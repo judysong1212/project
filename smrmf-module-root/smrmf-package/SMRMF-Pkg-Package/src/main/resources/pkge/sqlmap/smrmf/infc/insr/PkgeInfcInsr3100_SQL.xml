@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcInsr3100">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgInsr3100SerarchVO" type="com.app.smrmf.infc.insurance.server.vo.InfcPkgInsr3100SrhVO"/>
+	
+	<resultMap id="infcPkgInsr3100" class="com.app.smrmf.infc.insurance.server.vo.InfcPkgInsr3100VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="nofctYrMnthNum" column="NOFCT_YR_MNTH_NUM" columnIndex="2"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="3"/>
+		<result property="dspty" column="DSPTY" columnIndex="4"/>
+		<result property="emymtSeilNum" column="EMYMT_SEIL_NUM" columnIndex="5"/>
+		<result property="dpobMangeNum" column="DPOB_MANGE_NUM" columnIndex="6"/>
+		<result property="acc" column="ACC" columnIndex="7"/>
+		<result property="untDpobCd" column="UNT_DPOB_CD" columnIndex="8"/>
+		<result property="certNumHuhd" column="CERT_NUM_HUHD" columnIndex="9"/>
+		<result property="nm" column="NM" columnIndex="10"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="11"/>
+		<result property="iposTotPrmmAggr" column="IPOS_TOT_PRMM_AGGR" columnIndex="12"/>
+		<result property="iposTotPrmmHlth" column="IPOS_TOT_PRMM_HLTH" columnIndex="13"/>
+		<result property="iposTotPrmmLgtmRcptn" column="IPOS_TOT_PRMM_LGTM_RCPTN" columnIndex="14"/>
+		<result property="yrlyPayTotAmnt" column="YRLY_PAY_TOT_AMNT" columnIndex="15"/>
+		<result property="dutyMnthIcm" column="DUTY_MNTH_ICM" columnIndex="16"/>
+		<result property="payMnthAmnt" column="PAY_MNTH_AMNT" columnIndex="17"/>
+		<result property="yrtxCalcBkdnGrde" column="YRTX_CALC_BKDN_GRDE" columnIndex="18"/>
+		<result property="stdPayMnthAmnt" column="STD_PAY_MNTH_AMNT" columnIndex="19"/>
+		<result property="fixPrmmAggr" column="FIX_PRMM_AGGR" columnIndex="20"/>
+		<result property="fixPrmmHlth" column="FIX_PRMM_HLTH" columnIndex="21"/>
+		<result property="fixPrmmLgtmRcptn" column="FIX_PRMM_LGTM_RCPTN" columnIndex="22"/>
+		<result property="clutPrmmAggr" column="CLUT_PRMM_AGGR" columnIndex="23"/>
+		<result property="clutPrmmHlth" column="CLUT_PRMM_HLTH" columnIndex="24"/>
+		<result property="clutPrmmLgtmRcptn" column="CLUT_PRMM_LGTM_RCPTN" columnIndex="25"/>
+		<result property="mbrAlttAggr" column="MBR_ALTT_AGGR" columnIndex="26"/>
+		<result property="mbrAlttHlth" column="MBR_ALTT_HLTH" columnIndex="27"/>
+		<result property="mbrAlttLgtmRcptn" column="MBR_ALTT_LGTM_RCPTN" columnIndex="28"/>
+		<result property="usrAlttAggr" column="USR_ALTT_AGGR" columnIndex="29"/>
+		<result property="usrAlttHlth" column="USR_ALTT_HLTH" columnIndex="30"/>
+		<result property="usrAlttLgtmRcptn" column="USR_ALTT_LGTM_RCPTN" columnIndex="31"/>
+		<result property="nofctSspn" column="NOFCT_SSPN" columnIndex="32"/>
+		<result property="hlthYrtxApptnYrMnth" column="HLTH_YRTX_APPTN_YR_MNTH" columnIndex="33"/>
+		<result property="hlthYrtxPrcsDt" column="HLTH_YRTX_PRCS_DT" columnIndex="34"/>
+		<result property="hlthInsrYrtxPrcsYn" column="HLTH_INSR_YRTX_PRCS_YN" columnIndex="35"/>
+		<result property="divdPymtDivCd" column="DIVD_PYMT_DIV_CD" columnIndex="36"/>
+		<result property="divdPymt" column="DIVD_PYMT" columnIndex="37"/>
+		<result property="kybdr" column="KYBDR" columnIndex="38"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="39"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="40"/>
+		<result property="ismt" column="ISMT" columnIndex="41"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="42"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="43"/>
+	</resultMap>
+	
+	<insert id="infcPkgInsr3100DAO.insertInsr3100_S">
+		<![CDATA[
+			INSERT INTO INSR3100 
+				( DPOB_CD
+				  , NOFCT_YR_MNTH_NUM
+				  , SYSTEMKEY
+				  , DSPTY
+				  , EMYMT_SEIL_NUM
+				  , HLTH_INSR_SEIL_NUM
+				  , DPOB_MANGE_NUM
+				  , ACC
+				  , UNT_DPOB_CD
+				  , CERT_NUM_HUHD
+				  , NM
+				  , RESN_REGN_NUM
+				  , IPOS_TOT_PRMM_AGGR
+				  , IPOS_TOT_PRMM_HLTH
+				  , IPOS_TOT_PRMM_LGTM_RCPTN
+				  , YRLY_PAY_TOT_AMNT
+				  , DUTY_MNTH_ICM
+				  , PAY_MNTH_AMNT
+				  , YRTX_CALC_BKDN_GRDE
+				  , STD_PAY_MNTH_AMNT
+				  , FIX_PRMM_AGGR
+				  , FIX_PRMM_HLTH
+				  , FIX_PRMM_LGTM_RCPTN
+				  , CLUT_PRMM_AGGR
+				  , CLUT_PRMM_HLTH
+				  , CLUT_PRMM_LGTM_RCPTN
+				  , MBR_ALTT_AGGR
+				  , MBR_ALTT_HLTH
+				  , MBR_ALTT_LGTM_RCPTN
+				  , USR_ALTT_AGGR
+				  , USR_ALTT_HLTH
+				  , USR_ALTT_LGTM_RCPTN
+				  , NOFCT_SSPN
+				  , HLTH_YRTX_APPTN_YR_MNTH
+				  , HLTH_YRTX_PRCS_DT
+				  , HLTH_INSR_YRTX_PRCS_YN
+				  , DIVD_PYMT_DIV_CD
+				  , DIVD_PYMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #nofctYrMnthNum#
+				  , #systemkey#
+				  , #dspty# 
+				  , #emymtSeilNum#
+				   , #hlthInsrSeilNum#
+				  , #dpobMangeNum#
+				  , #acc#
+				  , #untDpobCd#
+				  , #certNumHuhd#
+				  , #nm#
+				  , #resnRegnNum#
+				  , #iposTotPrmmAggr#
+				  , #iposTotPrmmHlth#
+				  , #iposTotPrmmLgtmRcptn#
+				  , #yrlyPayTotAmnt#
+				  , #dutyMnthIcm#
+				  , #payMnthAmnt#
+				  , #yrtxCalcBkdnGrde#
+				  , #stdPayMnthAmnt#
+				  , #fixPrmmAggr#
+				  , #fixPrmmHlth#
+				  , #fixPrmmLgtmRcptn#
+				  , #clutPrmmAggr#
+				  , #clutPrmmHlth#
+				  , #clutPrmmLgtmRcptn#
+				  , #mbrAlttAggr#
+				  , #mbrAlttHlth#
+				  , #mbrAlttLgtmRcptn#
+				  , #usrAlttAggr#
+				  , #usrAlttHlth#
+				  , #usrAlttLgtmRcptn#
+				  , #nofctSspn#
+				  , #hlthYrtxApptnYrMnth#
+				  , #hlthYrtxPrcsDt#
+				  , #hlthInsrYrtxPrcsYn#
+				  , #divdPymtDivCd#
+				  , #divdPymt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgInsr3100DAO.updateInsr3100_S">
+		<![CDATA[
+			UPDATE INSR3100
+			SET DPOB_CD=#dpobCd#
+				, NOFCT_YR_MNTH_NUM=#nofctYrMnthNum#
+				, SYSTEMKEY=#systemkey#
+				, DSPTY=#dspty#
+				, HLTH_INSR_SEIL_NUM=#hlthInsrSeilNum#
+				 , EMYMT_SEIL_NUM=#emymtSeilNum#
+				, DPOB_MANGE_NUM=#dpobMangeNum#
+				, ACC=#acc#
+				, UNT_DPOB_CD=#untDpobCd#
+				, CERT_NUM_HUHD=#certNumHuhd#
+				, NM=#nm#
+				, RESN_REGN_NUM=#resnRegnNum#
+				, IPOS_TOT_PRMM_AGGR=#iposTotPrmmAggr#
+				, IPOS_TOT_PRMM_HLTH=#iposTotPrmmHlth#
+				, IPOS_TOT_PRMM_LGTM_RCPTN=#iposTotPrmmLgtmRcptn#
+				, YRLY_PAY_TOT_AMNT=#yrlyPayTotAmnt#
+				, DUTY_MNTH_ICM=#dutyMnthIcm#
+				, PAY_MNTH_AMNT=#payMnthAmnt#
+				, YRTX_CALC_BKDN_GRDE=#yrtxCalcBkdnGrde#
+				, STD_PAY_MNTH_AMNT=#stdPayMnthAmnt#
+				, FIX_PRMM_AGGR=#fixPrmmAggr#
+				, FIX_PRMM_HLTH=#fixPrmmHlth#
+				, FIX_PRMM_LGTM_RCPTN=#fixPrmmLgtmRcptn#
+				, CLUT_PRMM_AGGR=#clutPrmmAggr#
+				, CLUT_PRMM_HLTH=#clutPrmmHlth#
+				, CLUT_PRMM_LGTM_RCPTN=#clutPrmmLgtmRcptn#
+				, MBR_ALTT_AGGR=#mbrAlttAggr#
+				, MBR_ALTT_HLTH=#mbrAlttHlth#
+				, MBR_ALTT_LGTM_RCPTN=#mbrAlttLgtmRcptn#
+				, USR_ALTT_AGGR=#usrAlttAggr#
+				, USR_ALTT_HLTH=#usrAlttHlth#
+				, USR_ALTT_LGTM_RCPTN=#usrAlttLgtmRcptn#
+				, NOFCT_SSPN=#nofctSspn#
+				, HLTH_YRTX_APPTN_YR_MNTH=#hlthYrtxApptnYrMnth#
+				, HLTH_YRTX_PRCS_DT=#hlthYrtxPrcsDt#
+				, HLTH_INSR_YRTX_PRCS_YN=#hlthInsrYrtxPrcsYn#
+				, DIVD_PYMT_DIV_CD=#divdPymtDivCd#
+				, DIVD_PYMT=#divdPymt# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND NOFCT_YR_MNTH_NUM=#nofctYrMnthNum#
+								AND SYSTEMKEY=#systemkey#
+								AND DSPTY=#dspty#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+				]]>
+	</update>
+	
+	<delete id="infcPkgInsr3100DAO.deleteInsr3100_S">
+		<![CDATA[
+			DELETE FROM INSR3100 
+						WHERE DPOB_CD=#dpobCd#
+								AND NOFCT_YR_MNTH_NUM=#nofctYrMnthNum#
+								AND SYSTEMKEY=#systemkey#
+								AND DSPTY=#dspty#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+				]]>
+	</delete>
+	
+	<select id="infcPkgInsr3100DAO.selectInsr3100_S" resultMap="infcPkgInsr3100">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, NOFCT_YR_MNTH_NUM
+				, SYSTEMKEY
+				, DSPTY
+				, EMYMT_SEIL_NUM
+				, HLTH_INSR_SEIL_NUM
+				, DPOB_MANGE_NUM
+				, ACC
+				, UNT_DPOB_CD
+				, CERT_NUM_HUHD
+				, NM
+				, RESN_REGN_NUM
+				, IPOS_TOT_PRMM_AGGR
+				, IPOS_TOT_PRMM_HLTH
+				, IPOS_TOT_PRMM_LGTM_RCPTN
+				, YRLY_PAY_TOT_AMNT
+				, DUTY_MNTH_ICM
+				, PAY_MNTH_AMNT
+				, YRTX_CALC_BKDN_GRDE
+				, STD_PAY_MNTH_AMNT
+				, FIX_PRMM_AGGR
+				, FIX_PRMM_HLTH
+				, FIX_PRMM_LGTM_RCPTN
+				, CLUT_PRMM_AGGR
+				, CLUT_PRMM_HLTH
+				, CLUT_PRMM_LGTM_RCPTN
+				, MBR_ALTT_AGGR
+				, MBR_ALTT_HLTH
+				, MBR_ALTT_LGTM_RCPTN
+				, USR_ALTT_AGGR
+				, USR_ALTT_HLTH
+				, USR_ALTT_LGTM_RCPTN
+				, NOFCT_SSPN
+				, HLTH_YRTX_APPTN_YR_MNTH
+				, HLTH_YRTX_PRCS_DT
+				, HLTH_INSR_YRTX_PRCS_YN
+				, DIVD_PYMT_DIV_CD
+				, DIVD_PYMT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM INSR3100
+						WHERE DPOB_CD=#dpobCd#
+								AND NOFCT_YR_MNTH_NUM=#nofctYrMnthNum#
+								AND SYSTEMKEY=#systemkey#
+								AND DSPTY=#dspty#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+				]]>
+	</select>
+	
+	<select id="infcPkgInsr3100DAO.selectInsr3100List_D" parameterClass="infcPkgInsr3100SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, NOFCT_YR_MNTH_NUM
+								, SYSTEMKEY
+								, DSPTY
+								, EMYMT_SEIL_NUM
+								, HLTH_INSR_SEIL_NUM
+								, DPOB_MANGE_NUM
+								, ACC
+								, UNT_DPOB_CD
+								, CERT_NUM_HUHD
+								, NM
+								, RESN_REGN_NUM
+								, IPOS_TOT_PRMM_AGGR
+								, IPOS_TOT_PRMM_HLTH
+								, IPOS_TOT_PRMM_LGTM_RCPTN
+								, YRLY_PAY_TOT_AMNT
+								, DUTY_MNTH_ICM
+								, PAY_MNTH_AMNT
+								, YRTX_CALC_BKDN_GRDE
+								, STD_PAY_MNTH_AMNT
+								, FIX_PRMM_AGGR
+								, FIX_PRMM_HLTH
+								, FIX_PRMM_LGTM_RCPTN
+								, CLUT_PRMM_AGGR
+								, CLUT_PRMM_HLTH
+								, CLUT_PRMM_LGTM_RCPTN
+								, MBR_ALTT_AGGR
+								, MBR_ALTT_HLTH
+								, MBR_ALTT_LGTM_RCPTN
+								, USR_ALTT_AGGR
+								, USR_ALTT_HLTH
+								, USR_ALTT_LGTM_RCPTN
+								, NOFCT_SSPN
+								, HLTH_YRTX_APPTN_YR_MNTH
+								, HLTH_YRTX_PRCS_DT
+								, HLTH_INSR_YRTX_PRCS_YN
+								, DIVD_PYMT_DIV_CD
+								, DIVD_PYMT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM INSR3100
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					NOFCT_YR_MNTH_NUM LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, NOFCT_YR_MNTH_NUM DESC
+							, SYSTEMKEY DESC
+							, DSPTY DESC
+							, EMYMT_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgInsr3100DAO.selectInsr3100ListTotCnt_S" parameterClass="infcPkgInsr3100SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM INSR3100
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				NOFCT_YR_MNTH_NUM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

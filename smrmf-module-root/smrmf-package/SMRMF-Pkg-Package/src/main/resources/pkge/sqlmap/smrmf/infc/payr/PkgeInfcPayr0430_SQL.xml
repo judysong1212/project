@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcPayr0430">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgPayr0430SrhVO" type="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0430SrhVO"/>
+	<typeAlias  alias="infcPkgBass0300SrhVO" type="com.app.smrmf.infc.basis.server.vo.InfcPkgBass0300SrhVO"/>
+	
+	<resultMap id="infcPkgPayr0430" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0430VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+	    <result property="typOccuGrdeMppgSeilNum" column="TYP_OCCU_GRDE_MPPG_SEIL_NUM" columnIndex="2"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="3"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="4"/>
+		<result property="pyspLogSvcYrNumCd" column="PYSP_LOG_SVC_YR_NUM_CD" columnIndex="5"/>
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="6"/>
+		<result property="logSvcYrNumOvr" column="LOG_SVC_YR_NUM_OVR" columnIndex="7"/>
+		<result property="logSvcYrNumUdr" column="LOG_SVC_YR_NUM_UDR" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="15"/>  
+	</resultMap>
+	
+	
+	<insert id="infcPkgPayr0430DAO.insertPayr0430_S">
+		<![CDATA[
+			INSERT INTO PAYR0430 
+				( DPOB_CD
+				  , TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				  , PYSP_LOG_SVC_YR_NUM_CD
+				  , LOG_SVC_YR_NUM_OVR
+				  , LOG_SVC_YR_NUM_UDR
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				   )
+			VALUES ( #dpobCd#
+				  , #typOccuGrdeMppgSeilNum#
+				  , #pyspLogSvcYrNumCd#
+				  , #logSvcYrNumOvr#
+				  , #logSvcYrNumUdr#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				   )
+		]]>
+	</insert>
+	
+	<update id="infcPkgPayr0430DAO.updatePayr0430_S">
+		<![CDATA[
+			UPDATE PAYR0430
+			SET DPOB_CD=#dpobCd#
+				, TYP_OCCU_GRDE_MPPG_SEIL_NUM=#typOccuGrdeMppgSeilNum#
+				, PYSP_LOG_SVC_YR_NUM_CD=#pyspLogSvcYrNumCd#
+				, LOG_SVC_YR_NUM_OVR=#logSvcYrNumOvr#
+				, LOG_SVC_YR_NUM_UDR=#logSvcYrNumUdr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND TYP_OCCU_GRDE_MPPG_SEIL_NUM=#typOccuGrdeMppgSeilNum#
+								AND PYSP_LOG_SVC_YR_NUM_CD=#pyspLogSvcYrNumCd#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPayr0430DAO.deletePayr0430_S">
+		<![CDATA[
+			DELETE FROM PAYR0430 
+						WHERE DPOB_CD=#dpobCd#
+								AND TYP_OCCU_GRDE_MPPG_SEIL_NUM=#typOccuGrdeMppgSeilNum#
+								
+				]]>
+				 	 <isNotEmpty prepend="AND" property="pyspLogSvcYrNumCd" >
+			   PYSP_LOG_SVC_YR_NUM_CD=#pyspLogSvcYrNumCd#
+		       </isNotEmpty>
+	</delete>
+	
+	<select id="infcPkgPayr0430DAO.selectPayr0430_S" resultMap="infcPkgPayr0430">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				, PYSP_LOG_SVC_YR_NUM_CD
+				, LOG_SVC_YR_NUM_OVR
+				, LOG_SVC_YR_NUM_UDR
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0430
+						WHERE DPOB_CD=#dpobCd#
+								AND TYP_OCCU_GRDE_MPPG_SEIL_NUM=#typOccuGrdeMppgSeilNum#
+								AND PYSP_LOG_SVC_YR_NUM_CD=#pyspLogSvcYrNumCd#
+				]]>
+	</select>
+	
+	<select id="infcPkgPayr0430DAO.selectPayr0430List_D" parameterClass="infcPkgPayr0430SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				               SELECT 
+				                   AA.DPOB_CD
+                                ,  AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                                , AA.TYP_OCCU_CD
+                                   ,  fcBass0320CDNM(AA.DPOB_CD,AA.TYP_OCCU_CD)  AS TYP_OCCU_NM
+                                , AA.PYSP_GRDE_CD
+                                , fcBass0300CDNM(AA.DPOB_CD,AA.PYSP_GRDE_CD) AS PYSP_GRDE_NM
+                                , BB.PYSP_LOG_SVC_YR_NUM_CD
+                                , fcBass0300CDNM(AA.DPOB_CD,BB.PYSP_LOG_SVC_YR_NUM_CD) AS PYSP_LOG_SVC_YR_NUM_NM
+                                , AA.DTIL_OCCU_CLS_DIV_CD
+                                , AA.DTIL_OCCU_INTTN_CD
+                                , fcBassEx0350CDNM(A.DPOB_CD,A.TYP_OCCU_CD,A.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM
+                                , BB.LOG_SVC_YR_NUM_OVR
+                                , BB.LOG_SVC_YR_NUM_UDR
+                                , BB.KYBDR
+                                , BB.INPT_DT
+                                , BB.INPT_ADDR
+                                , BB.ISMT
+                                , BB.REVN_DT
+                                , BB.REVN_ADDR
+                        FROM PAYR0400 AA, PAYR0430 BB
+                WHERE AA.DPOB_CD = BB.DPOB_CD
+                  AND  AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM  =  BB.TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+			  <isNotEmpty prepend="AND" property="dpobCd" >
+			 	AA.DPOB_CD=#dpobCd#
+		       </isNotEmpty>
+		         <isNotEmpty prepend="AND" property="typOccuGrdeMppgSeilNum" >
+			 	AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM=#typOccuGrdeMppgSeilNum#
+		       </isNotEmpty> 
+		       	 <isNotEmpty prepend="AND" property="typOccuCd" >
+			 	AA.TYP_OCCU_CD=#typOccuCd#
+		       </isNotEmpty>
+		        <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+			 	  AA.DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+		         </isNotEmpty>
+					ORDER BY 
+						AA.DPOB_CD ASC
+						   , AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM ASC
+						 	, BB.PYSP_LOG_SVC_YR_NUM_CD ASC
+							
+		
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>
+	</select>	
+	<select id="infcPkgPayr0430DAO.selectPayr0430ListTotCnt_S" parameterClass="infcPkgPayr0430SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM  (  SELECT 
+				                   AA.DPOB_CD
+                                ,  AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                                , AA.TYP_OCCU_CD
+                                 ,  fcBass0320CDNM(AA.DPOB_CD,AA.TYP_OCCU_CD)  AS TYP_OCCU_NM
+                                , AA.PYSP_GRDE_CD
+                                , fcBass0300CDNM(AA.DPOB_CD,AA.PYSP_GRDE_CD) AS PYSP_GRDE_NM
+                                , BB.PYSP_LOG_SVC_YR_NUM_CD
+                                , fcBass0300CDNM(AA.DPOB_CD,BB.PYSP_LOG_SVC_YR_NUM_CD) AS PYSP_LOG_SVC_YR_NUM_NM
+                                , AA.DTIL_OCCU_CLS_DIV_CD
+                                , AA.DTIL_OCCU_INTTN_CD
+                                , fcBassEx0350CDNM(A.DPOB_CD,A.TYP_OCCU_CD,A.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM
+                                , BB.LOG_SVC_YR_NUM_OVR
+                                , BB.LOG_SVC_YR_NUM_UDR
+                                , BB.KYBDR
+                                , BB.INPT_DT
+                                , BB.INPT_ADDR
+                                , BB.ISMT
+                                , BB.REVN_DT
+                                , BB.REVN_ADDR
+                        FROM PAYR0400 AA, PAYR0430 BB
+                WHERE AA.DPOB_CD = BB.DPOB_CD
+                  AND  AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM  =  BB.TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+			  <isNotEmpty prepend="AND" property="dpobCd" >
+			 	AA.DPOB_CD=#dpobCd#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="typOccuGrdeMppgSeilNum" >
+			 	AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM=#typOccuGrdeMppgSeilNum#
+		       </isNotEmpty> 
+		       	 <isNotEmpty prepend="AND" property="typOccuCd" >
+			 	AA.TYP_OCCU_CD=#typOccuCd#
+		       </isNotEmpty>
+		      	 <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+			 	AA.DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+		       </isNotEmpty>
+		       )
+	</select>
+	
+<select id="infcPkgPayr0430DAO.selectBass0300List_D" parameterClass="infcPkgBass0300SrhVO"   resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, COMM_CD
+								, RPSTTV_CD
+								, DTL_CD
+								, COMM_CD_NM
+								, ABBR_NM
+								, ENG_NM
+								, MANGE_ITEM01
+								, MANGE_ITEM02
+								, MANGE_ITEM03
+								, MANGE_ITEM04
+								, MANGE_ITEM05
+								, MANGE_ITEM06
+								, MANGE_ITEM07
+								, MANGE_ITEM08
+								, MANGE_ITEM09
+								, MANGE_ITEM10
+								, MANGE_ITEM11
+								, MANGE_ITEM12
+								, MANGE_ITEM13
+								, MANGE_ITEM14
+								, MANGE_ITEM15
+								, MANGE_ITEM16
+								, MANGE_ITEM17
+								, MANGE_ITEM18
+								, MANGE_ITEM19
+								, MANGE_ITEM20
+								, CD_TREE_LVL
+								, ORD
+								, OPN_YN
+								, USE_YN
+								, NOTE
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS0300
+				WHERE  OPN_YN = 'Y'
+				 AND USE_YN = 'Y'
+				 AND  MANGE_ITEM11 IS NOT NULL
+				 AND  MANGE_ITEM12 IS NOT NULL
+				<isNotEmpty prepend="AND" property="rpsttvCd">
+					RPSTTV_CD = #rpsttvCd#
+				</isNotEmpty>  
+					<isNotEmpty prepend="AND" property="commCd">
+					<![CDATA[
+					    TO_NUMBER(NVL(MANGE_ITEM01,'9999')) <= (
+										SELECT TO_NUMBER(NVL(MANGE_ITEM01,'0')) 
+											FROM BASS0300
+											WHERE  OPN_YN = 'Y'
+											 AND USE_YN = 'Y'
+											 AND  MANGE_ITEM11 IS NOT NULL
+											 AND  MANGE_ITEM12 IS NOT NULL
+											   ]]>
+											 <isNotEmpty prepend="AND" property="dpobCd" >
+												 DPOB_CD=#dpobCd#
+											</isNotEmpty>
+											<isNotEmpty prepend="AND" property="rpsttvCd">
+												RPSTTV_CD = #rpsttvCd#
+											</isNotEmpty>  
+												<isNotEmpty prepend="AND" property="commCd">
+													COMM_CD  = #commCd#
+												</isNotEmpty> 
+					               )   
+					             
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="commCdNm">
+					COMM_CD_NM LIKE '%' || #commCdNm# || '%'
+				</isNotEmpty> 
+		<!--  <isNotNull prepend="AND" property="arrRpsttvCd">
+				    <![CDATA[
+						RPSTTV_CD
+					]]>
+					<iterate prepend="IN" property="arrRpsttvCd" open="(" close=")" conjunction=",">
+					 #arrRpsttvCd[]#
+					</iterate> 
+				</isNotNull> -->
+				<isNotEmpty prepend="AND" property="mangeItem01" >
+					 MANGE_ITEM01=#mangeItem01#
+				</isNotEmpty>	
+				<isNotEmpty prepend="AND" property="mangeItem02" >
+					 MANGE_ITEM02=#mangeItem02#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem03" >
+					 MANGE_ITEM03=#mangeItem03#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="mangeItem04" >
+					  MANGE_ITEM04=#mangeItem04#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="mangeItem05" >
+					 MANGE_ITEM05=#mangeItem05#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="mangeItem06" >
+					 MANGE_ITEM06=#mangeItem06#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem07" >
+					 MANGE_ITEM07=#mangeItem07#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem08" >
+					 MANGE_ITEM08=#mangeItem08#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="mangeItem09" >
+					  MANGE_ITEM09=#mangeItem09#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem10" >
+					 MANGE_ITEM10=#mangeItem10#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem11" >
+					 MANGE_ITEM11=#mangeItem11#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="mangeItem12" >
+					 MANGE_ITEM12=#mangeItem12#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem13" >
+					 MANGE_ITEM13=#mangeItem13#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="mangeItem14" >
+					  MANGE_ITEM14=#mangeItem14#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem15" >
+					 MANGE_ITEM15=#mangeItem15#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem16" >
+					 MANGE_ITEM16=#mangeItem16#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem17" >
+					 MANGE_ITEM17=#mangeItem17#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem18" >
+					  MANGE_ITEM18=#mangeItem18#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem19" >
+					  MANGE_ITEM19=#mangeItem19#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem20" >
+					 MANGE_ITEM20=#mangeItem20#
+				</isNotEmpty>  
+				<isNotEmpty prepend="AND" property="dpobCd" >
+					 DPOB_CD=#dpobCd#
+				</isNotEmpty>
+					ORDER BY 
+						DPOB_CD ASC , ORD ASC  , COMM_CD ASC
+ 				
+	) A  
+) 
+</select>		
+	
+
+</sqlMap>

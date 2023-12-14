@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Cmmanldlastwrk">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="cmmanldlastwrkSerarchVO" type="com.app.smrmf.pkg.sche.sysm.service.vo.CmmanldlastwrkSrhVO"/>
+	
+	<resultMap id="cmmanldlastwrk" class="com.app.smrmf.pkg.sche.sysm.service.vo.CmmanldlastwrkVO">
+		<result property="sysGbn" column="SYS_GBN" columnIndex="1"/>
+		<result property="logDate" column="LOG_DATE" columnIndex="2"/>
+		<result property="logSeq" column="LOG_SEQ" columnIndex="3"/>
+	</resultMap>
+	
+	<insert id="cmmanldlastwrkDAO.insertCmmanldlastwrk_S">
+		<![CDATA[
+			INSERT INTO CMMANLDLASTWRK 
+				( SYS_GBN
+				  , LOG_DATE
+				  , LOG_SEQ )
+			VALUES ( #sysGbn#
+				  , #logDate#
+				  , #logSeq# )
+		]]>
+	</insert>
+	
+	<update id="cmmanldlastwrkDAO.updateCmmanldlastwrk_S">
+		<![CDATA[
+			UPDATE CMMANLDLASTWRK
+			SET SYS_GBN=#sysGbn#
+				, LOG_DATE=#logDate#
+				, LOG_SEQ=#logSeq#
+			]]>
+	</update>
+	
+	<delete id="cmmanldlastwrkDAO.deleteCmmanldlastwrk_S">
+		<![CDATA[
+			DELETE FROM CMMANLDLASTWRK 
+			WHERE SYS_GBN=#sysGbn#
+			]]>
+	</delete>
+	
+	<!-- 이로직 호출  -->
+	<select id="cmmanldlastwrkDAO.selectCmmanldlastwrk_S" resultMap="cmmanldlastwrk">
+		<![CDATA[
+			SELECT
+				SYS_GBN
+				, LOG_DATE
+				, LOG_SEQ
+			FROM CMMANLDLASTWRK
+			WHERE SYS_GBN=#sysGbn# 
+			]]>
+	</select>
+	
+	<select id="cmmanldlastwrkDAO.selectCmmanldlastwrkList_D" parameterClass="cmmanldlastwrkSerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								SYS_GBN
+								, LOG_DATE
+								, LOG_SEQ
+						FROM CMMANLDLASTWRK
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					SYS_GBN = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					LOG_DATE LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+	
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="cmmanldlastwrkDAO.selectCmmanldlastwrkListTotCnt_S" parameterClass="cmmanldlastwrkSerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM CMMANLDLASTWRK
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				SYS_GBN = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				LOG_DATE LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

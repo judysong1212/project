@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="YetaPrc1000">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="yetaPrc1000SerarchVO" type="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta1000SrhVO"/>
+	
+	<resultMap id="yetaPrc1000" class="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta1000VO">
+		<result property="edacRvyy" column="EDAC_RVYY" columnIndex="1"/>
+		<result property="settGbcd" column="SETT_GBCD" columnIndex="2"/>
+		<result property="edacSeilNum" column="EDAC_SEIL_NUM" columnIndex="3"/>
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="4"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="5"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="6"/>
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="7"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="8"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="9"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="10"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="11"/>
+		<result property="pernChrgEmpIdenNum" column="PERN_CHRG_EMP_IDEN_NUM" columnIndex="12"/>
+		<result property="closFlag" column="CLOS_FLAG" columnIndex="13"/>
+		<result property="closCont" column="CLOS_CONT" columnIndex="14"/>
+		<result property="closDate" column="CLOS_DATE" columnIndex="15"/>
+		<result property="edacPrdt" column="EDAC_PRDT" columnIndex="16"/>
+		<result property="reprName" column="REPR_NAME" columnIndex="17"/>
+		<result property="juriName" column="JURI_NAME" columnIndex="18"/>
+		<result property="busiNumb" column="BUSI_NUMB" columnIndex="19"/>
+		<result property="resuNumb" column="RESU_NUMB" columnIndex="20"/>
+		<result property="juriNumb" column="JURI_NUMB" columnIndex="21"/>
+		<result property="incmPost" column="INCM_POST" columnIndex="22"/>
+		<result property="incmAddr" column="INCM_ADDR" columnIndex="23"/>
+		<result property="incmAdtl" column="INCM_ADTL" columnIndex="24"/>
+		<result property="taxaCode" column="TAXA_CODE" columnIndex="25"/>
+		<result property="incmGbcd" column="INCM_GBCD" columnIndex="26"/>
+		<result property="taxaDnum" column="TAXA_DNUM" columnIndex="27"/>
+		<result property="homeTxid" column="HOME_TXID" columnIndex="28"/>
+		<result property="taxaPrcd" column="TAXA_PRCD" columnIndex="29"/>
+		<result property="charDept" column="CHAR_DEPT" columnIndex="30"/>
+		<result property="charName" column="CHAR_NAME" columnIndex="31"/>
+		<result property="charTele" column="CHAR_TELE" columnIndex="32"/>
+		<result property="filePass" column="FILE_PASS" columnIndex="33"/>
+		<result property="kybdr" column="KYBDR" columnIndex="34"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="35"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="36"/>
+		<result property="ismt" column="ISMT" columnIndex="37"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="38"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="39"/>
+		<result property="dpobCd" column="DPOB_CD" columnIndex="40"/>
+	</resultMap>
+	
+	<insert id="yetaPrc1000DAO.insertYetaPrc1000_S">
+		<![CDATA[
+			INSERT INTO YETA1000 
+				( DPOB_CD
+				  , EDAC_RVYY
+				  , SETT_GBCD
+				  , EDAC_SEIL_NUM
+				  , PAYR_MANG_DEPT_CD
+				  , DEPT_CD
+				  , TYP_OCCU_CD
+				  , DTIL_OCCU_CLS_DIV_CD
+				  , PYSP_GRDE_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , BUSIN_CD
+				  , EMYMT_DIV_CD
+				  , PERN_CHRG_EMP_IDEN_NUM
+				  , CLOS_FLAG
+				  , CLOS_CONT
+				  , CLOS_DATE
+				  , EDAC_PRDT
+				  , REPR_NAME
+				  , JURI_NAME
+				  , BUSI_NUMB
+				  , RESU_NUMB
+				  , JURI_NUMB
+				  , INCM_POST
+				  , INCM_ADDR
+				  , INCM_ADTL
+				  , TAXA_CODE
+				  , INCM_GBCD
+				  , TAXA_DNUM
+				  , HOME_TXID
+				  , TAXA_PRCD
+				  , CHAR_DEPT
+				  , CHAR_NAME
+				  , CHAR_TELE
+				  , FILE_PASS
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd# 
+			      , #edacRvyy#
+				  , #settGbcd#
+				  , #edacSeilNum#
+				  , #payrMangDeptCd#
+				  , #deptCd#
+				  , #typOccuCd#
+				  , #dtilOccuClsDivCd#
+				  , #pyspGrdeCd#
+				  , #dtilOccuInttnCd#
+				  , #businCd#
+				  , #emymtDivCd#
+				  , #pernChrgEmpIdenNum#
+				  , #closFlag#
+				  , #closCont#
+				  , #closDate#
+				  , #edacPrdt#
+				  , #reprName#
+				  , #juriName#
+				  , #busiNumb#
+				  , #resuNumb#
+				  , #juriNumb#
+				  , #incmPost#
+				  , #incmAddr#
+				  , #incmAdtl#
+				  , #taxaCode#
+				  , #incmGbcd#
+				  , #taxaDnum#
+				  , #homeTxid#
+				  , #taxaPrcd#
+				  , #charDept#
+				  , #charName#
+				  , #charTele#
+				  , #filePass#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<insert id="yetaPrc1000DAO.fnPayr06420_PAYR420_2014_CREATE_Insert_S">
+		<![CDATA[
+			INSERT INTO YETA1000 
+				( DPOB_CD 
+				  , EDAC_RVYY
+				  , SETT_GBCD
+				  , EDAC_SEIL_NUM
+				  , PAYR_MANG_DEPT_CD
+				  , DEPT_CD
+				  , TYP_OCCU_CD
+				  , DTIL_OCCU_CLS_DIV_CD
+				  , PYSP_GRDE_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , BUSIN_CD
+				  , EMYMT_DIV_CD
+				  , PERN_CHRG_EMP_IDEN_NUM
+				  , CLOS_FLAG
+				  , CLOS_CONT
+				  , CLOS_DATE
+				  , EDAC_PRDT
+				  , REPR_NAME
+				  , JURI_NAME
+				  , BUSI_NUMB
+				  , RESU_NUMB
+				  , JURI_NUMB
+				  , INCM_POST
+				  , INCM_ADDR
+				  , INCM_ADTL
+				  , TAXA_CODE
+				  , INCM_GBCD
+				  , TAXA_DNUM
+				  , HOME_TXID
+				  , TAXA_PRCD
+				  , CHAR_DEPT
+				  , CHAR_NAME
+				  , CHAR_TELE
+				  , FILE_PASS
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES (  #dpobCd#
+			      ,#edacRvyy#
+				  , #settGbcd#
+				  , (
+				     SELECT NVL(MAX(EDAC_SEIL_NUM),0) + 1
+				       FROM YETA1000
+				      WHERE DPOB_CD = #dpobCd#
+				        AND EDAC_RVYY = #edacRvyy#
+				        AND SETT_GBCD = #settGbcd#
+				   )
+				  , #payrMangDeptCd#
+				  , #deptCd#
+				  , #typOccuCd#
+				  , #dtilOccuClsDivCd#
+				  , #pyspGrdeCd#
+				  , #dtilOccuInttnCd#
+				  , #businCd#
+				  , #emymtDivCd#
+				  , #pernChrgEmpIdenNum#
+				  , #closFlag#
+				  , #closCont#
+				  , #closDate#
+				  , #edacPrdt#
+				  , #reprName#
+				  , #juriName#
+				  , #busiNumb#
+				  , #resuNumb#
+				  , #juriNumb#
+				  , #incmPost#
+				  , #incmAddr#
+				  , #incmAdtl#
+				  , #taxaCode#
+				  , #incmGbcd#
+				  , #taxaDnum#
+				  , #homeTxid#
+				  , #taxaPrcd#
+				  , #charDept#
+				  , #charName#
+				  , #charTele#
+				  , #filePass#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	
+	<update id="yetaPrc1000DAO.updateYetaPrc1000_S">
+		<![CDATA[
+			UPDATE YETA1000
+			SET DPOB_CD=#dpobCd#
+			    , EDAC_RVYY=#edacRvyy#
+				, SETT_GBCD=#settGbcd#
+				, EDAC_SEIL_NUM=#edacSeilNum#
+				, PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				, DEPT_CD=#deptCd#
+				, TYP_OCCU_CD=#typOccuCd#
+				, DTIL_OCCU_CLS_DIV_CD=#dtilOccuClsDivCd#
+				, PYSP_GRDE_CD=#pyspGrdeCd#
+				, DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				, BUSIN_CD=#businCd#
+				, EMYMT_DIV_CD=#emymtDivCd#
+				, PERN_CHRG_EMP_IDEN_NUM=#pernChrgEmpIdenNum#
+				, CLOS_FLAG=#closFlag#
+				, CLOS_CONT=#closCont#
+				, CLOS_DATE=#closDate#
+				, EDAC_PRDT=#edacPrdt#
+				, REPR_NAME=#reprName#
+				, JURI_NAME=#juriName#
+				, BUSI_NUMB=#busiNumb#
+				, RESU_NUMB=#resuNumb#
+				, JURI_NUMB=#juriNumb#
+				, INCM_POST=#incmPost#
+				, INCM_ADDR=#incmAddr#
+				, INCM_ADTL=#incmAdtl#
+				, TAXA_CODE=#taxaCode#
+				, INCM_GBCD=#incmGbcd#
+				, TAXA_DNUM=#taxaDnum#
+				, HOME_TXID=#homeTxid#
+				, TAXA_PRCD=#taxaPrcd#
+				, CHAR_DEPT=#charDept#
+				, CHAR_NAME=#charName#
+				, CHAR_TELE=#charTele#
+				, FILE_PASS=#filePass# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE  DPOB_CD=#dpobCd#
+						        AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND EDAC_SEIL_NUM=#edacSeilNum#
+				]]>
+	</update>
+	
+	<delete id="yetaPrc1000DAO.deleteYetaPrc1000_S">
+		<![CDATA[
+			DELETE FROM YETA1000 
+						WHERE DPOB_CD=#dpobCd#
+						       AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND EDAC_SEIL_NUM=#edacSeilNum#
+				]]>
+	</delete>
+	
+	<!-- yeta0100 화면 연말정산 대상자관리  -->
+	<delete id="yetaPrc1000DAO.fnPayr06430_PAYR420_CREATE_Delete_S">
+		<![CDATA[
+			      DELETE FROM YETA1000 
+						WHERE DPOB_CD=#dpobCd#
+						  AND EDAC_RVYY=#edacRvyy#
+						  AND SETT_GBCD=#settGbcd# 
+		]]>
+				   <isNotEmpty prepend="AND" property="deptCd" >
+                       DEPT_CD = #deptCd#
+                   </isNotEmpty> 
+                   <isNotEmpty prepend="AND" property="typOccuCd" >
+                      TYP_OCCU_CD = #typOccuCd#
+                   </isNotEmpty> 
+                   <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+                      DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#
+                   </isNotEmpty> 
+                   <isNotEmpty prepend="AND" property="businCd" >
+                       BUSIN_CD = #businCd#
+                   </isNotEmpty> 
+	</delete> 
+	  <!-- AND EDAC_SEIL_NUM=#edacSeilNum# -->
+	 <select id="yetaPrc1000DAO.selectYeta0100ToCreateYetaPrc1000_S" resultMap="yetaPrc1000">
+		<![CDATA[
+			SELECT DPOB_CD
+				, EDAC_RVYY
+				, SETT_GBCD
+				, EDAC_SEIL_NUM
+				, PAYR_MANG_DEPT_CD
+				, DEPT_CD
+				, TYP_OCCU_CD
+				, DTIL_OCCU_CLS_DIV_CD
+				, PYSP_GRDE_CD
+				, DTIL_OCCU_INTTN_CD
+				, BUSIN_CD
+				, EMYMT_DIV_CD
+				, PERN_CHRG_EMP_IDEN_NUM
+				, CLOS_FLAG
+				, CLOS_CONT
+				, CLOS_DATE
+				, EDAC_PRDT
+				, REPR_NAME
+				, JURI_NAME
+				, BUSI_NUMB
+				, RESU_NUMB
+				, JURI_NUMB
+				, INCM_POST
+				, INCM_ADDR
+				, INCM_ADTL
+				, TAXA_CODE
+				, INCM_GBCD
+				, TAXA_DNUM
+				, HOME_TXID
+				, TAXA_PRCD
+				, CHAR_DEPT
+				, CHAR_NAME
+				, CHAR_TELE
+				, FILE_PASS
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YETA1000
+			WHERE  DPOB_CD=#dpobCd#
+			        AND EDAC_RVYY=#edacRvyy#
+					AND SETT_GBCD=#settGbcd#
+				    AND PAYR_MANG_DEPT_CD = #payrMangDeptCd#
+					AND EMYMT_DIV_CD = #emymtDivCd#   
+				]]>
+				  <isNotEmpty prepend="AND" property="deptCd" >
+                       DEPT_CD = #deptCd#
+                   </isNotEmpty> 
+                     <isNotEmpty prepend="AND" property="typOccuCd" >
+                      TYP_OCCU_CD = #typOccuCd#
+                   </isNotEmpty> 
+                   <isEqual  property="emymtDivCd" compareValue="A0020010"> 
+	                   <isEmpty prepend="AND" property="typOccuCd" >
+	                        TYP_OCCU_CD IS NULL
+	                   </isEmpty> 
+                   </isEqual>
+                     <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+                      DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#
+                   </isNotEmpty> 
+                    <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+                      DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#
+                   </isNotEmpty> 
+                     <isNotEmpty prepend="AND" property="businCd" >
+                       BUSIN_CD = #businCd#
+                   </isNotEmpty> 
+                  AND ROWNUM = 1
+            ORDER BY EDAC_SEIL_NUM ASC 
+	</select>
+	
+	<select id="yetaPrc1000DAO.selectYetaPrc1000_S" resultMap="yetaPrc1000">
+		<![CDATA[
+			SELECT DPOB_CD
+				, EDAC_RVYY
+				, SETT_GBCD
+				, EDAC_SEIL_NUM
+				, PAYR_MANG_DEPT_CD
+				, DEPT_CD
+				, TYP_OCCU_CD
+				, DTIL_OCCU_CLS_DIV_CD
+				, PYSP_GRDE_CD
+				, DTIL_OCCU_INTTN_CD
+				, BUSIN_CD
+				, EMYMT_DIV_CD
+				, PERN_CHRG_EMP_IDEN_NUM
+				, CLOS_FLAG
+				, CLOS_CONT
+				, CLOS_DATE
+				, EDAC_PRDT
+				, REPR_NAME
+				, JURI_NAME
+				, BUSI_NUMB
+				, RESU_NUMB
+				, JURI_NUMB
+				, INCM_POST
+				, INCM_ADDR
+				, INCM_ADTL
+				, TAXA_CODE
+				, INCM_GBCD
+				, TAXA_DNUM
+				, HOME_TXID
+				, TAXA_PRCD
+				, CHAR_DEPT
+				, CHAR_NAME
+				, CHAR_TELE
+				, FILE_PASS
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YETA1000
+						WHERE  DPOB_CD=#dpobCd#
+						     AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND EDAC_SEIL_NUM=#edacSeilNum#
+				]]>
+	</select>
+	
+	<select id="yetaPrc1000DAO.selectYeta0100ToChkYetaPrc1000" resultMap="yetaPrc1000">
+		<![CDATA[
+			SELECT DPOB_CD
+				, EDAC_RVYY
+				, SETT_GBCD
+				, EDAC_SEIL_NUM
+				, PAYR_MANG_DEPT_CD
+				, DEPT_CD
+				, TYP_OCCU_CD
+				, DTIL_OCCU_CLS_DIV_CD
+				, PYSP_GRDE_CD
+				, DTIL_OCCU_INTTN_CD
+				, BUSIN_CD
+				, EMYMT_DIV_CD
+				, PERN_CHRG_EMP_IDEN_NUM
+				, CLOS_FLAG
+				, CLOS_CONT
+				, CLOS_DATE
+				, EDAC_PRDT
+				, REPR_NAME
+				, JURI_NAME
+				, BUSI_NUMB
+				, RESU_NUMB
+				, JURI_NUMB
+				, INCM_POST
+				, INCM_ADDR
+				, INCM_ADTL
+				, TAXA_CODE
+				, INCM_GBCD
+				, TAXA_DNUM
+				, HOME_TXID
+				, TAXA_PRCD
+				, CHAR_DEPT
+				, CHAR_NAME
+				, CHAR_TELE
+				, FILE_PASS
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YETA1000
+						WHERE  DPOB_CD=#dpobCd#
+						     AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND EDAC_SEIL_NUM=#edacSeilNum#
+				]]>
+	</select>
+	
+	
+	<select id="yetaPrc1000DAO.selectYetaPrc1000List_D" parameterClass="yetaPrc1000SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								EDAC_RVYY
+								, SETT_GBCD
+								, EDAC_SEIL_NUM
+								, PAYR_MANG_DEPT_CD
+								, DEPT_CD
+								, TYP_OCCU_CD
+								, DTIL_OCCU_CLS_DIV_CD
+								, PYSP_GRDE_CD
+								, DTIL_OCCU_INTTN_CD
+								, BUSIN_CD
+								, EMYMT_DIV_CD
+								, PERN_CHRG_EMP_IDEN_NUM
+								, CLOS_FLAG
+								, CLOS_CONT
+								, CLOS_DATE
+								, EDAC_PRDT
+								, REPR_NAME
+								, JURI_NAME
+								, BUSI_NUMB
+								, RESU_NUMB
+								, JURI_NUMB
+								, INCM_POST
+								, INCM_ADDR
+								, INCM_ADTL
+								, TAXA_CODE
+								, INCM_GBCD
+								, TAXA_DNUM
+								, HOME_TXID
+								, TAXA_PRCD
+								, CHAR_DEPT
+								, CHAR_NAME
+								, CHAR_TELE
+								, FILE_PASS
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YETA1000
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					EDAC_RVYY = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SETT_GBCD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						EDAC_RVYY DESC
+							, SETT_GBCD DESC
+							, EDAC_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="yetaPrc1000DAO.selectYetaPrc1000ListTotCnt_S" parameterClass="yetaPrc1000SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA1000
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				EDAC_RVYY = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SETT_GBCD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

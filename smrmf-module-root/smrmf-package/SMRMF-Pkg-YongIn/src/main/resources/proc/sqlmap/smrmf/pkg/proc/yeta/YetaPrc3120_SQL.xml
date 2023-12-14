@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="YetaPrc3120">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="yetaPrc3120SerarchVO" type="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta3120SrhVO"/>
+	
+	<resultMap id="yetaPrc3120" class="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta3120VO">
+		<result property="edacRvyy" column="EDAC_RVYY" columnIndex="1"/>
+		<result property="settGbcd" column="SETT_GBCD" columnIndex="2"/>
+		<result property="cnclSqno" column="CNCL_SQNO" columnIndex="3"/>
+		<result property="dpobCd" column="DPOB_CD" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="cnclName" column="CNCL_NAME" columnIndex="6"/>
+		<result property="cnclRsno" column="CNCL_RSNO" columnIndex="7"/>
+		<result property="cnclStdt" column="CNCL_STDT" columnIndex="8"/>
+		<result property="cnclEddt" column="CNCL_EDDT" columnIndex="9"/>
+		<result property="cnclItro" column="CNCL_ITRO" columnIndex="10"/>
+		<result property="cnclRdmt" column="CNCL_RDMT" columnIndex="11"/>
+		<result property="cnclPrpl" column="CNCL_PRPL" columnIndex="12"/>
+		<result property="cnclItrt" column="CNCL_ITRT" columnIndex="13"/>
+		<result property="cnclDuam" column="CNCL_DUAM" columnIndex="14"/>
+		<result property="kybdr" column="KYBDR" columnIndex="15"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="16"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="17"/>
+		<result property="ismt" column="ISMT" columnIndex="18"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="19"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="20"/>
+	</resultMap>
+	
+	<insert id="yetaPrc3120DAO.insertYetaPrc3120_S">
+		<![CDATA[
+			INSERT INTO YETA3120 
+				( EDAC_RVYY
+				  , SETT_GBCD
+				  , CNCL_SQNO
+				  , DPOB_CD
+				  , SYSTEMKEY
+				  , CNCL_NAME
+				  , CNCL_RSNO
+				  , CNCL_STDT
+				  , CNCL_EDDT
+				  , CNCL_ITRO
+				  , CNCL_RDMT
+				  , CNCL_PRPL
+				  , CNCL_ITRT
+				  , CNCL_DUAM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #edacRvyy#
+				  , #settGbcd#
+				  , #cnclSqno#
+				  , #dpobCd#
+				  , #systemkey#
+				  , #cnclName#
+				  , #cnclRsno#
+				  , #cnclStdt#
+				  , #cnclEddt#
+				  , #cnclItro#
+				  , #cnclRdmt#
+				  , #cnclPrpl#
+				  , #cnclItrt#
+				  , #cnclDuam#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="yetaPrc3120DAO.updateYetaPrc3120_S">
+		<![CDATA[
+			UPDATE YETA3120
+			SET EDAC_RVYY=#edacRvyy#
+				, SETT_GBCD=#settGbcd#
+				, CNCL_SQNO=#cnclSqno#
+				, DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, CNCL_NAME=#cnclName#
+				, CNCL_RSNO=#cnclRsno#
+				, CNCL_STDT=#cnclStdt#
+				, CNCL_EDDT=#cnclEddt#
+				, CNCL_ITRO=#cnclItro#
+				, CNCL_RDMT=#cnclRdmt#
+				, CNCL_PRPL=#cnclPrpl#
+				, CNCL_ITRT=#cnclItrt#
+				, CNCL_DUAM=#cnclDuam#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND CNCL_SQNO=#cnclSqno#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	
+	<delete id="yetaPrc3120DAO.deleteYetaPrc3120_S">
+		<![CDATA[
+			DELETE FROM YETA3120 
+						WHERE EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND CNCL_SQNO=#cnclSqno#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<!-- yeta0100 화면 삭제 -->
+	<delete id="yetaPrc3120DAO.fnPayr06430_PAYR450_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3120 
+						WHERE EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd# 
+								AND DPOB_CD=#dpobCd# 
+				]]> 
+				   <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                   </isNotEmpty> 
+	</delete>
+	
+	
+	<select id="yetaPrc3120DAO.selectYetaPrc3120_S" resultMap="yetaPrc3120">
+		<![CDATA[
+			SELECT
+				EDAC_RVYY
+				, SETT_GBCD
+				, CNCL_SQNO
+				, DPOB_CD
+				, SYSTEMKEY
+				, CNCL_NAME
+				, CNCL_RSNO
+				, CNCL_STDT
+				, CNCL_EDDT
+				, CNCL_ITRO
+				, CNCL_RDMT
+				, CNCL_PRPL
+				, CNCL_ITRT
+				, CNCL_DUAM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YETA3120
+						WHERE EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND CNCL_SQNO=#cnclSqno#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+	<select id="yetaPrc3120DAO.selectYeta3120List_D" parameterClass="yetaPrc3120SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								EDAC_RVYY
+								, SETT_GBCD
+								, CNCL_SQNO
+								, DPOB_CD
+								, SYSTEMKEY
+								, CNCL_NAME
+								, CNCL_RSNO
+								, CNCL_STDT
+								, CNCL_EDDT
+								, CNCL_ITRO
+								, CNCL_RDMT
+								, CNCL_PRPL
+								, CNCL_ITRT
+								, CNCL_DUAM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YETA3120
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					EDAC_RVYY = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SETT_GBCD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						EDAC_RVYY DESC
+							, SETT_GBCD DESC
+							, CNCL_SQNO DESC
+							, DPOB_CD DESC
+							, SYSTEMKEY DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="yetaPrc3120DAO.selectYetaPrc3120ListTotCnt_S" parameterClass="yetaPrc3120SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3120
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				EDAC_RVYY = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SETT_GBCD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

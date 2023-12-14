@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcPsnl0115">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="infcPkgPsnl0115Vo" type="com.app.smrmf.infc.personal.server.vo.InfcPkgPsnl0115VO"/>
+	
+	
+	<insert id="infcPkgPsnl0115DAO.insertPsnl0115_S" parameterClass="infcPkgPsnl0115Vo">
+		<![CDATA[
+			INSERT INTO PSNL0115 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , FAMY_SEIL_NUM
+				  , FAMY_RELA_DIV_CD
+				  , FAMY_NM
+				  , FAMY_RESN_REGN_NUM
+				  , YOOBH_MNTH_DAY
+				  , SCLC_DIV_CD
+				  , ACAD_ABTY_DIV_CD
+				  , SCHL_NM
+				  , CRR_CD
+				  , WK_OFC_NM
+				  , INBY_NM
+				  , FRGNR_YN
+				  , DABTY_DIV_CD
+				  , DABTY_GRDE_CD
+				  , FAMY_PART_NOTE_CTNT
+				  , NATN_CD
+				  , FAMY_CHBTT_YN
+				  , FAMY_ALLW_YN
+				  , SCHL_EXPN_ADMCL_YN
+				  , YRTX_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , (select NVL(MAX(FAMY_SEIL_NUM)+1,1) from PSNL0115 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#)
+				  , #famyRelaDivCd#
+				  , #famyNm#
+				  , replace(#famyResnRegnNum#, '-', '')
+				  , #yoobhMnthDay#
+				  , #sclcDivCd#
+				  , #acadAbtyDivCd#
+				  , #schlNm#
+				  , #crrCd#
+				  , #wkOfcNm#
+				  , #inbyNm#
+				  , #frgnrYn#
+				  , #dabtyDivCd#
+				  , #dabtyGrdeCd#
+				  , #famyPartNoteCtnt#
+				  , #natnCd#
+				  , #famyChbttYn#
+				  , #famyAllwYn#
+				  , #schlExpnAdmclYn#
+				  , #yrtxYn#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+
+</sqlMap>

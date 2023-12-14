@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0114">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="infcPsnl0114Dto" type="com.app.exterms.personal.client.dto.InfcPsnl0114DTO"/>
+    <typeAlias  alias="infcPsnl0114SerarchVO" type="com.app.exterms.personal.server.vo.InfcPsnl0114DefaultVO"/>
+	
+	<resultMap id="infcPsnl0114" class="com.app.exterms.personal.server.vo.InfcPsnl0114VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="opztnSeilNum" column="OPZTN_SEIL_NUM" columnIndex="3"/>
+		<result property="jnDt" column="JN_DT" columnIndex="4"/>
+		<result property="jnOpztnNm" column="JN_OPZTN_NM" columnIndex="5"/>
+		<result property="odtyCd" column="ODTY_CD" columnIndex="6"/>
+		<result property="wirlDt" column="WIRL_DT" columnIndex="7"/>
+		<result property="kybdr" column="KYBDR" columnIndex="8"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="9"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="10"/>
+		<result property="ismt" column="ISMT" columnIndex="11"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="12"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="13"/>
+	</resultMap>
+	<insert id="infcPsnl0114DAO.insertPsnl0114" parameterClass="infcPsnl0114Dto">
+		<![CDATA[
+			INSERT INTO PSNL0114 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , OPZTN_SEIL_NUM
+				  , JN_DT
+				  , JN_OPZTN_NM
+				  , ODTY_CD
+				  , WIRL_DT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , (select NVL(MAX(OPZTN_SEIL_NUM)+1,1) from PSNL0114 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#) 
+				  , TO_CHAR(#jnDt# , 'YYYYMMDD')
+				  , #jnOpztnNm#
+				  , #odtyCd#
+				  , TO_CHAR(#wirlDt#, 'YYYYMMDD')
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPsnl0114DAO.updatePsnl0114" parameterClass="infcPsnl0114Dto">
+	
+			UPDATE PSNL0114
+			SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+	<isNotNull property="jnDt"><isNotEmpty property="jnDt">, JN_DT=TO_CHAR(#jnDt# , 'YYYYMMDD')</isNotEmpty></isNotNull>
+	<isNotNull property="jnOpztnNm"><isNotEmpty property="jnOpztnNm">, JN_OPZTN_NM=#jnOpztnNm#</isNotEmpty></isNotNull>
+	<isNotNull property="odtyCd"><isNotEmpty property="odtyCd">, ODTY_CD=#odtyCd#</isNotEmpty></isNotNull>
+	<isNotNull property="wirlDt"><isNotEmpty property="wirlDt">, WIRL_DT=TO_CHAR(#wirlDt#, 'YYYYMMDD')</isNotEmpty></isNotNull>
+	<isNotNull property="ismt"><isNotEmpty property="ismt">, ISMT=#ismt#</isNotEmpty></isNotNull>
+	<isNotNull property="revnAddr"><isNotEmpty property="revnAddr">, REVN_ADDR=#revnAddr#</isNotEmpty></isNotNull>
+			WHERE DPOB_CD=#dpobCd#
+			AND SYSTEMKEY=#systemkey#
+			AND OPZTN_SEIL_NUM=#opztnSeilNum#
+	
+	</update>
+	
+	<delete id="infcPsnl0114DAO.deletePsnl0114" parameterClass="infcPsnl0114Dto">
+		<![CDATA[
+			DELETE FROM PSNL0114 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND OPZTN_SEIL_NUM=#opztnSeilNum#
+				]]>
+	</delete>
+	
+	<select id="infcPsnl0114DAO.selectPsnl0114" resultClass="egovMap" parameterClass="hashMap">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, OPZTN_SEIL_NUM
+				, TO_DATE(JN_DT,'YYYYMMDD') JN_DT
+				, JN_OPZTN_NM
+				, ODTY_CD
+				, TO_DATE(WIRL_DT,'YYYYMMDD') WIRL_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PSNL0114
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								
+				]]>
+		<isNotNull property="opztnSeilNum">
+		    <isNotEmpty property="opztnSeilNum">
+		        AND OPZTN_SEIL_NUM=#opztnSeilNum#
+		    </isNotEmpty>
+		</isNotNull>
+	</select>
+	
+	
+
+</sqlMap>

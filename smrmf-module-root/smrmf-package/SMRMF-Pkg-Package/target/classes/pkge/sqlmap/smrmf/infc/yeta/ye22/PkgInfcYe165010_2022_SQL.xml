@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgYe165010_2022">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYe165010Srh_2022_VO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2022.InfcPkgYe165010Srh_2022_VO"/>
+	
+	<resultMap id="infcPkgYe165010_2022" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2022.InfcPkgYe165010_2022_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="cnbtSeilNum" column="CNBT_SEIL_NUM" columnIndex="5"/>
+		<result property="conbCd" column="CONB_CD" columnIndex="6"/>
+		<result property="conbNm" column="CONB_NM" columnIndex="7"/>
+		<result property="yrsMateClCd" column="YRS_MATE_CL_CD" columnIndex="8"/>
+		<result property="dntcntn" column="DNTCNTN" columnIndex="9"/>
+		<result property="coplNm" column="COPL_NM" columnIndex="10"/>
+		<result property="bsnoEncCntn" column="BSNO_ENC_CNTN" columnIndex="11"/>
+		<result property="cnbtRltClCd" column="CNBT_RLT_CL_CD" columnIndex="12"/>
+		<result property="cnbtFnm" column="CNBT_FNM" columnIndex="13"/>
+		<result property="resnoEncCntn" column="RESNO_ENC_CNTN" columnIndex="14"/>
+		<result property="dntScnt" column="DNT_SCNT" columnIndex="15"/>
+		<result property="useSumAmt" column="USE_SUM_AMT" columnIndex="16"/>
+		<result property="ddcTrgtConbAmt" column="DDC_TRGT_CONB_AMT" columnIndex="17"/>
+		<result property="conbSumAmt" column="CONB_SUM_AMT" columnIndex="18"/>
+		<result property="kybdr" column="KYBDR" columnIndex="19"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="20"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="21"/>
+		<result property="ismt" column="ISMT" columnIndex="22"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="23"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="24"/>
+	</resultMap>
+	
+	
+
+<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직  시작 ++++++++++++++++++++++++++++++ --> 
+
+	<!-- 노조회비 기부금 처리  -->
+	<delete id="infcPkgYe165010_2022_DAO.fnYeta7100_YE165010_2022_PAYR_Delete_S">
+		<![CDATA[
+			DELETE FROM YE165010 AA
+				WHERE DPOB_CD			= #dpobCd#
+					AND YRTX_BLGG_YR	= #yrtxBlggYr#
+					AND CLUT_SEPT_CD	= #clutSeptCd#
+					AND SYSTEMKEY		= #systemkey# 
+				    AND YRS_MATE_CL_CD 	= #yrsMateClCd#  /* 기타자료  */   
+					AND CONB_CD 		= #conbCd#
+					AND BSNO_ENC_CNTN 	= #bsnoEncCntn#
+					AND RESNO_ENC_CNTN  = ( SELECT RESN_REGN_NUM FROM PSNL0100 WHERE SYSTEMKEY = #systemkey# )
+				]]>  
+	</delete>
+	
+	<!--  노조회비 기부금 처리  -->
+	<insert id="infcPkgYe165010_2022_DAO.fnYeta7100_YE165010_2022_PAYR_Insert_S">
+		<![CDATA[
+			INSERT INTO YE165010 ( DPOB_CD
+									, SYSTEMKEY
+			                      	, YRTX_BLGG_YR
+			                      	, CLUT_SEPT_CD
+			                      	, CNBT_SEIL_NUM
+			                      	, CONB_CD
+			                      	, CONB_CHG_CD
+			                      	, YRS_MATE_CL_CD
+			                      	, DNTCNTN
+			                      	, COPL_NM
+			                      	, BSNO_ENC_CNTN
+			                      	, CNBT_RLT_CL_CD
+			                      	, CNBT_RLT_CHG_CD
+			                      	, CNBT_FNM
+			                      	, RESNO_ENC_CNTN
+			                      	, DNT_SCNT
+			                      	, USE_SUM_AMT
+			                      	, DDC_TRGT_CONB_AMT
+			                      	, CONB_SUM_AMT
+			                      	, CNBT_ETC
+			                      	, KYBDR
+			                      	, INPT_DT
+			                      	, INPT_ADDR
+			                      	, ISMT
+			                      	, REVN_DT
+			                      	, REVN_ADDR )	
+			                      	
+							SELECT 	#dpobCd#																/* 사업장코드				*/
+									, #systemkey#															/* SYSTEMKEY			*/
+									, #yrtxBlggYr#															/* 귀속연도					*/
+									, #clutSeptCd#															/* 연말정산구분코드			*/
+									, ( SELECT NVL( MAX(CNBT_SEIL_NUM)+1 ,1)  
+											FROM YE165010  
+										WHERE DPOB_CD=#dpobCd# 
+											AND YRTX_BLGG_YR=#yrtxBlggYr# 
+											AND CLUT_SEPT_CD=#clutSeptCd# 
+									        AND SYSTEMKEY=#systemkey# )										/* 기부금일련번호				*/
+									, #conbCd#																/* 기부유형코드				*/
+									, #conbChgCd#															/* 기부유형전환코드			*/
+									, #yrsMateClCd#															/* 기부국세자료구분코드			*/
+									, #dntcntn#																/* 기부내용					*/
+									, #coplNm#																/* 기부처_상호명				*/
+									, #bsnoEncCntn#															/* 기부처_사업자등록번호		*/
+									, #cnbtRltClCd#															/* 기부자관계코드				*/
+									, #cnbtRltChgCd#														/* 기부자관계전환코드			*/
+									, PS0100.HAN_NM															/* 기부자성명				*/
+									, PS0100.RESN_REGN_NUM													/* 기부자_주민등록번호			*/
+									, #dntScnt#																/* 기부명세건수				*/
+									, NVL( ( SELECT SUM(TA01.PYMT_DDUC_SUM)
+											FROM ( SELECT AA.PYMT_YR_MNTH
+															, AA.PAY_CD
+															, AA.SYSTEMKEY
+															, SUM(AA.PYMT_DDUC_SUM)AS PYMT_DDUC_SUM
+														
+														FROM PAYR0302 AA
+													WHERE AA.PAY_ITEM_CD = #payItemCd#
+														AND SUBSTR(AA.PYMT_YR_MNTH, 0, 4) = #yrtxBlggYr#				
+														AND NOT EXISTS ( SELECT  SYSTEMKEY										
+																			FROM PYYT0302 
+																		WHERE PYYT_ITEM_CD	= AA.PAY_ITEM_CD
+																			AND PYYT_YR_MNTH= AA.PYMT_YR_MNTH
+																			AND SYSTEMKEY	= AA.SYSTEMKEY
+																			AND PAY_CD		= AA.PAY_CD				
+																		) 
+														AND AA.SYSTEMKEY = #systemkey#				
+													
+													GROUP BY PYMT_YR_MNTH, PAY_CD, SYSTEMKEY   
+													
+													UNION ALL 
+												  
+													SELECT  AA.PYYT_YR_MNTH
+															, AA.PAY_CD
+															, AA.SYSTEMKEY
+															, SUM(AA.PYYT_PYMT_DDUC_SUM)AS PYMT_DDUC_SUM
+														
+														FROM PYYT0302 AA
+									
+													WHERE AA.PYYT_ITEM_CD = #payItemCd#
+														AND SUBSTR(AA.PYYT_YR_MNTH, 0, 4) = #yrtxBlggYr#
+														AND ( NOT EXISTS ( SELECT  SYSTEMKEY                           
+																			FROM PAYR0302 
+																		WHERE PAY_ITEM_CD	= AA.PYYT_ITEM_CD
+																			AND PYMT_YR_MNTH= AA.PYYT_YR_MNTH
+																			AND SYSTEMKEY	= AA.SYSTEMKEY
+																			AND PAY_CD		= AA.PAY_CD
+																		)																
+															OR EXISTS ( SELECT  SYSTEMKEY                           
+																				FROM PAYR0302 
+																			WHERE PAY_ITEM_CD	= AA.PYYT_ITEM_CD
+																				AND PYMT_YR_MNTH= AA.PYYT_YR_MNTH
+																				AND SYSTEMKEY	= AA.SYSTEMKEY
+																				AND PAY_CD		= AA.PAY_CD
+																		)  
+															)  
+														AND AA.SYSTEMKEY = #systemkey#
+												  GROUP BY PYYT_YR_MNTH, PAY_CD, SYSTEMKEY   
+												)TA01
+											WHERE TA01.SYSTEMKEY = #systemkey#
+											GROUP BY TA01.SYSTEMKEY
+										), 0)AS PYMT_DDUC_SUM													/* 기부명세합계금액			*/
+									
+									, NVL( ( SELECT SUM(TA01.PYMT_DDUC_SUM)
+											FROM ( SELECT AA.PYMT_YR_MNTH
+															, AA.PAY_CD
+															, AA.SYSTEMKEY
+															, SUM(AA.PYMT_DDUC_SUM)AS PYMT_DDUC_SUM
+														
+														FROM PAYR0302 AA
+													WHERE AA.PAY_ITEM_CD = 'D9500400'
+														AND SUBSTR(AA.PYMT_YR_MNTH, 0, 4) = #yrtxBlggYr#				
+														AND NOT EXISTS ( SELECT  SYSTEMKEY										
+																			FROM PYYT0302 
+																		WHERE PYYT_ITEM_CD	= AA.PAY_ITEM_CD
+																			AND PYYT_YR_MNTH= AA.PYMT_YR_MNTH
+																			AND SYSTEMKEY	= AA.SYSTEMKEY
+																			AND PAY_CD		= AA.PAY_CD				
+																		) 
+														AND AA.SYSTEMKEY = #systemkey#				
+													
+													GROUP BY PYMT_YR_MNTH, PAY_CD, SYSTEMKEY   
+													
+													UNION ALL 
+												  
+													SELECT  AA.PYYT_YR_MNTH
+															, AA.PAY_CD
+															, AA.SYSTEMKEY
+															, SUM(AA.PYYT_PYMT_DDUC_SUM)AS PYMT_DDUC_SUM
+														
+														FROM PYYT0302 AA
+									
+													WHERE AA.PYYT_ITEM_CD = 'D9500400'
+														AND SUBSTR(AA.PYYT_YR_MNTH, 0, 4) = #yrtxBlggYr#
+														AND ( NOT EXISTS ( SELECT  SYSTEMKEY                           
+																			FROM PAYR0302 
+																		WHERE PAY_ITEM_CD	= AA.PYYT_ITEM_CD
+																			AND PYMT_YR_MNTH= AA.PYYT_YR_MNTH
+																			AND SYSTEMKEY	= AA.SYSTEMKEY
+																			AND PAY_CD		= AA.PAY_CD
+																		)																
+															OR EXISTS ( SELECT  SYSTEMKEY                           
+																				FROM PAYR0302 
+																			WHERE PAY_ITEM_CD	= AA.PYYT_ITEM_CD
+																				AND PYMT_YR_MNTH= AA.PYYT_YR_MNTH
+																				AND SYSTEMKEY	= AA.SYSTEMKEY
+																				AND PAY_CD		= AA.PAY_CD
+																		)  
+															)  
+														AND AA.SYSTEMKEY = #systemkey#
+												  GROUP BY PYYT_YR_MNTH, PAY_CD, SYSTEMKEY   
+												)TA01
+											WHERE TA01.SYSTEMKEY = #systemkey#
+											GROUP BY TA01.SYSTEMKEY
+										), 0)AS PYMT_DDUC_SUM												/* 공제대상기부금액			*/
+									, '0'																	/* 기부장려금신청금			*/
+									, '0'																	/* 기부금기타				*/
+									, #kybdr#																/* 입력자					*/
+									, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS') 									/* 입력일자					*/
+									, #inptAddr# 															/* 입력주소					*/
+									, #ismt#																/* 수정자					*/
+									, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS') 									/* 수정일자					*/
+									, #revnAddr#															/* 수정주소					*/
+									                      		
+								FROM PSNL0100 PS0100
+							  WHERE PS0100.DPOB_CD = #dpobCd#
+							  	AND PS0100.SYSTEMKEY = #systemkey# 
+		
+		]]> 
+	</insert>
+
+ 
+ <!--   기부금   -->
+<delete id="infcPkgYe165010_2022_DAO.PdfYeta7200_L102Y_YE165010_Delete_S">
+		<![CDATA[
+			DELETE FROM YE165010 AA
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey# 
+					            AND YRS_MATE_CL_CD = 'Y0140000'  /* 국세청 */   
+								AND EXISTS (SELECT * FROM PDF_L102Y BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY  
+										)
+								
+				]]>  
+	</delete>
+	
+<!-- 기부금  -->
+<insert id="infcPkgYe165010_2022_DAO.PdfYeta7200_L102Y_YE165010_Insert_S">
+		<![CDATA[
+			INSERT INTO YE165010 
+				( DPOB_CD			/* 사업장코드          */ 
+					,YRTX_BLGG_YR		/* 귀속연도	    */
+					,CLUT_SEPT_CD		/* 연말정산구분코드	    */
+					,SYSTEMKEY		/* SYSTEMKEY	    */
+					,CNBT_SEIL_NUM		/* 기부금일련번호	    */
+					,CONB_CD		/* 기부유형코드	    */
+					,CONB_CHG_CD		/* 기부유형전환코드	    */
+					,YRS_MATE_CL_CD		/* 기부국세자료구분코드   */
+					,DNTCNTN		/* 기부내용	    */
+					,COPL_NM		/* 기부처_상호명	    */
+					,BSNO_ENC_CNTN		/* 기부처_사업자등록번호  */
+					,CNBT_RLT_CL_CD		/* 기부자관계코드	    */
+					,CNBT_RLT_CHG_CD	/* 기부자관계전환코드	    */
+					,CNBT_FNM		/* 기부자성명	    */
+					,RESNO_ENC_CNTN		/* 기부자_주민등록번호   */
+					,DNT_SCNT		/* 기부명세건수	    */
+					,USE_SUM_AMT		/* 기부명세합계금액	    */
+					,DDC_TRGT_CONB_AMT	/* 공제대상기부금액	    */
+					,CONB_SUM_AMT		/* 기부장려금신청금	    */
+					,CNBT_ETC		/* 기부금기타	    */
+					,KYBDR			/* 입력자		    */
+					,INPT_DT		/* 입력일자	    */
+					,INPT_ADDR		/* 입력주소	    */
+					,ISMT			/* 수정자		    */
+					,REVN_DT		/* 수정일자	    */
+					,REVN_ADDR		/* 수정주소	    */
+ )
+		  (SELECT 
+				     AC02.DPOB_CD
+				   , AC02.YRTX_BLGG_YR
+				   , AC02.CLUT_SEPT_CD
+				   , AC02.SYSTEMKEY
+				   , ( ( ROW_NUMBER() OVER (ORDER BY AC02.DPOB_CD ASC,
+											           AC02.YRTX_BLGG_YR ASC,
+											           AC02.CLUT_SEPT_CD ASC,
+											           AC02.SYSTEMKEY ASC))  + 
+                              (SELECT (NVL(MAX(CNBT_SEIL_NUM),0) +  1) AS CNBT_SEIL_NUM 
+				                FROM YE165010  AA 
+				                WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#) )   AS ROWCNT  
+				   , AC03.CONB_CD
+				   , AC03.DONATION_CD  
+				   ,'Y0140000'  /* 국세청 */ 
+				   ,''
+				   , AC03.TRADE_NM
+				   , AC03.BUSNID
+				   ,   (CASE WHEN  AC02.FAMY_RELA_DIV_CD IN ('A0190001')  THEN 'Y0180001'                                                                                                                   
+                                                   WHEN  AC02.FAMY_RELA_DIV_CD IN ('A0190002','A0190007')  THEN 'Y0180002'                                                                                                               
+                                                   WHEN  AC02.FAMY_RELA_DIV_CD IN ('A0190003','A0190004','A0190009','A0190010','A0190017','A0190018','A0190019' ,'A0190053','A0190054','A0190055','A0190056','A0190051','A0190050','A0190078','A0190079')  THEN 'Y0180004'   
+                                                   WHEN  AC02.FAMY_RELA_DIV_CD IN ('A0190011','A0190012','A0190013','A0190021','A0190023')  THEN 'Y0180006'                                                                                           
+                                                   WHEN  AC02.FAMY_RELA_DIV_CD IN ('A0190005','A0190040' ,'A0190099','A0190076')  THEN 'Y0180003'                                                                                       
+                                                   WHEN  AC02.FAMY_RELA_DIV_CD IN ('A0190020' ,'A0190022' ,'A0190025','A0190033','A0190035' ,'A0190051','A0190052' ,'A0190032','A0190038')  THEN 'Y0180005'  
+                                                   WHEN  AC02.FAMY_RELA_DIV_CD IN ('A0190109','A01900ZZ','A01900A7','A0190032')  THEN 'Y0180006'                              
+                                                   WHEN  AC02.FAMY_RELA_DIV_CD IN ('A0190100')  THEN 'Y0180006'  ELSE 'Y0180006' END)  
+				   ,  (CASE WHEN  AC02.FAMY_RELA_DIV_CD IN ('A0190001')  THEN '1'                                                                                                                   
+                                                   WHEN  AC02.FAMY_RELA_DIV_CD IN ('A0190002','A0190007')  THEN '2'                                                                                                               
+                                                   WHEN  AC02.FAMY_RELA_DIV_CD IN ('A0190003','A0190004','A0190009','A0190010','A0190017','A0190018','A0190019' ,'A0190053','A0190054','A0190055','A0190056','A0190051','A0190050','A0190078','A0190079')  THEN '4'   
+                                                   WHEN  AC02.FAMY_RELA_DIV_CD IN ('A0190011','A0190012','A0190013','A0190021','A0190023')  THEN '6'                                                                                           
+                                                   WHEN  AC02.FAMY_RELA_DIV_CD IN ('A0190005','A0190040' ,'A0190099','A0190076')  THEN '3'                                                                                       
+                                                   WHEN  AC02.FAMY_RELA_DIV_CD IN ('A0190020' ,'A0190022' ,'A0190025','A0190033','A0190035' ,'A0190051','A0190052' ,'A0190032','A0190038')  THEN '5'  
+                                                   WHEN  AC02.FAMY_RELA_DIV_CD IN ('A0190109','A01900ZZ','A01900A7','A0190032')  THEN '6'                              
+                                                   WHEN  AC02.FAMY_RELA_DIV_CD IN ('A0190100')  THEN '6'  ELSE '6' END)   
+				   , AC03.NAME
+				   , AC03.RESID
+				   , DECODE(AC03.DNT_SCNT, 0, 1, AC03.DNT_SCNT)AS DNT_SCNT
+				   , AC03.CONB_SUM
+				   , AC03.CONB_AMT_SUM
+				   , AC03.SBDY_APLN_SUM
+				   , 0
+				   , #kybdr#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #inptAddr#
+				   , #ismt#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #revnAddr#   
+		FROM YE161030  AC02, (   
+											  SELECT   AA.DPOB_CD		/* 사업장코드             */
+														,AA.YRTX_BLGG_YR	/* 귀속년도	       */
+														,AA.CLUT_SEPT_CD	/* 연말정산구분코드	      */
+														,AA.SYSTEMKEY		/* SYSTEMKEY	      */
+														,AA.CONB_SEIL_NUM	/* 기부금명세일련번호	       */
+														,AA.FORM_CD		/* 서식코드	       */
+														,AA.RESID		/* 기부금_주민등록번호      */
+														,AA.NAME		/* 기부금_성명	       */
+														,AA.DAT_CD		/* 자료코드	       */
+														,AA.BUSNID		/* 기부금_사업자등록번호     */
+														,AA.TRADE_NM		/* 기부금_단체명	       */
+														,AA.DONATION_CD
+														,(CASE WHEN AA.DONATION_CD = '10' THEN 'B0230010'
+														WHEN AA.DONATION_CD = '20' THEN 'B0230020'
+														WHEN AA.DONATION_CD = '40' THEN 'B0230040'
+														WHEN AA.DONATION_CD = '41' THEN 'B0230041'
+														WHEN AA.DONATION_CD = '42' THEN 'B0230042'
+														       ELSE 'B0230050' END) AS CONB_CD
+														 		/* 기부금_기부유형코드      */
+														,AA.CONB_AMT_SUM	/* 기부금_공제대상기부금액   */
+														,AA.SBDY_APLN_SUM	/* 기부금_기부장려금신청금액  */
+														,AA.CONB_SUM		/* 기부금_기부금액합계      */ 
+														,(SELECT  COUNT(CONB_DD) 
+																FROM  PDF_L102D DD
+																WHERE DD.DPOB_CD = AA.DPOB_CD
+													                AND DD.YRTX_BLGG_YR = AA.YRTX_BLGG_YR 
+													                AND DD.CLUT_SEPT_CD = AA.CLUT_SEPT_CD 
+													                AND DD.SYSTEMKEY = AA.SYSTEMKEY
+													                AND  DD.CONB_SEIL_NUM = AA.CONB_SEIL_NUM
+																   ) AS DNT_SCNT
+										              FROM   PDF_L102Y  AA   
+										               WHERE AA.DPOB_CD=#dpobCd#
+														 AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+														 AND AA.CLUT_SEPT_CD=#clutSeptCd#
+														 AND AA.SYSTEMKEY=#systemkey# 
+														 AND AA.DAT_CD = 'G0020'
+														 AND AA.PDF_DAT_APP_YN = 'Y'
+														 AND EXISTS
+														 (SELECT * FROM YE161030 AC01
+										              			   WHERE  AC01.DPOB_CD=#dpobCd#
+														            AND AC01.YRTX_BLGG_YR=#yrtxBlggYr#
+														            AND AC01.CLUT_SEPT_CD=#clutSeptCd#
+														            AND AC01.SYSTEMKEY=#systemkey# 
+																    AND AC01.DPOB_CD = AA.DPOB_CD
+													                AND AC01.YRTX_BLGG_YR = AA.YRTX_BLGG_YR 
+													                AND AC01.CLUT_SEPT_CD = AA.CLUT_SEPT_CD 
+													                AND AC01.SYSTEMKEY = AA.SYSTEMKEY   ) 
+					) AC03
+					 WHERE AC02.DPOB_CD=#dpobCd#
+					   AND AC02.YRTX_BLGG_YR=#yrtxBlggYr#
+					   AND AC02.CLUT_SEPT_CD=#clutSeptCd#
+					   AND AC02.SYSTEMKEY=#systemkey#
+					   AND AC02.DPOB_CD = AC03.DPOB_CD
+		               AND AC02.YRTX_BLGG_YR = AC03.YRTX_BLGG_YR 
+		               AND AC02.CLUT_SEPT_CD = AC03.CLUT_SEPT_CD 
+		               AND AC02.SYSTEMKEY = AC03.SYSTEMKEY 
+		               AND AC02.TXPR_DSCM_NO_CNTN = AC03.RESID 
+				      )
+		]]>
+	</insert>
+	
+
+<!--  I_해당연도기부금명세  -->
+<insert id="infcPkgYe165010_2022_DAO.incTaxDeducDec_nts_Yeta2022_Ye165010_Insert_S">
+		<![CDATA[
+			INSERT INTO YE165010 
+				( DPOB_CD			/* 사업장코드          */ 
+					,YRTX_BLGG_YR		/* 귀속연도	    */
+					,CLUT_SEPT_CD		/* 연말정산구분코드	    */
+					,SYSTEMKEY		/* SYSTEMKEY	    */
+					,CNBT_SEIL_NUM		/* 기부금일련번호	    */
+					,CONB_CD		/* 기부유형코드	    */
+					,CONB_CHG_CD		/* 기부유형전환코드	    */
+					,YRS_MATE_CL_CD		/* 기부국세자료구분코드   */
+					,DNTCNTN		/* 기부내용	    */
+					,COPL_NM		/* 기부처_상호명	    */
+					,BSNO_ENC_CNTN		/* 기부처_사업자등록번호  */
+					,CNBT_RLT_CL_CD		/* 기부자관계코드	    */
+					,CNBT_RLT_CHG_CD	/* 기부자관계전환코드	    */
+					,CNBT_FNM		/* 기부자성명	    */
+					,RESNO_ENC_CNTN		/* 기부자_주민등록번호   */
+					,DNT_SCNT		/* 기부명세건수	    */
+					,USE_SUM_AMT		/* 기부명세합계금액	    */
+					,DDC_TRGT_CONB_AMT	/* 공제대상기부금액	    */
+					,CONB_SUM_AMT		/* 기부장려금신청금	    */
+					,CNBT_ETC		/* 기부금기타	    */
+					,KYBDR			/* 입력자		    */
+					,INPT_DT		/* 입력일자	    */
+					,INPT_ADDR		/* 입력주소	    */
+					,ISMT			/* 수정자		    */
+					,REVN_DT		/* 수정일자	    */
+					,REVN_ADDR		/* 수정주소	    */
+ )
+		  (SELECT 
+						 DPOB_CD			/* 사업장코드          */ 
+						 ,YRTX_BLGG_YR		/* 귀속연도	    */
+						 ,CLUT_SEPT_CD		/* 연말정산구분코드	    */
+						,SYSTEMKEY		/* SYSTEMKEY	    */
+						, ( ( ROW_NUMBER() OVER (ORDER BY DPOB_CD ASC,
+											           YRTX_BLGG_YR ASC,
+											           CLUT_SEPT_CD ASC,
+											           SYSTEMKEY ASC))  + 
+                              (SELECT (NVL(MAX(CNBT_SEIL_NUM),0) +  1) AS CNBT_SEIL_NUM 
+				                FROM YE165010  AA 
+				                WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#) )  /* 기부금일련번호	    */
+						,(CASE WHEN CONB_NM = '10' THEN 'B0230010'
+														WHEN CONB_NM = '20' THEN 'B0230020'
+														WHEN CONB_NM = '40' THEN 'B0230040'
+														WHEN CONB_NM= '41' THEN 'B0230041'
+														WHEN CONB_NM  = '42' THEN 'B0230042'
+														       ELSE 'B0230050' END)  			/* 기부유형	    */ 
+						,CONB_NM			/* 기부코드	    */ 
+						 ,'Y0140000'  /* 국세청 */ 
+						,DNT_CNTN		/* 기부내용	    */
+						,COPL_NM			/* 기부처_상호명	    */
+						,BSNO_ENC_CNTN		/* 기부처_사업자등록번호  */
+						, ( SELECT 
+									COMM_CD
+							  FROM  BASS0300 AN02 
+						       WHERE AN02.DPOB_CD  = YE167420.DPOB_CD 
+				               AND AN02.MANGE_ITEM11 = YE167420.CNBT_RLT_CL_CD
+				               AND  AN02.RPSTTV_CD = 'Y018'
+						  )		/* 기부자관계코드	    */
+						, CNBT_RLT_CL_CD	/* 기부자관계전환코드	    */	
+						,CNBT_FNM		/* 기부자성명	    */
+						,RESNO_ENC_CNTN		/* 기부자_주민등록번호   */
+						,DNT_SCNT		/* 기부명세건수	    */
+						,USE_SUM_AMT		/* 기부명세합계금액	    */
+						,DDC_TRGT_CONB_AMT	/* 공제대상기부금액	    */
+						,CONB_SUM_AMT		/* 기부장려금신청금	    */
+						,DDC_EXCL_CONB_ETC_AMT	/* 공제제외기부금기타금액 */
+					  , #kybdr#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #inptAddr#
+				   , #ismt#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #revnAddr#   
+			FROM  YE167420 
+		       WHERE DPOB_CD=#dpobCd#
+					   AND YRTX_BLGG_YR=#yrtxBlggYr#
+					   AND CLUT_SEPT_CD=#clutSeptCd#
+					   AND SYSTEMKEY=#systemkey# 
+				      )
+		]]>
+	</insert>
+	 
+ 
+<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직  종료 ++++++++++++++++++++++++++++++ -->	
+ 
+	
+	
+	
+	<insert id="infcPkgYe165010_2022_DAO.insertYe165010_S">
+		<![CDATA[
+			INSERT INTO YE165010 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , CNBT_SEIL_NUM
+				  , CONB_CD
+				  , CONB_NM
+				  , YRS_MATE_CL_CD
+				  , DNTCNTN
+				  , COPL_NM
+				  , BSNO_ENC_CNTN
+				  , CNBT_RLT_CL_CD
+				  , CNBT_FNM
+				  , RESNO_ENC_CNTN
+				  , DNT_SCNT
+				  , USE_SUM_AMT
+				  , DDC_TRGT_CONB_AMT
+				  , CONB_SUM_AMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #cnbtSeilNum#
+				  , #conbCd#
+				  , #conbNm#
+				  , #yrsMateClCd#
+				  , #dntcntn#
+				  , #coplNm#
+				  , #bsnoEncCntn#
+				  , #cnbtRltClCd#
+				  , #cnbtFnm#
+				  , #resnoEncCntn#
+				  , #dntScnt#
+				  , #useSumAmt#
+				  , #ddcTrgtConbAmt#
+				  , #conbSumAmt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgYe165010_2022_DAO.updateYe165010_S">
+		<![CDATA[
+			UPDATE YE165010
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, CNBT_SEIL_NUM=#cnbtSeilNum#
+				, CONB_CD=#conbCd#
+				, CONB_NM=#conbNm#
+				, YRS_MATE_CL_CD=#yrsMateClCd#
+				, DNTCNTN=#dntcntn#
+				, COPL_NM=#coplNm#
+				, BSNO_ENC_CNTN=#bsnoEncCntn#
+				, CNBT_RLT_CL_CD=#cnbtRltClCd#
+				, CNBT_FNM=#cnbtFnm#
+				, RESNO_ENC_CNTN=#resnoEncCntn#
+				, DNT_SCNT=#dntScnt#
+				, USE_SUM_AMT=#useSumAmt#
+				, DDC_TRGT_CONB_AMT=#ddcTrgtConbAmt#
+				, CONB_SUM_AMT=#conbSumAmt#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND CNBT_SEIL_NUM=#cnbtSeilNum#
+				]]>
+	</update>
+	
+	<delete id="infcPkgYe165010_2022_DAO.deleteYe165010_S">
+		<![CDATA[
+			DELETE FROM YE165010 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND CNBT_SEIL_NUM=#cnbtSeilNum#
+				]]>
+	</delete>
+	
+	<select id="infcPkgYe165010_2022_DAO.selectYe165010_S" resultMap="infcPkgYe165010_2022">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, CNBT_SEIL_NUM
+				, CONB_CD
+				, CONB_NM
+				, YRS_MATE_CL_CD
+				, DNTCNTN
+				, COPL_NM
+				, BSNO_ENC_CNTN
+				, CNBT_RLT_CL_CD
+				, CNBT_FNM
+				, RESNO_ENC_CNTN
+				, DNT_SCNT
+				, USE_SUM_AMT
+				, DDC_TRGT_CONB_AMT
+				, CONB_SUM_AMT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE165010
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND CNBT_SEIL_NUM=#cnbtSeilNum#
+				]]>
+	</select>
+	
+	<select id="infcPkgYe165010_2022_DAO.selectYe165010List_D" parameterClass="infcPkgYe165010Srh_2022_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, CNBT_SEIL_NUM
+								, CONB_CD
+								, CONB_NM
+								, YRS_MATE_CL_CD
+								, DNTCNTN
+								, COPL_NM
+								, BSNO_ENC_CNTN
+								, CNBT_RLT_CL_CD
+								, CNBT_FNM
+								, RESNO_ENC_CNTN
+								, DNT_SCNT
+								, USE_SUM_AMT
+								, DDC_TRGT_CONB_AMT
+								, CONB_SUM_AMT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE165010
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, CNBT_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgYe165010_2022_DAO.selectYe165010ListTotCnt_S" parameterClass="infcPkgYe165010Srh_2022_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE165010
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

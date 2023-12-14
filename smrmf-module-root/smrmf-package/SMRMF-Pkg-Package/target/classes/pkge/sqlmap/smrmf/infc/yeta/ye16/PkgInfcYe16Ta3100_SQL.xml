@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgYeta3100">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYeta3100SerarchVO" type="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta3100SrhVO"/>
+	
+	<resultMap id="infcPkgYeta3100" class="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta3100VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="edacRvyy" column="EDAC_RVYY" columnIndex="2"/>
+		<result property="settGbcd" column="SETT_GBCD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="finaSeqn" column="FINA_SEQN" columnIndex="5"/>
+		<result property="imdeGbcd" column="IMDE_GBCD" columnIndex="6"/>
+		<result property="finaCode" column="FINA_CODE" columnIndex="7"/>
+		<result property="finaName" column="FINA_NAME" columnIndex="8"/>
+		<result property="acntNumb" column="ACNT_NUMB" columnIndex="9"/>
+		<result property="icnmYear" column="ICNM_YEAR" columnIndex="10"/>
+		<result property="paytAmnt" column="PAYT_AMNT" columnIndex="11"/>
+		<result property="deduAmnt" column="DEDU_AMNT" columnIndex="12"/>
+		<result property="imdeTxcd" column="IMDE_TXCD" columnIndex="13"/>
+		<result property="finaTxcd" column="FINA_TXCD" columnIndex="14"/>
+		<result property="kybdr" column="KYBDR" columnIndex="15"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="16"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="17"/>
+		<result property="ismt" column="ISMT" columnIndex="18"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="19"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="20"/>
+	</resultMap>
+	
+	<insert id="infcPkgYeta3100DAO.insertYetaPrc3100_S">
+		<![CDATA[
+			INSERT INTO YETA3100 
+				( DPOB_CD
+				  , EDAC_RVYY
+				  , SETT_GBCD
+				  , SYSTEMKEY
+				  , FINA_SEQN
+				  , IMDE_GBCD
+				  , FINA_CODE
+				  , FINA_NAME
+				  , ACNT_NUMB
+				  , ICNM_YEAR
+				  , PAYT_AMNT
+				  , DEDU_AMNT
+				  , IMDE_TXCD
+				  , FINA_TXCD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #edacRvyy#
+				  , #settGbcd#
+				  , #systemkey#
+				  , #finaSeqn#
+				  , #imdeGbcd#
+				  , #finaCode#
+				  , #finaName#
+				  , #acntNumb#
+				  , #icnmYear#
+				  , #paytAmnt#
+				  , #deduAmnt#
+				  , #imdeTxcd#
+				  , #finaTxcd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<!-- yeta0200 화면 개인연금 저축  -->
+	<insert id="infcPkgYeta3100DAO.fnPayr06430_Payr418_2016_Insert">
+		<![CDATA[
+			INSERT INTO YETA3100 
+				( DPOB_CD
+				  , EDAC_RVYY
+				  , SETT_GBCD
+				  , SYSTEMKEY
+				  , FINA_SEQN
+				  , IMDE_GBCD
+				  , FINA_CODE
+				  , FINA_NAME
+				  , ACNT_NUMB
+				  , ICNM_YEAR
+				  , PAYT_AMNT
+				  , DEDU_AMNT
+				  , IMDE_TXCD
+				  , FINA_TXCD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #edacRvyy#
+				  , #settGbcd#
+				  , #systemkey#
+				  ,    (SELECT (NVL(MAX(FINA_SEQN),0) +  1)
+				   FROM YETA3100  AA 
+				   WHERE AA.EDAC_RVYY = #edacRvyy# 
+                   AND AA.SETT_GBCD = #settGbcd# 
+                   AND  AA.SYSTEMKEY = #systemkey#
+                   AND AA.DPOB_CD = #dpobCd#
+				  ) 
+				  , #imdeGbcd#
+				  , (
+				     SELECT  COMM_CD 
+					FROM  BASS0300 
+					WHERE RPSTTV_CD = 'Y005'
+					 AND MANGE_ITEM11 =  #finaCode#
+				  )   
+				  , #finaName#
+				  , #acntNumb#
+				  , #icnmYear#
+				  , #paytAmnt#
+				  , #deduAmnt#
+				  , #imdeTxcd#
+				  , #finaTxcd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	
+	
+	<update id="infcPkgYeta3100DAO.updateYetaPrc3100_S">
+		<![CDATA[
+			UPDATE YETA3100
+			SET DPOB_CD=#dpobCd#
+				, EDAC_RVYY=#edacRvyy#
+				, SETT_GBCD=#settGbcd#
+				, SYSTEMKEY=#systemkey#
+				, FINA_SEQN=#finaSeqn#
+				, IMDE_GBCD=#imdeGbcd#
+				, FINA_CODE=#finaCode#
+				, FINA_NAME=#finaName#
+				, ACNT_NUMB=#acntNumb#
+				, ICNM_YEAR=#icnmYear#
+				, PAYT_AMNT=#paytAmnt#
+				, DEDU_AMNT=#deduAmnt#
+				, IMDE_TXCD=#imdeTxcd#
+				, FINA_TXCD=#finaTxcd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND FINA_SEQN=#finaSeqn#
+				]]>
+	</update>
+	
+	<delete id="infcPkgYeta3100DAO.deleteYetaPrc3100_S">
+		<![CDATA[
+			DELETE FROM YETA3100 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND FINA_SEQN=#finaSeqn#
+				]]>
+	</delete>
+	
+	<delete id="infcPkgYeta3100DAO.fnPayr06430_Payr418_2015_Delete">
+		<![CDATA[
+			DELETE FROM YETA3100 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND IMDE_GBCD=#imdeGbcd#
+				]]>
+	</delete>
+	
+	
+	<!-- yeta0100 연말정산 대상자관리  -->
+		<delete id="infcPkgYeta3100DAO.fnPayr06430_PAYR418_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3100 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd# 
+				]]>
+				  <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                   </isNotEmpty> 
+	</delete>
+	
+	
+	<select id="infcPkgYeta3100DAO.selectYetaPrc3100_S" resultMap="infcPkgYeta3100">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, EDAC_RVYY
+				, SETT_GBCD
+				, SYSTEMKEY
+				, FINA_SEQN
+				, IMDE_GBCD
+				, FINA_CODE
+				, FINA_NAME
+				, ACNT_NUMB
+				, ICNM_YEAR
+				, PAYT_AMNT
+				, DEDU_AMNT
+				, IMDE_TXCD
+				, FINA_TXCD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YETA3100
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND FINA_SEQN=#finaSeqn#
+				]]>
+	</select>
+	
+	<select id="infcPkgYeta3100DAO.selectYetaPrc3100List_D" parameterClass="infcPkgYeta3100SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, EDAC_RVYY
+								, SETT_GBCD
+								, SYSTEMKEY
+								, FINA_SEQN
+								, IMDE_GBCD
+								, FINA_CODE
+								, FINA_NAME
+								, ACNT_NUMB
+								, ICNM_YEAR
+								, PAYT_AMNT
+								, DEDU_AMNT
+								, IMDE_TXCD
+								, FINA_TXCD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YETA3100
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, EDAC_RVYY DESC
+							, SETT_GBCD DESC
+							, SYSTEMKEY DESC
+							, FINA_SEQN DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgYeta3100DAO.selectYetaPrc3100ListTotCnt_S" parameterClass="infcPkgYeta3100SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3100
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

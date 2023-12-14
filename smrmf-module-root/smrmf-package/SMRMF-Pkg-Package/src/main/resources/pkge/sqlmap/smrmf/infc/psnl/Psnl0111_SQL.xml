@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0111">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+    <typeAlias alias="infcPsnl0111SerarchVO" type="com.app.exterms.personal.server.vo.InfcPsnl0111DefaultVO"/>
+	<typeAlias alias="infcPsnl0111Dto" type="com.app.exterms.personal.client.dto.InfcPsnl0111DTO"/>
+	
+	<resultMap id="infcPsnl0111" class="com.app.exterms.personal.server.vo.InfcPsnl0111VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="hfmlyNm" column="HFMLY_NM" columnIndex="3"/>
+		<result property="hfmlyRelaCd" column="HFMLY_RELA_CD" columnIndex="4"/>
+		<result property="bthcAddr" column="BTHC_ADDR" columnIndex="5"/>
+		<result property="husZpcd" column="HUS_ZPCD" columnIndex="6"/>
+		<result property="husFndtnAddr" column="HUS_FNDTN_ADDR" columnIndex="7"/>
+		<result property="husDtlPatrAddr" column="HUS_DTL_PATR_ADDR" columnIndex="8"/>
+		<result property="husRoadNmZpcd" column="HUS_ROAD_NM_ZPCD" columnIndex="9"/>
+		<result property="husRoadNmFndtnAddr" column="HUS_ROAD_NM_FNDTN_ADDR" columnIndex="10"/>
+		<result property="husRoadNmDtlPatrAddr" column="HUS_ROAD_NM_DTL_PATR_ADDR" columnIndex="11"/>
+		<result property="husPhnNum" column="HUS_PHN_NUM" columnIndex="12"/>
+		<result property="husRoadNmEngAddr" column="HUS_ROAD_NM_ENG_ADDR" columnIndex="13"/>
+		<result property="wkOfcZpcd" column="WK_OFC_ZPCD" columnIndex="14"/>
+		<result property="wkOfcFndtnAddr" column="WK_OFC_FNDTN_ADDR" columnIndex="15"/>
+		<result property="wkOfcDtlPatrAddr" column="WK_OFC_DTL_PATR_ADDR" columnIndex="16"/>
+		<result property="cmpyPhnNum" column="CMPY_PHN_NUM" columnIndex="17"/>
+		<result property="cmpyFaxNum" column="CMPY_FAX_NUM" columnIndex="18"/>
+		<result property="carNum" column="CAR_NUM" columnIndex="19"/>
+		<result property="carMdl" column="CAR_MDL" columnIndex="20"/>
+		<result property="cellPhneNum" column="CELL_PHNE_NUM" columnIndex="21"/>
+		<result property="emailAddr" column="EMAIL_ADDR" columnIndex="22"/>
+		<result property="kybdr" column="KYBDR" columnIndex="23"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="24"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="25"/>
+		<result property="ismt" column="ISMT" columnIndex="26"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="27"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="28"/>
+	</resultMap>
+	
+	<update id="infcPsnl0111DAO.savePsnl0111" parameterClass="infcPsnl0111Dto">
+	    
+			MERGE INTO PSNL0111
+			     USING DUAL
+			        ON (DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#)
+			WHEN MATCHED
+			THEN
+			   UPDATE SET ISMT=#ismt#
+						, REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						, REVN_ADDR=#revnAddr#
+			<isNotNull property="hfmlyNm"><isNotEmpty property="hfmlyNm">, HFMLY_NM=#hfmlyNm#</isNotEmpty></isNotNull>
+			<isNotNull property="hfmlyRelaCd"><isNotEmpty property="hfmlyRelaCd">, HFMLY_RELA_CD=#hfmlyRelaCd#</isNotEmpty></isNotNull>
+			<isNotNull property="bthcAddr"><isNotEmpty property="bthcAddr">, BTHC_ADDR=#bthcAddr#</isNotEmpty></isNotNull>
+			<isNotNull property="husZpcd"><isNotEmpty property="husZpcd">, HUS_ZPCD=#husZpcd#</isNotEmpty></isNotNull>
+			<isNotNull property="husFndtnAddr"><isNotEmpty property="husFndtnAddr">, HUS_FNDTN_ADDR=#husFndtnAddr#</isNotEmpty></isNotNull>
+			<isNotNull property="husDtlPatrAddr"><isNotEmpty property="husDtlPatrAddr">, HUS_DTL_PATR_ADDR=#husDtlPatrAddr#</isNotEmpty></isNotNull>
+			<isNotNull property="husRoadNmZpcd"><isNotEmpty property="husRoadNmZpcd">, HUS_ROAD_NM_ZPCD=#husRoadNmZpcd#</isNotEmpty></isNotNull>
+			<isNotNull property="husRoadNmFndtnAddr"><isNotEmpty property="husRoadNmFndtnAddr">, HUS_ROAD_NM_FNDTN_ADDR=#husRoadNmFndtnAddr#</isNotEmpty></isNotNull>
+			<isNotNull property="husRoadNmDtlPatrAddr"><isNotEmpty property="husRoadNmDtlPatrAddr">, HUS_ROAD_NM_DTL_PATR_ADDR=#husRoadNmDtlPatrAddr#</isNotEmpty></isNotNull>
+			<isNotNull property="husPhnNum"><isNotEmpty property="husPhnNum">, HUS_PHN_NUM=#husPhnNum#</isNotEmpty></isNotNull>
+			<isNotNull property="husRoadNmEngAddr"><isNotEmpty property="husRoadNmEngAddr">, HUS_ROAD_NM_ENG_ADDR=#husRoadNmEngAddr#</isNotEmpty></isNotNull>
+			<isNotNull property="wkOfcZpcd"><isNotEmpty property="wkOfcZpcd">, WK_OFC_ZPCD=#wkOfcZpcd#</isNotEmpty></isNotNull>
+			<isNotNull property="wkOfcFndtnAddr"><isNotEmpty property="wkOfcFndtnAddr">, WK_OFC_FNDTN_ADDR=#wkOfcFndtnAddr#</isNotEmpty></isNotNull>
+			<isNotNull property="wkOfcDtlPatrAddr"><isNotEmpty property="wkOfcDtlPatrAddr">, WK_OFC_DTL_PATR_ADDR=#wkOfcDtlPatrAddr#</isNotEmpty></isNotNull>
+			<isNotNull property="cmpyPhnNum"><isNotEmpty property="cmpyPhnNum">, CMPY_PHN_NUM=#cmpyPhnNum#</isNotEmpty></isNotNull>
+			<isNotNull property="cmpyFaxNum"><isNotEmpty property="cmpyFaxNum">, CMPY_FAX_NUM=#cmpyFaxNum#</isNotEmpty></isNotNull>
+			<isNotNull property="carNum"><isNotEmpty property="carNum">, CAR_NUM=#carNum#</isNotEmpty></isNotNull>
+			<isNotNull property="carMdl"><isNotEmpty property="carMdl">, CAR_MDL=#carMdl#</isNotEmpty></isNotNull>
+			<isNotNull property="cellPhneNum"><isNotEmpty property="cellPhneNum">, CELL_PHNE_NUM=#cellPhneNum#</isNotEmpty></isNotNull>
+			<isNotNull property="emailAddr"><isNotEmpty property="emailAddr">, EMAIL_ADDR=#emailAddr#</isNotEmpty></isNotNull>						
+			WHEN NOT MATCHED
+			THEN
+			   INSERT 
+						( DPOB_CD
+						  , SYSTEMKEY
+						  , HFMLY_NM
+						  , HFMLY_RELA_CD
+						  , BTHC_ADDR
+						  , HUS_ZPCD
+						  , HUS_FNDTN_ADDR
+						  , HUS_DTL_PATR_ADDR
+						  , HUS_ROAD_NM_ZPCD
+						  , HUS_ROAD_NM_FNDTN_ADDR
+						  , HUS_ROAD_NM_DTL_PATR_ADDR
+						  , HUS_PHN_NUM
+						  , HUS_ROAD_NM_ENG_ADDR
+						  , WK_OFC_ZPCD
+						  , WK_OFC_FNDTN_ADDR
+						  , WK_OFC_DTL_PATR_ADDR
+						  , CMPY_PHN_NUM
+						  , CMPY_FAX_NUM
+						  , CAR_NUM
+						  , CAR_MDL
+						  , CELL_PHNE_NUM
+						  , EMAIL_ADDR
+						  , KYBDR
+						  , INPT_DT
+						  , INPT_ADDR
+						  , ISMT
+						  , REVN_DT
+						  , REVN_ADDR )
+				VALUES ( #dpobCd#
+						  , #systemkey#
+						  , #hfmlyNm#
+						  , #hfmlyRelaCd#
+						  , #bthcAddr#
+						  , #husZpcd#
+						  , #husFndtnAddr#
+						  , #husDtlPatrAddr#
+						  , #husRoadNmZpcd#
+						  , #husRoadNmFndtnAddr#
+						  , #husRoadNmDtlPatrAddr#
+						  , #husPhnNum#
+						  , #husRoadNmEngAddr#
+						  , #wkOfcZpcd#
+						  , #wkOfcFndtnAddr#
+						  , #wkOfcDtlPatrAddr#
+						  , #cmpyPhnNum#
+						  , #cmpyFaxNum#
+						  , #carNum#
+						  , #carMdl#
+						  , #cellPhneNum#
+						  , #emailAddr#
+						  , #ismt#
+						  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						  , #revnAddr#
+						  , #ismt#
+						  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						  , #revnAddr# )
+			
+	    
+	</update>
+	
+	<insert id="infcPsnl0111DAO.insertPsnl0111" parameterClass="hashMap">
+		<![CDATA[
+			INSERT INTO PSNL0111 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , HFMLY_NM
+				  , HFMLY_RELA_CD
+				  , BTHC_ADDR
+				  , HUS_ZPCD
+				  , HUS_FNDTN_ADDR
+				  , HUS_DTL_PATR_ADDR
+				  , HUS_ROAD_NM_ZPCD
+				  , HUS_ROAD_NM_FNDTN_ADDR
+				  , HUS_ROAD_NM_DTL_PATR_ADDR
+				  , HUS_PHN_NUM
+				  , HUS_ROAD_NM_ENG_ADDR
+				  , WK_OFC_ZPCD
+				  , WK_OFC_FNDTN_ADDR
+				  , WK_OFC_DTL_PATR_ADDR
+				  , CMPY_PHN_NUM
+				  , CMPY_FAX_NUM
+				  , CAR_NUM
+				  , CAR_MDL
+				  , CELL_PHNE_NUM
+				  , EMAIL_ADDR
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #hfmlyNm#
+				  , #hfmlyRelaCd#
+				  , #bthcAddr#
+				  , #husZpcd#
+				  , #husFndtnAddr#
+				  , #husDtlPatrAddr#
+				  , #husRoadNmZpcd#
+				  , #husRoadNmFndtnAddr#
+				  , #husRoadNmDtlPatrAddr#
+				  , #husPhnNum#
+				  , #husRoadNmEngAddr#
+				  , #wkOfcZpcd#
+				  , #wkOfcFndtnAddr#
+				  , #wkOfcDtlPatrAddr#
+				  , #cmpyPhnNum#
+				  , #cmpyFaxNum#
+				  , #carNum#
+				  , #carMdl#
+				  , #cellPhneNum#
+				  , #emailAddr#
+				  , #kybdr#
+				  , to_char(sysdate, 'yyyymmdd')
+				  , #inptAddr#
+				  , #ismt#
+				  , to_char(sysdate, 'yyyymmdd')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPsnl0111DAO.updatePsnl0111" parameterClass="hashMap">
+		<![CDATA[
+			UPDATE PSNL0111
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, HFMLY_NM=#hfmlyNm#
+				, HFMLY_RELA_CD=#hfmlyRelaCd#
+				, BTHC_ADDR=#bthcAddr#
+				, HUS_ZPCD=#husZpcd#
+				, HUS_FNDTN_ADDR=#husFndtnAddr#
+				, HUS_DTL_PATR_ADDR=#husDtlPatrAddr#
+				, HUS_ROAD_NM_ZPCD=#husRoadNmZpcd#
+				, HUS_ROAD_NM_FNDTN_ADDR=#husRoadNmFndtnAddr#
+				, HUS_ROAD_NM_DTL_PATR_ADDR=#husRoadNmDtlPatrAddr#
+				, HUS_PHN_NUM=#husPhnNum#
+				, HUS_ROAD_NM_ENG_ADDR=#husRoadNmEngAddr#
+				, WK_OFC_ZPCD=#wkOfcZpcd#
+				, WK_OFC_FNDTN_ADDR=#wkOfcFndtnAddr#
+				, WK_OFC_DTL_PATR_ADDR=#wkOfcDtlPatrAddr#
+				, CMPY_PHN_NUM=#cmpyPhnNum#
+				, CMPY_FAX_NUM=#cmpyFaxNum#
+				, CAR_NUM=#carNum#
+				, CAR_MDL=#carMdl#
+				, CELL_PHNE_NUM=#cellPhneNum#
+				, EMAIL_ADDR=#emailAddr#
+				, ISMT=#ismt#
+				, REVN_DT= to_char(sysdate, 'yyyymmdd')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	
+	<delete id="infcPsnl0111DAO.deletePsnl0111" parameterClass="hashMap">
+		<![CDATA[
+			DELETE FROM PSNL0111 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<select id="infcPsnl0111DAO.selectPsnl0111" resultClass="hashMap" parameterClass="hashMap">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, HFMLY_NM
+				, HFMLY_RELA_CD
+				, BTHC_ADDR
+				, HUS_ZPCD
+				, HUS_FNDTN_ADDR
+				, HUS_DTL_PATR_ADDR
+				, NVL(HUS_ROAD_NM_ZPCD,HUS_ZPCD) as HUS_ROAD_NM_ZPCD
+			    , NVL(HUS_ROAD_NM_FNDTN_ADDR,HUS_FNDTN_ADDR) as HUS_ROAD_NM_FNDTN_ADDR
+			    , NVL(HUS_ROAD_NM_DTL_PATR_ADDR,HUS_DTL_PATR_ADDR) as HUS_ROAD_NM_DTL_PATR_ADDR
+				, HUS_PHN_NUM
+				, HUS_ROAD_NM_ENG_ADDR
+				, WK_OFC_ZPCD
+				, WK_OFC_FNDTN_ADDR
+				, WK_OFC_DTL_PATR_ADDR
+				, CMPY_PHN_NUM
+				, CMPY_FAX_NUM
+				, CAR_NUM
+				, CAR_MDL
+				, CELL_PHNE_NUM
+				, EMAIL_ADDR
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, (SELECT PERN_NOTE_CTNT FROM PSNL0100 WHERE DPOB_CD=#dpobCd# AND SYSTEMKEY=#systemkey#) AS PERN_NOTE_CTNT
+			FROM PSNL0111
+		WHERE DPOB_CD=#dpobCd#
+		AND SYSTEMKEY=#systemkey#
+		]]>
+		
+	</select>
+	
+
+</sqlMap>

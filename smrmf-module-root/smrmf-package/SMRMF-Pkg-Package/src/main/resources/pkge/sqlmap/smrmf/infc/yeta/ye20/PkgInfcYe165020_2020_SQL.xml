@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgYe165020_2020">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYe165020Srh_2020_VO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2020.InfcPkgYe165020Srh_2020_VO"/>
+	
+	<resultMap id="infcPkgYe165020_2020" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2020.InfcPkgYe165020_2020_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="famRltClCd" column="FAM_RLT_CL_CD" columnIndex="5"/>
+		<result property="amtSum" column="AMT_SUM" columnIndex="6"/>
+		<result property="amt10" column="AMT10" columnIndex="7"/>
+		<result property="amt20" column="AMT20" columnIndex="8"/>
+		<result property="amt40" column="AMT40" columnIndex="9"/>
+		<result property="amt41" column="AMT41" columnIndex="10"/>
+		<result property="amt42" column="AMT42" columnIndex="11"/>
+		<result property="amt50" column="AMT50" columnIndex="12"/>
+		<result property="kybdr" column="KYBDR" columnIndex="13"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="14"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="15"/>
+		<result property="ismt" column="ISMT" columnIndex="16"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="17"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="18"/>
+	</resultMap>
+	
+	
+<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직  시작 ++++++++++++++++++++++++++++++ --> 
+ 
+ <!--   기부금   -->
+<delete id="infcPkgYe165020_2020_DAO.PdfYeta5200_L102Y_YE165020_Delete_S">
+		<![CDATA[
+			DELETE FROM YE165020 AA
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#    
+				]]>  
+	</delete>
+	
+<!-- 기부금  -->
+<insert id="infcPkgYe165020_2020_DAO.PdfYeta5200_L102Y_YE165020_Insert_S">
+		<![CDATA[
+			INSERT INTO YE165020 
+				(   DPOB_CD		    /* 사업장코드                  */
+					,YRTX_BLGG_YR	/* 귀속연도		    */
+					,CLUT_SEPT_CD	/* 연말정산구분코드		    */
+					,SYSTEMKEY	    /* SYSTEMKEY		    */
+					,FAM_RLT_CL_CD	/* 기부자관계구분코드		    */
+					,AMT_SUM	/* 기부금총합계		    */
+					,AMT10		/* 기부금_법정기부금_10	    */
+					,AMT20		/* 기부금_정치자금기부금_20	    */
+					,AMT40		/* 기부금_종교단체외지정기부금_40   */
+					,AMT41		/* 기부금_종교단체지정기부금_41	    */
+					,AMT42		/* 기부금_우리사주조합기부금_42	    */
+					,DNT_SBDY_APLN_AMT
+					,AMT50		/* 기부금_공제제외기부금_50	    */
+					,KYBDR		/* 입력자			    */
+					,INPT_DT	/* 입력일자		    */
+					,INPT_ADDR	/* 입력주소		    */
+					,ISMT		/* 수정자			    */
+					,REVN_DT	/* 수정일자		    */
+					,REVN_ADDR	/* 수정주소		    */
+ ) 
+ (     
+          SELECT 
+                 DPOB_CD
+		          , YRTX_BLGG_YR
+		          , CLUT_SEPT_CD
+		          , SYSTEMKEY
+		          , CNBT_RLT_CHG_CD 
+		          , (AMT10_DDC + AMT20_DDC + AMT40_DDC + AMT41_DDC + AMT42_DDC
+		             + (AMT10_CONB + AMT40_CONB + AMT41_CONB) + AMT50_DDC) AMT_SUM
+		          , AMT10_DDC  AS AMT10 
+		          , AMT20_DDC  AS AMT20 
+		          , AMT40_DDC  AS AMT40 
+		          , AMT41_DDC  AS AMT41 
+		          , AMT42_DDC  AS AMT42 
+		          , (AMT10_CONB + AMT40_CONB + AMT41_CONB) AS AMT_CONB
+		          , AMT50_DDC  AS AMT50 
+		          		  , #kybdr#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #inptAddr#
+				   , #ismt#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #revnAddr#   
+		   FROM		   
+		  ( 
+		   SELECT
+		            DPOB_CD
+		          , YRTX_BLGG_YR
+		          , CLUT_SEPT_CD
+		          , SYSTEMKEY
+		          , ('0') AS CNBT_RLT_CHG_CD 
+		          , MAX(DECODE(CONB_CHG_CD,'10',DDC_TRGT_CONB_AMT,0)) AS AMT10_DDC
+		          , MAX(DECODE(CONB_CHG_CD,'10',CONB_SUM_AMT,0)) AS AMT10_CONB
+		          , MAX(DECODE(CONB_CHG_CD,'10',CNBT_ETC,0)) AS AMT10_ETC
+		          , MAX(DECODE(CONB_CHG_CD,'20',DDC_TRGT_CONB_AMT,0)) AS AMT20_DDC
+		          , MAX(DECODE(CONB_CHG_CD,'20',CONB_SUM_AMT,0)) AS AMT20_CONB
+		          , MAX(DECODE(CONB_CHG_CD,'20',CNBT_ETC,0)) AS AMT20_ETC
+		          , MAX(DECODE(CONB_CHG_CD,'40',DDC_TRGT_CONB_AMT,0)) AS AMT40_DDC
+		          , MAX(DECODE(CONB_CHG_CD,'40',CONB_SUM_AMT,0)) AS AMT40_CONB
+		          , MAX(DECODE(CONB_CHG_CD,'40',CNBT_ETC,0)) AS AMT40_ETC
+		          , MAX(DECODE(CONB_CHG_CD,'41',DDC_TRGT_CONB_AMT,0)) AS AMT41_DDC
+		          , MAX(DECODE(CONB_CHG_CD,'41',CONB_SUM_AMT,0)) AS AMT41_CONB
+		          , MAX(DECODE(CONB_CHG_CD,'41',CNBT_ETC,0)) AS AMT41_ETC
+		          , MAX(DECODE(CONB_CHG_CD,'42',DDC_TRGT_CONB_AMT,0)) AS AMT42_DDC
+		          , MAX(DECODE(CONB_CHG_CD,'42',CONB_SUM_AMT,0)) AS AMT42_CONB
+		          , MAX(DECODE(CONB_CHG_CD,'42',CNBT_ETC,0)) AS AMT42_ETC  
+		          , MAX(DECODE(CONB_CHG_CD,'50',DDC_TRGT_CONB_AMT,0)) AS AMT50_DDC
+		          , MAX(DECODE(CONB_CHG_CD,'50',CONB_SUM_AMT,0)) AS AMT50_CONB
+		          , MAX(DECODE(CONB_CHG_CD,'50',CNBT_ETC,0)) AS AMT50_ETC  
+		   FROM
+		      (
+		   SELECT
+		            DPOB_CD
+		          , YRTX_BLGG_YR
+		          , CLUT_SEPT_CD
+		          , SYSTEMKEY 
+		          , CONB_CHG_CD
+		          , SUM(DDC_TRGT_CONB_AMT) AS DDC_TRGT_CONB_AMT
+		          , SUM(CONB_SUM_AMT) AS CONB_SUM_AMT
+		          , SUM(CNBT_ETC) AS CNBT_ETC 
+				   FROM YE165010 AC02
+					 WHERE AC02.DPOB_CD=#dpobCd#
+					   AND AC02.YRTX_BLGG_YR=#yrtxBlggYr#
+					   AND AC02.CLUT_SEPT_CD=#clutSeptCd#
+					   AND AC02.SYSTEMKEY=#systemkey# 
+				 GROUP BY  DPOB_CD
+				          , YRTX_BLGG_YR
+				          , CLUT_SEPT_CD
+				          , SYSTEMKEY 
+				          , CONB_CHG_CD )
+		     GROUP BY  DPOB_CD
+			          , YRTX_BLGG_YR
+			          , CLUT_SEPT_CD
+			          , SYSTEMKEY 
+		  UNION ALL	           		          
+		   SELECT
+		            DPOB_CD
+		          , YRTX_BLGG_YR
+		          , CLUT_SEPT_CD
+		          , SYSTEMKEY
+		          , CNBT_RLT_CHG_CD 
+		          , MAX(DECODE(CONB_CHG_CD,'10',DDC_TRGT_CONB_AMT,0)) AS AMT10_DDC
+		          , MAX(DECODE(CONB_CHG_CD,'10',CONB_SUM_AMT,0)) AS AMT10_CONB
+		          , MAX(DECODE(CONB_CHG_CD,'10',CNBT_ETC,0)) AS AMT10_ETC
+		          , MAX(DECODE(CONB_CHG_CD,'20',DDC_TRGT_CONB_AMT,0)) AS AMT20_DDC
+		          , MAX(DECODE(CONB_CHG_CD,'20',CONB_SUM_AMT,0)) AS AMT20_CONB
+		          , MAX(DECODE(CONB_CHG_CD,'20',CNBT_ETC,0)) AS AMT20_ETC
+		          , MAX(DECODE(CONB_CHG_CD,'40',DDC_TRGT_CONB_AMT,0)) AS AMT40_DDC
+		          , MAX(DECODE(CONB_CHG_CD,'40',CONB_SUM_AMT,0)) AS AMT40_CONB
+		          , MAX(DECODE(CONB_CHG_CD,'40',CNBT_ETC,0)) AS AMT40_ETC
+		          , MAX(DECODE(CONB_CHG_CD,'41',DDC_TRGT_CONB_AMT,0)) AS AMT41_DDC
+		          , MAX(DECODE(CONB_CHG_CD,'41',CONB_SUM_AMT,0)) AS AMT41_CONB
+		          , MAX(DECODE(CONB_CHG_CD,'41',CNBT_ETC,0)) AS AMT41_ETC
+		          , MAX(DECODE(CONB_CHG_CD,'42',DDC_TRGT_CONB_AMT,0)) AS AMT42_DDC
+		          , MAX(DECODE(CONB_CHG_CD,'42',CONB_SUM_AMT,0)) AS AMT42_CONB
+		          , MAX(DECODE(CONB_CHG_CD,'42',CNBT_ETC,0)) AS AMT42_ETC  
+		          , MAX(DECODE(CONB_CHG_CD,'50',DDC_TRGT_CONB_AMT,0)) AS AMT50_DDC
+		          , MAX(DECODE(CONB_CHG_CD,'50',CONB_SUM_AMT,0)) AS AMT50_CONB
+		          , MAX(DECODE(CONB_CHG_CD,'50',CNBT_ETC,0)) AS AMT50_ETC  
+		   FROM
+		      (SELECT
+		            DPOB_CD
+		          , YRTX_BLGG_YR
+		          , CLUT_SEPT_CD
+		          , SYSTEMKEY
+		          , CNBT_RLT_CHG_CD
+		          , CONB_CHG_CD
+		          , SUM(DDC_TRGT_CONB_AMT) AS DDC_TRGT_CONB_AMT
+		          , SUM(CONB_SUM_AMT) AS CONB_SUM_AMT
+		          , SUM(CNBT_ETC) AS CNBT_ETC
+				   FROM YE165010 AC02
+					 WHERE AC02.DPOB_CD=#dpobCd#
+					   AND AC02.YRTX_BLGG_YR=#yrtxBlggYr#
+					   AND AC02.CLUT_SEPT_CD=#clutSeptCd#
+					   AND AC02.SYSTEMKEY=#systemkey# 
+				 GROUP BY  DPOB_CD
+				          , YRTX_BLGG_YR
+				          , CLUT_SEPT_CD
+				          , SYSTEMKEY
+				          , CNBT_RLT_CHG_CD
+				          ,CONB_CHG_CD
+				      )
+				      GROUP BY  DPOB_CD
+			          , YRTX_BLGG_YR
+			          , CLUT_SEPT_CD
+			          , SYSTEMKEY
+			          , CNBT_RLT_CHG_CD	 
+			          )
+			   )  
+		]]>
+	</insert> 
+	
+<!--  I_기부자관계코드별기부금합계   -->
+<insert id="infcPkgYe165020_2020_DAO.incTaxDeducDec_nts_Yeta2020_Ye165020_Insert_S">
+		<![CDATA[
+			INSERT INTO YE165020 
+				(   DPOB_CD		    /* 사업장코드                  */
+					,YRTX_BLGG_YR	/* 귀속연도		    */
+					,CLUT_SEPT_CD	/* 연말정산구분코드		    */
+					,SYSTEMKEY	    /* SYSTEMKEY		    */
+					,FAM_RLT_CL_CD	/* 기부자관계구분코드		    */
+					,AMT_SUM	/* 기부금총합계		    */
+					,AMT10		/* 기부금_법정기부금_10	    */
+					,AMT20		/* 기부금_정치자금기부금_20	    */
+					,AMT40		/* 기부금_종교단체외지정기부금_40   */
+					,AMT41		/* 기부금_종교단체지정기부금_41	    */
+					,AMT42		/* 기부금_우리사주조합기부금_42	    */
+					,DNT_SBDY_APLN_AMT
+					,AMT50		/* 기부금_공제제외기부금_50	    */
+					,KYBDR		/* 입력자			    */
+					,INPT_DT	/* 입력일자		    */
+					,INPT_ADDR	/* 입력주소		    */
+					,ISMT		/* 수정자			    */
+					,REVN_DT	/* 수정일자		    */
+					,REVN_ADDR	/* 수정주소		    */
+ ) 
+ (   SELECT 
+				DPOB_CD, YRTX_BLGG_YR, 
+				   CLUT_SEPT_CD, SYSTEMKEY, FAM_RLT_CL_CD
+				   , AMT_SUM, 
+				   AMT10, AMT20, AMT40, 
+				   AMT41, AMT42, DNT_SBDY_APLN_AMT, 
+				   AMT50 
+   		       , #kybdr#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #inptAddr#
+				   , #ismt#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #revnAddr#   
+				FROM  YE167430 
+				   WHERE DPOB_CD=#dpobCd#
+					   AND YRTX_BLGG_YR=#yrtxBlggYr#
+					   AND CLUT_SEPT_CD=#clutSeptCd#
+					   AND SYSTEMKEY=#systemkey# 
+  
+			   )  
+		]]>
+	</insert> 
+ 
+	
+<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직  종료 ++++++++++++++++++++++++++++++ -->	
+ 
+	
+	
+	
+	<insert id="infcPkgYe165020_2020_DAO.insertYe165020_S">
+		<![CDATA[
+			INSERT INTO YE165020 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , FAM_RLT_CL_CD
+				  , AMT_SUM
+				  , AMT10
+				  , AMT20
+				  , AMT40
+				  , AMT41
+				  , AMT42
+				  , AMT50
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #famRltClCd#
+				  , #amtSum#
+				  , #amt10#
+				  , #amt20#
+				  , #amt40#
+				  , #amt41#
+				  , #amt42#
+				  , #amt50#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgYe165020_2020_DAO.updateYe165020_S">
+		<![CDATA[
+			UPDATE YE165020
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, FAM_RLT_CL_CD=#famRltClCd#
+				, AMT_SUM=#amtSum#
+				, AMT10=#amt10#
+				, AMT20=#amt20#
+				, AMT40=#amt40#
+				, AMT41=#amt41#
+				, AMT42=#amt42#
+				, AMT50=#amt50#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAM_RLT_CL_CD=#famRltClCd#
+				]]>
+	</update>
+	
+	<delete id="infcPkgYe165020_2020_DAO.deleteYe165020_S">
+		<![CDATA[
+			DELETE FROM YE165020 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAM_RLT_CL_CD=#famRltClCd#
+				]]>
+	</delete>
+	
+	<select id="infcPkgYe165020_2020_DAO.selectYe165020_S" resultMap="infcPkgYe165020_2020">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, FAM_RLT_CL_CD
+				, AMT_SUM
+				, AMT10
+				, AMT20
+				, AMT40
+				, AMT41
+				, AMT42
+				, AMT50
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE165020
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAM_RLT_CL_CD=#famRltClCd#
+				]]>
+	</select>
+	
+	<select id="infcPkgYe165020_2020_DAO.selectYe165020List_D" parameterClass="infcPkgYe165020Srh_2020_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, FAM_RLT_CL_CD
+								, AMT_SUM
+								, AMT10
+								, AMT20
+								, AMT40
+								, AMT41
+								, AMT42
+								, AMT50
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE165020
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, FAM_RLT_CL_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgYe165020_2020_DAO.selectYe165020ListTotCnt_S" parameterClass="infcPkgYe165020Srh_2020_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE165020
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

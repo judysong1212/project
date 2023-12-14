@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgYe166020_2019">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYe166020Srh_2019_VO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2019.InfcPkgYe166020Srh_2019_VO"/>
+	
+	<resultMap id="infcPkgYe166020_2019" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2019.InfcPkgYe166020_2019_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="famResnoEncCntn" column="FAM_RESNO_ENC_CNTN" columnIndex="5"/>
+		<result property="dataCd" column="DATA_CD" columnIndex="6"/>
+		<result property="nnfCl" column="NNF_CL" columnIndex="7"/>
+		<result property="suptFmlyRltCl" column="SUPT_FMLY_RLT_CL" columnIndex="8"/>
+		<result property="suptFmlyFnm" column="SUPT_FMLY_FNM" columnIndex="9"/>
+		<result property="suptFmlyBhdt" column="SUPT_FMLY_BHDT" columnIndex="10"/>
+		<result property="crdcUseAmtSum" column="CRDC_USE_AMT_SUM" columnIndex="11"/>
+		<result property="crdcUseAmt" column="CRDC_USE_AMT" columnIndex="12"/>
+		<result property="cshptUseAmt" column="CSHPT_USE_AMT" columnIndex="13"/>
+		<result property="drtpCardUseAmt" column="DRTP_CARD_USE_AMT" columnIndex="14"/>
+		<result property="tdmrUseAmt" column="TDMR_USE_AMT" columnIndex="15"/>
+		<result property="bookShowAmt" column="BOOK_SHOW_AMT" columnIndex="16"/>
+		<result property="etcUseAmt" column="ETC_USE_AMT" columnIndex="17"/>
+		<result property="kybdr" column="KYBDR" columnIndex="18"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="19"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="20"/>
+		<result property="ismt" column="ISMT" columnIndex="21"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="22"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="23"/>
+	</resultMap>
+
+
+<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직  시작 ++++++++++++++++++++++++++++++ -->
+
+
+	<insert id="infcPkgYe166020_2019_DAO.fnYeta4100_YE166020_2019_CREATE_Insert01_S">
+		<![CDATA[
+			INSERT INTO YE166020 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , FAM_RESNO_ENC_CNTN
+				  , DATA_CD
+				  , NNF_CL
+				  , SUPT_FMLY_RLT_CL
+				  , SUPT_FMLY_FNM
+				  , SUPT_FMLY_BHDT
+				  , CRDC_USE_AMT_SUM
+				  , CRDC_USE_AMT
+				  , CSHPT_USE_AMT
+				  , DRTP_CARD_USE_AMT
+				  , TDMR_USE_AMT
+				  , ETC_USE_AMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			 ( 
+			 SELECT 
+                      DPOB_CD
+                    , YRTX_BLGG_YR
+                    , CLUT_SEPT_CD
+                    , SYSTEMKEY
+                    , TXPR_DSCM_NO_CNTN
+                    ,'Y0140000'  /* 국세청 */   
+                    , NNF_CL_CD
+                    , SUPT_FMLY_RLT_CL_CD 
+                    , TXPR_NM
+                    , (CASE WHEN (SUBSTR(TXPR_DSCM_NO_CNTN,7,1)) IN ('3','4') THEN '20' || SUBSTR(TXPR_DSCM_NO_CNTN,1,6)  
+				                                                      ELSE '19' ||  SUBSTR(TXPR_DSCM_NO_CNTN,1,6) END)
+                  , 0
+	 			  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# 
+				FROM  YE161030 
+			WHERE   YRTX_BLGG_YR = #yrtxBlggYr#
+			        	AND  CLUT_SEPT_CD = #clutSeptCd#
+			        	AND DPOB_CD=#dpobCd# 
+			            AND SYSTEMKEY=#systemkey#  
+			            AND TXPR_DSCM_NO_CNTN = #famResnoEncCntn#   
+			 ) 
+		]]>
+	</insert>
+	<insert id="infcPkgYe166020_2019_DAO.fnYeta4100_YE166020_2019_CREATE_Insert02_S">
+		<![CDATA[
+			INSERT INTO YE166020 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , FAM_RESNO_ENC_CNTN
+				  , DATA_CD
+				  , NNF_CL
+				  , SUPT_FMLY_RLT_CL
+				  , SUPT_FMLY_FNM
+				  , SUPT_FMLY_BHDT
+				  , CRDC_USE_AMT_SUM
+				  , CRDC_USE_AMT
+				  , CSHPT_USE_AMT
+				  , DRTP_CARD_USE_AMT
+				  , TDMR_USE_AMT
+				  , ETC_USE_AMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			 ( 
+			 SELECT 
+                      DPOB_CD
+                    , YRTX_BLGG_YR
+                    , CLUT_SEPT_CD
+                    , SYSTEMKEY
+                    , TXPR_DSCM_NO_CNTN
+                    ,'Y0140001'  /* 국세청외 */   
+                    , NNF_CL_CD
+                    , SUPT_FMLY_RLT_CL_CD 
+                    , TXPR_NM
+                    , (CASE WHEN (SUBSTR(TXPR_DSCM_NO_CNTN,7,1)) IN ('3','4') THEN '20' || SUBSTR(TXPR_DSCM_NO_CNTN,1,6)  
+				                                                      ELSE '19' ||  SUBSTR(TXPR_DSCM_NO_CNTN,1,6) END)
+                   , 0
+	 			  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# 
+FROM  YE161030 
+WHERE   YRTX_BLGG_YR = #yrtxBlggYr#
+        	AND  CLUT_SEPT_CD = #clutSeptCd#
+        	AND DPOB_CD=#dpobCd# 
+            AND SYSTEMKEY=#systemkey#
+            AND TXPR_DSCM_NO_CNTN = #famResnoEncCntn#     
+			 ) 
+		]]>
+	</insert>
+	
+	
+	<!-- 신용카드등소득공제상세    -->
+	<insert id="infcPkgYe166020_2019_DAO.incTaxDeducDec_nts_Yeta2019_Ye166020_Insert_S">
+		<![CDATA[
+			INSERT INTO YE166020 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , FAM_RESNO_ENC_CNTN
+				  , DATA_CD
+				  , NNF_CL
+				  , SUPT_FMLY_RLT_CL
+				  , SUPT_FMLY_FNM
+				  , SUPT_FMLY_BHDT
+				  , CRDC_USE_AMT_SUM
+				  , CRDC_USE_AMT
+				  , CSHPT_USE_AMT
+				  , DRTP_CARD_USE_AMT
+				  , TDMR_USE_AMT
+				  , ETC_USE_AMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			 (  
+				SELECT 
+				     DPOB_CD, YRTX_BLGG_YR
+				   , CLUT_SEPT_CD
+				   , SYSTEMKEY 
+				    , FAM_RESNO_ENC_CNTN
+				   , (CASE WHEN TRIM(DATA_CD) = '국세청자료' THEN 'Y0140000'
+				          ELSE 'Y0140001' END) 
+				   ,  (CASE WHEN TRIM(NNF_CL) = '내국인' THEN '1'
+				          ELSE '9' END)   
+				   	, ( SELECT 
+									SUPT_FMLY_RLT_CL_CD
+							  FROM  YE161030 AN02 
+						       WHERE   AN02.DPOB_CD  = YE167520.DPOB_CD
+				               AND AN02.YRTX_BLGG_YR      = YE167520.YRTX_BLGG_YR 
+				               AND AN02.CLUT_SEPT_CD      = YE167520.CLUT_SEPT_CD 
+				               AND AN02.SYSTEMKEY         = YE167520.SYSTEMKEY 
+				               AND AN02.TXPR_DSCM_NO_CNTN = YE167520.FAM_RESNO_ENC_CNTN 
+						  )	
+					  , SUPT_FMLY_FNM 
+				   , SUPT_FMLY_BHDT
+				    , CRDC_USE_AMT_SUM
+				    ,  CRDC_USE_AMT, CSHPT_USE_AMT, DRTP_CARD_USE_AMT
+				    , TDMR_USE_AMT
+				   , ETC_USE_AMT 
+				   , #kybdr#
+								  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+								  , #inptAddr#
+								  , #ismt#
+								  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+								  , #revnAddr# 
+				FROM  YE167520 
+				WHERE   YRTX_BLGG_YR = #yrtxBlggYr#
+				        	AND  CLUT_SEPT_CD = #clutSeptCd#
+				        	AND DPOB_CD=#dpobCd# 
+				            AND SYSTEMKEY=#systemkey#   
+				            AND FAM_RESNO_ENC_CNTN = #famResnoEncCntn#   
+			 ) 
+		]]>
+	</insert>
+	 
+	 
+	<update id="infcPkgYe166020_2019_DAO.PdfYeta4200_G107Y_YE166020_Update_S">
+		<![CDATA[
+			UPDATE YE166020 AA
+			SET   CRDC_USE_AMT_SUM=   NVL((SELECT  NVL(CRDC_DDC_TRGT_AMT,0) 
+			                                      +  NVL(DRTP_CARD_DDC_TRGT_AMT,0)
+			                                       +  NVL(CSHPT_DDC_TRGT_AMT,0)
+			                                        +  NVL(TDMR_DDC_TRGT_AMT,0)
+			                                         +  NVL(PBT_DDC_TRGT_AMT,0) 
+													 +  NVL(BOOK_SHOW_AMT,0) 
+													 FROM
+			 									 YE161040 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.TXPR_DSCM_NO_CNTN = AA.FAM_RESNO_ENC_CNTN  
+											AND BB.CD_VVAL_KRN_CD = AA.DATA_CD     
+			  							),CRDC_USE_AMT_SUM)  
+			 
+				, CRDC_USE_AMT= NVL((SELECT  NVL(CRDC_DDC_TRGT_AMT,0) FROM
+			 									 YE161040 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.TXPR_DSCM_NO_CNTN = AA.FAM_RESNO_ENC_CNTN  
+											AND BB.CD_VVAL_KRN_CD = AA.DATA_CD     
+			  							),CRDC_USE_AMT)  
+				, CSHPT_USE_AMT= NVL((SELECT  NVL(CSHPT_DDC_TRGT_AMT,0) FROM
+			 									 YE161040 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.TXPR_DSCM_NO_CNTN = AA.FAM_RESNO_ENC_CNTN  
+											AND BB.CD_VVAL_KRN_CD = AA.DATA_CD     
+			  							),CSHPT_USE_AMT)  
+				, DRTP_CARD_USE_AMT= NVL((SELECT  NVL(DRTP_CARD_DDC_TRGT_AMT,0) FROM
+			 									 YE161040 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.TXPR_DSCM_NO_CNTN = AA.FAM_RESNO_ENC_CNTN  
+											AND BB.CD_VVAL_KRN_CD = AA.DATA_CD     
+			  							),DRTP_CARD_USE_AMT)  
+				, TDMR_USE_AMT= NVL((SELECT  NVL(TDMR_DDC_TRGT_AMT,0) FROM
+			 									 YE161040 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.TXPR_DSCM_NO_CNTN = AA.FAM_RESNO_ENC_CNTN  
+											AND BB.CD_VVAL_KRN_CD = AA.DATA_CD     
+			  							),TDMR_USE_AMT)  
+				, BOOK_SHOW_AMT= NVL((SELECT  NVL(BOOK_SHOW_AMT,0) FROM
+			 									 YE161040 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.TXPR_DSCM_NO_CNTN = AA.FAM_RESNO_ENC_CNTN  
+											AND BB.CD_VVAL_KRN_CD = AA.DATA_CD     
+			  							),BOOK_SHOW_AMT)  
+				, ETC_USE_AMT= NVL((SELECT  NVL(PBT_DDC_TRGT_AMT,0) FROM
+			 									 YE161040 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.TXPR_DSCM_NO_CNTN = AA.FAM_RESNO_ENC_CNTN  
+											AND BB.CD_VVAL_KRN_CD = AA.DATA_CD     
+			  							),ETC_USE_AMT)  
+				 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>	
+				  <isNotEmpty prepend="AND" property="famResnoEncCntn" >
+                       	  AA.FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+                  </isNotEmpty> 			
+			 
+	</update>
+	
+	<delete id="infcPkgYe166020_2019_DAO.fnYeta4100_YE166020_2019_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YE166020 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+				]]>
+	</delete>
+	
+	
+	<delete id="infcPkgYe166020_2019_DAO.PdfYeta4200_G107Y_YE166020_Delete_S">
+		<![CDATA[
+			DELETE FROM YE166020 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAM_RESNO_ENC_CNTN NOT IN (
+																SELECT  TXPR_DSCM_NO_CNTN 
+																	FROM YE161030
+																				WHERE DPOB_CD=#dpobCd#
+																						AND YRTX_BLGG_YR=#yrtxBlggYr#
+																						AND CLUT_SEPT_CD=#clutSeptCd#
+																						AND SYSTEMKEY=#systemkey# 
+								)
+				]]>
+	</delete>
+ 
+<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직  종료 ++++++++++++++++++++++++++++++ -->
+
+	
+	<insert id="infcPkgYe166020_2019_DAO.insertYe166020_S">
+		<![CDATA[
+			INSERT INTO YE166020 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , FAM_RESNO_ENC_CNTN
+				  , DATA_CD
+				  , NNF_CL
+				  , SUPT_FMLY_RLT_CL
+				  , SUPT_FMLY_FNM
+				  , SUPT_FMLY_BHDT
+				  , CRDC_USE_AMT_SUM
+				  , CRDC_USE_AMT
+				  , CSHPT_USE_AMT
+				  , DRTP_CARD_USE_AMT
+				  , TDMR_USE_AMT
+				  , BOOK_SHOW_AMT
+				  , ETC_USE_AMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #famResnoEncCntn#
+				  , #dataCd#
+				  , #nnfCl#
+				  , #suptFmlyRltCl#
+				  , #suptFmlyFnm#
+				  , #suptFmlyBhdt#
+				  , #crdcUseAmtSum#
+				  , #crdcUseAmt#
+				  , #cshptUseAmt#
+				  , #drtpCardUseAmt#
+				  , #tdmrUseAmt#
+				  , #bookShowAmt#
+				  , #etcUseAmt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgYe166020_2019_DAO.updateYe166020_S">
+		<![CDATA[
+			UPDATE YE166020
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+				, DATA_CD=#dataCd#
+				, NNF_CL=#nnfCl#
+				, SUPT_FMLY_RLT_CL=#suptFmlyRltCl#
+				, SUPT_FMLY_FNM=#suptFmlyFnm#
+				, SUPT_FMLY_BHDT=#suptFmlyBhdt#
+				, CRDC_USE_AMT_SUM=#crdcUseAmtSum#
+				, CRDC_USE_AMT=#crdcUseAmt#
+				, CSHPT_USE_AMT=#cshptUseAmt#
+				, DRTP_CARD_USE_AMT=#drtpCardUseAmt#
+				, TDMR_USE_AMT=#tdmrUseAmt#
+				, BOOK_SHOW_AMT = #bookShowAmt#
+				, ETC_USE_AMT=#etcUseAmt#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+								AND DATA_CD=#dataCd#
+				]]>
+	</update>
+	
+	<delete id="infcPkgYe166020_2019_DAO.deleteYe166020_S">
+		<![CDATA[
+			DELETE FROM YE166020 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+								AND DATA_CD=#dataCd#
+				]]>
+	</delete>
+	
+	<select id="infcPkgYe166020_2019_DAO.selectYe166020_S" resultMap="infcPkgYe166020_2019">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, FAM_RESNO_ENC_CNTN
+				, DATA_CD
+				, NNF_CL
+				, SUPT_FMLY_RLT_CL
+				, SUPT_FMLY_FNM
+				, SUPT_FMLY_BHDT
+				, CRDC_USE_AMT_SUM
+				, CRDC_USE_AMT
+				, CSHPT_USE_AMT
+				, DRTP_CARD_USE_AMT
+				, TDMR_USE_AMT
+				, BOOK_SHOW_AMT
+				, ETC_USE_AMT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE166020
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+								AND DATA_CD=#dataCd#
+				]]>
+	</select>
+	
+	<select id="infcPkgYe166020_2019_DAO.selectYe166020List_D" parameterClass="infcPkgYe166020Srh_2019_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, FAM_RESNO_ENC_CNTN
+								, DATA_CD
+								, NNF_CL
+								, SUPT_FMLY_RLT_CL
+								, SUPT_FMLY_FNM
+								, SUPT_FMLY_BHDT
+								, CRDC_USE_AMT_SUM
+								, CRDC_USE_AMT
+								, CSHPT_USE_AMT
+								, DRTP_CARD_USE_AMT
+								, TDMR_USE_AMT
+								, BOOK_SHOW_AMT
+								, ETC_USE_AMT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE166020
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, FAM_RESNO_ENC_CNTN DESC
+							, DATA_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgYe166020_2019_DAO.selectYe166020ListTotCnt_S" parameterClass="infcPkgYe166020Srh_2019_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE166020
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

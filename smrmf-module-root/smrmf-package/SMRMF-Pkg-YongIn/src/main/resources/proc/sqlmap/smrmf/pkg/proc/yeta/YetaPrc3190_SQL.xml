@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="YetaPrc3190">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="yetaPrc3190SerarchVO" type="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta3190SrhVO"/>
+	
+	<resultMap id="yetaPrc3190" class="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta3190VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="edacRvyy" column="EDAC_RVYY" columnIndex="2"/>
+		<result property="settGbcd" column="SETT_GBCD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="ctrbSeqn" column="CTRB_SEQN" columnIndex="5"/>
+		<result property="ctrbDdcd" column="CTRB_DDCD" columnIndex="6"/>
+		<result property="ctrbTycd" column="CTRB_TYCD" columnIndex="7"/>
+		<result property="ctrbYrmn" column="CTRB_YRMN" columnIndex="8"/>
+		<result property="ctrbAmnt" column="CTRB_AMNT" columnIndex="9"/>
+		<result property="bfyrDeam" column="BFYR_DEAM" columnIndex="10"/>
+		<result property="detrAmnt" column="DETR_AMNT" columnIndex="11"/>
+		<result property="dyyrDeam" column="DYYR_DEAM" columnIndex="12"/>
+		<result property="dyyrOtam" column="DYYR_OTAM" columnIndex="13"/>
+		<result property="ayyrNtam" column="AYYR_NTAM" columnIndex="14"/>
+		<result property="kybdr" column="KYBDR" columnIndex="15"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="16"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="17"/>
+		<result property="ismt" column="ISMT" columnIndex="18"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="19"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="20"/>
+	</resultMap>
+	
+	<insert id="yetaPrc3190DAO.insertYetPrc3190_S">
+		<![CDATA[
+			INSERT INTO YETA3190 
+				( DPOB_CD
+				  , EDAC_RVYY
+				  , SETT_GBCD
+				  , SYSTEMKEY
+				  , CTRB_SEQN
+				  , CTRB_DDCD
+				  , CTRB_TYCD
+				  , CTRB_YRMN
+				  , CTRB_AMNT
+				  , BFYR_DEAM
+				  , DETR_AMNT
+				  , DYYR_DEAM
+				  , DYYR_OTAM
+				  , AYYR_NTAM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #edacRvyy#
+				  , #settGbcd#
+				  , #systemkey#
+				  , #ctrbSeqn#
+				  , #ctrbDdcd#
+				  , #ctrbTycd#
+				  , #ctrbYrmn#
+				  , #ctrbAmnt#
+				  , #bfyrDeam#
+				  , #detrAmnt#
+				  , #dyyrDeam#
+				  , #dyyrOtam#
+				  , #ayyrNtam#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	
+	<!-- yeta0100 화면 - 이월기부금 443  -->
+	<insert id="yetaPrc3190DAO.fnPayr06430_PAYR443_2014_CREATE_Insert_S"> 
+			     INSERT INTO YETA3190 
+                ( DPOB_CD
+                  , EDAC_RVYY
+                  , SETT_GBCD
+                  , SYSTEMKEY
+                  , CTRB_SEQN
+                  , CTRB_DDCD
+                  , CTRB_TYCD
+                  , CTRB_YRMN
+                  , CTRB_AMNT
+                  , BFYR_DEAM
+                  , DETR_AMNT
+                  , DYYR_DEAM
+                  , DYYR_OTAM
+                  , AYYR_NTAM
+                  , KYBDR
+                  , INPT_DT
+                  , INPT_ADDR
+                  , ISMT
+                  , REVN_DT
+                  , REVN_ADDR )              
+          (SELECT                      
+               AA.DPOB_CD ,  
+              (AA.EDAC_RVYY + 1),               
+              AA.SETT_GBCD,               
+              AA.SYSTEMKEY,
+              (SELECT (NVL(MAX(CTRB_SEQN),0) + 1) FROM YETA3190 AA01      
+              WHERE AA01.DPOB_CD = AA.DPOB_CD 
+                AND AA01.EDAC_RVYY = (AA.EDAC_RVYY + 1) 
+                AND AA01.SETT_GBCD = AA.SETT_GBCD 
+                AND  AA01.SYSTEMKEY = AA.SYSTEMKEY) , 
+              AA.CTRB_DDCD,                
+              AA.CTRB_TYCD,                
+              AA.CTRB_AMNT,                
+              AA.CTRB_YRMN,               
+              AA.DYYR_DEAM,               
+              AA.AYYR_NTAM,              
+              0,               
+              0,               
+              0                
+              , #kybdr#
+              , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+              , #inptAddr#
+              , #ismt#
+              , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+              , #revnAddr#                      
+          FROM YETA3170 AA, (
+              SELECT BB01.*, BB02.PAYR_MANG_DEPT_CD FROM  PSNL0100 BB01,PAYR0500 BB02
+              WHERE BB01.DPOB_CD = BB02.DPOB_CD  
+                AND BB01.SYSTEMKEY = BB02.SYSTEMKEY  
+          )     BB       
+          WHERE AA.SYSTEMKEY = BB.SYSTEMKEY  
+            AND AA.DPOB_CD = BB.DPOB_CD  
+          AND  AA.AYYR_NTAM > 0        
+          AND    AA.EDAC_RVYY = (#edacRvyy# - 1)     
+          AND   (( AA.CTRB_TYCD = '10'     
+          AND      AA.CTRB_YRMN >=  '2012')       
+           OR   ( AA.CTRB_TYCD IN ('40','41')     
+          AND      AA.CTRB_YRMN >=  '2010')       
+              OR   ( AA.CTRB_TYCD = '31'     
+          AND      AA.CTRB_YRMN IN  ('2011'))  )     
+           AND  AA.DPOB_CD=#dpobCd#
+          AND    AA.SETT_GBCD = #settGbcd#    
+            <isNotEmpty prepend="AND" property="systemkey" >
+                         AA.SYSTEMKEY=#systemkey#
+             </isNotEmpty> 
+                 AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                        	    <isNotEmpty prepend="AND" property="deptCd" >
+							                       C.DEPT_CD = #deptCd#
+							                   </isNotEmpty>
+                                          ) 
+                       <isNotEmpty prepend="AND" property="businCd" >
+                         BB.BUSIN_CD=#businCd#
+                       </isNotEmpty> 
+                       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+                         BB.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+                       </isNotEmpty> 
+                       <isNotEmpty prepend="AND" property="emymtDivCd" >
+                         BB.EMYMT_DIV_CD=#emymtDivCd#
+                         </isNotEmpty>  
+                     <isNotEmpty prepend="AND" property="typOccuCd" >
+                      BB.TYP_OCCU_CD = #typOccuCd#
+                   </isNotEmpty> 
+                     <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+                      BB.DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#
+                   </isNotEmpty> 
+                       <isEqual prepend="AND" property="addCheck" compareValue="ADD">
+                    NOT EXISTS (
+                       SELECT * FROM   YETA3190 KK01
+                        WHERE KK01.DPOB_CD = AA.DPOB_CD
+                          AND KK01.EDAC_RVYY = #edacRvyy#
+                          AND KK01.SETT_GBCD = #settGbcd#
+                          AND KK01.EDAC_RVYY = (AA.EDAC_RVYY + 1)
+                           AND KK01.SETT_GBCD =  AA.SETT_GBCD
+                          AND KK01.SYSTEMKEY =  AA.SYSTEMKEY 
+                    )
+                  </isEqual> 
+                   
+		 )
+	</insert> 
+	
+	
+	<update id="yetaPrc3190DAO.updateYetaPrc3190_S">
+		<![CDATA[
+			UPDATE YETA3190
+			SET DPOB_CD=#dpobCd#
+				, EDAC_RVYY=#edacRvyy#
+				, SETT_GBCD=#settGbcd#
+				, SYSTEMKEY=#systemkey#
+				, CTRB_SEQN=#ctrbSeqn#
+				, CTRB_DDCD=#ctrbDdcd#
+				, CTRB_TYCD=#ctrbTycd#
+				, CTRB_YRMN=#ctrbYrmn#
+				, CTRB_AMNT=#ctrbAmnt#
+				, BFYR_DEAM=#bfyrDeam#
+				, DETR_AMNT=#detrAmnt#
+				, DYYR_DEAM=#dyyrDeam#
+				, DYYR_OTAM=#dyyrOtam#
+				, AYYR_NTAM=#ayyrNtam#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND CTRB_SEQN=#ctrbSeqn#
+				]]>
+	</update>
+	
+	<delete id="yetaPrc3190DAO.deleteYetaPrc3190_S">
+		<![CDATA[
+			DELETE FROM YETA3190 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND CTRB_SEQN=#ctrbSeqn#
+				]]>
+	</delete>
+	
+	<!-- yeta0100 화면 이월기부금  -->
+		<delete id="yetaPrc3190DAO.fnPayr06430_PAYR443_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3190 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd# 
+				]]>
+				  <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                   </isNotEmpty> 
+		    		  			    
+	</delete>
+	
+	
+	<select id="yetaPrc3190DAO.selectYetaPrc3190_S" resultMap="yetaPrc3190">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, EDAC_RVYY
+				, SETT_GBCD
+				, SYSTEMKEY
+				, CTRB_SEQN
+				, CTRB_DDCD
+				, CTRB_TYCD
+				, CTRB_YRMN
+				, CTRB_AMNT
+				, BFYR_DEAM
+				, DETR_AMNT
+				, DYYR_DEAM
+				, DYYR_OTAM
+				, AYYR_NTAM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YETA3190
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND CTRB_SEQN=#ctrbSeqn#
+				]]>
+	</select>
+	
+	<select id="yetaPrc3190DAO.selectYetaPrc3190List_D" parameterClass="yetaPrc3190SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, EDAC_RVYY
+								, SETT_GBCD
+								, SYSTEMKEY
+								, CTRB_SEQN
+								, CTRB_DDCD
+								, CTRB_TYCD
+								, CTRB_YRMN
+								, CTRB_AMNT
+								, BFYR_DEAM
+								, DETR_AMNT
+								, DYYR_DEAM
+								, DYYR_OTAM
+								, AYYR_NTAM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YETA3190
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, EDAC_RVYY DESC
+							, SETT_GBCD DESC
+							, SYSTEMKEY DESC
+							, CTRB_SEQN DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="yetaPrc3190DAO.selectYetaPrc3190ListTotCnt_S" parameterClass="yetaPrc3190SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3190
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgPdfA102y_2021">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgPdfA102ySrh_2021_VO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2021.InfcPkgPdfA102ySrh_2021_VO"/>
+	
+	<resultMap id="infcPkgPdfA102y_2021" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2021.InfcPkgPdfA102y_2021_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="accNo" column="ACC_NO" columnIndex="5"/>
+		<result property="formCd" column="FORM_CD" columnIndex="6"/>
+		<result property="resid" column="RESID" columnIndex="7"/>
+		<result property="name" column="NAME" columnIndex="8"/>
+		<result property="datCd" column="DAT_CD" columnIndex="9"/>
+		<result property="busnid" column="BUSNID" columnIndex="10"/>
+		<result property="tradeNm" column="TRADE_NM" columnIndex="11"/>
+		<result property="goodsNm" column="GOODS_NM" columnIndex="12"/>
+		<result property="insu1Resid" column="INSU1_RESID" columnIndex="13"/>
+		<result property="insu1Nm" column="INSU1_NM" columnIndex="14"/>
+		<result property="insu2Resid1" column="INSU2_RESID_1" columnIndex="15"/>
+		<result property="insu2Nm1" column="INSU2_NM_1" columnIndex="16"/>
+		<result property="insu2Resid2" column="INSU2_RESID_2" columnIndex="17"/>
+		<result property="insu2Nm2" column="INSU2_NM_2" columnIndex="18"/>
+		<result property="insu2Resid3" column="INSU2_RESID_3" columnIndex="19"/>
+		<result property="insu2Nm3" column="INSU2_NM_3" columnIndex="20"/>
+		<result property="insuPaySum" column="INSU_PAY_SUM" columnIndex="21"/>
+		<result property="pdfDatAppYn" column="PDF_DAT_APP_YN" columnIndex="22"/>
+		<result property="kybdr" column="KYBDR" columnIndex="23"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="24"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="25"/>
+		<result property="ismt" column="ISMT" columnIndex="26"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="27"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="28"/>
+	</resultMap>
+	
+	<insert id="infcPkgPdfA102y_2021_DAO.insertPdfA102y_S">
+		<![CDATA[
+			INSERT INTO PDF_A102Y 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , ACC_NO
+				  , FORM_CD
+				  , RESID
+				  , NAME
+				  , DAT_CD
+				  , BUSNID
+				  , TRADE_NM
+				  , GOODS_NM
+				  , INSU1_RESID
+				  , INSU1_NM
+				  , INSU2_RESID_1
+				  , INSU2_NM_1
+				  , INSU2_RESID_2
+				  , INSU2_NM_2
+				  , INSU2_RESID_3
+				  , INSU2_NM_3
+				  , INSU_PAY_SUM
+				  , PDF_DAT_APP_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #accNo#
+				  , #formCd#
+				  , #resid#
+				  , #name#
+				  , #datCd#
+				  , #busnid#
+				  , #tradeNm#
+				  , #goodsNm#
+				  , #insu1Resid#
+				  , #insu1Nm#
+				  , #insu2Resid1#
+				  , #insu2Nm1#
+				  , #insu2Resid2#
+				  , #insu2Nm2#
+				  , #insu2Resid3#
+				  , #insu2Nm3#
+				  , #insuPaySum#
+				  , #pdfDatAppYn#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgPdfA102y_2021_DAO.updatePdfA102y_S">
+		<![CDATA[
+			UPDATE PDF_A102Y
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, ACC_NO=#accNo#
+				, FORM_CD=#formCd#
+				, RESID=#resid#
+				, NAME=#name#
+				, DAT_CD=#datCd#
+				, BUSNID=#busnid#
+				, TRADE_NM=#tradeNm#
+				, GOODS_NM=#goodsNm#
+				, INSU1_RESID=#insu1Resid#
+				, INSU1_NM=#insu1Nm#
+				, INSU2_RESID_1=#insu2Resid1#
+				, INSU2_NM_1=#insu2Nm1#
+				, INSU2_RESID_2=#insu2Resid2#
+				, INSU2_NM_2=#insu2Nm2#
+				, INSU2_RESID_3=#insu2Resid3#
+				, INSU2_NM_3=#insu2Nm3#
+				, INSU_PAY_SUM=#insuPaySum#
+				, PDF_DAT_APP_YN=#pdfDatAppYn#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND ACC_NO=#accNo#
+				]]>
+	</update>
+	
+	<update id="infcPkgPdfA102y_2021_DAO.updateYetaP620001ToPdfA102y_S">
+		<![CDATA[
+			UPDATE PDF_A102Y
+			SET   PDF_DAT_APP_YN=#pdfDatAppYn#
+				, PDF_DAT_APP_CMPL_DT = SUBSTR(TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),0,8)
+				, PDF_DAT_APP_EXC_CTNT = #pdfDatAppExcCtnt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD = #dpobCd#
+								AND YRTX_BLGG_YR= #yrtxBlggYr#
+								AND CLUT_SEPT_CD= #clutSeptCd#
+								AND SYSTEMKEY = #systemkey#
+								AND ACC_NO = #accNo#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPdfA102y_2021_DAO.deletePdfA102y_S">
+		<![CDATA[
+			DELETE FROM PDF_A102Y 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND RESID=#resid#
+								AND ACC_NO=#accNo#
+				]]>
+	</delete>
+	
+	<select id="infcPkgPdfA102y_2021_DAO.selectPdfA102y_S" resultMap="infcPkgPdfA102y_2021">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, ACC_NO
+				, FORM_CD
+				, RESID
+				, NAME
+				, DAT_CD
+				, BUSNID
+				, TRADE_NM
+				, GOODS_NM
+				, INSU1_RESID
+				, INSU1_NM
+				, INSU2_RESID_1
+				, INSU2_NM_1
+				, INSU2_RESID_2
+				, INSU2_NM_2
+				, INSU2_RESID_3
+				, INSU2_NM_3
+				, INSU_PAY_SUM
+				, PDF_DAT_APP_YN
+				, PDF_DAT_APP_CMPL_DT
+				, PDF_DAT_APP_EXC_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PDF_A102Y
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND ACC_NO=#accNo#
+				]]>
+	</select>
+	
+	<select id="infcPkgPdfA102y_2021_DAO.selectPdfA102yList_D" parameterClass="infcPkgPdfA102ySrh_2021_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, ACC_NO
+								, FORM_CD
+								, RESID
+								, NAME
+								, DAT_CD
+								, BUSNID
+								, TRADE_NM
+								, GOODS_NM
+								, INSU1_RESID
+								, INSU1_NM
+								, INSU2_RESID_1
+								, INSU2_NM_1
+								, INSU2_RESID_2
+								, INSU2_NM_2
+								, INSU2_RESID_3
+								, INSU2_NM_3
+								, INSU_PAY_SUM
+								, PDF_DAT_APP_YN
+								, PDF_DAT_APP_CMPL_DT
+								, PDF_DAT_APP_EXC_CTNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PDF_A102Y
+				WHERE 1=1
+				AND DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY = #systemkey#
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, ACC_NO ASC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgPdfA102y_2021_DAO.selectPdfA102yListTotCnt_S" parameterClass="infcPkgPdfA102ySrh_2021_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PDF_A102Y
+			WHERE 1=1
+			AND DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY = #systemkey#
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

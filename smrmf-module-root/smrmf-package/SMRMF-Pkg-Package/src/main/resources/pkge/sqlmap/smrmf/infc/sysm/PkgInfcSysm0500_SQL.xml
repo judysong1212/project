@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgInfcSysm0500">
+	 
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgSysm0500SrhVo" type="com.app.smrmf.infc.sysauth.system.server.vo.InfcPkgSysm0500SrhVO"/>
+	<typeAlias  alias="infcPkgSysm0500Vo" type="com.app.smrmf.infc.sysauth.system.server.vo.InfcPkgSysm0500VO"/>
+	
+	
+	<delete id="InfcPkgSysm0500DAO.deleteYeta2080ToSysm0500">
+		<![CDATA[
+		DELETE FROM SYSM0500 
+			WHERE USR_ID = #usrId#					
+				AND AUTH_GRP_SEIL_NUM = #authGrpSeilNum#	
+				AND SYS_DIV_CD = #sysDivCd#		
+				]]>
+	</delete>
+	
+	<insert id="InfcPkgSysm0500DAO.insertYeta2080ToSysm0500">
+		<![CDATA[
+			INSERT INTO SYSM0500 
+				( USR_ID				
+					, AUTH_GRP_SEIL_NUM	
+					, SYS_DIV_CD			
+					, USR_AUTH_USE_YN		
+					, KYBDR				
+					, INPT_DT				
+					, ISMT				
+					, REVN_DT				
+					, REVN_ADDR			
+					, INPT_ADDR	)
+			VALUES ( #usrId#				
+						, #authGrpSeilNum#	
+						, #sysDivCd#			
+						, #usrAuthUseYn#		
+						, #kybdr#				
+						, SYSDATE				
+						, #ismt#				
+						, SYSDATE				
+						, #revnAddr#			
+						, #inptAddr#	)
+		]]>
+	</insert>
+	 
+	
+</sqlMap>

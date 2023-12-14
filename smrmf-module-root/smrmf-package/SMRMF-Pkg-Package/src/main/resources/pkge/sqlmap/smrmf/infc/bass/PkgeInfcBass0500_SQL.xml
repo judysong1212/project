@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcBass0500">
+	
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="infcPkgBass0500DTO" type="com.app.exterms.basis.client.dto.InfcPkgBass0500DTO"/>
+	<typeAlias alias="infcPkgBass0500SrhVO" type="com.app.smrmf.infc.basis.server.vo.InfcPkgBass0500SrhVO"/>
+	
+	<select id="infcPkgBass0500DAO.getYearList" parameterClass="infcPkgBass0500DTO" resultClass="egovMap">
+		  SELECT DISTINCT YR AS COMM_CD, YR AS COMM_CD_NM
+		    FROM (SELECT DISTINCT BUSIN_APPTN_YR AS YR FROM BASS0500
+		          UNION ALL
+		          SELECT TO_CHAR (SYSDATE, 'YYYY') FROM DUAL
+		          UNION ALL
+		          SELECT TO_CHAR (SYSDATE + 365, 'YYYY') FROM DUAL)
+		ORDER BY YR DESC
+	</select> 
+	
+	<select id="infcPkgBass0500DAO.getBass0500BusinYrList" parameterClass="infcPkgBass0500DTO" resultClass="egovMap">
+		SELECT DISTINCT BUSIN_APPTN_YR
+		FROM BASS0500
+		WHERE DPOB_CD = #dpobCd#
+		GROUP BY BUSIN_APPTN_YR
+		ORDER BY BUSIN_APPTN_YR DESC
+	</select>
+	 
+	<select id="infcPkgBass0500DAO.selectBass0500PayYrList_D" parameterClass="infcPkgBass0500SrhVO" resultClass="egovMap">
+	SELECT * FROM (
+	     SELECT A.*, ROWNUM RNUM FROM (
+		   	  SELECT 
+						DISTINCT  BUSIN_APPTN_YR AS PAY_YR
+						, (BUSIN_APPTN_YR) AS PAY_YR_DISP 
+						FROM BASS0500
+				WHERE 1=1 
+				  <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty> 
+					ORDER BY   BUSIN_APPTN_YR DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	 
+	
+	<select id="infcPkgBass0500DAO.selectBass0500PayYrListTotCnt_S" parameterClass="infcPkgBass0500SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0500
+			WHERE 1=1 
+			  <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty> 
+	</select>
+	
+	<select id="infcPkgBass0500DAO.selectYeta2017ToBass0500OffList_D" parameterClass="infcPkgBass0500SrhVO" resultClass="egovMap">
+		SELECT * FROM (
+		     SELECT A.*, ROWNUM RNUM FROM (
+					SELECT DPOB_CD,
+					       BUSIN_CD,
+					       DEPT_CD,
+					       fcBass0400CDNM (DPOB_CD, DEPT_CD, 2) AS DEPT_NM,
+					       BUSIN_APPTN_YR,
+					       PAY_MANGE_DEPT_USE_YN,
+					       MANGE_DEPT_CD,
+					       BUSIN_NM,
+					       REPBTY_BUSIN_DIV_CD,
+					       BUSIN_EMYMT_TYP_OCCU_CD,
+					       BUSIN_REPBTY_EMP_NUM,
+					       IDTL_ACCDT_INSUR_APMRT,
+					       SPITY_CTNT,
+					       NAT_PENN_SYM,
+					       HLTH_INSR_SYM,
+					       UMYT_INSR_SYM,
+					       IDTL_ACCDT_INSUR_SYM,
+					       BUSIN_STDT,
+					       BUSIN_EDDT,
+					       HLTH_INSR_OFCE_SYM,
+					       DTIL_OCCLS_APPTN_UCST_CD,
+					       EMYMT_DIV_CD,
+					       TXTN_FRM_DIV_CD,
+					       UNT_DPOB_CD,
+					       SOC_INSR_SYM_INTTN_CD,
+					       BUSIN_ACC_CD,
+					       HHRK_DEPT_CD_01,
+					       HHRK_DEPT_CD_02,
+					       BUSIN_USE_YN,
+					       KYBDR,
+					       INPT_DT,
+					       INPT_ADDR,
+					       ISMT,
+					       REVN_DT,
+					       REVN_ADDR,
+					       WHDG_TX_CTYP_DIV_CD
+					  FROM BASS0500
+					 WHERE     DPOB_CD = #dpobCd#
+					       AND BUSIN_APPTN_YR = #businApptnYr# 
+					       AND BUSIN_USE_YN = #businUseYn#
+					       <isNotNull property="deptCd">
+							    <isNotEmpty property="deptCd">
+							       AND DEPT_CD = #deptCd#
+							    </isNotEmpty>
+						   </isNotNull>
+					       AND UNT_DPOB_CD IS NULL
+					       <![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>
+	
+	<select id="infcPkgBass0500DAO.selectYeta2017ToBass0500OffListTotCnt_S" parameterClass="infcPkgBass0500SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0500
+			WHERE 1=1 
+			  			AND DPOB_CD = #dpobCd#
+					       AND BUSIN_APPTN_YR = #businApptnYr# 
+					       AND BUSIN_USE_YN = #businUseYn#
+					       <isNotNull property="deptCd">
+							    <isNotEmpty property="deptCd">
+							       AND DEPT_CD = #deptCd#
+							    </isNotEmpty>
+						   </isNotNull>
+					       AND UNT_DPOB_CD IS NULL
+	</select>
+	
+	<select id="infcPkgBass0500DAO.selectYeta2017ToBass0500OnList_D" parameterClass="infcPkgBass0500SrhVO" resultClass="egovMap">
+		SELECT * FROM (
+		     SELECT A.*, ROWNUM RNUM FROM (
+					SELECT DPOB_CD,
+					       BUSIN_CD,
+					       DEPT_CD,
+					       fcBass0400CDNM (DPOB_CD, DEPT_CD, 2) AS DEPT_NM,
+					       BUSIN_APPTN_YR,
+					       PAY_MANGE_DEPT_USE_YN,
+					       MANGE_DEPT_CD,
+					       BUSIN_NM,
+					       REPBTY_BUSIN_DIV_CD,
+					       BUSIN_EMYMT_TYP_OCCU_CD,
+					       BUSIN_REPBTY_EMP_NUM,
+					       IDTL_ACCDT_INSUR_APMRT,
+					       SPITY_CTNT,
+					       NAT_PENN_SYM,
+					       HLTH_INSR_SYM,
+					       UMYT_INSR_SYM,
+					       IDTL_ACCDT_INSUR_SYM,
+					       BUSIN_STDT,
+					       BUSIN_EDDT,
+					       HLTH_INSR_OFCE_SYM,
+					       DTIL_OCCLS_APPTN_UCST_CD,
+					       EMYMT_DIV_CD,
+					       TXTN_FRM_DIV_CD,
+					       UNT_DPOB_CD,
+					       (SELECT UT_DPOB_NM FROM BASS0120 WHERE UT_DPOB_CD = #untDpobCd#) AS UNT_DPOB_NM,
+					       SOC_INSR_SYM_INTTN_CD,
+					       BUSIN_ACC_CD,
+					       HHRK_DEPT_CD_01,
+					       HHRK_DEPT_CD_02,
+					       BUSIN_USE_YN,
+					       KYBDR,
+					       INPT_DT,
+					       INPT_ADDR,
+					       ISMT,
+					       REVN_DT,
+					       REVN_ADDR,
+					       WHDG_TX_CTYP_DIV_CD
+					  FROM BASS0500
+					 WHERE     DPOB_CD = #dpobCd#
+					 	<isNotNull property="untDpobCd">
+							    <isNotEmpty property="untDpobCd">
+							       AND UNT_DPOB_CD = #untDpobCd#
+							    </isNotEmpty>
+						</isNotNull>
+						AND BUSIN_APPTN_YR = #businApptnYr# 
+						AND BUSIN_USE_YN = #businUseYn#
+						<isNotNull property="deptCd">
+					    <isNotEmpty property="deptCd">
+					       AND DEPT_CD = #deptCd#
+					    </isNotEmpty>
+						</isNotNull>
+						AND UNT_DPOB_CD IS NOT NULL
+					       <![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>
+	
+	<select id="infcPkgBass0500DAO.selectYeta2017ToBass0500OnListTotCnt_S" parameterClass="infcPkgBass0500SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0500
+			WHERE 1=1 
+			  		AND DPOB_CD = #dpobCd#
+					<isNotNull property="untDpobCd">
+							    <isNotEmpty property="untDpobCd">
+							       AND UNT_DPOB_CD = #untDpobCd#
+							    </isNotEmpty>
+					</isNotNull>
+					AND BUSIN_APPTN_YR = #businApptnYr# 
+					AND BUSIN_USE_YN = #businUseYn#
+					<isNotNull property="deptCd">
+					    <isNotEmpty property="deptCd">
+					       AND DEPT_CD = #deptCd#
+					    </isNotEmpty>
+					</isNotNull>
+					AND UNT_DPOB_CD IS NOT NULL
+					
+	</select>
+	
+	<update id="infcPkgBass0500DAO.updateOnYeta2070_S">
+		<![CDATA[
+			UPDATE BASS0500 SET
+				UNT_DPOB_CD = #untDpobCd#
+			WHERE
+				BUSIN_CD = #businCd#
+		]]>
+	</update>
+	
+	<update id="infcPkgBass0500DAO.updateOffYeta2070_S">
+			<![CDATA[
+				UPDATE BASS0500 SET
+					UNT_DPOB_CD = #untDpobCd#
+				WHERE
+					BUSIN_CD = #businCd#
+			]]>
+	</update>
+	
+		 
+	 
+</sqlMap>

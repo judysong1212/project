@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcPayr0470">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgPayr0470SrhVO" type="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0470SrhVO"/>
+	
+	<resultMap id="infcPkgPayr0470" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0470VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="payDducCd" column="PAY_DDUC_CD" columnIndex="2"/>
+		<result property="payDducGrpCd" column="PAY_DDUC_GRP_CD" columnIndex="3"/>
+		<result property="payDducNm" column="PAY_DDUC_NM" columnIndex="4"/>
+		<result property="payDducUseYn" column="PAY_DDUC_USE_YN" columnIndex="5"/>
+		<result property="payDducSum" column="PAY_DDUC_SUM" columnIndex="6"/>
+		<result property="payDducRto" column="PAY_DDUC_RTO" columnIndex="7"/>
+		<result property="yrtxDducDivCd" column="YRTX_DDUC_DIV_CD" columnIndex="8"/>
+		<result property="grpApptnDivCd" column="GRP_APPTN_DIV_CD" columnIndex="9"/>
+		<result property="payDducBgnnDt" column="PAY_DDUC_BGNN_DT" columnIndex="10"/>
+		<result property="payDducEndDt" column="PAY_DDUC_END_DT" columnIndex="11"/>
+		<result property="kybdr" column="KYBDR" columnIndex="12"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="13"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="14"/>
+		<result property="ismt" column="ISMT" columnIndex="15"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="16"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="17"/>
+		<result property="pymtDducDivCd" column="PYMT_DDUC_DIV_CD" columnIndex="18"/>
+	</resultMap>
+	
+	<insert id="infcPkgPayr0470DAO.insertPayr0470_S">
+		<![CDATA[
+			INSERT INTO PAYR0470 
+				( DPOB_CD
+				  , PAY_DDUC_CD
+				  , PAY_DDUC_GRP_CD
+				  , PAY_DDUC_NM
+				  , PAY_DDUC_USE_YN
+				  , PAY_DDUC_SUM
+				  , PAY_DDUC_RTO
+				  , YRTX_DDUC_DIV_CD
+				  , GRP_APPTN_DIV_CD
+				  , PAY_DDUC_BGNN_DT
+				  , PAY_DDUC_END_DT
+				   , PYMT_DDUC_DIV_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #payDducCd#
+				  , #payDducGrpCd#
+				  , #payDducNm#
+				  , #payDducUseYn#
+				  , #payDducSum#
+				  , #payDducRto#
+				  , #yrtxDducDivCd#
+				  , #grpApptnDivCd#
+				  , #payDducBgnnDt#
+				  , #payDducEndDt#
+				  , #pymtDducDivCd#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgPayr0470DAO.updatePayr0470_S">
+		<![CDATA[
+			UPDATE PAYR0470
+			SET DPOB_CD=#dpobCd#
+				, PAY_DDUC_CD=#payDducCd#
+				, PAY_DDUC_GRP_CD=#payDducGrpCd#
+				, PAY_DDUC_NM=#payDducNm#
+				, PAY_DDUC_USE_YN=#payDducUseYn#
+				, PAY_DDUC_SUM=#payDducSum#
+				, PAY_DDUC_RTO=#payDducRto#
+				, YRTX_DDUC_DIV_CD=#yrtxDducDivCd#
+				, GRP_APPTN_DIV_CD=#grpApptnDivCd#
+				, PAY_DDUC_BGNN_DT=#payDducBgnnDt#
+				, PAY_DDUC_END_DT=#payDducEndDt#
+				, PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND PAY_DDUC_CD=#payDducCd#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPayr0470DAO.deletePayr0470_S">
+		<![CDATA[
+			DELETE FROM PAYR0470 
+						WHERE DPOB_CD=#dpobCd#
+								AND PAY_DDUC_CD=#payDducCd#
+				]]>
+	</delete>
+	
+	<select id="infcPkgPayr0470DAO.selectPayr0470_S" resultMap="infcPkgPayr0470">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, PAY_DDUC_CD
+				, PAY_DDUC_GRP_CD
+				, PAY_DDUC_NM
+				, PAY_DDUC_USE_YN
+				, PAY_DDUC_SUM
+				, PAY_DDUC_RTO
+				, YRTX_DDUC_DIV_CD
+				, GRP_APPTN_DIV_CD
+				, PAY_DDUC_BGNN_DT
+				, PAY_DDUC_END_DT
+				, PYMT_DDUC_DIV_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0470
+						WHERE DPOB_CD=#dpobCd#
+								AND PAY_DDUC_CD=#payDducCd#
+				]]>
+	</select>
+	
+	<select id="infcPkgPayr0470DAO.selectPayr0470List_D" parameterClass="infcPkgPayr0470SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, PAY_DDUC_CD
+								, PAY_DDUC_GRP_CD
+								, PAY_DDUC_GRP_CD AS payDducGrpCdcommCd
+								, fcBass0300CDNM(#dpobCd#,PAY_DDUC_GRP_CD) AS payDducGrpCdcommCdNm
+								, PAY_DDUC_NM
+								, PAY_DDUC_USE_YN
+								, PAY_DDUC_SUM
+								, PAY_DDUC_RTO
+								, YRTX_DDUC_DIV_CD
+								, YRTX_DDUC_DIV_CD AS yrtxDducDivCdcommCd
+								, fcBass0300CDNM(#dpobCd#,YRTX_DDUC_DIV_CD) AS yrtxDducDivCdcommCdNm
+								, GRP_APPTN_DIV_CD
+								, GRP_APPTN_DIV_CD AS  grpApptnDivCdcommCd
+								, fcBass0300CDNM(#dpobCd#,GRP_APPTN_DIV_CD) AS grpApptnDivCdcommCdNm
+								, PAY_DDUC_BGNN_DT
+								, PAY_DDUC_END_DT
+								, PYMT_DDUC_DIV_CD 
+								, PYMT_DDUC_DIV_CD AS pymtDducDivCdcommCd
+								, fcBass0300CDNM(#dpobCd#,PYMT_DDUC_DIV_CD) AS pymtDducDivCdcommCdNm
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PAYR0470
+				WHERE 1=1
+              <isNotEmpty prepend="AND" property="payDducGrpCd">
+				  PAY_DDUC_GRP_CD = #payDducGrpCd#
+		       </isNotEmpty>  
+		      <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		      </isNotEmpty>
+		        <isNotEmpty prepend="AND" property="payDducNm">
+				  PAY_DDUC_NM LIKE '%' || #payDducNm# || '%'
+		       </isNotEmpty> 
+					ORDER BY 
+						DPOB_CD ASC
+							, PAY_DDUC_CD DESC
+		
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>
+	</select>	
+	<select id="infcPkgPayr0470DAO.selectPayr0470ListTotCnt_S" parameterClass="infcPkgPayr0470SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0470
+			WHERE 1=1
+		     <isNotEmpty prepend="AND" property="payDducGrpCd">
+				  PAY_DDUC_GRP_CD = #payDducGrpCd#
+		     </isNotEmpty>  
+		     <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		     </isNotEmpty>
+		      <isNotEmpty prepend="AND" property="payDducNm">
+				  PAY_DDUC_NM LIKE '%' || #payDducNm# || '%'
+		      </isNotEmpty> 
+	</select>
+	
+	
+	<select id="infcPkgPayr0470DAO.selectPayr0470ToPayr4450List_D" parameterClass="infcPkgPayr0470SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								  DPOB_CD
+								, PAY_DDUC_CD 
+								, PAY_DDUC_NM 
+						FROM PAYR0470
+				WHERE 1=1 
+		      <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		      </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+			 	PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+		      </isNotEmpty> 
+					ORDER BY 
+						DPOB_CD ASC
+							, PAY_DDUC_CD ASC
+		
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>
+	</select>	
+	<select id="infcPkgPayr0470DAO.selectPayr0470ToPayr4450ListTotCnt_S" parameterClass="infcPkgPayr0470SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0470
+			WHERE 1=1 
+		     <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		     </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+			 	PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+		      </isNotEmpty> 
+	</select>
+	
+
+</sqlMap>

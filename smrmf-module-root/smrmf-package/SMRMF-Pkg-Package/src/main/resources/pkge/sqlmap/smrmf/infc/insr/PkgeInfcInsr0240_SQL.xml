@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcInsr0240">
+	
+	 <typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	 <typeAlias  alias="payr0250CalcSrhVO" type="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0250VO"/>  
+	    
+        <resultMap id="pkgInsrAmntVo" class="com.app.smrmf.pkg.insr.insurance.service.PkgInsrAmntVO"> 
+	    <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="hlthDducYrMnth" column="HLTH_DDUC_YR_MNTH" columnIndex="3"/>
+		<result property="hlthInsrPrcsDt" column="HLTH_INSR_PRCS_DT" columnIndex="4"/>
+		<result property="hlthInsrPrcsYn" column="HLTH_INSR_PRCS_YN" columnIndex="5"/>
+		<result property="hlthInsrPrmmSrd" column="HLTH_INSR_PRMM_SRD" columnIndex="6"/>
+		<result property="lgtmRcptnInsurSrd" column="LGTM_RCPTN_INSUR_SRD" columnIndex="7"/>
+		<result property="lgtmRcptnYrtxPrmm" column="LGTM_RCPTN_YRTX_PRMM" columnIndex="8"/>
+		<result property="hlthInsrRefdItrt" column="HLTH_INSR_REFD_ITRT" columnIndex="9"/>
+		<result property="lgtmRcptnInsurRefdItrt" column="LGTM_RCPTN_INSUR_REFD_ITRT" columnIndex="10"/>
+		<result property="srdAggrSum" column="SRD_AGGR_SUM" columnIndex="11"/>
+		<result property="divdPymtDivCd" column="DIVD_PYMT_DIV_CD" columnIndex="12"/>
+		<result property="divdPymt" column="DIVD_PYMT" columnIndex="13"/>
+		<result property="regrstIncmTotAmnt" column="REGRST_INCM_TOT_AMNT" columnIndex="14"/>
+		<result property="deinStdIncmMnthAmnt" column="DEIN_STD_INCM_MNTH_AMNT" columnIndex="15"/>
+		<result property="deinMnthPrmm" column="DEIN_MNTH_PRMM" columnIndex="16"/>
+		<result property="indvBrdnSum" column="INDV_BRDN_SUM" columnIndex="17"/>
+		<result property="reattyQnty" column="REATTY_QNTY" columnIndex="18"/>
+		<result property="hmlfClutPrmm" column="HMLF_CLUT_PRMM" columnIndex="19"/>
+		<result property="hmlfPrmmAggr" column="HMLF_PRMM_AGGR" columnIndex="20"/>
+		<result property="dpobBrdnSum" column="DPOB_BRDN_SUM" columnIndex="21"/>
+		<result property="busoprClutPrmm" column="BUSOPR_CLUT_PRMM" columnIndex="22"/>
+		<result property="busoprReattyPrmm" column="BUSOPR_REATTY_PRMM" columnIndex="23"/>
+		<result property="busoprPrmmAggr" column="BUSOPR_PRMM_AGGR" columnIndex="24"/>
+		<result property="aggr" column="AGGR" columnIndex="25"/>
+		<result property="fluc" column="FLUC" columnIndex="26"/>
+		<result property="aqtnMnthPymtYn" column="AQTN_MNTH_PYMT_YN" columnIndex="27"/> 
+		<result property="flucDt" column="FLUC_DT" columnIndex="28"/>
+		<result property="flucReasCtnt" column="FLUC_REAS_CTNT" columnIndex="29"/>
+		<result property="pbcorpOautyDeinYn" column="PBCORP_OAUTY_DEIN_YN" columnIndex="30"/>
+		<result property="natPayrDducYrMnth" column="NAT_PAYR_DDUC_YR_MNTH" columnIndex="31"/>
+		<result property="natInsrPrcsDt" column="NAT_INSR_PRCS_DT" columnIndex="32"/>
+		<result property="natInsrPrcsYn" column="NAT_INSR_PRCS_YN" columnIndex="33"/>
+		<result property="natInsrPrmmSrd" column="NAT_INSR_PRMM_SRD" columnIndex="34"/>
+		<result property="mnthAvgPayMnthAmnt" column="MNTH_AVG_PAY_MNTH_AMNT" columnIndex="35"/>
+		<result property="cmpttnWkppUneplrtSum" column="CMPTTN_WKPP_UNEPLRT_SUM" columnIndex="36"/>
+		<result property="cmpttnEplrUneplrtSum" column="CMPTTN_EPLR_UNEPLRT_SUM" columnIndex="37"/>
+		<result property="cmpttnEplrFncdsnInsurSum" column="CMPTTN_EPLR_FNCDSN_INSUR_SUM" columnIndex="38"/>
+		<result property="recpttnWkppUneplrtSum" column="RECPTTN_WKPP_UNEPLRT_SUM" columnIndex="39"/>
+		<result property="recpttnEplrUneplrtSum" column="RECPTTN_EPLR_UNEPLRT_SUM" columnIndex="40"/>
+		<result property="recpttnEplrFncdsnSum" column="RECPTTN_EPLR_FNCDSN_SUM" columnIndex="41"/>
+		<result property="clutPayTotAmnt" column="CLUT_PAY_TOT_AMNT" columnIndex="42"/>
+		<result property="clutWkppUneplrtSum" column="CLUT_WKPP_UNEPLRT_SUM" columnIndex="43"/> 
+		<result property="clutEplrUneplrtSum" column="CLUT_EPLR_UNEPLRT_SUM" columnIndex="44"/>
+		<result property="clutEplrFncdsnSum" column="CLUT_EPLR_FNCDSN_SUM" columnIndex="45"/>
+		<result property="umytInsrApmrt" column="UMYT_INSR_APMRT" columnIndex="46"/>
+		<result property="payCalcEmymtInsurSum" column="PAY_CALC_EMYMT_INSUR_SUM" columnIndex="47"/> 
+		<result property="indvUneplrtPymtAggrSum" column="INDV_UNEPLRT_PYMT_AGGR_SUM" columnIndex="48"/>
+		<result property="eplrUneplrtPymtAggrSum" column="EPLR_UNEPLRT_PYMT_AGGR_SUM" columnIndex="49"/>
+		<result property="eplrFncdsnAggrSum" column="EPLR_FNCDSN_AGGR_SUM" columnIndex="50"/>
+		<result property="umytPayrDducYrMnth" column="UMYT_PAYR_DDUC_YR_MNTH" columnIndex="51"/>
+		<result property="umytInsrPrcsDt" column="UMYT_INSR_PRCS_DT" columnIndex="52"/>
+		<result property="umytInsrPrcsYn" column="UMYT_INSR_PRCS_YN" columnIndex="53"/>
+		<result property="umytInsrPrmmSrd" column="UMYT_INSR_PRMM_SRD" columnIndex="54"/> 
+			<result property="yrtxPrmm" column="YRTX_PRMM" columnIndex="55"/>  
+	</resultMap>
+	
+	
+	<select id="infcPkgInsr0240DAO.select4InsureDataList_D" parameterClass="payr0250CalcSrhVO" resultClass="egovMap">
+		<![CDATA[ 
+		  SELECT 
+		       INSR0240.HLTH_INSR_STD_YR, 
+		       INSR0240.HLTH_INSR_MINM_MNTH_RUNTN_AMNT,
+		       INSR0240.HLTH_INSR_BST_MNTH_RUNTN_AMNT,
+		       INSR0240.HLTH_INSR_USR_BRDN_APMRT,
+		       INSR0240.HLTH_INSR_HMLF_BRDN_APMRT,
+		       INSR0240.HLTH_RCPTN_USR_BRDN_APMRT,
+		       INSR0240.HLTH_RCPTN_HMLF_BRDN_APMRT,
+		       INSR0250.NAT_PENN_STD_YR, 
+		       INSR0250.NAT_PENN_MINM_INCM_MNTH_AMNT,
+		       INSR0250.NAT_PENN_BST_INCM_MNTH_AMNT,
+		       INSR0250.NAT_PENN_USR_BRDN_APMRT,
+		       INSR0250.NAT_PENN_HMLF_BRDN_APMRT, 
+		       INSR0260.UMYT_INSR_STD_YR, 
+		       INSR0260.UMYT_INSR_MINM_INCM_MNTH_AMNT,
+		       INSR0260.UMYT_INSR_BST_INCM_MNTH_AMNT,
+		       INSR0260.UMYT_INSR_HMLF_BRDN_APMRT,
+		       INSR0260.UMYT_INSR_USR_BRDN_APMRT,
+		       INSR0260.UMYT_INSR_USR_SFTY_EBIS_APMRT,
+		       INSR0270.IDTL_ACCDT_INSUR_STD_YR, 
+		       NVL(INSR0270.IDTL_ACCDT_INSUR_USR_APMRT,0) AS IDTL_ACCDT_INSUR_USR_APMRT
+		  FROM INSR0240 INSR0240, INSR0250 INSR0250,INSR0260 INSR0260 ,INSR0270 INSR0270
+		 WHERE INSR0240.DPOB_CD = #dpobCd#   
+		   AND INSR0240.DPOB_CD = INSR0250.DPOB_CD(+)  
+		   AND INSR0240.DPOB_CD = INSR0260.DPOB_CD(+)  
+		   AND INSR0240.DPOB_CD = INSR0270.DPOB_CD(+)  
+		   AND #pymtDt# BETWEEN INSR0240.HLTH_INSR_BGNN_DT AND  INSR0240.HLTH_INSR_END_DT 
+		   AND #pymtDt# BETWEEN INSR0250.NAT_PENN_BGNN_DT(+) AND  INSR0250.NAT_PENN_END_DT(+)
+		   AND #pymtDt# BETWEEN INSR0260.UMYT_INSR_BGNN_DT(+) AND  INSR0260.UMYT_INSR_END_DT(+) 
+		   AND #pymtDt# BETWEEN INSR0270.IDTL_ACCDT_INSUR_BGNN_DT(+) AND  INSR0270.IDTL_ACCDT_INSUR_END_DT(+)  
+		   AND INSR0240.HLTH_INSR_STD_YR = SUBSTR(#jobYrMnth#,1,4)
+				]]>
+	</select>  
+	
+	  <!-- 2017.04.05 금액처리를 위한 부분 추가  -->
+		<select id="infcPkgInsr0240DAO.select4InsureDataAmnt_D" parameterClass="payr0250CalcSrhVO" resultMap="pkgInsrAmntVo">
+		<![CDATA[ 
+ SELECT  AA01.DPOB_CD
+      , AA01.SYSTEMKEY
+      , AA02.HLTH_DDUC_YR_MNTH 
+      , AA02.HLTH_INSR_PRCS_DT 
+      , AA02.HLTH_INSR_PRCS_YN 
+      , NVL(AA02.HLTH_INSR_PRMM_SRD,0) AS  HLTH_INSR_PRMM_SRD
+      , NVL(AA02.LGTM_RCPTN_INSUR_SRD,0) AS LGTM_RCPTN_INSUR_SRD  
+      , NVL(AA02.YRTX_PRMM,0) AS YRTX_PRMM  
+      , NVL(AA02.LGTM_RCPTN_YRTX_PRMM,0) AS  LGTM_RCPTN_YRTX_PRMM 
+      , NVL(AA02.HLTH_INSR_REFD_ITRT,0) AS  HLTH_INSR_REFD_ITRT 
+      , NVL(AA02.LGTM_RCPTN_INSUR_REFD_ITRT,0) AS LGTM_RCPTN_INSUR_REFD_ITRT  
+      , NVL(AA02.SRD_AGGR_SUM,0) AS SRD_AGGR_SUM  
+      , AA02.DIVD_PYMT_DIV_CD 
+      , NVL(AA02.DIVD_PYMT,0) AS DIVD_PYMT
+      , NVL(AA03.REGRST_INCM_TOT_AMNT,0) AS REGRST_INCM_TOT_AMNT
+      , NVL(AA03.DEIN_STD_INCM_MNTH_AMNT,0) AS DEIN_STD_INCM_MNTH_AMNT
+      , NVL(AA03.DEIN_MNTH_PRMM,0) AS DEIN_MNTH_PRMM
+      , NVL(AA03.INDV_BRDN_SUM,0) AS INDV_BRDN_SUM
+      , NVL(AA03.REATTY_QNTY,0) AS REATTY_QNTY
+      , NVL(AA03.HMLF_CLUT_PRMM,0) AS HMLF_CLUT_PRMM
+      , NVL(AA03.HMLF_PRMM_AGGR,0) AS HMLF_PRMM_AGGR
+      , NVL(AA03.DPOB_BRDN_SUM,0) AS DPOB_BRDN_SUM
+      , NVL(AA03.BUSOPR_CLUT_PRMM,0) AS BUSOPR_CLUT_PRMM
+      , NVL(AA03.BUSOPR_REATTY_PRMM,0) AS BUSOPR_REATTY_PRMM 
+      , NVL(AA03.BUSOPR_PRMM_AGGR,0) AS BUSOPR_PRMM_AGGR
+      , NVL(AA03.AGGR,0) AS AGGR
+      , AA03.FLUC
+      , AA03.AQTN_MNTH_PYMT_YN
+      , AA03.FLUC_DT
+      , AA03.FLUC_REAS_CTNT
+      , AA03.PBCORP_OAUTY_DEIN_YN
+      , AA03.NAT_PAYR_DDUC_YR_MNTH
+      , AA03.NAT_INSR_PRCS_DT
+      , AA03.NAT_INSR_PRCS_YN
+      , NVL(AA03.NAT_INSR_PRMM_SRD,0) AS NAT_INSR_PRMM_SRD
+      , NVL(AA04.MNTH_AVG_PAY_MNTH_AMNT,0) AS MNTH_AVG_PAY_MNTH_AMNT
+      , NVL(AA04.CMPTTN_WKPP_UNEPLRT_SUM,0) AS CMPTTN_WKPP_UNEPLRT_SUM
+      , NVL(AA04.CMPTTN_EPLR_UNEPLRT_SUM,0) AS CMPTTN_EPLR_UNEPLRT_SUM
+      , NVL(AA04.CMPTTN_EPLR_FNCDSN_INSUR_SUM,0) AS CMPTTN_EPLR_FNCDSN_INSUR_SUM 
+      , NVL(AA04.RECPTTN_WKPP_UNEPLRT_SUM,0) AS RECPTTN_WKPP_UNEPLRT_SUM
+      , NVL(AA04.RECPTTN_EPLR_UNEPLRT_SUM,0) AS RECPTTN_EPLR_UNEPLRT_SUM
+      , NVL(AA04.RECPTTN_EPLR_FNCDSN_SUM,0) AS RECPTTN_EPLR_FNCDSN_SUM
+      , NVL(AA04.CLUT_PAY_TOT_AMNT,0) AS CLUT_PAY_TOT_AMNT
+      , NVL(AA04.CLUT_WKPP_UNEPLRT_SUM,0) AS CLUT_WKPP_UNEPLRT_SUM
+      , NVL(AA04.CLUT_EPLR_UNEPLRT_SUM,0) AS CLUT_EPLR_UNEPLRT_SUM
+      , NVL(AA04.CLUT_EPLR_FNCDSN_SUM,0) AS CLUT_EPLR_FNCDSN_SUM
+      , NVL(AA04.UMYT_INSR_APMRT,0) AS UMYT_INSR_APMRT
+      , NVL(AA04.PAY_CALC_EMYMT_INSUR_SUM,0) AS PAY_CALC_EMYMT_INSUR_SUM
+      , NVL(AA04.INDV_UNEPLRT_PYMT_AGGR_SUM,0) AS INDV_UNEPLRT_PYMT_AGGR_SUM
+      , NVL(AA04.EPLR_UNEPLRT_PYMT_AGGR_SUM,0) AS EPLR_UNEPLRT_PYMT_AGGR_SUM
+      , NVL(AA04.EPLR_FNCDSN_AGGR_SUM,0) AS EPLR_FNCDSN_AGGR_SUM
+      , AA04.UMYT_PAYR_DDUC_YR_MNTH
+      , AA04.UMYT_INSR_PRCS_DT
+      , AA04.UMYT_INSR_PRCS_YN
+      , NVL(AA04.UMYT_INSR_PRMM_SRD,0)  AS UMYT_INSR_PRMM_SRD 
+   FROM PAYR0500 AA01, (
+           SELECT 
+              AB01.DPOB_CD,
+              AB01.NOFCT_YR_MNTH,
+              AB01.NOFCT_DSPTY,
+              AB01.SYSTEMKEY,
+              AB02.EMYMT_SEIL_NUM, 
+              AB02.DDUC_YR_MNTH AS HLTH_DDUC_YR_MNTH, 
+              AB02.HLTH_INSR_PRCS_DT, 
+              AB02.HLTH_INSR_PRCS_YN, 
+              AB02.HLTH_INSR_PRMM_SRD, 
+              AB02.LGTM_RCPTN_INSUR_SRD, 
+              AB02.YRTX_PRMM, 
+              AB02.LGTM_RCPTN_YRTX_PRMM, 
+              AB02.HLTH_INSR_REFD_ITRT, 
+              AB02.LGTM_RCPTN_INSUR_REFD_ITRT, 
+              AB02.SRD_AGGR_SUM, 
+              AB02.DIVD_PYMT_DIV_CD, 
+              AB02.DIVD_PYMT 
+        FROM  INSR3200 AB01 , INSR3300 AB02
+        WHERE AB01.DPOB_CD = AB02.DPOB_CD
+          AND AB01.NOFCT_YR_MNTH = AB02.NOFCT_YR_MNTH
+          AND AB01.NOFCT_DSPTY  = AB02.NOFCT_DSPTY
+          AND AB01.SYSTEMKEY = AB02.SYSTEMKEY
+   ) AA02,
+   INSR4200 AA03,
+   INSR5200 AA04
+WHERE AA01.DPOB_CD = #dpobCd#
+  AND AA01.SYSTEMKEY = #systemkey#
+  AND AA01.DPOB_CD = AA02.DPOB_CD(+)
+  AND AA01.SYSTEMKEY = AA02.SYSTEMKEY(+)
+  AND AA02.HLTH_DDUC_YR_MNTH(+) = #jobYrMnth#
+  AND AA01.DPOB_CD = AA03.DPOB_CD(+) 
+  AND AA01.SYSTEMKEY = AA03.SYSTEMKEY(+)
+  AND AA03.NAT_PAYR_DDUC_YR_MNTH(+) = #jobYrMnth#
+  AND AA01.DPOB_CD = AA04.DPOB_CD(+)
+  AND AA01.SYSTEMKEY = AA04.SYSTEMKEY(+)
+  AND AA04.UMYT_PAYR_DDUC_YR_MNTH(+) = #jobYrMnth# 
+				]]>
+	</select>  
+		  
+</sqlMap>

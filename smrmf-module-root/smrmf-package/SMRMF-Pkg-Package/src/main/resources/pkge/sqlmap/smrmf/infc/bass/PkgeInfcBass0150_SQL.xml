@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcBass0150">
+	
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="pkgBass0150SrhVO" type="com.app.smrmf.infc.basis.server.vo.InfcPkgBass0150SrhVO"/>
+	
+	<select id="InfcPkgBass0150DAO.selectYeta2070ToBass0150List" parameterClass="pkgBass0150SrhVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+						SELECT C.DPOB_CD || C.PAYR_MANG_DEPT_CD as DPOB_CD_PAYR_MANG_DEPT_CD,
+							   C.DPOB_CD,
+							   (SELECT B.DPOB_NM FROM BASS0100 B WHERE B.DPOB_CD = C.DPOB_CD ) AS DPOB_NM ,
+						       C.PAYR_MANG_DEPT_CD,
+						       C.PAY_MANGE_DEPT_NM,
+						       REGEXP_REPLACE(C.DEGTR_RESN_REGN_NUM,'(^.{6})','\1-') as DEGTR_RESN_REGN_NUM,
+						       C.DEGTR_NM,
+						       DECODE(LENGTH(C.BUSOPR_RGSTN_NUM),10,
+								            SUBSTR(C.BUSOPR_RGSTN_NUM,1,3)||'-'||
+								            SUBSTR(C.BUSOPR_RGSTN_NUM,4,2)||'-'||
+								            SUBSTR(C.BUSOPR_RGSTN_NUM,6,5)
+								          ,C.BUSOPR_RGSTN_NUM) as BUSOPR_RGSTN_NUM,
+						       REGEXP_REPLACE(C.CORP_RGSTN_NUM,'(^.{6})','\1-') as CORP_RGSTN_NUM,
+						       C.CORP_DIV_CD,
+						       REGEXP_REPLACE(C.PAY_MANGE_DEPT_ZPCD,'(^.{3})','\1-') as PAY_MANGE_DEPT_ZPCD,
+						       C.PAY_MANGE_DEPT_F_NDTN_ADDR,
+						       C.PAY_MANGE_DEPT_DTL_PATR_ADDR,
+						       C.PAY_MANGE_DEPT_PHN_NUM,
+						       C.PAY_MANGE_DEPT_FAX_NUM,
+						       C.PAY_MANGE_DEPT_SEAL_WRD_NM,
+						       C.PAY_MANGE_DEPT_SEAL_RFTA_NM,
+						       C.PAY_MANGE_DEPT_SEAL_FL_NM,
+						       C.PAY_MANGE_DEPT_F_NDTN_USE_YN,
+						       C.PAY_MANGE_DEPT_WHLE_PERN_CHRG,
+						       (SELECT D.USR_NM FROM SYSM0100 D WHERE D.USR_ID = C.PAY_MANGE_DEPT_WHLE_PERN_CHRG)AS PAY_MANGE_DEPT_WHLE_PERN_NM,
+						       C.PAY_MANGE_DEPT_DIV_TSK_OFFR,
+						       (SELECT D.USR_NM FROM SYSM0100 D WHERE D.USR_ID = C.PAY_MANGE_DEPT_DIV_TSK_OFFR)AS PAY_MANGE_DEPT_DIV_TSK_NM,
+						       C.ACC_CD,
+						       C.HLTH_INSR_SYM,
+						       C.NAT_PENN_SYM,
+						       C.UMYT_INSR_SYM,
+						       C.CLLN_DEBR_NM,
+						       C.HMTX_ID,
+						       C.TX_OFFC_CD,
+						       C.BNK_CD,
+						       C.GRO_TNSR_CD,
+						       C.KYBDR,
+						       C.INPT_DT,
+						       C.INPT_ADDR,
+						       C.ISMT,
+						       C.REVN_DT,
+						       C.REVN_ADDR,
+						       C.HLTH_INSR_OFCE_SYM,
+						       C.IDTL_ACCDT_INSUR_SYM,
+						       C.UNT_DPOB_CD,
+						       (SELECT AA.UT_DPOB_NM FROM BASS0120 AA WHERE AA.UT_DPOB_CD = C.UNT_DPOB_CD) AS UNT_DPOB_NM,
+						       C.UNT_DPOB_CD AS utDpobCd,
+						       (SELECT AA.UT_DPOB_NM FROM BASS0120 AA WHERE AA.UT_DPOB_CD = C.UNT_DPOB_CD) AS utDpobCdutDpobNm
+						  FROM BASS0150 C
+						WHERE 1=1
+						ORDER BY C.DPOB_CD, C.PAYR_MANG_DEPT_CD ASC
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+			</select>	
+	<select id="InfcPkgBass0150DAO.selectYeta2070ToBass0150ListTotCnt" parameterClass="pkgBass0150SrhVO" resultClass="int">
+					SELECT COUNT(*) totcnt
+					FROM BASS0150
+					WHERE 1=1
+	</select>
+	
+	<select id="InfcPkgBass0150DAO.selectYeta2070ToBass0120List" parameterClass="pkgBass0150SrhVO" resultClass="egovMap">
+		SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+						DPOB_CD						
+						,UT_DPOB_CD
+						,UT_DPOB_NM		
+						,HHRK_UNT_DPOB_CD			
+						,DEGTR_RESN_REGN_NUM		
+						,DEGTR_NM					
+						,FRGNR_DIV_CD				
+						,BUSOPR_RGSTN_NUM			
+						,CORP_RGSTN_NUM				
+						,CORP_DIV_CD				
+						,UNT_DPOB_ZPCD				
+						,UNT_DPOB_FNDTN_ADDR		
+						,UNT_DPOB_DTL_PATR_ADDR		
+						,UNT_DPOB_PHN_NUM			
+						,UNT_DPOB_FAX_NUM			
+						,UNT_DPOB_ECTN_MAIL_ADDR	
+						,UNT_DPOB_BNCDS_NM			
+						,UNT_DPOB_ITEM_NM			
+						,UNT_DPOB_MN_PRDT			
+						,UNT_DPOB_ESBM_DT			
+						,UNT_DPOB_INGN_DT			
+						,UNT_DPOB_EOB_DT			
+						,UNT_DPOB_SEAL_WRD_NM		
+						,UNT_DPOB_SEAL_RFTA			
+						,UNT_DPOB_SEAL_FLNM			
+						,UNT_DPOB_FNDTN_USE_YN		
+						,KYBDR						
+						,INPT_DT					
+						,INPT_ADDR					
+						,ISMT						
+						,REVN_DT					
+						,REVN_ADDR					
+						,MTST_BUSIN_DIV_CD			
+						,UP_DPOB_CMP_NO				
+						,UP_DPOB_UTYN_C171			
+						,MTST_DPOB_SEIL_NUM_C172	
+						,MNBH_DIV_CD				
+						,WHDG_TX_CTYP_DIV_CD		
+						,BEF_BUSOPR_RGSTN_NUM
+					FROM BASS0120
+				WHERE 1=1
+					AND UNT_DPOB_FNDTN_USE_YN = #untDpobFndtnUseYn#
+				ORDER BY DPOB_CD ASC			
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+			
+	<select id="InfcPkgBass0150DAO.selectYeta2070ToBass0120ListTotCnt" parameterClass="pkgBass0150SrhVO" resultClass="int">
+				SELECT 
+				COUNT(*) totcnt
+				FROM BASS0120
+				WHERE 1=1
+					AND UNT_DPOB_FNDTN_USE_YN = #untDpobFndtnUseYn#
+	</select>
+	
+	<update id="InfcPkgBass0150DAO.updateYeta2070ToBass0150">
+			<![CDATA[
+				UPDATE BASS0150 SET
+					UNT_DPOB_CD = #untDpobCd#
+				WHERE
+					PAYR_MANG_DEPT_CD = #payrMangDeptCd#
+			]]>
+	</update>
+
+</sqlMap>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Cmmanldsydtl">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="cmmanldsydtlSerarchVO" type="com.app.smrmf.pkg.sche.sysm.service.vo.CmmanldsydtlSrhVO"/>
+	
+	<resultMap id="cmmanldsydtl" class="com.app.smrmf.pkg.sche.sysm.service.vo.CmmanldsydtlVO">
+		<result property="logDate" column="LOG_DATE" columnIndex="1"/>
+		<result property="logSeq" column="LOG_SEQ" columnIndex="2"/>
+		<result property="attrName" column="ATTR_NAME" columnIndex="3"/>
+		<result property="attrVal" column="ATTR_VAL" columnIndex="4"/>
+	</resultMap>
+	
+	<insert id="cmmanldsydtlDAO.insertCmmanldsydtl_S">
+		<![CDATA[
+			INSERT INTO CMMANLDSYDTL 
+				( LOG_DATE
+				  , LOG_SEQ
+				  , ATTR_NAME
+				  , ATTR_VAL )
+			VALUES ( #logDate#
+				  , #logSeq#
+				  , #attrName#
+				  , #attrVal# )
+		]]>
+	</insert>
+	
+	<update id="cmmanldsydtlDAO.updateCmmanldsydtl_S">
+		<![CDATA[
+			UPDATE CMMANLDSYDTL
+			SET LOG_DATE=#logDate#
+				, LOG_SEQ=#logSeq#
+				, ATTR_NAME=#attrName#
+				, ATTR_VAL=#attrVal#
+			]]>
+	</update>
+	
+	<delete id="cmmanldsydtlDAO.deleteCmmanldsydtl_S">
+		<![CDATA[
+			DELETE FROM CMMANLDSYDTL 
+			]]>
+	</delete>
+	
+	<select id="cmmanldsydtlDAO.selectCmmanldsydtl_S" resultMap="cmmanldsydtl">
+		<![CDATA[
+			SELECT
+				LOG_DATE
+				, LOG_SEQ
+				, ATTR_NAME
+				, ATTR_VAL
+			FROM CMMANLDSYDTL
+			]]>
+	</select>
+	
+	<select id="cmmanldsydtlDAO.selectCmmanldsydtlList_D" parameterClass="cmmanldsydtlSerarchVO" resultClass="egovMap"> 
+				SELECT
+								LOG_DATE
+								, LOG_SEQ
+								, ATTR_NAME
+								, ATTR_VAL
+						FROM CMMANLDSYDTL
+  				 <isNotEmpty property="logDate" prepend="AND">
+			        LOG_DATE > #logDate# 
+			      </isNotEmpty>
+			      <isNotEmpty property="logSeq" prepend="AND"> 
+					  LOG_SEQ  > #logSeq#
+			     	</isNotEmpty> 
+					ORDER BY LOG_DATE, LOG_SEQ 
+	</select>	
+	
+	<select id="cmmanldsydtlDAO.selectCmmanldsydtlListTotCnt_S" parameterClass="cmmanldsydtlSerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM CMMANLDSYDTL
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				LOG_DATE = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				LOG_SEQ LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

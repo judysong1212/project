@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcPayr0306">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgPayr0306SrhVO" type="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0306SrhVO"/>
+	
+	<resultMap id="infcPkgPayr0306" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0306VO">
+	    <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="pymtYrMnth" column="PYMT_YR_MNTH" columnIndex="2"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="3"/>
+			<result property="payCd" column="PAY_CD" columnIndex="4"/>
+		<result property="payrSeilNum" column="PAYR_SEIL_NUM" columnIndex="5"/>
+		<result property="payFamyRsptSeilNum" column="PAY_FAMY_RSPT_SEIL_NUM" columnIndex="6"/>
+		<result property="payFamyResnRegnNum" column="PAY_FAMY_RESN_REGN_NUM" columnIndex="7"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="8"/>
+		<result property="famyRelaDivCd" column="FAMY_RELA_DIV_CD" columnIndex="9"/>
+		<result property="famyAllwPymtYn" column="FAMY_ALLW_PYMT_YN" columnIndex="10"/>
+		<result property="chdnChdRrgEpnsPymtYn" column="CHDN_CHD_RRG_EPNS_PYMT_YN" columnIndex="11"/>
+		<result property="fndtnDducYn" column="FNDTN_DDUC_YN" columnIndex="12"/>
+		<result property="spueDducYn" column="SPUE_DDUC_YN" columnIndex="13"/>
+		<result property="wmnDducYn" column="WMN_DDUC_YN" columnIndex="14"/>
+		<result property="rftaGvstDducYn" column="RFTA_GVST_DDUC_YN" columnIndex="15"/>
+		<result property="dabpnDducYn" column="DABPN_DDUC_YN" columnIndex="16"/>
+		<result property="sgpnFmlyDducYn" column="SGPN_FMLY_DDUC_YN" columnIndex="17"/>
+		<result property="chdnChdRrgEpnsDducYn" column="CHDN_CHD_RRG_EPNS_DDUC_YN" columnIndex="18"/>
+		<result property="famyExtpyDivCd" column="FAMY_EXTPY_DIV_CD" columnIndex="19"/>
+		<result property="schlExpnAdmclExtpyDivCd" column="SCHL_EXPN_ADMCL_EXTPY_DIV_CD" columnIndex="20"/>
+		<result property="schlExpnAdmclExtpySum" column="SCHL_EXPN_ADMCL_EXTPY_SUM" columnIndex="21"/>
+		<result property="famyExtpySum" column="FAMY_EXTPY_SUM" columnIndex="22"/>
+		<result property="kybdr" column="KYBDR" columnIndex="23"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="24"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="25"/>
+		<result property="ismt" column="ISMT" columnIndex="26"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="27"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="28"/>
+		 
+	</resultMap>
+	
+	<insert id="infcPkgPayr0306DAO.insertPayr0306_S">
+		<![CDATA[
+			INSERT INTO PAYR0306 
+				( DPOB_CD
+				  , PYMT_YR_MNTH
+				  , SYSTEMKEY
+				  , PAY_CD
+				  , PAYR_SEIL_NUM
+				  , PAY_FAMY_RSPT_SEIL_NUM
+				  , PAY_FAMY_RESN_REGN_NUM
+				  , HAN_NM
+				  , FAMY_RELA_DIV_CD
+				  , FAMY_ALLW_PYMT_YN
+				  , CHDN_CHD_RRG_EPNS_PYMT_YN
+				  , FNDTN_DDUC_YN
+				  , SPUE_DDUC_YN
+				  , WMN_DDUC_YN
+				  , RFTA_GVST_DDUC_YN
+				  , DABPN_DDUC_YN
+				  , SGPN_FMLY_DDUC_YN
+				  , CHDN_CHD_RRG_EPNS_DDUC_YN
+				  , FAMY_EXTPY_DIV_CD
+				  , SCHL_EXPN_ADMCL_EXTPY_DIV_CD
+				  , SCHL_EXPN_ADMCL_EXTPY_SUM
+				  , FAMY_EXTPY_SUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #pymtYrMnth#
+				  , #systemkey#
+				    , #payCd#
+				  , #payrSeilNum#
+				  , #payFamyRsptSeilNum#
+				  , #payFamyResnRegnNum#
+				  , #hanNm#
+				  , #famyRelaDivCd#
+				  , #famyAllwPymtYn#
+				  , #chdnChdRrgEpnsPymtYn#
+				  , #fndtnDducYn#
+				  , #spueDducYn#
+				  , #wmnDducYn#
+				  , #rftaGvstDducYn#
+				  , #dabpnDducYn#
+				  , #sgpnFmlyDducYn#
+				  , #chdnChdRrgEpnsDducYn#
+				  , #famyExtpyDivCd#
+				  , #schlExpnAdmclExtpyDivCd#
+				  , #schlExpnAdmclExtpySum#
+				  , #famyExtpySum#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgPayr0306DAO.updatePayr0306_S">
+		<![CDATA[
+				UPDATE PAYR0306
+			SET DPOB_CD=#dpobCd#
+				, PYMT_YR_MNTH=#pymtYrMnth#
+				, SYSTEMKEY=#systemkey#
+				, PAY_CD=#payCd#
+				, PAYR_SEIL_NUM=#payrSeilNum#
+				, PAY_FAMY_RSPT_SEIL_NUM=#payFamyRsptSeilNum#
+				, PAY_FAMY_RESN_REGN_NUM=#payFamyResnRegnNum#
+				, HAN_NM=#hanNm#
+				, FAMY_RELA_DIV_CD=#famyRelaDivCd#
+				, FAMY_ALLW_PYMT_YN=#famyAllwPymtYn#
+				, CHDN_CHD_RRG_EPNS_PYMT_YN=#chdnChdRrgEpnsPymtYn#
+				, FNDTN_DDUC_YN=#fndtnDducYn#
+				, SPUE_DDUC_YN=#spueDducYn#
+				, WMN_DDUC_YN=#wmnDducYn#
+				, RFTA_GVST_DDUC_YN=#rftaGvstDducYn#
+				, DABPN_DDUC_YN=#dabpnDducYn#
+				, SGPN_FMLY_DDUC_YN=#sgpnFmlyDducYn#
+				, CHDN_CHD_RRG_EPNS_DDUC_YN=#chdnChdRrgEpnsDducYn#
+				, FAMY_EXTPY_DIV_CD=#famyExtpyDivCd#
+				, SCHL_EXPN_ADMCL_EXTPY_DIV_CD=#schlExpnAdmclExtpyDivCd#
+				, SCHL_EXPN_ADMCL_EXTPY_SUM=#schlExpnAdmclExtpySum#
+				, FAMY_EXTPY_SUM=#famyExtpySum#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND SYSTEMKEY=#systemkey#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+								AND PAY_FAMY_RSPT_SEIL_NUM=#payFamyRsptSeilNum#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPayr0306DAO.deletePayr0306_S">
+		<![CDATA[
+			DELETE FROM PAYR0306 
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND SYSTEMKEY=#systemkey#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+								AND PAY_FAMY_RSPT_SEIL_NUM=#payFamyRsptSeilNum#
+				]]>
+	</delete>
+	
+		<delete id="infcPkgPayr0306DAO.deletePayCalculationPayr0306_S">
+		<![CDATA[
+			DELETE FROM PAYR0306 
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth# 
+									]]>						
+						<isNotEmpty prepend="AND" property="systemkey" >
+					 	  SYSTEMKEY=#systemkey#
+				        </isNotEmpty>  	 
+	</delete>
+	
+	
+	<select id="infcPkgPayr0306DAO.selectPayr0306_S" resultMap="infcPkgPayr0306">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, PYMT_YR_MNTH
+				, SYSTEMKEY
+				   , PAY_CD
+				  , PAYR_SEIL_NUM
+				, PAY_FAMY_RSPT_SEIL_NUM
+				, PAY_FAMY_RESN_REGN_NUM
+				, HAN_NM
+				, FAMY_RELA_DIV_CD
+				, FAMY_ALLW_PYMT_YN
+				, CHDN_CHD_RRG_EPNS_PYMT_YN
+				, FNDTN_DDUC_YN
+				, SPUE_DDUC_YN
+				, WMN_DDUC_YN
+				, RFTA_GVST_DDUC_YN
+				, DABPN_DDUC_YN
+				, SGPN_FMLY_DDUC_YN
+				, CHDN_CHD_RRG_EPNS_DDUC_YN
+				, FAMY_EXTPY_DIV_CD
+				, SCHL_EXPN_ADMCL_EXTPY_DIV_CD
+				, SCHL_EXPN_ADMCL_EXTPY_SUM
+				, FAMY_EXTPY_SUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0306
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND SYSTEMKEY=#systemkey#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+								AND PAY_FAMY_RSPT_SEIL_NUM=#payFamyRsptSeilNum#
+				]]>
+	</select>
+	
+	<select id="infcPkgPayr0306DAO.selectPayr0306List_D" parameterClass="infcPkgPayr0306SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, PYMT_YR_MNTH
+								, SYSTEMKEY
+								   , PAY_CD
+				                , PAYR_SEIL_NUM
+								, PAY_FAMY_RSPT_SEIL_NUM
+								, PAY_FAMY_RESN_REGN_NUM
+								, HAN_NM
+								, FAMY_RELA_DIV_CD
+								, FAMY_ALLW_PYMT_YN
+								, CHDN_CHD_RRG_EPNS_PYMT_YN
+								, FNDTN_DDUC_YN
+								, SPUE_DDUC_YN
+								, WMN_DDUC_YN
+								, RFTA_GVST_DDUC_YN
+								, DABPN_DDUC_YN
+								, SGPN_FMLY_DDUC_YN
+								, CHDN_CHD_RRG_EPNS_DDUC_YN
+								, FAMY_EXTPY_DIV_CD
+								, SCHL_EXPN_ADMCL_EXTPY_DIV_CD
+								, SCHL_EXPN_ADMCL_EXTPY_SUM
+								, FAMY_EXTPY_SUM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PAYR0306
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					PYMT_YR_MNTH = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY DPOB_CD
+						     ,PYMT_YR_MNTH DESC
+							, SYSTEMKEY DESC
+							 , PAY_CD ASC
+				            , PAYR_SEIL_NUM DESC 
+ 							, PAY_FAMY_RSPT_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgPayr0306DAO.selectPayr0306ListTotCnt_S" parameterClass="infcPkgPayr0306SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0306
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				PYMT_YR_MNTH = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

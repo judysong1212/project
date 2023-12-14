@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcInsr3300">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="pkgInsr3300SerarchVO" type="com.app.smrmf.infc.insurance.server.vo.InfcPkgInsr3300SrhVO"/>
+ 
+	
+	<resultMap id="pkgInsrAmntCnt" class="com.app.smrmf.pkg.insr.insurance.service.PkgInsrAmntVO">
+		<result property="hlthDducCnt"				  column="HLTH_DDUC_CNT"					  columnIndex="1"/>
+		<result property="natPayrDducCnt"			  column="NAT_PAYR_DDUC_CNT"			  columnIndex="2"/>
+		<result property="umytPayrDducCnt"			  column="UMYT_PAYR_DDUC_CNT"				  columnIndex="3"/>
+	</resultMap>
+		
+	 
+			      	
+	
+	<resultMap id="pkgeInsr3300" class="com.app.smrmf.infc.insurance.server.vo.InfcPkgInsr3300VO">
+		<result property="dpobCd"				  column="DPOB_CD"					  columnIndex="1"/>
+		<result property="nofctYrMnth"			  column="NOFCT_YR_MNTH"			  columnIndex="2"/>
+		<result property="nofctDspty"			  column="NOFCT_DSPTY"				  columnIndex="3"/>
+		<result property="systemkey"			  column="SYSTEMKEY"				  columnIndex="4"/>
+		<result property="emymtSeilNum"			  column="EMYMT_SEIL_NUM"			  columnIndex="5"/>
+		<result property="dducYrMnth"			  column="DDUC_YR_MNTH"				  columnIndex="6"/>
+		<result property="hlthInsrPrcsDt"		  column="HLTH_INSR_PRCS_DT"		  columnIndex="7"/>
+		<result property="hlthInsrPrcsYn"		  column="HLTH_INSR_PRCS_YN"		  columnIndex="8"/>
+		<result property="hlthInsrPrmmSrd"		  column="HLTH_INSR_PRMM_SRD"		  columnIndex="9"/>
+		<result property="lgtmRcptnInsurSrd"	  column="LGTM_RCPTN_INSUR_SRD"		  columnIndex="10"/>
+		<result property="yrtxPrmm"				  column="YRTX_PRMM"				  columnIndex="11"/>
+		<result property="lgtmRcptnYrtxPrmm"	  column="LGTM_RCPTN_YRTX_PRMM"		  columnIndex="12"/>
+		<result property="hlthInsrRefdItrt"		  column="HLTH_INSR_REFD_ITRT"		  columnIndex="13"/>
+		<result property="lgtmRcptnInsurRefdItrt" column="LGTM_RCPTN_INSUR_REFD_ITRT" columnIndex="14"/>
+		<result property="srdAggrSum"			  column="SRD_AGGR_SUM"				  columnIndex="15"/>
+		<result property="divdPymtDivCd"		  column="DIVD_PYMT_DIV_CD"			  columnIndex="16"/>
+		<result property="divdPymt"				  column="DIVD_PYMT"				  columnIndex="17"/>
+		<result property="kybdr"				  column="KYBDR"					  columnIndex="18"/>
+		<result property="inptDt"				  column="INPT_DT"					  columnIndex="19"/>
+		<result property="inptAddr"				  column="INPT_ADDR"				  columnIndex="20"/>
+		<result property="ismt"					  column="ISMT"						  columnIndex="21"/>
+		<result property="revnDt"				  column="REVN_DT"					  columnIndex="22"/>
+		<result property="revnAddr"				  column="REVN_ADDR"				  columnIndex="23"/>
+	</resultMap>
+	    
+	
+	<!-- 급여 반영  후 처리 작업 진행  -->
+	<update id="infcPkgInsr3300DAO.updatePayrToInsr3300">
+		<![CDATA[
+			UPDATE INSR3300
+			SET   HLTH_INSR_PRCS_DT	 = TO_CHAR(SYSDATE, 'YYYYMMDD')	        /* 건강보험처리일자  */
+				  , HLTH_INSR_PRCS_YN	= 'Y'				    /*  건강보험처리여부  */ 
+				  , ISMT		 = #ismt#										/* 수정자	*/
+				  , REVN_DT		 = TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')			/* 수정일자	*/
+				  , REVN_ADDR	 = #revnAddr#									/* 수정주소	*/
+			WHERE	DPOB_CD		  =	#dpobCd#
+			AND		DDUC_YR_MNTH =	#dducYrMnth# 
+			AND		SYSTEMKEY	  =	#systemkey#
+		]]>
+	</update> 
+	<!-- AND		NOFCT_DSPTY	  =	#nofctDspty# -->
+	
+	<!-- 급여 반영  후 초기화 처리  -->
+	<update id="infcPkgInsr3300DAO.updatePayCancelInsr3300">
+		<![CDATA[
+			UPDATE	INSR3300
+			SET HLTH_INSR_PRCS_DT	 = TO_CHAR(SYSDATE, 'YYYYMMDD')	        /* 건강보험처리일자  */
+			  , HLTH_INSR_PRCS_YN	= 'N'			    /*  건강보험처리여부  */ 
+	          , ISMT		 = #ismt#										/* 수정자	*/
+		      , REVN_DT		 = TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')			/* 수정일자	*/
+		      , REVN_ADDR	 = #revnAddr#									/* 수정주소	*/
+			WHERE	DPOB_CD		  =	#dpobCd#
+			AND		DDUC_YR_MNTH =	#dducYrMnth# 
+			AND		SYSTEMKEY	  =	#systemkey#
+		]]>
+	</update>
+	 
+	<select id="infcPkgInsr3300DAO.selectPyar4200ToInsr_S" resultMap="pkgInsrAmntCnt">
+		<![CDATA[
+			  SELECT   
+			        COUNT(AA02.HLTH_DDUC_YR_MNTH) AS HLTH_DDUC_CNT
+			      , COUNT(AA03.NAT_PAYR_DDUC_YR_MNTH) AS NAT_PAYR_DDUC_CNT
+			      , COUNT(AA04.UMYT_PAYR_DDUC_YR_MNTH) AS UMYT_PAYR_DDUC_CNT
+						   FROM PAYR0500 AA01, (
+						           SELECT 
+						              AB01.DPOB_CD,
+						                AB01.NOFCT_YR_MNTH,
+						                AB01.NOFCT_DSPTY,
+						                AB01.SYSTEMKEY,
+						              AB02.EMYMT_SEIL_NUM, 
+						              AB02.DDUC_YR_MNTH AS HLTH_DDUC_YR_MNTH, 
+						              AB02.HLTH_INSR_PRCS_DT, 
+						              AB02.HLTH_INSR_PRCS_YN, 
+						              AB02.HLTH_INSR_PRMM_SRD, 
+						              AB02.LGTM_RCPTN_INSUR_SRD, 
+						              AB02.YRTX_PRMM, 
+						              AB02.LGTM_RCPTN_YRTX_PRMM, 
+						              AB02.HLTH_INSR_REFD_ITRT, 
+						              AB02.LGTM_RCPTN_INSUR_REFD_ITRT, 
+						              AB02.SRD_AGGR_SUM, 
+						              AB02.DIVD_PYMT_DIV_CD, 
+						              AB02.DIVD_PYMT 
+						        FROM  INSR3200 AB01 , INSR3300 AB02
+						        WHERE AB01.DPOB_CD = AB02.DPOB_CD
+						          AND AB01.NOFCT_YR_MNTH = AB02.NOFCT_YR_MNTH
+						          AND AB01.NOFCT_DSPTY  = AB02.NOFCT_DSPTY
+						          AND AB01.SYSTEMKEY = AB02.SYSTEMKEY
+						   ) AA02,
+						   INSR4200 AA03,
+						   INSR5200 AA04
+						WHERE AA01.DPOB_CD = #dpobCd#
+						  AND AA01.SYSTEMKEY = #systemkey#
+						  AND AA01.DPOB_CD = AA02.DPOB_CD(+)
+						  AND AA01.SYSTEMKEY = AA02.SYSTEMKEY(+)
+						  AND AA02.HLTH_DDUC_YR_MNTH(+) = #hlthDducYrMnth#
+						  AND AA01.DPOB_CD = AA03.DPOB_CD(+) 
+						  AND AA01.SYSTEMKEY = AA03.SYSTEMKEY(+)
+						  AND AA03.NAT_PAYR_DDUC_YR_MNTH(+) = #hlthDducYrMnth#
+						  AND AA01.DPOB_CD = AA04.DPOB_CD(+)
+						  AND AA01.SYSTEMKEY = AA04.SYSTEMKEY(+)
+						  AND AA04.UMYT_PAYR_DDUC_YR_MNTH(+) = #hlthDducYrMnth# 
+				]]>
+	</select>
+	
+	 
+</sqlMap>

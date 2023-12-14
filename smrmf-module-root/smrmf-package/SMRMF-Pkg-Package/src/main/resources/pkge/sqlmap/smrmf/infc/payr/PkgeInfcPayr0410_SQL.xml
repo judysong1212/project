@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcPayr0410">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgPayr0410SrhVO" type="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0410SrhVO"/>
+	
+	<resultMap id="infcPkgPayr0410" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0410VO">
+	    <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="payYr" column="PAY_YR" columnIndex="2"/>
+		<result property="typOccuGrdeMppgSeilNum" column="TYP_OCCU_GRDE_MPPG_SEIL_NUM" columnIndex="3"/>
+		<result property="payrItemSeilNum" column="PAYR_ITEM_SEIL_NUM" columnIndex="4"/>
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="5"/>
+		<result property="payrImcd" column="PAYR_IMCD" columnIndex="6"/>
+		<result property="itemNm" column="ITEM_NM" columnIndex="7"/>
+		<result property="payCd" column="PAY_CD" columnIndex="8"/>
+		<result property="pymtDducDivCd" column="PYMT_DDUC_DIV_CD" columnIndex="9"/>
+		<result property="pymtDducFrmCd" column="PYMT_DDUC_FRM_CD" columnIndex="10"/>
+		<result property="pymtDducRate" column="PYMT_DDUC_RATE" columnIndex="11"/>
+		<result property="pymtDducSum" column="PYMT_DDUC_SUM" columnIndex="12"/>
+		<result property="txtnDivCd" column="TXTN_DIV_CD" columnIndex="13"/>
+		<result property="freeDtyRate" column="FREE_DTY_RATE" columnIndex="14"/>
+		<result property="freeDtySum" column="FREE_DTY_SUM" columnIndex="15"/>
+		<result property="jan" column="JAN" columnIndex="16"/>
+		<result property="feb" column="FEB" columnIndex="17"/>
+		<result property="mar" column="MAR" columnIndex="18"/>
+		<result property="apr" column="APR" columnIndex="19"/>
+		<result property="may" column="MAY" columnIndex="20"/>
+		<result property="jun" column="JUN" columnIndex="21"/>
+		<result property="jul" column="JUL" columnIndex="22"/>
+		<result property="aug" column="AUG" columnIndex="23"/>
+		<result property="sep" column="SEP" columnIndex="24"/>
+		<result property="oct" column="OCT" columnIndex="25"/>
+		<result property="nov" column="NOV" columnIndex="26"/>
+		<result property="dec" column="DEC" columnIndex="27"/>
+		<result property="rngeOrd" column="RNGE_ORD" columnIndex="28"/>
+		<result property="payItemUseYn" column="PAY_ITEM_USE_YN" columnIndex="29"/>
+		<result property="itemApptnBgnnDt" column="ITEM_APPTN_BGNN_DT" columnIndex="30"/>
+		<result property="itemApptnEndDt" column="ITEM_APPTN_END_DT" columnIndex="31"/>
+		<result property="dayMnthAmntDivCd" column="DAY_MNTH_AMNT_DIV_CD" columnIndex="32"/>
+		<result property="calcStdDivCd" column="CALC_STD_DIV_CD" columnIndex="33"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="34"/>
+		<result property="usalyAmntYn" column="USALY_AMNT_YN" columnIndex="35"/>
+		<result property="payItemNoteCtnt" column="PAY_ITEM_NOTE_CTNT" columnIndex="36"/>
+		<result property="kybdr" column="KYBDR" columnIndex="37"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="38"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="39"/>
+		<result property="ismt" column="ISMT" columnIndex="40"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="41"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="42"/>
+		<result property="calcStdFunc" column="CALC_STD_FUNC" columnIndex="43"/> 
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="44"/> 
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="45"/>
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="46"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="47"/>  
+	</resultMap>
+	
+	<insert id="infcPkgPayr0410DAO.insertPayr0410_S">
+		<![CDATA[
+		INSERT INTO PAYR0410 
+				( DPOB_CD
+				  , PAY_YR
+				  , TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				  , PAYR_ITEM_SEIL_NUM
+				  , PAYR_MANG_DEPT_CD
+				  , PAYR_IMCD
+				  , ITEM_NM
+				  , PAY_CD
+				  , PYMT_DDUC_DIV_CD
+				  , PYMT_DDUC_FRM_CD
+				  , PYMT_DDUC_RATE
+				  , PYMT_DDUC_SUM
+				  , TXTN_DIV_CD
+				  , FREE_DTY_RATE
+				  , FREE_DTY_SUM
+				  , JAN
+				  , FEB
+				  , MAR
+				  , APR
+				  , MAY
+				  , JUN
+				  , JUL
+				  , AUG
+				  , SEP
+				  , OCT
+				  , NOV
+				  , DEC
+				  , RNGE_ORD
+				  , PAY_ITEM_USE_YN
+				  , ITEM_APPTN_BGNN_DT
+				  , ITEM_APPTN_END_DT
+				  , DAY_MNTH_AMNT_DIV_CD
+				  , CALC_STD_DIV_CD
+				  , EMYMT_DIV_CD
+				  , USALY_AMNT_YN
+				  , PAY_ITEM_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , CALC_STD_FUNC )
+			VALUES ( #dpobCd#
+				  , #payYr#
+				  , #typOccuGrdeMppgSeilNum#
+				    , (SELECT NVL(MAX(PAYR_ITEM_SEIL_NUM),0) + 1 
+			           FROM PAYR0410
+			           WHERE DPOB_CD = #dpobCd#
+			           AND PAY_YR = #payYr#
+			           AND TYP_OCCU_GRDE_MPPG_SEIL_NUM =#typOccuGrdeMppgSeilNum# )  
+				  , #payrMangDeptCd#
+				  , #payrImcd#
+				  , #itemNm#
+				  , #payCd#
+				  , #pymtDducDivCd#
+				  , #pymtDducFrmCd#
+				  , #pymtDducRate#
+				  , #pymtDducSum#
+				  , #txtnDivCd#
+				  , #freeDtyRate#
+				  , #freeDtySum#
+				  , #jan#
+				  , #feb#
+				  , #mar#
+				  , #apr#
+				  , #may#
+				  , #jun#
+				  , #jul#
+				  , #aug#
+				  , #sep#
+				  , #oct#
+				  , #nov#
+				  , #dec#
+				  , #rngeOrd#
+				  , #payItemUseYn#
+				  , #itemApptnBgnnDt#
+				  , #itemApptnEndDt#
+				  , #dayMnthAmntDivCd#
+				  , #calcStdDivCd#
+				  , #emymtDivCd#
+				  , #usalyAmntYn#
+				  , #payItemNoteCtnt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #calcStdFunc# ) 
+		]]>
+	</insert>
+	
+	<update id="infcPkgPayr0410DAO.updatePayr0410_S">
+		<![CDATA[
+			UPDATE PAYR0410
+			SET DPOB_CD=#dpobCd#
+				, PAY_YR=#payYr#
+				, TYP_OCCU_GRDE_MPPG_SEIL_NUM=#typOccuGrdeMppgSeilNum#
+				, PAYR_ITEM_SEIL_NUM=#payrItemSeilNum#
+				, PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				, PAYR_IMCD=#payrImcd#
+				, ITEM_NM=#itemNm#
+				, PAY_CD=#payCd#
+				, PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+				, PYMT_DDUC_FRM_CD=#pymtDducFrmCd#
+				, PYMT_DDUC_RATE=#pymtDducRate#
+				, PYMT_DDUC_SUM=#pymtDducSum#
+				, TXTN_DIV_CD=#txtnDivCd#
+				, FREE_DTY_RATE=#freeDtyRate#
+				, FREE_DTY_SUM=#freeDtySum#
+				, JAN=#jan#
+				, FEB=#feb#
+				, MAR=#mar#
+				, APR=#apr#
+				, MAY=#may#
+				, JUN=#jun#
+				, JUL=#jul#
+				, AUG=#aug#
+				, SEP=#sep#
+				, OCT=#oct#
+				, NOV=#nov#
+				, DEC=#dec#
+				, RNGE_ORD=#rngeOrd#
+				, PAY_ITEM_USE_YN=#payItemUseYn#
+				, ITEM_APPTN_BGNN_DT=#itemApptnBgnnDt#
+				, ITEM_APPTN_END_DT=#itemApptnEndDt#
+				, DAY_MNTH_AMNT_DIV_CD=#dayMnthAmntDivCd#
+				, CALC_STD_DIV_CD=#calcStdDivCd#
+				, EMYMT_DIV_CD=#emymtDivCd#
+				, USALY_AMNT_YN=#usalyAmntYn#
+				, PAY_ITEM_NOTE_CTNT=#payItemNoteCtnt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+				, CALC_STD_FUNC=#calcStdFunc#
+						WHERE DPOB_CD=#dpobCd#
+								AND PAY_YR=#payYr#
+								AND TYP_OCCU_GRDE_MPPG_SEIL_NUM=#typOccuGrdeMppgSeilNum#
+								AND PAYR_ITEM_SEIL_NUM=#payrItemSeilNum#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPayr0410DAO.deletePayr0410_S">
+		<![CDATA[
+			DELETE FROM PAYR0410 
+						WHERE PAY_YR=#payYr#
+								AND DPOB_CD=#dpobCd#
+								AND TYP_OCCU_GRDE_MPPG_SEIL_NUM=#typOccuGrdeMppgSeilNum#
+								AND PAYR_ITEM_SEIL_NUM=#payrItemSeilNum#
+				]]>
+	</delete>
+	
+	<!-- 이관처리에 따른 데이타 삭제   -->
+		<delete id="infcPkgPayr0410DAO.deleteBfToNewPayr0410_S">
+		<![CDATA[
+		DELETE FROM PAYR0410 
+						WHERE PAY_YR=#payYr#
+								AND DPOB_CD=#dpobCd#
+								AND TYP_OCCU_GRDE_MPPG_SEIL_NUM=  (SELECT TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+																     FROM PAYR0400
+																    WHERE DPOB_CD= #dpobCd# 
+															 	      AND TYP_OCCU_CD=#typOccuCd#  
+															 	       AND DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#  
+																     ) 
+				]]>
+	</delete>
+	
+	 
+	
+	<select id="infcPkgPayr0410DAO.selectPayr0410_S" resultMap="infcPkgPayr0410">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, PAY_YR
+				, TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				, PAYR_ITEM_SEIL_NUM
+				, PAYR_MANG_DEPT_CD
+				, PAYR_IMCD
+				, ITEM_NM
+				, PAY_CD
+				, PYMT_DDUC_DIV_CD
+				, PYMT_DDUC_FRM_CD
+				, PYMT_DDUC_RATE
+				, PYMT_DDUC_SUM
+				, TXTN_DIV_CD
+				, FREE_DTY_RATE
+				, FREE_DTY_SUM
+				, JAN
+				, FEB
+				, MAR
+				, APR
+				, MAY
+				, JUN
+				, JUL
+				, AUG
+				, SEP
+				, OCT
+				, NOV
+				, DEC
+				, RNGE_ORD
+				, PAY_ITEM_USE_YN
+				, ITEM_APPTN_BGNN_DT
+				, ITEM_APPTN_END_DT
+				, DAY_MNTH_AMNT_DIV_CD
+				, CALC_STD_DIV_CD
+				, EMYMT_DIV_CD
+				, USALY_AMNT_YN
+				, PAY_ITEM_NOTE_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, CALC_STD_FUNC
+			FROM PAYR0410
+						WHERE DPOB_CD=#dpobCd#
+								AND PAY_YR=#payYr#
+								AND TYP_OCCU_GRDE_MPPG_SEIL_NUM=#typOccuGrdeMppgSeilNum#
+								AND PAYR_ITEM_SEIL_NUM=#payrItemSeilNum#
+				]]>
+	</select>
+	
+	<select id="infcPkgPayr0410DAO.selectPayr0410List_D" parameterClass="infcPkgPayr0410SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+			    SELECT
+                                  AA.DPOB_CD
+                                , AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                                , BB.PAY_YR
+                                , BB.PAYR_ITEM_SEIL_NUM
+                                , BB.PAYR_MANG_DEPT_CD
+								, BB.CALC_STD_FUNC
+                                , BB.PAY_CD 
+                                , fcBass0300CDNM(AA.DPOB_CD,BB.PAY_CD) AS PAY_NM
+                                , AA.TYP_OCCU_CD
+                                , fcBass0320CDNM(AA.DPOB_CD,AA.TYP_OCCU_CD) AS TYP_OCCU_NM
+                                , BB.PAYR_IMCD
+                                , BB.ITEM_NM  
+                                , AA.PYSP_GRDE_CD
+                                , fcBass0300CDNM(AA.DPOB_CD,AA.PYSP_GRDE_CD) AS PYSP_GRDE_NM
+                                , AA.DTIL_OCCU_CLS_DIV_CD
+                                , AA.DTIL_OCCU_INTTN_CD 
+		                        ,fcBassEx0350CDNM(AA.DPOB_CD,AA.TYP_OCCU_CD,AA.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM 
+                                , BB.PYMT_DDUC_DIV_CD
+                                , fcBass0300CDNM(AA.DPOB_CD,BB.PYMT_DDUC_DIV_CD) AS PYMT_DDUC_DIV_NM
+                                , BB.PYMT_DDUC_FRM_CD
+                                , fcBass0300CDNM(AA.DPOB_CD,BB.PYMT_DDUC_FRM_CD) AS PYMT_DDUC_FRM_NM
+                                , BB.PYMT_DDUC_RATE
+                                , BB.PYMT_DDUC_SUM
+                                , BB.TXTN_DIV_CD
+                                , fcBass0300CDNM(AA.DPOB_CD,BB.TXTN_DIV_CD) AS TXTN_DIV_NM
+                                , BB.FREE_DTY_RATE
+                                , BB.FREE_DTY_SUM
+                                , BB.JAN
+                                , BB.FEB
+                                , BB.MAR
+                                , BB.APR
+                                , BB.MAY
+                                , BB.JUN
+                                , BB.JUL
+                                , BB.AUG
+                                , BB.SEP
+                                , BB.OCT
+                                , BB.NOV
+                                , BB.DEC
+                                , BB.RNGE_ORD
+                                , BB.PAY_ITEM_USE_YN
+                                , BB.ITEM_APPTN_BGNN_DT
+                                , BB.ITEM_APPTN_END_DT
+                                , BB.DAY_MNTH_AMNT_DIV_CD
+                                ,fcBass0300CDNM(AA.DPOB_CD,BB.DAY_MNTH_AMNT_DIV_CD) AS DAY_MNTH_AMNT_DIV_NM
+                                , BB.CALC_STD_DIV_CD
+                                ,fcBass0300CDNM(AA.DPOB_CD,BB.CALC_STD_DIV_CD) AS CALC_STD_DIV_NM
+                                , BB.EMYMT_DIV_CD
+                                ,fcBass0300CDNM(AA.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM
+                                , BB.USALY_AMNT_YN
+                                , BB.PAY_ITEM_NOTE_CTNT
+                                , BB.KYBDR
+                                , BB.INPT_DT
+                                , BB.INPT_ADDR
+                                , BB.ISMT
+                                , BB.REVN_DT
+                                , BB.REVN_ADDR
+                        FROM PAYR0400 AA, PAYR0410 BB
+                 WHERE AA.DPOB_CD = BB.DPOB_CD
+                  AND  AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM  =  BB.TYP_OCCU_GRDE_MPPG_SEIL_NUM  
+				 <isNotEmpty prepend="AND" property="dpobCd" >
+			 	 AA.DPOB_CD=#dpobCd#
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="payYr" >
+			 	   BB.PAY_YR=#payYr# 
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="typOccuCd" >
+			 	   AA.TYP_OCCU_CD=#typOccuCd# 
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="pyspGrdeCd" >
+			 	   NVL(AA.PYSP_GRDE_CD,'A0060000')=#pyspGrdeCd#
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+			 	   AA.DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd# 
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+			 	  BB.PYMT_DDUC_DIV_CD = #pymtDducDivCd#
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	BB.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+			  </isNotEmpty> 
+					ORDER BY 
+						AA.DPOB_CD DESC
+						      , BB.PAY_YR DESC
+							  , AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM ASC 
+                              , BB.PAYR_ITEM_SEIL_NUM ASC  
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	
+	<!-- 직종별급여산정기준_무기계약직단가표생성을 위한 급여항목값을 가지고오는 쿼리  -->
+	<select id="infcPkgPayr0410DAO.selectPayr0410ToPayr0420List_D" parameterClass="infcPkgPayr0410SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+	 SELECT 
+                                  AA.DPOB_CD
+                                , AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                                , BB.PAY_YR
+                                , BB.PAYR_ITEM_SEIL_NUM
+                                , BB.PAYR_MANG_DEPT_CD
+								, BB.CALC_STD_FUNC
+                                , BB.PAY_CD 
+                                , fcBass0300CDNM(AA.DPOB_CD,BB.PAY_CD) AS PAY_NM
+                                , AA.TYP_OCCU_CD
+                                , fcBass0320CDNM(AA.DPOB_CD,AA.TYP_OCCU_CD) AS TYP_OCCU_NM
+                                , BB.PAYR_IMCD
+                                , BB.ITEM_NM  
+                                , AA.PYSP_GRDE_CD
+                                , fcBass0300CDNM(AA.DPOB_CD,AA.PYSP_GRDE_CD) AS PYSP_GRDE_NM
+                                , AA.DTIL_OCCU_CLS_DIV_CD
+                                , AA.DTIL_OCCU_INTTN_CD 
+		                        ,fcBassEx0350CDNM(AA.DPOB_CD,AA.TYP_OCCU_CD,AA.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM 
+                                , BB.PYMT_DDUC_DIV_CD
+                                , fcBass0300CDNM(AA.DPOB_CD,BB.PYMT_DDUC_DIV_CD) AS PYMT_DDUC_DIV_NM 
+                                , BB.ITEM_APPTN_BGNN_DT
+                                , BB.ITEM_APPTN_END_DT
+                                , BB.DAY_MNTH_AMNT_DIV_CD
+                                ,fcBass0300CDNM(AA.DPOB_CD,BB.DAY_MNTH_AMNT_DIV_CD) AS DAY_MNTH_AMNT_DIV_NM
+                                , BB.CALC_STD_DIV_CD
+                                ,fcBass0300CDNM(AA.DPOB_CD,BB.CALC_STD_DIV_CD) AS CALC_STD_DIV_NM
+                                , BB.EMYMT_DIV_CD
+                                ,fcBass0300CDNM(AA.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM
+                                , BB.USALY_AMNT_YN 
+                        FROM PAYR0400 AA, PAYR0410 BB
+                 WHERE AA.DPOB_CD = BB.DPOB_CD
+                  AND  AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM  =  BB.TYP_OCCU_GRDE_MPPG_SEIL_NUM   
+                        WHERE BB.PAY_ITEM_USE_YN = 'Y'
+                         AND  BB.PYMT_DDUC_DIV_CD IN ('B0080010','B0080020')
+				 <isNotEmpty prepend="AND" property="dpobCd" >
+			 	 AA.DPOB_CD=#dpobCd#
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="payYr" >
+			 	     BB.PAY_YR=#payYr# 
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="typOccuCd" >
+			 	   AA.TYP_OCCU_CD=#typOccuCd# 
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="pyspGrdeCd" >
+			 	   NVL(AA.PYSP_GRDE_CD,'A0060000')=#pyspGrdeCd#
+		       </isNotEmpty> 
+		          <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+			 	   AA.DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd# 
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+			 	  BB.PYMT_DDUC_DIV_CD = #pymtDducDivCd#
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	BB.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+			   </isNotEmpty> 
+					ORDER BY 
+						AA.DPOB_CD DESC
+						      , BB.PAY_YR DESC
+							  , AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM ASC 
+                              , BB.PAYR_ITEM_SEIL_NUM ASC  
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	
+	
+	<select id="infcPkgPayr0410DAO.selectPayr0410ListTotCnt_S" parameterClass="infcPkgPayr0410SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM  (SELECT
+                                  AA.DPOB_CD
+                                , AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                                , BB.PAY_YR
+                                , BB.PAYR_ITEM_SEIL_NUM
+                                , BB.PAY_CD  
+                        FROM PAYR0400 AA, PAYR0410 BB
+                 WHERE AA.DPOB_CD = BB.DPOB_CD
+                  AND  AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM  =  BB.TYP_OCCU_GRDE_MPPG_SEIL_NUM  
+				 <isNotEmpty prepend="AND" property="dpobCd" >
+			 	 AA.DPOB_CD=#dpobCd#
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="payYr" >
+			 	   BB.PAY_YR=#payYr# 
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="typOccuCd" >
+			 	   AA.TYP_OCCU_CD=#typOccuCd# 
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="pyspGrdeCd" >
+			 	   NVL(AA.PYSP_GRDE_CD,'A0060000')=#pyspGrdeCd#
+		       </isNotEmpty> 
+		          <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+			 	   AA.DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd# 
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+			 	  BB.PYMT_DDUC_DIV_CD = #pymtDducDivCd#
+		       </isNotEmpty> )
+		        <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	BB.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+			  </isNotEmpty> 
+	</select>
+	
+
+	<resultMap id="infcPkgModPayr0410" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0410VO">
+	    <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="payYr" column="PAY_YR" columnIndex="2"/>
+		<result property="typOccuGrdeMppgSeilNum" column="TYP_OCCU_GRDE_MPPG_SEIL_NUM" columnIndex="3"/>
+		<result property="payrItemSeilNum" column="PAYR_ITEM_SEIL_NUM" columnIndex="4"/>
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="5"/>
+		<result property="payrImcd" column="PAYR_IMCD" columnIndex="6"/>
+		<result property="itemNm" column="ITEM_NM" columnIndex="7"/>
+		<result property="payCd" column="PAY_CD" columnIndex="8"/>
+		<result property="pymtDducDivCd" column="PYMT_DDUC_DIV_CD" columnIndex="9"/>
+		<result property="pymtDducFrmCd" column="PYMT_DDUC_FRM_CD" columnIndex="10"/>
+		<result property="pymtDducRate" column="PYMT_DDUC_RATE" columnIndex="11"/>
+		<result property="pymtDducSum" column="PYMT_DDUC_SUM" columnIndex="12"/>
+		<result property="txtnDivCd" column="TXTN_DIV_CD" columnIndex="13"/>
+		<result property="freeDtyRate" column="FREE_DTY_RATE" columnIndex="14"/>
+		<result property="freeDtySum" column="FREE_DTY_SUM" columnIndex="15"/>
+		<result property="jan" column="JAN" columnIndex="16"/>
+		<result property="feb" column="FEB" columnIndex="17"/>
+		<result property="mar" column="MAR" columnIndex="18"/>
+		<result property="apr" column="APR" columnIndex="19"/>
+		<result property="may" column="MAY" columnIndex="20"/>
+		<result property="jun" column="JUN" columnIndex="21"/>
+		<result property="jul" column="JUL" columnIndex="22"/>
+		<result property="aug" column="AUG" columnIndex="23"/>
+		<result property="sep" column="SEP" columnIndex="24"/>
+		<result property="oct" column="OCT" columnIndex="25"/>
+		<result property="nov" column="NOV" columnIndex="26"/>
+		<result property="dec" column="DEC" columnIndex="27"/>
+		<result property="rngeOrd" column="RNGE_ORD" columnIndex="28"/>
+		<result property="payItemUseYn" column="PAY_ITEM_USE_YN" columnIndex="29"/>
+		<result property="itemApptnBgnnDt" column="ITEM_APPTN_BGNN_DT" columnIndex="30"/>
+		<result property="itemApptnEndDt" column="ITEM_APPTN_END_DT" columnIndex="31"/>
+		<result property="dayMnthAmntDivCd" column="DAY_MNTH_AMNT_DIV_CD" columnIndex="32"/>
+		<result property="calcStdDivCd" column="CALC_STD_DIV_CD" columnIndex="33"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="34"/>
+		<result property="usalyAmntYn" column="USALY_AMNT_YN" columnIndex="35"/>
+		<result property="payItemNoteCtnt" column="PAY_ITEM_NOTE_CTNT" columnIndex="36"/>
+		<result property="kybdr" column="KYBDR" columnIndex="37"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="38"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="39"/>
+		<result property="ismt" column="ISMT" columnIndex="40"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="41"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="42"/>
+		<result property="calcStdFunc" column="CALC_STD_FUNC" columnIndex="43"/>  
+	</resultMap>
+	 
+	<!-- 급여조정에 따른 급여단가항목에서 원하는 값가져오기 -->
+	<select id="infcPkgPayr0410DAO.selectPayr0410ToPayrCalcList_S" resultMap="infcPkgModPayr0410">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, PAY_YR
+				, TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				, PAYR_ITEM_SEIL_NUM
+				, PAYR_MANG_DEPT_CD
+				, PAYR_IMCD
+				, ITEM_NM
+				, PAY_CD
+				, PYMT_DDUC_DIV_CD
+				, PYMT_DDUC_FRM_CD
+				, PYMT_DDUC_RATE
+				, PYMT_DDUC_SUM
+				, TXTN_DIV_CD
+				, FREE_DTY_RATE
+				, FREE_DTY_SUM
+				, JAN
+				, FEB
+				, MAR
+				, APR
+				, MAY
+				, JUN
+				, JUL
+				, AUG
+				, SEP
+				, OCT
+				, NOV
+				, DEC
+				, RNGE_ORD
+				, PAY_ITEM_USE_YN
+				, ITEM_APPTN_BGNN_DT
+				, ITEM_APPTN_END_DT
+				, DAY_MNTH_AMNT_DIV_CD
+				, CALC_STD_DIV_CD
+				, EMYMT_DIV_CD
+				, USALY_AMNT_YN
+				, PAY_ITEM_NOTE_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, CALC_STD_FUNC
+			FROM PAYR0410
+						WHERE DPOB_CD=#dpobCd#
+								AND PAY_YR=SUBSTR(#pymtYrMnth#,1,4) 
+								AND PAYR_IMCD = #payrImcd#
+								AND PAY_ITEM_USE_YN = 'Y'
+								AND TYP_OCCU_GRDE_MPPG_SEIL_NUM IN (SELECT  TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+										FROM PAYR0400 
+										WHERE  DPOB_CD=#dpobCd#  
+										 AND TYP_OCCU_CD=#typOccuCd#  
+										 AND DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd# ) 
+				]]>
+	</select> 
+		
+
+</sqlMap>

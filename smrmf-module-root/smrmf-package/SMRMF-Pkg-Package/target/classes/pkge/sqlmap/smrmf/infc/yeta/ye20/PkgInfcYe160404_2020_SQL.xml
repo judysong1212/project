@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye160404_2020">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYe160404Srh_2020_Vo" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2020.InfcPkgYe160404Srh_2020_VO"/>
+
+	<resultMap id="infcPkgYe160404_2020" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2020.InfcPkgYe160404_2020_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="whdgDebrBusoprRgstnum" column="WHDG_DEBR_BUSOPR_RGSTNUM" columnIndex="5"/>
+		<result property="prcspSeilNum" column="PRCSP_SEIL_NUM" columnIndex="6"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="7"/>
+		<result property="prcspTxpyrAsocYn" column="PRCSP_TXPYR_ASOC_YN" columnIndex="8"/>
+		<result property="prcspFmnmNm" column="PRCSP_FMNM_NM" columnIndex="9"/>
+		<result property="prcspBusoprRgstnum" column="PRCSP_BUSOPR_RGSTNUM" columnIndex="10"/>
+		<result property="prcspDutyBgnnDt" column="PRCSP_DUTY_BGNN_DT" columnIndex="11"/>
+		<result property="prcspDutyEndDt" column="PRCSP_DUTY_END_DT" columnIndex="12"/>
+		<result property="prcspReduBgnnDt" column="PRCSP_REDU_BGNN_DT" columnIndex="13"/>
+		<result property="prcspReduEndDt" column="PRCSP_REDU_END_DT" columnIndex="14"/>
+		<result property="prcspPaySum" column="PRCSP_PAY_SUM" columnIndex="15"/>
+		<result property="prcspAllwBnusSum" column="PRCSP_ALLW_BNUS_SUM" columnIndex="16"/>
+		<result property="prcspRcgtnBnusSum" column="PRCSP_RCGTN_BNUS_SUM" columnIndex="17"/>
+		<result property="prcspStckEvntPrftSum" column="PRCSP_STCK_EVNT_PRFT_SUM" columnIndex="18"/>
+		<result property="prcspEmpStkscWdrwSum" column="PRCSP_EMP_STKSC_WDRW_SUM" columnIndex="19"/>
+		<result property="prcspEcteRsgtnExceSum" column="PRCSP_ECTE_RSGTN_EXCE_SUM" columnIndex="20"/>
+		<result property="prcspAggrSum" column="PRCSP_AGGR_SUM" columnIndex="21"/>
+		<result property="freeDtyAggrSum" column="FREE_DTY_AGGR_SUM" columnIndex="22"/>
+		<result property="reduIncmAggrSum" column="REDU_INCM_AGGR_SUM" columnIndex="23"/>
+		<result property="prcspIncmTxSum" column="PRCSP_INCM_TX_SUM" columnIndex="24"/>
+		<result property="prcspRgonIncmTxSum" column="PRCSP_RGON_INCM_TX_SUM" columnIndex="25"/>
+		<result property="prcspNnksSum" column="PRCSP_NNKS_SUM" columnIndex="26"/>
+		<result property="prcspHlthPrmmSum" column="PRCSP_HLTH_PRMM_SUM" columnIndex="27"/>
+		<result property="prcspLgtmRcptnSum" column="PRCSP_LGTM_RCPTN_SUM" columnIndex="28"/>
+		<result property="prcspHlthPrmmDducSum" column="PRCSP_HLTH_PRMM_DDUC_SUM" columnIndex="29"/>
+		<result property="prcspHlthLgcptnAggr" column="PRCSP_HLTH_LGCPTN_AGGR" columnIndex="30"/>
+		<result property="prcspEmymtPrmmSum" column="PRCSP_EMYMT_PRMM_SUM" columnIndex="31"/>
+		<result property="prcspEmytPrmmDducSum" column="PRCSP_EMYT_PRMM_DDUC_SUM" columnIndex="32"/>
+		<result property="prcspPrcsYn" column="PRCSP_PRCS_YN" columnIndex="33"/>
+		<result property="prcspWhdgReipSumtYn" column="PRCSP_WHDG_REIP_SUMT_YN" columnIndex="34"/>
+		
+		<result property="prcspYetaC165" column="PRCSP_YETA_C165" columnIndex="35"/>
+		<result property="prcspYetaC166" column="PRCSP_YETA_C166" columnIndex="36"/>
+		<result property="prcspYetaC167" column="PRCSP_YETA_C167" columnIndex="37"/>		
+		
+		<result property="kybdr" column="KYBDR" columnIndex="38"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="39"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="40"/>
+		<result property="ismt" column="ISMT" columnIndex="41"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="42"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="43"/>
+		
+
+		  
+	</resultMap>
+	
+	
+	<!-- 
+	#############################################################################
+	######################## 2017년도 연말정산 로직 시작 ############################
+	#############################################################################
+	 -->
+	<!-- 종전근무지등록 팝업 등록   -->
+	<insert id="infcPkgYe160404_2020_DAO.insertYetaP53006ToYe160404_S">
+		<![CDATA[
+			INSERT INTO YE160404 
+				( DPOB_CD						
+					, YRTX_BLGG_YR				
+					, CLUT_SEPT_CD				
+					, SYSTEMKEY					
+					, WHDG_DEBR_BUSOPR_RGSTNUM	
+					, PRCSP_SEIL_NUM				
+					, RESN_REGN_NUM				
+					, PRCSP_TXPYR_ASOC_YN			
+					, PRCSP_FMNM_NM				
+					, PRCSP_BUSOPR_RGSTNUM		
+					, PRCSP_DUTY_BGNN_DT			
+					, PRCSP_DUTY_END_DT			
+					, PRCSP_REDU_BGNN_DT			
+					, PRCSP_REDU_END_DT			
+					, PRCSP_PAY_SUM				
+					, PRCSP_ALLW_BNUS_SUM			
+					, PRCSP_RCGTN_BNUS_SUM		
+					, PRCSP_STCK_EVNT_PRFT_SUM	
+					, PRCSP_EMP_STKSC_WDRW_SUM	
+					, PRCSP_ECTE_RSGTN_EXCE_SUM	
+					, PRCSP_AGGR_SUM				
+					, FREE_DTY_AGGR_SUM			
+					, REDU_INCM_AGGR_SUM			
+					, PRCSP_INCM_TX_SUM			
+					, PRCSP_RGON_INCM_TX_SUM		
+					, PRCSP_NNKS_SUM				
+					, PRCSP_HLTH_PRMM_SUM			
+					, PRCSP_LGTM_RCPTN_SUM		
+					, PRCSP_HLTH_LGCPTN_AGGR		
+					, PRCSP_HLTH_PRMM_DDUC_SUM	
+					, PRCSP_EMYMT_PRMM_SUM		
+					, PRCSP_EMYT_PRMM_DDUC_SUM	
+					, PRCSP_PRCS_YN				
+					, PRCSP_WHDG_REIP_SUMT_YN		
+					, KYBDR						
+					, INPT_DT						
+					, INPT_ADDR				
+					, ISMT					
+					, REVN_DT					
+					, REVN_ADDR )
+			VALUES ( #dpobCd#						
+					, #yrtxBlggYr#				
+					, #clutSeptCd#				
+					, #systemkey#					
+					, #whdgDebrBusoprRgstnum#	
+					, ( SELECT NVL( MAX(PRCSP_SEIL_NUM)+1 ,1 )  
+						  FROM YE160404
+						 WHERE DPOB_CD 						= #dpobCd#
+						 	AND YRTX_BLGG_YR 				= #yrtxBlggYr#				
+							AND CLUT_SEPT_CD 				= #clutSeptCd#				
+							AND SYSTEMKEY	 				= #systemkey#
+							AND WHDG_DEBR_BUSOPR_RGSTNUM 	= #whdgDebrBusoprRgstnum# )			
+					, ( SELECT RESN_REGN_NUM
+						  FROM PSNL0100
+						 WHERE DPOB_CD 		= #dpobCd#
+							AND SYSTEMKEY	= #systemkey#	)			
+					, #prcspTxpyrAsocYn#			
+					, #prcspFmnmNm#				
+					, #prcspBusoprRgstnum#		
+					, #prcspDutyBgnnDt#			
+					, #prcspDutyEndDt#			
+					, #prcspReduBgnnDt#			
+					, #prcspReduEndDt#			
+					, #prcspPaySum#				
+					, #prcspAllwBnusSum#			
+					, #prcspRcgtnBnusSum#		
+					, #prcspStckEvntPrftSum#	
+					, #prcspEmpStkscWdrwSum#	
+					, #prcspEcteRsgtnExceSum#	
+					, #prcspAggrSum#				
+					, #freeDtyAggrSum#			
+					, #reduIncmAggrSum#			
+					, #prcspIncmTxSum#			
+					, #prcspRgonIncmTxSum#		
+					, #prcspNnksSum#				
+					, #prcspHlthPrmmSum#			
+					, #prcspLgtmRcptnSum#		
+					, #prcspHlthLgcptnAggr#		
+					, #prcspHlthPrmmDducSum#	
+					, #prcspEmymtPrmmSum#		
+					, #prcspEmytPrmmDducSum#
+					, #prcspPrcsYn#				
+					, #prcspWhdgReipSumtYn#		
+					, #kybdr#						
+					, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')					
+					, #inptAddr#				
+					, #ismt#					
+					, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')					
+					, #revnAddr# )
+		]]>
+	</insert>
+	
+	<!-- 종전근무지등록 팝업 수정 -->
+	<update id="infcPkgYe160404_2020_DAO.updateYetaP53006ToYe160404_S">
+		<![CDATA[
+			UPDATE YE160404
+				SET PRCSP_TXPYR_ASOC_YN			=#prcspTxpyrAsocYn#			
+					, PRCSP_FMNM_NM				=#prcspFmnmNm#				
+					, PRCSP_BUSOPR_RGSTNUM		=#prcspBusoprRgstnum#		
+					, PRCSP_DUTY_BGNN_DT		=#prcspDutyBgnnDt#			
+					, PRCSP_DUTY_END_DT			=#prcspDutyEndDt#			
+					, PRCSP_REDU_BGNN_DT		=#prcspReduBgnnDt#			
+					, PRCSP_REDU_END_DT			=#prcspReduEndDt#			
+					, PRCSP_PAY_SUM				=#prcspPaySum#				
+					, PRCSP_ALLW_BNUS_SUM		=#prcspAllwBnusSum#			
+					, PRCSP_RCGTN_BNUS_SUM		=#prcspRcgtnBnusSum#		
+					, PRCSP_STCK_EVNT_PRFT_SUM	=#prcspStckEvntPrftSum#	
+					, PRCSP_EMP_STKSC_WDRW_SUM	=#prcspEmpStkscWdrwSum#	
+					, PRCSP_ECTE_RSGTN_EXCE_SUM	=#prcspEcteRsgtnExceSum#	
+					, PRCSP_AGGR_SUM			=#prcspAggrSum#				
+					, FREE_DTY_AGGR_SUM			=#freeDtyAggrSum#			
+					, REDU_INCM_AGGR_SUM		=#reduIncmAggrSum#			
+					, PRCSP_INCM_TX_SUM			=#prcspIncmTxSum#			
+					, PRCSP_RGON_INCM_TX_SUM	=#prcspRgonIncmTxSum#		
+					, PRCSP_NNKS_SUM			=#prcspNnksSum#				
+					, PRCSP_HLTH_PRMM_SUM		=#prcspHlthPrmmSum#			
+					, PRCSP_LGTM_RCPTN_SUM		=#prcspLgtmRcptnSum#		
+					, PRCSP_HLTH_LGCPTN_AGGR	=#prcspHlthLgcptnAggr#		
+					, PRCSP_HLTH_PRMM_DDUC_SUM	=#prcspHlthPrmmDducSum#	
+					, PRCSP_EMYMT_PRMM_SUM		=#prcspEmymtPrmmSum#		
+					, PRCSP_EMYT_PRMM_DDUC_SUM	=#prcspEmytPrmmDducSum#	
+					, PRCSP_PRCS_YN				=#prcspPrcsYn#				
+					, PRCSP_WHDG_REIP_SUMT_YN	=#prcspWhdgReipSumtYn#
+					, ISMT						=#ismt#
+					, REVN_DT					=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					, REVN_ADDR					=#revnAddr#
+				WHERE DPOB_CD=#dpobCd#
+					AND YRTX_BLGG_YR=#yrtxBlggYr#
+					AND CLUT_SEPT_CD=#clutSeptCd#
+					AND SYSTEMKEY=#systemkey#
+					AND PRCSP_SEIL_NUM=#prcspSeilNum#
+				]]>
+	</update>
+	
+	
+	<!-- 종전근무지등록 팝업 삭제 -->
+	<delete id="infcPkgYe160404_2020_DAO.deleteYetaP53006ToYe160404_S">
+		<![CDATA[
+			DELETE FROM YE160404 
+				WHERE DPOB_CD=#dpobCd#
+					AND YRTX_BLGG_YR=#yrtxBlggYr#
+					AND CLUT_SEPT_CD=#clutSeptCd#
+					AND SYSTEMKEY=#systemkey#
+					AND WHDG_DEBR_BUSOPR_RGSTNUM=#whdgDebrBusoprRgstnum#
+					AND PRCSP_SEIL_NUM=#prcspSeilNum#
+				]]>
+	</delete>
+	
+	<!-- 종전근무지등록 팝업 조회 -->
+	<select id="infcPkgYe160404_2020_DAO.seleteYetaP53006ToYe160404_D" parameterClass="infcPkgYe160404Srh_2020_Vo" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM 
+				FROM ( SELECT  A.DPOB_CD						
+								, A.YRTX_BLGG_YR				
+								, A.CLUT_SEPT_CD
+								, fcBass0300CDNM(A.DPOB_CD, A.CLUT_SEPT_CD) AS CLUT_SEPT_NM				
+								, A.SYSTEMKEY					
+								, A.WHDG_DEBR_BUSOPR_RGSTNUM	
+								, A.PRCSP_SEIL_NUM				
+								, A.RESN_REGN_NUM				
+								, A.PRCSP_TXPYR_ASOC_YN			
+								, A.PRCSP_FMNM_NM				
+								, A.PRCSP_BUSOPR_RGSTNUM		
+								, A.PRCSP_DUTY_BGNN_DT			
+								, A.PRCSP_DUTY_END_DT			
+								, A.PRCSP_REDU_BGNN_DT			
+								, A.PRCSP_REDU_END_DT			
+								, A.PRCSP_PAY_SUM				
+								, A.PRCSP_ALLW_BNUS_SUM			
+								, A.PRCSP_RCGTN_BNUS_SUM		
+								, A.PRCSP_STCK_EVNT_PRFT_SUM	
+								, A.PRCSP_EMP_STKSC_WDRW_SUM	
+								, A.PRCSP_ECTE_RSGTN_EXCE_SUM	
+								, A.PRCSP_AGGR_SUM				
+								, A.FREE_DTY_AGGR_SUM			
+								, A.REDU_INCM_AGGR_SUM			
+								, A.PRCSP_INCM_TX_SUM			
+								, A.PRCSP_RGON_INCM_TX_SUM		
+								, A.PRCSP_NNKS_SUM				
+								, A.PRCSP_HLTH_PRMM_SUM			
+								, A.PRCSP_LGTM_RCPTN_SUM		
+								, A.PRCSP_HLTH_LGCPTN_AGGR		
+								, A.PRCSP_HLTH_PRMM_DDUC_SUM	
+								, A.PRCSP_EMYMT_PRMM_SUM		
+								, A.PRCSP_EMYT_PRMM_DDUC_SUM	
+								, A.PRCSP_PRCS_YN				
+								, A.PRCSP_WHDG_REIP_SUMT_YN		
+								, A.KYBDR						
+								, A.INPT_DT						
+								, A.INPT_ADDR				
+								, A.ISMT					
+								, A.REVN_DT					
+								, A.REVN_ADDR
+								, B.NAT_PENN_PRMM_SUM		
+								, B.NAT_PENN_ARA_PRMM_SUM	
+								, B.NAT_PENN_DDUC_SUM		
+								, B.PUOFER_ANTY				
+								, B.PUOFER_ANTY_DDUC_SUM	
+								, B.MLTYM_ANTY				
+								, B.MLTYM_ANTY_DDUC_SUM		
+								, B.PRTAFIR_SCHL_FALYMM_ANTY
+								, B.PRTAFIR_SCHL_DDUC_SUM	
+								, B.SPILDTN_PSTOFIC_ANTY	
+								, B.SPILDTN_PSTOFIC_DDUC_SUM
+								, C.HAN_NM AS FNM
+							
+						  FROM YE160404 A,  YE160406 B, PSNL0100 C
+						WHERE A.DPOB_CD 					= B.DPOB_CD
+							AND A.YRTX_BLGG_YR 				= B.YRTX_BLGG_YR
+							AND A.CLUT_SEPT_CD 				= B.CLUT_SEPT_CD
+							AND A.SYSTEMKEY 				= B.SYSTEMKEY
+							AND A.WHDG_DEBR_BUSOPR_RGSTNUM 	= B.WHDG_DEBR_BUSOPR_RGSTNUM
+							
+							AND A.DPOB_CD 					= C.DPOB_CD
+							AND A.SYSTEMKEY 				= C.SYSTEMKEY
+							
+							AND	A.DPOB_CD					=#dpobCd#
+							AND	A.YRTX_BLGG_YR				=#yrtxBlggYr#
+							AND	A.CLUT_SEPT_CD				=#clutSeptCd#
+							AND	A.SYSTEMKEY					=#systemkey#
+							
+					ORDER BY  A.DPOB_CD
+								, A.YRTX_BLGG_YR
+								, A.CLUT_SEPT_CD
+								, A.SYSTEMKEY
+								, A.WHDG_DEBR_BUSOPR_RGSTNUM
+								, A.PRCSP_DUTY_BGNN_DT	
+				
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>
+	
+	<select id="infcPkgYe160404_2020_DAO.seleteYetaP53006ToYe160404ListCnt_S" parameterClass="infcPkgYe160404Srh_2020_Vo" resultClass="int">
+		SELECT COUNT(*) totcnt
+ 			FROM YE160404 A,  YE160406 B, PSNL0100 C
+		WHERE A.DPOB_CD 					= B.DPOB_CD
+			AND A.YRTX_BLGG_YR 				= B.YRTX_BLGG_YR
+			AND A.CLUT_SEPT_CD 				= B.CLUT_SEPT_CD
+			AND A.SYSTEMKEY 				= B.SYSTEMKEY
+			AND A.WHDG_DEBR_BUSOPR_RGSTNUM 	= B.WHDG_DEBR_BUSOPR_RGSTNUM
+							
+			AND A.DPOB_CD 					= C.DPOB_CD
+			AND A.SYSTEMKEY 				= C.SYSTEMKEY
+							
+			AND	A.DPOB_CD					=#dpobCd#
+			AND	A.YRTX_BLGG_YR				=#yrtxBlggYr#
+			AND	A.CLUT_SEPT_CD				=#clutSeptCd#
+			AND	A.SYSTEMKEY					=#systemkey#
+	</select>
+	
+	<!-- 
+	#############################################################################
+	######################## 2017년도 연말정산 로직 종료 ############################
+	#############################################################################
+	 -->	
+	
+	
+	
+	<insert id="infcPkgYe160404_2020_DAO.insertYe160404_S">
+		<![CDATA[
+			INSERT INTO YE160404 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , WHDG_DEBR_BUSOPR_RGSTNUM
+				  , PRCSP_SEIL_NUM
+				  , RESN_REGN_NUM
+				  , PRCSP_TXPYR_ASOC_YN
+				  , PRCSP_FMNM_NM
+				  , PRCSP_BUSOPR_RGSTNUM
+				  , PRCSP_DUTY_BGNN_DT
+				  , PRCSP_DUTY_END_DT
+				  , PRCSP_REDU_BGNN_DT
+				  , PRCSP_REDU_END_DT
+				  , PRCSP_PAY_SUM
+				  , PRCSP_ALLW_BNUS_SUM
+				  , PRCSP_RCGTN_BNUS_SUM
+				  , PRCSP_STCK_EVNT_PRFT_SUM
+				  , PRCSP_EMP_STKSC_WDRW_SUM
+				  , PRCSP_ECTE_RSGTN_EXCE_SUM
+				  , PRCSP_AGGR_SUM
+				  , FREE_DTY_AGGR_SUM
+				  , REDU_INCM_AGGR_SUM
+				  , PRCSP_INCM_TX_SUM
+				  , PRCSP_RGON_INCM_TX_SUM
+				  , PRCSP_NNKS_SUM
+				  , PRCSP_HLTH_PRMM_SUM
+				  , PRCSP_LGTM_RCPTN_SUM
+				  , PRCSP_HLTH_PRMM_DDUC_SUM
+				  , PRCSP_HLTH_LGCPTN_AGGR
+				  , PRCSP_EMYMT_PRMM_SUM
+				  , PRCSP_EMYT_PRMM_DDUC_SUM
+				  , PRCSP_PRCS_YN
+				  , PRCSP_WHDG_REIP_SUMT_YN
+				  ,PRCSP_YETA_C165
+				 ,PRCSP_YETA_C166
+				 ,PRCSP_YETA_C167
+				   , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #whdgDebrBusoprRgstnum#
+				  , #prcspSeilNum#
+				  , #resnRegnNum#
+				  , #prcspTxpyrAsocYn#
+				  , #prcspFmnmNm#
+				  , #prcspBusoprRgstnum#
+				  , #prcspDutyBgnnDt#
+				  , #prcspDutyEndDt#
+				  , #prcspReduBgnnDt#
+				  , #prcspReduEndDt#
+				  , #prcspPaySum#
+				  , #prcspAllwBnusSum#
+				  , #prcspRcgtnBnusSum#
+				  , #prcspStckEvntPrftSum#
+				  , #prcspEmpStkscWdrwSum#
+				  , #prcspEcteRsgtnExceSum#
+				  , #prcspAggrSum#
+				  , #freeDtyAggrSum#
+				  , #reduIncmAggrSum#
+				  , #prcspIncmTxSum#
+				  , #prcspRgonIncmTxSum#
+				  , #prcspNnksSum#
+				  , #prcspHlthPrmmSum#
+				  , #prcspLgtmRcptnSum#
+				  , #prcspHlthPrmmDducSum#
+				  , #prcspHlthLgcptnAggr#
+				  , #prcspEmymtPrmmSum#
+				  , #prcspEmytPrmmDducSum#
+				  , #prcspPrcsYn#
+				  , #prcspWhdgReipSumtYn#
+				 , #prcspYetaC165#
+	,#prcspYetaC166#
+	,#prcspYetaC167#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgYe160404_2020_DAO.updateYe160404_S">
+		<![CDATA[
+			UPDATE YE160404
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, WHDG_DEBR_BUSOPR_RGSTNUM=#whdgDebrBusoprRgstnum#
+				, PRCSP_SEIL_NUM=#prcspSeilNum#
+				, RESN_REGN_NUM=#resnRegnNum#
+				, PRCSP_TXPYR_ASOC_YN=#prcspTxpyrAsocYn#
+				, PRCSP_FMNM_NM=#prcspFmnmNm#
+				, PRCSP_BUSOPR_RGSTNUM=#prcspBusoprRgstnum#
+				, PRCSP_DUTY_BGNN_DT=#prcspDutyBgnnDt#
+				, PRCSP_DUTY_END_DT=#prcspDutyEndDt#
+				, PRCSP_REDU_BGNN_DT=#prcspReduBgnnDt#
+				, PRCSP_REDU_END_DT=#prcspReduEndDt#
+				, PRCSP_PAY_SUM=#prcspPaySum#
+				, PRCSP_ALLW_BNUS_SUM=#prcspAllwBnusSum#
+				, PRCSP_RCGTN_BNUS_SUM=#prcspRcgtnBnusSum#
+				, PRCSP_STCK_EVNT_PRFT_SUM=#prcspStckEvntPrftSum#
+				, PRCSP_EMP_STKSC_WDRW_SUM=#prcspEmpStkscWdrwSum#
+				, PRCSP_ECTE_RSGTN_EXCE_SUM=#prcspEcteRsgtnExceSum#
+				, PRCSP_AGGR_SUM=#prcspAggrSum#
+				, FREE_DTY_AGGR_SUM=#freeDtyAggrSum#
+				, REDU_INCM_AGGR_SUM=#reduIncmAggrSum#
+				, PRCSP_INCM_TX_SUM=#prcspIncmTxSum#
+				, PRCSP_RGON_INCM_TX_SUM=#prcspRgonIncmTxSum#
+				, PRCSP_NNKS_SUM=#prcspNnksSum#
+				, PRCSP_HLTH_PRMM_SUM=#prcspHlthPrmmSum#
+				, PRCSP_LGTM_RCPTN_SUM=#prcspLgtmRcptnSum#
+				, PRCSP_HLTH_PRMM_DDUC_SUM=#prcspHlthPrmmDducSum#
+				, PRCSP_HLTH_LGCPTN_AGGR=#prcspHlthLgcptnAggr#
+				, PRCSP_EMYMT_PRMM_SUM=#prcspEmymtPrmmSum#
+				, PRCSP_EMYT_PRMM_DDUC_SUM=#prcspEmytPrmmDducSum#
+				, PRCSP_PRCS_YN=#prcspPrcsYn#
+				, PRCSP_WHDG_REIP_SUMT_YN=#prcspWhdgReipSumtYn#
+				  ,PRCSP_YETA_C165=#prcspYetaC165# 
+				 ,PRCSP_YETA_C166=#prcspYetaC166#
+				 ,PRCSP_YETA_C167=#prcspYetaC167#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND WHDG_DEBR_BUSOPR_RGSTNUM=#whdgDebrBusoprRgstnum#
+				]]>
+	</update>
+	
+	<delete id="infcPkgYe160404_2020_DAO.deleteYe160404_S">
+		<![CDATA[
+			DELETE FROM YE160404 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND WHDG_DEBR_BUSOPR_RGSTNUM=#whdgDebrBusoprRgstnum#
+				]]>
+	</delete>
+	
+	<delete id="infcPkgYe160404_2020_DAO.deleteYeta1100ToYe160404_S">
+		<![CDATA[
+			DELETE FROM YE160404 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	
+	
+	<select id="infcPkgYe160404_2020_DAO.selectYe160404_S" resultMap="infcPkgYe160404_2020">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, WHDG_DEBR_BUSOPR_RGSTNUM
+				, PRCSP_SEIL_NUM
+				, RESN_REGN_NUM
+				, PRCSP_TXPYR_ASOC_YN
+				, PRCSP_FMNM_NM
+				, PRCSP_BUSOPR_RGSTNUM
+				, PRCSP_DUTY_BGNN_DT
+				, PRCSP_DUTY_END_DT
+				, PRCSP_REDU_BGNN_DT
+				, PRCSP_REDU_END_DT
+				, PRCSP_PAY_SUM
+				, PRCSP_ALLW_BNUS_SUM
+				, PRCSP_RCGTN_BNUS_SUM
+				, PRCSP_STCK_EVNT_PRFT_SUM
+				, PRCSP_EMP_STKSC_WDRW_SUM
+				, PRCSP_ECTE_RSGTN_EXCE_SUM
+				, PRCSP_AGGR_SUM
+				, FREE_DTY_AGGR_SUM
+				, REDU_INCM_AGGR_SUM
+				, PRCSP_INCM_TX_SUM
+				, PRCSP_RGON_INCM_TX_SUM
+				, PRCSP_NNKS_SUM
+				, PRCSP_HLTH_PRMM_SUM
+				, PRCSP_LGTM_RCPTN_SUM
+				, PRCSP_HLTH_PRMM_DDUC_SUM
+				, PRCSP_HLTH_LGCPTN_AGGR
+				, PRCSP_EMYMT_PRMM_SUM
+				, PRCSP_EMYT_PRMM_DDUC_SUM
+				, PRCSP_PRCS_YN
+				, PRCSP_WHDG_REIP_SUMT_YN
+				  ,PRCSP_YETA_C165
+				 ,PRCSP_YETA_C166
+				 ,PRCSP_YETA_C167
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE160404
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND WHDG_DEBR_BUSOPR_RGSTNUM=#whdgDebrBusoprRgstnum#
+				]]>
+	</select>
+	
+	<select id="infcPkgYe160404_2020_DAO.selectYe160404List_D" parameterClass="infcPkgYe160404Srh_2020_Vo" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, WHDG_DEBR_BUSOPR_RGSTNUM
+								, PRCSP_SEIL_NUM
+								, RESN_REGN_NUM
+								, PRCSP_TXPYR_ASOC_YN
+								, PRCSP_FMNM_NM
+								, PRCSP_BUSOPR_RGSTNUM
+								, PRCSP_DUTY_BGNN_DT
+								, PRCSP_DUTY_END_DT
+								, PRCSP_REDU_BGNN_DT
+								, PRCSP_REDU_END_DT
+								, PRCSP_PAY_SUM
+								, PRCSP_ALLW_BNUS_SUM
+								, PRCSP_RCGTN_BNUS_SUM
+								, PRCSP_STCK_EVNT_PRFT_SUM
+								, PRCSP_EMP_STKSC_WDRW_SUM
+								, PRCSP_ECTE_RSGTN_EXCE_SUM
+								, PRCSP_AGGR_SUM
+								, FREE_DTY_AGGR_SUM
+								, REDU_INCM_AGGR_SUM
+								, PRCSP_INCM_TX_SUM
+								, PRCSP_RGON_INCM_TX_SUM
+								, PRCSP_NNKS_SUM
+								, PRCSP_HLTH_PRMM_SUM
+								, PRCSP_LGTM_RCPTN_SUM
+								, PRCSP_HLTH_PRMM_DDUC_SUM
+								, PRCSP_HLTH_LGCPTN_AGGR
+								, PRCSP_EMYMT_PRMM_SUM
+								, PRCSP_EMYT_PRMM_DDUC_SUM
+								, PRCSP_PRCS_YN
+								, PRCSP_WHDG_REIP_SUMT_YN
+								  ,PRCSP_YETA_C165
+				 ,PRCSP_YETA_C166
+				 ,PRCSP_YETA_C167
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE160404
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, WHDG_DEBR_BUSOPR_RGSTNUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgYe160404_2020_DAO.selectYe160404ListTotCnt_S" parameterClass="infcPkgYe160404Srh_2020_Vo" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE160404
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+ <!-- ######################### 2017년도 귀속 로직  시작 ######################### -->
+
+     <!--  D_종전근무처 삭제  -->
+     
+	<delete id="infcPkgYe160404_2020_DAO.deleteYetaP410001_Ye160404VO_2020_Delete_S">
+		<![CDATA[
+			DELETE FROM YE160404 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey# 
+				]]>
+	</delete>	
+	
+</sqlMap>

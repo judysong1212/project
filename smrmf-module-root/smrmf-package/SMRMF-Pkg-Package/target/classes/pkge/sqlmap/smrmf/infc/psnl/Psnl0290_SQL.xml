@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0290">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="infcPsnl0290Dto" type="com.app.exterms.personal.client.dto.InfcPsnl0290DTO"/>
+	
+	
+	
+	<select id="infcPsnl0290DAO.selectPsnl0290" parameterClass="infcPsnl0290Dto" resultClass="egovMap">
+	    
+		 SELECT A.DPOB_CD, A.SYSTEMKEY
+		    ,B.HODY_APPTN_YR 
+		    ,FCBASS0400CDNM(A.DPOB_CD,A.CURR_AFFN_DEPT_CD,'2') AS DEPT_CD
+       		,FCBASS0300CDNM(A.DPOB_CD,A.TYP_OCCU_CD) AS TYP_OCCU_CD
+		    ,A.HAN_NM
+		    ,SUBSTR(A.RESN_REGN_NUM,1,6)||'-'||SUBSTR(A.RESN_REGN_NUM,7,7) as RESN_REGN_NUM
+		    ,HODY_NUM_DYS_SYS_CALC
+		    ,HODY_APPTN_NUM_DYS
+		    ,HODY_USE_NUM_DYS
+		    ,HODY_RST_NUM_DYS
+		    ,FCBASS0500CDNM (A.DPOB_CD,SUBSTR(A.EMYMT_BGNN_DT,1,4),A.CURR_AFFN_DEPT_CD,A.BUSIN_CD) AS BUSIN_NM
+		    ,B.HODY_NOTE_CTNT
+		    ,B.HODY_FIX_YN
+		  FROM PSNL0100 A, PSNL0126 B
+		 WHERE A.DPOB_CD = B.DPOB_CD 
+		   AND A.SYSTEMKEY = B.SYSTEMKEY
+		   
+		 <isNotNull property="hodyApptnYr">
+		     <isNotEmpty property="hodyApptnYr">
+		         AND B.HODY_APPTN_YR = #hodyApptnYr#  
+		     </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="currAffnDeptCd">
+		     <isNotEmpty property="currAffnDeptCd">
+		         AND A.CURR_AFFN_DEPT_CD = #currAffnDeptCd#  
+		     </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="emymtDivCd">
+		     <isNotEmpty property="emymtDivCd">
+		         AND A.EMYMT_DIV_CD = #emymtDivCd#  
+		     </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="deptCd">
+		     <isNotEmpty property="deptCd">
+		         AND A.DEPT_CD = #deptCd#  
+		     </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="businCd">
+		     <isNotEmpty property="businCd">
+		         AND A.BUSIN_CD = #businCd#  
+		     </isNotEmpty>
+		 </isNotNull>  
+		 <isNotNull property="hanNm">
+		     <isNotEmpty property="hanNm">
+		         AND A.HAN_NM = #hanNm#  
+		     </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="resnRegnNum">
+		     <isNotEmpty property="resnRegnNum">
+		         AND A.RESN_REGN_NUM LIKE '%'|| REPLACE(#resnRegnNum#,'-','') || '%'  
+		     </isNotEmpty>
+		 </isNotNull>
+		 
+	</select>
+	
+	<insert id="infcPsnl0290DAO.insertPsnl0290"  parameterClass="infcPsnl0290Dto" >
+			INSERT INTO PSNL0126 (DPOB_CD,
+                      SYSTEMKEY,
+                      HODY_APPTN_YR,
+                      HODY_NUM_DYS_SYS_CALC,
+                      HODY_APPTN_NUM_DYS,
+                      HODY_USE_NUM_DYS,
+                      HODY_RST_NUM_DYS,
+                      HODY_BGNN_DT,
+                      HODY_END_DT,
+                      HODY_NOTE_CTNT,
+                      HODY_FIX_YN,
+                      LVSG_COPTN_CST_APPTN_YN,
+                      LVSG_COPTN_CST_APPTN_DT,
+                      KYBDR,
+                      INPT_DT,
+                      INPT_ADDR,
+                      ISMT,
+                      REVN_DT,
+                      REVN_ADDR)
+		     VALUES (#dpobCd#,
+		             #systemkey#,
+		             #hodyApptnYr#,
+		             #hodyNumDysSysCalc#,
+		             #hodyApptnNumDys#,
+		             #hodyUseNumDys#,
+		             #hodyRstNumDys#,
+		             #hodyBgnnDt#,
+		             #hodyEndDt#,
+		             #hodyNoteCtnt#,
+		             #hodyFixYn#,
+		             #lvsgCoptnCstApptnYn#,
+		             #lvsgCoptnCstApptnDt#,
+		             #ismt#,
+		             TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+		             #revnAddr#,
+		             #ismt#,
+		             TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+		             #revnAddr#)
+			    
+	</insert>
+	
+	<update id="infcPsnl0290DAO.updatePsnl0290"  parameterClass="infcPsnl0290Dto">
+		UPDATE PSNL0126
+		   SET HODY_APPTN_NUM_DYS = #hodyApptnNumDys#
+		 WHERE DPOB_CD = #dpobCd#
+		   AND SYSTEMKEY = #systemkey#
+		   AND HODY_APPTN_YR = #hodyApptnYr#
+	</update>
+	
+	<delete id="infcPsnl0290DAO.deletePsnl0290"  parameterClass="infcPsnl0290Dto">
+		DELETE FROM PSNL0126 
+		 WHERE DPOB_CD = #dpobCd#
+		   AND SYSTEMKEY = #systemkey#
+		   AND HODY_APPTN_YR = #hodyApptnYr#
+	</delete>
+	
+	<update id="infcPsnl0290DAO.updatePsnl0290Fix"  parameterClass="infcPsnl0290Dto">
+		UPDATE PSNL0126
+		   SET HODY_FIX_YN = #hodyFixYn#
+		 WHERE DPOB_CD = #dpobCd#
+		   AND SYSTEMKEY = #systemkey#
+		   AND HODY_APPTN_YR = #hodyApptnYr#
+	</update>
+	
+	
+
+</sqlMap>

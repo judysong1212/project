@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgYeta3900">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYeta3900SerarchVO" type="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta3900SrhVO"/>
+	
+	<resultMap id="infcPkgYeta3900" class="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta3900VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="pymtYrMnth" column="PYMT_YR_MNTH" columnIndex="2"/>
+		<result property="payCd" column="PAY_CD" columnIndex="3"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="4"/>
+		<result property="payItemCd" column="PAY_ITEM_CD" columnIndex="5"/>
+		<result property="payItemSeilNum" column="PAY_ITEM_SEIL_NUM" columnIndex="6"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="7"/>
+		<result property="pymtDducDivCd" column="PYMT_DDUC_DIV_CD" columnIndex="8"/>
+		<result property="pymtDducSum" column="PYMT_DDUC_SUM" columnIndex="9"/>
+		<result property="pymtDducTxtnAmnt" column="PYMT_DDUC_TXTN_AMNT" columnIndex="10"/>
+		<result property="pymtDducFreeDtySum" column="PYMT_DDUC_FREE_DTY_SUM" columnIndex="11"/>
+		<result property="payPymtDt" column="PAY_PYMT_DT" columnIndex="12"/>
+		<result property="payItemNm" column="PAY_ITEM_NM" columnIndex="13"/>
+		<result property="kybdr" column="KYBDR" columnIndex="14"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="15"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="16"/>
+		<result property="ismt" column="ISMT" columnIndex="17"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="18"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="19"/>
+	</resultMap>
+	
+	<insert id="infcPkgYeta3900DAO.insertYetaPrc3900_S">
+		<![CDATA[
+			INSERT INTO YETA3900 
+				( DPOB_CD
+				  , PYMT_YR_MNTH
+				  , PAY_CD
+				  , RESN_REGN_NUM
+				  , PAY_ITEM_CD
+				  , PAY_ITEM_SEIL_NUM
+				  , SYSTEMKEY
+				  , PYMT_DDUC_DIV_CD
+				  , PYMT_DDUC_SUM
+				  , PYMT_DDUC_TXTN_AMNT
+				  , PYMT_DDUC_FREE_DTY_SUM
+				  , PAY_PYMT_DT
+				  , PAY_ITEM_NM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #pymtYrMnth#
+				  , #payCd#
+				  , #resnRegnNum#
+				  , #payItemCd#
+				  , #payItemSeilNum#
+				  , #systemkey#
+				  , #pymtDducDivCd#
+				  , #pymtDducSum#
+				  , #pymtDducTxtnAmnt#
+				  , #pymtDducFreeDtySum#
+				  , #payPymtDt#
+				  , #payItemNm#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgYeta3900DAO.updateYetaPrc3900_S">
+		<![CDATA[
+			UPDATE YETA3900
+			SET DPOB_CD=#dpobCd#
+				, PYMT_YR_MNTH=#pymtYrMnth#
+				, PAY_CD=#payCd#
+				, RESN_REGN_NUM=#resnRegnNum#
+				, PAY_ITEM_CD=#payItemCd#
+				, PAY_ITEM_SEIL_NUM=#payItemSeilNum#
+				, SYSTEMKEY=#systemkey#
+				, PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+				, PYMT_DDUC_SUM=#pymtDducSum#
+				, PYMT_DDUC_TXTN_AMNT=#pymtDducTxtnAmnt#
+				, PYMT_DDUC_FREE_DTY_SUM=#pymtDducFreeDtySum#
+				, PAY_PYMT_DT=#payPymtDt#
+				, PAY_ITEM_NM=#payItemNm#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND RESN_REGN_NUM=#resnRegnNum#
+								AND PAY_ITEM_CD=#payItemCd#
+								AND PAY_ITEM_SEIL_NUM=#payItemSeilNum#
+				]]>
+	</update>
+	
+	<delete id="infcPkgYeta3900DAO.deleteYetaPrc3900_S">
+		<![CDATA[
+			DELETE FROM YETA3900 
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND RESN_REGN_NUM=#resnRegnNum#
+								AND PAY_ITEM_CD=#payItemCd#
+								AND PAY_ITEM_SEIL_NUM=#payItemSeilNum#
+				]]>
+	</delete>
+	
+	<select id="infcPkgYeta3900DAO.selectYetaPrc3900_S" resultMap="infcPkgYeta3900">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, PYMT_YR_MNTH
+				, PAY_CD
+				, RESN_REGN_NUM
+				, PAY_ITEM_CD
+				, PAY_ITEM_SEIL_NUM
+				, SYSTEMKEY
+				, PYMT_DDUC_DIV_CD
+				, PYMT_DDUC_SUM
+				, PYMT_DDUC_TXTN_AMNT
+				, PYMT_DDUC_FREE_DTY_SUM
+				, PAY_PYMT_DT
+				, PAY_ITEM_NM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YETA3900
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND RESN_REGN_NUM=#resnRegnNum#
+								AND PAY_ITEM_CD=#payItemCd#
+								AND PAY_ITEM_SEIL_NUM=#payItemSeilNum#
+				]]>
+	</select>
+	
+	<select id="infcPkgYeta3900DAO.selectYetaPrc3900List_D" parameterClass="infcPkgYeta3900SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, PYMT_YR_MNTH
+								, PAY_CD
+								, RESN_REGN_NUM
+								, PAY_ITEM_CD
+								, PAY_ITEM_SEIL_NUM
+								, SYSTEMKEY
+								, PYMT_DDUC_DIV_CD
+								, PYMT_DDUC_SUM
+								, PYMT_DDUC_TXTN_AMNT
+								, PYMT_DDUC_FREE_DTY_SUM
+								, PAY_PYMT_DT
+								, PAY_ITEM_NM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YETA3900
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					PYMT_YR_MNTH LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, PYMT_YR_MNTH DESC
+							, PAY_CD DESC
+							, RESN_REGN_NUM DESC
+							, PAY_ITEM_CD DESC
+							, PAY_ITEM_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgYeta3900DAO.selectYetaPrc3900ListTotCnt_S" parameterClass="infcPkgYeta3900SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3900
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				PYMT_YR_MNTH LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

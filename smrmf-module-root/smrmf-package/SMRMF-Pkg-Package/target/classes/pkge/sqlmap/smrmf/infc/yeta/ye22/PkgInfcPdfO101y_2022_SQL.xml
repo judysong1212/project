@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgPdfO101y_2022">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgPdfO101ySrh_2022_VO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2022.InfcPkgPdfO101ySrh_2022_VO"/>
+	
+	<resultMap id="infcPkgPdfO101y_2022" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2022.InfcPkgPdfO101y_2022_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="datCd" column="DAT_CD" columnIndex="4"/>
+		<result property="formCd" column="FORM_CD" columnIndex="5"/>
+		<result property="resid" column="RESID" columnIndex="6"/>
+		<result property="name" column="NAME" columnIndex="7"/>
+		<result property="hlthAmtSum" column="HLTH_AMT_SUM" columnIndex="8"/>
+		<result property="hiYrs" column="HI_YRS" columnIndex="9"/>
+		<result property="ltrmYrs" column="LTRM_YRS" columnIndex="10"/>
+		<result property="hiNtf" column="HI_NTF" columnIndex="11"/>
+		<result property="ltrmNtf" column="LTRM_NTF" columnIndex="12"/>
+		<result property="hiPmt" column="HI_PMT" columnIndex="13"/>
+		<result property="ltrmPmt" column="LTRM_PMT" columnIndex="14"/>
+		<result property="pdfDatAppYn" column="PDF_DAT_APP_YN" columnIndex="15"/>
+		<result property="kybdr" column="KYBDR" columnIndex="16"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="17"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="18"/>
+		<result property="ismt" column="ISMT" columnIndex="19"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="20"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="21"/>
+	</resultMap>
+	
+	<insert id="infcPkgPdfO101y_2022_DAO.insertPdfO101y_S">
+		<![CDATA[
+			INSERT INTO PDF_O101Y 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , DAT_CD
+				  , FORM_CD
+				  , RESID
+				  , NAME
+				  , HLTH_AMT_SUM
+				  , HI_YRS
+				  , LTRM_YRS
+				  , HI_NTF
+				  , LTRM_NTF
+				  , HI_PMT
+				  , LTRM_PMT
+				  , PDF_DAT_APP_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #datCd#
+				  , #formCd#
+				  , #resid#
+				  , #name#
+				  , #hlthAmtSum#
+				  , #hiYrs#
+				  , #ltrmYrs#
+				  , #hiNtf#
+				  , #ltrmNtf#
+				  , #hiPmt#
+				  , #ltrmPmt#
+				  , #pdfDatAppYn#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgPdfO101y_2022_DAO.updatePdfO101y_S">
+		<![CDATA[
+			UPDATE PDF_O101Y
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, DAT_CD=#datCd#
+				, FORM_CD=#formCd#
+				, RESID=#resid#
+				, NAME=#name#
+				, HLTH_AMT_SUM=#hlthAmtSum#
+				, HI_YRS=#hiYrs#
+				, LTRM_YRS=#ltrmYrs#
+				, HI_NTF=#hiNtf#
+				, LTRM_NTF=#ltrmNtf#
+				, HI_PMT=#hiPmt#
+				, LTRM_PMT=#ltrmPmt#
+				, PDF_DAT_APP_YN=#pdfDatAppYn#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND DAT_CD=#datCd#
+				]]>
+	</update>
+	
+	<update id="infcPkgPdfO101y_2022_DAO.updateYetaP720001ToPdfO101y_S">
+		<![CDATA[
+			UPDATE PDF_O101Y
+			SET   PDF_DAT_APP_YN=#pdfDatAppYn#
+				, PDF_DAT_APP_CMPL_DT = SUBSTR(TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),0,8)
+				, PDF_DAT_APP_EXC_CTNT = #pdfDatAppExcCtnt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND DAT_CD=#datCd#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPdfO101y_2022_DAO.deletePdfO101y_S">
+		<![CDATA[
+			DELETE FROM PDF_O101Y 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND DAT_CD=#datCd#
+								AND SYSTEMKEY = #systemkey#
+				]]>
+	</delete>
+	
+	<select id="infcPkgPdfO101y_2022_DAO.selectPdfO101y_S" resultMap="infcPkgPdfO101y_2022">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, DAT_CD
+				, FORM_CD
+				, RESID
+				, NAME
+				, HLTH_AMT_SUM
+				, HI_YRS
+				, LTRM_YRS
+				, HI_NTF
+				, LTRM_NTF
+				, HI_PMT
+				, LTRM_PMT
+				, PDF_DAT_APP_YN
+				, PDF_DAT_APP_CMPL_DT
+				, PDF_DAT_APP_EXC_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PDF_O101Y
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND DAT_CD=#datCd#
+				]]>
+	</select>
+	
+	<select id="infcPkgPdfO101y_2022_DAO.selectPdfO101yList_D" parameterClass="infcPkgPdfO101ySrh_2022_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, DAT_CD
+								, FORM_CD
+								, RESID
+								, NAME
+								, HLTH_AMT_SUM
+								, HI_YRS
+								, LTRM_YRS
+								, HI_NTF
+								, LTRM_NTF
+								, HI_PMT
+								, LTRM_PMT
+								, PDF_DAT_APP_YN
+								, PDF_DAT_APP_CMPL_DT
+								, PDF_DAT_APP_EXC_CTNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PDF_O101Y
+				WHERE 1=1
+				AND DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY = #systemkey#
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, DAT_CD ASC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgPdfO101y_2022_DAO.selectPdfO101yListTotCnt_S" parameterClass="infcPkgPdfO101ySrh_2022_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PDF_O101Y
+			WHERE 1=1
+			AND DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY = #systemkey#
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="YetaPrc3130">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="yetaPrc3130SerarchVO" type="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta3130SrhVO"/>
+	
+	<resultMap id="yetaPrc3130" class="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta3130VO">
+		<result property="edacRvyy" column="EDAC_RVYY" columnIndex="1"/>
+		<result property="settGbcd" column="SETT_GBCD" columnIndex="2"/>
+		<result property="mnrnSqno" column="MNRN_SQNO" columnIndex="3"/>
+		<result property="dpobCd" column="DPOB_CD" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="mnrnName" column="MNRN_NAME" columnIndex="6"/>
+		<result property="mnrnRsno" column="MNRN_RSNO" columnIndex="7"/>
+		<result property="mnrnTyhu" column="MNRN_TYHU" columnIndex="8"/>
+		<result property="mnrnArea" column="MNRN_AREA" columnIndex="9"/>
+		<result property="mnrnAddr" column="MNRN_ADDR" columnIndex="10"/>
+		<result property="mnrnStdt" column="MNRN_STDT" columnIndex="11"/>
+		<result property="mnrnEddt" column="MNRN_EDDT" columnIndex="12"/>
+		<result property="mnrnAmnt" column="MNRN_AMNT" columnIndex="13"/>
+		<result property="mnrnDuam" column="MNRN_DUAM" columnIndex="14"/>
+		<result property="kybdr" column="KYBDR" columnIndex="15"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="16"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="17"/>
+		<result property="ismt" column="ISMT" columnIndex="18"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="19"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="20"/>
+	</resultMap>
+	
+	<insert id="yetaPrc3130DAO.insertYetaPrc3130_S">
+		<![CDATA[
+			INSERT INTO YETA3130 
+				( EDAC_RVYY
+				  , SETT_GBCD
+				  , MNRN_SQNO
+				  , DPOB_CD
+				  , SYSTEMKEY
+				  , MNRN_NAME
+				  , MNRN_RSNO
+				  , MNRN_TYHU
+				  , MNRN_AREA
+				  , MNRN_ADDR
+				  , MNRN_STDT
+				  , MNRN_EDDT
+				  , MNRN_AMNT
+				  , MNRN_DUAM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #edacRvyy#
+				  , #settGbcd#
+				  , #mnrnSqno#
+				  , #dpobCd#
+				  , #systemkey#
+				  , #mnrnName#
+				  , #mnrnRsno#
+				  , #mnrnTyhu#
+				  , #mnrnArea#
+				  , #mnrnAddr#
+				  , #mnrnStdt#
+				  , #mnrnEddt#
+				  , #mnrnAmnt#
+				  , #mnrnDuam#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="yetaPrc3130DAO.updateYetaPrc3130_S">
+		<![CDATA[
+			UPDATE YETA3130
+			SET EDAC_RVYY=#edacRvyy#
+				, SETT_GBCD=#settGbcd#
+				, MNRN_SQNO=#mnrnSqno#
+				, DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, MNRN_NAME=#mnrnName#
+				, MNRN_RSNO=#mnrnRsno#
+				, MNRN_TYHU=#mnrnTyhu#
+				, MNRN_AREA=#mnrnArea#
+				, MNRN_ADDR=#mnrnAddr#
+				, MNRN_STDT=#mnrnStdt#
+				, MNRN_EDDT=#mnrnEddt#
+				, MNRN_AMNT=#mnrnAmnt#
+				, MNRN_DUAM=#mnrnDuam#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND MNRN_SQNO=#mnrnSqno#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	
+	<delete id="yetaPrc3130DAO.deleteYetaPrc3130_S">
+		<![CDATA[
+			DELETE FROM YETA3130 
+						WHERE EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND MNRN_SQNO=#mnrnSqno#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<!-- yeta0100 화면 연말정산대상자관리  -->
+	 <delete id="yetaPrc3130DAO.fnPayr06430_PAYR452_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3130 
+						WHERE EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd# 
+								AND DPOB_CD=#dpobCd# 
+				]]>
+				<isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                   </isNotEmpty> 
+		    		  			    
+	</delete>
+	
+	
+	<select id="yetaPrc3130DAO.selectYetaPrc3130_S" resultMap="yetaPrc3130">
+		<![CDATA[
+			SELECT
+				EDAC_RVYY
+				, SETT_GBCD
+				, MNRN_SQNO
+				, DPOB_CD
+				, SYSTEMKEY
+				, MNRN_NAME
+				, MNRN_RSNO
+				, MNRN_TYHU
+				, MNRN_AREA
+				, MNRN_ADDR
+				, MNRN_STDT
+				, MNRN_EDDT
+				, MNRN_AMNT
+				, MNRN_DUAM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YETA3130
+						WHERE EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND MNRN_SQNO=#mnrnSqno#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+	<select id="yetaPrc3130DAO.selectYetaPrc3130List_D" parameterClass="yetaPrc3130SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								EDAC_RVYY
+								, SETT_GBCD
+								, MNRN_SQNO
+								, DPOB_CD
+								, SYSTEMKEY
+								, MNRN_NAME
+								, MNRN_RSNO
+								, MNRN_TYHU
+								, MNRN_AREA
+								, MNRN_ADDR
+								, MNRN_STDT
+								, MNRN_EDDT
+								, MNRN_AMNT
+								, MNRN_DUAM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YETA3130
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					EDAC_RVYY = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SETT_GBCD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						EDAC_RVYY DESC
+							, SETT_GBCD DESC
+							, MNRN_SQNO DESC
+							, DPOB_CD DESC
+							, SYSTEMKEY DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="yetaPrc3130DAO.selectYetaPrc3130ListTotCnt_S" parameterClass="yetaPrc3130SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3130
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				EDAC_RVYY = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SETT_GBCD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

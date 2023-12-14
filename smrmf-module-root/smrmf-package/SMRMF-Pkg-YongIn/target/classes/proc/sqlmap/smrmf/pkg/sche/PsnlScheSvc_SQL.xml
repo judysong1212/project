@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="psnlScheSvcDAO">
+
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+    <typeAlias alias="schePsnl0100Dto" type="com.app.exterms.personal.client.dto.InfcPkgPsnl0100DTO"/> 
+	<typeAlias alias="schePsnl0123Dto" type="com.app.exterms.personal.client.dto.InfcPkgPsnl0123DTO"/>
+	 
+	<resultMap id="schePsnl0100" class="com.app.smrmf.infc.personal.server.vo.InfcPkgPsnl0100VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="3"/>
+		<result property="engNm" column="ENG_NM" columnIndex="4"/>
+		<result property="chinCharNm" column="CHIN_CHAR_NM" columnIndex="5"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="6"/>
+		<result property="sxDivCd" column="SX_DIV_CD" columnIndex="7"/>
+		<result property="yoobhMnthDay" column="YOOBH_MNTH_DAY" columnIndex="8"/>
+		<result property="sclcDivCd" column="SCLC_DIV_CD" columnIndex="9"/>
+		<result property="natnCd" column="NATN_CD" columnIndex="10"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="11"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="12"/>
+		<result property="currAffnDeptCd" column="CURR_AFFN_DEPT_CD" columnIndex="13"/>
+		<result property="repbtyBusinDivCd" column="REPBTY_BUSIN_DIV_CD" columnIndex="14"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="15"/>		
+		<result property="odtyCd" column="ODTY_CD" columnIndex="16"/>
+		<result property="frstEmymtDt" column="FRST_EMYMT_DT" columnIndex="17"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="18"/>
+		<result property="emymtBgnnDt" column="EMYMT_BGNN_DT" columnIndex="19"/>
+		<result property="emymtEndDt" column="EMYMT_END_DT" columnIndex="20"/>
+		<result property="pyspCd" column="PYSP_CD" columnIndex="21"/>
+		<result property="hdofcCodtnCd" column="HDOFC_CODTN_CD" columnIndex="22"/>
+		<result property="retryDt" column="RETRY_DT" columnIndex="23"/>
+		<result property="retryReasCtnt" column="RETRY_REAS_CTNT" columnIndex="24"/>
+		<result property="frgnrDivCd" column="FRGNR_DIV_CD" columnIndex="25"/>
+		<result property="psptNum" column="PSPT_NUM" columnIndex="26"/>
+		<result property="styBgnnDt" column="STY_BGNN_DT" columnIndex="27"/>
+		<result property="styEndDt" column="STY_END_DT" columnIndex="28"/>
+		<result property="endSchl" column="END_SCHL" columnIndex="29"/>
+		<result property="endDegrDivCd" column="END_DEGR_DIV_CD" columnIndex="30"/>
+		<result property="pmtnScduDt" column="PMTN_SCDU_DT" columnIndex="31"/>
+		<result property="pyspPrmtnScduDt" column="PYSP_PRMTN_SCDU_DT" columnIndex="32"/>
+		<result property="reymnScduDt" column="REYMN_SCDU_DT" columnIndex="33"/>
+		<result property="logSvcYrNumCd" column="LOG_SVC_YR_NUM_CD" columnIndex="34"/>
+		<result property="logSvcMnthIcmCd" column="LOG_SVC_MNTH_ICM_CD" columnIndex="35"/>
+		<result property="currPyspAppmtDt" column="CURR_PYSP_APPMT_DT" columnIndex="36"/>
+		<result property="currDeptAppmtDt" column="CURR_DEPT_APPMT_DT" columnIndex="37"/>
+		<result property="pernNoteCtnt" column="PERN_NOTE_CTNT" columnIndex="38"/>
+		<result property="kybdr" column="KYBDR" columnIndex="39"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="40"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="41"/>
+		<result property="ismt" column="ISMT" columnIndex="42"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="43"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="44"/> 
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="45"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="46"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="47"/>  
+	</resultMap>
+	
+	
+	<resultMap id="schePsnl0123" class="com.app.smrmf.infc.personal.server.vo.InfcPkgPsnl0123VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="levfAbncSeilNum" column="LEVF_ABNC_SEIL_NUM" columnIndex="3"/>
+		<result property="levfAbncDivCd" column="LEVF_ABNC_DIV_CD" columnIndex="4"/>
+		<result property="levfAbncBgnnDt" column="LEVF_ABNC_BGNN_DT" columnIndex="5"/>
+		<result property="levfAbncEndDt" column="LEVF_ABNC_END_DT" columnIndex="6"/>
+		<result property="turtyRntmntDt" column="TURTY_RNTMNT_DT" columnIndex="7"/>
+		<result property="levfAbncNoteCtnt" column="LEVF_ABNC_NOTE_CTNT" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap>
+	
+	<select id="psnlScheSvcDAO.selectScheLogSvcYrList_D" resultClass="egovMap">
+		<![CDATA[  
+     SELECT
+              ZZ.DPOB_CD,  ZZ.SYSTEMKEY, ZZ.HAN_NM, 
+               ZZ.FRST_EMYMT_DT,   ZZ.EMYMT_END_DT, ZZ.EMYMT_BGNN_DT, 
+              ZZ.LOG_STD_DT ,
+              (SELECT 
+                    COMM_CD 
+                FROM  BASS0300 A01
+                WHERE A01.RPSTTV_CD = 'A007'
+                AND   A01.DPOB_CD = ZZ.DPOB_CD
+                AND   A01.MANGE_ITEM01 = ZZ.ADD_YEAR_DAY) AS LOG_SVC_YR_NUM_CD01,
+              (SELECT 
+                    COMM_CD_NM 
+                FROM  BASS0300 A01
+                WHERE A01.RPSTTV_CD = 'A007'
+                AND   A01.DPOB_CD = ZZ.DPOB_CD
+                AND   A01.MANGE_ITEM01 = ZZ.ADD_YEAR_DAY) AS LOG_SVC_YR_NUM_NM01, 
+             NVL((SELECT 
+                    COMM_CD 
+                FROM  BASS0300 A01
+                WHERE A01.RPSTTV_CD = 'A006'
+                AND   A01.DPOB_CD = ZZ.DPOB_CD
+                AND   A01.MANGE_ITEM01 = ZZ.ADD_MONTH_DAY),'A0060034')  AS LOG_SVC_MNTH_ICM_CD01,
+              (SELECT 
+                    COMM_CD_NM 
+                FROM  BASS0300 A01
+                WHERE A01.RPSTTV_CD = 'A006'
+                AND   A01.DPOB_CD = ZZ.DPOB_CD
+                AND   A01.MANGE_ITEM01 = ZZ.ADD_MONTH_DAY) AS LOG_SVC_MNTH_ICM_NM01,
+                ZZ.ADD_DAY_DAY,  
+             ZZ.LOG_SVC_YR_NUM_CD02, ZZ.LOG_SVC_YR_NUM_NM02,
+             ZZ.LOG_SVC_MNTH_ICM_CD02 ,
+             ZZ.LOG_SVC_MNTH_ICM_NM02 
+            ,ZZ.STD_YEAR_DAY
+            ,ZZ.STD_MONTH_DAY 
+            ,ZZ.STD_DAY_DAY 
+            ,ZZ.YEAR_DAY0112  
+            ,ZZ.MONTH_DAY0112
+            ,ZZ.DAYS_DAY0112
+            ,ZZ.MONTH_RETY_DAY0110
+            ,ZZ.DAY_MI_DAY0123
+            FROM 
+            ( 
+          SELECT
+                 HH.DPOB_CD
+                ,HH.SYSTEMKEY
+                ,HH.HAN_NM
+                ,HH.FRST_EMYMT_DT
+                ,HH.EMYMT_END_DT
+                ,HH.EMYMT_BGNN_DT 
+                ,TO_CHAR(HH.LOG_STD_DT,'YYYYMMDD') AS LOG_STD_DT
+               , (  NVL (HH.STD_YEAR_DAY, 0)
+                + NVL (HH.YEAR_DAY0112, 0)
+                + TRUNC (
+                     (  (  NVL (HH.STD_MONTH_DAY, 0)
+                         + NVL (HH.MONTH_DAY0112, 0)
+                         + (TRUNC (
+                               (  (  NVL (HH.STD_DAY_DAY, 0)
+                                   + NVL (HH.DAYS_DAY0112, 0))
+                                / 30),
+                               0)))
+                      / 12),
+                     0))
+                  AS ADD_YEAR_DAY,
+               TRUNC (
+                  MOD (
+                     (  NVL (HH.STD_MONTH_DAY, 0)
+                      + NVL (HH.MONTH_DAY0112, 0)
+                      + (  TRUNC (
+                              (  (  NVL (HH.STD_DAY_DAY, 0)
+                                  + NVL (HH.DAYS_DAY0112, 0))
+                               / 30),
+                              0)
+                         - NVL (HH.MONTH_RETY_DAY0110, 0)
+                         + NVL (HH.RCGTN_MNTH_NUM, 0))),
+                     12),
+                  0)
+                  AS ADD_MONTH_DAY,
+               TRUNC (
+                  MOD ( (NVL (HH.STD_DAY_DAY, 0) + NVL (HH.DAYS_DAY0112, 0)),
+                       30),
+                  0)
+                  AS ADD_DAY_DAY
+               , HH.STD_YEAR_DAY
+                ,HH.STD_MONTH_DAY 
+                ,HH.STD_DAY_DAY 
+               , HH.YEAR_DAY0112  
+               , HH.MONTH_DAY0112
+               , HH.DAYS_DAY0112
+               , HH.MONTH_RETY_DAY0110
+               , HH.LOG_SVC_YR_NUM_CD02
+               , HH.LOG_SVC_YR_NUM_NM02
+               , HH.LOG_SVC_MNTH_ICM_CD02 
+               , HH.LOG_SVC_MNTH_ICM_NM02  
+               , HH.RCGTN_MNTH_NUM
+               , HH.DAY_MI_DAY0123
+            FROM          
+              ( SELECT AA.DPOB_CD, AA.SYSTEMKEY,AA.HAN_NM, AA.FRST_EMYMT_DT, CC.EMYMT_END_DT,BB.EMYMT_BGNN_DT , NVL((TO_DATE(BB.EMYMT_BGNN_DT,'YYYYMMDD') + H01.DAY_MI_DAY0123),TO_DATE(BB.EMYMT_BGNN_DT,'YYYYMMDD')) AS LOG_STD_DT ,
+                                 TRUNC(((TRUNC(MONTHS_BETWEEN(TO_DATE(CC.EMYMT_END_DT,'YYYYMMDD') + 1, NVL((TO_DATE(BB.EMYMT_BGNN_DT,'YYYYMMDD') + H01.DAY_MI_DAY0123),TO_DATE(BB.EMYMT_BGNN_DT,'YYYYMMDD'))),0))/12),0) AS STD_YEAR_DAY
+                                ,TRUNC(MOD((TRUNC(MONTHS_BETWEEN(TO_DATE(CC.EMYMT_END_DT,'YYYYMMDD') + 1, NVL((TO_DATE(BB.EMYMT_BGNN_DT,'YYYYMMDD') + H01.DAY_MI_DAY0123),TO_DATE(BB.EMYMT_BGNN_DT,'YYYYMMDD'))),0) ),12),0)   AS STD_MONTH_DAY 
+                                ,  ( TRUNC((((MONTHS_BETWEEN(TO_DATE(CC.EMYMT_END_DT,'YYYYMMDD') + 1, NVL((TO_DATE(BB.EMYMT_BGNN_DT,'YYYYMMDD') + H01.DAY_MI_DAY0123),TO_DATE(BB.EMYMT_BGNN_DT,'YYYYMMDD')))) 
+                                                - TRUNC(MONTHS_BETWEEN(TO_DATE(CC.EMYMT_END_DT,'YYYYMMDD') + 1, NVL((TO_DATE(BB.EMYMT_BGNN_DT,'YYYYMMDD') + H01.DAY_MI_DAY0123),TO_DATE(BB.EMYMT_BGNN_DT,'YYYYMMDD'))),0)) * 30.5),0))   AS STD_DAY_DAY 
+                                ,NVL(DD.YEAR_DAY0112,0)  AS YEAR_DAY0112  
+                                ,NVL(DD.MONTH_DAY0112,0) AS MONTH_DAY0112
+                                ,NVL(DD.DAYS_DAY0112,0) AS DAYS_DAY0112 
+                                ,NVL(GG.MONTH_RETY_DAY0110,0) AS MONTH_RETY_DAY0110
+                                ,AA.LOG_SVC_YR_NUM_CD AS LOG_SVC_YR_NUM_CD02
+                                ,fcBass0300CDNM(AA.DPOB_CD,AA.LOG_SVC_YR_NUM_CD) AS LOG_SVC_YR_NUM_NM02
+                                ,NVL(AA.LOG_SVC_MNTH_ICM_CD,'A0060034') AS LOG_SVC_MNTH_ICM_CD02 
+                                ,fcBass0300CDNM(AA.DPOB_CD,NVL(AA.LOG_SVC_MNTH_ICM_CD,'A0060034')) AS LOG_SVC_MNTH_ICM_NM02
+                                ,NVL(FF.RCGTN_MNTH_NUM,0) AS RCGTN_MNTH_NUM 
+                                ,H01.DAY_MI_DAY0123  
+                               FROM PSNL0100 AA, 
+                                (SELECT 
+                                   DPOB_CD, SYSTEMKEY,  
+                                   EMYMT_DIV_CD, MIN(EMYMT_BGNN_DT) AS EMYMT_BGNN_DT 
+                                FROM PSNL0110 
+                                WHERE EMYMT_DIV_CD = 'A0020010'
+                                  AND EMYMT_TYP_CD IN ('A0420010','A0420020','A0420030','A0420050','A0420060','A0420090')
+                                GROUP BY DPOB_CD, SYSTEMKEY, EMYMT_DIV_CD) BB,
+                                (
+                                SELECT
+                                    DPOB_CD, SYSTEMKEY,  
+                                   EMYMT_DIV_CD, 
+                                   (CASE WHEN EMYMT_END_DT NOT BETWEEN (TO_CHAR(SYSDATE,'YYYYMM') || '01') AND TO_CHAR(LAST_DAY(SYSDATE),'YYYYMMDD') THEN  
+                                                        CASE WHEN SUBSTR(EMYMT_END_DT,7,2) > SUBSTR(TO_CHAR(LAST_DAY(SYSDATE),'YYYYMMDD'),7,2)
+                                                           THEN (TO_CHAR(ADD_MONTHS(TO_DATE(EMYMT_END_DT,'YYYYMMDD'),
+                                                                                 MONTHS_BETWEEN(TO_DATE(TO_CHAR(SYSDATE,'YYYYMM'),'YYYYMM'),TO_DATE(SUBSTR(EMYMT_END_DT,1,6),'YYYYMM'))), 'YYYYMM') || '01' )
+                                                          ELSE (TO_CHAR(ADD_MONTHS(TO_DATE(EMYMT_END_DT,'YYYYMMDD'),
+                                                                                 MONTHS_BETWEEN(TO_DATE(TO_CHAR(SYSDATE,'YYYYMM'),'YYYYMM'),TO_DATE(SUBSTR(EMYMT_END_DT,1,6),'YYYYMM'))), 'YYYYMM') || '01')
+                                                      END
+                                                ELSE EMYMT_END_DT
+                                            END)  AS EMYMT_END_DT 
+                                 FROM 
+                                  (SELECT 
+                                   DPOB_CD, SYSTEMKEY,  
+                                   EMYMT_DIV_CD, 
+                                      (CASE WHEN MAX(NVL(EMYMT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))) = TO_CHAR(SYSDATE,'YYYYMMDD')
+                                         THEN (SELECT FRST_EMYMT_DT FROM PSNL0100 WHERE PSNL0100.DPOB_CD = PSNL0110.DPOB_CD AND PSNL0100.SYSTEMKEY = PSNL0110.SYSTEMKEY)
+                                         ELSE MAX(NVL(EMYMT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))) END) AS EMYMT_END_DT  
+                                FROM PSNL0110 
+                                WHERE EMYMT_DIV_CD = 'A0020010'
+                                  AND EMYMT_TYP_CD IN ('A0420010','A0420020','A0420030','A0420050','A0420060','A0420090')
+                                GROUP BY DPOB_CD, SYSTEMKEY, EMYMT_DIV_CD)
+                                ) CC,
+                                (
+                                
+                                SELECT
+                                    DPOB_CD, SYSTEMKEY,  
+                                      NVL(TRUNC((least(MONTH_DAYS, MANGE_MONTH_DAYS )/12), 0), 0) AS YEAR_DAY0112 ,  
+                                     (CASE WHEN NVL(TRUNC(least( NVL(MONTH_DAYS,0),NVL(MANGE_MONTH_DAYS,0)), 0), 0) = NVL(MONTH_DAYS,0) 
+                                          THEN  
+                                               (CASE WHEN NVL(ENRLNT_DT,'TT') <> 'TT' AND NVL(DSAGE_DT,'TT') <> 'TT' 
+                                                      AND LENGTH(ENRLNT_DT) = 8 AND LENGTH(DSAGE_DT) = 8
+                                                     THEN  TRUNC(MOD(MONTHS_BETWEEN(TO_DATE(DSAGE_DT,'YYYYMMDD') + 1, TO_DATE(ENRLNT_DT,'YYYYMMDD')),12),0) 
+                                                     ELSE 0 END)
+                                          ELSE   0 
+                                          END)  AS MONTH_DAY0112,
+                                   
+
+                                   (CASE WHEN NVL(TRUNC(least( NVL(MONTH_DAYS,0),NVL(MANGE_MONTH_DAYS,0)), 0), 0) = NVL(MONTH_DAYS,0) 
+                                          THEN  
+                                               (CASE WHEN NVL(ENRLNT_DT,'TT') <> 'TT' AND NVL(DSAGE_DT,'TT') <> 'TT' 
+                                                      AND LENGTH(ENRLNT_DT) = 8 AND LENGTH(DSAGE_DT) = 8
+                                                     THEN TRUNC((((MONTHS_BETWEEN(TO_DATE(DSAGE_DT,'YYYYMMDD') + 1, TO_DATE(ENRLNT_DT,'YYYYMMDD'))) 
+                                                        - TRUNC(MONTHS_BETWEEN(TO_DATE(DSAGE_DT,'YYYYMMDD') + 1, TO_DATE(ENRLNT_DT,'YYYYMMDD')),0)) * 30.5),0) 
+                                                     ELSE 0 END)
+                                          ELSE   0 
+                                          END) AS DAYS_DAY0112
+                                FROM
+                                    (SELECT DPOB_CD, SYSTEMKEY,ENRLNT_DT,DSAGE_DT ,  
+                                            (CASE WHEN NVL(ENRLNT_DT,'TT') <> 'TT' AND NVL(DSAGE_DT,'TT') <> 'TT' 
+                                                   AND LENGTH(ENRLNT_DT) = 8 AND LENGTH(DSAGE_DT) = 8
+                                              THEN TRUNC(MONTHS_BETWEEN(TO_DATE(DSAGE_DT,'YYYYMMDD') + 1, TO_DATE(ENRLNT_DT,'YYYYMMDD')),'0') 
+                                              ELSE 0 END) AS MONTH_DAYS,
+                                            (SELECT NVL(MANGE_ITEM11,0) FROM BASS0300 GG WHERE GG.DPOB_CD = NN.DPOB_CD
+                                                                 AND GG.COMM_CD  = NN.SERVC_RCGTN_PRID_CD  )  AS MANGE_MONTH_DAYS 
+                                    FROM PSNL0112 NN
+                                    WHERE NVL(NN.SERVC_RCGTN_PRID_CD,'A0290000') NOT IN ('A0290000')) 
+                                    
+                                     ) DD,
+                                (SELECT 
+                                     DPOB_CD, SYSTEMKEY , 
+                                     SUM(NVL(RCGTN_MNTH_NUM,0)) AS RCGTN_MNTH_NUM
+                                FROM PSNL0119
+                                GROUP BY DPOB_CD, SYSTEMKEY ) FF,
+                                (SELECT
+                                       DPOB_CD, 
+                                       SYSTEMKEY, 
+                                      (TRUNC(MONTHS_BETWEEN(TO_DATE(MIN_EMYMT_BGNN_DT,'YYYYMMDD') , TO_DATE(EMYMT_BGNN_DT,'YYYYMMDD')),'0') )  AS MONTH_RETY_DAY0110 
+                                FROM 
+                                (SELECT AA.DPOB_CD, 
+                                       AA.SYSTEMKEY, BB.EMYMT_BGNN_DT,
+                                       MIN(CASE WHEN BB.EMYMT_BGNN_DT < AA.EMYMT_BGNN_DT 
+                                                THEN AA.EMYMT_BGNN_DT
+                                                ELSE NULL END) AS MIN_EMYMT_BGNN_DT
+                                FROM PSNL0110 AA ,
+                                (SELECT 
+                                   *
+                                 FROM PSNL0110
+                                 WHERE  EMYMT_DIV_CD = 'A0020010'
+                                   AND  EMYMT_TYP_CD IN ('A0420990') 
+                                 ) BB
+                                WHERE AA.DPOB_CD = BB.DPOB_CD 
+                                  AND AA.SYSTEMKEY = BB.SYSTEMKEY   
+                                  AND AA.EMYMT_DIV_CD = 'A0020010'
+                                  AND AA.EMYMT_TYP_CD IN ('A0420010','A0420020','A0420060','A0420090') 
+                                GROUP BY AA.DPOB_CD, AA.SYSTEMKEY,BB.EMYMT_BGNN_DT)
+                                WHERE MIN_EMYMT_BGNN_DT IS NOT NULL) GG,
+                                ( SELECT 
+                                         DPOB_CD, SYSTEMKEY,SUM(DAY_MI_DAY0123) AS DAY_MI_DAY0123
+                                  FROM
+                                  (SELECT 
+                                       DPOB_CD, SYSTEMKEY, LEVF_ABNC_SEIL_NUM, 
+                                       LEVF_ABNC_DIV_CD, LEVF_ABNC_BGNN_DT, LEVF_ABNC_END_DT, 
+                                       TURTY_RNTMNT_DT, 
+                                       NVL((TRUNC(((TO_DATE(LEVF_ABNC_END_DT,'YYYYMMDD') + 1) - TO_DATE(LEVF_ABNC_BGNN_DT,'YYYYMMDD')),'0') ),0)  AS DAY_MI_DAY0123 
+                                    FROM  PSNL0123
+                                    WHERE SUBSTR(LEVF_ABNC_BGNN_DT,1,7) >= '2017' 
+                                    AND LEVF_ABNC_DIV_CD IN (
+                                     'B0140002'
+                                    ,'B0140005'
+                                    ,'B0140007'
+                                    ))
+                                    GROUP BY DPOB_CD, SYSTEMKEY) H01
+                                WHERE AA.DPOB_CD = BB.DPOB_CD
+                                  AND AA.DPOB_CD = CC.DPOB_CD
+                                  AND AA.SYSTEMKEY = BB.SYSTEMKEY
+                                  AND AA.SYSTEMKEY = CC.SYSTEMKEY  
+                                  AND AA.HDOFC_CODTN_CD IN ('A0030010','A0030030')
+                                  AND AA.EMYMT_DIV_CD = 'A0020010' 
+                                  AND AA.DPOB_CD = DD.DPOB_CD(+)
+                                  AND AA.SYSTEMKEY = DD.SYSTEMKEY(+)
+                                  AND AA.DPOB_CD = FF.DPOB_CD(+)
+                                  AND AA.SYSTEMKEY = FF.SYSTEMKEY(+)
+                                  AND AA.DPOB_CD = GG.DPOB_CD(+)
+                                  AND AA.SYSTEMKEY = GG.SYSTEMKEY(+)
+                                    AND AA.DPOB_CD = H01.DPOB_CD(+)
+                                  AND AA.SYSTEMKEY = H01.SYSTEMKEY(+)) HH 
+                  ) ZZ
+				]]> 
+	</select> 
+	
+	 <!-- 	SELECT
+              ZZ.DPOB_CD,  ZZ.SYSTEMKEY, ZZ.HAN_NM,  ZZ.FRST_EMYMT_DT,   ZZ.EMYMT_END_DT, ZZ.EMYMT_BGNN_DT,
+              ZZ.TOT_MONTH_DAY,
+              ZZ.YEAR_DAY,  
+              (SELECT 
+                    COMM_CD 
+                FROM  BASS0300 A01
+                WHERE A01.RPSTTV_CD = 'A007'
+                AND   A01.DPOB_CD = ZZ.DPOB_CD
+                AND   A01.MANGE_ITEM01 = ZZ.YEAR_DAY) AS LOG_SVC_YR_NUM_CD01,
+              (SELECT 
+                    COMM_CD_NM 
+                FROM  BASS0300 A01
+                WHERE A01.RPSTTV_CD = 'A007'
+                AND   A01.DPOB_CD = ZZ.DPOB_CD
+                AND   A01.MANGE_ITEM01 = ZZ.YEAR_DAY) AS LOG_SVC_YR_NUM_NM01,
+             ZZ.MONTH_DAY, 
+             (SELECT 
+                    COMM_CD 
+                FROM  BASS0300 A01
+                WHERE A01.RPSTTV_CD = 'A006'
+                AND   A01.DPOB_CD = ZZ.DPOB_CD
+                AND   A01.MANGE_ITEM01 = ZZ.MONTH_DAY) AS LOG_SVC_MNTH_ICM_CD01,
+              (SELECT 
+                    COMM_CD_NM 
+                FROM  BASS0300 A01
+                WHERE A01.RPSTTV_CD = 'A006'
+                AND   A01.DPOB_CD = ZZ.DPOB_CD
+                AND   A01.MANGE_ITEM01 = ZZ.MONTH_DAY) AS LOG_SVC_MNTH_ICM_NM01,
+             ZZ.MONTH_DAY0112, 
+             ZZ.MONTH_RETY_DAY0110,
+             ZZ.LOG_SVC_YR_NUM_CD02, ZZ.LOG_SVC_YR_NUM_NM02,
+             ZZ.LOG_SVC_MNTH_ICM_CD02 ,
+             ZZ.LOG_SVC_MNTH_ICM_NM02 
+            FROM 
+            ( 
+            SELECT AA.DPOB_CD, AA.SYSTEMKEY,AA.HAN_NM, AA.FRST_EMYMT_DT, CC.EMYMT_END_DT,BB.EMYMT_BGNN_DT, 
+                    ((TRUNC(MONTHS_BETWEEN(TO_DATE(CC.EMYMT_END_DT,'YYYYMMDD'), TO_DATE(BB.EMYMT_BGNN_DT,'YYYYMMDD')),'0') 
+                     + NVL(DD.MONTH_DAY0112,0) + NVL(FF.RCGTN_MNTH_NUM,0)) - NVL(MONTH_RETY_DAY0110,0)) AS TOT_MONTH_DAY,
+                     
+                    (CASE WHEN (SUBSTR(CC.EMYMT_END_DT,5,2) <> SUBSTR(AA.FRST_EMYMT_DT,5,2)) OR
+                              (SUBSTR(CC.EMYMT_END_DT,5,4)  = (SUBSTR(AA.FRST_EMYMT_DT,5,2) || '01'))  
+                       THEN 
+                        TRUNC(((TRUNC(MONTHS_BETWEEN(TO_DATE(CC.EMYMT_END_DT,'YYYYMMDD'), TO_DATE(BB.EMYMT_BGNN_DT,'YYYYMMDD')),'0') 
+                     + NVL(DD.MONTH_DAY0112,0) + NVL(FF.RCGTN_MNTH_NUM,0)) - NVL(MONTH_RETY_DAY0110,0))/12,'0')   
+                       ELSE 
+                        DECODE(TRUNC((((TRUNC(MONTHS_BETWEEN(TO_DATE(CC.EMYMT_END_DT,'YYYYMMDD'), TO_DATE(BB.EMYMT_BGNN_DT,'YYYYMMDD')),'0') - 1) 
+                        + NVL(DD.MONTH_DAY0112,0) + NVL(FF.RCGTN_MNTH_NUM,0)) - NVL(MONTH_RETY_DAY0110,0))/12,'0'), -1,0,
+                        TRUNC((((TRUNC(MONTHS_BETWEEN(TO_DATE(CC.EMYMT_END_DT,'YYYYMMDD'), TO_DATE(BB.EMYMT_BGNN_DT,'YYYYMMDD')),'0') - 1) 
+                        + NVL(DD.MONTH_DAY0112,0) + NVL(FF.RCGTN_MNTH_NUM,0)) - NVL(MONTH_RETY_DAY0110,0))/12,'0'))
+                       END ) AS YEAR_DAY,  
+                
+                (CASE WHEN (SUBSTR(CC.EMYMT_END_DT,5,2) <> SUBSTR(AA.FRST_EMYMT_DT,5,2)) OR
+                              (SUBSTR(CC.EMYMT_END_DT,5,4) = (SUBSTR(AA.FRST_EMYMT_DT,5,2) || '01'))  
+                       THEN 
+                       TRUNC(MOD((TRUNC(MONTHS_BETWEEN(TO_DATE(CC.EMYMT_END_DT,'YYYYMMDD'), TO_DATE(BB.EMYMT_BGNN_DT,'YYYYMMDD')),'0') 
+                     + NVL(DD.MONTH_DAY0112,0) + NVL(FF.RCGTN_MNTH_NUM,0) - NVL(MONTH_RETY_DAY0110,0)),12),'0') 
+                       ELSE 
+                       DECODE( TRUNC(MOD(((TRUNC(MONTHS_BETWEEN(TO_DATE(CC.EMYMT_END_DT,'YYYYMMDD'), TO_DATE(BB.EMYMT_BGNN_DT,'YYYYMMDD')),'0') - 1) 
+                     + NVL(DD.MONTH_DAY0112,0) + NVL(FF.RCGTN_MNTH_NUM,0) - NVL(MONTH_RETY_DAY0110,0)),12),'0') ,-1,11,
+                     TRUNC(MOD(((TRUNC(MONTHS_BETWEEN(TO_DATE(CC.EMYMT_END_DT,'YYYYMMDD'), TO_DATE(BB.EMYMT_BGNN_DT,'YYYYMMDD')),'0') - 1) 
+                     + NVL(DD.MONTH_DAY0112,0) + NVL(FF.RCGTN_MNTH_NUM,0) - NVL(MONTH_RETY_DAY0110,0)),12),'0'))
+                       END )  AS MONTH_DAY, 
+                    NVL(DD.MONTH_DAY0112,0) AS MONTH_DAY0112, 
+                    GG.MONTH_RETY_DAY0110,
+                    AA.LOG_SVC_YR_NUM_CD AS LOG_SVC_YR_NUM_CD02,fcBass0300CDNM(AA.DPOB_CD,AA.LOG_SVC_YR_NUM_CD) AS LOG_SVC_YR_NUM_NM02,
+                    NVL(AA.LOG_SVC_MNTH_ICM_CD,'A0060034') AS LOG_SVC_MNTH_ICM_CD02 ,
+                    fcBass0300CDNM(AA.DPOB_CD,NVL(AA.LOG_SVC_MNTH_ICM_CD,'A0060034')) AS LOG_SVC_MNTH_ICM_NM02  
+                    FROM PSNL0100 AA, 
+                    (SELECT 
+                       DPOB_CD, SYSTEMKEY,  
+                       EMYMT_DIV_CD, MIN(EMYMT_BGNN_DT) AS EMYMT_BGNN_DT 
+                    FROM PSNL0110 
+                    WHERE EMYMT_DIV_CD = 'A0020010'
+                      AND EMYMT_TYP_CD IN ('A0420010','A0420020','A0420030','A0420050','A0420060')
+                    GROUP BY DPOB_CD, SYSTEMKEY, EMYMT_DIV_CD) BB,
+                    (
+                    SELECT
+                        DPOB_CD, SYSTEMKEY,  
+                       EMYMT_DIV_CD, 
+                       (CASE WHEN EMYMT_END_DT NOT BETWEEN (TO_CHAR(SYSDATE,'YYYYMM') || '01') AND TO_CHAR(LAST_DAY(SYSDATE),'YYYYMMDD') THEN  
+                                            CASE WHEN SUBSTR(EMYMT_END_DT,7,2) > SUBSTR(TO_CHAR(LAST_DAY(SYSDATE),'YYYYMMDD'),7,2)
+                                               THEN TO_CHAR(ADD_MONTHS(TO_DATE(EMYMT_END_DT,'YYYYMMDD'),
+                                                                     MONTHS_BETWEEN(TO_DATE(TO_CHAR(SYSDATE,'YYYYMM'),'YYYYMM'),TO_DATE(SUBSTR(EMYMT_END_DT,1,6),'YYYYMM'))-1), 'YYYYMMDD')
+                                              ELSE TO_CHAR(ADD_MONTHS(TO_DATE(EMYMT_END_DT,'YYYYMMDD'),
+                                                                     MONTHS_BETWEEN(TO_DATE(TO_CHAR(SYSDATE,'YYYYMM'),'YYYYMM'),TO_DATE(SUBSTR(EMYMT_END_DT,1,6),'YYYYMM'))), 'YYYYMMDD')
+                                          END
+                                    ELSE EMYMT_END_DT
+                                END)  AS EMYMT_END_DT 
+                     FROM 
+                      (SELECT 
+                       DPOB_CD, SYSTEMKEY,  
+                       EMYMT_DIV_CD, 
+                          (CASE WHEN MAX(NVL(EMYMT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))) = TO_CHAR(SYSDATE,'YYYYMMDD')
+                             THEN (SELECT FRST_EMYMT_DT FROM PSNL0100 WHERE PSNL0100.DPOB_CD = PSNL0110.DPOB_CD AND PSNL0100.SYSTEMKEY = PSNL0110.SYSTEMKEY)
+                             ELSE MAX(NVL(EMYMT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))) END) AS EMYMT_END_DT  
+                    FROM PSNL0110 
+                    WHERE EMYMT_DIV_CD = 'A0020010'
+                      AND EMYMT_TYP_CD IN ('A0420010','A0420020','A0420030','A0420050','A0420060')
+                    GROUP BY DPOB_CD, SYSTEMKEY, EMYMT_DIV_CD)
+                    ) CC,
+                    (SELECT
+                        DPOB_CD, SYSTEMKEY,  
+                        NVL(TRUNC(least( NVL(MONTH_DAYS,0),NVL(MANGE_DAYS,0)), 0), 0) AS MONTH_DAY0112 
+                    FROM
+                        (SELECT DPOB_CD, SYSTEMKEY,   
+                                  (CASE WHEN NVL(ENRLNT_DT,'TT') <> 'TT' AND NVL(DSAGE_DT,'TT') <> 'TT' 
+                                       AND LENGTH(ENRLNT_DT) = 8 AND LENGTH(DSAGE_DT) = 8
+                                  THEN TRUNC(MONTHS_BETWEEN(TO_DATE(DSAGE_DT,'YYYYMMDD'), TO_DATE(ENRLNT_DT,'YYYYMMDD')),'0') 
+                                  ELSE 0 END) AS MONTH_DAYS,
+                             (SELECT NVL(MANGE_ITEM11,0) FROM BASS0300 GG WHERE GG.DPOB_CD = NN.DPOB_CD
+                                                     AND GG.COMM_CD  = NN.SERVC_RCGTN_PRID_CD  )  AS MANGE_DAYS 
+                        FROM PSNL0112 NN
+                        WHERE NVL(NN.SERVC_RCGTN_PRID_CD,'A0290000') NOT IN ('A0290000')) ) DD,
+                    (SELECT 
+                         DPOB_CD, SYSTEMKEY , 
+                         SUM(NVL(RCGTN_MNTH_NUM,0)) AS RCGTN_MNTH_NUM
+                    FROM PSNL0119
+                    GROUP BY DPOB_CD, SYSTEMKEY ) FF,
+                    (SELECT
+                           DPOB_CD, 
+                           SYSTEMKEY, 
+                          (TRUNC(MONTHS_BETWEEN(TO_DATE(MIN_EMYMT_BGNN_DT,'YYYYMMDD') , TO_DATE(EMYMT_BGNN_DT,'YYYYMMDD')),'0') )  AS MONTH_RETY_DAY0110 
+                    FROM 
+                    (SELECT AA.DPOB_CD, 
+                           AA.SYSTEMKEY, BB.EMYMT_BGNN_DT,
+                           MIN(CASE WHEN BB.EMYMT_BGNN_DT < AA.EMYMT_BGNN_DT 
+                                    THEN AA.EMYMT_BGNN_DT
+                                    ELSE NULL END) AS MIN_EMYMT_BGNN_DT
+                    FROM PSNL0110 AA ,
+                    (SELECT 
+                       *
+                     FROM PSNL0110
+                     WHERE  EMYMT_DIV_CD = 'A0020010'
+                       AND  EMYMT_TYP_CD IN ('A0420990') 
+                     ) BB
+                    WHERE AA.DPOB_CD = BB.DPOB_CD 
+                      AND AA.SYSTEMKEY = BB.SYSTEMKEY   
+                      AND AA.EMYMT_DIV_CD = 'A0020010'
+                      AND AA.EMYMT_TYP_CD IN ('A0420010','A0420020','A0420060') 
+                    GROUP BY AA.DPOB_CD, AA.SYSTEMKEY,BB.EMYMT_BGNN_DT)
+                    WHERE MIN_EMYMT_BGNN_DT IS NOT NULL) GG
+                    WHERE AA.DPOB_CD = BB.DPOB_CD
+                      AND AA.DPOB_CD = CC.DPOB_CD
+                      AND AA.SYSTEMKEY = BB.SYSTEMKEY
+                      AND AA.SYSTEMKEY = CC.SYSTEMKEY  
+                      AND AA.HDOFC_CODTN_CD IN ('A0030010','A0030030')
+                      AND AA.EMYMT_DIV_CD = 'A0020010' 
+                      AND AA.DPOB_CD = DD.DPOB_CD(+)
+                      AND AA.SYSTEMKEY = DD.SYSTEMKEY(+)
+                      AND AA.DPOB_CD = FF.DPOB_CD(+)
+                      AND AA.SYSTEMKEY = FF.SYSTEMKEY(+)
+                      AND AA.DPOB_CD = GG.DPOB_CD(+)
+                      AND AA.SYSTEMKEY = GG.SYSTEMKEY(+)  
+                  ) ZZ -->
+	
+		<!-- 근속년수 업데이트  따른 업데이트  -->
+	<update id="psnlScheSvcDAO.updatePsnl0100LogSvcYrNumCd">
+	   UPDATE PSNL0100
+         SET LOG_SVC_YR_NUM_CD    	= #logSvcYrNumCd#
+      		 , LOG_SVC_MNTH_ICM_CD  = #logSvcMnthIcmCd#
+      		 , LOG_STD_DT     		= replace(#logStdDt#,'-', '')
+	    WHERE DPOB_CD = #dpobCd#
+		  AND SYSTEMKEY = #systemkey# 	
+	</update>
+	
+	
+	<select id="psnlScheSvcDAO.selectPsnl0123_D"  resultClass="egovMap">
+		<![CDATA[
+			SELECT
+                  DPOB_CD
+                , SYSTEMKEY
+                , LEVF_ABNC_SEIL_NUM
+                , LEVF_ABNC_DIV_CD
+                , LEVF_ABNC_BGNN_DT
+                , LEVF_ABNC_END_DT
+                , TURTY_RNTMNT_DT
+                , LEVF_ABNC_NOTE_CTNT
+                , KYBDR
+                , INPT_DT
+                , INPT_ADDR
+                , ISMT
+                , REVN_DT
+                , REVN_ADDR
+            FROM  PSNL0123
+            WHERE NVL(TURTY_RNTMNT_DT,LEVF_ABNC_END_DT) = TO_CHAR(SYSDATE,'YYYYMMDD')
+              AND LEVF_ABNC_DIV_CD  NOT IN ('B0140003')
+				]]>
+	</select>
+	
+		<!-- 재직상태구분에 따른 업데이트  -->
+	<update id="psnlScheSvcDAO.Psnl0100ToPsnlStat" parameterClass="schePsnl0100Dto">
+	   UPDATE PSNL0100
+          SET HDOFC_CODTN_CD   = #hdofcCodtnCd#,
+              RETRY_DT         = #retryDt#,
+              RETRY_REAS_CTNT  = #retryReasCtnt# 
+	    WHERE DPOB_CD = #dpobCd#
+		  AND SYSTEMKEY = #systemkey# 	
+	</update>
+	
+		<!-- 휴직 업데이트 처리   -->
+	<update id="psnlScheSvcDAO.updateSchePsnl0123" parameterClass="schePsnl0123Dto">
+		
+			UPDATE PSNL0123
+			SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS') 
+				<isNotNull property="turtyRntmntDt"><isNotEmpty property="turtyRntmntDt">, TURTY_RNTMNT_DT=TO_CHAR( #turtyRntmntDt#, 'yyyymmdd')</isNotEmpty></isNotNull> 
+				<isNotNull property="ismt"><isNotEmpty property="ismt">, ISMT=#ismt#</isNotEmpty></isNotNull>
+				<isNotNull property="revnAddr"><isNotEmpty property="revnAddr">, REVN_ADDR=#revnAddr#</isNotEmpty></isNotNull>
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				AND LEVF_ABNC_SEIL_NUM=#levfAbncSeilNum# 
+	</update>
+	
+	<!-- 기간제 퇴직자 스케줄링 처리  -->
+	<select id="psnlScheSvcDAO.selectPsnl0100EndToPanl0100List_D"  resultClass="egovMap">
+		<![CDATA[
+			 SELECT 
+                 DPOB_CD, SYSTEMKEY, EMYMT_SEIL_NUM, 
+                 EMYMT_DIV_CD,  
+                 EMYMT_TYP_CD, EMYMT_BGNN_DT,  
+                 EMYMT_END_DT, 
+                 DEPT_CD, CURR_PAE_WORK_NM, 
+                 BUSIN_CD, TYP_OCCU_CD, DTIL_OCCU_CLS_DIV_CD, 
+                 ODTY_CD, PAY_PYMT_DIV_CD, EMYMT_SUM, 
+                 EMYMT_REAS_CTNT, CERT_NUM_HUHD, RDUC_BGNN_DT,  
+                 RDUC_END_DT, PYSP_GRDE_CD  
+               FROM PSNL0110 CC
+               WHERE CC.DPOB_CD IN ( SELECT DPOB_CD FROM BASS0100 ) 
+                AND (CC.DPOB_CD, CC.SYSTEMKEY  , CC.EMYMT_SEIL_NUM ) 
+                     IN (SELECT  AA.DPOB_CD, AA.SYSTEMKEY
+                                ,  AA.EMYMT_SEIL_NUM  AS EMYMT_SEIL_NUM 
+                           FROM PSNL0110 AA , PSNL0100 BB 
+                          WHERE AA.DPOB_CD IN ( SELECT DPOB_CD FROM BASS0100 ) 
+                            AND AA.DPOB_CD = BB.DPOB_CD
+                            AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+                            AND SUBSTR(AA.EMYMT_BGNN_DT,1,4) <= TO_CHAR(SYSDATE,'YYYY') 
+                            AND NVL(AA.EMYMT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD')) < TO_CHAR(SYSDATE,'YYYYMMDD') 
+                            AND BB.HDOFC_CODTN_CD = 'A0030010' 
+                            AND BB.EMYMT_DIV_CD = 'A0020020'
+                            AND  AA.EMYMT_BGNN_DT  = 
+                                     ( SELECT    MAX(A01.EMYMT_BGNN_DT )  
+                                           FROM PSNL0110 A01 , PSNL0100 A02 
+                                          WHERE A01.DPOB_CD IN ( SELECT DPOB_CD FROM BASS0100 ) 
+                                            AND A01.DPOB_CD = A02.DPOB_CD
+                                            AND A01.SYSTEMKEY = A02.SYSTEMKEY  
+                                            AND  NVL(A01.EMYMT_TYP_CD,'TT')  NOT IN ('A0420040')
+                                            AND A02.HDOFC_CODTN_CD = 'A0030010' 
+                                            AND A01.DPOB_CD = AA.DPOB_CD
+                                            AND A01.SYSTEMKEY = AA.SYSTEMKEY  
+                                          ) ) 
+                                          
+				]]>
+	</select>
+
+	<!-- 기간제오류수정  -->
+	<select id="psnlScheSvcDAO.selectPsnl0100EndToRePanl0100List_D"  resultClass="egovMap">
+		<![CDATA[
+			 SELECT 
+                 DPOB_CD, SYSTEMKEY, EMYMT_SEIL_NUM, 
+                 EMYMT_DIV_CD,  
+                 EMYMT_TYP_CD, EMYMT_BGNN_DT,  
+                 EMYMT_END_DT, 
+                 DEPT_CD, CURR_PAE_WORK_NM, 
+                 BUSIN_CD, TYP_OCCU_CD, DTIL_OCCU_CLS_DIV_CD, 
+                 ODTY_CD, PAY_PYMT_DIV_CD, EMYMT_SUM, 
+                 EMYMT_REAS_CTNT, CERT_NUM_HUHD, RDUC_BGNN_DT,  
+                 RDUC_END_DT, PYSP_GRDE_CD  
+               FROM PSNL0110 CC
+               WHERE CC.DPOB_CD IN ( SELECT DPOB_CD FROM BASS0100 ) 
+                AND (CC.DPOB_CD, CC.SYSTEMKEY  , CC.EMYMT_SEIL_NUM ) 
+                     IN (SELECT  AA.DPOB_CD, AA.SYSTEMKEY
+                                ,  AA.EMYMT_SEIL_NUM  AS EMYMT_SEIL_NUM 
+                           FROM PSNL0110 AA , PSNL0100 BB 
+                          WHERE AA.DPOB_CD IN ( SELECT DPOB_CD FROM BASS0100 ) 
+                            AND AA.DPOB_CD = BB.DPOB_CD
+                            AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+                            AND SUBSTR(AA.EMYMT_BGNN_DT,1,4)  >= TO_CHAR(SYSDATE,'YYYY') 
+                            AND NVL(AA.EMYMT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD')) >= TO_CHAR(SYSDATE,'YYYYMMDD') 
+                            AND BB.HDOFC_CODTN_CD = 'A0030020' 
+                            AND BB.EMYMT_DIV_CD = 'A0020020'
+                            AND  AA.EMYMT_BGNN_DT  = 
+                                     ( SELECT    MAX(A01.EMYMT_BGNN_DT )  
+                                           FROM PSNL0110 A01 , PSNL0100 A02 
+                                          WHERE A01.DPOB_CD IN ( SELECT DPOB_CD FROM BASS0100 ) 
+                                            AND A01.DPOB_CD = A02.DPOB_CD
+                                            AND A01.SYSTEMKEY = A02.SYSTEMKEY  
+                                            AND  NVL(A01.EMYMT_TYP_CD,'TT')  NOT IN ('A0420040')
+                                            AND A02.HDOFC_CODTN_CD = 'A0030020' 
+                                            AND A01.DPOB_CD = AA.DPOB_CD
+                                            AND A01.SYSTEMKEY = AA.SYSTEMKEY  
+                                          ) ) 
+				]]>
+	</select>
+	      
+                                          
+	 
+</sqlMap>

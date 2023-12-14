@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0550">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPsnl0550SerarchVO" type="com.app.exterms.personal.server.vo.InfcPsnl0550DefaultVO"/>
+	
+	<resultMap id="infcPsnl0550" class="com.app.exterms.personal.server.vo.InfcPsnl0550VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="prfIssNum" column="PRF_ISS_NUM" columnIndex="2"/>
+		<result property="certcDivCd" column="CERTC_DIV_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="certcIssDt" column="CERTC_ISS_DT" columnIndex="5"/>
+		<result property="issAppyDt" column="ISS_APPY_DT" columnIndex="6"/>
+		<result property="issAppbnDt" column="ISS_APPBN_DT" columnIndex="7"/>
+		<result property="issNumCpis" column="ISS_NUM_CPIS" columnIndex="8"/>
+		<result property="issPrpseCtnt" column="ISS_PRPSE_CTNT" columnIndex="9"/>
+		<result property="issIstutNm" column="ISS_ISTUT_NM" columnIndex="10"/>
+		<result property="retryReasCtnt" column="RETRY_REAS_CTNT" columnIndex="11"/>
+		<result property="issCodtnDivCd" column="ISS_CODTN_DIV_CD" columnIndex="12"/>
+		<result property="issYn" column="ISS_YN" columnIndex="13"/>
+		<result property="kybdr" column="KYBDR" columnIndex="14"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="15"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="16"/>
+		<result property="ismt" column="ISMT" columnIndex="17"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="18"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="19"/>
+	</resultMap>
+	
+	<insert id="infcPsnl0550DAO.insertPsnl0550_S">
+		<![CDATA[
+			INSERT INTO PSNL0550 
+				( DPOB_CD
+				  , PRF_ISS_NUM
+				  , CERTC_DIV_CD
+				  , SYSTEMKEY
+				  , CERTC_ISS_DT
+				  , ISS_APPY_DT
+				  , ISS_APPBN_DT
+				  , ISS_NUM_CPIS
+				  , ISS_PRPSE_CTNT
+				  , ISS_ISTUT_NM
+				  , RETRY_REAS_CTNT
+				  , ISS_CODTN_DIV_CD
+				  , ISS_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #prfIssNum#
+				  , #certcDivCd#
+				  , #systemkey#
+				  , #certcIssDt#
+				  , #issAppyDt#
+				  , #issAppbnDt#
+				  , #issNumCpis#
+				  , #issPrpseCtnt#
+				  , #issIstutNm#
+				  , #retryReasCtnt#
+				  , #issCodtnDivCd#
+				  , #issYn#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPsnl0550DAO.updatePsnl0550_S">
+		<![CDATA[
+			UPDATE PSNL0550
+			SET DPOB_CD=#dpobCd#
+				, PRF_ISS_NUM=#prfIssNum#
+				, CERTC_DIV_CD=#certcDivCd#
+				, SYSTEMKEY=#systemkey#
+				, CERTC_ISS_DT=#certcIssDt#
+				, ISS_APPY_DT=#issAppyDt#
+				, ISS_APPBN_DT=#issAppbnDt#
+				, ISS_NUM_CPIS=#issNumCpis#
+				, ISS_PRPSE_CTNT=#issPrpseCtnt#
+				, ISS_ISTUT_NM=#issIstutNm#
+				, RETRY_REAS_CTNT=#retryReasCtnt#
+				, ISS_CODTN_DIV_CD=#issCodtnDivCd#
+				, ISS_YN=#issYn#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND PRF_ISS_NUM=#prfIssNum#
+				]]>
+	</update>
+	
+	<delete id="infcPsnl0550DAO.deletePsnl0550_S">
+		<![CDATA[
+			DELETE FROM PSNL0550 
+						WHERE DPOB_CD=#dpobCd#
+								AND PRF_ISS_NUM=#prfIssNum#
+				]]>
+	</delete>
+	
+	<select id="infcPsnl0550DAO.selectPsnl0550_S" resultMap="infcPsnl0550">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, PRF_ISS_NUM
+				, CERTC_DIV_CD
+				, SYSTEMKEY
+				, CERTC_ISS_DT
+				, ISS_APPY_DT
+				, ISS_APPBN_DT
+				, ISS_NUM_CPIS
+				, ISS_PRPSE_CTNT
+				, ISS_ISTUT_NM
+				, RETRY_REAS_CTNT
+				, ISS_CODTN_DIV_CD
+				, ISS_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PSNL0550
+						WHERE DPOB_CD=#dpobCd#
+								AND PRF_ISS_NUM=#prfIssNum#
+				]]>
+	</select>
+	
+	<select id="infcPsnl0550DAO.selectPsnl0550List_D" parameterClass="infcPsnl0550SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, PRF_ISS_NUM
+								, CERTC_DIV_CD
+								, SYSTEMKEY
+								, CERTC_ISS_DT
+								, ISS_APPY_DT
+								, ISS_APPBN_DT
+								, ISS_NUM_CPIS
+								, ISS_PRPSE_CTNT
+								, ISS_ISTUT_NM
+								, RETRY_REAS_CTNT
+								, ISS_CODTN_DIV_CD
+								, ISS_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PSNL0550
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					PRF_ISS_NUM LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, PRF_ISS_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPsnl0550DAO.selectPsnl0550ListTotCnt_S" parameterClass="infcPsnl0550SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PSNL0550
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				PRF_ISS_NUM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

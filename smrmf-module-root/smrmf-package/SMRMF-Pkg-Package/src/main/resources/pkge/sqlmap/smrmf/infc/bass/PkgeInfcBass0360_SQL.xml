@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcBass0360">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgBass0360SrhVo" type="com.app.smrmf.infc.basis.server.vo.InfcPkgBass0360SrhVO"/>
+	<typeAlias  alias="infcPkgBass0360Vo" type="com.app.smrmf.infc.basis.server.vo.InfcPkgBass0360VO"/>
+	
+	<select id="InfcPkgBass0360DAO.selectBass0360ListTotCnt" parameterClass="infcPkgBass0360SrhVo" resultClass="int">
+	    
+		SELECT COUNT(*) FROM BASS0360 WHERE
+		<isNotNull property="dpobCd">
+			<isNotEmpty property="dpobCd">
+				DPOB_CD = #dpobCd#  
+		     </isNotEmpty>
+		 </isNotNull>		 	
+		 
+		 <isNotNull property="deptCd">
+		     <isNotEmpty property="deptCd">
+		         AND DEPT_CD = #deptCd#  
+		     </isNotEmpty>
+		 </isNotNull>		 
+		 
+		 <isNotNull property="typOccuCd">
+		 	<isNotEmpty property="typOccuCd" >
+			 	 AND TYP_OCCU_CD=#typOccuCd# 
+		 	</isNotEmpty> 
+		 </isNotNull> 
+		 
+		<isNotNull property="dtilOccuInttnCd">
+		 	<isNotEmpty property="dtilOccuInttnCd" >
+			 	 AND DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd# 
+		 	</isNotEmpty> 
+		 </isNotNull>
+
+		<isEqual property="payrMangDeptCdCk" compareValue="chk">
+				AND PAYR_MANG_DEPT_CD IS NULL
+		</isEqual>	
+		 
+	</select>	
+	
+	<update id="InfcPkgBass0360DAO.updateBass0360PayrMangDeptCd">
+	    UPDATE BASS0360
+	    	SET PAYR_MANG_DEPT_CD = #payrMangDeptCd#
+	    WHERE 1=1
+		<isNotNull prepend="AND" property="dpobCd">
+			<isNotEmpty property="dpobCd">
+				DPOB_CD = #dpobCd#  
+		     </isNotEmpty>
+		 </isNotNull>		 	
+		 
+		 <isNotNull prepend="AND" property="deptCd">
+		     <isNotEmpty property="deptCd">
+		          DEPT_CD = #deptCd#  
+		     </isNotEmpty>
+		 </isNotNull>		 
+		 
+		 <isNotNull prepend="AND" property="typOccuCd">
+		 	<isNotEmpty property="typOccuCd" >
+			 	  TYP_OCCU_CD=#typOccuCd# 
+		 	</isNotEmpty> 
+		 </isNotNull> 
+		 
+		<isNotNull prepend="AND" property="dtilOccuInttnCd">
+		 	<isNotEmpty property="dtilOccuInttnCd" >
+			 	  DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd# 
+		 	</isNotEmpty> 
+		 </isNotNull>
+
+		<isNotNull prepend="AND" property="payrMangDeptCd">
+			 	  PAYR_MANG_DEPT_CD IS NULL
+		 </isNotNull> 
+ 	</update>
+	
+	
+	<insert id="InfcPkgBass0360DAO.insertBass0360_S">
+		<![CDATA[
+			INSERT INTO BASS0360 
+				( DPOB_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , TYP_OCCU_CD
+				  , DEPT_CD
+				  , PAYR_MANG_DEPT_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #dtilOccuInttnCd#
+				  , #typOccuCd#
+				  , #deptCd#
+				  , #payrMangDeptCd#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	
+	<!-- 단위기관 가져오는 쿼리  -->
+	<select id="InfcPkgBass0360DAO.getPayrMangDeptCd" parameterClass="infcPkgBass0360SrhVo" resultClass="egovMap">
+	 <![CDATA[
+		SELECT 0 AS LEV,
+		       AA.DPOB_CD,
+		       AA.DEPT_CD,
+		       AA.TPLVL_DEPT_CD,
+		       AA.HHRK_DEPT_CD,
+		       AA.DEPT_NM_HAN,
+		       (CASE  WHEN (SELECT COUNT(DD.PAY_MANGE_DEPT_NM)  FROM BASS0150 DD WHERE DD.PAYR_MANG_DEPT_CD = AA.DEPT_CD) = '0'
+		                THEN (SELECT DD.DEPT_NM_ENG FROM BASS0400 DD WHERE DD.DEPT_CD = AA.TPLVL_DEPT_CD)           
+		          ELSE (SELECT DD.PAY_MANGE_DEPT_NM FROM BASS0150 DD WHERE DD.PAYR_MANG_DEPT_CD = AA.DEPT_CD) 
+		          END
+		       )AS PAY_MANGE_DEPT_NM,
+		              (CASE  WHEN (SELECT COUNT(FF.PAYR_MANG_DEPT_CD)  FROM BASS0150 FF WHERE FF.PAYR_MANG_DEPT_CD = AA.DEPT_CD) = '0'
+		                THEN (SELECT FF.DEPT_CD FROM BASS0400 FF WHERE FF.DEPT_CD = AA.TPLVL_DEPT_CD)           
+		          ELSE (SELECT FF.PAYR_MANG_DEPT_CD FROM BASS0150 FF WHERE FF.PAYR_MANG_DEPT_CD = AA.DEPT_CD) 
+		          END
+		       )AS PAYR_MANG_DEPT_CD
+		  FROM BASS0400 AA
+		 WHERE AA.DEPT_USE_YN = 'Y' AND AA.DEPT_CD = #deptCd#
+			AND  PAYR_MANG_DEPT_CD IS NOT NULL    
+		UNION ALL
+		    SELECT LEVEL, AA02.*
+		      FROM (SELECT CC.DPOB_CD,
+		                   CC.DEPT_CD,
+		                   CC.TPLVL_DEPT_CD,
+		                   CC.HHRK_DEPT_CD,
+		                   CC.DEPT_NM_HAN,
+		                   ''AS PAYR_MANGE_DEPT_NM,
+		                   ''AS PAYR_MANG_DEPT_CD
+		              FROM BASS0400 CC
+		             WHERE CC.DEPT_USE_YN = 'Y') AA02
+		     WHERE PAYR_MANG_DEPT_CD IS NOT NULL          
+		START WITH  AA02.HHRK_DEPT_CD = #deptCd#
+		CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD   
+	 	]]>	
+	</select>	
+	
+	<!--
+	<select id="InfcPkgBass0360DAO.getPayrMangDeptCd" parameterClass="infcPkgBass0360SrhVo" resultClass="egovMap">
+		<![CDATA[
+			WITH G01
+			     AS (SELECT 0 AS LEV,
+			                AA.DPOB_CD,
+			                AA.DEPT_CD,
+			                AA.TPLVL_DEPT_CD,
+			                AA.HHRK_DEPT_CD,
+			                AA.DEPT_NM_HAN
+			           FROM BASS0400 AA
+			          WHERE AA.DEPT_USE_YN = 'Y' AND AA.DEPT_CD = '000000000'
+			         UNION ALL
+			             SELECT LEVEL, AA02.*
+			               FROM (SELECT CC.DPOB_CD,
+			                            CC.DEPT_CD,
+			                            CC.TPLVL_DEPT_CD,
+			                            CC.HHRK_DEPT_CD,
+			                            CC.DEPT_NM_HAN
+			                       FROM BASS0400 CC
+			                      WHERE CC.DEPT_USE_YN = 'Y') AA02
+			         START WITH AA02.HHRK_DEPT_CD = '000000000'
+			         CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD),
+			         
+			     G02
+			     AS (SELECT G01.LEV AS LEV_04,
+			                G01.DEPT_CD AS DEPT_CD_04,
+			                DECODE (G01.HHRK_DEPT_CD, '000000000', G01.DEPT_CD, '', G01.DEPT_CD, G01.HHRK_DEPT_CD)AS HHRK_DEPT_CD_04,
+			                G01.DEPT_NM_HAN AS DEPT_NM_HAN_04,
+			                G06.PAYR_MANG_DEPT_CD AS PAYR_MANG_DEPT_CD_04,
+			                G06.PAY_MANGE_DEPT_NM AS PAY_MANGE_DEPT_NM_04
+			           FROM G01, BASS0150 G06
+			          WHERE     
+		]]>
+						<isNotNull property="dpobCd">
+							<isNotEmpty property="dpobCd">
+								G01.DPOB_CD = #dpobCd#  
+		     				</isNotEmpty>
+				 		</isNotNull>	
+						<isNotNull property="deptCd">
+		     				<isNotEmpty property="deptCd">
+		         				AND G01.DEPT_CD = #deptCd#  
+		     				</isNotEmpty>
+		 				</isNotNull>
+		<![CDATA[ 				
+			                AND G01.DEPT_CD = G06.PAYR_MANG_DEPT_CD(+)),
+			
+			     G03
+			     AS (SELECT DECODE (G01.LEV, '', G02.LEV_04, G01.LEV) AS LEV_03,
+			                DECODE (G01.DEPT_CD, '000000000', G02.DEPT_CD_04, '', G02.DEPT_CD_04, G01.DEPT_CD)AS DEPT_CD_03,
+			                DECODE (G01.HHRK_DEPT_CD,'000000000', G02.DEPT_CD_04, '', G02.DEPT_CD_04, G01.HHRK_DEPT_CD)AS HHRK_DEPT_CD_03,
+			                DECODE (G01.DEPT_NM_HAN,'', G02.DEPT_NM_HAN_04, G01.DEPT_NM_HAN)AS DEPT_NM_HAN_03,
+			                DECODE (G06.PAYR_MANG_DEPT_CD,'', G02.PAYR_MANG_DEPT_CD_04, G06.PAYR_MANG_DEPT_CD)AS PAYR_MANG_DEPT_CD_03,
+			                DECODE (G06.PAY_MANGE_DEPT_NM,'', G02.PAY_MANGE_DEPT_NM_04,G06.PAY_MANGE_DEPT_NM)AS PAY_MANGE_DEPT_NM_03
+			           FROM G01, G02, BASS0150 G06
+			          WHERE     G01.DEPT_CD = G02.HHRK_DEPT_CD_04
+			                AND G01.DEPT_CD = G06.PAYR_MANG_DEPT_CD(+)),
+			
+			     G04
+			     AS (SELECT DECODE (G01.LEV, '', G03.LEV_03, G01.LEV) AS LEV_02,
+			                DECODE (G01.DEPT_CD, '000000000', G03.DEPT_CD_03, '', G03.DEPT_CD_03, G01.DEPT_CD)AS DEPT_CD_02,
+			                DECODE (G01.HHRK_DEPT_CD,'000000000', G03.DEPT_CD_03, '', G03.DEPT_CD_03,G01.HHRK_DEPT_CD)AS HHRK_DEPT_CD_02,
+			                DECODE (G01.DEPT_NM_HAN, '', G02.DEPT_NM_HAN_04,G01.DEPT_NM_HAN)AS DEPT_NM_HAN_02,
+			                DECODE (G06.PAYR_MANG_DEPT_CD,'', G03.DEPT_CD_03,G06.PAYR_MANG_DEPT_CD)AS PAYR_MANG_DEPT_CD_02,
+			                DECODE (G06.PAY_MANGE_DEPT_NM,'', G03.PAY_MANGE_DEPT_NM_03, G06.PAY_MANGE_DEPT_NM)AS PAY_MANGE_DEPT_NM_02
+			           FROM G01,
+			                G02,
+			                G03,
+			                BASS0150 G06
+			          WHERE     G01.DEPT_CD = G03.HHRK_DEPT_CD_03
+			                AND G01.DEPT_CD = G06.PAYR_MANG_DEPT_CD(+)),
+			
+			     G05
+			     AS (SELECT DECODE (G01.LEV, '', G04.LEV_02, G01.LEV) AS LEV_01,
+			                DECODE (G01.DEPT_CD,'000000000', G04.DEPT_CD_02, '', G04.DEPT_CD_02,G01.DEPT_CD)AS DEPT_CD_01,
+			                DECODE (G01.HHRK_DEPT_CD,'000000000', G04.DEPT_CD_02,'', G04.DEPT_CD_02,G01.HHRK_DEPT_CD)AS HHRK_DEPT_CD_01,
+			                DECODE (G01.DEPT_NM_HAN,'', G04.DEPT_NM_HAN_02, G01.DEPT_NM_HAN)AS DEPT_NM_HAN_01,
+			                DECODE (G06.PAYR_MANG_DEPT_CD,'', G04.PAYR_MANG_DEPT_CD_02,G06.PAYR_MANG_DEPT_CD)AS PAYR_MANG_DEPT_CD_01,
+			                DECODE (G06.PAY_MANGE_DEPT_NM, '', G04.PAY_MANGE_DEPT_NM_02,G06.PAY_MANGE_DEPT_NM)AS PAY_MANGE_DEPT_NM_01
+			           FROM G01,
+			                G02,
+			                G03,
+			                G04,
+			                BASS0150 G06
+			          WHERE     G01.DEPT_CD = G04.HHRK_DEPT_CD_02
+			                AND G01.DEPT_CD = G06.PAYR_MANG_DEPT_CD(+))
+			
+			SELECT G02.LEV_04,
+			       G02.DEPT_CD_04,
+			       G02.HHRK_DEPT_CD_04,
+			       G02.DEPT_NM_HAN_04,
+			       G02.PAY_MANGE_DEPT_NM_04,
+			       DECODE (
+			          G02.PAYR_MANG_DEPT_CD_04,
+			          '', DECODE (
+			                 G03.PAYR_MANG_DEPT_CD_03,
+			                 '', DECODE (G04.PAYR_MANG_DEPT_CD_02,
+			                             '', G05.PAYR_MANG_DEPT_CD_01,
+			                             G04.PAYR_MANG_DEPT_CD_02),
+			                 G03.PAYR_MANG_DEPT_CD_03),
+			          G02.PAYR_MANG_DEPT_CD_04)
+			          AS PAYR_MANG_DEPT_CD,
+			       DECODE (
+			          G02.PAY_MANGE_DEPT_NM_04,
+			          '', DECODE (
+			                 G03.PAY_MANGE_DEPT_NM_03,
+			                 '', DECODE (G04.PAY_MANGE_DEPT_NM_02,
+			                             '', G05.PAY_MANGE_DEPT_NM_01,
+			                             G04.PAY_MANGE_DEPT_NM_02),
+			                 G03.PAY_MANGE_DEPT_NM_03),
+			          G02.PAY_MANGE_DEPT_NM_04) AS PAY_MANGE_DEPT_NM
+			  FROM G01,
+			       G02,
+			       G03,
+			       G04,
+			       G05
+			 WHERE     G01.DEPT_CD = G02.DEPT_CD_04
+			       AND G02.HHRK_DEPT_CD_04 = G03.DEPT_CD_03
+			       AND G03.HHRK_DEPT_CD_03 = G04.DEPT_CD_02
+			       AND G04.HHRK_DEPT_CD_02 = G05.DEPT_CD_01
+		]]>
+	</select>
+	--> 
+	
+	
+</sqlMap>

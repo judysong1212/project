@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPayr0485">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPayr0485SrhVo" type="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0485SrhVO"/>
+	<typeAlias  alias="infcPayr0485Vo" type="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0485VO"/>
+	
+	<resultMap id="infcPayr0485" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0485VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="2"/>
+		<result property="payItemCd" column="PAY_ITEM_CD" columnIndex="3"/>
+		<result property="accAccCd" column="ACC_ACC_CD" columnIndex="4"/>
+		<result property="sevePayYn" column="SEVE_PAY_YN" columnIndex="5"/>
+		<result property="yrtxDotnCd" column="YRTX_DOTN_CD" columnIndex="6"/>
+		<result property="yrtxFreeDtyReduCd" column="YRTX_FREE_DTY_REDU_CD" columnIndex="7"/>
+		<result property="payrTermUseYn" column="PAYR_TERM_USE_YN" columnIndex="8"/>
+		<result property="extptDducDspyYn" column="EXTPT_DDUC_DSPY_YN" columnIndex="9"/>
+		<result property="extptDducUseYn" column="EXTPT_DDUC_USE_YN" columnIndex="10"/>
+		<result property="extptDducRngeOrd" column="EXTPT_DDUC_RNGE_ORD" columnIndex="11"/>
+		<result property="kybdr" column="KYBDR" columnIndex="12"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="13"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="14"/>
+		<result property="ismt" column="ISMT" columnIndex="15"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="16"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="17"/>
+	</resultMap>
+	
+	<insert id="infcPkgPayr0485DAO.insertPayr0485_S">
+		<![CDATA[
+			INSERT INTO PAYR0485 
+				( DPOB_CD
+				  , EMYMT_DIV_CD
+				  , PAY_ITEM_CD
+				  , ACC_ACC_CD
+				  , SEVE_PAY_YN
+				  , YRTX_DOTN_CD
+				  , YRTX_FREE_DTY_REDU_CD
+				  , PAYR_TERM_USE_YN
+				  , EXTPT_DDUC_DSPY_YN
+				  , EXTPT_DDUC_USE_YN
+				  , EXTPT_DDUC_RNGE_ORD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #emymtDivCd#
+				  , #payItemCd#
+				  , #accAccCd#
+				  , #sevePayYn#
+				  , #yrtxDotnCd#
+				  , #yrtxFreeDtyReduCd#
+				  , #payrTermUseYn#
+				  , #extptDducDspyYn#
+				  , #extptDducUseYn#
+				  , #extptDducRngeOrd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgPayr0485DAO.updatePayr0485_S">
+		<![CDATA[
+			UPDATE PAYR0485
+			SET DPOB_CD=#dpobCd#
+				, EMYMT_DIV_CD=#emymtDivCd#
+				, PAY_ITEM_CD=#payItemCd#
+				, ACC_ACC_CD=#accAccCd#
+				, SEVE_PAY_YN=#sevePayYn#
+				, YRTX_DOTN_CD=#yrtxDotnCd#
+				, YRTX_FREE_DTY_REDU_CD=#yrtxFreeDtyReduCd#
+				, PAYR_TERM_USE_YN=#payrTermUseYn#
+				, EXTPT_DDUC_DSPY_YN=#extptDducDspyYn#
+				, EXTPT_DDUC_USE_YN=#extptDducUseYn#
+				, EXTPT_DDUC_RNGE_ORD=#extptDducRngeOrd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND PAY_ITEM_CD=#payItemCd#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPayr0485DAO.deletePayr0485_S">
+		<![CDATA[
+			DELETE FROM PAYR0485 
+						WHERE DPOB_CD=#dpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND PAY_ITEM_CD=#payItemCd#
+				]]>
+	</delete>
+	
+	<select id="infcPkgPayr0485DAO.selectPayr0485_S" parameterClass="infcPayr0485SrhVo" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, EMYMT_DIV_CD
+				, PAY_ITEM_CD
+				, ( SELECT BB.PAY_DDUC_NM 
+					FROM
+					(SELECT DPOB_CD, PAY_DDUC_CD, PAY_DDUC_NM
+					    FROM PAYR0470
+					      WHERE DPOB_CD = #dpobCd#
+					    UNION ALL
+					    SELECT DPOB_CD, PAY_EXTPY_CD, PAY_EXTPY_NM
+					      FROM PAYR0480
+					    WHERE DPOB_CD = #dpobCd# 
+					)BB    
+					WHERE DPOB_CD = BB.DPOB_CD
+						AND PAY_ITEM_CD = BB.PAY_DDUC_CD
+				   )AS PAY_ITEM_NM
+				, ACC_ACC_CD
+				, SEVE_PAY_YN
+				, YRTX_DOTN_CD
+				, YRTX_FREE_DTY_REDU_CD
+				, PAYR_TERM_USE_YN
+				, EXTPT_DDUC_DSPY_YN
+				, EXTPT_DDUC_USE_YN
+				, EXTPT_DDUC_RNGE_ORD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0485
+			WHERE 1=1
+		]]>				
+			<isNotEmpty prepend="AND" property="dpobCd">
+				DPOB_CD = #dpobCd#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="emymtDivCd">
+				EMYMT_DIV_CD = #emymtDivCd#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="payItemCd">
+				PAY_ITEM_CD = #payItemCd#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="extptDducDspyYn">
+				EXTPT_DDUC_DSPY_YN = #extptDducDspyYn#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="extptDducUseYn">
+				EXTPT_DDUC_USE_YN = #extptDducUseYn#
+			</isNotEmpty>
+				
+	</select>
+	
+	<select id="infcPkgPayr0485DAO.selectPayr0485List_D" parameterClass="infcPayr0485SrhVo" resultClass="egovMap">
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+					SELECT
+									DPOB_CD
+									, EMYMT_DIV_CD
+									, PAY_ITEM_CD
+									, ACC_ACC_CD
+									, SEVE_PAY_YN
+									, YRTX_DOTN_CD
+									, YRTX_FREE_DTY_REDU_CD
+									, PAYR_TERM_USE_YN
+									, EXTPT_DDUC_DSPY_YN
+									, EXTPT_DDUC_USE_YN
+									, EXTPT_DDUC_RNGE_ORD
+									, KYBDR
+									, INPT_DT
+									, INPT_ADDR
+									, ISMT
+									, REVN_DT
+									, REVN_ADDR
+							FROM PAYR0485
+					WHERE 1=1
+					<isEqual prepend="AND" property="searchCondition" compareValue="0">
+						DPOB_CD = #searchKeyword#
+					</isEqual>
+					<isEqual prepend="AND" property="searchCondition" compareValue="1">
+						EMYMT_DIV_CD LIKE '%' || #searchKeyword# || '%'
+					</isEqual>
+						ORDER BY 
+							DPOB_CD DESC
+								, EMYMT_DIV_CD DESC
+								, PAY_ITEM_CD DESC
+			
+			<![CDATA[					
+		) A WHERE ROWNUM <= #lastIndex#
+	)WHERE RNUM > #firstIndex#
+	]]>
+	</select>	
+	
+	
+	<select id="infcPkgPayr0485DAO.selectPayr0485ListTotCnt" parameterClass="infcPayr0485Vo" resultClass="int">
+			SELECT COUNT(*) totcnt
+			  FROM PAYR0485
+			WHERE 1=1
+			<isNotEmpty prepend="AND" property="dpobCd">
+				DPOB_CD = #dpobCd#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="emymtDivCd">
+				EMYMT_DIV_CD = #emymtDivCd#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="payItemCd">
+				PAY_ITEM_CD = #payItemCd#
+			</isNotEmpty>	
+			AND EXTPT_DDUC_DSPY_YN = 'Y'
+			AND EXTPT_DDUC_USE_YN = 'Y'
+	</select>
+	
+	
+	<select id="infcPkgPayr0485DAO.selectPayr0485ListTotCnt_S" parameterClass="infcPayr0485SrhVo" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0485
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				EMYMT_DIV_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+	
+	<!-- +++++++++++++++++++++++++++출력물 급여계산시 반영되도록 처리 루틴 추가 +++++++++++++++++++++++++++++++++++++ -->
+	<insert id="infcPkgPayr0485DAO.mutilInsertPayr4150ToPayr0485_01_S">
+		<![CDATA[
+		 INSERT INTO PAYGEN.PAYR0485 (
+			   DPOB_CD, EMYMT_DIV_CD, PAY_ITEM_CD, 
+			   ACC_ACC_CD, SEVE_PAY_YN, YRTX_DOTN_CD, 
+			   YRTX_FREE_DTY_REDU_CD, PAYR_TERM_USE_YN, EXTPT_DDUC_DSPY_YN, 
+			   EXTPT_DDUC_USE_YN, EXTPT_DDUC_RNGE_ORD ,PYMT_DDUC_DIV_CD)  
+			  
+			 
+			  SELECT   DPOB_CD,'A0020020',  PAY_ITEM_CD ,
+			  '','','','',PAYR_TERM_USE_YN,'Y','Y',
+			  ROW_NUMBER() OVER( ORDER BY PYMT_DDUC_DIV_CD ASC, PAY_ITEM_CD ASC ) RANK 
+			  ,PYMT_DDUC_DIV_CD
+			  FROM
+			(SELECT  DISTINCT AA.DPOB_CD, AA.PAY_ITEM_CD ,
+			   BB.PAYR_TERM_USE_YN,BB.PYMT_DDUC_DIV_CD 
+			FROM  PAYR0302 AA, PAYR0480 BB, PAYR0304 CC
+			WHERE AA.DPOB_CD = BB.DPOB_CD
+			  AND SUBSTR(AA.PYMT_YR_MNTH,1,4) >= '2014'
+			  AND AA.PAY_ITEM_CD = BB.PAY_EXTPY_CD
+			  AND AA.DPOB_CD = CC.DPOB_CD
+			  AND AA.SYSTEMKEY = CC.SYSTEMKEY
+			  AND CC.EMYMT_DIV_CD = 'A0020020'
+			  AND NOT EXISTS (SELECT 
+			                   DPOB_CD, EMYMT_DIV_CD, PAY_ITEM_CD, 
+			                   ACC_ACC_CD, SEVE_PAY_YN, YRTX_DOTN_CD, 
+			                   YRTX_FREE_DTY_REDU_CD, PAYR_TERM_USE_YN, EXTPT_DDUC_DSPY_YN, 
+			                   EXTPT_DDUC_USE_YN, EXTPT_DDUC_RNGE_ORD, KYBDR, 
+			                   INPT_DT, INPT_ADDR, ISMT, 
+			                   REVN_DT, REVN_ADDR, PYMT_DDUC_DIV_CD
+			                FROM PAYR0485 NN
+			                WHERE AA.DPOB_CD = NN.DPOB_CD
+			                AND AA.PAY_ITEM_CD =  NN.PAY_ITEM_CD))
+		]]>
+	</insert>
+	
+	<insert id="infcPkgPayr0485DAO.mutilInsertPayr4150ToPayr0485_02_S">
+		<![CDATA[
+		 
+			INSERT INTO PAYGEN.PAYR0485 (
+			   DPOB_CD, EMYMT_DIV_CD, PAY_ITEM_CD, 
+			   ACC_ACC_CD, SEVE_PAY_YN, YRTX_DOTN_CD, 
+			   YRTX_FREE_DTY_REDU_CD, PAYR_TERM_USE_YN, EXTPT_DDUC_DSPY_YN, 
+			   EXTPT_DDUC_USE_YN, EXTPT_DDUC_RNGE_ORD,PYMT_DDUC_DIV_CD )  
+			 
+			  SELECT   DPOB_CD,'A0020020',  PAY_ITEM_CD  ,
+			  '','','','',PAYR_TERM_DDUC_YN,'Y','Y', 
+			   1000 + ROW_NUMBER() OVER( ORDER BY PYMT_DDUC_DIV_CD ASC, PAY_ITEM_CD ASC ) RANK 
+			  ,PYMT_DDUC_DIV_CD
+			  FROM
+			(SELECT  DISTINCT AA.DPOB_CD, AA.PAY_ITEM_CD ,BB.PAYR_TERM_DDUC_YN
+			   ,BB.PYMT_DDUC_DIV_CD
+			FROM  PAYR0302 AA, PAYR0470 BB, PAYR0304 CC
+			WHERE AA.DPOB_CD = BB.DPOB_CD
+			AND SUBSTR(AA.PYMT_YR_MNTH,1,4) >= '2014'
+			AND   AA.PAY_ITEM_CD = BB.PAY_DDUC_CD 
+			  AND AA.DPOB_CD = CC.DPOB_CD
+			  AND AA.SYSTEMKEY = CC.SYSTEMKEY
+			  AND CC.EMYMT_DIV_CD = 'A0020020'
+			  AND NOT EXISTS (SELECT 
+			                   DPOB_CD, EMYMT_DIV_CD, PAY_ITEM_CD, 
+			                   ACC_ACC_CD, SEVE_PAY_YN, YRTX_DOTN_CD, 
+			                   YRTX_FREE_DTY_REDU_CD, PAYR_TERM_USE_YN, EXTPT_DDUC_DSPY_YN, 
+			                   EXTPT_DDUC_USE_YN, EXTPT_DDUC_RNGE_ORD, KYBDR, 
+			                   INPT_DT, INPT_ADDR, ISMT, 
+			                   REVN_DT, REVN_ADDR, PYMT_DDUC_DIV_CD
+			                FROM PAYR0485 NN
+			                WHERE AA.DPOB_CD = NN.DPOB_CD
+			                AND AA.PAY_ITEM_CD =  NN.PAY_ITEM_CD)
+           )
+		]]>
+	</insert>
+	
+	<insert id="infcPkgPayr0485DAO.mutilInsertPayr4150ToPayr0485_03_S">
+		<![CDATA[
+		 INSERT INTO PAYGEN.PAYR0485 (
+			   DPOB_CD, EMYMT_DIV_CD, PAY_ITEM_CD, 
+			   ACC_ACC_CD, SEVE_PAY_YN, YRTX_DOTN_CD, 
+			   YRTX_FREE_DTY_REDU_CD, PAYR_TERM_USE_YN, EXTPT_DDUC_DSPY_YN, 
+			   EXTPT_DDUC_USE_YN, EXTPT_DDUC_RNGE_ORD ,PYMT_DDUC_DIV_CD)  
+			  
+			 
+			  SELECT   DPOB_CD,'A0020010',  PAY_ITEM_CD ,
+			  '','','','',PAYR_TERM_USE_YN,'Y','Y',
+			  ROW_NUMBER() OVER( ORDER BY PYMT_DDUC_DIV_CD ASC, PAY_ITEM_CD ASC ) RANK 
+			  ,PYMT_DDUC_DIV_CD
+			  FROM
+			(SELECT  DISTINCT AA.DPOB_CD, AA.PAY_ITEM_CD ,
+			   BB.PAYR_TERM_USE_YN,BB.PYMT_DDUC_DIV_CD 
+			FROM  PAYR0302 AA, PAYR0480 BB, PAYR0304 CC
+			WHERE AA.DPOB_CD = BB.DPOB_CD
+			  AND SUBSTR(AA.PYMT_YR_MNTH,1,4) >= '2014'
+			  AND AA.PAY_ITEM_CD = BB.PAY_EXTPY_CD
+			  AND AA.DPOB_CD = CC.DPOB_CD
+			  AND AA.SYSTEMKEY = CC.SYSTEMKEY
+			  AND CC.EMYMT_DIV_CD = 'A0020010'
+			  AND NOT EXISTS (SELECT 
+			                   DPOB_CD, EMYMT_DIV_CD, PAY_ITEM_CD, 
+			                   ACC_ACC_CD, SEVE_PAY_YN, YRTX_DOTN_CD, 
+			                   YRTX_FREE_DTY_REDU_CD, PAYR_TERM_USE_YN, EXTPT_DDUC_DSPY_YN, 
+			                   EXTPT_DDUC_USE_YN, EXTPT_DDUC_RNGE_ORD, KYBDR, 
+			                   INPT_DT, INPT_ADDR, ISMT, 
+			                   REVN_DT, REVN_ADDR, PYMT_DDUC_DIV_CD
+			                FROM PAYR0485 NN
+			                WHERE AA.DPOB_CD = NN.DPOB_CD
+			                AND AA.PAY_ITEM_CD =  NN.PAY_ITEM_CD))
+		]]>
+	</insert>
+	
+	<insert id="infcPkgPayr0485DAO.mutilInsertPayr4150ToPayr0485_04_S">
+		<![CDATA[
+
+			INSERT INTO PAYGEN.PAYR0485 (
+			   DPOB_CD, EMYMT_DIV_CD, PAY_ITEM_CD, 
+			   ACC_ACC_CD, SEVE_PAY_YN, YRTX_DOTN_CD, 
+			   YRTX_FREE_DTY_REDU_CD, PAYR_TERM_USE_YN, EXTPT_DDUC_DSPY_YN, 
+			   EXTPT_DDUC_USE_YN, EXTPT_DDUC_RNGE_ORD,PYMT_DDUC_DIV_CD )  
+			 
+			  SELECT   DPOB_CD,'A0020010',  PAY_ITEM_CD  ,
+			  '','','','',PAYR_TERM_DDUC_YN,'Y','Y', 
+			   1000 + ROW_NUMBER() OVER( ORDER BY PYMT_DDUC_DIV_CD ASC, PAY_ITEM_CD ASC ) RANK 
+			  ,PYMT_DDUC_DIV_CD
+			  FROM
+			(SELECT  DISTINCT AA.DPOB_CD, AA.PAY_ITEM_CD ,BB.PAYR_TERM_DDUC_YN
+			   ,BB.PYMT_DDUC_DIV_CD
+			FROM  PAYR0302 AA, PAYR0470 BB, PAYR0304 CC
+			WHERE AA.DPOB_CD = BB.DPOB_CD
+			AND SUBSTR(AA.PYMT_YR_MNTH,1,4) >= '2014'
+			AND   AA.PAY_ITEM_CD = BB.PAY_DDUC_CD 
+			  AND AA.DPOB_CD = CC.DPOB_CD
+			  AND AA.SYSTEMKEY = CC.SYSTEMKEY
+			  AND CC.EMYMT_DIV_CD = 'A0020010'
+			   AND NOT EXISTS (SELECT 
+			                   DPOB_CD, EMYMT_DIV_CD, PAY_ITEM_CD, 
+			                   ACC_ACC_CD, SEVE_PAY_YN, YRTX_DOTN_CD, 
+			                   YRTX_FREE_DTY_REDU_CD, PAYR_TERM_USE_YN, EXTPT_DDUC_DSPY_YN, 
+			                   EXTPT_DDUC_USE_YN, EXTPT_DDUC_RNGE_ORD, KYBDR, 
+			                   INPT_DT, INPT_ADDR, ISMT, 
+			                   REVN_DT, REVN_ADDR, PYMT_DDUC_DIV_CD
+			                FROM PAYR0485 NN
+			                WHERE AA.DPOB_CD = NN.DPOB_CD
+			                AND AA.PAY_ITEM_CD =  NN.PAY_ITEM_CD))		 
+		]]>
+	</insert>
+	
+</sqlMap>

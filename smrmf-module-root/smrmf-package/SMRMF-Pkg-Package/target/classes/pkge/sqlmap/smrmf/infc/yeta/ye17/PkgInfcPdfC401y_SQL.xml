@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgPdfC401y">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgPdfC401ySrhVO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgPdfC401ySrhVO"/>
+	
+	<resultMap id="infcPkgPdfC401y" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgPdfC401yVO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="schUniSeilNum" column="SCH_UNI_SEIL_NUM" columnIndex="5"/>
+		<result property="formCd" column="FORM_CD" columnIndex="6"/>
+		<result property="resid" column="RESID" columnIndex="7"/>
+		<result property="name" column="NAME" columnIndex="8"/>
+		<result property="datCd" column="DAT_CD" columnIndex="9"/>
+		<result property="busnid" column="BUSNID" columnIndex="10"/>
+		<result property="schInttNm" column="SCH_INTT_NM" columnIndex="11"/>
+		<result property="schInttUniSum" column="SCH_INTT_UNI_SUM" columnIndex="12"/>
+		<result property="pdfDatAppYn" column="PDF_DAT_APP_YN" columnIndex="13"/>
+		<result property="pdfDatAppCmplDt" column="PDF_DAT_APP_CMPL_DT" columnIndex="14"/>
+		<result property="pdfDatAppExcCtnt" column="PDF_DAT_APP_EXC_CTNT" columnIndex="15"/>
+		<result property="kybdr" column="KYBDR" columnIndex="16"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="17"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="18"/>
+		<result property="ismt" column="ISMT" columnIndex="19"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="20"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="21"/>
+	</resultMap>
+	
+	<insert id="infcPkgPdfC401yDAO.insertPdfC401y_S">
+		<![CDATA[
+			INSERT INTO PDF_C401Y
+				(DPOB_CD, 
+				YRTX_BLGG_YR, 
+				CLUT_SEPT_CD, 
+				SYSTEMKEY, 
+				SCH_UNI_SEIL_NUM, 
+				FORM_CD, 
+				RESID, 
+				NAME, 
+				DAT_CD, 
+				BUSNID, 
+				SCH_INTT_NM, 
+				SCH_INTT_UNI_SUM, 
+				PDF_DAT_APP_YN, 
+				PDF_DAT_APP_CMPL_DT, 
+				PDF_DAT_APP_EXC_CTNT, 
+				KYBDR, 
+				INPT_DT, 
+				INPT_ADDR, 
+				ISMT, 
+				REVN_DT, 
+				REVN_ADDR) 
+		VALUES(#dpobCd#, 
+				#yrtxBlggYr#, 
+				#clutSeptCd#, 
+				#systemkey#, 
+				(SELECT COUNT(*)+1 FROM PDF_C401Y), 
+				#formCd#, 
+				#resid#, 
+				#name#, 
+				#datCd#, 
+				#busnid#, 
+				#schInttNm#, 
+				#schInttUniSum#, 
+				#pdfDatAppYn#, 
+				#pdfDatAppCmplDt#, 
+				#pdfDatAppExcCtnt#, 
+				#kybdr#, 
+				TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'), 
+				#inptAddr#, 
+				#ismt#, 
+				TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'), 
+				#revnAddr#)		
+		]]>
+	</insert>
+	
+	<update id="infcPkgPdfC401yDAO.updatePdfC401y_S">
+		<![CDATA[
+			UPDATE PDF_C401Y
+			   SET DPOB_CD = #dpobCd#,
+			       YRTX_BLGG_YR = #yrtxBlggYr#,
+			       CLUT_SEPT_CD = #clutSeptCd#,
+			       SYSTEMKEY = #systemkey#,
+			       SCH_UNI_SEIL_NUM = #schUniSeilNum#,
+			       FORM_CD = #formCd#,
+			       RESID = #resid#,
+			       NAME = #name#,
+			       DAT_CD = #datCd#,
+			       BUSNID = #busnid#,
+			       SCH_INTT_NM = #schInttNm#,
+			       SCH_INTT_UNI_SUM = #schInttUniSum#,
+			       PDF_DAT_APP_YN = #pdfDatAppYn#,
+			       PDF_DAT_APP_CMPL_DT = #pdfDatAppCmplDt#,
+			       PDF_DAT_APP_EXC_CTNT = #pdfDatAppExcCtnt#,
+			       ISMT = #ismt#,
+			       REVN_DT = #revnDt#,
+			       REVN_ADDR = #revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND SCH_UNI_SEIL_NUM=#schUniSeilNum#
+				]]>
+	</update>
+	
+	<update id="infcPkgPdfC401yDAO.updateYetaP220001ToPdfC401y_S">
+		<![CDATA[
+			UPDATE PDF_C401Y
+			SET   PDF_DAT_APP_YN=#pdfDatAppYn#
+				, PDF_DAT_APP_CMPL_DT = SUBSTR(TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),0,8)
+				, PDF_DAT_APP_EXC_CTNT = #pdfDatAppExcCtnt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND SCH_UNI_SEIL_NUM=#schUniSeilNum#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPdfC401yDAO.deletePdfC401y_S">
+		<![CDATA[
+			DELETE FROM PDF_C401Y 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+				<!-- AND SCH_UNI_SEIL_NUM=#schUniSeilNum# -->
+	</delete>
+	
+	<select id="infcPkgPdfC401yDAO.selectPdfC401y_S" resultMap="infcPkgPdfC401y">
+		<![CDATA[
+			SELECT
+				DPOB_CD, 
+				YRTX_BLGG_YR, 
+				CLUT_SEPT_CD, 
+				SYSTEMKEY, 
+				SCH_UNI_SEIL_NUM, 
+				FORM_CD, 
+				RESID, 
+				NAME, 
+				DAT_CD, 
+				BUSNID, 
+				SCH_INTT_NM, 
+				SCH_INTT_UNI_SUM, 
+				PDF_DAT_APP_YN, 
+				PDF_DAT_APP_CMPL_DT, 
+				PDF_DAT_APP_EXC_CTNT, 
+				KYBDR, 
+				INPT_DT, 
+				INPT_ADDR, 
+				ISMT, 
+				REVN_DT, 
+				REVN_ADDR
+			FROM PDF_C401Y
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND SCH_UNI_SEIL_NUM=#schUniSeilNum#
+				]]>
+	</select>
+	
+	<select id="infcPkgPdfC401yDAO.selectPdfC401yList_D" parameterClass="infcPkgPdfC401ySrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD, 
+								YRTX_BLGG_YR, 
+								CLUT_SEPT_CD, 
+								SYSTEMKEY, 
+								SCH_UNI_SEIL_NUM, 
+								FORM_CD, 
+								RESID, 
+								NAME, 
+								DAT_CD, 
+								BUSNID, 
+								SCH_INTT_NM, 
+								SCH_INTT_UNI_SUM, 
+								PDF_DAT_APP_YN, 
+								PDF_DAT_APP_CMPL_DT, 
+								PDF_DAT_APP_EXC_CTNT, 
+								KYBDR, 
+								INPT_DT, 
+								INPT_ADDR, 
+								ISMT, 
+								REVN_DT, 
+								REVN_ADDR
+						FROM PDF_C401Y
+				WHERE 1=1
+				AND DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY = #systemkey#
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, SCH_UNI_SEIL_NUM ASC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgPdfC401yDAO.selectPdfC401yListTotCnt_S" parameterClass="infcPkgPdfC401ySrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PDF_C401Y
+			WHERE 1=1
+			AND DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY = #systemkey#
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

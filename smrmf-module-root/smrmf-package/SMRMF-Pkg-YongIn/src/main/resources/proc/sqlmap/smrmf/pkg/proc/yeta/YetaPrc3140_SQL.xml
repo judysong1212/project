@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="YetaPrc3140">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="yetaPrc3140SerarchVO" type="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta3140SrhVO"/>
+	
+	<resultMap id="yetaPrc3140" class="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta3140VO">
+		<result property="mediSeqn" column="MEDI_SEQN" columnIndex="1"/>
+		<result property="edacRvyy" column="EDAC_RVYY" columnIndex="2"/>
+		<result property="settGbcd" column="SETT_GBCD" columnIndex="3"/>
+		<result property="dpobCd" column="DPOB_CD" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="rsnoNumb" column="RSNO_NUMB" columnIndex="6"/>
+		<result property="psclHpyn" column="PSCL_HPYN" columnIndex="7"/>
+		<result property="vendNumb" column="VEND_NUMB" columnIndex="8"/>
+		<result property="vendName" column="VEND_NAME" columnIndex="9"/>
+		<result property="mediCfcd" column="MEDI_CFCD" columnIndex="10"/>
+		<result property="cashUect" column="CASH_UECT" columnIndex="11"/>
+		<result property="cashUeam" column="CASH_UEAM" columnIndex="12"/>
+		<result property="ctifTrea" column="CTIF_TREA" columnIndex="13"/>
+		<result property="kybdr" column="KYBDR" columnIndex="14"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="15"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="16"/>
+		<result property="ismt" column="ISMT" columnIndex="17"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="18"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="19"/>
+	</resultMap>
+	
+	<insert id="yetaPrc3140DAO.insertYetaPrc3140_S">
+		<![CDATA[
+			INSERT INTO YETA3140 
+				( MEDI_SEQN
+				  , EDAC_RVYY
+				  , SETT_GBCD
+				  , DPOB_CD
+				  , SYSTEMKEY
+				  , RSNO_NUMB
+				  , PSCL_HPYN
+				  , VEND_NUMB
+				  , VEND_NAME
+				  , MEDI_CFCD
+				  , CASH_UECT
+				  , CASH_UEAM
+				  , CTIF_TREA
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #mediSeqn#
+				  , #edacRvyy#
+				  , #settGbcd#
+				  , #dpobCd#
+				  , #systemkey#
+				  , #rsnoNumb#
+				  , #psclHpyn#
+				  , #vendNumb#
+				  , #vendName#
+				  , #mediCfcd#
+				  , #cashUect#
+				  , #cashUeam#
+				  , #ctifTrea#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<!--  -->
+	<insert id="yetaPrc3140DAO.fnPayr06430_PAYR430_2014_Insert">
+		<![CDATA[
+			INSERT INTO YETA3140 
+				( MEDI_SEQN
+				  , EDAC_RVYY
+				  , SETT_GBCD
+				  , DPOB_CD
+				  , SYSTEMKEY
+				  , RSNO_NUMB
+				  , PSCL_HPYN
+				  , VEND_NUMB
+				  , VEND_NAME
+				  , MEDI_CFCD
+				  , CASH_UECT
+				  , CASH_UEAM
+				  , CTIF_TREA
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES (  
+			 (SELECT (NVL(MAX(MEDI_SEQN),0) +  1) AS MEDI_SEQN 
+                FROM YETA3140  AA 
+                WHERE AA.EDAC_RVYY = #edacRvyy# 
+                 AND AA.SETT_GBCD = #settGbcd# 
+                 AND  AA.SYSTEMKEY = #systemkey#
+                 AND AA.DPOB_CD = #dpobCd#)  
+				  , #edacRvyy#
+				  , #settGbcd#
+				  , #dpobCd#
+				  , #systemkey#
+				  , #rsnoNumb#
+				  , (
+				     DECODE(#psclHpyn#,'1','1',(
+				      SELECT DECODE(BB.PSCL_DDYN,'1','1','2') 
+				      FROM YETA3220 BB
+				       WHERE BB.EDAC_RVYY = #edacRvyy# 
+		                 AND BB.SETT_GBCD = #settGbcd# 
+		                 AND  BB.SYSTEMKEY = #systemkey#
+		                 AND BB.DPOB_CD = #dpobCd#
+		                 AND BB.RSNO_NUMB = #rsnoNumb#
+				     ))
+				   )
+				  , #vendNumb#
+				  , #vendName#
+				  , #mediCfcd#
+				  , #cashUect#
+				  , #cashUeam#
+				  , #ctifTrea#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	
+	<update id="yetaPrc3140DAO.updateYetaPrc3140_S">
+		<![CDATA[
+			UPDATE YETA3140
+			SET MEDI_SEQN=#mediSeqn#
+				, EDAC_RVYY=#edacRvyy#
+				, SETT_GBCD=#settGbcd#
+				, DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, RSNO_NUMB=#rsnoNumb#
+				, PSCL_HPYN=#psclHpyn#
+				, VEND_NUMB=#vendNumb#
+				, VEND_NAME=#vendName#
+				, MEDI_CFCD=#mediCfcd#
+				, CASH_UECT=#cashUect#
+				, CASH_UEAM=#cashUeam#
+				, CTIF_TREA=#ctifTrea# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE MEDI_SEQN=#mediSeqn#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	
+	<delete id="yetaPrc3140DAO.deleteYetaPrc3140_S">
+		<![CDATA[
+			DELETE FROM YETA3140 
+						WHERE MEDI_SEQN=#mediSeqn#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	   <!-- yeta0200 화면 의료비 추출  -->
+		<delete id="yetaPrc3140DAO.fnPayr06430_PAYR430_2014_Delete">
+		<![CDATA[
+			DELETE FROM YETA3140 
+						WHERE   EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND RSNO_NUMB=#rsnoNumb# 
+				                AND VEND_NUMB=#vendNumb#
+				]]>
+	</delete>
+	
+	
+	<!-- yeta0100 대상자정보 의료비 삭제  -->
+		<delete id="yetaPrc3140DAO.fnPayr06430_PAYR430_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3140 
+						WHERE   EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND DPOB_CD=#dpobCd#
+				]]>
+				  <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                   </isNotEmpty> 
+	</delete>
+	
+	
+	<select id="yetaPrc3140DAO.selectYetaPrc3140_S" resultMap="yetaPrc3140">
+		<![CDATA[
+			SELECT
+				MEDI_SEQN
+				, EDAC_RVYY
+				, SETT_GBCD
+				, DPOB_CD
+				, SYSTEMKEY
+				, RSNO_NUMB
+				, PSCL_HPYN
+				, VEND_NUMB
+				, VEND_NAME
+				, MEDI_CFCD
+				, CASH_UECT
+				, CASH_UEAM
+				, CTIF_TREA
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YETA3140
+						WHERE MEDI_SEQN=#mediSeqn#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+	<select id="yetaPrc3140DAO.selectYetaPrc3140List_D" parameterClass="yetaPrc3140SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								MEDI_SEQN
+								, EDAC_RVYY
+								, SETT_GBCD
+								, DPOB_CD
+								, SYSTEMKEY
+								, RSNO_NUMB
+								, PSCL_HPYN
+								, VEND_NUMB
+								, VEND_NAME
+								, MEDI_CFCD
+								, CASH_UECT
+								, CASH_UEAM
+								, CTIF_TREA
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YETA3140
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					MEDI_SEQN = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						MEDI_SEQN DESC
+							, EDAC_RVYY DESC
+							, SETT_GBCD DESC
+							, DPOB_CD DESC
+							, SYSTEMKEY DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="yetaPrc3140DAO.selectYetaPrc3140ListTotCnt_S" parameterClass="yetaPrc3140SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3140
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				MEDI_SEQN = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

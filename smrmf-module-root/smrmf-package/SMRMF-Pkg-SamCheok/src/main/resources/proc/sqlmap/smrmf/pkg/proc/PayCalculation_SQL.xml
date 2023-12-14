@@ -1,0 +1,2914 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PayCalculation">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/> 
+	<typeAlias  alias="payr0250CalcSrhVO" type="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0250VO"/>
+	<typeAlias  alias="payCalculationSrhVO" type="com.app.smrmf.pkg.payr.payrcalc.service.PkgPayrCommCalcSrhVO"/>  
+	<typeAlias  alias="infcInsr3100SrhVO"  type="com.app.smrmf.infc.insurance.server.vo.InfcPkgInsr3100SrhVO"/>
+	 <typeAlias  alias="infcCalPayr0302SrhVO" type="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0302VO"/> 
+	 
+	<resultMap id="procPayCalculation" class="com.app.smrmf.pkg.payr.payrcalc.service.PkgPayrCommCalcVO">
+	    <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>  
+		<result property="hanNm" column="HAN_NM" columnIndex="3"/> 
+		<result property="sxDivCd" column="SX_DIV_CD" columnIndex="4"/>
+		<result property="yoobhMnthDay" column="YOOBH_MNTH_DAY" columnIndex="5"/>
+		<result property="sclcDivCd" column="SCLC_DIV_CD" columnIndex="6"/>
+		<result property="natnCd" column="NATN_CD" columnIndex="7"/> 
+	    <result property="currAffnDeptCd" column="CURR_AFFN_DEPT_CD" columnIndex="8"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="9"/> 
+		<result property="repbtyBusinDivCd" column="REPBTY_BUSIN_DIV_CD" columnIndex="10"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="11"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="12"/> 
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="13"/>
+		<result property="odtyCd" column="ODTY_CD" columnIndex="14"/>
+		<result property="frstEmymtDt" column="FRST_EMYMT_DT" columnIndex="15"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="16"/>
+		<result property="emymtBgnnDt" column="EMYMT_BGNN_DT" columnIndex="17"/>
+		<result property="emymtEndDt" column="EMYMT_END_DT" columnIndex="18"/>
+		<result property="pyspCd" column="PYSP_CD" columnIndex="19"/>
+		<result property="hdofcCodtnCd" column="HDOFC_CODTN_CD" columnIndex="20"/>
+		<result property="retryDt" column="RETRY_DT" columnIndex="21"/>
+		<result property="retryReasCtnt" column="RETRY_REAS_CTNT" columnIndex="22"/>
+		<result property="frgnrDivCd" column="FRGNR_DIV_CD" columnIndex="23"/>
+		<result property="psptNum" column="PSPT_NUM" columnIndex="24"/>
+		<result property="styBgnnDt" column="STY_BGNN_DT" columnIndex="25"/>
+		<result property="styEndDt" column="STY_END_DT" columnIndex="26"/>
+		<result property="endSchl" column="END_SCHL" columnIndex="27"/>
+		<result property="endDegrDivCd" column="END_DEGR_DIV_CD" columnIndex="28"/>
+		<result property="pmtnScduDt" column="PMTN_SCDU_DT" columnIndex="29"/>
+		<result property="pyspPrmtnScduDt" column="PYSP_PRMTN_SCDU_DT" columnIndex="30"/>
+		<result property="reymnScduDt" column="REYMN_SCDU_DT" columnIndex="31"/>
+		<result property="logSvcYrNumCd" column="LOG_SVC_YR_NUM_CD" columnIndex="32"/>
+		<result property="logSvcMnthIcmCd" column="LOG_SVC_MNTH_ICM_CD" columnIndex="33"/>
+		<result property="currPyspAppmtDt" column="CURR_PYSP_APPMT_DT" columnIndex="34"/>
+		<result property="currDeptAppmtDt" column="CURR_DEPT_APPMT_DT" columnIndex="35"/>
+		<result property="pernNoteCtnt" column="PERN_NOTE_CTNT" columnIndex="36"/>	  
+		<result property="soctyInsurYr" column="SOCTY_INSUR_YR" columnIndex="37"/>
+		<result property="hlthInsurFlucDt" column="HLTH_INSUR_FLUC_DT" columnIndex="38"/>
+		<result property="hlthInsrPayTotAmnt" column="HLTH_INSR_PAY_TOT_AMNT" columnIndex="39"/>
+		<result property="hlthInsrMnthRuntnAmnt" column="HLTH_INSR_MNTH_RUNTN_AMNT" columnIndex="40"/>
+		<result property="natPennStdIncmMnthAmnt" column="NAT_PENN_STD_INCM_MNTH_AMNT" columnIndex="41"/>	 		
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="42"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="43"/>
+		<result property="logSvcStdDt" column="LOG_SVC_STD_DT" columnIndex="44"/>
+		<result property="wmnYn" column="WMN_YN" columnIndex="45"/>
+		<result property="retryClutYn" column="RETRY_CLUT_YN" columnIndex="46"/>
+		<result property="payRcptYn" column="PAY_RCPT_YN" columnIndex="47"/>
+		<result property="spueYn" column="SPUE_YN" columnIndex="48"/>
+		<result property="hlthInsrApptnYn" column="HLTH_INSR_APPTN_YN" columnIndex="49"/>
+		<result property="natPennApptnYn" column="NAT_PENN_APPTN_YN" columnIndex="50"/>
+		<result property="umytInsrApptnYn" column="UMYT_INSR_APPTN_YN" columnIndex="51"/>
+		<result property="idtlAccdtInsurApptnYn" column="IDTL_ACCDT_INSUR_APPTN_YN" columnIndex="52"/>
+		<result property="suprtFamyNumTwenChDn" column="SUPRT_FAMY_NUM_TWEN_CH_DN" columnIndex="53"/>
+		<result property="suprtFamyNumTreOvrChdnYn" column="SUPRT_FAMY_NUM_TRE_OVR_CHDN_YN" columnIndex="54"/>
+		<result property="suprtFamyNumEtc" column="SUPRT_FAMY_NUM_ETC" columnIndex="55"/>
+		<result property="chdnSchlExpnAdmclYn" column="CHDN_SCHL_EXPN_ADMCL_YN" columnIndex="56"/>
+		<result property="logSvcExtpyApptnYn" column="LOG_SVC_EXTPY_APPTN_YN" columnIndex="57"/> 		
+		<result property="levfAbncSeilNum" column="LEVF_ABNC_SEIL_NUM" columnIndex="58"/>
+		<result property="levfAbncDivCd" column="LEVF_ABNC_DIV_CD" columnIndex="59"/>
+		<result property="levfAbncBgnnDt" column="LEVF_ABNC_BGNN_DT" columnIndex="60"/>
+		<result property="levfAbncEndDt" column="LEVF_ABNC_END_DT" columnIndex="61"/>
+		<result property="turtyRntmntDt" column="TURTY_RNTMNT_DT" columnIndex="62"/>		
+		<result property="bnkCd" column="BNK_CD" columnIndex="63"/>
+		<result property="bnkAccuNum" column="BNK_ACCU_NUM" columnIndex="64"/>
+		<result property="acntHodrNm" column="ACNT_HODR_NM" columnIndex="65"/>
+		  <result property="rpsttvAccuYn" column="RPSTTV_ACCU_YN" columnIndex="66"/>		
+       	  <result property="dilnlazYrMnth" column="DILNLAZ_YR_MNTH" columnIndex="67"/> 
+		  <result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="68"/>
+		  <result property="dilnlazDutyBgnnDt" column="DILNLAZ_DUTY_BGNN_DT" columnIndex="69"/>
+		  <result property="dilnlazDutyEndDt" column="DILNLAZ_DUTY_END_DT" columnIndex="70"/>
+		  <result property="dilnlazDutyNumDys" column="DILNLAZ_DUTY_NUM_DYS" columnIndex="71"/>
+		  <result property="dilnlazLvsgNumDys" column="DILNLAZ_LVSG_NUM_DYS" columnIndex="72"/>
+		  <result property="dilnlazAbnceNumDys" column="DILNLAZ_ABNCE_NUM_DYS" columnIndex="73"/>
+		  <result property="dilnlazSckleaNumDys" column="DILNLAZ_SCKLEA_NUM_DYS" columnIndex="74"/>
+		  <result property="dilnlazOffvaNumDys" column="DILNLAZ_OFFVA_NUM_DYS" columnIndex="75"/>
+		  <result property="dilnlazFmlyEvntNumDys" column="DILNLAZ_FMLY_EVNT_NUM_DYS" columnIndex="76"/>
+		  <result property="dilnlazHlthCreNumDys" column="DILNLAZ_HLTH_CRE_NUM_DYS" columnIndex="77"/>
+		  <result property="dilnlazTotDutyNumDys" column="DILNLAZ_TOT_DUTY_NUM_DYS" columnIndex="78"/>
+		  <result property="dilnlazWklyHldyNumDys" column="DILNLAZ_WKLY_HLDY_NUM_DYS" columnIndex="79"/>
+		  <result property="dilnlazPaidPubcHodyNum" column="DILNLAZ_PAID_PUBC_HODY_NUM" columnIndex="80"/>
+		  <result property="dilnlazDdlnePrcsYn01"     column="DILNLAZ_DDLNE_PRCS_YN_01" columnIndex="81"/>  
+		  <result property="dilnlazExceDutyYrMnth" column="DILNLAZ_EXCE_DUTY_YR_MNTH" columnIndex="82"/> 
+		  <result property="dilnlazExceDutyBgnnDt" column="DILNLAZ_EXCE_DUTY_BGNN_DT" columnIndex="83"/>
+		  <result property="dilnlazExceDutyEndDt" column="DILNLAZ_EXCE_DUTY_END_DT" columnIndex="84"/>
+		  <result property="dilnlazPubcHodyDutyNumDys" column="DILNLAZ_PUBC_HODY_DUTY_NUM_DYS" columnIndex="85"/>
+		  <result property="dilnlazSatDutyNumDys" column="DILNLAZ_SAT_DUTY_NUM_DYS" columnIndex="86"/>
+		  <result property="dilnlazTotNtotNumDys" column="DILNLAZ_TOT_NTOT_NUM_DYS" columnIndex="87"/>
+		  <result property="dilnlazTotNtotTm" column="DILNLAZ_TOT_NTOT_TM" columnIndex="88"/>
+		  <result property="dilnlazFndtnTmRstDutyTm" column="DILNLAZ_FNDTN_TM_RST_DUTY_TM" columnIndex="89"/>
+		  <result property="dilnlazTmRstDutyTm" column="DILNLAZ_TM_RST_DUTY_TM" columnIndex="90"/>
+		  <result property="dilnlazTotTmRstDutyTm" column="DILNLAZ_TOT_TM_RST_DUTY_TM" columnIndex="91"/>
+		  <result property="dilnlazDdlnePrcsYn02" column="DILNLAZ_DDLNE_PRCS_YN_02" columnIndex="92"/>
+		  <result property="dilnlazNoteCtnt" column="DILNLAZ_NOTE_CTNT" columnIndex="93"/>
+		  <result property="payYrMnth" column="PAY_YR_MNTH" columnIndex="94"/> 		  
+		  <result property="hlthInsrGrde" column="HLTH_INSR_GRDE" columnIndex="95"/> 
+		  <result property="hlthInsrCertNum" column="HLTH_INSR_CERT_NUM" columnIndex="96"/> 
+		  <result property="natPennInsurFlucDt" column="NAT_PENN_INSUR_FLUC_DT" columnIndex="97"/> 
+		  <result property="natPennGrde" column="NAT_PENN_GRDE" columnIndex="98"/>  
+		  <result property="suprtFamy3ChdnExtpySum" column="SUPRT_FAMY_3_CHDN_EXTPY_SUM" columnIndex="99"/>		   
+		  <result property="hlthInsrPayAmt" column="HLTH_INSR_PAY_AMT" columnIndex="100"/>
+		  <result property="hlthInsrRcptnPayAmt" column="HLTH_INSR_RCPTN_PAY_AMT" columnIndex="101"/>
+		  <result property="natPennAmt" column="NAT_PENN_AMT" columnIndex="102"/>	
+		  <result property="payCd" column="PAY_CD" columnIndex="103"/>	
+		  <result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="104"/>
+		  <result property="dilnlazAbnceDutyRcgtnDys" column="DILNLAZ_ABNCE_DUTY_RCGTN_DYS" columnIndex="105"/>
+		  <result property="dilnlazSpclHodyNumDys" column="DILNLAZ_SPCL_HODY_NUM_DYS" columnIndex="106"/>
+		  <result property="dilnlazTotDutyTm" column="DILNLAZ_TOT_DUTY_TM" columnIndex="107"/>  
+		  <result property="dilnlazPaidHodyNumDys" column="DILNLAZ_PAID_HODY_NUM_DYS" columnIndex="108"/>
+		  <result property="dilnlazTfcAssCstNumDys" column="DILNLAZ_TFC_ASS_CST_NUM_DYS" columnIndex="109"/>
+		  
+		  <result property="umytInsrFlucDt" column="UMYT_INSR_FLUC_DT" columnIndex="110"/>
+		  <result property="umytInsrPayTotAmnt" column="UMYT_INSR_PAY_TOT_AMNT" columnIndex="111"/>
+		  <result property="umytInsrPayMnthAmnt" column="UMYT_INSR_PAY_MNTH_AMNT" columnIndex="112"/>
+		  <result property="idtlAccdtFlucDt" column="IDTL_ACCDT_FLUC_DT" columnIndex="113"/>
+		  <result property="idtlAccdtPayTotAmnt" column="IDTL_ACCDT_PAY_TOT_AMNT" columnIndex="114"/>
+		  <result property="idtlAccdtPayMnthAmnt" column="IDTL_ACCDT_PAY_MNTH_AMNT" columnIndex="115"/>
+		  <result property="dayWorkYn" column="DAY_WORK_YN" columnIndex="116"/> 
+		  <result property="addIncmTxApptnRtoCd" column="ADD_INCM_TX_APPTN_RTO_CD" columnIndex="117"/>
+		<result property="addIncmTxApptnYrMnth" column="ADD_INCM_TX_APPTN_YR_MNTH" columnIndex="118"/>
+		<result property="addIncmTxApptnYn" column="ADD_INCM_TX_APPTN_YN" columnIndex="119"/>
+		 <result property="addIncmTxApptnRto" column="ADD_INCM_TX_APPTN_RTO" columnIndex="120"/>
+		  <result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="121"/>
+		   <result property="dilnlazLnchDys" column="DILNLAZ_LNCH_DYS" columnIndex="122"/>
+		    <result property="dilnlazPubcHodyDutyTm" column="DILNLAZ_PUBC_HODY_DUTY_TM" columnIndex="123"/>
+		    <result property="unnMbspSttYn" column="UNN_MBSP_STT_YN" columnIndex="124"/> 
+           <result property="dilnlazHodyTotNtotTm" column="DILNLAZ_HODY_TOT_NTOT_TM" columnIndex="125"/> 
+           <result property="dilnlazHodyDutyNumDys" column="DILNLAZ_HODY_DUTY_NUM_DYS" columnIndex="126"/> 
+<result property="dilnlazWkdDutyNumDys" column="DILNLAZ_WKD_DUTY_NUM_DYS" columnIndex="127"/>  
+<result property="dilnlazButpDys" column="DILNLAZ_BUTP_DYS" columnIndex="128"/>
+ <result property="mangeDeptCd" column="MANGE_DEPT_CD" columnIndex="129"/>
+		  <result property="exPayr0410" column="{dpobCd=DPOB_CD,payYrMnth=PAY_YR_MNTH,payCd=PAY_CD,systemkey=SYSTEMKEY,emymtDivCd=EMYMT_DIV_CD,payrMangDeptCd=PAYR_MANG_DEPT_CD,typOccuCd=TYP_OCCU_CD,pyspGrdeCd=PYSP_GRDE_CD,dtilOccuInttnCd=DTIL_OCCU_INTTN_CD,logSvcYrNumCd=LOG_SVC_YR_NUM_CD}"   select="payCalculationDAO.selectPayr0410_S"/>
+		  <result property="exPayr0530" column="{dpobCd=DPOB_CD,systemkey=SYSTEMKEY}"   select="payCalculationDAO.selectPayr0530_S"/>  
+	</resultMap> 
+	 
+	
+	<resultMap id="payA20Calculation" class="com.app.smrmf.pkg.payr.payrcalc.service.PkgPayrCommCalcVO">
+	    <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>  
+		<result property="hanNm" column="HAN_NM" columnIndex="3"/> 
+		<result property="sxDivCd" column="SX_DIV_CD" columnIndex="4"/>
+		<result property="yoobhMnthDay" column="YOOBH_MNTH_DAY" columnIndex="5"/>
+		<result property="sclcDivCd" column="SCLC_DIV_CD" columnIndex="6"/>
+		<result property="natnCd" column="NATN_CD" columnIndex="7"/> 
+	    <result property="currAffnDeptCd" column="CURR_AFFN_DEPT_CD" columnIndex="8"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="9"/> 
+		<result property="repbtyBusinDivCd" column="REPBTY_BUSIN_DIV_CD" columnIndex="10"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="11"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="12"/> 
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="13"/>
+		<result property="odtyCd" column="ODTY_CD" columnIndex="14"/>
+		<result property="frstEmymtDt" column="FRST_EMYMT_DT" columnIndex="15"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="16"/>
+		<result property="emymtBgnnDt" column="EMYMT_BGNN_DT" columnIndex="17"/>
+		<result property="emymtEndDt" column="EMYMT_END_DT" columnIndex="18"/>
+		<result property="pyspCd" column="PYSP_CD" columnIndex="19"/>
+		<result property="hdofcCodtnCd" column="HDOFC_CODTN_CD" columnIndex="20"/>
+		<result property="retryDt" column="RETRY_DT" columnIndex="21"/>
+		<result property="retryReasCtnt" column="RETRY_REAS_CTNT" columnIndex="22"/>
+		<result property="frgnrDivCd" column="FRGNR_DIV_CD" columnIndex="23"/>
+		<result property="psptNum" column="PSPT_NUM" columnIndex="24"/>
+		<result property="styBgnnDt" column="STY_BGNN_DT" columnIndex="25"/>
+		<result property="styEndDt" column="STY_END_DT" columnIndex="26"/>
+		<result property="endSchl" column="END_SCHL" columnIndex="27"/>
+		<result property="endDegrDivCd" column="END_DEGR_DIV_CD" columnIndex="28"/>
+		<result property="pmtnScduDt" column="PMTN_SCDU_DT" columnIndex="29"/>
+		<result property="pyspPrmtnScduDt" column="PYSP_PRMTN_SCDU_DT" columnIndex="30"/>
+		<result property="reymnScduDt" column="REYMN_SCDU_DT" columnIndex="31"/>
+		<result property="logSvcYrNumCd" column="LOG_SVC_YR_NUM_CD" columnIndex="32"/>
+		<result property="logSvcMnthIcmCd" column="LOG_SVC_MNTH_ICM_CD" columnIndex="33"/>
+		<result property="currPyspAppmtDt" column="CURR_PYSP_APPMT_DT" columnIndex="34"/>
+		<result property="currDeptAppmtDt" column="CURR_DEPT_APPMT_DT" columnIndex="35"/>
+		<result property="pernNoteCtnt" column="PERN_NOTE_CTNT" columnIndex="36"/>	  
+		<result property="soctyInsurYr" column="SOCTY_INSUR_YR" columnIndex="37"/>
+		<result property="hlthInsurFlucDt" column="HLTH_INSUR_FLUC_DT" columnIndex="38"/>
+		<result property="hlthInsrPayTotAmnt" column="HLTH_INSR_PAY_TOT_AMNT" columnIndex="39"/>
+		<result property="hlthInsrMnthRuntnAmnt" column="HLTH_INSR_MNTH_RUNTN_AMNT" columnIndex="40"/>
+		<result property="natPennStdIncmMnthAmnt" column="NAT_PENN_STD_INCM_MNTH_AMNT" columnIndex="41"/>	 		
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="42"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="43"/>
+		<result property="logSvcStdDt" column="LOG_SVC_STD_DT" columnIndex="44"/>
+		<result property="wmnYn" column="WMN_YN" columnIndex="45"/>
+		<result property="retryClutYn" column="RETRY_CLUT_YN" columnIndex="46"/>
+		<result property="payRcptYn" column="PAY_RCPT_YN" columnIndex="47"/>
+		<result property="spueYn" column="SPUE_YN" columnIndex="48"/>
+		<result property="hlthInsrApptnYn" column="HLTH_INSR_APPTN_YN" columnIndex="49"/>
+		<result property="natPennApptnYn" column="NAT_PENN_APPTN_YN" columnIndex="50"/>
+		<result property="umytInsrApptnYn" column="UMYT_INSR_APPTN_YN" columnIndex="51"/>
+		<result property="idtlAccdtInsurApptnYn" column="IDTL_ACCDT_INSUR_APPTN_YN" columnIndex="52"/>
+		<result property="suprtFamyNumTwenChDn" column="SUPRT_FAMY_NUM_TWEN_CH_DN" columnIndex="53"/>
+		<result property="suprtFamyNumTreOvrChdnYn" column="SUPRT_FAMY_NUM_TRE_OVR_CHDN_YN" columnIndex="54"/>
+		<result property="suprtFamyNumEtc" column="SUPRT_FAMY_NUM_ETC" columnIndex="55"/>
+		<result property="chdnSchlExpnAdmclYn" column="CHDN_SCHL_EXPN_ADMCL_YN" columnIndex="56"/>
+		<result property="logSvcExtpyApptnYn" column="LOG_SVC_EXTPY_APPTN_YN" columnIndex="57"/> 		
+		<result property="levfAbncSeilNum" column="LEVF_ABNC_SEIL_NUM" columnIndex="58"/>
+		<result property="levfAbncDivCd" column="LEVF_ABNC_DIV_CD" columnIndex="59"/>
+		<result property="levfAbncBgnnDt" column="LEVF_ABNC_BGNN_DT" columnIndex="60"/>
+		<result property="levfAbncEndDt" column="LEVF_ABNC_END_DT" columnIndex="61"/>
+		<result property="turtyRntmntDt" column="TURTY_RNTMNT_DT" columnIndex="62"/>		
+		<result property="bnkCd" column="BNK_CD" columnIndex="63"/>
+		<result property="bnkAccuNum" column="BNK_ACCU_NUM" columnIndex="64"/>
+		<result property="acntHodrNm" column="ACNT_HODR_NM" columnIndex="65"/>
+		  <result property="rpsttvAccuYn" column="RPSTTV_ACCU_YN" columnIndex="66"/>		
+       	  <result property="dilnlazYrMnth" column="DILNLAZ_YR_MNTH" columnIndex="67"/> 
+		  <result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="68"/>
+		  <result property="dilnlazDutyBgnnDt" column="DILNLAZ_DUTY_BGNN_DT" columnIndex="69"/>
+		  <result property="dilnlazDutyEndDt" column="DILNLAZ_DUTY_END_DT" columnIndex="70"/>
+		  <result property="dilnlazDutyNumDys" column="DILNLAZ_DUTY_NUM_DYS" columnIndex="71"/>
+		  <result property="dilnlazLvsgNumDys" column="DILNLAZ_LVSG_NUM_DYS" columnIndex="72"/>
+		  <result property="dilnlazAbnceNumDys" column="DILNLAZ_ABNCE_NUM_DYS" columnIndex="73"/>
+		  <result property="dilnlazSckleaNumDys" column="DILNLAZ_SCKLEA_NUM_DYS" columnIndex="74"/>
+		  <result property="dilnlazOffvaNumDys" column="DILNLAZ_OFFVA_NUM_DYS" columnIndex="75"/>
+		  <result property="dilnlazFmlyEvntNumDys" column="DILNLAZ_FMLY_EVNT_NUM_DYS" columnIndex="76"/>
+		  <result property="dilnlazHlthCreNumDys" column="DILNLAZ_HLTH_CRE_NUM_DYS" columnIndex="77"/>
+		  <result property="dilnlazTotDutyNumDys" column="DILNLAZ_TOT_DUTY_NUM_DYS" columnIndex="78"/>
+		  <result property="dilnlazWklyHldyNumDys" column="DILNLAZ_WKLY_HLDY_NUM_DYS" columnIndex="79"/>
+		  <result property="dilnlazPaidPubcHodyNum" column="DILNLAZ_PAID_PUBC_HODY_NUM" columnIndex="80"/>
+		  <result property="dilnlazDdlnePrcsYn01"     column="DILNLAZ_DDLNE_PRCS_YN_01" columnIndex="81"/>  
+		  <result property="dilnlazExceDutyYrMnth" column="DILNLAZ_EXCE_DUTY_YR_MNTH" columnIndex="82"/> 
+		  <result property="dilnlazExceDutyBgnnDt" column="DILNLAZ_EXCE_DUTY_BGNN_DT" columnIndex="83"/>
+		  <result property="dilnlazExceDutyEndDt" column="DILNLAZ_EXCE_DUTY_END_DT" columnIndex="84"/>
+		  <result property="dilnlazPubcHodyDutyNumDys" column="DILNLAZ_PUBC_HODY_DUTY_NUM_DYS" columnIndex="85"/>
+		  <result property="dilnlazSatDutyNumDys" column="DILNLAZ_SAT_DUTY_NUM_DYS" columnIndex="86"/>
+		  <result property="dilnlazTotNtotNumDys" column="DILNLAZ_TOT_NTOT_NUM_DYS" columnIndex="87"/>
+		  <result property="dilnlazTotNtotTm" column="DILNLAZ_TOT_NTOT_TM" columnIndex="88"/>
+		  <result property="dilnlazFndtnTmRstDutyTm" column="DILNLAZ_FNDTN_TM_RST_DUTY_TM" columnIndex="89"/>
+		  <result property="dilnlazTmRstDutyTm" column="DILNLAZ_TM_RST_DUTY_TM" columnIndex="90"/>
+		  <result property="dilnlazTotTmRstDutyTm" column="DILNLAZ_TOT_TM_RST_DUTY_TM" columnIndex="91"/>
+		  <result property="dilnlazDdlnePrcsYn02" column="DILNLAZ_DDLNE_PRCS_YN_02" columnIndex="92"/>
+		  <result property="dilnlazNoteCtnt" column="DILNLAZ_NOTE_CTNT" columnIndex="93"/>
+		  <result property="payYrMnth" column="PAY_YR_MNTH" columnIndex="94"/> 		  
+		  <result property="hlthInsrGrde" column="HLTH_INSR_GRDE" columnIndex="95"/> 
+		  <result property="hlthInsrCertNum" column="HLTH_INSR_CERT_NUM" columnIndex="96"/> 
+		  <result property="natPennInsurFlucDt" column="NAT_PENN_INSUR_FLUC_DT" columnIndex="97"/> 
+		  <result property="natPennGrde" column="NAT_PENN_GRDE" columnIndex="98"/>  
+		  <result property="suprtFamy3ChdnExtpySum" column="SUPRT_FAMY_3_CHDN_EXTPY_SUM" columnIndex="99"/>		   
+		  <result property="hlthInsrPayAmt" column="HLTH_INSR_PAY_AMT" columnIndex="100"/>
+		  <result property="hlthInsrRcptnPayAmt" column="HLTH_INSR_RCPTN_PAY_AMT" columnIndex="101"/>
+		  <result property="natPennAmt" column="NAT_PENN_AMT" columnIndex="102"/>	
+		  <result property="payCd" column="PAY_CD" columnIndex="103"/>	
+		  <result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="104"/>
+		  <result property="dilnlazAbnceDutyRcgtnDys" column="DILNLAZ_ABNCE_DUTY_RCGTN_DYS" columnIndex="105"/>
+		  <result property="dilnlazSpclHodyNumDys" column="DILNLAZ_SPCL_HODY_NUM_DYS" columnIndex="106"/>
+		  <result property="dilnlazTotDutyTm" column="DILNLAZ_TOT_DUTY_TM" columnIndex="107"/>  
+		  <result property="dilnlazPaidHodyNumDys" column="DILNLAZ_PAID_HODY_NUM_DYS" columnIndex="108"/>
+		  <result property="dilnlazTfcAssCstNumDys" column="DILNLAZ_TFC_ASS_CST_NUM_DYS" columnIndex="109"/>
+		  
+		  <result property="umytInsrFlucDt" column="UMYT_INSR_FLUC_DT" columnIndex="110"/>
+		  <result property="umytInsrPayTotAmnt" column="UMYT_INSR_PAY_TOT_AMNT" columnIndex="111"/>
+		  <result property="umytInsrPayMnthAmnt" column="UMYT_INSR_PAY_MNTH_AMNT" columnIndex="112"/>
+		  <result property="idtlAccdtFlucDt" column="IDTL_ACCDT_FLUC_DT" columnIndex="113"/>
+		  <result property="idtlAccdtPayTotAmnt" column="IDTL_ACCDT_PAY_TOT_AMNT" columnIndex="114"/>
+		  <result property="idtlAccdtPayMnthAmnt" column="IDTL_ACCDT_PAY_MNTH_AMNT" columnIndex="115"/>
+		  <result property="dayWorkYn" column="DAY_WORK_YN" columnIndex="116"/> 
+		    <result property="addIncmTxApptnRtoCd" column="ADD_INCM_TX_APPTN_RTO_CD" columnIndex="117"/>
+		<result property="addIncmTxApptnYrMnth" column="ADD_INCM_TX_APPTN_YR_MNTH" columnIndex="118"/>
+		<result property="addIncmTxApptnYn" column="ADD_INCM_TX_APPTN_YN" columnIndex="119"/>
+		<result property="addIncmTxApptnRto" column="ADD_INCM_TX_APPTN_RTO" columnIndex="120"/>
+		 <result property="dilnlazLnchDys" column="DILNLAZ_LNCH_DYS" columnIndex="121"/>
+		 <result property="unnMbspSttYn" column="UNN_MBSP_STT_YN" columnIndex="122"/>
+		 <result property="dilnlazPubcHodyDutyTm" column="DILNLAZ_PUBC_HODY_DUTY_TM" columnIndex="122"/>
+		 <result property="payrIncmExceYn" column="PAYR_INCM_EXCE_YN" columnIndex="123"/>  
+           <result property="dilnlazHodyTotNtotTm" column="DILNLAZ_HODY_TOT_NTOT_TM" columnIndex="124"/> 
+           <result property="dilnlazHodyDutyNumDys" column="DILNLAZ_HODY_DUTY_NUM_DYS" columnIndex="125"/> 
+<result property="dilnlazWkdDutyNumDys" column="DILNLAZ_WKD_DUTY_NUM_DYS" columnIndex="126"/>  
+<result property="dilnlazButpDys" column="DILNLAZ_BUTP_DYS" columnIndex="127"/>
+ <result property="mangeDeptCd" column="MANGE_DEPT_CD" columnIndex="128"/>
+ 
+		  <result property="exPayr0490" column="{dpobCd=DPOB_CD,payYrMnth=PAY_YR_MNTH,payCd=PAY_CD,businCd=BUSIN_CD,deptCd=CURR_AFFN_DEPT_CD}"   select="payCalculationDAO.selectPayr0490_S"/>  
+          <result property="exPayr0530" column="{dpobCd=DPOB_CD,systemkey=SYSTEMKEY}"   select="payCalculationDAO.selectPayr0530_S"/>  
+	</resultMap> 
+	 
+	
+	<resultMap id="payrSche0530" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0530VO">
+	     <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="payFamyRsptSeilNum" column="PAY_FAMY_RSPT_SEIL_NUM" columnIndex="3"/>
+		<result property="payFamyResnRegnNum" column="PAY_FAMY_RESN_REGN_NUM" columnIndex="4"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="5"/>
+		<result property="famyRelaDivCd" column="FAMY_RELA_DIV_CD" columnIndex="6"/>
+		<result property="famyAllwPymtYn" column="FAMY_ALLW_PYMT_YN" columnIndex="7"/>
+		<result property="chdnChdRrgEpnsPymtYn" column="CHDN_CHD_RRG_EPNS_PYMT_YN" columnIndex="8"/>
+		<result property="fndtnDducYn" column="FNDTN_DDUC_YN" columnIndex="9"/>
+		<result property="spueDducYn" column="SPUE_DDUC_YN" columnIndex="10"/>
+		<result property="wmnDducYn" column="WMN_DDUC_YN" columnIndex="11"/>
+		<result property="rftaGvstDducYn" column="RFTA_GVST_DDUC_YN" columnIndex="12"/>
+		<result property="dabpnDducYn" column="DABPN_DDUC_YN" columnIndex="13"/>
+		<result property="sgpnFmlyDducYn" column="SGPN_FMLY_DDUC_YN" columnIndex="14"/>
+		<result property="chdnChdRrgEpnsDducYn" column="CHDN_CHD_RRG_EPNS_DDUC_YN" columnIndex="15"/>
+		<result property="famyExtpyDivCd" column="FAMY_EXTPY_DIV_CD" columnIndex="16"/>
+		<result property="schlExpnAdmclExtpyDivCd" column="SCHL_EXPN_ADMCL_EXTPY_DIV_CD" columnIndex="17"/>
+		<result property="schlExpnAdmclExtpySum" column="SCHL_EXPN_ADMCL_EXTPY_SUM" columnIndex="18"/>
+		<result property="famyExtpySum" column="FAMY_EXTPY_SUM" columnIndex="19"/>
+		<result property="schlExpnExtpyPymtBgnnDt" column="SCHL_EXPN_EXTPY_PYMT_BGNN_DT" columnIndex="20"/>
+		<result property="schlExpnExtpyPymtEndDt" column="SCHL_EXPN_EXTPY_PYMT_END_DT" columnIndex="21"/> 
+	</resultMap>
+	
+	<resultMap id="payrSche0410" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0410VO">
+	     <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="payYr" column="PAY_YR" columnIndex="2"/>
+		<result property="typOccuGrdeMppgSeilNum" column="TYP_OCCU_GRDE_MPPG_SEIL_NUM" columnIndex="3"/>
+		<result property="payrItemSeilNum" column="PAYR_ITEM_SEIL_NUM" columnIndex="4"/>
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="5"/>
+		<result property="payrImcd" column="PAYR_IMCD" columnIndex="6"/>
+		<result property="itemNm" column="ITEM_NM" columnIndex="7"/>
+		<result property="payCd" column="PAY_CD" columnIndex="8"/>
+		<result property="pymtDducDivCd" column="PYMT_DDUC_DIV_CD" columnIndex="9"/>
+		<result property="pymtDducFrmCd" column="PYMT_DDUC_FRM_CD" columnIndex="10"/>
+		<result property="pymtDducRate" column="PYMT_DDUC_RATE" columnIndex="11"/>
+		<result property="pymtDducSum" column="PYMT_DDUC_SUM" columnIndex="12"/>
+		<result property="txtnDivCd" column="TXTN_DIV_CD" columnIndex="13"/>
+		<result property="freeDtyRate" column="FREE_DTY_RATE" columnIndex="14"/>
+		<result property="freeDtySum" column="FREE_DTY_SUM" columnIndex="15"/>
+		<result property="jan" column="JAN" columnIndex="16"/>
+		<result property="feb" column="FEB" columnIndex="17"/>
+		<result property="mar" column="MAR" columnIndex="18"/>
+		<result property="apr" column="APR" columnIndex="19"/>
+		<result property="may" column="MAY" columnIndex="20"/>
+		<result property="jun" column="JUN" columnIndex="21"/>
+		<result property="jul" column="JUL" columnIndex="22"/>
+		<result property="aug" column="AUG" columnIndex="23"/>
+		<result property="sep" column="SEP" columnIndex="24"/>
+		<result property="oct" column="OCT" columnIndex="25"/>
+		<result property="nov" column="NOV" columnIndex="26"/>
+		<result property="dec" column="DEC" columnIndex="27"/>
+		<result property="rngeOrd" column="RNGE_ORD" columnIndex="28"/>
+		<result property="payItemUseYn" column="PAY_ITEM_USE_YN" columnIndex="29"/>
+		<result property="itemApptnBgnnDt" column="ITEM_APPTN_BGNN_DT" columnIndex="30"/>
+		<result property="itemApptnEndDt" column="ITEM_APPTN_END_DT" columnIndex="31"/>
+		<result property="dayMnthAmntDivCd" column="DAY_MNTH_AMNT_DIV_CD" columnIndex="32"/>
+		<result property="calcStdDivCd" column="CALC_STD_DIV_CD" columnIndex="33"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="34"/>
+		<result property="usalyAmntYn" column="USALY_AMNT_YN" columnIndex="35"/>
+		<result property="calcStdFunc" column="CALC_STD_FUNC" columnIndex="43"/> 
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="44"/> 
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="45"/>
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="46"/> 
+		<result property="ucstSum" column="UCST_SUM" columnIndex="47"/>
+		<result property="ucstCalcDivCd" column="UCST_CALC_DIV_CD" columnIndex="48"/>
+		<result property="ucstPrntOrd" column="UCST_PRNT_ORD" columnIndex="49"/>
+		<result property="ucstDgmBgnnDt" column="UCST_DGM_BGNN_DT" columnIndex="50"/>
+		<result property="ucstDgmEndDt" column="UCST_DGM_END_DT" columnIndex="51"/>
+		<result property="ucstDgmUseYn" column="UCST_DGM_USE_YN" columnIndex="52"/> 
+		
+		<result property="mnthUsalyAmntWag" column="MNTH_USALY_AMNT_WAG" columnIndex="53"/> 
+		<result property="mnthUsalyAmntAllwBnusSum" column="MNTH_USALY_AMNT_ALLW_BNUS_SUM" columnIndex="54"/> 
+		<result property="usalyAmntPdyQnty" column="USALY_AMNT_PDY_QNTY" columnIndex="55"/> 
+		<result property="usalyAmntHrwgQnty" column="USALY_AMNT_HRWG_QNTY" columnIndex="56"/> 
+		<result property="calcStdFunc" column="CALC_STD_FUNC" columnIndex="57"/> 
+		<result property="befLogSvcYrNumCd" column="BEF_LOG_SVC_YR_NUM_CD" columnIndex="58"/> 
+		<result property="befClssPayCmpttnStd" column="BEF_CLSS_PAY_CMPTTN_STD" columnIndex="59"/> 
+		<result property="befUcstSum" column="BEF_UCST_SUM" columnIndex="60"/> 
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="61"/>
+	</resultMap>
+	 
+	<resultMap id="payrSche0490" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0490VO"> 
+	    <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="payYr" column="PAY_YR" columnIndex="2"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="3"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="4"/>
+		<result property="payrUcstDgmSeilNum" column="PAYR_UCST_DGM_SEIL_NUM" columnIndex="5"/>
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="6"/>
+		<result property="payCd" column="PAY_CD" columnIndex="7"/>
+		<result property="payItemCd" column="PAY_ITEM_CD" columnIndex="8"/>
+		<result property="itemNm" column="ITEM_NM" columnIndex="9"/>
+		<result property="pymtDducDivCd" column="PYMT_DDUC_DIV_CD" columnIndex="10"/>
+		<result property="pymtDducFrmCd" column="PYMT_DDUC_FRM_CD" columnIndex="11"/>
+		<result property="pymtDducRate" column="PYMT_DDUC_RATE" columnIndex="12"/>
+		<result property="pymtDducSum" column="PYMT_DDUC_SUM" columnIndex="13"/>
+		<result property="txtnDivCd" column="TXTN_DIV_CD" columnIndex="14"/>
+		<result property="freeDtyRate" column="FREE_DTY_RATE" columnIndex="15"/>
+		<result property="freeDtySum" column="FREE_DTY_SUM" columnIndex="16"/>
+		<result property="jan" column="JAN" columnIndex="17"/>
+		<result property="feb" column="FEB" columnIndex="18"/>
+		<result property="mar" column="MAR" columnIndex="19"/>
+		<result property="apr" column="APR" columnIndex="20"/>
+		<result property="may" column="MAY" columnIndex="21"/>
+		<result property="jun" column="JUN" columnIndex="22"/>
+		<result property="jul" column="JUL" columnIndex="23"/>
+		<result property="aug" column="AUG" columnIndex="24"/>
+		<result property="sep" column="SEP" columnIndex="25"/>
+		<result property="oct" column="OCT" columnIndex="26"/>
+		<result property="nov" column="NOV" columnIndex="27"/>
+		<result property="dec" column="DEC" columnIndex="28"/>
+		<result property="rngeOrd" column="RNGE_ORD" columnIndex="29"/>
+		<result property="payItemUseYn" column="PAY_ITEM_USE_YN" columnIndex="30"/>
+		<result property="itemApptnBgnnDt" column="ITEM_APPTN_BGNN_DT" columnIndex="31"/>
+		<result property="itemApptnEndDt" column="ITEM_APPTN_END_DT" columnIndex="32"/>
+		<result property="dayMnthAmntDivCd" column="DAY_MNTH_AMNT_DIV_CD" columnIndex="33"/>
+		<result property="calcStdDivCd" column="CALC_STD_DIV_CD" columnIndex="34"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="35"/>
+		<result property="usalyAmntYn" column="USALY_AMNT_YN" columnIndex="36"/>
+		<result property="payItemNoteCtnt" column="PAY_ITEM_NOTE_CTNT" columnIndex="37"/> 
+		<result property="calcStdFunc" column="CALC_STD_FUNC" columnIndex="38"/> 
+	</resultMap>
+	
+	
+		<resultMap id="payrInsr0200" class="com.app.smrmf.infc.insurance.server.vo.InfcPkgInsr0200VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="dducYrMnth" column="DDUC_YR_MNTH" columnIndex="3"/>
+		<result property="nofctYrMnth" column="NOFCT_YR_MNTH" columnIndex="4"/>
+		<result property="dpobMangeNum" column="DPOB_MANGE_NUM" columnIndex="5"/>
+		<result property="untIstutCd" column="UNT_ISTUT_CD" columnIndex="6"/>
+		<result property="nofctDspty" column="NOFCT_DSPTY" columnIndex="7"/>
+		<result property="accSgn" column="ACC_SGN" columnIndex="8"/>
+		<result property="hlthInsrCertNum" column="HLTH_INSR_CERT_NUM" columnIndex="9"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="10"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="11"/>
+		<result property="reduReasCd" column="REDU_REAS_CD" columnIndex="12"/>
+		<result property="hlthInsrTypOccuCd" column="HLTH_INSR_TYP_OCCU_CD" columnIndex="13"/>
+		<result property="payMnthAmntGrde" column="PAY_MNTH_AMNT_GRDE" columnIndex="14"/>
+		<result property="payMnthAmnt" column="PAY_MNTH_AMNT" columnIndex="15"/>
+		<result property="calcPrmm" column="CALC_PRMM" columnIndex="16"/>
+		<result property="clutReasCd" column="CLUT_REAS_CD" columnIndex="17"/>
+		<result property="clutApptnBgnnYrMnth" column="CLUT_APPTN_BGNN_YR_MNTH" columnIndex="18"/>
+		<result property="clutApptnEndYrMnth" column="CLUT_APPTN_END_YR_MNTH" columnIndex="19"/>
+		<result property="clutPrmm" column="CLUT_PRMM" columnIndex="20"/>
+		<result property="nofctPrmm" column="NOFCT_PRMM" columnIndex="21"/>
+		<result property="yrtxPrmm" column="YRTX_PRMM" columnIndex="22"/>
+		<result property="aqtnDt" column="AQTN_DT" columnIndex="23"/>
+		<result property="lssDt" column="LSS_DT" columnIndex="24"/>
+		<result property="lgtmRcptnCalcPrmm" column="LGTM_RCPTN_CALC_PRMM" columnIndex="25"/>
+		<result property="lgtmRcptnClutReasCd" column="LGTM_RCPTN_CLUT_REAS_CD" columnIndex="26"/>
+		<result property="lgtmRcptnApptnBgnnYrMnth" column="LGTM_RCPTN_APPTN_BGNN_YR_MNTH" columnIndex="27"/>
+		<result property="lgtmRcptnApptnEndYrMnth" column="LGTM_RCPTN_APPTN_END_YR_MNTH" columnIndex="28"/>
+		<result property="lgtmRcptnClutPrmm" column="LGTM_RCPTN_CLUT_PRMM" columnIndex="29"/>
+		<result property="lgtmRcptnNofctPrmm" column="LGTM_RCPTN_NOFCT_PRMM" columnIndex="30"/>
+		<result property="lgtmRcptnYrtxPrmm" column="LGTM_RCPTN_YRTX_PRMM" columnIndex="31"/>
+		<result property="hlthRcptnCalcPrmm" column="HLTH_RCPTN_CALC_PRMM" columnIndex="32"/>
+		<result property="hlthRcptnClutPrmm" column="HLTH_RCPTN_CLUT_PRMM" columnIndex="33"/>
+		<result property="hlthRcptnNofctPrmm" column="HLTH_RCPTN_NOFCT_PRMM" columnIndex="34"/>
+		<result property="hlthRcptnYrtxPrmm" column="HLTH_RCPTN_YRTX_PRMM" columnIndex="35"/>
+		<result property="hlthInsrRefdItrt" column="HLTH_INSR_REFD_ITRT" columnIndex="36"/>
+		<result property="lgtmRcptnRefdItrt" column="LGTM_RCPTN_REFD_ITRT" columnIndex="37"/>
+		<result property="totPymtPrmm" column="TOT_PYMT_PRMM" columnIndex="38"/>
+		<result property="kybdr" column="KYBDR" columnIndex="39"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="40"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="41"/>
+		<result property="ismt" column="ISMT" columnIndex="42"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="43"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="44"/>
+	</resultMap>
+	
+	<!-- 용인시  급여계산로직 -마스터데이터 가져오기  -->
+	<select id="payCalculationDAO.selectPsnlPayrInfoList_D" parameterClass="payr0250CalcSrhVO" resultMap="procPayCalculation"> 
+				<![CDATA[	
+			     SELECT  DISTINCT   (REPLACE(#jobYrMnth#,'.','')) AS PAY_YR_MNTH
+				          , (#payCd#) AS PAY_CD
+                          ,  BB.DPOB_CD
+                          ,  BB.SYSTEMKEY 
+                          ,  BB.HAN_NM 
+                          ,  BB.UNN_MBSP_STT_YN
+                          , AA.PAYR_MANG_DEPT_CD 
+                          , (SELECT PAY_MANGE_DEPT_NM FROM BASS0150 
+                                           WHERE BASS0150.PAYR_MANG_DEPT_CD = AA.PAYR_MANG_DEPT_CD) AS PAY_MANGE_DEPT_NM
+                            , AA.LOG_SVC_STD_DT
+                            , AA.WMN_YN
+                            , AA.RETRY_CLUT_YN
+                            , AA.PAY_RCPT_YN
+                            , (CASE WHEN AA.SPUE_YN = 'Y' AND (SELECT FNDTN_DDUC_YN 
+															FROM PAYR0530 AA05
+															WHERE AA05.DPOB_CD = BB.DPOB_CD
+															  AND AA05.SYSTEMKEY = BB.SYSTEMKEY
+															  AND  AA05.FAMY_RELA_DIV_CD = 'A0190002')  = 'Y' THEN AA.SPUE_YN
+					               ELSE 'N' END) AS SPUE_YN
+                            , NVL(DECODE(NVL(AA.HLTH_INSR_APPTN_YN,'N'),NVL(DD.HLTH_INSR_APPTN_YN,'N'),NVL(AA.HLTH_INSR_APPTN_YN,'N'),'N'),'N') AS HLTH_INSR_APPTN_YN
+                            , NVL(DECODE(NVL(AA.NAT_PENN_APPTN_YN,'N'),NVL(DD.NAT_PENN_APPTN_YN,'N'),NVL(AA.NAT_PENN_APPTN_YN,'N'),'N'),'N') AS NAT_PENN_APPTN_YN
+                            , NVL(DECODE(NVL(AA.UMYT_INSR_APPTN_YN,'N'),NVL(DD.UMYT_INSR_APPTN_YN,'N'),NVL(AA.UMYT_INSR_APPTN_YN,'N'),'N'),'N') AS UMYT_INSR_APPTN_YN
+                            , NVL(DECODE(NVL(AA.IDTL_ACCDT_INSUR_APPTN_YN,'N'),NVL(DD.IDTL_ACCDT_INSUR_APPTN_YN,'N'),NVL(AA.IDTL_ACCDT_INSUR_APPTN_YN,'N'),'N'),'N') AS  IDTL_ACCDT_INSUR_APPTN_YN
+                            , NVL(AA.SUPRT_FAMY_NUM_TWEN_CH_DN,0) AS SUPRT_FAMY_NUM_TWEN_CH_DN
+                            , AA.SUPRT_FAMY_NUM_TRE_OVR_CHDN_YN	  
+                            , (CASE WHEN AA.SUPRT_FAMY_NUM_TRE_OVR_CHDN_YN = 'Y' 
+                                    THEN
+                                      (SELECT PYMT_DDUC_SUM 
+                                        FROM PAYR0450 AA3
+                                        WHERE AA3.DPOB_CD = AA.DPOB_CD
+                                          AND AA3.PAY_YR =  SUBSTR (#jobYrMnth#,1,4) 
+                                          AND AA3.PAY_ITEM_CD = 'C9050100'  
+                                          AND AA3.ITEM_EXTPY_DIV_CD = 'B0260030' )           
+                                    ELSE
+                                       0
+                                    END
+                              ) AS SUPRT_FAMY_3_CHDN_EXTPY_SUM
+                            , NVL(AA.SUPRT_FAMY_NUM_ETC,0) AS SUPRT_FAMY_NUM_ETC
+                            , AA.CHDN_SCHL_EXPN_ADMCL_YN
+                            , NVL(DAY_WORK_YN,'N') AS DAY_WORK_YN
+                            , NVL(PAYR_INCM_EXCE_YN ,'N') AS PAYR_INCM_EXCE_YN 
+                            , AA.LOG_SVC_EXTPY_APPTN_YN 
+                             , AA.ADD_INCM_TX_APPTN_RTO_CD 
+                             , NVL((SELECT NVL(MANGE_ITEM11,100) FROM BASS0300 
+                                      WHERE RPSTTV_CD = 'B029' 
+                                     AND COMM_CD = AA.ADD_INCM_TX_APPTN_RTO_CD  ),0) AS ADD_INCM_TX_APPTN_RTO
+				  			 , NVL(AA.ADD_INCM_TX_APPTN_YR_MNTH,'') AS ADD_INCM_TX_APPTN_YR_MNTH
+				             , AA.ADD_INCM_TX_APPTN_YN,
+                           BB.ENG_NM,
+                           BB.CHIN_CHAR_NM,
+                           BB.RESN_REGN_NUM,
+                           BB.SX_DIV_CD,
+                           BB.YOOBH_MNTH_DAY,
+                           BB.SCLC_DIV_CD,
+                           BB.NATN_CD,
+                           SS.DEPT_CD,
+                           fcBass0400CDNM(AA.DPOB_CD,SS.DEPT_CD,'2') AS DEPT_NM,
+                           
+                             (BB.DEPT_CD) AS MANGE_DEPT_CD,
+  							fcBass0400CDNM(AA.DPOB_CD,BB.DEPT_CD,'2') AS MANGE_DEPT_NM,  
+                           
+                           SS.BUSIN_CD,
+                           SS.DEPT_CD AS CURR_AFFN_DEPT_CD,
+                           fcBass0400CDNM(AA.DPOB_CD,SS.DEPT_CD,'2') AS CURR_AFFN_DEPT_NM,
+                           BB.REPBTY_BUSIN_DIV_CD,
+                           SS.TYP_OCCU_CD,
+                           fcBass0320CDNM(AA.DPOB_CD,SS.TYP_OCCU_CD) AS TYP_OCCU_NM,
+                           BB.ODTY_CD,
+                           fcBass0300CDNM(AA.DPOB_CD,BB.ODTY_CD) AS ODTY_NM,
+                           BB.FRST_EMYMT_DT,
+                           BB.EMYMT_DIV_CD,
+                           fcBass0300CDNM(AA.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM,
+                           BB.EMYMT_BGNN_DT,
+                           BB.EMYMT_END_DT,
+                           BB.PYSP_CD,
+                           BB.PERN_NOTE_CTNT,
+                           fcBass0300CDNM(AA.DPOB_CD,BB.PYSP_CD) AS PYSP_NM,
+                           BB.HDOFC_CODTN_CD,
+                           BB.RETRY_DT,
+                           BB.RETRY_REAS_CTNT,
+                           BB.FRGNR_DIV_CD,
+                           BB.PSPT_NUM,
+                           BB.STY_BGNN_DT,
+                           BB.STY_END_DT,
+                           BB.END_SCHL,
+                           BB.END_DEGR_DIV_CD,
+                           BB.PMTN_SCDU_DT,
+                           BB.PYSP_PRMTN_SCDU_DT,
+                           BB.REYMN_SCDU_DT,
+                           BB.LOG_SVC_YR_NUM_CD,
+                           fcBass0300CDNM(AA.DPOB_CD,BB.LOG_SVC_YR_NUM_CD) AS LOG_SVC_YR_NUM_NM,
+                           BB.LOG_SVC_MNTH_ICM_CD,
+                           (SELECT  COMM_CD_NM FROM BASS0300 C WHERE  C.COMM_CD = LOG_SVC_YR_NUM_CD)
+                                     ||' '||(SELECT  COMM_CD_NM FROM BASS0300 C WHERE  C.COMM_CD = LOG_SVC_MNTH_ICM_CD) AS LOG_SVC_MNTH_ICM_NM,
+                           BB.CURR_PYSP_APPMT_DT,
+                           BB.CURR_DEPT_APPMT_DT,
+                           BB.PERN_NOTE_CTNT, 
+                           (SELECT MAX (B.CURR_PAE_WORK_NM)
+                              FROM PSNL0110 B
+                             WHERE B.DPOB_CD = BB.DPOB_CD AND B.SYSTEMKEY = BB.SYSTEMKEY)
+                              AS CURR_PAE_WORK_NM,
+                           (SELECT MAX (C.PIC_FLNM )
+                              FROM PSNL0125 C
+                             WHERE C.DPOB_CD = BB.DPOB_CD AND C.SYSTEMKEY = BB.SYSTEMKEY)
+                              AS PIC_FLNM,
+                           BB.PYSP_GRDE_CD,
+                           fcBass0300CDNM(AA.DPOB_CD,BB.PYSP_GRDE_CD) AS PYSP_GRDE_NM,
+                           SS.DTIL_OCCU_CLS_DIV_CD,
+                           	 SS.DTIL_OCCU_INTTN_CD 
+		                   , fcBassEx0350CDNM(BB.DPOB_CD,SS.TYP_OCCU_CD,SS.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM ,
+                           '('||(SELECT BUSIN_APPTN_YR FROM BASS0500 WHERE BB.DPOB_CD = DPOB_CD AND SS.DEPT_CD = DEPT_CD AND SS.BUSIN_CD = BUSIN_CD AND SUBSTR(BB.EMYMT_BGNN_DT,1,4) = BUSIN_APPTN_YR)||')'||
+                           (SELECT BUSIN_NM FROM BASS0500 WHERE BB.DPOB_CD = DPOB_CD AND SS.DEPT_CD = DEPT_CD AND SS.BUSIN_CD = BUSIN_CD AND SUBSTR(BB.EMYMT_BGNN_DT,1,4) = BUSIN_APPTN_YR) AS BUSIN_NM         
+                            , CC.LEVF_ABNC_SEIL_NUM
+                            , CC.LEVF_ABNC_DIV_CD
+                            , fcBass0300CDNM(AA.DPOB_CD,CC.LEVF_ABNC_DIV_CD) AS LEVF_ABNC_DIV_NM
+                            , CC.LEVF_ABNC_BGNN_DT
+                            , CC.LEVF_ABNC_END_DT
+                            , CC.TURTY_RNTMNT_DT
+                            , DD.SOCTY_INSUR_YR
+                            , DD.HLTH_INSUR_FLUC_DT
+                            , TRUNC((CASE WHEN  DECODE(NVL(AA.HLTH_INSR_APPTN_YN,'N'),NVL(DD.HLTH_INSR_APPTN_YN,'N'),NVL(AA.HLTH_INSR_APPTN_YN,'N'),'N') = 'Y' THEN
+                                (
+                                    NVL(DD.HLTH_INSR_MNTH_RUNTN_AMNT,0) * (( SELECT AA1.HLTH_INSR_HMLF_BRDN_APMRT 
+                                                                       FROM INSR0240 AA1 
+                                                                      WHERE AA1.DPOB_CD = AA.DPOB_CD
+                                                                        AND AA1.HLTH_INSR_STD_YR =  SUBSTR (REPLACE(#jobYrMnth#,'.',''),1,4) 
+                                                                        AND AA1.HLTH_INSR_BGNN_DT <= #rflctnEndDt#
+                                                                        AND AA1.HLTH_INSR_END_DT >= #rflctnEndDt#) / 100 )
+                                )
+                            ELSE 0 END),-1) AS HLTH_INSR_PAY_AMT    
+                            ,TRUNC((CASE WHEN  DECODE(NVL(AA.HLTH_INSR_APPTN_YN,'N'),NVL(DD.HLTH_INSR_APPTN_YN,'N'),NVL(AA.HLTH_INSR_APPTN_YN,'N'),'N') = 'Y' THEN
+                             (
+                                (NVL(DD.HLTH_INSR_MNTH_RUNTN_AMNT,0) * (( SELECT AA1.HLTH_INSR_HMLF_BRDN_APMRT 
+                                                                   FROM INSR0240 AA1 
+                                                                  WHERE AA1.DPOB_CD = AA.DPOB_CD
+                                                                    AND AA1.HLTH_INSR_STD_YR = SUBSTR (#jobYrMnth#,1,4) 
+                                                                    AND AA1.HLTH_INSR_END_DT = '99991231') / 100 )) *
+                                                                    (( SELECT AA1.HLTH_RCPTN_HMLF_BRDN_APMRT 
+                                                                       FROM INSR0240 AA1 
+                                                                      WHERE AA1.DPOB_CD = AA.DPOB_CD
+                                                                        AND AA1.HLTH_INSR_STD_YR = SUBSTR (#jobYrMnth#,1,4)  
+                                                                        AND AA1.HLTH_INSR_BGNN_DT <= #rflctnEndDt#
+                                                                        AND AA1.HLTH_INSR_END_DT >= #rflctnEndDt# ) / 100 )
+                             )
+                             ELSE 0 END),-1) AS HLTH_INSR_RCPTN_PAY_AMT  
+                            , NVL(DD.HLTH_INSR_PAY_TOT_AMNT,0) AS HLTH_INSR_PAY_TOT_AMNT
+                            , NVL(DD.HLTH_INSR_MNTH_RUNTN_AMNT,0) AS HLTH_INSR_MNTH_RUNTN_AMNT
+                            , NVL(DD.NAT_PENN_STD_INCM_MNTH_AMNT,0) AS NAT_PENN_STD_INCM_MNTH_AMNT 
+                            ,   DD.HLTH_INSR_GRDE 
+                            ,   DD.HLTH_INSR_CERT_NUM  
+                            ,   DD.NAT_PENN_INSUR_FLUC_DT   
+                            ,   DD.NAT_PENN_GRDE       
+                            , TRUNC((CASE WHEN  DECODE(NVL(AA.NAT_PENN_APPTN_YN,'N'),NVL(DD.NAT_PENN_APPTN_YN,'N'),NVL(AA.NAT_PENN_APPTN_YN,'N'),'N')  = 'Y' THEN
+                                (
+                                    NVL(DD.NAT_PENN_STD_INCM_MNTH_AMNT,0) * (( SELECT AA2.NAT_PENN_HMLF_BRDN_APMRT 
+                                                                       FROM INSR0250 AA2 
+                                                                      WHERE AA2.DPOB_CD = AA.DPOB_CD
+                                                                        AND AA2.NAT_PENN_STD_YR =  SUBSTR (#jobYrMnth#,1,4)  
+                                                                        AND AA2.NAT_PENN_BGNN_DT <= #rflctnEndDt#
+                                                                        AND AA2.NAT_PENN_END_DT >= #rflctnEndDt# ) / 100 )
+                                )
+                            ELSE 0 END),-1) AS NAT_PENN_AMT 
+                            	,DD.UMYT_INSR_FLUC_DT
+							, DD.UMYT_INSR_PAY_TOT_AMNT
+							  , TRUNC((CASE WHEN  DECODE(NVL(AA.UMYT_INSR_APPTN_YN,'N'),NVL(DD.UMYT_INSR_APPTN_YN,'N'),NVL(AA.UMYT_INSR_APPTN_YN,'N'),'N') = 'Y' THEN
+                                (
+                                    NVL(DD.UMYT_INSR_PAY_MNTH_AMNT,0) * (( SELECT AA2.UMYT_INSR_HMLF_BRDN_APMRT 
+                                                                       FROM INSR0260 AA2 
+                                                                      WHERE AA2.DPOB_CD = AA.DPOB_CD
+                                                                        AND AA2.UMYT_INSR_STD_YR =  SUBSTR (REPLACE(#jobYrMnth#,'.',''),1,4)  
+                                                                        AND AA2.UMYT_INSR_BGNN_DT <= #rflctnEndDt#
+                                                                        AND AA2.UMYT_INSR_END_DT >= #rflctnEndDt# ) / 100 )
+                                )
+                            ELSE 0 END),-1) AS UMYT_INSR_PAY_MNTH_AMNT   
+							,  DD.IDTL_ACCDT_FLUC_DT
+							   , DD.IDTL_ACCDT_PAY_TOT_AMNT
+							   , DD.IDTL_ACCDT_PAY_MNTH_AMNT   
+                              , EE.BNK_CD
+                              , EE.BNK_ACCU_NUM
+                              , EE.ACNT_HODR_NM
+                              , EE.RPSTTV_ACCU_YN,    
+                               FF.DILNLAZ_YR_MNTH ,
+                               FF.DILNLAZ_DUTY_BGNN_DT,
+                               FF.DILNLAZ_DUTY_END_DT,
+                               NVL(FF.DILNLAZ_DUTY_NUM_DYS,0) AS DILNLAZ_DUTY_NUM_DYS,
+                               FF.DILNLAZ_LVSG_NUM_DYS,
+                               FF.DILNLAZ_ABNCE_NUM_DYS,
+                               FF.DILNLAZ_SCKLEA_NUM_DYS,
+                               FF.DILNLAZ_OFFVA_NUM_DYS,
+                               FF.DILNLAZ_FMLY_EVNT_NUM_DYS,
+                               FF.DILNLAZ_HLTH_CRE_NUM_DYS,
+                               NVL(FF.DILNLAZ_TOT_DUTY_NUM_DYS,0) AS DILNLAZ_TOT_DUTY_NUM_DYS,
+                               FF.DILNLAZ_WKLY_HLDY_NUM_DYS,
+                               FF.DILNLAZ_PAID_PUBC_HODY_NUM,
+                               GG.DILNLAZ_SAT_DUTY_NUM_DYS,
+                               NVL(GG.DILNLAZ_PUBC_HODY_DUTY_NUM_DYS,0) AS DILNLAZ_PUBC_HODY_DUTY_NUM_DYS, 
+                               FF.DILNLAZ_TOT_DUTY_TM,
+                               FF.DILNLAZ_HODY_DUTY_NUM_DYS,
+           FF.DILNLAZ_WKD_DUTY_NUM_DYS,           
+FF.DILNLAZ_BUTP_DYS,
+                               FF.DILNLAZ_ABNCE_DUTY_RCGTN_DYS,
+                               FF.DILNLAZ_SPCL_HODY_NUM_DYS , 
+				               FF.DILNLAZ_PAID_HODY_NUM_DYS,
+				               FF.DILNLAZ_TFC_ASS_CST_NUM_DYS,
+				               NVL(FF.DILNLAZ_LNCH_DYS,0) AS DILNLAZ_LNCH_DYS,
+                               FF.DILNLAZ_DDLNE_PRCS_YN AS DILNLAZ_DDLNE_PRCS_YN_01,
+                               GG.DILNLAZ_EXCE_DUTY_YR_MNTH,
+                               GG.DILNLAZ_EXCE_DUTY_BGNN_DT,
+                               GG.DILNLAZ_EXCE_DUTY_END_DT, 
+                               GG.DILNLAZ_TOT_NTOT_NUM_DYS,
+                               GG.DILNLAZ_TOT_NTOT_TM,
+                               GG.DILNLAZ_FNDTN_TM_RST_DUTY_TM,
+                               GG.DILNLAZ_TM_RST_DUTY_TM,
+                               NVL(GG.DILNLAZ_TOT_TM_RST_DUTY_TM,0) AS DILNLAZ_TOT_TM_RST_DUTY_TM,
+                               GG.DILNLAZ_DDLNE_PRCS_YN AS DILNLAZ_DDLNE_PRCS_YN_02,
+                            (NVL(GG.DILNLAZ_PUBC_HODY_DUTY_TM,0) / 60) AS DILNLAZ_PUBC_HODY_DUTY_TM,  /* 분단위 처리 이므로 주의  60 */
+                              TRUNC((NVL(GG.DILNLAZ_HODY_TOT_NTOT_TM,0) / 60),4) AS DILNLAZ_HODY_TOT_NTOT_TM, /* 분단위 처리 이므로 주의  60 */
+                             GG.DILNLAZ_NOTE_CTNT 
+              FROM PAYR0500 AA, PSNL0100 BB ,( 
+						                     SELECT 
+												   DPOB_CD, SYSTEMKEY, LEVF_ABNC_SEIL_NUM, 
+												   LEVF_ABNC_DIV_CD, LEVF_ABNC_BGNN_DT, LEVF_ABNC_END_DT, 
+												   TURTY_RNTMNT_DT 
+												FROM  PSNL0123  KK
+											    WHERE KK.DPOB_CD = #dpobCd# 
+											      AND LEVF_ABNC_SEIL_NUM = (
+											       SELECT 
+												        MAX(LEVF_ABNC_SEIL_NUM) AS LEVF_ABNC_SEIL_NUM 
+												FROM  PSNL0123  JJ
+											    WHERE JJ.DPOB_CD = #dpobCd# 
+											    AND   JJ.SYSTEMKEY = KK.SYSTEMKEY
+											    AND ((JJ.LEVF_ABNC_BGNN_DT  >=  #rflctnBgnnDt#  AND   JJ.LEVF_ABNC_BGNN_DT  <=  #rflctnEndDt#)
+											          OR (JJ.LEVF_ABNC_END_DT  >=  #rflctnBgnnDt#  AND   JJ.LEVF_ABNC_END_DT  <=  #rflctnEndDt#)) 
+											      )  
+                       ) CC, PSNL0127 DD ,
+                     ( 
+                       SELECT  SYSTEMKEY
+                              , DPOB_CD
+                              , PAY_CD 
+                              , BNK_CD
+                              , BNK_ACCU_NUM
+                              , ACNT_HODR_NM
+                              , RPSTTV_ACCU_YN 
+                     FROM PSNL0130  
+                     WHERE  (SYSTEMKEY , DPOB_CD , PAY_CD ) IN ( SELECT SYSTEMKEY , DPOB_CD  
+                                                   , NVL((SELECT   PAY_CD  
+                                                            FROM  PSNL0130 BB
+                                                           WHERE BB.DPOB_CD = AA.DPOB_CD
+                                                             AND BB.PAY_CD = #payCd#
+                                                             AND BB.SYSTEMKEY =  AA.SYSTEMKEY 
+                                                     ),'B0150000')
+                                                      FROM  PSNL0130  AA 
+                                                    WHERE DPOB_CD =  #dpobCd#)  
+                     )  EE , DLGN0100 FF, DLGN0200 GG ,
+                     (
+        
+          SELECT DISTINCT CC05.DPOB_CD,
+								       CC05.SYSTEMKEY,
+								       CC05.EMYMT_BGNN_DT,
+								       CC05.EMYMT_END_DT,
+								       CC06.DEPT_CD,
+								       CC06.BUSIN_CD,
+								       CC06.TYP_OCCU_CD,
+								       CC06.DTIL_OCCU_CLS_DIV_CD,
+								       CC06.DTIL_OCCU_INTTN_CD
+								  FROM (  SELECT DPOB_CD,
+								                 SYSTEMKEY,
+								                 MIN (EMYMT_BGNN_DT) AS EMYMT_BGNN_DT,
+								                 MAX (NVL (EMYMT_END_DT, TO_CHAR (SYSDATE, 'YYYYMMDD')))
+								                    AS EMYMT_END_DT
+								            FROM PSNL0110 CC01
+								           WHERE    CC01.DPOB_CD =  #dpobCd# 
+					                                  AND  CC01.EMYMT_DIV_CD =  #emymtDivCd#
+					                                   AND CC01.EMYMT_TYP_CD NOT IN ('A0420990')
+					                                   AND ( SUBSTR(#rflctnBgnnDt#,1,6) BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6) 
+					                                   AND  SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN #rflctnBgnnDt#  <= TO_CHAR (SYSDATE, 'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR ( SYSDATE, 'YYYYMMDD')  
+                                                                                                      ELSE #rflctnBgnnDt#  END)  ),1,6)
+                                       OR SUBSTR(#rflctnEndDt#,1,6) BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6) 
+                                       AND  SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN #rflctnEndDt#  >= TO_CHAR (SYSDATE, 'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR ( SYSDATE, 'YYYYMMDD')  
+                                                                                                      ELSE #rflctnEndDt#  END)  ),1,6))
+					                        	]]>
+                        <isNotEmpty prepend="AND" property="businCd" >
+					 	CC01.BUSIN_CD=#businCd#
+				       </isNotEmpty>  
+				          <![CDATA[      
+								        GROUP BY DPOB_CD, SYSTEMKEY
+								        UNION ALL
+					                SELECT
+					                      KK01.DPOB_CD,
+					                      KK01.SYSTEMKEY, 
+					                      KK01.EMYMT_BGNN_DT,
+					                      NVL (KK01.EMYMT_END_DT,
+					                                      TO_CHAR (SYSDATE, 'YYYYMMDD')) 
+					                                 AS EMYMT_END_DT 
+					                FROM PSNL0100 KK01, (
+					                                        SELECT DPOB_CD,
+					                                            SYSTEMKEY 
+					                                       FROM PSNL0123 KK
+					                                      WHERE     KK.DPOB_CD =  #dpobCd# 
+					                                            AND LEVF_ABNC_SEIL_NUM =
+					                                                   (  SELECT MAX (LEVF_ABNC_SEIL_NUM)
+					                                                                AS LEVF_ABNC_SEIL_NUM
+					                                                        FROM PSNL0123 JJ
+					                                                       WHERE     JJ.DPOB_CD =  #dpobCd# 
+					                                                             AND JJ.SYSTEMKEY = KK.SYSTEMKEY
+					                                                             AND ((JJ.LEVF_ABNC_BGNN_DT  >=  #rflctnBgnnDt#  AND   JJ.LEVF_ABNC_BGNN_DT  <=  #rflctnEndDt#)
+                              													OR (JJ.LEVF_ABNC_END_DT  >=  #rflctnBgnnDt#  AND   JJ.LEVF_ABNC_END_DT  <=  #rflctnEndDt#)) 
+					                                                    GROUP BY JJ.DPOB_CD, JJ.SYSTEMKEY)
+					                                                    ) KK02 
+					                  WHERE KK01.DPOB_CD = KK02.DPOB_CD
+					                    AND KK01.SYSTEMKEY = KK02.SYSTEMKEY  ) CC05,
+								       (SELECT CC02.DPOB_CD,
+								               CC02.SYSTEMKEY,
+								               CC02.DEPT_CD,
+								               CC02.BUSIN_CD,
+								               CC02.TYP_OCCU_CD,
+								               CC02.DTIL_OCCU_CLS_DIV_CD,
+								               CC02.DTIL_OCCU_INTTN_CD
+								          FROM PSNL0110 CC02,
+								               (  SELECT DPOB_CD,
+								                         SYSTEMKEY,
+								                         MAX (CC01.EMYMT_BGNN_DT) AS EMYMT_BGNN_DT
+								                    FROM PSNL0110 CC01
+								                   WHERE  CC01.DPOB_CD =  #dpobCd# 
+					                                  AND  CC01.EMYMT_DIV_CD =  #emymtDivCd#
+					                                  AND ( SUBSTR(#rflctnBgnnDt#,1,6) BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6) 
+					                                  AND  SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN #rflctnBgnnDt#  <= TO_CHAR (SYSDATE, 'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR ( SYSDATE, 'YYYYMMDD')  
+                                                                                                      ELSE #rflctnBgnnDt#  END)  ),1,6)
+                                       OR SUBSTR(#rflctnEndDt#,1,6) BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6) 
+                                       AND  SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN #rflctnEndDt#  >= TO_CHAR (SYSDATE, 'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR ( SYSDATE, 'YYYYMMDD')  
+                                                                                                      ELSE #rflctnEndDt#  END)  ),1,6))
+					                              	]]>
+                        <isNotEmpty prepend="AND" property="businCd" >
+					 	CC01.BUSIN_CD=#businCd#
+				       </isNotEmpty>  
+				          <![CDATA[
+								                GROUP BY DPOB_CD, SYSTEMKEY) CC03
+								         WHERE     CC02.DPOB_CD = CC03.DPOB_CD
+								               AND CC02.SYSTEMKEY = CC03.SYSTEMKEY
+								                AND CC02.EMYMT_TYP_CD NOT IN ('A0420990')
+								               /*   AND (CC02.DPOB_CD,CC02.SYSTEMKEY) NOT IN (
+				                                   SELECT DPOB_CD,SYSTEMKEY 
+				                                     FROM PSNL0100
+				                                  
+				                                    WHERE  HDOFC_CODTN_CD  IN ('A0030020', 'A0030030') 
+				                                 )  */
+										
+								               AND CC02.EMYMT_BGNN_DT = CC03.EMYMT_BGNN_DT) CC06
+								 WHERE CC05.DPOB_CD = CC06.DPOB_CD 
+								   AND CC05.SYSTEMKEY = CC06.SYSTEMKEY 
+                                  
+                             ) SS
+                     WHERE AA.DPOB_CD = BB.DPOB_CD
+                     AND  AA.SYSTEMKEY= BB.SYSTEMKEY 
+                     AND BB.DPOB_CD = SS.DPOB_CD
+                     AND BB.SYSTEMKEY = SS.SYSTEMKEY  
+                     
+                     AND  AA.DPOB_CD = CC.DPOB_CD(+)
+                     AND  AA.SYSTEMKEY= CC.SYSTEMKEY(+)  
+                     AND  AA.DPOB_CD = DD.DPOB_CD(+)
+                     AND  AA.SYSTEMKEY= DD.SYSTEMKEY(+) 
+                     AND  AA.DPOB_CD = EE.DPOB_CD(+)
+                     AND  AA.SYSTEMKEY= EE.SYSTEMKEY(+) 
+                   ]]>
+                   <isEqual property="payCd" compareValue="B0150003">
+				     AND  AA.DPOB_CD = FF.DPOB_CD 
+                     AND  AA.SYSTEMKEY= FF.SYSTEMKEY 
+                     AND  FF.DILNLAZ_YR_MNTH  =  REPLACE(#jobYrMnth#,'.','')
+                     AND  FF.PAY_CD  =  #payCd#
+                     AND  AA.DPOB_CD = GG.DPOB_CD(+)
+                     AND  AA.SYSTEMKEY= GG.SYSTEMKEY(+) 
+                     AND  GG.DILNLAZ_EXCE_DUTY_YR_MNTH(+) = REPLACE(#jobYrMnth#,'.','')
+                     AND  GG.PAY_CD(+) = #payCd#
+                     <![CDATA[	
+                                       
+                     AND  BB.EMYMT_DIV_CD = #emymtDivCd# 
+                    ]]>
+			        </isEqual>
+			     	<isNotEqual property="payCd" compareValue="B0150003">
+				     AND  AA.DPOB_CD = FF.DPOB_CD 
+                     AND  AA.SYSTEMKEY= FF.SYSTEMKEY  
+                     AND  FF.DILNLAZ_YR_MNTH  =  REPLACE(#jobYrMnth#,'.','')
+                     AND  FF.PAY_CD  =  #payCd#
+                     AND  AA.DPOB_CD = GG.DPOB_CD(+) 
+                     AND  AA.SYSTEMKEY= GG.SYSTEMKEY(+)  
+                     AND  GG.DILNLAZ_EXCE_DUTY_YR_MNTH(+)  = REPLACE(#jobYrMnth#,'.','')
+                     AND  GG.PAY_CD(+) = #payCd#
+                        <![CDATA[	
+                       
+                     AND  BB.EMYMT_DIV_CD = #emymtDivCd# 
+                      ]]>
+			     </isNotEqual>  
+                 AND EXISTS  (
+                                SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             (SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,#rflctnBgnnDt# ))) C
+                                            WHERE     C.DPOB_CD = SS.DPOB_CD
+						                        AND C.DEPT_CD = SS.DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(SS.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(SS.DTIL_OCCU_INTTN_CD,'TT') 
+                                                 <isNotEmpty prepend="AND" property="deptCd" >
+										 	C.DEPT_CD=#deptCd#
+									       </isNotEmpty> 
+                                           )  
+                  <isNotEmpty prepend="AND" property="systemkey" >
+			 	    AA.SYSTEMKEY=#systemkey#
+		           </isNotEmpty> 
+		             <isNotEmpty prepend="AND" property="mangeDeptCd" >
+			 	    BB.DEPT_CD=#mangeDeptCd# 
+		           </isNotEmpty>   
+		            <isNotEmpty property="typOccuCd" prepend="AND"> 
+						 SS.TYP_OCCU_CD = #typOccuCd#  
+					</isNotEmpty>   
+		          <isNotEmpty property="dtilOccuInttnCd" prepend="AND"> 
+							 SS.DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd# 
+					</isNotEmpty>   
+	</select>	
+	
+	
+	
+	<!-- 김해시  급여계산로직 -마스터데이터 가져오기  -->
+	
+	<resultMap id="procGimHaePayCalculation"  class="com.app.smrmf.pkg.payr.payrcalc.service.PkgPayrCommCalcVO">
+	    <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>  
+		<result property="hanNm" column="HAN_NM" columnIndex="3"/> 
+		<result property="sxDivCd" column="SX_DIV_CD" columnIndex="4"/>
+		<result property="yoobhMnthDay" column="YOOBH_MNTH_DAY" columnIndex="5"/>
+		<result property="sclcDivCd" column="SCLC_DIV_CD" columnIndex="6"/>
+		<result property="natnCd" column="NATN_CD" columnIndex="7"/> 
+	    <result property="currAffnDeptCd" column="CURR_AFFN_DEPT_CD" columnIndex="8"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="9"/> 
+		<result property="repbtyBusinDivCd" column="REPBTY_BUSIN_DIV_CD" columnIndex="10"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="11"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="12"/> 
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="13"/>
+		<result property="odtyCd" column="ODTY_CD" columnIndex="14"/>
+		<result property="frstEmymtDt" column="FRST_EMYMT_DT" columnIndex="15"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="16"/>
+		<result property="emymtBgnnDt" column="EMYMT_BGNN_DT" columnIndex="17"/>
+		<result property="emymtEndDt" column="EMYMT_END_DT" columnIndex="18"/>
+		<result property="pyspCd" column="PYSP_CD" columnIndex="19"/>
+		<result property="hdofcCodtnCd" column="HDOFC_CODTN_CD" columnIndex="20"/>
+		<result property="retryDt" column="RETRY_DT" columnIndex="21"/>
+		<result property="retryReasCtnt" column="RETRY_REAS_CTNT" columnIndex="22"/>
+		<result property="frgnrDivCd" column="FRGNR_DIV_CD" columnIndex="23"/>
+		<result property="psptNum" column="PSPT_NUM" columnIndex="24"/>
+		<result property="styBgnnDt" column="STY_BGNN_DT" columnIndex="25"/>
+		<result property="styEndDt" column="STY_END_DT" columnIndex="26"/>
+		<result property="endSchl" column="END_SCHL" columnIndex="27"/>
+		<result property="endDegrDivCd" column="END_DEGR_DIV_CD" columnIndex="28"/>
+		<result property="pmtnScduDt" column="PMTN_SCDU_DT" columnIndex="29"/>
+		<result property="pyspPrmtnScduDt" column="PYSP_PRMTN_SCDU_DT" columnIndex="30"/>
+		<result property="reymnScduDt" column="REYMN_SCDU_DT" columnIndex="31"/>
+		<result property="logSvcYrNumCd" column="LOG_SVC_YR_NUM_CD" columnIndex="32"/>
+		<result property="logSvcMnthIcmCd" column="LOG_SVC_MNTH_ICM_CD" columnIndex="33"/>
+		<result property="currPyspAppmtDt" column="CURR_PYSP_APPMT_DT" columnIndex="34"/>
+		<result property="currDeptAppmtDt" column="CURR_DEPT_APPMT_DT" columnIndex="35"/>
+		<result property="pernNoteCtnt" column="PERN_NOTE_CTNT" columnIndex="36"/>	  
+		<result property="soctyInsurYr" column="SOCTY_INSUR_YR" columnIndex="37"/>
+		<result property="hlthInsurFlucDt" column="HLTH_INSUR_FLUC_DT" columnIndex="38"/>
+		<result property="hlthInsrPayTotAmnt" column="HLTH_INSR_PAY_TOT_AMNT" columnIndex="39"/>
+		<result property="hlthInsrMnthRuntnAmnt" column="HLTH_INSR_MNTH_RUNTN_AMNT" columnIndex="40"/>
+		<result property="natPennStdIncmMnthAmnt" column="NAT_PENN_STD_INCM_MNTH_AMNT" columnIndex="41"/>	 		
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="42"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="43"/>
+		<result property="logSvcStdDt" column="LOG_SVC_STD_DT" columnIndex="44"/>
+		<result property="wmnYn" column="WMN_YN" columnIndex="45"/>
+		<result property="retryClutYn" column="RETRY_CLUT_YN" columnIndex="46"/>
+		<result property="payRcptYn" column="PAY_RCPT_YN" columnIndex="47"/>
+		<result property="spueYn" column="SPUE_YN" columnIndex="48"/>
+		<result property="hlthInsrApptnYn" column="HLTH_INSR_APPTN_YN" columnIndex="49"/>
+		<result property="natPennApptnYn" column="NAT_PENN_APPTN_YN" columnIndex="50"/>
+		<result property="umytInsrApptnYn" column="UMYT_INSR_APPTN_YN" columnIndex="51"/>
+		<result property="idtlAccdtInsurApptnYn" column="IDTL_ACCDT_INSUR_APPTN_YN" columnIndex="52"/>
+		<result property="suprtFamyNumTwenChDn" column="SUPRT_FAMY_NUM_TWEN_CH_DN" columnIndex="53"/>
+		<result property="suprtFamyNumTreOvrChdnYn" column="SUPRT_FAMY_NUM_TRE_OVR_CHDN_YN" columnIndex="54"/>
+		<result property="suprtFamyNumEtc" column="SUPRT_FAMY_NUM_ETC" columnIndex="55"/>
+		<result property="chdnSchlExpnAdmclYn" column="CHDN_SCHL_EXPN_ADMCL_YN" columnIndex="56"/>
+		<result property="logSvcExtpyApptnYn" column="LOG_SVC_EXTPY_APPTN_YN" columnIndex="57"/> 		
+		<result property="levfAbncSeilNum" column="LEVF_ABNC_SEIL_NUM" columnIndex="58"/>
+		<result property="levfAbncDivCd" column="LEVF_ABNC_DIV_CD" columnIndex="59"/>
+		<result property="levfAbncBgnnDt" column="LEVF_ABNC_BGNN_DT" columnIndex="60"/>
+		<result property="levfAbncEndDt" column="LEVF_ABNC_END_DT" columnIndex="61"/>
+		<result property="turtyRntmntDt" column="TURTY_RNTMNT_DT" columnIndex="62"/>		
+		<result property="bnkCd" column="BNK_CD" columnIndex="63"/>
+		<result property="bnkAccuNum" column="BNK_ACCU_NUM" columnIndex="64"/>
+		<result property="acntHodrNm" column="ACNT_HODR_NM" columnIndex="65"/>
+		  <result property="rpsttvAccuYn" column="RPSTTV_ACCU_YN" columnIndex="66"/>		
+       	  <result property="dilnlazYrMnth" column="DILNLAZ_YR_MNTH" columnIndex="67"/> 
+		  <result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="68"/>
+		  <result property="dilnlazDutyBgnnDt" column="DILNLAZ_DUTY_BGNN_DT" columnIndex="69"/>
+		  <result property="dilnlazDutyEndDt" column="DILNLAZ_DUTY_END_DT" columnIndex="70"/>
+		  <result property="dilnlazDutyNumDys" column="DILNLAZ_DUTY_NUM_DYS" columnIndex="71"/>
+		  <result property="dilnlazLvsgNumDys" column="DILNLAZ_LVSG_NUM_DYS" columnIndex="72"/>
+		  <result property="dilnlazAbnceNumDys" column="DILNLAZ_ABNCE_NUM_DYS" columnIndex="73"/>
+		  <result property="dilnlazSckleaNumDys" column="DILNLAZ_SCKLEA_NUM_DYS" columnIndex="74"/>
+		  <result property="dilnlazOffvaNumDys" column="DILNLAZ_OFFVA_NUM_DYS" columnIndex="75"/>
+		  <result property="dilnlazFmlyEvntNumDys" column="DILNLAZ_FMLY_EVNT_NUM_DYS" columnIndex="76"/>
+		  <result property="dilnlazHlthCreNumDys" column="DILNLAZ_HLTH_CRE_NUM_DYS" columnIndex="77"/>
+		  <result property="dilnlazTotDutyNumDys" column="DILNLAZ_TOT_DUTY_NUM_DYS" columnIndex="78"/>
+		  <result property="dilnlazWklyHldyNumDys" column="DILNLAZ_WKLY_HLDY_NUM_DYS" columnIndex="79"/>
+		  <result property="dilnlazPaidPubcHodyNum" column="DILNLAZ_PAID_PUBC_HODY_NUM" columnIndex="80"/>
+		  <result property="dilnlazDdlnePrcsYn01"     column="DILNLAZ_DDLNE_PRCS_YN_01" columnIndex="81"/>  
+		  <result property="dilnlazExceDutyYrMnth" column="DILNLAZ_EXCE_DUTY_YR_MNTH" columnIndex="82"/> 
+		  <result property="dilnlazExceDutyBgnnDt" column="DILNLAZ_EXCE_DUTY_BGNN_DT" columnIndex="83"/>
+		  <result property="dilnlazExceDutyEndDt" column="DILNLAZ_EXCE_DUTY_END_DT" columnIndex="84"/>
+		  <result property="dilnlazPubcHodyDutyNumDys" column="DILNLAZ_PUBC_HODY_DUTY_NUM_DYS" columnIndex="85"/>
+		  <result property="dilnlazSatDutyNumDys" column="DILNLAZ_SAT_DUTY_NUM_DYS" columnIndex="86"/>
+		  <result property="dilnlazTotNtotNumDys" column="DILNLAZ_TOT_NTOT_NUM_DYS" columnIndex="87"/>
+		  <result property="dilnlazTotNtotTm" column="DILNLAZ_TOT_NTOT_TM" columnIndex="88"/>
+		  <result property="dilnlazFndtnTmRstDutyTm" column="DILNLAZ_FNDTN_TM_RST_DUTY_TM" columnIndex="89"/>
+		  <result property="dilnlazTmRstDutyTm" column="DILNLAZ_TM_RST_DUTY_TM" columnIndex="90"/>
+		  <result property="dilnlazTotTmRstDutyTm" column="DILNLAZ_TOT_TM_RST_DUTY_TM" columnIndex="91"/>
+		  <result property="dilnlazDdlnePrcsYn02" column="DILNLAZ_DDLNE_PRCS_YN_02" columnIndex="92"/>
+		  <result property="dilnlazNoteCtnt" column="DILNLAZ_NOTE_CTNT" columnIndex="93"/>
+		  <result property="payYrMnth" column="PAY_YR_MNTH" columnIndex="94"/> 		  
+		  <result property="hlthInsrGrde" column="HLTH_INSR_GRDE" columnIndex="95"/> 
+		  <result property="hlthInsrCertNum" column="HLTH_INSR_CERT_NUM" columnIndex="96"/> 
+		  <result property="natPennInsurFlucDt" column="NAT_PENN_INSUR_FLUC_DT" columnIndex="97"/> 
+		  <result property="natPennGrde" column="NAT_PENN_GRDE" columnIndex="98"/>  
+		  <result property="suprtFamy3ChdnExtpySum" column="SUPRT_FAMY_3_CHDN_EXTPY_SUM" columnIndex="99"/>		   
+		  <result property="hlthInsrPayAmt" column="HLTH_INSR_PAY_AMT" columnIndex="100"/>
+		  <result property="hlthInsrRcptnPayAmt" column="HLTH_INSR_RCPTN_PAY_AMT" columnIndex="101"/>
+		  <result property="natPennAmt" column="NAT_PENN_AMT" columnIndex="102"/>	
+		  <result property="payCd" column="PAY_CD" columnIndex="103"/>	
+		  <result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="104"/>
+		  <result property="dilnlazAbnceDutyRcgtnDys" column="DILNLAZ_ABNCE_DUTY_RCGTN_DYS" columnIndex="105"/>
+		  <result property="dilnlazSpclHodyNumDys" column="DILNLAZ_SPCL_HODY_NUM_DYS" columnIndex="106"/>
+		  <result property="dilnlazTotDutyTm" column="DILNLAZ_TOT_DUTY_TM" columnIndex="107"/>  
+		  <result property="dilnlazPaidHodyNumDys" column="DILNLAZ_PAID_HODY_NUM_DYS" columnIndex="108"/>
+		  <result property="dilnlazTfcAssCstNumDys" column="DILNLAZ_TFC_ASS_CST_NUM_DYS" columnIndex="109"/>
+		  
+		  <result property="umytInsrFlucDt" column="UMYT_INSR_FLUC_DT" columnIndex="110"/>
+		  <result property="umytInsrPayTotAmnt" column="UMYT_INSR_PAY_TOT_AMNT" columnIndex="111"/>
+		  <result property="umytInsrPayMnthAmnt" column="UMYT_INSR_PAY_MNTH_AMNT" columnIndex="112"/>
+		  <result property="idtlAccdtFlucDt" column="IDTL_ACCDT_FLUC_DT" columnIndex="113"/>
+		  <result property="idtlAccdtPayTotAmnt" column="IDTL_ACCDT_PAY_TOT_AMNT" columnIndex="114"/>
+		  <result property="idtlAccdtPayMnthAmnt" column="IDTL_ACCDT_PAY_MNTH_AMNT" columnIndex="115"/>
+		  <result property="dayWorkYn" column="DAY_WORK_YN" columnIndex="116"/> 
+		  <result property="addIncmTxApptnRtoCd" column="ADD_INCM_TX_APPTN_RTO_CD" columnIndex="117"/>
+		  <result property="addIncmTxApptnYrMnth" column="ADD_INCM_TX_APPTN_YR_MNTH" columnIndex="118"/>
+		  <result property="addIncmTxApptnYn" column="ADD_INCM_TX_APPTN_YN" columnIndex="119"/>
+		  <result property="addIncmTxApptnRto" column="ADD_INCM_TX_APPTN_RTO" columnIndex="120"/>
+		  <result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="121"/>
+		  <result property="dilnlazLnchDys" column="DILNLAZ_LNCH_DYS" columnIndex="122"/>
+		   <result property="dilnlazPubcHodyDutyTm" column="DILNLAZ_PUBC_HODY_DUTY_TM" columnIndex="123"/>
+		  <result property="unnMbspSttYn" column="UNN_MBSP_STT_YN" columnIndex="124"/>
+		  <result property="payrIncmExceYn" column="PAYR_INCM_EXCE_YN" columnIndex="125"/>  
+           <result property="dilnlazHodyTotNtotTm" column="DILNLAZ_HODY_TOT_NTOT_TM" columnIndex="126"/> 
+           <result property="dilnlazHodyDutyNumDys" column="DILNLAZ_HODY_DUTY_NUM_DYS" columnIndex="127"/> 
+<result property="dilnlazWkdDutyNumDys" column="DILNLAZ_WKD_DUTY_NUM_DYS" columnIndex="128"/>  
+<result property="dilnlazButpDys" column="DILNLAZ_BUTP_DYS" columnIndex="129"/>
+ <result property="mangeDeptCd" column="MANGE_DEPT_CD" columnIndex="130"/>
+		  <result property="exPayr0410" column="{dpobCd=DPOB_CD,payYrMnth=PAY_YR_MNTH,payCd=PAY_CD,systemkey=SYSTEMKEY,emymtDivCd=EMYMT_DIV_CD,payrMangDeptCd=PAYR_MANG_DEPT_CD,typOccuCd=TYP_OCCU_CD,pyspGrdeCd=PYSP_GRDE_CD,dtilOccuInttnCd=DTIL_OCCU_INTTN_CD,logSvcYrNumCd=LOG_SVC_YR_NUM_CD,repbtyBusinDivCd=REPBTY_BUSIN_DIV_CD}"   select="payCalculationDAO.selectGimHaePayr0410_S"/>
+		  <result property="exPayr0530" column="{dpobCd=DPOB_CD,systemkey=SYSTEMKEY}"   select="payCalculationDAO.selectPayr0530_S"/>  
+		</resultMap> 
+	
+	<!-- 
+	  <result property="exPayr0445" column="{dpobCd=DPOB_CD,payYrMnth=PAY_YR_MNTH,payCd=PAY_CD,systemkey=SYSTEMKEY,payrMangDeptCd=PAYR_MANG_DEPT_CD,typOccuCd=TYP_OCCU_CD,pyspGrdeCd=PYSP_GRDE_CD,dtilOccuInttnCd=DTIL_OCCU_INTTN_CD,logSvcYrNumCd=LOG_SVC_YR_NUM_CD}"   select="payCalculationDAO.selectPayr0445_S"/>
+	 --> 
+	<resultMap id="procPayr0445" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0445VO"> 
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="payYr" column="PAY_YR" columnIndex="2"/>
+		<result property="typOccuGrdeMppgSeilNum" column="TYP_OCCU_GRDE_MPPG_SEIL_NUM" columnIndex="3"/>
+		<result property="pyspLogSvcYrNumCd" column="PYSP_LOG_SVC_YR_NUM_CD" columnIndex="4"/> 
+		<result property="occuClssPayCmpttnStd" column="OCCU_CLSS_PAY_CMPTTN_STD" columnIndex="5"/>
+		<result property="mnthUsalyAmntWag" column="MNTH_USALY_AMNT_WAG" columnIndex="6"/>
+		<result property="mnthUsalyAmntAllwBnusSum" column="MNTH_USALY_AMNT_ALLW_BNUS_SUM" columnIndex="7"/>
+		<result property="usalyAmntPdyQnty" column="USALY_AMNT_PDY_QNTY" columnIndex="8"/>
+		<result property="usalyAmntHrwgQnty" column="USALY_AMNT_HRWG_QNTY" columnIndex="9"/>
+		<result property="kybdr" column="KYBDR" columnIndex="10"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="11"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="12"/>
+		<result property="ismt" column="ISMT" columnIndex="13"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="14"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="15"/>
+	</resultMap>
+	
+		
+	
+		
+	<!-- 거제시  급여계산로직 -마스터데이터 가져오기  -->
+	
+	<resultMap id="procGeoJePayCalculation" class="com.app.smrmf.pkg.payr.payrcalc.service.PkgPayrCommCalcVO">
+	    <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>  
+		<result property="hanNm" column="HAN_NM" columnIndex="3"/> 
+		<result property="sxDivCd" column="SX_DIV_CD" columnIndex="4"/>
+		<result property="yoobhMnthDay" column="YOOBH_MNTH_DAY" columnIndex="5"/>
+		<result property="sclcDivCd" column="SCLC_DIV_CD" columnIndex="6"/>
+		<result property="natnCd" column="NATN_CD" columnIndex="7"/> 
+	    <result property="currAffnDeptCd" column="CURR_AFFN_DEPT_CD" columnIndex="8"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="9"/> 
+		<result property="repbtyBusinDivCd" column="REPBTY_BUSIN_DIV_CD" columnIndex="10"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="11"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="12"/> 
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="13"/>
+		<result property="odtyCd" column="ODTY_CD" columnIndex="14"/>
+		<result property="frstEmymtDt" column="FRST_EMYMT_DT" columnIndex="15"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="16"/>
+		<result property="emymtBgnnDt" column="EMYMT_BGNN_DT" columnIndex="17"/>
+		<result property="emymtEndDt" column="EMYMT_END_DT" columnIndex="18"/>
+		<result property="pyspCd" column="PYSP_CD" columnIndex="19"/>
+		<result property="hdofcCodtnCd" column="HDOFC_CODTN_CD" columnIndex="20"/>
+		<result property="retryDt" column="RETRY_DT" columnIndex="21"/>
+		<result property="retryReasCtnt" column="RETRY_REAS_CTNT" columnIndex="22"/>
+		<result property="frgnrDivCd" column="FRGNR_DIV_CD" columnIndex="23"/>
+		<result property="psptNum" column="PSPT_NUM" columnIndex="24"/>
+		<result property="styBgnnDt" column="STY_BGNN_DT" columnIndex="25"/>
+		<result property="styEndDt" column="STY_END_DT" columnIndex="26"/>
+		<result property="endSchl" column="END_SCHL" columnIndex="27"/>
+		<result property="endDegrDivCd" column="END_DEGR_DIV_CD" columnIndex="28"/>
+		<result property="pmtnScduDt" column="PMTN_SCDU_DT" columnIndex="29"/>
+		<result property="pyspPrmtnScduDt" column="PYSP_PRMTN_SCDU_DT" columnIndex="30"/>
+		<result property="reymnScduDt" column="REYMN_SCDU_DT" columnIndex="31"/>
+		<result property="logSvcYrNumCd" column="LOG_SVC_YR_NUM_CD" columnIndex="32"/>
+		<result property="logSvcMnthIcmCd" column="LOG_SVC_MNTH_ICM_CD" columnIndex="33"/>
+		<result property="currPyspAppmtDt" column="CURR_PYSP_APPMT_DT" columnIndex="34"/>
+		<result property="currDeptAppmtDt" column="CURR_DEPT_APPMT_DT" columnIndex="35"/>
+		<result property="pernNoteCtnt" column="PERN_NOTE_CTNT" columnIndex="36"/>	  
+		<result property="soctyInsurYr" column="SOCTY_INSUR_YR" columnIndex="37"/>
+		<result property="hlthInsurFlucDt" column="HLTH_INSUR_FLUC_DT" columnIndex="38"/>
+		<result property="hlthInsrPayTotAmnt" column="HLTH_INSR_PAY_TOT_AMNT" columnIndex="39"/>
+		<result property="hlthInsrMnthRuntnAmnt" column="HLTH_INSR_MNTH_RUNTN_AMNT" columnIndex="40"/>
+		<result property="natPennStdIncmMnthAmnt" column="NAT_PENN_STD_INCM_MNTH_AMNT" columnIndex="41"/>	 		
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="42"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="43"/>
+		<result property="logSvcStdDt" column="LOG_SVC_STD_DT" columnIndex="44"/>
+		<result property="wmnYn" column="WMN_YN" columnIndex="45"/>
+		<result property="retryClutYn" column="RETRY_CLUT_YN" columnIndex="46"/>
+		<result property="payRcptYn" column="PAY_RCPT_YN" columnIndex="47"/>
+		<result property="spueYn" column="SPUE_YN" columnIndex="48"/>
+		<result property="hlthInsrApptnYn" column="HLTH_INSR_APPTN_YN" columnIndex="49"/>
+		<result property="natPennApptnYn" column="NAT_PENN_APPTN_YN" columnIndex="50"/>
+		<result property="umytInsrApptnYn" column="UMYT_INSR_APPTN_YN" columnIndex="51"/>
+		<result property="idtlAccdtInsurApptnYn" column="IDTL_ACCDT_INSUR_APPTN_YN" columnIndex="52"/>
+		<result property="suprtFamyNumTwenChDn" column="SUPRT_FAMY_NUM_TWEN_CH_DN" columnIndex="53"/>
+		<result property="suprtFamyNumTreOvrChdnYn" column="SUPRT_FAMY_NUM_TRE_OVR_CHDN_YN" columnIndex="54"/>
+		<result property="suprtFamyNumEtc" column="SUPRT_FAMY_NUM_ETC" columnIndex="55"/>
+		<result property="chdnSchlExpnAdmclYn" column="CHDN_SCHL_EXPN_ADMCL_YN" columnIndex="56"/>
+		<result property="logSvcExtpyApptnYn" column="LOG_SVC_EXTPY_APPTN_YN" columnIndex="57"/> 		
+		<result property="levfAbncSeilNum" column="LEVF_ABNC_SEIL_NUM" columnIndex="58"/>
+		<result property="levfAbncDivCd" column="LEVF_ABNC_DIV_CD" columnIndex="59"/>
+		<result property="levfAbncBgnnDt" column="LEVF_ABNC_BGNN_DT" columnIndex="60"/>
+		<result property="levfAbncEndDt" column="LEVF_ABNC_END_DT" columnIndex="61"/>
+		<result property="turtyRntmntDt" column="TURTY_RNTMNT_DT" columnIndex="62"/>		
+		<result property="bnkCd" column="BNK_CD" columnIndex="63"/>
+		<result property="bnkAccuNum" column="BNK_ACCU_NUM" columnIndex="64"/>
+		<result property="acntHodrNm" column="ACNT_HODR_NM" columnIndex="65"/>
+		  <result property="rpsttvAccuYn" column="RPSTTV_ACCU_YN" columnIndex="66"/>		
+       	  <result property="dilnlazYrMnth" column="DILNLAZ_YR_MNTH" columnIndex="67"/> 
+		  <result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="68"/>
+		  <result property="dilnlazDutyBgnnDt" column="DILNLAZ_DUTY_BGNN_DT" columnIndex="69"/>
+		  <result property="dilnlazDutyEndDt" column="DILNLAZ_DUTY_END_DT" columnIndex="70"/>
+		  <result property="dilnlazDutyNumDys" column="DILNLAZ_DUTY_NUM_DYS" columnIndex="71"/>
+		  <result property="dilnlazLvsgNumDys" column="DILNLAZ_LVSG_NUM_DYS" columnIndex="72"/>
+		  <result property="dilnlazAbnceNumDys" column="DILNLAZ_ABNCE_NUM_DYS" columnIndex="73"/>
+		  <result property="dilnlazSckleaNumDys" column="DILNLAZ_SCKLEA_NUM_DYS" columnIndex="74"/>
+		  <result property="dilnlazOffvaNumDys" column="DILNLAZ_OFFVA_NUM_DYS" columnIndex="75"/>
+		  <result property="dilnlazFmlyEvntNumDys" column="DILNLAZ_FMLY_EVNT_NUM_DYS" columnIndex="76"/>
+		  <result property="dilnlazHlthCreNumDys" column="DILNLAZ_HLTH_CRE_NUM_DYS" columnIndex="77"/>
+		  <result property="dilnlazTotDutyNumDys" column="DILNLAZ_TOT_DUTY_NUM_DYS" columnIndex="78"/>
+		  <result property="dilnlazWklyHldyNumDys" column="DILNLAZ_WKLY_HLDY_NUM_DYS" columnIndex="79"/>
+		  <result property="dilnlazPaidPubcHodyNum" column="DILNLAZ_PAID_PUBC_HODY_NUM" columnIndex="80"/>
+		  <result property="dilnlazDdlnePrcsYn01"     column="DILNLAZ_DDLNE_PRCS_YN_01" columnIndex="81"/>  
+		  <result property="dilnlazExceDutyYrMnth" column="DILNLAZ_EXCE_DUTY_YR_MNTH" columnIndex="82"/> 
+		  <result property="dilnlazExceDutyBgnnDt" column="DILNLAZ_EXCE_DUTY_BGNN_DT" columnIndex="83"/>
+		  <result property="dilnlazExceDutyEndDt" column="DILNLAZ_EXCE_DUTY_END_DT" columnIndex="84"/>
+		  <result property="dilnlazPubcHodyDutyNumDys" column="DILNLAZ_PUBC_HODY_DUTY_NUM_DYS" columnIndex="85"/>
+		  <result property="dilnlazSatDutyNumDys" column="DILNLAZ_SAT_DUTY_NUM_DYS" columnIndex="86"/>
+		  <result property="dilnlazTotNtotNumDys" column="DILNLAZ_TOT_NTOT_NUM_DYS" columnIndex="87"/>
+		  <result property="dilnlazTotNtotTm" column="DILNLAZ_TOT_NTOT_TM" columnIndex="88"/>
+		  <result property="dilnlazFndtnTmRstDutyTm" column="DILNLAZ_FNDTN_TM_RST_DUTY_TM" columnIndex="89"/>
+		  <result property="dilnlazTmRstDutyTm" column="DILNLAZ_TM_RST_DUTY_TM" columnIndex="90"/>
+		  <result property="dilnlazTotTmRstDutyTm" column="DILNLAZ_TOT_TM_RST_DUTY_TM" columnIndex="91"/>
+		  <result property="dilnlazDdlnePrcsYn02" column="DILNLAZ_DDLNE_PRCS_YN_02" columnIndex="92"/>
+		  <result property="dilnlazNoteCtnt" column="DILNLAZ_NOTE_CTNT" columnIndex="93"/>
+		  <result property="payYrMnth" column="PAY_YR_MNTH" columnIndex="94"/> 		  
+		  <result property="hlthInsrGrde" column="HLTH_INSR_GRDE" columnIndex="95"/> 
+		  <result property="hlthInsrCertNum" column="HLTH_INSR_CERT_NUM" columnIndex="96"/> 
+		  <result property="natPennInsurFlucDt" column="NAT_PENN_INSUR_FLUC_DT" columnIndex="97"/> 
+		  <result property="natPennGrde" column="NAT_PENN_GRDE" columnIndex="98"/>  
+		  <result property="suprtFamy3ChdnExtpySum" column="SUPRT_FAMY_3_CHDN_EXTPY_SUM" columnIndex="99"/>		   
+		  <result property="hlthInsrPayAmt" column="HLTH_INSR_PAY_AMT" columnIndex="100"/>
+		  <result property="hlthInsrRcptnPayAmt" column="HLTH_INSR_RCPTN_PAY_AMT" columnIndex="101"/>
+		  <result property="natPennAmt" column="NAT_PENN_AMT" columnIndex="102"/>	
+		  <result property="payCd" column="PAY_CD" columnIndex="103"/>	
+		  <result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="104"/>
+		  <result property="dilnlazAbnceDutyRcgtnDys" column="DILNLAZ_ABNCE_DUTY_RCGTN_DYS" columnIndex="105"/>
+		  <result property="dilnlazSpclHodyNumDys" column="DILNLAZ_SPCL_HODY_NUM_DYS" columnIndex="106"/>
+		  <result property="dilnlazTotDutyTm" column="DILNLAZ_TOT_DUTY_TM" columnIndex="107"/>  
+		  <result property="dilnlazPaidHodyNumDys" column="DILNLAZ_PAID_HODY_NUM_DYS" columnIndex="108"/>
+		  <result property="dilnlazTfcAssCstNumDys" column="DILNLAZ_TFC_ASS_CST_NUM_DYS" columnIndex="109"/>
+		  
+		  <result property="umytInsrFlucDt" column="UMYT_INSR_FLUC_DT" columnIndex="110"/>
+		  <result property="umytInsrPayTotAmnt" column="UMYT_INSR_PAY_TOT_AMNT" columnIndex="111"/>
+		  <result property="umytInsrPayMnthAmnt" column="UMYT_INSR_PAY_MNTH_AMNT" columnIndex="112"/>
+		  <result property="idtlAccdtFlucDt" column="IDTL_ACCDT_FLUC_DT" columnIndex="113"/>
+		  <result property="idtlAccdtPayTotAmnt" column="IDTL_ACCDT_PAY_TOT_AMNT" columnIndex="114"/>
+		  <result property="idtlAccdtPayMnthAmnt" column="IDTL_ACCDT_PAY_MNTH_AMNT" columnIndex="115"/>
+		  <result property="dayWorkYn" column="DAY_WORK_YN" columnIndex="116"/> 
+		  <result property="addIncmTxApptnRtoCd" column="ADD_INCM_TX_APPTN_RTO_CD" columnIndex="117"/>
+		  <result property="addIncmTxApptnYrMnth" column="ADD_INCM_TX_APPTN_YR_MNTH" columnIndex="118"/>
+		  <result property="addIncmTxApptnYn" column="ADD_INCM_TX_APPTN_YN" columnIndex="119"/>
+		  <result property="addIncmTxApptnRto" column="ADD_INCM_TX_APPTN_RTO" columnIndex="120"/>
+		  <result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="121"/>
+		  <result property="dilnlazLnchDys" column="DILNLAZ_LNCH_DYS" columnIndex="122"/>
+		   <result property="dilnlazPubcHodyDutyTm" column="DILNLAZ_PUBC_HODY_DUTY_TM" columnIndex="123"/>
+		   <result property="unnMbspSttYn" column="UNN_MBSP_STT_YN" columnIndex="124"/>
+		    <result property="payrIncmExceYn" column="PAYR_INCM_EXCE_YN" columnIndex="125"/>  
+           <result property="dilnlazHodyTotNtotTm" column="DILNLAZ_HODY_TOT_NTOT_TM" columnIndex="126"/> 
+           <result property="dilnlazHodyDutyNumDys" column="DILNLAZ_HODY_DUTY_NUM_DYS" columnIndex="127"/> 
+<result property="dilnlazWkdDutyNumDys" column="DILNLAZ_WKD_DUTY_NUM_DYS" columnIndex="128"/>  
+<result property="dilnlazButpDys" column="DILNLAZ_BUTP_DYS" columnIndex="129"/>
+ <result property="mangeDeptCd" column="MANGE_DEPT_CD" columnIndex="130"/>
+		  <result property="exPayr0410" column="{dpobCd=DPOB_CD,payYrMnth=PAY_YR_MNTH,payCd=PAY_CD,systemkey=SYSTEMKEY,emymtDivCd=EMYMT_DIV_CD,payrMangDeptCd=PAYR_MANG_DEPT_CD,typOccuCd=TYP_OCCU_CD,pyspGrdeCd=PYSP_GRDE_CD,dtilOccuInttnCd=DTIL_OCCU_INTTN_CD,logSvcYrNumCd=LOG_SVC_YR_NUM_CD,repbtyBusinDivCd=REPBTY_BUSIN_DIV_CD}"   select="payCalculationDAO.selectGeoJePayr0410_S"/>
+		  <result property="exPayr0530" column="{dpobCd=DPOB_CD,systemkey=SYSTEMKEY}"   select="payCalculationDAO.selectPayr0530_S"/>  
+		</resultMap> 
+	
+	<!-- 
+	  <result property="exPayr0445" column="{dpobCd=DPOB_CD,payYrMnth=PAY_YR_MNTH,payCd=PAY_CD,systemkey=SYSTEMKEY,payrMangDeptCd=PAYR_MANG_DEPT_CD,typOccuCd=TYP_OCCU_CD,pyspGrdeCd=PYSP_GRDE_CD,dtilOccuInttnCd=DTIL_OCCU_INTTN_CD,logSvcYrNumCd=LOG_SVC_YR_NUM_CD}"   select="payCalculationDAO.selectPayr0445_S"/>
+	 --> 
+	  
+	
+	<select id="payCalculationDAO.selectPayr0445_S" resultMap="procPayr0445">
+		<![CDATA[
+				SELECT
+				DPOB_CD
+				, PAY_YR
+				, TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				, PYSP_LOG_SVC_YR_NUM_CD 
+				, OCCU_CLSS_PAY_CMPTTN_STD
+				, MNTH_USALY_AMNT_WAG
+				, MNTH_USALY_AMNT_ALLW_BNUS_SUM
+				, USALY_AMNT_PDY_QNTY
+				, USALY_AMNT_HRWG_QNTY
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0445
+						WHERE DPOB_CD=#dpobCd#
+								AND PAY_YR=#payYr#
+								AND TYP_OCCU_GRDE_MPPG_SEIL_NUM=#typOccuGrdeMppgSeilNum#
+								AND PYSP_LOG_SVC_YR_NUM_CD=#pyspLogSvcYrNumCd# 
+								AND OCCU_CLSS_PAY_CMPTTN_STD=#occuClssPayCmpttnStd#
+				]]>
+	</select>
+	  <!-- 
+	     <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>   
+	  
+	   <isNotEmpty prepend="AND" property="businCd" >
+			 	    BB.BUSIN_CD=#businCd#
+		           </isNotEmpty>
+		           <isEmpty prepend="AND" property="businCd" >
+			 	     NVL(BB.BUSIN_CD,'BC') NOT IN (SELECT BUSIN_CD FROM PAYR0250 KK
+			 	                         WHERE KK.DPOB_CD =#dpobCd#
+			 	                           AND KK.EMYMT_DIV_CD = #emymtDivCd# 
+									       AND KK.JOB_YR_MNTH = SUBSTR(REPLACE(#jobYrMnth#,'.',''),1,4)
+									       AND KK.PAY_CD =  #payCd#
+									      <isNotEmpty prepend="AND" property="deptCd" >
+										 	 KK.DEPT_CD = #deptCd# 
+									       </isNotEmpty> 
+									         )  
+		           </isEmpty>
+		             <isNotEmpty  prepend="AND" property="typOccucdIn" >
+			 	      (BB.TYP_OCCU_CD || NVL(BB.PYSP_GRDE_CD,'A0060000'))  IN (#typOccucdIn#)  
+		           </isNotEmpty>  -->
+		<!-- <isNotEmpty property="pyspGrdeCd" prepend="AND"> 
+						 NVL(BB.PYSP_GRDE_CD,'A0060000') =  #pyspGrdeCd# 
+					</isNotEmpty>   
+					<isNotEmpty prepend="AND"  property="dtilOccuInttnCd" >
+					 	        BB.DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#  
+					 </isNotEmpty>  -->
+	 <!-- 
+	 
+	  
+	  AND  'B0140006' = CC.LEVF_ABNC_DIV_CD(+) 
+	   AND  CC.LEVF_ABNC_BGNN_DT(+) <= #rflctnBgnnDt#
+                     AND  CC.LEVF_ABNC_END_DT(+) >= #rflctnEndDt#
+	 -->
+	 <!--  AND BB.CURR_AFFN_DEPT_CD = SYSM0100.DEPT_CD --> 
+	   <!--/* AND  DD.SOCTY_INSUR_YR  = (
+			              SELECT MAX(SOCTY_INSUR_YR) FROM PSNL0127 EE
+			               WHERE EE.DPOB_CD =#dpobCd#
+			                 AND  EE.SYSTEMKEY= #systemkey#
+			         )*/-->
+			          <!-- /* AND  BB.EMYMT_BGNN_DT <= #rflctnBgnnDt#
+                     AND  (BB.EMYMT_END_DT >= #rflctnEndDt# OR BB.EMYMT_END_DT IS NULL) */ --> 
+   
+	<!-- 기간제 급여계산로직 -마스터데이터 가져오기  -->
+	<select id="payCalculationDAO.selectPsnlA20PayrInfoList_D" parameterClass="payr0250CalcSrhVO" resultMap="payA20Calculation"> 
+				<![CDATA[	
+			     SELECT   DISTINCT  (REPLACE(#jobYrMnth#,'.','')) AS PAY_YR_MNTH
+				          , (#payCd#) AS PAY_CD
+                          , BB.DPOB_CD
+                          ,  BB.SYSTEMKEY 
+                          ,  BB.HAN_NM 
+                          ,  BB.UNN_MBSP_STT_YN
+                          , AA.PAYR_MANG_DEPT_CD 
+                          , (SELECT PAY_MANGE_DEPT_NM FROM BASS0150 
+                                           WHERE BASS0150.PAYR_MANG_DEPT_CD = AA.PAYR_MANG_DEPT_CD) AS PAY_MANGE_DEPT_NM
+                            , AA.LOG_SVC_STD_DT
+                            , AA.WMN_YN
+                            , AA.RETRY_CLUT_YN
+                            , AA.PAY_RCPT_YN
+                            , (CASE WHEN AA.SPUE_YN = 'Y' AND (SELECT FNDTN_DDUC_YN 
+															FROM PAYR0530 AA05
+															WHERE AA05.DPOB_CD = BB.DPOB_CD
+															  AND AA05.SYSTEMKEY = BB.SYSTEMKEY
+															  AND  AA05.FAMY_RELA_DIV_CD = 'A0190002')  = 'Y' THEN AA.SPUE_YN
+					               ELSE 'N' END) AS SPUE_YN
+                            , NVL(DECODE(NVL(AA.HLTH_INSR_APPTN_YN,'N'),NVL(DD.HLTH_INSR_APPTN_YN,'N'),NVL(AA.HLTH_INSR_APPTN_YN,'N'),'N'),'N') AS HLTH_INSR_APPTN_YN
+                            , NVL(DECODE(NVL(AA.NAT_PENN_APPTN_YN,'N'),NVL(DD.NAT_PENN_APPTN_YN,'N'),NVL(AA.NAT_PENN_APPTN_YN,'N'),'N'),'N') AS NAT_PENN_APPTN_YN
+                            , NVL(DECODE(NVL(AA.UMYT_INSR_APPTN_YN,'N'),NVL(DD.UMYT_INSR_APPTN_YN,'N'),NVL(AA.UMYT_INSR_APPTN_YN,'N'),'N'),'N') AS UMYT_INSR_APPTN_YN
+                            , NVL(DECODE(NVL(AA.IDTL_ACCDT_INSUR_APPTN_YN,'N'),NVL(DD.IDTL_ACCDT_INSUR_APPTN_YN,'N'),NVL(AA.IDTL_ACCDT_INSUR_APPTN_YN,'N'),'N'),'N') AS  IDTL_ACCDT_INSUR_APPTN_YN
+                            , NVL(AA.SUPRT_FAMY_NUM_TWEN_CH_DN,0) AS SUPRT_FAMY_NUM_TWEN_CH_DN
+                            , AA.SUPRT_FAMY_NUM_TRE_OVR_CHDN_YN	  
+                            , (CASE WHEN AA.SUPRT_FAMY_NUM_TRE_OVR_CHDN_YN = 'Y' 
+                                    THEN
+                                      (SELECT PYMT_DDUC_SUM 
+                                        FROM PAYR0450 AA3
+                                        WHERE AA3.DPOB_CD = AA.DPOB_CD
+                                          AND AA3.PAY_YR =  SUBSTR (REPLACE(#jobYrMnth#,'.',''),1,4) 
+                                          AND AA3.PAY_ITEM_CD = 'C9050100'  
+                                          AND AA3.ITEM_EXTPY_DIV_CD = 'B0260030' )           
+                                    ELSE
+                                       0
+                                    END
+                              ) AS SUPRT_FAMY_3_CHDN_EXTPY_SUM
+                            , NVL(AA.SUPRT_FAMY_NUM_ETC,0) AS SUPRT_FAMY_NUM_ETC
+                            , AA.CHDN_SCHL_EXPN_ADMCL_YN
+                            , NVL(DAY_WORK_YN,'N') AS DAY_WORK_YN
+                            , NVL(PAYR_INCM_EXCE_YN ,'N') AS PAYR_INCM_EXCE_YN 
+                            , AA.LOG_SVC_EXTPY_APPTN_YN,
+                                AA.ADD_INCM_TX_APPTN_RTO_CD 
+                             , NVL((SELECT NVL(MANGE_ITEM11,100) FROM BASS0300 
+                                      WHERE RPSTTV_CD = 'B029' 
+                                     AND COMM_CD = AA.ADD_INCM_TX_APPTN_RTO_CD  ),0) AS ADD_INCM_TX_APPTN_RTO
+				  			 , NVL(AA.ADD_INCM_TX_APPTN_YR_MNTH,'') AS ADD_INCM_TX_APPTN_YR_MNTH
+				             , AA.ADD_INCM_TX_APPTN_YN,
+                           BB.ENG_NM,
+                           BB.CHIN_CHAR_NM,
+                           BB.RESN_REGN_NUM,
+                           BB.SX_DIV_CD,
+                           BB.YOOBH_MNTH_DAY,
+                           BB.SCLC_DIV_CD,
+                           BB.NATN_CD,
+                           SS.DEPT_CD,
+                           fcBass0400CDNM(AA.DPOB_CD,SS.DEPT_CD,'2') AS DEPT_NM,
+                           
+                             (BB.DEPT_CD) AS MANGE_DEPT_CD,
+  							fcBass0400CDNM(AA.DPOB_CD,BB.DEPT_CD,'2') AS MANGE_DEPT_NM,  
+  
+                           NVL(SS.BUSIN_CD,BB.BUSIN_CD) AS BUSIN_CD,
+                           SS.DEPT_CD AS CURR_AFFN_DEPT_CD,
+                           fcBass0400CDNM(AA.DPOB_CD,SS.DEPT_CD,'2') AS CURR_AFFN_DEPT_NM,
+                           BB.REPBTY_BUSIN_DIV_CD,
+                           SS.TYP_OCCU_CD,
+                           fcBass0320CDNM(AA.DPOB_CD,SS.TYP_OCCU_CD) AS TYP_OCCU_NM,
+                           BB.ODTY_CD,
+                           fcBass0300CDNM(AA.DPOB_CD,BB.ODTY_CD) AS ODTY_NM,
+                           BB.FRST_EMYMT_DT,
+                           BB.EMYMT_DIV_CD,
+                           fcBass0300CDNM(AA.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM,
+                           BB.EMYMT_BGNN_DT,
+                           BB.EMYMT_END_DT,
+                           BB.PYSP_CD,
+                           BB.PERN_NOTE_CTNT,
+                           fcBass0300CDNM(AA.DPOB_CD,BB.PYSP_CD) AS PYSP_NM,
+                           BB.HDOFC_CODTN_CD,
+                           BB.RETRY_DT,
+                           BB.RETRY_REAS_CTNT,
+                           BB.FRGNR_DIV_CD,
+                           BB.PSPT_NUM,
+                           BB.STY_BGNN_DT,
+                           BB.STY_END_DT,
+                           BB.END_SCHL,
+                           BB.END_DEGR_DIV_CD,
+                           BB.PMTN_SCDU_DT,
+                           BB.PYSP_PRMTN_SCDU_DT,
+                           BB.REYMN_SCDU_DT,
+                           BB.LOG_SVC_YR_NUM_CD,
+                           fcBass0300CDNM(AA.DPOB_CD,BB.LOG_SVC_YR_NUM_CD) AS LOG_SVC_YR_NUM_NM,
+                           BB.LOG_SVC_MNTH_ICM_CD,
+                           (SELECT  COMM_CD_NM FROM BASS0300 C WHERE  C.COMM_CD = LOG_SVC_YR_NUM_CD)
+                                     ||' '||(SELECT  COMM_CD_NM FROM BASS0300 C WHERE  C.COMM_CD = LOG_SVC_MNTH_ICM_CD) AS LOG_SVC_MNTH_ICM_NM,
+                           BB.CURR_PYSP_APPMT_DT,
+                           BB.CURR_DEPT_APPMT_DT,
+                           BB.PERN_NOTE_CTNT, 
+                           (SELECT MAX (B.CURR_PAE_WORK_NM)
+                              FROM PSNL0110 B
+                             WHERE B.DPOB_CD = BB.DPOB_CD AND B.SYSTEMKEY = BB.SYSTEMKEY)
+                              AS CURR_PAE_WORK_NM,
+                           (SELECT MAX (C.PIC_FLNM )
+                              FROM PSNL0125 C
+                             WHERE C.DPOB_CD = BB.DPOB_CD AND C.SYSTEMKEY = BB.SYSTEMKEY)
+                              AS PIC_FLNM,
+                           BB.PYSP_GRDE_CD,
+                           fcBass0300CDNM(AA.DPOB_CD,BB.PYSP_GRDE_CD) AS PYSP_GRDE_NM,
+                           SS.DTIL_OCCU_CLS_DIV_CD,
+                           '('||(SELECT BUSIN_APPTN_YR FROM BASS0500 WHERE BB.DPOB_CD = DPOB_CD AND SS.DEPT_CD = DEPT_CD AND SS.BUSIN_CD = BUSIN_CD AND SUBSTR(BB.EMYMT_BGNN_DT,1,4) = BUSIN_APPTN_YR)||')'||
+                           (SELECT BUSIN_NM FROM BASS0500 WHERE BB.DPOB_CD = DPOB_CD AND SS.DEPT_CD = DEPT_CD AND SS.BUSIN_CD = BUSIN_CD AND SUBSTR(BB.EMYMT_BGNN_DT,1,4) = BUSIN_APPTN_YR) AS BUSIN_NM         
+                            , CC.LEVF_ABNC_SEIL_NUM
+                            , CC.LEVF_ABNC_DIV_CD
+                            , fcBass0300CDNM(AA.DPOB_CD,CC.LEVF_ABNC_DIV_CD) AS LEVF_ABNC_DIV_NM
+                            , CC.LEVF_ABNC_BGNN_DT
+                            , CC.LEVF_ABNC_END_DT
+                            , CC.TURTY_RNTMNT_DT
+                            , DD.SOCTY_INSUR_YR
+                            , DD.HLTH_INSUR_FLUC_DT
+                            , TRUNC((CASE WHEN  DECODE(NVL(AA.HLTH_INSR_APPTN_YN,'N'),NVL(DD.HLTH_INSR_APPTN_YN,'N'),NVL(AA.HLTH_INSR_APPTN_YN,'N'),'N') = 'Y' THEN
+                                (
+                                    NVL(DD.HLTH_INSR_MNTH_RUNTN_AMNT,0) * (( SELECT AA1.HLTH_INSR_HMLF_BRDN_APMRT 
+                                                                       FROM INSR0240 AA1 
+                                                                      WHERE AA1.DPOB_CD = AA.DPOB_CD
+                                                                        AND AA1.HLTH_INSR_STD_YR =  SUBSTR (REPLACE(#jobYrMnth#,'.',''),1,4) 
+                                                                        AND AA1.HLTH_INSR_BGNN_DT <= #rflctnEndDt#
+                                                                        AND AA1.HLTH_INSR_END_DT >= #rflctnEndDt#) / 100 )
+                                )
+                            ELSE 0 END),-1) AS HLTH_INSR_PAY_AMT    
+                            ,TRUNC((CASE WHEN  DECODE(NVL(AA.HLTH_INSR_APPTN_YN,'N'),NVL(DD.HLTH_INSR_APPTN_YN,'N'),NVL(AA.HLTH_INSR_APPTN_YN,'N'),'N') = 'Y' THEN
+                             (
+                                (NVL(DD.HLTH_INSR_MNTH_RUNTN_AMNT,0) * (( SELECT AA1.HLTH_INSR_HMLF_BRDN_APMRT 
+                                                                   FROM INSR0240 AA1 
+                                                                  WHERE AA1.DPOB_CD = AA.DPOB_CD
+                                                                    AND AA1.HLTH_INSR_STD_YR = SUBSTR (REPLACE(#jobYrMnth#,'.',''),1,4) 
+                                                                    AND AA1.HLTH_INSR_END_DT = '99991231') / 100 )) *
+                                                                    (( SELECT AA1.HLTH_RCPTN_HMLF_BRDN_APMRT 
+                                                                       FROM INSR0240 AA1 
+                                                                      WHERE AA1.DPOB_CD = AA.DPOB_CD
+                                                                        AND AA1.HLTH_INSR_STD_YR = SUBSTR (REPLACE(#jobYrMnth#,'.',''),1,4)  
+                                                                        AND AA1.HLTH_INSR_BGNN_DT <= #rflctnEndDt#
+                                                                        AND AA1.HLTH_INSR_END_DT >= #rflctnEndDt# ) / 100 )
+                             )
+                             ELSE 0 END),-1) AS HLTH_INSR_RCPTN_PAY_AMT  
+                            , NVL(DD.HLTH_INSR_PAY_TOT_AMNT,0) AS HLTH_INSR_PAY_TOT_AMNT
+                            , NVL(DD.HLTH_INSR_MNTH_RUNTN_AMNT,0) AS HLTH_INSR_MNTH_RUNTN_AMNT
+                            , NVL(DD.NAT_PENN_STD_INCM_MNTH_AMNT,0) AS NAT_PENN_STD_INCM_MNTH_AMNT 
+                            ,   DD.HLTH_INSR_GRDE 
+                            ,   DD.HLTH_INSR_CERT_NUM  
+                            ,   DD.NAT_PENN_INSUR_FLUC_DT   
+                            ,   DD.NAT_PENN_GRDE       
+                            , TRUNC((CASE WHEN  DECODE(NVL(AA.NAT_PENN_APPTN_YN,'N'),NVL(DD.NAT_PENN_APPTN_YN,'N'),NVL(AA.NAT_PENN_APPTN_YN,'N'),'N')  = 'Y' THEN
+                                (
+                                    NVL(DD.NAT_PENN_STD_INCM_MNTH_AMNT,0) * (( SELECT AA2.NAT_PENN_HMLF_BRDN_APMRT 
+                                                                       FROM INSR0250 AA2 
+                                                                      WHERE AA2.DPOB_CD = AA.DPOB_CD
+                                                                        AND AA2.NAT_PENN_STD_YR =  SUBSTR (REPLACE(#jobYrMnth#,'.',''),1,4)  
+                                                                        AND AA2.NAT_PENN_BGNN_DT <= #rflctnEndDt#
+                                                                        AND AA2.NAT_PENN_END_DT >= #rflctnEndDt# ) / 100 )
+                                )
+                            ELSE 0 END),-1) AS NAT_PENN_AMT 
+                            	,DD.UMYT_INSR_FLUC_DT
+							, DD.UMYT_INSR_PAY_TOT_AMNT
+							  , TRUNC((CASE WHEN  DECODE(NVL(AA.UMYT_INSR_APPTN_YN,'N'),NVL(DD.UMYT_INSR_APPTN_YN,'N'),NVL(AA.UMYT_INSR_APPTN_YN,'N'),'N') = 'Y' THEN
+                                (
+                                    NVL(DD.UMYT_INSR_PAY_MNTH_AMNT,0) * (( SELECT AA2.UMYT_INSR_HMLF_BRDN_APMRT 
+                                                                       FROM INSR0260 AA2 
+                                                                      WHERE AA2.DPOB_CD = AA.DPOB_CD
+                                                                        AND AA2.UMYT_INSR_STD_YR =  SUBSTR (REPLACE(#jobYrMnth#,'.',''),1,4)  
+                                                                        AND AA2.UMYT_INSR_BGNN_DT <= #rflctnEndDt#
+                                                                        AND AA2.UMYT_INSR_END_DT >= #rflctnEndDt# ) / 100 )
+                                )
+                            ELSE 0 END),-1) AS UMYT_INSR_PAY_MNTH_AMNT   
+							,  DD.IDTL_ACCDT_FLUC_DT
+							   , DD.IDTL_ACCDT_PAY_TOT_AMNT
+							   , DD.IDTL_ACCDT_PAY_MNTH_AMNT   
+                              , EE.BNK_CD
+                              , EE.BNK_ACCU_NUM
+                              , EE.ACNT_HODR_NM
+                              , EE.RPSTTV_ACCU_YN,    
+                               FF.DILNLAZ_YR_MNTH ,
+                               FF.DILNLAZ_DUTY_BGNN_DT,
+                               FF.DILNLAZ_DUTY_END_DT,
+                               NVL(FF.DILNLAZ_DUTY_NUM_DYS,0) AS DILNLAZ_DUTY_NUM_DYS,
+                               FF.DILNLAZ_LVSG_NUM_DYS,
+                               FF.DILNLAZ_ABNCE_NUM_DYS,
+                               FF.DILNLAZ_SCKLEA_NUM_DYS,
+                               FF.DILNLAZ_OFFVA_NUM_DYS,
+                               FF.DILNLAZ_FMLY_EVNT_NUM_DYS,
+                               FF.DILNLAZ_HLTH_CRE_NUM_DYS,
+                               NVL(FF.DILNLAZ_TOT_DUTY_NUM_DYS,0) AS DILNLAZ_TOT_DUTY_NUM_DYS,
+                               FF.DILNLAZ_WKLY_HLDY_NUM_DYS,
+                               FF.DILNLAZ_PAID_PUBC_HODY_NUM,
+                               GG.DILNLAZ_SAT_DUTY_NUM_DYS,
+                               NVL(GG.DILNLAZ_PUBC_HODY_DUTY_NUM_DYS,0) AS DILNLAZ_PUBC_HODY_DUTY_NUM_DYS,
+                               FF.DILNLAZ_TOT_DUTY_TM,
+                               FF.DILNLAZ_HODY_DUTY_NUM_DYS,
+           FF.DILNLAZ_WKD_DUTY_NUM_DYS,
+           FF.DILNLAZ_BUTP_DYS,
+                               FF.DILNLAZ_ABNCE_DUTY_RCGTN_DYS,
+                               FF.DILNLAZ_SPCL_HODY_NUM_DYS , 
+				               FF.DILNLAZ_PAID_HODY_NUM_DYS,
+				               FF.DILNLAZ_TFC_ASS_CST_NUM_DYS,
+				               NVL(FF.DILNLAZ_LNCH_DYS,0) AS DILNLAZ_LNCH_DYS,
+                               FF.DILNLAZ_DDLNE_PRCS_YN AS DILNLAZ_DDLNE_PRCS_YN_01,
+                               GG.DILNLAZ_EXCE_DUTY_YR_MNTH,
+                               GG.DILNLAZ_EXCE_DUTY_BGNN_DT,
+                               GG.DILNLAZ_EXCE_DUTY_END_DT, 
+                               GG.DILNLAZ_TOT_NTOT_NUM_DYS,
+                               GG.DILNLAZ_TOT_NTOT_TM,
+                               GG.DILNLAZ_FNDTN_TM_RST_DUTY_TM,
+                               GG.DILNLAZ_TM_RST_DUTY_TM,
+                               NVL(GG.DILNLAZ_TOT_TM_RST_DUTY_TM,0) AS DILNLAZ_TOT_TM_RST_DUTY_TM,
+                               GG.DILNLAZ_DDLNE_PRCS_YN AS DILNLAZ_DDLNE_PRCS_YN_02,
+                             (NVL(GG.DILNLAZ_PUBC_HODY_DUTY_TM,0) / 60) AS DILNLAZ_PUBC_HODY_DUTY_TM,  /* 분단위 처리 이므로 주의  60 */
+                              TRUNC((NVL(GG.DILNLAZ_HODY_TOT_NTOT_TM,0) / 60),4) AS DILNLAZ_HODY_TOT_NTOT_TM, /* 분단위 처리 이므로 주의  60 */
+                              GG.DILNLAZ_NOTE_CTNT 
+              FROM PAYR0500 AA, PSNL0100 BB ,PSNL0123 CC, PSNL0127 DD ,
+                     ( 
+                       SELECT  SYSTEMKEY
+                              , DPOB_CD
+                              , PAY_CD 
+                              , BNK_CD
+                              , BNK_ACCU_NUM
+                              , ACNT_HODR_NM
+                              , RPSTTV_ACCU_YN 
+                     FROM PSNL0130  
+                     WHERE  (SYSTEMKEY , DPOB_CD , PAY_CD ) IN ( SELECT SYSTEMKEY , DPOB_CD  
+                                                   , NVL((SELECT   PAY_CD  
+                                                            FROM  PSNL0130 BB
+                                                           WHERE BB.DPOB_CD = AA.DPOB_CD
+                                                             AND BB.PAY_CD = #payCd#
+                                                             AND BB.SYSTEMKEY =  AA.SYSTEMKEY 
+                                                     ),'B0150000')
+                                                      FROM  PSNL0130  AA 
+                                                    WHERE DPOB_CD =  #dpobCd#)  
+                     )  EE , DLGN0100 FF, DLGN0200 GG,
+                     (
+                     
+                    
+          SELECT DISTINCT CC05.DPOB_CD,
+								       CC05.SYSTEMKEY,
+								       CC05.EMYMT_BGNN_DT,
+								       CC05.EMYMT_END_DT,
+								       CC06.DEPT_CD,
+								       CC06.BUSIN_CD,
+								       CC06.TYP_OCCU_CD,
+								       CC06.DTIL_OCCU_CLS_DIV_CD,
+								       CC06.DTIL_OCCU_INTTN_CD
+								  FROM (  SELECT DPOB_CD,
+								                 SYSTEMKEY,
+								                 MIN (EMYMT_BGNN_DT) AS EMYMT_BGNN_DT,
+								                 MAX (NVL (EMYMT_END_DT, TO_CHAR (SYSDATE, 'YYYYMMDD')))
+								                    AS EMYMT_END_DT
+								            FROM PSNL0110 CC01
+								           WHERE    CC01.DPOB_CD =  #dpobCd# 
+					                                  AND  CC01.EMYMT_DIV_CD =  #emymtDivCd#
+					                                   AND CC01.EMYMT_TYP_CD NOT IN ('A0420990')
+					                                   AND ( SUBSTR(#rflctnBgnnDt#,1,6) BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6) 
+					                                   AND  SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN #rflctnBgnnDt#  <= TO_CHAR (SYSDATE, 'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR ( SYSDATE, 'YYYYMMDD')  
+                                                                                                      ELSE #rflctnBgnnDt#  END)  ),1,6)
+                                       OR SUBSTR(#rflctnEndDt#,1,6) BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6) 
+                                       AND  SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN #rflctnEndDt#  >= TO_CHAR (SYSDATE, 'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR ( SYSDATE, 'YYYYMMDD')  
+                                                                                                      ELSE #rflctnEndDt#  END)  ),1,6))
+					                        	]]>
+                        <isNotEmpty prepend="AND" property="businCd" >
+					 	CC01.BUSIN_CD=#businCd#
+				       </isNotEmpty>  
+				          <![CDATA[      
+								        GROUP BY DPOB_CD, SYSTEMKEY
+								        UNION ALL
+					                SELECT
+					                      KK01.DPOB_CD,
+					                      KK01.SYSTEMKEY, 
+					                      KK01.EMYMT_BGNN_DT,
+					                      NVL (KK01.EMYMT_END_DT,
+					                                      TO_CHAR (SYSDATE, 'YYYYMMDD')) 
+					                                 AS EMYMT_END_DT 
+					                FROM PSNL0100 KK01, (
+					                                        SELECT DPOB_CD,
+					                                            SYSTEMKEY 
+					                                       FROM PSNL0123 KK
+					                                      WHERE     KK.DPOB_CD =  #dpobCd# 
+					                                            AND LEVF_ABNC_SEIL_NUM =
+					                                                   (  SELECT MAX (LEVF_ABNC_SEIL_NUM)
+					                                                                AS LEVF_ABNC_SEIL_NUM
+					                                                        FROM PSNL0123 JJ
+					                                                       WHERE     JJ.DPOB_CD =  #dpobCd# 
+					                                                             AND JJ.SYSTEMKEY = KK.SYSTEMKEY
+					                                                             AND ((JJ.LEVF_ABNC_BGNN_DT  >=  #rflctnBgnnDt#  AND   JJ.LEVF_ABNC_BGNN_DT  <=  #rflctnEndDt#)
+                              													OR (JJ.LEVF_ABNC_END_DT  >=  #rflctnBgnnDt#  AND   JJ.LEVF_ABNC_END_DT  <=  #rflctnEndDt#)) 
+					                                                    GROUP BY JJ.DPOB_CD, JJ.SYSTEMKEY)
+					                                                    ) KK02 
+					                  WHERE KK01.DPOB_CD = KK02.DPOB_CD
+					                    AND KK01.SYSTEMKEY = KK02.SYSTEMKEY  ) CC05,
+								       (SELECT CC02.DPOB_CD,
+								               CC02.SYSTEMKEY,
+								               CC02.DEPT_CD,
+								               CC02.BUSIN_CD,
+								               CC02.TYP_OCCU_CD,
+								               CC02.DTIL_OCCU_CLS_DIV_CD,
+								               CC02.DTIL_OCCU_INTTN_CD
+								          FROM PSNL0110 CC02,
+								               (  SELECT DPOB_CD,
+								                         SYSTEMKEY,
+								                         MAX (CC01.EMYMT_BGNN_DT) AS EMYMT_BGNN_DT
+								                    FROM PSNL0110 CC01
+								                   WHERE  CC01.DPOB_CD =  #dpobCd# 
+					                                  AND  CC01.EMYMT_DIV_CD =  #emymtDivCd#
+					                                  AND ( SUBSTR(#rflctnBgnnDt#,1,6) BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6)
+					                                   AND  SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN #rflctnBgnnDt#  <= TO_CHAR (SYSDATE, 'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR ( SYSDATE, 'YYYYMMDD')  
+                                                                                                      ELSE #rflctnBgnnDt#  END)  ),1,6)
+                                       OR SUBSTR(#rflctnEndDt#,1,6) BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6) 
+                                       AND  SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN #rflctnEndDt#  >= TO_CHAR (SYSDATE, 'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR ( SYSDATE, 'YYYYMMDD')  
+                                                                                                      ELSE #rflctnEndDt#  END)  ),1,6))
+					                              	]]>
+                        <isNotEmpty prepend="AND" property="businCd" >
+					 	CC01.BUSIN_CD=#businCd#
+				       </isNotEmpty>  
+				          <![CDATA[
+								                GROUP BY DPOB_CD, SYSTEMKEY) CC03
+								         WHERE     CC02.DPOB_CD = CC03.DPOB_CD
+								               AND CC02.SYSTEMKEY = CC03.SYSTEMKEY
+								                AND CC02.EMYMT_TYP_CD NOT IN ('A0420990')
+								               /*   AND (CC02.DPOB_CD,CC02.SYSTEMKEY) NOT IN (
+				                                   SELECT DPOB_CD,SYSTEMKEY 
+				                                     FROM PSNL0100
+				                                 
+				                                    WHERE  HDOFC_CODTN_CD  IN ('A0030020', 'A0030030') 
+				                                 )  */
+										
+								               AND CC02.EMYMT_BGNN_DT = CC03.EMYMT_BGNN_DT) CC06
+								 WHERE CC05.DPOB_CD = CC06.DPOB_CD 
+								   AND CC05.SYSTEMKEY = CC06.SYSTEMKEY
+     
+     
+                             ) SS
+                     WHERE AA.DPOB_CD = BB.DPOB_CD
+                     AND  AA.SYSTEMKEY= BB.SYSTEMKEY 
+                     AND BB.DPOB_CD = SS.DPOB_CD
+                     AND BB.SYSTEMKEY = SS.SYSTEMKEY 
+                     AND  AA.DPOB_CD = CC.DPOB_CD(+)
+                     AND  AA.SYSTEMKEY= CC.SYSTEMKEY(+)
+                     AND  'B0140006' = CC.LEVF_ABNC_DIV_CD(+)
+                     AND  CC.LEVF_ABNC_BGNN_DT(+) <= #rflctnBgnnDt#
+                     AND  CC.LEVF_ABNC_END_DT(+) >= #rflctnEndDt#
+                     AND  AA.DPOB_CD = DD.DPOB_CD(+)
+                     AND  AA.SYSTEMKEY= DD.SYSTEMKEY(+) 
+                     AND  AA.DPOB_CD = EE.DPOB_CD(+)
+                     AND  AA.SYSTEMKEY= EE.SYSTEMKEY(+) 
+                      ]]>
+                 	<isEqual property="payCd" compareValue="B0150003">
+				     AND  AA.DPOB_CD = FF.DPOB_CD 
+                     AND  AA.SYSTEMKEY= FF.SYSTEMKEY  
+                     AND  FF.DILNLAZ_YR_MNTH =  REPLACE(#jobYrMnth#,'.','')
+                     AND  FF.PAY_CD  =  #payCd#
+                     AND  AA.DPOB_CD = GG.DPOB_CD(+)
+                     AND  AA.SYSTEMKEY= GG.SYSTEMKEY(+) 
+                     AND  GG.DILNLAZ_EXCE_DUTY_YR_MNTH(+) = REPLACE(#jobYrMnth#,'.','')
+                     AND  GG.PAY_CD(+) = #payCd#
+                        	     <![CDATA[	
+                    
+                     AND  BB.EMYMT_DIV_CD = #emymtDivCd#    
+                      ]]>
+			     </isEqual>
+			     	<isNotEqual property="payCd" compareValue="B0150003"> 
+				     AND  AA.DPOB_CD = FF.DPOB_CD 
+                     AND  AA.SYSTEMKEY= FF.SYSTEMKEY  
+                     AND  FF.DILNLAZ_YR_MNTH  =  REPLACE(#jobYrMnth#,'.','')
+                     AND  FF.PAY_CD  =  #payCd#
+                     AND  AA.DPOB_CD = GG.DPOB_CD(+) 
+                     AND  AA.SYSTEMKEY= GG.SYSTEMKEY(+)  
+                     AND  GG.DILNLAZ_EXCE_DUTY_YR_MNTH(+)  = REPLACE(#jobYrMnth#,'.','')
+                     AND  GG.PAY_CD(+) = #payCd#
+                    <![CDATA[	
+                     
+                     AND  BB.EMYMT_DIV_CD = #emymtDivCd#    
+                      ]]>
+			     </isNotEqual>  
+                 AND EXISTS  (
+                                SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             (SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,#rflctnBgnnDt# )) ) C
+                                            WHERE     C.DPOB_CD = SS.DPOB_CD
+						                        AND C.DEPT_CD = SS.DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(SS.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(SS.DTIL_OCCU_INTTN_CD,'TT') 
+                                           <isNotEmpty prepend="AND" property="deptCd" >
+										 	C.DEPT_CD=#deptCd#
+									       </isNotEmpty>
+                                          )  
+                  <isNotEmpty prepend="AND" property="systemkey" >
+			 	    AA.SYSTEMKEY=#systemkey#
+		           </isNotEmpty>
+		             <isNotEmpty prepend="AND" property="mangeDeptCd" >
+			 	    BB.DEPT_CD=#mangeDeptCd# 
+		           </isNotEmpty>   
+		           <isEmpty prepend="AND" property="businCd" >
+			 	     NVL(SS.BUSIN_CD,'BC') NOT IN (SELECT BUSIN_CD FROM PAYR0250 KK
+			 	                         WHERE KK.DPOB_CD =#dpobCd#
+			 	                           AND KK.EMYMT_DIV_CD = #emymtDivCd# 
+									       AND KK.JOB_YR_MNTH = SUBSTR(REPLACE(#jobYrMnth#,'.',''),1,4)
+									       AND KK.PAY_CD =  #payCd#
+									      <isNotEmpty prepend="AND" property="deptCd" >
+										 	 KK.DEPT_CD = #deptCd# 
+									       </isNotEmpty> 
+									         )  
+		           </isEmpty> 
+	</select>	       
+	  <!--  
+		            <![CDATA[	
+                     AND  BB.HDOFC_CODTN_CD  IN ('A0030010','A0030020','A0030030')  
+                      
+					  AND ( ( BB.HDOFC_CODTN_CD = 'A0030010')
+				            OR (    BB.HDOFC_CODTN_CD = 'A0030020'
+				                AND RETRY_DT >= #rflctnBgnnDt#
+				                AND RETRY_DT <= #rflctnEndDt#))  
+                     AND  BB.EMYMT_DIV_CD = #emymtDivCd# 
+                     AND NVL(BB.TYP_OCCU_CD,'TT')  NOT IN ('A0410205','A0410188')    
+                      ]]>
+		          
+		          <isNotEmpty property="typOccuCd" prepend="AND"> 
+						 BB.TYP_OCCU_CD = #typOccuCd#  
+					</isNotEmpty>  
+					<isNotEmpty property="pyspGrdeCd" prepend="AND"> 
+						 NVL(BB.PYSP_GRDE_CD,'A0060000') = #pyspGrdeCd# 
+					</isNotEmpty>   
+		           <isEqual  prepend="AND" property="payrMangDeptYn" compareValue="Y">
+			 	           NOT  EXISTS 
+                             (SELECT DISTINCT  
+                              (TYP_OCCU_CD ||  NVL(PYSP_GRDE_CD,'A0060000'))  
+                                               FROM SYSM0100 
+                                               WHERE SYSM0100.USE_YN = 'Y' 
+                                                AND BB.TYP_OCCU_CD  = SYSM0100.TYP_OCCU_CD
+                                                AND NVL(BB.PYSP_GRDE_CD,'A0060000') =  NVL(SYSM0100.PYSP_GRDE_CD,'A0060000')  
+                                                )
+		           </isEqual>   -->            
+                 <!-- 
+                  <isNotEmpty prepend="AND" property="businCd" >
+			 	    BB.BUSIN_CD=#businCd#
+		           </isNotEmpty>
+                   AND SUBSTR(BB.EMYMT_BGNN_DT,1,6) <= SUBSTR(#rflctnBgnnDt#,1,6)
+                       AND  ((SUBSTR(BB.EMYMT_END_DT,1,6) >= SUBSTR(#rflctnEndDt#,1,6)) 
+							OR (BB.EMYMT_END_DT IS NULL  AND BB.HDOFC_CODTN_CD <> 'A0030020')
+							OR ((SUBSTR(BB.EMYMT_END_DT,1,6) <= SUBSTR(#rflctnEndDt#,1,6)) AND BB.HDOFC_CODTN_CD = 'A0030010')
+							OR (BB.HDOFC_CODTN_CD  = 'A0030020' AND RETRY_DT >= #rflctnBgnnDt# 
+							                                    AND RETRY_DT <= #rflctnEndDt# ))   
+                  -->    
+	<select id="payCalculationDAO.selectPayr0410_S" resultMap="payrSche0410">
+		<![CDATA[
+		SELECT  
+                  AA.DPOB_CD
+                , AA.PAY_YR
+                , AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+                , AA.PAYR_ITEM_SEIL_NUM 
+                , AA.PAYR_MANG_DEPT_CD
+                , AA.PAY_CD
+                , AA.TYP_OCCU_CD
+                , AA.PAYR_IMCD
+                , SUBSTR(AA.DTIL_OCCU_INTTN_CD,9,8) AS PYSP_GRDE_CD
+                , SUBSTR(AA.DTIL_OCCU_INTTN_CD,1,8) AS DTIL_OCCU_CLS_DIV_CD
+                , AA.DTIL_OCCU_INTTN_CD
+                , AA.ITEM_NM
+                , AA.PYMT_DDUC_DIV_CD
+                , AA.PYMT_DDUC_FRM_CD
+                , AA.PYMT_DDUC_RATE
+                , NVL(AA.PYMT_DDUC_SUM,0) AS PYMT_DDUC_SUM
+                , AA.TXTN_DIV_CD
+                , AA.FREE_DTY_RATE
+                , AA.FREE_DTY_SUM
+                , AA.JAN
+                , AA.FEB
+                , AA.MAR
+                , AA.APR
+                , AA.MAY
+                , AA.JUN
+                , AA.JUL
+                , AA.AUG
+                , AA.SEP
+                , AA.OCT
+                , AA.NOV
+                , AA.DEC
+                , AA.RNGE_ORD
+                , AA.PAY_ITEM_USE_YN
+                , AA.ITEM_APPTN_BGNN_DT
+                , AA.ITEM_APPTN_END_DT
+                , AA.DAY_MNTH_AMNT_DIV_CD
+                , AA.CALC_STD_DIV_CD
+                , AA.EMYMT_DIV_CD
+                , AA.USALY_AMNT_YN 
+                , AA.PYSP_LOG_SVC_YR_NUM_CD
+                , AA.OCCU_CLSS_PAY_CMPTTN_STD
+                , NVL(AA.UCST_SUM,0) AS UCST_SUM
+                , AA.UCST_CALC_DIV_CD
+                , AA.UCST_PRNT_ORD
+                , AA.UCST_DGM_BGNN_DT
+                , AA.UCST_DGM_END_DT
+                , AA.UCST_DGM_USE_YN
+                ,(CASE WHEN NVL(#repbtyBusinDivCd#,'A0480010') = 'A0480010' THEN
+                   (SELECT  
+						      TRUNC(SUM(CASE WHEN PY01.PAYR_ITEM_CD = 'B0010100' THEN UCST_SUM + (UCST_SUM / 3)
+						           ELSE UCST_SUM END),0)
+						FROM PAYR0440 PY01 
+						WHERE PY01.DPOB_CD  = AA.DPOB_CD
+						AND PY01.PAY_YR = AA.PAY_YR
+						AND PY01.PYSP_LOG_SVC_YR_NUM_CD  =  AA.PYSP_LOG_SVC_YR_NUM_CD
+						AND PY01.TYP_OCCU_GRDE_MPPG_SEIL_NUM   =  AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+						AND PY01.OCCU_CLSS_PAY_CMPTTN_STD  =  AA.OCCU_CLSS_PAY_CMPTTN_STD
+						AND PAYR_ITEM_CD IN ('B0010100','C9080100','C9100100')
+                     )
+                  ELSE 
+                      DD.MNTH_USALY_AMNT_WAG
+                  END   
+                ) AS MNTH_USALY_AMNT_WAG
+                , (CASE WHEN NVL(#repbtyBusinDivCd#,'A0480010') = 'A0480010' THEN
+                   (SELECT  
+						      TRUNC(SUM(CASE WHEN PY01.PAYR_ITEM_CD = 'B0010100' THEN UCST_SUM + (UCST_SUM / 3)
+						           ELSE UCST_SUM END),0)
+						FROM PAYR0440 PY01 
+						WHERE PY01.DPOB_CD  = AA.DPOB_CD
+						AND PY01.PAY_YR = AA.PAY_YR
+						AND PY01.PYSP_LOG_SVC_YR_NUM_CD  =  AA.PYSP_LOG_SVC_YR_NUM_CD
+						AND PY01.TYP_OCCU_GRDE_MPPG_SEIL_NUM   =  AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+						AND PY01.OCCU_CLSS_PAY_CMPTTN_STD  =  AA.OCCU_CLSS_PAY_CMPTTN_STD
+						AND PAYR_ITEM_CD IN ('B0010100','C9080100','C9100100')
+                     )
+                  ELSE 
+                      DD.MNTH_USALY_AMNT_ALLW_BNUS_SUM
+                  END   
+                ) AS MNTH_USALY_AMNT_ALLW_BNUS_SUM
+                , (CASE WHEN NVL(#repbtyBusinDivCd#,'A0480010') = 'A0480010' THEN
+                   TRUNC(((((SELECT  
+						      TRUNC(SUM(CASE WHEN PY01.PAYR_ITEM_CD = 'B0010100' THEN UCST_SUM + (UCST_SUM / 3)
+						           ELSE UCST_SUM END),0)
+						FROM PAYR0440 PY01 
+						WHERE PY01.DPOB_CD  = AA.DPOB_CD
+						AND PY01.PAY_YR = AA.PAY_YR
+						AND PY01.PYSP_LOG_SVC_YR_NUM_CD  =  AA.PYSP_LOG_SVC_YR_NUM_CD
+						AND PY01.TYP_OCCU_GRDE_MPPG_SEIL_NUM   =  AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+						AND PY01.OCCU_CLSS_PAY_CMPTTN_STD  =  AA.OCCU_CLSS_PAY_CMPTTN_STD
+						AND PAYR_ITEM_CD IN ('B0010100','C9080100','C9100100')
+                     ) / 209) * 1.5) * 8),0)
+                  ELSE 
+                      DD.USALY_AMNT_PDY_QNTY
+                  END   
+                ) AS USALY_AMNT_PDY_QNTY
+                , (CASE WHEN NVL(#repbtyBusinDivCd#,'A0480010') = 'A0480010' THEN
+                   TRUNC((((SELECT  
+						      TRUNC(SUM(CASE WHEN PY01.PAYR_ITEM_CD = 'B0010100' THEN UCST_SUM + (UCST_SUM / 3)
+						           ELSE UCST_SUM END),0)
+						FROM PAYR0440 PY01 
+						WHERE PY01.DPOB_CD  = AA.DPOB_CD
+						AND PY01.PAY_YR = AA.PAY_YR
+						AND PY01.PYSP_LOG_SVC_YR_NUM_CD  =  AA.PYSP_LOG_SVC_YR_NUM_CD
+						AND PY01.TYP_OCCU_GRDE_MPPG_SEIL_NUM   =  AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+						AND PY01.OCCU_CLSS_PAY_CMPTTN_STD  =  AA.OCCU_CLSS_PAY_CMPTTN_STD
+						AND PAYR_ITEM_CD IN ('B0010100','C9080100','C9100100')
+                     ) / 209) * 1.5),0)
+                  ELSE 
+                      DD.USALY_AMNT_HRWG_QNTY 
+                  END   
+                ) AS USALY_AMNT_HRWG_QNTY
+                , AA.CALC_STD_FUNC
+                , AA.BEF_LOG_SVC_YR_NUM_CD 
+				, AA.BEF_CLSS_PAY_CMPTTN_STD 
+				,  AA.BEF_UCST_SUM 
+            FROM  (
+                   SELECT 
+                            XX.DPOB_CD
+                        , XX.PAY_YR
+                        , XX.TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+                        , XX.PAYR_ITEM_SEIL_NUM 
+                        , XX.PAYR_MANG_DEPT_CD
+                        , XX.PAY_CD 
+                        , XX.PAYR_IMCD 
+                        , XX.ITEM_NM
+                        , XX.PYMT_DDUC_DIV_CD
+                        , XX.PYMT_DDUC_FRM_CD
+                        , XX.PYMT_DDUC_RATE
+                        , NVL(XX.PYMT_DDUC_SUM,0) AS PYMT_DDUC_SUM
+                        , XX.TXTN_DIV_CD
+                        , XX.FREE_DTY_RATE
+                        , XX.FREE_DTY_SUM
+                        , XX.JAN
+                        , XX.FEB
+                        , XX.MAR
+                        , XX.APR
+                        , XX.MAY
+                        , XX.JUN
+                        , XX.JUL
+                        , XX.AUG
+                        , XX.SEP
+                        , XX.OCT
+                        , XX.NOV
+                        , XX.DEC
+                        , XX.RNGE_ORD
+                        , XX.PAY_ITEM_USE_YN
+                        , XX.ITEM_APPTN_BGNN_DT
+                        , XX.ITEM_APPTN_END_DT
+                        , XX.DAY_MNTH_AMNT_DIV_CD
+                        , XX.CALC_STD_DIV_CD
+                        , XX.EMYMT_DIV_CD
+                        , XX.USALY_AMNT_YN  
+                        , XX.CALC_STD_FUNC
+                         , BB.PYSP_LOG_SVC_YR_NUM_CD
+                        , BB.OCCU_CLSS_PAY_CMPTTN_STD
+                        , BB.UCST_SUM
+                        , BB.UCST_CALC_DIV_CD
+                        , BB.UCST_PRNT_ORD
+                        , BB.UCST_DGM_BGNN_DT
+                        , BB.UCST_DGM_END_DT
+                        , BB.UCST_DGM_USE_YN
+                        , RR.TYP_OCCU_CD  
+                        , RR.DTIL_OCCU_INTTN_CD 
+                        , NVL((A51.PYSP_LOG_SVC_YR_NUM_CD),0) AS BEF_LOG_SVC_YR_NUM_CD 
+					    , NVL((A51.OCCU_CLSS_PAY_CMPTTN_STD),0) AS BEF_CLSS_PAY_CMPTTN_STD 
+					    , NVL((A51.UCST_SUM),0) AS BEF_UCST_SUM 
+                   FROM  PAYR0410 XX, (  
+                                         SELECT 
+                                             KK.*
+                                         FROM 
+                                         PAYR0440 KK,
+                                         (
+                                            SELECT
+                                                         NN.DPOB_CD
+                                                       , NN.PAY_YR 
+                                                       , NN.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                                                       , NN.OCCU_CLSS_PAY_CMPTTN_STD
+                                                       , OO.TYP_OCCU_CD  
+                                                       , OO.DTIL_OCCU_INTTN_CD
+                                                       , (CASE WHEN NN.PYSP_LOG_SVC_YR_NUM > OO.MANGE_ITEM01 
+                                                              THEN  OO.COMM_CD
+                                                              ELSE  NN.PYSP_LOG_SVC_YR_NUM_CD END) AS PYSP_LOG_SVC_YR_NUM_CD
+                                                FROM
+                                                (SELECT
+                                                         DPOB_CD
+                                                       , PAY_YR
+                                                       , TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                                                       , OCCU_CLSS_PAY_CMPTTN_STD
+                                                       , MAX(PYSP_LOG_SVC_YR_NUM_CD) AS PYSP_LOG_SVC_YR_NUM_CD
+                                                       , MAX(TO_NUMBER(PYSP_LOG_SVC_YR_NUM)) AS PYSP_LOG_SVC_YR_NUM
+                                                FROM
+                                                (SELECT   DPOB_CD
+                                                        , PAY_YR
+                                                        , TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                                                         ,  OCCU_CLSS_PAY_CMPTTN_STD
+                                                         , (SELECT COMM_CD FROM BASS0300 
+                                                                              WHERE RPSTTV_CD = 'A007' 
+                                                                                AND COMM_CD = PYSP_LOG_SVC_YR_NUM_CD ) AS PYSP_LOG_SVC_YR_NUM_CD
+                                                        , (SELECT MANGE_ITEM01 FROM BASS0300 
+                                                                              WHERE RPSTTV_CD = 'A007' 
+                                                                                AND COMM_CD = PYSP_LOG_SVC_YR_NUM_CD ) AS PYSP_LOG_SVC_YR_NUM
+                                                FROM   PAYR0440
+                                                WHERE  DPOB_CD=#dpobCd#
+                                                  AND  PAY_YR=SUBSTR(REPLACE(#payYrMnth#,'.',''),1,4)
+                                                  AND (REPLACE(#payYrMnth#,'.','') || (TO_CHAR(SYSDATE,'DD'))) BETWEEN UCST_DGM_BGNN_DT AND UCST_DGM_END_DT
+                                                 )
+                                                 GROUP BY  DPOB_CD
+                                                         , PAY_YR 
+                                                         , TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                                                         , OCCU_CLSS_PAY_CMPTTN_STD) NN, 
+                                                 ( SELECT    QQ.DPOB_CD
+                                                           , QQ.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                                                           , QQ.TYP_OCCU_CD  
+                                                           , QQ.DTIL_OCCU_INTTN_CD
+                                                           , PP.COMM_CD
+                                                           , TO_NUMBER(PP.MANGE_ITEM01) AS  MANGE_ITEM01 
+                                                     FROM BASS0300 PP ,   PAYR0400 QQ  
+                                                    WHERE PP.DPOB_CD = QQ.DPOB_CD
+                                                      AND PP.RPSTTV_CD = 'A007' 
+                                                      AND PP.COMM_CD = #logSvcYrNumCd# 
+                                                      AND QQ.TYP_OCCU_CD=#typOccuCd# 
+                                                      	]]>
+                                                      	 <isNotEmpty prepend="AND"  property="dtilOccuInttnCd" >
+														 	         QQ.DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+													 </isNotEmpty>  
+                                                      <![CDATA[
+                                                      ) OO
+                                                WHERE  NN.DPOB_CD = OO.DPOB_CD
+                                                  AND  NN.TYP_OCCU_GRDE_MPPG_SEIL_NUM = OO.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                                             ) CC 
+                             WHERE  KK.DPOB_CD = CC.DPOB_CD 
+                                AND KK.PAY_YR  = CC.PAY_YR 
+                                AND KK.TYP_OCCU_GRDE_MPPG_SEIL_NUM= CC.TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+                                AND KK.PYSP_LOG_SVC_YR_NUM_CD= CC.PYSP_LOG_SVC_YR_NUM_CD 
+                                AND KK.OCCU_CLSS_PAY_CMPTTN_STD  = CC.OCCU_CLSS_PAY_CMPTTN_STD  
+                   
+                    ) BB, 
+                    ( SELECT     QQ.DPOB_CD
+                               , QQ.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                               , QQ.TYP_OCCU_CD 
+                               , QQ.DTIL_OCCU_INTTN_CD 
+                               , PP.COMM_CD
+                               , TO_NUMBER(PP.MANGE_ITEM01) AS  MANGE_ITEM01 
+                         FROM BASS0300 PP ,   PAYR0400 QQ  
+                        WHERE PP.DPOB_CD = QQ.DPOB_CD
+                          AND PP.RPSTTV_CD = 'A007' 
+                          AND PP.COMM_CD = (
+				                           SELECT    (CASE WHEN NN.PYSP_LOG_SVC_YR_NUM > OO.MANGE_ITEM01 
+				                                                              THEN  OO.COMM_CD
+				                                                              ELSE  NN.PYSP_LOG_SVC_YR_NUM_CD END) AS PYSP_LOG_SVC_YR_NUM_CD
+				                                                FROM
+				                                                (SELECT
+				                                                         DPOB_CD
+				                                                       , PAY_YR
+				                                                       , TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				                                                        ,MAX(OCCU_CLSS_PAY_CMPTTN_STD) AS OCCU_CLSS_PAY_CMPTTN_STD
+				                                                       , MAX(PYSP_LOG_SVC_YR_NUM_CD) AS PYSP_LOG_SVC_YR_NUM_CD
+				                                                       , MAX(TO_NUMBER(PYSP_LOG_SVC_YR_NUM)) AS PYSP_LOG_SVC_YR_NUM
+				                                                FROM
+				                                                (SELECT   DPOB_CD
+				                                                        , PAY_YR
+				                                                        , TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				                                                         ,  OCCU_CLSS_PAY_CMPTTN_STD
+				                                                         , (SELECT COMM_CD FROM BASS0300 
+				                                                                              WHERE RPSTTV_CD = 'A007' 
+				                                                                                AND COMM_CD = PYSP_LOG_SVC_YR_NUM_CD ) AS PYSP_LOG_SVC_YR_NUM_CD
+				                                                        , (SELECT MANGE_ITEM01 FROM BASS0300 
+				                                                                              WHERE RPSTTV_CD = 'A007' 
+				                                                                                AND COMM_CD = PYSP_LOG_SVC_YR_NUM_CD ) AS PYSP_LOG_SVC_YR_NUM
+				                                                FROM   PAYR0440
+				                                                WHERE  DPOB_CD=#dpobCd#
+				                                                  AND  PAY_YR=SUBSTR(REPLACE(#payYrMnth#,'.',''),1,4)
+				                                                   AND (REPLACE(#payYrMnth#,'.','') || (TO_CHAR(SYSDATE,'DD'))) BETWEEN UCST_DGM_BGNN_DT AND UCST_DGM_END_DT
+				                                                 )
+				                                                 GROUP BY  DPOB_CD
+				                                                         , PAY_YR 
+				                                                         , TYP_OCCU_GRDE_MPPG_SEIL_NUM ) NN, 
+				                                                 ( SELECT    QQ.DPOB_CD
+				                                                           , QQ.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				                                                           , QQ.TYP_OCCU_CD 
+				                                                           , QQ.DTIL_OCCU_INTTN_CD 
+				                                                           , PP.COMM_CD
+				                                                           , TO_NUMBER(PP.MANGE_ITEM01) AS  MANGE_ITEM01 
+				                                                     FROM BASS0300 PP ,   PAYR0400 QQ  
+				                                                    WHERE PP.DPOB_CD = QQ.DPOB_CD
+				                                                      AND PP.RPSTTV_CD = 'A007' 
+				                                                      AND PP.COMM_CD = #logSvcYrNumCd# 
+				                                                      AND QQ.TYP_OCCU_CD=#typOccuCd# 
+				                                                       	]]>
+				                                                       	 <isNotEmpty prepend="AND"  property="dtilOccuInttnCd" >
+														 	                  QQ.DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+													                    </isNotEmpty>  
+				                                                      <![CDATA[
+				                                                      ) OO
+				                                                WHERE  NN.DPOB_CD = OO.DPOB_CD
+				                                                  AND  NN.TYP_OCCU_GRDE_MPPG_SEIL_NUM = OO.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                          )
+                          AND QQ.TYP_OCCU_CD=#typOccuCd#
+                           ]]>
+                            <isNotEmpty prepend="AND"  property="dtilOccuInttnCd" >
+			 	                  QQ.DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+		                    </isNotEmpty>  
+                          <![CDATA[
+                                                      ) RR  , 
+						 (
+						    SELECT 
+						         B01.*
+						          FROM   PAYR0440 B01,
+						                 PAYR0400 B02 
+						        WHERE B01.PAY_YR=SUBSTR(TO_CHAR(ADD_MONTHS(TO_DATE(REPLACE(#payYrMnth#,'.',''),'YYYYMM'), -1),'YYYYMM'),1,4)   
+						          AND B01.DPOB_CD = B02.DPOB_CD
+						          AND B01.TYP_OCCU_GRDE_MPPG_SEIL_NUM = B02.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+						          AND B02.TYP_OCCU_CD=#typOccuCd# 
+						           ]]>
+						            <isNotEmpty prepend="AND"  property="dtilOccuInttnCd" >
+			 	                  B02.DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+		                    </isNotEmpty>  
+						         
+						          <![CDATA[
+						          AND B01.PYSP_LOG_SVC_YR_NUM_CD = ( 
+						                CASE WHEN NVL((SELECT  B51.LOG_SVC_YR_NUM_CD
+						                                   FROM  PAYR0304 B51 
+						                                  WHERE B51.DPOB_CD=#dpobCd# 
+						                                    AND B51.PYMT_YR_MNTH = TO_CHAR(ADD_MONTHS(TO_DATE(REPLACE(#payYrMnth#,'.',''),'YYYYMM'), -1),'YYYYMM')
+						                                    AND B51.PAY_CD=#payCd#   
+						                                    AND B51.EMYMT_DIV_CD=#emymtDivCd#
+						                                    AND B51.SYSTEMKEY = #systemkey#),'TT') = 'TT'  
+						                    THEN (
+				                           SELECT    (CASE WHEN NN.PYSP_LOG_SVC_YR_NUM > OO.MANGE_ITEM01 
+				                                                              THEN  OO.COMM_CD
+				                                                              ELSE  NN.PYSP_LOG_SVC_YR_NUM_CD END) AS PYSP_LOG_SVC_YR_NUM_CD
+				                                                FROM
+				                                                (SELECT
+				                                                         DPOB_CD
+				                                                       , PAY_YR
+				                                                       , TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				                                                       ,  MAX(OCCU_CLSS_PAY_CMPTTN_STD) AS OCCU_CLSS_PAY_CMPTTN_STD 
+				                                                       , MAX(PYSP_LOG_SVC_YR_NUM_CD) AS PYSP_LOG_SVC_YR_NUM_CD
+				                                                       , MAX(TO_NUMBER(PYSP_LOG_SVC_YR_NUM)) AS PYSP_LOG_SVC_YR_NUM
+				                                                FROM
+				                                                (SELECT   DPOB_CD
+				                                                        , PAY_YR
+				                                                        , TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				                                                         ,  OCCU_CLSS_PAY_CMPTTN_STD
+				                                                         , (SELECT COMM_CD FROM BASS0300 
+				                                                                              WHERE RPSTTV_CD = 'A007' 
+				                                                                                AND COMM_CD = PYSP_LOG_SVC_YR_NUM_CD ) AS PYSP_LOG_SVC_YR_NUM_CD
+				                                                        , (SELECT MANGE_ITEM01 FROM BASS0300 
+				                                                                              WHERE RPSTTV_CD = 'A007' 
+				                                                                                AND COMM_CD = PYSP_LOG_SVC_YR_NUM_CD ) AS PYSP_LOG_SVC_YR_NUM
+				                                                FROM   PAYR0440
+				                                                WHERE  DPOB_CD=#dpobCd#
+				                                                  AND  PAY_YR=SUBSTR(REPLACE(#payYrMnth#,'.',''),1,4)
+				                                                  AND (REPLACE(#payYrMnth#,'.','') || (TO_CHAR(SYSDATE,'DD'))) BETWEEN UCST_DGM_BGNN_DT AND UCST_DGM_END_DT
+				                                                 )
+				                                                 GROUP BY  DPOB_CD
+				                                                         , PAY_YR 
+				                                                         , TYP_OCCU_GRDE_MPPG_SEIL_NUM ) NN, 
+				                                                 ( SELECT    QQ.DPOB_CD
+				                                                           , QQ.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				                                                           , QQ.TYP_OCCU_CD 
+				                                                           , QQ.DTIL_OCCU_INTTN_CD
+				                                                           , PP.COMM_CD
+				                                                           , TO_NUMBER(PP.MANGE_ITEM01) AS  MANGE_ITEM01 
+				                                                     FROM BASS0300 PP ,   PAYR0400 QQ  
+				                                                    WHERE PP.DPOB_CD = QQ.DPOB_CD
+				                                                      AND PP.RPSTTV_CD = 'A007' 
+				                                                      AND PP.COMM_CD = #logSvcYrNumCd# 
+				                                                      AND QQ.TYP_OCCU_CD=#typOccuCd#
+				                                                       ]]>
+				                                                           <isNotEmpty prepend="AND"  property="dtilOccuInttnCd" >
+														 	                  QQ.DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+													                    </isNotEmpty>   
+				                                                      <![CDATA[
+				                                                      ) OO
+				                                                WHERE  NN.DPOB_CD = OO.DPOB_CD
+				                                                  AND  NN.TYP_OCCU_GRDE_MPPG_SEIL_NUM = OO.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                          )
+						                    ELSE 
+						                              (SELECT  B51.LOG_SVC_YR_NUM_CD
+						                                 FROM  PAYR0304 B51 
+						                                WHERE  B51.DPOB_CD=#dpobCd#
+						                                  AND B51.PYMT_YR_MNTH = TO_CHAR(ADD_MONTHS(TO_DATE(REPLACE(#payYrMnth#,'.',''),'YYYYMM'), -1),'YYYYMM')
+						                                  AND B51.PAY_CD=#payCd#   
+						                                  AND B51.EMYMT_DIV_CD=#emymtDivCd#
+						                                  AND B51.SYSTEMKEY = #systemkey#)
+						                    END 
+						          )  
+						          AND B01.OCCU_CLSS_PAY_CMPTTN_STD = (
+						                                                SELECT 
+						                                                    MAX( CASE WHEN B01.OCCU_CLSS_PAY_CMPTTN_STD  <= (#payYrMnth# || (TO_CHAR(SYSDATE,'DD')))
+																              THEN
+																                    B01.OCCU_CLSS_PAY_CMPTTN_STD 
+																              ELSE 
+																                   ''
+																              END) AS  OCCU_CLSS_PAY_CMPTTN_STD  
+						                                              FROM   PAYR0440 B01,
+						                                                     PAYR0400 B02 
+						                                            WHERE B01.PAY_YR=SUBSTR(TO_CHAR(ADD_MONTHS(TO_DATE(REPLACE(#payYrMnth#,'.',''),'YYYYMM'), -1),'YYYYMM'),1,4)   
+						                                              AND B01.DPOB_CD = B02.DPOB_CD
+						                                              AND B01.TYP_OCCU_GRDE_MPPG_SEIL_NUM = B02.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+						                                              AND B02.TYP_OCCU_CD=#typOccuCd#
+						                                              ]]>
+						                                                <isNotEmpty prepend="AND"  property="dtilOccuInttnCd" >
+														 	                  B02.DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+													                    </isNotEmpty>  
+						                                              <![CDATA[
+						                                              AND B01.PYSP_LOG_SVC_YR_NUM_CD = ( 
+						                                                    CASE WHEN NVL((SELECT  B51.LOG_SVC_YR_NUM_CD
+						                                                                       FROM  PAYR0304 B51 
+						                                                                      WHERE B51.DPOB_CD=#dpobCd# 
+						                                                                        AND B51.PYMT_YR_MNTH = TO_CHAR(ADD_MONTHS(TO_DATE(REPLACE(#payYrMnth#,'.',''),'YYYYMM'), -1),'YYYYMM')
+						                                                                        AND B51.PAY_CD=#payCd#   
+						                                                                        AND B51.EMYMT_DIV_CD=#emymtDivCd#
+						                                                                        AND B51.SYSTEMKEY = #systemkey#),'TT') = 'TT'  
+						                                                        THEN (
+				                           SELECT    (CASE WHEN NN.PYSP_LOG_SVC_YR_NUM > OO.MANGE_ITEM01 
+				                                                              THEN  OO.COMM_CD
+				                                                              ELSE  NN.PYSP_LOG_SVC_YR_NUM_CD END) AS PYSP_LOG_SVC_YR_NUM_CD
+				                                                FROM
+				                                                (SELECT
+				                                                         DPOB_CD
+				                                                       , PAY_YR
+				                                                       , TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				                                                       , OCCU_CLSS_PAY_CMPTTN_STD
+				                                                       , MAX(PYSP_LOG_SVC_YR_NUM_CD) AS PYSP_LOG_SVC_YR_NUM_CD
+				                                                       , MAX(TO_NUMBER(PYSP_LOG_SVC_YR_NUM)) AS PYSP_LOG_SVC_YR_NUM
+				                                                FROM
+				                                                (SELECT   DPOB_CD
+				                                                        , PAY_YR
+				                                                        , TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				                                                         ,  OCCU_CLSS_PAY_CMPTTN_STD
+				                                                         , (SELECT COMM_CD FROM BASS0300 
+				                                                                              WHERE RPSTTV_CD = 'A007' 
+				                                                                                AND COMM_CD = PYSP_LOG_SVC_YR_NUM_CD ) AS PYSP_LOG_SVC_YR_NUM_CD
+				                                                        , (SELECT MANGE_ITEM01 FROM BASS0300 
+				                                                                              WHERE RPSTTV_CD = 'A007' 
+				                                                                                AND COMM_CD = PYSP_LOG_SVC_YR_NUM_CD ) AS PYSP_LOG_SVC_YR_NUM
+				                                                FROM   PAYR0440
+				                                                WHERE  DPOB_CD=#dpobCd#
+				                                                  AND  PAY_YR=SUBSTR(REPLACE(#payYrMnth#,'.',''),1,4)
+				                                                   AND (REPLACE(#payYrMnth#,'.','') || (TO_CHAR(SYSDATE,'DD'))) BETWEEN UCST_DGM_BGNN_DT AND UCST_DGM_END_DT
+				                                                 )
+				                                                 GROUP BY  DPOB_CD
+				                                                         , PAY_YR 
+				                                                         , TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				                                                         , OCCU_CLSS_PAY_CMPTTN_STD) NN, 
+				                                                 ( SELECT    QQ.DPOB_CD
+				                                                           , QQ.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				                                                           , QQ.TYP_OCCU_CD 
+				                                                           , QQ.DTIL_OCCU_INTTN_CD
+				                                                           , PP.COMM_CD
+				                                                           , TO_NUMBER(PP.MANGE_ITEM01) AS  MANGE_ITEM01 
+				                                                     FROM BASS0300 PP ,   PAYR0400 QQ  
+				                                                    WHERE PP.DPOB_CD = QQ.DPOB_CD
+				                                                      AND PP.RPSTTV_CD = 'A007' 
+				                                                      AND PP.COMM_CD = #logSvcYrNumCd# 
+				                                                      AND QQ.TYP_OCCU_CD=#typOccuCd#
+				                                                       ]]>
+				                                                        <isNotEmpty prepend="AND"  property="dtilOccuInttnCd" >
+														 	                  QQ.DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+													                    </isNotEmpty>   
+				                                                      <![CDATA[
+				                                                      ) OO
+				                                                WHERE  NN.DPOB_CD = OO.DPOB_CD
+				                                                  AND  NN.TYP_OCCU_GRDE_MPPG_SEIL_NUM = OO.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                          )
+						                                                        ELSE 
+						                                                                  (SELECT  B51.LOG_SVC_YR_NUM_CD
+						                                                                     FROM  PAYR0304 B51 
+						                                                                    WHERE  B51.DPOB_CD=#dpobCd#
+						                                                                      AND B51.PYMT_YR_MNTH = TO_CHAR(ADD_MONTHS(TO_DATE(REPLACE(#payYrMnth#,'.',''),'YYYYMM'), -1),'YYYYMM')
+						                                                                      AND B51.PAY_CD=#payCd#  
+						                                                                      AND B51.EMYMT_DIV_CD=#emymtDivCd#
+						                                                                      AND B51.SYSTEMKEY = #systemkey#)
+						                                                        END 
+						                                              ) 
+						          )  
+						) A51  
+                    WHERE   XX.PAY_ITEM_USE_YN = 'Y' 
+                      AND   XX.DPOB_CD = RR.DPOB_CD
+                      AND   XX.TYP_OCCU_GRDE_MPPG_SEIL_NUM = RR.TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+                            AND XX.DPOB_CD=BB.DPOB_CD(+)
+                            AND XX.TYP_OCCU_GRDE_MPPG_SEIL_NUM=BB.TYP_OCCU_GRDE_MPPG_SEIL_NUM(+)
+                            AND XX.PAYR_IMCD=BB.PAYR_ITEM_CD(+)  
+                            AND XX.PAY_YR = BB.PAY_YR(+)  
+                            AND BB.UCST_DGM_USE_YN(+) = 'Y'   
+                            AND XX.DPOB_CD=#dpobCd#
+                            AND XX.PAY_YR=SUBSTR(REPLACE(#payYrMnth#,'.',''),1,4)
+                            AND XX.PAY_CD=#payCd#  
+                            AND XX.DPOB_CD=A51.DPOB_CD(+) 
+  							AND XX.TYP_OCCU_GRDE_MPPG_SEIL_NUM=A51.TYP_OCCU_GRDE_MPPG_SEIL_NUM(+) 
+  							AND XX.PAYR_IMCD=A51.PAYR_ITEM_CD(+) 
+                            
+                   ) AA,  PAYR0445 DD
+                             WHERE   AA.DPOB_CD = DD.DPOB_CD(+) 
+                                AND AA.PAY_YR  = DD.PAY_YR(+) 
+                                AND AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM= DD.TYP_OCCU_GRDE_MPPG_SEIL_NUM(+) 
+                                AND AA.PYSP_LOG_SVC_YR_NUM_CD= DD.PYSP_LOG_SVC_YR_NUM_CD(+)  
+                                AND AA.OCCU_CLSS_PAY_CMPTTN_STD  = DD.OCCU_CLSS_PAY_CMPTTN_STD(+)   
+                                ]]> 
+			
+			
+	</select>
+	 <!--  AND AA.PAYR_MANG_DEPT_CD = #payrMangDeptCd# -->
+	<select id="payCalculationDAO.selectPayr0490_S" resultMap="payrSche0490">
+		<![CDATA[ 
+			SELECT
+				DPOB_CD
+				  , PAY_YR
+				  , BUSIN_CD
+				  , DEPT_CD
+				  , PAYR_UCST_DGM_SEIL_NUM
+				  , PAYR_MANG_DEPT_CD
+				  , PAY_CD
+				  , PAY_ITEM_CD
+				  , ITEM_NM
+				  , PYMT_DDUC_DIV_CD
+				  , PYMT_DDUC_FRM_CD
+				  , PYMT_DDUC_RATE
+				  , PYMT_DDUC_SUM
+				  , TXTN_DIV_CD
+				  , FREE_DTY_RATE
+				  , FREE_DTY_SUM
+				  , JAN
+				  , FEB
+				  , MAR
+				  , APR
+				  , MAY
+				  , JUN
+				  , JUL
+				  , AUG
+				  , SEP
+				  , OCT
+				  , NOV
+				  , DEC
+				  , RNGE_ORD
+				  , PAY_ITEM_USE_YN
+				  , ITEM_APPTN_BGNN_DT
+				  , ITEM_APPTN_END_DT
+				  , DAY_MNTH_AMNT_DIV_CD
+				  , CALC_STD_DIV_CD
+				  , EMYMT_DIV_CD
+				  , USALY_AMNT_YN
+				  , PAY_ITEM_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , CALC_STD_FUNC
+			FROM PAYR0490
+						WHERE  PAY_ITEM_USE_YN  = 'Y' 
+						 AND DPOB_CD=#dpobCd# 
+						 AND PAY_YR=SUBSTR(REPLACE(#payYrMnth#,'.',''),1,4) 
+						 AND BUSIN_CD=#businCd#
+						 AND DEPT_CD=#deptCd# 
+						 AND PAY_CD=#payCd#
+				]]> 
+	</select>
+	    <!-- AND PAYR_MANG_DEPT_CD=#payrMangDeptCd# -->
+	
+		<!--	AND UCST_DGM_APPTN_DT=UCST_DGM_APPTN_DT  -->
+	 	<select id="payCalculationDAO.selectPayr0530_S" resultMap="payrSche0530">
+		<![CDATA[
+			SELECT
+		           SYSTEMKEY
+		 		  , DPOB_CD
+				  , PAY_FAMY_RSPT_SEIL_NUM
+				  , PAY_FAMY_RESN_REGN_NUM
+				  , HAN_NM
+				  , FAMY_RELA_DIV_CD
+				  , FAMY_ALLW_PYMT_YN
+				  , CHDN_CHD_RRG_EPNS_PYMT_YN
+				  , FNDTN_DDUC_YN
+				  , SPUE_DDUC_YN
+				  , WMN_DDUC_YN
+				  , RFTA_GVST_DDUC_YN
+				  , DABPN_DDUC_YN
+				  , SGPN_FMLY_DDUC_YN
+				  , CHDN_CHD_RRG_EPNS_DDUC_YN
+				  , FAMY_EXTPY_DIV_CD
+				  , SCHL_EXPN_ADMCL_EXTPY_DIV_CD  
+				  , NVL(SCHL_EXPN_ADMCL_EXTPY_SUM,0) AS SCHL_EXPN_ADMCL_EXTPY_SUM
+				  , NVL(FAMY_EXTPY_SUM,0) AS FAMY_EXTPY_SUM
+				  , SCHL_EXPN_EXTPY_PYMT_BGNN_DT
+				  , SCHL_EXPN_EXTPY_PYMT_END_DT 
+			 FROM PAYR0530
+			WHERE DPOB_CD = #dpobCd#
+			  AND SYSTEMKEY=#systemkey# 
+				]]>
+				
+	</select>
+	<!-- AND PAY_FAMY_RSPT_SEIL_NUM=#payFamyRsptSeilNum#  -->
+ 
+	
+	<resultMap id="infcInsr3100" class="com.app.smrmf.infc.insurance.server.vo.InfcPkgInsr3100VO"> 
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="nofctYrMnthNum" column="NOFCT_YR_MNTH_NUM" columnIndex="2"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="3"/>
+		<result property="dspty" column="DSPTY" columnIndex="4"/>
+		<result property="emymtSeilNum" column="EMYMT_SEIL_NUM" columnIndex="5"/>
+		<result property="dpobMangeNum" column="DPOB_MANGE_NUM" columnIndex="6"/>
+		<result property="acc" column="ACC" columnIndex="7"/>
+		<result property="untDpobCd" column="UNT_DPOB_CD" columnIndex="8"/>
+		<result property="certNumHuhd" column="CERT_NUM_HUHD" columnIndex="9"/>
+		<result property="nm" column="NM" columnIndex="10"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="11"/>
+		<result property="iposTotPrmmAggr" column="IPOS_TOT_PRMM_AGGR" columnIndex="12"/>
+		<result property="iposTotPrmmHlth" column="IPOS_TOT_PRMM_HLTH" columnIndex="13"/>
+		<result property="iposTotPrmmLgtmRcptn" column="IPOS_TOT_PRMM_LGTM_RCPTN" columnIndex="14"/>
+		<result property="yrlyPayTotAmnt" column="YRLY_PAY_TOT_AMNT" columnIndex="15"/>
+		<result property="dutyMnthIcm" column="DUTY_MNTH_ICM" columnIndex="16"/>
+		<result property="payMnthAmnt" column="PAY_MNTH_AMNT" columnIndex="17"/>
+		<result property="yrtxCalcBkdnGrde" column="YRTX_CALC_BKDN_GRDE" columnIndex="18"/>
+		<result property="stdPayMnthAmnt" column="STD_PAY_MNTH_AMNT" columnIndex="19"/>
+		<result property="fixPrmmAggr" column="FIX_PRMM_AGGR" columnIndex="20"/>
+		<result property="fixPrmmHlth" column="FIX_PRMM_HLTH" columnIndex="21"/>
+		<result property="fixPrmmLgtmRcptn" column="FIX_PRMM_LGTM_RCPTN" columnIndex="22"/>
+		<result property="clutPrmmAggr" column="CLUT_PRMM_AGGR" columnIndex="23"/>
+		<result property="clutPrmmHlth" column="CLUT_PRMM_HLTH" columnIndex="24"/>
+		<result property="clutPrmmLgtmRcptn" column="CLUT_PRMM_LGTM_RCPTN" columnIndex="25"/>
+		<result property="mbrAlttAggr" column="MBR_ALTT_AGGR" columnIndex="26"/>
+		<result property="mbrAlttHlth" column="MBR_ALTT_HLTH" columnIndex="27"/>
+		<result property="mbrAlttLgtmRcptn" column="MBR_ALTT_LGTM_RCPTN" columnIndex="28"/>
+		<result property="usrAlttAggr" column="USR_ALTT_AGGR" columnIndex="29"/>
+		<result property="usrAlttHlth" column="USR_ALTT_HLTH" columnIndex="30"/>
+		<result property="usrAlttLgtmRcptn" column="USR_ALTT_LGTM_RCPTN" columnIndex="31"/>
+		<result property="nofctSspn" column="NOFCT_SSPN" columnIndex="32"/>
+		<result property="hlthYrtxApptnYrMnth" column="HLTH_YRTX_APPTN_YR_MNTH" columnIndex="33"/>
+		<result property="hlthYrtxPrcsDt" column="HLTH_YRTX_PRCS_DT" columnIndex="34"/>
+		<result property="hlthInsrYrtxPrcsYn" column="HLTH_INSR_YRTX_PRCS_YN" columnIndex="35"/>
+		<result property="divdPymtDivCd" column="DIVD_PYMT_DIV_CD" columnIndex="36"/>
+		<result property="divdPymt" column="DIVD_PYMT" columnIndex="37"/>
+		<result property="kybdr" column="KYBDR" columnIndex="38"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="39"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="40"/>
+		<result property="ismt" column="ISMT" columnIndex="41"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="42"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="43"/>
+	</resultMap>
+	
+	<!-- 전환완료 사용안함.  -->
+	<select id="payCalculationDAO.selectInsr0200_S"   parameterClass="infcInsr3100SrhVO"   resultMap="infcInsr3100">
+		<![CDATA[
+			    SELECT     DPOB_CD, NOFCT_YR_MNTH_NUM, SYSTEMKEY, 
+						   DSPTY, EMYMT_SEIL_NUM, DPOB_MANGE_NUM, 
+						   ACC, UNT_DPOB_CD, CERT_NUM_HUHD, 
+						   NM, RESN_REGN_NUM, IPOS_TOT_PRMM_AGGR, 
+						   IPOS_TOT_PRMM_HLTH, IPOS_TOT_PRMM_LGTM_RCPTN, YRLY_PAY_TOT_AMNT, 
+						   DUTY_MNTH_ICM, PAY_MNTH_AMNT, YRTX_CALC_BKDN_GRDE, 
+						   STD_PAY_MNTH_AMNT, FIX_PRMM_AGGR, FIX_PRMM_HLTH, 
+						   FIX_PRMM_LGTM_RCPTN, CLUT_PRMM_AGGR, CLUT_PRMM_HLTH, 
+						   CLUT_PRMM_LGTM_RCPTN, MBR_ALTT_AGGR, MBR_ALTT_HLTH, 
+						   MBR_ALTT_LGTM_RCPTN, USR_ALTT_AGGR, USR_ALTT_HLTH, 
+						   USR_ALTT_LGTM_RCPTN, NOFCT_SSPN, HLTH_YRTX_APPTN_YR_MNTH, 
+						   HLTH_YRTX_PRCS_DT, HLTH_INSR_YRTX_PRCS_YN, DIVD_PYMT_DIV_CD, 
+						   DIVD_PYMT, KYBDR, INPT_DT, 
+						   INPT_ADDR, ISMT, REVN_DT, 
+						   REVN_ADDR
+						FROM  INSR3100 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND NOFCT_YR_MNTH_NUM=REPLACE(#nofctYrMnthNum#,'.','')
+				]]>
+	</select>
+	
+	<!-- 테이블 수정에 따라 수정처리 해야 함...안그럼 오류 발생... -->
+	<!-- <select id="payCalculationDAO.selectInsr0200_S" resultMap="payrInsr0200">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, DDUC_YR_MNTH
+				, NOFCT_YR_MNTH
+				, DPOB_MANGE_NUM
+				, UNT_ISTUT_CD
+				, NOFCT_DSPTY
+				, ACC_SGN
+				, HLTH_INSR_CERT_NUM
+				, HAN_NM
+				, RESN_REGN_NUM
+				, REDU_REAS_CD
+				, HLTH_INSR_TYP_OCCU_CD
+				, PAY_MNTH_AMNT_GRDE
+				, NVL(PAY_MNTH_AMNT,0) AS PAY_MNTH_AMNT
+				, NVL(CALC_PRMM,0) AS CALC_PRMM
+				, CLUT_REAS_CD
+				, CLUT_APPTN_BGNN_YR_MNTH
+				, CLUT_APPTN_END_YR_MNTH
+				, NVL(CLUT_PRMM,0) AS CLUT_PRMM
+				, NVL(NOFCT_PRMM,0) AS NOFCT_PRMM
+				, NVL(YRTX_PRMM,0) AS YRTX_PRMM
+				, AQTN_DT
+				, LSS_DT
+				, NVL(LGTM_RCPTN_CALC_PRMM,0) AS LGTM_RCPTN_CALC_PRMM
+				, LGTM_RCPTN_CLUT_REAS_CD
+				, LGTM_RCPTN_APPTN_BGNN_YR_MNTH
+				, LGTM_RCPTN_APPTN_END_YR_MNTH
+				, NVL(LGTM_RCPTN_CLUT_PRMM,0) AS LGTM_RCPTN_CLUT_PRMM
+				, NVL(LGTM_RCPTN_NOFCT_PRMM,0) AS LGTM_RCPTN_NOFCT_PRMM
+				, NVL(LGTM_RCPTN_YRTX_PRMM,0) AS LGTM_RCPTN_YRTX_PRMM
+				, NVL(HLTH_RCPTN_CALC_PRMM,0) AS HLTH_RCPTN_CALC_PRMM
+				, NVL(HLTH_RCPTN_CLUT_PRMM,0) AS HLTH_RCPTN_CLUT_PRMM
+				, NVL(HLTH_RCPTN_NOFCT_PRMM,0) AS HLTH_RCPTN_NOFCT_PRMM
+				, NVL(HLTH_RCPTN_YRTX_PRMM,0) AS HLTH_RCPTN_YRTX_PRMM
+				, NVL(HLTH_INSR_REFD_ITRT,0) AS HLTH_INSR_REFD_ITRT
+				, NVL(LGTM_RCPTN_REFD_ITRT,0) AS LGTM_RCPTN_REFD_ITRT
+				, NVL(TOT_PYMT_PRMM,0) AS TOT_PYMT_PRMM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM INSR0200
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND DDUC_YR_MNTH=REPLACE(#dducYrMnth#,'.','')
+				]]>
+	</select> -->
+	
+	<resultMap id="infcYeta2000" class="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta2000VO"> 
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="edacRvyy" column="EDAC_RVYY" columnIndex="2"/>
+		<result property="settGbcd" column="SETT_GBCD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/> 
+		<result property="yrtxApptnYrMnth" column="YRTX_APPTN_YR_MNTH" columnIndex="5"/>
+		<result property="yrtxPrcsDt" column="YRTX_PRCS_DT" columnIndex="6"/>
+		<result property="yrtxPrcsYn" column="YRTX_PRCS_YN" columnIndex="7"/>
+		<result property="divdPymtDivCd" column="DIVD_PYMT_DIV_CD" columnIndex="8"/>
+		<result property="divdPymtDivSu" column="DIVD_PYMT_DIV_SU" columnIndex="9"/>
+		<result property="divdPymt" column="DIVD_PYMT" columnIndex="10"/> 
+		<result property="divdPymtAmnt" column="DIVD_PYMT_AMNT" columnIndex="11"/> 
+		<result property="subtEtax" column="SUBT_ETAX" columnIndex="12"/>
+		<result property="subtInhb" column="SUBT_INHB" columnIndex="13"/>
+		<result property="subtFafv" column="SUBT_FAFV" columnIndex="14"/>
+		<result property="subtAmsu" column="SUBT_AMSU" columnIndex="15"/>
+		<result property="subtEtax01" column="SUBT_ETAX01" columnIndex="16"/>
+		<result property="subtInhb01" column="SUBT_INHB01" columnIndex="17"/> 
+		<result property="subtAmsu01" column="SUBT_AMSU01" columnIndex="18"/>
+	</resultMap>
+	<!-- <result property="subtFafv01" column="SUBT_FAFV01" columnIndex="18"/> -->
+	
+	<!--  연말정산 결과 급여 반영  -->
+	<select id="payCalculationDAO.seletYeta2000Data_S" resultMap="infcYeta2000">
+		<![CDATA[
+			SELECT 
+			     AA.DPOB_CD
+			   , AA.EDAC_RVYY
+			   , AA.SETT_GBCD
+			   , AA.SYSTEMKEY
+			   , AA.YRTX_APPTN_YR_MNTH
+			   , AA.YRTX_PRCS_DT
+			   , AA.YRTX_PRCS_YN
+			   , AA.DIVD_PYMT_DIV_CD
+			   , (CASE WHEN AA.DIVD_PYMT_DIV_CD = 'B0300030'  THEN 3
+			          WHEN AA.DIVD_PYMT_DIV_CD = 'B0300020'  THEN 2 
+			          ELSE  1 END ) AS DIVD_PYMT_DIV_SU
+			   , AA.DIVD_PYMT
+			   , AA.DIVD_PYMT_AMNT 
+			   , BB.SUBT_ETAX
+			   , BB.SUBT_INHB
+			   , BB.SUBT_FAFV
+			   , BB.SUBT_AMSU       
+			   , (CASE WHEN AA.DIVD_PYMT_DIV_CD = 'B0300030' THEN TRUNC((BB.SUBT_ETAX / 3),-1) 
+			           WHEN AA.DIVD_PYMT_DIV_CD = 'B0300020' THEN TRUNC((BB.SUBT_ETAX / 2),-1) 
+			           ELSE  BB.SUBT_ETAX END ) AS  SUBT_ETAX01 
+			   , (CASE WHEN AA.DIVD_PYMT_DIV_CD = 'B0300030' THEN TRUNC((BB.SUBT_INHB / 3),-1)   
+			           WHEN AA.DIVD_PYMT_DIV_CD = 'B0300020' THEN TRUNC((BB.SUBT_INHB / 2),-1)  
+			           ELSE  BB.SUBT_INHB END ) AS  SUBT_INHB01 
+			   , (CASE WHEN AA.DIVD_PYMT_DIV_CD = 'B0300030' THEN TRUNC((BB.SUBT_ETAX / 3),-1) 
+			           WHEN AA.DIVD_PYMT_DIV_CD = 'B0300020' THEN TRUNC((BB.SUBT_ETAX / 2),-1) 
+			           ELSE  BB.SUBT_ETAX END ) + (CASE WHEN AA.DIVD_PYMT_DIV_CD = 'B0300030' THEN TRUNC((BB.SUBT_INHB / 3),-1)   
+			           WHEN AA.DIVD_PYMT_DIV_CD = 'B0300020' THEN TRUNC((BB.SUBT_INHB / 2),-1)  
+			           ELSE  BB.SUBT_INHB END ) AS  SUBT_AMSU01                      
+			FROM  YETA2000 AA, YETA3000 BB
+			WHERE  AA.DPOB_CD   = BB.DPOB_CD
+			  AND  AA.EDAC_RVYY = BB.EDAC_RVYY
+			  AND  AA.SETT_GBCD = BB.SETT_GBCD
+			  AND  AA.SYSTEMKEY = BB.SYSTEMKEY 
+			  AND  AA.DIVD_PYMT <> (CASE WHEN AA.DIVD_PYMT_DIV_CD = 'B0300030'  THEN 3
+								         WHEN AA.DIVD_PYMT_DIV_CD = 'B0300020'  THEN 2 
+								         ELSE  1 END )
+			  AND  AA.YRTX_APPTN_YR_MNTH IS NOT NULL
+			   /* AND BB.SUBT_AMSU > 0 */
+			  AND AA.DPOB_CD=#dpobCd#
+                 AND AA.EDAC_RVYY=(#edacRvyy# - 1)
+                 AND AA.SETT_GBCD=#settGbcd#
+                 AND AA.SYSTEMKEY=#systemkey# 
+				]]>
+	</select> 
+	
+	<update id="payCalculationDAO.updatePayCalYeta2000_S">
+		<![CDATA[
+			UPDATE YETA2000
+			SET   YRTX_PRCS_DT=#yrtxPrcsDt#
+				, YRTX_PRCS_YN=#yrtxPrcsYn#
+				, DIVD_PYMT=#divdPymt# 
+				, DIVD_PYMT_AMNT=#divdPymtAmnt# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy# 
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	<!--  , DIVD_PYMT_DIV_CD=#divdPymtDivCd# -->
+	
+	
+	<resultMap id="tpPayr0300" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0300VO"> 
+	    <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="pymtYrMnth" column="PYMT_YR_MNTH" columnIndex="2"/>
+		<result property="payCd" column="PAY_CD" columnIndex="3"/>
+		<result property="payrSeilNum" column="PAYR_SEIL_NUM" columnIndex="4"/>
+		<result property="payPymtDt" column="PAY_PYMT_DT" columnIndex="5"/>
+		<result property="payMstrNoteCtnt" column="PAY_MSTR_NOTE_CTNT" columnIndex="6"/>
+		<result property="kybdr" column="KYBDR" columnIndex="7"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="8"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="9"/>
+		<result property="ismt" column="ISMT" columnIndex="10"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="11"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="12"/>
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="13"/> 
+	</resultMap>
+	
+	
+	<select id="payCalculationDAO.selectPayr0300_S" resultMap="tpPayr0300">
+		<![CDATA[
+				SELECT
+				DPOB_CD
+				, PYMT_YR_MNTH
+				, PAY_CD
+				, PAYR_SEIL_NUM
+				, PAY_PYMT_DT
+				, PAY_MSTR_NOTE_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, PAYR_MANG_DEPT_CD
+			FROM PAYR0300
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=REPLACE(#pymtYrMnth#,'.','') 
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+				]]>
+	</select>
+	
+	<!-- 김해시청 기말 수당 구하는 쿼리  -->
+	<resultMap id="tpPayr0302" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0302VO">  
+		<result property="pymtDducSum" column="PYMT_DDUC_SUM" columnIndex="1"/> 
+	</resultMap>
+	
+	
+	<select id="payCalculationDAO.selectGHPayr0302C9020100_S" resultMap="tpPayr0302">
+		<![CDATA[
+			 SELECT  
+				        DECODE(NVL(SUM(PYMT_DDUC_SUM),0),0,0,NVL(SUM(PYMT_DDUC_SUM),0)) AS PYMT_DDUC_SUM
+			FROM PAYR0302
+			WHERE DPOB_CD=#dpobCd#
+			AND PYMT_YR_MNTH BETWEEN TO_CHAR(add_months(TO_DATE((#pymtYrMnth# || '01'),'YYYYMMDD'), -2),'YYYYMM') 
+			     AND TO_CHAR(add_months(TO_DATE((#pymtYrMnth# || '01'),'YYYYMMDD'), -1),'YYYYMM')
+			AND PAY_CD=#payCd# 
+			AND SYSTEMKEY=#systemkey#
+			AND PAY_ITEM_CD = 'B0010100' 
+				]]>
+	</select>
+	
+	<!-- 급여조정데이터 처리  안성모듈 및 공통 모듈적용시 분리 적용가능하게 -->
+	<select id="payCalculationDAO.selectPayr0302ToPayr301CalcList_D" parameterClass="infcCalPayr0302SrhVO" resultClass="egovMap"> 
+		<![CDATA[	 
+		SELECT 
+			     AA.DPOB_CD, AA.PYMT_YR_MNTH, AA.PAY_CD, 
+			     AA.PAYR_SEIL_NUM, AA.SYSTEMKEY,    
+			     AA.SUM_B001,
+			     NVL(AA.UCST_SUM_D9500400,0) AS UCST_SUM_D9500400,
+			     AA.TP_PYMT_TOT_AMNT, 
+			     AA.TP_EXTPY_TOT_AMNT,
+			     AA.TP_TXTN_TOT_AMNT,
+			     AA.TP_FREE_DTY_TOT_AMNT,     
+			     AA.TP_DDUC_TOT_AMNT ,
+			     BB.SPUE_YN, BB.BUSIN_CD,
+			     BB.EMYMT_DIV_CD,
+			     BB.TYP_OCCU_CD,
+			     BB.DTIL_OCCU_INTTN_CD,
+			     BB.SUPRT_FAMY_NUM_TWEN_CH_DN, 
+			     BB.SUPRT_FAMY_NUM_TRE_OVR_CHDN, 
+			     BB.SUPRT_FAMY_NUM_ETC ,
+			     NVL(GG.PAYR_INCM_EXCE_YN,'N') AS PAYR_INCM_EXCE_YN ,
+			     NVL(GG.DAY_WORK_YN,'N') AS DAY_WORK_YN,
+			     GG.ADD_INCM_TX_APPTN_RTO_CD 
+                             ,(SELECT NVL(MANGE_ITEM11,100)  FROM BASS0300 
+                                      WHERE RPSTTV_CD = 'B029' 
+                                     AND COMM_CD = GG.ADD_INCM_TX_APPTN_RTO_CD  ) AS ADD_INCM_TX_APPTN_RTO 
+				  			 ,GG.ADD_INCM_TX_APPTN_YR_MNTH
+				             ,GG.ADD_INCM_TX_APPTN_YN,
+			     AA.SUM_B002,
+			     NVL(AA.SUM_D0010100,0) AS SUM_D0010100,
+                 NVL(AA.SUM_D0110100,0) AS SUM_D0110100,
+                 NVL(AA.SUM_D0150100,0) AS SUM_D0150100,
+                 NVL(AA.SUM_D0160100,0) AS SUM_D0160100,
+                 NVL(AA.SUM_D9600200,0) AS SUM_D9600200,
+                 NVL(AA.SUM_D9500400,0) AS SUM_D9500400, 
+                 
+                  NVL(AA.SUM_CHK_D0010100,'N') AS SUM_CHK_D0010100,
+                 NVL(AA.SUM_CHK_D0110100,'N') AS SUM_CHK_D0110100,
+                 NVL(AA.SUM_CHK_D0150100,'N') AS SUM_CHK_D0150100,
+                 NVL(AA.SUM_CHK_D0160100,'N') AS SUM_CHK_D0160100,
+                 
+                 NVL(AA.SUM_REATTY_D0150100, 0) AS SUM_REATTY_D0150100,
+			     NVL(FF.DILNLAZ_TOT_DUTY_NUM_DYS,0) AS DILNLAZ_TOT_DUTY_NUM_DYS,
+			     HH.PAY_PYMT_DT, 
+				     GG.HLTH_INSR_APPTN_YN,
+                 GG.NAT_PENN_APPTN_YN,
+                 GG.UMYT_INSR_APPTN_YN,
+                 GG.IDTL_ACCDT_INSUR_APPTN_YN ,
+                 II.HLTH_INSR_MNTH_RUNTN_AMNT  ,
+                 II.NAT_PENN_STD_INCM_MNTH_AMNT  , 
+                 II.UMYT_INSR_PAY_MNTH_AMNT ,
+                 JJ.UNN_MBSP_STT_YN	 
+                  FROM
+			(SELECT 
+			    DPOB_CD, PYMT_YR_MNTH, PAY_CD, 
+			    PAYR_SEIL_NUM, SYSTEMKEY ,    
+			    SUM(CASE WHEN PYMT_DDUC_DIV_CD IN ('B0080010' ) 
+			        THEN PYMT_DDUC_SUM  
+			        ELSE 0 END)  AS SUM_B001 ,
+			     SUM(CASE WHEN PYMT_DDUC_DIV_CD  = 'B0080020' AND  PAY_ITEM_CD NOT IN ('C9110100','C9060100','C9410600')
+        			 THEN  PYMT_DDUC_SUM 
+       				 ELSE 0 END) AS UCST_SUM_D9500400  ,    
+			    SUM(CASE WHEN PYMT_DDUC_DIV_CD IN ('B0080010', 'B0080020' ) 
+			        THEN  PYMT_DDUC_SUM 
+			        ELSE 0 END) AS TP_PYMT_TOT_AMNT , 
+			     SUM(CASE WHEN PYMT_DDUC_DIV_CD IN ('B0080020') 
+			        THEN PYMT_DDUC_SUM  
+			        ELSE 0 END)  AS TP_EXTPY_TOT_AMNT,
+			    SUM(CASE WHEN PYMT_DDUC_DIV_CD IN ('B0080010', 'B0080020' ) 
+			        THEN PYMT_DDUC_TXTN_AMNT  
+			        ELSE 0 END)  AS TP_TXTN_TOT_AMNT,
+			     SUM(CASE WHEN PYMT_DDUC_DIV_CD IN ('B0080020' ) 
+			        THEN  PYMT_DDUC_FREE_DTY_SUM 
+			        ELSE 0 END) AS TP_FREE_DTY_TOT_AMNT,     
+			    SUM(CASE WHEN PYMT_DDUC_DIV_CD IN ('B0080030') 
+			        THEN  PYMT_DDUC_SUM 
+			        ELSE 0 END) AS TP_DDUC_TOT_AMNT ,
+        SUM(CASE WHEN PYMT_DDUC_DIV_CD  = 'B0080030' AND  PAY_ITEM_CD IN ('D0150100','D0150200','D0150300')
+        THEN  PYMT_DDUC_SUM 
+        ELSE 0 END) AS SUM_B002  ,
+          SUM(CASE WHEN PYMT_DDUC_DIV_CD  = 'B0080030' AND  PAY_ITEM_CD = 'D0010100' AND PAY_REATTY_ADMNT_VAL = '0'
+        THEN  PYMT_DDUC_SUM 
+        ELSE 0 END) AS SUM_D0010100,  
+          SUM(CASE WHEN PYMT_DDUC_DIV_CD  = 'B0080030' AND  PAY_ITEM_CD = 'D0110100' AND PAY_REATTY_ADMNT_VAL = '0'
+        THEN  PYMT_DDUC_SUM 
+        ELSE 0 END) AS SUM_D0110100 , 
+          SUM(CASE WHEN PYMT_DDUC_DIV_CD  = 'B0080030' AND  PAY_ITEM_CD = 'D0150100' AND PAY_REATTY_ADMNT_VAL = '0'
+        THEN  PYMT_DDUC_SUM 
+        ELSE 0 END) AS SUM_D0150100,
+       
+        MAX(CASE WHEN PYMT_DDUC_DIV_CD  = 'B0080030' AND  PAY_ITEM_CD = 'D0010100' AND PAY_REATTY_ADMNT_VAL = '0'
+        THEN  PYMT_DDUC_CHG_YN 
+        ELSE 'N' END)  AS SUM_CHK_D0010100,  
+           MAX(CASE WHEN PYMT_DDUC_DIV_CD  = 'B0080030' AND  PAY_ITEM_CD = 'D0110100' AND PAY_REATTY_ADMNT_VAL = '0'
+        THEN  PYMT_DDUC_CHG_YN 
+        ELSE 'N' END) AS SUM_CHK_D0110100 ,
+          MAX(CASE WHEN PYMT_DDUC_DIV_CD  = 'B0080030' AND  PAY_ITEM_CD = 'D0150100' AND PAY_REATTY_ADMNT_VAL = '0'
+        THEN  PYMT_DDUC_CHG_YN 
+        ELSE 'N' END) AS SUM_CHK_D0150100,
+           MAX(CASE WHEN PYMT_DDUC_DIV_CD  = 'B0080030' AND  PAY_ITEM_CD = 'D0160100' AND PAY_REATTY_ADMNT_VAL = '0'
+        THEN  PYMT_DDUC_CHG_YN 
+        ELSE 'N' END) AS SUM_CHK_D0160100 ,
+        
+          SUM(CASE WHEN PYMT_DDUC_DIV_CD  = 'B0080030' AND  PAY_ITEM_CD = 'D0150100' AND PAY_REATTY_ADMNT_VAL <> '0'
+        THEN  PYMT_DDUC_SUM 
+        ELSE 0 END) AS SUM_REATTY_D0150100,
+          SUM(CASE WHEN PYMT_DDUC_DIV_CD  = 'B0080030' AND  PAY_ITEM_CD = 'D0160100' AND PAY_REATTY_ADMNT_VAL = '0'
+        THEN  PYMT_DDUC_SUM 
+        ELSE 0 END) AS SUM_D0160100 , 
+          SUM(CASE WHEN PYMT_DDUC_DIV_CD  = 'B0080030' AND  PAY_ITEM_CD = 'D9600200' AND PAY_REATTY_ADMNT_VAL = '0'
+        THEN  PYMT_DDUC_SUM 
+        ELSE 0 END) AS  SUM_D9600200   ,
+          SUM(CASE WHEN PYMT_DDUC_DIV_CD  = 'B0080030' AND  PAY_ITEM_CD = 'D9500400' AND PAY_REATTY_ADMNT_VAL = '0'
+        THEN  PYMT_DDUC_SUM 
+        ELSE 0 END) AS SUM_D9500400  
+         	FROM PAYR0302
+			WHERE DPOB_CD=#dpobCd#
+				AND PYMT_YR_MNTH=#pymtYrMnth#
+				AND PAY_CD=#payCd#
+				AND PAYR_SEIL_NUM=#payrSeilNum#
+				AND SYSTEMKEY=#systemkey#  
+			GROUP BY DPOB_CD, PYMT_YR_MNTH, PAY_CD, 
+			   PAYR_SEIL_NUM, SYSTEMKEY) AA , PAYR0304 BB,  DLGN0100 FF ,PAYR0500 GG, PAYR0300 HH, PSNL0127 II, PSNL0100 JJ
+			WHERE AA.DPOB_CD = BB.DPOB_CD
+			AND  AA.PYMT_YR_MNTH = BB.PYMT_YR_MNTH
+			AND  AA.PAY_CD = BB.PAY_CD
+			AND  AA.PAYR_SEIL_NUM = BB.PAYR_SEIL_NUM
+			AND  AA.SYSTEMKEY = BB.SYSTEMKEY
+		    AND  AA.DPOB_CD = FF.DPOB_CD 
+            AND  AA.SYSTEMKEY= FF.SYSTEMKEY  
+            AND  AA.PYMT_YR_MNTH = FF.DILNLAZ_YR_MNTH 
+            AND  AA.PAY_CD =  FF.PAY_CD 
+            AND  AA.DPOB_CD = GG.DPOB_CD 
+            AND  AA.SYSTEMKEY= GG.SYSTEMKEY  
+            AND  AA.DPOB_CD = HH.DPOB_CD
+			AND  AA.PYMT_YR_MNTH = HH.PYMT_YR_MNTH
+			AND  AA.PAY_CD = HH.PAY_CD
+			AND  AA.PAYR_SEIL_NUM = HH.PAYR_SEIL_NUM
+			AND  AA.DPOB_CD = II.DPOB_CD(+) 
+            AND  AA.SYSTEMKEY = II.SYSTEMKEY(+)
+            AND  AA.DPOB_CD = JJ.DPOB_CD 
+            AND  AA.SYSTEMKEY = JJ.SYSTEMKEY 
+        ]]>
+	</select> 
+	
+	<resultMap id="infcPayr4200Payr0305Vo" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0305VO">  
+		    <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="pymtYrMnth" column="PYMT_YR_MNTH" columnIndex="2"/>
+		<result property="payCd" column="PAY_CD" columnIndex="3"/>
+		<result property="payrSeilNum" column="PAYR_SEIL_NUM" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/> 
+		<result property="mnlTxtbSimfTxs" column="MNL_TXTB_SIMF_TXS" columnIndex="6"/>
+		<result property="mnlLocTxAmt" column="MNL_LOC_TX_AMT" columnIndex="7"/>
+		<result property="mnlTxtbSimfYn" column="MNL_TXTB_SIMF_YN" columnIndex="8"/> 
+	</resultMap>
+	 
+	 
+	<select id="payCalculationDAO.selectPayr0302T0010100_S" resultMap="infcPayr4200Payr0305Vo">
+<![CDATA[
+				SELECT AA.DPOB_CD
+				, AA.PYMT_YR_MNTH
+				, AA.PAY_CD
+				, AA.PAYR_SEIL_NUM
+				, AA.SYSTEMKEY  
+                , NVL(BB.MNL_TXTB_SIMF_TXS,0) AS MNL_TXTB_SIMF_TXS
+        		, NVL(BB.MNL_LOC_TX_AMT,0) AS MNL_LOC_TX_AMT
+        		, (CASE WHEN NVL(BB.MNL_TXTB_SIMF_TXS,0) != 0 THEN AA.MNL_TXTB_SIMF_YN ELSE 'N' END) AS MNL_TXTB_SIMF_YN
+			FROM PAYR0305 AA ,
+			(SELECT 
+			    DPOB_CD, PYMT_YR_MNTH, PAY_CD, 
+			    PAYR_SEIL_NUM, SYSTEMKEY ,   
+			          SUM(CASE WHEN PYMT_DDUC_DIV_CD  = 'B0080040' AND  PAY_ITEM_CD = 'T0010100' 
+			        THEN  PYMT_DDUC_SUM 
+			        ELSE 0 END) AS  MNL_TXTB_SIMF_TXS   ,
+			          SUM(CASE WHEN PYMT_DDUC_DIV_CD  = 'B0080040' AND  PAY_ITEM_CD = 'T0020100'  
+			        THEN  PYMT_DDUC_SUM 
+			        ELSE 0 END) AS MNL_LOC_TX_AMT  
+			         	FROM PAYR0302
+						WHERE DPOB_CD=#dpobCd#
+							AND PYMT_YR_MNTH=#pymtYrMnth#
+							AND PAY_CD=#payCd#
+							AND PAYR_SEIL_NUM=#payrSeilNum#
+							AND SYSTEMKEY=#systemkey#  
+						GROUP BY DPOB_CD, PYMT_YR_MNTH, PAY_CD, 
+						   PAYR_SEIL_NUM, SYSTEMKEY) BB
+			 WHERE  AA.DPOB_CD = BB.DPOB_CD
+							AND  AA.PYMT_YR_MNTH = BB.PYMT_YR_MNTH
+							AND  AA.PAY_CD = BB.PAY_CD
+							AND  AA.PAYR_SEIL_NUM = BB.PAYR_SEIL_NUM
+							AND  AA.SYSTEMKEY = BB.SYSTEMKEY
+							 AND    AA.DPOB_CD=#dpobCd#
+								AND AA.PYMT_YR_MNTH=#pymtYrMnth#
+								AND AA.PAY_CD=#payCd#
+								AND AA.PAYR_SEIL_NUM=#payrSeilNum#
+								AND AA.SYSTEMKEY=#systemkey#
+				]]>
+</select> 
+   
+	<resultMap id="infcPayrYe169010" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgYe169010VO"> 
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>    
+		<result property="yrtxApptnYrMnth" column="YRTX_APPTN_YR_MNTH" columnIndex="5"/>
+		<result property="yrtxPrcsDt" column="YRTX_PRCS_DT" columnIndex="6"/>
+		<result property="yrtxPrcsYn" column="YRTX_PRCS_YN" columnIndex="7"/>
+		<result property="divdPymtDivCd" column="DIVD_PYMT_DIV_CD" columnIndex="8"/>
+		<result property="divdPymtDivSu" column="DIVD_PYMT_DIV_SU" columnIndex="9"/>
+		<result property="divdPymt" column="DIVD_PYMT" columnIndex="10"/> 
+		<result property="divdPymtAmnt" column="DIVD_PYMT_AMNT" columnIndex="11"/> 
+		<result property="subtEtax" column="SUBT_ETAX" columnIndex="12"/>
+		<result property="subtInhb" column="SUBT_INHB" columnIndex="13"/>
+		<result property="subtFafv" column="SUBT_FAFV" columnIndex="14"/>
+		<result property="subtAmsu" column="SUBT_AMSU" columnIndex="15"/>
+		<result property="subtEtax01" column="SUBT_ETAX01" columnIndex="16"/>
+		<result property="subtInhb01" column="SUBT_INHB01" columnIndex="17"/> 
+		<result property="subtAmsu01" column="SUBT_AMSU01" columnIndex="18"/>
+			<result property="yetaC159" column="YETA_C159" columnIndex="19"/>
+		<result property="yetaC160" column="YETA_C160" columnIndex="20"/>
+		<result property="yetaC161" column="YETA_C161" columnIndex="21"/>
+		<result property="yetaC162" column="YETA_C162" columnIndex="22"/>
+		<result property="yetaC163" column="YETA_C163" columnIndex="23"/>
+		<result property="yetaC164" column="YETA_C164" columnIndex="23"/> 
+	</resultMap>
+<!--  연말정산 결과 급여 반영  -->
+	<select id="payCalculationDAO.seletYeta2017ToPayrData_S" resultMap="infcPayrYe169010"> 
+	
+	<![CDATA[
+		    SELECT AA.DPOB_CD,
+                   AA.YRTX_BLGG_YR, 
+                   AA.SYSTEMKEY,
+                   AA.CLUT_SEPT_CD, 
+                   AA.YRTX_APPTN_YR_MNTH,                  
+                   AA.YRTX_PRCS_YN,                        
+                   AA.YRTX_PRCS_DT,                      
+                   AA.DIVD_PYMT_DIV_CD,                   
+                   (CASE WHEN AA.DIVD_PYMT_DIV_CD = 'B0300030'  THEN 3
+			          WHEN AA.DIVD_PYMT_DIV_CD = 'B0300020'  THEN 2 
+			          ELSE  1 END ) AS DIVD_PYMT_DIV_SU,
+                     NVL(AA.DIVD_PYMT,0) AS DIVD_PYMT,
+			        NVL(AA.DIVD_PYMT_AMNT,0) AS DIVD_PYMT_AMNT  ,
+                    DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_0C63  ,CC.YETA_0C63    ) AS YETA_0C63,           /*  C63_정산명세_총급여금액                          */ 
+               
+                    DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C162  ,CC.YETA_C162    ) AS YETA_C162,           /*  C162_주현근무지_기납부세액_소득세금액                */
+					DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C163  ,CC.YETA_C163    ) AS YETA_C163  ,         /*  C163_주현근무지_기납부세액_지방소득세금액              */
+					DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C164  ,CC.YETA_C164    ) AS YETA_C164 ,          /*  C164_주현근무지_기납부세액_농특세금액                */  
+                   
+                   DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C168  ,CC.YETA_C168 ) AS SUBT_ETAX,  /* column 차감징수_소득세 : SUBT_ETAX */ 
+                   DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C169  ,CC.YETA_C169 ) AS SUBT_INHB, /* column 차감징수_주민세_지방소득세 : SUBT_INHB */ 
+                   DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C170  ,CC.YETA_C170 ) AS SUBT_FAFV, /* column 차감징수_농특세 : SUBT_FAFV */ 
+                   
+                      (NVL( DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C168  ,CC.YETA_C168 ),0)
+     				+ NVL(DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C169  ,CC.YETA_C169 ),0) ) AS SUBT_AMSU,  /* column 차감징수_세액계 : SUBT_AMSU */ 
+                    
+                   
+                    DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C159  ,CC.YETA_C159    ) AS YETA_C159,          /*  C159_결정세액_소득세금액                          */
+					DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C160  ,CC.YETA_C160    ) AS YETA_C160,           /*  C160_결정세액_지방소득세금액                     */
+					DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C161  ,CC.YETA_C161    ) AS YETA_C161           /*  C161_결정세액_농특세금액                       */
+           
+               , (CASE WHEN AA.DIVD_PYMT_DIV_CD = 'B0300030' THEN TRUNC((DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C168  ,CC.YETA_C168 ) / 3),-1) 
+			           WHEN AA.DIVD_PYMT_DIV_CD = 'B0300020' THEN TRUNC((DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C168  ,CC.YETA_C168 ) / 2),-1) 
+			           ELSE  DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C168  ,CC.YETA_C168 ) END ) AS  SUBT_ETAX01 
+			   , (CASE WHEN AA.DIVD_PYMT_DIV_CD = 'B0300030' THEN TRUNC((DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C169  ,CC.YETA_C169 ) / 3),-1)   
+			           WHEN AA.DIVD_PYMT_DIV_CD = 'B0300020' THEN TRUNC((DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C169  ,CC.YETA_C169 ) / 2),-1)  
+			           ELSE  DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C169  ,CC.YETA_C169 ) END ) AS  SUBT_INHB01 
+			   , (CASE WHEN AA.DIVD_PYMT_DIV_CD = 'B0300030' THEN TRUNC((DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C168  ,CC.YETA_C168 ) / 3),-1) 
+			           WHEN AA.DIVD_PYMT_DIV_CD = 'B0300020' THEN TRUNC((DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C168  ,CC.YETA_C168 ) / 2),-1) 
+			           ELSE  DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C168  ,CC.YETA_C168 ) END ) 
+			           + (CASE WHEN AA.DIVD_PYMT_DIV_CD = 'B0300030' THEN TRUNC((NVL(DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C169  ,CC.YETA_C169 ),0) / 3),-1)   
+			           WHEN AA.DIVD_PYMT_DIV_CD = 'B0300020' THEN TRUNC((NVL(DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C169  ,CC.YETA_C169 ),0) / 2),-1)  
+			           ELSE  NVL(DECODE(AA01.C152_STD_TX_DDC_YN,'Y',CC01.YETA_STD_C169  ,CC.YETA_C169 ),0) END ) AS  SUBT_AMSU01                      
+			           
+             FROM  YE161010 AA, 
+                   YE161020 AA01, 
+                   YE169010 CC ,
+                   YE169010A CC01 
+             WHERE    CC.SYSTEMKEY = AA.SYSTEMKEY
+                   AND CC.YRTX_BLGG_YR = AA.YRTX_BLGG_YR
+                   AND CC.CLUT_SEPT_CD = AA.CLUT_SEPT_CD
+                   AND CC.DPOB_CD=AA.DPOB_CD   
+                    AND CC.SYSTEMKEY = AA01.SYSTEMKEY
+                   AND CC.YRTX_BLGG_YR = AA01.YRTX_BLGG_YR
+                   AND CC.CLUT_SEPT_CD = AA01.CLUT_SEPT_CD
+                   AND CC.DPOB_CD=AA01.DPOB_CD   
+                   AND AA.SYSTEMKEY  = CC01.SYSTEMKEY(+)
+                   AND AA.YRTX_BLGG_YR  = CC01.YRTX_BLGG_YR(+)
+                   AND AA.CLUT_SEPT_CD = CC01.CLUT_SEPT_CD(+) 
+                   AND  AA.DPOB_CD = CC01.DPOB_CD(+)     
+			       AND  AA.YRTX_APPTN_YR_MNTH IS NOT NULL 
+    			  AND AA.DPOB_CD=#dpobCd#
+				   AND AA.YRTX_BLGG_YR = (#yrtxBlggYr# - 1) 
+           		   AND AA.CLUT_SEPT_CD=#clutSeptCd#
+              	   AND AA.SYSTEMKEY=#systemkey#
+      				 
+		]]>			 
+	</select> 
+	
+	<update id="payCalculationDAO.updateYeta2017ToYe161010_S">
+		<![CDATA[
+			UPDATE YE161010
+			SET   YRTX_PRCS_DT=#yrtxPrcsDt#
+				, YRTX_PRCS_YN=#yrtxPrcsYn#
+				, DIVD_PYMT=#divdPymt# 
+				, DIVD_PYMT_AMNT=#divdPymtAmnt# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr# 
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	
+</sqlMap>

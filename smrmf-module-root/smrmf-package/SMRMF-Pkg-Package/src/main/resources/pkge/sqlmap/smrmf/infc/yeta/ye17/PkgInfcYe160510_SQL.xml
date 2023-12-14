@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgYe160510">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYe160510SrhVO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgYe160510SrhVO"/>
+	
+	<resultMap id="infcPkgYe160510" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgYe160510VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="whdgDebrBusoprRgstnum" column="WHDG_DEBR_BUSOPR_RGSTNUM" columnIndex="5"/>
+		<result property="freeDtyReduDivCd" column="FREE_DTY_REDU_DIV_CD" columnIndex="6"/>
+		<result property="freeDtyReduAggrSum" column="FREE_DTY_REDU_AGGR_SUM" columnIndex="7"/>
+		<result property="currPaeWorkPayrfgSum" column="CURR_PAE_WORK_PAYRFG_SUM" columnIndex="8"/>
+		<result property="prcspPayrfgSum" column="PRCSP_PAYRFG_SUM" columnIndex="9"/>
+		<result property="freetyReduTxChngSum" column="FREETY_REDU_TX_CHNG_SUM" columnIndex="10"/>
+		<result property="kybdr" column="KYBDR" columnIndex="11"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="12"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="13"/>
+		<result property="ismt" column="ISMT" columnIndex="14"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="15"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="16"/>
+	</resultMap>
+	
+	<insert id="infcPkgYe160510DAO.insertYe160510_S">
+		<![CDATA[
+			INSERT INTO YE160510 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , WHDG_DEBR_BUSOPR_RGSTNUM
+				  , FREE_DTY_REDU_DIV_CD
+				  , FREE_DTY_REDU_AGGR_SUM
+				  , CURR_PAE_WORK_PAYRFG_SUM
+				  , PRCSP_PAYRFG_SUM
+				  , FREETY_REDU_TX_CHNG_SUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #whdgDebrBusoprRgstnum#
+				  , #freeDtyReduDivCd#
+				  , #freeDtyReduAggrSum#
+				  , #currPaeWorkPayrfgSum#
+				  , #prcspPayrfgSum#
+				  , #freetyReduTxChngSum#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgYe160510DAO.updateYe160510_S">
+		<![CDATA[
+			UPDATE YE160510
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, WHDG_DEBR_BUSOPR_RGSTNUM=#whdgDebrBusoprRgstnum#
+				, FREE_DTY_REDU_DIV_CD=#freeDtyReduDivCd#
+				, FREE_DTY_REDU_AGGR_SUM=#freeDtyReduAggrSum#
+				, CURR_PAE_WORK_PAYRFG_SUM=#currPaeWorkPayrfgSum#
+				, PRCSP_PAYRFG_SUM=#prcspPayrfgSum#
+				, FREETY_REDU_TX_CHNG_SUM=#freetyReduTxChngSum#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND WHDG_DEBR_BUSOPR_RGSTNUM=#whdgDebrBusoprRgstnum#
+				]]>
+	</update>
+	
+	<delete id="infcPkgYe160510DAO.deleteYe160510_S">
+		<![CDATA[
+			DELETE FROM YE160510 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND WHDG_DEBR_BUSOPR_RGSTNUM=#whdgDebrBusoprRgstnum#
+				]]>
+	</delete>
+	
+	<select id="infcPkgYe160510DAO.selectYe160510_S" resultMap="infcPkgYe160510">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, WHDG_DEBR_BUSOPR_RGSTNUM
+				, FREE_DTY_REDU_DIV_CD
+				, FREE_DTY_REDU_AGGR_SUM
+				, CURR_PAE_WORK_PAYRFG_SUM
+				, PRCSP_PAYRFG_SUM
+				, FREETY_REDU_TX_CHNG_SUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE160510
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND WHDG_DEBR_BUSOPR_RGSTNUM=#whdgDebrBusoprRgstnum#
+				]]>
+	</select>
+	
+	<select id="infcPkgYe160510DAO.selectYe160510List_D" parameterClass="infcPkgYe160510SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, WHDG_DEBR_BUSOPR_RGSTNUM
+								, FREE_DTY_REDU_DIV_CD
+								, FREE_DTY_REDU_AGGR_SUM
+								, CURR_PAE_WORK_PAYRFG_SUM
+								, PRCSP_PAYRFG_SUM
+								, FREETY_REDU_TX_CHNG_SUM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE160510
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, WHDG_DEBR_BUSOPR_RGSTNUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgYe160510DAO.selectYe160510ListTotCnt_S" parameterClass="infcPkgYe160510SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE160510
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

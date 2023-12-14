@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgYe166040_2020">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYe166040Srh_2020_VO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2020.InfcPkgYe166040Srh_2020_VO"/>
+	
+	<resultMap id="infcPkgYe166040_2020" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2020.InfcPkgYe166040_2020_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="2"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="vntSeilNum" column="VNT_SEIL_NUM" columnIndex="5"/>
+		<result property="resid" column="RESID" columnIndex="6"/>
+		<result property="name" column="NAME" columnIndex="7"/>
+		<result property="busnid" column="BUSNID" columnIndex="8"/>
+		<result property="tradeNm" column="TRADE_NM" columnIndex="9"/>
+		<result property="secuNo" column="SECU_NO" columnIndex="10"/>
+		<result property="fundNm" column="FUND_NM" columnIndex="11"/>
+		<result property="regDt" column="REG_DT" columnIndex="12"/>
+		<result property="vntKrnCd" column="VNT_KRN_CD" columnIndex="13"/>
+		<result property="vntAsctClCd" column="VNT_ASCT_CL_CD" columnIndex="14"/>
+		<result property="comCd" column="COM_CD" columnIndex="15"/>
+		<result property="vntSum" column="VNT_SUM" columnIndex="16"/>
+		<result property="kybdr" column="KYBDR" columnIndex="17"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="18"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="19"/>
+		<result property="ismt" column="ISMT" columnIndex="20"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="21"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="22"/>
+	</resultMap>
+	
+<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직  시작 ++++++++++++++++++++++++++++++ -->
+
+	<delete id="infcPkgYe166040_2020_DAO.PdfYeta5200_Q101Y_YE166040_Delete_S">
+		<![CDATA[
+			DELETE FROM YE166040 AA
+						WHERE AA.DPOB_CD=#dpobCd#
+								AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+								AND AA.CLUT_SEPT_CD=#clutSeptCd#
+								AND AA.SYSTEMKEY=#systemkey#
+								AND AA.VNT_KRN_CD = 'Y0140000'  /* 국세청 */ 
+								AND EXISTS ( SELECT * FROM  PDF_Q101Y BB
+			 							   WHERE BB.DPOB_CD= AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR= AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD= AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY= AA.SYSTEMKEY
+											AND BB.RESID = AA.RESID)
+				]]>
+				<isNotEmpty prepend="AND" property="resid" >
+                         RESID=#resid#
+                </isNotEmpty> 
+				 				
+	</delete>
+	
+		<insert id="infcPkgYe166040_2020_DAO.PdfYeta5200_Q101Y_YE166040_Insert_S">
+		<![CDATA[
+			INSERT INTO YE166040 (DPOB_CD,
+			                      YRTX_BLGG_YR,
+			                      CLUT_SEPT_CD,
+			                      SYSTEMKEY,
+			                      VNT_SEIL_NUM,
+			                      RESID,
+			                      NAME,
+			                      BUSNID,
+			                      TRADE_NM,
+			                      SECU_NO,
+			                      FUND_NM,
+			                      REG_DT,
+			                      VNT_KRN_CD,
+			                      VNT_ASCT_CL_CD,
+			                      COM_CD,
+			                      VNT_SUM,
+			                      KYBDR,
+			                      INPT_DT,
+			                      INPT_ADDR,
+			                      ISMT,
+			                      REVN_DT,
+			                      REVN_ADDR)
+			   (SELECT AC02.DPOB_CD,
+			           AC02.YRTX_BLGG_YR,
+			           AC02.CLUT_SEPT_CD,
+			           AC02.SYSTEMKEY,
+			           ( ( ROW_NUMBER() OVER (ORDER BY AC02.DPOB_CD ASC,
+											           AC02.YRTX_BLGG_YR ASC,
+											           AC02.CLUT_SEPT_CD ASC,
+											           AC02.SYSTEMKEY ASC))  + 
+                               (SELECT (NVL (MAX (VNT_SEIL_NUM), 0) + 1)
+					              FROM YE166040 AA
+					             WHERE     DPOB_CD = #dpobCd#
+					                   AND YRTX_BLGG_YR = #yrtxBlggYr#
+					                   AND CLUT_SEPT_CD = #clutSeptCd#
+					                   AND SYSTEMKEY = #systemkey#))   AS ROWCNT  ,
+			           AC03.RESID,
+			           AC03.NAME,
+			           AC03.BUSNID,
+			           AC03.TRADE_NM,
+			           AC03.SECU_NO,
+			           AC03.FUND_NM,
+			           AC03.REG_DT,
+			           'Y0140000',                                                /* 국세청 */
+			           AC03.VNT_ASCT_CL_CD,
+			           AC03.COM_CD,
+			           AC03.VNT_SUM,
+			           #kybdr#,
+			           TO_CHAR (SYSDATE, 'YYYYMMDDHHMISS'),
+			           #inptAddr#,
+			           #ismt#,
+			           TO_CHAR (SYSDATE, 'YYYYMMDDHHMISS'),
+			           #revnAddr#
+			      FROM YE161030 AC02,
+			           (  SELECT AA.DPOB_CD,
+			                     AA.YRTX_BLGG_YR,
+			                     AA.CLUT_SEPT_CD,
+			                     AA.SYSTEMKEY,
+			                     AA.SECU_NO,
+			                     AA.DAT_CD,
+			                     AA.RESID,
+			                     AA.NAME,
+			                     AA.BUSNID,
+			                     AA.TRADE_NM,
+			                     AA.FUND_NM,
+			                     AA.REG_DT,
+			                     AA.VNT_ASCT_CL_CD,
+			                     AA.COM_CD,
+			                     SUM (AA.VNT_SUM) AS VNT_SUM,
+			                     COUNT (AA.RESID) AS SCNT
+			                FROM PDF_Q101Y AA
+			               WHERE     AA.DPOB_CD = #dpobCd#
+			                     AND AA.YRTX_BLGG_YR = #yrtxBlggYr#
+			                     AND AA.CLUT_SEPT_CD = #clutSeptCd#
+			                     AND AA.SYSTEMKEY = #systemkey#
+			                     AND AA.PDF_DAT_APP_YN = 'Y'
+			                     AND EXISTS
+			                            (SELECT *
+			                               FROM YE161030 AC01
+			                              WHERE     AC01.DPOB_CD = AA.DPOB_CD
+			                                    AND AC01.YRTX_BLGG_YR = AA.YRTX_BLGG_YR
+			                                    AND AC01.CLUT_SEPT_CD = AA.CLUT_SEPT_CD
+			                                    AND AC01.SYSTEMKEY = AA.SYSTEMKEY
+			                                    AND AC01.TXPR_DSCM_NO_CNTN = AA.RESID)
+			            GROUP BY AA.DPOB_CD,
+			                     AA.YRTX_BLGG_YR,
+			                     AA.CLUT_SEPT_CD,
+			                     AA.SYSTEMKEY,
+			                     AA.SECU_NO,
+			                     AA.DAT_CD,
+			                     AA.RESID,
+			                     AA.NAME,
+			                     AA.BUSNID,
+			                     AA.TRADE_NM,
+			                     AA.FUND_NM,
+			                     AA.REG_DT,
+			                     AA.VNT_ASCT_CL_CD,
+			                     AA.COM_CD) AC03
+			     WHERE     AC02.DPOB_CD = #dpobCd#
+			           AND AC02.YRTX_BLGG_YR = #yrtxBlggYr#
+			           AND AC02.CLUT_SEPT_CD = #clutSeptCd#
+			           AND AC02.SYSTEMKEY = #systemkey#
+			           AND AC02.DPOB_CD = AC03.DPOB_CD
+			           AND AC02.YRTX_BLGG_YR = AC03.YRTX_BLGG_YR
+			           AND AC02.CLUT_SEPT_CD = AC03.CLUT_SEPT_CD
+			           AND AC02.SYSTEMKEY = AC03.SYSTEMKEY
+			           AND AC02.TXPR_DSCM_NO_CNTN = AC03.RESID)
+		]]>
+	</insert>
+	
+   <!-- A_실손보험금지급명세 -->	
+	<insert id="infcPkgYe166040_2020_DAO.incTaxDeducDec_nts_Yeta2020_Ye166040_Insert_S">
+		<![CDATA[
+			INSERT INTO YE166040 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , MDXPS_SEIL_NUM
+				  , MDXPS_VVAL_KRN_CD
+				  , BSNO_ENC_CNTN
+				  , RESNO_ENC_CNTN
+				  , YN
+				  , PLYM_NM
+				  , MDXPS_PRF_CL_CD
+				  , SCNT
+				  , USE_AMT
+				  , YN2
+				  , YN3
+				  , YN4
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+				  
+				 (
+				 SELECT 
+						DPOB_CD, YRTX_BLGG_YR, 
+						   CLUT_SEPT_CD
+						   , SYSTEMKEY
+					 , ( ( ROW_NUMBER() OVER (ORDER BY DPOB_CD ASC,
+											           YRTX_BLGG_YR ASC,
+											           CLUT_SEPT_CD ASC,
+											           SYSTEMKEY ASC))  + 
+                              (SELECT (NVL(MAX(MDXPS_SEIL_NUM),0) +  1) AS MDXPS_SEIL_NUM 
+				                FROM YE166040  AA 
+				                WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#) )  
+								
+						   , 'Y0140000'  /* 국세청 */ 
+						   , BSNO_ENC_CNTN
+						    , RESNO_ENC_CNTN
+						   , DECODE(YN,'여','1','0')
+						    , PLYM_NM
+						 ,  (CASE WHEN TRIM(MDXPS_PRF_CL_CD) = '1' THEN 'Y0060001'
+					    WHEN TRIM(MDXPS_PRF_CL_CD) = '2' THEN 'Y0060002'
+					     WHEN TRIM(MDXPS_PRF_CL_CD) = '3' THEN 'Y0060003'
+					      WHEN TRIM(MDXPS_PRF_CL_CD) = '4' THEN 'Y0060004' 
+					      ELSE 'Y0060005' END)  
+						    , SCNT
+						    , USE_AMT
+						    , DECODE(YN2,'여','1','')
+						    , DECODE(YN3,'여','1','')
+						    , DECODE(YN4,'여','1','') 
+						        , #kybdr#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #inptAddr#
+				   , #ismt#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #revnAddr#   
+						FROM  YE167320
+				   WHERE DPOB_CD=#dpobCd#
+					   AND YRTX_BLGG_YR=#yrtxBlggYr#
+					   AND CLUT_SEPT_CD=#clutSeptCd#
+					   AND SYSTEMKEY=#systemkey# 
+						  
+					)
+				  
+		]]>
+	</insert>  
+	 
+	
+<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직  종료 ++++++++++++++++++++++++++++++ -->
+	
+	
+	<insert id="infcPkgYe166040_2020_DAO.insertYe166040_S">
+		<![CDATA[
+			INSERT INTO YE166040 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , RESNO_ENC_CNTN
+				  , YN
+				  , BSNO_ENC_CNTN
+				  , PLYM_NM
+				  , MDXPS_PRF_CL_CD
+				  , SCNT
+				  , USE_AMT
+				  , YN2
+				  , YN3
+				  , YN4
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #resnoEncCntn#
+				  , #yn#
+				  , #bsnoEncCntn#
+				  , #plymNm#
+				  , #mdxpsPrfClCd#
+				  , #scnt#
+				  , #useAmt#
+				  , #yn2#
+				  , #yn3#
+				  , #yn4#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgYe166040_2020_DAO.updateYe166040_S">
+		<![CDATA[
+			UPDATE YE166040
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, RESNO_ENC_CNTN=#resnoEncCntn#
+				, YN=#yn#
+				, BSNO_ENC_CNTN=#bsnoEncCntn#
+				, PLYM_NM=#plymNm#
+				, MDXPS_PRF_CL_CD=#mdxpsPrfClCd#
+				, SCNT=#scnt#
+				, USE_AMT=#useAmt#
+				, YN2=#yn2#
+				, YN3=#yn3#
+				, YN4=#yn4#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND RESNO_ENC_CNTN=#resnoEncCntn#
+				]]>
+	</update>
+	
+	<delete id="infcPkgYe166040_2020_DAO.deleteYe166040_S">
+		<![CDATA[
+			DELETE FROM YE166040 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND RESNO_ENC_CNTN=#resnoEncCntn#
+				]]>
+	</delete>
+	
+	<select id="infcPkgYe166040_2020_DAO.selectYe166040_S" resultMap="infcPkgYe166040_2020">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, RESNO_ENC_CNTN
+				, YN
+				, BSNO_ENC_CNTN
+				, PLYM_NM
+				, MDXPS_PRF_CL_CD
+				, SCNT
+				, USE_AMT
+				, YN2
+				, YN3
+				, YN4
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE166040
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND RESNO_ENC_CNTN=#resnoEncCntn#
+				]]>
+	</select>
+	
+	<select id="infcPkgYe166040_2020_DAO.selectYe166040List_D" parameterClass="infcPkgYe166040Srh_2020_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, RESNO_ENC_CNTN
+								, YN
+								, BSNO_ENC_CNTN
+								, PLYM_NM
+								, MDXPS_PRF_CL_CD
+								, SCNT
+								, USE_AMT
+								, YN2
+								, YN3
+								, YN4
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE166040
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, RESNO_ENC_CNTN DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgYe166040_2020_DAO.selectYe166040ListTotCnt_S" parameterClass="infcPkgYe166040Srh_2020_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE166040
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

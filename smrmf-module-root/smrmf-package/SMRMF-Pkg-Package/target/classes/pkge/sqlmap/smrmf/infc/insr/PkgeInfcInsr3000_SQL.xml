@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcInsr3000">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgInsr3000SerarchVO" type="com.app.smrmf.infc.insurance.server.vo.InfcPkgInsr3000SrhVO"/>
+	
+	<resultMap id="infcPkgInsr3000" class="com.app.smrmf.infc.insurance.server.vo.InfcPkgInsr3000VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<!-- <result property="hlthInsrSeilNum" column="HLTH_INSR_SEIL_NUM" columnIndex="3"/>  -->
+		<result property="emymtSeilNum" column="EMYMT_SEIL_NUM" columnIndex="3"/>
+		<result property="socInsrDducEthdCd" column="SOC_INSR_DDUC_ETHD_CD" columnIndex="4"/>
+		<result property="hlthInsrAqtnDt" column="HLTH_INSR_AQTN_DT" columnIndex="5"/>
+		<result property="hlthInsrLssDt" column="HLTH_INSR_LSS_DT" columnIndex="6"/>
+		<result property="kybdr" column="KYBDR" columnIndex="7"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="8"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="9"/>
+		<result property="ismt" column="ISMT" columnIndex="10"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="11"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="12"/>
+	</resultMap>
+	
+	
+	
+	<insert id="infcPkgInsr3000DAO.insertInsr3000_NOT_EXISTS">
+		<![CDATA[
+		INSERT INTO INSR3000 (DPOB_CD, SYSTEMKEY, EMYMT_SEIL_NUM)
+		   SELECT AA.DPOB_CD, AA.SYSTEMKEY, AA.EMYMT_SEIL_NUM
+		     FROM PSNL0110 AA
+		    WHERE AA.EMYMT_SEIL_NUM = ( SELECT MAX (BB.EMYMT_SEIL_NUM)
+							                    FROM PSNL0110 BB
+							                   WHERE     AA.DPOB_CD = BB.DPOB_CD
+							                         AND AA.SYSTEMKEY = BB.SYSTEMKEY
+							                         AND EMYMT_TYP_CD = 'A0420010')
+				AND NOT EXISTS ( SELECT 1
+									FROM INSR3000 NN
+								 WHERE     NN.DPOB_CD = AA.DPOB_CD
+									AND NN.SYSTEMKEY = AA.SYSTEMKEY
+									AND NN.EMYMT_SEIL_NUM = AA.EMYMT_SEIL_NUM
+								)
+		]]>
+	</insert>
+	
+	<insert id="infcPkgInsr3000DAO.insertInsr3000_S">
+		<![CDATA[
+			INSERT INTO INSR3000 
+				( DPOB_CD
+				  , SYSTEMKEY 
+				  , EMYMT_SEIL_NUM
+				  , SOC_INSR_DDUC_ETHD_CD
+				  , HLTH_INSR_AQTN_DT
+				  , HLTH_INSR_LSS_DT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey# 
+				  , #emymtSeilNum#
+				  , #socInsrDducEthdCd#
+				  , #hlthInsrAqtnDt#
+				  , #hlthInsrLssDt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgInsr3000DAO.updateInsr3000_S">
+		<![CDATA[
+			UPDATE INSR3000
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey# 
+				, EMYMT_SEIL_NUM=#emymtSeilNum#
+				, SOC_INSR_DDUC_ETHD_CD=#socInsrDducEthdCd#
+				, HLTH_INSR_AQTN_DT=#hlthInsrAqtnDt#
+				, HLTH_INSR_LSS_DT=#hlthInsrLssDt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND  EMYMT_SEIL_NUM=#emymtSeilNum#
+				]]>
+	</update>
+	
+	<delete id="infcPkgInsr3000DAO.deleteInsr3000_S">
+		<![CDATA[
+			DELETE FROM INSR3000 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND  EMYMT_SEIL_NUM=#emymtSeilNum#
+				]]>
+	</delete>
+	
+	<select id="infcPkgInsr3000DAO.selectInsr3000_S" resultMap="infcPkgInsr3000">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY 
+				, EMYMT_SEIL_NUM
+				, SOC_INSR_DDUC_ETHD_CD
+				, HLTH_INSR_AQTN_DT
+				, HLTH_INSR_LSS_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM INSR3000
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND  EMYMT_SEIL_NUM=#emymtSeilNum#
+				]]>
+	</select>
+	
+	<select id="infcPkgInsr3000DAO.selectInsr3000List_D" parameterClass="infcPkgInsr3000SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY 
+								, EMYMT_SEIL_NUM
+								, SOC_INSR_DDUC_ETHD_CD
+								, HLTH_INSR_AQTN_DT
+								, HLTH_INSR_LSS_DT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM INSR3000
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, EMYMT_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgInsr3000DAO.selectInsr3000ListTotCnt_S" parameterClass="infcPkgInsr3000SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM INSR3000
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+	<select id="infcPkgInsr3000DAO.selectInsr3000ListTotCnt" parameterClass="infcPkgInsr3000SerarchVO" resultClass="int">
+		SELECT COUNT(*) totcnt
+		FROM INSR3000
+		WHERE 
+		<isNotNull property="dpobCd">
+			<isNotEmpty property="dpobCd" >
+				DPOB_CD=#dpobCd# 
+		 	</isNotEmpty> 
+		 </isNotNull> 
+		<isNotNull property="systemkey">
+			<isNotEmpty property="systemkey" >
+				AND SYSTEMKEY=#systemkey# 
+			</isNotEmpty> 
+		</isNotNull> 
+	</select>
+	 
+</sqlMap>

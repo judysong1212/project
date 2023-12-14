@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0120">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="infcPsnl0120Dto" type="com.app.exterms.personal.client.dto.InfcPsnl0120DTO"/>
+	<typeAlias  alias="infcPsnl0120SerarchVO" type="com.app.exterms.personal.server.vo.InfcPsnl0120DefaultVO"/>
+	
+	<resultMap id="infcPsnl0120" class="com.app.exterms.personal.server.vo.InfcPsnl0120VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="eduSeilNum" column="EDU_SEIL_NUM" columnIndex="3"/>
+		<result property="eduBgnnDt" column="EDU_BGNN_DT" columnIndex="4"/>
+		<result property="eduEndDt" column="EDU_END_DT" columnIndex="5"/>
+		<result property="eduCmpteTm" column="EDU_CMPTE_TM" columnIndex="6"/>
+		<result property="eduKndNm" column="EDU_KND_NM" columnIndex="7"/>
+		<result property="eduIstutNm" column="EDU_ISTUT_NM" columnIndex="8"/>
+		<result property="eduNoteCtnt" column="EDU_NOTE_CTNT" columnIndex="9"/>
+		<result property="kybdr" column="KYBDR" columnIndex="10"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="11"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="12"/>
+		<result property="ismt" column="ISMT" columnIndex="13"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="14"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="15"/>
+	</resultMap>
+	<insert id="infcPsnl0120DAO.insertPsnl0120Excel" parameterClass="infcPsnl0120Dto">
+		<![CDATA[
+			INSERT INTO PSNL0120 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , EDU_SEIL_NUM
+				  , EDU_BGNN_DT
+				  , EDU_END_DT
+				  , EDU_CMPTE_TM
+				  , EDU_KND_NM
+				  , EDU_ISTUT_NM
+				  , EDU_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( (select DPOB_CD from infcPsnl0100 WHERE RESN_REGN_NUM = replace(#rrn#,'-','') and rownum = 1)
+				  , (select systemkey from infcPsnl0100 WHERE RESN_REGN_NUM = replace(#rrn#,'-','') and rownum = 1)
+				  , (select NVL(MAX(EDU_SEIL_NUM)+1,1) from PSNL0120 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = (select systemkey from infcPsnl0100 WHERE dpob_cd = #dpobCd# and RESN_REGN_NUM = replace(#rrn#,'-','') and rownum = 1)) 
+				  , TO_CHAR(#eduBgnnDt#, 'yyyymmdd')
+				  , TO_CHAR(#eduEndDt#, 'yyyymmdd')
+				  , #eduCmpteTm#
+				  , #eduKndNm#
+				  , #eduIstutNm#
+				  , #eduNoteCtnt#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	<insert id="infcPsnl0120DAO.insertPsnl0120" parameterClass="infcPsnl0120Dto">
+		<![CDATA[
+			INSERT INTO PSNL0120 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , EDU_SEIL_NUM
+				  , EDU_BGNN_DT
+				  , EDU_END_DT
+				  , EDU_CMPTE_TM
+				  , EDU_KND_NM
+				  , EDU_ISTUT_NM
+				  , EDU_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , (select NVL(MAX(EDU_SEIL_NUM)+1,1) from PSNL0120 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#) 
+				  , TO_CHAR(#eduBgnnDt#, 'yyyymmdd')
+				  , TO_CHAR(#eduEndDt#, 'yyyymmdd')
+				  , #eduCmpteTm#
+				  , #eduKndNm#
+				  , #eduIstutNm#
+				  , #eduNoteCtnt#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPsnl0120DAO.updatePsnl0120" parameterClass="infcPsnl0120Dto">
+		
+			UPDATE PSNL0120
+			SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				<isNotNull property="eduBgnnDt"><isNotEmpty property="eduBgnnDt">, EDU_BGNN_DT=TO_CHAR(#eduBgnnDt#, 'yyyymmdd')</isNotEmpty></isNotNull>
+				<isNotNull property="eduEndDt"><isNotEmpty property="eduEndDt">, EDU_END_DT=TO_CHAR(#eduEndDt#, 'yyyymmdd')</isNotEmpty></isNotNull>
+				<isNotNull property="eduCmpteTm"><isNotEmpty property="eduCmpteTm">, EDU_CMPTE_TM=#eduCmpteTm#</isNotEmpty></isNotNull>
+				<isNotNull property="eduKndNm"><isNotEmpty property="eduKndNm">, EDU_KND_NM=#eduKndNm#</isNotEmpty></isNotNull>
+				<isNotNull property="eduIstutNm"><isNotEmpty property="eduIstutNm">, EDU_ISTUT_NM=#eduIstutNm#</isNotEmpty></isNotNull>
+				<isNotNull property="eduNoteCtnt"><isNotEmpty property="eduNoteCtnt">, EDU_NOTE_CTNT=#eduNoteCtnt#</isNotEmpty></isNotNull>
+				<isNotNull property="ismt"><isNotEmpty property="ismt">, ISMT=#ismt#</isNotEmpty></isNotNull>
+				<isNotNull property="revnAddr"><isNotEmpty property="revnAddr">, REVN_ADDR=#revnAddr#</isNotEmpty></isNotNull>
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				AND EDU_SEIL_NUM=#eduSeilNum#
+		
+	</update>
+	
+	<delete id="infcPsnl0120DAO.deletePsnl0120" parameterClass="infcPsnl0120Dto">
+		<![CDATA[
+			DELETE FROM PSNL0120 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EDU_SEIL_NUM=#eduSeilNum#
+				]]>
+	</delete>
+	
+	<select id="infcPsnl0120DAO.selectPsnl0120" resultClass="egovMap" parameterClass="hashMap">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, EDU_SEIL_NUM
+				, TO_DATE( EDU_BGNN_DT ,'YYYYMMDD') EDU_BGNN_DT
+				, TO_DATE( EDU_END_DT ,'YYYYMMDD') EDU_END_DT
+				, EDU_CMPTE_TM
+				, EDU_KND_NM
+				, EDU_ISTUT_NM
+				, EDU_NOTE_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PSNL0120
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				
+				]]>
+		<isNotNull property="eduSeilNum">
+		    <isNotEmpty property="eduSeilNum">
+				AND EDU_SEIL_NUM=#eduSeilNum#		        
+		    </isNotEmpty>
+		</isNotNull>
+	</select>
+	
+
+</sqlMap>
