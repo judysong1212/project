@@ -1,0 +1,976 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PsnlPage">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="psnlPageSerarchVO" type="com.web.exterms.mypage.psnl.service.PsnlPageDefaultVO"/>
+	<typeAlias  alias="psnlProofAccept" type="com.web.exterms.mypage.iucert.service.PsnlProofAcceptVO"/>
+	<typeAlias  alias="psnlPageVo" type="com.web.exterms.mypage.psnl.service.PsnlPageVO"/>
+	
+	<resultMap id="psnlPage" class="com.web.exterms.mypage.psnl.service.PsnlPageVO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="3"/>
+		<result property="engNm" column="ENG_NM" columnIndex="4"/>
+		<result property="chinCharNm" column="CHIN_CHAR_NM" columnIndex="5"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="6"/>
+		<result property="sxDivCd" column="SX_DIV_CD" columnIndex="7"/>
+		<result property="yoobhMnthDay" column="YOOBH_MNTH_DAY" columnIndex="8"/>
+		<result property="sclcDivCd" column="SCLC_DIV_CD" columnIndex="9"/>
+		<result property="natnCd" column="NATN_CD" columnIndex="10"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="11"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="12"/>
+		<result property="currAffnDeptCd" column="CURR_AFFN_DEPT_CD" columnIndex="13"/>
+		<result property="repbtyBusinDivCd" column="REPBTY_BUSIN_DIV_CD" columnIndex="14"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="15"/>
+		<result property="odtyCd" column="ODTY_CD" columnIndex="16"/>
+		<result property="frstEmymtDt" column="FRST_EMYMT_DT" columnIndex="17"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="18"/>
+		<result property="emymtBgnnDt" column="EMYMT_BGNN_DT" columnIndex="19"/>
+		<result property="emymtEndDt" column="EMYMT_END_DT" columnIndex="20"/>
+		<result property="pyspCd" column="PYSP_CD" columnIndex="21"/>
+		<result property="hdofcCodtnCd" column="HDOFC_CODTN_CD" columnIndex="22"/>
+		<result property="retryDt" column="RETRY_DT" columnIndex="23"/>
+		<result property="retryReasCtnt" column="RETRY_REAS_CTNT" columnIndex="24"/>
+		<result property="frgnrDivCd" column="FRGNR_DIV_CD" columnIndex="25"/>
+		<result property="psptNum" column="PSPT_NUM" columnIndex="26"/>
+		<result property="styBgnnDt" column="STY_BGNN_DT" columnIndex="27"/>
+		<result property="styEndDt" column="STY_END_DT" columnIndex="28"/>
+		<result property="endSchl" column="END_SCHL" columnIndex="29"/>
+		<result property="endDegrDivCd" column="END_DEGR_DIV_CD" columnIndex="30"/>
+		<result property="pmtnScduDt" column="PMTN_SCDU_DT" columnIndex="31"/>
+		<result property="pyspPrmtnScduDt" column="PYSP_PRMTN_SCDU_DT" columnIndex="32"/>
+		<result property="reymnScduDt" column="REYMN_SCDU_DT" columnIndex="33"/>
+		<result property="logSvcYrNumCd" column="LOG_SVC_YR_NUM_CD" columnIndex="34"/>
+		<result property="logSvcMnthIcmCd" column="LOG_SVC_MNTH_ICM_CD" columnIndex="35"/>
+		<result property="currPyspAppmtDt" column="CURR_PYSP_APPMT_DT" columnIndex="36"/>
+		<result property="currDeptAppmtDt" column="CURR_DEPT_APPMT_DT" columnIndex="37"/>
+		<result property="pernNoteCtnt" column="PERN_NOTE_CTNT" columnIndex="38"/>
+		<result property="kybdr" column="KYBDR" columnIndex="39"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="40"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="41"/>
+		<result property="ismt" column="ISMT" columnIndex="42"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="43"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="44"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="45"/>
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="46"/>
+	</resultMap>
+	
+	<resultMap id="psnlPageSym" class="com.web.exterms.mypage.psnl.service.PsnlPageVO">
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="1"/>
+		<result property="picFlnm" column="PIC_FLNM" columnIndex="2"/>
+		<result property="dpobNm" column="DPOB_NM" columnIndex="3"/>
+		<result property="currAffnDeptNm" column="CURR_AFFN_DEPT_NM" columnIndex="4"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="5"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="6"/>
+		<result property="engNm" column="ENG_NM" columnIndex="7"/>
+		<result property="chinCharNm" column="CHIN_CHAR_NM" columnIndex="8"/>
+		<result property="currPaeWorkNm" column="CURR_PAE_WORK_NM" columnIndex="9"/>
+		<result property="businNm" column="BUSIN_NM" columnIndex="10"/>
+		<result property="typOccuNm" column="TYP_OCCU_NM" columnIndex="11"/>
+		<result property="dtilOccuClsDivNm" column="DTIL_OCCU_CLS_DIV_NM" columnIndex="12"/>
+		<result property="emymtDivNm" column="EMYMT_DIV_NM" columnIndex="13"/>
+		<result property="hdofcCodtnNm" column="HDOFC_CODTN_NM" columnIndex="14"/>
+		<result property="frstEmymtDt" column="FRST_EMYMT_DT" columnIndex="15"/>
+		<result property="currDeptAppmtDt" column="CURR_DEPT_APPMT_DT" columnIndex="16"/>
+		<result property="retryDt" column="RETRY_DT" columnIndex="17"/>
+		<result property="retryReasCtnt" column="RETRY_REAS_CTNT" columnIndex="18"/>
+		<result property="logSvcYrNumNm" column="LOG_SVC_YR_NUM_NM" columnIndex="19"/>
+		<result property="husRoadNmZpcd" column="HUS_ROAD_NM_ZPCD" columnIndex="20"/>
+		<result property="husRoadNmFndtnAddr" column="HUS_ROAD_NM_FNDTN_ADDR" columnIndex="21"/>
+		<result property="husRoadNmDtlPatrAddr" column="HUS_ROAD_NM_DTL_PATR_ADDR" columnIndex="22"/>
+		<result property="husZpcd" column="HUS_ZPCD" columnIndex="23"/>
+		<result property="husFndtnAddr" column="HUS_FNDTN_ADDR" columnIndex="24"/>
+		<result property="husDtlPatrAddr" column="HUS_DTL_PATR_ADDR" columnIndex="25"/>
+		<result property="hfmlyRelaNm" column="HFMLY_RELA_NM" columnIndex="26"/>
+		<result property="husPhnNum" column="HUS_PHN_NUM" columnIndex="27"/>
+		<result property="cellPhneNum" column="CELL_PHNE_NUM" columnIndex="28"/>
+		<result property="emailAddr" column="EMAIL_ADDR" columnIndex="29"/>
+		<result property="pernNoteCtnt" column="PERN_NOTE_CTNT" columnIndex="30"/>
+		<result property="baseArNum" column="BASE_AR_NUM" columnIndex="31"/>
+		<result property="hfmlyNm" column="HFMLY_NM" columnIndex="32"/>
+	</resultMap>
+	
+	<resultMap id="psnlProofAccept" class="com.web.exterms.mypage.iucert.service.PsnlProofAcceptVO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="prfIssNum" column="PRF_ISS_NUM" columnIndex="2"/>
+		<result property="certcDivCd" column="CERTC_DIV_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="certcIssDt" column="CERTC_ISS_DT" columnIndex="5"/>
+		<result property="issNumCpis" column="ISS_NUM_CPIS" columnIndex="6"/>
+		<result property="issPrpseCtnt" column="ISS_PRPSE_CTNT" columnIndex="7"/>
+		<result property="issIstutNm" column="ISS_ISTUT_NM" columnIndex="8"/>
+		<result property="retryReasCtnt" column="RETRY_REAS_CTNT" columnIndex="9"/>
+		<result property="issAppyDt" column="ISS_APPY_DT" columnIndex="10"/>
+		<result property="issAppbnDt" column="ISS_APPBN_DT" columnIndex="11"/>
+		<result property="issCodtnDivCd" column="ISS_CODTN_DIV_CD" columnIndex="12"/>
+		<result property="issCodtnEmpNum" column="ISS_CODTN_EMP_NUM" columnIndex="13"/>
+		<result property="issYn" column="ISS_YN" columnIndex="14"/>
+		<result property="certcIssDelYn" column="CERTC_ISS_DEL_YN" columnIndex="15"/>
+		<result property="kybdr" column="KYBDR" columnIndex="16"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="17"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="18"/>
+		<result property="ismt" column="ISMT" columnIndex="19"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="20"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="21"/>
+		<result property="rowcount" column="ROWCOUNT" columnIndex="22"/>
+		<result property="currentpage" column="CURRENTPAGE" columnIndex="23"/>
+		<result property="certType" column="CERT_TYPE" columnIndex="24"/>
+		<result property="delCheckedValue" column="DEL_CHEKED_VALUE" columnIndex="25"/>		
+	</resultMap>
+<!-- 원천징수영수증 시작 -->
+	<!-- 원천징수삭제 신청 -->
+	<update id="psnlPageDAO.deletePayrCertInfo" parameterClass="psnlProofAccept">
+	    UPDATE PAYR0900 
+	       SET WHDG_TX_ISS_DEL_YN = 'Y'
+	          ,ISMT = #ismt#			
+			  ,REVN_DT = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		      ,REVN_ADDR = #revnAddr#			  
+		 WHERE DPOB_CD = #dpobCd#
+		   AND WHDG_TX_ISS_NUM = #prfIssNum#
+		   AND WHDG_TX_ISS_COD_T_N_DIV_CD = 'A0390001'
+	</update>
+	
+	<!-- 원천징수 프린터 출력 후 변경을 위해 추가 -->
+	<update id="psnlPageDAO.afterPrintDown2" parameterClass="psnlProofAccept">
+	    UPDATE PAYR0900
+	       SET WHDG_TX_ISS_DT = TO_CHAR(SYSDATE, 'YYYYMMDD')
+	       	  ,WHDG_TX_ISS_YN = 'Y'
+	          ,ISMT = #ismt#			
+			  ,REVN_DT = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		      ,REVN_ADDR = #revnAddr#			  
+		 WHERE DPOB_CD = #dpobCd#
+		   AND SYSTEMKEY = #systemkey#
+		   AND WHDG_TX_ISS_NUM = #prfIssNum#
+	</update>  
+	<!-- 원천징수 신청 -->
+	<insert id="psnlPageDAO.insertPayrCertInfo" parameterClass="psnlProofAccept">
+	    INSERT INTO PAYR0900 (DPOB_CD,
+		                      WHDG_TX_ISS_NUM,
+		                      WHDG_TX_ISS_YR,
+		                      CERTC_ISS_DIV_CD,
+		                      SYSTEMKEY,
+		                      WHDG_TX_ISS_NUM_CPIS,
+		                      WHDG_TX_ISS_PRPSE_CTNT,
+		                      WHDG_TX_ISS_APPY_DT,
+		                      WHDG_TX_ISS_COD_T_N_DIV_CD,
+		                      WHDG_TX_ISS_YN,
+		                      WHDG_TX_ISS_DEL_YN,
+		                      KYBDR,
+		                      INPT_DT,
+		                      INPT_ADDR,
+		                      ISMT,
+		                      REVN_DT,
+		                      REVN_ADDR)
+		     VALUES (#dpobCd#,
+		     		( SELECT TO_CHAR(SYSDATE,'yyyy') || SUBSTR(#certcDivCd#,-2)|| LPAD(NVL(MAX(SUBSTR(WHDG_TX_ISS_NUM,LENGTH(WHDG_TX_ISS_NUM)-3,4)),0)+1 ,4,'0')
+			          FROM PAYR0900
+			         WHERE SUBSTR(WHDG_TX_ISS_NUM,1,4) = TO_CHAR(SYSDATE,'yyyy')
+			           AND CERTC_ISS_DIV_CD = #certcDivCd#),
+		             #whdgTxIssYr#,
+		             #certcDivCd#,
+		             #systemkey#,
+		             #issNumCpis#,
+		             #issPrpseCtnt#,
+		             TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		             #issCodtnDivCd#,
+		             #issYn#,
+		             #certcIssDelYn#,
+		             #ismt#,
+		             TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		             #revnAddr#,
+		             #ismt#,
+		             TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		             #revnAddr#)
+	</insert>
+	
+	<!-- getPayrCertListTotCnt -->
+	<select id="psnlPageDAO.getPayrCertListTotCnt" parameterClass="psnlProofAccept" resultClass="java.lang.String">
+		SELECT 
+			COUNT(*) AS TOTCNT
+		 FROM PAYR0900 A
+		WHERE DPOB_CD = #dpobCd#    
+		  AND SYSTEMKEY = #systemkey#
+		  AND WHDG_TX_ISS_DEL_YN != 'Y'
+		  AND EXISTS (
+                         SELECT B.COMM_CD 
+                           FROM BASS0300 B 
+                          WHERE A.DPOB_CD = B.DPOB_CD
+                            AND A.CERTC_ISS_DIV_CD = B.COMM_CD 
+                            AND B.RPSTTV_CD = 'A038'
+                       <isEqual property="certType" compareValue="1">
+						    AND B.MANGE_ITEM01 = 'Y'
+						</isEqual>
+						<isEqual property="certType" compareValue="2">
+						    AND (B.MANGE_ITEM01 &lt;&gt; 'Y' OR B.MANGE_ITEM01 IS NULL)
+						</isEqual>     
+                         )
+	</select>
+	<!-- 원친징수 신청 리스트 -->
+	<select id="psnlPageDAO.getPayrCertList" parameterClass="psnlProofAccept" resultClass="egovMap">
+	SELECT   T.*
+	  FROM   (SELECT   ROWNUM AS RNUM, A.*
+	            FROM   (
+			    SELECT 
+				    DPOB_CD
+				    ,SYSTEMKEY
+				    ,WHDG_TX_ISS_NUM as PRF_ISS_NUM
+				    ,WHDG_TX_ISS_YR
+				    ,TO_CHAR(TO_DATE(WHDG_TX_ISS_APPY_DT,'YYYYMMDD'),'YYYY-MM-DD') AS ISS_APPY_DT
+				    ,CERTC_ISS_DIV_CD as CERTC_DIV_CD
+				    ,FCBASS0300CDNM(DPOB_CD, CERTC_ISS_DIV_CD) AS CERTC_DIV_CD_NM
+				    ,WHDG_TX_ISS_PRPSE_CTNT as ISS_PRPSE_CTNT
+				    ,WHDG_TX_ISS_NUM_CPIS as ISS_NUM_CPIS
+				    ,TO_CHAR(TO_DATE(WHDG_TX_ISS_DT,'YYYYMMDD'),'YYYY-MM-DD') AS CERTC_ISS_DT
+				    ,FCBASS0300CDNM(DPOB_CD,WHDG_TX_ISS_COD_T_N_DIV_CD) AS ISS_CODTN_DIV_CD
+				    ,CASE 
+				    	WHEN TO_DATE(WHDG_TX_ISS_APPY_DT,'YYYYMMDD')+90-SYSDATE &gt; 0
+				    		AND WHDG_TX_ISS_YN &lt;&gt; 'Y'
+                        	AND WHDG_TX_ISS_COD_T_N_DIV_CD =  'A0390002'
+				    	THEN 'Y' ELSE 'N' 
+				  	 END DOWN_OK
+				 FROM PAYR0900 A
+				WHERE DPOB_CD = #dpobCd#    
+				  AND SYSTEMKEY = #systemkey#
+				  AND WHDG_TX_ISS_DEL_YN != 'Y'
+				  AND EXISTS (
+                              SELECT B.COMM_CD 
+                                FROM BASS0300 B 
+                               WHERE A.DPOB_CD = B.DPOB_CD
+                                 AND A.CERTC_ISS_DIV_CD = B.COMM_CD 
+                                 AND B.RPSTTV_CD = 'A038'
+                            <isEqual property="certType" compareValue="1">
+							    AND B.MANGE_ITEM01 = 'Y'
+							</isEqual>
+							<isEqual property="certType" compareValue="2">
+							    AND (B.MANGE_ITEM01 &lt;&gt; 'Y' OR B.MANGE_ITEM01 IS NULL)
+							</isEqual>     
+                              )
+				ORDER BY WHDG_TX_ISS_APPY_DT, WHDG_TX_ISS_NUM DESC
+				
+		) A) T
+ 	WHERE   T.RNUM BETWEEN ( NVL(#rowcount#, 5) * NVL(#currentpage#, 1) ) - ( NVL(#rowcount#,5)-1	) AND (NVL(#rowcount#, 5) * NVL (#currentpage#, 1))
+	</select>
+<!-- 원천징수영수증 끝 -->
+<!-- 프린터 출력 후 -->
+	<update id="psnlPageDAO.afterPrintDown" parameterClass="psnlProofAccept">
+	    UPDATE PSNL0550 
+	       SET CERTC_ISS_DT = TO_CHAR(SYSDATE, 'YYYYMMDD')
+	       	  ,ISS_YN = 'Y'
+	          ,ISMT = #ismt#			
+			  ,REVN_DT = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		      ,REVN_ADDR = #revnAddr#			  
+		 WHERE DPOB_CD = #dpobCd#
+		   AND SYSTEMKEY = #systemkey#
+		   AND PRF_ISS_NUM = #prfIssNum#
+	</update>    
+<!-- 증명발급신청 시작 -->
+	<!-- 발급신청 삭제 -->	
+	<update id="psnlPageDAO.deleteCertInfo" parameterClass="psnlProofAccept">
+	    UPDATE PSNL0550 
+	       SET CERTC_ISS_DEL_YN = 'Y'
+	          ,ISMT = #ismt#			
+			  ,REVN_DT = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		      ,REVN_ADDR = #revnAddr#			  
+		 WHERE DPOB_CD = #dpobCd#
+		   AND PRF_ISS_NUM = #prfIssNum#
+		   AND ISS_CODTN_DIV_CD = 'A0390001'
+	</update>
+	<!-- 증명서신청 -->
+	<insert id="psnlPageDAO.insertCertInfo" parameterClass="psnlProofAccept">
+	    INSERT INTO PSNL0550 (DPOB_CD,
+		                      PRF_ISS_NUM,
+		                      CERTC_DIV_CD,
+		                      SYSTEMKEY,
+		                      CERTC_ISS_DT,
+		                      ISS_NUM_CPIS,
+		                      ISS_PRPSE_CTNT,
+		                      ISS_ISTUT_NM,
+		                      RETRY_REAS_CTNT,
+		                      ISS_APPY_DT,
+		                      ISS_APPBN_DT,
+		                      ISS_CODTN_DIV_CD,
+		                      ISS_CODTN_EMP_NUM,
+		                      ISS_YN,
+		                      CERTC_ISS_DEL_YN,
+		                      KYBDR,
+		                      INPT_DT,
+		                      INPT_ADDR,
+		                      ISMT,
+		                      REVN_DT,
+		                      REVN_ADDR)
+		     VALUES (#dpobCd#,
+		     		( SELECT TO_CHAR(SYSDATE,'yyyy') || SUBSTR(#certcDivCd#,-2)|| LPAD(NVL(MAX(SUBSTR(PRF_ISS_NUM,LENGTH(PRF_ISS_NUM)-3,4)),0)+1 ,4,'0')
+			          FROM PSNL0550
+			         WHERE SUBSTR(PRF_ISS_NUM,1,4) = TO_CHAR(SYSDATE,'yyyy')
+			           AND CERTC_DIV_CD = #certcDivCd#),
+		             #certcDivCd#,
+		             #systemkey#,
+		             #certcIssDt#,
+		             #issNumCpis#,
+		             #issPrpseCtnt#,
+		             #issIstutNm#,
+		             #retryReasCtnt#,
+		             TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		             #issAppbnDt#,
+		             #issCodtnDivCd#,
+		             #issCodtnEmpNum#,
+		             #issYn#,
+		             #certcIssDelYn#,
+		             #ismt#,
+		             TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		             #revnAddr#,
+		             #ismt#,
+		             TO_CHAR(SYSDATE, 'YYYYMMDD'),
+		             #revnAddr#)
+	</insert>
+	<!-- getCertListTotCnt -->
+	<select id="psnlPageDAO.getCertListTotCnt" parameterClass="psnlProofAccept" resultClass="java.lang.String">
+		SELECT 
+			COUNT(*) AS TOTCNT
+		 FROM PSNL0550 A
+		WHERE DPOB_CD = #dpobCd#    
+		  AND SYSTEMKEY = #systemkey#
+		  AND CERTC_ISS_DEL_YN != 'Y'
+		  AND EXISTS (
+                         SELECT B.COMM_CD 
+                           FROM BASS0300 B 
+                          WHERE A.DPOB_CD = B.DPOB_CD
+                            AND A.CERTC_DIV_CD = B.COMM_CD 
+                            AND B.RPSTTV_CD = 'A038'
+                       <isEqual property="certType" compareValue="1">
+						    AND B.MANGE_ITEM01 = 'Y'
+						</isEqual>
+						<isEqual property="certType" compareValue="2">
+						    AND (B.MANGE_ITEM01 &lt;&gt; 'Y' OR B.MANGE_ITEM01 IS NULL)
+						</isEqual>     
+                         )
+	</select>
+	<!-- 증명서발급신청 리스트 -->
+	<select id="psnlPageDAO.getCertList" parameterClass="psnlProofAccept" resultClass="egovMap">
+	SELECT   T.*
+	FROM   (SELECT   ROWNUM AS RNUM, A.*
+	            FROM   (
+			    SELECT 
+				    DPOB_CD
+				    ,SYSTEMKEY
+				    ,PRF_ISS_NUM
+				    ,TO_CHAR(TO_DATE(ISS_APPY_DT,'YYYYMMDD'),'YYYY-MM-DD') AS ISS_APPY_DT
+				    ,CERTC_DIV_CD as CERTC_DIV_CD
+				    ,FCBASS0300CDNM(DPOB_CD, CERTC_DIV_CD) AS CERTC_DIV_CD_NM
+				    ,ISS_PRPSE_CTNT
+				    ,ISS_NUM_CPIS
+				    ,ISS_YN
+				    ,TO_CHAR(TO_DATE(CERTC_ISS_DT,'YYYYMMDD'),'YYYY-MM-DD') AS CERTC_ISS_DT
+				    ,FCBASS0300CDNM(DPOB_CD,ISS_CODTN_DIV_CD) AS ISS_CODTN_DIV_CD
+				    ,CASE 
+				    	WHEN TO_DATE(ISS_APPY_DT,'YYYYMMDD')+90-SYSDATE &gt; 0
+				    		AND ISS_YN &lt;&gt; 'Y'
+                        	AND ISS_CODTN_DIV_CD =  'A0390002'
+				    	THEN 'Y' ELSE 'N' 
+				  	 END DOWN_OK
+				 FROM PSNL0550 A
+				WHERE DPOB_CD = #dpobCd#    
+				  AND SYSTEMKEY = #systemkey#
+				  AND CERTC_ISS_DEL_YN != 'Y'
+				  AND EXISTS (
+                              SELECT B.COMM_CD 
+                                FROM BASS0300 B 
+                               WHERE A.DPOB_CD = B.DPOB_CD
+                                 AND A.CERTC_DIV_CD = B.COMM_CD 
+                                 AND B.RPSTTV_CD = 'A038'
+                            <isEqual property="certType" compareValue="1">
+							    AND B.MANGE_ITEM01 = 'Y'
+							</isEqual>
+							<isEqual property="certType" compareValue="2">
+							    AND (B.MANGE_ITEM01 &lt;&gt; 'Y' OR B.MANGE_ITEM01 IS NULL)
+							</isEqual>     
+                              )
+				ORDER BY ISS_APPY_DT  DESC, PRF_ISS_NUM DESC
+		) A
+	) T
+ 	WHERE   
+ 		T.RNUM BETWEEN ( NVL(#rowcount#, 5) * NVL(#currentpage#, 1) ) - ( NVL(#rowcount#,5)-1	) 
+ 		AND (NVL(#rowcount#, 5) * NVL (#currentpage#, 1))
+	</select>
+	<!-- 증명발급타입 -->
+	<select id="psnlPageDAO.getCertType" parameterClass="psnlProofAccept" resultClass="egovMap">
+	    SELECT   
+			COMM_CD, 
+			COMM_CD_NM
+		 FROM BASS0300
+		WHERE RPSTTV_CD = 'A038'
+		<isEqual property="certType" compareValue="1">
+		    AND MANGE_ITEM01 = 'Y'
+		</isEqual>
+		<isEqual property="certType" compareValue="2">
+		    AND (MANGE_ITEM01 &lt;&gt; 'Y' OR MANGE_ITEM01 IS NULL)
+		</isEqual>     
+	</select>
+<!-- 증명발급신청 끝 -->	
+<!-- 개인정보 -->
+	<!-- 개인정보저장 -->
+	<update id="psnlPageDAO.updateDoroAddr" parameterClass="psnlPageVo">
+	    UPDATE PSNL0111
+	    	SET HUS_ROAD_NM_ZPCD = #husRoadNmZpcd#
+		       ,HUS_ROAD_NM_FNDTN_ADDR = #husRoadNmFndtnNmAddr#
+		       ,HUS_ROAD_NM_DTL_PATR_ADDR = #husRoadNmDtlPatrAddr#
+		       ,HUS_FNDTN_ADDR = #husFndtnAddr#
+		       ,HUS_PHN_NUM = #husPhnNum#
+		       ,CELL_PHNE_NUM = #cellPhneNum#
+		       ,EMAIL_ADDR = #emailAddr#
+		       ,ISMT = #ismt#
+		       ,REVN_DT = TO_CHAR(SYSDATE, 'YYYYMMDD')
+		       ,REVN_ADDR = #revnAddr#
+		  WHERE DPOB_CD = #dpobCd#
+		    AND SYSTEMKEY = #systemkey#
+	</update>
+	<!-- 가족사항 -->
+	<select id="psnlPageDAO.getFamilyList" parameterClass="psnlPageVo" resultClass="egovMap">
+	     SELECT 
+	         FCBASS0300CDNM(A.DPOB_CD, A.FAMY_RELA_DIV_CD) AS FAMY_RELA_DIV_NM
+	         ,A.FAMY_NM
+	         ,FCBASS0300CDNM(A.DPOB_CD, A.ACAD_ABTY_DIV_CD) AS ACAD_ABTY_DIV_NM
+	         ,FCBASS0300CDNM(A.DPOB_CD, CRR_CD) AS CRR_NM
+	         ,A.WK_OFC_NM
+	         ,A.INBY_NM
+	         ,SUBSTR (A.FAMY_RESN_REGN_NUM, 0, 6) || '-' || SUBSTR (A.FAMY_RESN_REGN_NUM, 7) AS FAMY_RESN_REGN_NUM
+	         ,A.FRGNR_YN
+	         ,FCBASS0300CDNM(A.DPOB_CD, A.DABTY_DIV_CD) AS DABTY_DIV_NM
+	         ,FCBASS0300CDNM(A.DPOB_CD, A.DABTY_GRDE_CD) AS DABTY_GRDE_NM
+	         ,B.FAMY_ALLW_PYMT_YN
+         FROM PSNL0115 A, PAYR0530 B
+		 WHERE A.DPOB_CD = B.DPOB_CD(+)
+		    AND A.SYSTEMKEY = B.SYSTEMKEY(+)
+		    AND A.FAMY_RESN_REGN_NUM =  B.PAY_FAMY_RESN_REGN_NUM(+)
+	    	AND A.DPOB_CD = #dpobCd#    
+		    AND A.SYSTEMKEY = #systemkey#
+		 ORDER BY A.FAMY_SEIL_NUM ASC 
+	</select>
+	<!-- 경력사항 -->
+	<select id="psnlPageDAO.getCarrList" parameterClass="psnlPageVo" resultClass="egovMap">
+	    SELECT 
+	    	DPOB_CD
+	    	, SYSTEMKEY
+	    	, FCBASS0400CDNM(DPOB_CD, DEPT_CD, '3') AS DEPT_NM_ENG
+	    	, FCBASS0400CDNM(DPOB_CD, DEPT_CD, '2') AS DEPT_NM_RTCHNT
+	    	, TO_CHAR(TO_DATE(EMYMT_BGNN_DT,'YYYYMMDD'),'YYYY-MM-DD') AS EMYMT_BGNN_DT
+	    	, TO_CHAR(TO_DATE(EMYMT_END_DT,'YYYYMMDD'),'YYYY-MM-DD') AS EMYMT_END_DT
+	    	, CURR_PAE_WORK_NM
+	    	, EMYMT_DIV_CD
+	    	, EMYMT_TYP_CD
+	        , FCBASS0300CDNM(DPOB_CD, EMYMT_DIV_CD) AS EMYMT_DIV_NM
+	        , FCBASS0300CDNM(DPOB_CD, EMYMT_TYP_CD) AS EMYMT_TYP_NM
+	        , FCBASS0320CDNM(DPOB_CD, TYP_OCCU_CD) AS TYP_OCCU_NM
+	        , SUBSTR(FCBass0500CDNM(DPOB_CD, SUBSTR(EMYMT_BGNN_DT,1,4), DEPT_CD, BUSIN_CD), 0, 16) AS BUSIN_NM
+	        , FCBASSEX0350CDNM(DPOB_CD, TYP_OCCU_CD, DTIL_OCCU_INTTN_CD, '1')  AS DTIL_OCCU_CLS_DIV_NM
+	        , SUBSTR(BUSIN_CD,1,4) AS BUSIN_CD
+	  FROM PSNL0110 
+	  WHERE DPOB_CD = #dpobCd#    
+		    AND SYSTEMKEY = #systemkey#
+	  ORDER BY EMYMT_BGNN_DT DESC
+	</select>
+		
+	<!-- 포상 -->
+	<select id="psnlPageDAO.getRewardList" parameterClass="psnlPageVo" resultClass="egovMap">
+			SELECT
+				DPOB_CD, SYSTEMKEY, ACCLD_SEIL_NUM	, ACCLD_YR,
+				SUBSTR(ACCLD_PRTT_DT,0,4) AS ACCLD_PRTT_DT_YEAR,
+				SUBSTR(ACCLD_PRTT_DT,5,2) AS ACCLD_PRTT_DT_MONTH,
+				SUBSTR(ACCLD_PRTT_DT,7,2) AS ACCLD_PRTT_DT_DAY,
+				ACCLD_KND_CD, ACCLD_DIV_CD, ACCLD_NM, ACCLD_CFMNT_NUM, EFMN_ISTUT_NM, ACCLD_MNANT_CTNT, 
+				ACCLD_NOTE_CTNT, KYBDR, INPT_DT, INPT_ADDR, ISMT, REVN_DT	, REVN_ADDR
+			FROM PSNL0121
+			WHERE  DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+		   ORDER BY ACCLD_SEIL_NUM DESC
+	</select>
+	
+	<!-- 우편번호 찾기 -->
+	<select id="psnlPageDAO.getZipCodeList" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
+	  <![CDATA[
+			SELECT 
+			    ZPCD AS OLD_ZPCD 
+			    , BASE_AR_NUM AS ZPCD 
+			    , (ROAD_NM_CTAPV || ' ' || ROAD_NM_CTATGU) || ' ' || 
+			        (CASE WHEN ROAD_NM_LI IS NOT NULL THEN (ROAD_NM_TAT || ' ') ELSE '' END) || 
+			        (ROAD_NM || ' ' ||(CASE WHEN ROAD_NM_UNGR = '1'THEN '지하 ' ELSE '' END) || BUILD_NUM_BOBN || 
+			        (CASE WHEN (TRIM(NVL(BUILD_NUM_BUBN,'TT')) <> 'TT') AND (TRIM(NVL(BUILD_NUM_BUBN,'TT')) <> '0') THEN '-' || BUILD_NUM_BUBN ELSE '' END))AS FN_DTN_ADDR 
+			    , ((CASE WHEN ROAD_NM_LI IS NULL THEN ' (' || ROAD_NM_TAT || (CASE WHEN JON_HUS = '1' THEN ', ' || CTATGU_BUILD_NM || ')' ELSE ')' END) ELSE '' END)) AS DTL_PATR_ADDR 
+			    , ZPCD_SEIL_NUM 
+			    , BUILD_MANGE_NUM 
+			    , CUTDOG_CD 
+			    , ROAD_NM_CTAPV 
+			    , ROAD_NM_CTATGU 
+			    , ROAD_NM_TAT 
+			    , ROAD_NM_LI 
+			    , ROAD_NM_SAN 
+			    , ROAD_NM_LTNUM_BOBN 
+			    , ROAD_NM_LTNUM_BUBN 
+			    , ROAD_NM_CD 
+			    , ROAD_NM 
+			    , ROAD_NM_UNGR 
+			    , BUILD_NUM_BOBN 
+			    , BUILD_NUM_BUBN 
+			    , BUILD_NM 
+			    , DTL_PATR_BUILD_NM 
+			    , TATD_SEIL_NUM 
+			    , ADSTT_DONG_CD 
+			    , ADSTT_DONG_NM 
+			    , LOT_DSTTN_NM 
+			    , MV_REAS_CD 
+			    , CHNG_DT 
+			    , CHNG_BFR_ROAD_NM_ADDR 
+			    , CTATGU_BUILD_NM 
+			    , JON_HUS 
+			    , BASE_AR_NUM 
+			    , DTL_ADDR_YN 
+			    , POST_CTNT01 
+			    , POST_CTNT02 
+			FROM 
+			    CMMN0320 
+			WHERE 
+			    sroad LIKE ''||#DONG#||'%' 
+			    union all
+			    SELECT 
+			    ZPCD AS OLD_ZPCD 
+			    , BASE_AR_NUM AS ZPCD 
+			    , (ROAD_NM_CTAPV || ' ' || ROAD_NM_CTATGU) || ' ' || 
+			        (CASE WHEN ROAD_NM_LI IS NOT NULL THEN (ROAD_NM_TAT || ' ') ELSE '' END) || 
+			        (ROAD_NM || ' ' ||(CASE WHEN ROAD_NM_UNGR = '1'THEN '지하 ' ELSE '' END) || BUILD_NUM_BOBN || 
+			        (CASE WHEN (TRIM(NVL(BUILD_NUM_BUBN,'TT')) <> 'TT') AND (TRIM(NVL(BUILD_NUM_BUBN,'TT')) <> '0') THEN '-' || BUILD_NUM_BUBN ELSE '' END))AS FN_DTN_ADDR 
+			    , ((CASE WHEN ROAD_NM_LI IS NULL THEN ' (' || ROAD_NM_TAT || (CASE WHEN JON_HUS = '1' THEN ', ' || CTATGU_BUILD_NM || ')' ELSE ')' END) ELSE '' END)) AS DTL_PATR_ADDR 
+			    , ZPCD_SEIL_NUM 
+			    , BUILD_MANGE_NUM 
+			    , CUTDOG_CD 
+			    , ROAD_NM_CTAPV 
+			    , ROAD_NM_CTATGU 
+			    , ROAD_NM_TAT 
+			    , ROAD_NM_LI 
+			    , ROAD_NM_SAN 
+			    , ROAD_NM_LTNUM_BOBN 
+			    , ROAD_NM_LTNUM_BUBN 
+			    , ROAD_NM_CD 
+			    , ROAD_NM 
+			    , ROAD_NM_UNGR 
+			    , BUILD_NUM_BOBN 
+			    , BUILD_NUM_BUBN 
+			    , BUILD_NM 
+			    , DTL_PATR_BUILD_NM 
+			    , TATD_SEIL_NUM 
+			    , ADSTT_DONG_CD 
+			    , ADSTT_DONG_NM 
+			    , LOT_DSTTN_NM 
+			    , MV_REAS_CD 
+			    , CHNG_DT 
+			    , CHNG_BFR_ROAD_NM_ADDR 
+			    , CTATGU_BUILD_NM 
+			    , JON_HUS 
+			    , BASE_AR_NUM 
+			    , DTL_ADDR_YN 
+			    , POST_CTNT01 
+			    , POST_CTNT02 
+			FROM 
+			    CMMN0320 
+			WHERE 
+			    sdong LIKE ''||#DONG#||'%' 
+			    union all
+			    SELECT 
+			    ZPCD AS OLD_ZPCD 
+			    , BASE_AR_NUM AS ZPCD 
+			    , (ROAD_NM_CTAPV || ' ' || ROAD_NM_CTATGU) || ' ' || 
+			        (CASE WHEN ROAD_NM_LI IS NOT NULL THEN (ROAD_NM_TAT || ' ') ELSE '' END) || 
+			        (ROAD_NM || ' ' ||(CASE WHEN ROAD_NM_UNGR = '1'THEN '지하 ' ELSE '' END) || BUILD_NUM_BOBN || 
+			        (CASE WHEN (TRIM(NVL(BUILD_NUM_BUBN,'TT')) <> 'TT') AND (TRIM(NVL(BUILD_NUM_BUBN,'TT')) <> '0') THEN '-' || BUILD_NUM_BUBN ELSE '' END))AS FN_DTN_ADDR 
+			    , ((CASE WHEN ROAD_NM_LI IS NULL THEN ' (' || ROAD_NM_TAT || (CASE WHEN JON_HUS = '1' THEN ', ' || CTATGU_BUILD_NM || ')' ELSE ')' END) ELSE '' END)) AS DTL_PATR_ADDR 
+			    , ZPCD_SEIL_NUM 
+			    , BUILD_MANGE_NUM 
+			    , CUTDOG_CD 
+			    , ROAD_NM_CTAPV 
+			    , ROAD_NM_CTATGU 
+			    , ROAD_NM_TAT 
+			    , ROAD_NM_LI 
+			    , ROAD_NM_SAN 
+			    , ROAD_NM_LTNUM_BOBN 
+			    , ROAD_NM_LTNUM_BUBN 
+			    , ROAD_NM_CD 
+			    , ROAD_NM 
+			    , ROAD_NM_UNGR 
+			    , BUILD_NUM_BOBN 
+			    , BUILD_NUM_BUBN 
+			    , BUILD_NM 
+			    , DTL_PATR_BUILD_NM 
+			    , TATD_SEIL_NUM 
+			    , ADSTT_DONG_CD 
+			    , ADSTT_DONG_NM 
+			    , LOT_DSTTN_NM 
+			    , MV_REAS_CD 
+			    , CHNG_DT 
+			    , CHNG_BFR_ROAD_NM_ADDR 
+			    , CTATGU_BUILD_NM 
+			    , JON_HUS 
+			    , BASE_AR_NUM 
+			    , DTL_ADDR_YN 
+			    , POST_CTNT01 
+			    , POST_CTNT02 
+			FROM 
+			    CMMN0320 
+			WHERE
+			    sgunmul LIKE ''||#DONG#||'%'  
+			ORDER BY 
+			    ROAD_NM_CD, BUILD_NUM_BOBN
+		]]>	
+	</select>
+	<!-- 개인정보 - 기본정보 -->
+	<select id="psnlPageDAO.selectPsnl0100" parameterClass="psnlPageVo" resultMap="psnlPageSym">
+	    SELECT 
+		        A.DPOB_CD
+		       ,A.SYSTEMKEY
+		       , (SELECT MAX (C.PIC_FLNM)
+		          FROM PSNL0125 C
+		         WHERE C.DPOB_CD = A.DPOB_CD AND C.SYSTEMKEY = A.SYSTEMKEY)
+		          AS PIC_FLNM
+		       ,FCBASS0400CDNM(A.DPOB_CD, A.DPOB_CD, '2') AS DPOB_NM
+		       ,FCBASS0400CDNM(A.DPOB_CD, A.CURR_AFFN_DEPT_CD, '2') AS CURR_AFFN_DEPT_NM
+		       ,SUBSTR (RESN_REGN_NUM, 0, 6) || '-' || SUBSTR (RESN_REGN_NUM, 7) AS RESN_REGN_NUM
+		       ,HAN_NM
+		       ,ENG_NM
+		       ,CHIN_CHAR_NM
+		       ,(SELECT MAX(B.CURR_PAE_WORK_NM) 
+		           FROM PSNL0110 B 
+		         WHERE B.DPOB_CD = A.DPOB_CD 
+		              AND B.SYSTEMKEY = A.SYSTEMKEY 
+		              AND B.EMYMT_BGNN_DT = (SELECT MAX(C.EMYMT_BGNN_DT) FROM PSNL0110 C WHERE C.DPOB_CD = A.DPOB_CD AND C.SYSTEMKEY = A.SYSTEMKEY)
+		              ) AS CURR_PAE_WORK_NM
+		       ,(SELECT fcBass0500CDNM(B.DPOB_CD, SUBSTR(B.EMYMT_BGNN_DT,1,4), B.DEPT_CD, B.BUSIN_CD)
+		           FROM PSNL0110 B 
+		         WHERE B.DPOB_CD = A.DPOB_CD 
+		              AND B.SYSTEMKEY = A.SYSTEMKEY 
+		              AND B.EMYMT_BGNN_DT = (SELECT MAX(C.EMYMT_BGNN_DT) FROM PSNL0110 C WHERE C.DPOB_CD = A.DPOB_CD AND C.SYSTEMKEY = A.SYSTEMKEY)
+		              ) AS BUSIN_NM  
+		       ,FCBASS0320CDNM(A.DPOB_CD, A.TYP_OCCU_CD) AS TYP_OCCU_NM
+		       ,FCBASSEX0350CDNM(A.DPOB_CD, A.TYP_OCCU_CD, A.DTIL_OCCU_INTTN_CD, '1')  AS DTIL_OCCU_CLS_DIV_NM
+		       ,FCBASS0300CDNM(A.DPOB_CD, A.EMYMT_DIV_CD) AS EMYMT_DIV_NM
+		       ,FCBASS0300CDNM(A.DPOB_CD, A.HDOFC_CODTN_CD) AS HDOFC_CODTN_NM
+		       ,TO_CHAR(TO_DATE(A.FRST_EMYMT_DT,'YYYYMMDD'),'YYYY-MM-DD') AS FRST_EMYMT_DT
+		       ,TO_CHAR(TO_DATE(A.CURR_DEPT_APPMT_DT,'YYYYMMDD'),'YYYY-MM-DD') AS CURR_DEPT_APPMT_DT
+		       ,TO_CHAR(TO_DATE(A.RETRY_DT,'YYYYMMDD'),'YYYY-MM-DD') AS RETRY_DT
+		       ,A.RETRY_REAS_CTNT
+		       ,FCBASS0300CDNM(A.DPOB_CD, A.LOG_SVC_YR_NUM_CD) AS LOG_SVC_YR_NUM_NM
+		       ,B.HUS_ROAD_NM_ZPCD
+		       ,B.HUS_ROAD_NM_FNDTN_ADDR
+		       ,B.HUS_ROAD_NM_DTL_PATR_ADDR
+		       ,B.HUS_ZPCD
+		       ,B.HUS_FNDTN_ADDR
+		       ,B.HUS_DTL_PATR_ADDR
+		       ,B.HFMLY_NM	
+		       ,FCBASS0300CDNM(B.DPOB_CD, B.HFMLY_RELA_CD) AS HFMLY_RELA_NM
+		       ,B.HUS_PHN_NUM
+		       ,B.CELL_PHNE_NUM
+		       ,B.EMAIL_ADDR
+		       ,A.PERN_NOTE_CTNT
+		       ,B.HUS_ROAD_NM_ZPCD AS BASE_AR_NUM
+		  FROM PSNL0100 A , PSNL0111 B
+		 WHERE   A.DPOB_CD = B.DPOB_CD(+)
+		 	AND A.SYSTEMKEY = B.SYSTEMKEY(+)
+		 	AND A.DPOB_CD = #dpobCd#
+		 	AND A.SYSTEMKEY = #systemkey#
+	</select>
+	
+	<insert id="psnlPageDAO.insertPsnlPage_S">
+		<![CDATA[
+			INSERT INTO PSNL0100 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , HAN_NM
+				  , ENG_NM
+				  , CHIN_CHAR_NM
+				  , RESN_REGN_NUM
+				  , SX_DIV_CD
+				  , YOOBH_MNTH_DAY
+				  , SCLC_DIV_CD
+				  , NATN_CD
+				  , DEPT_CD
+				  , BUSIN_CD
+				  , CURR_AFFN_DEPT_CD
+				  , REPBTY_BUSIN_DIV_CD
+				  , TYP_OCCU_CD
+				  , ODTY_CD
+				  , FRST_EMYMT_DT
+				  , EMYMT_DIV_CD
+				  , EMYMT_BGNN_DT
+				  , EMYMT_END_DT
+				  , PYSP_CD
+				  , HDOFC_CODTN_CD
+				  , RETRY_DT
+				  , RETRY_REAS_CTNT
+				  , FRGNR_DIV_CD
+				  , PSPT_NUM
+				  , STY_BGNN_DT
+				  , STY_END_DT
+				  , END_SCHL
+				  , END_DEGR_DIV_CD
+				  , PMTN_SCDU_DT
+				  , PYSP_PRMTN_SCDU_DT
+				  , REYMN_SCDU_DT
+				  , LOG_SVC_YR_NUM_CD
+				  , LOG_SVC_MNTH_ICM_CD
+				  , CURR_PYSP_APPMT_DT
+				  , CURR_DEPT_APPMT_DT
+				  , PERN_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , PYSP_GRDE_CDjun
+				  , DTIL_OCCU_CLS_DIV_CD )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #hanNm#
+				  , #engNm#
+				  , #chinCharNm#
+				  , #resnRegnNum#
+				  , #sxDivCd#
+				  , #yoobhMnthDay#
+				  , #sclcDivCd#
+				  , #natnCd#
+				  , #deptCd#
+				  , #businCd#
+				  , #currAffnDeptCd#
+				  , #repbtyBusinDivCd#
+				  , #typOccuCd#
+				  , #odtyCd#
+				  , #frstEmymtDt#
+				  , #emymtDivCd#
+				  , #emymtBgnnDt#
+				  , #emymtEndDt#
+				  , #pyspCd#
+				  , #hdofcCodtnCd#
+				  , #retryDt#
+				  , #retryReasCtnt#
+				  , #frgnrDivCd#
+				  , #psptNum#
+				  , #styBgnnDt#
+				  , #styEndDt#
+				  , #endSchl#
+				  , #endDegrDivCd#
+				  , #pmtnScduDt#
+				  , #pyspPrmtnScduDt#
+				  , #reymnScduDt#
+				  , #logSvcYrNumCd#
+				  , #logSvcMnthIcmCd#
+				  , #currPyspAppmtDt#
+				  , #currDeptAppmtDt#
+				  , #pernNoteCtnt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr#
+				  , #pyspGrdeCd#
+				  , #dtilOccuClsDivCd# )
+		]]>
+	</insert>
+<!-- 쿼리 -->	
+	<!-- updatePsnlPage_S -->
+	<update id="psnlPageDAO.updatePsnlPage_S">
+		<![CDATA[
+			UPDATE PSNL0100
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, HAN_NM=#hanNm#
+				, ENG_NM=#engNm#
+				, CHIN_CHAR_NM=#chinCharNm#
+				, RESN_REGN_NUM=#resnRegnNum#
+				, SX_DIV_CD=#sxDivCd#
+				, YOOBH_MNTH_DAY=#yoobhMnthDay#
+				, SCLC_DIV_CD=#sclcDivCd#
+				, NATN_CD=#natnCd#
+				, DEPT_CD=#deptCd#
+				, BUSIN_CD=#businCd#
+				, CURR_AFFN_DEPT_CD=#currAffnDeptCd#
+				, REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+				, TYP_OCCU_CD=#typOccuCd#
+				, ODTY_CD=#odtyCd#
+				, FRST_EMYMT_DT=#frstEmymtDt#
+				, EMYMT_DIV_CD=#emymtDivCd#
+				, EMYMT_BGNN_DT=#emymtBgnnDt#
+				, EMYMT_END_DT=#emymtEndDt#
+				, PYSP_CD=#pyspCd#
+				, HDOFC_CODTN_CD=#hdofcCodtnCd#
+				, RETRY_DT=#retryDt#
+				, RETRY_REAS_CTNT=#retryReasCtnt#
+				, FRGNR_DIV_CD=#frgnrDivCd#
+				, PSPT_NUM=#psptNum#
+				, STY_BGNN_DT=#styBgnnDt#
+				, STY_END_DT=#styEndDt#
+				, END_SCHL=#endSchl#
+				, END_DEGR_DIV_CD=#endDegrDivCd#
+				, PMTN_SCDU_DT=#pmtnScduDt#
+				, PYSP_PRMTN_SCDU_DT=#pyspPrmtnScduDt#
+				, REYMN_SCDU_DT=#reymnScduDt#
+				, LOG_SVC_YR_NUM_CD=#logSvcYrNumCd#
+				, LOG_SVC_MNTH_ICM_CD=#logSvcMnthIcmCd#
+				, CURR_PYSP_APPMT_DT=#currPyspAppmtDt#
+				, CURR_DEPT_APPMT_DT=#currDeptAppmtDt#
+				, PERN_NOTE_CTNT=#pernNoteCtnt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+				, PYSP_GRDE_CD=#pyspGrdeCd#
+				, DTIL_OCCU_CLS_DIV_CD=#dtilOccuClsDivCd#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	<!-- deletePsnlPage_S -->
+	<delete id="psnlPageDAO.deletePsnlPage_S">
+		<![CDATA[
+			DELETE FROM PSNL0100 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	<!-- selectPsnlPage_S -->
+	<select id="psnlPageDAO.selectPsnlPage_S" resultMap="psnlPage">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, HAN_NM
+				, ENG_NM
+				, CHIN_CHAR_NM
+				, RESN_REGN_NUM
+				, SX_DIV_CD
+				, YOOBH_MNTH_DAY
+				, SCLC_DIV_CD
+				, NATN_CD
+				, DEPT_CD
+				, BUSIN_CD
+				, CURR_AFFN_DEPT_CD
+				, REPBTY_BUSIN_DIV_CD
+				, TYP_OCCU_CD
+				, ODTY_CD
+				, FRST_EMYMT_DT
+				, EMYMT_DIV_CD
+				, EMYMT_BGNN_DT
+				, EMYMT_END_DT
+				, PYSP_CD
+				, HDOFC_CODTN_CD
+				, RETRY_DT
+				, RETRY_REAS_CTNT
+				, FRGNR_DIV_CD
+				, PSPT_NUM
+				, STY_BGNN_DT
+				, STY_END_DT
+				, END_SCHL
+				, END_DEGR_DIV_CD
+				, PMTN_SCDU_DT
+				, PYSP_PRMTN_SCDU_DT
+				, REYMN_SCDU_DT
+				, LOG_SVC_YR_NUM_CD
+				, LOG_SVC_MNTH_ICM_CD
+				, CURR_PYSP_APPMT_DT
+				, CURR_DEPT_APPMT_DT
+				, PERN_NOTE_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, PYSP_GRDE_CD
+				, DTIL_OCCU_CLS_DIV_CD
+			FROM PSNL0100
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	<!--  PSNL0100 목록 조회-->
+	<select id="psnlPageDAO.selectPsnlPageList_D" parameterClass="psnlPageSerarchVO" resultClass="egovMap">
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+					SELECT
+									DPOB_CD
+									, SYSTEMKEY
+									, HAN_NM
+									, ENG_NM
+									, CHIN_CHAR_NM
+									, RESN_REGN_NUM
+									, SX_DIV_CD
+									, YOOBH_MNTH_DAY
+									, SCLC_DIV_CD
+									, NATN_CD
+									, DEPT_CD
+									, BUSIN_CD
+									, CURR_AFFN_DEPT_CD
+									, REPBTY_BUSIN_DIV_CD
+									, TYP_OCCU_CD
+									, ODTY_CD
+									, FRST_EMYMT_DT
+									, EMYMT_DIV_CD
+									, EMYMT_BGNN_DT
+									, EMYMT_END_DT
+									, PYSP_CD
+									, HDOFC_CODTN_CD
+									, RETRY_DT
+									, RETRY_REAS_CTNT
+									, FRGNR_DIV_CD
+									, PSPT_NUM
+									, STY_BGNN_DT
+									, STY_END_DT
+									, END_SCHL
+									, END_DEGR_DIV_CD
+									, PMTN_SCDU_DT
+									, PYSP_PRMTN_SCDU_DT
+									, REYMN_SCDU_DT
+									, LOG_SVC_YR_NUM_CD
+									, LOG_SVC_MNTH_ICM_CD
+									, CURR_PYSP_APPMT_DT
+									, CURR_DEPT_APPMT_DT
+									, PERN_NOTE_CTNT
+									, KYBDR
+									, INPT_DT
+									, INPT_ADDR
+									, ISMT
+									, REVN_DT
+									, REVN_ADDR
+									, PYSP_GRDE_CD
+									, DTIL_OCCU_CLS_DIV_CD
+							FROM PSNL0100
+					WHERE 1=1
+					<isEqual prepend="AND" property="searchCondition" compareValue="0">
+						DPOB_CD = #searchKeyword#
+					</isEqual>
+					<isEqual prepend="AND" property="searchCondition" compareValue="1">
+						SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+					</isEqual>
+						ORDER BY 
+							DPOB_CD DESC
+								, SYSTEMKEY DESC
+			
+			<![CDATA[					
+		) A WHERE ROWNUM <= #lastIndex#
+	)WHERE RNUM > #firstIndex#
+	]]>
+	</select>	
+	<select id="psnlPageDAO.selectPsnlPageListTotCnt_S" parameterClass="psnlPageSerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PSNL0100
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>
