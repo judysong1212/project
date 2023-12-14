@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye167430_2019">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ye167430Srh_2019_VO" type="com.app.exterms.yearendtax.server.vo.Ye167430Srh_2019_VO"/>
+	
+	<resultMap id="ye167430_2019" class="com.app.exterms.yearendtax.server.vo.Ye167430_2019_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="3"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="4"/>
+		<result property="famRltClCd" column="FAM_RLT_CL_CD" columnIndex="5"/>
+		<result property="amtSum" column="AMT_SUM" columnIndex="6"/>
+		<result property="amt10" column="AMT10" columnIndex="7"/>
+		<result property="amt20" column="AMT20" columnIndex="8"/>
+		<result property="amt40" column="AMT40" columnIndex="9"/>
+		<result property="amt41" column="AMT41" columnIndex="10"/>
+		<result property="amt42" column="AMT42" columnIndex="11"/>
+		<result property="amt50" column="AMT50" columnIndex="12"/>
+		<result property="kybdr" column="KYBDR" columnIndex="13"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="14"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="15"/>
+		<result property="ismt" column="ISMT" columnIndex="16"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="17"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="18"/>
+	</resultMap>
+	
+	<insert id="ye167430_2019_DAO.insertYe167430_S">
+		<![CDATA[
+			INSERT INTO YE167430 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , FAM_RLT_CL_CD
+				  , AMT_SUM
+				  , AMT10
+				  , AMT20
+				  , AMT40
+				  , AMT41
+				  , AMT42
+				  , AMT50
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #famRltClCd#
+				  , #amtSum#
+				  , #amt10#
+				  , #amt20#
+				  , #amt40#
+				  , #amt41#
+				  , #amt42#
+				  , #amt50#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="ye167430_2019_DAO.updateYe167430_S">
+		<![CDATA[
+			UPDATE YE167430
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, FAM_RLT_CL_CD=#famRltClCd#
+				, AMT_SUM=#amtSum#
+				, AMT10=#amt10#
+				, AMT20=#amt20#
+				, AMT40=#amt40#
+				, AMT41=#amt41#
+				, AMT42=#amt42#
+				, AMT50=#amt50#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND FAM_RLT_CL_CD=#famRltClCd#
+				]]>
+	</update>
+	
+	<delete id="ye167430_2019_DAO.deleteYe167430_S">
+		<![CDATA[
+			DELETE FROM YE167430 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND FAM_RLT_CL_CD=#famRltClCd#
+				]]>
+	</delete>
+	
+	<select id="ye167430_2019_DAO.selectYe167430_S" resultMap="ye167430_2019">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, FAM_RLT_CL_CD
+				, AMT_SUM
+				, AMT10
+				, AMT20
+				, AMT40
+				, AMT41
+				, AMT42
+				, AMT50
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE167430
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND FAM_RLT_CL_CD=#famRltClCd#
+				]]>
+	</select>
+	
+	<select id="ye167430_2019_DAO.selectYe167430List_D" parameterClass="ye167430Srh_2019_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, FAM_RLT_CL_CD
+								, AMT_SUM
+								, AMT10
+								, AMT20
+								, AMT40
+								, AMT41
+								, AMT42
+								, AMT50
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE167430
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, FAM_RLT_CL_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="ye167430_2019_DAO.selectYe167430ListTotCnt_S" parameterClass="ye167430Srh_2019_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE167430
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

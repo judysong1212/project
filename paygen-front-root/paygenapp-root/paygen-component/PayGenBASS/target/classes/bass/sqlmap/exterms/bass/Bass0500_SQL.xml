@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass0500">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass0500DTO" type="com.app.exterms.basis.client.dto.Bass0500DTO"/>
+	<typeAlias  alias="bass0500SrhVO" type="com.app.exterms.basis.server.vo.Bass0500SrhVO"/>
+	<typeAlias  alias="bass0500Vo" type="com.app.exterms.basis.server.vo.Bass0500VO"/>
+
+
+	<select id="bass0500DAO.getBass0500BusinYrList" parameterClass="bass0500DTO" resultClass="egovMap">
+		SELECT DISTINCT BUSIN_APPTN_YR
+		FROM BASS0500
+		WHERE DPOB_CD = #dpobCd#
+		GROUP BY BUSIN_APPTN_YR
+		ORDER BY BUSIN_APPTN_YR DESC
+	</select>
+
+
+	
+
+<!-- ############################  이전년도 사업 이관 관련 쿼리 시작 ############################    -->
+	<select id="bass0500DAO.getBass0500BfrBusinYrListCnt" parameterClass="bass0500Vo" resultClass="int">
+		SELECT COUNT(*)
+		FROM BASS0500
+		WHERE
+			<isNotNull property="dpobCd">
+				<isNotEmpty property="dpobCd">
+					DPOB_CD = #dpobCd#
+				</isNotEmpty>
+			</isNotNull>
+			<isNotNull property="deptCd">
+				<isNotEmpty property="deptCd">
+					AND DEPT_CD = #deptCd#
+				</isNotEmpty>
+			</isNotNull>
+			<isNotNull property="businApptnYr">
+				<isNotEmpty property="businApptnYr">
+					AND BUSIN_APPTN_YR = #businApptnYr#
+				</isNotEmpty>
+			</isNotNull>
+			<isNotNull property="businCd">
+				<isNotEmpty property="businCd">
+					AND BUSIN_CD = #businCd#
+				</isNotEmpty>
+			</isNotNull>
+			<isNotNull property="businNm">
+				<isNotEmpty property="businNm">
+						AND BUSIN_NM like '%'|| #businNm# || '%' 
+				</isNotEmpty>
+			</isNotNull>
+	</select>
+	
+	<select id="bass0500DAO.getBass0500BfrBusinYrList" parameterClass="bass0500Vo"  resultClass="egovMap">
+		SELECT 
+				DPOB_CD	
+				, DEPT_CD	
+				, BUSIN_APPTN_YR	
+				, BUSIN_CD			
+				, BUSIN_NM	
+				, BUSIN_EMYMT_TYP_OCCU_CD	
+				, BUSIN_REPBTY_EMP_NUM	
+				, IDTL_ACCDT_INSUR_APMRT		
+				, SPITY_CTNT	
+				, NAT_PENN_SYM	
+				, HLTH_INSR_SYM	
+				, UMYT_INSR_SYM	
+				, IDTL_ACCDT_INSUR_SYM	
+				, KYBDR		
+				, INPT_DT	
+				, INPT_ADDR		
+				, ISMT	
+				, REVN_DT		
+				, REVN_ADDR		
+				, BUSIN_EDDT		
+				, BUSIN_STDT			
+				, HLTH_INSR_OFCE_SYM			
+				, BUSIN_DUTY_NUM_DYS
+				, DILNLAZ_TM_RST_DUTY_TM				
+		FROM BASS0500
+		WHERE
+			<isNotNull property="dpobCd">
+				<isNotEmpty property="dpobCd">
+					DPOB_CD = #dpobCd#
+				</isNotEmpty>
+			</isNotNull>
+			<isNotNull property="deptCd">
+				<isNotEmpty property="deptCd">
+					AND DEPT_CD = #deptCd#
+				</isNotEmpty>
+			</isNotNull>		
+			<isNotNull property="businApptnYr">
+				<isNotEmpty property="businApptnYr">
+					AND BUSIN_APPTN_YR = #businApptnYr#
+				</isNotEmpty>
+			</isNotNull>
+			<isNotNull property="businCd">
+				<isNotEmpty property="businCd">
+					AND BUSIN_CD = #businCd#
+				</isNotEmpty>
+			</isNotNull>
+			<isNotNull property="businNm">
+				<isNotEmpty property="businNm">
+						AND BUSIN_NM like '%'|| #businNm# || '%' 
+				</isNotEmpty>
+			</isNotNull>
+	</select>
+	
+	
+	<insert id="bass0500DAO.insertBass0500"  parameterClass="bass0500Vo" >
+		INSERT INTO BASS0500
+			( 
+				DPOB_CD	
+				, DEPT_CD	
+				, BUSIN_APPTN_YR	
+				, BUSIN_CD			
+				, BUSIN_NM	
+				, BUSIN_EMYMT_TYP_OCCU_CD	
+				, BUSIN_REPBTY_EMP_NUM	
+				, IDTL_ACCDT_INSUR_APMRT		
+				, SPITY_CTNT	
+				, NAT_PENN_SYM	
+				, HLTH_INSR_SYM	
+				, UMYT_INSR_SYM	
+				, IDTL_ACCDT_INSUR_SYM	
+				, KYBDR		
+				, INPT_DT	
+				, INPT_ADDR		
+				, ISMT	
+				, REVN_DT		
+				, REVN_ADDR		
+				, BUSIN_EDDT		
+				, BUSIN_STDT			
+				, HLTH_INSR_OFCE_SYM			
+				, BUSIN_DUTY_NUM_DYS
+				, DILNLAZ_TM_RST_DUTY_TM	
+			)
+			VALUES 
+			(  #dpobCd#
+				, #deptCd#	
+				, #businApptnYr#	
+			    , (
+			    	SELECT  #businApptnYr# || LPAD(NVL(MAX(SUBSTR(BUSIN_CD,5,4)),0)+1,4,'0')
+					FROM BASS0500
+					WHERE BUSIN_APPTN_YR = #businApptnYr#
+				  )	
+				, #businNm#	
+				, #businEmymtTypOccuCd#	
+				, ( SELECT USR_NM FROM SYSM0100 WHERE USR_ID = #businRepbtyEmpNum#	)
+				, #idtlAccdtInsurApmrt#		
+				, #spityCtnt#	
+				, #natPennSym#	
+				, #hlthInsrSym#
+				, #umytInsrSym#	
+				, #idtlAccdtInsurSym#	
+				, #kybdr#		
+				, to_char(sysdate,'yyyymmddhh24miss')
+				, #inptAddr#		
+				, #ismt#	
+				, to_char(sysdate,'yyyymmddhh24miss')		
+				, #revnAddr#		
+				, #businEddt#		
+				, #businStdt#			
+				, #hlthInsrOfceSym#		
+				, #businDutyNumDys#	
+				, #dilnlazTmRstDutyTm#
+			)
+	</insert>
+	
+	
+
+	
+<!-- ############################  이전년도 사업 이관 관련 쿼리 종료 ############################    -->	
+
+
+
+
+	<select id="bass0500DAO.getBass0400List" parameterClass="bass0500DTO"
+		resultClass="egovMap">
+		SELECT DEPT_CD AS COMM_CD, DEPT_NM_RTCHNT AS COMM_CD_NM
+		FROM BASS0400
+		WHERE DEPT_USE_YN = 'Y'
+		ORDER BY LPAD(DEPT_RANK,5,'0') ASC
+	</select>
+	
+	<update id="bass0500DAO.saveBass0500" parameterClass="bass0500DTO">
+			MERGE INTO BASS0500
+			     USING DUAL ON (DPOB_CD = #dpobCd# AND DEPT_CD = #deptCd# AND BUSIN_APPTN_YR = #businApptnYr# AND BUSIN_CD = #businCd# )
+			WHEN MATCHED
+			THEN
+			   UPDATE 
+			      SET  BUSIN_NM = #businNm#,
+				       BUSIN_EMYMT_TYP_OCCU_CD = #businEmymtTypOccuCd#,
+				       BUSIN_REPBTY_EMP_NUM = #businRepbtyEmpNum#,
+				       IDTL_ACCDT_INSUR_APMRT = #idtlAccdtInsurApmrt#,
+				       SPITY_CTNT = #spityCtnt#,
+				       NAT_PENN_SYM = #natPennSym#,
+				       HLTH_INSR_SYM = #hlthInsrSym#,
+				       HLTH_INSR_OFCE_SYM = #hlthInsrOfceSym#,
+				       UMYT_INSR_SYM = #umytInsrSym#,
+				       IDTL_ACCDT_INSUR_SYM = #idtlAccdtInsurSym#,
+				       ISMT = #ismt#,
+				       REVN_DT = to_char(sysdate,'yyyymmddhh24miss'),
+				       REVN_ADDR = #revnAddr#,
+				       BUSIN_STDT = #businStdt#,
+				       BUSIN_EDDT = #businEddt#,
+				       DILNLAZ_TM_RST_DUTY_TM = #dilnlazTmRstDutyTm#
+       		WHEN NOT MATCHED
+			THEN
+			   INSERT 
+						( DPOB_CD,
+	                      DEPT_CD,
+	                      BUSIN_APPTN_YR,
+	                      BUSIN_CD,
+	                      BUSIN_NM,
+	                      BUSIN_EMYMT_TYP_OCCU_CD,
+	                      BUSIN_REPBTY_EMP_NUM,
+	                      IDTL_ACCDT_INSUR_APMRT,
+	                      SPITY_CTNT,
+	                      NAT_PENN_SYM,
+	                      HLTH_INSR_SYM,
+	                      HLTH_INSR_OFCE_SYM,
+	                      UMYT_INSR_SYM,
+	                      IDTL_ACCDT_INSUR_SYM,
+	                      KYBDR,
+	                      INPT_DT,
+	                      INPT_ADDR,
+	                      ISMT,
+	                      REVN_DT,
+	                      REVN_ADDR,
+	                      BUSIN_STDT,
+	                      BUSIN_EDDT,
+	                      DILNLAZ_TM_RST_DUTY_TM)
+				VALUES ( #dpobCd#,
+			             #deptCd#,
+			             #businApptnYr#,
+			             (SELECT  #businApptnYr#||LPAD(NVL(MAX(SUBSTR(BUSIN_CD,5,4)),0)+1,4,'0')
+							FROM BASS0500
+							WHERE BUSIN_APPTN_YR = #businApptnYr#),
+			             #businNm#,
+			             #businEmymtTypOccuCd#,
+			             #businRepbtyEmpNum#,
+			             #idtlAccdtInsurApmrt#,
+			             #spityCtnt#,
+			             #natPennSym#,
+			             #hlthInsrSym#,
+			             #hlthInsrOfceSym#,
+			             #umytInsrSym#,
+			             #idtlAccdtInsurSym#,
+			             #ismt#,
+			             to_char(sysdate,'yyyymmddhh24miss'),
+			             #revnAddr#,
+			             #ismt#,
+			             to_char(sysdate,'yyyymmddhh24miss'),
+			             #revnAddr#,
+			             #businStdt#,
+			             #businEddt#,
+			             #dilnlazTmRstDutyTm#)
+	</update>
+	
+	<delete id="bass0500DAO.deleteBass0500" parameterClass="bass0500DTO">
+		<![CDATA[
+			DELETE FROM BASS0500 
+			WHERE DPOB_CD = #dpobCd# 
+			  AND DEPT_CD = #deptCd# 
+			  AND BUSIN_APPTN_YR = #businApptnYr# 
+			  AND BUSIN_CD = #businCd# 
+			]]>
+	</delete>
+	
+	
+	
+		<select id="bass0500DAO.selectBass0500List" parameterClass="bass0500DTO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT C.DPOB_CD,
+				       (SELECT B.DPOB_NM FROM BASS0100 B WHERE B.DPOB_CD = C.DPOB_CD ) AS DPOB_NM,
+                       C.DEPT_CD,
+				       (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = C.DPOB_CD AND B.DEPT_CD = C.DEPT_CD ) AS DEPT_NM,
+				       C.BUSIN_APPTN_YR,
+				       C.BUSIN_CD,
+				       C.BUSIN_NM,
+				       C.BUSIN_EMYMT_TYP_OCCU_CD,
+				       fcBass0300CDNM(C.DPOB_CD, C.BUSIN_EMYMT_TYP_OCCU_CD ) as BUSIN_EMYMT_TYP_OCCU_NM,
+				       C.BUSIN_REPBTY_EMP_NUM,
+				       C.IDTL_ACCDT_INSUR_APMRT,
+				       C.SPITY_CTNT,
+				       C.NAT_PENN_SYM,
+				       C.HLTH_INSR_SYM,
+				       C.HLTH_INSR_OFCE_SYM,
+				       C.UMYT_INSR_SYM,
+				       C.IDTL_ACCDT_INSUR_SYM,
+				       C.KYBDR,
+				       C.INPT_DT,
+				       C.INPT_ADDR,
+				       C.ISMT,
+				       C.REVN_DT,
+				       C.REVN_ADDR,
+				       C.BUSIN_STDT,
+				       C.BUSIN_EDDT,
+				       C.DILNLAZ_TM_RST_DUTY_TM
+				  FROM BASS0500 C
+				WHERE 1=1
+				<isNotNull property="dpobCd">
+				    <isNotEmpty property="dpobCd">
+				        AND C.DPOB_CD = #dpobCd#
+				    </isNotEmpty>
+				</isNotNull>
+				<isNotNull property="businApptnYr">
+				    <isNotEmpty property="businApptnYr">
+				        AND C.BUSIN_APPTN_YR = #businApptnYr#
+				    </isNotEmpty>
+				</isNotNull>
+				<isNotNull property="deptCd">
+				    <isNotEmpty property="deptCd">
+				        AND C.DEPT_CD = #deptCd#
+				    </isNotEmpty>
+				</isNotNull>
+				<isNotNull property="businNm">
+				    <isNotEmpty property="businNm">
+				        AND C.BUSIN_NM like '%' || #businNm# || '%'
+				    </isNotEmpty>
+				</isNotNull>
+				
+				ORDER BY C.DPOB_CD DESC
+						, (SELECT LPAD(DEPT_RANK,5,'0')  
+                         	FROM BASS0400 DD
+                  			WHERE DD.DEPT_CD = C.DEPT_CD
+                 				AND DD.DPOB_CD = C.DPOB_CD) ASC
+                 		, C.BUSIN_APPTN_YR DESC
+                 		, C.BUSIN_NM ASC
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>
+	
+	<!-- 광명,안양,양평,안성 제외 기존 부서별사업관리 조회쿼리문(근무시간 추가분으로 인한 C.DILNLAZ_TM_RST_DUTY_TM 변경)
+	<select id="bass0500DAO.selectBass0500List" parameterClass="bass0500DTO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT C.DPOB_CD,
+				       (SELECT B.DPOB_NM FROM BASS0100 B WHERE B.DPOB_CD = C.DPOB_CD ) AS DPOB_NM,
+                       C.DEPT_CD,
+				       (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = C.DPOB_CD AND B.DEPT_CD = C.DEPT_CD ) AS DEPT_NM,
+				       C.BUSIN_APPTN_YR,
+				       C.BUSIN_CD,
+				       C.BUSIN_NM,
+				       C.BUSIN_EMYMT_TYP_OCCU_CD,
+				       fcBass0300CDNM(C.DPOB_CD, C.BUSIN_EMYMT_TYP_OCCU_CD ) as BUSIN_EMYMT_TYP_OCCU_NM,
+				       C.BUSIN_REPBTY_EMP_NUM,
+				       C.IDTL_ACCDT_INSUR_APMRT,
+				       C.SPITY_CTNT,
+				       C.NAT_PENN_SYM,
+				       C.HLTH_INSR_SYM,
+				       C.HLTH_INSR_OFCE_SYM,
+				       C.UMYT_INSR_SYM,
+				       C.IDTL_ACCDT_INSUR_SYM,
+				       C.KYBDR,
+				       C.INPT_DT,
+				       C.INPT_ADDR,
+				       C.ISMT,
+				       C.REVN_DT,
+				       C.REVN_ADDR,
+				       C.BUSIN_STDT,
+				       C.BUSIN_EDDT
+				  FROM BASS0500 C
+				WHERE 1=1
+				<isNotNull property="dpobCd">
+				    <isNotEmpty property="dpobCd">
+				        AND C.DPOB_CD = #dpobCd#
+				    </isNotEmpty>
+				</isNotNull>
+				<isNotNull property="businApptnYr">
+				    <isNotEmpty property="businApptnYr">
+				        AND C.BUSIN_APPTN_YR = #businApptnYr#
+				    </isNotEmpty>
+				</isNotNull>
+				<isNotNull property="deptCd">
+				    <isNotEmpty property="deptCd">
+				        AND C.DEPT_CD = #deptCd#
+				    </isNotEmpty>
+				</isNotNull>
+				<isNotNull property="businNm">
+				    <isNotEmpty property="businNm">
+				        AND C.BUSIN_NM like '%' || #businNm# || '%'
+				    </isNotEmpty>
+				</isNotNull>
+				
+				ORDER BY C.DPOB_CD DESC
+						, (SELECT LPAD(DEPT_RANK,5,'0')  
+                         	FROM BASS0400 DD
+                  			WHERE DD.DEPT_CD = C.DEPT_CD
+                 				AND DD.DPOB_CD = C.DPOB_CD) ASC
+                 		, C.BUSIN_APPTN_YR DESC
+                 		, C.BUSIN_NM ASC
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>
+	  -->
+	
+	
+	<select id="bass0500DAO.selectBass0500ListTotCnt" parameterClass="bass0500DTO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0500
+			WHERE 1=1
+			<isNotNull property="dpobCd">
+			    <isNotEmpty property="dpobCd">
+			        AND DPOB_CD = #dpobCd#
+			    </isNotEmpty>
+			</isNotNull>
+			<isNotNull property="businApptnYr">
+			    <isNotEmpty property="businApptnYr">
+			        AND BUSIN_APPTN_YR = #businApptnYr#
+			    </isNotEmpty>
+			</isNotNull>
+			<isNotNull property="deptCd">
+			    <isNotEmpty property="deptCd">
+			        AND DEPT_CD = #deptCd#
+			    </isNotEmpty>
+			</isNotNull>
+			<isNotNull property="businNm">
+			    <isNotEmpty property="businNm">
+			        AND BUSIN_NM like '%' || #businNm# || '%'
+			    </isNotEmpty>
+			</isNotNull>
+	</select>
+
+</sqlMap>

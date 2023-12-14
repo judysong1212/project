@@ -1,0 +1,1815 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Insr3150">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="insr3150SerarchVO" type="com.app.exterms.insurance.server.vo.Insr3150SrhVO"/>
+	
+	
+	<resultMap id="insr3150" class="com.app.exterms.insurance.server.vo.Insr3150VO">
+		<result property="dpobCd"				column="DPOB_CD"				  columnIndex="1"/>
+		<result property="hlthInsrYr"			column="HLTH_INSR_YR"			  columnIndex="2"/>
+		<result property="systemkey"			column="SYSTEMKEY"				  columnIndex="3"/>
+		<result property="dspty"				column="DSPTY"					  columnIndex="4"/>
+		<result property="emymtSeilNum"			column="EMYMT_SEIL_NUM"			  columnIndex="5"/>
+		<result property="dpobMangeNum"			column="DPOB_MANGE_NUM"			  columnIndex="6"/>
+		<result property="acc"					column="ACC"					  columnIndex="7"/>
+		<result property="untDpobCd"			column="UNT_DPOB_CD"			  columnIndex="8"/>
+		<result property="certNumHuhd"			column="CERT_NUM_HUHD"			  columnIndex="9"/>
+		<result property="hlthNm"				column="HLTH_NM"				  columnIndex="10"/>
+		<result property="resnRegnNum"			column="RESN_REGN_NUM"			  columnIndex="11"/>
+		<result property="hlthInsrAqtnDt"		column="HLTH_INSR_AQTN_DT"		  columnIndex="12"/>
+		<result property="iposPrmmMnthHlth"		column="IPOS_PRMM_MNTH_HLTH"	  columnIndex="13"/>
+		<result property="iposPrmmMnthRcptn"	column="IPOS_PRMM_MNTH_RCPTN"	  columnIndex="14"/>
+		<result property="iposTotPrmmAggr"		column="IPOS_TOT_PRMM_AGGR"		  columnIndex="15"/>
+		<result property="iposTotPrmmHlth"		column="IPOS_TOT_PRMM_HLTH"		  columnIndex="16"/>
+		<result property="iposTotPrmmLgtmRcptn"	column="IPOS_TOT_PRMM_LGTM_RCPTN" columnIndex="17"/>
+		<result property="yrlyPayTotAmnt"		column="YRLY_PAY_TOT_AMNT"		  columnIndex="18"/>
+		<result property="dutyMnthIcm"			column="DUTY_MNTH_ICM"			  columnIndex="19"/>
+		<result property="nofctSspn"			column="NOFCT_SSPN"				  columnIndex="20"/>
+		<result property="kybdr"				column="KYBDR"					  columnIndex="21"/>
+		<result property="inptDt"				column="INPT_DT"				  columnIndex="22"/>
+		<result property="inptAddr"				column="INPT_ADDR"				  columnIndex="23"/>
+		<result property="ismt"					column="ISMT"					  columnIndex="24"/>
+		<result property="revnDt"				column="REVN_DT"				  columnIndex="25"/>
+		<result property="revnAddr"				column="REVN_ADDR"				  columnIndex="26"/>
+	</resultMap>
+	
+	<insert id="insr3150DAO.insertInsr3150_S">
+		<![CDATA[
+			INSERT INTO INSR3150 
+				( DPOB_CD
+				  , HLTH_INSR_YR
+				  , SYSTEMKEY
+				  , DSPTY
+				  , EMYMT_SEIL_NUM
+				  , DPOB_MANGE_NUM
+				  , ACC
+				  , UNT_DPOB_CD
+				  , CERT_NUM_HUHD
+				  , HLTH_NM
+				  , RESN_REGN_NUM
+				  , HLTH_INSR_AQTN_DT
+				  , IPOS_PRMM_MNTH_HLTH
+				  , IPOS_PRMM_MNTH_RCPTN
+				  , IPOS_TOT_PRMM_AGGR
+				  , IPOS_TOT_PRMM_HLTH
+				  , IPOS_TOT_PRMM_LGTM_RCPTN
+				  , YRLY_PAY_TOT_AMNT
+				  , DUTY_MNTH_ICM
+				  , NOFCT_SSPN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #hlthInsrYr#
+				  , #systemkey#
+				  , #dspty#
+				  , #emymtSeilNum#
+				  , #dpobMangeNum#
+				  , #acc#
+				  , #untDpobCd#
+				  , #certNumHuhd#
+				  , #hlthNm#
+				  , #resnRegnNum#
+				  , #hlthInsrAqtnDt#
+				  , #iposPrmmMnthHlth#
+				  , #iposPrmmMnthRcptn#
+				  , #iposTotPrmmAggr#
+				  , #iposTotPrmmHlth#
+				  , #iposTotPrmmLgtmRcptn#
+				  , #yrlyPayTotAmnt#
+				  , #dutyMnthIcm#
+				  , #nofctSspn#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="insr3150DAO.updateInsr3150_S">
+		<![CDATA[
+			UPDATE INSR3150
+			SET DPOB_CD=#dpobCd#
+				, HLTH_INSR_YR=#hlthInsrYr#
+				, SYSTEMKEY=#systemkey#
+				, DSPTY=#dspty#
+				, EMYMT_SEIL_NUM=#emymtSeilNum#
+				, DPOB_MANGE_NUM=#dpobMangeNum#
+				, ACC=#acc#
+				, UNT_DPOB_CD=#untDpobCd#
+				, CERT_NUM_HUHD=#certNumHuhd#
+				, HLTH_NM=#hlthNm#
+				, RESN_REGN_NUM=#resnRegnNum#
+				, HLTH_INSR_AQTN_DT=#hlthInsrAqtnDt#
+				, IPOS_PRMM_MNTH_HLTH=#iposPrmmMnthHlth#
+				, IPOS_PRMM_MNTH_RCPTN=#iposPrmmMnthRcptn#
+				, IPOS_TOT_PRMM_AGGR=#iposTotPrmmAggr#
+				, IPOS_TOT_PRMM_HLTH=#iposTotPrmmHlth#
+				, IPOS_TOT_PRMM_LGTM_RCPTN=#iposTotPrmmLgtmRcptn#
+				, YRLY_PAY_TOT_AMNT=#yrlyPayTotAmnt#
+				, DUTY_MNTH_ICM=#dutyMnthIcm#
+				, NOFCT_SSPN=#nofctSspn#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND HLTH_INSR_YR=#hlthInsrYr#
+								AND SYSTEMKEY=#systemkey#
+								AND DSPTY=#dspty#
+				]]>
+	</update>
+	
+	<!-- ########## 엑셀 저장 ##########  -->
+	<delete id="insr3150DAO.deleteXlsInsr3150">
+		<![CDATA[
+			DELETE FROM INSR3150 
+				WHERE DPOB_CD=#dpobCd#
+					AND HLTH_INSR_YR=#hlthInsrYr#
+					AND SYSTEMKEY=(SELECT SYSTEMKEY 
+									FROM PSNL0100 
+									WHERE 
+									RESN_REGN_NUM = REPLACE(#resnRegnNum#,'-',''))
+					AND DSPTY=#dspty#
+		]]>
+	</delete>
+	
+	<insert id="insr3150DAO.insertXlsInsr3150">
+		<![CDATA[
+			INSERT INTO INSR3150 
+				(  DPOB_CD
+				  , HLTH_INSR_YR
+				  , SYSTEMKEY
+				  , DSPTY
+				  , EMYMT_SEIL_NUM
+				  , DPOB_MANGE_NUM
+				  , ACC
+				  , UNT_DPOB_CD
+				  , CERT_NUM_HUHD
+				  , HLTH_NM
+				  , RESN_REGN_NUM
+				  , HLTH_INSR_AQTN_DT
+				  , IPOS_PRMM_MNTH_HLTH
+				  , IPOS_PRMM_MNTH_RCPTN
+				  , IPOS_TOT_PRMM_AGGR
+				  , IPOS_TOT_PRMM_HLTH
+				  , IPOS_TOT_PRMM_LGTM_RCPTN
+				  , YRLY_PAY_TOT_AMNT
+				  , DUTY_MNTH_ICM
+				  , NOFCT_SSPN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES (#dpobCd# 
+				  , #hlthInsrYr#
+				  , #systemkey#
+				  , #dspty#
+				  , #emymtSeilNum#
+				  , REPLACE(#dpobMangeNum#,'-','')
+				  , #acc#
+				  , #untDpobCd#
+				  , #certNumHuhd#
+				  , #hlthNm#
+				  , REPLACE(#resnRegnNum#,'-','') 
+				  , #hlthInsrAqtnDt#
+				  , #iposPrmmMnthHlth#
+				  , #iposPrmmMnthRcptn#
+				  , #iposTotPrmmAggr#
+				  , #iposTotPrmmHlth#
+				  , #iposTotPrmmLgtmRcptn#
+				  , #yrlyPayTotAmnt#
+				  , #dutyMnthIcm#
+				  , #nofctSspn#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<delete id="insr3150DAO.deleteInsr3150_S">
+		<![CDATA[
+			DELETE FROM INSR3150 
+						WHERE DPOB_CD=#dpobCd#
+								AND HLTH_INSR_YR=#hlthInsrYr#
+								AND SYSTEMKEY=#systemkey#
+								AND DSPTY=#dspty#
+				]]>
+	</delete>
+	
+	<select id="insr3150DAO.selectInsr3150_S" resultMap="insr3150">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, HLTH_INSR_YR
+				, SYSTEMKEY
+				, DSPTY
+				, EMYMT_SEIL_NUM
+				, DPOB_MANGE_NUM
+				, ACC
+				, UNT_DPOB_CD
+				, CERT_NUM_HUHD
+				, HLTH_NM
+				, RESN_REGN_NUM
+				, HLTH_INSR_AQTN_DT
+				, IPOS_PRMM_MNTH_HLTH
+				, IPOS_PRMM_MNTH_RCPTN
+				, IPOS_TOT_PRMM_AGGR
+				, IPOS_TOT_PRMM_HLTH
+				, IPOS_TOT_PRMM_LGTM_RCPTN
+				, YRLY_PAY_TOT_AMNT
+				, DUTY_MNTH_ICM
+				, NOFCT_SSPN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM INSR3150
+						WHERE DPOB_CD=#dpobCd#
+								AND HLTH_INSR_YR=#hlthInsrYr#
+								AND SYSTEMKEY=#systemkey#
+								AND DSPTY=#dspty#
+				]]>
+	</select>
+	
+	<select id="insr3150DAO.selectInsr4400ToInsr3150_S" resultMap="insr3150">
+		<![CDATA[
+			SELECT
+				AA.DPOB_CD
+				, AA.HLTH_INSR_YR
+				, BB.SYSTEMKEY
+				, AA.DSPTY
+				, AA.EMYMT_SEIL_NUM
+				, AA.DPOB_MANGE_NUM
+				, AA.ACC
+				, AA.UNT_DPOB_CD
+				, AA.CERT_NUM_HUHD
+				, AA.HLTH_NM
+				, BB.RESN_REGN_NUM
+				, AA.HLTH_INSR_AQTN_DT
+				, AA.IPOS_PRMM_MNTH_HLTH
+				, AA.IPOS_PRMM_MNTH_RCPTN
+				, AA.IPOS_TOT_PRMM_AGGR
+				, AA.IPOS_TOT_PRMM_HLTH
+				, AA.IPOS_TOT_PRMM_LGTM_RCPTN
+				, AA.YRLY_PAY_TOT_AMNT
+				, AA.DUTY_MNTH_ICM
+				, AA.NOFCT_SSPN
+				, AA.KYBDR
+				, AA.INPT_DT
+				, AA.INPT_ADDR
+				, AA.ISMT
+				, AA.REVN_DT
+				, AA.REVN_ADDR
+			FROM  PSNL0100 BB ,INSR3150 AA 
+			WHERE   BB.DPOB_CD = AA.DPOB_CD(+) 
+	                AND BB.SYSTEMKEY = AA.SYSTEMKEY(+)
+			        AND BB.DPOB_CD=#dpobCd#
+					AND AA.HLTH_INSR_YR(+)=#hlthInsrYr# 
+					AND AA.DSPTY(+)=#dspty#
+					AND BB.RESN_REGN_NUM = REPLACE(#resnRegnNum#,'-','') 
+				]]>
+	</select>
+	
+	
+	<select id="insr3150DAO.selectInsr3150List_D" parameterClass="insr3150SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, HLTH_INSR_YR
+								, SYSTEMKEY
+								, DSPTY
+								, EMYMT_SEIL_NUM
+								, DPOB_MANGE_NUM
+								, ACC
+								, UNT_DPOB_CD
+								, CERT_NUM_HUHD
+								, HLTH_NM
+								, RESN_REGN_NUM
+								, HLTH_INSR_AQTN_DT
+								, IPOS_PRMM_MNTH_HLTH
+								, IPOS_PRMM_MNTH_RCPTN
+								, IPOS_TOT_PRMM_AGGR
+								, IPOS_TOT_PRMM_HLTH
+								, IPOS_TOT_PRMM_LGTM_RCPTN
+								, YRLY_PAY_TOT_AMNT
+								, DUTY_MNTH_ICM
+								, NOFCT_SSPN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM INSR3150
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					HLTH_INSR_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, HLTH_INSR_YR DESC
+							, SYSTEMKEY DESC
+							, DSPTY DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="insr3150DAO.selectInsr3150ListTotCnt_S" parameterClass="insr3150SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM INSR3150
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				HLTH_INSR_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+	
+	<select id="insr3150DAO.selectInsr4400ToInsr3150List_D" parameterClass="insr3150SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+	<![CDATA[	
+				SELECT
+			          BB01.DPOB_CD
+			        , BB01.HLTH_INSR_YR
+			        , BB01.SYSTEMKEY
+			        , BB02.DSPTY
+			        , BB02.EMYMT_SEIL_NUM
+			        , BB02.DPOB_MANGE_NUM
+			        , BB02.ACC
+			        , BB02.UNT_DPOB_CD
+			        , BB02.CERT_NUM_HUHD 
+			        , BB01.RESN_REGN_NUM
+			        , BB02.HLTH_INSR_AQTN_DT
+			        , BB02.IPOS_PRMM_MNTH_HLTH
+			        , BB02.IPOS_PRMM_MNTH_RCPTN
+			        , BB02.IPOS_TOT_PRMM_AGGR
+			        , BB02.IPOS_TOT_PRMM_HLTH
+			        , BB02.IPOS_TOT_PRMM_LGTM_RCPTN
+			        , BB01.YRLY_PAY_TOT_AMNT
+			        , BB01.DUTY_MNTH_ICM
+			        , BB02.NOFCT_SSPN
+			        
+			        , BB01.DEPT_CD 
+			        , BB01.DEPT_NM
+			        , BB01.TYP_OCCU_CD
+			        , BB01.TYP_OCCU_NM
+			        , BB01.DTIL_OCCU_INTTN_CD
+			        , BB01.DTIL_OCCU_INTTN_NM
+			        , BB01.BUSIN_CD
+			        , BB01.BUSIN_NM
+			        , BB01.EMYMT_DIV_CD
+			        , BB01.EMYMT_DIV_NM
+			        , DECODE(NVL(BB02.HLTH_NM,'TT'),'TT',BB01.HAN_NM ,BB02.HLTH_NM) AS HLTH_NM
+			
+			FROM 
+			 ]]>
+			     <isGreaterEqual  property="hlthInsrYr" compareValue="2017">
+						<![CDATA[
+						(SELECT                                                                              
+			                   AA01.DPOB_CD, 
+			                   AA01.YRTX_BLGG_YR AS HLTH_INSR_YR ,
+			                   AA01.SYSTEMKEY, 
+			                   AA04.CURR_AFFN_DEPT_CD AS DEPT_CD,
+			                   fcBass0400CDNM (AA04.DPOB_CD, AA04.CURR_AFFN_DEPT_CD, '2') AS DEPT_NM,
+			                   AA04.TYP_OCCU_CD,
+			                   fcBass0320CDNM (AA04.DPOB_CD, AA04.TYP_OCCU_CD) AS TYP_OCCU_NM,
+			                   AA04.DTIL_OCCU_INTTN_CD,
+			                   fcBassEx0350CDNM (AA04.DPOB_CD, AA04.TYP_OCCU_CD, AA04.DTIL_OCCU_INTTN_CD, '1')AS DTIL_OCCU_INTTN_NM,
+			                   AA04.BUSIN_CD,
+			                   fcBass0500CDNM (AA04.DPOB_CD,  SUBSTR (AA04.BUSIN_CD, 1, 4), AA04.CURR_AFFN_DEPT_CD, AA04.BUSIN_CD)AS BUSIN_NM,
+			                   AA04.EMYMT_DIV_CD,
+			                   fcBass0300CDNM (AA04.DPOB_CD, AA04.EMYMT_DIV_CD) AS EMYMT_DIV_NM,
+			                   AA04.HAN_NM,
+			                   AA04.RESN_REGN_NUM,
+			                    AA02.YETA_0C63 AS YRLY_PAY_TOT_AMNT,
+			                    (TRUNC((MONTHS_BETWEEN(TO_DATE(SUBSTR(AA01.EMYMT_END_DT,1,6),'YYYYMM'), TO_DATE(SUBSTR(AA01.EMYMT_BGNN_DT,1,6),'YYYYMM')) + 1),0)
+			                    - NVL(AA03.MONTH_SU,0)) AS DUTY_MNTH_ICM 
+			                 FROM                           
+			                 (SELECT DISTINCT  AA.DPOB_CD, 
+			                                   AA.YRTX_BLGG_YR ,
+			                                   AA.SYSTEMKEY,
+			                                   AA.CLUT_SEPT_CD,              
+			                                   (SELECT CASE WHEN BB.EMYMT_DIV_CD = 'A0020010' THEN  
+			                                                   (CASE WHEN MIN(A01.EMYMT_BGNN_DT) < (AA.YRTX_BLGG_YR || '0101') 
+			                                                        THEN AA.YRTX_BLGG_YR || '0101'
+			                                                    ELSE MIN(A01.EMYMT_BGNN_DT) END)
+			                                                ELSE 
+			                                                     (CASE WHEN MAX(A01.EMYMT_BGNN_DT) < (AA.YRTX_BLGG_YR || '0101') 
+			                                                            THEN AA.YRTX_BLGG_YR || '0101'
+			                                                        ELSE MAX(A01.EMYMT_BGNN_DT) END)
+			                                                END
+			                                     FROM PSNL0110 A01                                                  
+			                                    WHERE   A01.DPOB_CD = AA.DPOB_CD                        
+			                                      AND   A01.SYSTEMKEY = AA.SYSTEMKEY
+			                                      AND   A01.EMYMT_BGNN_DT LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.YRTX_BLGG_YR)  || '%' 
+			                                      AND   A01.EMYMT_TYP_CD <> 'A0420990' )  AS EMYMT_BGNN_DT,                                  
+			                                
+			                                    (CASE WHEN BB.HDOFC_CODTN_CD  <>  'A0030020' THEN  
+			                                            (SELECT CASE WHEN MAX(NVL(A01.EMYMT_END_DT ,'99991231')) > (AA.YRTX_BLGG_YR || '1231') 
+			                                                         THEN (AA.YRTX_BLGG_YR || '1231') 
+			                                                     ELSE   MAX(A01.EMYMT_END_DT) 
+			                                                       END 
+			                                              FROM PSNL0110 A01                                                  
+			                                              WHERE   A01.DPOB_CD = AA.DPOB_CD                           
+			                                                AND   A01.SYSTEMKEY = AA.SYSTEMKEY   
+			                                                AND   NVL(A01.EMYMT_END_DT,'99991231') LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.YRTX_BLGG_YR)  || '%'                                     
+			                                                AND   A01.EMYMT_TYP_CD <> 'A0420990' )                                                 
+			                                       ELSE                                                                                   
+			                                             (SELECT  MAX(A01.EMYMT_END_DT)                                                        
+			                                             FROM PSNL0110 A01                                                                          
+			                                             WHERE   A01.DPOB_CD = AA.DPOB_CD                              
+			                                               AND   A01.SYSTEMKEY = AA.SYSTEMKEY   
+			                                               AND   NVL(A01.EMYMT_END_DT,'99991231') LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.YRTX_BLGG_YR)  || '%'                                     
+			                                               AND   A01.EMYMT_TYP_CD  <> 'A0420990' )                                        
+			                                      END) AS EMYMT_END_DT                                                                 
+			                 FROM YE161010 AA, PSNL0100 BB                                                                  
+			                 WHERE AA.DPOB_CD = BB.DPOB_CD
+			                   AND AA.SYSTEMKEY = BB.SYSTEMKEY) AA01, YE169010 AA02,  (
+			                   SELECT
+			                          DPOB_CD, SYSTEMKEY,
+			                          SUM(ADD_MONTH_SU + (CASE WHEN MONTH_SU < 0 THEN 0 ELSE MONTH_SU END)) AS MONTH_SU
+			                    FROM
+			                    ( 
+			                    SELECT DISTINCT
+			                      DPOB_CD, SYSTEMKEY, 
+			                      LEVF_ABNC_BGNN_DT, (CASE WHEN (
+			                       SELECT TO_CHAR((TO_DATE( AB01.EMYMT_END_DT ,'YYYYMMDD')  + 1),'YYYYMMDD')
+			                       FROM PSNL0110 AB01
+			                       WHERE AB01.EMYMT_TYP_CD = 'A0420040'
+			                         AND AB01.DPOB_CD = AB02.DPOB_CD
+			                         AND AB01.SYSTEMKEY = AB02.SYSTEMKEY
+			                         AND AB01.EMYMT_SEIL_NUM = (AB02.EMYMT_SEIL_NUM - 1)
+			                      ) = AB02.LEVF_ABNC_BGNN_DT THEN 1 ELSE 0 END) AS ADD_MONTH_SU,
+			                      (TRUNC((MONTHS_BETWEEN(TO_DATE(SUBSTR(LEVF_ABNC_END_DT,1,6),'YYYYMM'), TO_DATE(SUBSTR(LEVF_ABNC_BGNN_DT,1,6),'YYYYMM')) + 1),0) 
+			                      - (CASE WHEN SUBSTR(LEVF_ABNC_BGNN_DT,7,2) = '01' THEN 1 
+			                             /* WHEN  SUBSTR(LEVF_ABNC_END_DT,5,4) = '1231'  THEN 0 */
+			                              WHEN SUBSTR(LEVF_ABNC_BGNN_DT,7,2) = '01' AND  SUBSTR(LEVF_ABNC_END_DT,5,4) = '1231'  THEN 0 
+			                              ELSE 2 END)) AS MONTH_SU 
+			                    FROM
+			                    (SELECT  
+			                       DPOB_CD, SYSTEMKEY, EMYMT_SEIL_NUM, EMYMT_BGNN_DT,
+			                       (CASE WHEN EMYMT_BGNN_DT < '20150101' THEN '20150101'
+			                            ELSE EMYMT_BGNN_DT END) AS LEVF_ABNC_BGNN_DT, 
+			                       (CASE WHEN EMYMT_END_DT > '20151231' THEN '20151231'
+			                            ELSE EMYMT_END_DT END)AS LEVF_ABNC_END_DT 
+			                    FROM PSNL0110
+			                      WHERE EMYMT_TYP_CD = 'A0420040'
+			                      AND SUBSTR(EMYMT_BGNN_DT,1,4) <= #hlthInsrYr#
+			                        AND SUBSTR(EMYMT_END_DT,1,4) >= #hlthInsrYr#) AB02 
+			                        )
+			                      GROUP BY DPOB_CD, SYSTEMKEY
+			                   ) AA03, PSNL0100 AA04 ,PAYR0500 AA05
+			                WHERE AA01.DPOB_CD   = AA02.DPOB_CD                             
+			                  AND AA01.YRTX_BLGG_YR = AA02.YRTX_BLGG_YR                                      
+			                  AND AA01.CLUT_SEPT_CD = AA02.CLUT_SEPT_CD                                      
+			                  AND AA01.SYSTEMKEY = AA02.SYSTEMKEY  
+			                  AND AA01.DPOB_CD   = AA04.DPOB_CD                                     
+			                  AND AA01.SYSTEMKEY = AA04.SYSTEMKEY 
+			                  AND AA01.DPOB_CD   = AA05.DPOB_CD                                     
+			                  AND AA01.SYSTEMKEY = AA05.SYSTEMKEY 
+			                  AND AA01.DPOB_CD   = AA03.DPOB_CD(+)                                     
+			                  AND AA01.SYSTEMKEY = AA03.SYSTEMKEY(+) 
+			 	     		 	AND AA04.DPOB_CD=#dpobCd# 
+						
+						 ]]>
+						 	<isNotEmpty prepend="AND" property="hlthInsrYr" >
+			 	 				AA01.YRTX_BLGG_YR =#hlthInsrYr#
+		       				</isNotEmpty>
+						 
+						</isGreaterEqual>
+							
+						<isLessThan  property="hlthInsrYr" compareValue="2017">
+							<![CDATA[
+				        
+							( SELECT                                                                              
+					                   AA01.DPOB_CD, 
+					                   AA01.EDAC_RVYY AS HLTH_INSR_YR ,
+					                   AA01.SYSTEMKEY, 
+					                   AA04.CURR_AFFN_DEPT_CD AS DEPT_CD,
+					                   fcBass0400CDNM (AA04.DPOB_CD, AA04.CURR_AFFN_DEPT_CD, '2') AS DEPT_NM,
+					                   AA04.TYP_OCCU_CD,
+					                   fcBass0320CDNM (AA04.DPOB_CD, AA04.TYP_OCCU_CD) AS TYP_OCCU_NM,
+					                   AA04.DTIL_OCCU_INTTN_CD,
+					                   fcBassEx0350CDNM (AA04.DPOB_CD, AA04.TYP_OCCU_CD, AA04.DTIL_OCCU_INTTN_CD, '1')AS DTIL_OCCU_INTTN_NM,
+					                   AA04.BUSIN_CD,
+					                   fcBass0500CDNM (AA04.DPOB_CD,  SUBSTR (AA04.BUSIN_CD, 1, 4), AA04.CURR_AFFN_DEPT_CD, AA04.BUSIN_CD)AS BUSIN_NM,
+					                   AA04.EMYMT_DIV_CD,
+					                   fcBass0300CDNM (AA04.DPOB_CD, AA04.EMYMT_DIV_CD) AS EMYMT_DIV_NM,
+					                   AA04.HAN_NM,
+					                   AA04.RESN_REGN_NUM,
+					                   AA02.TOTL_SALA AS YRLY_PAY_TOT_AMNT,
+					                   (TRUNC((MONTHS_BETWEEN(TO_DATE(SUBSTR(AA01.EMYMT_END_DT,1,6),'YYYYMM'), TO_DATE(SUBSTR(AA01.EMYMT_BGNN_DT,1,6),'YYYYMM')) + 1),0)
+					                    - NVL(AA03.MONTH_SU,0)) AS DUTY_MNTH_ICM 
+					                 FROM                           
+					                 (SELECT DISTINCT  AA.DPOB_CD, 
+					                                   AA.EDAC_RVYY ,
+					                                   AA.SYSTEMKEY,
+					                                   AA.SETT_GBCD,              
+					                                   (SELECT CASE WHEN BB.EMYMT_DIV_CD = 'A0020010' THEN  
+					                                                   (CASE WHEN MIN(A01.EMYMT_BGNN_DT) < (AA.EDAC_RVYY || '0101') 
+					                                                        THEN AA.EDAC_RVYY || '0101'
+					                                                    ELSE MIN(A01.EMYMT_BGNN_DT) END)
+					                                                ELSE 
+					                                                     (CASE WHEN MAX(A01.EMYMT_BGNN_DT) < (AA.EDAC_RVYY || '0101') 
+					                                                            THEN AA.EDAC_RVYY || '0101'
+					                                                        ELSE MAX(A01.EMYMT_BGNN_DT) END)
+					                                                END
+					                                     FROM PSNL0110 A01                                                  
+					                                    WHERE   A01.DPOB_CD = AA.DPOB_CD                        
+					                                      AND   A01.SYSTEMKEY = AA.SYSTEMKEY
+					                                      AND   A01.EMYMT_BGNN_DT LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.EDAC_RVYY)  || '%' 
+					                                      AND   A01.EMYMT_TYP_CD <> 'A0420990' )  AS EMYMT_BGNN_DT,                                  
+					                                
+					                                    (CASE WHEN BB.HDOFC_CODTN_CD  <>  'A0030020' THEN  
+					                                            (SELECT CASE WHEN MAX(NVL(A01.EMYMT_END_DT ,'99991231')) > (AA.EDAC_RVYY || '1231') 
+					                                                         THEN (AA.EDAC_RVYY || '1231') 
+					                                                     ELSE   MAX(A01.EMYMT_END_DT) 
+					                                                       END 
+					                                              FROM PSNL0110 A01                                                  
+					                                              WHERE   A01.DPOB_CD = AA.DPOB_CD                           
+					                                                AND   A01.SYSTEMKEY = AA.SYSTEMKEY   
+					                                                AND   NVL(A01.EMYMT_END_DT,'99991231') LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.EDAC_RVYY)  || '%'                                     
+					                                                AND   A01.EMYMT_TYP_CD <> 'A0420990' )                                                 
+					                                       ELSE                                                                                   
+					                                             (SELECT  MAX(A01.EMYMT_END_DT)                                                        
+					                                             FROM PSNL0110 A01                                                                          
+					                                             WHERE   A01.DPOB_CD = AA.DPOB_CD                              
+					                                               AND   A01.SYSTEMKEY = AA.SYSTEMKEY   
+					                                               AND   NVL(A01.EMYMT_END_DT,'99991231') LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.EDAC_RVYY)  || '%'                                     
+					                                               AND   A01.EMYMT_TYP_CD  <> 'A0420990' )                                        
+					                                      END) AS EMYMT_END_DT                                                                 
+					                 FROM YETA2000 AA, PSNL0100 BB                                                                  
+					                 WHERE AA.DPOB_CD = BB.DPOB_CD
+					                   AND AA.SYSTEMKEY = BB.SYSTEMKEY) AA01,YETA3000 AA02,  (
+					                   SELECT
+					                          DPOB_CD, SYSTEMKEY,
+					                          SUM(ADD_MONTH_SU + (CASE WHEN MONTH_SU < 0 THEN 0 ELSE MONTH_SU END)) AS MONTH_SU
+					                    FROM
+					                    ( 
+					                    SELECT DISTINCT
+					                      DPOB_CD, SYSTEMKEY, 
+					                      LEVF_ABNC_BGNN_DT, (CASE WHEN (
+					                       SELECT TO_CHAR((TO_DATE( AB01.EMYMT_END_DT ,'YYYYMMDD')  + 1),'YYYYMMDD')
+					                       FROM PSNL0110 AB01
+					                       WHERE AB01.EMYMT_TYP_CD = 'A0420040'
+					                         AND AB01.DPOB_CD = AB02.DPOB_CD
+					                         AND AB01.SYSTEMKEY = AB02.SYSTEMKEY
+					                         AND AB01.EMYMT_SEIL_NUM = (AB02.EMYMT_SEIL_NUM - 1)
+					                      ) = AB02.LEVF_ABNC_BGNN_DT THEN 1 ELSE 0 END) AS ADD_MONTH_SU,
+					                      (TRUNC((MONTHS_BETWEEN(TO_DATE(SUBSTR(LEVF_ABNC_END_DT,1,6),'YYYYMM'), TO_DATE(SUBSTR(LEVF_ABNC_BGNN_DT,1,6),'YYYYMM')) + 1),0) 
+					                      - (CASE WHEN SUBSTR(LEVF_ABNC_BGNN_DT,7,2) = '01' THEN 1 
+					                             /* WHEN  SUBSTR(LEVF_ABNC_END_DT,5,4) = '1231'  THEN 0 */
+					                              WHEN SUBSTR(LEVF_ABNC_BGNN_DT,7,2) = '01' AND  SUBSTR(LEVF_ABNC_END_DT,5,4) = '1231'  THEN 0 
+					                              ELSE 2 END)) AS MONTH_SU 
+					                    FROM
+					                    (SELECT  
+					                       DPOB_CD, SYSTEMKEY, EMYMT_SEIL_NUM, EMYMT_BGNN_DT,
+					                       (CASE WHEN EMYMT_BGNN_DT < '20150101' THEN '20150101'
+					                            ELSE EMYMT_BGNN_DT END) AS LEVF_ABNC_BGNN_DT, 
+					                       (CASE WHEN EMYMT_END_DT > '20151231' THEN '20151231'
+					                            ELSE EMYMT_END_DT END)AS LEVF_ABNC_END_DT 
+					                    FROM PSNL0110
+					                      WHERE EMYMT_TYP_CD = 'A0420040'
+					                      AND SUBSTR(EMYMT_BGNN_DT,1,4) <= #hlthInsrYr#
+					                        AND SUBSTR(EMYMT_END_DT,1,4) >= #hlthInsrYr#) AB02 
+					                        )
+					                      GROUP BY DPOB_CD, SYSTEMKEY
+					                   ) AA03, PSNL0100 AA04 ,PAYR0500 AA05
+					                WHERE AA01.DPOB_CD   = AA02.DPOB_CD                             
+					                  AND AA01.EDAC_RVYY = AA02.EDAC_RVYY                                      
+					                  AND AA01.SETT_GBCD = AA02.SETT_GBCD                                      
+					                  AND AA01.SYSTEMKEY = AA02.SYSTEMKEY  
+					                  AND AA01.DPOB_CD   = AA04.DPOB_CD                                     
+					                  AND AA01.SYSTEMKEY = AA04.SYSTEMKEY 
+					                  AND AA01.DPOB_CD   = AA05.DPOB_CD                                     
+					                  AND AA01.SYSTEMKEY = AA05.SYSTEMKEY 
+					                  AND AA01.DPOB_CD   = AA03.DPOB_CD(+)                                     
+					                  AND AA01.SYSTEMKEY = AA03.SYSTEMKEY(+) 
+					 	     		  AND AA04.DPOB_CD=#dpobCd#
+					 	    	 ]]>
+					 	    	 
+					 	    	 <isNotEmpty prepend="AND" property="hlthInsrYr" >
+			 	 					AA01.EDAC_RVYY =#hlthInsrYr#
+		       					</isNotEmpty>
+		       					
+							</isLessThan>
+							
+		        AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' ))) C
+                                            WHERE     C.DPOB_CD = AA04.DPOB_CD
+						                        AND C.DEPT_CD = AA04.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(AA04.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(AA04.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          )       
+		       <isNotEmpty prepend="AND" property="businCd" >
+			 	AA04.BUSIN_CD=#businCd#
+		       </isNotEmpty> 
+		       
+				<isNotEmpty prepend="AND" property="mangeDeptCd" >
+       			 AA04.DEPT_CD=#mangeDeptCd#
+         		</isNotEmpty> 
+
+	           <isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+	       			 AA04.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+	           </isNotEmpty>
+		       <isNotEmpty property="typOccuCd" prepend="AND">
+				<![CDATA[
+				 AA04.TYP_OCCU_CD
+				]]>
+				<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+				 #typOccuCdArr[]#
+				</iterate>
+				</isNotEmpty>  
+			    <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 AA04.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+		        <!--  <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+				<![CDATA[
+				 BB.DTIL_OCCU_CLS_DIV_CD
+				]]>
+				<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+				 #dtilOccuClsDivCdArr[]#
+				</iterate>
+				</isNotEmpty>  -->
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	AA04.SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="hanNm" >
+			 	AA04.HAN_NM LIKE '%' || #hanNm# || '%'
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="payrMangeDeptCd" >
+			    AA05.PAYR_MANG_DEPT_CD=#payrMangeDeptCd#
+		       </isNotEmpty> 
+		        <isNotEmpty property="hdofcCodtnCd" prepend="AND">
+				<![CDATA[
+				 AA04.HDOFC_CODTN_CD
+				]]>
+				<iterate prepend="IN" property="hdofcCodtnCdArr" open="(" close=")" conjunction=",">
+				 #hdofcCodtnCdArr[]#
+				</iterate>
+				</isNotEmpty> 
+		          <isNotEmpty prepend="AND" property="emymtDivCd" >
+			 	AA04.EMYMT_DIV_CD=#emymtDivCd#
+		       </isNotEmpty>  
+			                  ) BB01,INSR3150 BB02
+			  WHERE  BB01.DPOB_CD   = BB02.DPOB_CD                         
+			  AND BB01.HLTH_INSR_YR = BB02.HLTH_INSR_YR                                   
+			  AND BB01.SYSTEMKEY = BB02.SYSTEMKEY
+			  AND BB02.HLTH_INSR_YR = #hlthInsrYr# 
+			 ORDER BY 
+						BB01.DPOB_CD ASC
+						  ,(SELECT LPAD(DEPT_RANK,5,'0')  
+                                   FROM BASS0400 DD
+                                   WHERE DD.DEPT_CD = BB01.DEPT_CD
+                                     AND DD.DPOB_CD = BB01.DPOB_CD) ASC 
+						, BB01.RESN_REGN_NUM ASC  
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>
+	
+	
+		
+	<select id="insr3150DAO.selectInsr4400ToInsr3150ListTotCnt_S" parameterClass="insr3150SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM (
+			<![CDATA[	
+				SELECT
+			          BB01.DPOB_CD
+			        , BB01.HLTH_INSR_YR
+			        , BB01.SYSTEMKEY
+			        , BB02.EMYMT_SEIL_NUM
+			        , BB02.DSPTY
+			        , BB02.DPOB_MANGE_NUM
+			        , BB02.ACC
+			        , BB02.UNT_DPOB_CD
+			        , BB02.CERT_NUM_HUHD 
+			        , BB01.RESN_REGN_NUM
+			        , BB02.HLTH_INSR_AQTN_DT
+			        , BB02.IPOS_PRMM_MNTH_HLTH
+			        , BB02.IPOS_PRMM_MNTH_RCPTN
+			        , BB02.IPOS_TOT_PRMM_AGGR
+			        , BB02.IPOS_TOT_PRMM_HLTH
+			        , BB02.IPOS_TOT_PRMM_LGTM_RCPTN
+			        , BB01.YRLY_PAY_TOT_AMNT
+			        , BB01.DUTY_MNTH_ICM
+			        , BB02.NOFCT_SSPN
+			        
+			        , BB01.DEPT_CD 
+			        , BB01.DEPT_NM
+			        , BB01.TYP_OCCU_CD
+			        , BB01.TYP_OCCU_NM
+			        , BB01.DTIL_OCCU_INTTN_CD
+			        , BB01.DTIL_OCCU_INTTN_NM
+			        , BB01.BUSIN_CD
+			        , BB01.BUSIN_NM
+			        , BB01.EMYMT_DIV_CD
+			        , BB01.EMYMT_DIV_NM
+			        , DECODE(NVL(BB02.HLTH_NM,'TT'),'TT',BB01.HAN_NM ,BB02.HLTH_NM) AS HLTH_NM
+			FROM
+			
+			]]> 
+			       <isGreaterEqual  property="hlthInsrYr" compareValue="2017">
+						<![CDATA[
+						(SELECT                                                                              
+			                   AA01.DPOB_CD, 
+			                   AA01.YRTX_BLGG_YR AS HLTH_INSR_YR ,
+			                   AA01.SYSTEMKEY, 
+			                   AA04.CURR_AFFN_DEPT_CD AS DEPT_CD,
+			                   fcBass0400CDNM (AA04.DPOB_CD, AA04.CURR_AFFN_DEPT_CD, '2') AS DEPT_NM,
+			                   AA04.TYP_OCCU_CD,
+			                   fcBass0320CDNM (AA04.DPOB_CD, AA04.TYP_OCCU_CD) AS TYP_OCCU_NM,
+			                   AA04.DTIL_OCCU_INTTN_CD,
+			                   fcBassEx0350CDNM (AA04.DPOB_CD, AA04.TYP_OCCU_CD, AA04.DTIL_OCCU_INTTN_CD, '1')AS DTIL_OCCU_INTTN_NM,
+			                   AA04.BUSIN_CD,
+			                   fcBass0500CDNM (AA04.DPOB_CD,  SUBSTR (AA04.BUSIN_CD, 1, 4), AA04.CURR_AFFN_DEPT_CD, AA04.BUSIN_CD)AS BUSIN_NM,
+			                   AA04.EMYMT_DIV_CD,
+			                   fcBass0300CDNM (AA04.DPOB_CD, AA04.EMYMT_DIV_CD) AS EMYMT_DIV_NM,
+			                   AA04.HAN_NM,
+			                   AA04.RESN_REGN_NUM,
+			                    AA02.YETA_0C63 AS YRLY_PAY_TOT_AMNT,
+			                    (TRUNC((MONTHS_BETWEEN(TO_DATE(SUBSTR(AA01.EMYMT_END_DT,1,6),'YYYYMM'), TO_DATE(SUBSTR(AA01.EMYMT_BGNN_DT,1,6),'YYYYMM')) + 1),0)
+			                    - NVL(AA03.MONTH_SU,0)) AS DUTY_MNTH_ICM 
+			                 FROM                           
+			                 (SELECT DISTINCT  AA.DPOB_CD, 
+			                                   AA.YRTX_BLGG_YR ,
+			                                   AA.SYSTEMKEY,
+			                                   AA.CLUT_SEPT_CD,              
+			                                   (SELECT CASE WHEN BB.EMYMT_DIV_CD = 'A0020010' THEN  
+			                                                   (CASE WHEN MIN(A01.EMYMT_BGNN_DT) < (AA.YRTX_BLGG_YR || '0101') 
+			                                                        THEN AA.YRTX_BLGG_YR || '0101'
+			                                                    ELSE MIN(A01.EMYMT_BGNN_DT) END)
+			                                                ELSE 
+			                                                     (CASE WHEN MAX(A01.EMYMT_BGNN_DT) < (AA.YRTX_BLGG_YR || '0101') 
+			                                                            THEN AA.YRTX_BLGG_YR || '0101'
+			                                                        ELSE MAX(A01.EMYMT_BGNN_DT) END)
+			                                                END
+			                                     FROM PSNL0110 A01                                                  
+			                                    WHERE   A01.DPOB_CD = AA.DPOB_CD                        
+			                                      AND   A01.SYSTEMKEY = AA.SYSTEMKEY
+			                                      AND   A01.EMYMT_BGNN_DT LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.YRTX_BLGG_YR)  || '%' 
+			                                      AND   A01.EMYMT_TYP_CD <> 'A0420990' )  AS EMYMT_BGNN_DT,                                  
+			                                
+			                                    (CASE WHEN BB.HDOFC_CODTN_CD  <>  'A0030020' THEN  
+			                                            (SELECT CASE WHEN MAX(NVL(A01.EMYMT_END_DT ,'99991231')) > (AA.YRTX_BLGG_YR || '1231') 
+			                                                         THEN (AA.YRTX_BLGG_YR || '1231') 
+			                                                     ELSE   MAX(A01.EMYMT_END_DT) 
+			                                                       END 
+			                                              FROM PSNL0110 A01                                                  
+			                                              WHERE   A01.DPOB_CD = AA.DPOB_CD                           
+			                                                AND   A01.SYSTEMKEY = AA.SYSTEMKEY   
+			                                                AND   NVL(A01.EMYMT_END_DT,'99991231') LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.YRTX_BLGG_YR)  || '%'                                     
+			                                                AND   A01.EMYMT_TYP_CD <> 'A0420990' )                                                 
+			                                       ELSE                                                                                   
+			                                             (SELECT  MAX(A01.EMYMT_END_DT)                                                        
+			                                             FROM PSNL0110 A01                                                                          
+			                                             WHERE   A01.DPOB_CD = AA.DPOB_CD                              
+			                                               AND   A01.SYSTEMKEY = AA.SYSTEMKEY   
+			                                               AND   NVL(A01.EMYMT_END_DT,'99991231') LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.YRTX_BLGG_YR)  || '%'                                     
+			                                               AND   A01.EMYMT_TYP_CD  <> 'A0420990' )                                        
+			                                      END) AS EMYMT_END_DT                                                                 
+			                 FROM YE161010 AA, PSNL0100 BB                                                                  
+			                 WHERE AA.DPOB_CD = BB.DPOB_CD
+			                   AND AA.SYSTEMKEY = BB.SYSTEMKEY) AA01, YE169010 AA02,  (
+			                   SELECT
+			                          DPOB_CD, SYSTEMKEY,
+			                          SUM(ADD_MONTH_SU + (CASE WHEN MONTH_SU < 0 THEN 0 ELSE MONTH_SU END)) AS MONTH_SU
+			                    FROM
+			                    ( 
+			                    SELECT DISTINCT
+			                      DPOB_CD, SYSTEMKEY, 
+			                      LEVF_ABNC_BGNN_DT, (CASE WHEN (
+			                       SELECT TO_CHAR((TO_DATE( AB01.EMYMT_END_DT ,'YYYYMMDD')  + 1),'YYYYMMDD')
+			                       FROM PSNL0110 AB01
+			                       WHERE AB01.EMYMT_TYP_CD = 'A0420040'
+			                         AND AB01.DPOB_CD = AB02.DPOB_CD
+			                         AND AB01.SYSTEMKEY = AB02.SYSTEMKEY
+			                         AND AB01.EMYMT_SEIL_NUM = (AB02.EMYMT_SEIL_NUM - 1)
+			                      ) = AB02.LEVF_ABNC_BGNN_DT THEN 1 ELSE 0 END) AS ADD_MONTH_SU,
+			                      (TRUNC((MONTHS_BETWEEN(TO_DATE(SUBSTR(LEVF_ABNC_END_DT,1,6),'YYYYMM'), TO_DATE(SUBSTR(LEVF_ABNC_BGNN_DT,1,6),'YYYYMM')) + 1),0) 
+			                      - (CASE WHEN SUBSTR(LEVF_ABNC_BGNN_DT,7,2) = '01' THEN 1 
+			                             /* WHEN  SUBSTR(LEVF_ABNC_END_DT,5,4) = '1231'  THEN 0 */
+			                              WHEN SUBSTR(LEVF_ABNC_BGNN_DT,7,2) = '01' AND  SUBSTR(LEVF_ABNC_END_DT,5,4) = '1231'  THEN 0 
+			                              ELSE 2 END)) AS MONTH_SU 
+			                    FROM
+			                    (SELECT  
+			                       DPOB_CD, SYSTEMKEY, EMYMT_SEIL_NUM, EMYMT_BGNN_DT,
+			                       (CASE WHEN EMYMT_BGNN_DT < '20150101' THEN '20150101'
+			                            ELSE EMYMT_BGNN_DT END) AS LEVF_ABNC_BGNN_DT, 
+			                       (CASE WHEN EMYMT_END_DT > '20151231' THEN '20151231'
+			                            ELSE EMYMT_END_DT END)AS LEVF_ABNC_END_DT 
+			                    FROM PSNL0110
+			                      WHERE EMYMT_TYP_CD = 'A0420040'
+			                      AND SUBSTR(EMYMT_BGNN_DT,1,4) <= #hlthInsrYr#
+			                        AND SUBSTR(EMYMT_END_DT,1,4) >= #hlthInsrYr#) AB02 
+			                        )
+			                      GROUP BY DPOB_CD, SYSTEMKEY
+			                   ) AA03, PSNL0100 AA04 ,PAYR0500 AA05
+			                WHERE AA01.DPOB_CD   = AA02.DPOB_CD                             
+			                  AND AA01.YRTX_BLGG_YR = AA02.YRTX_BLGG_YR                                      
+			                  AND AA01.CLUT_SEPT_CD = AA02.CLUT_SEPT_CD                                      
+			                  AND AA01.SYSTEMKEY = AA02.SYSTEMKEY  
+			                  AND AA01.DPOB_CD   = AA04.DPOB_CD                                     
+			                  AND AA01.SYSTEMKEY = AA04.SYSTEMKEY 
+			                  AND AA01.DPOB_CD   = AA05.DPOB_CD                                     
+			                  AND AA01.SYSTEMKEY = AA05.SYSTEMKEY 
+			                  AND AA01.DPOB_CD   = AA03.DPOB_CD(+)                                     
+			                  AND AA01.SYSTEMKEY = AA03.SYSTEMKEY(+) 
+			 	     		  AND AA04.DPOB_CD=#dpobCd# 
+						 ]]>
+						 
+						  	<isNotEmpty prepend="AND" property="hlthInsrYr" >
+			 	 				AA01.YRTX_BLGG_YR =#hlthInsrYr#
+		       				</isNotEmpty>  
+		       				
+						</isGreaterEqual>
+							
+						<isLessThan  property="hlthInsrYr" compareValue="2017">
+							<![CDATA[
+				        
+							( SELECT                                                                              
+					                   AA01.DPOB_CD, 
+					                   AA01.EDAC_RVYY AS HLTH_INSR_YR ,
+					                   AA01.SYSTEMKEY, 
+					                   AA04.CURR_AFFN_DEPT_CD AS DEPT_CD,
+					                   fcBass0400CDNM (AA04.DPOB_CD, AA04.CURR_AFFN_DEPT_CD, '2') AS DEPT_NM,
+					                   AA04.TYP_OCCU_CD,
+					                   fcBass0320CDNM (AA04.DPOB_CD, AA04.TYP_OCCU_CD) AS TYP_OCCU_NM,
+					                   AA04.DTIL_OCCU_INTTN_CD,
+					                   fcBassEx0350CDNM (AA04.DPOB_CD, AA04.TYP_OCCU_CD, AA04.DTIL_OCCU_INTTN_CD, '1')AS DTIL_OCCU_INTTN_NM,
+					                   AA04.BUSIN_CD,
+					                   fcBass0500CDNM (AA04.DPOB_CD,  SUBSTR (AA04.BUSIN_CD, 1, 4), AA04.CURR_AFFN_DEPT_CD, AA04.BUSIN_CD)AS BUSIN_NM,
+					                   AA04.EMYMT_DIV_CD,
+					                   fcBass0300CDNM (AA04.DPOB_CD, AA04.EMYMT_DIV_CD) AS EMYMT_DIV_NM,
+					                   AA04.HAN_NM,
+					                   AA04.RESN_REGN_NUM,
+					                   AA02.TOTL_SALA AS YRLY_PAY_TOT_AMNT,
+					                   (TRUNC((MONTHS_BETWEEN(TO_DATE(SUBSTR(AA01.EMYMT_END_DT,1,6),'YYYYMM'), TO_DATE(SUBSTR(AA01.EMYMT_BGNN_DT,1,6),'YYYYMM')) + 1),0)
+					                    - NVL(AA03.MONTH_SU,0)) AS DUTY_MNTH_ICM 
+					                 FROM                           
+					                 (SELECT DISTINCT  AA.DPOB_CD, 
+					                                   AA.EDAC_RVYY ,
+					                                   AA.SYSTEMKEY,
+					                                   AA.SETT_GBCD,              
+					                                   (SELECT CASE WHEN BB.EMYMT_DIV_CD = 'A0020010' THEN  
+					                                                   (CASE WHEN MIN(A01.EMYMT_BGNN_DT) < (AA.EDAC_RVYY || '0101') 
+					                                                        THEN AA.EDAC_RVYY || '0101'
+					                                                    ELSE MIN(A01.EMYMT_BGNN_DT) END)
+					                                                ELSE 
+					                                                     (CASE WHEN MAX(A01.EMYMT_BGNN_DT) < (AA.EDAC_RVYY || '0101') 
+					                                                            THEN AA.EDAC_RVYY || '0101'
+					                                                        ELSE MAX(A01.EMYMT_BGNN_DT) END)
+					                                                END
+					                                     FROM PSNL0110 A01                                                  
+					                                    WHERE   A01.DPOB_CD = AA.DPOB_CD                        
+					                                      AND   A01.SYSTEMKEY = AA.SYSTEMKEY
+					                                      AND   A01.EMYMT_BGNN_DT LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.EDAC_RVYY)  || '%' 
+					                                      AND   A01.EMYMT_TYP_CD <> 'A0420990' )  AS EMYMT_BGNN_DT,                                  
+					                                
+					                                    (CASE WHEN BB.HDOFC_CODTN_CD  <>  'A0030020' THEN  
+					                                            (SELECT CASE WHEN MAX(NVL(A01.EMYMT_END_DT ,'99991231')) > (AA.EDAC_RVYY || '1231') 
+					                                                         THEN (AA.EDAC_RVYY || '1231') 
+					                                                     ELSE   MAX(A01.EMYMT_END_DT) 
+					                                                       END 
+					                                              FROM PSNL0110 A01                                                  
+					                                              WHERE   A01.DPOB_CD = AA.DPOB_CD                           
+					                                                AND   A01.SYSTEMKEY = AA.SYSTEMKEY   
+					                                                AND   NVL(A01.EMYMT_END_DT,'99991231') LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.EDAC_RVYY)  || '%'                                     
+					                                                AND   A01.EMYMT_TYP_CD <> 'A0420990' )                                                 
+					                                       ELSE                                                                                   
+					                                             (SELECT  MAX(A01.EMYMT_END_DT)                                                        
+					                                             FROM PSNL0110 A01                                                                          
+					                                             WHERE   A01.DPOB_CD = AA.DPOB_CD                              
+					                                               AND   A01.SYSTEMKEY = AA.SYSTEMKEY   
+					                                               AND   NVL(A01.EMYMT_END_DT,'99991231') LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.EDAC_RVYY)  || '%'                                     
+					                                               AND   A01.EMYMT_TYP_CD  <> 'A0420990' )                                        
+					                                      END) AS EMYMT_END_DT                                                                 
+					                 FROM YETA2000 AA, PSNL0100 BB                                                                  
+					                 WHERE AA.DPOB_CD = BB.DPOB_CD
+					                   AND AA.SYSTEMKEY = BB.SYSTEMKEY) AA01,YETA3000 AA02,  (
+					                   SELECT
+					                          DPOB_CD, SYSTEMKEY,
+					                          SUM(ADD_MONTH_SU + (CASE WHEN MONTH_SU < 0 THEN 0 ELSE MONTH_SU END)) AS MONTH_SU
+					                    FROM
+					                    ( 
+					                    SELECT DISTINCT
+					                      DPOB_CD, SYSTEMKEY, 
+					                      LEVF_ABNC_BGNN_DT, (CASE WHEN (
+					                       SELECT TO_CHAR((TO_DATE( AB01.EMYMT_END_DT ,'YYYYMMDD')  + 1),'YYYYMMDD')
+					                       FROM PSNL0110 AB01
+					                       WHERE AB01.EMYMT_TYP_CD = 'A0420040'
+					                         AND AB01.DPOB_CD = AB02.DPOB_CD
+					                         AND AB01.SYSTEMKEY = AB02.SYSTEMKEY
+					                         AND AB01.EMYMT_SEIL_NUM = (AB02.EMYMT_SEIL_NUM - 1)
+					                      ) = AB02.LEVF_ABNC_BGNN_DT THEN 1 ELSE 0 END) AS ADD_MONTH_SU,
+					                      (TRUNC((MONTHS_BETWEEN(TO_DATE(SUBSTR(LEVF_ABNC_END_DT,1,6),'YYYYMM'), TO_DATE(SUBSTR(LEVF_ABNC_BGNN_DT,1,6),'YYYYMM')) + 1),0) 
+					                      - (CASE WHEN SUBSTR(LEVF_ABNC_BGNN_DT,7,2) = '01' THEN 1 
+					                             /* WHEN  SUBSTR(LEVF_ABNC_END_DT,5,4) = '1231'  THEN 0 */
+					                              WHEN SUBSTR(LEVF_ABNC_BGNN_DT,7,2) = '01' AND  SUBSTR(LEVF_ABNC_END_DT,5,4) = '1231'  THEN 0 
+					                              ELSE 2 END)) AS MONTH_SU 
+					                    FROM
+					                    (SELECT  
+					                       DPOB_CD, SYSTEMKEY, EMYMT_SEIL_NUM, EMYMT_BGNN_DT,
+					                       (CASE WHEN EMYMT_BGNN_DT < '20150101' THEN '20150101'
+					                            ELSE EMYMT_BGNN_DT END) AS LEVF_ABNC_BGNN_DT, 
+					                       (CASE WHEN EMYMT_END_DT > '20151231' THEN '20151231'
+					                            ELSE EMYMT_END_DT END)AS LEVF_ABNC_END_DT 
+					                    FROM PSNL0110
+					                      WHERE EMYMT_TYP_CD = 'A0420040'
+					                      AND SUBSTR(EMYMT_BGNN_DT,1,4) <= #hlthInsrYr#
+					                        AND SUBSTR(EMYMT_END_DT,1,4) >= #hlthInsrYr#) AB02 
+					                        )
+					                      GROUP BY DPOB_CD, SYSTEMKEY
+					                   ) AA03, PSNL0100 AA04 ,PAYR0500 AA05
+					                WHERE AA01.DPOB_CD   = AA02.DPOB_CD                             
+					                  AND AA01.EDAC_RVYY = AA02.EDAC_RVYY                                      
+					                  AND AA01.SETT_GBCD = AA02.SETT_GBCD                                      
+					                  AND AA01.SYSTEMKEY = AA02.SYSTEMKEY  
+					                  AND AA01.DPOB_CD   = AA04.DPOB_CD                                     
+					                  AND AA01.SYSTEMKEY = AA04.SYSTEMKEY 
+					                  AND AA01.DPOB_CD   = AA05.DPOB_CD                                     
+					                  AND AA01.SYSTEMKEY = AA05.SYSTEMKEY 
+					                  AND AA01.DPOB_CD   = AA03.DPOB_CD(+)                                     
+					                  AND AA01.SYSTEMKEY = AA03.SYSTEMKEY(+) 
+					 	     		  AND AA04.DPOB_CD=#dpobCd#
+					 	    	 ]]>
+					 	    	 
+					 			<isNotEmpty prepend="AND" property="hlthInsrYr" >
+			 	 					AA01.EDAC_RVYY =#hlthInsrYr#
+		       					</isNotEmpty>
+		       					
+							</isLessThan>
+		        
+		        AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             (  SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' ))) C
+                                            WHERE     C.DPOB_CD = AA04.DPOB_CD
+						                        AND C.DEPT_CD = AA04.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(AA04.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(AA04.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          )       
+		       <isNotEmpty prepend="AND" property="businCd" >
+			 	AA04.BUSIN_CD=#businCd#
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+			 	AA04.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="mangeDeptCd" >
+		        AA04.DEPT_CD=#mangeDeptCd#
+		        </isNotEmpty> 
+		       <isNotEmpty property="typOccuCd" prepend="AND">
+				<![CDATA[
+				 AA04.TYP_OCCU_CD
+				]]>
+				<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+				 #typOccuCdArr[]#
+				</iterate>
+				</isNotEmpty>  
+			    <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 AA04.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+		        <!--  <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+				<![CDATA[
+				 BB.DTIL_OCCU_CLS_DIV_CD
+				]]>
+				<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+				 #dtilOccuClsDivCdArr[]#
+				</iterate>
+				</isNotEmpty>  -->
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	AA04.SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="hanNm" >
+			 	AA04.HAN_NM LIKE '%' || #hanNm# || '%'
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="payrMangeDeptCd" >
+			    AA05.PAYR_MANG_DEPT_CD=#payrMangeDeptCd#
+		       </isNotEmpty> 
+		        <isNotEmpty property="hdofcCodtnCd" prepend="AND">
+				<![CDATA[
+				 AA04.HDOFC_CODTN_CD
+				]]>
+				<iterate prepend="IN" property="hdofcCodtnCdArr" open="(" close=")" conjunction=",">
+				 #hdofcCodtnCdArr[]#
+				</iterate>
+				</isNotEmpty> 
+		          <isNotEmpty prepend="AND" property="emymtDivCd" >
+			 	AA04.EMYMT_DIV_CD=#emymtDivCd#
+		       </isNotEmpty>  
+			                  ) BB01,INSR3150 BB02
+			  WHERE  BB01.DPOB_CD   = BB02.DPOB_CD                             
+			  AND BB01.HLTH_INSR_YR = BB02.HLTH_INSR_YR                                     
+			  AND BB01.SYSTEMKEY = BB02.SYSTEMKEY
+			  AND BB02.HLTH_INSR_YR = #hlthInsrYr#  
+			) 
+	</select>
+	
+		<select id="insr3150DAO.selectXlsInsr4400ToInsr3150List_D" parameterClass="insr3150SerarchVO" resultClass="egovMap">
+ SELECT * FROM (
+	SELECT A.*, ROWNUM RWNUM FROM (
+			<![CDATA[	
+						SELECT   BB01.DPOB_CD
+					        , BB01.HLTH_INSR_YR
+					        , BB01.SYSTEMKEY
+					        , BB02.EMYMT_SEIL_NUM
+					        , BB02.DSPTY
+					        , BB02.DPOB_MANGE_NUM
+					        , BB02.ACC
+					        , BB02.UNT_DPOB_CD
+					        , BB02.CERT_NUM_HUHD 
+					        , BB01.RESN_REGN_NUM
+					        , BB02.HLTH_INSR_AQTN_DT
+					        , BB02.IPOS_PRMM_MNTH_HLTH
+					        , BB02.IPOS_PRMM_MNTH_RCPTN
+					        , BB02.IPOS_TOT_PRMM_AGGR
+					        , BB02.IPOS_TOT_PRMM_HLTH
+					        , BB02.IPOS_TOT_PRMM_LGTM_RCPTN
+					        
+					        , BB01.YRLY_PAY_TOT_AMNT
+					        , BB01.DUTY_MNTH_ICM
+					        , BB02.NOFCT_SSPN
+					        , BB01.DEPT_CD 
+					        , BB01.DEPT_NM
+					        , BB01.TYP_OCCU_CD
+					        , BB01.TYP_OCCU_NM
+					        , BB01.DTIL_OCCU_INTTN_CD
+					        , BB01.DTIL_OCCU_INTTN_NM
+					        , BB01.BUSIN_CD
+					        , BB01.BUSIN_NM
+					        , BB01.EMYMT_DIV_CD
+					        , BB01.EMYMT_DIV_NM 
+					        , DECODE(NVL(BB02.HLTH_NM,'TT'),'TT',BB01.HAN_NM ,BB02.HLTH_NM) AS HLTH_NM
+					 ]]>
+					FROM 
+						<isGreaterEqual  property="hlthInsrYr" compareValue="2017">
+						<![CDATA[
+						(SELECT                                                                              
+			                   AA01.DPOB_CD, 
+			                   AA01.YRTX_BLGG_YR AS HLTH_INSR_YR ,
+			                   AA01.SYSTEMKEY, 
+			                   AA04.CURR_AFFN_DEPT_CD AS DEPT_CD,
+			                   fcBass0400CDNM (AA04.DPOB_CD, AA04.CURR_AFFN_DEPT_CD, '2') AS DEPT_NM,
+			                   AA04.TYP_OCCU_CD,
+			                   fcBass0320CDNM (AA04.DPOB_CD, AA04.TYP_OCCU_CD) AS TYP_OCCU_NM,
+			                   AA04.DTIL_OCCU_INTTN_CD,
+			                   fcBassEx0350CDNM (AA04.DPOB_CD, AA04.TYP_OCCU_CD, AA04.DTIL_OCCU_INTTN_CD, '1')AS DTIL_OCCU_INTTN_NM,
+			                   AA04.BUSIN_CD,
+			                   fcBass0500CDNM (AA04.DPOB_CD,  SUBSTR (AA04.BUSIN_CD, 1, 4), AA04.CURR_AFFN_DEPT_CD, AA04.BUSIN_CD)AS BUSIN_NM,
+			                   AA04.EMYMT_DIV_CD,
+			                   fcBass0300CDNM (AA04.DPOB_CD, AA04.EMYMT_DIV_CD) AS EMYMT_DIV_NM,
+			                   AA04.HAN_NM,
+			                   AA04.RESN_REGN_NUM,
+			                    AA02.YETA_0C63 AS YRLY_PAY_TOT_AMNT,
+			                    (TRUNC((MONTHS_BETWEEN(TO_DATE(SUBSTR(AA01.EMYMT_END_DT,1,6),'YYYYMM'), TO_DATE(SUBSTR(AA01.EMYMT_BGNN_DT,1,6),'YYYYMM')) + 1),0)
+			                    - NVL(AA03.MONTH_SU,0)) AS DUTY_MNTH_ICM 
+			                 FROM                           
+			                 (SELECT DISTINCT  AA.DPOB_CD, 
+			                                   AA.YRTX_BLGG_YR ,
+			                                   AA.SYSTEMKEY,
+			                                   AA.CLUT_SEPT_CD,              
+			                                   (SELECT CASE WHEN BB.EMYMT_DIV_CD = 'A0020010' THEN  
+			                                                   (CASE WHEN MIN(A01.EMYMT_BGNN_DT) < (AA.YRTX_BLGG_YR || '0101') 
+			                                                        THEN AA.YRTX_BLGG_YR || '0101'
+			                                                    ELSE MIN(A01.EMYMT_BGNN_DT) END)
+			                                                ELSE 
+			                                                     (CASE WHEN MAX(A01.EMYMT_BGNN_DT) < (AA.YRTX_BLGG_YR || '0101') 
+			                                                            THEN AA.YRTX_BLGG_YR || '0101'
+			                                                        ELSE MAX(A01.EMYMT_BGNN_DT) END)
+			                                                END
+			                                     FROM PSNL0110 A01                                                  
+			                                    WHERE   A01.DPOB_CD = AA.DPOB_CD                        
+			                                      AND   A01.SYSTEMKEY = AA.SYSTEMKEY
+			                                      AND   A01.EMYMT_BGNN_DT LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.YRTX_BLGG_YR)  || '%' 
+			                                      AND   A01.EMYMT_TYP_CD <> 'A0420990' )  AS EMYMT_BGNN_DT,                                  
+			                                
+			                                    (CASE WHEN BB.HDOFC_CODTN_CD  <>  'A0030020' THEN  
+			                                            (SELECT CASE WHEN MAX(NVL(A01.EMYMT_END_DT ,'99991231')) > (AA.YRTX_BLGG_YR || '1231') 
+			                                                         THEN (AA.YRTX_BLGG_YR || '1231') 
+			                                                     ELSE   MAX(A01.EMYMT_END_DT) 
+			                                                       END 
+			                                              FROM PSNL0110 A01                                                  
+			                                              WHERE   A01.DPOB_CD = AA.DPOB_CD                           
+			                                                AND   A01.SYSTEMKEY = AA.SYSTEMKEY   
+			                                                AND   NVL(A01.EMYMT_END_DT,'99991231') LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.YRTX_BLGG_YR)  || '%'                                     
+			                                                AND   A01.EMYMT_TYP_CD <> 'A0420990' )                                                 
+			                                       ELSE                                                                                   
+			                                             (SELECT  MAX(A01.EMYMT_END_DT)                                                        
+			                                             FROM PSNL0110 A01                                                                          
+			                                             WHERE   A01.DPOB_CD = AA.DPOB_CD                              
+			                                               AND   A01.SYSTEMKEY = AA.SYSTEMKEY   
+			                                               AND   NVL(A01.EMYMT_END_DT,'99991231') LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.YRTX_BLGG_YR)  || '%'                                     
+			                                               AND   A01.EMYMT_TYP_CD  <> 'A0420990' )                                        
+			                                      END) AS EMYMT_END_DT                                                                 
+			                 FROM YE161010 AA, PSNL0100 BB                                                                  
+			                 WHERE AA.DPOB_CD = BB.DPOB_CD
+			                   AND AA.SYSTEMKEY = BB.SYSTEMKEY) AA01, YE169010 AA02,  (
+			                   SELECT
+			                          DPOB_CD, SYSTEMKEY,
+			                          SUM(ADD_MONTH_SU + (CASE WHEN MONTH_SU < 0 THEN 0 ELSE MONTH_SU END)) AS MONTH_SU
+			                    FROM
+			                    ( 
+			                    SELECT DISTINCT
+			                      DPOB_CD, SYSTEMKEY, 
+			                      LEVF_ABNC_BGNN_DT, (CASE WHEN (
+			                       SELECT TO_CHAR((TO_DATE( AB01.EMYMT_END_DT ,'YYYYMMDD')  + 1),'YYYYMMDD')
+			                       FROM PSNL0110 AB01
+			                       WHERE AB01.EMYMT_TYP_CD = 'A0420040'
+			                         AND AB01.DPOB_CD = AB02.DPOB_CD
+			                         AND AB01.SYSTEMKEY = AB02.SYSTEMKEY
+			                         AND AB01.EMYMT_SEIL_NUM = (AB02.EMYMT_SEIL_NUM - 1)
+			                      ) = AB02.LEVF_ABNC_BGNN_DT THEN 1 ELSE 0 END) AS ADD_MONTH_SU,
+			                      (TRUNC((MONTHS_BETWEEN(TO_DATE(SUBSTR(LEVF_ABNC_END_DT,1,6),'YYYYMM'), TO_DATE(SUBSTR(LEVF_ABNC_BGNN_DT,1,6),'YYYYMM')) + 1),0) 
+			                      - (CASE WHEN SUBSTR(LEVF_ABNC_BGNN_DT,7,2) = '01' THEN 1 
+			                             /* WHEN  SUBSTR(LEVF_ABNC_END_DT,5,4) = '1231'  THEN 0 */
+			                              WHEN SUBSTR(LEVF_ABNC_BGNN_DT,7,2) = '01' AND  SUBSTR(LEVF_ABNC_END_DT,5,4) = '1231'  THEN 0 
+			                              ELSE 2 END)) AS MONTH_SU 
+			                    FROM
+			                    (SELECT  
+			                       DPOB_CD, SYSTEMKEY, EMYMT_SEIL_NUM, EMYMT_BGNN_DT,
+			                       (CASE WHEN EMYMT_BGNN_DT < '20150101' THEN '20150101'
+			                            ELSE EMYMT_BGNN_DT END) AS LEVF_ABNC_BGNN_DT, 
+			                       (CASE WHEN EMYMT_END_DT > '20151231' THEN '20151231'
+			                            ELSE EMYMT_END_DT END)AS LEVF_ABNC_END_DT 
+			                    FROM PSNL0110
+			                      WHERE EMYMT_TYP_CD = 'A0420040'
+			                      AND SUBSTR(EMYMT_BGNN_DT,1,4) <= #hlthInsrYr#
+			                        AND SUBSTR(EMYMT_END_DT,1,4) >= #hlthInsrYr#) AB02 
+			                        )
+			                      GROUP BY DPOB_CD, SYSTEMKEY
+			                   ) AA03, PSNL0100 AA04 ,PAYR0500 AA05
+			                WHERE AA01.DPOB_CD   = AA02.DPOB_CD                             
+			                  AND AA01.YRTX_BLGG_YR = AA02.YRTX_BLGG_YR                                      
+			                  AND AA01.CLUT_SEPT_CD = AA02.CLUT_SEPT_CD                                      
+			                  AND AA01.SYSTEMKEY = AA02.SYSTEMKEY  
+			                  AND AA01.DPOB_CD   = AA04.DPOB_CD                                     
+			                  AND AA01.SYSTEMKEY = AA04.SYSTEMKEY 
+			                  AND AA01.DPOB_CD   = AA05.DPOB_CD                                     
+			                  AND AA01.SYSTEMKEY = AA05.SYSTEMKEY 
+			                  AND AA01.DPOB_CD   = AA03.DPOB_CD(+)                                     
+			                  AND AA01.SYSTEMKEY = AA03.SYSTEMKEY(+) 
+			 	     		 AND AA04.DPOB_CD=#dpobCd# 
+						
+						 ]]>
+						 
+						  <isNotEmpty prepend="AND" property="hlthInsrYr" >
+			 	 					AA01.YRTX_BLGG_YR =#hlthInsrYr#
+		       			  </isNotEmpty>
+		       					
+						</isGreaterEqual>
+							
+						<isLessThan  property="hlthInsrYr" compareValue="2017">
+							<![CDATA[
+				        
+							( SELECT                                                                              
+					                   AA01.DPOB_CD, 
+					                   AA01.EDAC_RVYY AS HLTH_INSR_YR ,
+					                   AA01.SYSTEMKEY, 
+					                   AA04.CURR_AFFN_DEPT_CD AS DEPT_CD,
+					                   fcBass0400CDNM (AA04.DPOB_CD, AA04.CURR_AFFN_DEPT_CD, '2') AS DEPT_NM,
+					                   AA04.TYP_OCCU_CD,
+					                   fcBass0320CDNM (AA04.DPOB_CD, AA04.TYP_OCCU_CD) AS TYP_OCCU_NM,
+					                   AA04.DTIL_OCCU_INTTN_CD,
+					                   fcBassEx0350CDNM (AA04.DPOB_CD, AA04.TYP_OCCU_CD, AA04.DTIL_OCCU_INTTN_CD, '1')AS DTIL_OCCU_INTTN_NM,
+					                   AA04.BUSIN_CD,
+					                   fcBass0500CDNM (AA04.DPOB_CD,  SUBSTR (AA04.BUSIN_CD, 1, 4), AA04.CURR_AFFN_DEPT_CD, AA04.BUSIN_CD)AS BUSIN_NM,
+					                   AA04.EMYMT_DIV_CD,
+					                   fcBass0300CDNM (AA04.DPOB_CD, AA04.EMYMT_DIV_CD) AS EMYMT_DIV_NM,
+					                   AA04.HAN_NM,
+					                   AA04.RESN_REGN_NUM,
+					                   AA02.TOTL_SALA AS YRLY_PAY_TOT_AMNT,
+					                   (TRUNC((MONTHS_BETWEEN(TO_DATE(SUBSTR(AA01.EMYMT_END_DT,1,6),'YYYYMM'), TO_DATE(SUBSTR(AA01.EMYMT_BGNN_DT,1,6),'YYYYMM')) + 1),0)
+					                    - NVL(AA03.MONTH_SU,0)) AS DUTY_MNTH_ICM 
+					                 FROM                           
+					                 (SELECT DISTINCT  AA.DPOB_CD, 
+					                                   AA.EDAC_RVYY ,
+					                                   AA.SYSTEMKEY,
+					                                   AA.SETT_GBCD,              
+					                                   (SELECT CASE WHEN BB.EMYMT_DIV_CD = 'A0020010' THEN  
+					                                                   (CASE WHEN MIN(A01.EMYMT_BGNN_DT) < (AA.EDAC_RVYY || '0101') 
+					                                                        THEN AA.EDAC_RVYY || '0101'
+					                                                    ELSE MIN(A01.EMYMT_BGNN_DT) END)
+					                                                ELSE 
+					                                                     (CASE WHEN MAX(A01.EMYMT_BGNN_DT) < (AA.EDAC_RVYY || '0101') 
+					                                                            THEN AA.EDAC_RVYY || '0101'
+					                                                        ELSE MAX(A01.EMYMT_BGNN_DT) END)
+					                                                END
+					                                     FROM PSNL0110 A01                                                  
+					                                    WHERE   A01.DPOB_CD = AA.DPOB_CD                        
+					                                      AND   A01.SYSTEMKEY = AA.SYSTEMKEY
+					                                      AND   A01.EMYMT_BGNN_DT LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.EDAC_RVYY)  || '%' 
+					                                      AND   A01.EMYMT_TYP_CD <> 'A0420990' )  AS EMYMT_BGNN_DT,                                  
+					                                
+					                                    (CASE WHEN BB.HDOFC_CODTN_CD  <>  'A0030020' THEN  
+					                                            (SELECT CASE WHEN MAX(NVL(A01.EMYMT_END_DT ,'99991231')) > (AA.EDAC_RVYY || '1231') 
+					                                                         THEN (AA.EDAC_RVYY || '1231') 
+					                                                     ELSE   MAX(A01.EMYMT_END_DT) 
+					                                                       END 
+					                                              FROM PSNL0110 A01                                                  
+					                                              WHERE   A01.DPOB_CD = AA.DPOB_CD                           
+					                                                AND   A01.SYSTEMKEY = AA.SYSTEMKEY   
+					                                                AND   NVL(A01.EMYMT_END_DT,'99991231') LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.EDAC_RVYY)  || '%'                                     
+					                                                AND   A01.EMYMT_TYP_CD <> 'A0420990' )                                                 
+					                                       ELSE                                                                                   
+					                                             (SELECT  MAX(A01.EMYMT_END_DT)                                                        
+					                                             FROM PSNL0110 A01                                                                          
+					                                             WHERE   A01.DPOB_CD = AA.DPOB_CD                              
+					                                               AND   A01.SYSTEMKEY = AA.SYSTEMKEY   
+					                                               AND   NVL(A01.EMYMT_END_DT,'99991231') LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.EDAC_RVYY)  || '%'                                     
+					                                               AND   A01.EMYMT_TYP_CD  <> 'A0420990' )                                        
+					                                      END) AS EMYMT_END_DT                                                                 
+					                 FROM YETA2000 AA, PSNL0100 BB                                                                  
+					                 WHERE AA.DPOB_CD = BB.DPOB_CD
+					                   AND AA.SYSTEMKEY = BB.SYSTEMKEY) AA01,YETA3000 AA02,  (
+					                   SELECT
+					                          DPOB_CD, SYSTEMKEY,
+					                          SUM(ADD_MONTH_SU + (CASE WHEN MONTH_SU < 0 THEN 0 ELSE MONTH_SU END)) AS MONTH_SU
+					                    FROM
+					                    ( 
+					                    SELECT DISTINCT
+					                      DPOB_CD, SYSTEMKEY, 
+					                      LEVF_ABNC_BGNN_DT, (CASE WHEN (
+					                       SELECT TO_CHAR((TO_DATE( AB01.EMYMT_END_DT ,'YYYYMMDD')  + 1),'YYYYMMDD')
+					                       FROM PSNL0110 AB01
+					                       WHERE AB01.EMYMT_TYP_CD = 'A0420040'
+					                         AND AB01.DPOB_CD = AB02.DPOB_CD
+					                         AND AB01.SYSTEMKEY = AB02.SYSTEMKEY
+					                         AND AB01.EMYMT_SEIL_NUM = (AB02.EMYMT_SEIL_NUM - 1)
+					                      ) = AB02.LEVF_ABNC_BGNN_DT THEN 1 ELSE 0 END) AS ADD_MONTH_SU,
+					                      (TRUNC((MONTHS_BETWEEN(TO_DATE(SUBSTR(LEVF_ABNC_END_DT,1,6),'YYYYMM'), TO_DATE(SUBSTR(LEVF_ABNC_BGNN_DT,1,6),'YYYYMM')) + 1),0) 
+					                      - (CASE WHEN SUBSTR(LEVF_ABNC_BGNN_DT,7,2) = '01' THEN 1 
+					                             /* WHEN  SUBSTR(LEVF_ABNC_END_DT,5,4) = '1231'  THEN 0 */
+					                              WHEN SUBSTR(LEVF_ABNC_BGNN_DT,7,2) = '01' AND  SUBSTR(LEVF_ABNC_END_DT,5,4) = '1231'  THEN 0 
+					                              ELSE 2 END)) AS MONTH_SU 
+					                    FROM
+					                    (SELECT  
+					                       DPOB_CD, SYSTEMKEY, EMYMT_SEIL_NUM, EMYMT_BGNN_DT,
+					                       (CASE WHEN EMYMT_BGNN_DT < '20150101' THEN '20150101'
+					                            ELSE EMYMT_BGNN_DT END) AS LEVF_ABNC_BGNN_DT, 
+					                       (CASE WHEN EMYMT_END_DT > '20151231' THEN '20151231'
+					                            ELSE EMYMT_END_DT END)AS LEVF_ABNC_END_DT 
+					                    FROM PSNL0110
+					                      WHERE EMYMT_TYP_CD = 'A0420040'
+					                      AND SUBSTR(EMYMT_BGNN_DT,1,4) <= #hlthInsrYr#
+					                        AND SUBSTR(EMYMT_END_DT,1,4) >= #hlthInsrYr#) AB02 
+					                        )
+					                      GROUP BY DPOB_CD, SYSTEMKEY
+					                   ) AA03, PSNL0100 AA04 ,PAYR0500 AA05
+					                WHERE AA01.DPOB_CD   = AA02.DPOB_CD                             
+					                  AND AA01.EDAC_RVYY = AA02.EDAC_RVYY                                      
+					                  AND AA01.SETT_GBCD = AA02.SETT_GBCD                                      
+					                  AND AA01.SYSTEMKEY = AA02.SYSTEMKEY  
+					                  AND AA01.DPOB_CD   = AA04.DPOB_CD                                     
+					                  AND AA01.SYSTEMKEY = AA04.SYSTEMKEY 
+					                  AND AA01.DPOB_CD   = AA05.DPOB_CD                                     
+					                  AND AA01.SYSTEMKEY = AA05.SYSTEMKEY 
+					                  AND AA01.DPOB_CD   = AA03.DPOB_CD(+)                                     
+					                  AND AA01.SYSTEMKEY = AA03.SYSTEMKEY(+) 
+					 	     		  AND AA04.DPOB_CD=#dpobCd#
+					 	    	 ]]>
+					 	    	 
+					 	    	  <isNotEmpty prepend="AND" property="hlthInsrYr" >
+			 	 					AA01.EDAC_RVYY =#hlthInsrYr#
+		       			  		</isNotEmpty>
+		       			  		
+							</isLessThan>
+
+					
+				        AND EXISTS  (
+		                         SELECT  C.DPOB_CD,
+		                                 C.DTIL_OCCU_INTTN_CD,
+		                                 C.TYP_OCCU_CD,
+		                                 C.DEPT_CD FROM 
+		                                             (  SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+		                                            WHERE     C.DPOB_CD = AA04.DPOB_CD
+								                        AND C.DEPT_CD = AA04.CURR_AFFN_DEPT_CD
+								                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(AA04.TYP_OCCU_CD,'TT') 
+		                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(AA04.DTIL_OCCU_INTTN_CD,'TT')
+		                                               <isNotEmpty property="deptCd" prepend="AND">
+														<![CDATA[
+														 C.DEPT_CD
+														]]>
+														<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+														 #deptCdArr[]#
+														</iterate>
+														</isNotEmpty> 
+		                                          )       
+				       <isNotEmpty prepend="AND" property="businCd" >
+					 	AA04.BUSIN_CD=#businCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="mangeDeptCd" >
+						 AA04.DEPT_CD=#mangeDeptCd#
+						</isNotEmpty>      
+						<isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+						 AA04.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+						</isNotEmpty>  
+				       <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+						 AA04.TYP_OCCU_CD
+						]]>
+						<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						 #typOccuCdArr[]#
+						</iterate>
+						</isNotEmpty>  
+					    <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+								<![CDATA[
+									 AA04.DTIL_OCCU_INTTN_CD
+								]]>
+								<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+									 #dtilOccuInttnCdArr[]#
+								</iterate>
+							</isNotEmpty>  
+				        <!--  <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+						<![CDATA[
+						 BB.DTIL_OCCU_CLS_DIV_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+						 #dtilOccuClsDivCdArr[]#
+						</iterate>
+						</isNotEmpty>  -->
+				       <isNotEmpty prepend="AND" property="systemkey" >
+					 	AA04.SYSTEMKEY=#systemkey#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="hanNm" >
+					 	AA04.HAN_NM LIKE '%' || #hanNm# || '%'
+				       </isNotEmpty> 
+				        <isNotEmpty prepend="AND" property="payrMangeDeptCd" >
+					    AA05.PAYR_MANG_DEPT_CD=#payrMangeDeptCd#
+				       </isNotEmpty> 
+				        <isNotEmpty property="hdofcCodtnCd" prepend="AND">
+						<![CDATA[
+						 AA04.HDOFC_CODTN_CD
+						]]>
+						<iterate prepend="IN" property="hdofcCodtnCdArr" open="(" close=")" conjunction=",">
+						 #hdofcCodtnCdArr[]#
+						</iterate>
+						</isNotEmpty> 
+				          <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	AA04.EMYMT_DIV_CD=#emymtDivCd#
+				       </isNotEmpty>  
+					                  ) BB01
+					                  
+					   	, INSR3150 BB02
+					   	
+					  WHERE  BB01.DPOB_CD   = BB02.DPOB_CD                           
+					  	AND BB01.HLTH_INSR_YR = BB02.HLTH_INSR_YR                                  
+					  	AND BB01.SYSTEMKEY = BB02.SYSTEMKEY 
+					  	AND BB02.HLTH_INSR_YR = #hlthInsrYr#
+					 ORDER BY 
+								BB01.DPOB_CD ASC
+								  ,(SELECT LPAD(DEPT_RANK,5,'0')  
+		                                   FROM BASS0400 DD
+		                                   WHERE DD.DEPT_CD = BB01.DEPT_CD
+		                                     AND DD.DPOB_CD = BB01.DPOB_CD) ASC 
+								, BB01.RESN_REGN_NUM ASC  
+				<![CDATA[					
+		) A 
+	)
+	ORDER BY  RWNUM ASC 
+	
+	]]>						 
+	</select>
+  
+	<select id="insr3150DAO.selectTxtInsr4400ToInsr3150List_D" parameterClass="insr3150SerarchVO" resultClass="egovMap">
+ SELECT * FROM (
+	SELECT A.*, ROWNUM RWNUM FROM (
+			<![CDATA[	
+						SELECT BB02.DPOB_CD
+					        , BB02.HLTH_INSR_YR
+					        , BB02.SYSTEMKEY
+					        , LPAD(BB02.EMYMT_SEIL_NUM,6,'0') AS EMYMT_SEIL_NUM
+					        , BB02.DSPTY
+					        , LPAD(BB02.DPOB_MANGE_NUM,11,'0') AS DPOB_MANGE_NUM
+					        , LPAD(BB02.ACC,2,'0') AS ACC
+					        , LPAD(BB02.UNT_DPOB_CD,3,'0') AS UNT_DPOB_CD
+					        , RPAD(BB02.CERT_NUM_HUHD,11,' ') AS  CERT_NUM_HUHD
+					        , DECODE(NVL(BB02.HLTH_NM,'TT'),'TT',BB01.HAN_NM ,BB02.HLTH_NM) ||
+					            RPAD(' ',(16 - (LENGTH(DECODE(NVL(BB02.HLTH_NM,'TT'),'TT',BB01.HAN_NM ,BB02.HLTH_NM)) * 2)),' ')  AS HLTH_NM
+					        , RPAD((SUBSTR(BB02.RESN_REGN_NUM,1,6) || '-' ||SUBSTR(BB02.RESN_REGN_NUM,7,7) ),14,' ') AS RESN_REGN_NUM
+					        , LPAD(BB02.HLTH_INSR_AQTN_DT,8,'0') AS HLTH_INSR_AQTN_DT
+					        , LPAD(BB02.IPOS_PRMM_MNTH_HLTH,2,'0') AS IPOS_PRMM_MNTH_HLTH
+					        , LPAD(BB02.IPOS_PRMM_MNTH_RCPTN,2,'0') AS IPOS_PRMM_MNTH_RCPTN
+					        , LPAD(BB02.IPOS_TOT_PRMM_AGGR,10,'0') AS IPOS_TOT_PRMM_AGGR
+					        , LPAD(BB02.IPOS_TOT_PRMM_HLTH,10,'0') AS IPOS_TOT_PRMM_HLTH
+					        , LPAD(BB02.IPOS_TOT_PRMM_LGTM_RCPTN,10,'0') AS IPOS_TOT_PRMM_LGTM_RCPTN
+					        , LPAD(NVL(BB01.YRLY_PAY_TOT_AMNT,'0'),13,'0') AS YRLY_PAY_TOT_AMNT
+					        , LPAD(NVL(BB01.DUTY_MNTH_ICM,'0'),2,'0') AS DUTY_MNTH_ICM 
+					        , LPAD(BB02.NOFCT_SSPN,2,'0') AS NOFCT_SSPN
+					        , BB01.DEPT_CD 
+					        , BB01.DEPT_NM
+					        , BB01.TYP_OCCU_CD
+					        , BB01.TYP_OCCU_NM
+					        , BB01.DTIL_OCCU_INTTN_CD
+					        , BB01.DTIL_OCCU_INTTN_NM
+					        , BB01.BUSIN_CD
+					        , BB01.BUSIN_NM
+					        , BB01.EMYMT_DIV_CD
+					        , BB01.EMYMT_DIV_NM  
+					        
+					FROM  
+					]]>
+						<isGreaterEqual  property="hlthInsrYr" compareValue="2017">
+						<![CDATA[
+						(SELECT                                                                              
+			                   AA01.DPOB_CD, 
+			                   AA01.YRTX_BLGG_YR AS HLTH_INSR_YR ,
+			                   AA01.SYSTEMKEY, 
+			                   AA04.CURR_AFFN_DEPT_CD AS DEPT_CD,
+			                   fcBass0400CDNM (AA04.DPOB_CD, AA04.CURR_AFFN_DEPT_CD, '2') AS DEPT_NM,
+			                   AA04.TYP_OCCU_CD,
+			                   fcBass0320CDNM (AA04.DPOB_CD, AA04.TYP_OCCU_CD) AS TYP_OCCU_NM,
+			                   AA04.DTIL_OCCU_INTTN_CD,
+			                   fcBassEx0350CDNM (AA04.DPOB_CD, AA04.TYP_OCCU_CD, AA04.DTIL_OCCU_INTTN_CD, '1')AS DTIL_OCCU_INTTN_NM,
+			                   AA04.BUSIN_CD,
+			                   fcBass0500CDNM (AA04.DPOB_CD,  SUBSTR (AA04.BUSIN_CD, 1, 4), AA04.CURR_AFFN_DEPT_CD, AA04.BUSIN_CD)AS BUSIN_NM,
+			                   AA04.EMYMT_DIV_CD,
+			                   fcBass0300CDNM (AA04.DPOB_CD, AA04.EMYMT_DIV_CD) AS EMYMT_DIV_NM,
+			                   AA04.HAN_NM,
+			                   AA04.RESN_REGN_NUM,
+			                    AA02.YETA_0C63 AS YRLY_PAY_TOT_AMNT,
+			                    (TRUNC((MONTHS_BETWEEN(TO_DATE(SUBSTR(AA01.EMYMT_END_DT,1,6),'YYYYMM'), TO_DATE(SUBSTR(AA01.EMYMT_BGNN_DT,1,6),'YYYYMM')) + 1),0)
+			                    - NVL(AA03.MONTH_SU,0)) AS DUTY_MNTH_ICM 
+			                 FROM                           
+			                 (SELECT DISTINCT  AA.DPOB_CD, 
+			                                   AA.YRTX_BLGG_YR ,
+			                                   AA.SYSTEMKEY,
+			                                   AA.CLUT_SEPT_CD,              
+			                                   (SELECT CASE WHEN BB.EMYMT_DIV_CD = 'A0020010' THEN  
+			                                                   (CASE WHEN MIN(A01.EMYMT_BGNN_DT) < (AA.YRTX_BLGG_YR || '0101') 
+			                                                        THEN AA.YRTX_BLGG_YR || '0101'
+			                                                    ELSE MIN(A01.EMYMT_BGNN_DT) END)
+			                                                ELSE 
+			                                                     (CASE WHEN MAX(A01.EMYMT_BGNN_DT) < (AA.YRTX_BLGG_YR || '0101') 
+			                                                            THEN AA.YRTX_BLGG_YR || '0101'
+			                                                        ELSE MAX(A01.EMYMT_BGNN_DT) END)
+			                                                END
+			                                     FROM PSNL0110 A01                                                  
+			                                    WHERE   A01.DPOB_CD = AA.DPOB_CD                        
+			                                      AND   A01.SYSTEMKEY = AA.SYSTEMKEY
+			                                      AND   A01.EMYMT_BGNN_DT LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.YRTX_BLGG_YR)  || '%' 
+			                                      AND   A01.EMYMT_TYP_CD <> 'A0420990' )  AS EMYMT_BGNN_DT,                                  
+			                                
+			                                    (CASE WHEN BB.HDOFC_CODTN_CD  <>  'A0030020' THEN  
+			                                            (SELECT CASE WHEN MAX(NVL(A01.EMYMT_END_DT ,'99991231')) > (AA.YRTX_BLGG_YR || '1231') 
+			                                                         THEN (AA.YRTX_BLGG_YR || '1231') 
+			                                                     ELSE   MAX(A01.EMYMT_END_DT) 
+			                                                       END 
+			                                              FROM PSNL0110 A01                                                  
+			                                              WHERE   A01.DPOB_CD = AA.DPOB_CD                           
+			                                                AND   A01.SYSTEMKEY = AA.SYSTEMKEY   
+			                                                AND   NVL(A01.EMYMT_END_DT,'99991231') LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.YRTX_BLGG_YR)  || '%'                                     
+			                                                AND   A01.EMYMT_TYP_CD <> 'A0420990' )                                                 
+			                                       ELSE                                                                                   
+			                                             (SELECT  MAX(A01.EMYMT_END_DT)                                                        
+			                                             FROM PSNL0110 A01                                                                          
+			                                             WHERE   A01.DPOB_CD = AA.DPOB_CD                              
+			                                               AND   A01.SYSTEMKEY = AA.SYSTEMKEY   
+			                                               AND   NVL(A01.EMYMT_END_DT,'99991231') LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.YRTX_BLGG_YR)  || '%'                                     
+			                                               AND   A01.EMYMT_TYP_CD  <> 'A0420990' )                                        
+			                                      END) AS EMYMT_END_DT                                                                 
+			                 FROM YE161010 AA, PSNL0100 BB                                                                  
+			                 WHERE AA.DPOB_CD = BB.DPOB_CD
+			                   AND AA.SYSTEMKEY = BB.SYSTEMKEY) AA01, YE169010 AA02,  (
+			                   SELECT
+			                          DPOB_CD, SYSTEMKEY,
+			                          SUM(ADD_MONTH_SU + (CASE WHEN MONTH_SU < 0 THEN 0 ELSE MONTH_SU END)) AS MONTH_SU
+			                    FROM
+			                    ( 
+			                    SELECT DISTINCT
+			                      DPOB_CD, SYSTEMKEY, 
+			                      LEVF_ABNC_BGNN_DT, (CASE WHEN (
+			                       SELECT TO_CHAR((TO_DATE( AB01.EMYMT_END_DT ,'YYYYMMDD')  + 1),'YYYYMMDD')
+			                       FROM PSNL0110 AB01
+			                       WHERE AB01.EMYMT_TYP_CD = 'A0420040'
+			                         AND AB01.DPOB_CD = AB02.DPOB_CD
+			                         AND AB01.SYSTEMKEY = AB02.SYSTEMKEY
+			                         AND AB01.EMYMT_SEIL_NUM = (AB02.EMYMT_SEIL_NUM - 1)
+			                      ) = AB02.LEVF_ABNC_BGNN_DT THEN 1 ELSE 0 END) AS ADD_MONTH_SU,
+			                      (TRUNC((MONTHS_BETWEEN(TO_DATE(SUBSTR(LEVF_ABNC_END_DT,1,6),'YYYYMM'), TO_DATE(SUBSTR(LEVF_ABNC_BGNN_DT,1,6),'YYYYMM')) + 1),0) 
+			                      - (CASE WHEN SUBSTR(LEVF_ABNC_BGNN_DT,7,2) = '01' THEN 1 
+			                             /* WHEN  SUBSTR(LEVF_ABNC_END_DT,5,4) = '1231'  THEN 0 */
+			                              WHEN SUBSTR(LEVF_ABNC_BGNN_DT,7,2) = '01' AND  SUBSTR(LEVF_ABNC_END_DT,5,4) = '1231'  THEN 0 
+			                              ELSE 2 END)) AS MONTH_SU 
+			                    FROM
+			                    (SELECT  
+			                       DPOB_CD, SYSTEMKEY, EMYMT_SEIL_NUM, EMYMT_BGNN_DT,
+			                       (CASE WHEN EMYMT_BGNN_DT < '20150101' THEN '20150101'
+			                            ELSE EMYMT_BGNN_DT END) AS LEVF_ABNC_BGNN_DT, 
+			                       (CASE WHEN EMYMT_END_DT > '20151231' THEN '20151231'
+			                            ELSE EMYMT_END_DT END)AS LEVF_ABNC_END_DT 
+			                    FROM PSNL0110
+			                      WHERE EMYMT_TYP_CD = 'A0420040'
+			                      AND SUBSTR(EMYMT_BGNN_DT,1,4) <= #hlthInsrYr#
+			                        AND SUBSTR(EMYMT_END_DT,1,4) >= #hlthInsrYr#) AB02 
+			                        )
+			                      GROUP BY DPOB_CD, SYSTEMKEY
+			                   ) AA03, PSNL0100 AA04 ,PAYR0500 AA05
+			                WHERE AA01.DPOB_CD   = AA02.DPOB_CD                             
+			                  AND AA01.YRTX_BLGG_YR = AA02.YRTX_BLGG_YR                                      
+			                  AND AA01.CLUT_SEPT_CD = AA02.CLUT_SEPT_CD                                      
+			                  AND AA01.SYSTEMKEY = AA02.SYSTEMKEY  
+			                  AND AA01.DPOB_CD   = AA04.DPOB_CD                                     
+			                  AND AA01.SYSTEMKEY = AA04.SYSTEMKEY 
+			                  AND AA01.DPOB_CD   = AA05.DPOB_CD                                     
+			                  AND AA01.SYSTEMKEY = AA05.SYSTEMKEY 
+			                  AND AA01.DPOB_CD   = AA03.DPOB_CD(+)                                     
+			                  AND AA01.SYSTEMKEY = AA03.SYSTEMKEY(+) 
+			 	     		 AND AA04.DPOB_CD=#dpobCd# 
+						
+						 ]]>
+						 
+						  <isNotEmpty prepend="AND" property="hlthInsrYr" >
+			 	 					AA01.YRTX_BLGG_YR =#hlthInsrYr#
+		       			  </isNotEmpty>
+		       			  		
+						</isGreaterEqual>
+							
+						<isLessThan  property="hlthInsrYr" compareValue="2017">
+							<![CDATA[
+				        
+							( SELECT                                                                              
+					                   AA01.DPOB_CD, 
+					                   AA01.EDAC_RVYY AS HLTH_INSR_YR ,
+					                   AA01.SYSTEMKEY, 
+					                   AA04.CURR_AFFN_DEPT_CD AS DEPT_CD,
+					                   fcBass0400CDNM (AA04.DPOB_CD, AA04.CURR_AFFN_DEPT_CD, '2') AS DEPT_NM,
+					                   AA04.TYP_OCCU_CD,
+					                   fcBass0320CDNM (AA04.DPOB_CD, AA04.TYP_OCCU_CD) AS TYP_OCCU_NM,
+					                   AA04.DTIL_OCCU_INTTN_CD,
+					                   fcBassEx0350CDNM (AA04.DPOB_CD, AA04.TYP_OCCU_CD, AA04.DTIL_OCCU_INTTN_CD, '1')AS DTIL_OCCU_INTTN_NM,
+					                   AA04.BUSIN_CD,
+					                   fcBass0500CDNM (AA04.DPOB_CD,  SUBSTR (AA04.BUSIN_CD, 1, 4), AA04.CURR_AFFN_DEPT_CD, AA04.BUSIN_CD)AS BUSIN_NM,
+					                   AA04.EMYMT_DIV_CD,
+					                   fcBass0300CDNM (AA04.DPOB_CD, AA04.EMYMT_DIV_CD) AS EMYMT_DIV_NM,
+					                   AA04.HAN_NM,
+					                   AA04.RESN_REGN_NUM,
+					                   AA02.TOTL_SALA AS YRLY_PAY_TOT_AMNT,
+					                   (TRUNC((MONTHS_BETWEEN(TO_DATE(SUBSTR(AA01.EMYMT_END_DT,1,6),'YYYYMM'), TO_DATE(SUBSTR(AA01.EMYMT_BGNN_DT,1,6),'YYYYMM')) + 1),0)
+					                    - NVL(AA03.MONTH_SU,0)) AS DUTY_MNTH_ICM 
+					                 FROM                           
+					                 (SELECT DISTINCT  AA.DPOB_CD, 
+					                                   AA.EDAC_RVYY ,
+					                                   AA.SYSTEMKEY,
+					                                   AA.SETT_GBCD,              
+					                                   (SELECT CASE WHEN BB.EMYMT_DIV_CD = 'A0020010' THEN  
+					                                                   (CASE WHEN MIN(A01.EMYMT_BGNN_DT) < (AA.EDAC_RVYY || '0101') 
+					                                                        THEN AA.EDAC_RVYY || '0101'
+					                                                    ELSE MIN(A01.EMYMT_BGNN_DT) END)
+					                                                ELSE 
+					                                                     (CASE WHEN MAX(A01.EMYMT_BGNN_DT) < (AA.EDAC_RVYY || '0101') 
+					                                                            THEN AA.EDAC_RVYY || '0101'
+					                                                        ELSE MAX(A01.EMYMT_BGNN_DT) END)
+					                                                END
+					                                     FROM PSNL0110 A01                                                  
+					                                    WHERE   A01.DPOB_CD = AA.DPOB_CD                        
+					                                      AND   A01.SYSTEMKEY = AA.SYSTEMKEY
+					                                      AND   A01.EMYMT_BGNN_DT LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.EDAC_RVYY)  || '%' 
+					                                      AND   A01.EMYMT_TYP_CD <> 'A0420990' )  AS EMYMT_BGNN_DT,                                  
+					                                
+					                                    (CASE WHEN BB.HDOFC_CODTN_CD  <>  'A0030020' THEN  
+					                                            (SELECT CASE WHEN MAX(NVL(A01.EMYMT_END_DT ,'99991231')) > (AA.EDAC_RVYY || '1231') 
+					                                                         THEN (AA.EDAC_RVYY || '1231') 
+					                                                     ELSE   MAX(A01.EMYMT_END_DT) 
+					                                                       END 
+					                                              FROM PSNL0110 A01                                                  
+					                                              WHERE   A01.DPOB_CD = AA.DPOB_CD                           
+					                                                AND   A01.SYSTEMKEY = AA.SYSTEMKEY   
+					                                                AND   NVL(A01.EMYMT_END_DT,'99991231') LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.EDAC_RVYY)  || '%'                                     
+					                                                AND   A01.EMYMT_TYP_CD <> 'A0420990' )                                                 
+					                                       ELSE                                                                                   
+					                                             (SELECT  MAX(A01.EMYMT_END_DT)                                                        
+					                                             FROM PSNL0110 A01                                                                          
+					                                             WHERE   A01.DPOB_CD = AA.DPOB_CD                              
+					                                               AND   A01.SYSTEMKEY = AA.SYSTEMKEY   
+					                                               AND   NVL(A01.EMYMT_END_DT,'99991231') LIKE  DECODE(BB.EMYMT_DIV_CD,'A0020010','',AA.EDAC_RVYY)  || '%'                                     
+					                                               AND   A01.EMYMT_TYP_CD  <> 'A0420990' )                                        
+					                                      END) AS EMYMT_END_DT                                                                 
+					                 FROM YETA2000 AA, PSNL0100 BB                                                                  
+					                 WHERE AA.DPOB_CD = BB.DPOB_CD
+					                   AND AA.SYSTEMKEY = BB.SYSTEMKEY) AA01,YETA3000 AA02,  (
+					                   SELECT
+					                          DPOB_CD, SYSTEMKEY,
+					                          SUM(ADD_MONTH_SU + (CASE WHEN MONTH_SU < 0 THEN 0 ELSE MONTH_SU END)) AS MONTH_SU
+					                    FROM
+					                    ( 
+					                    SELECT DISTINCT
+					                      DPOB_CD, SYSTEMKEY, 
+					                      LEVF_ABNC_BGNN_DT, (CASE WHEN (
+					                       SELECT TO_CHAR((TO_DATE( AB01.EMYMT_END_DT ,'YYYYMMDD')  + 1),'YYYYMMDD')
+					                       FROM PSNL0110 AB01
+					                       WHERE AB01.EMYMT_TYP_CD = 'A0420040'
+					                         AND AB01.DPOB_CD = AB02.DPOB_CD
+					                         AND AB01.SYSTEMKEY = AB02.SYSTEMKEY
+					                         AND AB01.EMYMT_SEIL_NUM = (AB02.EMYMT_SEIL_NUM - 1)
+					                      ) = AB02.LEVF_ABNC_BGNN_DT THEN 1 ELSE 0 END) AS ADD_MONTH_SU,
+					                      (TRUNC((MONTHS_BETWEEN(TO_DATE(SUBSTR(LEVF_ABNC_END_DT,1,6),'YYYYMM'), TO_DATE(SUBSTR(LEVF_ABNC_BGNN_DT,1,6),'YYYYMM')) + 1),0) 
+					                      - (CASE WHEN SUBSTR(LEVF_ABNC_BGNN_DT,7,2) = '01' THEN 1 
+					                             /* WHEN  SUBSTR(LEVF_ABNC_END_DT,5,4) = '1231'  THEN 0 */
+					                              WHEN SUBSTR(LEVF_ABNC_BGNN_DT,7,2) = '01' AND  SUBSTR(LEVF_ABNC_END_DT,5,4) = '1231'  THEN 0 
+					                              ELSE 2 END)) AS MONTH_SU 
+					                    FROM
+					                    (SELECT  
+					                       DPOB_CD, SYSTEMKEY, EMYMT_SEIL_NUM, EMYMT_BGNN_DT,
+					                       (CASE WHEN EMYMT_BGNN_DT < '20150101' THEN '20150101'
+					                            ELSE EMYMT_BGNN_DT END) AS LEVF_ABNC_BGNN_DT, 
+					                       (CASE WHEN EMYMT_END_DT > '20151231' THEN '20151231'
+					                            ELSE EMYMT_END_DT END)AS LEVF_ABNC_END_DT 
+					                    FROM PSNL0110
+					                      WHERE EMYMT_TYP_CD = 'A0420040'
+					                      AND SUBSTR(EMYMT_BGNN_DT,1,4) <= #hlthInsrYr#
+					                        AND SUBSTR(EMYMT_END_DT,1,4) >= #hlthInsrYr#) AB02 
+					                        )
+					                      GROUP BY DPOB_CD, SYSTEMKEY
+					                   ) AA03, PSNL0100 AA04 ,PAYR0500 AA05
+					                WHERE AA01.DPOB_CD   = AA02.DPOB_CD                             
+					                  AND AA01.EDAC_RVYY = AA02.EDAC_RVYY                                      
+					                  AND AA01.SETT_GBCD = AA02.SETT_GBCD                                      
+					                  AND AA01.SYSTEMKEY = AA02.SYSTEMKEY  
+					                  AND AA01.DPOB_CD   = AA04.DPOB_CD                                     
+					                  AND AA01.SYSTEMKEY = AA04.SYSTEMKEY 
+					                  AND AA01.DPOB_CD   = AA05.DPOB_CD                                     
+					                  AND AA01.SYSTEMKEY = AA05.SYSTEMKEY 
+					                  AND AA01.DPOB_CD   = AA03.DPOB_CD(+)                                     
+					                  AND AA01.SYSTEMKEY = AA03.SYSTEMKEY(+) 
+					 	     		  AND AA04.DPOB_CD=#dpobCd#
+					 	    	 ]]>
+					 	    	 
+					 	    	 <isNotEmpty prepend="AND" property="hlthInsrYr" >
+			 	 					AA01.EDAC_RVYY =#hlthInsrYr#
+		       			  		</isNotEmpty>
+		       			  		
+							</isLessThan>
+							
+				       		 AND EXISTS  (
+		                         SELECT  C.DPOB_CD,
+		                                 C.DTIL_OCCU_INTTN_CD,
+		                                 C.TYP_OCCU_CD,
+		                                 C.DEPT_CD FROM 
+		                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+		                                            WHERE     C.DPOB_CD = AA04.DPOB_CD
+								                        AND C.DEPT_CD = AA04.CURR_AFFN_DEPT_CD
+								                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(AA04.TYP_OCCU_CD,'TT') 
+		                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(AA04.DTIL_OCCU_INTTN_CD,'TT')
+		                                               <isNotEmpty property="deptCd" prepend="AND">
+														<![CDATA[
+														 C.DEPT_CD
+														]]>
+														<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+														 #deptCdArr[]#
+														</iterate>
+														</isNotEmpty> 
+		                                          )       
+				       <isNotEmpty prepend="AND" property="businCd" >
+					 	AA04.BUSIN_CD=#businCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="mangeDeptCd" >
+			        	AA04.DEPT_CD=#mangeDeptCd#
+			           </isNotEmpty>			
+			           <isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+			        	AA04.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+			           </isNotEmpty> 
+				       <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+						 AA04.TYP_OCCU_CD
+						]]>
+						<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						 #typOccuCdArr[]#
+						</iterate>
+						</isNotEmpty>  
+					    <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+								<![CDATA[
+									 AA04.DTIL_OCCU_INTTN_CD
+								]]>
+								<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+									 #dtilOccuInttnCdArr[]#
+								</iterate>
+							</isNotEmpty>  
+				        <!--  <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+						<![CDATA[
+						 BB.DTIL_OCCU_CLS_DIV_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+						 #dtilOccuClsDivCdArr[]#
+						</iterate>
+						</isNotEmpty>  -->
+				       <isNotEmpty prepend="AND" property="systemkey" >
+					 	AA04.SYSTEMKEY=#systemkey#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="hanNm" >
+					 	AA04.HAN_NM LIKE '%' || #hanNm# || '%'
+				       </isNotEmpty> 
+				        <isNotEmpty prepend="AND" property="payrMangeDeptCd" >
+					    AA05.PAYR_MANG_DEPT_CD=#payrMangeDeptCd#
+				       </isNotEmpty> 
+				        <isNotEmpty property="hdofcCodtnCd" prepend="AND">
+						<![CDATA[
+						 AA04.HDOFC_CODTN_CD
+						]]>
+						<iterate prepend="IN" property="hdofcCodtnCdArr" open="(" close=")" conjunction=",">
+						 #hdofcCodtnCdArr[]#
+						</iterate>
+						</isNotEmpty> 
+				          <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	AA04.EMYMT_DIV_CD=#emymtDivCd#
+				       </isNotEmpty>  
+					                  ) BB01
+					   , INSR3150 BB02         
+					         
+					  WHERE  BB01.DPOB_CD(+)   	= BB02.DPOB_CD                             
+					  	AND BB01.HLTH_INSR_YR(+)= BB02.HLTH_INSR_YR                                      
+					  	AND BB01.SYSTEMKEY(+) 	= BB02.SYSTEMKEY 
+					  	AND BB02.HLTH_INSR_YR = #hlthInsrYr#
+					 ORDER BY 
+								BB01.DPOB_CD ASC
+								  ,(SELECT LPAD(DEPT_RANK,5,'0')  
+		                                   FROM BASS0400 DD
+		                                   WHERE DD.DEPT_CD = BB01.DEPT_CD
+		                                     AND DD.DPOB_CD = BB01.DPOB_CD) ASC 
+								, BB01.RESN_REGN_NUM ASC  
+			<![CDATA[					
+	) A 
+)
+ORDER BY EMYMT_SEIL_NUM ASC 
+
+]]>						 
+  </select>
+  	
+	<!-- 연간보수총액, 근무월수 update -->
+	<update id="insr3150DAO.updateTxtFileInsr3150">
+		<![CDATA[
+			UPDATE	INSR3150
+			SET		YRLY_PAY_TOT_AMNT = #yrlyPayTotAmnt#
+				  , DUTY_MNTH_ICM	  = #dutyMnthIcm#
+				  , ISMT			  = #ismt#
+				  , REVN_DT			  = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , REVN_ADDR		  = #revnAddr#
+			WHERE	DPOB_CD		 = #dpobCd#
+			AND		SYSTEMKEY	 = #systemkey#
+			AND		HLTH_INSR_YR = #hlthInsrYr#
+		]]>
+	</update>
+</sqlMap>

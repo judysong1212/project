@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgInfcSysm0100">
+	 
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgSysm0100SrhVo" type="com.app.smrmf.infc.sysauth.system.server.vo.InfcPkgSysm0100SrhVO"/>
+	<typeAlias  alias="infcPkgSysm0100Vo" type="com.app.smrmf.infc.sysauth.system.server.vo.InfcPkgSysm0100VO"/>
+	
+	<!-- 
+	<resultMap id="infcPkgSysm0100" class="com.app.smrmf.infc.system.server.vo.InfcPkgSysm0100VO">
+		<result property="sysDivCd" column="SYS_DIV_CD" columnIndex="1"/>
+		<result property="usrId" column="USR_ID" columnIndex="2"/>
+		<result property="usrNm" column="USR_NM" columnIndex="3"/>
+		<result property="usrDivCd" column="USR_DIV_CD" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="6"/> 
+		<result property="usrTel" column="USR_TEL" columnIndex="7"/>
+		<result property="email" column="EMAIL" columnIndex="8"/>
+		<result property="pwd" column="PWD" columnIndex="9"/>
+		<result property="useYn" column="USE_YN" columnIndex="10"/>
+		<result property="kybdr" column="KYBDR" columnIndex="11"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="12"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="13"/>
+		<result property="ismt" column="ISMT" columnIndex="14"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="15"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="16"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="17"/> 
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="18"/>
+		<result property="tmpPwd" column="TMP_PWD" columnIndex="19"/> 
+		<result property="payrMangDeptYn" column="PAYR_MANG_DEPT_YN"  columnIndex="20"/>
+		<result property="usrAuthEepnYn" column="USR_AUTH_EEPN_YN"  columnIndex="21"/> 
+		<result property="pyspInsnYn" column="PYSP_INSN_YN"  columnIndex="22"/> 
+		<result property="notPyspInsnYn" column="NOT_PYSP_INSN_YN"  columnIndex="23"/> 
+		<result property="servcInptPrcsYn" column="SERVC_INPT_PRCS_YN"  columnIndex="24"/> 
+		<result property="yrtxInptPrcsYn" column="YRTX_INPT_PRCS_YN"  columnIndex="25"/> 
+		<result property="shttmInsnYn" column="SHTTM_INSN_YN"  columnIndex="26"/> 
+		<result property="usrAuthDivCd" column="USR_AUTH_DIV_CD"  columnIndex="27"/>  		
+	</resultMap>
+	 --> 
+	 
+	 
+	<!-- 2017년도 연말정산등록담당자관리 -->	
+	<select id="InfcPkgSysm0100DAO.selectYeta2080ToSysm0100List_D" parameterClass="infcPkgSysm0100SrhVo" resultClass="egovMap">
+	<![CDATA[	
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+			SELECT AA.SYS_DIV_CD            
+				    , AA.USR_ID                
+				    , AA.USR_NM                
+				    , AA.USR_DIV_CD   
+				    , AA.USR_DIV_CD AS usrDivCdcommCd 
+				    , (SELECT BA0300.COMM_CD_NM FROM BASS0300 BA0300 WHERE BA0300.COMM_CD = AA.USR_DIV_CD) AS usrDivCdcommCdNm             
+				    , AA.SYSTEMKEY            
+				    , AA.DEPT_CD    
+				    , AA.DEPT_CD AS deptCddeptCd   
+				    , (SELECT BA0400.DEPT_NM_RTCHNT FROM BASS0400 BA0400 WHERE BA0400.DEPT_CD = AA.DEPT_CD) AS deptCddeptNmRtchnt          
+				    , AA.USR_TEL                
+				    , AA.EMAIL                
+				    , AA.PWD                    
+				    , AA.USE_YN                
+				    , AA.KYBDR                
+				    , AA.INPT_DT                
+				    , AA.INPT_ADDR            
+				    , AA.ISMT                
+				    , AA.REVN_DT                
+				    , AA.REVN_ADDR            
+				    , AA.TYP_OCCU_CD            
+				    , AA.PYSP_GRDE_CD        
+				    , AA.USR_AUTH_EEPN_YN    
+				    , AA.PYSP_INSN_YN        
+				    , AA.NOT_PYSP_INSN_YN    
+				    , AA.SERVC_INPT_PRCS_YN    
+				    , AA.YRTX_INPT_PRCS_YN    
+				    , AA.SHTTM_INSN_YN        
+				    , AA.USR_AUTH_DIV_CD        
+				    , AA.DTIL_OCCU_INTTN_CD    
+				    , AA.AUTH_IN_STDT        
+				    , AA.AUTH_IN_EDDT        
+				    , AA.USR_LGN_ACC_LCK_YN    
+				    , AA.UNT_DPOB_CD            
+				    , AA.PAY_MANGE_DEPT_CD    
+			
+			  FROM SYSM0100 AA
+			WHERE NVL(AA.YRTX_INPT_PRCS_YN, 'N') = #yrtxInptPrcsYn#
+				AND AA.USE_YN = 'Y'	
+				AND AA.DEPT_CD = #deptCd#	
+		]]>		
+		<!-- 
+			    AND (SYSTEMKEY IS NOT NULL 
+			            OR USR_DIV_CD IS NOT NULL) -->
+				<isNotNull property="usrNm">
+				    <isNotEmpty property="usrNm">
+					        AND AA.USR_NM LIKE  '%' || #usrNm# || '%'
+				    </isNotEmpty>
+				</isNotNull> 
+    
+			ORDER BY ( SELECT LPAD(DEPT_RANK,5,'0')
+			  				FROM BASS0400 DD
+			            WHERE DD.DEPT_CD = AA.DEPT_CD
+			    	  ) ASC
+			    	  , AA.USR_NM
+	
+			<![CDATA[					
+		) A WHERE ROWNUM <= #lastIndex#
+	)WHERE RNUM >= #firstIndex#
+	]]>
+	</select>
+
+
+	<select id="InfcPkgSysm0100DAO.selectYeta2080ToSysm0100ListCnt_S" parameterClass="infcPkgSysm0100SrhVo" resultClass="int">
+		SELECT COUNT(*) totcnt
+			FROM ( SELECT USR_ID            
+				  	FROM SYSM0100
+				   WHERE NVL(YRTX_INPT_PRCS_YN, 'N') = #yrtxInptPrcsYn#
+				   	AND USE_YN = 'Y'
+				   	AND DEPT_CD = #deptCd#	
+
+				<isNotNull property="usrNm"><isNotEmpty property="usrNm">
+					AND USR_NM LIKE  '%' || #usrNm# || '%'
+				</isNotEmpty></isNotNull> 	
+						
+				)
+	</select>	
+	
+	
+	<update id="InfcPkgSysm0100DAO.updaetYeta2080ToSysm0100Yn">
+		<![CDATA[
+			UPDATE SYSM0100
+				SET YRTX_INPT_PRCS_YN 	= #yrtxInptPrcsYn#
+					, USR_DIV_CD 		= #usrDivCd#
+					, ISMT				= #ismt#
+					, REVN_DT			= SYSDATE
+					, REVN_ADDR			= #revnAddr#
+					
+				WHERE SYS_DIV_CD = #sysDivCd#	
+					AND USR_ID = #usrId#
+		]]>
+	</update>
+	
+	
+</sqlMap>

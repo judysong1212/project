@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Payr0445">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="payr0445SrhVO" type="com.app.exterms.payroll.server.vo.Payr0445SrhVO"/>
+	
+	<resultMap id="payr0445" class="com.app.exterms.payroll.server.vo.Payr0445VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="payYr" column="PAY_YR" columnIndex="2"/>
+		<result property="typOccuGrdeMppgSeilNum" column="TYP_OCCU_GRDE_MPPG_SEIL_NUM" columnIndex="3"/>
+		<result property="pyspLogSvcYrNumCd" column="PYSP_LOG_SVC_YR_NUM_CD" columnIndex="4"/> 
+		<result property="occuClssPayCmpttnStd" column="OCCU_CLSS_PAY_CMPTTN_STD" columnIndex="5"/>
+		<result property="mnthUsalyAmntWag" column="MNTH_USALY_AMNT_WAG" columnIndex="6"/>
+		<result property="mnthUsalyAmntAllwBnusSum" column="MNTH_USALY_AMNT_ALLW_BNUS_SUM" columnIndex="7"/>
+		<result property="usalyAmntPdyQnty" column="USALY_AMNT_PDY_QNTY" columnIndex="8"/>
+		<result property="usalyAmntHrwgQnty" column="USALY_AMNT_HRWG_QNTY" columnIndex="9"/>
+		<result property="kybdr" column="KYBDR" columnIndex="10"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="11"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="12"/>
+		<result property="ismt" column="ISMT" columnIndex="13"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="14"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="15"/>
+	</resultMap>
+	
+	<insert id="payr0445DAO.insertPayr0445_S">
+		<![CDATA[
+			INSERT INTO PAYR0445 
+				( DPOB_CD
+				  , PAY_YR
+				  , TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				  , PYSP_LOG_SVC_YR_NUM_CD 
+				  , OCCU_CLSS_PAY_CMPTTN_STD
+				  , MNTH_USALY_AMNT_WAG
+				  , MNTH_USALY_AMNT_ALLW_BNUS_SUM
+				  , USALY_AMNT_PDY_QNTY
+				  , USALY_AMNT_HRWG_QNTY
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #payYr#
+				  , #typOccuGrdeMppgSeilNum#
+				  , #pyspLogSvcYrNumCd# 
+				  , #occuClssPayCmpttnStd#
+				  , #mnthUsalyAmntWag#
+				  , #mnthUsalyAmntAllwBnusSum#
+				  , #usalyAmntPdyQnty#
+				  , #usalyAmntHrwgQnty#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="payr0445DAO.updatePayr0445_S">
+		<![CDATA[
+		UPDATE PAYR0445
+			SET DPOB_CD=#dpobCd#
+				, PAY_YR=#payYr#
+				, TYP_OCCU_GRDE_MPPG_SEIL_NUM=#typOccuGrdeMppgSeilNum#
+				, PYSP_LOG_SVC_YR_NUM_CD=#pyspLogSvcYrNumCd# 
+				, OCCU_CLSS_PAY_CMPTTN_STD=#occuClssPayCmpttnStd#
+				, MNTH_USALY_AMNT_WAG=#mnthUsalyAmntWag#
+				, MNTH_USALY_AMNT_ALLW_BNUS_SUM=#mnthUsalyAmntAllwBnusSum#
+				, USALY_AMNT_PDY_QNTY=#usalyAmntPdyQnty#
+				, USALY_AMNT_HRWG_QNTY=#usalyAmntHrwgQnty# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND PAY_YR=#payYr#
+								AND TYP_OCCU_GRDE_MPPG_SEIL_NUM=#typOccuGrdeMppgSeilNum#
+								AND PYSP_LOG_SVC_YR_NUM_CD=#pyspLogSvcYrNumCd# 
+								AND OCCU_CLSS_PAY_CMPTTN_STD=#occuClssPayCmpttnStd#
+				]]>
+	</update>
+	
+	<delete id="payr0445DAO.deletePayr0445_S">
+		<![CDATA[
+				DELETE FROM PAYR0445 
+						WHERE DPOB_CD=#dpobCd#
+								AND PAY_YR=#payYr#
+								AND TYP_OCCU_GRDE_MPPG_SEIL_NUM=#typOccuGrdeMppgSeilNum#
+								AND PYSP_LOG_SVC_YR_NUM_CD=#pyspLogSvcYrNumCd# 
+								AND OCCU_CLSS_PAY_CMPTTN_STD=#occuClssPayCmpttnStd#
+				]]>
+	</delete>
+	
+	<select id="payr0445DAO.selectPayr0445_S" resultMap="payr0445">
+		<![CDATA[
+				SELECT
+				DPOB_CD
+				, PAY_YR
+				, TYP_OCCU_GRDE_MPPG_SEIL_NUM
+				, PYSP_LOG_SVC_YR_NUM_CD 
+				, OCCU_CLSS_PAY_CMPTTN_STD
+				, MNTH_USALY_AMNT_WAG
+				, MNTH_USALY_AMNT_ALLW_BNUS_SUM
+				, USALY_AMNT_PDY_QNTY
+				, USALY_AMNT_HRWG_QNTY
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0445
+						WHERE DPOB_CD=#dpobCd#
+								AND PAY_YR=#payYr#
+								AND TYP_OCCU_GRDE_MPPG_SEIL_NUM=#typOccuGrdeMppgSeilNum#
+								AND PYSP_LOG_SVC_YR_NUM_CD=#pyspLogSvcYrNumCd# 
+								AND OCCU_CLSS_PAY_CMPTTN_STD=#occuClssPayCmpttnStd#
+				]]>
+	</select>
+	
+	<select id="payr0445DAO.selectPayr0445List_D" parameterClass="payr0445SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+							      DPOB_CD
+								, PAY_YR
+								, TYP_OCCU_GRDE_MPPG_SEIL_NUM
+								, PYSP_LOG_SVC_YR_NUM_CD 
+								, OCCU_CLSS_PAY_CMPTTN_STD
+								, MNTH_USALY_AMNT_WAG
+								, MNTH_USALY_AMNT_ALLW_BNUS_SUM
+								, USALY_AMNT_PDY_QNTY
+								, USALY_AMNT_HRWG_QNTY
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PAYR0445 
+				WHERE DPOB_CD=#dpobCd#
+								AND PAY_YR=#payYr#
+								AND TYP_OCCU_GRDE_MPPG_SEIL_NUM=#typOccuGrdeMppgSeilNum#
+								AND PYSP_LOG_SVC_YR_NUM_CD=#pyspLogSvcYrNumCd# 
+								AND OCCU_CLSS_PAY_CMPTTN_STD=#occuClssPayCmpttnStd#
+					ORDER BY 
+						DPOB_CD DESC
+							, TYP_OCCU_GRDE_MPPG_SEIL_NUM DESC
+							, PYSP_LOG_SVC_YR_NUM_CD DESC
+							, OCCU_CLSS_PAY_CMPTTN_STD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="payr0445DAO.selectPayr0445ListTotCnt_S" parameterClass="payr0445SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0445
+			WHERE DPOB_CD=#dpobCd#
+								AND PAY_YR=#payYr#
+								AND TYP_OCCU_GRDE_MPPG_SEIL_NUM=#typOccuGrdeMppgSeilNum#
+								AND PYSP_LOG_SVC_YR_NUM_CD=#pyspLogSvcYrNumCd# 
+								AND OCCU_CLSS_PAY_CMPTTN_STD=#occuClssPayCmpttnStd#
+			 
+	</select>
+
+</sqlMap>

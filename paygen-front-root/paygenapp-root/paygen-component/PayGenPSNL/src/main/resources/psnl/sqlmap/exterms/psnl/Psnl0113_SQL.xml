@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0113">
+	
+    <typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="psnl0113SrhVO" type="com.app.exterms.personal.server.vo.Psnl0113SrhVO"/>
+	<typeAlias  alias="psnl0113Vo" type="com.app.exterms.personal.server.vo.Psnl0113VO"/>
+	<typeAlias  alias="psnl0113Dto" type="com.app.exterms.personal.client.dto.Psnl0113DTO"/>
+	
+	<resultMap id="psnl0113" class="com.app.exterms.personal.server.vo.Psnl0113VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="sttur" column="STTUR" columnIndex="3"/>
+		<result property="wei" column="WEI" columnIndex="4"/>
+		<result property="tnkeeVsnLf" column="TNKEE_VSN_LF" columnIndex="5"/>
+		<result property="tnkeeVsnRght" column="TNKEE_VSN_RGHT" columnIndex="6"/>
+		<result property="corrVsnLf" column="CORR_VSN_LF" columnIndex="7"/>
+		<result property="corrVsnRght" column="CORR_VSN_RGHT" columnIndex="8"/>
+		<result property="prmtsaYn" column="PRMTSA_YN" columnIndex="9"/>
+		<result property="bldtpDivCd" column="BLDTP_DIV_CD" columnIndex="10"/>
+		<result property="relnFrmCd" column="RELN_FRM_CD" columnIndex="11"/>
+		<result property="hbbyCtnt" column="HBBY_CTNT" columnIndex="12"/>
+		<result property="spityCtnt" column="SPITY_CTNT" columnIndex="13"/>
+		<result property="dabtyDivCd" column="DABTY_DIV_CD" columnIndex="14"/>
+		<result property="dabtyGrdeCd" column="DABTY_GRDE_CD" columnIndex="15"/>
+		<result property="dabtyAjmtDt" column="DABTY_AJMT_DT" columnIndex="16"/>
+		<result property="pattVetnsDivCd" column="PATT_VETNS_DIV_CD" columnIndex="17"/>
+		<result property="pattVetnsNum" column="PATT_VETNS_NUM" columnIndex="18"/>
+		<result property="pattVetnsYn" column="PATT_VETNS_YN" columnIndex="19"/>
+		<result property="amomRelaDivCd" column="AMOM_RELA_DIV_CD" columnIndex="20"/>
+		<result property="hlthCodtnCtnt" column="HLTH_CODTN_CTNT" columnIndex="21"/>
+		<result property="husDivCd" column="HUS_DIV_CD" columnIndex="22"/>
+		<result property="husSum" column="HUS_SUM" columnIndex="23"/>
+		<result property="rstPptySum" column="RST_PPTY_SUM" columnIndex="24"/>
+		<result property="mvasstSum" column="MVASST_SUM" columnIndex="25"/>
+		<result property="ridnDivCd" column="RIDN_DIV_CD" columnIndex="26"/>
+		<result property="famyAllwApptnYrMnth" column="FAMY_ALLW_APPTN_YR_MNTH" columnIndex="27"/>
+		<result property="hlthInsrRegrstFlag" column="HLTH_INSR_REGRST_FLAG" columnIndex="28"/>
+		<result property="natPennRegrstFlag" column="NAT_PENN_REGRST_FLAG" columnIndex="29"/>
+		<result property="idtlAccdtInsurRegrstFlag" column="IDTL_ACCDT_INSUR_REGRST_FLAG" columnIndex="30"/>
+		<result property="umytInsrRegrstFlag" column="UMYT_INSR_REGRST_FLAG" columnIndex="31"/>
+		<result property="kybdr" column="KYBDR" columnIndex="32"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="33"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="34"/>
+		<result property="ismt" column="ISMT" columnIndex="35"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="36"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="37"/>
+	</resultMap>
+	
+	<update id="psnl0113DAO.savePsnl0113" parameterClass="psnl0113Dto">
+	    MERGE INTO PSNL0113 A, PSNL0100 B
+			     USING PSNL0113 A, PSNL0100 B
+			        ON (A.DPOB_CD = #dpobCd# AND A.SYSTEMKEY = #systemkey#
+			        	A.DPOB_CD = B.DPOB_CD AND  A.SYSTEMKEY = B.SYSTEMKEY)
+			WHEN MATCHED
+			THEN
+			   UPDATE SET A.REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						, A.ISMT=#ismt#
+						, A.REVN_ADDR=#revnAddr#
+	    				
+<isNotNull property="sttur"><isNotEmpty property="sttur">, A.STTUR=#sttur# </isNotEmpty></isNotNull>
+<isNotNull property="wei"><isNotEmpty property="wei">, A.WEI=#wei# </isNotEmpty></isNotNull>
+<isNotNull property="tnkeeVsnLf"><isNotEmpty property="tnkeeVsnLf">, A.TNKEE_VSN_LF=#tnkeeVsnLf# </isNotEmpty></isNotNull>
+<isNotNull property="tnkeeVsnRght"><isNotEmpty property="tnkeeVsnRght">, A.TNKEE_VSN_RGHT=#tnkeeVsnRght# </isNotEmpty></isNotNull>
+<isNotNull property="corrVsnLf"><isNotEmpty property="corrVsnLf">, A.CORR_VSN_LF=#corrVsnLf# </isNotEmpty></isNotNull>
+<isNotNull property="corrVsnRght"><isNotEmpty property="corrVsnRght">, A.CORR_VSN_RGHT=#corrVsnRght# </isNotEmpty></isNotNull>
+<isNotNull property="prmtsaYn"><isNotEmpty property="prmtsaYn">, A.PRMTSA_YN=#prmtsaYn# </isNotEmpty></isNotNull>
+<isNotNull property="bldtpDivCd"><isNotEmpty property="bldtpDivCd">, A.BLDTP_DIV_CD=#bldtpDivCd# </isNotEmpty></isNotNull>
+<isNotNull property="relnFrmCd"><isNotEmpty property="relnFrmCd">, A.RELN_FRM_CD=#relnFrmCd# </isNotEmpty></isNotNull>
+<isNotNull property="hbbyCtnt"><isNotEmpty property="hbbyCtnt">, A.HBBY_CTNT=#hbbyCtnt# </isNotEmpty></isNotNull>
+<isNotNull property="spityCtnt"><isNotEmpty property="spityCtnt">, A.SPITY_CTNT=#spityCtnt# </isNotEmpty></isNotNull>
+<isNotNull property="dabtyDivCd"><isNotEmpty property="dabtyDivCd">, A.DABTY_DIV_CD=#dabtyDivCd# </isNotEmpty></isNotNull>
+<isNotNull property="dabtyGrdeCd"><isNotEmpty property="dabtyGrdeCd">, A.DABTY_GRDE_CD=#dabtyGrdeCd# </isNotEmpty></isNotNull>
+<isNotNull property="dabtyAjmtDt"><isNotEmpty property="dabtyAjmtDt">, A.DABTY_AJMT_DT=#dabtyAjmtDt# </isNotEmpty></isNotNull>
+<isNotNull property="pattVetnsDivCd"><isNotEmpty property="pattVetnsDivCd">, A.PATT_VETNS_DIV_CD=#pattVetnsDivCd# </isNotEmpty></isNotNull>
+<isNotNull property="pattVetnsNum"><isNotEmpty property="pattVetnsNum">, A.PATT_VETNS_NUM=#pattVetnsNum# </isNotEmpty></isNotNull>
+, A.PATT_VETNS_YN= NVL(#pattVetnsYn#,'N')
+<isNotNull property="amomRelaDivCd"><isNotEmpty property="amomRelaDivCd">, A.AMOM_RELA_DIV_CD=#amomRelaDivCd# </isNotEmpty></isNotNull>
+<isNotNull property="hlthCodtnCtnt"><isNotEmpty property="hlthCodtnCtnt">, A.HLTH_CODTN_CTNT=#hlthCodtnCtnt# </isNotEmpty></isNotNull>
+<isNotNull property="husDivCd"><isNotEmpty property="husDivCd">, A.HUS_DIV_CD=#husDivCd# </isNotEmpty></isNotNull>
+<isNotNull property="husSum"><isNotEmpty property="husSum">, A.HUS_SUM=#husSum# </isNotEmpty></isNotNull>
+<isNotNull property="rstPptySum"><isNotEmpty property="rstPptySum">, A.RST_PPTY_SUM=#rstPptySum# </isNotEmpty></isNotNull>
+<isNotNull property="mvasstSum"><isNotEmpty property="mvasstSum">, A.MVASST_SUM=#mvasstSum# </isNotEmpty></isNotNull>
+<isNotNull property="ridnDivCd"><isNotEmpty property="ridnDivCd">, A.RIDN_DIV_CD=#ridnDivCd# </isNotEmpty></isNotNull>
+<isNotNull property="famyAllwApptnYrMnth"><isNotEmpty property="famyAllwApptnYrMnth">, A.FAMY_ALLW_APPTN_YR_MNTH=#famyAllwApptnYrMnth# </isNotEmpty></isNotNull>
+<isNotNull property="hlthInsrRegrstFlag"><isNotEmpty property="hlthInsrRegrstFlag">, A.HLTH_INSR_REGRST_FLAG=#hlthInsrRegrstFlag# </isNotEmpty></isNotNull>
+<isNotNull property="natPennRegrstFlag"><isNotEmpty property="natPennRegrstFlag">, A.NAT_PENN_REGRST_FLAG=#natPennRegrstFlag# </isNotEmpty></isNotNull>
+<isNotNull property="idtlAccdtInsurRegrstFlag"><isNotEmpty property="idtlAccdtInsurRegrstFlag">, A.IDTL_ACCDT_INSUR_REGRST_FLAG=#idtlAccdtInsurRegrstFlag# </isNotEmpty></isNotNull>
+<isNotNull property="umytInsrRegrstFlag"><isNotEmpty property="umytInsrRegrstFlag">, A.UMYT_INSR_REGRST_FLAG=#umytInsrRegrstFlag# </isNotEmpty></isNotNull>
+<isNotNull property="sxDivCd"><isNotEmpty property="sxDivCd">, B.SX_DIV_CD=#sxDivCd# </isNotEmpty></isNotNull>
+<isNotNull property="yoobhMnthDay"><isNotEmpty property="yoobhMnthDay">, B.YOOBH_MNTH_DAY=#yoobhMnthDay# </isNotEmpty></isNotNull>
+			WHEN NOT MATCHED
+			THEN
+			   INSERT 						
+					( A.DPOB_CD
+				  , A.SYSTEMKEY
+				  , A.STTUR
+				  , A.WEI
+				  , A.TNKEE_VSN_LF
+				  , A.TNKEE_VSN_RGHT
+				  , A.CORR_VSN_LF
+				  , A.CORR_VSN_RGHT
+				  , A.PRMTSA_YN
+				  , A.BLDTP_DIV_CD
+				  , A.RELN_FRM_CD
+				  , A.HBBY_CTNT
+				  , A.SPITY_CTNT
+				  , A.DABTY_DIV_CD
+				  , A.DABTY_GRDE_CD
+				  , A.DABTY_AJMT_DT
+				  , A.PATT_VETNS_DIV_CD
+				  , A.PATT_VETNS_NUM
+				  , A.PATT_VETNS_YN
+				  , A.AMOM_RELA_DIV_CD
+				  , A.HLTH_CODTN_CTNT
+				  , A.HUS_DIV_CD
+				  , A.HUS_SUM
+				  , A.RST_PPTY_SUM
+				  , A.MVASST_SUM
+				  , A.RIDN_DIV_CD
+				  , A.FAMY_ALLW_APPTN_YR_MNTH
+				  , A.HLTH_INSR_REGRST_FLAG
+				  , A.NAT_PENN_REGRST_FLAG
+				  , A.IDTL_ACCDT_INSUR_REGRST_FLAG
+				  , A.UMYT_INSR_REGRST_FLAG
+				  , A.KYBDR
+				  , A.INPT_DT
+				  , A.INPT_ADDR
+				  , A.ISMT
+				  , A.REVN_DT
+				  , A.REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #sttur#
+				  , #wei#
+				  , #tnkeeVsnLf#
+				  , #tnkeeVsnRght#
+				  , #corrVsnLf#
+				  , #corrVsnRght#
+				  , #prmtsaYn#
+				  , #bldtpDivCd#
+				  , #relnFrmCd#
+				  , #hbbyCtnt#
+				  , #spityCtnt#
+				  , #dabtyDivCd#
+				  , #dabtyGrdeCd#
+				  , #dabtyAjmtDt#
+				  , #pattVetnsDivCd#
+				  , #pattVetnsNum#
+				  , #pattVetnsYn#
+				  , #amomRelaDivCd#
+				  , #hlthCodtnCtnt#
+				  , #husDivCd#
+				  , #husSum#
+				  , #rstPptySum#
+				  , #mvasstSum#
+				  , #ridnDivCd#
+				  , #famyAllwApptnYrMnth#
+				  , #hlthInsrRegrstFlag#
+				  , #natPennRegrstFlag#
+				  , #idtlAccdtInsurRegrstFlag#
+				  , #umytInsrRegrstFlag#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )		
+						
+	</update>
+	
+	
+	<insert id="psnl0113DAO.insertPsnl0113_S" parameterClass="psnl0113Vo">
+		INSERT INTO PSNL0113 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , DABTY_DIV_CD
+				  , DABTY_GRDE_CD
+				  , DABTY_AJMT_DT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , NVL( ( SELECT COMM_CD FROM BASS0300 WHERE RPSTTV_CD = 'A037'  AND COMM_CD_NM =  TRIM(#dabtyDivCd#) ) , 'A0370000') 
+				  , NVL( ( SELECT COMM_CD FROM BASS0300 WHERE RPSTTV_CD = 'A036'  AND COMM_CD_NM = TRIM(#dabtyGrdeCd#) ) , 'A0360000')  
+				  , #dabtyAjmtDt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+	</insert>
+	
+	
+	<insert id="psnl0113DAO.insertPsnl0113" parameterClass="psnl0113Dto">
+		INSERT INTO PSNL0113 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , STTUR
+				  , WEI
+				  , TNKEE_VSN_LF
+				  , TNKEE_VSN_RGHT
+				  , CORR_VSN_LF
+				  , CORR_VSN_RGHT
+				  , PRMTSA_YN
+				  , BLDTP_DIV_CD
+				  , RELN_FRM_CD
+				  , HBBY_CTNT
+				  , SPITY_CTNT
+				  , DABTY_DIV_CD
+				  , DABTY_GRDE_CD
+				  , DABTY_AJMT_DT
+				  , PATT_VETNS_DIV_CD
+				  , PATT_VETNS_NUM
+				  , PATT_VETNS_YN
+				  , AMOM_RELA_DIV_CD
+				  , HLTH_CODTN_CTNT
+				  , HUS_DIV_CD
+				  , HUS_SUM
+				  , RST_PPTY_SUM
+				  , MVASST_SUM
+				  , RIDN_DIV_CD
+				  , FAMY_ALLW_APPTN_YR_MNTH
+				  , HLTH_INSR_REGRST_FLAG
+				  , NAT_PENN_REGRST_FLAG
+				  , IDTL_ACCDT_INSUR_REGRST_FLAG
+				  , UMYT_INSR_REGRST_FLAG
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #sttur#
+				  , #wei#
+				  , #tnkeeVsnLf#
+				  , #tnkeeVsnRght#
+				  , #corrVsnLf#
+				  , #corrVsnRght#
+				  , #prmtsaYn#
+				  , #bldtpDivCd#
+				  , #relnFrmCd#
+				  , #hbbyCtnt#
+				  , #spityCtnt#
+				  , #dabtyDivCd#
+				  , #dabtyGrdeCd#
+				  , #dabtyAjmtDt#
+				  , #pattVetnsDivCd#
+				  , #pattVetnsNum#
+				  , #pattVetnsYn#
+				  , #amomRelaDivCd#
+				  , #hlthCodtnCtnt#
+				  , #husDivCd#
+				  , #husSum#
+				  , #rstPptySum#
+				  , #mvasstSum#
+				  , #ridnDivCd#
+				  , #famyAllwApptnYrMnth#
+				  , #hlthInsrRegrstFlag#
+				  , #natPennRegrstFlag#
+				  , #idtlAccdtInsurRegrstFlag#
+				  , #umytInsrRegrstFlag#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+	</insert>
+	
+	<update id="psnl0113DAO.updatePsnl0113" parameterClass="psnl0113Dto">
+		UPDATE PSNL0113 
+			SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					, ISMT=#ismt#
+					, REVN_ADDR=#revnAddr#
+			<isNotNull property="sttur"><isNotEmpty property="sttur">, STTUR=#sttur# </isNotEmpty></isNotNull>
+			<isNotNull property="wei"><isNotEmpty property="wei">, WEI=#wei# </isNotEmpty></isNotNull>
+			<isNotNull property="tnkeeVsnLf"><isNotEmpty property="tnkeeVsnLf">, TNKEE_VSN_LF=#tnkeeVsnLf# </isNotEmpty></isNotNull>
+			<isNotNull property="tnkeeVsnRght"><isNotEmpty property="tnkeeVsnRght">, TNKEE_VSN_RGHT=#tnkeeVsnRght# </isNotEmpty></isNotNull>
+			<isNotNull property="corrVsnLf"><isNotEmpty property="corrVsnLf">, CORR_VSN_LF=#corrVsnLf# </isNotEmpty></isNotNull>
+			<isNotNull property="corrVsnRght"><isNotEmpty property="corrVsnRght">, CORR_VSN_RGHT=#corrVsnRght# </isNotEmpty></isNotNull>
+			<isNotNull property="prmtsaYn"><isNotEmpty property="prmtsaYn">, PRMTSA_YN=#prmtsaYn# </isNotEmpty></isNotNull>
+			<isNotNull property="bldtpDivCd"><isNotEmpty property="bldtpDivCd">, BLDTP_DIV_CD=#bldtpDivCd# </isNotEmpty></isNotNull>
+			<isNotNull property="relnFrmCd"><isNotEmpty property="relnFrmCd">, RELN_FRM_CD=#relnFrmCd# </isNotEmpty></isNotNull>
+			<isNotNull property="hbbyCtnt"><isNotEmpty property="hbbyCtnt">, HBBY_CTNT=#hbbyCtnt# </isNotEmpty></isNotNull>
+			<isNotNull property="spityCtnt"><isNotEmpty property="spityCtnt">, SPITY_CTNT=#spityCtnt# </isNotEmpty></isNotNull>
+			<isNotNull property="dabtyDivCd"><isNotEmpty property="dabtyDivCd">, DABTY_DIV_CD=#dabtyDivCd# </isNotEmpty></isNotNull>
+			<isNotNull property="dabtyGrdeCd"><isNotEmpty property="dabtyGrdeCd">, DABTY_GRDE_CD=#dabtyGrdeCd# </isNotEmpty></isNotNull>
+			<isNotNull property="dabtyAjmtDt"><isNotEmpty property="dabtyAjmtDt">, DABTY_AJMT_DT=#dabtyAjmtDt# </isNotEmpty></isNotNull>
+			<isNotNull property="pattVetnsDivCd"><isNotEmpty property="pattVetnsDivCd">, PATT_VETNS_DIV_CD=#pattVetnsDivCd# </isNotEmpty></isNotNull>
+			<isNotNull property="pattVetnsNum"><isNotEmpty property="pattVetnsNum">, PATT_VETNS_NUM=#pattVetnsNum# </isNotEmpty></isNotNull>
+				, PATT_VETNS_YN= NVL(#pattVetnsYn#,'N')
+			<isNotNull property="amomRelaDivCd"><isNotEmpty property="amomRelaDivCd">, AMOM_RELA_DIV_CD=#amomRelaDivCd# </isNotEmpty></isNotNull>
+			<isNotNull property="hlthCodtnCtnt"><isNotEmpty property="hlthCodtnCtnt">, HLTH_CODTN_CTNT=#hlthCodtnCtnt# </isNotEmpty></isNotNull>
+			<isNotNull property="husDivCd"><isNotEmpty property="husDivCd">, HUS_DIV_CD=#husDivCd# </isNotEmpty></isNotNull>
+			<isNotNull property="husSum"><isNotEmpty property="husSum">, HUS_SUM=#husSum# </isNotEmpty></isNotNull>
+			<isNotNull property="rstPptySum"><isNotEmpty property="rstPptySum">, RST_PPTY_SUM=#rstPptySum# </isNotEmpty></isNotNull>
+			<isNotNull property="mvasstSum"><isNotEmpty property="mvasstSum">, MVASST_SUM=#mvasstSum# </isNotEmpty></isNotNull>
+			<isNotNull property="ridnDivCd"><isNotEmpty property="ridnDivCd">, RIDN_DIV_CD=#ridnDivCd# </isNotEmpty></isNotNull>
+			<isNotNull property="famyAllwApptnYrMnth"><isNotEmpty property="famyAllwApptnYrMnth">, FAMY_ALLW_APPTN_YR_MNTH=#famyAllwApptnYrMnth# </isNotEmpty></isNotNull>
+			<isNotNull property="hlthInsrRegrstFlag"><isNotEmpty property="hlthInsrRegrstFlag">, HLTH_INSR_REGRST_FLAG=#hlthInsrRegrstFlag# </isNotEmpty></isNotNull>
+			<isNotNull property="natPennRegrstFlag"><isNotEmpty property="natPennRegrstFlag">, NAT_PENN_REGRST_FLAG=#natPennRegrstFlag# </isNotEmpty></isNotNull>
+			<isNotNull property="idtlAccdtInsurRegrstFlag"><isNotEmpty property="idtlAccdtInsurRegrstFlag">, IDTL_ACCDT_INSUR_REGRST_FLAG=#idtlAccdtInsurRegrstFlag# </isNotEmpty></isNotNull>
+			<isNotNull property="umytInsrRegrstFlag"><isNotEmpty property="umytInsrRegrstFlag">, UMYT_INSR_REGRST_FLAG=#umytInsrRegrstFlag# </isNotEmpty></isNotNull>
+			WHERE
+				DPOB_CD = #dpobCd# 
+					AND SYSTEMKEY = #systemkey#
+	</update>
+	
+	<delete id="psnl0113DAO.deletePsnl0113" parameterClass="psnl0113Dto">
+		<![CDATA[
+			DELETE FROM PSNL0113 
+					WHERE DPOB_CD=#dpobCd#
+						AND SYSTEMKEY=#systemkey#
+			]]>
+	</delete>
+	
+	<delete id="psnl0113DAO.deletePsnl0113_H" parameterClass="hashMap">
+		<![CDATA[
+			DELETE FROM PSNL0113
+							WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+			]]>
+	</delete>
+	
+	<select id="psnl0113DAO.selectPsnl0113" parameterClass="psnl0113Dto" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+			  B.HAN_NM
+			  , B.RESN_REGN_NUM 
+			  , SUBSTR(B.RESN_REGN_NUM, 0, 6) AS  RESNREGNYMN
+			  , A.DPOB_CD
+			  , A.SYSTEMKEY
+			  , A.STTUR
+			  , A.WEI
+			  , A.TNKEE_VSN_LF
+			  , A.TNKEE_VSN_RGHT
+			  , A.CORR_VSN_LF
+			  , A.CORR_VSN_RGHT
+			  , A.PRMTSA_YN
+			  , A.BLDTP_DIV_CD
+			  , A.RELN_FRM_CD
+			  , A.HBBY_CTNT
+			  , A.SPITY_CTNT
+			  , A.DABTY_DIV_CD
+			  , A.DABTY_GRDE_CD
+			  , A.DABTY_AJMT_DT
+			  , A.PATT_VETNS_DIV_CD
+			  , A.PATT_VETNS_NUM
+			  , A.PATT_VETNS_YN
+			  , A.AMOM_RELA_DIV_CD
+			  , A.HLTH_CODTN_CTNT
+			  , A.HUS_DIV_CD
+			  , A.HUS_SUM
+			  , A.RST_PPTY_SUM
+			  , A.MVASST_SUM
+			  , A.RIDN_DIV_CD
+			  , A.FAMY_ALLW_APPTN_YR_MNTH
+			  , A.HLTH_INSR_REGRST_FLAG
+			  , A.NAT_PENN_REGRST_FLAG
+			  , A.IDTL_ACCDT_INSUR_REGRST_FLAG
+			  , A.UMYT_INSR_REGRST_FLAG
+			  , A.KYBDR
+			  , A.INPT_DT
+			  , A.INPT_ADDR
+			  , A.ISMT
+			  , A.REVN_DT
+			  , A.REVN_ADDR
+			  , B.SX_DIV_CD
+			  , B.YOOBH_MNTH_DAY
+			FROM PSNL0113 A, PSNL0100 B
+			WHERE 
+			    B.DPOB_CD = #dpobCd#
+			    AND A.DPOB_CD(+) = B.DPOB_CD
+			    AND B.SYSTEMKEY = #systemkey#
+			    AND A.SYSTEMKEY(+) = B.SYSTEMKEY
+			]]>
+	</select>
+	
+	<select id="psnl0113DAO.selectPsnl0113ListTotCnt_S" parameterClass="psnl0113SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM (
+				<![CDATA[
+					SELECT
+					  DPOB_CD
+					  , SYSTEMKEY
+					  , STTUR
+					  , WEI
+					  , TNKEE_VSN_LF
+					  , TNKEE_VSN_RGHT
+					  , CORR_VSN_LF
+					  , CORR_VSN_RGHT
+					  , PRMTSA_YN
+					  , BLDTP_DIV_CD
+					  , RELN_FRM_CD
+					  , HBBY_CTNT
+					  , SPITY_CTNT
+					  , DABTY_DIV_CD
+					  , DABTY_GRDE_CD
+					  , DABTY_AJMT_DT
+					  , PATT_VETNS_DIV_CD
+					  , PATT_VETNS_NUM
+					  , PATT_VETNS_YN
+					  , AMOM_RELA_DIV_CD
+					  , HLTH_CODTN_CTNT
+					  , HUS_DIV_CD
+					  , HUS_SUM
+					  , RST_PPTY_SUM
+					  , MVASST_SUM
+					  , RIDN_DIV_CD
+					  , FAMY_ALLW_APPTN_YR_MNTH
+					  , HLTH_INSR_REGRST_FLAG
+					  , NAT_PENN_REGRST_FLAG
+					  , IDTL_ACCDT_INSUR_REGRST_FLAG
+					  , UMYT_INSR_REGRST_FLAG
+					  , KYBDR
+					  , INPT_DT
+					  , INPT_ADDR
+					  , ISMT
+					  , REVN_DT
+					  , REVN_ADDR
+					FROM PSNL0113
+					WHERE 
+					    DPOB_CD = #dpobCd#
+					    AND SYSTEMKEY = #systemkey#
+			]]>
+	)
+	</select>
+	
+	
+	
+	
+</sqlMap>

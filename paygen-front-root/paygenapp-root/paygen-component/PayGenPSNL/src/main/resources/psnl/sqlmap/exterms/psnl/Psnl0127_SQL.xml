@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0127">
+	
+    <typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	
+    <typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	
+	<typeAlias alias="psnl0127Dto" type="com.app.exterms.personal.client.dto.Psnl0127DTO"/>
+    <typeAlias  alias="psnl0127SrhVo" type="com.app.exterms.personal.server.vo.Psnl0127SrhVO"/>
+	  
+	
+	<resultMap id="psnl0127" class="com.app.exterms.personal.server.vo.Psnl0127VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="soctyInsurYr" column="SOCTY_INSUR_YR" columnIndex="3"/>
+		<result property="hlthInsurFlucDt" column="HLTH_INSUR_FLUC_DT" columnIndex="4"/>
+		<result property="hlthInsrPayTotAmnt" column="HLTH_INSR_PAY_TOT_AMNT" columnIndex="5"/>
+		<result property="hlthInsrMnthRuntnAmnt" column="HLTH_INSR_MNTH_RUNTN_AMNT" columnIndex="6"/>
+		<result property="hlthInsrGrde" column="HLTH_INSR_GRDE" columnIndex="7"/>
+		<result property="hlthInsrCertNum" column="HLTH_INSR_CERT_NUM" columnIndex="8"/>
+		<result property="natPennInsurFlucDt" column="NAT_PENN_INSUR_FLUC_DT" columnIndex="9"/>
+		<result property="natPennStdIncmMnthAmnt" column="NAT_PENN_STD_INCM_MNTH_AMNT" columnIndex="10"/>
+		<result property="natPennGrde" column="NAT_PENN_GRDE" columnIndex="11"/>
+		<result property="hlthInsrApptnYn" column="HLTH_INSR_APPTN_YN" columnIndex="12"/>
+		<result property="natPennApptnYn" column="NAT_PENN_APPTN_YN" columnIndex="13"/>
+		<result property="umytInsrApptnYn" column="UMYT_INSR_APPTN_YN" columnIndex="14"/>
+		<result property="idtlAccdtInsurApptnYn" column="IDTL_ACCDT_INSUR_APPTN_YN" columnIndex="15"/>
+		<result property="kybdr" column="KYBDR" columnIndex="16"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="17"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="18"/>
+		<result property="ismt" column="ISMT" columnIndex="19"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="20"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="21"/>
+		<result property="umytInsrFlucDt" column="UMYT_INSR_FLUC_DT" columnIndex="22"/>
+		<result property="umytInsrPayTotAmnt" column="UMYT_INSR_PAY_TOT_AMNT" columnIndex="23"/>
+		<result property="umytInsrPayMnthAmnt" column="UMYT_INSR_PAY_MNTH_AMNT" columnIndex="24"/>
+		<result property="idtlAccdtFlucDt" column="IDTL_ACCDT_FLUC_DT" columnIndex="25"/>
+		<result property="idtlAccdtPayTotAmnt" column="IDTL_ACCDT_PAY_TOT_AMNT" columnIndex="26"/>
+		<result property="idtlAccdtPayMnthAmnt" column="IDTL_ACCDT_PAY_MNTH_AMNT" columnIndex="27"/>
+	</resultMap>
+    
+	
+	<insert id="psnl0127DAO.insertPsnl0127_S">
+		<![CDATA[
+			INSERT INTO PSNL0127 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , SOCTY_INSUR_YR
+				  , HLTH_INSUR_FLUC_DT
+				  , HLTH_INSR_PAY_TOT_AMNT
+				  , HLTH_INSR_MNTH_RUNTN_AMNT
+				  , HLTH_INSR_GRDE
+				  , HLTH_INSR_CERT_NUM
+				  , NAT_PENN_INSUR_FLUC_DT
+				  , NAT_PENN_STD_INCM_MNTH_AMNT
+				  , NAT_PENN_GRDE
+				  , HLTH_INSR_APPTN_YN
+				  , NAT_PENN_APPTN_YN
+				  , UMYT_INSR_APPTN_YN
+				  , IDTL_ACCDT_INSUR_APPTN_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , UMYT_INSR_FLUC_DT
+				  , UMYT_INSR_PAY_TOT_AMNT
+				  , UMYT_INSR_PAY_MNTH_AMNT
+				  , IDTL_ACCDT_FLUC_DT
+				  , IDTL_ACCDT_PAY_TOT_AMNT
+				  , IDTL_ACCDT_PAY_MNTH_AMNT )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , NVL( ( SELECT SUBSTR(AA.EMYMT_BGNN_DT, 0, 4)
+							FROM PSNL0110 AA
+						  WHERE AA.EMYMT_BGNN_DT = ( SELECT MAX(BB.EMYMT_BGNN_DT)  
+						                            	FROM PSNL0110 BB
+						                              WHERE BB.DPOB_CD 		= AA.DPOB_CD
+						                                AND BB.SYSTEMKEY 	= AA.SYSTEMKEY
+						                                AND BB.EMYMT_TYP_CD = AA.EMYMT_TYP_CD
+						                            )
+						    
+						    AND AA.EMYMT_TYP_CD	= 'A0420010' 
+						    AND AA.DPOB_CD 		= #dpobCd#
+						    AND AA.SYSTEMKEY 	= #systemkey#
+						    AND ROWNUM=1)  , #soctyInsurYr# )
+				  , #hlthInsurFlucDt#
+				  , #hlthInsrPayTotAmnt#
+				  , #hlthInsrMnthRuntnAmnt#
+				  , #hlthInsrGrde#
+				  , #hlthInsrCertNum#
+				  , #natPennInsurFlucDt#
+				  , #natPennStdIncmMnthAmnt#
+				  , #natPennGrde#
+				  , #hlthInsrApptnYn#
+				  , #natPennApptnYn#
+				  , #umytInsrApptnYn#
+				  , #idtlAccdtInsurApptnYn#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #umytInsrFlucDt#
+				  , #umytInsrPayTotAmnt#
+				  , #umytInsrPayMnthAmnt#
+				  , #idtlAccdtFlucDt#
+				  , #idtlAccdtPayTotAmnt#
+				  , #idtlAccdtPayMnthAmnt# )
+		]]>
+	</insert>
+	
+	<update id="psnl0127DAO.updatePsnl0127_S">
+		<![CDATA[
+			UPDATE PSNL0127
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, SOCTY_INSUR_YR=#soctyInsurYr#
+				, HLTH_INSUR_FLUC_DT=#hlthInsurFlucDt#
+				, HLTH_INSR_PAY_TOT_AMNT=#hlthInsrPayTotAmnt#
+				, HLTH_INSR_MNTH_RUNTN_AMNT=#hlthInsrMnthRuntnAmnt#
+				, HLTH_INSR_GRDE=#hlthInsrGrde#
+				, HLTH_INSR_CERT_NUM=#hlthInsrCertNum#
+				, NAT_PENN_INSUR_FLUC_DT=#natPennInsurFlucDt#
+				, NAT_PENN_STD_INCM_MNTH_AMNT=#natPennStdIncmMnthAmnt#
+				, NAT_PENN_GRDE=#natPennGrde#
+				, HLTH_INSR_APPTN_YN=#hlthInsrApptnYn#
+				, NAT_PENN_APPTN_YN=#natPennApptnYn#
+				, UMYT_INSR_APPTN_YN=#umytInsrApptnYn#
+				, IDTL_ACCDT_INSUR_APPTN_YN=#idtlAccdtInsurApptnYn#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+				, UMYT_INSR_FLUC_DT=#umytInsrFlucDt#
+				, UMYT_INSR_PAY_TOT_AMNT=#umytInsrPayTotAmnt#
+				, UMYT_INSR_PAY_MNTH_AMNT=#umytInsrPayMnthAmnt#
+				, IDTL_ACCDT_FLUC_DT=#idtlAccdtFlucDt#
+				, IDTL_ACCDT_PAY_TOT_AMNT=#idtlAccdtPayTotAmnt#
+				, IDTL_ACCDT_PAY_MNTH_AMNT=#idtlAccdtPayMnthAmnt#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND SOCTY_INSUR_YR=#soctyInsurYr#
+				]]>
+	</update>
+	
+	<update id="psnl0127DAO.updatePsnl0127ToPayr4100_S">
+		<![CDATA[
+			UPDATE PSNL0127
+			SET   HLTH_INSR_MNTH_RUNTN_AMNT=#hlthInsrMnthRuntnAmnt#  
+				, NAT_PENN_STD_INCM_MNTH_AMNT=#natPennStdIncmMnthAmnt# 
+				, HLTH_INSR_APPTN_YN=#hlthInsrApptnYn#
+				, NAT_PENN_APPTN_YN=#natPennApptnYn#
+				, UMYT_INSR_APPTN_YN=#umytInsrApptnYn#
+				, IDTL_ACCDT_INSUR_APPTN_YN=#idtlAccdtInsurApptnYn#  
+				, UMYT_INSR_PAY_MNTH_AMNT=#umytInsrPayMnthAmnt# 
+				, IDTL_ACCDT_PAY_MNTH_AMNT=#idtlAccdtPayMnthAmnt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr# 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND SOCTY_INSUR_YR=#soctyInsurYr#
+				]]>
+	</update>
+	
+	<delete id="psnl0127DAO.deletePsnl0127_S">
+		<![CDATA[
+			DELETE FROM PSNL0127 
+			  WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+
+	<insert id="psnl0127DAO.insertPsnl0127" parameterClass="psnl0127Dto">
+
+			INSERT INTO PSNL0127 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , SOCTY_INSUR_YR
+				  , HLTH_INSUR_FLUC_DT
+				  , HLTH_INSR_PAY_TOT_AMNT
+				  , HLTH_INSR_MNTH_RUNTN_AMNT
+				  , NAT_PENN_STD_INCM_MNTH_AMNT
+				  , HLTH_INSR_APPTN_YN
+				  , NAT_PENN_APPTN_YN
+				  , UMYT_INSR_APPTN_YN
+				  , IDTL_ACCDT_INSUR_APPTN_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #soctyInsurYr#
+				  , #hlthInsurFlucDt#
+				  , #hlthInsrPayTotAmnt#
+				  , #hlthInsrMnthRuntnAmnt#
+				  , #natPennStdIncmMnthAmnt#
+				  , #hlthInsrApptnYn#
+				  , #natPennApptnYn#
+				  , #umytInsrApptnYn#
+				  , #idtlAccdtInsurApptnYn#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+	
+	</insert> 
+	
+	<select id="psnl0127DAO.selectPsnl0127_S" resultMap="psnl0127">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, SOCTY_INSUR_YR
+				, HLTH_INSUR_FLUC_DT
+				, HLTH_INSR_PAY_TOT_AMNT
+				, HLTH_INSR_MNTH_RUNTN_AMNT
+				, HLTH_INSR_GRDE
+				, HLTH_INSR_CERT_NUM
+				, NAT_PENN_INSUR_FLUC_DT
+				, NAT_PENN_STD_INCM_MNTH_AMNT
+				, NAT_PENN_GRDE
+				, HLTH_INSR_APPTN_YN
+				, NAT_PENN_APPTN_YN
+				, UMYT_INSR_APPTN_YN
+				, IDTL_ACCDT_INSUR_APPTN_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, UMYT_INSR_FLUC_DT
+				, UMYT_INSR_PAY_TOT_AMNT
+				, UMYT_INSR_PAY_MNTH_AMNT
+				, IDTL_ACCDT_FLUC_DT
+				, IDTL_ACCDT_PAY_TOT_AMNT
+				, IDTL_ACCDT_PAY_MNTH_AMNT
+			FROM PSNL0127
+						WHERE DPOB_CD=#dpobCd#
+						  AND SYSTEMKEY=#systemkey# 
+				]]>
+	</select>
+	<!-- AND SOCTY_INSUR_YR=#soctyInsurYr# -->
+	
+	<update id="psnl0127DAO.updatePsnl0127" parameterClass="psnl0127Dto">
+		
+			UPDATE PSNL0127
+			SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				<isNotNull property="hlthInsrPayTotAmnt"><isNotEmpty property="hlthInsrPayTotAmnt">, HLTH_INSR_PAY_TOT_AMNT=#hlthInsrPayTotAmnt#</isNotEmpty></isNotNull>
+				<isNotNull property="hlthInsrMnthRuntnAmnt"><isNotEmpty property="hlthInsrMnthRuntnAmnt">, HLTH_INSR_MNTH_RUNTN_AMNT=#hlthInsrMnthRuntnAmnt#</isNotEmpty></isNotNull>
+				<isNotNull property="natPennStdIncmMnthAmnt"><isNotEmpty property="natPennStdIncmMnthAmnt">, NAT_PENN_STD_INCM_MNTH_AMNT=#natPennStdIncmMnthAmnt#</isNotEmpty></isNotNull>
+				<isNotNull property="hlthInsrApptnYn"><isNotEmpty property="hlthInsrApptnYn">, HLTH_INSR_APPTN_YN=#hlthInsrApptnYn#</isNotEmpty></isNotNull>
+				<isNotNull property="natPennApptnYn"><isNotEmpty property="natPennApptnYn">, NAT_PENN_APPTN_YN=#natPennApptnYn#</isNotEmpty></isNotNull>
+				<isNotNull property="umytInsrApptnYn"><isNotEmpty property="umytInsrApptnYn">, UMYT_INSR_APPTN_YN=#umytInsrApptnYn#</isNotEmpty></isNotNull>
+				<isNotNull property="idtlAccdtInsurApptnYn"><isNotEmpty property="idtlAccdtInsurApptnYn">, IDTL_ACCDT_INSUR_APPTN_YN=#idtlAccdtInsurApptnYn#</isNotEmpty></isNotNull>
+				<isNotNull property="ismt"><isNotEmpty property="ismt">, ISMT=#ismt#</isNotEmpty></isNotNull>
+				<isNotNull property="revnAddr"><isNotEmpty property="revnAddr">, REVN_ADDR=#revnAddr#</isNotEmpty></isNotNull>
+			WHERE DPOB_CD=#dpobCd#
+			  AND SYSTEMKEY=#systemkey#
+		
+
+	</update>
+	
+	<delete id="psnl0127DAO.deletePsnl0127" parameterClass="psnl0127Dto">
+	
+			DELETE FROM PSNL0127 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+						
+	
+	</delete>
+	
+	
+	<select id="psnl0127DAO.selectPsnl0127Data" resultMap="psnl0127" parameterClass="psnl0127SrhVo">
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, SOCTY_INSUR_YR
+				, HLTH_INSUR_FLUC_DT
+				, HLTH_INSR_PAY_TOT_AMNT
+				, HLTH_INSR_MNTH_RUNTN_AMNT
+				, HLTH_INSR_GRDE
+				, HLTH_INSR_CERT_NUM
+				, NAT_PENN_INSUR_FLUC_DT
+				, NAT_PENN_STD_INCM_MNTH_AMNT
+				, NAT_PENN_GRDE
+				, HLTH_INSR_APPTN_YN
+				, NAT_PENN_APPTN_YN
+				, UMYT_INSR_APPTN_YN
+				, IDTL_ACCDT_INSUR_APPTN_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, UMYT_INSR_FLUC_DT
+				, UMYT_INSR_PAY_TOT_AMNT
+				, UMYT_INSR_PAY_MNTH_AMNT
+				, IDTL_ACCDT_FLUC_DT
+				, IDTL_ACCDT_PAY_TOT_AMNT
+				, IDTL_ACCDT_PAY_MNTH_AMNT
+			FROM PSNL0127
+						WHERE DPOB_CD=#dpobCd#
+						  AND SYSTEMKEY=#systemkey#
+	</select>
+	
+	<select id="psnl0127DAO.selectPsnl0127" resultClass="egovMap" parameterClass="hashMap">
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, SOCTY_INSUR_YR
+				, HLTH_INSUR_FLUC_DT
+				, HLTH_INSR_PAY_TOT_AMNT
+				, HLTH_INSR_MNTH_RUNTN_AMNT
+				, UMYT_INSR_PAY_MNTH_AMNT
+				, IDTL_ACCDT_PAY_MNTH_AMNT
+				, NAT_PENN_STD_INCM_MNTH_AMNT
+				, HLTH_INSR_APPTN_YN
+				, NAT_PENN_APPTN_YN
+				, UMYT_INSR_APPTN_YN
+				, IDTL_ACCDT_INSUR_APPTN_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PSNL0127
+		   WHERE DPOB_CD=#dpobCd#
+	    	AND SYSTEMKEY=#systemkey#
+		<isNotNull property="soctyInsurYr">
+		    <isNotEmpty property="soctyInsurYr">
+		        AND SOCTY_INSUR_YR=#soctyInsurYr#
+		    </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="hlthInsurFlucDt">
+		    <isNotEmpty property="hlthInsurFlucDt">
+		        AND HLTH_INSUR_FLUC_DT=#hlthInsurFlucDt#
+		    </isNotEmpty>
+		</isNotNull>
+	</select>
+
+	
+</sqlMap>

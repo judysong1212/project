@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0134">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	
+	<typeAlias alias="psnl0134Dto" type="com.app.exterms.personal.client.dto.Psnl0134DTO"/>
+    <typeAlias  alias="psnl0134SrhVo" type="com.app.exterms.personal.server.vo.Psnl0134SrhVO"/>
+	<typeAlias  alias="psnl0134Vo" type="com.app.exterms.personal.server.vo.Psnl0134VO"/>
+	
+	
+	<insert id="psnl0134DAO.insertPsnl0134" parameterClass="psnl0134Vo">
+		<![CDATA[
+			INSERT INTO PSNL0134 
+				( DPOB_CD				
+					, SYSTEMKEY			
+					, ACMP_INSPN_SEIL_NUM	
+					, ACMP_INSPN_DIV_CD	
+					, ACMP_INSPN_TTL		
+					, ACMP_INSPN_BGNN_DT	
+					, ACMP_INSPN_END_DT	
+					, ACMP_INSPN_NM_CTY	
+					, ACMP_INSPN_PUR_CTNT	
+					, ACMP_INSPN_RST_CTNT	
+					, ACMP_INSPN_ETC_CTNT	
+					, KYBDR				
+					, INPT_DT				
+					, INPT_ADDR			
+					, REVN_DT				
+					, ISMT				
+					, REVN_ADDR
+					, ACMP_INSPN_DYS )
+			VALUES ( #dpobCd#
+						, #systemkey#
+					 	, (  SELECT NVL(MAX(ACMP_INSPN_SEIL_NUM)+1,1) FROM PSNL0134 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#   ) 
+						, #acmpInspnDivCd#	
+						, #acmpInspnTtl#		
+						, #acmpInspnBgnnDt#	
+						, #acmpInspnEndDt#	
+						, #acmpInspnNmCty#	
+						, #acmpInspnPurCtnt#	
+						, #acmpInspnRstCtnt#	
+						, #acmpInspnEtcCtnt#	
+					  	, #ismt#
+					  	, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  	, #revnAddr#
+					  	, #ismt#
+					  	, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  	, #revnAddr#
+					  	, #acmpInspnDys# )
+			]]>
+	</insert>
+	
+	<update id="psnl0134DAO.updatePsnl0134" parameterClass="psnl0134Vo">
+	
+			UPDATE PSNL0134
+				SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					, ISMT=#ismt#
+					, REVN_ADDR=#revnAddr#
+					, ACMP_INSPN_DIV_CD=#acmpInspnDivCd#	
+					, ACMP_INSPN_TTL=#acmpInspnTtl#		
+					, ACMP_INSPN_BGNN_DT=#acmpInspnBgnnDt#		
+					, ACMP_INSPN_END_DT=#acmpInspnEndDt#	
+					, ACMP_INSPN_NM_CTY=#acmpInspnNmCty#	
+					, ACMP_INSPN_PUR_CTNT=#acmpInspnPurCtnt#	
+					, ACMP_INSPN_RST_CTNT=#acmpInspnRstCtnt#	
+					, ACMP_INSPN_ETC_CTNT=#acmpInspnEtcCtnt#
+					, ACMP_INSPN_DYS=#acmpInspnDys#
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				AND ACMP_INSPN_SEIL_NUM=#acmpInspnSeilNum#
+	</update>
+	
+	<delete id="psnl0134DAO.deletePsnl0134" parameterClass="psnl0134Vo">
+		<![CDATA[
+			DELETE FROM PSNL0134 
+				WHERE DPOB_CD=#dpobCd#
+					AND SYSTEMKEY=#systemkey#
+					AND ACMP_INSPN_SEIL_NUM=#acmpInspnSeilNum#
+		]]>
+	</delete>
+	 
+	 
+	<select id="psnl0134DAO.selectPsnl0134" resultClass="egovMap" parameterClass="psnl0134SrhVo">
+		<![CDATA[
+			SELECT ROWNUM RNUM, T.*
+			  FROM ( SELECT A.DPOB_CD				
+								, A.SYSTEMKEY			
+								, A.ACMP_INSPN_SEIL_NUM	
+								, A.ACMP_INSPN_DIV_CD	
+								, fcBass0300CDNM(A.DPOB_CD, A.ACMP_INSPN_DIV_CD) AS ACMP_INSPN_DIV_NM
+								, A.ACMP_INSPN_TTL		
+								, TO_DATE(A.ACMP_INSPN_BGNN_DT, 'YYYYMMDD')AS ACMP_INSPN_BGNN_DT
+								, TO_DATE(A.ACMP_INSPN_END_DT, 'YYYYMMDD')AS ACMP_INSPN_END_DT
+								, A.ACMP_INSPN_DYS AS ACMP_INSPN_DYS	
+								, A.ACMP_INSPN_NM_CTY	
+								, A.ACMP_INSPN_PUR_CTNT	
+								, A.ACMP_INSPN_RST_CTNT	
+								, A.ACMP_INSPN_ETC_CTNT	
+								, ( ( SELECT USR_NM FROM SYSM0100  WHERE USR_ID = A.KYBDR ) || '( ' || A.KYBDR || ' )'  ) AS KYBDR 	
+								, A.INPT_DT				
+								, A.INPT_ADDR			
+								, A.REVN_DT				
+								, A.ISMT				
+								, A.REVN_ADDR			
+						FROM PSNL0134 A
+					WHERE A.DPOB_CD=#dpobCd#
+						AND A.SYSTEMKEY=#systemkey#
+						AND A.ACMP_INSPN_DIV_CD=#acmpInspnDivCd#
+		]]>					
+					<isNotNull property="acmpInspnSeilNum">
+						<isNotEqual property="acmpInspnSeilNum" compareValue="0">
+							AND A.ACMP_INSPN_SEIL_NUM = #acmpInspnSeilNum#
+						</isNotEqual>	
+					</isNotNull>
+					ORDER BY A.ACMP_INSPN_BGNN_DT DESC)T
+			ORDER BY RNUM DESC
+		
+	</select>
+	
+</sqlMap>

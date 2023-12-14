@@ -1,0 +1,855 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Insr4300">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="insr4300SerarchVO" type="com.app.exterms.insurance.server.vo.Insr4300SrhVO"/>
+	 
+<resultMap id="insr4300" class="com.app.exterms.insurance.server.vo.Insr4300VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="emymtSeilNum" column="EMYMT_SEIL_NUM" columnIndex="3"/>
+		<result property="antyDeinYr" column="ANTY_DEIN_YR" columnIndex="4"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="5"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="6"/>
+		<result property="antyTotDutyNumDys" column="ANTY_TOT_DUTY_NUM_DYS" columnIndex="7"/>
+		<result property="antyIncmTotAmnt" column="ANTY_INCM_TOT_AMNT" columnIndex="8"/>
+		<result property="antyStdIncmMnthAmnt" column="ANTY_STD_INCM_MNTH_AMNT" columnIndex="9"/>
+		<result property="antyMnthPrmm" column="ANTY_MNTH_PRMM" columnIndex="10"/>
+		<result property="bfrStdIncmMnthAmnt" column="BFR_STD_INCM_MNTH_AMNT" columnIndex="11"/>
+		<result property="txtnDataDeinYn" column="TXTN_DATA_DEIN_YN" columnIndex="12"/>
+		<result property="pbcorpOautyDeinYn" column="PBCORP_OAUTY_DEIN_YN" columnIndex="13"/>
+		<result property="antyPayRflctnYn" column="ANTY_PAY_RFLCTN_YN" columnIndex="14"/>
+		<result property="kybdr" column="KYBDR" columnIndex="15"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="16"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="17"/>
+		<result property="ismt" column="ISMT" columnIndex="18"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="19"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="20"/>
+	</resultMap>
+	
+	<insert id="insr4300DAO.insertInsr4300_S">
+		<![CDATA[
+			INSERT INTO INSR4300 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , EMYMT_SEIL_NUM
+				  , ANTY_DEIN_YR
+				  , HAN_NM
+				  , RESN_REGN_NUM
+				  , ANTY_TOT_DUTY_NUM_DYS
+				  , ANTY_INCM_TOT_AMNT
+				  , ANTY_STD_INCM_MNTH_AMNT
+				  , ANTY_MNTH_PRMM
+				  , BFR_STD_INCM_MNTH_AMNT
+				  , TXTN_DATA_DEIN_YN
+				  , PBCORP_OAUTY_DEIN_YN
+				  , ANTY_PAY_RFLCTN_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #emymtSeilNum#
+				  , #antyDeinYr#
+				  , #hanNm#
+				  , Replace(#resnRegnNum#,'-','')
+				  , #antyTotDutyNumDys#
+				  , #antyIncmTotAmnt#
+				  , #antyStdIncmMnthAmnt#
+				  , #antyMnthPrmm#
+				  , #bfrStdIncmMnthAmnt#
+				  , #txtnDataDeinYn#
+				  , #pbcorpOautyDeinYn#
+				  , #antyPayRflctnYn#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<insert id="insr4300DAO.insertXlsInsr4300_S">
+		<![CDATA[
+			INSERT INTO INSR4300 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , EMYMT_SEIL_NUM
+				  , ANTY_DEIN_YR
+				  , HAN_NM
+				  , RESN_REGN_NUM
+				  , ANTY_TOT_DUTY_NUM_DYS
+				  , ANTY_INCM_TOT_AMNT
+				  , ANTY_STD_INCM_MNTH_AMNT
+				  , ANTY_MNTH_PRMM
+				  , BFR_STD_INCM_MNTH_AMNT
+				  , TXTN_DATA_DEIN_YN
+				  , PBCORP_OAUTY_DEIN_YN
+				  , ANTY_PAY_RFLCTN_YN
+				  , NAT_PENN_AQTN_DT
+                  , NAT_APPTN_YR_MNTH
+                  , NAT_PRCS_DT
+                  , NAT_PRCS_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  ,  NVL((SELECT SYSTEMKEY 
+						                    FROM PSNL0100
+						                    WHERE  DPOB_CD=#dpobCd#
+	                                          AND  RESN_REGN_NUM = Replace(#resnRegnNum#,'-','')),( 'P' || LPAD((SELECT NVL(MAX(EMYMT_SEIL_NUM),0) + 1 
+													           FROM INSR4300),7,'0')))   
+				, (SELECT MAX(EMYMT_SEIL_NUM) AS EMYMT_SEIL_NUM 
+					  FROM INSR3000
+					 WHERE DPOB_CD = #dpobCd#
+					   AND SYSTEMKEY= (
+					                  SELECT SYSTEMKEY 
+					                    FROM PSNL0100 
+					                   WHERE DPOB_CD = #dpobCd#
+					                     AND RESN_REGN_NUM = REPLACE(#resnRegnNum#,'-','') 
+					                )
+					 )													         
+				  , #antyDeinYr#
+				  , #hanNm#
+				  , Replace(#resnRegnNum#,'-','')
+				  , #antyTotDutyNumDys#
+				  , #antyIncmTotAmnt#
+				  , #antyStdIncmMnthAmnt#
+				  , #antyMnthPrmm#
+				  , #bfrStdIncmMnthAmnt#
+				  , #txtnDataDeinYn#
+				  , #pbcorpOautyDeinYn#
+				  , #antyPayRflctnYn#
+				  , (SELECT	MAX(NAT_PENN_AQTN_DT) 
+				  	FROM 	INSR4100 
+				  	WHERE	SYSTEMKEY =
+									(SELECT	SYSTEMKEY 
+									FROM 	PSNL0100
+									WHERE	DPOB_CD = #dpobCd#
+									AND		RESN_REGN_NUM = Replace(#resnRegnNum#,'-','') )
+					AND		DPOB_CD = #dpobCd# )
+				  , TO_CHAR(SYSDATE,'YYYYMM')
+				  , TO_CHAR(SYSDATE,'YYYYMMDD')
+				  , #natPrcsYn#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDD')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDD')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	
+	
+	<update id="insr4300DAO.updateInsr4300_S">
+		<![CDATA[
+			UPDATE INSR4300
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, EMYMT_SEIL_NUM=#emymtSeilNum#
+				, ANTY_DEIN_YR=#antyDeinYr#
+				, HAN_NM=#hanNm#
+				, RESN_REGN_NUM=#resnRegnNum#
+				, ANTY_TOT_DUTY_NUM_DYS=#antyTotDutyNumDys#
+				, ANTY_INCM_TOT_AMNT=#antyIncmTotAmnt#
+				, ANTY_STD_INCM_MNTH_AMNT=#antyStdIncmMnthAmnt#
+				, ANTY_MNTH_PRMM=#antyMnthPrmm#
+				, BFR_STD_INCM_MNTH_AMNT=#bfrStdIncmMnthAmnt#
+				, TXTN_DATA_DEIN_YN=#txtnDataDeinYn#
+				, PBCORP_OAUTY_DEIN_YN=#pbcorpOautyDeinYn#
+				, ANTY_PAY_RFLCTN_YN=#antyPayRflctnYn#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+								AND ANTY_DEIN_YR=#antyDeinYr#
+				]]>
+	</update>
+	
+	<update id="insr4300DAO.updateXlsInsr4300_S">
+		<![CDATA[
+				UPDATE INSR4300
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, EMYMT_SEIL_NUM=#emymtSeilNum#
+				, ANTY_DEIN_YR=#antyDeinYr#
+				, HAN_NM=#hanNm#
+				, RESN_REGN_NUM=#resnRegnNum#
+				, ANTY_TOT_DUTY_NUM_DYS=#antyTotDutyNumDys#
+				, ANTY_INCM_TOT_AMNT=#antyIncmTotAmnt#
+				, ANTY_STD_INCM_MNTH_AMNT=#antyStdIncmMnthAmnt#
+				, ANTY_MNTH_PRMM=#antyMnthPrmm#
+				, BFR_STD_INCM_MNTH_AMNT=#bfrStdIncmMnthAmnt#
+				, TXTN_DATA_DEIN_YN=#txtnDataDeinYn#
+				, PBCORP_OAUTY_DEIN_YN=#pbcorpOautyDeinYn#
+				, ANTY_PAY_RFLCTN_YN=#antyPayRflctnYn#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								 AND SYSTEMKEY= (SELECT SYSTEMKEY 
+						                    FROM PSNL0100
+						                    WHERE  DPOB_CD=#dpobCd#
+	                                          AND  RESN_REGN_NUM = Replace(#resnRegnNum#,'-','')  
+						               ) 
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+								AND ANTY_DEIN_YR=#antyDeinYr#
+				]]>
+	</update>
+	 
+	
+	<delete id="insr4300DAO.deleteInsr4300_S">
+		<![CDATA[
+			DELETE FROM INSR4300 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+								AND ANTY_DEIN_YR=#antyDeinYr#
+				]]>
+	</delete>
+	
+	
+	<delete id="insr4300DAO.deleteXlsInsr4300_S">
+		<![CDATA[
+			DELETE FROM INSR4300 
+						WHERE DPOB_CD=#dpobCd# 
+						  AND ANTY_DEIN_YR=#antyDeinYr#
+						  AND SYSTEMKEY= (SELECT SYSTEMKEY 
+						                    FROM PSNL0100
+						                    WHERE  DPOB_CD=#dpobCd#
+	                                          AND  RESN_REGN_NUM = Replace(#resnRegnNum#,'-','')  
+						               ) 
+				]]>
+	</delete>
+	
+	<select id="insr4300DAO.selectInsr4300_S" resultMap="insr4300">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, EMYMT_SEIL_NUM
+				, ANTY_DEIN_YR
+				, HAN_NM
+				, RESN_REGN_NUM
+				, ANTY_TOT_DUTY_NUM_DYS
+				, ANTY_INCM_TOT_AMNT
+				, ANTY_STD_INCM_MNTH_AMNT
+				, ANTY_MNTH_PRMM
+				, BFR_STD_INCM_MNTH_AMNT
+				, TXTN_DATA_DEIN_YN
+				, PBCORP_OAUTY_DEIN_YN
+				, ANTY_PAY_RFLCTN_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM INSR4300
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+								AND ANTY_DEIN_YR=#antyDeinYr#
+				]]>
+	</select>
+	
+	<select id="insr4300DAO.selectInsr4300List_D" parameterClass="insr4300SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, EMYMT_SEIL_NUM
+								, ANTY_DEIN_YR
+								, HAN_NM
+								, RESN_REGN_NUM
+								, ANTY_TOT_DUTY_NUM_DYS
+								, ANTY_INCM_TOT_AMNT
+								, ANTY_STD_INCM_MNTH_AMNT
+								, ANTY_MNTH_PRMM
+								, BFR_STD_INCM_MNTH_AMNT
+								, TXTN_DATA_DEIN_YN
+								, PBCORP_OAUTY_DEIN_YN
+								, ANTY_PAY_RFLCTN_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM INSR4300
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, EMYMT_SEIL_NUM DESC
+							, ANTY_DEIN_YR DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="insr4300DAO.selectInsr4300ListTotCnt_S" parameterClass="insr4300SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM INSR4300
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	<!-- 국민연금소득총액신고 insr3200 - 결정을 선택한 경우 데이터 -->
+	<select id="insr4300DAO.selectInsr320001ToInsr4300List_D" parameterClass="insr4300SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+                                  AA.DPOB_CD
+                                , AA.SYSTEMKEY
+                                , AA.EMYMT_SEIL_NUM
+                                , AA.ANTY_DEIN_YR
+                                , AA.HAN_NM
+                                , AA.RESN_REGN_NUM
+                                , AA.ANTY_TOT_DUTY_NUM_DYS
+                                , AA.ANTY_INCM_TOT_AMNT
+                                , AA.ANTY_STD_INCM_MNTH_AMNT
+                                , AA.ANTY_MNTH_PRMM
+                                , AA.BFR_STD_INCM_MNTH_AMNT
+                                , AA.TXTN_DATA_DEIN_YN
+                                , AA.PBCORP_OAUTY_DEIN_YN
+                                , AA.ANTY_PAY_RFLCTN_YN 
+                                , BB.EMYMT_DIV_CD
+                                , fcBass0300CDNM(BB.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM 
+                                , BB.CURR_AFFN_DEPT_CD AS DEPT_CD
+                                , fcBass0400CDNM(BB.DPOB_CD,BB.CURR_AFFN_DEPT_CD,'2') AS DEPT_NM 
+                                , BB.TYP_OCCU_CD 
+                                ,  fcBass0320CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD) AS TYP_OCCU_NM
+                                , BB.PYSP_GRDE_CD
+                                ,	 BB.DTIL_OCCU_INTTN_CD 
+		         , fcBassEx0350CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD,BB.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM 
+                                , BB.BUSIN_CD
+                                , fcBass0500CDNM(BB.DPOB_CD,SUBSTR(BB.EMYMT_BGNN_DT,1,4),BB.CURR_AFFN_DEPT_CD,BB.BUSIN_CD) AS BUSIN_NM 
+                        FROM INSR4300 AA, PSNL0100 BB, PAYR0500 CC 
+                        WHERE AA.DPOB_CD = BB.DPOB_CD 
+                          AND AA.SYSTEMKEY = BB.SYSTEMKEY
+                          AND AA.DPOB_CD = CC.DPOB_CD 
+                          AND AA.SYSTEMKEY = CC.SYSTEMKEY 
+                          <isNotEmpty prepend="AND" property="mangeDeptCd" >
+			 	BB.DEPT_CD=#mangeDeptCd#
+		       </isNotEmpty>   
+		       <isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+         BB.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+        </isNotEmpty> 
+				 <isNotEmpty prepend="AND" property="dpobCd" >
+			 	AA.DPOB_CD=#dpobCd#
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="antyDeinYr" >
+			 	AA.ANTY_DEIN_YR = #antyDeinYr#  
+		       </isNotEmpty>  
+		        AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          )       
+		       <isNotEmpty prepend="AND" property="businCd" >
+			 	BB.BUSIN_CD=#businCd#
+		       </isNotEmpty> 
+		       <isNotEmpty property="typOccuCd" prepend="AND">
+				<![CDATA[
+				 BB.TYP_OCCU_CD
+				]]>
+				<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+				 #typOccuCdArr[]#
+				</iterate>
+				</isNotEmpty>  
+			    <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+		       <!--   <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+				<![CDATA[
+				 BB.DTIL_OCCU_CLS_DIV_CD
+				]]>
+				<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+				 #dtilOccuClsDivCdArr[]#
+				</iterate>
+				</isNotEmpty>  -->
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	AA.SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="hanNm" >
+			 	BB.HAN_NM LIKE '%' || #hanNm# || '%'
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="payrMangeDeptCd" >
+			    CC.PAYR_MANG_DEPT_CD=#payrMangeDeptCd#
+		       </isNotEmpty> 
+		        <isNotEmpty property="hdofcCodtnCd" prepend="AND">
+				<![CDATA[
+				 BB.HDOFC_CODTN_CD
+				]]>
+				<iterate prepend="IN" property="hdofcCodtnCdArr" open="(" close=")" conjunction=",">
+				 #hdofcCodtnCdArr[]#
+				</iterate>
+				</isNotEmpty> 
+		          <isNotEmpty prepend="AND" property="emymtDivCd" >
+			 	BB.EMYMT_DIV_CD=#emymtDivCd#
+		       </isNotEmpty>  
+		          <isNotEmpty prepend="AND" property="businApptnYr" >
+			 	 SUBSTR(BB.EMYMT_BGNN_DT,1,4) =#businApptnYr#
+		       </isNotEmpty>  
+					ORDER BY 
+						AA.DPOB_CD ASC
+						  ,(SELECT LPAD(DEPT_RANK,5,'0')  
+                                   FROM BASS0400 DD
+                                   WHERE DD.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+                                     AND DD.DPOB_CD = BB.DPOB_CD) ASC 
+						, AA.RESN_REGN_NUM ASC  
+		                , BB.DTIL_OCCU_CLS_DIV_CD ASC 
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<!-- 국민연금소득총액신고 insr3200 - 결정을 선택한 경우 데이터 -->
+	<select id="insr4300DAO.selectInsr320001ToInsr4300ListTotCnt_S" parameterClass="insr4300SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM 
+            (
+            SELECT
+                                  AA.DPOB_CD
+                                , AA.SYSTEMKEY
+                                , AA.EMYMT_SEIL_NUM
+                                , AA.ANTY_DEIN_YR
+                                , AA.HAN_NM
+                                , AA.RESN_REGN_NUM
+                                , AA.ANTY_TOT_DUTY_NUM_DYS
+                                , AA.ANTY_INCM_TOT_AMNT
+                                , AA.ANTY_STD_INCM_MNTH_AMNT
+                                , AA.ANTY_MNTH_PRMM
+                                , AA.BFR_STD_INCM_MNTH_AMNT
+                                , AA.TXTN_DATA_DEIN_YN
+                                , AA.PBCORP_OAUTY_DEIN_YN
+                                , AA.ANTY_PAY_RFLCTN_YN 
+                                , BB.EMYMT_DIV_CD
+                                , fcBass0300CDNM(BB.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM 
+                                , BB.CURR_AFFN_DEPT_CD AS DEPT_CD
+                                , fcBass0400CDNM(BB.DPOB_CD,BB.CURR_AFFN_DEPT_CD,'2') AS DEPT_NM 
+                                , BB.TYP_OCCU_CD 
+                                ,  fcBass0320CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD)  AS TYP_OCCU_NM
+                                , BB.PYSP_GRDE_CD
+                                , BB.BUSIN_CD
+                                , fcBass0500CDNM(BB.DPOB_CD,SUBSTR(BB.EMYMT_BGNN_DT,1,4),BB.CURR_AFFN_DEPT_CD,BB.BUSIN_CD) AS BUSIN_NM 
+                        FROM INSR4300 AA, PSNL0100 BB, PAYR0500 CC 
+                        WHERE AA.DPOB_CD = BB.DPOB_CD 
+                          AND AA.SYSTEMKEY = BB.SYSTEMKEY
+                          AND AA.DPOB_CD = CC.DPOB_CD 
+                          AND AA.SYSTEMKEY = CC.SYSTEMKEY   
+				 <isNotEmpty prepend="AND" property="mangeDeptCd" >
+			 	BB.DEPT_CD=#mangeDeptCd#
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+		         BB.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+		        </isNotEmpty>
+				 <isNotEmpty prepend="AND" property="dpobCd" >
+			 	AA.DPOB_CD=#dpobCd#
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="antyDeinYr" >
+			 	AA.ANTY_DEIN_YR = #antyDeinYr#  
+		       </isNotEmpty>  
+		        AND EXISTS  (
+                          SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' ))) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          )       
+		       <isNotEmpty prepend="AND" property="businCd" >
+			 	BB.BUSIN_CD=#businCd#
+		       </isNotEmpty> 
+		       <isNotEmpty property="typOccuCd" prepend="AND">
+				<![CDATA[
+				 BB.TYP_OCCU_CD
+				]]>
+				<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+				 #typOccuCdArr[]#
+				</iterate>
+				</isNotEmpty>  
+			      <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+		         <!-- <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+				<![CDATA[
+				 BB.DTIL_OCCU_CLS_DIV_CD
+				]]>
+				<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+				 #dtilOccuClsDivCdArr[]#
+				</iterate>
+				</isNotEmpty>  -->
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	AA.SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="hanNm" >
+			 	BB.HAN_NM LIKE '%' || #hanNm# || '%'
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="payrMangeDeptCd" >
+			    CC.PAYR_MANG_DEPT_CD=#payrMangeDeptCd#
+		       </isNotEmpty> 
+		        <isNotEmpty property="hdofcCodtnCd" prepend="AND">
+				<![CDATA[
+				 BB.HDOFC_CODTN_CD
+				]]>
+				<iterate prepend="IN" property="hdofcCodtnCdArr" open="(" close=")" conjunction=",">
+				 #hdofcCodtnCdArr[]#
+				</iterate>
+				</isNotEmpty> 
+		          <isNotEmpty prepend="AND" property="emymtDivCd" >
+			 	BB.EMYMT_DIV_CD=#emymtDivCd#
+		       </isNotEmpty>  
+		          <isNotEmpty prepend="AND" property="businApptnYr" >
+			 	 SUBSTR(BB.EMYMT_BGNN_DT,1,4) =#businApptnYr#
+		       </isNotEmpty>  
+            )
+	</select>
+	<!-- 국민연금소득총액신고 insr3200 - 신고를 선택한 경우 데이터 -->
+	<select id="insr4300DAO.selectInsr320002ToInsr4300List_D" parameterClass="insr4300SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+                                  AA.DPOB_CD
+                                , AA.SYSTEMKEY
+                                , AA.EMYMT_SEIL_NUM
+                                , AA.ANTY_DEIN_YR
+                                , AA.HAN_NM
+                                , AA.RESN_REGN_NUM
+                                , AA.ANTY_TOT_DUTY_NUM_DYS
+                                , AA.ANTY_INCM_TOT_AMNT
+                                , AA.ANTY_STD_INCM_MNTH_AMNT
+                                , AA.ANTY_MNTH_PRMM
+                                , AA.BFR_STD_INCM_MNTH_AMNT
+                                , AA.TXTN_DATA_DEIN_YN
+                                , AA.PBCORP_OAUTY_DEIN_YN
+                                , AA.ANTY_PAY_RFLCTN_YN 
+                                , BB.EMYMT_DIV_CD
+                                , fcBass0300CDNM(BB.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM 
+                                , BB.CURR_AFFN_DEPT_CD AS DEPT_CD
+                                , fcBass0400CDNM(BB.DPOB_CD,BB.CURR_AFFN_DEPT_CD,'2') AS DEPT_NM 
+                                , BB.TYP_OCCU_CD 
+                                ,  fcBass0320CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD)  AS TYP_OCCU_NM
+                                , BB.PYSP_GRDE_CD
+                                ,	 BB.DTIL_OCCU_INTTN_CD 
+		         , fcBassEx0350CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD,BB.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM 
+                                , BB.BUSIN_CD
+                                , fcBass0500CDNM(BB.DPOB_CD,SUBSTR(BB.EMYMT_BGNN_DT,1,4),BB.CURR_AFFN_DEPT_CD,BB.BUSIN_CD) AS BUSIN_NM 
+                        FROM INSR4300 AA, PSNL0100 BB, PAYR0500 CC 
+                        WHERE AA.DPOB_CD = BB.DPOB_CD 
+                          AND AA.SYSTEMKEY = BB.SYSTEMKEY
+                          AND AA.DPOB_CD = CC.DPOB_CD 
+                          AND AA.SYSTEMKEY = CC.SYSTEMKEY   
+                          <isNotEmpty prepend="AND" property="mangeDeptCd" >
+			 	BB.DEPT_CD=#mangeDeptCd#
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+         BB.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+        </isNotEmpty> 
+				 <isNotEmpty prepend="AND" property="dpobCd" >
+			 	AA.DPOB_CD=#dpobCd#
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="antyDeinYr" >
+			 	AA.ANTY_DEIN_YR = #antyDeinYr#  
+		       </isNotEmpty>  
+		        AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          )       
+		       <isNotEmpty prepend="AND" property="businCd" >
+			 	BB.BUSIN_CD=#businCd#
+		       </isNotEmpty> 
+		       <isNotEmpty property="typOccuCd" prepend="AND">
+				<![CDATA[
+				 BB.TYP_OCCU_CD
+				]]>
+				<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+				 #typOccuCdArr[]#
+				</iterate>
+				</isNotEmpty>  
+			    <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+		        <!--  <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+				<![CDATA[
+				 BB.DTIL_OCCU_CLS_DIV_CD
+				]]>
+				<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+				 #dtilOccuClsDivCdArr[]#
+				</iterate>
+				</isNotEmpty>  -->
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	AA.SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="hanNm" >
+			 	BB.HAN_NM LIKE '%' || #hanNm# || '%'
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="payrMangeDeptCd" >
+			    CC.PAYR_MANG_DEPT_CD=#payrMangeDeptCd#
+		       </isNotEmpty> 
+		        <isNotEmpty property="hdofcCodtnCd" prepend="AND">
+				<![CDATA[
+				 BB.HDOFC_CODTN_CD
+				]]>
+				<iterate prepend="IN" property="hdofcCodtnCdArr" open="(" close=")" conjunction=",">
+				 #hdofcCodtnCdArr[]#
+				</iterate>
+				</isNotEmpty> 
+		          <isNotEmpty prepend="AND" property="emymtDivCd" >
+			 	BB.EMYMT_DIV_CD=#emymtDivCd#
+		       </isNotEmpty>  
+		          <isNotEmpty prepend="AND" property="businApptnYr" >
+			 	 SUBSTR(BB.EMYMT_BGNN_DT,1,4) =#businApptnYr#
+		       </isNotEmpty>  
+					ORDER BY 
+						AA.DPOB_CD ASC
+						  ,(SELECT LPAD(DEPT_RANK,5,'0')  
+                                   FROM BASS0400 DD
+                                   WHERE DD.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+                                     AND DD.DPOB_CD = BB.DPOB_CD) ASC 
+						, AA.RESN_REGN_NUM ASC  
+		                , BB.DTIL_OCCU_CLS_DIV_CD ASC 
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<!-- 국민연금소득총액신고 insr3200 - 신고를 선택한 경우 데이터 -->
+	<select id="insr4300DAO.selectInsr320002ToInsr4300ListTotCnt_S" parameterClass="insr4300SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM 
+			(
+			SELECT
+                                  AA.DPOB_CD
+                                , AA.SYSTEMKEY
+                                , AA.EMYMT_SEIL_NUM
+                                , AA.ANTY_DEIN_YR
+                                , AA.HAN_NM
+                                , AA.RESN_REGN_NUM
+                                , AA.ANTY_TOT_DUTY_NUM_DYS
+                                , AA.ANTY_INCM_TOT_AMNT
+                                , AA.ANTY_STD_INCM_MNTH_AMNT
+                                , AA.ANTY_MNTH_PRMM
+                                , AA.BFR_STD_INCM_MNTH_AMNT
+                                , AA.TXTN_DATA_DEIN_YN
+                                , AA.PBCORP_OAUTY_DEIN_YN
+                                , AA.ANTY_PAY_RFLCTN_YN 
+                                , BB.EMYMT_DIV_CD
+                                , fcBass0300CDNM(BB.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM 
+                                , BB.CURR_AFFN_DEPT_CD AS DEPT_CD
+                                , fcBass0400CDNM(BB.DPOB_CD,BB.CURR_AFFN_DEPT_CD,'2') AS DEPT_NM 
+                                , BB.TYP_OCCU_CD 
+                                ,  fcBass0320CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD)  AS TYP_OCCU_NM
+                                , BB.PYSP_GRDE_CD
+                                , BB.BUSIN_CD
+                                , fcBass0500CDNM(BB.DPOB_CD,SUBSTR(BB.EMYMT_BGNN_DT,1,4),BB.CURR_AFFN_DEPT_CD,BB.BUSIN_CD) AS BUSIN_NM 
+                        FROM INSR4300 AA, PSNL0100 BB, PAYR0500 CC 
+                        WHERE AA.DPOB_CD = BB.DPOB_CD 
+                          AND AA.SYSTEMKEY = BB.SYSTEMKEY
+                          AND AA.DPOB_CD = CC.DPOB_CD 
+                          AND AA.SYSTEMKEY = CC.SYSTEMKEY   
+                          <isNotEmpty prepend="AND" property="mangeDeptCd" >
+			 	BB.DEPT_CD=#mangeDeptCd#
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+         BB.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+        </isNotEmpty>
+				 <isNotEmpty prepend="AND" property="dpobCd" >
+			 	AA.DPOB_CD=#dpobCd#
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="antyDeinYr" >
+			 	AA.ANTY_DEIN_YR = #antyDeinYr#  
+		       </isNotEmpty>  
+		        AND EXISTS  (
+                        SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' ))) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          )       
+		       <isNotEmpty prepend="AND" property="businCd" >
+			 	BB.BUSIN_CD=#businCd#
+		       </isNotEmpty> 
+		       <isNotEmpty property="typOccuCd" prepend="AND">
+				<![CDATA[
+				 BB.TYP_OCCU_CD
+				]]>
+				<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+				 #typOccuCdArr[]#
+				</iterate>
+				</isNotEmpty>  
+			     <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+		       <!--   <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+				<![CDATA[
+				 BB.DTIL_OCCU_CLS_DIV_CD
+				]]>
+				<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+				 #dtilOccuClsDivCdArr[]#
+				</iterate>
+				</isNotEmpty>  -->
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	AA.SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="hanNm" >
+			 	BB.HAN_NM LIKE '%' || #hanNm# || '%'
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="payrMangeDeptCd" >
+			    CC.PAYR_MANG_DEPT_CD=#payrMangeDeptCd#
+		       </isNotEmpty> 
+		        <isNotEmpty property="hdofcCodtnCd" prepend="AND">
+				<![CDATA[
+				 BB.HDOFC_CODTN_CD
+				]]>
+				<iterate prepend="IN" property="hdofcCodtnCdArr" open="(" close=")" conjunction=",">
+				 #hdofcCodtnCdArr[]#
+				</iterate>
+				</isNotEmpty> 
+		          <isNotEmpty prepend="AND" property="emymtDivCd" >
+			 	BB.EMYMT_DIV_CD=#emymtDivCd#
+		       </isNotEmpty>  
+		          <isNotEmpty prepend="AND" property="businApptnYr" >
+			 	 SUBSTR(BB.EMYMT_BGNN_DT,1,4) =#businApptnYr#
+		       </isNotEmpty>  
+			)
+	</select>
+	
+	<!-- 7월급여반영 -->
+	<update id="insr4300DAO.insr3300MnthUpdate_S">
+			UPDATE	INSR4300
+			SET 
+					NAT_APPTN_YR_MNTH = #natApptnYrMnth#
+				  , NAT_PRCS_DT		  = TO_CHAR(SYSDATE, 'YYYYMMDD')
+				  , NAT_PRCS_YN		  = #natPrcsYn#
+				  , ANTY_PAY_RFLCTN_YN=#antyPayRflctnYn#
+				  , ISMT			  = #ismt#
+				  , REVN_DT			  = TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')
+				  , REVN_ADDR		  = #revnAddr#
+			WHERE	DPOB_CD		   = #dpobCd#
+			AND		SYSTEMKEY	   = #systemkey#
+			AND		EMYMT_SEIL_NUM = #emymtSeilNum#
+			AND		ANTY_DEIN_YR   = #antyDeinYr#
+	</update>
+	
+	<select id="insr4300DAO.selectPsnl0100TotCnt_S" resultClass="int">
+	    SELECT COUNT(*) totcnt
+					  FROM INSR4100
+					 WHERE DPOB_CD = #dpobCd#
+					   AND SYSTEMKEY= (
+					                  SELECT SYSTEMKEY 
+					                    FROM PSNL0100 
+					                   WHERE DPOB_CD = #dpobCd#
+					                     AND RESN_REGN_NUM = REPLACE(#resnRegnNum#,'-','') 
+					                )
+	</select>
+</sqlMap>

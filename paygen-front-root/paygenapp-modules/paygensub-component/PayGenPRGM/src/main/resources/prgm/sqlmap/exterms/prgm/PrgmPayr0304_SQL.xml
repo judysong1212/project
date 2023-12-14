@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PGRM_Psnl0100">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="prgmComSearchVO" type="com.app.exterms.prgm.server.vo.PrgmComSearchVO"/>
+	
+	<resultMap id="prgmComPsnl0100" class="com.app.exterms.prgm.server.vo.PrgmComPsnl0100VO"> 
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="3"/>
+		<result property="engNm" column="ENG_NM" columnIndex="4"/>
+		<result property="chinCharNm" column="CHIN_CHAR_NM" columnIndex="5"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="6"/>
+		<result property="sxDivCd" column="SX_DIV_CD" columnIndex="7"/>
+		<result property="yoobhMnthDay" column="YOOBH_MNTH_DAY" columnIndex="8"/>
+		<result property="sclcDivCd" column="SCLC_DIV_CD" columnIndex="9"/>
+		<result property="natnCd" column="NATN_CD" columnIndex="10"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="11"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="12"/>
+		<result property="currAffnDeptCd" column="CURR_AFFN_DEPT_CD" columnIndex="13"/>
+		<result property="repbtyBusinDivCd" column="REPBTY_BUSIN_DIV_CD" columnIndex="14"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="15"/>
+		<result property="odtyCd" column="ODTY_CD" columnIndex="16"/>
+		<result property="frstEmymtDt" column="FRST_EMYMT_DT" columnIndex="17"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="18"/>
+		<result property="emymtBgnnDt" column="EMYMT_BGNN_DT" columnIndex="19"/>
+		<result property="emymtEndDt" column="EMYMT_END_DT" columnIndex="20"/>
+		<result property="pyspCd" column="PYSP_CD" columnIndex="21"/>
+		<result property="hdofcCodtnCd" column="HDOFC_CODTN_CD" columnIndex="22"/>
+		<result property="retryDt" column="RETRY_DT" columnIndex="23"/>
+		<result property="retryReasCtnt" column="RETRY_REAS_CTNT" columnIndex="24"/>
+		<result property="frgnrDivCd" column="FRGNR_DIV_CD" columnIndex="25"/>
+		<result property="psptNum" column="PSPT_NUM" columnIndex="26"/>
+		<result property="styBgnnDt" column="STY_BGNN_DT" columnIndex="27"/>
+		<result property="styEndDt" column="STY_END_DT" columnIndex="28"/>
+		<result property="endSchl" column="END_SCHL" columnIndex="29"/>
+		<result property="endDegrDivCd" column="END_DEGR_DIV_CD" columnIndex="30"/>
+		<result property="pmtnScduDt" column="PMTN_SCDU_DT" columnIndex="31"/>
+		<result property="pyspPrmtnScduDt" column="PYSP_PRMTN_SCDU_DT" columnIndex="32"/>
+		<result property="reymnScduDt" column="REYMN_SCDU_DT" columnIndex="33"/>
+		<result property="logSvcYrNumCd" column="LOG_SVC_YR_NUM_CD" columnIndex="34"/>
+		<result property="logSvcMnthIcmCd" column="LOG_SVC_MNTH_ICM_CD" columnIndex="35"/>
+		<result property="currPyspAppmtDt" column="CURR_PYSP_APPMT_DT" columnIndex="36"/>
+		<result property="currDeptAppmtDt" column="CURR_DEPT_APPMT_DT" columnIndex="37"/>
+		<result property="pernNoteCtnt" column="PERN_NOTE_CTNT" columnIndex="38"/>
+		<result property="kybdr" column="KYBDR" columnIndex="39"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="40"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="41"/>
+		<result property="ismt" column="ISMT" columnIndex="42"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="43"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="44"/> 
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="45"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="46"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="47"/>
+	</resultMap>
+	 
+	<select id="prgmComPayr0304DAO.selectYetaP0100ListTotCnt_S" parameterClass="prgmComSearchVO" resultClass="int">
+			SELECT COUNT (*) tocnt
+			  FROM PSNL0100 AA,
+				        PAYR0500 CC,
+				        (  SELECT SYSTEMKEY
+				              FROM PAYR0304
+				                 WHERE PYMT_YR_MNTH LIKE #yrtxBlggYr# || '%'
+				                 GROUP BY SYSTEMKEY
+				            UNION
+				            SELECT SYSTEMKEY
+				               FROM PYYT0304
+				                  WHERE PYYT_YR_MNTH LIKE #yrtxBlggYr# || '%'
+				                  GROUP BY SYSTEMKEY) DD
+				  WHERE CC.SYSTEMKEY = DD.SYSTEMKEY
+				      		 AND AA.DPOB_CD = CC.DPOB_CD
+				             AND AA.SYSTEMKEY = CC.SYSTEMKEY
+				             AND AA.SYSTEMKEY = DD.SYSTEMKEY
+							 <isNotEmpty prepend="AND" property="dpobCd" >
+							 AA.DPOB_CD=#dpobCd#
+						     </isNotEmpty>  
+						     <isNotEmpty prepend="AND" property="emymtDivCd" >
+							 AA.EMYMT_DIV_CD=#emymtDivCd#
+						     </isNotEmpty> 
+						     <isNotEmpty prepend="AND" property="hdofcCodtnCd" >
+							 AA.HDOFC_CODTN_CD=#hdofcCodtnCd#
+							 </isNotEmpty> 
+						     <isNotEmpty prepend="AND" property="deptCd" >
+							 AA.CURR_AFFN_DEPT_CD=#deptCd#
+						     </isNotEmpty> 
+						     <isNotEmpty prepend="AND" property="businCd" >
+							 AA.BUSIN_CD=#businCd#
+						     </isNotEmpty> 
+						     <isNotEmpty prepend="AND" property="typOccuCd" >
+							 AA.TYP_OCCU_CD=#typOccuCd#
+						     </isNotEmpty> 
+						     <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+							 AA.DTIL_OCCU_INTTN_CD =#dtilOccuInttnCd#
+						     </isNotEmpty> 
+						     <isNotEmpty prepend="AND" property="systemkey" >
+							 AA.SYSTEMKEY=#systemkey#
+						     </isNotEmpty> 
+						     <isNotEmpty prepend="AND" property="hanNm" >
+							 AA.HAN_NM LIKE '%' || #hanNm# || '%'
+						     </isNotEmpty> 
+	</select>
+		
+	<select id="prgmComPayr0304DAO.selectYetaP0100List_D" parameterClass="prgmComSearchVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+				SELECT  AA.DPOB_CD,
+	                         AA.SYSTEMKEY,
+	                         AA.HAN_NM,
+	                         AA.ENG_NM,
+	                         AA.CHIN_CHAR_NM,
+	                            SUBSTR (AA.RESN_REGN_NUM, 0, 6)
+	                         || '-'
+	                         || SUBSTR (AA.RESN_REGN_NUM, 7)
+	                            AS RESN_REGN_NUM,
+	                         AA.SX_DIV_CD,
+	                         AA.YOOBH_MNTH_DAY,
+	                         AA.SCLC_DIV_CD,
+	                         AA.NATN_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.NATN_CD) AS NATN_NM,
+	                         AA.DEPT_CD,
+	                         fcBass0400CDNM (AA.DPOB_CD, AA.DEPT_CD, '2')
+	                            AS DEPT_NM,
+	                         AA.CURR_AFFN_DEPT_CD,
+	                         fcBass0400CDNM (AA.DPOB_CD, AA.CURR_AFFN_DEPT_CD, '2')
+	                            AS CURR_AFFN_DEPT_NM,
+	                         AA.REPBTY_BUSIN_DIV_CD,
+	                         AA.TYP_OCCU_CD,
+	                         fcBass0320CDNM (AA.DPOB_CD, AA.TYP_OCCU_CD)
+	                            AS TYP_OCCU_NM,
+	                         AA.ODTY_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.ODTY_CD) AS ODTY_NM,
+	                         AA.FRST_EMYMT_DT,
+	                         AA.EMYMT_DIV_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.EMYMT_DIV_CD)
+	                            AS EMYMT_DIV_NM,
+	                         AA.EMYMT_DIV_CD AS emymtDivCdcommCd,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.EMYMT_DIV_CD)
+	                            AS emymtDivCdcommCdNm,
+	                         AA.EMYMT_BGNN_DT,
+	                         AA.EMYMT_END_DT,
+	                         AA.PYSP_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.PYSP_CD) AS PYSP_NM,
+	                         AA.RETRY_DT,
+	                         AA.RETRY_REAS_CTNT,
+	                         AA.FRGNR_DIV_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.FRGNR_DIV_CD)
+	                            AS FRGNR_DIV_NM,
+	                         AA.PSPT_NUM,
+	                         AA.STY_BGNN_DT,
+	                         AA.STY_END_DT,
+	                         AA.END_SCHL,
+	                         AA.END_DEGR_DIV_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.END_DEGR_DIV_CD)
+	                            AS END_DEGR_DIV_NM,
+	                         AA.PMTN_SCDU_DT,
+	                         AA.PYSP_PRMTN_SCDU_DT,
+	                         AA.REYMN_SCDU_DT,
+	                         AA.LOG_SVC_YR_NUM_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.LOG_SVC_YR_NUM_CD)
+	                            AS LOG_SVC_YR_NUM_NM,
+	                         AA.LOG_SVC_MNTH_ICM_CD,
+	                            (SELECT COMM_CD_NM
+	                               FROM BASS0300 C
+	                              WHERE C.COMM_CD = AA.LOG_SVC_YR_NUM_CD)
+	                         || ' '
+	                         || (SELECT COMM_CD_NM
+	                               FROM BASS0300 C
+	                              WHERE C.COMM_CD = AA.LOG_SVC_MNTH_ICM_CD)
+	                            AS LOG_SVC_MNTH_ICM_NM,
+	                         AA.CURR_PYSP_APPMT_DT,
+	                         AA.CURR_DEPT_APPMT_DT,
+	                         AA.PERN_NOTE_CTNT,
+	                         AA.KYBDR,
+	                         AA.INPT_DT,
+	                         AA.INPT_ADDR,
+	                         AA.ISMT,
+	                         AA.REVN_DT,
+	                         AA.REVN_ADDR,
+	                         (SELECT MAX (B.CURR_PAE_WORK_NM)
+	                            FROM PSNL0110 B
+	                           WHERE     B.DPOB_CD = AA.DPOB_CD
+	                                 AND B.SYSTEMKEY = AA.SYSTEMKEY)
+	                            AS CURR_PAE_WORK_NM,
+	                         (SELECT MAX (C.PIC_FLNM)
+	                            FROM PSNL0125 C
+	                           WHERE     C.DPOB_CD = AA.DPOB_CD
+	                                 AND C.SYSTEMKEY = AA.SYSTEMKEY)
+	                            AS PIC_FLNM,
+	                         AA.PYSP_GRDE_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, PYSP_GRDE_CD)
+	                            AS PYSP_GRDE_NM,
+	                         AA.DTIL_OCCU_CLS_DIV_CD,
+	                         AA.DTIL_OCCU_INTTN_CD,
+	                         fcBassEx0350CDNM (AA.DPOB_CD,
+	                                           AA.TYP_OCCU_CD,
+	                                           AA.DTIL_OCCU_INTTN_CD,
+	                                           '1')
+	                            AS DTIL_OCCU_CLS_DIV_NM,
+	                         AA.BUSIN_CD,
+	                            '('
+	                         || (SELECT BUSIN_APPTN_YR
+	                               FROM BASS0500
+	                              WHERE     AA.DPOB_CD = DPOB_CD
+	                                    AND AA.CURR_AFFN_DEPT_CD = DEPT_CD
+	                                    AND AA.BUSIN_CD = BUSIN_CD
+	                                    AND SUBSTR (AA.EMYMT_BGNN_DT, 1, 4) =
+	                                           BUSIN_APPTN_YR)
+	                         || ')'
+	                         || (SELECT BUSIN_NM
+	                               FROM BASS0500
+	                              WHERE     AA.DPOB_CD = DPOB_CD
+	                                    AND AA.CURR_AFFN_DEPT_CD = DEPT_CD
+	                                    AND AA.BUSIN_CD = BUSIN_CD
+	                                    AND SUBSTR (AA.EMYMT_BGNN_DT, 1, 4) =
+	                                           BUSIN_APPTN_YR)
+	                            AS BUSIN_NM,
+	                         AA.HDOFC_CODTN_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.HDOFC_CODTN_CD)
+	                            AS HDOFC_CODTN_NM,
+	                         CC.PAYR_MANG_DEPT_CD
+					    FROM PSNL0100 AA,
+					        	  PAYR0500 CC,
+					        	 (  SELECT SYSTEMKEY
+							              FROM PAYR0304
+							            	 WHERE PYMT_YR_MNTH LIKE #yrtxBlggYr# || '%'
+							          			GROUP BY SYSTEMKEY
+									 UNION
+									 SELECT SYSTEMKEY
+									      FROM PYYT0304
+									         WHERE PYYT_YR_MNTH LIKE #yrtxBlggYr# || '%'
+									          	GROUP BY SYSTEMKEY ) DD					
+					   WHERE  CC.SYSTEMKEY = DD.SYSTEMKEY
+					         AND AA.DPOB_CD = CC.DPOB_CD
+					         AND AA.SYSTEMKEY = CC.SYSTEMKEY
+					         AND AA.SYSTEMKEY = DD.SYSTEMKEY
+						   <isNotEmpty prepend="AND" property="dpobCd" >
+						 	AA.DPOB_CD=#dpobCd#
+					       </isNotEmpty>  
+					       <isNotEmpty prepend="AND" property="emymtDivCd" >
+						 	AA.EMYMT_DIV_CD=#emymtDivCd#
+					       </isNotEmpty> 
+					       <isNotEmpty prepend="AND" property="hdofcCodtnCd" >
+						 	AA.HDOFC_CODTN_CD=#hdofcCodtnCd#
+					       </isNotEmpty> 
+					       <isNotEmpty prepend="AND" property="deptCd" >
+						 	AA.CURR_AFFN_DEPT_CD=#deptCd#
+					       </isNotEmpty> 
+					       <isNotEmpty prepend="AND" property="businCd" >
+						 	AA.BUSIN_CD=#businCd#
+					       </isNotEmpty> 
+					       <isNotEmpty prepend="AND" property="typOccuCd" >
+						 	AA.TYP_OCCU_CD=#typOccuCd#
+					       </isNotEmpty> 
+					       <isNotEmpty prepend="AND" property="systemkey" >
+						 	AA.SYSTEMKEY=#systemkey#
+					       </isNotEmpty> 
+					       <isNotEmpty prepend="AND" property="hanNm" >
+						 	AA.HAN_NM LIKE '%' || #hanNm# || '%'
+					       </isNotEmpty>					
+							ORDER BY 
+								AA.DPOB_CD ASC
+								,AA.RESN_REGN_NUM ASC 
+									, AA.SYSTEMKEY ASC
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>	
+	
+	<select id="prgmComPayr0304DAO.selectPayrP405001ListTotCnt_S" parameterClass="prgmComSearchVO" resultClass="int">
+			SELECT COUNT (*) tocnt
+					  FROM PSNL0100 AA,
+					       (  SELECT  A.SYSTEMKEY, A.DPOB_CD
+							            FROM PSNL0110 A, PSNL0100 B
+							           WHERE #pymtYrMnth# BETWEEN TO_CHAR (SUBSTR (A.EMYMT_BGNN_DT, 1, 6))
+							                              AND TO_CHAR (
+							                                     (NVL (
+							                                         SUBSTR (A.EMYMT_END_DT, 1, 6),
+							                                         TO_CHAR (SYSDATE, 'YYYYMM'))))
+							                              AND A.EMYMT_DIV_CD = B.EMYMT_DIV_CD
+												          AND A.SYSTEMKEY = B.SYSTEMKEY
+												          AND A.DPOB_CD = B.DPOB_CD
+							        	GROUP BY A.SYSTEMKEY, A.DPOB_CD
+							        MINUS
+							          SELECT C.SYSTEMKEY, C.DPOB_CD
+							            FROM PAYR0304 C
+							           WHERE C.PYMT_YR_MNTH = #pymtYrMnth#
+							           	   <isNotEmpty prepend="AND" property="payCd" >
+											C.PAY_CD = #payCd# 
+											</isNotEmpty>  
+							        	GROUP BY C.SYSTEMKEY, C.DPOB_CD) DD
+					 WHERE AA.DPOB_CD = DD.DPOB_CD
+       					 AND AA.SYSTEMKEY = DD.SYSTEMKEY
+							 <isNotEmpty prepend="AND" property="dpobCd" >
+							 AA.DPOB_CD=#dpobCd#
+						     </isNotEmpty>  
+						     <isNotEmpty prepend="AND" property="emymtDivCd" >
+							 AA.EMYMT_DIV_CD=#emymtDivCd#
+						     </isNotEmpty> 
+						     <isNotEmpty prepend="AND" property="hdofcCodtnCd" >
+							 AA.HDOFC_CODTN_CD=#hdofcCodtnCd#
+							 </isNotEmpty> 
+						     <isNotEmpty prepend="AND" property="deptCd" >
+							 AA.CURR_AFFN_DEPT_CD=#deptCd#
+						     </isNotEmpty> 
+						     <isNotEmpty prepend="AND" property="businCd" >
+							 AA.BUSIN_CD=#businCd#
+						     </isNotEmpty> 
+						     <isNotEmpty prepend="AND" property="typOccuCd" >
+							 AA.TYP_OCCU_CD=#typOccuCd#
+						     </isNotEmpty> 
+						     <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+							 AA.DTIL_OCCU_INTTN_CD =#dtilOccuInttnCd#
+						     </isNotEmpty> 
+						     <isNotEmpty prepend="AND" property="systemkey" >
+							 AA.SYSTEMKEY=#systemkey#
+						     </isNotEmpty> 
+						     <isNotEmpty prepend="AND" property="hanNm" >
+							 AA.HAN_NM LIKE '%' || #hanNm# || '%'
+						     </isNotEmpty> 
+	</select>
+		
+	<select id="prgmComPayr0304DAO.selectPayrP405001List_D" parameterClass="prgmComSearchVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+				SELECT  AA.DPOB_CD,
+	                         AA.SYSTEMKEY,
+	                         AA.HAN_NM,
+	                         AA.ENG_NM,
+	                         AA.CHIN_CHAR_NM,
+	                            SUBSTR (AA.RESN_REGN_NUM, 0, 6)
+	                         || '-'
+	                         || SUBSTR (AA.RESN_REGN_NUM, 7)
+	                            AS RESN_REGN_NUM,
+	                         AA.SX_DIV_CD,
+	                         AA.YOOBH_MNTH_DAY,
+	                         AA.SCLC_DIV_CD,
+	                         AA.NATN_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.NATN_CD) AS NATN_NM,
+	                         AA.DEPT_CD,
+	                         fcBass0400CDNM (AA.DPOB_CD, AA.DEPT_CD, '2')
+	                            AS DEPT_NM,
+	                         AA.CURR_AFFN_DEPT_CD,
+	                         fcBass0400CDNM (AA.DPOB_CD, AA.CURR_AFFN_DEPT_CD, '2')
+	                            AS CURR_AFFN_DEPT_NM,
+	                         AA.REPBTY_BUSIN_DIV_CD,
+	                         AA.TYP_OCCU_CD,
+	                         fcBass0320CDNM (AA.DPOB_CD, AA.TYP_OCCU_CD)
+	                            AS TYP_OCCU_NM,
+	                         AA.ODTY_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.ODTY_CD) AS ODTY_NM,
+	                         AA.FRST_EMYMT_DT,
+	                         AA.EMYMT_DIV_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.EMYMT_DIV_CD)
+	                            AS EMYMT_DIV_NM,
+	                         AA.EMYMT_DIV_CD AS emymtDivCdcommCd,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.EMYMT_DIV_CD)
+	                            AS emymtDivCdcommCdNm,
+	                         AA.EMYMT_BGNN_DT,
+	                         AA.EMYMT_END_DT,
+	                         AA.PYSP_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.PYSP_CD) AS PYSP_NM,
+	                         AA.RETRY_DT,
+	                         AA.RETRY_REAS_CTNT,
+	                         AA.FRGNR_DIV_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.FRGNR_DIV_CD)
+	                            AS FRGNR_DIV_NM,
+	                         AA.PSPT_NUM,
+	                         AA.STY_BGNN_DT,
+	                         AA.STY_END_DT,
+	                         AA.END_SCHL,
+	                         AA.END_DEGR_DIV_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.END_DEGR_DIV_CD)
+	                            AS END_DEGR_DIV_NM,
+	                         AA.PMTN_SCDU_DT,
+	                         AA.PYSP_PRMTN_SCDU_DT,
+	                         AA.REYMN_SCDU_DT,
+	                         AA.LOG_SVC_YR_NUM_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.LOG_SVC_YR_NUM_CD)
+	                            AS LOG_SVC_YR_NUM_NM,
+	                         AA.LOG_SVC_MNTH_ICM_CD,
+	                            (SELECT COMM_CD_NM
+	                               FROM BASS0300 C
+	                              WHERE C.COMM_CD = AA.LOG_SVC_YR_NUM_CD)
+	                         || ' '
+	                         || (SELECT COMM_CD_NM
+	                               FROM BASS0300 C
+	                              WHERE C.COMM_CD = AA.LOG_SVC_MNTH_ICM_CD)
+	                            AS LOG_SVC_MNTH_ICM_NM,
+	                         AA.CURR_PYSP_APPMT_DT,
+	                         AA.CURR_DEPT_APPMT_DT,
+	                         AA.PERN_NOTE_CTNT,
+	                         AA.KYBDR,
+	                         AA.INPT_DT,
+	                         AA.INPT_ADDR,
+	                         AA.ISMT,
+	                         AA.REVN_DT,
+	                         AA.REVN_ADDR,
+	                         (SELECT MAX (B.CURR_PAE_WORK_NM)
+	                            FROM PSNL0110 B
+	                           WHERE     B.DPOB_CD = AA.DPOB_CD
+	                                 AND B.SYSTEMKEY = AA.SYSTEMKEY)
+	                            AS CURR_PAE_WORK_NM,
+	                         (SELECT MAX (C.PIC_FLNM)
+	                            FROM PSNL0125 C
+	                           WHERE     C.DPOB_CD = AA.DPOB_CD
+	                                 AND C.SYSTEMKEY = AA.SYSTEMKEY)
+	                            AS PIC_FLNM,
+	                         AA.PYSP_GRDE_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, PYSP_GRDE_CD)
+	                            AS PYSP_GRDE_NM,
+	                         AA.DTIL_OCCU_CLS_DIV_CD,
+	                         AA.DTIL_OCCU_INTTN_CD,
+	                         fcBassEx0350CDNM (AA.DPOB_CD,
+	                                           AA.TYP_OCCU_CD,
+	                                           AA.DTIL_OCCU_INTTN_CD,
+	                                           '1')
+	                            AS DTIL_OCCU_CLS_DIV_NM,
+	                         AA.BUSIN_CD,
+	                            '('
+	                         || (SELECT BUSIN_APPTN_YR
+	                               FROM BASS0500
+	                              WHERE     AA.DPOB_CD = DPOB_CD
+	                                    AND AA.CURR_AFFN_DEPT_CD = DEPT_CD
+	                                    AND AA.BUSIN_CD = BUSIN_CD
+	                                    AND SUBSTR (AA.EMYMT_BGNN_DT, 1, 4) =
+	                                           BUSIN_APPTN_YR)
+	                         || ')'
+	                         || (SELECT BUSIN_NM
+	                               FROM BASS0500
+	                              WHERE     AA.DPOB_CD = DPOB_CD
+	                                    AND AA.CURR_AFFN_DEPT_CD = DEPT_CD
+	                                    AND AA.BUSIN_CD = BUSIN_CD
+	                                    AND SUBSTR (AA.EMYMT_BGNN_DT, 1, 4) =
+	                                           BUSIN_APPTN_YR)
+	                            AS BUSIN_NM,
+	                         AA.HDOFC_CODTN_CD,
+	                         fcBass0300CDNM (AA.DPOB_CD, AA.HDOFC_CODTN_CD)
+	                            AS HDOFC_CODTN_NM
+					    FROM PSNL0100 AA,
+					        	 (  SELECT  A.SYSTEMKEY, A.DPOB_CD
+							            FROM PSNL0110 A, PSNL0100 B
+							           WHERE #pymtYrMnth# BETWEEN TO_CHAR (SUBSTR (A.EMYMT_BGNN_DT, 1, 6))
+							                              AND TO_CHAR (
+							                                     (NVL (
+							                                         SUBSTR (A.EMYMT_END_DT, 1, 6),
+							                                         TO_CHAR (SYSDATE, 'YYYYMM'))))
+							                              AND A.EMYMT_DIV_CD = B.EMYMT_DIV_CD
+												          AND A.SYSTEMKEY = B.SYSTEMKEY
+												          AND A.DPOB_CD = B.DPOB_CD
+							        	GROUP BY A.SYSTEMKEY, A.DPOB_CD
+							        MINUS
+							        SELECT C.SYSTEMKEY, C.DPOB_CD
+							            FROM PAYR0304 C
+							           WHERE C.PYMT_YR_MNTH = #pymtYrMnth#
+							           	   <isNotEmpty prepend="AND" property="payCd" >
+											C.PAY_CD = #payCd# 
+											</isNotEmpty>  
+							        	GROUP BY C.SYSTEMKEY, C.DPOB_CD) DD					
+					   WHERE  AA.DPOB_CD = DD.DPOB_CD
+       						AND AA.SYSTEMKEY = DD.SYSTEMKEY					   
+						   <isNotEmpty prepend="AND" property="dpobCd" >
+						 	AA.DPOB_CD=#dpobCd#
+					       </isNotEmpty>  
+					       <isNotEmpty prepend="AND" property="emymtDivCd" >
+						 	AA.EMYMT_DIV_CD=#emymtDivCd#
+					       </isNotEmpty> 
+					       <isNotEmpty prepend="AND" property="hdofcCodtnCd" >
+						 	AA.HDOFC_CODTN_CD=#hdofcCodtnCd#
+					       </isNotEmpty> 
+					       <isNotEmpty prepend="AND" property="deptCd" >
+						 	AA.CURR_AFFN_DEPT_CD=#deptCd#
+					       </isNotEmpty> 
+					       <isNotEmpty prepend="AND" property="businCd" >
+						 	AA.BUSIN_CD=#businCd#
+					       </isNotEmpty> 
+					       <isNotEmpty prepend="AND" property="typOccuCd" >
+						 	AA.TYP_OCCU_CD=#typOccuCd#
+					       </isNotEmpty> 
+					       <isNotEmpty prepend="AND" property="systemkey" >
+						 	AA.SYSTEMKEY=#systemkey#
+					       </isNotEmpty> 
+					       <isNotEmpty prepend="AND" property="hanNm" >
+						 	AA.HAN_NM LIKE '%' || #hanNm# || '%'
+					       </isNotEmpty>					
+							ORDER BY 
+								AA.DPOB_CD ASC
+								,AA.RESN_REGN_NUM ASC 
+									, AA.SYSTEMKEY ASC
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>	
+	
+</sqlMap>

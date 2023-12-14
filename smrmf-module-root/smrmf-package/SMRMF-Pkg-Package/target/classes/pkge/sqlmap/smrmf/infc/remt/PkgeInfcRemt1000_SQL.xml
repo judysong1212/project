@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcRemt1000">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgRemt1000SrhVO" type="com.app.smrmf.infc.retirement.server.vo.InfcPkgRemt1000SrhVO"/>
+	
+	<resultMap id="infcPkgRemt1000" class="com.app.smrmf.infc.retirement.server.vo.InfcPkgRemt1000VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="sevePayAddRateSeilNum" column="SEVE_PAY_ADD_RATE_SEIL_NUM" columnIndex="2"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="3"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="4"/>
+		<result property="sevePayAddRateFrmCd" column="SEVE_PAY_ADD_RATE_FRM_CD" columnIndex="5"/>
+		<result property="sevePayAddOvr" column="SEVE_PAY_ADD_OVR" columnIndex="6"/>
+		<result property="sevePayAddUdr" column="SEVE_PAY_ADD_UDR" columnIndex="7"/>
+		<result property="sevePayAddSum" column="SEVE_PAY_ADD_SUM" columnIndex="8"/>
+		<result property="sevePayAddRate" column="SEVE_PAY_ADD_RATE" columnIndex="9"/>
+		<result property="sevePayAddBgnnDt" column="SEVE_PAY_ADD_BGNN_DT" columnIndex="10"/>
+		<result property="sevePayAddEndDt" column="SEVE_PAY_ADD_END_DT" columnIndex="11"/>
+		<result property="sevePayAddUseYn" column="SEVE_PAY_ADD_USE_YN" columnIndex="12"/>
+		<result property="sevePayNoteCtnt" column="SEVE_PAY_NOTE_CTNT" columnIndex="13"/>
+		<result property="kybdr" column="KYBDR" columnIndex="14"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="15"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="16"/>
+		<result property="ismt" column="ISMT" columnIndex="17"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="18"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="19"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="20"/>  
+	</resultMap>
+	
+	<insert id="infcPkgRemt1000DAO.insertRemt1000_S">
+		<![CDATA[
+			INSERT INTO REMT1000 
+				(   DPOB_CD
+				  , SEVE_PAY_ADD_RATE_SEIL_NUM
+				  , TYP_OCCU_CD
+				  , PYSP_GRDE_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , SEVE_PAY_ADD_RATE_FRM_CD
+				  , SEVE_PAY_ADD_OVR
+				  , SEVE_PAY_ADD_UDR
+				  , SEVE_PAY_ADD_SUM
+				  , SEVE_PAY_ADD_RATE
+				    , SEVE_PAY_ADD_BGNN_DT
+				  , SEVE_PAY_ADD_END_DT
+				  , SEVE_PAY_ADD_USE_YN
+				  , SEVE_PAY_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+			      , (SELECT NVL(MAX(SEVE_PAY_ADD_RATE_SEIL_NUM),0) + 1 
+			           FROM REMT1000
+			           WHERE DPOB_CD = #dpobCd#)  
+				  , #typOccuCd#
+				  , SUBSTR(#dtilOccuInttnCd#,9,8)
+				  , #dtilOccuInttnCd#  
+				  , #sevePayAddRateFrmCd#
+				  , #sevePayAddOvr#
+				  , #sevePayAddUdr#
+				  , #sevePayAddSum#
+				  , #sevePayAddRate#
+				    , #sevePayAddBgnnDt#
+				  , #sevePayAddEndDt#
+				  , #sevePayAddUseYn#
+				  , #sevePayNoteCtnt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgRemt1000DAO.updateRemt1000_S">
+		<![CDATA[
+			UPDATE REMT1000
+			SET DPOB_CD=#dpobCd#
+				, SEVE_PAY_ADD_RATE_SEIL_NUM=#sevePayAddRateSeilNum#
+				, TYP_OCCU_CD=#typOccuCd#
+				, PYSP_GRDE_CD=SUBSTR(#dtilOccuInttnCd#,9,8)
+				 , DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#  
+				, SEVE_PAY_ADD_RATE_FRM_CD=#sevePayAddRateFrmCd#
+				, SEVE_PAY_ADD_OVR=#sevePayAddOvr#
+				, SEVE_PAY_ADD_UDR=#sevePayAddUdr#
+				, SEVE_PAY_ADD_SUM=#sevePayAddSum#
+				, SEVE_PAY_ADD_RATE=#sevePayAddRate#
+				, SEVE_PAY_ADD_BGNN_DT=#sevePayAddBgnnDt#
+				, SEVE_PAY_ADD_END_DT=#sevePayAddEndDt#
+				, SEVE_PAY_ADD_USE_YN=#sevePayAddUseYn#
+				, SEVE_PAY_NOTE_CTNT=#sevePayNoteCtnt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SEVE_PAY_ADD_RATE_SEIL_NUM=#sevePayAddRateSeilNum#
+				]]>
+	</update>
+	
+	<delete id="infcPkgRemt1000DAO.deleteRemt1000_S">
+		<![CDATA[
+			DELETE FROM REMT1000 
+						WHERE DPOB_CD=#dpobCd#
+								AND SEVE_PAY_ADD_RATE_SEIL_NUM=#sevePayAddRateSeilNum#
+				]]>
+	</delete>
+	
+	<select id="infcPkgRemt1000DAO.selectRemt1000_S" resultMap="infcPkgRemt1000">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SEVE_PAY_ADD_RATE_SEIL_NUM
+				, TYP_OCCU_CD
+				, PYSP_GRDE_CD
+				,DTIL_OCCU_INTTN_CD
+				, SEVE_PAY_ADD_RATE_FRM_CD
+				, SEVE_PAY_ADD_OVR
+				, SEVE_PAY_ADD_UDR
+				, SEVE_PAY_ADD_SUM
+				, SEVE_PAY_ADD_RATE
+					, SEVE_PAY_ADD_BGNN_DT
+				, SEVE_PAY_ADD_END_DT
+				, SEVE_PAY_ADD_USE_YN
+				, SEVE_PAY_NOTE_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM REMT1000
+						WHERE DPOB_CD=#dpobCd#
+								AND SEVE_PAY_ADD_RATE_SEIL_NUM=#sevePayAddRateSeilNum#
+				]]>
+	</select>
+	
+	<select id="infcPkgRemt1000DAO.selectRemt1000List_D" parameterClass="infcPkgRemt1000SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SEVE_PAY_ADD_RATE_SEIL_NUM
+								, TYP_OCCU_CD
+								, TYP_OCCU_CD   AS typOccuCdtypOccuCd
+								 , fcBass0320CDNM(DPOB_CD,TYP_OCCU_CD)  AS typOccuCdtypOccuNm
+								, PYSP_GRDE_CD
+								, DTIL_OCCU_INTTN_CD
+								, DTIL_OCCU_INTTN_CD AS dtilOccuInttnCddtilOccuInttnCd
+								, fcBassEx0350CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD,BB.DTIL_OCCU_INTTN_CD,'1' ) AS dtilOccuInttnCddtiOccuClsNm
+								, fcBassEx0350CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD,BB.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM
+								, fcBass0300CDNM(DPOB_CD,PYSP_GRDE_CD) AS PYSP_GRDE_NM 
+								, SEVE_PAY_ADD_RATE_FRM_CD
+							    , SEVE_PAY_ADD_RATE_FRM_CD AS sevePayAddRateFrmCdcommCd
+								, fcBass0300CDNM(DPOB_CD,SEVE_PAY_ADD_RATE_FRM_CD) AS sevePayAddRateFrmCdcommCdNm
+								, SEVE_PAY_ADD_OVR
+								, SEVE_PAY_ADD_UDR
+								, SEVE_PAY_ADD_SUM
+								, SEVE_PAY_ADD_RATE
+									, SEVE_PAY_ADD_BGNN_DT
+				, SEVE_PAY_ADD_END_DT
+				, SEVE_PAY_ADD_USE_YN
+								, SEVE_PAY_NOTE_CTNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM REMT1000
+				WHERE   DPOB_CD=#dpobCd# 
+		        <isNotEmpty prepend="AND" property="typOccuCd" >
+			 	TYP_OCCU_CD=#typOccuCd#
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="sevePayAddRateFrmCd" >
+			 	SEVE_PAY_ADD_RATE_FRM_CD=#sevePayAddRateFrmCd#
+		       </isNotEmpty>
+		       	<isNotEmpty prepend="AND"  property="dtilOccuInttnCd" >
+					 	         DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#  
+				 </isNotEmpty> 
+					ORDER BY 
+						DPOB_CD DESC
+							, SEVE_PAY_ADD_RATE_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgRemt1000DAO.selectRemt1000ListTotCnt_S" parameterClass="infcPkgRemt1000SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM REMT1000
+				WHERE   DPOB_CD=#dpobCd# 
+		        <isNotEmpty prepend="AND" property="typOccuCd" >
+			 	TYP_OCCU_CD=#typOccuCd#
+		       </isNotEmpty>
+		        <isNotEmpty prepend="AND" property="pyspGrdeCd" >
+			 	NVL(PYSP_GRDE_CD,'A0060000')=#pyspGrdeCd#
+		       </isNotEmpty>
+		           <isNotEmpty prepend="AND" property="sevePayAddRateFrmCd" >
+			 	SEVE_PAY_ADD_RATE_FRM_CD=#sevePayAddRateFrmCd#
+		       </isNotEmpty>
+		     	<isNotEmpty prepend="AND"  property="dtilOccuInttnCd" >
+					 	     DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#  
+			 	</isNotEmpty> 
+	</select>
+
+</sqlMap>

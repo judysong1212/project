@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Payr0460">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="payr0460SrhVO" type="com.app.exterms.payroll.server.vo.Payr0460SrhVO"/>
+	
+	<resultMap id="payr0460" class="com.app.exterms.payroll.server.vo.Payr0460VO">
+		<result property="payYr" column="PAY_YR" columnIndex="1"/>
+		<result property="dpobCd" column="DPOB_CD" columnIndex="2"/>
+		<result property="odtyDtilOccuClsCd" column="ODTY_DTIL_OCCU_CLS_CD" columnIndex="3"/>
+		<result property="payItemCd" column="PAY_ITEM_CD" columnIndex="4"/>
+		<result property="odtyDtilOccuClsSum" column="ODTY_DTIL_OCCU_CLS_SUM" columnIndex="5"/>
+		<result property="odtyDtilOccuClsNoteCtnt" column="ODTY_DTIL_OCCU_CLS_NOTE_CTNT" columnIndex="6"/>
+		<result property="odtyDtilOccuClsDelYn" column="ODTY_DTIL_OCCU_CLS_DEL_YN" columnIndex="7"/>
+		<result property="kybdr" column="KYBDR" columnIndex="8"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="9"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="10"/>
+		<result property="ismt" column="ISMT" columnIndex="11"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="12"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="13"/>
+	</resultMap>
+	
+	<insert id="payr0460DAO.insertPayr0460_S">
+		<![CDATA[
+			INSERT INTO PAYR0460 
+				( PAY_YR
+				  , DPOB_CD
+				  , ODTY_DTIL_OCCU_CLS_CD
+				  , PAY_ITEM_CD
+				  , ODTY_DTIL_OCCU_CLS_SUM
+				  , ODTY_DTIL_OCCU_CLS_NOTE_CTNT
+				  , ODTY_DTIL_OCCU_CLS_DEL_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #payYr#
+				  , #dpobCd#
+				  , #odtyDtilOccuClsCd#
+				  , #payItemCd#
+				  , #odtyDtilOccuClsSum#
+				  , #odtyDtilOccuClsNoteCtnt#
+				  , #odtyDtilOccuClsDelYn#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="payr0460DAO.updatePayr0460_S">
+		<![CDATA[
+			UPDATE PAYR0460
+			SET PAY_YR=#payYr#
+				, DPOB_CD=#dpobCd#
+				, ODTY_DTIL_OCCU_CLS_CD=#odtyDtilOccuClsCd#
+				, PAY_ITEM_CD=#payItemCd#
+				, ODTY_DTIL_OCCU_CLS_SUM=#odtyDtilOccuClsSum#
+				, ODTY_DTIL_OCCU_CLS_NOTE_CTNT=#odtyDtilOccuClsNoteCtnt#
+				, ODTY_DTIL_OCCU_CLS_DEL_YN=#odtyDtilOccuClsDelYn#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE PAY_YR=#payYr#
+								AND DPOB_CD=#dpobCd#
+								AND ODTY_DTIL_OCCU_CLS_CD=#odtyDtilOccuClsCd#
+								AND PAY_ITEM_CD=#payItemCd#
+				]]>
+	</update>
+	
+	<delete id="payr0460DAO.deletePayr0460_S">
+		<![CDATA[
+			DELETE FROM PAYR0460 
+						WHERE PAY_YR=#payYr#
+								AND DPOB_CD=#dpobCd#
+								AND ODTY_DTIL_OCCU_CLS_CD=#odtyDtilOccuClsCd#
+								AND PAY_ITEM_CD=#payItemCd#
+				]]>
+	</delete>
+	
+	<select id="payr0460DAO.selectPayr0460_S" resultMap="payr0460">
+		<![CDATA[
+			SELECT
+				PAY_YR
+				, DPOB_CD
+				, ODTY_DTIL_OCCU_CLS_CD
+				, PAY_ITEM_CD
+				, ODTY_DTIL_OCCU_CLS_SUM
+				, ODTY_DTIL_OCCU_CLS_NOTE_CTNT
+				, ODTY_DTIL_OCCU_CLS_DEL_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0460
+						WHERE PAY_YR=#payYr#
+								AND DPOB_CD=#dpobCd#
+								AND ODTY_DTIL_OCCU_CLS_CD=#odtyDtilOccuClsCd#
+								AND PAY_ITEM_CD=#payItemCd#
+				]]>
+	</select>
+	
+	<select id="payr0460DAO.selectPayr0460List_D" parameterClass="payr0460SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								PAY_YR
+								, DPOB_CD
+								, ODTY_DTIL_OCCU_CLS_CD
+								, ODTY_DTIL_OCCU_CLS_CD AS odtyDtilOccuClsCdcommCd
+								, fcBass0300CDNM(DPOB_CD,ODTY_DTIL_OCCU_CLS_CD) AS odtyDtilOccuClsCdcommCdNm
+								, PAY_ITEM_CD
+								,(SELECT PAY_EXTPY_NM FROM PAYR0480
+								  WHERE PAYR0480.DPOB_CD = PAYR0460.DPOB_CD
+								    AND PAYR0480.PAY_EXTPY_CD = PAYR0460.PAY_ITEM_CD) AS PAY_ITEM_NM
+								, ODTY_DTIL_OCCU_CLS_SUM
+								, ODTY_DTIL_OCCU_CLS_NOTE_CTNT
+								, ODTY_DTIL_OCCU_CLS_DEL_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PAYR0460
+				WHERE 1=1
+				<isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="payYr" >
+			 	  PAY_YR=#payYr# 
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="payItemCd" >
+			 	  PAY_ITEM_CD=#payItemCd# 
+		       </isNotEmpty> 
+					ORDER BY 
+						PAY_YR DESC
+							, DPOB_CD DESC
+							, ODTY_DTIL_OCCU_CLS_CD DESC
+							, PAY_ITEM_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="payr0460DAO.selectPayr0460ListTotCnt_S" parameterClass="payr0460SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0460
+			WHERE 1=1
+			<isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="payYr" >
+			 	  PAY_YR=#payYr# 
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="payItemCd" >
+			 	  PAY_ITEM_CD=#payItemCd# 
+		       </isNotEmpty> 
+	</select>
+	   <!--TODO 직책별 지급항목 수정필요  -->
+		<select id="payr0460DAO.selectPayr0460ToPayr5500List_D" parameterClass="payr0460SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+	    SELECT
+                                (#payYr#) AS PAY_YR
+								,  DPOB_CD
+								, PAY_EXTPY_CD 
+								, PAY_EXTPY_NM  
+						FROM PAYR0480
+						WHERE PAY_EXTPY_CD IN (
+						/* 'C9010100','C9030100','C9010200','C9050100','C9060100' // 'C9040100','C9210100','C9220100','C9310100','C9310200',,'C9130100'*/
+						'C9999200'
+						)  
+					<isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>  
+					ORDER BY   PAY_EXTPY_CD ASC
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>	
+	</select>	
+	<select id="payr0460DAO.selectPayr0460ToPayr5500ListTotCnt_S" parameterClass="payr0460SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt 
+						FROM (
+						  SELECT
+                                (#payYr#) AS PAY_YR
+								,  DPOB_CD
+								, PAY_EXTPY_CD 
+								, PAY_EXTPY_NM  
+						FROM PAYR0480
+						WHERE PAY_EXTPY_CD IN (
+						/* 'C9010100','C9030100','C9010200','C9050100','C9060100' //'C9040100','C9210100','C9220100','C9310100','C9310200',,'C9130100' */
+						'C9999200'
+						)  
+					<isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>  
+						)
+	</select>
+	
+
+</sqlMap>

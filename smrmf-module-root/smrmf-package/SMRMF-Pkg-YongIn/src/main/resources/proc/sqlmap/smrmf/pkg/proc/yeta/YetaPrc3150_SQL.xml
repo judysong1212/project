@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="YetaPrc3150">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="yetaPrc3150SerarchVO" type="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta3150SrhVO"/>
+	
+	<resultMap id="yetaPrc3150" class="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta3150VO">
+		<result property="edacDtnu" column="EDAC_DTNU" columnIndex="1"/>
+		<result property="edacRvyy" column="EDAC_RVYY" columnIndex="2"/>
+		<result property="settGbcd" column="SETT_GBCD" columnIndex="3"/>
+		<result property="dpobCd" column="DPOB_CD" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="fmacGbcd" column="FMAC_GBCD" columnIndex="6"/>
+		<result property="edacOtam" column="EDAC_OTAM" columnIndex="7"/>
+		<result property="rsnoNumb" column="RSNO_NUMB" columnIndex="8"/>
+	</resultMap>
+	
+	<insert id="yetaPrc3150DAO.insertYetaPrc3150_S">
+		<![CDATA[
+			INSERT INTO YETA3150 
+				( EDAC_DTNU
+				  , EDAC_RVYY
+				  , SETT_GBCD
+				  , DPOB_CD
+				  , SYSTEMKEY
+				  , RSNO_NUMB
+				  , FMAC_GBCD
+				  , EDAC_OTAM )
+			VALUES ( #edacDtnu#
+				  , #edacRvyy#
+				  , #settGbcd#
+				  , #dpobCd#
+				  , #systemkey#
+				  , #rsnoNumb#
+				  , #fmacGbcd#
+				  , #edacOtam# )
+		]]>
+	</insert>
+	
+		<insert id="yetaPrc3150DAO.fnPayr06430_PAYR445_1_2014_Insert">
+		<![CDATA[
+			INSERT INTO YETA3150 
+				( EDAC_DTNU
+				  , EDAC_RVYY
+				  , SETT_GBCD
+				  , DPOB_CD
+				  , SYSTEMKEY
+				  , RSNO_NUMB
+				  , FMAC_GBCD
+				  , EDAC_OTAM )
+			VALUES ( 
+			  (SELECT (NVL(MAX(EDAC_DTNU),0) +  1) AS EDAC_DTNU  
+                FROM YETA3150  AA 
+                 WHERE AA.DPOB_CD=#dpobCd#
+                  AND AA.EDAC_RVYY=#edacRvyy#
+                  AND AA.SETT_GBCD=#settGbcd#
+                  AND AA.SYSTEMKEY=#systemkey# ) 
+				  , #edacRvyy#
+				  , #settGbcd#
+				  , #dpobCd#
+				  , #systemkey#
+				  , #rsnoNumb#
+				  , #fmacGbcd#
+				  , #edacOtam# )
+		]]>
+	</insert>
+	
+	
+	
+	<update id="yetaPrc3150DAO.updateYetaPrc3150_S">
+		<![CDATA[
+			UPDATE YETA3150
+			SET EDAC_DTNU=#edacDtnu#
+				, EDAC_RVYY=#edacRvyy#
+				, SETT_GBCD=#settGbcd#
+				, DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, RSNO_NUMB=#rsnoNumb#
+				, FMAC_GBCD=#fmacGbcd#
+				, EDAC_OTAM=#edacOtam#
+						WHERE EDAC_DTNU=#edacDtnu#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	
+	<delete id="yetaPrc3150DAO.deleteYetaPrc3150_S">
+		<![CDATA[
+			DELETE FROM YETA3150 
+						WHERE EDAC_DTNU=#edacDtnu#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+		<delete id="yetaPrc3150DAO.fnPayr06430_PAYR445_2014_Delete">
+		<![CDATA[
+			DELETE FROM YETA3150 
+						WHERE  EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	
+	<!-- yeta0100  화면 교육비삭제 -->
+	<delete id="yetaPrc3150DAO.fnPayr06430_PAYR445_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3150 
+						WHERE EDAC_RVYY=#edacRvyy#
+						  AND SETT_GBCD=#settGbcd# 
+						  AND DPOB_CD=#dpobCd# 
+				]]>
+				 <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                 </isNotEmpty> 
+	</delete>
+	
+	
+	<select id="yetaPrc3150DAO.selectYetaPrc3150_S" resultMap="yetaPrc3150">
+		<![CDATA[
+			SELECT
+				EDAC_DTNU
+				, EDAC_RVYY
+				, SETT_GBCD
+				, DPOB_CD
+				, SYSTEMKEY
+				,RSNO_NUMB
+				, FMAC_GBCD
+				, EDAC_OTAM
+			FROM YETA3150
+						WHERE EDAC_DTNU=#edacDtnu#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+	<select id="yetaPrc3150DAO.selectYetaPrc3150List_D" parameterClass="yetaPrc3150SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								EDAC_DTNU
+								, EDAC_RVYY
+								, SETT_GBCD
+								, DPOB_CD
+								, SYSTEMKEY
+								, RSNO_NUMB
+								, FMAC_GBCD
+								, EDAC_OTAM
+						FROM YETA3150
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					EDAC_DTNU = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						EDAC_DTNU DESC
+							, EDAC_RVYY DESC
+							, SETT_GBCD DESC
+							, DPOB_CD DESC
+							, SYSTEMKEY DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="yetaPrc3150DAO.selectYetaPrc3150ListTotCnt_S" parameterClass="yetaPrc3150SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3150
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				EDAC_DTNU = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0123">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	
+	<typeAlias alias="psnl0123Dto" type="com.app.exterms.personal.client.dto.Psnl0123DTO"/>
+    <typeAlias alias="psnl0123SrhVO" type="com.app.exterms.personal.server.vo.Psnl0123SrhVO"/>
+    <typeAlias alias="psnl0123Vo" type="com.app.exterms.personal.server.vo.Psnl0123VO"/>
+	
+	<resultMap id="psnl0123" class="com.app.exterms.personal.server.vo.Psnl0123VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="levfAbncSeilNum" column="LEVF_ABNC_SEIL_NUM" columnIndex="3"/>
+		<result property="levfAbncDivCd" column="LEVF_ABNC_DIV_CD" columnIndex="4"/>
+		<result property="levfAbncBgnnDt" column="LEVF_ABNC_BGNN_DT" columnIndex="5"/>
+		<result property="levfAbncEndDt" column="LEVF_ABNC_END_DT" columnIndex="6"/>
+		<result property="turtyRntmntDt" column="TURTY_RNTMNT_DT" columnIndex="7"/>
+		<result property="levfAbncNoteCtnt" column="LEVF_ABNC_NOTE_CTNT" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap>
+	
+	<!-- <insert id="psnl0123DAO.insertPsnl0123" parameterClass="psnl0123Dto">  -->
+	<insert id="psnl0123DAO.insertPsnl0123" parameterClass="psnl0123Vo">
+		<![CDATA[
+			INSERT INTO PSNL0123 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , LEVF_ABNC_SEIL_NUM
+				  , LEVF_ABNC_DIV_CD
+				  , LEVF_ABNC_BGNN_DT
+				  , LEVF_ABNC_END_DT
+				  , TURTY_RNTMNT_DT
+				  , LEVF_ABNC_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , (select NVL(MAX(LEVF_ABNC_SEIL_NUM)+1,1) from PSNL0123 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#) 
+				  , #levfAbncDivCd#
+				  , #levfAbncBgnnDt#
+				  , #levfAbncEndDt#
+				  , #turtyRntmntDt#
+				  , #levfAbncNoteCtnt#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<!-- <update id="psnl0123DAO.updatePsnl0123" parameterClass="psnl0123Dto"> -->
+	<update id="psnl0123DAO.updatePsnl0123" parameterClass="psnl0123Vo">
+		
+			UPDATE PSNL0123
+			SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				<isNotNull property="levfAbncDivCd"><isNotEmpty property="levfAbncDivCd">, LEVF_ABNC_DIV_CD=#levfAbncDivCd#</isNotEmpty></isNotNull>
+				<isNotNull property="levfAbncBgnnDt"><isNotEmpty property="levfAbncBgnnDt">, LEVF_ABNC_BGNN_DT= #levfAbncBgnnDt#</isNotEmpty></isNotNull>
+				<isNotNull property="levfAbncEndDt"><isNotEmpty property="levfAbncEndDt">, LEVF_ABNC_END_DT= #levfAbncEndDt#</isNotEmpty></isNotNull>
+				<isNotNull property="turtyRntmntDt"><isNotEmpty property="turtyRntmntDt">, TURTY_RNTMNT_DT= #turtyRntmntDt#</isNotEmpty></isNotNull>
+				<isNotNull property="levfAbncNoteCtnt"><isNotEmpty property="levfAbncNoteCtnt">, LEVF_ABNC_NOTE_CTNT=#levfAbncNoteCtnt#</isNotEmpty></isNotNull>
+				<isNotNull property="ismt"><isNotEmpty property="ismt">, ISMT=#ismt#</isNotEmpty></isNotNull>
+				<isNotNull property="revnAddr"><isNotEmpty property="revnAddr">, REVN_ADDR=#revnAddr#</isNotEmpty></isNotNull>
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				AND LEVF_ABNC_SEIL_NUM=#levfAbncSeilNum#
+		
+	</update>
+	
+	
+	<update id="psnl0123DAO.updatePsnl0110ToPsnl0123" parameterClass="psnl0123Vo">
+		UPDATE PSNL0123
+			SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				<isNotNull property="levfAbncEndDt">	<isNotEmpty property="levfAbncEndDt">		, LEVF_ABNC_END_DT		= #levfAbncEndDt#		</isNotEmpty></isNotNull>
+				<isNotNull property="levfAbncNoteCtnt">	<isNotEmpty property="levfAbncNoteCtnt">	, LEVF_ABNC_NOTE_CTNT	= #levfAbncNoteCtnt#	</isNotEmpty></isNotNull>
+				<isNotNull property="ismt">				<isNotEmpty property="ismt">				, ISMT					= #ismt#				</isNotEmpty></isNotNull>
+				<isNotNull property="revnAddr">			<isNotEmpty property="revnAddr">			, REVN_ADDR				= #revnAddr#			</isNotEmpty></isNotNull>
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				AND DECODE(LEVF_ABNC_DIV_CD, 'B0140006', 'A0420080', 'A0420040')=#levfAbncDivCd#
+				AND LEVF_ABNC_BGNN_DT=#levfAbncBgnnDt#
+	</update>
+	
+	
+	
+	<!--<delete id="psnl0123DAO.deletePsnl0123" parameterClass="psnl0123Dto">  -->
+	<delete id="psnl0123DAO.deletePsnl0123" parameterClass="psnl0123Vo">
+		<![CDATA[
+			DELETE FROM PSNL0123 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND LEVF_ABNC_SEIL_NUM=#levfAbncSeilNum#
+				]]>
+	</delete>
+	
+	<delete id="psnl0123DAO.deletePsnl100ToPsnl0123" parameterClass="psnl0123Vo">
+		<![CDATA[
+			DELETE FROM PSNL0123 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND LEVF_ABNC_BGNN_DT= #levfAbncBgnnDt#
+				]]>
+	</delete>
+	
+	<select id="psnl0123DAO.selectPsnl0123" resultClass="egovMap" parameterClass="hashMap">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, LEVF_ABNC_SEIL_NUM
+				, LEVF_ABNC_DIV_CD
+				, to_date( LEVF_ABNC_BGNN_DT ,'yyyymmdd') LEVF_ABNC_BGNN_DT
+				, to_date( LEVF_ABNC_END_DT ,'yyyymmdd') LEVF_ABNC_END_DT
+				, to_date( TURTY_RNTMNT_DT ,'yyyymmdd') TURTY_RNTMNT_DT
+				, LEVF_ABNC_NOTE_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PSNL0123
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+			]]>
+		<isNotNull property="levfAbncSeilNum">
+		    <isNotEmpty property="levfAbncSeilNum">
+		        AND LEVF_ABNC_SEIL_NUM=#levfAbncSeilNum#
+		    </isNotEmpty>
+		</isNotNull>	
+			ORDER BY LEVF_ABNC_BGNN_DT DESC
+	</select>
+	
+	<select id="psnl0123DAO.selectPsnl0123_S" resultMap="psnl0123">
+		<![CDATA[
+			SELECT
+			    	DPOB_CD
+				, SYSTEMKEY
+				, LEVF_ABNC_SEIL_NUM
+				, LEVF_ABNC_DIV_CD
+				, LEVF_ABNC_BGNN_DT
+				, LEVF_ABNC_END_DT
+				, TURTY_RNTMNT_DT
+				, LEVF_ABNC_NOTE_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PSNL0123
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND LEVF_ABNC_SEIL_NUM=#levfAbncSeilNum#
+				]]>
+	</select>
+	
+	<select id="psnl0123DAO.selectPsnl0123ToPayr4100List_D" parameterClass="psnl0123SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, LEVF_ABNC_SEIL_NUM
+								, LEVF_ABNC_DIV_CD
+								, fcBass0300CDNM(DPOB_CD,LEVF_ABNC_DIV_CD) AS LEVF_ABNC_DIV_NM
+								, LEVF_ABNC_BGNN_DT
+								, LEVF_ABNC_END_DT
+								, TURTY_RNTMNT_DT
+								, LEVF_ABNC_NOTE_CTNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PSNL0123
+				WHERE 1=1
+					<isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>   
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, LEVF_ABNC_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="psnl0123DAO.selectPsnl0123ToPayr4100ListTotCnt_S" parameterClass="psnl0123SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PSNL0123
+			WHERE 1=1
+				<isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>   
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+	</select>
+	
+
+</sqlMap>

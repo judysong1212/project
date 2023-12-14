@@ -1,0 +1,1017 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye161005_2022">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ye161005Srh_2022_VO" type="com.app.exterms.yearendtax.server.vo.Ye161005Srh_2022_VO"/>
+	
+	<resultMap id="ye161005_2022" class="com.app.exterms.yearendtax.server.vo.Ye161005_2022_VO">
+		<result property="dpobCd" 					column="DPOB_CD" 					columnIndex="1"/>		
+		<result property="yrtxBlggYr" 				column="YRTX_BLGG_YR" 				columnIndex="2"/>
+		<result property="clutSeptCd" 				column="CLUT_SEPT_CD" 				columnIndex="3"/>
+		<result property="whdgTxRegrstDeptCd"		column="WHDG_TX_REGRST_DEPT_CD" 	columnIndex="4"/>	
+		<result property="hhrkWhdgRegrstDeptCd" 	column="HHRK_WHDG_REGRST_DEPT_CD" 	columnIndex="5"/>
+		<result property="txOffcCd" 				column="TX_OFFC_CD" 				columnIndex="6"/>
+		<result property="pentrSeptCd" 				column="PENTR_SEPT_CD" 				columnIndex="7"/>
+		<result property="txDeptyMangeNum" 			column="TX_DEPTY_MANGE_NUM" 		columnIndex="8"/>
+		<result property="hmtxId" 					column="HMTX_ID" 					columnIndex="9"/>
+		<result property="txPgmCd" 					column="TX_PGM_CD" 					columnIndex="10"/>
+		<result property="busoprRgstnum" 			column="BUSOPR_RGSTNUM" 			columnIndex="11"/>
+		<result property="corpFmnmNm"				column="CORP_FMNM_NM" 				columnIndex="12"/>
+		<result property="pernChrgDeptNm" 			column="PERN_CHRG_DEPT_NM" 			columnIndex="13"/>
+		<result property="pernChrgNm" 				column="PERN_CHRG_NM" 				columnIndex="14"/>
+		<result property="pernChrgPhnNum" 			column="PERN_CHRG_PHN_NUM" 			columnIndex="15"/>
+		<result property="useHanCd" 				column="USE_HAN_CD" 				columnIndex="16"/>
+		<result property="sumtTgtPridCd" 			column="SUMT_TGT_PRID_CD" 			columnIndex="17"/>
+		<result property="corpNum" 					column="CORP_NUM" 					columnIndex="18"/>
+		<result property="incmPost" 				column="INCM_POST" 					columnIndex="19"/>
+		<result property="incmAddr" 				column="INCM_ADDR" 					columnIndex="20"/>
+		<result property="incmAdtl" 				column="INCM_ADTL" 					columnIndex="21"/>
+		<result property="kybdr" 					column="KYBDR" 						columnIndex="22"/>
+		<result property="inptDt" 					column="INPT_DT" 					columnIndex="23"/>
+		<result property="inptAddr" 				column="INPT_ADDR" 					columnIndex="24"/>
+		<result property="ismt" 					column="ISMT" 						columnIndex="25"/>
+		<result property="revnDt" 					column="REVN_DT" 					columnIndex="26"/>
+		<result property="revnAddr" 				column="REVN_ADDR" 					columnIndex="27"/>
+		<result property="reprName" 				column="REPR_NAME" 					columnIndex="28"/>
+		<result property="resuNumb" 				column="RESU_NUMB" 					columnIndex="29"/>
+		<result property="yetaC171" 				column="YETA_C171" 					columnIndex="30"/>
+		<result property="yetaC172" 				column="YETA_C172" 					columnIndex="31"/>
+
+	</resultMap>
+	
+	
+	<select id="ye161005_2022_DAO.selectYetaP710002ToYe161005_S" resultMap="ye161005_2022">
+		<![CDATA[
+			SELECT DPOB_CD							
+					, YRTX_BLGG_YR	
+					, CLUT_SEPT_CD	
+					, WHDG_TX_REGRST_DEPT_CD		
+					, HHRK_WHDG_REGRST_DEPT_CD	
+					, TX_OFFC_CD	
+					, PENTR_SEPT_CD	
+					, TX_DEPTY_MANGE_NUM	
+					, HMTX_ID		
+					, TX_PGM_CD		
+					, BUSOPR_RGSTNUM
+					, CORP_FMNM_NM	
+					, PERN_CHRG_DEPT_NM	
+					, PERN_CHRG_NM		
+					, PERN_CHRG_PHN_NUM	
+					, USE_HAN_CD			
+					, SUMT_TGT_PRID_CD	
+					, CORP_NUM			
+					, INCM_POST	
+					, INCM_ADDR	
+					, INCM_ADTL	
+					, KYBDR		
+					, INPT_DT		
+					, INPT_ADDR	
+					, ISMT		
+					, REVN_DT		
+					, REVN_ADDR	
+					, REPR_NAME	
+					, RESU_NUMB	
+					, YETA_C171	
+					, YETA_C172	
+
+			FROM YE161005
+		WHERE DPOB_CD=#dpobCd#
+			AND YRTX_BLGG_YR=#yrtxBlggYr#	
+			AND CLUT_SEPT_CD=#clutSeptCd#	
+			AND WHDG_TX_REGRST_DEPT_CD=#whdgTxRegrstDeptCd#
+				]]>
+	</select>
+	
+	
+	
+	<insert id="ye161005_2022_DAO.insertYe161005_S">
+		<![CDATA[
+			INSERT INTO YE161005 
+					 (DPOB_CD,
+                      WHDG_TX_REGRST_DEPT_CD,
+                      HHRK_WHDG_REGRST_DEPT_CD,
+                      TX_OFFC_CD,
+                      PENTR_SEPT_CD,
+                      TX_DEPTY_MANGE_NUM,
+                      HMTX_ID,
+                      TX_PGM_CD,
+                      BUSOPR_RGSTNUM,
+                      CORP_FMNM_NM,
+                      PERN_CHRG_DEPT_NM,
+                      PERN_CHRG_NM,
+                      PERN_CHRG_PHN_NUM,
+                      USE_HAN_CD,
+                      SUMT_TGT_PRID_CD,
+                      CORP_NUM,
+                      INCM_POST,
+                      INCM_ADDR,
+                      INCM_ADTL,
+                      KYBDR,
+                      INPT_DT,
+                      INPT_ADDR,
+                      ISMT,
+                      REVN_DT,
+                      REVN_ADDR,
+                      REPR_NAME,
+                      RESU_NUMB,
+                      YETA_C171,
+                      YETA_C172,
+                      CLUT_SEPT_CD,
+                      YRTX_BLGG_YR)
+		     VALUES (#dpobCd#,
+		             #whdgTxRegrstDeptCd#,
+		             #whdgTxRegrstDeptCd#,
+		             #txOffcCd#,
+		             #pentrSeptCd#,
+		             #txDeptyMangeNum#,
+		             #hmtxId#,
+		             #txPgmCd#,
+		             #busoprRgstnum#,
+		             #corpFmnmNm#,
+		             #pernChrgDeptNm#,
+		             #pernChrgNm#,
+		             #pernChrgPhnNum#,
+		             #useHanCd#,
+		             #sumtTgtPridCd#,
+		             #corpNum#,
+		             #incmPost#,
+		             #incmAddr#,
+		             #incmAdtl#,
+		             #kybdr#,
+		             TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+		             #inptAddr#,
+		             #ismt#,
+		             TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+		             #revnAddr#,
+		             #reprName#,
+		             #resuNumb#,
+		             #yetaC171#,
+		             #yetaC172#,
+		             #clutSeptCd#,
+		             #yrtxBlggYr#)
+		]]>
+	</insert>
+	
+	
+	<update id="ye161005_2022_DAO.updateYetaP710002ToYe161005_S">
+		<![CDATA[
+			UPDATE YE161005
+				   SET TX_OFFC_CD = #txOffcCd#	
+						, PENTR_SEPT_CD	 = #pentrSeptCd#
+						, TX_DEPTY_MANGE_NUM = #txDeptyMangeNum#	
+						, HMTX_ID	 = #hmtxId#	
+						, TX_PGM_CD	 = #txPgmCd#	
+						, BUSOPR_RGSTNUM = #busoprRgstnum#
+						, CORP_FMNM_NM	 = #corpFmnmNm#
+						, PERN_CHRG_DEPT_NM	 = #pernChrgDeptNm#
+						, PERN_CHRG_NM		 = #pernChrgNm#
+						, PERN_CHRG_PHN_NUM	 = #pernChrgPhnNum#
+						, USE_HAN_CD		 = #useHanCd#	
+						, SUMT_TGT_PRID_CD	 = #sumtTgtPridCd#
+						, CORP_NUM		 = #corpNum#	
+						, INCM_POST	 = #incmPost#
+						, INCM_ADDR	 = #incmAddr#
+						, INCM_ADTL	 = #incmAdtl#
+						, REPR_NAME	 = #reprName#
+						, RESU_NUMB	 = #resuNumb#
+						, ISMT = #ismt#
+						, REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						, REVN_ADDR = #revnAddr#
+						
+				 WHERE     DPOB_CD = #dpobCd#
+				 	AND YRTX_BLGG_YR = #yrtxBlggYr#	
+					AND CLUT_SEPT_CD = #clutSeptCd#	
+				    AND WHDG_TX_REGRST_DEPT_CD = #whdgTxRegrstDeptCd#
+				]]>
+	</update>
+	
+	<update id="ye161005_2022_DAO.updateYe161005_S">
+		<![CDATA[
+			UPDATE YE161005
+				   SET BUSOPR_RGSTNUM = #busoprRgstnum#,
+				       CORP_FMNM_NM = #corpFmnmNm#,
+				       CORP_NUM = #corpNum#,
+				       INCM_POST = #incmPost#,
+				       INCM_ADDR = #incmAddr#,
+				       INCM_ADTL = #incmAdtl#,
+				       ISMT = #ismt#,
+				       REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+				       REVN_ADDR = #revnAddr#,
+				       REPR_NAME = #reprName#,
+				       RESU_NUMB = #resuNumb#,
+				       YETA_C171 = #yetaC171#
+				 WHERE     DPOB_CD = #dpobCd#
+				       AND WHDG_TX_REGRST_DEPT_CD = #whdgTxRegrstDeptCd#
+				]]>
+	</update>
+	
+	<delete id="ye161005_2022_DAO.deleteYe161005_S">
+		<![CDATA[
+			DELETE FROM YE161005 
+						WHERE DPOB_CD=#dpobCd#
+								AND WHDG_TX_REGRST_DEPT_CD=#whdgTxRegrstDeptCd#
+				]]>
+	</delete>
+	
+	<select id="ye161005_2022_DAO.selectYe161005_S" resultMap="ye161005_2022">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, WHDG_TX_REGRST_DEPT_CD
+				, HHRK_WHDG_REGRST_DEPT_CD
+				, TX_OFFC_CD
+				, PENTR_SEPT_CD
+				, TX_DEPTY_MANGE_NUM
+				, HMTX_ID
+				, TX_PGM_CD
+				, BUSOPR_RGSTNUM
+				, CORP_FMNM_NM
+				, PERN_CHRG_DEPT_NM
+				, PERN_CHRG_NM
+				, PERN_CHRG_PHN_NUM
+				, USE_HAN_CD
+				, SUMT_TGT_PRID_CD
+				, CORP_NUM
+				, INCM_POST
+				, INCM_ADDR
+				, INCM_ADTL
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE161005
+						WHERE DPOB_CD=#dpobCd#
+								AND WHDG_TX_REGRST_DEPT_CD=#whdgTxRegrstDeptCd#
+				]]>
+	</select>
+	
+	<select id="ye161005_2022_DAO.selectYe161005List_D" parameterClass="ye161005Srh_2022_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, WHDG_TX_REGRST_DEPT_CD
+								, HHRK_WHDG_REGRST_DEPT_CD
+								, TX_OFFC_CD
+								, PENTR_SEPT_CD
+								, TX_DEPTY_MANGE_NUM
+								, HMTX_ID
+								, TX_PGM_CD
+								, BUSOPR_RGSTNUM
+								, CORP_FMNM_NM
+								, PERN_CHRG_DEPT_NM
+								, PERN_CHRG_NM
+								, PERN_CHRG_PHN_NUM
+								, USE_HAN_CD
+								, SUMT_TGT_PRID_CD
+								, CORP_NUM
+								, INCM_POST
+								, INCM_ADDR
+								, INCM_ADTL
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE161005
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					WHDG_TX_REGRST_DEPT_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, WHDG_TX_REGRST_DEPT_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="ye161005_2022_DAO.selectYe161005ListTotCnt_S" parameterClass="ye161005Srh_2022_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE161005
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				WHDG_TX_REGRST_DEPT_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+<update id="ye161005_2022_DAO.insertYetaS206001ToYe161005_S">
+		<![CDATA[
+			UPDATE YE161005 SET
+				HHRK_WHDG_REGRST_DEPT_CD = #hhrkWhdgRegrstDeptCd#,
+				YETA_C172 = (SELECT MTST_DPOB_SEIL_NUM_C172
+							              FROM BASS0120 WHERE UT_DPOB_CD = #whdgTxRegrstDeptCd#),
+		        ISMT = #ismt#,
+				REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+				REVN_ADDR = #revnAddr#
+			WHERE
+				DPOB_CD = #dpobCd#
+				AND WHDG_TX_REGRST_DEPT_CD = #whdgTxRegrstDeptCd#
+		]]>
+</update>
+	
+<update id="ye161005_2022_DAO.deleteYeta706001ToYe161005_S">
+		<![CDATA[
+			UPDATE YE161005 SET
+				HHRK_WHDG_REGRST_DEPT_CD = #hhrkWhdgRegrstDeptCd#,
+				YETA_C172 = #yetaC172#,
+				ISMT = #ismt#,
+				REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+				REVN_ADDR = #revnAddr#
+			WHERE 
+			    DPOB_CD = #dpobCd#
+				AND WHDG_TX_REGRST_DEPT_CD = #whdgTxRegrstDeptCd#
+			]]>
+</update>
+<update id="ye161005_2022_DAO.updateNumYetaS206001ToYe161005_S">
+		<![CDATA[
+			UPDATE YE161005 SET
+				YETA_C172 = #yetaC172#,
+				ISMT = #ismt#,
+				REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+				REVN_ADDR = #revnAddr#
+			WHERE
+				DPOB_CD = #dpobCd#
+				AND WHDG_TX_REGRST_DEPT_CD = #whdgTxRegrstDeptCd#
+		]]>
+</update>
+ 
+	<!-- 연말정산신고파일생성 전자신고기본정보 리스트  -->	
+	<select id="ye161005_2022_DAO.selectYeta7400ToYe161005List_D" parameterClass="ye161005Srh_2022_VO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+						SELECT AC01.DPOB_CD
+					       , DECODE (AC01.REPR_NAME,
+					               '', DECODE (AC03.DEGTR_NM, '', AC02.DEGTR_NM, AC03.DEGTR_NM),
+					               AC01.REPR_NAME)AS REPR_NAME
+					       , DECODE (
+					          AC01.CORP_FMNM_NM,
+					          '', DECODE (AC03.PAY_MANGE_DEPT_NM,
+					                      '', AC02.DPOB_NM,
+					                      AC03.PAY_MANGE_DEPT_NM),
+					          AC01.CORP_FMNM_NM)AS CORP_FMNM_NM 
+					       , DECODE (
+					          AC01.BUSOPR_RGSTNUM,
+					          '', DECODE (AC03.BUSOPR_RGSTN_NUM,
+					                      '', AC02.BUSOPR_RGSTN_NUM,
+					                      AC03.BUSOPR_RGSTN_NUM),
+					          AC01.BUSOPR_RGSTNUM)AS BUSOPR_RGSTNUM
+					       , DECODE (
+					          AC01.RESU_NUMB,
+					          '', DECODE (AC03.DEGTR_RESN_REGN_NUM,
+					                      '', AC02.DEGTR_RESN_REGN_NUM,
+					                      AC03.DEGTR_RESN_REGN_NUM),
+					          AC01.RESU_NUMB)AS RESU_NUMB
+					       , DECODE (
+					          AC01.CORP_NUM,
+					          '', DECODE (AC03.CORP_RGSTN_NUM,
+					                      '', AC02.CORP_RGSTN_NUM,
+					                      AC03.CORP_RGSTN_NUM),
+					          AC01.CORP_NUM) AS CORP_NUM
+					       , DECODE (
+					          AC01.INCM_POST,
+					          '', DECODE (AC03.PAY_MANGE_DEPT_ZPCD,
+					                      '', AC02.DPOB_ZPCD,
+					                      AC03.PAY_MANGE_DEPT_ZPCD),
+					          AC01.INCM_POST)AS INCM_POST
+					       , DECODE (
+					          AC01.INCM_ADDR,
+					          '', DECODE (AC03.PAY_MANGE_DEPT_F_NDTN_ADDR,
+					                      '', AC02.DPOB_FNDTN_ADDR,
+					                      AC03.PAY_MANGE_DEPT_F_NDTN_ADDR),
+					          AC01.INCM_ADDR)AS INCM_ADDR
+					       , DECODE (
+					          AC01.INCM_ADTL,
+					          '', DECODE (AC03.PAY_MANGE_DEPT_DTL_PATR_ADDR,
+					                      '', AC02.DPOB_DTL_PATR_ADDR,
+					                      AC03.PAY_MANGE_DEPT_DTL_PATR_ADDR),
+					          AC01.INCM_ADTL)AS INCM_ADTL
+					       , AC01.TX_OFFC_CD
+					       , AC01.PENTR_SEPT_CD
+					       , AC01.TX_DEPTY_MANGE_NUM
+					       , AC01.HMTX_ID
+					       , AC01.TX_PGM_CD
+					       , AC01.PERN_CHRG_DEPT_NM
+					       , AC01.PERN_CHRG_NM
+					       , AC01.PERN_CHRG_PHN_NUM
+					        , AC01.YETA_C171
+							, AC01.YETA_C172
+							, AC01.YRTX_BLGG_YR
+							, AC01.CLUT_SEPT_CD
+	   FROM             
+	              (SELECT DISTINCT TT.WHDG_TX_REGRST_DEPT_CD
+							, TT.DPOB_CD
+							, TT.HHRK_WHDG_REGRST_DEPT_CD
+							, TT.TX_OFFC_CD
+							, TT.PENTR_SEPT_CD
+							, BB.PAYR_MANG_DEPT_CD
+							, TT.TX_DEPTY_MANGE_NUM
+							, TT.HMTX_ID
+							, TT.TX_PGM_CD
+							, TT.BUSOPR_RGSTNUM
+							, TT.CORP_FMNM_NM
+							, TT.PERN_CHRG_DEPT_NM
+							, TT.PERN_CHRG_NM
+							, TT.PERN_CHRG_PHN_NUM
+							, TT.USE_HAN_CD
+							, TT.SUMT_TGT_PRID_CD
+							, TT.CORP_NUM
+							, TT.INCM_POST
+							, TT.INCM_ADDR
+							, TT.INCM_ADTL
+							, TT.KYBDR
+							, TT.INPT_DT
+							, TT.INPT_ADDR
+							, TT.ISMT
+							, TT.REVN_DT
+							, TT.REVN_ADDR
+							, TT.REPR_NAME
+							, TT.RESU_NUMB
+							, TT.YETA_C171
+							, TT.YETA_C172
+							, TT.YRTX_BLGG_YR
+							, TT.CLUT_SEPT_CD
+	                      FROM YE161010 AA, YE161005 TT, (
+	                                     SELECT  DISTINCT   AD02.DPOB_CD
+	                                              ,AD02.SYSTEMKEY
+	                                              ,AD02.PAYR_MANG_DEPT_CD
+	                                              ,AD02.EMYMT_DIV_CD
+	                                              ,AD02.HAN_NM
+	                                              ,AD02.RESN_REGN_NUM
+	                                              ,DECODE (AD02.EMYMT_DIV_CD, 'A0020020', AD02.DEPT_CD,DECODE(AD01.EMYMT_DIV_CD,'A0020020',AD02.DEPT_CD,AD01.CURR_AFFN_DEPT_CD)) AS DEPT_CD  
+								                   ,DECODE (AD02.EMYMT_DIV_CD, 'A0020020', AD02.BUSIN_CD, DECODE(AD01.EMYMT_DIV_CD,'A0020020',AD02.BUSIN_CD,AD01.BUSIN_CD) ) AS BUSIN_CD 
+								                  ,DECODE (AD02.EMYMT_DIV_CD, 'A0020020', AD02.TYP_OCCU_CD, DECODE(AD01.EMYMT_DIV_CD,'A0020020',AD02.TYP_OCCU_CD,AD01.TYP_OCCU_CD) ) AS TYP_OCCU_CD 
+								                  ,DECODE (AD02.EMYMT_DIV_CD, 'A0020020', AD02.DTIL_OCCU_INTTN_CD, DECODE(AD01.EMYMT_DIV_CD,'A0020020',AD02.DTIL_OCCU_INTTN_CD,AD01.DTIL_OCCU_INTTN_CD) ) AS DTIL_OCCU_INTTN_CD 
+								                  , DECODE (AD02.ODTY_CD,AD01.ODTY_CD, AD01.ODTY_CD,AD01.ODTY_CD) AS ODTY_CD 
+												  , DECODE (AD02.PYSP_CD, AD01.PYSP_CD, AD01.PYSP_CD, AD01.PYSP_CD) AS PYSP_CD  
+												  , DECODE (AD02.LOG_SVC_YR_NUM_CD, AD01.LOG_SVC_YR_NUM_CD, AD01.LOG_SVC_YR_NUM_CD, AD01.LOG_SVC_YR_NUM_CD) AS LOG_SVC_YR_NUM_CD 
+												  , DECODE (AD02.LOG_SVC_MNTH_ICM_CD, AD01.LOG_SVC_MNTH_ICM_CD, AD01.LOG_SVC_MNTH_ICM_CD, AD01.LOG_SVC_MNTH_ICM_CD) AS LOG_SVC_MNTH_ICM_CD 
+												  , DECODE (AD02.FRST_EMYMT_DT, AD01.FRST_EMYMT_DT, AD01.FRST_EMYMT_DT, AD01.FRST_EMYMT_DT) AS FRST_EMYMT_DT 
+												  , DECODE (AD02.EMYMT_BGNN_DT, AD01.EMYMT_BGNN_DT, AD01.EMYMT_BGNN_DT, AD01.EMYMT_BGNN_DT) AS EMYMT_BGNN_DT 
+											  	  , DECODE (AD02.EMYMT_END_DT, AD01.EMYMT_END_DT, AD01.EMYMT_END_DT, AD01.EMYMT_END_DT) AS EMYMT_END_DT 
+	                                              ,AD01.NATN_CD
+	                                              ,AD01.HDOFC_CODTN_CD
+	                                              ,AD01.RETRY_DT 
+	                                                  FROM PSNL0100 AD01,  (SELECT 
+                                                                           DPOB_CD ,SYSTEMKEY ,PYMT_YR_MNTH, PAYR_SEIL_NUM, PAY_CD,
+                                                                           PAYR_MANG_DEPT_CD ,EMYMT_DIV_CD,HAN_NM ,RESN_REGN_NUM ,DEPT_CD  ,BUSIN_CD ,TYP_OCCU_CD 
+                                                                           ,DTIL_OCCU_INTTN_CD ,ODTY_CD ,PYSP_CD ,LOG_SVC_YR_NUM_CD 
+                                                                           ,LOG_SVC_MNTH_ICM_CD ,FRST_EMYMT_DT ,EMYMT_BGNN_DT,EMYMT_END_DT  
+                                                                        FROM PAYR0304
+                                                                        UNION ALL
+                                                                        SELECT 
+                                                                           DPOB_CD ,SYSTEMKEY ,PYYT_YR_MNTH,  (0) AS PAYR_SEIL_NUM,('B0150000') AS PAY_CD,
+                                                                            PAYR_MANG_DEPT_CD ,EMYMT_DIV_CD,HAN_NM ,RESN_REGN_NUM ,DEPT_CD  ,BUSIN_CD ,TYP_OCCU_CD 
+                                                                           ,DTIL_OCCU_INTTN_CD ,ODTY_CD ,PYSP_CD ,LOG_SVC_YR_NUM_CD 
+                                                                           ,LOG_SVC_MNTH_ICM_CD ,FRST_EMYMT_DT ,EMYMT_BGNN_DT,EMYMT_END_DT  
+                                                                        FROM PYYT0304) AD02,
+	                                                ( 
+	                                                     SELECT NN.DPOB_CD,
+										                               NN.PYMT_YR_MNTH,
+										                               NN.PAY_CD,
+										                               NN.SYSTEMKEY,
+										                               NN.PAYR_SEIL_NUM
+										                     FROM    
+										                     (SELECT           DPOB_CD,
+										                                       PYMT_YR_MNTH,
+										                                       PAY_CD,
+										                                       SYSTEMKEY,
+										                                       MAX(PAYR_SEIL_NUM) AS PAYR_SEIL_NUM  
+										                                  FROM (SELECT 
+																			   DPOB_CD, PYMT_YR_MNTH, SYSTEMKEY,  PAYR_SEIL_NUM,
+																			   PAY_CD,  PAYR_MANG_DEPT_CD, 
+																			   EMYMT_DIV_CD, HAN_NM, RESN_REGN_NUM, 
+																			   DEPT_CD, BUSIN_CD, TYP_OCCU_CD,   DTIL_OCCU_INTTN_CD,
+																			     ODTY_CD, PYSP_CD, 
+																			     LOG_SVC_YR_NUM_CD, LOG_SVC_MNTH_ICM_CD, 
+																			   FRST_EMYMT_DT, EMYMT_BGNN_DT, EMYMT_END_DT, 
+																			   HDOFC_DIV_CD, RETRY_DT 
+																			FROM  PAYR0304 
+																			UNION ALL
+																			SELECT 
+																			   DPOB_CD, PYYT_YR_MNTH, SYSTEMKEY,  (0) AS PAYR_SEIL_NUM,('B0150000') AS PAY_CD,
+																			   PAYR_MANG_DEPT_CD, EMYMT_DIV_CD, HAN_NM, 
+																			   RESN_REGN_NUM, DEPT_CD, BUSIN_CD, 
+																			   TYP_OCCU_CD, DTIL_OCCU_INTTN_CD, ODTY_CD, 
+																			   PYSP_CD, LOG_SVC_YR_NUM_CD, LOG_SVC_MNTH_ICM_CD, 
+																			   FRST_EMYMT_DT, EMYMT_BGNN_DT, EMYMT_END_DT, 
+																			   HDOFC_DIV_CD, RETRY_DT 
+																			FROM  PYYT0304) PAYR0304
+										                                 WHERE     PYMT_YR_MNTH LIKE #yrtxBlggYr# ||'%'  
+										                                     GROUP BY  DPOB_CD,  PYMT_YR_MNTH,
+                                                                           PAY_CD, SYSTEMKEY
+										                                 ) NN,
+										                                  (  
+										                                   SELECT        MM.DPOB_CD,
+										                                                 MM.PYMT_YR_MNTH ,
+										                                                 MM.PAY_CD , 
+										                                                 MM.SYSTEMKEY ,
+										                                                 MM.PAYR_SEIL_NUM ,    MM.SEL_NUM
+										                                     FROM    
+										                                     (  
+										                                    SELECT   MAX(SEL_NUM)   AS SEL_NUM,
+													                                         DPOB_CD,
+													                                         MAX(PYMT_YR_MNTH) AS PYMT_YR_MNTH,
+													                                         MAX(PAY_CD) AS PAY_CD,
+													                                         SYSTEMKEY,
+													                                         MAX(PAYR_SEIL_NUM) AS PAYR_SEIL_NUM
+										                                     FROM 
+										                                      (SELECT  ROW_NUMBER ()
+										                                                 OVER (ORDER BY
+										                                                          DPOB_CD,
+										                                                          SYSTEMKEY,
+										                                                          PYMT_YR_MNTH ASC,
+										                                                          PAY_CD ASC,
+										                                                          PAYR_SEIL_NUM DESC) AS SEL_NUM,
+										                                                 DPOB_CD,
+										                                                 PYMT_YR_MNTH ,
+										                                                 PAY_CD , 
+										                                                 SYSTEMKEY ,
+										                                                 PAYR_SEIL_NUM
+										                                            FROM (SELECT 
+																			   DPOB_CD, PYMT_YR_MNTH, SYSTEMKEY,  PAYR_SEIL_NUM,
+																			   PAY_CD,  PAYR_MANG_DEPT_CD, 
+																			   EMYMT_DIV_CD, HAN_NM, RESN_REGN_NUM, 
+																			   DEPT_CD, BUSIN_CD, TYP_OCCU_CD,   DTIL_OCCU_INTTN_CD,
+																			     ODTY_CD, PYSP_CD, 
+																			     LOG_SVC_YR_NUM_CD, LOG_SVC_MNTH_ICM_CD, 
+																			   FRST_EMYMT_DT, EMYMT_BGNN_DT, EMYMT_END_DT, 
+																			   HDOFC_DIV_CD, RETRY_DT 
+																			FROM  PAYR0304 
+																			UNION ALL
+																			SELECT 
+																			   DPOB_CD, PYYT_YR_MNTH, SYSTEMKEY,  (0) AS PAYR_SEIL_NUM,('B0150000') AS PAY_CD,
+																			   PAYR_MANG_DEPT_CD, EMYMT_DIV_CD, HAN_NM, 
+																			   RESN_REGN_NUM, DEPT_CD, BUSIN_CD, 
+																			   TYP_OCCU_CD, DTIL_OCCU_INTTN_CD, ODTY_CD, 
+																			   PYSP_CD, LOG_SVC_YR_NUM_CD, LOG_SVC_MNTH_ICM_CD, 
+																			   FRST_EMYMT_DT, EMYMT_BGNN_DT, EMYMT_END_DT, 
+																			   HDOFC_DIV_CD, RETRY_DT 
+																			FROM  PYYT0304) PAYR0304   
+																			 WHERE   PYMT_YR_MNTH  LIKE #yrtxBlggYr# ||'%'  
+																		                   AND (SYSTEMKEY,PYMT_YR_MNTH) IN (
+																		                      SELECT SYSTEMKEY, MAX(PYMT_YR_MNTH)
+																		                        FROM 
+																		                         (SELECT DPOB_CD, PYMT_YR_MNTH, SYSTEMKEY
+																		                         FROM PAYR0304
+																		                         UNION ALL
+																		                         SELECT DPOB_CD, PYYT_YR_MNTH, SYSTEMKEY
+																		                         FROM PYYT0304) NNAA 
+																		                        WHERE  NNAA.DPOB_CD = PAYR0304.DPOB_CD 
+																		                          AND NNAA.PYMT_YR_MNTH = PAYR0304.PYMT_YR_MNTH
+																		                          AND NNAA.SYSTEMKEY = PAYR0304.SYSTEMKEY
+																		                          AND NNAA.PYMT_YR_MNTH  LIKE #yrtxBlggYr# ||'%'  
+																		                          GROUP BY SYSTEMKEY
+																	      )
+										                                             ) 
+										                                          GROUP BY  DPOB_CD,    SYSTEMKEY     
+										                                            ) MM   
+										                                             ) GG
+										                             WHERE     NN.DPOB_CD = GG.DPOB_CD
+	                                         AND NN.SYSTEMKEY = GG.SYSTEMKEY 
+	                                         AND NN.PYMT_YR_MNTH = GG.PYMT_YR_MNTH
+	                                              /*     AND NN.PAYR_SEIL_NUM =  GG.PAYR_SEIL_NUM
+	                                                  AND NN.PAY_CD = GG.PAY_CD  */           ) AD03 
+	                                               WHERE   AD02.DPOB_CD = AD01.DPOB_CD
+	                                                 AND AD02.SYSTEMKEY = AD01.SYSTEMKEY
+	                                                 AND AD02.DPOB_CD  = AD03.DPOB_CD
+	                                                 AND AD02.PYMT_YR_MNTH  = AD03.PYMT_YR_MNTH
+	                                                 AND AD02.SYSTEMKEY  = AD03.SYSTEMKEY  
+	                                                   AND AD02.PAY_CD  = AD03.PAY_CD
+	                                                 AND AD02.PAYR_SEIL_NUM  = AD03.PAYR_SEIL_NUM  
+	                                                  AND AD02.PYMT_YR_MNTH LIKE #yrtxBlggYr# ||'%'   
+	                                             ) BB
+	                    WHERE AA.DPOB_CD=BB.DPOB_CD  
+	                      AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+	                      AND AA.DPOB_CD = TT.DPOB_CD(+)                             
+	                  	  AND AA.UT_DPOB_CD = TT.WHDG_TX_REGRST_DEPT_CD(+)	                  	  
+							<isNotEmpty prepend="AND" property="busoprRgstnum" >
+								TT.BUSOPR_RGSTNUM = #busoprRgstnum#
+					    	</isNotEmpty> 
+							<isNotEmpty  prepend="AND"  property="utDpobCd" > 
+							AA.UT_DPOB_CD=#utDpobCd# 
+	          			</isNotEmpty> 
+	                          <isNotEmpty prepend="AND" property="yrtxBlggYr" >
+	                                     AA.YRTX_BLGG_YR = #yrtxBlggYr# 
+	                                </isNotEmpty>   
+	                                <isNotEmpty prepend="AND" property="clutSeptCd" >
+	                                     AA.CLUT_SEPT_CD=#clutSeptCd#
+	                                </isNotEmpty> 
+	                       <isNotEmpty prepend="AND" property="systemkey" >
+	                       AA.SYSTEMKEY=#systemkey#
+	                      </isNotEmpty> 
+	                      AND AA.YRTX_BLGG_YR = TT.YRTX_BLGG_YR(+)
+	                      AND AA.CLUT_SEPT_CD = TT.CLUT_SEPT_CD(+)
+	                       <isNotEmpty prepend="AND" property="businCd" >
+				    		<![CDATA[
+				    			BB.BUSIN_CD 
+							]]>
+							<iterate prepend="IN" property="businCdArr" open="(" close=")" conjunction=",">
+	                			#businCdArr[]#
+	                		</iterate>
+				  			</isNotEmpty> 
+	                       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+	                         AA.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+	                       </isNotEmpty> 
+	                       <isNotEmpty prepend="AND" property="emymtDivCd" >
+	                         BB.EMYMT_DIV_CD=#emymtDivCd#
+	                         </isNotEmpty>  
+	                     <isNotEmpty property="typOccuCd" prepend="AND">
+	                    <![CDATA[
+	                     BB.TYP_OCCU_CD
+	                    ]]>
+	                    <iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+	                     #typOccuCdArr[]#
+	                    </iterate>
+	                    </isNotEmpty>  
+	                  
+	                    <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+	                        <![CDATA[
+	                             BB.DTIL_OCCU_INTTN_CD
+	                        ]]>
+	                        <iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+	                             #dtilOccuInttnCdArr[]#
+	                        </iterate> 
+	                  </isNotEmpty>
+	                  ) AC01, BASS0100 AC02, BASS0150 AC03
+			   WHERE AC01.DPOB_CD = AC02.DPOB_CD
+			     AND AC01.DPOB_CD = AC03.DPOB_CD(+)
+			     AND AC01.PAYR_MANG_DEPT_CD = AC03.PAYR_MANG_DEPT_CD(+)
+			     AND ROWNUM =  1
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>
+		
+	<!-- 연말정산신고파일생성 전자신고기본정보 갯수  -->	
+	<select id="ye161005_2022_DAO.selectYeta7400ToYe161005ListTotCnt_S" parameterClass="ye161005Srh_2022_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM  (
+			   SELECT AC01.DPOB_CD
+				       , DECODE (AC01.REPR_NAME,
+				               '', DECODE (AC03.DEGTR_NM, '', AC02.DEGTR_NM, AC03.DEGTR_NM),
+				               AC01.REPR_NAME)AS REPR_NAME
+				       , DECODE (
+				          AC01.CORP_FMNM_NM,
+				          '', DECODE (AC03.PAY_MANGE_DEPT_NM,
+				                      '', AC02.DPOB_NM,
+				                      AC03.PAY_MANGE_DEPT_NM),
+				          AC01.CORP_FMNM_NM)AS JURI_NAME
+				       , DECODE (
+				          AC01.BUSOPR_RGSTNUM,
+				          '', DECODE (AC03.BUSOPR_RGSTN_NUM,
+				                      '', AC02.BUSOPR_RGSTN_NUM,
+				                      AC03.BUSOPR_RGSTN_NUM),
+				          AC01.BUSOPR_RGSTNUM)AS BUSI_NUMB
+				       , DECODE (
+				          AC01.RESU_NUMB,
+				          '', DECODE (AC03.DEGTR_RESN_REGN_NUM,
+				                      '', AC02.DEGTR_RESN_REGN_NUM,
+				                      AC03.DEGTR_RESN_REGN_NUM),
+				          AC01.RESU_NUMB)AS RESU_NUMB
+				       , DECODE (
+				          AC01.CORP_NUM,
+				          '', DECODE (AC03.CORP_RGSTN_NUM,
+				                      '', AC02.CORP_RGSTN_NUM,
+				                      AC03.CORP_RGSTN_NUM),
+				          AC01.CORP_NUM) AS JURI_NUMB
+				       , DECODE (
+				          AC01.INCM_POST,
+				          '', DECODE (AC03.PAY_MANGE_DEPT_ZPCD,
+				                      '', AC02.DPOB_ZPCD,
+				                      AC03.PAY_MANGE_DEPT_ZPCD),
+				          AC01.INCM_POST)AS INCM_POST
+				       , DECODE (
+				          AC01.INCM_ADDR,
+				          '', DECODE (AC03.PAY_MANGE_DEPT_F_NDTN_ADDR,
+				                      '', AC02.DPOB_FNDTN_ADDR,
+				                      AC03.PAY_MANGE_DEPT_F_NDTN_ADDR),
+				          AC01.INCM_ADDR)AS INCM_ADDR
+				       , DECODE (
+				          AC01.INCM_ADTL,
+				          '', DECODE (AC03.PAY_MANGE_DEPT_DTL_PATR_ADDR,
+				                      '', AC02.DPOB_DTL_PATR_ADDR,
+				                      AC03.PAY_MANGE_DEPT_DTL_PATR_ADDR),
+				          AC01.INCM_ADTL)AS INCM_ADTL
+				       , AC01.TX_OFFC_CD
+				       , AC01.PENTR_SEPT_CD
+				       , AC01.TX_DEPTY_MANGE_NUM
+				       , AC01.HMTX_ID
+				       , AC01.TX_PGM_CD
+				       , AC01.PERN_CHRG_DEPT_NM
+				       , AC01.PERN_CHRG_NM
+				       , AC01.PERN_CHRG_PHN_NUM
+				      , AC01.YETA_C171
+							, AC01.YETA_C172
+							, AC01.YRTX_BLGG_YR
+							, AC01.CLUT_SEPT_CD
+   FROM             
+              (SELECT DISTINCT TT.WHDG_TX_REGRST_DEPT_CD
+						, TT.DPOB_CD
+						, TT.HHRK_WHDG_REGRST_DEPT_CD
+						, TT.TX_OFFC_CD
+						, TT.PENTR_SEPT_CD
+						, BB.PAYR_MANG_DEPT_CD
+						, TT.TX_DEPTY_MANGE_NUM
+						, TT.HMTX_ID
+						, TT.TX_PGM_CD
+						, TT.BUSOPR_RGSTNUM 
+						, TT.CORP_FMNM_NM
+						, TT.PERN_CHRG_DEPT_NM
+						, TT.PERN_CHRG_NM
+						, TT.PERN_CHRG_PHN_NUM
+						, TT.USE_HAN_CD
+						, TT.SUMT_TGT_PRID_CD
+						, TT.CORP_NUM
+						, TT.INCM_POST
+						, TT.INCM_ADDR
+						, TT.INCM_ADTL
+						, TT.KYBDR
+						, TT.INPT_DT
+						, TT.INPT_ADDR
+						, TT.ISMT
+						, TT.REVN_DT
+						, TT.REVN_ADDR
+						, TT.REPR_NAME
+						, TT.RESU_NUMB
+								, TT.YETA_C171
+							, TT.YETA_C172
+							, TT.YRTX_BLGG_YR
+							, TT.CLUT_SEPT_CD
+                      FROM YE161010 AA, YE161005 TT, (
+                                     SELECT   DISTINCT  AD02.DPOB_CD
+                                              ,AD02.SYSTEMKEY
+                                              ,AD02.PAYR_MANG_DEPT_CD
+                                              ,AD02.EMYMT_DIV_CD
+                                              ,AD02.HAN_NM
+                                              ,AD02.RESN_REGN_NUM
+                                              ,DECODE (AD02.EMYMT_DIV_CD, 'A0020020', AD02.DEPT_CD,DECODE(AD01.EMYMT_DIV_CD,'A0020020',AD02.DEPT_CD,AD01.CURR_AFFN_DEPT_CD)) AS DEPT_CD 
+							                  ,DECODE (AD02.EMYMT_DIV_CD, 'A0020020', AD02.BUSIN_CD, DECODE(AD01.EMYMT_DIV_CD,'A0020020',AD02.BUSIN_CD,AD01.BUSIN_CD) ) AS BUSIN_CD  
+							                  ,DECODE (AD02.EMYMT_DIV_CD, 'A0020020', AD02.TYP_OCCU_CD, DECODE(AD01.EMYMT_DIV_CD,'A0020020',AD02.TYP_OCCU_CD,AD01.TYP_OCCU_CD) ) AS TYP_OCCU_CD 
+							                  ,DECODE (AD02.EMYMT_DIV_CD, 'A0020020', AD02.DTIL_OCCU_INTTN_CD, DECODE(AD01.EMYMT_DIV_CD,'A0020020',AD02.DTIL_OCCU_INTTN_CD,AD01.DTIL_OCCU_INTTN_CD) ) AS DTIL_OCCU_INTTN_CD 
+							                  ,DECODE (AD02.EMYMT_DIV_CD, 'A0020020', AD01.DTIL_OCCU_CLS_DIV_CD,  DECODE(AD01.EMYMT_DIV_CD,'A0020020',AD01.DTIL_OCCU_CLS_DIV_CD,AD01.DTIL_OCCU_CLS_DIV_CD) ) AS DTIL_OCCU_CLS_DIV_CD 
+                                            , DECODE (AD02.ODTY_CD,AD01.ODTY_CD, AD01.ODTY_CD,AD01.ODTY_CD) AS ODTY_CD 
+											, DECODE (AD02.PYSP_CD, AD01.PYSP_CD, AD01.PYSP_CD, AD01.PYSP_CD) AS PYSP_CD  
+											, DECODE (AD02.LOG_SVC_YR_NUM_CD, AD01.LOG_SVC_YR_NUM_CD, AD01.LOG_SVC_YR_NUM_CD, AD01.LOG_SVC_YR_NUM_CD) AS LOG_SVC_YR_NUM_CD 
+											, DECODE (AD02.LOG_SVC_MNTH_ICM_CD, AD01.LOG_SVC_MNTH_ICM_CD, AD01.LOG_SVC_MNTH_ICM_CD, AD01.LOG_SVC_MNTH_ICM_CD) AS LOG_SVC_MNTH_ICM_CD 
+											, DECODE (AD02.FRST_EMYMT_DT, AD01.FRST_EMYMT_DT, AD01.FRST_EMYMT_DT, AD01.FRST_EMYMT_DT) AS FRST_EMYMT_DT 
+											, DECODE (AD02.EMYMT_BGNN_DT, AD01.EMYMT_BGNN_DT, AD01.EMYMT_BGNN_DT, AD01.EMYMT_BGNN_DT) AS EMYMT_BGNN_DT 
+											, DECODE (AD02.EMYMT_END_DT, AD01.EMYMT_END_DT, AD01.EMYMT_END_DT, AD01.EMYMT_END_DT) AS EMYMT_END_DT 
+                                              ,AD01.NATN_CD
+                                              ,AD01.HDOFC_CODTN_CD
+                                              ,AD01.RETRY_DT 
+                                                  FROM PSNL0100 AD01,  (SELECT 
+                                                                           DPOB_CD ,SYSTEMKEY ,PYMT_YR_MNTH, PAYR_SEIL_NUM, PAY_CD,
+                                                                           PAYR_MANG_DEPT_CD ,EMYMT_DIV_CD,HAN_NM ,RESN_REGN_NUM ,DEPT_CD  ,BUSIN_CD ,TYP_OCCU_CD 
+                                                                           ,DTIL_OCCU_INTTN_CD ,ODTY_CD ,PYSP_CD ,LOG_SVC_YR_NUM_CD 
+                                                                           ,LOG_SVC_MNTH_ICM_CD ,FRST_EMYMT_DT ,EMYMT_BGNN_DT,EMYMT_END_DT  
+                                                                        FROM PAYR0304
+                                                                        UNION ALL
+                                                                        SELECT 
+                                                                           DPOB_CD ,SYSTEMKEY ,PYYT_YR_MNTH,  (0) AS PAYR_SEIL_NUM,('B0150000') AS PAY_CD,
+                                                                            PAYR_MANG_DEPT_CD ,EMYMT_DIV_CD,HAN_NM ,RESN_REGN_NUM ,DEPT_CD  ,BUSIN_CD ,TYP_OCCU_CD 
+                                                                           ,DTIL_OCCU_INTTN_CD ,ODTY_CD ,PYSP_CD ,LOG_SVC_YR_NUM_CD 
+                                                                           ,LOG_SVC_MNTH_ICM_CD ,FRST_EMYMT_DT ,EMYMT_BGNN_DT,EMYMT_END_DT  
+                                                                        FROM PYYT0304) AD02,
+                                                ( 
+                                                     SELECT NN.DPOB_CD,
+									                               NN.PYMT_YR_MNTH,
+									                               NN.PAY_CD,
+									                               NN.SYSTEMKEY,
+									                               NN.PAYR_SEIL_NUM
+									                     FROM    
+									                     (SELECT           DPOB_CD,
+										                                       PYMT_YR_MNTH,
+										                                       PAY_CD,
+										                                       SYSTEMKEY,
+										                                       MAX(PAYR_SEIL_NUM) AS PAYR_SEIL_NUM  
+										                                  FROM (SELECT 
+																			   DPOB_CD, PYMT_YR_MNTH, SYSTEMKEY,  PAYR_SEIL_NUM,
+																			   PAY_CD,  PAYR_MANG_DEPT_CD, 
+																			   EMYMT_DIV_CD, HAN_NM, RESN_REGN_NUM, 
+																			   DEPT_CD, BUSIN_CD, TYP_OCCU_CD,   DTIL_OCCU_INTTN_CD,
+																			     ODTY_CD, PYSP_CD, 
+																			     LOG_SVC_YR_NUM_CD, LOG_SVC_MNTH_ICM_CD, 
+																			   FRST_EMYMT_DT, EMYMT_BGNN_DT, EMYMT_END_DT, 
+																			   HDOFC_DIV_CD, RETRY_DT 
+																			FROM  PAYR0304 
+																			UNION ALL
+																			SELECT 
+																			   DPOB_CD, PYYT_YR_MNTH, SYSTEMKEY,  (0) AS PAYR_SEIL_NUM,('B0150000') AS PAY_CD,
+																			   PAYR_MANG_DEPT_CD, EMYMT_DIV_CD, HAN_NM, 
+																			   RESN_REGN_NUM, DEPT_CD, BUSIN_CD, 
+																			   TYP_OCCU_CD, DTIL_OCCU_INTTN_CD, ODTY_CD, 
+																			   PYSP_CD, LOG_SVC_YR_NUM_CD, LOG_SVC_MNTH_ICM_CD, 
+																			   FRST_EMYMT_DT, EMYMT_BGNN_DT, EMYMT_END_DT, 
+																			   HDOFC_DIV_CD, RETRY_DT 
+																			FROM  PYYT0304) PAYR0304
+										                                 WHERE     PYMT_YR_MNTH LIKE #yrtxBlggYr# ||'%'  
+										                                     GROUP BY  DPOB_CD,  PYMT_YR_MNTH,
+                                                                           PAY_CD, SYSTEMKEY
+									                                 ) NN,
+									                                  (  
+									                                   SELECT        MM.DPOB_CD,
+									                                                 MM.PYMT_YR_MNTH ,
+									                                                 MM.PAY_CD , 
+									                                                 MM.SYSTEMKEY ,
+									                                                 MM.PAYR_SEIL_NUM ,    MM.SEL_NUM
+									                                     FROM    
+									                                     (  
+									                                    SELECT   MAX(SEL_NUM)   AS SEL_NUM,
+												                                         DPOB_CD,
+												                                         MAX(PYMT_YR_MNTH) AS PYMT_YR_MNTH,
+												                                         MAX(PAY_CD) AS PAY_CD,
+												                                         SYSTEMKEY,
+												                                         MAX(PAYR_SEIL_NUM) AS PAYR_SEIL_NUM
+									                                     FROM 
+									                                      (SELECT  ROW_NUMBER ()
+									                                                 OVER (ORDER BY
+									                                                          DPOB_CD,
+									                                                          SYSTEMKEY,
+									                                                          PYMT_YR_MNTH ASC,
+									                                                          PAY_CD ASC,
+									                                                          PAYR_SEIL_NUM DESC) AS SEL_NUM,
+									                                                 DPOB_CD,
+									                                                 PYMT_YR_MNTH ,
+									                                                 PAY_CD , 
+									                                                 SYSTEMKEY ,
+									                                                 PAYR_SEIL_NUM
+									                                            FROM (SELECT 
+																		   DPOB_CD, PYMT_YR_MNTH, SYSTEMKEY,  PAYR_SEIL_NUM,
+																		   PAY_CD,  PAYR_MANG_DEPT_CD, 
+																		   EMYMT_DIV_CD, HAN_NM, RESN_REGN_NUM, 
+																		   DEPT_CD, BUSIN_CD, TYP_OCCU_CD,   DTIL_OCCU_INTTN_CD,
+																		     ODTY_CD, PYSP_CD, 
+																		     LOG_SVC_YR_NUM_CD, LOG_SVC_MNTH_ICM_CD, 
+																		   FRST_EMYMT_DT, EMYMT_BGNN_DT, EMYMT_END_DT, 
+																		   HDOFC_DIV_CD, RETRY_DT 
+																		FROM  PAYR0304 
+																		UNION ALL
+																		SELECT 
+																		   DPOB_CD, PYYT_YR_MNTH, SYSTEMKEY,  (0) AS PAYR_SEIL_NUM,('B0150000') AS PAY_CD,
+																		   PAYR_MANG_DEPT_CD, EMYMT_DIV_CD, HAN_NM, 
+																		   RESN_REGN_NUM, DEPT_CD, BUSIN_CD, 
+																		   TYP_OCCU_CD, DTIL_OCCU_INTTN_CD, ODTY_CD, 
+																		   PYSP_CD, LOG_SVC_YR_NUM_CD, LOG_SVC_MNTH_ICM_CD, 
+																		   FRST_EMYMT_DT, EMYMT_BGNN_DT, EMYMT_END_DT, 
+																		   HDOFC_DIV_CD, RETRY_DT 
+																		FROM  PYYT0304) PAYR0304   
+																		 WHERE   PYMT_YR_MNTH  LIKE #yrtxBlggYr# ||'%'  
+																	                   AND (SYSTEMKEY,PYMT_YR_MNTH) IN (
+																	                      SELECT SYSTEMKEY, MAX(PYMT_YR_MNTH)
+																	                        FROM 
+																	                         (SELECT DPOB_CD, PYMT_YR_MNTH, SYSTEMKEY
+																	                         FROM PAYR0304
+																	                         UNION ALL
+																	                         SELECT DPOB_CD, PYYT_YR_MNTH, SYSTEMKEY
+																	                         FROM PYYT0304) NNAA 
+																	                        WHERE  NNAA.DPOB_CD = PAYR0304.DPOB_CD 
+																	                          AND NNAA.PYMT_YR_MNTH = PAYR0304.PYMT_YR_MNTH
+																	                          AND NNAA.SYSTEMKEY = PAYR0304.SYSTEMKEY
+																	                          AND NNAA.PYMT_YR_MNTH  LIKE #yrtxBlggYr# ||'%'  
+																	                          GROUP BY SYSTEMKEY
+																      )
+									                                             ) 
+									                                          GROUP BY  DPOB_CD,    SYSTEMKEY     
+									                                            ) MM   
+									                                             ) GG
+									                             WHERE     NN.DPOB_CD = GG.DPOB_CD
+                                         AND NN.SYSTEMKEY = GG.SYSTEMKEY 
+                                         AND NN.PYMT_YR_MNTH = GG.PYMT_YR_MNTH
+                                              /*     AND NN.PAYR_SEIL_NUM =  GG.PAYR_SEIL_NUM
+                                                  AND NN.PAY_CD = GG.PAY_CD  */           ) AD03 
+                                               WHERE   AD02.DPOB_CD = AD01.DPOB_CD
+                                                 AND AD02.SYSTEMKEY = AD01.SYSTEMKEY
+                                                 AND AD02.DPOB_CD  = AD03.DPOB_CD
+                                                 AND AD02.PYMT_YR_MNTH  = AD03.PYMT_YR_MNTH
+                                                 AND AD02.SYSTEMKEY  = AD03.SYSTEMKEY  
+                                                   AND AD02.PAY_CD  = AD03.PAY_CD
+                                                 AND AD02.PAYR_SEIL_NUM  = AD03.PAYR_SEIL_NUM  
+                                                  AND AD02.PYMT_YR_MNTH LIKE #yrtxBlggYr# ||'%'   
+                                             ) BB
+                    WHERE AA.DPOB_CD=BB.DPOB_CD  
+                      AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+                      AND AA.DPOB_CD = TT.DPOB_CD(+)                             
+                  	  AND AA.UT_DPOB_CD = TT.WHDG_TX_REGRST_DEPT_CD(+)
+						<isNotEmpty prepend="AND" property="busoprRgstnum" >
+							TT.BUSOPR_RGSTNUM = #busoprRgstnum#
+				    	</isNotEmpty> 
+						<isNotEmpty property="utDpobCd"  prepend="AND" > 
+							AA.UT_DPOB_CD=#utDpobCd# 
+	          			</isNotEmpty>  
+                          <isNotEmpty prepend="AND" property="yrtxBlggYr" >
+                                     AA.YRTX_BLGG_YR = #yrtxBlggYr#
+                                </isNotEmpty>  
+                                <isNotEmpty prepend="AND" property="clutSeptCd" >
+                                     AA.CLUT_SEPT_CD=#clutSeptCd#
+                                </isNotEmpty> 
+                       <isNotEmpty prepend="AND" property="systemkey" >
+                       AA.SYSTEMKEY=#systemkey#
+                      </isNotEmpty> 
+                 AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             (SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,#yrtxBlggYr# )) ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+                                                AND C.DEPT_CD = BB.DEPT_CD
+                                                AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                                 <isNotEmpty property="deptCd" prepend="AND">
+                                                <![CDATA[
+                                                 C.DEPT_CD
+                                                ]]>
+                                                <iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+                                                 #deptCdArr[]#
+                                                </iterate>
+                                                </isNotEmpty>  
+                                          ) 
+                       <isNotEmpty prepend="AND" property="businCd" >
+			    		<![CDATA[
+			    			BB.BUSIN_CD 
+						]]>
+						<iterate prepend="IN" property="businCdArr" open="(" close=")" conjunction=",">
+                			#businCdArr[]#
+                		</iterate>
+			  			</isNotEmpty> 
+                       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+                         AA.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+                       </isNotEmpty> 
+                       <isNotEmpty prepend="AND" property="emymtDivCd" >
+                         BB.EMYMT_DIV_CD=#emymtDivCd#
+                         </isNotEmpty>  
+                     <isNotEmpty property="typOccuCd" prepend="AND">
+                    <![CDATA[
+                     BB.TYP_OCCU_CD
+                    ]]>
+                    <iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+                     #typOccuCdArr[]#
+                    </iterate>
+                    </isNotEmpty>  
+                  
+                    <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+                        <![CDATA[
+                             BB.DTIL_OCCU_INTTN_CD
+                        ]]>
+                        <iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+                             #dtilOccuInttnCdArr[]#
+                        </iterate> 
+                  </isNotEmpty>
+                  ) AC01, BASS0100 AC02, BASS0150 AC03
+		   WHERE AC01.DPOB_CD = AC02.DPOB_CD
+		     AND AC01.DPOB_CD = AC03.DPOB_CD(+)
+			 AND AC01.PAYR_MANG_DEPT_CD = AC03.PAYR_MANG_DEPT_CD(+)
+		     AND ROWNUM =  1
+			)
+	</select>
+	
+		<update id="ye161005_2022_DAO.updateYeta7400ToYe161005_S">
+		<![CDATA[
+			UPDATE YE161005
+				   SET    TX_OFFC_CD = #txOffcCd#	
+						, PENTR_SEPT_CD	 = #pentrSeptCd#
+						, TX_DEPTY_MANGE_NUM = #txDeptyMangeNum#	
+						, HMTX_ID	 = #hmtxId#	
+						, TX_PGM_CD	 = #txPgmCd# 	
+						, BUSOPR_RGSTNUM = #busoprRgstnum#
+						, CORP_FMNM_NM	 = #corpFmnmNm#
+						, PERN_CHRG_DEPT_NM	 = #pernChrgDeptNm#
+						, PERN_CHRG_NM		 = #pernChrgNm#
+						, PERN_CHRG_PHN_NUM	 = #pernChrgPhnNum#
+						, USE_HAN_CD		 = #useHanCd#	
+						, SUMT_TGT_PRID_CD	 = #sumtTgtPridCd#
+						, CORP_NUM		 = #corpNum#	
+						, INCM_POST	 = #incmPost#
+						, INCM_ADDR	 = #incmAddr#
+						, INCM_ADTL	 = #incmAdtl#
+						, REPR_NAME	 = #reprName#
+						, RESU_NUMB	 = #resuNumb#
+						, YETA_C171	 = #yetaC171#  
+						, YETA_C172	 = #yetaC172#  
+						, ISMT = #ismt#
+						, REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						, REVN_ADDR = #revnAddr#
+						
+				 WHERE     DPOB_CD = #dpobCd#
+				 	AND YRTX_BLGG_YR = #yrtxBlggYr#	
+					AND CLUT_SEPT_CD = #clutSeptCd#	
+				    AND WHDG_TX_REGRST_DEPT_CD = #whdgTxRegrstDeptCd#
+				]]>
+	</update>
+	 
+</sqlMap>

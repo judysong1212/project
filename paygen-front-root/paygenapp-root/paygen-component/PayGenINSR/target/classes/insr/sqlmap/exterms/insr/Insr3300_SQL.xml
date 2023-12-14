@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Insr3300">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="insr3300SerarchVO" type="com.app.exterms.insurance.server.vo.Insr3300SrhVO"/>
+	<typeAlias  alias="insr3300" type="com.app.exterms.insurance.server.vo.Insr3300VO"/>
+	
+	<resultMap id="insr3300" class="com.app.exterms.insurance.server.vo.Insr3300VO">
+		<result property="dpobCd"				  column="DPOB_CD"					  columnIndex="1"/>
+		<result property="nofctYrMnth"			  column="NOFCT_YR_MNTH"			  columnIndex="2"/>
+		<result property="nofctDspty"			  column="NOFCT_DSPTY"				  columnIndex="3"/>
+		<result property="systemkey"			  column="SYSTEMKEY"				  columnIndex="4"/>
+		<result property="emymtSeilNum"			  column="EMYMT_SEIL_NUM"			  columnIndex="5"/>
+		<result property="dducYrMnth"			  column="DDUC_YR_MNTH"				  columnIndex="6"/>
+		<result property="hlthInsrPrcsDt"		  column="HLTH_INSR_PRCS_DT"		  columnIndex="7"/>
+		<result property="hlthInsrPrcsYn"		  column="HLTH_INSR_PRCS_YN"		  columnIndex="8"/>
+		<result property="hlthInsrPrmmSrd"		  column="HLTH_INSR_PRMM_SRD"		  columnIndex="9"/>
+		<result property="lgtmRcptnInsurSrd"	  column="LGTM_RCPTN_INSUR_SRD"		  columnIndex="10"/>
+		<result property="yrtxPrmm"				  column="YRTX_PRMM"				  columnIndex="11"/>
+		<result property="lgtmRcptnYrtxPrmm"	  column="LGTM_RCPTN_YRTX_PRMM"		  columnIndex="12"/>
+		<result property="hlthInsrRefdItrt"		  column="HLTH_INSR_REFD_ITRT"		  columnIndex="13"/>
+		<result property="lgtmRcptnInsurRefdItrt" column="LGTM_RCPTN_INSUR_REFD_ITRT" columnIndex="14"/>
+		<result property="srdAggrSum"			  column="SRD_AGGR_SUM"				  columnIndex="15"/>
+		<result property="divdPymtDivCd"		  column="DIVD_PYMT_DIV_CD"			  columnIndex="16"/>
+		<result property="divdPymt"				  column="DIVD_PYMT"				  columnIndex="17"/>
+		<result property="kybdr"				  column="KYBDR"					  columnIndex="18"/>
+		<result property="inptDt"				  column="INPT_DT"					  columnIndex="19"/>
+		<result property="inptAddr"				  column="INPT_ADDR"				  columnIndex="20"/>
+		<result property="ismt"					  column="ISMT"						  columnIndex="21"/>
+		<result property="revnDt"				  column="REVN_DT"					  columnIndex="22"/>
+		<result property="revnAddr"				  column="REVN_ADDR"				  columnIndex="23"/>
+	</resultMap>
+	
+	<insert id="insr3300DAO.insertInsr3300_S">
+		<![CDATA[
+			INSERT INTO INSR3300 
+				( DPOB_CD
+				  , NOFCT_YR_MNTH
+				  , NOFCT_DSPTY
+				  , SYSTEMKEY
+				  , EMYMT_SEIL_NUM
+				  , DDUC_YR_MNTH
+				  , HLTH_INSR_PRCS_DT
+				  , HLTH_INSR_PRCS_YN
+				  , HLTH_INSR_PRMM_SRD
+				  , LGTM_RCPTN_INSUR_SRD
+				  , YRTX_PRMM
+				  , LGTM_RCPTN_YRTX_PRMM
+				  , HLTH_INSR_REFD_ITRT
+				  , LGTM_RCPTN_INSUR_REFD_ITRT
+				  , SRD_AGGR_SUM
+				  , DIVD_PYMT_DIV_CD
+				  , DIVD_PYMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  ,  #nofctYrMnth#
+				  ,  #nofctDspty#
+				  ,  #systemkey#
+				  ,  #emymtSeilNum#
+				  ,  #dducYrMnth#
+				  ,  #hlthInsrPrcsDt#
+				  ,  #hlthInsrPrcsYn#
+				  ,  #hlthInsrPrmmSrd#
+				  ,  #lgtmRcptnInsurSrd#
+				  ,  #yrtxPrmm#
+				  ,  #lgtmRcptnYrtxPrmm#
+				  ,  #hlthInsrRefdItrt#
+				  ,  #lgtmRcptnInsurRefdItrt#
+				  ,  #srdAggrSum#
+				  ,  #divdPymtDivCd#
+				  ,  #divdPymt#
+				  ,  #kybdr#
+				  ,  TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  ,  #inptAddr#
+				  ,  #ismt#
+				  ,  TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  ,  #revnAddr# )
+		]]>
+	</insert>
+	
+				<!-- 대사월 급여마감여부 체크  -->
+	<select id="insr3300DAO.selectPayCloseChkCnt" parameterClass="insr3300" resultClass="int">
+             <![CDATA[
+             	  SELECT NVL(COUNT(*),0) CNT
+               FROM   PAYR0301  BBB
+               WHERE  BBB.PAY_CD = 'B0150000' 
+               AND    BBB.PYMT_YR_MNTH =  #nofctYrMnth#
+               AND    BBB.SYSTEMKEY =  #systemkey#
+               AND    BBB.PAY_DDLNE_YN = 'Y'
+               	]]>
+	</select>
+	
+	<!-- insr4200화면 엑셀 업로드 삭제  -->
+	<delete id="insr3300DAO.deleteXlsInsr3300">
+		<![CDATA[
+			DELETE
+			FROM   INSR3300
+			WHERE  DPOB_CD		 = #dpobCd#
+			AND	   SYSTEMKEY	 = (SELECT SYSTEMKEY 
+									FROM   PSNL0100 
+									WHERE  DPOB_CD		 = #dpobCd#
+									AND	   RESN_REGN_NUM = REPLACE(#resnRegnNum#, '-', '') 
+									AND    ROWNUM = 1
+								   )
+			AND	   NOFCT_YR_MNTH = #nofctYrMnth#
+			AND	   NOFCT_DSPTY	 = #nofctDspty# 
+		]]>
+	</delete>
+	
+	<!-- insr4200화면 엑셀 업로드 인서트   -->
+	<insert id="insr3300DAO.insertXlsInsr3300">
+		<![CDATA[
+					INSERT INTO INSR3300 
+				(   DPOB_CD
+				  , NOFCT_YR_MNTH
+				  , NOFCT_DSPTY
+				  , SYSTEMKEY
+				  , EMYMT_SEIL_NUM
+				  , DDUC_YR_MNTH
+				  , HLTH_INSR_PRCS_DT
+				  , HLTH_INSR_PRCS_YN
+				  , HLTH_INSR_PRMM_SRD
+				  , LGTM_RCPTN_INSUR_SRD
+				  , YRTX_PRMM
+				  , LGTM_RCPTN_YRTX_PRMM
+				  , HLTH_INSR_REFD_ITRT
+				  , LGTM_RCPTN_INSUR_REFD_ITRT
+				  , SRD_AGGR_SUM
+				  , DIVD_PYMT_DIV_CD
+				  , DIVD_PYMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				   )
+			VALUES (
+					#dpobCd#
+				  , #nofctYrMnth#
+				  , #nofctDspty#
+				  , (
+					  SELECT SYSTEMKEY 
+						FROM  PSNL0100 
+						WHERE DPOB_CD = #dpobCd#
+						AND  RESN_REGN_NUM = REPLACE(#resnRegnNum#,'-','') 
+					)
+				  , (SELECT	MAX(EMYMT_SEIL_NUM) AS EMYMT_SEIL_NUM
+					 FROM	PSNL0110
+					 WHERE	DPOB_CD	  = #dpobCd#
+					 AND	SYSTEMKEY = (
+										 SELECT SYSTEMKEY 
+										 FROM PSNL0100 
+										 WHERE DPOB_CD	   = #dpobCd#
+										 AND RESN_REGN_NUM = REPLACE(#resnRegnNum#, '-', '')
+										)
+					)
+				  , #nofctYrMnth#
+				  , TO_CHAR(SYSDATE,'YYYYMMDD')
+				  , 'N'
+				  , 0
+				  , 0
+				  , #yrtxPrmm# 
+				  , #lgtmRcptnYrtxPrmm#
+				  , #hlthInsrRefdItrt#
+				  , #lgtmRcptnInsurRefdItrt#
+				  , 0
+				  , 'B0300010'
+				  , '0'
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				   )
+		
+			]]>
+		
+		
+		
+<!-- 			INSERT INTO INSR3300 
+				(   DPOB_CD
+				  , NOFCT_YR_MNTH
+				  , NOFCT_DSPTY
+				  , SYSTEMKEY
+				  , EMYMT_SEIL_NUM
+				  , DDUC_YR_MNTH
+				  , HLTH_INSR_PRCS_DT
+				  , HLTH_INSR_PRCS_YN
+				  , HLTH_INSR_PRMM_SRD
+				  , LGTM_RCPTN_INSUR_SRD
+				  , YRTX_PRMM
+				  , LGTM_RCPTN_YRTX_PRMM
+				  , HLTH_INSR_REFD_ITRT
+				  , LGTM_RCPTN_INSUR_REFD_ITRT
+				  , SRD_AGGR_SUM
+				  , DIVD_PYMT_DIV_CD
+				  , DIVD_PYMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				   )
+			VALUES (
+					#dpobCd#
+				  , #nofctYrMnth#
+				  , #nofctDspty#
+				  , (
+					  SELECT SYSTEMKEY 
+						FROM  PSNL0100 
+						WHERE DPOB_CD = #dpobCd#
+						AND  RESN_REGN_NUM = REPLACE(#resnRegnNum#,'-','') 
+					)
+				  , (SELECT	MAX(EMYMT_SEIL_NUM) AS EMYMT_SEIL_NUM
+					 FROM	INSR3000
+					 WHERE	DPOB_CD	  = #dpobCd#
+					 AND	SYSTEMKEY = (
+										 SELECT SYSTEMKEY 
+										 FROM PSNL0100 
+										 WHERE DPOB_CD	   = #dpobCd#
+										 AND RESN_REGN_NUM = REPLACE(#resnRegnNum#, '-', '')
+										)
+					)
+				  , #nofctYrMnth#
+				  , TO_CHAR(SYSDATE,'YYYYMMDD')
+				  , 'N'
+				  , ((SELECT NVL(SUM(PYMT_DDUC_SUM), 0)
+	                  FROM   PAYR0302 A01
+	                  WHERE  A01.DPOB_CD      = #dpobCd#
+	                  AND    A01.PYMT_YR_MNTH = #nofctYrMnth#
+	                  AND    A01.PAY_CD       = 'B0150000'
+	                  AND    A01.SYSTEMKEY    = (SELECT SYSTEMKEY
+	                                             FROM   PSNL0100
+	                                             WHERE  DPOB_CD       = #dpobCd#
+	                                             AND    RESN_REGN_NUM = REPLACE(#resnRegnNum#, '-', '')
+	                                            )
+	                  AND    A01.PAY_ITEM_CD  = 'D0010100'
+	                 )
+	                 - #sanCalcPrmm#
+	                )
+				  , ((SELECT NVL(SUM(PYMT_DDUC_SUM), 0)
+	                  FROM   PAYR0302 A01
+	                  WHERE  A01.DPOB_CD      = #dpobCd#
+	                  AND    A01.PYMT_YR_MNTH = #nofctYrMnth#
+	                  AND    A01.PAY_CD       = 'B0150000'
+	                  AND    A01.SYSTEMKEY    = (SELECT SYSTEMKEY
+	                                             FROM   PSNL0100
+	                                             WHERE  DPOB_CD       = #dpobCd#
+	                                             AND    RESN_REGN_NUM = REPLACE(#resnRegnNum#, '-', '')
+	                                            )
+	                  AND    A01.PAY_ITEM_CD  = 'D0110100'
+	                 )
+	                 - #sanLgtmRcptnCalcPrmm#
+	                )
+				  , #yrtxPrmm#
+				  , #lgtmRcptnYrtxPrmm#
+				  , #hlthInsrRefdItrt#
+				  , #lgtmRcptnRefdItrt#
+				  , ((SELECT NVL(SUM(PYMT_DDUC_SUM), 0)
+	                  FROM   PAYR0302 A01
+	                  WHERE  A01.DPOB_CD      = #dpobCd#
+	                  AND    A01.PYMT_YR_MNTH = #nofctYrMnth#
+	                  AND    A01.PAY_CD       = 'B0150000'
+	                  AND    A01.SYSTEMKEY    = (SELECT SYSTEMKEY
+	                                             FROM   PSNL0100
+	                                             WHERE  DPOB_CD       = #dpobCd#
+	                                             AND    RESN_REGN_NUM = REPLACE(#resnRegnNum#, '-', '')
+	                                            )
+	                  AND    A01.PAY_ITEM_CD  = 'D0010100'
+	                 )
+	                 - #sanCalcPrmm#
+	                )
+	                +
+	                ((SELECT NVL(SUM(PYMT_DDUC_SUM), 0)
+	                  FROM   PAYR0302 A01
+	                  WHERE  A01.DPOB_CD      = #dpobCd#
+	                  AND    A01.PYMT_YR_MNTH = #nofctYrMnth#
+	                  AND    A01.PAY_CD       = 'B0150000'
+	                  AND    A01.SYSTEMKEY    = (SELECT SYSTEMKEY
+	                                             FROM   PSNL0100
+	                                             WHERE  DPOB_CD       = #dpobCd#
+	                                             AND    RESN_REGN_NUM = REPLACE(#resnRegnNum#, '-', '')
+	                                            )
+	                  AND    A01.PAY_ITEM_CD  = 'D0110100'
+	                 )
+	                 - #sanLgtmRcptnCalcPrmm#
+	                )
+				  , 'B0300010'
+				  , '0'
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				   ) -->
+	
+	</insert>
+	
+	<!-- 당/차월 급여 반영 -->
+	<update id="insr3300DAO.updatePayRflctnInsr3300">
+		<![CDATA[
+			UPDATE	INSR3300
+			SET
+		]]>
+			<isEqual property="dducYrMnth" compareValue="this">
+					DDUC_YR_MNTH = #nofctYrMnth#  					/* 공제년월	*/
+				 ,  HLTH_INSR_PRCS_DT	 = TO_CHAR(SYSDATE, 'YYYYMMDD')	 /* 건강보험처리일자  */
+			</isEqual>
+			<isEqual property="dducYrMnth" compareValue="next">
+					DDUC_YR_MNTH = TO_CHAR(ADD_MONTHS(TO_DATE(#nofctYrMnth#,'YYYYMM'), 1), 'YYYYMM')	/* 공제년월	*/
+			  	,   HLTH_INSR_PRCS_DT	 = TO_CHAR(SYSDATE, 'YYYYMMDD')	 /* 건강보험처리일자  */
+			</isEqual>
+			<isEqual property="dducYrMnth" compareValue="cancel">
+					DDUC_YR_MNTH = NULL	/* 공제년월	*/
+				 ,  HLTH_INSR_PRCS_DT	 = NULL	 /* 건강보험처리일자  */
+			</isEqual>
+			<isEqual property="dducYrMnth" compareValue="pay">
+					DDUC_YR_MNTH = NULL	/* 공제년월	*/
+				 ,  HLTH_INSR_PRCS_DT	 = NULL	 /* 건강보험처리일자  */
+			</isEqual>
+		<![CDATA[
+				  
+				  , HLTH_INSR_PRMM_SRD	= #hlthInsrPrmmSrd#				/* 건강보험보험료차액	*/
+				  , LGTM_RCPTN_INSUR_SRD	= #lgtmRcptnInsurSrd#			/* 장기요양보험차액	*/
+				  , SRD_AGGR_SUM		 = #srdAggrSum#							/* 차액합계	*/
+				  , ISMT		 = #ismt#										/* 수정자	*/
+				  , REVN_DT		 = TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')			/* 수정일자	*/
+				  , REVN_ADDR	 = #revnAddr#									/* 수정주소	*/
+			WHERE	DPOB_CD		  =	#dpobCd#
+			AND		NOFCT_YR_MNTH =	#nofctYrMnth#
+			AND		NOFCT_DSPTY	  =	#nofctDspty#
+			AND		SYSTEMKEY	  =	#systemkey#
+		]]>
+	</update>
+
+	
+	
+	<!-- 당/차월 급여 반영 취소-->
+	<update id="insr3300DAO.updatePayCancelInsr3300">
+		<![CDATA[
+			UPDATE	INSR3300
+			SET
+			DDUC_YR_MNTH = ""					/* 공제년월	*/
+	      , HLTH_INSR_PRMM_SRD	= 0				/* 건강보험보험료차액	*/
+		  , LGTM_RCPTN_INSUR_SRD	= 0			/* 장기요양보험차액	*/
+		  , SRD_AGGR_SUM		 = 0							/* 차액합계	*/
+		  , ISMT		 = #ismt#										/* 수정자	*/
+		  , REVN_DT		 = TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')			/* 수정일자	*/
+		  , REVN_ADDR	 = #revnAddr#									/* 수정주소	*/
+			WHERE	DPOB_CD		  =	#dpobCd#
+			AND		NOFCT_YR_MNTH =	#nofctYrMnth#
+			AND		NOFCT_DSPTY	  =	#nofctDspty#
+			AND		SYSTEMKEY	  =	#systemkey#
+		]]>
+	</update>
+	
+	
+	
+	<delete id="insr3300DAO.deleteInsr3300_S">
+		<![CDATA[
+			DELETE FROM INSR3300 
+						WHERE DPOB_CD=#dpobCd#
+								AND NOFCT_YR_MNTH=#nofctYrMnth#
+								AND NOFCT_DSPTY=#nofctDspty#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	<!-- inser4200화면 엑셀 업로드 삭제  -->
+	<delete id="insr3300DAO.deleteXlsInsr3300_S">
+		<![CDATA[
+			DELETE
+			FROM   INSR3300 
+			WHERE  DPOB_CD		 = #dpobCd#
+			AND	   NOFCT_YR_MNTH = #nofctYrMnth#
+			AND	   NOFCT_DSPTY	 = #nofctDspty#
+			AND	   SYSTEMKEY	 = (SELECT SYSTEMKEY
+									FROM   PSNL0100
+									WHERE  DPOB_CD		 = #dpobCd#
+									AND	   RESN_REGN_NUM = REPLACE(#resnRegnNum#, '-', '')
+								   )
+		]]>
+	</delete>
+	<!-- AND HLTH_INSR_SEIL_NUM=#hlthInsrSeilNum# -->
+	<select id="insr3300DAO.selectInsr3300_S" resultMap="insr3300">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, NOFCT_YR_MNTH
+				, NOFCT_DSPTY
+				, SYSTEMKEY
+				, EMYMT_SEIL_NUM
+				, DDUC_YR_MNTH
+				, HLTH_INSR_PRCS_DT
+				, HLTH_INSR_PRCS_YN
+				, HLTH_INSR_PRMM_SRD
+				, LGTM_RCPTN_INSUR_SRD
+				, YRTX_PRMM
+				, LGTM_RCPTN_YRTX_PRMM
+				, HLTH_INSR_REFD_ITRT
+				, LGTM_RCPTN_INSUR_REFD_ITRT
+				, SRD_AGGR_SUM
+				, DIVD_PYMT_DIV_CD
+				, DIVD_PYMT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM INSR3300
+						WHERE DPOB_CD=#dpobCd#
+								AND NOFCT_YR_MNTH=#nofctYrMnth#
+								AND NOFCT_DSPTY=#nofctDspty#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+	<select id="insr3300DAO.selectInsr3300List_D" parameterClass="insr3300SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								  DPOB_CD
+								, NOFCT_YR_MNTH
+								, NOFCT_DSPTY
+								, SYSTEMKEY
+								, EMYMT_SEIL_NUM
+								, DDUC_YR_MNTH
+								, HLTH_INSR_PRCS_DT
+								, HLTH_INSR_PRCS_YN
+								, HLTH_INSR_PRMM_SRD
+								, LGTM_RCPTN_INSUR_SRD
+								, YRTX_PRMM
+								, LGTM_RCPTN_YRTX_PRMM
+								, HLTH_INSR_REFD_ITRT
+								, LGTM_RCPTN_INSUR_REFD_ITRT
+								, SRD_AGGR_SUM
+								, DIVD_PYMT_DIV_CD
+								, DIVD_PYMT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM INSR3300
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					NOFCT_YR_MNTH LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, NOFCT_YR_MNTH DESC
+							, NOFCT_DSPTY DESC
+							, SYSTEMKEY DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	
+	<select id="insr3300DAO.selectInsr3300ListTotCnt_S" parameterClass="insr3300SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM INSR3300
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				NOFCT_YR_MNTH LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+
+
+</sqlMap>

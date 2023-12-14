@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcPayr0650">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgPayr0650SrhVO" type="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0650SrhVO"/>
+	
+	<resultMap id="infcPkgPayr0650" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0650VO">
+		<result property="dilWrkrIncmBlggYr" column="DIL_WRKR_INCM_BLGG_YR" columnIndex="1"/>
+		<result property="dilWrkrBlggQatrDivCd" column="DIL_WRKR_BLGG_QATR_DIV_CD" columnIndex="2"/>
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="3"/>
+		<result property="dilWrkrIncmPymtYrMnth" column="DIL_WRKR_INCM_PYMT_YR_MNTH" columnIndex="4"/>
+		<result property="dilWrkrIncmDutyYrMnth" column="DIL_WRKR_INCM_DUTY_YR_MNTH" columnIndex="5"/>
+		<result property="dilWrkrIncmDutyNumDys" column="DIL_WRKR_INCM_DUTY_NUM_DYS" columnIndex="6"/>
+		<result property="dilWrkrIncmTotPymtSum" column="DIL_WRKR_INCM_TOT_PYMT_SUM" columnIndex="7"/>
+		<result property="dilWrkrFreeDtyIncmSum" column="DIL_WRKR_FREE_DTY_INCM_SUM" columnIndex="8"/>
+		<result property="dilWrkrIncmIncmTxSum" column="DIL_WRKR_INCM_INCM_TX_SUM" columnIndex="9"/>
+		<result property="dilWrkrRgonIncmTxSum" column="DIL_WRKR_RGON_INCM_TX_SUM" columnIndex="10"/>
+		<result property="dilWrkrIncmDataArrgtDt" column="DIL_WRKR_INCM_DATA_ARRGT_DT" columnIndex="11"/>
+		<result property="kybdr" column="KYBDR" columnIndex="12"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="13"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="14"/>
+		<result property="ismt" column="ISMT" columnIndex="15"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="16"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="17"/>
+	</resultMap>
+	
+	<insert id="infcPkgPayr0650DAO.insertPayr0650_S">
+		<![CDATA[
+			INSERT INTO PAYR0650 
+				( DIL_WRKR_INCM_BLGG_YR
+				  , DIL_WRKR_BLGG_QATR_DIV_CD
+				  , PAYR_MANG_DEPT_CD
+				  , DIL_WRKR_INCM_PYMT_YR_MNTH
+				  , DIL_WRKR_INCM_DUTY_YR_MNTH
+				  , DIL_WRKR_INCM_DUTY_NUM_DYS
+				  , DIL_WRKR_INCM_TOT_PYMT_SUM
+				  , DIL_WRKR_FREE_DTY_INCM_SUM
+				  , DIL_WRKR_INCM_INCM_TX_SUM
+				  , DIL_WRKR_RGON_INCM_TX_SUM
+				  , DIL_WRKR_INCM_DATA_ARRGT_DT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dilWrkrIncmBlggYr#
+				  , #dilWrkrBlggQatrDivCd#
+				  , #payrMangDeptCd#
+				  , #dilWrkrIncmPymtYrMnth#
+				  , #dilWrkrIncmDutyYrMnth#
+				  , #dilWrkrIncmDutyNumDys#
+				  , #dilWrkrIncmTotPymtSum#
+				  , #dilWrkrFreeDtyIncmSum#
+				  , #dilWrkrIncmIncmTxSum#
+				  , #dilWrkrRgonIncmTxSum#
+				  , #dilWrkrIncmDataArrgtDt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgPayr0650DAO.updatePayr0650_S">
+		<![CDATA[
+			UPDATE PAYR0650
+			SET DIL_WRKR_INCM_BLGG_YR=#dilWrkrIncmBlggYr#
+				, DIL_WRKR_BLGG_QATR_DIV_CD=#dilWrkrBlggQatrDivCd#
+				, PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				, DIL_WRKR_INCM_PYMT_YR_MNTH=#dilWrkrIncmPymtYrMnth#
+				, DIL_WRKR_INCM_DUTY_YR_MNTH=#dilWrkrIncmDutyYrMnth#
+				, DIL_WRKR_INCM_DUTY_NUM_DYS=#dilWrkrIncmDutyNumDys#
+				, DIL_WRKR_INCM_TOT_PYMT_SUM=#dilWrkrIncmTotPymtSum#
+				, DIL_WRKR_FREE_DTY_INCM_SUM=#dilWrkrFreeDtyIncmSum#
+				, DIL_WRKR_INCM_INCM_TX_SUM=#dilWrkrIncmIncmTxSum#
+				, DIL_WRKR_RGON_INCM_TX_SUM=#dilWrkrRgonIncmTxSum#
+				, DIL_WRKR_INCM_DATA_ARRGT_DT=#dilWrkrIncmDataArrgtDt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DIL_WRKR_INCM_BLGG_YR=#dilWrkrIncmBlggYr#
+								AND DIL_WRKR_BLGG_QATR_DIV_CD=#dilWrkrBlggQatrDivCd#
+								AND PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPayr0650DAO.deletePayr0650_S">
+		<![CDATA[
+			DELETE FROM PAYR0650 
+						WHERE DIL_WRKR_INCM_BLGG_YR=#dilWrkrIncmBlggYr#
+								AND DIL_WRKR_BLGG_QATR_DIV_CD=#dilWrkrBlggQatrDivCd#
+								AND PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				]]>
+	</delete>
+	
+	<select id="infcPkgPayr0650DAO.selectPayr0650_S" resultMap="infcPkgPayr0650">
+		<![CDATA[
+			SELECT
+				DIL_WRKR_INCM_BLGG_YR
+				, DIL_WRKR_BLGG_QATR_DIV_CD
+				, PAYR_MANG_DEPT_CD
+				, DIL_WRKR_INCM_PYMT_YR_MNTH
+				, DIL_WRKR_INCM_DUTY_YR_MNTH
+				, DIL_WRKR_INCM_DUTY_NUM_DYS
+				, DIL_WRKR_INCM_TOT_PYMT_SUM
+				, DIL_WRKR_FREE_DTY_INCM_SUM
+				, DIL_WRKR_INCM_INCM_TX_SUM
+				, DIL_WRKR_RGON_INCM_TX_SUM
+				, DIL_WRKR_INCM_DATA_ARRGT_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0650
+						WHERE DIL_WRKR_INCM_BLGG_YR=#dilWrkrIncmBlggYr#
+								AND DIL_WRKR_BLGG_QATR_DIV_CD=#dilWrkrBlggQatrDivCd#
+								AND PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				]]>
+	</select>
+	
+	<select id="infcPkgPayr0650DAO.selectPayr0650List_D" parameterClass="infcPkgPayr0650SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DIL_WRKR_INCM_BLGG_YR
+								, DIL_WRKR_BLGG_QATR_DIV_CD
+								, PAYR_MANG_DEPT_CD
+								, DIL_WRKR_INCM_PYMT_YR_MNTH
+								, DIL_WRKR_INCM_DUTY_YR_MNTH
+								, DIL_WRKR_INCM_DUTY_NUM_DYS
+								, DIL_WRKR_INCM_TOT_PYMT_SUM
+								, DIL_WRKR_FREE_DTY_INCM_SUM
+								, DIL_WRKR_INCM_INCM_TX_SUM
+								, DIL_WRKR_RGON_INCM_TX_SUM
+								, DIL_WRKR_INCM_DATA_ARRGT_DT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PAYR0650
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DIL_WRKR_INCM_BLGG_YR = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					DIL_WRKR_BLGG_QATR_DIV_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DIL_WRKR_INCM_BLGG_YR DESC
+							, DIL_WRKR_BLGG_QATR_DIV_CD DESC
+							, PAYR_MANG_DEPT_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgPayr0650DAO.selectPayr0650ListTotCnt_S" parameterClass="infcPkgPayr0650SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0650
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DIL_WRKR_INCM_BLGG_YR = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				DIL_WRKR_BLGG_QATR_DIV_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

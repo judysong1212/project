@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgPdfG106y">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgPdfG106ySrhVO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgPdfG106ySrhVO"/>
+	
+	<resultMap id="infcPkgPdfG106y" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgPdfG106yVO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="cardSeilNum" column="CARD_SEIL_NUM" columnIndex="5"/>
+		<result property="formCd" column="FORM_CD" columnIndex="6"/>
+		<result property="resid" column="RESID" columnIndex="7"/>
+		<result property="datCd" column="DAT_CD" columnIndex="8"/>
+		<result property="busnid" column="BUSNID" columnIndex="9"/>
+		<result property="name" column="NAME" columnIndex="10"/>
+		<result property="tradeNm" column="TRADE_NM" columnIndex="11"/>
+		<result property="usePlaceCd" column="USE_PLACE_CD" columnIndex="12"/>
+		<result property="cardAmtSum" column="CARD_AMT_SUM" columnIndex="13"/>
+		<result property="pdfDatAppYn" column="PDF_DAT_APP_YN" columnIndex="14"/>
+		<result property="pdfDatAppCmplDt" column="PDF_DAT_APP_CMPL_DT" columnIndex="15"/>
+		<result property="pdfDatAppExcCtnt" column="PDF_DAT_APP_EXC_CTNT" columnIndex="16"/>	
+		<result property="kybdr" column="KYBDR" columnIndex="17"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="18"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="19"/>
+		<result property="ismt" column="ISMT" columnIndex="20"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="21"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="22"/>
+	</resultMap>
+	
+	<insert id="infcPkgPdfG106yDAO.insertPdfG106y_S">
+		<![CDATA[
+				INSERT INTO PDF_G106Y 
+							(DPOB_CD,
+				             YRTX_BLGG_YR,
+				             CLUT_SEPT_CD,
+				             SYSTEMKEY,
+				             CARD_SEIL_NUM,
+				             FORM_CD,
+				             RESID,
+				             DAT_CD,
+				             BUSNID,
+				             NAME,
+				             TRADE_NM,
+				             USE_PLACE_CD,
+				             CARD_AMT_SUM,
+				             PDF_DAT_APP_YN,
+				             PDF_DAT_APP_CMPL_DT,
+				             PDF_DAT_APP_EXC_CTNT,
+				             KYBDR,
+				             INPT_DT,
+				             INPT_ADDR,
+				             ISMT,
+				             REVN_DT,
+				             REVN_ADDR)
+				     VALUES (#dpobCd#,
+				             #yrtxBlggYr#,
+				             #clutSeptCd#,
+				             #systemkey#,
+				             (SELECT COUNT(*)+1 FROM PDF_G106Y),
+				             #formCd#,
+				             #resid#,
+				             #datCd#,
+				             #busnid#,
+				             #name#,
+				             #tradeNm#,
+				             #usePlaceCd#,
+				             #cardAmtSum#,
+				             #pdfDatAppYn#,
+				             #pdfDatAppCmplDt#,
+				             #pdfDatAppExcCtnt#,
+				             #kybdr#,
+				             TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+				             #inptAddr#,
+				             #ismt#,
+				             TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+				             #revnAddr#)
+		]]>
+	</insert>
+	
+	<update id="infcPkgPdfG106yDAO.updatePdfG106y_S">
+		<![CDATA[
+			UPDATE PDF_G106Y
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, CARD_SEIL_NUM=#cardSeilNum#
+				, FORM_CD=#formCd#
+				, RESID=#resid#
+				, DAT_CD=#datCd#
+				, BUSNID=#busnid#
+				, NAME=#name#
+				, TRADE_NM=#tradeNm#
+				, USE_PLACE_CD=#usePlaceCd#
+				, CARD_AMT_SUM=#cardAmtSum#
+				, PDF_DAT_APP_YN=#pdfDatAppYn#
+				, PDF_DAT_APP_CMPL_DT = #pdfDatAppCmplDt#
+				, PDF_DAT_APP_EXC_CTNT = #pdfDatAppExcCtnt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND CARD_SEIL_NUM=#cardSeilNum#
+				]]>
+	</update>
+	
+	<update id="infcPkgPdfG106yDAO.updateYetaP220001ToPdfG106y_S">
+		<![CDATA[
+			UPDATE PDF_G106Y
+			SET   PDF_DAT_APP_YN=#pdfDatAppYn#
+				, PDF_DAT_APP_CMPL_DT = SUBSTR(TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),0,8)
+				, PDF_DAT_APP_EXC_CTNT = #pdfDatAppExcCtnt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND CARD_SEIL_NUM=#cardSeilNum#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPdfG106yDAO.deletePdfG106y_S">
+		<![CDATA[
+			DELETE FROM PDF_G106Y 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+				<!-- AND CARD_SEIL_NUM=#cardSeilNum# -->
+	</delete>
+	
+	<select id="infcPkgPdfG106yDAO.selectPdfG106y_S" resultMap="infcPkgPdfG106y">
+		<![CDATA[
+			SELECT
+				DPOB_CD,
+				YRTX_BLGG_YR,
+				CLUT_SEPT_CD,
+				SYSTEMKEY,
+				CARD_SEIL_NUM,
+				FORM_CD,
+				RESID,
+				DAT_CD,
+				BUSNID,
+				NAME,
+				TRADE_NM,
+				USE_PLACE_CD,
+				CARD_AMT_SUM,
+				PDF_DAT_APP_YN,
+				PDF_DAT_APP_CMPL_DT,
+				PDF_DAT_APP_EXC_CTNT,
+				KYBDR,
+				INPT_DT,
+				INPT_ADDR,
+				ISMT,
+				REVN_DT,
+				REVN_ADDR
+			FROM PDF_G106Y
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND CARD_SEIL_NUM=#cardSeilNum#
+				]]>
+	</select>
+	
+	<select id="infcPkgPdfG106yDAO.selectPdfG106yList_D" parameterClass="infcPkgPdfG106ySrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD,
+								YRTX_BLGG_YR,
+								CLUT_SEPT_CD,
+								SYSTEMKEY,
+								CARD_SEIL_NUM,
+								FORM_CD,
+								RESID,
+								DAT_CD,
+								BUSNID,
+								NAME,
+								TRADE_NM,
+								USE_PLACE_CD,
+								CARD_AMT_SUM,
+								PDF_DAT_APP_YN,
+								PDF_DAT_APP_CMPL_DT,
+								PDF_DAT_APP_EXC_CTNT,
+								KYBDR,
+								INPT_DT,
+								INPT_ADDR,
+								ISMT,
+								REVN_DT,
+								REVN_ADDR
+						FROM PDF_G106Y
+				WHERE 1=1
+				AND DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY = #systemkey#
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, CARD_SEIL_NUM ASC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgPdfG106yDAO.selectPdfG106yListTotCnt_S" parameterClass="infcPkgPdfG106ySrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PDF_G106Y
+			WHERE 1=1
+			AND DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY = #systemkey#
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

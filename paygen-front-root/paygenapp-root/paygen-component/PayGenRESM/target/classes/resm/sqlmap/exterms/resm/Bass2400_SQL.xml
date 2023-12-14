@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass2400">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass2400SerarchVO" type="com.app.exterms.resm.server.vo.Bass2400SrhVO"/>
+	
+	<resultMap id="bass2400" class="com.app.exterms.resm.server.vo.Bass2400VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="busnDtlTypOccuCd" column="BUSN_DTL_TYP_OCCU_CD" columnIndex="2"/>
+		<result property="busnDtilOccuClsUcstYr" column="BUSN_DTIL_OCCU_CLS_UCST_YR" columnIndex="3"/>
+		<result property="payItemCd" column="PAY_ITEM_CD" columnIndex="4"/>
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="5"/>
+		<result property="payCd" column="PAY_CD" columnIndex="6"/>
+		<result property="itemNm" column="ITEM_NM" columnIndex="7"/>
+		<result property="pymtDducDivCd" column="PYMT_DDUC_DIV_CD" columnIndex="8"/>
+		<result property="pymtDducFrmCd" column="PYMT_DDUC_FRM_CD" columnIndex="9"/>
+		<result property="pymtDducRate" column="PYMT_DDUC_RATE" columnIndex="10"/>
+		<result property="pymtDducSum" column="PYMT_DDUC_SUM" columnIndex="11"/>
+		<result property="txtnDivCd" column="TXTN_DIV_CD" columnIndex="12"/>
+		<result property="freeDtyRate" column="FREE_DTY_RATE" columnIndex="13"/>
+		<result property="freeDtySum" column="FREE_DTY_SUM" columnIndex="14"/>
+		<result property="jan" column="JAN" columnIndex="15"/>
+		<result property="feb" column="FEB" columnIndex="16"/>
+		<result property="mar" column="MAR" columnIndex="17"/>
+		<result property="apr" column="APR" columnIndex="18"/>
+		<result property="may" column="MAY" columnIndex="19"/>
+		<result property="jun" column="JUN" columnIndex="20"/>
+		<result property="jul" column="JUL" columnIndex="21"/>
+		<result property="aug" column="AUG" columnIndex="22"/>
+		<result property="sep" column="SEP" columnIndex="23"/>
+		<result property="oct" column="OCT" columnIndex="24"/>
+		<result property="nov" column="NOV" columnIndex="25"/>
+		<result property="dec" column="DEC" columnIndex="26"/>
+		<result property="rngeOrd" column="RNGE_ORD" columnIndex="27"/>
+		<result property="payItemUseYn" column="PAY_ITEM_USE_YN" columnIndex="28"/>
+		<result property="itemApptnBgnnDt" column="ITEM_APPTN_BGNN_DT" columnIndex="29"/>
+		<result property="itemApptnEndDt" column="ITEM_APPTN_END_DT" columnIndex="30"/>
+		<result property="dayMnthAmntDivCd" column="DAY_MNTH_AMNT_DIV_CD" columnIndex="31"/>
+		<result property="calcStdDivCd" column="CALC_STD_DIV_CD" columnIndex="32"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="33"/>
+		<result property="usalyAmntYn" column="USALY_AMNT_YN" columnIndex="34"/>
+		<result property="allwBnusAmntYn" column="ALLW_BNUS_AMNT_YN" columnIndex="35"/>
+		<result property="payItemNoteCtnt" column="PAY_ITEM_NOTE_CTNT" columnIndex="36"/>
+		<result property="accPrcsDivCd" column="ACC_PRCS_DIV_CD" columnIndex="37"/>
+		<result property="kybdr" column="KYBDR" columnIndex="38"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="39"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="40"/>
+		<result property="ismt" column="ISMT" columnIndex="41"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="42"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="43"/>
+	</resultMap>
+	
+	<insert id="bass2400DAO.insertBass2400_S">
+		<![CDATA[
+			INSERT INTO BASS2400 
+				( DPOB_CD
+				  , BUSN_DTL_TYP_OCCU_CD
+				  , BUSN_DTIL_OCCU_CLS_UCST_YR
+				  , PAY_ITEM_CD
+				  , PAYR_MANG_DEPT_CD
+				  , PAY_CD
+				  , ITEM_NM
+				  , PYMT_DDUC_DIV_CD
+				  , PYMT_DDUC_FRM_CD
+				  , PYMT_DDUC_RATE
+				  , PYMT_DDUC_SUM
+				  , TXTN_DIV_CD
+				  , FREE_DTY_RATE
+				  , FREE_DTY_SUM
+				  , JAN
+				  , FEB
+				  , MAR
+				  , APR
+				  , MAY
+				  , JUN
+				  , JUL
+				  , AUG
+				  , SEP
+				  , OCT
+				  , NOV
+				  , DEC
+				  , RNGE_ORD
+				  , PAY_ITEM_USE_YN
+				  , ITEM_APPTN_BGNN_DT
+				  , ITEM_APPTN_END_DT
+				  , DAY_MNTH_AMNT_DIV_CD
+				  , CALC_STD_DIV_CD
+				  , EMYMT_DIV_CD
+				  , USALY_AMNT_YN
+				  , ALLW_BNUS_AMNT_YN
+				  , PAY_ITEM_NOTE_CTNT
+				  , ACC_PRCS_DIV_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #busnDtlTypOccuCd#
+				  , #busnDtilOccuClsUcstYr#
+				  , #payItemCd#
+				  , #payrMangDeptCd#
+				  , #payCd#
+				  , #itemNm#
+				  , #pymtDducDivCd#
+				  , #pymtDducFrmCd#
+				  , #pymtDducRate#
+				  , #pymtDducSum#
+				  , #txtnDivCd#
+				  , #freeDtyRate#
+				  , #freeDtySum#
+				  , #jan#
+				  , #feb#
+				  , #mar#
+				  , #apr#
+				  , #may#
+				  , #jun#
+				  , #jul#
+				  , #aug#
+				  , #sep#
+				  , #oct#
+				  , #nov#
+				  , #dec#
+				  , #rngeOrd#
+				  , #payItemUseYn#
+				  , #itemApptnBgnnDt#
+				  , #itemApptnEndDt#
+				  , #dayMnthAmntDivCd#
+				  , #calcStdDivCd#
+				  , #emymtDivCd#
+				  , #usalyAmntYn#
+				  , #allwBnusAmntYn#
+				  , #payItemNoteCtnt#
+				  , #accPrcsDivCd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass2400DAO.updateBass2400_S">
+		<![CDATA[
+			UPDATE BASS2400
+			SET DPOB_CD=#dpobCd#
+				, BUSN_DTL_TYP_OCCU_CD=#busnDtlTypOccuCd#
+				, BUSN_DTIL_OCCU_CLS_UCST_YR=#busnDtilOccuClsUcstYr#
+				, PAY_ITEM_CD=#payItemCd#
+				, PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				, PAY_CD=#payCd#
+				, ITEM_NM=#itemNm#
+				, PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+				, PYMT_DDUC_FRM_CD=#pymtDducFrmCd#
+				, PYMT_DDUC_RATE=#pymtDducRate#
+				, PYMT_DDUC_SUM=#pymtDducSum#
+				, TXTN_DIV_CD=#txtnDivCd#
+				, FREE_DTY_RATE=#freeDtyRate#
+				, FREE_DTY_SUM=#freeDtySum#
+				, JAN=#jan#
+				, FEB=#feb#
+				, MAR=#mar#
+				, APR=#apr#
+				, MAY=#may#
+				, JUN=#jun#
+				, JUL=#jul#
+				, AUG=#aug#
+				, SEP=#sep#
+				, OCT=#oct#
+				, NOV=#nov#
+				, DEC=#dec#
+				, RNGE_ORD=#rngeOrd#
+				, PAY_ITEM_USE_YN=#payItemUseYn#
+				, ITEM_APPTN_BGNN_DT=#itemApptnBgnnDt#
+				, ITEM_APPTN_END_DT=#itemApptnEndDt#
+				, DAY_MNTH_AMNT_DIV_CD=#dayMnthAmntDivCd#
+				, CALC_STD_DIV_CD=#calcStdDivCd#
+				, EMYMT_DIV_CD=#emymtDivCd#
+				, USALY_AMNT_YN=#usalyAmntYn#
+				, ALLW_BNUS_AMNT_YN=#allwBnusAmntYn#
+				, PAY_ITEM_NOTE_CTNT=#payItemNoteCtnt#
+				, ACC_PRCS_DIV_CD=#accPrcsDivCd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND BUSN_DTL_TYP_OCCU_CD=#busnDtlTypOccuCd#
+								AND BUSN_DTIL_OCCU_CLS_UCST_YR=#busnDtilOccuClsUcstYr#
+								AND PAY_ITEM_CD=#payItemCd#
+				]]>
+	</update>
+	
+	<delete id="bass2400DAO.deleteBass2400_S">
+		<![CDATA[
+			DELETE FROM BASS2400 
+						WHERE DPOB_CD=#dpobCd#
+								AND BUSN_DTL_TYP_OCCU_CD=#busnDtlTypOccuCd#
+								AND BUSN_DTIL_OCCU_CLS_UCST_YR=#busnDtilOccuClsUcstYr#
+								AND PAY_ITEM_CD=#payItemCd#
+				]]>
+	</delete>
+	
+	<select id="bass2400DAO.selectBass2400_S" resultMap="bass2400">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, BUSN_DTL_TYP_OCCU_CD
+				, BUSN_DTIL_OCCU_CLS_UCST_YR
+				, PAY_ITEM_CD
+				, PAYR_MANG_DEPT_CD
+				, PAY_CD
+				, ITEM_NM
+				, PYMT_DDUC_DIV_CD
+				, PYMT_DDUC_FRM_CD
+				, PYMT_DDUC_RATE
+				, PYMT_DDUC_SUM
+				, TXTN_DIV_CD
+				, FREE_DTY_RATE
+				, FREE_DTY_SUM
+				, JAN
+				, FEB
+				, MAR
+				, APR
+				, MAY
+				, JUN
+				, JUL
+				, AUG
+				, SEP
+				, OCT
+				, NOV
+				, DEC
+				, RNGE_ORD
+				, PAY_ITEM_USE_YN
+				, ITEM_APPTN_BGNN_DT
+				, ITEM_APPTN_END_DT
+				, DAY_MNTH_AMNT_DIV_CD
+				, CALC_STD_DIV_CD
+				, EMYMT_DIV_CD
+				, USALY_AMNT_YN
+				, ALLW_BNUS_AMNT_YN
+				, PAY_ITEM_NOTE_CTNT
+				, ACC_PRCS_DIV_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS2400
+						WHERE DPOB_CD=#dpobCd#
+								AND BUSN_DTL_TYP_OCCU_CD=#busnDtlTypOccuCd#
+								AND BUSN_DTIL_OCCU_CLS_UCST_YR=#busnDtilOccuClsUcstYr#
+								AND PAY_ITEM_CD=#payItemCd#
+				]]>
+	</select>
+	
+	<select id="bass2400DAO.selectBass2400List_D" parameterClass="bass2400SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, BUSN_DTL_TYP_OCCU_CD
+								, BUSN_DTIL_OCCU_CLS_UCST_YR
+								, PAY_ITEM_CD
+								, PAYR_MANG_DEPT_CD
+								, PAY_CD
+								, ITEM_NM
+								, PYMT_DDUC_DIV_CD
+								, PYMT_DDUC_FRM_CD
+								, PYMT_DDUC_RATE
+								, PYMT_DDUC_SUM
+								, TXTN_DIV_CD
+								, FREE_DTY_RATE
+								, FREE_DTY_SUM
+								, JAN
+								, FEB
+								, MAR
+								, APR
+								, MAY
+								, JUN
+								, JUL
+								, AUG
+								, SEP
+								, OCT
+								, NOV
+								, DEC
+								, RNGE_ORD
+								, PAY_ITEM_USE_YN
+								, ITEM_APPTN_BGNN_DT
+								, ITEM_APPTN_END_DT
+								, DAY_MNTH_AMNT_DIV_CD
+								, CALC_STD_DIV_CD
+								, EMYMT_DIV_CD
+								, USALY_AMNT_YN
+								, ALLW_BNUS_AMNT_YN
+								, PAY_ITEM_NOTE_CTNT
+								, ACC_PRCS_DIV_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS2400
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					BUSN_DTL_TYP_OCCU_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, BUSN_DTL_TYP_OCCU_CD DESC
+							, BUSN_DTIL_OCCU_CLS_UCST_YR DESC
+							, PAY_ITEM_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass2400DAO.selectBass2400ListTotCnt_S" parameterClass="bass2400SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS2400
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				BUSN_DTL_TYP_OCCU_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

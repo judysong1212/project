@@ -1,0 +1,837 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Payr0302">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="payr0302SrhVO" type="com.app.exterms.payroll.server.vo.Payr0302SrhVO"/>
+	<typeAlias  alias="payr0302TpSrhVO" type="com.app.exterms.payroll.server.vo.Payr0302VO"/>
+	<!-- 0307vo추가 6.17 -"49" -->
+	<typeAlias  alias="payr0307SrhVO" type="com.app.exterms.payroll.server.vo.Payr0307SrhVO"/>
+	
+	
+	 <resultMap id="payr0302" class="com.app.exterms.payroll.server.vo.Payr0302VO">
+	    <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="pymtYrMnth" column="PYMT_YR_MNTH" columnIndex="2"/>
+		<result property="payCd" column="PAY_CD" columnIndex="3"/>
+		<result property="payrSeilNum" column="PAYR_SEIL_NUM" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="payItemCd" column="PAY_ITEM_CD" columnIndex="6"/>
+		<result property="payItemSeilNum" column="PAY_ITEM_SEIL_NUM" columnIndex="7"/>
+		<result property="pymtDducDivCd" column="PYMT_DDUC_DIV_CD" columnIndex="8"/>
+		<result property="pymtDducFreeDtySum" column="PYMT_DDUC_FREE_DTY_SUM" columnIndex="9"/>
+		<result property="pymtDducSum" column="PYMT_DDUC_SUM" columnIndex="10"/>
+		<result property="payPymtDducPrcsFlag" column="PAY_PYMT_DDUC_PRCS_FLAG" columnIndex="11"/>
+		<result property="payReattyAdmntVal" column="PAY_REATTY_ADMNT_VAL" columnIndex="12"/>
+		<result property="kybdr" column="KYBDR" columnIndex="13"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="14"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="15"/>
+		<result property="ismt" column="ISMT" columnIndex="16"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="17"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="18"/>
+		<result property="pymtDducTxtnAmnt" column="PYMT_DDUC_TXTN_AMNT" columnIndex="19"/> 
+		<result property="pymtDducChgYn" column="PYMT_DDUC_CHG_YN" columnIndex="20"/>   
+	</resultMap>
+	
+	
+	
+	<insert id="payr0302DAO.insertPayr0302_S">
+		<![CDATA[
+		INSERT INTO PAYR0302 
+				( DPOB_CD
+				  , PYMT_YR_MNTH
+				  , PAY_CD
+				  , PAYR_SEIL_NUM
+				  , SYSTEMKEY
+				  , PAY_ITEM_CD
+				  , PAY_ITEM_SEIL_NUM
+				  , PYMT_DDUC_DIV_CD
+				  , PYMT_DDUC_FREE_DTY_SUM
+				  , PYMT_DDUC_SUM
+				  , PAY_PYMT_DDUC_PRCS_FLAG
+				  , PAY_REATTY_ADMNT_VAL
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , PYMT_DDUC_TXTN_AMNT 
+				  ,PYMT_DDUC_CHG_YN)
+			VALUES ( #dpobCd#
+				  , #pymtYrMnth#
+				  , #payCd#
+				  , #payrSeilNum#
+				  , #systemkey#
+				  , #payItemCd#
+				    ,  (SELECT NVL(MAX(PAY_ITEM_SEIL_NUM),0) + 1
+				       FROM PAYR0302
+				      	WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+								AND SYSTEMKEY=#systemkey#
+								AND PAY_ITEM_CD=#payItemCd# 
+				    )   
+				  , #pymtDducDivCd#
+				  , #pymtDducFreeDtySum#
+				  , #pymtDducSum#
+				  , #payPymtDducPrcsFlag#
+				  , #payReattyAdmntVal#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #pymtDducTxtnAmnt#
+				  , nvl(#pymtDducChgYn#,'N')  )
+			 
+		]]>
+	</insert>
+	
+	<update id="payr0302DAO.updatePayr0302_S">
+		<![CDATA[
+			UPDATE PAYR0302
+			SET DPOB_CD=#dpobCd#
+				, PYMT_YR_MNTH=#pymtYrMnth#
+				, PAY_CD=#payCd#
+				, PAYR_SEIL_NUM=#payrSeilNum#
+				, SYSTEMKEY=#systemkey#
+				, PAY_ITEM_CD=#payItemCd#
+				, PAY_ITEM_SEIL_NUM=#payItemSeilNum#
+				, PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+				, PYMT_DDUC_FREE_DTY_SUM=#pymtDducFreeDtySum#
+				, PYMT_DDUC_SUM=#pymtDducSum#
+				, PAY_PYMT_DDUC_PRCS_FLAG=#payPymtDducPrcsFlag#
+				, PAY_REATTY_ADMNT_VAL=#payReattyAdmntVal#
+				, PYMT_DDUC_CHG_YN=NVL(#pymtDducChgYn#,'N')
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+				, PYMT_DDUC_TXTN_AMNT=#pymtDducTxtnAmnt#
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+								AND SYSTEMKEY=#systemkey#
+								AND PAY_ITEM_CD=#payItemCd#
+								AND PAY_ITEM_SEIL_NUM=#payItemSeilNum#
+				]]>
+	</update>
+	
+	
+	<update id="payr0302DAO.updatePayr0302Payr0307_S">
+		<![CDATA[
+			UPDATE PAYR0302
+			SET   PYMT_DDUC_FREE_DTY_SUM=#pymtDducFreeDtySum#
+				, PYMT_DDUC_SUM=#pymtDducSum#
+				, PAY_PYMT_DDUC_PRCS_FLAG=#payPymtDducPrcsFlag# 
+				, PYMT_DDUC_CHG_YN = NVL(#pymtDducChgYn#,'N')
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+				, PYMT_DDUC_TXTN_AMNT=#pymtDducTxtnAmnt#
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+								AND SYSTEMKEY=#systemkey#
+								AND PAY_ITEM_CD=#payItemCd# 
+								AND PAY_REATTY_ADMNT_VAL=#payReattyAdmntVal# 
+				]]>
+	</update> 
+	
+	
+	<delete id="payr0302DAO.deletePayr0302_S">
+		<![CDATA[
+			DELETE FROM PAYR0302 
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+								AND SYSTEMKEY=#systemkey# 
+				]]>						
+						<isNotEmpty prepend="AND" property="payItemCd" >
+					 	   PAY_ITEM_CD=#payItemCd#
+				        </isNotEmpty>  	 
+				        <isNotEmpty property="payItemSeilNum" >
+				            <isNotEqual  prepend="AND"  property="payItemSeilNum"  compareValue="0">
+					 	       PAY_ITEM_SEIL_NUM=#payItemSeilNum#
+				            </isNotEqual>  
+				        </isNotEmpty>  	 
+	</delete>
+	
+	<delete id="payr0302DAO.deletePayr0302ToPayr0307T_S">
+		<![CDATA[
+			DELETE FROM PAYR0302 
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+								AND SYSTEMKEY=#systemkey#
+								AND PAY_ITEM_CD=#payItemCd# 
+				]]>
+	</delete>
+	
+	<delete id="payr0302DAO.deletePayr0302Payr0307_S">
+		<![CDATA[
+			DELETE FROM PAYR0302 
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+								AND SYSTEMKEY=#systemkey#
+								AND PAY_ITEM_CD=#payItemCd# 	]]>
+								<isNotEmpty property="payItemSeilNum" >
+						            <isNotEqual  prepend="AND"  property="payItemSeilNum"  compareValue="0">
+							 	       PAY_ITEM_SEIL_NUM=#payItemSeilNum#
+						            </isNotEqual>  
+						        </isNotEmpty>  	 
+								 <isNotEmpty property="payReattyAdmntVal" >
+						            <isNotEqual  prepend="AND"  property="payReattyAdmntVal"  compareValue="0">
+							 	      PAY_REATTY_ADMNT_VAL=#payReattyAdmntVal# 
+						            </isNotEqual>  
+						        </isNotEmpty>   
+	</delete>
+	
+	
+	
+	
+	<delete id="payr0302DAO.deletePayCalculationPayr0302_S">
+		<![CDATA[
+			DELETE FROM PAYR0302 
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum# 
+			]]>						
+						<isNotEmpty prepend="AND" property="systemkey" >
+					 	  SYSTEMKEY=#systemkey#
+				        </isNotEmpty>  	 
+	</delete>
+	
+	
+	
+	
+	<select id="payr0302DAO.selectPayr0302_S" resultMap="payr0302">
+		<![CDATA[
+				SELECT
+				DPOB_CD
+				, PYMT_YR_MNTH
+				, PAY_CD
+				, PAYR_SEIL_NUM
+				, SYSTEMKEY
+				, PAY_ITEM_CD
+				, PAY_ITEM_SEIL_NUM
+				, PYMT_DDUC_DIV_CD
+				, PYMT_DDUC_FREE_DTY_SUM
+				, PYMT_DDUC_SUM
+				, PAY_PYMT_DDUC_PRCS_FLAG
+				, PAY_REATTY_ADMNT_VAL
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, PYMT_DDUC_TXTN_AMNT
+				, PYMT_DDUC_CHG_YN
+			FROM PAYR0302
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+								AND SYSTEMKEY=#systemkey#
+								AND PAY_ITEM_CD=#payItemCd#
+								AND PAY_ITEM_SEIL_NUM=#payItemSeilNum#
+				]]>
+	</select>
+	
+	<select id="payr0302DAO.selectPayr0302Payr0307_S" resultMap="payr0302">
+		<![CDATA[
+				SELECT
+				DPOB_CD
+				, PYMT_YR_MNTH
+				, PAY_CD
+				, PAYR_SEIL_NUM
+				, SYSTEMKEY
+				, PAY_ITEM_CD
+				, PAY_ITEM_SEIL_NUM
+				, PYMT_DDUC_DIV_CD
+				, PYMT_DDUC_FREE_DTY_SUM
+				, PYMT_DDUC_SUM
+				, PAY_PYMT_DDUC_PRCS_FLAG
+				, PAY_REATTY_ADMNT_VAL
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, PYMT_DDUC_TXTN_AMNT
+				, PYMT_DDUC_CHG_YN
+			FROM PAYR0302
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+								AND SYSTEMKEY=#systemkey#
+								AND PAY_ITEM_CD=#payItemCd#
+								AND PAY_REATTY_ADMNT_VAL=#payReattyAdmntVal# 
+				]]>
+	</select>
+	
+	
+	<!-- 엑셀 조정 업로드 시 Payr0302 테이블 조회하는 쿼리 -->
+	<select id="payr0302DAO.selectPayr0302Payr0307_S2" resultMap="payr0302">
+		<![CDATA[
+				SELECT
+				DPOB_CD
+				, PYMT_YR_MNTH
+				, PAY_CD
+				, PAYR_SEIL_NUM
+				, SYSTEMKEY
+				, PAY_ITEM_CD
+				, PAY_ITEM_SEIL_NUM
+				, PYMT_DDUC_DIV_CD
+				, PYMT_DDUC_FREE_DTY_SUM
+				, PYMT_DDUC_SUM
+				, PAY_PYMT_DDUC_PRCS_FLAG
+				, PAY_REATTY_ADMNT_VAL
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, PYMT_DDUC_TXTN_AMNT
+				, PYMT_DDUC_CHG_YN
+			FROM PAYR0302
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PYMT_DDUC_DIV_CD = #pymtDducDivCd#
+								AND SYSTEMKEY= (SELECT SYSTEMKEY FROM PSNL0100 WHERE RESN_REGN_NUM = REPLACE(#resnRegnNum#,'-','')))
+								AND PAY_ITEM_CD=#payItemCd#
+				]]>
+	</select>
+	
+	
+	<select id="payr0302DAO.selectPayr0302List_D" parameterClass="payr0302SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, PYMT_YR_MNTH
+								, PAY_CD
+								, PAYR_SEIL_NUM
+								, SYSTEMKEY
+								, PAY_ITEM_CD
+								, PAY_ITEM_SEIL_NUM
+								, PYMT_DDUC_DIV_CD
+								, PYMT_DDUC_FREE_DTY_SUM
+								, PYMT_DDUC_SUM
+								, PAY_PYMT_DDUC_PRCS_FLAG
+								, PAY_REATTY_ADMNT_VAL
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+								, PYMT_DDUC_TXTN_AMNT
+								, PYMT_DDUC_CHG_YN
+						FROM PAYR0302
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					PYMT_YR_MNTH = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+					       DPOB_CD
+					   	    , PYMT_YR_MNTH DESC
+							, SYSTEMKEY DESC
+							, PAY_ITEM_CD DESC
+							, PAY_CD DESC
+							, PAYR_MANG_DEPT_CD DESC
+							, PAYR_SEIL_NUM DESC
+							, PAY_ITEM_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="payr0302DAO.selectPayr0302ListTotCnt_S" parameterClass="payr0302SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0302
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				PYMT_YR_MNTH = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select> 
+	
+	<select id="payr0302DAO.selectExtpyPayr0302List_D" parameterClass="payr0302SrhVO" resultClass="egovMap">
+	  SELECT 
+	   FF.DPOB_CD, FF.PYMT_YR_MNTH, FF.PAY_CD, 
+	   FF.PAYR_SEIL_NUM, FF.SYSTEMKEY, FF.PAY_ITEM_CD, FF. PYMT_DDUC_CHG_YN,
+	   FF.PAY_ITEM_SEIL_NUM, FF.PYMT_DDUC_DIV_CD, FF.PYMT_DDUC_FREE_DTY_SUM, 
+	   FF.PYMT_DDUC_SUM, FF.PAY_PYMT_DDUC_PRCS_FLAG, FF.PAY_REATTY_ADMNT_VAL, 
+	   FF.PYMT_DDUC_TXTN_AMNT, FF.PYYT_YRTX_DOTN_CD, FF.PYYT_YTFE_DTY_REDU_CD,
+	   HH.MNTH_PAY_ADMNT_YN,
+	   NVL(HH.PYMT_DDUC_SUM,0) AS PYMT_DDUC_SUM02, 
+	   NVL(HH.PYMT_DDUC_FREE_DTY_SUM,0) AS PYMT_DDUC_FREE_DTY_SUM02, 
+	   NVL(HH.PYMT_DDUC_TXTN_AMNT,0) AS PYMT_DDUC_TXTN_AMNT02
+	FROM PAYR0302 FF, PAYR0300 GG, PAYR0307 HH
+	                WHERE   FF.DPOB_CD  = GG.DPOB_CD
+	                    AND FF.PYMT_YR_MNTH  = GG.PYMT_YR_MNTH
+	                    AND FF.PAY_CD  = GG.PAY_CD
+	                    AND FF.PAYR_SEIL_NUM  = GG.PAYR_SEIL_NUM
+	                    AND FF.DPOB_CD  = HH.DPOB_CD(+)
+	                    AND FF.PYMT_YR_MNTH  = HH.PYMT_YR_MNTH(+)
+	                    AND FF.PAY_CD  = HH.PAY_CD(+)
+	                    AND FF.PAYR_SEIL_NUM  = HH.PAYR_SEIL_NUM(+)
+	                    AND FF.SYSTEMKEY = HH.SYSTEMKEY(+)
+	                    AND FF.PAY_ITEM_CD = HH.PAY_ITEM_CD(+)  
+	                    AND FF.PAY_REATTY_ADMNT_VAL = HH.MNTH_PAY_ADMNT_SEIL_NUM(+)
+		              <isNotEmpty prepend="AND" property="dpobCd" >
+	                         FF.DPOB_CD=#dpobCd#
+	                       </isNotEmpty> 
+	                    <isNotEmpty prepend="AND" property="systemkey" >
+	                         FF.SYSTEMKEY=#systemkey#
+	                       </isNotEmpty> 
+	                       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+	                         GG.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+	                       </isNotEmpty> 
+	                        <isNotEmpty prepend="AND" property="payCd" >
+	                         FF.PAY_CD=#payCd#
+	                       </isNotEmpty> 
+	                           <isNotEmpty prepend="AND" property="pymtYrMnth" >
+	                         FF.PYMT_YR_MNTH = #pymtYrMnth#
+	                       </isNotEmpty> 
+	                         <isNotEmpty prepend="AND" property="payrSeilNum" >
+	                         FF.PAYR_SEIL_NUM=#payrSeilNum#
+	                       </isNotEmpty> 
+	                        <isNotEmpty prepend="AND" property="payItemCd" >
+	                         FF.PAY_ITEM_CD=#payItemCd#
+	                       </isNotEmpty>
+	                        AND FF.PYMT_DDUC_DIV_CD IN ('B0080010', 'B0080020' )
+	                        ORDER BY FF.DPOB_CD, FF.PYMT_YR_MNTH, FF.PAY_CD, 
+							   FF.PAYR_SEIL_NUM, FF.SYSTEMKEY, FF.PAY_ITEM_CD, 
+							   FF.PAY_ITEM_SEIL_NUM 
+		</select>	
+		
+		
+		<select id="payr0302DAO.selectDducPayr0302List_D" parameterClass="payr0302SrhVO" resultClass="egovMap">
+		  SELECT 
+			   FF.DPOB_CD, FF.PYMT_YR_MNTH, FF.PAY_CD, 
+			   FF.PAYR_SEIL_NUM, FF.SYSTEMKEY, FF.PAY_ITEM_CD, FF.PYMT_DDUC_CHG_YN,
+			   FF.PAY_ITEM_SEIL_NUM, FF.PYMT_DDUC_DIV_CD, FF.PYMT_DDUC_FREE_DTY_SUM, 
+			   FF.PYMT_DDUC_SUM, FF.PAY_PYMT_DDUC_PRCS_FLAG, FF.PAY_REATTY_ADMNT_VAL, 
+			   FF.PYMT_DDUC_TXTN_AMNT, FF.PYYT_YRTX_DOTN_CD, FF.PYYT_YTFE_DTY_REDU_CD,
+			   HH.MNTH_PAY_ADMNT_YN,
+			   NVL(HH.PYMT_DDUC_SUM,0) AS PYMT_DDUC_SUM02, 
+			   NVL(HH.PYMT_DDUC_FREE_DTY_SUM,0) AS PYMT_DDUC_FREE_DTY_SUM02, 
+			   NVL(HH.PYMT_DDUC_TXTN_AMNT,0) AS PYMT_DDUC_TXTN_AMNT02
+		FROM PAYR0302 FF, PAYR0300 GG, PAYR0307 HH
+		                WHERE   FF.DPOB_CD  = GG.DPOB_CD
+		                    AND FF.PYMT_YR_MNTH  = GG.PYMT_YR_MNTH
+		                    AND FF.PAY_CD  = GG.PAY_CD
+		                    AND FF.PAYR_SEIL_NUM  = GG.PAYR_SEIL_NUM
+		                    AND FF.DPOB_CD  = HH.DPOB_CD(+)
+		                    AND FF.PYMT_YR_MNTH  = HH.PYMT_YR_MNTH(+)
+		                    AND FF.PAY_CD  = HH.PAY_CD(+)
+		                    AND FF.PAYR_SEIL_NUM  = HH.PAYR_SEIL_NUM(+)
+		                    AND FF.SYSTEMKEY = HH.SYSTEMKEY(+)
+		                    AND FF.PAY_ITEM_CD = HH.PAY_ITEM_CD(+)  
+		                    AND FF.PAY_REATTY_ADMNT_VAL = HH.MNTH_PAY_ADMNT_SEIL_NUM(+)
+			              <isNotEmpty prepend="AND" property="dpobCd" >
+		                         FF.DPOB_CD=#dpobCd#
+		                       </isNotEmpty> 
+		                    <isNotEmpty prepend="AND" property="systemkey" >
+		                         FF.SYSTEMKEY=#systemkey#
+		                       </isNotEmpty> 
+		                       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+		                         GG.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+		                       </isNotEmpty> 
+		                        <isNotEmpty prepend="AND" property="payCd" >
+		                         FF.PAY_CD=#payCd#
+		                       </isNotEmpty> 
+		                           <isNotEmpty prepend="AND" property="pymtYrMnth" >
+		                         FF.PYMT_YR_MNTH = #pymtYrMnth#
+		                       </isNotEmpty> 
+		                         <isNotEmpty prepend="AND" property="payrSeilNum" >
+		                         FF.PAYR_SEIL_NUM=#payrSeilNum#
+		                       </isNotEmpty> 
+		                        <isNotEmpty prepend="AND" property="payItemCd" >
+		                         FF.PAY_ITEM_CD=#payItemCd#
+		                       </isNotEmpty>
+		                        AND FF.PYMT_DDUC_DIV_CD IN ('B0080030', 'B0080040' )
+		                        ORDER BY FF.DPOB_CD, FF.PYMT_YR_MNTH, FF.PAY_CD, 
+								   FF.PAYR_SEIL_NUM, FF.SYSTEMKEY, FF.PAY_ITEM_CD, 
+								   FF.PAY_ITEM_SEIL_NUM 
+		</select>	
+		
+		
+		
+	<select id="payr0302DAO.selectPayr0302ExtpyList_D" parameterClass="payr0302SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+	          SELECT       AA.DPOB_CD
+	                            , AA.PYMT_YR_MNTH
+								, AA.SYSTEMKEY
+								, AA.PYMT_DDUC_DIV_CD
+								, AA.PAY_ITEM_CD
+								,  (SELECT  PAY_EXTPY_NM 
+							      	  FROM PAYR0480
+									 WHERE PAYR0480.DPOB_CD= #dpobCd#
+									   AND PAYR0480.PAY_EXTPY_CD= AA.PAY_ITEM_CD) AS PAY_ITEM_NM
+								, AA.PAY_CD
+								, AA.PAYR_MANG_DEPT_CD
+								, AA.PAYR_SEIL_NUM 
+								, AA.PYMT_DDUC_FREE_DTY_SUM
+								, AA.PYMT_DDUC_SUM 
+	                            , AA. PYMT_DDUC_TXTN_AMNT
+	                            , AA.PYMT_DDUC_CHG_YN
+	          FROM
+				(SELECT
+				                 FF.DPOB_CD
+								, FF.PYMT_YR_MNTH
+								, FF.SYSTEMKEY
+								, FF.PYMT_DDUC_DIV_CD
+								, FF.PAY_ITEM_CD
+								, FF.PAY_CD
+								, GG.PAYR_MANG_DEPT_CD
+								, FF.PAYR_SEIL_NUM  
+								, SUM(FF.PYMT_DDUC_FREE_DTY_SUM) AS PYMT_DDUC_FREE_DTY_SUM
+								, SUM(FF.PYMT_DDUC_SUM) AS PYMT_DDUC_SUM
+								, SUM(FF.PYMT_DDUC_TXTN_AMNT) AS PYMT_DDUC_TXTN_AMNT
+								 , MAX(CASE WHEN PAY_REATTY_ADMNT_VAL = '0' THEN FF.PYMT_DDUC_CHG_YN 
+                                        ELSE FF.PYMT_DDUC_CHG_YN END) AS PYMT_DDUC_CHG_YN
+						FROM PAYR0302 FF, PAYR0300 GG
+				WHERE    FF.DPOB_CD  = GG.DPOB_CD
+					AND FF.PYMT_YR_MNTH  = GG.PYMT_YR_MNTH
+					AND FF.PAY_CD  = GG.PAY_CD
+					AND FF.PAYR_SEIL_NUM  = GG.PAYR_SEIL_NUM
+					  <isNotEmpty prepend="AND" property="dpobCd" >
+					 	FF.DPOB_CD=#dpobCd#
+				       </isNotEmpty> 
+			        <isNotEmpty prepend="AND" property="systemkey" >
+					 	FF.SYSTEMKEY=#systemkey#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	GG.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				       </isNotEmpty> 
+				        <isNotEmpty prepend="AND" property="payCd" >
+					 	FF.PAY_CD=#payCd#
+				       </isNotEmpty> 
+				           <isNotEmpty prepend="AND" property="pymtYrMnth" >
+					 	FF.PYMT_YR_MNTH = #pymtYrMnth#
+				       </isNotEmpty> 
+				         <isNotEmpty prepend="AND" property="payrSeilNum" >
+					 	FF.PAYR_SEIL_NUM=#payrSeilNum#
+				       </isNotEmpty> 
+				        AND FF.PYMT_DDUC_DIV_CD IN ('B0080010', 'B0080020' ) 
+					GROUP BY  FF.DPOB_CD
+						    , FF.PYMT_YR_MNTH  
+							, FF.SYSTEMKEY 
+							, FF.PYMT_DDUC_DIV_CD
+							, FF.PAY_ITEM_CD  
+							, FF.PAY_CD  
+							, GG.PAYR_MANG_DEPT_CD  
+							, FF.PAYR_SEIL_NUM   
+		        ) AA
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>
+	
+	
+		
+	<select id="payr0302DAO.selectPayr0302ExtpyListTotCnt_S" parameterClass="payr0302SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM
+			  ( SELECT
+	                             AA.PYMT_YR_MNTH
+								, AA.SYSTEMKEY
+								, AA.PAY_ITEM_CD
+								,  (SELECT  PAY_EXTPY_NM 
+							      	  FROM PAYR0480
+									 WHERE PAYR0480.DPOB_CD= #dpobCd#
+									   AND PAYR0480.PAY_EXTPY_CD= AA.PAY_ITEM_CD) AS PAY_ITEM_NM
+								, AA.PAY_CD
+								, AA.PAYR_MANG_DEPT_CD
+								, AA.PAYR_SEIL_NUM 
+								, AA.PYMT_DDUC_FREE_DTY_SUM
+								, AA.PYMT_DDUC_SUM 
+	                            , AA. PYMT_DDUC_TXTN_AMNT
+	                            , AA.PYMT_DDUC_CHG_YN
+	          FROM
+				(SELECT
+								  FF.PYMT_YR_MNTH
+								, FF.SYSTEMKEY
+								, FF.PAY_ITEM_CD
+								, FF.PAY_CD
+								, GG.PAYR_MANG_DEPT_CD
+								, FF.PAYR_SEIL_NUM 
+								, SUM(FF.PYMT_DDUC_FREE_DTY_SUM) AS PYMT_DDUC_FREE_DTY_SUM
+								, SUM(FF.PYMT_DDUC_SUM) AS PYMT_DDUC_SUM
+								 , SUM(FF.PYMT_DDUC_TXTN_AMNT) AS PYMT_DDUC_TXTN_AMNT
+								 , MAX(CASE WHEN PAY_REATTY_ADMNT_VAL = '0' THEN FF.PYMT_DDUC_CHG_YN 
+                                        ELSE FF.PYMT_DDUC_CHG_YN END) AS PYMT_DDUC_CHG_YN
+						FROM PAYR0302 FF, PAYR0300 GG
+				WHERE    FF.DPOB_CD  = GG.DPOB_CD
+					AND FF.PYMT_YR_MNTH  = GG.PYMT_YR_MNTH
+					AND FF.PAY_CD  = GG.PAY_CD
+					AND FF.PAYR_SEIL_NUM  = GG.PAYR_SEIL_NUM
+					  <isNotEmpty prepend="AND" property="dpobCd" >
+					 	FF.DPOB_CD=#dpobCd#
+				       </isNotEmpty> 
+			        <isNotEmpty prepend="AND" property="systemkey" >
+					 	FF.SYSTEMKEY=#systemkey#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	GG.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				       </isNotEmpty> 
+				        <isNotEmpty prepend="AND" property="payCd" >
+					 	FF.PAY_CD=#payCd#
+				       </isNotEmpty> 
+				           <isNotEmpty prepend="AND" property="pymtYrMnth" >
+					 	FF.PYMT_YR_MNTH = #pymtYrMnth#
+				       </isNotEmpty> 
+				         <isNotEmpty prepend="AND" property="payrSeilNum" >
+					 	FF.PAYR_SEIL_NUM=#payrSeilNum#
+				       </isNotEmpty> 
+				        AND FF.PYMT_DDUC_DIV_CD IN ('B0080010', 'B0080020' )
+				     
+					GROUP BY  FF.DPOB_CD
+						      ,FF.PYMT_YR_MNTH  
+							, FF.SYSTEMKEY 
+							, FF.PAY_ITEM_CD  
+							, FF.PAY_CD  
+							, GG.PAYR_MANG_DEPT_CD  
+							, FF.PAYR_SEIL_NUM 
+		        ) AA
+		        )
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	<select id="payr0302DAO.selectPayr0302DducList_D" parameterClass="payr0302SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+			  SELECT    AA.DPOB_CD
+	                            , AA.PYMT_YR_MNTH
+								, AA.SYSTEMKEY
+								, AA.PAY_ITEM_CD
+								, (SELECT  PAY_DDUC_NM 
+							      	  FROM PAYR0470
+									 WHERE PAYR0470.DPOB_CD= #dpobCd#
+									   AND PAYR0470.PAY_DDUC_CD= AA.PAY_ITEM_CD) AS PAY_ITEM_NM
+								, AA.PAY_CD
+								, AA.PAYR_MANG_DEPT_CD
+								, AA.PAYR_SEIL_NUM 
+								, AA.PYMT_DDUC_FREE_DTY_SUM
+								, AA.PYMT_DDUC_SUM 
+	                            , AA.PYMT_DDUC_DIV_CD
+								, AA.PYMT_DDUC_DIV_NM
+								, AA. PYMT_DDUC_TXTN_AMNT
+								, AA.PYMT_DDUC_CHG_YN
+	          FROM
+				(SELECT    FF.DPOB_CD
+				                , FF.PYMT_YR_MNTH
+								, FF.SYSTEMKEY
+								, FF.PAY_ITEM_CD
+								, FF.PAY_CD
+								, GG.PAYR_MANG_DEPT_CD
+								, FF.PAYR_SEIL_NUM 
+								, SUM(FF.PYMT_DDUC_FREE_DTY_SUM) AS PYMT_DDUC_FREE_DTY_SUM
+								, SUM(FF.PYMT_DDUC_SUM) AS PYMT_DDUC_SUM
+							 	, SUM(FF.PYMT_DDUC_TXTN_AMNT) AS PYMT_DDUC_TXTN_AMNT
+								, FF.PYMT_DDUC_DIV_CD
+								 , fcBass0300CDNM(FF.DPOB_CD,FF.PYMT_DDUC_DIV_CD) AS PYMT_DDUC_DIV_NM
+								 , MAX(CASE WHEN PAY_REATTY_ADMNT_VAL = '0' THEN FF.PYMT_DDUC_CHG_YN 
+                                        ELSE FF.PYMT_DDUC_CHG_YN END) AS PYMT_DDUC_CHG_YN
+						FROM PAYR0302 FF, PAYR0300 GG
+				WHERE    FF.DPOB_CD  = GG.DPOB_CD
+					AND FF.PYMT_YR_MNTH  = GG.PYMT_YR_MNTH
+					AND FF.PAY_CD  = GG.PAY_CD
+					AND FF.PAYR_SEIL_NUM  = GG.PAYR_SEIL_NUM 
+					  <isNotEmpty prepend="AND" property="dpobCd" >
+					 	FF.DPOB_CD=#dpobCd#
+				       </isNotEmpty> 
+			        <isNotEmpty prepend="AND" property="systemkey" >
+					 	FF.SYSTEMKEY=#systemkey#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	GG.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				       </isNotEmpty> 
+				        <isNotEmpty prepend="AND" property="payCd" >
+					 	FF.PAY_CD=#payCd#
+				       </isNotEmpty> 
+				           <isNotEmpty prepend="AND" property="pymtYrMnth" >
+					 	FF.PYMT_YR_MNTH = #pymtYrMnth#
+				       </isNotEmpty> 
+				         <isNotEmpty prepend="AND" property="payrSeilNum" >
+					 	FF.PAYR_SEIL_NUM=#payrSeilNum#
+				       </isNotEmpty> 
+				        AND FF.PYMT_DDUC_DIV_CD IN ('B0080030', 'B0080040' )
+				     
+					GROUP BY  FF.DPOB_CD
+                            , FF.PYMT_DDUC_DIV_CD
+						    , FF.PYMT_YR_MNTH  
+							, FF.PAY_ITEM_CD  
+							, FF.PAY_CD  
+							, GG.PAYR_MANG_DEPT_CD  
+							, FF.PAYR_SEIL_NUM  
+							, FF.SYSTEMKEY  
+		        ) AA
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="payr0302DAO.selectPayr0302DducListTotCnt_S" parameterClass="payr0302SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM
+			  ( SELECT
+	                             AA.PYMT_YR_MNTH
+								, AA.SYSTEMKEY
+								, AA.PAY_ITEM_CD
+								 , (SELECT  PAY_DDUC_NM 
+							      	  FROM PAYR0470
+									 WHERE PAYR0470.DPOB_CD= #dpobCd#
+									   AND PAYR0470.PAY_DDUC_CD= AA.PAY_ITEM_CD) AS PAY_ITEM_NM
+								, AA.PAY_CD
+								, AA.PAYR_MANG_DEPT_CD
+								, AA.PAYR_SEIL_NUM 
+								, AA.PYMT_DDUC_FREE_DTY_SUM
+								, AA.PYMT_DDUC_SUM 
+	                           , AA. PYMT_DDUC_TXTN_AMNT
+	                           , AA.PYMT_DDUC_CHG_YN
+	          FROM
+				(SELECT
+				                  FF.PYMT_YR_MNTH
+								, FF.SYSTEMKEY
+								, FF.PAY_ITEM_CD
+								, FF.PAY_CD
+								, GG.PAYR_MANG_DEPT_CD
+								, FF.PAYR_SEIL_NUM 
+								, SUM(FF.PYMT_DDUC_FREE_DTY_SUM) AS PYMT_DDUC_FREE_DTY_SUM
+								, SUM(FF.PYMT_DDUC_SUM) AS PYMT_DDUC_SUM
+							 	, SUM(FF.PYMT_DDUC_TXTN_AMNT) AS PYMT_DDUC_TXTN_AMNT
+							 	 , MAX(CASE WHEN PAY_REATTY_ADMNT_VAL = '0' THEN FF.PYMT_DDUC_CHG_YN 
+                                        ELSE FF.PYMT_DDUC_CHG_YN END) AS PYMT_DDUC_CHG_YN
+						FROM PAYR0302 FF, PAYR0300 GG
+				WHERE    FF.DPOB_CD  = GG.DPOB_CD
+					AND FF.PYMT_YR_MNTH  = GG.PYMT_YR_MNTH
+					AND FF.PAY_CD  = GG.PAY_CD
+					AND FF.PAYR_SEIL_NUM  = GG.PAYR_SEIL_NUM 
+					  <isNotEmpty prepend="AND" property="dpobCd" >
+					 	FF.DPOB_CD=#dpobCd#
+				       </isNotEmpty> 
+			        <isNotEmpty prepend="AND" property="systemkey" >
+					 	FF.SYSTEMKEY=#systemkey#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	GG.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				       </isNotEmpty> 
+				        <isNotEmpty prepend="AND" property="payCd" >
+					 	FF.PAY_CD=#payCd#
+				       </isNotEmpty> 
+				           <isNotEmpty prepend="AND" property="pymtYrMnth" >
+					 	FF.PYMT_YR_MNTH = #pymtYrMnth#
+				       </isNotEmpty> 
+				         <isNotEmpty prepend="AND" property="payrSeilNum" >
+					 	FF.PAYR_SEIL_NUM=#payrSeilNum#
+				       </isNotEmpty> 
+				        AND FF.PYMT_DDUC_DIV_CD IN ('B0080030', 'B0080040' )
+				     
+					GROUP BY  FF.DPOB_CD
+						    ,  FF.PYMT_YR_MNTH  
+							, FF.PAY_ITEM_CD  
+							, FF.PAY_CD  
+							, GG.PAYR_MANG_DEPT_CD  
+							, FF.PAYR_SEIL_NUM  
+							, FF.SYSTEMKEY  
+		        ) AA
+		        )
+	</select>
+
+	<!-- 급여조정데이터 처리  -->
+	<select id="payr0302DAO.selectPayr0302ToPayr301CalcList_D" parameterClass="payr0302TpSrhVO" resultClass="egovMap"> 
+		<![CDATA[	 
+		SELECT 
+			     AA.DPOB_CD, AA.PYMT_YR_MNTH, AA.PAY_CD, 
+			     AA.PAYR_SEIL_NUM, AA.SYSTEMKEY,    
+			     AA.SUM_B001,
+			     AA.TP_PYMT_TOT_AMNT, 
+			     AA.TP_EXTPY_TOT_AMNT,
+			     AA.TP_TXTN_TOT_AMNT,
+			     AA.TP_FREE_DTY_TOT_AMNT,     
+			     AA.TP_DDUC_TOT_AMNT ,
+			     BB.SPUE_YN, 
+			     BB.SUPRT_FAMY_NUM_TWEN_CH_DN, 
+			     BB.SUPRT_FAMY_NUM_TRE_OVR_CHDN, 
+			     BB.SUPRT_FAMY_NUM_ETC ,
+			     AA.SUM_B002,
+			      NVL(FF.DILNLAZ_TOT_DUTY_NUM_DYS,0) AS DILNLAZ_TOT_DUTY_NUM_DYS 
+			 FROM
+			(SELECT 
+			    DPOB_CD, PYMT_YR_MNTH, PAY_CD, 
+			    PAYR_SEIL_NUM, SYSTEMKEY,    
+			    SUM(CASE WHEN PYMT_DDUC_DIV_CD IN ('B0080010' ) 
+			        THEN PYMT_DDUC_SUM  
+			        ELSE 0 END)  AS SUM_B001,
+			    SUM(CASE WHEN PYMT_DDUC_DIV_CD IN ('B0080010', 'B0080020' ) 
+			        THEN  PYMT_DDUC_SUM 
+			        ELSE 0 END) AS TP_PYMT_TOT_AMNT, 
+			     SUM(CASE WHEN PYMT_DDUC_DIV_CD IN ('B0080020') 
+			        THEN PYMT_DDUC_SUM  
+			        ELSE 0 END)  AS TP_EXTPY_TOT_AMNT,
+			    SUM(CASE WHEN PYMT_DDUC_DIV_CD IN ('B0080010', 'B0080020' ) 
+			        THEN PYMT_DDUC_TXTN_AMNT  
+			        ELSE 0 END)  AS TP_TXTN_TOT_AMNT,
+			     SUM(CASE WHEN PYMT_DDUC_DIV_CD IN ('B0080020' ) 
+			        THEN  PYMT_DDUC_FREE_DTY_SUM 
+			        ELSE 0 END) AS TP_FREE_DTY_TOT_AMNT,     
+			    SUM(CASE WHEN PYMT_DDUC_DIV_CD IN ('B0080030') 
+			        THEN  PYMT_DDUC_SUM 
+			        ELSE 0 END) AS TP_DDUC_TOT_AMNT    ,
+     SUM(CASE WHEN PYMT_DDUC_DIV_CD IN ('B0080030') AND  PAY_ITEM_CD IN ('D0150100','D0150200','D0150300')
+        THEN  PYMT_DDUC_SUM 
+        ELSE 0 END) AS SUM_B002  
+			FROM PAYR0302
+			WHERE DPOB_CD=#dpobCd#
+				AND PYMT_YR_MNTH=#pymtYrMnth#
+				AND PAY_CD=#payCd#
+				AND PAYR_SEIL_NUM=#payrSeilNum#
+				AND SYSTEMKEY=#systemkey#  
+			GROUP BY DPOB_CD, PYMT_YR_MNTH, PAY_CD, 
+			   PAYR_SEIL_NUM, SYSTEMKEY) AA , PAYR0304 BB,  DLGN0100 FF 
+			WHERE AA.DPOB_CD = BB.DPOB_CD
+			AND   AA.PYMT_YR_MNTH = BB.PYMT_YR_MNTH
+			AND   AA.PAY_CD = BB.PAY_CD
+			AND   AA.PAYR_SEIL_NUM = BB.PAYR_SEIL_NUM
+			AND   AA.SYSTEMKEY = BB.SYSTEMKEY
+		    AND  AA.DPOB_CD = FF.DPOB_CD 
+            AND  AA.SYSTEMKEY= FF.SYSTEMKEY  
+            AND  AA.PYMT_YR_MNTH = FF.DILNLAZ_YR_MNTH 
+            AND  AA.PAY_CD =  FF.PAY_CD 
+        ]]>
+	</select> 
+	
+</sqlMap>

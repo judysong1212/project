@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+    
+	<bean id="dlgn0250ExcelView" class="org.msf.exterms.xls.web.Dlgn0250ExcelView" /> 
+	
+	<bean id="dlgn0250FileExcelView" class="org.msf.exterms.xls.web.Dlgn0250FileExcelView" />  
+	  
+	<bean id="dlgn0250ExcelUploadService" class="org.msf.exterms.xls.imp.impl.MsfExcelServiceImpl">
+		<property name="mapClass" value="org.msf.exterms.xls.service.impl.xlsDlgn0250Mapping" /> 
+		 <property name="mapBeanName" value="mappingHSSFDlgn0250Bean" /> 
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean> 
+	  
+	<bean id="mappingHSSFDlgn0250Bean" class="org.msf.exterms.xls.service.impl.xlsDlgn0250Mapping" />
+	
+	<bean id="dlgn0250XSSFExcelUploadService" class="org.msf.exterms.xls.imp.impl.MsfExcelServiceImpl"> 
+		<property name="mapClass" value="org.msf.exterms.xls.service.impl.xlsxDlgn0250Mapping" /> 
+		 <property name="mapBeanName" value="mappingXSSFDlgn0250Bean" /> 
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean> 
+	
+	<bean id="mappingXSSFDlgn0250Bean" class="org.msf.exterms.xls.service.impl.xlsxDlgn0250Mapping" />
+ 
+</beans>

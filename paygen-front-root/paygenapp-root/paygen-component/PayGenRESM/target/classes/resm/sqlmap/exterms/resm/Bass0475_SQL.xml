@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass0475">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass0475SerarchVO" type="com.app.exterms.resm.server.vo.Bass0475SrhVO"/>
+	
+	<resultMap id="bass0475" class="com.app.exterms.resm.server.vo.Bass0475VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="usrId" column="USR_ID" columnIndex="2"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="3"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="4"/>
+		<result property="deptGrpCd" column="DEPT_GRP_CD" columnIndex="5"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="6"/>
+		<result property="kybdr" column="KYBDR" columnIndex="7"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="8"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="9"/>
+		<result property="ismt" column="ISMT" columnIndex="10"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="11"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="12"/>
+	</resultMap>
+	
+	<insert id="bass0475DAO.insertBass0475_S">
+		<![CDATA[
+			INSERT INTO BASS0475 
+				( DPOB_CD
+				  , USR_ID
+				  , TYP_OCCU_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , DEPT_GRP_CD
+				  , DEPT_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #usrId#
+				  , #typOccuCd#
+				  , #dtilOccuInttnCd#
+				  , #deptGrpCd#
+				  , #deptCd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass0475DAO.updateBass0475_S">
+		<![CDATA[
+			UPDATE BASS0475
+			SET DPOB_CD=#dpobCd#
+				, USR_ID=#usrId#
+				, TYP_OCCU_CD=#typOccuCd#
+				, DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				, DEPT_GRP_CD=#deptGrpCd#
+				, DEPT_CD=#deptCd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND USR_ID=#usrId#
+								AND TYP_OCCU_CD=#typOccuCd#
+								AND DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				]]>
+	</update>
+	
+	<delete id="bass0475DAO.deleteBass0475_S">
+		<![CDATA[
+			DELETE FROM BASS0475 
+						WHERE DPOB_CD=#dpobCd#
+								AND USR_ID=#usrId#
+								AND TYP_OCCU_CD=#typOccuCd#
+								AND DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				]]>
+	</delete>
+	
+	<select id="bass0475DAO.selectBass0475_S" resultMap="bass0475">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, USR_ID
+				, TYP_OCCU_CD
+				, DTIL_OCCU_INTTN_CD
+				, DEPT_GRP_CD
+				, DEPT_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS0475
+						WHERE DPOB_CD=#dpobCd#
+								AND USR_ID=#usrId#
+								AND TYP_OCCU_CD=#typOccuCd#
+								AND DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				]]>
+	</select>
+	
+	<select id="bass0475DAO.selectBass0475List_D" parameterClass="bass0475SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, USR_ID
+								, TYP_OCCU_CD
+								, DTIL_OCCU_INTTN_CD
+								, DEPT_GRP_CD
+								, DEPT_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS0475
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					USR_ID LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, USR_ID DESC
+							, TYP_OCCU_CD DESC
+							, DTIL_OCCU_INTTN_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass0475DAO.selectBass0475ListTotCnt_S" parameterClass="bass0475SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0475
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				USR_ID LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

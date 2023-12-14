@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0101">
+    
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="psnl0101SrhVO" type="com.app.exterms.personal.server.vo.Psnl0101SrhVO"/>
+	<typeAlias  alias="psnl0101Vo" type="com.app.exterms.personal.server.vo.Psnl0101VO"/>
+	
+	<insert id="psnl0101DAO.insertPsnl0101_S" parameterClass="psnl0101Vo">
+	<![CDATA[
+		INSERT INTO PSNL0101 
+					( DPOB_CD				
+						, SYSTEMKEY			
+						, PSNL_BSE_SEIL_NUM	
+						, EMYMT_DIV_CD		
+						, FRST_BSE_EMYMT_DT	
+						, KYBDR				
+						, INPT_DT				
+						, INPT_ADDR			
+						, ISMT				
+						, REVN_DT				
+						, REVN_ADDR	)
+		SELECT 	P0110.DPOB_CD
+						, P0110.SYSTEMKEY
+						, P0110.EMYMT_SEIL_NUM
+						, P0110.EMYMT_DIV_CD
+						, P0110.EMYMT_BGNN_DT
+						, #kybdr#
+						, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						, #inptAddr#
+						, #ismt#
+						, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						, #revnAddr# 
+			FROM PSNL0110 P0110
+		 WHERE P0110.DPOB_CD =  #dpobCd#
+		 	AND P0110.SYSTEMKEY = #systemkey# 
+		 	AND P0110.EMYMT_DIV_CD = #emymtDivCd#
+	]]>	 	
+		 	
+		 	<isEqual property="emymtTypCd" compareValue="A0420090">
+            AND P0110.EMYMT_BGNN_DT = #frstBseEmymtDt#
+			</isEqual>
+		 	
+		 	<isNotEqual property="emymtTypCd" compareValue="A0420090">
+		 	AND P0110.EMYMT_BGNN_DT = ( SELECT NVL( MIN(EMYMT_BGNN_DT) , #frstBseEmymtDt# ) 
+											FROM PSNL0110 
+										WHERE DPOB_CD = P0110.DPOB_CD 
+										 	AND SYSTEMKEY = P0110.SYSTEMKEY 
+										  	AND EMYMT_DIV_CD = P0110.EMYMT_DIV_CD
+										  	AND EMYMT_TYP_CD = 'A0420010'
+						  	  	  	  )
+		 	</isNotEqual>
+			
+		 	AND NOT EXISTS ( SELECT A.SYSTEMKEY
+		 						FROM PSNL0101 A
+		 					 WHERE A.DPOB_CD = #dpobCd#
+		 					 	AND A.SYSTEMKEY =  #systemkey#
+		 					 	AND A.EMYMT_DIV_CD = P0110.EMYMT_DIV_CD
+		 					)
+		 	AND EXISTS  ( SELECT  MIN(EMYMT_BGNN_DT)
+							FROM PSNL0110 
+						  WHERE DPOB_CD = P0110.DPOB_CD 
+							AND SYSTEMKEY = P0110.SYSTEMKEY 
+							AND EMYMT_DIV_CD = P0110.EMYMT_DIV_CD
+							AND EMYMT_TYP_CD = 'A0420010'
+						)
+		
+	</insert>
+	
+	
+	<delete id="psnl0101DAO.deletePsnl0101" parameterClass="psnl0101Vo">
+		DELETE FROM PSNL0101
+		WHERE DPOB_CD=#dpobCd#
+			AND SYSTEMKEY=#systemkey#
+			
+			<isNotNull property="emymtDivCd">
+				<isNotEmpty property="emymtDivCd">
+			AND EMYMT_DIV_CD = #emymtDivCd#
+				</isNotEmpty>
+			</isNotNull> 	
+	</delete>
+
+	<update id="psnl0101DAO.updatePsnl0101_S" parameterClass="psnl0101Vo"> 
+	<![CDATA[
+		UPDATE PSNL0101
+		 SET FRST_BSE_EMYMT_DT =  ( SELECT NVL( MIN(EMYMT_BGNN_DT) , #frstBseEmymtDt#) 
+							  			FROM PSNL0110 
+							  	  	  WHERE DPOB_CD = #dpobCd# 
+							  	  	  	AND SYSTEMKEY = #systemkey# 
+							  	  	  	AND EMYMT_DIV_CD = #emymtDivCd#
+							  	  	  	AND EMYMT_TYP_CD = 'A0420010'
+							  	   ) 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+		 WHERE DPOB_CD=#dpobCd#
+			AND SYSTEMKEY=#systemkey#
+			AND EMYMT_DIV_CD=#emymtDivCd#
+	]]>			
+	</update>
+
+</sqlMap>
+
+

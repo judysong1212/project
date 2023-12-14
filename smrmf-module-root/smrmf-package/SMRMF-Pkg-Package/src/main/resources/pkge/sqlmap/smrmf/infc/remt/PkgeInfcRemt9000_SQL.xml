@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcRemt9000">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgRemt9000SrhVO" type="com.app.smrmf.infc.retirement.server.vo.InfcPkgRemt9000SrhVO"/>
+	
+	<resultMap id="infcPkgRemt9000" class="com.app.smrmf.infc.retirement.server.vo.InfcPkgRemt9000VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="sevePayClutMangeNum" column="SEVE_PAY_CLUT_MANGE_NUM" columnIndex="3"/>
+		<result property="calcSevePayPsnBlggYr" column="CALC_SEVE_PAY_PSN_BLGG_YR" columnIndex="4"/>
+		<result property="calcSevePayPsnDivCd" column="CALC_SEVE_PAY_PSN_DIV_CD" columnIndex="5"/>
+		<result property="icncDt" column="ICNC_DT" columnIndex="6"/>
+		<result property="rkfcdDt" column="RKFCD_DT" columnIndex="7"/>
+		<result property="rsgtnDt" column="RSGTN_DT" columnIndex="8"/>
+		<result property="pymtDt" column="PYMT_DT" columnIndex="9"/>
+		<result property="eepnMnthIcm2012Bfr" column="EEPN_MNTH_ICM_2012_BFR" columnIndex="10"/>
+		<result property="eepnMnthIcm2013Aft" column="EEPN_MNTH_ICM_2013_AFT" columnIndex="11"/>
+		<result property="addMnthIcm2012Bfr" column="ADD_MNTH_ICM_2012_BFR" columnIndex="12"/>
+		<result property="addMnthIcm2013Aft" column="ADD_MNTH_ICM_2013_AFT" columnIndex="13"/>
+		<result property="retryPayQnty" column="RETRY_PAY_QNTY" columnIndex="14"/>
+		<result property="freeDtyRetryPayQnty" column="FREE_DTY_RETRY_PAY_QNTY" columnIndex="15"/>
+		<result property="alpayTxAmnt" column="ALPAY_TX_AMNT" columnIndex="16"/>
+		<result property="locIncmTxAmt" column="LOC_INCM_TX_AMT" columnIndex="17"/>
+		<result property="pernPymtSum" column="PERN_PYMT_SUM" columnIndex="18"/>
+		<result property="sevePayCtrClutNoteCtnt" column="SEVE_PAY_CTR_CLUT_NOTE_CTNT" columnIndex="19"/>
+		<result property="kybdr" column="KYBDR" columnIndex="20"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="21"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="22"/>
+		<result property="ismt" column="ISMT" columnIndex="23"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="24"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="25"/>
+		<result property="amcrrClutInsnYn" column="AMCRR_CLUT_INSN_YN" columnIndex="26"/>
+	</resultMap>
+	
+	<insert id="infcPkgRemt9000DAO.insertRemt9000_S">
+		<![CDATA[
+			INSERT INTO REMT9000 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , SEVE_PAY_CLUT_MANGE_NUM
+				  , CALC_SEVE_PAY_PSN_BLGG_YR
+				  , CALC_SEVE_PAY_PSN_DIV_CD
+				  , ICNC_DT
+				  , RKFCD_DT
+				  , RSGTN_DT
+				  , PYMT_DT
+				  , EEPN_MNTH_ICM_2012_BFR
+				  , EEPN_MNTH_ICM_2013_AFT
+				  , ADD_MNTH_ICM_2012_BFR
+				  , ADD_MNTH_ICM_2013_AFT
+				  , RETRY_PAY_QNTY
+				  , FREE_DTY_RETRY_PAY_QNTY
+				  , ALPAY_TX_AMNT
+				  , LOC_INCM_TX_AMT
+				  , PERN_PYMT_SUM
+				  , SEVE_PAY_CTR_CLUT_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , AMCRR_CLUT_INSN_YN )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				 , (SELECT NVL(MAX(SEVE_PAY_CLUT_MANGE_NUM),0) + 1 
+			           FROM REMT9000
+			           WHERE DPOB_CD = #dpobCd#
+			           AND SYSTEMKEY =  #systemkey#)   
+				  , #calcSevePayPsnBlggYr#
+				  , #calcSevePayPsnDivCd#
+				  , #icncDt#
+				  , #rkfcdDt#
+				  , #rsgtnDt#
+				  , #pymtDt#
+				  , #eepnMnthIcm2012Bfr#
+				  , #eepnMnthIcm2013Aft#
+				  , #addMnthIcm2012Bfr#
+				  , #addMnthIcm2013Aft#
+				  , #retryPayQnty#
+				  , #freeDtyRetryPayQnty#
+				  , #alpayTxAmnt#
+				  , #locIncmTxAmt#
+				  , #pernPymtSum#
+				  , #sevePayCtrClutNoteCtnt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr#
+				  , #amcrrClutInsnYn# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgRemt9000DAO.updateRemt9000_S">
+		<![CDATA[
+			UPDATE REMT9000
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, SEVE_PAY_CLUT_MANGE_NUM=#sevePayClutMangeNum#
+				, CALC_SEVE_PAY_PSN_BLGG_YR=#calcSevePayPsnBlggYr#
+				, CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+				, ICNC_DT=#icncDt#
+				, RKFCD_DT=#rkfcdDt#
+				, RSGTN_DT=#rsgtnDt#
+				, PYMT_DT=#pymtDt#
+				, EEPN_MNTH_ICM_2012_BFR=#eepnMnthIcm2012Bfr#
+				, EEPN_MNTH_ICM_2013_AFT=#eepnMnthIcm2013Aft#
+				, ADD_MNTH_ICM_2012_BFR=#addMnthIcm2012Bfr#
+				, ADD_MNTH_ICM_2013_AFT=#addMnthIcm2013Aft#
+				, RETRY_PAY_QNTY=#retryPayQnty#
+				, FREE_DTY_RETRY_PAY_QNTY=#freeDtyRetryPayQnty#
+				, ALPAY_TX_AMNT=#alpayTxAmnt#
+				, LOC_INCM_TX_AMT=#locIncmTxAmt#
+				, PERN_PYMT_SUM=#pernPymtSum#
+				, SEVE_PAY_CTR_CLUT_NOTE_CTNT=#sevePayCtrClutNoteCtnt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+				, AMCRR_CLUT_INSN_YN=#amcrrClutInsnYn#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND SEVE_PAY_CLUT_MANGE_NUM=#sevePayClutMangeNum#
+			]]>
+	</update>
+	
+	<delete id="infcPkgRemt9000DAO.deleteRemt9000_S">
+		<![CDATA[
+			DELETE FROM REMT9000 
+			WHERE  DPOB_CD=#dpobCd#
+				AND  SYSTEMKEY=#systemkey#
+				AND SEVE_PAY_CLUT_MANGE_NUM=#sevePayClutMangeNum#
+			]]>
+	</delete>
+	
+	<select id="infcPkgRemt9000DAO.selectRemt9000_S" resultMap="infcPkgRemt9000">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, SEVE_PAY_CLUT_MANGE_NUM
+				, CALC_SEVE_PAY_PSN_BLGG_YR
+				, CALC_SEVE_PAY_PSN_DIV_CD
+				, ICNC_DT
+				, RKFCD_DT
+				, RSGTN_DT
+				, PYMT_DT
+				, EEPN_MNTH_ICM_2012_BFR
+				, EEPN_MNTH_ICM_2013_AFT
+				, ADD_MNTH_ICM_2012_BFR
+				, ADD_MNTH_ICM_2013_AFT
+				, RETRY_PAY_QNTY
+				, FREE_DTY_RETRY_PAY_QNTY
+				, ALPAY_TX_AMNT
+				, LOC_INCM_TX_AMT
+				, PERN_PYMT_SUM
+				, SEVE_PAY_CTR_CLUT_NOTE_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, AMCRR_CLUT_INSN_YN
+			FROM REMT9000
+		    WHERE  DPOB_CD=#dpobCd#
+				AND  SYSTEMKEY=#systemkey#
+				AND SEVE_PAY_CLUT_MANGE_NUM=#sevePayClutMangeNum#
+			]]>
+	</select>
+	
+	<select id="infcPkgRemt9000DAO.selectRemt9000List_D" parameterClass="infcPkgRemt9000SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								  AA.DPOB_CD
+								, AA.SYSTEMKEY
+								 , BB.HAN_NM,
+							       SUBSTR(BB.RESN_REGN_NUM,0,6)||'-'||SUBSTR(BB.RESN_REGN_NUM,7) AS RESN_REGN_NUM,
+							       BB.BUSIN_CD,
+							       BB.CURR_AFFN_DEPT_CD,
+							       fcBass0400CDNM(AA.DPOB_CD,BB.CURR_AFFN_DEPT_CD,'2') AS CURR_AFFN_DEPT_NM,
+							       BB.REPBTY_BUSIN_DIV_CD,
+							       BB.TYP_OCCU_CD,
+							       fcBass0300CDNM(AA.DPOB_CD,BB.TYP_OCCU_CD) AS TYP_OCCU_NM,
+							       BB.FRST_EMYMT_DT,
+							       BB.EMYMT_DIV_CD,
+							       fcBass0300CDNM(AA.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM,
+							       BB.EMYMT_BGNN_DT,
+							       BB.EMYMT_END_DT,
+							       BB.HDOFC_CODTN_CD
+								, AA.SEVE_PAY_CLUT_MANGE_NUM
+								, AA.CALC_SEVE_PAY_PSN_BLGG_YR
+								, AA.CALC_SEVE_PAY_PSN_DIV_CD
+								 , AA.CALC_SEVE_PAY_PSN_DIV_CD AS calcSevePayPsnDivCdcommCd
+								, fcBass0300CDNM(AA.DPOB_CD,AA.CALC_SEVE_PAY_PSN_DIV_CD) AS calcSevePayPsnDivCdcommCdNm
+								, AA.ICNC_DT
+								, AA.RKFCD_DT
+								, AA.RSGTN_DT
+								, AA.PYMT_DT
+								, AA.EEPN_MNTH_ICM_2012_BFR
+								, AA.EEPN_MNTH_ICM_2013_AFT
+								, AA.ADD_MNTH_ICM_2012_BFR
+								, AA.ADD_MNTH_ICM_2013_AFT
+								, AA.RETRY_PAY_QNTY
+								, AA.FREE_DTY_RETRY_PAY_QNTY
+								, AA.ALPAY_TX_AMNT
+								, AA.SEVE_PAY_CTR_CLUT_NOTE_CTNT
+								, AA.KYBDR
+								, AA.INPT_DT
+								, AA.INPT_ADDR
+								, AA.ISMT
+								, AA.REVN_DT
+								, AA.REVN_ADDR
+									, AA.LOC_INCM_TX_AMT
+								, AA.PERN_PYMT_SUM 
+								, AA.AMCRR_CLUT_INSN_YN 
+						FROM REMT9000 AA, PSNL0100 BB
+				WHERE AA.DPOB_CD = BB.DPOB_CD
+				AND   AA.SYSTEMKEY = BB.SYSTEMKEY 
+				AND AA.DPOB_CD=#dpobCd#  
+		         <isNotEmpty prepend="AND" property="deptCd" >
+					 	BB.CURR_AFFN_DEPT_CD=#deptCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="businCd" >
+					 	BB.BUSIN_CD=#businCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="calcSevePayPsnDivCd" >
+					 	AA.CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	BB.EMYMT_DIV_CD=#emymtDivCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="typOccuCd" >
+					 	BB.TYP_OCCU_CD=#typOccuCd#
+				       </isNotEmpty> 
+				        	<isNotEmpty prepend="AND"  property="dtilOccuInttnCd" >
+					 	        BB.DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#  
+					 	</isNotEmpty> 
+				          <isNotEmpty prepend="AND" property="calcSevePayPsnBlggYr" >
+					 	AA.CALC_SEVE_PAY_PSN_BLGG_YR = #calcSevePayPsnBlggYr# 
+				       </isNotEmpty> 
+		               <isNotEmpty prepend="AND" property="systemkey" >
+					 	 AA.SYSTEMKEY=#systemkey#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="hanNm" >
+					 	 BB.HAN_NM LIKE '%' || #hanNm# || '%'
+				       </isNotEmpty> 
+		               <isNotEmpty prepend="AND" property="sevePayClutMangeNum" >
+			 	          AA.SEVE_PAY_CLUT_MANGE_NUM=#sevePayClutMangeNum#
+		               </isNotEmpty> 
+					ORDER BY 
+					AA.DPOB_CD , AA.SYSTEMKEY , AA.SEVE_PAY_CLUT_MANGE_NUM
+	
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgRemt9000DAO.selectRemt9000ListTotCnt_S" parameterClass="infcPkgRemt9000SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM (SELECT
+								  AA.DPOB_CD
+								, AA.SYSTEMKEY
+								, AA.SEVE_PAY_CLUT_MANGE_NUM
+						FROM REMT9000 AA, PSNL0100 BB
+				WHERE AA.DPOB_CD = BB.DPOB_CD
+				AND   AA.SYSTEMKEY = BB.SYSTEMKEY 
+				AND AA.DPOB_CD=#dpobCd# 
+		        <isNotEmpty prepend="AND" property="deptCd" >
+					 	BB.CURR_AFFN_DEPT_CD=#deptCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="businCd" >
+					 	BB.BUSIN_CD=#businCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="calcSevePayPsnDivCd" >
+					 	AA.CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	BB.EMYMT_DIV_CD=#emymtDivCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="typOccuCd" >
+					 	BB.TYP_OCCU_CD=#typOccuCd#
+				       </isNotEmpty> 
+				        	<isNotEmpty prepend="AND"  property="dtilOccuInttnCd" >
+					 	        BB.DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#  
+					 	</isNotEmpty> 
+				          <isNotEmpty prepend="AND" property="calcSevePayPsnBlggYr" >
+					 	AA.CALC_SEVE_PAY_PSN_BLGG_YR = #calcSevePayPsnBlggYr# 
+				       </isNotEmpty> 
+		               <isNotEmpty prepend="AND" property="systemkey" >
+					 	 AA.SYSTEMKEY=#systemkey#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="hanNm" >
+					 	 BB.HAN_NM LIKE '%' || #hanNm# || '%'
+				       </isNotEmpty> 
+		               <isNotEmpty prepend="AND" property="sevePayClutMangeNum" >
+			 	          AA.SEVE_PAY_CLUT_MANGE_NUM=#sevePayClutMangeNum#
+		               </isNotEmpty> 
+		       )
+	</select>
+
+</sqlMap>

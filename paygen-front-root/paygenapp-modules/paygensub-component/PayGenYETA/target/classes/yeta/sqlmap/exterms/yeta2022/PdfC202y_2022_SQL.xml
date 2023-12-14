@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PdfC202y_2022">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="pdfC202ySrh_2022_VO" type="com.app.exterms.yearendtax.server.vo.PdfC202ySrh_2022_VO"/>
+	
+	<resultMap id="pdfC202y_2022" class="com.app.exterms.yearendtax.server.vo.PdfC202y_2022_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="jbEdiSeilNum" column="JB_EDI_SEIL_NUM" columnIndex="5"/>
+		<result property="formCd" column="FORM_CD" columnIndex="6"/>
+		<result property="datCd" column="DAT_CD" columnIndex="7"/>
+		<result property="resid" column="RESID" columnIndex="8"/>
+		<result property="name" column="NAME" columnIndex="9"/>
+		<result property="busnid" column="BUSNID" columnIndex="10"/>
+		<result property="tradeNm" column="TRADE_NM" columnIndex="11"/>
+		<result property="courseCd" column="COURSE_CD" columnIndex="12"/>
+		<result property="subjectNm" column="SUBJECT_NM" columnIndex="13"/>
+		<result property="jobEdiSum" column="JOB_EDI_SUM" columnIndex="14"/>
+		<result property="pdfDatAppYn" column="PDF_DAT_APP_YN" columnIndex="15"/>
+		<result property="kybdr" column="KYBDR" columnIndex="16"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="17"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="18"/>
+		<result property="ismt" column="ISMT" columnIndex="19"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="20"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="21"/>
+	</resultMap>
+	
+	<insert id="pdfC202y_2022_DAO.insertPdfC202y_S">
+		<![CDATA[
+			INSERT INTO PDF_C202Y 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , JB_EDI_SEIL_NUM
+				  , FORM_CD
+				  , DAT_CD
+				  , RESID
+				  , NAME
+				  , BUSNID
+				  , TRADE_NM
+				  , COURSE_CD
+				  , SUBJECT_NM
+				  , JOB_EDI_SUM
+				  , PDF_DAT_APP_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #jbEdiSeilNum#
+				  , #formCd#
+				  , #datCd#
+				  , #resid#
+				  , #name#
+				  , #busnid#
+				  , #tradeNm#
+				  , #courseCd#
+				  , #subjectNm#
+				  , #jobEdiSum#
+				  , #pdfDatAppYn#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="pdfC202y_2022_DAO.updatePdfC202y_S">
+		<![CDATA[
+			UPDATE PDF_C202Y
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, JB_EDI_SEIL_NUM=#jbEdiSeilNum#
+				, FORM_CD=#formCd#
+				, DAT_CD=#datCd#
+				, RESID=#resid#
+				, NAME=#name#
+				, BUSNID=#busnid#
+				, TRADE_NM=#tradeNm#
+				, COURSE_CD=#courseCd#
+				, SUBJECT_NM=#subjectNm#
+				, JOB_EDI_SUM=#jobEdiSum#
+				, PDF_DAT_APP_YN=#pdfDatAppYn#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND JB_EDI_SEIL_NUM=#jbEdiSeilNum#
+				]]>
+	</update>
+	
+	<delete id="pdfC202y_2022_DAO.deletePdfC202y_S">
+		<![CDATA[
+			DELETE FROM PDF_C202Y 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND JB_EDI_SEIL_NUM=#jbEdiSeilNum#
+				]]>
+	</delete>
+	
+	<select id="pdfC202y_2022_DAO.selectPdfC202y_S" resultMap="pdfC202y_2022">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, JB_EDI_SEIL_NUM
+				, FORM_CD
+				, DAT_CD
+				, RESID
+				, NAME
+				, BUSNID
+				, TRADE_NM
+				, COURSE_CD
+				, SUBJECT_NM
+				, JOB_EDI_SUM
+				, PDF_DAT_APP_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PDF_C202Y
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND JB_EDI_SEIL_NUM=#jbEdiSeilNum#
+				]]>
+	</select>
+	
+	<select id="pdfC202y_2022_DAO.selectPdfC202yList_D" parameterClass="pdfC202ySrh_2022_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, JB_EDI_SEIL_NUM
+								, FORM_CD
+								, DAT_CD
+								, RESID
+								, NAME
+								, BUSNID
+								, TRADE_NM
+								, COURSE_CD
+								, SUBJECT_NM
+								, JOB_EDI_SUM
+								, PDF_DAT_APP_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PDF_C202Y
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, JB_EDI_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="pdfC202y_2022_DAO.selectPdfC202yListTotCnt_S" parameterClass="pdfC202ySrh_2022_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PDF_C202Y
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

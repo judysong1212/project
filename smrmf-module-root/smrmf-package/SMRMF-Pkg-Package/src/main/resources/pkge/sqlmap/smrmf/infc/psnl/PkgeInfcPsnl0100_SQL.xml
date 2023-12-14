@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcPsnl0100">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+    <typeAlias alias="infcPkgPsnl0100SerarchVO" type="com.app.smrmf.infc.personal.server.vo.InfcPkgPsnl0100SrhVO"/>
+    <typeAlias alias="infcPkgPsnl0100Vo" type="com.app.smrmf.infc.personal.server.vo.InfcPkgPsnl0100VO"/>
+    
+	
+	<resultMap id="infcPkgPsnl0100" class="com.app.smrmf.infc.personal.server.vo.InfcPkgPsnl0100VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="3"/>
+		<result property="engNm" column="ENG_NM" columnIndex="4"/>
+		<result property="chinCharNm" column="CHIN_CHAR_NM" columnIndex="5"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="6"/>
+		<result property="sxDivCd" column="SX_DIV_CD" columnIndex="7"/>
+		<result property="yoobhMnthDay" column="YOOBH_MNTH_DAY" columnIndex="8"/>
+		<result property="sclcDivCd" column="SCLC_DIV_CD" columnIndex="9"/>
+		<result property="natnCd" column="NATN_CD" columnIndex="10"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="11"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="12"/>
+		<result property="currAffnDeptCd" column="CURR_AFFN_DEPT_CD" columnIndex="13"/>
+		<result property="repbtyBusinDivCd" column="REPBTY_BUSIN_DIV_CD" columnIndex="14"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="15"/>		
+		<result property="odtyCd" column="ODTY_CD" columnIndex="16"/>
+		<result property="frstEmymtDt" column="FRST_EMYMT_DT" columnIndex="17"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="18"/>
+		<result property="emymtBgnnDt" column="EMYMT_BGNN_DT" columnIndex="19"/>
+		<result property="emymtEndDt" column="EMYMT_END_DT" columnIndex="20"/>
+		<result property="pyspCd" column="PYSP_CD" columnIndex="21"/>
+		<result property="hdofcCodtnCd" column="HDOFC_CODTN_CD" columnIndex="22"/>
+		<result property="retryDt" column="RETRY_DT" columnIndex="23"/>
+		<result property="retryReasCtnt" column="RETRY_REAS_CTNT" columnIndex="24"/>
+		<result property="frgnrDivCd" column="FRGNR_DIV_CD" columnIndex="25"/>
+		<result property="psptNum" column="PSPT_NUM" columnIndex="26"/>
+		<result property="styBgnnDt" column="STY_BGNN_DT" columnIndex="27"/>
+		<result property="styEndDt" column="STY_END_DT" columnIndex="28"/>
+		<result property="endSchl" column="END_SCHL" columnIndex="29"/>
+		<result property="endDegrDivCd" column="END_DEGR_DIV_CD" columnIndex="30"/>
+		<result property="pmtnScduDt" column="PMTN_SCDU_DT" columnIndex="31"/>
+		<result property="pyspPrmtnScduDt" column="PYSP_PRMTN_SCDU_DT" columnIndex="32"/>
+		<result property="reymnScduDt" column="REYMN_SCDU_DT" columnIndex="33"/>
+		<result property="logSvcYrNumCd" column="LOG_SVC_YR_NUM_CD" columnIndex="34"/>
+		<result property="logSvcMnthIcmCd" column="LOG_SVC_MNTH_ICM_CD" columnIndex="35"/>
+		<result property="currPyspAppmtDt" column="CURR_PYSP_APPMT_DT" columnIndex="36"/>
+		<result property="currDeptAppmtDt" column="CURR_DEPT_APPMT_DT" columnIndex="37"/>
+		<result property="pernNoteCtnt" column="PERN_NOTE_CTNT" columnIndex="38"/>
+		<result property="kybdr" column="KYBDR" columnIndex="39"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="40"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="41"/>
+		<result property="ismt" column="ISMT" columnIndex="42"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="43"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="44"/> 
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="45"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="46"/>
+		 <result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="47"/> 
+	</resultMap>
+	 
+	<select id="infcPkgPsnl0100DAO.getBusinList" parameterClass="com.app.exterms.basis.client.dto.InfcComBass0500DTO" resultClass="egovMap">
+	    
+	      SELECT DPOB_CD,
+		         DEPT_CD,
+		         BUSIN_APPTN_YR,
+		         BUSIN_CD,
+		         BUSIN_NM,
+		         '(' || BUSIN_APPTN_YR || ')' || BUSIN_NM AS BUSIN_YEAR_NM
+		    FROM BASS0500
+		WHERE 1=1
+		<isNotNull property="businApptnYr">
+			<isNotEmpty property="businApptnYr">
+			    AND BUSIN_APPTN_YR = #businApptnYr#
+			</isNotEmpty>		    
+		</isNotNull>
+		<isNotNull property="businCd">
+			<isNotEmpty property="businCd">
+			    AND BUSIN_CD = #businCd#
+			</isNotEmpty>		    
+		</isNotNull>
+		<isNotNull property="dpobCd">
+			<isNotEmpty property="dpobCd">
+			    AND DPOB_CD = #dpobCd#
+			</isNotEmpty>		    
+		</isNotNull>
+		<isNotNull property="deptCd">
+			<isNotEmpty property="deptCd">
+			    AND DEPT_CD = #deptCd#
+			</isNotEmpty>		    
+		</isNotNull>
+		ORDER BY  BUSIN_APPTN_YR DESC,BUSIN_NM ASC
+	    
+	</select> 
+
+	<!-- 근속년수 업데이트  따른 업데이트  -->
+	<update id="infcPkgPsnl0100DAO.updatePsnl0100ToPayr4100" >
+	    <![CDATA[
+	   UPDATE PSNL0100
+         SET LOG_SVC_YR_NUM_CD  = #logSvcYrNumCd# 
+      	  		, LOG_SVC_MNTH_ICM_CD  = #logSvcMnthIcmCd#
+	    WHERE DPOB_CD = #dpobCd#
+		  AND SYSTEMKEY = #systemkey# 	
+		  ]]>
+	</update>
+	
+	
+	<!-- 호봉, 노조가입여부 업데이트  따른 업데이트  -->
+	<update id="infcPkgPsnl0100DAO.updatePsnl0100ToPayr4100_2" >
+		<![CDATA[
+		   UPDATE PSNL0100
+	         SET  UNN_MBSP_STT_YN = #unnMbspSttYn# 
+					, PYSP_CD  = #pyspCd# 
+		    WHERE DPOB_CD = #dpobCd#
+			  AND SYSTEMKEY = #systemkey# 	
+		]]>
+	</update>
+	
+</sqlMap>

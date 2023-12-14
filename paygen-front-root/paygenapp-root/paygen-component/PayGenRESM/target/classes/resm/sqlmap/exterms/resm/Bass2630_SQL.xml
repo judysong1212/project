@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass2630">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass2630SerarchVO" type="com.app.exterms.resm.server.vo.Bass2630SrhVO"/>
+	
+	<resultMap id="bass2630" class="com.app.exterms.resm.server.vo.Bass2630VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="dutyDivCd" column="DUTY_DIV_CD" columnIndex="2"/>
+		<result property="stpInttnSeptVal" column="STP_INTTN_SEPT_VAL" columnIndex="3"/>
+		<result property="monDutyYn" column="MON_DUTY_YN" columnIndex="4"/>
+		<result property="tueDutyYn" column="TUE_DUTY_YN" columnIndex="5"/>
+		<result property="wedDutyYn" column="WED_DUTY_YN" columnIndex="6"/>
+		<result property="thurDutyYn" column="THUR_DUTY_YN" columnIndex="7"/>
+		<result property="friDutyYn" column="FRI_DUTY_YN" columnIndex="8"/>
+		<result property="satDutyYn" column="SAT_DUTY_YN" columnIndex="9"/>
+		<result property="sunDutyYn" column="SUN_DUTY_YN" columnIndex="10"/>
+		<result property="norPubcHodyCalcYn" column="NOR_PUBC_HODY_CALC_YN" columnIndex="11"/>
+		<result property="servcDutyDotwSeilNum" column="SERVC_DUTY_DOTW_SEIL_NUM" columnIndex="12"/>
+		<result property="workBusinNum" column="WORK_BUSIN_NUM" columnIndex="13"/>
+		<result property="mangeUntBusinNum" column="MANGE_UNT_BUSIN_NUM" columnIndex="14"/>
+		<result property="workUntBusinNum" column="WORK_UNT_BUSIN_NUM" columnIndex="15"/>
+		<result property="kybdr" column="KYBDR" columnIndex="16"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="17"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="18"/>
+		<result property="ismt" column="ISMT" columnIndex="19"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="20"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="21"/>
+	</resultMap>
+	
+	<insert id="bass2630DAO.insertBass2630_S">
+		<![CDATA[
+			INSERT INTO BASS2630 
+				( DPOB_CD
+				  , DUTY_DIV_CD
+				  , STP_INTTN_SEPT_VAL
+				  , MON_DUTY_YN
+				  , TUE_DUTY_YN
+				  , WED_DUTY_YN
+				  , THUR_DUTY_YN
+				  , FRI_DUTY_YN
+				  , SAT_DUTY_YN
+				  , SUN_DUTY_YN
+				  , NOR_PUBC_HODY_CALC_YN
+				  , SERVC_DUTY_DOTW_SEIL_NUM
+				  , WORK_BUSIN_NUM
+				  , MANGE_UNT_BUSIN_NUM
+				  , WORK_UNT_BUSIN_NUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #dutyDivCd#
+				  , #stpInttnSeptVal#
+				  , #monDutyYn#
+				  , #tueDutyYn#
+				  , #wedDutyYn#
+				  , #thurDutyYn#
+				  , #friDutyYn#
+				  , #satDutyYn#
+				  , #sunDutyYn#
+				  , #norPubcHodyCalcYn#
+				  , #servcDutyDotwSeilNum#
+				  , #workBusinNum#
+				  , #mangeUntBusinNum#
+				  , #workUntBusinNum#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass2630DAO.updateBass2630_S">
+		<![CDATA[
+			UPDATE BASS2630
+			SET DPOB_CD=#dpobCd#
+				, DUTY_DIV_CD=#dutyDivCd#
+				, STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				, MON_DUTY_YN=#monDutyYn#
+				, TUE_DUTY_YN=#tueDutyYn#
+				, WED_DUTY_YN=#wedDutyYn#
+				, THUR_DUTY_YN=#thurDutyYn#
+				, FRI_DUTY_YN=#friDutyYn#
+				, SAT_DUTY_YN=#satDutyYn#
+				, SUN_DUTY_YN=#sunDutyYn#
+				, NOR_PUBC_HODY_CALC_YN=#norPubcHodyCalcYn#
+				, SERVC_DUTY_DOTW_SEIL_NUM=#servcDutyDotwSeilNum#
+				, WORK_BUSIN_NUM=#workBusinNum#
+				, MANGE_UNT_BUSIN_NUM=#mangeUntBusinNum#
+				, WORK_UNT_BUSIN_NUM=#workUntBusinNum#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND DUTY_DIV_CD=#dutyDivCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				]]>
+	</update>
+	
+	<delete id="bass2630DAO.deleteBass2630_S">
+		<![CDATA[
+			DELETE FROM BASS2630 
+						WHERE DPOB_CD=#dpobCd#
+								AND DUTY_DIV_CD=#dutyDivCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				]]>
+	</delete>
+	
+	<select id="bass2630DAO.selectBass2630_S" resultMap="bass2630">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, DUTY_DIV_CD
+				, STP_INTTN_SEPT_VAL
+				, MON_DUTY_YN
+				, TUE_DUTY_YN
+				, WED_DUTY_YN
+				, THUR_DUTY_YN
+				, FRI_DUTY_YN
+				, SAT_DUTY_YN
+				, SUN_DUTY_YN
+				, NOR_PUBC_HODY_CALC_YN
+				, SERVC_DUTY_DOTW_SEIL_NUM
+				, WORK_BUSIN_NUM
+				, MANGE_UNT_BUSIN_NUM
+				, WORK_UNT_BUSIN_NUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS2630
+						WHERE DPOB_CD=#dpobCd#
+								AND DUTY_DIV_CD=#dutyDivCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				]]>
+	</select>
+	
+	<select id="bass2630DAO.selectBass2630List_D" parameterClass="bass2630SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, DUTY_DIV_CD
+								, STP_INTTN_SEPT_VAL
+								, MON_DUTY_YN
+								, TUE_DUTY_YN
+								, WED_DUTY_YN
+								, THUR_DUTY_YN
+								, FRI_DUTY_YN
+								, SAT_DUTY_YN
+								, SUN_DUTY_YN
+								, NOR_PUBC_HODY_CALC_YN
+								, SERVC_DUTY_DOTW_SEIL_NUM
+								, WORK_BUSIN_NUM
+								, MANGE_UNT_BUSIN_NUM
+								, WORK_UNT_BUSIN_NUM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS2630
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					DUTY_DIV_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, DUTY_DIV_CD DESC
+							, STP_INTTN_SEPT_VAL DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass2630DAO.selectBass2630ListTotCnt_S" parameterClass="bass2630SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS2630
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				DUTY_DIV_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

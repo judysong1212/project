@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcPayr0450">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgPayr0450SrhVO" type="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0450SrhVO"/>
+	
+	<resultMap id="infcPkgPayr0450" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0450VO">
+		<result property="payPymtItemListSeilNum" column="PAY_PYMT_ITEM_LIST_SEIL_NUM" columnIndex="1"/>
+		<result property="dpobCd" column="DPOB_CD" columnIndex="2"/>
+		<result property="payYr" column="PAY_YR" columnIndex="3"/>
+		<result property="payItemCd" column="PAY_ITEM_CD" columnIndex="4"/>
+		<result property="itemExtpyDivCd" column="ITEM_EXTPY_DIV_CD" columnIndex="5"/>
+		<result property="styrNum" column="STYR_NUM" columnIndex="6"/>
+		<result property="edyrNum" column="EDYR_NUM" columnIndex="7"/>
+		<result property="pymtDducRate" column="PYMT_DDUC_RATE" columnIndex="8"/>
+		<result property="pymtDducSum" column="PYMT_DDUC_SUM" columnIndex="9"/>
+		<result property="itemListExtpyDelYn" column="ITEM_LIST_EXTPY_DEL_YN" columnIndex="10"/>
+		<result property="rmak" column="RMAK" columnIndex="11"/>
+		<result property="kybdr" column="KYBDR" columnIndex="12"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="13"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="14"/>
+		<result property="ismt" column="ISMT" columnIndex="15"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="16"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="17"/>
+		<result property="addPymtDducSum" column="ADD_PYMT_DDUC_SUM" columnIndex="18"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="19"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="20"/> 
+	</resultMap>
+	
+	<insert id="infcPkgPayr0450DAO.insertPayr0450_S">
+		<![CDATA[
+			INSERT INTO PAYR0450 
+				( PAY_PYMT_ITEM_LIST_SEIL_NUM
+				  , DPOB_CD
+				  , PAY_YR
+				  , PAY_ITEM_CD
+				  , ITEM_EXTPY_DIV_CD
+				  , STYR_NUM
+				  , EDYR_NUM
+				  , PYMT_DDUC_RATE
+				  , PYMT_DDUC_SUM
+				  , ITEM_LIST_EXTPY_DEL_YN
+				  , RMAK
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES (
+			       (SELECT (NVL(MAX(PAY_PYMT_ITEM_LIST_SEIL_NUM),0) + 1) 
+			          FROM  PAYR0450 
+			          WHERE  DPOB_CD=#dpobCd#
+								AND PAY_YR=#payYr#
+								AND PAY_ITEM_CD=#payItemCd# )
+				  , #dpobCd#
+				  , #payYr#
+				  , #payItemCd#
+				  , #itemExtpyDivCd#
+				  , #styrNum#
+				  , #edyrNum#
+				  , #pymtDducRate#
+				  , #pymtDducSum#
+				  , #itemListExtpyDelYn#
+				  , #rmak#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgPayr0450DAO.updatePayr0450_S">
+		<![CDATA[
+			UPDATE PAYR0450
+			SET PAY_PYMT_ITEM_LIST_SEIL_NUM=#payPymtItemListSeilNum#
+				, DPOB_CD=#dpobCd#
+				, PAY_YR=#payYr#
+				, PAY_ITEM_CD=#payItemCd#
+				, ITEM_EXTPY_DIV_CD=#itemExtpyDivCd#
+				, STYR_NUM=#styrNum#
+				, EDYR_NUM=#edyrNum#
+				, PYMT_DDUC_RATE=#pymtDducRate#
+				, PYMT_DDUC_SUM=#pymtDducSum#
+				, ITEM_LIST_EXTPY_DEL_YN=#itemListExtpyDelYn#
+				, RMAK=#rmak#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE PAY_PYMT_ITEM_LIST_SEIL_NUM=#payPymtItemListSeilNum#
+								AND DPOB_CD=#dpobCd#
+								AND PAY_YR=#payYr#
+								AND PAY_ITEM_CD=#payItemCd#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPayr0450DAO.deletePayr0450_S">
+		<![CDATA[
+			DELETE FROM PAYR0450 
+						WHERE PAY_PYMT_ITEM_LIST_SEIL_NUM=#payPymtItemListSeilNum#
+								AND DPOB_CD=#dpobCd#
+								AND PAY_YR=#payYr#
+								AND PAY_ITEM_CD=#payItemCd#
+				]]>
+	</delete>
+	
+	<select id="infcPkgPayr0450DAO.selectPayr0450_S" resultMap="infcPkgPayr0450">
+		<![CDATA[
+		SELECT
+				DPOB_CD
+				, PAY_YR
+				, PAY_ITEM_CD
+				, PAY_PYMT_ITEM_LIST_SEIL_NUM
+				, ITEM_EXTPY_DIV_CD
+				, STYR_NUM
+				, EDYR_NUM
+				, PYMT_DDUC_RATE
+				, PYMT_DDUC_SUM
+				, ITEM_LIST_EXTPY_DEL_YN
+				, RMAK
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, NVL(ADD_PYMT_DDUC_SUM,0) AS ADD_PYMT_DDUC_SUM
+				,TYP_OCCU_CD, DTIL_OCCU_INTTN_CD 
+			FROM PAYR0450
+						WHERE DPOB_CD=#dpobCd#
+								AND PAY_YR=#payYr#
+								AND PAY_ITEM_CD=#payItemCd# 
+								AND TO_NUMBER(fcBass0300ITEMNM(#dpobCd#,#logSvcYrNumCd#,'11'))  >= STYR_NUM
+								AND TO_NUMBER(fcBass0300ITEMNM(#dpobCd#,#logSvcYrNumCd#,'11')) < EDYR_NUM
+								AND ITEM_LIST_EXTPY_DEL_YN = #itemListExtpyDelYn#
+				]]>
+	</select>
+	<!-- 가족수당,학비보조수당 값가져오기  -->
+		<select id="infcPkgPayr0450DAO.selectPayr0450ToPayr4100_S" resultMap="infcPkgPayr0450">
+		<![CDATA[
+			SELECT
+				PAY_PYMT_ITEM_LIST_SEIL_NUM
+				, DPOB_CD
+				, PAY_YR
+				, PAY_ITEM_CD
+				, ITEM_EXTPY_DIV_CD
+				  ,  (CASE WHEN ITEM_EXTPY_DIV_CD IN ('B0260050','B0260060') THEN
+                             (SELECT PYMT_DDUC_SUM FROM PAYR0450 AA
+                                WHERE AA.DPOB_CD = PAYR0450.DPOB_CD
+                                AND AA.PAY_YR = PAYR0450.PAY_YR
+                                AND AA.PAY_ITEM_CD = PAYR0450.PAY_ITEM_CD
+                                AND AA.ITEM_EXTPY_DIV_CD = 'B0260030' )
+                       ELSE 0  END        
+                  ) AS ADD_PYMT_DDUC_SUM
+				, STYR_NUM
+				, EDYR_NUM
+				, PYMT_DDUC_RATE
+				, PYMT_DDUC_SUM
+				, ITEM_LIST_EXTPY_DEL_YN 
+				, RMAK
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				,TYP_OCCU_CD, DTIL_OCCU_INTTN_CD 
+			FROM PAYR0450
+						WHERE  DPOB_CD=#dpobCd#
+								AND PAY_YR= (SELECT MAX(PAY_YR) FROM PAYR0450
+								                               WHERE DPOB_CD=#dpobCd#
+								                               AND PAY_ITEM_CD=#payItemCd#)
+                                    
+								AND PAY_ITEM_CD=#payItemCd#
+				]]>
+				  <isNotEmpty prepend="AND" property="itemListExtpyDelYn" >
+					 	ITEM_LIST_EXTPY_DEL_YN=#itemListExtpyDelYn#
+				 </isNotEmpty> 
+				 <isNotEmpty prepend="AND" property="itemExtpyDivCd" >
+					 	ITEM_EXTPY_DIV_CD=#itemExtpyDivCd#
+				 </isNotEmpty> 
+	</select>
+	
+	<select id="infcPkgPayr0450DAO.selectPayr0450List_D" parameterClass="infcPkgPayr0450SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+							
+								 DPOB_CD
+								, PAY_YR
+								,PAY_PYMT_ITEM_LIST_SEIL_NUM
+								, PAY_ITEM_CD
+								,(SELECT PAY_EXTPY_NM FROM PAYR0480
+								  WHERE PAYR0480.DPOB_CD = PAYR0450.DPOB_CD
+								    AND PAYR0480.PAY_EXTPY_CD = PAYR0450.PAY_ITEM_CD) AS PAY_ITEM_NM
+								, ITEM_EXTPY_DIV_CD
+								, ITEM_EXTPY_DIV_CD AS itemExtpyDivCdcommCd
+								, fcBass0300CDNM(DPOB_CD,ITEM_EXTPY_DIV_CD) AS itemExtpyDivCdcommCdNm
+								, STYR_NUM
+								, EDYR_NUM
+								, PYMT_DDUC_RATE
+								, PYMT_DDUC_SUM
+								, ITEM_LIST_EXTPY_DEL_YN
+								, RMAK
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PAYR0450
+				WHERE 1=1
+			<isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="payYr" >
+			 	  PAY_YR=#payYr# 
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="payItemCd" >
+			 	  PAY_ITEM_CD=#payItemCd# 
+		       </isNotEmpty> 
+					ORDER BY 
+						PAY_PYMT_ITEM_LIST_SEIL_NUM DESC
+							, DPOB_CD DESC
+							, PAY_YR DESC
+							, PAY_ITEM_CD ASC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgPayr0450DAO.selectPayr0450ListTotCnt_S" parameterClass="infcPkgPayr0450SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0450
+			WHERE 1=1
+				<isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="payYr" >
+			 	  PAY_YR=#payYr# 
+		       </isNotEmpty> 
+		         <isNotEmpty prepend="AND" property="payItemCd" >
+			 	  PAY_ITEM_CD=#payItemCd# 
+		       </isNotEmpty> 
+	</select>
+	
+	<select id="infcPkgPayr0450DAO.selectPayr0450ToPayr5600List_D" parameterClass="infcPkgPayr0450SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+	        SELECT
+                              DISTINCT  (#payYr#) AS PAY_YR
+								,  DPOB_CD
+								, PAY_EXTPY_CD 
+								, PAY_EXTPY_NM  
+						FROM PAYR0480
+						WHERE PAY_EXTPY_CD IN (
+						  'C9010100','C9030100','C9010200','C9050100','C9060100','C9010400' ,'C9030100'   
+						) 
+					<isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>  
+					ORDER BY   PAY_EXTPY_CD ASC
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>		 
+	</select>	
+	<select id="infcPkgPayr0450DAO.selectPayr0450ToPayr5600ListTotCnt_S" parameterClass="infcPkgPayr0450SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt 
+						FROM 
+						(
+						 SELECT
+                              DISTINCT  (#payYr#) AS PAY_YR
+								,  DPOB_CD
+								, PAY_EXTPY_CD 
+								, PAY_EXTPY_NM  
+						FROM PAYR0480
+						WHERE PAY_EXTPY_CD IN (
+						  'C9010100','C9030100','C9010200','C9050100','C9060100','C9010400'  ,'C9030100'  
+						) 
+						<isNotEmpty prepend="AND" property="dpobCd" >
+					 	DPOB_CD=#dpobCd#
+				       </isNotEmpty>
+						)
+						
+					  
+	</select>
+	
+	
+	<!--  정근수당 근속년수에 따른 구간 구하기  비율 금액  -->
+	<select id="infcPkgPayr0450DAO.selectPayr0450ToC9030100_S" resultMap="infcPkgPayr0450">
+		<![CDATA[
+		SELECT 
+			   	   DPOB_CD, PAY_YR, PAY_ITEM_CD, 
+				   PAY_PYMT_ITEM_LIST_SEIL_NUM, ITEM_EXTPY_DIV_CD, STYR_NUM, 
+				   EDYR_NUM
+				   , NVL(PYMT_DDUC_RATE,0) AS PYMT_DDUC_RATE
+				   , NVL(PYMT_DDUC_SUM,0) AS PYMT_DDUC_SUM, 
+				   ITEM_LIST_EXTPY_DEL_YN, RMAK
+				   , NVL(ADD_PYMT_DDUC_SUM,0) AS ADD_PYMT_DDUC_SUM, 
+				   TYP_OCCU_CD, DTIL_OCCU_INTTN_CD 
+				   , RMAK
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0450
+						WHERE DPOB_CD=#dpobCd#
+								AND PAY_YR=#payYr#
+								AND PAY_ITEM_CD=#payItemCd# 
+								AND TO_NUMBER((fcBass0300ITEMNM(#dpobCd#,#logSvcYrNumCd#,'11')))  >= STYR_NUM
+								AND TO_NUMBER((fcBass0300ITEMNM(#dpobCd#,#logSvcYrNumCd#,'11'))) < EDYR_NUM
+								AND ITEM_LIST_EXTPY_DEL_YN = #itemListExtpyDelYn#
+				]]>
+				  <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+					 	DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#
+				       </isNotEmpty> 
+	</select>
+
+
+	<!-- 근속가산금  근속년수에 따른 구간 구하기  비율 금액  -->
+	<select id="infcPkgPayr0450DAO.selectPayr0450ToC9010100_S" resultMap="infcPkgPayr0450">
+		<![CDATA[
+		SELECT 
+			   	   DPOB_CD, PAY_YR, PAY_ITEM_CD, 
+				   PAY_PYMT_ITEM_LIST_SEIL_NUM, ITEM_EXTPY_DIV_CD, STYR_NUM, 
+				   EDYR_NUM
+				   , NVL(PYMT_DDUC_RATE,0) AS PYMT_DDUC_RATE
+				   , NVL(PYMT_DDUC_SUM,0) AS PYMT_DDUC_SUM, 
+				   ITEM_LIST_EXTPY_DEL_YN, RMAK
+				   , NVL(ADD_PYMT_DDUC_SUM,0) AS ADD_PYMT_DDUC_SUM, 
+				   TYP_OCCU_CD, DTIL_OCCU_INTTN_CD 
+				   , RMAK
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0450
+						WHERE DPOB_CD=#dpobCd#
+								AND PAY_YR=#payYr#
+								AND PAY_ITEM_CD=#payItemCd# 
+								AND TO_NUMBER((fcBass0300ITEMNM(#dpobCd#,#logSvcYrNumCd#,'11')))  >= STYR_NUM
+								AND TO_NUMBER((fcBass0300ITEMNM(#dpobCd#,#logSvcYrNumCd#,'11'))) < EDYR_NUM
+								AND ITEM_LIST_EXTPY_DEL_YN = #itemListExtpyDelYn#
+				]]>
+				     <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+					 	DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#
+				       </isNotEmpty>  
+	</select>
+	
+	<!-- 장기근속수당  -->
+		<select id="infcPkgPayr0450DAO.selectPayr0450ToC9010400_S" resultMap="infcPkgPayr0450">
+		<![CDATA[
+		SELECT 
+			   	   DPOB_CD, PAY_YR, PAY_ITEM_CD, 
+				   PAY_PYMT_ITEM_LIST_SEIL_NUM, ITEM_EXTPY_DIV_CD, STYR_NUM, 
+				   EDYR_NUM
+				   , NVL(PYMT_DDUC_RATE,0) AS PYMT_DDUC_RATE
+				   , NVL(PYMT_DDUC_SUM,0) AS PYMT_DDUC_SUM, 
+				   ITEM_LIST_EXTPY_DEL_YN, RMAK
+				   , NVL(ADD_PYMT_DDUC_SUM,0) AS ADD_PYMT_DDUC_SUM, 
+				   TYP_OCCU_CD, DTIL_OCCU_INTTN_CD 
+				   , RMAK
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0450
+						WHERE DPOB_CD=#dpobCd#
+								AND PAY_YR=#payYr#
+								AND PAY_ITEM_CD=#payItemCd# 
+								AND TO_NUMBER((fcBass0300ITEMNM(#dpobCd#,#logSvcYrNumCd#,'11')))  >= STYR_NUM
+								AND TO_NUMBER((fcBass0300ITEMNM(#dpobCd#,#logSvcYrNumCd#,'11'))) < EDYR_NUM
+								AND ITEM_LIST_EXTPY_DEL_YN = #itemListExtpyDelYn#
+				]]>
+				     <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+					 	DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#
+				       </isNotEmpty>  
+	</select>
+</sqlMap>

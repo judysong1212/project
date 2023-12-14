@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Yeta3120">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="yeta3120SrhVO" type="com.app.exterms.yearendtax.server.vo.Yeta3120SrhVO"/>
+	
+	<resultMap id="yeta3120" class="com.app.exterms.yearendtax.server.vo.Yeta3120VO">
+		<result property="edacRvyy" column="EDAC_RVYY" columnIndex="1"/>
+		<result property="settGbcd" column="SETT_GBCD" columnIndex="2"/>
+		<result property="cnclSqno" column="CNCL_SQNO" columnIndex="3"/>
+		<result property="dpobCd" column="DPOB_CD" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="cnclName" column="CNCL_NAME" columnIndex="6"/>
+		<result property="cnclRsno" column="CNCL_RSNO" columnIndex="7"/>
+		<result property="cnclStdt" column="CNCL_STDT" columnIndex="8"/>
+		<result property="cnclEddt" column="CNCL_EDDT" columnIndex="9"/>
+		<result property="cnclItro" column="CNCL_ITRO" columnIndex="10"/>
+		<result property="cnclRdmt" column="CNCL_RDMT" columnIndex="11"/>
+		<result property="cnclPrpl" column="CNCL_PRPL" columnIndex="12"/>
+		<result property="cnclItrt" column="CNCL_ITRT" columnIndex="13"/>
+		<result property="cnclDuam" column="CNCL_DUAM" columnIndex="14"/>
+		<result property="kybdr" column="KYBDR" columnIndex="15"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="16"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="17"/>
+		<result property="ismt" column="ISMT" columnIndex="18"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="19"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="20"/>
+	</resultMap>
+	
+	<insert id="yeta3120DAO.insertYeta3120_S">
+		<![CDATA[
+			INSERT INTO YETA3120 
+				( EDAC_RVYY
+				  , SETT_GBCD
+				  , CNCL_SQNO
+				  , DPOB_CD
+				  , SYSTEMKEY
+				  , CNCL_NAME
+				  , CNCL_RSNO
+				  , CNCL_STDT
+				  , CNCL_EDDT
+				  , CNCL_ITRO
+				  , CNCL_RDMT
+				  , CNCL_PRPL
+				  , CNCL_ITRT
+				  , CNCL_DUAM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #edacRvyy#
+				  , #settGbcd#
+				  , (SELECT NVL(MAX(CNCL_SQNO)+1,1) 
+					  FROM YETA3120 
+					  WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#) 
+				  , #dpobCd#
+				  , #systemkey#
+				  , #cnclName#
+				  , #cnclRsno#
+				  , #cnclStdt#
+				  , #cnclEddt#
+				  , #cnclItro#
+				  , ((NVL(#cnclPrpl#,0) +  NVL(#cnclItrt#,0))
+				  , #cnclPrpl#
+				  , #cnclItrt#
+				  , (((NVL(#cnclPrpl#,0) +  NVL(#cnclItrt#,0)) * 0.4)
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="yeta3120DAO.updateYeta3120_S">
+		<![CDATA[
+			UPDATE YETA3120
+			SET EDAC_RVYY=#edacRvyy#
+				, SETT_GBCD=#settGbcd#
+				, CNCL_SQNO=#cnclSqno#
+				, DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, CNCL_NAME=#cnclName#
+				, CNCL_RSNO=#cnclRsno#
+				, CNCL_STDT=#cnclStdt#
+				, CNCL_EDDT=#cnclEddt#
+				, CNCL_ITRO=#cnclItro#
+				, CNCL_RDMT=((NVL(#cnclPrpl#,0) +  NVL(#cnclItrt#,0))
+				, CNCL_PRPL=#cnclPrpl#
+				, CNCL_ITRT=#cnclItrt#
+				, CNCL_DUAM=(((NVL(#cnclPrpl#,0) +  NVL(#cnclItrt#,0)) * 0.4)
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND CNCL_SQNO=#cnclSqno#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	
+	<delete id="yeta3120DAO.deleteYeta3120_S">
+		<![CDATA[
+			DELETE FROM YETA3120 
+						WHERE EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND CNCL_SQNO=#cnclSqno#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<!-- yeta0100 화면 삭제 -->
+	<delete id="yeta3120DAO.fnPayr06430_PAYR450_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3120 
+						WHERE EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd# 
+								AND DPOB_CD=#dpobCd# 
+				]]> 
+				   <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                   </isNotEmpty> 
+	</delete>
+	
+	
+	<select id="yeta3120DAO.selectYeta3120_S" resultMap="yeta3120">
+		<![CDATA[
+			SELECT
+				EDAC_RVYY
+				, SETT_GBCD
+				, CNCL_SQNO
+				, DPOB_CD
+				, SYSTEMKEY
+				, CNCL_NAME
+				, CNCL_RSNO
+				, CNCL_STDT
+				, CNCL_EDDT
+				, CNCL_ITRO
+				, CNCL_RDMT
+				, CNCL_PRPL
+				, CNCL_ITRT
+				, CNCL_DUAM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YETA3120
+						WHERE EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND CNCL_SQNO=#cnclSqno#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+	<!-- 거주자간 주택임차차입금 원리금 상환액 팝업 금전소비대차계약 리스트 -->
+	<select id="yeta3120DAO.selectYetaP03004To3120List_D" parameterClass="yeta3120SrhVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+						SELECT
+										EDAC_RVYY
+										, SETT_GBCD
+										, fcBass0300CDNM(DPOB_CD, SETT_GBCD) AS SETT_GBNM
+										, CNCL_SQNO
+										, DPOB_CD
+										, SYSTEMKEY
+										, CNCL_NAME
+										, CNCL_RSNO
+										, CNCL_STDT
+										, CNCL_EDDT
+										, CNCL_ITRO
+										, CNCL_RDMT
+										, CNCL_PRPL
+										, CNCL_ITRT
+										, CNCL_DUAM
+										, KYBDR
+										, INPT_DT
+										, INPT_ADDR
+										, ISMT
+										, REVN_DT
+										, REVN_ADDR
+								FROM YETA3120
+						WHERE 
+							<isNotEmpty property="dpobCd">
+								DPOB_CD=#dpobCd#
+							</isNotEmpty>
+							<isNotEmpty prepend="AND" property="edacRvyy" >
+								EDAC_RVYY=#edacRvyy#
+							</isNotEmpty> 
+							<isNotEmpty prepend="AND" property="settGbcd" >
+								SETT_GBCD=#settGbcd#
+							</isNotEmpty> 
+							<isNotEmpty prepend="AND" property="systemkey" >
+								SYSTEMKEY=#systemkey#
+							</isNotEmpty> 
+						ORDER BY 
+							EDAC_RVYY DESC
+							, SETT_GBCD DESC
+							, CNCL_SQNO DESC
+							, DPOB_CD DESC
+							, SYSTEMKEY DESC
+				
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>	
+	<!-- 거주자간 주택임차차입금 원리금 상환액 팝업 금전소비대차계약 갯수 -->
+	<select id="yeta3120DAO.selectYetaP03004To3120ListTotCnt_S" parameterClass="yeta3120SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3120
+			WHERE 
+				<isNotEmpty property="dpobCd">
+					DPOB_CD=#dpobCd#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="edacRvyy" >
+					EDAC_RVYY=#edacRvyy#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="settGbcd" >
+					SETT_GBCD=#settGbcd#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="systemkey" >
+					SYSTEMKEY=#systemkey#
+				</isNotEmpty> 
+	</select>	
+	
+	
+	
+	
+	
+	<select id="yeta3120DAO.selectYeta3120List_D" parameterClass="yeta3120SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								EDAC_RVYY
+								, SETT_GBCD
+								, CNCL_SQNO
+								, DPOB_CD
+								, SYSTEMKEY
+								, CNCL_NAME
+								, CNCL_RSNO
+								, CNCL_STDT
+								, CNCL_EDDT
+								, CNCL_ITRO
+								, CNCL_RDMT
+								, CNCL_PRPL
+								, CNCL_ITRT
+								, CNCL_DUAM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YETA3120
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					EDAC_RVYY = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SETT_GBCD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						EDAC_RVYY DESC
+							, SETT_GBCD DESC
+							, CNCL_SQNO DESC
+							, DPOB_CD DESC
+							, SYSTEMKEY DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="yeta3120DAO.selectYeta3120ListTotCnt_S" parameterClass="yeta3120SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3120
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				EDAC_RVYY = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SETT_GBCD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

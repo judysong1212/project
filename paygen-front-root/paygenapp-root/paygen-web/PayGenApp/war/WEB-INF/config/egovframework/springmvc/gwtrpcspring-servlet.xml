@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    - DispatcherServlet application context for Application's web tier.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+ 
+    <!--
+        - The controllers are autodetected DAOs labeled with the @Controller annotation.
+    --> 
+      <context:component-scan base-package="com.app.exterms,com.app.smrmf,com.msf,
+                                            com.msfgwt,org.aspectj,com.google,com.app.smrmf.core.msfmainapp,
+                                            org.app.exterms,com.app.smrmf.infc,com.msf.exterms,
+                                            org.gwtrpcspring,org.msf.exterms">
+         <!--   <context:include-filter   type="annotation" expression="org.springframework.stereotype.Controller"/>  
+           <context:include-filter expression="org.springframework.stereotype.Service" type="annotation"/>
+	   	   <context:include-filter expression="org.springframework.stereotype.Repository" type="annotation"/> -->  
+      </context:component-scan>   
+         
+</beans>

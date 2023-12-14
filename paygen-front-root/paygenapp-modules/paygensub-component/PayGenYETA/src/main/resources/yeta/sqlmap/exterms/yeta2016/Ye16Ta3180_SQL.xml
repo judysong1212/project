@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye16Ta3180">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ye16Ta3180SrhVO" type="com.app.exterms.yearendtax.server.vo.Yeta3180SrhVO"/>
+	
+	<resultMap id="ye16Ta3180" class="com.app.exterms.yearendtax.server.vo.Yeta3180VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="edacRvyy" column="EDAC_RVYY" columnIndex="2"/>
+		<result property="settGbcd" column="SETT_GBCD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="ctrbSeqn" column="CTRB_SEQN" columnIndex="5"/>
+		<result property="ctrbDdcd" column="CTRB_DDCD" columnIndex="6"/>
+		<result property="ctrbTycd" column="CTRB_TYCD" columnIndex="7"/>
+		<result property="ctrbCont" column="CTRB_CONT" columnIndex="8"/>
+		<result property="ctrbYrmn" column="CTRB_YRMN" columnIndex="9"/>
+		<result property="ctrbName" column="CTRB_NAME" columnIndex="10"/>
+		<result property="ctrbBsnu" column="CTRB_BSNU" columnIndex="11"/>
+		<result property="ctrbAmnt" column="CTRB_AMNT" columnIndex="12"/>
+		<result property="crtbCncd" column="CRTB_CNCD" columnIndex="13"/>
+		<result property="crnrFlag" column="CRNR_FLAG" columnIndex="14"/>
+		<result property="cbtgName" column="CBTG_NAME" columnIndex="15"/>
+		<result property="rsnoNumb" column="RSNO_NUMB" columnIndex="16"/>
+		<result property="ctrbCtnt" column="CTRB_CTNT" columnIndex="17"/>
+		<result property="receRati" column="RECE_RATI" columnIndex="18"/>
+		<result property="kybdr" column="KYBDR" columnIndex="19"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="20"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="21"/>
+		<result property="ismt" column="ISMT" columnIndex="22"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="23"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="24"/>
+		<result property="ctrbNcnt" column="CTRB_NCNT" columnIndex="25"/>
+		<result property="ctrbTgam" column="CTRB_TGAM" columnIndex="26"/>
+		<result property="ctjaCham" column="CTJA_CHAM" columnIndex="27"/>
+	</resultMap>
+	
+	
+	
+	<!-- 연말정산 대상자 yeta0100 화면 기부금 삭제  -->
+	<delete id="ye16Ta3180DAO.fnYeta1100_YETA3180_2016_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3180 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd# 
+				]]>
+				<isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                </isNotEmpty> 
+		    		  			    
+	</delete>
+	
+	
+	
+	
+	
+	
+	<insert id="ye16Ta3180DAO.insertYeta3180_S">
+		<![CDATA[
+			INSERT INTO YETA3180 
+				( DPOB_CD
+				  , EDAC_RVYY
+				  , SETT_GBCD
+				  , SYSTEMKEY
+				  , CTRB_SEQN
+				  , CTRB_DDCD
+				  , CTRB_TYCD
+				  , CTRB_CONT
+				  , CTRB_YRMN
+				  , CTRB_NAME
+				  , CTRB_BSNU
+				  , CTRB_AMNT
+				  , CRTB_CNCD
+				  , CRNR_FLAG
+				  , CBTG_NAME
+				  , RSNO_NUMB
+				  , CTRB_CTNT
+				  , RECE_RATI
+				  , CTRB_NCNT
+				  ,	CTRB_TGAM
+				  ,	CTJA_CHAM 
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #edacRvyy#
+				  , #settGbcd#
+				  , #systemkey#
+				  , (SELECT NVL(MAX(CTRB_SEQN)+1,1) 
+						FROM YETA3180 
+						WHERE DPOB_CD=#dpobCd#
+							AND EDAC_RVYY=#edacRvyy#
+							AND SETT_GBCD=#settGbcd#
+							AND SYSTEMKEY=#systemkey#) 
+				  , #ctrbDdcd#
+				  , (fcBass0300ITEMNM(#dpobCd#, #ctrbDdcd#, '11'))
+				  , #ctrbCont#
+				  , #ctrbYrmn#
+				  , #ctrbName#
+				  , #ctrbBsnu#
+				  , #ctrbAmnt#
+				  , #crtbCncd#
+				  , #crnrFlag#
+				  , #cbtgName#
+				  , #rsnoNumb#
+				  , #ctrbCtnt#
+				  , #receRati#
+				  , #ctrbNcnt#
+				  , (nvl(#ctrbAmnt#,0) - nvl(#ctjaCham#,0)) 
+				  , #ctjaCham# 
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="ye16Ta3180DAO.updateYeta3180_S">
+		<![CDATA[
+			UPDATE YETA3180
+			SET DPOB_CD=#dpobCd#
+				, EDAC_RVYY=#edacRvyy#
+				, SETT_GBCD=#settGbcd#
+				, SYSTEMKEY=#systemkey#
+				, CTRB_SEQN=#ctrbSeqn#
+				, CTRB_DDCD=#ctrbDdcd#
+				, CTRB_TYCD=(fcBass0300ITEMNM(#dpobCd#, #ctrbDdcd#, '11'))
+				, CTRB_CONT=#ctrbCont#
+				, CTRB_YRMN=#ctrbYrmn#
+				, CTRB_NAME=#ctrbName#
+				, CTRB_BSNU=#ctrbBsnu#
+				, CTRB_AMNT=#ctrbAmnt#
+				, CRTB_CNCD=#crtbCncd#
+				, CRNR_FLAG=#crnrFlag#
+				, CBTG_NAME=#cbtgName#
+				, RSNO_NUMB=#rsnoNumb#
+				, CTRB_CTNT=#ctrbCtnt#
+				, RECE_RATI=#receRati#
+				, CTRB_NCNT = #ctrbNcnt#
+				, CTRB_TGAM = (nvl(#ctrbAmnt#,0) - nvl(#ctjaCham#,0)) 
+				, CTJA_CHAM = #ctjaCham#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND CTRB_SEQN=#ctrbSeqn#
+				]]>
+	</update>
+	
+	<delete id="ye16Ta3180DAO.deleteYeta3180_S">
+		<![CDATA[
+			DELETE FROM YETA3180 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND CTRB_SEQN=#ctrbSeqn#
+				]]>
+	</delete>
+	
+	
+	<!-- 연말정산 대상자 yeta0100 화면 기부금 삭제  -->
+	<delete id="ye16Ta3180DAO.fnPayr06430_PAYR440_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3180 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd# 
+				]]>
+				<isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                </isNotEmpty> 
+		    		  			    
+	</delete>
+	
+	<!-- 기부금내역등록 리스트 -->
+	<select id="ye16Ta3180DAO.selectYetaP03003To3180List_D" parameterClass="ye16Ta3180SrhVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+						SELECT
+										DPOB_CD
+										, EDAC_RVYY
+										, SETT_GBCD
+										, fcBass0300CDNM(DPOB_CD, SETT_GBCD) AS SETT_GBNM
+										, SETT_GBCD AS settGbcdcommCd 
+										, fcBass0300CDNM(DPOB_CD, SETT_GBCD) AS settGbcdcommCdNm 
+										, SYSTEMKEY
+										, CTRB_SEQN
+										, CTRB_DDCD
+										, fcBass0300CDNM(DPOB_CD, CTRB_DDCD) AS CTRB_DDNM
+										, CTRB_DDCD AS ctrbDdcdcommCd 
+										, fcBass0300CDNM(DPOB_CD, CTRB_DDCD) AS ctrbDdcdcommCdNm 
+										, CTRB_TYCD
+										, CTRB_CONT
+										, CTRB_YRMN
+										, CTRB_NAME
+										, CTRB_BSNU
+										, CTRB_AMNT
+										, CRTB_CNCD
+										, CRTB_CNCD AS crtbCncdcommCd 
+										, fcBass0300CDNM(DPOB_CD, CRTB_CNCD) AS crtbCncdcommCdNm 
+										, CRNR_FLAG
+										, CBTG_NAME
+										, RSNO_NUMB
+										, CTRB_CTNT
+										, RECE_RATI
+										,CTRB_NCNT
+										,CTRB_TGAM
+										,CTJA_CHAM
+										, KYBDR
+										, INPT_DT
+										, INPT_ADDR
+										, ISMT
+										, REVN_DT
+										, REVN_ADDR
+								FROM YETA3180
+						WHERE 
+							<isNotEmpty property="dpobCd">
+								DPOB_CD=#dpobCd#
+							</isNotEmpty>
+							<isNotEmpty prepend="AND" property="edacRvyy" >
+								EDAC_RVYY=#edacRvyy#
+							</isNotEmpty> 
+							<isNotEmpty prepend="AND" property="settGbcd" >
+								SETT_GBCD=#settGbcd#
+							</isNotEmpty> 
+							<isNotEmpty prepend="AND" property="systemkey" >
+								SYSTEMKEY=#systemkey#
+							</isNotEmpty> 
+						ORDER BY 
+							DPOB_CD DESC
+							, EDAC_RVYY DESC
+							, SETT_GBCD DESC
+							, SYSTEMKEY DESC
+							, CTRB_SEQN DESC
+		<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>	
+	<!-- 기부금내역등록 갯수 -->
+	<select id="ye16Ta3180DAO.selectYetaP03003To3180ListTotCnt_S" parameterClass="ye16Ta3180SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3180
+			WHERE 
+				<isNotEmpty property="dpobCd">
+					DPOB_CD=#dpobCd#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="edacRvyy" >
+					EDAC_RVYY=#edacRvyy#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="settGbcd" >
+					SETT_GBCD=#settGbcd#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="systemkey" >
+					SYSTEMKEY=#systemkey#
+				</isNotEmpty> 
+	</select>	
+	
+	
+	
+	
+	
+	<select id="ye16Ta3180DAO.selectYeta3180_S" resultMap="ye16Ta3180">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, EDAC_RVYY
+				, SETT_GBCD
+				, SYSTEMKEY
+				, CTRB_SEQN
+				, CTRB_DDCD
+				, CTRB_TYCD
+				, CTRB_CONT
+				, CTRB_YRMN
+				, CTRB_NAME
+				, CTRB_BSNU
+				, CTRB_AMNT
+				, CRTB_CNCD
+				, CRNR_FLAG
+				, CBTG_NAME
+				, RSNO_NUMB
+				, CTRB_CTNT
+				, RECE_RATI
+				,CTRB_NCNT
+				,CTRB_TGAM
+				,CTJA_CHAM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YETA3180
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND CTRB_SEQN=#ctrbSeqn#
+				]]>
+	</select>
+	
+	<select id="ye16Ta3180DAO.selectYeta3180List_D" parameterClass="ye16Ta3180SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, EDAC_RVYY
+								, SETT_GBCD
+								, fcBass0300CDNM(DPOB_CD, SETT_GBCD) AS SETT_GBNM
+								, SYSTEMKEY
+								, CTRB_SEQN
+								, CTRB_DDCD
+								, CTRB_TYCD
+								, CTRB_CONT
+								, CTRB_YRMN
+								, CTRB_NAME
+								, CTRB_BSNU
+								, CTRB_AMNT
+								, CRTB_CNCD
+								, CRNR_FLAG
+								, CBTG_NAME
+								, RSNO_NUMB
+								, CTRB_CTNT
+								, RECE_RATI
+								,CTRB_NCNT
+								,CTRB_TGAM
+								,CTJA_CHAM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YETA3180
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, EDAC_RVYY DESC
+							, SETT_GBCD DESC
+							, SYSTEMKEY DESC
+							, CTRB_SEQN DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="ye16Ta3180DAO.selectYeta3180ListTotCnt_S" parameterClass="ye16Ta3180SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3180
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

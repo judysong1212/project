@@ -1,0 +1,3496 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.paygen</groupId>
+  <artifactId>paygen-front-root</artifactId>
+  <version>2.2.0</version>
+  <packaging>pom</packaging>
+  <name>${project.artifactId}</name>
+  <description>paygenapp-front</description> 
+	<modules>
+	    <module>paygenapp-modules</module> 
+	    <module>paygenapp-dlgn</module> 
+		<module>paygenapp-root</module> 
+	</modules> 
+	
+<!-- 	<properties> 
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>   -->
+    <properties>
+	    <release.version>2.2.0</release.version>
+	    <paygen.version>2.2.0</paygen.version>
+		<!-- Convenience property to set the GWT version -->
+		<gwtVersion>2.7.0</gwtVersion>
+		<springframeworkVersion>3.2.4.RELEASE</springframeworkVersion>
+		<!-- GWT needs at least java 1.6 -->
+		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+		<mybatis-spring.version>1.0.1</mybatis-spring.version> 
+		<quartz.version>1.8.6</quartz.version>
+        <mysql-connector-java.version>5.1.18</mysql-connector-java.version>
+         <geronimo-servlet_3.0_spec.version>1.0</geronimo-servlet_3.0_spec.version>  	 
+    	<org.mapstruct.version>1.0.0.Beta1</org.mapstruct.version> 
+    	<!-- <jetty.version>7.6.17.v20150415</jetty.version> -->
+    	<jetty.version>8.1.12.v20130726</jetty.version>
+        <jetty.jsp.version>8.1.12.v20130726</jetty.jsp.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
+		<!-- <gxt.version>2.2.4-gwt25</gxt.version> -->
+		<gxt.version>2.3.1-gwt27</gxt.version> 
+		<poi.version>3.9</poi.version>
+		<commons-httpclient-version>3.1</commons-httpclient-version>
+		<smrmf.version>2.2.0</smrmf.version>
+	</properties> 
+
+ <repositories>
+  <!-- nexus 레포지토리연계 -->      
+      <repository>
+            <id>paygenVer1</id>
+            <url>http://211.34.164.100:9090/nexus/content/groups/PayGen-Group/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository> 
+	  	<repository>
+			<id>mvn2</id>
+			<url>http://211.34.164.100:8080/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		 <!-- nexus 레포지토리연계     
+	     <repository>
+			<id>mvn2</id>
+			<url>http://repo1.maven.org/maven2/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+-->  
+		<repository>
+			<id>egovframe</id>
+			<url>http://www.egovframe.go.kr/maven/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository> 
+		 <repository>
+			<id>central</id>
+			<name>bintray</name>
+			<url>http://jcenter.bintray.com</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+  	  <pluginRepositories>
+	    <pluginRepository>
+	        <id>paygenVer1</id>
+            <url>http://211.34.164.100:9090/nexus/content/groups/PayGen-Group/</url>
+	        <releases><enabled>true</enabled></releases>
+	        <snapshots><enabled>false</enabled></snapshots>
+	    </pluginRepository>
+	</pluginRepositories>   
+	
+	
+<!-- 메인프로파일 profile definition -->
+    <profiles>  
+        <profile>
+           <id>yongin</id>
+           <properties>
+               <environment>yongin</environment>
+               <pkgname>yongin</pkgname>
+               <dlgnname>YongIn</dlgnname>
+               <draftcomp>false</draftcomp> 
+                <distenv>prod</distenv> 
+           </properties> 
+            <dependencies> 
+				  <!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yongin</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> -->  
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					<!-- ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile>
+       <profile>
+           <id>geoje</id>
+           <properties>
+               <environment>geoje</environment>
+               <pkgname>geoje</pkgname>
+               <dlgnname>GeoJe</dlgnname>
+               <draftcomp>false</draftcomp> 
+                <distenv>prod</distenv> 
+           </properties> 
+           <dependencies>
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-geoje</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency>  
+					 ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile>
+       <profile>
+           <id>gimhae</id>
+           <properties>
+               <environment>gimhae</environment>
+               <pkgname>gimhae</pkgname>
+               <dlgnname>GimHae</dlgnname>
+               <draftcomp>false</draftcomp> 
+                <distenv>prod</distenv> 
+           </properties> 
+           <dependencies>
+					<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>		  
+					</dependency>  
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile>
+       <profile>
+           <id>samcheok</id>
+           <properties>
+               <environment>samcheok</environment>
+               <pkgname>samcheok</pkgname>
+                <dlgnname>SamCheok</dlgnname>
+               <draftcomp>false</draftcomp> 
+                <distenv>prod</distenv> 
+           </properties> 
+           <dependencies>
+				<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-samcheok</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+				<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile>
+       <profile>
+           <id>suwon</id>
+           <properties>
+               <environment>suwon</environment>
+               <pkgname>suwon</pkgname>
+               <dlgnname>SuWon</dlgnname>
+               <draftcomp>false</draftcomp> 
+                <distenv>prod</distenv> 
+           </properties>
+           <dependencies> 
+					<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-suwon</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+				<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+       </profile> 
+          <profile>
+           <id>anyang</id>
+           <properties>
+               <environment>anyang</environment>
+               <pkgname>anyang</pkgname>
+               <dlgnname>AnYang</dlgnname>
+               <draftcomp>false</draftcomp> 
+                <distenv>prod</distenv> 
+           </properties> 
+           <dependencies>
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-anyang</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+         <profile>
+           <id>ulju</id>
+           <properties>
+               <environment>ulju</environment>
+               <pkgname>ulju</pkgname>
+                <dlgnname>UlJu</dlgnname>
+               <draftcomp>false</draftcomp> 
+                <distenv>prod</distenv> 
+           </properties> 
+           <dependencies>
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-ulju</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+        <profile>
+           <id>gm</id>
+           <properties>
+               <environment>gwangmyeong</environment>
+               <pkgname>gwangmyeong</pkgname>
+                <dlgnname>GwangMyeong</dlgnname>
+               <draftcomp>false</draftcomp> 
+                <distenv>prod</distenv> 
+           </properties> 
+           <dependencies>
+				<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-gwangmyeong</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+				<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+          <profile>
+           <id>goseong</id>
+           <properties>
+               <environment>goseong</environment>
+                <pkgname>goseong</pkgname>
+                <dlgnname>GoSeong</dlgnname>
+                <draftcomp>false</draftcomp> 
+                 <distenv>prod</distenv> 
+           </properties> 
+           <dependencies>
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-goseong</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+          <profile>
+           <id>ulsannamgu</id>
+           <properties>
+               <environment>ulsannamgu</environment>
+                <pkgname>ulsannamgu</pkgname>
+                <dlgnname>UlSanNamGu</dlgnname>
+                <draftcomp>false</draftcomp> 
+                 <distenv>prod</distenv> 
+           </properties>
+            <dependencies>
+				<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-ulsannamgu</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+				<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+       </profile> 
+          <profile>
+           <id>usc</id>
+           <properties>
+               <environment>usc</environment>
+               <pkgname>usc</pkgname>
+                <dlgnname>Usc</dlgnname>
+               <draftcomp>false</draftcomp>
+                <distenv>prod</distenv>  
+           </properties> 
+          <dependencies>
+					<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-usc</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+				<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+        <profile>
+           <id>gimcheon</id>
+           <properties>
+               <environment>gimcheon</environment>
+               <pkgname>gimcheon</pkgname>
+                <dlgnname>GimCheon</dlgnname>
+               <draftcomp>false</draftcomp> 
+                <distenv>prod</distenv> 
+           </properties> 
+           <dependencies>
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-gimcheon</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+        <profile>
+               <id>suncheon</id>
+               <properties>
+                 <environment>suncheon</environment>
+                 <pkgname>suncheon</pkgname>
+                  <dlgnname>SunCheon</dlgnname>
+                 <draftcomp>false</draftcomp> 
+                  <distenv>prod</distenv> 
+               </properties>  
+               <dependencies>
+				<!--	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-suncheon</artifactId>
+					  	<version>${paygen.version}</version>	 	  
+					</dependency>  
+				 ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+				 <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+          <profile>
+               <id>yangju</id>
+               <properties>
+                 <environment>yangju</environment>
+                 <pkgname>yangju</pkgname>
+                  <dlgnname>YangJu</dlgnname>
+                 <draftcomp>false</draftcomp> 
+                  <distenv>prod</distenv> 
+               </properties>  
+               <dependencies>
+			<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangju</artifactId>
+					  	<version>${paygen.version}</version>	 		  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+          <profile>
+               <id>anseong</id>
+               <properties>
+                 <environment>anseong</environment>
+                 <pkgname>anseong</pkgname>
+                 <dlgnname>AnSeong</dlgnname>
+                 <draftcomp>false</draftcomp> 
+                  <distenv>prod</distenv> 
+               </properties> 
+               <dependencies>
+				<!--	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-anseong</artifactId>
+					  	<version>${paygen.version}</version>	 					  
+					</dependency>  
+				 ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+				 <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile> 
+         <profile>
+               <id>goesan</id>
+               <properties>
+                 <environment>goesan</environment>
+                 <pkgname>goesan</pkgname>
+                 <dlgnname>GoeSan</dlgnname>
+                 <draftcomp>false</draftcomp> 
+                  <distenv>prod</distenv> 
+               </properties>  
+               <dependencies>
+				<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-goesan</artifactId>
+					  	<version>${paygen.version}</version>	 					  
+					</dependency>  
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+				<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+         <profile>
+               <id>geochang</id>
+               <properties>
+                 <environment>geochang</environment>
+                 <pkgname>geochang</pkgname>
+                  <dlgnname>GeoChang</dlgnname>
+                 <draftcomp>false</draftcomp> 
+                  <distenv>prod</distenv> 
+               </properties> 
+               <dependencies>
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-geochang</artifactId>
+					  	<version>${paygen.version}</version>	 		  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile> 
+         <profile>
+               <id>hygn</id>
+               <properties>
+                 <environment>hygn</environment>
+                 <pkgname>hygn</pkgname>
+                  <dlgnname>Hygn</dlgnname>
+                 <draftcomp>false</draftcomp> 
+                  <distenv>prod</distenv> 
+               </properties>
+               <dependencies>
+			<!-- 	 <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-hygn</artifactId>
+					  	<version>${paygen.version}</version>	 		  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>  
+        </profile>
+        <profile>
+               <id>andong</id>
+               <properties>
+                 <environment>andong</environment>
+                 <pkgname>andong</pkgname>
+                 <dlgnname>AnDong</dlgnname>
+                 <draftcomp>false</draftcomp> 
+                  <distenv>prod</distenv> 
+               </properties>  
+               <dependencies>
+			<!-- 	 <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-andong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6.5</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+        <profile>
+               <id>jinan</id>
+               <properties>
+                 <environment>jinan</environment>
+                 <pkgname>jinan</pkgname>
+                 <dlgnname>JinAn</dlgnname>
+                 <draftcomp>false</draftcomp> 
+                  <distenv>prod</distenv> 
+               </properties> 
+               <dependencies>
+			<!-- 	 <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-jinan</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency>  
+			</dependencies> 
+        </profile>
+        <!-- 양평  -->
+        <profile>
+			<id>yangpyeong</id>
+				<properties>
+				<environment>yangpyeong</environment>
+				 <pkgname>yangpyeong</pkgname>
+				  <dlgnname>YangPyeong</dlgnname>
+                 <draftcomp>false</draftcomp> 
+                  <distenv>prod</distenv> 
+			</properties>
+			<dependencies>
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+		 <!-- 제주  -->
+        <profile>
+			<id>jeju</id>
+				<properties>
+				<environment>jeju</environment>
+				 <pkgname>jeju</pkgname>
+				  <dlgnname>JeJu</dlgnname>
+                 <draftcomp>false</draftcomp> 
+                  <distenv>prod</distenv> 
+			</properties>
+			<dependencies>
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+		 <!-- 무주  -->
+        <profile>
+			<id>muju</id>
+				<properties>
+				<environment>muju</environment>
+				 <pkgname>muju</pkgname>
+				  <dlgnname>MuJu</dlgnname>
+                 <draftcomp>false</draftcomp> 
+                  <distenv>prod</distenv> 
+			</properties>
+			<dependencies>
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+		 <!-- 옥천  -->
+        <profile>
+			<id>okcheon</id>
+				<properties>
+				<environment>okcheon</environment>
+				 <pkgname>okcheon</pkgname>
+				  <dlgnname>OkCheon</dlgnname>
+                 <draftcomp>false</draftcomp> 
+                  <distenv>prod</distenv> 
+			</properties>
+			<dependencies>
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+		 <!-- 전남  -->
+        <profile>
+			<id>jeonnam</id>
+				<properties>
+				<environment>jeonnam</environment>
+				 <pkgname>jeonnam</pkgname>
+				  <dlgnname>JeonNam</dlgnname>
+                 <draftcomp>false</draftcomp> 
+                  <distenv>prod</distenv> 
+			</properties>
+			<dependencies>
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+		 <!-- 밀양  -->
+        <profile>
+			<id>miryang</id>
+				<properties>
+				<environment>miryang</environment>
+				 <pkgname>miryang</pkgname>
+				  <dlgnname>MirYang</dlgnname>
+                 <draftcomp>false</draftcomp> 
+                  <distenv>prod</distenv> 
+			</properties>
+			<dependencies>
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+    <!-- 개발을 위해 프로파일 변경 추가  -->
+    <profile>
+               <id>local</id>
+               <properties>
+                   <environment>gimhae</environment>
+                   <pkgname>gimhae</pkgname>
+                   <dlgnname>GimHae</dlgnname>
+                    <draftcomp>true</draftcomp> 
+                    <distenv>dev</distenv>  
+               </properties>  
+               <!-- 프로젝트 코어 등 추가 jar -->
+			<dependencies> 
+				<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>		 	  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+	   <profile>
+               <id>dev</id>
+               <properties>
+                 <environment>geoje</environment>
+                 <pkgname>geoje</pkgname>
+                  <dlgnname>GeoJe</dlgnname>
+                  <draftcomp>false</draftcomp>
+                  <distenv>dev</distenv>  
+               </properties>  
+               <dependencies>
+					<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>		 	  
+					</dependency>  
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+				<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+ <profile>
+           <id>yongindev</id>
+           <properties>
+               <environment>yongin</environment>
+                <pkgname>yongin</pkgname>
+                <dlgnname>YongIn</dlgnname>
+                 <draftcomp>true</draftcomp> 
+                  <distenv>dev</distenv> 
+           </properties> 
+           <dependencies>
+				<!--	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yongin</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency>  
+				 ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+				 <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>   
+       </profile>
+       <profile>
+           <id>geojedev</id>
+           <properties>
+               <environment>geoje</environment>
+               <pkgname>geoje</pkgname>
+                <dlgnname>GeoJe</dlgnname>
+                <draftcomp>true</draftcomp> 
+                 <distenv>dev</distenv> 
+           </properties> 
+           <dependencies>
+					<!--	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-geoje</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency>  
+				 ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+				 <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency>   
+			</dependencies> 
+       </profile>
+       <profile>
+           <id>gimhaedev</id>
+           <properties>
+               <environment>gimhae</environment>
+               <pkgname>gimhae</pkgname>
+                <dlgnname>GimHae</dlgnname>
+                <draftcomp>false</draftcomp> 
+                 <distenv>dev</distenv> 
+           </properties> 
+           <dependencies>
+				<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>		  
+					</dependency>
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency>   
+			</dependencies>  
+					<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation> 
+       </profile>
+       <profile>
+           <id>samcheokdev</id>
+           <properties>
+               <environment>samcheok</environment>
+                <pkgname>samcheok</pkgname>
+                  <dlgnname>SamCheok</dlgnname>
+                 <draftcomp>true</draftcomp> 
+                  <distenv>dev</distenv> 
+           </properties> 
+           <dependencies>
+			<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-samcheok</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile>
+       <profile>
+           <id>suwondev</id>
+           <properties>
+               <environment>suwon</environment>
+               <pkgname>suwon</pkgname>
+                <dlgnname>SuWon</dlgnname>
+                <draftcomp>true</draftcomp> 
+                 <distenv>dev</distenv> 
+           </properties> 
+           <dependencies>
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-suwon</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+          <profile>
+           <id>anyangdev</id>
+           <properties>
+               <environment>anyang</environment>
+               <pkgname>anyang</pkgname>
+               <dlgnname>AnYang</dlgnname>
+                <draftcomp>true</draftcomp> 
+                 <distenv>dev</distenv> 
+           </properties> 
+           <dependencies>
+				 <!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-anyang</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+				<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				 <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+         <profile>
+           <id>uljudev</id>
+           <properties>
+               <environment>ulju</environment>
+               <pkgname>ulju</pkgname>
+                <dlgnname>UlJu</dlgnname>
+                <draftcomp>true</draftcomp> 
+                 <distenv>dev</distenv> 
+           </properties> 
+           <dependencies>
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-ulju</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+        <profile>
+           <id>gmdev</id>
+           <properties>
+               <environment>gwangmyeong</environment>
+               <pkgname>gwangmyeong</pkgname>
+               <dlgnname>GwangMyeong</dlgnname>
+                <draftcomp>true</draftcomp>
+                 <distenv>dev</distenv>  
+           </properties> 
+           <dependencies>
+                   <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-gwangmyeong</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+          <profile>
+           <id>goseongdev</id>
+           <properties>
+               <environment>goseong</environment>
+               <pkgname>goseong</pkgname>
+                <dlgnname>GoSeong</dlgnname>
+                <draftcomp>true</draftcomp> 
+                 <distenv>dev</distenv> 
+           </properties> 
+           <dependencies>
+			<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-goseong</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+          <profile>
+           <id>ulsannamgudev</id>
+           <properties>
+               <environment>ulsannamgu</environment>
+               <pkgname>ulsannamgu</pkgname>
+                <dlgnname>UlSanNamGu</dlgnname>
+                <draftcomp>true</draftcomp> 
+                 <distenv>dev</distenv> 
+           </properties> 
+           <dependencies>
+					<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-ulsannamgu</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+				<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+          <profile>
+           <id>uscdev</id>
+           <properties>
+               <environment>usc</environment>
+               <pkgname>usc</pkgname>
+                <dlgnname>Usc</dlgnname>
+                <draftcomp>true</draftcomp> 
+                 <distenv>dev</distenv> 
+           </properties> 
+           <dependencies>
+			<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-usc</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+        <profile>
+           <id>gimcheondev</id>
+           <properties>
+               <environment>gimcheon</environment>
+               <pkgname>gimcheon</pkgname>
+                 <dlgnname>GimCheon</dlgnname>
+                <draftcomp>true</draftcomp> 
+                 <distenv>dev</distenv> 
+           </properties> 
+           <dependencies>
+					<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-gimcheon</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+				<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+        <profile>
+               <id>suncheondev</id>
+               <properties>
+                 <environment>suncheon</environment>
+                  <pkgname>suncheon</pkgname>
+                  <dlgnname>SunCheon</dlgnname>
+                   <draftcomp>true</draftcomp> 
+                    <distenv>dev</distenv> 
+               </properties>  
+               <dependencies>
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-suncheon</artifactId>
+					  	<version>${paygen.version}</version>	 	  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+          <profile>
+               <id>yangjudev</id>
+               <properties>
+                 <environment>yangju</environment>
+                  <pkgname>yangju</pkgname>
+                   <dlgnname>YangJu</dlgnname>
+                   <draftcomp>true</draftcomp> 
+                    <distenv>dev</distenv> 
+               </properties>  
+               <dependencies>
+               <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangju</artifactId>
+					  	<version>${paygen.version}</version>	 		  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+          <profile>
+               <id>anseongdev</id>
+               <properties>
+                 <environment>anseong</environment>
+                 <pkgname>anseong</pkgname>
+                  <dlgnname>AnSeong</dlgnname>
+                 <draftcomp>true</draftcomp>
+                  <distenv>dev</distenv> 
+               </properties>  
+               <dependencies>
+               <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-anseong</artifactId>
+					  	<version>${paygen.version}</version>	 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile> 
+           <profile>
+               <id>goesandev</id>
+               <properties>
+                 <environment>goesan</environment>
+                 <pkgname>goesan</pkgname>
+                    <dlgnname>GoeSan</dlgnname>
+                 <draftcomp>true</draftcomp>
+                  <distenv>dev</distenv> 
+               </properties>  
+               <dependencies>
+               <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-goesan</artifactId>
+					  	<version>${paygen.version}</version>	 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile> 
+         <profile>
+               <id>geochangdev</id>
+               <properties>
+                 <environment>geochang</environment>
+                 <pkgname>geochang</pkgname>
+                  <dlgnname>GeoChang</dlgnname>
+                 <draftcomp>true</draftcomp>
+                  <distenv>dev</distenv> 
+               </properties>
+               <dependencies>
+               <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-geochang</artifactId>
+					  	<version>${paygen.version}</version>	 		  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>   
+        </profile> 
+         <profile>
+               <id>hygndev</id>
+               <properties>
+                 <environment>hygn</environment>
+                  <pkgname>hygn</pkgname>
+                   <dlgnname>Hygn</dlgnname>
+                  <draftcomp>true</draftcomp>
+                   <distenv>dev</distenv> 
+               </properties> 
+              <dependencies>
+              <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-hygn</artifactId>
+					  	<version>${paygen.version}</version>	 		  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>   
+        </profile>
+        <profile>
+               <id>andongdev</id>
+               <properties>
+                 <environment>andong</environment>
+                  <pkgname>andong</pkgname>
+                   <dlgnname>AnDong</dlgnname>
+                  <draftcomp>false</draftcomp>
+                   <distenv>dev</distenv> 
+               </properties>
+               <dependencies>
+               <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				 <!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-andong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency>  
+			</dependencies> 
+        </profile>
+        <profile>
+               <id>jinandev</id>
+               <properties>
+                 <environment>jinan</environment>
+                 <pkgname>jinan</pkgname>
+                  <dlgnname>JinAn</dlgnname>
+                 <draftcomp>true</draftcomp>
+                  <distenv>dev</distenv> 
+               </properties>  
+               <dependencies>
+               <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				 <!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-jinan</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+        <profile>
+               <id>yangpyeongdev</id>
+               <properties>
+                 <environment>yangpyeong</environment>
+                 <pkgname>yangpyeong</pkgname> 
+                  <dlgnname>YangPyeong</dlgnname>
+                 <draftcomp>true</draftcomp>
+                 <distenv>dev</distenv> 
+               </properties>  
+               <dependencies>
+               <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				 <!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+        	 <!-- 제주  -->
+        <profile>
+			<id>jejudev</id>
+				<properties>
+				<environment>jeju</environment>
+				 <pkgname>jeju</pkgname>
+				  <dlgnname>JeJu</dlgnname>
+                 <draftcomp>true</draftcomp> 
+                  <distenv>dev</distenv> 
+			</properties>
+			<dependencies>
+			<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+		 <!-- 무주  -->
+        <profile>
+			<id>mujudev</id>
+				<properties>
+				<environment>muju</environment>
+				 <pkgname>muju</pkgname>
+				  <dlgnname>MuJu</dlgnname>
+                   <draftcomp>true</draftcomp> 
+                  <distenv>dev</distenv> 
+			</properties>
+			<dependencies>
+			<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+		 <!-- 옥천  -->
+        <profile>
+			<id>okcheondev</id>
+				<properties>
+				<environment>okcheon</environment>
+				 <pkgname>okcheon</pkgname>
+				  <dlgnname>OkCheon</dlgnname>
+                 <draftcomp>true</draftcomp> 
+                  <distenv>dev</distenv> 
+			</properties>
+			<dependencies>
+			<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+		 <!-- 전남  -->
+        <profile>
+			<id>jeonnamdev</id>
+				<properties>
+				<environment>jeonnam</environment>
+				 <pkgname>jeonnam</pkgname>
+				  <dlgnname>JeonNam</dlgnname>
+                   <draftcomp>true</draftcomp> 
+                  <distenv>dev</distenv> 
+			</properties>
+			<dependencies>
+			<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+		 <!-- 밀양  -->
+        <profile>
+			<id>miryangdev</id>
+				<properties>
+				<environment>miryang</environment>
+				 <pkgname>miryang</pkgname>
+				  <dlgnname>MirYang</dlgnname>
+                 <draftcomp>true</draftcomp> 
+                  <distenv>dev</distenv> 
+			</properties>
+			<dependencies>
+			<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+        <!--  개발을 위해 프로파일 변경 추가 -->
+  </profiles> 	
+	  
+	  
+  	<dependencies>
+  	 
+	 <!--	   프레임워크 적용시작   01 --> 
+       <dependency>
+       <groupId>smrmf.gwtsystem</groupId>
+       <artifactId>smrmf-gwtsystem</artifactId>
+      	<version>${paygen.version}</version>
+      	<scope>compile</scope>      	
+      	<exclusions>
+			  <exclusion> 
+			    <groupId>org.slf4j</groupId>
+			    <artifactId>slf4j-log4j12</artifactId>
+			  </exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>  
+      </dependency>
+      <dependency>
+       <groupId>smrmf.gwtutils</groupId>
+        <artifactId>smrmf-gwtutils</artifactId>
+      	<version>${paygen.version}</version>
+      	<scope>compile</scope>
+      	<exclusions>
+			  <exclusion> 
+			    <groupId>org.slf4j</groupId>
+			    <artifactId>slf4j-log4j12</artifactId>
+			  </exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>  
+      </dependency> 
+        <dependency>
+			 <groupId>smrmf.anycore</groupId>
+ 			 <artifactId>smrmf-anycore</artifactId>
+			<version>2.2.0</version>
+				<scope>compile</scope>
+      	<exclusions>
+			  <exclusion> 
+			    <groupId>org.slf4j</groupId>
+			    <artifactId>slf4j-log4j12</artifactId>
+			  </exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions> 
+		</dependency>
+         <dependency>
+             <groupId>smrmf.anyutils</groupId>
+        <artifactId>smrmf-anyutils</artifactId>
+      	<version>${paygen.version}</version>  
+      	<!-- <scope>compile</scope>  --> 
+      	  <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+      </dependency>  
+      <dependency>
+          <groupId>smrmf.anycrypt</groupId>
+        <artifactId>smrmf-anycrypt</artifactId>
+      	<version>${paygen.version}</version>  
+      	<scope>compile</scope> 
+      	  <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+      </dependency>  
+      <dependency>
+		<groupId>smrmf.gwtcore</groupId>
+		<artifactId>smrmf-gwtcore</artifactId>
+      	<version>${paygen.version}</version>
+      	<scope>compile</scope>
+      	<exclusions>
+			  <exclusion> 
+			    <groupId>org.slf4j</groupId>
+			    <artifactId>slf4j-log4j12</artifactId>
+			  </exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>  
+      </dependency>   
+     <dependency>
+	  <groupId>smrmf.anyext</groupId>
+	  <artifactId>smrmf-anyext</artifactId>
+      	<version>${paygen.version}</version>
+      	<scope>compile</scope>
+      	  <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+      </dependency>  
+      <dependency>
+   	     <groupId>smrmf.anysso</groupId>
+		  <artifactId>smrmf-anysso</artifactId>
+      	<version>${paygen.version}</version>
+      	<scope>compile</scope>
+      	  <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+      </dependency>  
+      <dependency>
+   	    <groupId>smrmf.anypgm</groupId>
+         <artifactId>smrmf-anypgm</artifactId>
+      	<version>${paygen.version}</version>
+      	<scope>compile</scope>
+      	  <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+      </dependency>  
+       <dependency>
+   	     <groupId>smrmf.anysystem</groupId>
+         <artifactId>smrmf-anysystem</artifactId>
+      	<version>${paygen.version}</version>
+      	<scope>compile</scope>
+      	  <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+      </dependency>   
+        <dependency>
+ 		  <groupId>smrmf.gwtpgm</groupId>
+          <artifactId>smrmf-gwtpgm</artifactId>
+      	<version>${paygen.version}</version>
+      	<scope>compile</scope>
+      	  <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+      </dependency>   
+      
+        <dependency>
+		  <groupId>com.app.smrmf.flow</groupId>
+  		<artifactId>smrmf-flow-common</artifactId>
+      	<version>${paygen.version}</version>
+      		<scope>compile</scope>
+      	  <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+      </dependency>  
+       
+        <dependency>
+		 <groupId>com.app.smrmf.flow</groupId>
+  		<artifactId>smrmf-flow-utils</artifactId>
+      	<version>${paygen.version}</version>
+      		<scope>compile</scope>
+      	  <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+      </dependency>   
+       <dependency>
+		 <groupId>com.app.smrmf.flow</groupId>
+  		<artifactId>smrmf-flow-module</artifactId>
+      	<version>${paygen.version}</version>
+      		<scope>compile</scope>
+      	  <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+      </dependency>    
+      <dependency>
+		 <groupId>com.app.smrmf.pkg</groupId>
+  		<artifactId>smrmf-pkg-package</artifactId>
+      	<version>${paygen.version}</version>
+      		<scope>compile</scope>
+      	  <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+      </dependency>   
+      
+       <dependency>
+		 <groupId>com.app.smrmf.pkg</groupId>
+  		<artifactId>smrmf-pkg-control</artifactId>
+      	<version>${paygen.version}</version>
+      		<scope>compile</scope>
+      	  <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+      </dependency>    
+      <!-- 프레임워크 적용종료   02 --> 
+	 <!-- TestNg -->
+		 <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.21</version>
+            <scope>test</scope>
+        </dependency> 
+        <!-- TestNg -->
+        
+	  <dependency>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-servlet_3.0_spec</artifactId>
+			<version>${geronimo-servlet_3.0_spec.version}</version> 
+			 <scope>provided</scope>
+		</dependency>  
+	    <!-- GWT  distribution  --> 
+		<dependency>
+		  <groupId>com.google.gwt</groupId>
+		  <artifactId>gwt-user</artifactId>
+	     <version>${gwtVersion}</version>  
+		  <!--  <scope>system</scope>
+           <systemPath>C:/eGovFrameDev-2.7.0-64bit/gwt-2.7.0/gwt-user.jar</systemPath>   -->
+		</dependency>
+	   <dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			  <version>1.1.0.Final</version>  
+			 <!--  <scope>system</scope>
+           <systemPath>C:/eGovFrameDev-2.7.0-64bit/gwt-2.7.0/validation-api-1.0.0.GA.jar</systemPath>    -->
+		</dependency>
+	
+	<!-- <dependency>
+			  <groupId>javax.validation</groupId>
+			  <artifactId>validation-api</artifactId>
+		      <version>1.1.0.Final</version> 
+		  	  <classifier>sources</classifier>  
+		</dependency>    -->	
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+		    <version>${gwtVersion}</version> 
+			<scope>provided</scope> 
+		</dependency> 	
+	  <dependency>
+		    <groupId>com.google.gwt</groupId>
+		    <artifactId>gwt-dev</artifactId>
+		  <version>${gwtVersion}</version> 
+		    <scope>provided</scope>
+		</dependency>  
+	 <!--  	<dependency>
+		  <groupId>com.google.gwt</groupId>
+		  <artifactId>gwt-codeserver</artifactId>
+		  <version>${gwtVersion}</version>
+		   <scope>provided</scope>
+		</dependency>  -->
+		<dependency>
+		  <groupId>com.google.web.bindery</groupId>
+		  <artifactId>requestfactory-server</artifactId>
+	      <version>${gwtVersion}</version> 
+		  <scope>runtime</scope>
+		</dependency>
+		 <!-- GWT  distribution -->
+		<!--  extjs
+       <dependency>
+	     <groupId>com.extjs</groupId>
+	     <artifactId>gxt</artifactId>
+	     <version>${gxt.version}</version> --> 
+	     <!--  <scope>provided</scope>   
+	   </dependency>
+       -->
+      <dependency>
+	     <groupId>com.extjs</groupId>
+	     <artifactId>gxt</artifactId>
+	     <version>${gxt.version}</version>  
+	   </dependency>
+	     <!--    <scope>system</scope>
+         <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/gxt-2.2.4-gwt24.jar</systemPath>  --> 
+             <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.8.1</version>
+		</dependency>
+	   <!-- dto mapper -->
+	   <dependency>
+		  <groupId>org.modelmapper</groupId>
+		  <artifactId>modelmapper</artifactId>
+		  <version>0.6.5</version>
+		</dependency>
+		
+	   <dependency>
+		  <groupId>org.modelmapper.extensions</groupId>
+		  <artifactId>modelmapper-spring</artifactId>
+		  <version>0.6.5</version>
+		</dependency> 
+		 
+       <!--  
+		<dependencies>
+		    <dependency>
+		        <groupId>org.mapstruct</groupId>
+		        <artifactId>mapstruct</artifactId>
+		        <version>${org.mapstruct.version}</version>
+		    </dependency>
+		</dependencies> -->
+		 <dependency> 
+			  <groupId>commons-configuration</groupId> 
+			  <artifactId>commons-configuration</artifactId> 
+			  <version>1.10</version> 
+		</dependency> 
+		 
+        <!-- jce crypt -->
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.55</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcpg-jdk15on</artifactId>
+			<version>1.55</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcpkix-jdk15on</artifactId>
+			<version>1.55</version>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-ext-jdk15on</artifactId>
+			<version>1.55</version>
+		</dependency> 
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>  
+        
+		<!-- Spring framework distribution -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${springframeworkVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${springframeworkVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${springframeworkVersion}</version>
+			   <exclusions>
+		       <!--  Exclude Commons Logging in favor of SLF4j -->
+		        <exclusion>
+		            <groupId>commons-logging</groupId>
+		            <artifactId>commons-logging</artifactId>
+		         </exclusion>
+               </exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${springframeworkVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${springframeworkVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${springframeworkVersion}</version>
+		</dependency>
+		 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${springframeworkVersion}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${springframeworkVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${springframeworkVersion}</version>
+		</dependency>
+		 
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-webmvc</artifactId>
+		    <version>${springframeworkVersion}</version>
+		    <exclusions>
+				<exclusion>
+					<artifactId>commons-logging</artifactId>
+					<groupId>commons-logging</groupId>
+				</exclusion>
+			</exclusions>
+        </dependency>
+        
+       <!-- json -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <version>2.6.0</version>
+		</dependency>
+		 
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.6.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-annotations</artifactId>
+		    <version>2.6.0</version>
+		</dependency> 
+          
+		<!-- egov framework  -->
+        
+        <dependency>
+		    <groupId>egovframework.rte</groupId>
+		    <artifactId>egovframework.rte.fdl.cmmn</artifactId>
+		    <version>2.7.0</version>
+        </dependency>
+		
+        <dependency>
+		    <groupId>egovframework.rte</groupId>
+		    <artifactId>egovframework.rte.ptl.mvc</artifactId>
+		    <version>2.7.0</version>
+        </dependency>
+				
+        <dependency>
+		    <groupId>egovframework.rte</groupId>
+		    <artifactId>egovframework.rte.psl.dataaccess</artifactId>
+		    <version>2.7.0</version>
+        </dependency>
+        
+        <dependency>
+			<groupId>egovframework.rte</groupId>
+			<artifactId>egovframework.rte.fdl.idgnr</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+        
+       	<dependency>
+			<groupId>egovframework.rte</groupId>
+			<artifactId>egovframework.rte.fdl.property</artifactId>  
+			<version>2.7.0</version>
+		</dependency>
+
+		<!-- Hibernate -->
+		 <dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>1.0.1.Final</version>
+		</dependency>
+	     <dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.1.4.Final</version>
+				<scope>provided</scope>
+		</dependency>  
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-annotations</artifactId>
+			<version>3.5.6-Final</version>
+			<exclusions>
+			  <exclusion> 
+			    <groupId>org.slf4j</groupId>
+			    <artifactId>slf4j-log4j12</artifactId>
+			  </exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>  
+				<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>3.6.10.Final</version>
+				<scope>provided</scope>
+		</dependency>
+		 
+		   <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.2.0.Final</version>
+            <exclusions>
+			  <exclusion> 
+			    <groupId>org.slf4j</groupId>
+			    <artifactId>slf4j-log4j12</artifactId>
+			  </exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>    
+        </dependency>
+        
+        <dependency> 
+		  <groupId>org.hibernate</groupId> 
+		  <artifactId>hibernate-validator-annotation-processor</artifactId> 
+		  <version>4.2.0.Final</version> 
+		</dependency> 
+		
+		
+		<!--	
+		    <dependency>  
+			<groupId>org.apache.bval</groupId>  
+			<artifactId>bval-jsr303</artifactId>  
+			<version>0.5</version>  
+		</dependency>
+		
+		 <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>3.4.0.GA</version>
+            	<scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-annotations</artifactId>
+            <version>3.4.0.GA</version>
+            	<scope>provided</scope>
+        </dependency>
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.1.2</version>
+		</dependency> 
+		
+         -->
+		 <!-- Hibernate --> 
+		<!-- 
+        <dependency>
+			  <groupId>com.gwtent</groupId>
+  			  <artifactId>gwtent</artifactId>
+ 			  <version>2.1</version>
+		</dependency>
+             -->
+        <!-- Databases Config  
+		 <dependency>
+		    <groupId>com.h2database</groupId>
+		    <artifactId>h2</artifactId>
+		    <version>1.3.168</version>
+		</dependency>-->   
+
+	<dependency>
+        <groupId>org.quartz-scheduler</groupId>
+        <artifactId>quartz</artifactId>
+        <version>${quartz.version}</version>
+        <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+    </dependency> 
+	  <dependency>
+		<groupId>org.quartz-scheduler</groupId>
+		<artifactId>quartz-oracle</artifactId>
+		<version>1.8.6</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.quartz-scheduler</groupId>
+		<artifactId>quartz-jboss</artifactId>
+		<version>1.8.6</version>
+	</dependency> 
+		<!-- Apache commons-logging -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+<!-- 
+	    <dependency>
+			<groupId>org.gwtrpcspring</groupId>
+			<artifactId>gwtrpc-spring</artifactId>
+			<version>1.0.3</version>
+		</dependency>  -->
+		
+		<!-- spring4gwt
+		<dependency>
+			<groupId>org.spring4gwt</groupId>
+			<artifactId>spring4gwt</artifactId>
+			<version>0.0.1</version> 
+		</dependency>  --> 
+		
+		<!-- Test -->
+		
+	    <!-- junit -->
+        <dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <version>4.11</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-all</artifactId>
+		    <version>1.10.19</version>
+		    <scope>test</scope>
+		</dependency>
+      <!-- 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>2.4</version>
+            <scope>test</scope>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymockclassextension</artifactId>
+            <version>2.4</version>
+            <scope>test</scope>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>2.4.3</version>
+            <scope>test</scope>
+        </dependency>
+ 
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils</artifactId>
+            <version>2.2</version>
+            <scope>test</scope>
+        </dependency>
+		 -->    
+	
+		<!-- aspectjweaver -->
+		  <dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>1.6.11</version>
+        </dependency>
+        
+		<!--  aspectjrt  -->
+        <dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjrt</artifactId>
+		    <version>1.6.9</version>
+        </dependency>
+		
+        <!-- aopalliance  -->
+        <dependency>
+		    <groupId>aopalliance</groupId>
+		    <artifactId>aopalliance</artifactId>
+		    <version>1.0</version>
+        </dependency>
+        
+		<!-- ibatis-sqlmap  -->
+        <dependency>
+		    <groupId>org.apache.ibatis</groupId>
+		    <artifactId>ibatis-sqlmap</artifactId>
+		    <version>2.3.4.726</version>
+        </dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+	
+	<!-- 	<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>4.3.6</version>
+		</dependency>
+ -->
+	  <dependency>
+          <groupId>commons-httpclient</groupId>
+          <artifactId>commons-httpclient</artifactId>
+          <version>${commons-httpclient-version}</version>
+      </dependency>
+        <!-- jsr250-api - annotation  -->
+        <dependency>
+		    <groupId>javax.annotation</groupId>
+		    <artifactId>jsr250-api</artifactId>
+		    <version>1.0</version>
+        </dependency>
+        <dependency>
+			    <groupId>org.glassfish</groupId>
+			    <artifactId>javax.annotation</artifactId>
+			    <version>3.1.1</version>
+			</dependency>
+		
+        <!-- jsp 관련 
+       	  ## 1.7 ##
+		 <dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId> 
+		    <version>3.0.1</version>
+		     <scope>provided</scope>
+        </dependency> 
+        
+        <dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.3.2-b02</version>
+				<scope>provided</scope>
+		</dependency> 
+        <dependency>
+				<groupId>javax.el</groupId>
+				<artifactId>javax.el-api</artifactId>
+				<version>3.0.0</version>
+					<scope>provided</scope>
+			</dependency>
+			  
+		-->
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>servlet-api</artifactId> 
+		    <version>2.5</version>
+		     <scope>provided</scope>
+        </dependency> 
+        
+        <dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		   <dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>el-api</artifactId>
+			<version>1.1</version>
+			<scope>provided</scope>
+		</dependency> 
+		
+		
+       <dependency>
+		    <groupId>taglibs</groupId>
+		    <artifactId>standard</artifactId>
+		    <version>1.1.2</version>
+        </dependency>
+	<!--	
+        <dependency>
+		    <groupId>cglib</groupId>
+		    <artifactId>cglib</artifactId>
+		    <version>2.2</version>
+		     <scope>provided</scope>
+        </dependency> 
+         <dependency>
+		    <groupId>cglib</groupId>
+		    <artifactId>cglib-nodep</artifactId>
+		    <version>2.2</version>
+		    <scope>provided</scope> 
+        </dependency>  
+         <version>2.2</version> --> 
+         <!--     <dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-log4j12</artifactId>
+		    <version>1.5.11</version>
+		     <scope>provided</scope>
+        </dependency>
+	  
+       <dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>1.5.11</version>
+		     <scope>provided</scope>
+        </dependency>   
+           <dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-log4j12</artifactId>
+		    <version>1.5.8</version>
+		     <scope>provided</scope>
+        </dependency>
+	  
+       <dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>1.5.8</version>
+		     <scope>provided</scope>
+        </dependency>  
+        
+         JETTY DEPENDENCIES -->
+	 <dependency>
+	    <groupId>org.eclipse.jetty</groupId>
+	    <artifactId>jetty-server</artifactId>
+	    <version>${jetty.version}</version>
+	     <scope>provided</scope>
+	  </dependency>  
+	<!--  <dependency>
+	    <groupId>org.eclipse.jetty</groupId>
+	    <artifactId>jetty-servlet</artifactId>
+	    <version>${jetty.version}</version>
+	     <scope>provided</scope>
+	  </dependency>
+	  <dependency>
+	    <groupId>org.eclipse.jetty</groupId>
+	    <artifactId>jetty-webapp</artifactId>
+	    <version>${jetty.version}</version>
+	     <scope>provided</scope>
+	  </dependency> 
+	  <dependency>
+	    <groupId>org.eclipse.jetty</groupId>
+	    <artifactId>jetty-servlets</artifactId>
+	    <version>${jetty.version}</version>
+	     <scope>provided</scope>
+	  </dependency>  
+	   <dependency>
+	    <groupId>org.eclipse.jetty</groupId>
+	    <artifactId>jetty-jsp</artifactId>
+        <version>${jetty.jsp.version}</version>
+	    <scope>provided</scope>
+     </dependency>  
+     <dependency>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jsp-2.1-glassfish</artifactId>
+            <version>2.1.v20100127</version>
+             <scope>provided</scope>
+    </dependency>  -->
+    	<dependency>
+	  <groupId>org.eclipse.jetty</groupId>
+	  <artifactId>jetty-continuation</artifactId>
+	  <version>${jetty.version}</version>
+	   <scope>provided</scope>
+	 </dependency> 
+    	<dependency>
+	  <groupId>org.eclipse.jetty</groupId>
+	  <artifactId>jetty-io</artifactId>
+	  <version>${jetty.version}</version>
+	   <scope>provided</scope>
+	 </dependency> 
+	 	<dependency>
+	  <groupId>org.eclipse.jetty</groupId>
+	  <artifactId>jetty-http</artifactId>
+	  <version>${jetty.version}</version>
+	   <scope>provided</scope>
+	 </dependency> 
+	 
+		<dependency>
+	  <groupId>org.eclipse.jetty</groupId>
+	  <artifactId>jetty-util</artifactId>
+	  <version>${jetty.version}</version>
+	   <scope>provided</scope>
+	 </dependency> 
+	 <dependency>
+		  <groupId>org.eclipse.jetty</groupId>
+		  <artifactId>jetty-security</artifactId>
+		  <version>${jetty.version}</version>
+	    <scope>provided</scope>
+		</dependency> 
+ <!--	  <dependency>
+		  <groupId>org.mortbay.jetty</groupId>
+		  <artifactId>jetty-util</artifactId> 
+		  <version>6.1.26</version> 
+		  <scope>provided</scope>
+		</dependency> 
+		<dependency>
+		  <groupId>org.mortbay.jetty</groupId>
+		  <artifactId>jetty</artifactId>
+		   <version>6.1.26</version> 
+		   <scope>provided</scope>
+		</dependency> 
+		
+	     <dependency>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jetty-maven-plugin</artifactId>
+			<version>8.1.16.v20140903</version>
+			 <scope>provided</scope>
+		</dependency>  --> 
+		   <!--	
+	       <dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>jstl</artifactId>
+		    <version>1.2</version>
+        </dependency> 
+     
+	    JSP and JSTL SUPPORT   --> 
+	    
+	    <dependency>
+		  <groupId>org.apache.cassandra</groupId>
+		  <artifactId>cassandra-thrift</artifactId>
+		  <version>1.1.6</version>
+		  <exclusions>
+			  <exclusion> 
+			    <groupId>org.slf4j</groupId>
+			    <artifactId>slf4j-log4j12</artifactId>
+			  </exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>  
+		    <scope>provided</scope>
+		</dependency>
+
+  <!--  <dependency>
+	<groupId> org.apache.cassandra</groupId>
+	<artifactId>cassandra-all</artifactId>
+	<version>1.1.6</version>  
+	</dependency>   -->
+      <dependency>
+	  <groupId>com.sun.xml.bind</groupId>
+	  <artifactId>jaxb-impl</artifactId>
+	  <version>2.1.3</version>
+	   <scope>provided</scope>
+	   </dependency>
+	   <dependency>
+	  <groupId>org.openoffice</groupId>
+	  <artifactId>juh</artifactId>
+	  <version>2.3.0</version>
+	  <scope>provided</scope>
+	</dependency>
+	<dependency>
+	  <groupId>org.openoffice</groupId>
+	  <artifactId>jurt</artifactId>
+	  <version>2.3.0</version>
+	   <scope>provided</scope>
+	</dependency>
+	
+	  <dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>jstl</artifactId>
+	    <version>1.1.2</version> 
+	  </dependency>  
+    
+	<!-- 	SLF4J  -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.13</version> 
+		</dependency> 
+	
+	    <dependency>
+	      <groupId>org.slf4j</groupId>
+	      <artifactId>jcl-over-slf4j</artifactId>
+	      <version>1.7.13</version> 
+	  </dependency>  
+	
+     <dependency>
+	      <groupId>org.slf4j</groupId>
+	      <artifactId>log4j-over-slf4j</artifactId>
+	      <version>1.7.13</version>
+	  </dependency> 
+ 
+   <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jul-to-slf4j</artifactId>
+      <version>1.7.13</version>
+  </dependency> 
+  
+      <dependency>
+		<groupId>ch.qos.logback</groupId>
+		<artifactId>logback-access</artifactId>
+		<version>1.1.2</version>
+		 </dependency>
+     <dependency>
+           <groupId>ch.qos.logback</groupId>
+           <artifactId>logback-classic</artifactId>
+            <version>1.1.2</version>
+           <!--  <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>runtime</scope> -->
+       </dependency>
+       <dependency>
+           <groupId>ch.qos.logback</groupId>
+           <artifactId>logback-core</artifactId>
+            <version>1.1.2</version>
+       </dependency>
+
+<!--  조건부 설정을 사용하려면 아래의 디펜던시를 추가해 주어야 한다.   -->
+ <dependency>
+    <groupId>org.codehaus.janino</groupId>
+    <artifactId>janino</artifactId>
+    <version>2.7.7</version>
+</dependency>
+  
+  <!-- Log4j2 SLF4J Binding 
+  
+   <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-jdk14</artifactId>
+      <version>1.7.13</version>
+  </dependency>
+  
+<dependency>
+  <groupId>org.apache.logging.log4j</groupId>
+  <artifactId>log4j-slf4j-impl</artifactId>
+  <version>x.x.x</version>
+</dependency>-->
+ 
+<!-- Log4j 2
+<dependency>
+  <groupId>org.apache.logging.log4j</groupId>
+  <artifactId>log4j-api</artifactId>
+  <version>x.x.x</version>
+</dependency> -->
+
+    <!-- 
+    
+    
+   <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.13</version>
+        </dependency>  
+         
+      	<dependency>
+		<groupId>log4j</groupId>
+		<artifactId>log4j</artifactId>
+		<version>1.2.17</version> 
+	</dependency>   -->    
+    <!--  
+      <dependency>
+	<groupId>javax.jms</groupId>
+	<artifactId>jms</artifactId>
+	<version>1.1</version>
+    </dependency>
+         <dependency>
+            <groupId>com.sun.jdmk</groupId>
+            <artifactId>jmxtools</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+		 <dependency>
+            <groupId>com.sun.jmx</groupId>
+            <artifactId>jmxri</artifactId>
+            <version>1.2.1</version>
+        </dependency> 	
+        <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+      <version>1.6.1</version>
+       <scope>runtime</scope> 
+  </dependency> 
+       <scope>provided</scope> 
+ <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jul-to-slf4j</artifactId>
+      <version>1.7.7</version>
+  </dependency>
+  
+  <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>log4j-over-slf4j</artifactId>
+      <version>1.7.7</version>
+  </dependency>
+
+ 
+      Apache log4j  1.2.15-->
+    
+	<!-- 
+	 <exclusions>
+                <exclusion>
+                    <groupId>com.sun.jdmk</groupId>
+                    <artifactId>jmxtools</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.sun.jmx</groupId>
+                    <artifactId>jmxri</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>runtime</scope>
+            
+	-->	
+	   <dependency>
+			<groupId>net.sf</groupId>
+			<artifactId>log4jdbc3</artifactId>
+			<version>1.1</version>
+			 <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.sf.log4jdbc</groupId>
+			<artifactId>log4jdbc4</artifactId>
+			<version>1.2</version>
+		</dependency> 
+        <dependency>
+		    <groupId>commons-dbcp</groupId>
+		    <artifactId>commons-dbcp</artifactId>
+		    <version>1.2.2</version>
+        </dependency>
+	 
+        <dependency>
+		    <groupId>commons-beanutils</groupId>
+		    <artifactId>commons-beanutils</artifactId>
+		    <version>1.8.3</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+        
+        <!-- 암호화 모듈 
+        <dependency>
+		  <groupId>com.softforum</groupId>
+		  <artifactId>xdbe</artifactId>
+		  <version>1.0</version>
+		   <scope>provided</scope>
+		</dependency>  
+ -->
+	<!-- DBunit -->
+	<!--
+		<dependency>
+			<groupId>org.dbunit</groupId>
+			<artifactId>dbunit</artifactId>
+			<version>2.4.8</version>
+		</dependency>
+	 -->
+	 
+	<!-- EMMA -->
+	<!--		
+		<dependency>
+			<groupId>emma</groupId>
+			<artifactId>emma</artifactId>
+			<version>2.1.5320</version>
+		</dependency>
+	 --> 
+   
+		<!--  hsqldb 
+		<dependency>
+			<groupId>hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>1.8.0.10</version>
+		</dependency>
+		-->
+   <dependency>
+      <groupId>com.google.code.gwtx</groupId>
+      <artifactId>gwtx</artifactId>
+      <version>1.5.3</version>
+    </dependency>
+  
+		<dependency>
+	        <groupId>org.easymock</groupId>
+	        <artifactId>easymock</artifactId>
+	        <version>3.0</version>
+	     </dependency>
+		      
+	    <dependency>
+	        <groupId>commons-collections</groupId>
+	        <artifactId>commons-collections</artifactId>
+	        <version>3.2.1</version>       
+	      </dependency>	
+		
+		<dependency>
+	        <groupId>commons-digester</groupId>
+	        <artifactId>commons-digester</artifactId>
+	        <version>1.8</version>
+	    </dependency>
+	    
+		<dependency>
+	        <groupId>org.antlr</groupId>
+	        <artifactId>antlr</artifactId>
+	        <version>3.0.1</version>
+   		</dependency>
+   		 <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>${mybatis-spring.version}</version>
+        </dependency>
+      <!--  <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
+        </dependency> --> 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${springframeworkVersion}</version>
+                <exclusions> 
+		        <exclusion>
+		            <groupId>commons-logging</groupId>
+		            <artifactId>commons-logging</artifactId>
+		         </exclusion>
+		    </exclusions> 
+        </dependency>
+ 
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.fdl.security</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+            <version>2.6.0</version>
+             <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+        </dependency>
+        
+        <dependency>
+		   <groupId>com.googlecode.ehcache-spring-annotations</groupId>
+		   <artifactId>ehcache-spring-annotations</artifactId>
+		   <version>1.2.0</version>
+		</dependency> 
+
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-terracotta</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.fdl.crypto</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.fdl.excel</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.fdl.string</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.fdl.filehandling</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-vfs</groupId>
+            <artifactId>commons-vfs</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+  
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.fdl.logging</artifactId>
+            <version>2.7.0</version> 
+             <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+        </dependency>
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.3.1</version>
+        </dependency> 
+      
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.itl.integration</artifactId>
+            <version>2.7.0</version>
+        </dependency> 
+        
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.castor</groupId>
+            <artifactId>castor-core</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.castor</groupId>
+            <artifactId>castor-codegen</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.castor</groupId>
+            <artifactId>castor-xml-schema</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.castor</groupId>
+            <artifactId>castor-xml</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+        
+        <dependency>
+    	<groupId>xml-apis</groupId>
+   		 <artifactId>xml-apis</artifactId>
+    	<version>1.4.01</version>
+	</dependency>
+
+        <dependency>
+            <groupId>commons-pool</groupId>
+            <artifactId>commons-pool</artifactId>
+            <version>1.5.6</version>
+        </dependency>
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.fdl.xml</artifactId>
+            <version>2.7.0</version> 
+             <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+        </dependency>
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.itl.webservice</artifactId>
+            <version>2.7.0</version>
+             <scope>provided</scope>
+        </dependency>
+      
+        
+        <dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-framework</artifactId>
+			<version>4.1.5</version>
+		</dependency> 
+        
+	   <dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		
+	    <dependency>
+			<groupId>com.artofsolving</groupId>
+			<artifactId>jodconverter</artifactId>
+			<version>2.2.1</version>
+			 <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+		</dependency>
+		
+	    <dependency>
+			<groupId>egovframework.com.ems</groupId>
+			<artifactId>sndng-mail</artifactId>
+			<version>1.0</version> 
+		</dependency>
+		 <dependency>
+		  <groupId>javax.mail</groupId>
+		  <artifactId>mail</artifactId>
+		  <version>1.4.1</version>
+		  <scope>provided</scope>
+		</dependency>
+		<!--	 <dependency> 
+			<groupId>org.jibx</groupId> 
+			<artifactId>maven-jibx-plugin</artifactId> 
+		  <version>1.2.5</version> 
+	   </dependency>
+
+  <dependency>
+	<groupId>xerces</groupId>
+	<artifactId>xercesImpl</artifactId>
+	<version>2.9.1</version>
+  </dependency>
+	  <dependency>
+		<groupId>org.jxls</groupId>
+		<artifactId>jxls-reader</artifactId>
+		<version>2.0.1</version>
+	</dependency> 
+	   <dependency>
+	    <groupId>org.jxls</groupId>
+	    <artifactId>jxls</artifactId>
+	    <version>2.2.7</version>
+	</dependency> -->
+	  <dependency> 
+        <groupId>maven</groupId>
+        <artifactId>maven-jboss-plugin</artifactId>
+        <version>1.5</version>
+        <type>plugin</type>
+      </dependency>
+       	    <!-- gwt-math BigDecimal <inherits name="com.googlecode.gwt.math.Math"/>
+	     <dependency>
+			<groupId>com.googlecode</groupId>
+			<artifactId>gwt-math-server</artifactId>
+			<version>2.1</version> 
+		</dependency> 
+	      <dependency>
+			<groupId>com.googlecode</groupId>
+			<artifactId>gwt-math</artifactId>
+			<version>2.1</version> 
+		</dependency>
+		-->
+		
+		<!-- gwt-java-math
+		<inherits name="net.zschech.gwt.math.Math" /> 
+		 <dependency>
+			<groupId>net.zschech</groupId>
+			<artifactId>gwt-java-math</artifactId>
+			<version>1.0.9</version> 
+		</dependency>  --> 
+	    <!-- apache poi -->
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>${poi.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>${poi.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml-schemas</artifactId>
+        <version>${poi.version}</version>
+    </dependency>
+  <!--   <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-contrib</artifactId>
+        <version>3.7-beta3</version>
+    </dependency>   
+    	<dependency>
+		    <groupId>org.jxls</groupId>
+		    <artifactId>jxls-poi</artifactId>
+		    <version>1.0.6</version>
+		</dependency> 
+       <dependency>
+	    <groupId>org.jxls</groupId>
+	    <artifactId>jxls-jexcel</artifactId>
+	    <version>1.0.3</version>
+	</dependency>
+    -->
+	 
+     <dependency>
+			<groupId>net.sourceforge.jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+			<version>2.6.12</version>
+		</dependency>
+  
+    <dependency>
+		<groupId>net.sf.jxls</groupId>
+		<artifactId>jxls-core</artifactId>
+		<version>1.0.2</version> 
+    </dependency> 
+    <dependency>
+		<groupId>net.sf.jxls</groupId>
+		<artifactId>jxls-reader</artifactId>
+		<version>1.0.2</version>  
+	</dependency>	
+	<!--  
+	<dependency>
+		<groupId>net.sf.jxls</groupId>
+		<artifactId>jxls-core</artifactId>
+		<version>2.3.0</version>
+	</dependency>
+	-->
+    	<!-- JXLS 
+	 <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-jexl</artifactId>
+        <version>2.1.1</version> 
+    </dependency> 
+	<dependency>
+		<groupId>net.sf.jxls</groupId>
+		<artifactId>jxls-core</artifactId>
+		<version>1.0.6</version>
+   </dependency> 
+    <dependency>
+		<groupId>net.sf.jxls</groupId>
+		<artifactId>jxls-reader</artifactId>
+		<version>1.0.6</version> 
+	</dependency>	 -->
+		<!-- cxf -->
+		<dependency>
+		  <groupId>org.apache.cxf</groupId>
+		  <artifactId>cxf-rt-core</artifactId>
+		  <version>2.7.18</version>
+		  <scope>provided</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.cxf</groupId>
+		  <artifactId>cxf-api</artifactId>
+		  <version>2.7.18</version>
+		  <scope>provided</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.cxf</groupId>
+		  <artifactId>cxf-common-utilities</artifactId>
+		  <version>2.5.11</version>
+		  <scope>provided</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.cxf</groupId>
+		  <artifactId>cxf-rt-bindings-soap</artifactId>
+		  <version>2.7.18</version>
+		  <scope>provided</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.cxf</groupId>
+		  <artifactId>cxf-rt-bindings-xml</artifactId>
+		  <version>2.7.18</version>
+		  <scope>provided</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.cxf</groupId>
+		  <artifactId>cxf-rt-databinding-aegis</artifactId>
+		  <version>2.7.18</version>
+		  <scope>provided</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.cxf</groupId>
+		  <artifactId>cxf-rt-databinding-jaxb</artifactId>
+		  <version>2.7.18</version>
+		  <scope>provided</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.cxf</groupId>
+		  <artifactId>cxf-rt-frontend-jaxws</artifactId>
+		 <version>2.7.18</version>
+        <exclusions>
+          <exclusion> <!-- exclude version 3 of asm -->
+            <groupId>asm</groupId>
+            <artifactId>asm</artifactId>
+          </exclusion> 
+        </exclusions>
+		  <scope>provided</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.cxf</groupId>
+		  <artifactId>cxf-rt-frontend-simple</artifactId>
+		  <version>2.7.18</version>
+		   <scope>provided</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.cxf</groupId>
+		  <artifactId>cxf-rt-transports-common</artifactId>
+		  <version>2.5.11</version>
+		  <scope>provided</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.cxf</groupId>
+		  <artifactId>cxf-rt-transports-http</artifactId>
+		  <version>2.7.18</version>
+		   <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+		  <scope>provided</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.cxf</groupId>
+		  <artifactId>cxf-rt-transports-http-jetty</artifactId>
+		  <version>2.7.18</version>
+		  <scope>provided</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.cxf</groupId>
+		  <artifactId>cxf-rt-ws-addr</artifactId>
+		  <version>2.7.18</version>
+		  <scope>provided</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.apache.cxf</groupId>
+		  <artifactId>cxf-tools-common</artifactId>
+		  <version>2.7.18</version>
+		  <scope>provided</scope>
+		</dependency>
+		<!-- cxf -->   
+	    <dependency>
+			    <groupId>asm</groupId>
+			    <artifactId>asm-all</artifactId>
+			    <version>3.3.1</version>
+			     <scope>provided</scope>
+			</dependency>
+	  <!--	  <dependency>
+		    <groupId>org.ow2.asm</groupId>
+		    <artifactId>asm</artifactId>
+		    <version>5.0.3</version>  
+		     <scope>provided</scope>
+		</dependency> -->
+		
+			<dependency>
+					<groupId>com.clipsoft</groupId>
+					<artifactId>ClipReport4.0</artifactId>
+					<version>1.0.0.73</version>
+				</dependency>
+				<dependency>
+						<groupId>smrmf.anyreport</groupId>
+  							<artifactId>smrmf-anyreport</artifactId>
+						  <version>2.2.0</version>
+			  </dependency>
+  
+  </dependencies>  
+	<reporting>
+		<outputDirectory>${basedir}/target/site</outputDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.0.1</version>
+				<reportSets>
+					<reportSet>
+						<id>sunlink</id>
+						<reports>
+							<report>javadoc</report>
+						</reports>
+						<inherited>true</inherited>
+						<configuration>
+							<links>
+								<link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
+							</links>
+						</configuration>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<!--   <plugin>
+			      <artifactId>maven-eclipse-plugin</artifactId> 
+		        <version>2.5.1</version>
+		        <configuration>
+		          <additionalprojectnatures>
+		               <projectnature>org.maven.ide.eclipse.maven2Nature</projectnature> 
+		          </additionalprojectnatures>
+		          <additionalbuildcommands>
+		             <buildcommand>org.maven.ide.eclipse.maven2Builder</buildcommand>
+		          </additionalbuildcommands>
+		        </configuration>
+		      </plugin>  -->
+			<!-- JUnit Test Results & EMMA Coverage Reporting -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>emma-maven-plugin</artifactId>
+				<inherited>true</inherited>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>surefire-report-maven-plugin</artifactId>
+				<inherited>true</inherited>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>report-only</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<!-- PMD manven plugin -->
+			<!--
+				<plugin> <groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId> <version>2.4</version>
+				<configuration> <rulesets> <ruleset>./Ruleset.xml</ruleset>
+				</rulesets> <linkXref>true</linkXref>
+				<sourceEncoding>${encoding}</sourceEncoding>
+				<minimumTokens>100</minimumTokens>
+				<targetJdk>${compileSource}</targetJdk> </configuration>
+				<reportSets> <reportSet> <reports> <report>pmd</report> </reports>
+				</reportSet> </reportSets> </plugin>
+			-->
+			<!-- Generating JavaDoc Report -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<minmemory>128m</minmemory>
+					<maxmemory>512m</maxmemory>
+					<encoding>${encoding}</encoding>
+					<docencoding>${encoding}</docencoding>
+					<charset>${encoding}</charset>
+				</configuration>
+			</plugin>
+			<!-- Generating Java Source in HTML -->
+			<plugin>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<configuration>
+					<inputEncoding>${encoding}</inputEncoding>
+					<outputEncoding>${encoding}</outputEncoding>
+					<linkJavadoc>true</linkJavadoc>
+					<javadocDir>apidocs</javadocDir>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>  
+	  <distributionManagement>
+	    <repository>
+	        <id>PayGen-Rel</id>
+	        <name>Releases</name>
+	        <url>http://211.34.164.100:9090/nexus/content/repositories/PayGen-Rel/</url>
+	    </repository> 
+	    <snapshotRepository>
+	        <id>PayGen-Snap</id>
+	        <name>Snapshots</name>
+	        <url>http://211.34.164.100:9090/nexus/content/repositories/PayGen-Snap/</url>
+	    </snapshotRepository>
+	</distributionManagement>      
+  
+</project>

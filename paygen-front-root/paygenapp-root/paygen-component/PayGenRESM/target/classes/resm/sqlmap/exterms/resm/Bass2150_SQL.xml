@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass2150">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass2150SerarchVO" type="com.app.exterms.resm.server.vo.Bass2150SrhVO"/>
+	
+	<resultMap id="bass2150" class="com.app.exterms.resm.server.vo.Bass2150VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="busnTypOccuCifiCd" column="BUSN_TYP_OCCU_CIFI_CD" columnIndex="2"/>
+		<result property="busnTypOccuCifiSmlrCd" column="BUSN_TYP_OCCU_CIFI_SMLR_CD" columnIndex="3"/>
+		<result property="busnTypOccuCifiSmlrNm" column="BUSN_TYP_OCCU_CIFI_SMLR_NM" columnIndex="4"/>
+		<result property="busnTypOccuCifiSmlrYn" column="BUSN_TYP_OCCU_CIFI_SMLR_YN" columnIndex="5"/>
+		<result property="kybdr" column="KYBDR" columnIndex="6"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="7"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="8"/>
+		<result property="ismt" column="ISMT" columnIndex="9"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="10"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="11"/>
+	</resultMap>
+	
+	<insert id="bass2150DAO.insertBass2150_S">
+		<![CDATA[
+			INSERT INTO BASS2150 
+				( DPOB_CD
+				  , BUSN_TYP_OCCU_CIFI_CD
+				  , BUSN_TYP_OCCU_CIFI_SMLR_CD
+				  , BUSN_TYP_OCCU_CIFI_SMLR_NM
+				  , BUSN_TYP_OCCU_CIFI_SMLR_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #busnTypOccuCifiCd#
+				  , #busnTypOccuCifiSmlrCd#
+				  , #busnTypOccuCifiSmlrNm#
+				  , #busnTypOccuCifiSmlrYn#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass2150DAO.updateBass2150_S">
+		<![CDATA[
+			UPDATE BASS2150
+			SET DPOB_CD=#dpobCd#
+				, BUSN_TYP_OCCU_CIFI_CD=#busnTypOccuCifiCd#
+				, BUSN_TYP_OCCU_CIFI_SMLR_CD=#busnTypOccuCifiSmlrCd#
+				, BUSN_TYP_OCCU_CIFI_SMLR_NM=#busnTypOccuCifiSmlrNm#
+				, BUSN_TYP_OCCU_CIFI_SMLR_YN=#busnTypOccuCifiSmlrYn#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND BUSN_TYP_OCCU_CIFI_CD=#busnTypOccuCifiCd#
+								AND BUSN_TYP_OCCU_CIFI_SMLR_CD=#busnTypOccuCifiSmlrCd#
+				]]>
+	</update>
+	
+	<delete id="bass2150DAO.deleteBass2150_S">
+		<![CDATA[
+			DELETE FROM BASS2150 
+						WHERE DPOB_CD=#dpobCd#
+								AND BUSN_TYP_OCCU_CIFI_CD=#busnTypOccuCifiCd#
+								AND BUSN_TYP_OCCU_CIFI_SMLR_CD=#busnTypOccuCifiSmlrCd#
+				]]>
+	</delete>
+	
+	<select id="bass2150DAO.selectBass2150_S" resultMap="bass2150">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, BUSN_TYP_OCCU_CIFI_CD
+				, BUSN_TYP_OCCU_CIFI_SMLR_CD
+				, BUSN_TYP_OCCU_CIFI_SMLR_NM
+				, BUSN_TYP_OCCU_CIFI_SMLR_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS2150
+						WHERE DPOB_CD=#dpobCd#
+								AND BUSN_TYP_OCCU_CIFI_CD=#busnTypOccuCifiCd#
+								AND BUSN_TYP_OCCU_CIFI_SMLR_CD=#busnTypOccuCifiSmlrCd#
+				]]>
+	</select>
+	
+	<select id="bass2150DAO.selectBass2150List_D" parameterClass="bass2150SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, BUSN_TYP_OCCU_CIFI_CD
+								, BUSN_TYP_OCCU_CIFI_SMLR_CD
+								, BUSN_TYP_OCCU_CIFI_SMLR_NM
+								, BUSN_TYP_OCCU_CIFI_SMLR_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS2150
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					BUSN_TYP_OCCU_CIFI_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, BUSN_TYP_OCCU_CIFI_CD DESC
+							, BUSN_TYP_OCCU_CIFI_SMLR_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass2150DAO.selectBass2150ListTotCnt_S" parameterClass="bass2150SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS2150
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				BUSN_TYP_OCCU_CIFI_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

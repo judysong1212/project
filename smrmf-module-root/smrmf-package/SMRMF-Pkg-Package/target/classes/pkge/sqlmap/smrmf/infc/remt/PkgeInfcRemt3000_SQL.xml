@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcRemt3000">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgRemt3000SerarchVO" type="com.app.smrmf.infc.retirement.server.vo.InfcPkgRemt3000SrhVO"/>
+	
+	<resultMap id="infcPkgRemt3000" class="com.app.smrmf.infc.retirement.server.vo.InfcPkgRemt3000VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="clutYrMnth" column="CLUT_YR_MNTH" columnIndex="2"/>
+		<result property="calcSevePayPsnDivCd" column="CALC_SEVE_PAY_PSN_DIV_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="reipDt" column="REIP_DT" columnIndex="5"/>
+		<result property="ddlneYn" column="DDLNE_YN" columnIndex="6"/>
+		<result property="ddlneDt" column="DDLNE_DT" columnIndex="7"/>
+		<result property="calcSevePayPsnSumtDt" column="CALC_SEVE_PAY_PSN_SUMT_DT" columnIndex="8"/>
+		<result property="degtrNm" column="DEGTR_NM" columnIndex="9"/>
+		<result property="corpNmFmnm" column="CORP_NM_FMNM" columnIndex="10"/>
+		<result property="busoprRgstnNum" column="BUSOPR_RGSTN_NUM" columnIndex="11"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="12"/>
+		<result property="corpNum" column="CORP_NUM" columnIndex="13"/>
+		<result property="incmRegrstDebrZpcd" column="INCM_REGRST_DEBR_ZPCD" columnIndex="14"/>
+		<result property="incmRegrstDebrFndtnAddr" column="INCM_REGRST_DEBR_FNDTN_ADDR" columnIndex="15"/>
+		<result property="incmRegrstDebrDtlPatrAddr" column="INCM_REGRST_DEBR_DTL_PATR_ADDR" columnIndex="16"/>
+		<result property="juriTxOffcCd" column="JURI_TX_OFFC_CD" columnIndex="17"/>
+		<result property="pentrCd" column="PENTR_CD" columnIndex="18"/>
+		<result property="txDeptyNum" column="TX_DEPTY_NUM" columnIndex="19"/>
+		<result property="hmtxId" column="HMTX_ID" columnIndex="20"/>
+		<result property="txPgmCd" column="TX_PGM_CD" columnIndex="21"/>
+		<result property="pernChrgDeptNm" column="PERN_CHRG_DEPT_NM" columnIndex="22"/>
+		<result property="pernChrgNm" column="PERN_CHRG_NM" columnIndex="23"/>
+		<result property="pernChrgPhnNum" column="PERN_CHRG_PHN_NUM" columnIndex="24"/>
+		<result property="cllnDebrDivCd" column="CLLN_DEBR_DIV_CD" columnIndex="25"/>
+		<result property="kybdr" column="KYBDR" columnIndex="26"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="27"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="28"/>
+		<result property="ismt" column="ISMT" columnIndex="29"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="30"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="31"/>
+		
+	</resultMap>
+	
+	<insert id="infcPkgRemt3000DAO.insertRemt3000_S">
+		<![CDATA[
+			INSERT INTO REMT3000 
+				( DPOB_CD
+				   , CLUT_YR_MNTH
+				   , CALC_SEVE_PAY_PSN_DIV_CD
+				  , SYSTEMKEY
+				  , REIP_DT
+				  , DDLNE_YN
+				  , DDLNE_DT
+				  , CALC_SEVE_PAY_PSN_SUMT_DT
+				  , DEGTR_NM
+				  , CORP_NM_FMNM
+				  , BUSOPR_RGSTN_NUM
+				  , RESN_REGN_NUM
+				  , CORP_NUM
+				  , INCM_REGRST_DEBR_ZPCD
+				  , INCM_REGRST_DEBR_FNDTN_ADDR
+				  , INCM_REGRST_DEBR_DTL_PATR_ADDR
+				  , JURI_TX_OFFC_CD
+				  , PENTR_CD
+				  , TX_DEPTY_NUM
+				  , HMTX_ID
+				  , TX_PGM_CD
+				  , PERN_CHRG_DEPT_NM
+				  , PERN_CHRG_NM
+				  , PERN_CHRG_PHN_NUM
+				  , CLLN_DEBR_DIV_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+			      , #clutYrMnth#
+				   , #calcSevePayPsnDivCd#
+				  , #systemkey#
+				  , #reipDt#
+				  , #ddlneYn#
+				  , #ddlneDt#
+				  , #calcSevePayPsnSumtDt#
+				  , #degtrNm#
+				  , #corpNmFmnm#
+				  , #busoprRgstnNum#
+				  , #resnRegnNum#
+				  , #corpNum#
+				  , #incmRegrstDebrZpcd#
+				  , #incmRegrstDebrFndtnAddr#
+				  , #incmRegrstDebrDtlPatrAddr#
+				  , #juriTxOffcCd#
+				  , #pentrCd#
+				  , #txDeptyNum#
+				  , #hmtxId#
+				  , #txPgmCd#
+				  , #pernChrgDeptNm#
+				  , #pernChrgNm#
+				  , #pernChrgPhnNum#
+				  , #cllnDebrDivCd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgRemt3000DAO.updateRemt3000_S">
+		<![CDATA[
+			UPDATE REMT3000
+			SET DPOB_CD=#dpobCd#
+			    , CLUT_YR_MNTH=#clutYrMnth#
+				 , CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+				, SYSTEMKEY=#systemkey#
+				, REIP_DT=#reipDt#
+				, DDLNE_YN=#ddlneYn#
+				, DDLNE_DT=#ddlneDt#
+				, CALC_SEVE_PAY_PSN_SUMT_DT=#calcSevePayPsnSumtDt#
+				, DEGTR_NM=#degtrNm#
+				, CORP_NM_FMNM=#corpNmFmnm#
+				, BUSOPR_RGSTN_NUM=#busoprRgstnNum#
+				, RESN_REGN_NUM=#resnRegnNum#
+				, CORP_NUM=#corpNum#
+				, INCM_REGRST_DEBR_ZPCD=#incmRegrstDebrZpcd#
+				, INCM_REGRST_DEBR_FNDTN_ADDR=#incmRegrstDebrFndtnAddr#
+				, INCM_REGRST_DEBR_DTL_PATR_ADDR=#incmRegrstDebrDtlPatrAddr#
+				, JURI_TX_OFFC_CD=#juriTxOffcCd#
+				, PENTR_CD=#pentrCd#
+				, TX_DEPTY_NUM=#txDeptyNum#
+				, HMTX_ID=#hmtxId#
+				, TX_PGM_CD=#txPgmCd#
+				, PERN_CHRG_DEPT_NM=#pernChrgDeptNm#
+				, PERN_CHRG_NM=#pernChrgNm#
+				, PERN_CHRG_PHN_NUM=#pernChrgPhnNum#
+				, CLLN_DEBR_DIV_CD=#cllnDebrDivCd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd# 
+								AND CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+								AND SYSTEMKEY=#systemkey#
+								AND CLUT_YR_MNTH=#clutYrMnth# 
+				]]>
+	</update>
+	
+	<delete id="infcPkgRemt3000DAO.deleteRemt3000_S">
+		<![CDATA[
+			DELETE FROM REMT3000 
+						WHERE DPOB_CD=#dpobCd#
+						  AND CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+						  AND SYSTEMKEY=#systemkey#
+						  AND CLUT_YR_MNTH=#clutYrMnth# 
+				]]>
+	</delete>
+	
+	<select id="infcPkgRemt3000DAO.selectRemt3000_S" resultMap="infcPkgRemt3000">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, CLUT_YR_MNTH
+				, CALC_SEVE_PAY_PSN_DIV_CD
+				, SYSTEMKEY
+				, REIP_DT
+				, DDLNE_YN
+				, DDLNE_DT
+				, CALC_SEVE_PAY_PSN_SUMT_DT
+				, DEGTR_NM
+				, CORP_NM_FMNM
+				, BUSOPR_RGSTN_NUM
+				, RESN_REGN_NUM
+				, CORP_NUM
+				, INCM_REGRST_DEBR_ZPCD
+				, INCM_REGRST_DEBR_FNDTN_ADDR
+				, INCM_REGRST_DEBR_DTL_PATR_ADDR
+				, JURI_TX_OFFC_CD
+				, PENTR_CD
+				, TX_DEPTY_NUM
+				, HMTX_ID
+				, TX_PGM_CD
+				, PERN_CHRG_DEPT_NM
+				, PERN_CHRG_NM
+				, PERN_CHRG_PHN_NUM
+				, CLLN_DEBR_DIV_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM REMT3000
+						WHERE DPOB_CD=#dpobCd#
+						  AND CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+                          AND SYSTEMKEY=#systemkey#
+                          AND CLUT_YR_MNTH=#clutYrMnth# 
+				]]>
+	</select>
+	
+	<select id="infcPkgRemt3000DAO.selectRemt3000List_D" parameterClass="infcPkgRemt3000SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD 
+								, CLUT_YR_MNTH
+								, CALC_SEVE_PAY_PSN_DIV_CD
+								, SYSTEMKEY
+								, REIP_DT
+								, DDLNE_YN
+								, DDLNE_DT
+								, CALC_SEVE_PAY_PSN_SUMT_DT
+								, DEGTR_NM
+								, CORP_NM_FMNM
+								, BUSOPR_RGSTN_NUM
+								, RESN_REGN_NUM
+								, CORP_NUM
+								, INCM_REGRST_DEBR_ZPCD
+								, INCM_REGRST_DEBR_FNDTN_ADDR
+								, INCM_REGRST_DEBR_DTL_PATR_ADDR
+								, JURI_TX_OFFC_CD
+								, PENTR_CD
+								, TX_DEPTY_NUM
+								, HMTX_ID
+								, TX_PGM_CD
+								, PERN_CHRG_DEPT_NM
+								, PERN_CHRG_NM
+								, PERN_CHRG_PHN_NUM
+								, CLLN_DEBR_DIV_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM REMT3000
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					CLUT_YR_MNTH LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, CLUT_YR_MNTH DESC
+							, CALC_SEVE_PAY_PSN_DIV_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgRemt3000DAO.selectRemt3000ListTotCnt_S" parameterClass="infcPkgRemt3000SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM REMT3000
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				CLUT_YR_MNTH LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

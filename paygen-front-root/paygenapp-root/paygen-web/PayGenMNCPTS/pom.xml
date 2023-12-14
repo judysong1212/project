@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.paygen.web</groupId>
+    <artifactId>paygen-web</artifactId>
+    <version>2.2.0</version>
+  </parent>
+  <groupId>com.paygen.mncpts</groupId>
+  <artifactId>paygen-mncpts</artifactId>
+  <packaging>war</packaging> 
+  <name>PayGenMUNICIPALITIES</name>
+  <url>http://maven.apache.org</url>
+  <!-- Municipalities 지방자체단체별 설정 정보  -->
+	<dependencies>	  
+          <dependency>
+            <groupId>org.springmodules</groupId>
+            <artifactId>spring-modules-validation</artifactId>
+            <version>0.9</version>
+           <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-modules-validation-0.9.jar</systemPath>
+        </dependency>
+       
+      <!-- 프로젝트 코어 등 추가 jar -->
+        <dependency> 
+      	 <groupId>com.paygen.prgm</groupId>
+  		 <artifactId>paygen-prgm</artifactId>
+         <version>${paygen.version}</version>  
+	   </dependency>
+      
+  </dependencies>   
+	 <build>
+	    <!--  <defaultGoal>install</defaultGoal>
+		<directory>${project.basedir}/target/classes</directory>
+	    <finalName>paygen-mncpts-${project.version}</finalName> -->   
+		 <!-- <outputDirectory>war/WEB-INF/classes</outputDirectory> --> 
+		 <!--<resources>
+		    <resource>
+		      <directory>src/main/resources</directory>
+		    </resource>
+		    <resource>
+		      <directory>src/main/java</directory>
+		      <includes> 
+		        <include>**/client/**/*.*</include>
+		        <include>**/shared/**/*.*</include>
+		        <include>**/*.gwt.xml</include>
+		      </includes>
+	    </resource>
+	  </resources> -->
+		    <resources>
+		   	<!-- <resource>
+        		<directory>src/main/resources</directory>
+     		 </resource> -->
+	            <resource>
+	                <directory>src/main/resources/${distenv}/${environment}</directory>
+	                <!--   <excludes>
+			            	<exclude>rebel.xml</exclude>  
+			            	<exclude>rebel-remote.xml</exclude>
+			    </excludes>  -->
+	            </resource> 
+	        </resources>
+	        <testResources>
+	            <testResource>
+	                <directory>src/test/resources/${distenv}/${environment}</directory>
+	            </testResource>
+	        </testResources>
+		 <plugins>
+		  <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-clean-plugin</artifactId>
+			    <version>2.5</version>
+			    <configuration>
+			      <filesets>
+			        <fileset>
+			          <directory>war</directory>
+			        <!--  <includes>
+			            <include>*</include>
+			          </includes> --> 
+			        </fileset>
+			      </filesets>
+			    </configuration>
+			  </plugin>
+		 	<!-- Copy static web files before executing gwt:run -->
+			 <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution> 
+						<phase>compile</phase> 
+					</execution>
+				</executions>
+				<configuration>  
+				    <warSourceDirectory>${basedir}/src/main/webapp</warSourceDirectory>
+                       <webResources>
+                            <webResource>
+                             <directory>${basedir}/src/main/mncpts/${environment}</directory>
+                           </webResource>
+                       </webResources>
+				     <failOnMissingWebXml>false</failOnMissingWebXml> 
+                     <overlays> </overlays> 
+					<webappDirectory>${project.basedir}/war</webappDirectory> 
+					<outputDirectory>${project.basedir}/target</outputDirectory> 
+					 <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>  
+				</configuration>
+			</plugin> 
+	         <!--	<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>
+                                ${project.build.directory}/lib
+                            </outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin> -->
+		</plugins>
+		 <pluginManagement>
+		 	<plugins>
+		 		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+		 		<plugin>
+		 			<groupId>org.eclipse.m2e</groupId>
+		 			<artifactId>lifecycle-mapping</artifactId>
+		 			<version>1.0.0</version>
+		 			<configuration>
+		 				<lifecycleMappingMetadata>
+		 					<pluginExecutions>
+		 						<pluginExecution>
+		 							<pluginExecutionFilter>
+		 								<groupId>
+		 									org.apache.maven.plugins
+		 								</groupId>
+		 								<artifactId>
+		 									maven-war-plugin
+		 								</artifactId>
+		 								<versionRange>
+		 									[2.6,)
+		 								</versionRange>
+		 								<goals>
+		 									<goal>war</goal>
+		 								</goals>
+		 							</pluginExecutionFilter>
+		 							<action>
+		 								<ignore></ignore>
+		 							</action>
+		 						</pluginExecution>
+		 					</pluginExecutions>
+		 				</lifecycleMappingMetadata>
+		 			</configuration>
+		 		</plugin>
+		 	</plugins>
+		 </pluginManagement>
+	 </build> 
+	 
+</project>

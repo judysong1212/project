@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Insr4200">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="pkgeInsr4200SerarchVO" type="com.app.smrmf.infc.insurance.server.vo.InfcPkgInsr4200SrhVO"/> 
+	
+	<resultMap id="pkgeInsr4200" class="com.app.smrmf.infc.insurance.server.vo.InfcPkgInsr4200VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="dducYrMnth" column="DDUC_YR_MNTH" columnIndex="3"/>
+		<result property="emymtSeilNum" column="EMYMT_SEIL_NUM" columnIndex="4"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="5"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="6"/>
+		<result property="regrstIncmTotAmnt" column="REGRST_INCM_TOT_AMNT" columnIndex="7"/>
+		<result property="deinStdIncmMnthAmnt" column="DEIN_STD_INCM_MNTH_AMNT" columnIndex="8"/>
+		<result property="deinMnthPrmm" column="DEIN_MNTH_PRMM" columnIndex="9"/>
+		<result property="indvBrdnSum" column="INDV_BRDN_SUM" columnIndex="10"/>
+		<result property="reattyQnty" column="REATTY_QNTY" columnIndex="11"/>
+		<result property="hmlfClutPrmm" column="HMLF_CLUT_PRMM" columnIndex="12"/>
+		<result property="hmlfPrmmAggr" column="HMLF_PRMM_AGGR" columnIndex="13"/>
+		<result property="dpobBrdnSum" column="DPOB_BRDN_SUM" columnIndex="14"/>
+		<result property="busoprClutPrmm" column="BUSOPR_CLUT_PRMM" columnIndex="15"/>
+		<result property="busoprReattyPrmm" column="BUSOPR_REATTY_PRMM" columnIndex="16"/>
+		<result property="busoprPrmmAggr" column="BUSOPR_PRMM_AGGR" columnIndex="17"/>
+		<result property="aggr" column="AGGR" columnIndex="18"/>
+		<result property="fluc" column="FLUC" columnIndex="19"/>
+		<result property="aqtnMnthPymtYn" column="AQTN_MNTH_PYMT_YN" columnIndex="20"/>
+		<result property="flucDt" column="FLUC_DT" columnIndex="21"/>
+		<result property="flucReasCtnt" column="FLUC_REAS_CTNT" columnIndex="22"/>
+		<result property="pbcorpOautyDeinYn" column="PBCORP_OAUTY_DEIN_YN" columnIndex="23"/>
+		<result property="kybdr" column="KYBDR" columnIndex="24"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="25"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="26"/>
+		<result property="ismt" column="ISMT" columnIndex="27"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="28"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="29"/>
+		<result property="natPennSymNum" column="NAT_PENN_SYM_NUM" columnIndex="30"/>
+		<result property="natPennPayCalcSum" column="NAT_PENN_PAY_CALC_SUM" columnIndex="31"/>
+	</resultMap>
+	 
+	 
+	<!-- 20170411 - 급여 반영  후 처리 작업 진행  -->
+	<update id="infcPkgInsr4200DAO.updatePayrToInsr4200">
+		<![CDATA[
+			UPDATE INSR4200
+			SET     NAT_INSR_PRCS_DT	= TO_CHAR(SYSDATE, 'YYYYMMDD')	        /*  처리일자  */
+				  , NAT_INSR_PRCS_YN 	= 'Y'				                    /*   처리여부  */ 
+				  , ISMT		 = #ismt#										/* 수정자	*/
+				  , REVN_DT		 = TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')			/* 수정일자	*/
+				  , REVN_ADDR	 = #revnAddr#									/* 수정주소	*/
+				WHERE DPOB_CD=#dpobCd#
+				  AND SYSTEMKEY=#systemkey#
+				  AND NAT_PAYR_DDUC_YR_MNTH=#natPayrDducYrMnth#
+				 
+		]]>
+	</update> 
+	<!--  AND EMYMT_SEIL_NUM=#emymtSeilNum# -->
+	
+	<!-- 20170411 - 급여 반영  후 초기화 처리  -->
+	<update id="infcPkgInsr4200DAO.updatePayCancelInsr4200">
+		<![CDATA[
+			UPDATE	INSR4200
+			SET NAT_INSR_PRCS_DT	 = TO_CHAR(SYSDATE, 'YYYYMMDD')	        /*  처리일자  */
+			  , NAT_INSR_PRCS_YN	= 'N'			    /*   처리여부  */ 
+	          , ISMT		 = #ismt#										/* 수정자	*/
+		      , REVN_DT		 = TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')			/* 수정일자	*/
+		      , REVN_ADDR	 = #revnAddr#									/* 수정주소	*/
+			WHERE	DPOB_CD		  =	#dpobCd#
+			AND		NAT_PAYR_DDUC_YR_MNTH=#natPayrDducYrMnth#
+			AND		SYSTEMKEY	  =	#systemkey#
+		]]>
+	</update>
+	
+</sqlMap>

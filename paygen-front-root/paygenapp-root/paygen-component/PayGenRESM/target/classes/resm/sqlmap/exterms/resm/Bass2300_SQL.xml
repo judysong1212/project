@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass2300">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass2300SerarchVO" type="com.app.exterms.resm.server.vo.Bass2300SrhVO"/>
+	
+	<resultMap id="bass2300" class="com.app.exterms.resm.server.vo.Bass2300VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="busnDtlTypOccuCd" column="BUSN_DTL_TYP_OCCU_CD" columnIndex="2"/>
+		<result property="busnDtlTypOccuNm" column="BUSN_DTL_TYP_OCCU_NM" columnIndex="3"/>
+		<result property="busnDtlTypOccuDayDys" column="BUSN_DTL_TYP_OCCU_DAY_DYS" columnIndex="4"/>
+		<result property="busnDtlTypOccuMnDys" column="BUSN_DTL_TYP_OCCU_MN_DYS" columnIndex="5"/>
+		<result property="dtilOcclsApptnUcstCd" column="DTIL_OCCLS_APPTN_UCST_CD" columnIndex="6"/>
+		<result property="busnDtlTypOccuUcstSum" column="BUSN_DTL_TYP_OCCU_UCST_SUM" columnIndex="7"/>
+		<result property="busnDtlTypOccuBgnnDt" column="BUSN_DTL_TYP_OCCU_BGNN_DT" columnIndex="8"/>
+		<result property="busnDtlTypOccuEndDt" column="BUSN_DTL_TYP_OCCU_END_DT" columnIndex="9"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="10"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="11"/>
+		<result property="busnDtlTypOccuJbfmlCd" column="BUSN_DTL_TYP_OCCU_JBFML_CD" columnIndex="12"/>
+		<result property="busnDtlTypOccuSeptCtnt" column="BUSN_DTL_TYP_OCCU_SEPT_CTNT" columnIndex="13"/>
+		<result property="busnTypOccuCifiCd" column="BUSN_TYP_OCCU_CIFI_CD" columnIndex="14"/>
+		<result property="busnTypOccuCifiSmlrCd" column="BUSN_TYP_OCCU_CIFI_SMLR_CD" columnIndex="15"/>
+		<result property="kybdr" column="KYBDR" columnIndex="16"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="17"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="18"/>
+		<result property="ismt" column="ISMT" columnIndex="19"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="20"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="21"/>
+	</resultMap>
+	
+	<insert id="bass2300DAO.insertBass2300_S">
+		<![CDATA[
+			INSERT INTO BASS2300 
+				( DPOB_CD
+				  , BUSN_DTL_TYP_OCCU_CD
+				  , BUSN_DTL_TYP_OCCU_NM
+				  , BUSN_DTL_TYP_OCCU_DAY_DYS
+				  , BUSN_DTL_TYP_OCCU_MN_DYS
+				  , DTIL_OCCLS_APPTN_UCST_CD
+				  , BUSN_DTL_TYP_OCCU_UCST_SUM
+				  , BUSN_DTL_TYP_OCCU_BGNN_DT
+				  , BUSN_DTL_TYP_OCCU_END_DT
+				  , TYP_OCCU_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , BUSN_DTL_TYP_OCCU_JBFML_CD
+				  , BUSN_DTL_TYP_OCCU_SEPT_CTNT
+				  , BUSN_TYP_OCCU_CIFI_CD
+				  , BUSN_TYP_OCCU_CIFI_SMLR_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #busnDtlTypOccuCd#
+				  , #busnDtlTypOccuNm#
+				  , #busnDtlTypOccuDayDys#
+				  , #busnDtlTypOccuMnDys#
+				  , #dtilOcclsApptnUcstCd#
+				  , #busnDtlTypOccuUcstSum#
+				  , #busnDtlTypOccuBgnnDt#
+				  , #busnDtlTypOccuEndDt#
+				  , #typOccuCd#
+				  , #dtilOccuInttnCd#
+				  , #busnDtlTypOccuJbfmlCd#
+				  , #busnDtlTypOccuSeptCtnt#
+				  , #busnTypOccuCifiCd#
+				  , #busnTypOccuCifiSmlrCd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass2300DAO.updateBass2300_S">
+		<![CDATA[
+			UPDATE BASS2300
+			SET DPOB_CD=#dpobCd#
+				, BUSN_DTL_TYP_OCCU_CD=#busnDtlTypOccuCd#
+				, BUSN_DTL_TYP_OCCU_NM=#busnDtlTypOccuNm#
+				, BUSN_DTL_TYP_OCCU_DAY_DYS=#busnDtlTypOccuDayDys#
+				, BUSN_DTL_TYP_OCCU_MN_DYS=#busnDtlTypOccuMnDys#
+				, DTIL_OCCLS_APPTN_UCST_CD=#dtilOcclsApptnUcstCd#
+				, BUSN_DTL_TYP_OCCU_UCST_SUM=#busnDtlTypOccuUcstSum#
+				, BUSN_DTL_TYP_OCCU_BGNN_DT=#busnDtlTypOccuBgnnDt#
+				, BUSN_DTL_TYP_OCCU_END_DT=#busnDtlTypOccuEndDt#
+				, TYP_OCCU_CD=#typOccuCd#
+				, DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				, BUSN_DTL_TYP_OCCU_JBFML_CD=#busnDtlTypOccuJbfmlCd#
+				, BUSN_DTL_TYP_OCCU_SEPT_CTNT=#busnDtlTypOccuSeptCtnt#
+				, BUSN_TYP_OCCU_CIFI_CD=#busnTypOccuCifiCd#
+				, BUSN_TYP_OCCU_CIFI_SMLR_CD=#busnTypOccuCifiSmlrCd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND BUSN_DTL_TYP_OCCU_CD=#busnDtlTypOccuCd#
+				]]>
+	</update>
+	
+	<delete id="bass2300DAO.deleteBass2300_S">
+		<![CDATA[
+			DELETE FROM BASS2300 
+						WHERE DPOB_CD=#dpobCd#
+								AND BUSN_DTL_TYP_OCCU_CD=#busnDtlTypOccuCd#
+				]]>
+	</delete>
+	
+	<select id="bass2300DAO.selectBass2300_S" resultMap="bass2300">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, BUSN_DTL_TYP_OCCU_CD
+				, BUSN_DTL_TYP_OCCU_NM
+				, BUSN_DTL_TYP_OCCU_DAY_DYS
+				, BUSN_DTL_TYP_OCCU_MN_DYS
+				, DTIL_OCCLS_APPTN_UCST_CD
+				, BUSN_DTL_TYP_OCCU_UCST_SUM
+				, BUSN_DTL_TYP_OCCU_BGNN_DT
+				, BUSN_DTL_TYP_OCCU_END_DT
+				, TYP_OCCU_CD
+				, DTIL_OCCU_INTTN_CD
+				, BUSN_DTL_TYP_OCCU_JBFML_CD
+				, BUSN_DTL_TYP_OCCU_SEPT_CTNT
+				, BUSN_TYP_OCCU_CIFI_CD
+				, BUSN_TYP_OCCU_CIFI_SMLR_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS2300
+						WHERE DPOB_CD=#dpobCd#
+								AND BUSN_DTL_TYP_OCCU_CD=#busnDtlTypOccuCd#
+				]]>
+	</select>
+	
+	<select id="bass2300DAO.selectBass2300List_D" parameterClass="bass2300SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, BUSN_DTL_TYP_OCCU_CD
+								, BUSN_DTL_TYP_OCCU_NM
+								, BUSN_DTL_TYP_OCCU_DAY_DYS
+								, BUSN_DTL_TYP_OCCU_MN_DYS
+								, DTIL_OCCLS_APPTN_UCST_CD
+								, BUSN_DTL_TYP_OCCU_UCST_SUM
+								, BUSN_DTL_TYP_OCCU_BGNN_DT
+								, BUSN_DTL_TYP_OCCU_END_DT
+								, TYP_OCCU_CD
+								, DTIL_OCCU_INTTN_CD
+								, BUSN_DTL_TYP_OCCU_JBFML_CD
+								, BUSN_DTL_TYP_OCCU_SEPT_CTNT
+								, BUSN_TYP_OCCU_CIFI_CD
+								, BUSN_TYP_OCCU_CIFI_SMLR_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS2300
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					BUSN_DTL_TYP_OCCU_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, BUSN_DTL_TYP_OCCU_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass2300DAO.selectBass2300ListTotCnt_S" parameterClass="bass2300SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS2300
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				BUSN_DTL_TYP_OCCU_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

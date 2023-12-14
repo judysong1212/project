@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass2500">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass2500SerarchVO" type="com.app.exterms.resm.server.vo.Bass2500SrhVO"/>
+	
+	<resultMap id="bass2500" class="com.app.exterms.resm.server.vo.Bass2500VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="stpInttnSeptVal" column="STP_INTTN_SEPT_VAL" columnIndex="2"/>
+		<result property="rotaDutyDivCd" column="ROTA_DUTY_DIV_CD" columnIndex="3"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="4"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="5"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="6"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="7"/>
+		<result property="kybdr" column="KYBDR" columnIndex="8"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="9"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="10"/>
+		<result property="ismt" column="ISMT" columnIndex="11"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="12"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="13"/>
+	</resultMap>
+	
+	<insert id="bass2500DAO.insertBass2500_S">
+		<![CDATA[
+			INSERT INTO BASS2500 
+				( DPOB_CD
+				  , STP_INTTN_SEPT_VAL
+				  , ROTA_DUTY_DIV_CD
+				  , TYP_OCCU_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , BUSIN_CD
+				  , DEPT_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #stpInttnSeptVal#
+				  , #rotaDutyDivCd#
+				  , #typOccuCd#
+				  , #dtilOccuInttnCd#
+				  , #businCd#
+				  , #deptCd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass2500DAO.updateBass2500_S">
+		<![CDATA[
+			UPDATE BASS2500
+			SET DPOB_CD=#dpobCd#
+				, STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				, ROTA_DUTY_DIV_CD=#rotaDutyDivCd#
+				, TYP_OCCU_CD=#typOccuCd#
+				, DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				, BUSIN_CD=#businCd#
+				, DEPT_CD=#deptCd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+								AND ROTA_DUTY_DIV_CD=#rotaDutyDivCd#
+				]]>
+	</update>
+	
+	<delete id="bass2500DAO.deleteBass2500_S">
+		<![CDATA[
+			DELETE FROM BASS2500 
+						WHERE DPOB_CD=#dpobCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+								AND ROTA_DUTY_DIV_CD=#rotaDutyDivCd#
+				]]>
+	</delete>
+	
+	<select id="bass2500DAO.selectBass2500_S" resultMap="bass2500">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, STP_INTTN_SEPT_VAL
+				, ROTA_DUTY_DIV_CD
+				, TYP_OCCU_CD
+				, DTIL_OCCU_INTTN_CD
+				, BUSIN_CD
+				, DEPT_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS2500
+						WHERE DPOB_CD=#dpobCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+								AND ROTA_DUTY_DIV_CD=#rotaDutyDivCd#
+				]]>
+	</select>
+	
+	<select id="bass2500DAO.selectBass2500List_D" parameterClass="bass2500SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, STP_INTTN_SEPT_VAL
+								, ROTA_DUTY_DIV_CD
+								, TYP_OCCU_CD
+								, DTIL_OCCU_INTTN_CD
+								, BUSIN_CD
+								, DEPT_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS2500
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					STP_INTTN_SEPT_VAL LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, STP_INTTN_SEPT_VAL DESC
+							, ROTA_DUTY_DIV_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass2500DAO.selectBass2500ListTotCnt_S" parameterClass="bass2500SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS2500
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				STP_INTTN_SEPT_VAL LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

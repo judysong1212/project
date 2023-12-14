@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Yeta2070">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="yeta2070SrhVO" type="com.app.exterms.yearendtax.server.vo.Yeta2070SrhVO"/>
+	
+	<resultMap id="yeta2070" class="com.app.exterms.yearendtax.server.vo.Yeta2070VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="2"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="3"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="4"/>
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="5"/>
+		<result property="kybdr" column="KYBDR" columnIndex="6"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="7"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="8"/>
+		<result property="ismt" column="ISMT" columnIndex="9"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="10"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="11"/>
+	</resultMap>
+	
+	<select id="Yeta2070DAO.selectYeta2070List_D" parameterClass="yeta2070SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+						DPOB_CD						/* 사업장코드				*/
+						,UT_DPOB_CD					/* 단위사업장코드           */
+						,UT_DPOB_NM					/* 단위사업장명             */
+						,HHRK_UNT_DPOB_CD			/* 상위단위사업장코드       */
+						,DEGTR_RESN_REGN_NUM		/* 대표자주민번호           */
+						,DEGTR_NM					/* 대표자명                 */
+						,FRGNR_DIV_CD				/* 내외국인구분코드         */
+						,BUSOPR_RGSTN_NUM			/* 사업자등록번호           */
+						,CORP_RGSTN_NUM				/* 법인등록번호             */
+						,CORP_DIV_CD				/* 법인구분코드             */
+						,UNT_DPOB_ZPCD				/* 단위사업장우편번호       */
+						,UNT_DPOB_FNDTN_ADDR		/* 단위사업장기본주소       */
+						,UNT_DPOB_DTL_PATR_ADDR		/* 단위사업장상세주소       */
+						,UNT_DPOB_PHN_NUM			/* 단위사업장전화번호       */
+						,UNT_DPOB_FAX_NUM			/* 단위사업장팩스번호       */
+						,UNT_DPOB_ECTN_MAIL_ADDR	/* 단위사업장전자우편주소   */
+						,UNT_DPOB_BNCDS_NM			/* 단위사업장업종_업태      */
+						,UNT_DPOB_ITEM_NM			/* 단위사업장업종_종목명    */
+						,UNT_DPOB_MN_PRDT			/* 단위사업장업종_주생산품  */
+						,UNT_DPOB_ESBM_DT			/* 단위사업장설립일자       */
+						,UNT_DPOB_INGN_DT			/* 단위사업장개업일자       */
+						,UNT_DPOB_EOB_DT			/* 단위사업장폐업일자       */
+						,UNT_DPOB_SEAL_WRD_NM		/* 단위사업장직인문구명     */
+						,UNT_DPOB_SEAL_RFTA			/* 단위사업장직인경로       */
+						,UNT_DPOB_SEAL_FLNM			/* 단위사업장직인파일명     */
+						,UNT_DPOB_FNDTN_USE_YN		/* 단위사업장기본사용여부   */
+						,KYBDR						/* 입력자                   */
+						,INPT_DT					/* 입력일자                 */
+						,INPT_ADDR					/* 입력주소                 */
+						,ISMT						/* 수정자                   */
+						,REVN_DT					/* 수정일자                 */
+						,REVN_ADDR					/* 수정주소                 */
+						,MTST_BUSIN_DIV_CD			/* 주종사업장구분코드       */
+						,fcBass0300CDNM(#dpobCd#, MTST_BUSIN_DIV_CD ) as MTST_BUSIN_DIV_NM
+						,UP_DPOB_CMP_NO					/* 단위사업장승인번호 */
+						,UP_DPOB_UTYN_C171				/* C171_사업자단위과세자여부 */
+						,MTST_DPOB_SEIL_NUM_C172	/* C172_종사업장일련번호 */
+						,MNBH_DIV_CD						/* 본지점구분코드 */
+						,WHDG_TX_CTYP_DIV_CD		/* 원천세징수유형구분코드 */
+						,BEF_BUSOPR_RGSTN_NUM
+					FROM BASS0120
+				WHERE 1=1
+				AND UNT_DPOB_FNDTN_USE_YN = 'Y'
+				ORDER BY MTST_BUSIN_DIV_CD ASC, DPOB_CD ASC
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</select>
+
+<select id="Yeta2070DAO.selectYeta2070ListTotCnt_S" parameterClass="yeta2070SrhVO" resultClass="int">
+			SELECT 
+				COUNT(*) totcnt
+			FROM BASS0120
+			WHERE 1=1
+			AND UNT_DPOB_FNDTN_USE_YN = 'Y'
+</select>
+	
+  
+		
+</sqlMap>

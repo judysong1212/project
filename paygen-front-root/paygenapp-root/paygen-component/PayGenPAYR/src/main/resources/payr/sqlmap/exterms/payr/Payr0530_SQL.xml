@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Payr0530">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="payr0530SrhVO" type="com.app.exterms.payroll.server.vo.Payr0530SrhVO"/>
+	
+	<resultMap id="payr0530" class="com.app.exterms.payroll.server.vo.Payr0530VO">
+	     <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="payFamyRsptSeilNum" column="PAY_FAMY_RSPT_SEIL_NUM" columnIndex="3"/>
+		<result property="payFamyResnRegnNum" column="PAY_FAMY_RESN_REGN_NUM" columnIndex="4"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="5"/>
+		<result property="famyRelaDivCd" column="FAMY_RELA_DIV_CD" columnIndex="6"/>
+		<result property="famyAllwPymtYn" column="FAMY_ALLW_PYMT_YN" columnIndex="7"/>
+		<result property="chdnChdRrgEpnsPymtYn" column="CHDN_CHD_RRG_EPNS_PYMT_YN" columnIndex="8"/>
+		<result property="fndtnDducYn" column="FNDTN_DDUC_YN" columnIndex="9"/>
+		<result property="spueDducYn" column="SPUE_DDUC_YN" columnIndex="10"/>
+		<result property="wmnDducYn" column="WMN_DDUC_YN" columnIndex="11"/>
+		<result property="rftaGvstDducYn" column="RFTA_GVST_DDUC_YN" columnIndex="12"/>
+		<result property="dabpnDducYn" column="DABPN_DDUC_YN" columnIndex="13"/>
+		<result property="sgpnFmlyDducYn" column="SGPN_FMLY_DDUC_YN" columnIndex="14"/>
+		<result property="chdnChdRrgEpnsDducYn" column="CHDN_CHD_RRG_EPNS_DDUC_YN" columnIndex="15"/>
+		<result property="famyExtpyDivCd" column="FAMY_EXTPY_DIV_CD" columnIndex="16"/>
+		<result property="schlExpnAdmclExtpyDivCd" column="SCHL_EXPN_ADMCL_EXTPY_DIV_CD" columnIndex="17"/>
+		<result property="schlExpnAdmclExtpySum" column="SCHL_EXPN_ADMCL_EXTPY_SUM" columnIndex="18"/>
+		<result property="famyExtpySum" column="FAMY_EXTPY_SUM" columnIndex="19"/>
+		<result property="schlExpnExtpyPymtBgnnDt" column="SCHL_EXPN_EXTPY_PYMT_BGNN_DT" columnIndex="20"/>
+		<result property="schlExpnExtpyPymtEndDt" column="SCHL_EXPN_EXTPY_PYMT_END_DT" columnIndex="21"/>
+		<result property="kybdr" column="KYBDR" columnIndex="22"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="23"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="24"/>
+		<result property="ismt" column="ISMT" columnIndex="25"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="26"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="27"/>
+	</resultMap>
+	
+	<insert id="payr0530DAO.insertPayr0530_S">
+		<![CDATA[
+			INSERT INTO PAYR0530 
+				(  DPOB_CD
+				  , SYSTEMKEY
+				  , PAY_FAMY_RSPT_SEIL_NUM
+				  , PAY_FAMY_RESN_REGN_NUM
+				  , HAN_NM
+				  , FAMY_RELA_DIV_CD
+				  , FAMY_ALLW_PYMT_YN
+				  , CHDN_CHD_RRG_EPNS_PYMT_YN
+				  , FNDTN_DDUC_YN
+				  , SPUE_DDUC_YN
+				  , WMN_DDUC_YN
+				  , RFTA_GVST_DDUC_YN
+				  , DABPN_DDUC_YN
+				  , SGPN_FMLY_DDUC_YN
+				  , CHDN_CHD_RRG_EPNS_DDUC_YN
+				  , FAMY_EXTPY_DIV_CD
+				  , SCHL_EXPN_ADMCL_EXTPY_DIV_CD
+				  , SCHL_EXPN_ADMCL_EXTPY_SUM
+				  , FAMY_EXTPY_SUM
+				  , SCHL_EXPN_EXTPY_PYMT_BGNN_DT
+				  , SCHL_EXPN_EXTPY_PYMT_END_DT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES (  #dpobCd#
+			      , #systemkey#
+				  , (
+				  	SELECT  NVL(MAX(PAY_FAMY_RSPT_SEIL_NUM),0) + 1
+					  FROM PAYR0530
+					 WHERE DPOB_CD=#dpobCd#
+					   AND SYSTEMKEY=#systemkey#
+				  ) 
+				  , #payFamyResnRegnNum#
+				  , #hanNm#
+				  , #famyRelaDivCd#
+				  , #famyAllwPymtYn#
+				  , #chdnChdRrgEpnsPymtYn#
+				  , #fndtnDducYn#
+				  , #spueDducYn#
+				  , #wmnDducYn#
+				  , #rftaGvstDducYn#
+				  , #dabpnDducYn#
+				  , #sgpnFmlyDducYn#
+				  , #chdnChdRrgEpnsDducYn#
+				  , #famyExtpyDivCd#
+				  , #schlExpnAdmclExtpyDivCd#
+				  , #schlExpnAdmclExtpySum#
+				  , #famyExtpySum#
+				  , #schlExpnExtpyPymtBgnnDt#
+				  , #schlExpnExtpyPymtEndDt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="payr0530DAO.updatePayr0530_S">
+		<![CDATA[
+			UPDATE PAYR0530
+			SET SYSTEMKEY=#systemkey#
+			, DPOB_CD=#dpobCd#
+				, PAY_FAMY_RSPT_SEIL_NUM=#payFamyRsptSeilNum#
+				, PAY_FAMY_RESN_REGN_NUM=#payFamyResnRegnNum#
+				, HAN_NM=#hanNm#
+				, FAMY_RELA_DIV_CD=#famyRelaDivCd#
+				, FAMY_ALLW_PYMT_YN=#famyAllwPymtYn#
+				, CHDN_CHD_RRG_EPNS_PYMT_YN=#chdnChdRrgEpnsPymtYn#
+				, FNDTN_DDUC_YN=#fndtnDducYn#
+				, SPUE_DDUC_YN=#spueDducYn#
+				, WMN_DDUC_YN=#wmnDducYn#
+				, RFTA_GVST_DDUC_YN=#rftaGvstDducYn#
+				, DABPN_DDUC_YN=#dabpnDducYn#
+				, SGPN_FMLY_DDUC_YN=#sgpnFmlyDducYn#
+				, CHDN_CHD_RRG_EPNS_DDUC_YN=#chdnChdRrgEpnsDducYn#
+				, FAMY_EXTPY_DIV_CD=#famyExtpyDivCd#
+				, SCHL_EXPN_ADMCL_EXTPY_DIV_CD=#schlExpnAdmclExtpyDivCd#
+				, SCHL_EXPN_ADMCL_EXTPY_SUM=#schlExpnAdmclExtpySum#
+				, FAMY_EXTPY_SUM=#famyExtpySum#
+				, SCHL_EXPN_EXTPY_PYMT_BGNN_DT=#schlExpnExtpyPymtBgnnDt#
+				, SCHL_EXPN_EXTPY_PYMT_END_DT=#schlExpnExtpyPymtEndDt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+				 WHERE SYSTEMKEY=#systemkey#
+				   AND PAY_FAMY_RSPT_SEIL_NUM=#payFamyRsptSeilNum#
+				]]>
+	</update>
+	
+	<delete id="payr0530DAO.deletePayr0530_S">
+		<![CDATA[
+			DELETE FROM PAYR0530 
+			      WHERE SYSTEMKEY=#systemkey#
+				    AND PAY_FAMY_RSPT_SEIL_NUM=#payFamyRsptSeilNum#
+				]]>
+	</delete>
+	
+	<select id="payr0530DAO.selectPayr0530_S" resultMap="payr0530">
+		<![CDATA[
+			SELECT
+				SYSTEMKEY
+				, DPOB_CD
+				, PAY_FAMY_RSPT_SEIL_NUM
+				, PAY_FAMY_RESN_REGN_NUM
+				, HAN_NM
+				, FAMY_RELA_DIV_CD
+				, FAMY_ALLW_PYMT_YN
+				, CHDN_CHD_RRG_EPNS_PYMT_YN
+				, FNDTN_DDUC_YN
+				, SPUE_DDUC_YN
+				, WMN_DDUC_YN
+				, RFTA_GVST_DDUC_YN
+				, DABPN_DDUC_YN
+				, SGPN_FMLY_DDUC_YN
+				, CHDN_CHD_RRG_EPNS_DDUC_YN
+				, FAMY_EXTPY_DIV_CD
+				, SCHL_EXPN_ADMCL_EXTPY_DIV_CD
+				, SCHL_EXPN_ADMCL_EXTPY_SUM
+				, FAMY_EXTPY_SUM
+				, SCHL_EXPN_EXTPY_PYMT_BGNN_DT
+				, SCHL_EXPN_EXTPY_PYMT_END_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0530
+						WHERE SYSTEMKEY=#systemkey#
+								AND PAY_FAMY_RSPT_SEIL_NUM=#payFamyRsptSeilNum#
+				]]>
+	</select>
+	
+	<select id="payr0530DAO.selectPayr0530Check_S" resultMap="payr0530">
+		<![CDATA[
+			SELECT
+				SYSTEMKEY
+				, DPOB_CD
+				, PAY_FAMY_RSPT_SEIL_NUM
+				, PAY_FAMY_RESN_REGN_NUM
+				, HAN_NM
+				, FAMY_RELA_DIV_CD
+				, FAMY_ALLW_PYMT_YN
+				, CHDN_CHD_RRG_EPNS_PYMT_YN
+				, FNDTN_DDUC_YN
+				, SPUE_DDUC_YN
+				, WMN_DDUC_YN
+				, RFTA_GVST_DDUC_YN
+				, DABPN_DDUC_YN
+				, SGPN_FMLY_DDUC_YN
+				, CHDN_CHD_RRG_EPNS_DDUC_YN
+				, FAMY_EXTPY_DIV_CD
+				, SCHL_EXPN_ADMCL_EXTPY_DIV_CD
+				, SCHL_EXPN_ADMCL_EXTPY_SUM
+				, FAMY_EXTPY_SUM
+				, SCHL_EXPN_EXTPY_PYMT_BGNN_DT
+				, SCHL_EXPN_EXTPY_PYMT_END_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0530
+						WHERE DPOB_CD=#dpobCd#
+						AND SYSTEMKEY=#systemkey#
+								AND PAY_FAMY_RESN_REGN_NUM=#payFamyResnRegnNum#
+				]]>
+	</select>
+	
+	<select id="payr0530DAO.selectPayr0530List_D" parameterClass="payr0530SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								SYSTEMKEY
+								, DPOB_CD
+								, PAY_FAMY_RSPT_SEIL_NUM
+								, PAY_FAMY_RESN_REGN_NUM
+								, HAN_NM
+								, FAMY_RELA_DIV_CD
+								, FAMY_RELA_DIV_CD AS famyRelaDivCdcommCd
+								, fcBass0300CDNM(DPOB_CD,FAMY_RELA_DIV_CD) AS famyRelaDivCdcommCdNm
+								, FAMY_ALLW_PYMT_YN
+								, CHDN_CHD_RRG_EPNS_PYMT_YN
+								, FNDTN_DDUC_YN
+								, SPUE_DDUC_YN
+								, WMN_DDUC_YN
+								, RFTA_GVST_DDUC_YN
+								, DABPN_DDUC_YN
+								, SGPN_FMLY_DDUC_YN
+								, CHDN_CHD_RRG_EPNS_DDUC_YN
+								, FAMY_EXTPY_DIV_CD
+								, FAMY_EXTPY_DIV_CD AS famyExtpyDivCdcommCd
+								, fcBass0300CDNM(DPOB_CD,FAMY_EXTPY_DIV_CD) AS famyExtpyDivCdcommCdNm
+								, SCHL_EXPN_ADMCL_EXTPY_DIV_CD
+								, SCHL_EXPN_ADMCL_EXTPY_DIV_CD AS schlExpnAdmclDivCdcommCd
+								, fcBass0300CDNM(DPOB_CD,SCHL_EXPN_ADMCL_EXTPY_DIV_CD) AS schlExpnAdmclDivCdcommCdNm
+								, NVL(SCHL_EXPN_ADMCL_EXTPY_SUM,0) AS SCHL_EXPN_ADMCL_EXTPY_SUM
+								, NVL(FAMY_EXTPY_SUM,0) AS FAMY_EXTPY_SUM
+								, SCHL_EXPN_EXTPY_PYMT_BGNN_DT
+								, SCHL_EXPN_EXTPY_PYMT_END_DT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PAYR0530
+				WHERE 1=1
+			  <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>   
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+					ORDER BY 
+						SYSTEMKEY DESC 
+							, PAY_FAMY_RSPT_SEIL_NUM ASC
+							, PAY_FAMY_RESN_REGN_NUM ASC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="payr0530DAO.selectPayr0530ListTotCnt_S" parameterClass="payr0530SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0530
+			WHERE 1=1
+			<isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>   
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+	</select>
+	
+	<!-- 가족수당 대상자 조회  -->
+	<select id="payr0530DAO.selectPayrP410005ToPayr0530List_D" parameterClass="payr0530SrhVO" resultClass="egovMap">
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+					SELECT
+						BB.DPOB_CD,
+						BB.SYSTEMKEY,
+						fcBass0300CDNM(BB.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM ,
+						fcBass0400CDNM(BB.DPOB_CD,BB.CURR_AFFN_DEPT_CD,'2') AS DEPT_NM,
+						BB.BUSIN_CD,
+						fcBass0500CDNM(BB.DPOB_CD,SUBSTR(BB.BUSIN_CD,1,4),BB.CURR_AFFN_DEPT_CD,BB.BUSIN_CD)AS BUSIN_NM,
+						BB.TYP_OCCU_CD,
+						fcBass0320CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD) AS TYP_OCCU_NM,
+						fcBassEx0350CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD,BB.DTIL_OCCU_INTTN_CD,'1')AS DTIL_OCCU_CLS_DIV_NM,
+						BB.HAN_NM AS HAN_NM ,
+						BB.RESN_REGN_NUM AS RESN_REGN_NUM,
+						fcBass0300CDNM(AA.DPOB_CD,AA.FAMY_RELA_DIV_CD) AS FAMY_RELA_DIV_NM ,
+						AA.HAN_NM AS FMLY_HAN_NM ,
+						AA.PAY_FAMY_RESN_REGN_NUM ,
+						AA.FAMY_ALLW_PYMT_YN ,
+						fcBass0300CDNM(BB.DPOB_CD,BB.HDOFC_CODTN_CD) AS HDOFC_DIV_NM ,
+						fcBass0300CDNM(BB.DPOB_CD,AA.FAMY_EXTPY_DIV_CD) AS FAMY_EXTPY_DIV_NM,
+						AA.FAMY_EXTPY_SUM
+					FROM PAYR0530 AA , PSNL0100 BB
+					WHERE AA.DPOB_CD = BB.DPOB_CD
+						AND AA.SYSTEMKEY = BB.SYSTEMKEY
+						AND AA.FAMY_ALLW_PYMT_YN = 'Y'
+						<isNotEmpty prepend="AND" property="dpobCd" >
+							BB.DPOB_CD=#dpobCd#
+		           		</isNotEmpty>
+						<isNotEmpty prepend="AND" property="emymtDivCd" >
+					 		BB.EMYMT_DIV_CD=#emymtDivCd#
+						</isNotEmpty>  
+						  
+				       	<isNotEmpty property="deptCd" prepend="AND">
+							<![CDATA[
+							 BB.CURR_AFFN_DEPT_CD
+							]]>
+						<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+							#deptCdArr[]#
+							</iterate>
+						</isNotEmpty>  
+				       <!--
+				 		<isNotEmpty prepend="AND" property="deptCd" >
+					 		BB.CURR_AFFN_DEPT_CD IN = (#deptCd#)
+				       	</isNotEmpty> 
+				       	-->
+				       
+					  	<isNotEmpty prepend="AND" property="businCd" >
+					 		BB.BUSIN_CD=#businCd#
+				       	</isNotEmpty>  
+				       	<isNotEmpty property="typOccuCd" prepend="AND">
+							<![CDATA[
+						 		BB.TYP_OCCU_CD
+							]]>
+							<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+								#typOccuCdArr[]#
+							</iterate>
+						</isNotEmpty>  
+				  		<isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+							<![CDATA[
+								 BB.DTIL_OCCU_INTTN_CD
+							]]>
+							<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+								 #dtilOccuInttnCdArr[]#
+							</iterate>
+						</isNotEmpty>  
+				    	<isNotEmpty property="hdofcCodtnCd" prepend="AND">
+							<![CDATA[
+								HDOFC_CODTN_CD
+							]]>
+							<iterate prepend="IN" property="hdofcCodtnCdArr" open="(" close=")" conjunction=",">
+								#hdofcCodtnCdArr[]#
+							</iterate>
+						</isNotEmpty> 
+				    		<isNotEmpty prepend="AND" property="systemkey" >
+					 			BB.SYSTEMKEY=#systemkey#
+				       			</isNotEmpty>  
+				       		<isNotEmpty prepend="AND" property="hanNm" >
+					 		BB.HAN_NM LIKE '%' || #hanNm# || '%'
+				       	</isNotEmpty> 
+				       	
+				       	  <isNotEmpty prepend="AND" property="mangeDeptCd" >
+					 	BB.DEPT_CD=#mangeDeptCd#
+				       </isNotEmpty> 
+				       	
+				       	  
+					ORDER BY BB.HDOFC_CODTN_CD ASC,
+					    (SELECT LPAD(DEPT_RANK,5,'0')  
+					           FROM BASS0400 DD
+					           WHERE DD.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+					             AND DD.DPOB_CD = BB.DPOB_CD) ASC ,
+					    AA.PAY_FAMY_RESN_REGN_NUM DESC ,
+					    AA.PAY_FAMY_RSPT_SEIL_NUM ASC 
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>
+	
+	<!-- 가족수당엑셀리스트 -->
+	<select id="payr0530DAO.selectXlsPayrP410005ToPayr0530List_D" parameterClass="payr0530SrhVO" resultClass="egovMap">
+		SELECT
+						BB.DPOB_CD,
+						BB.SYSTEMKEY,
+						fcBass0300CDNM(BB.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM ,
+						fcBass0400CDNM(BB.DPOB_CD,BB.CURR_AFFN_DEPT_CD,'2') AS DEPT_NM,
+						BB.BUSIN_CD,
+						fcBass0500CDNM(BB.DPOB_CD,SUBSTR(BB.BUSIN_CD,1,4),BB.CURR_AFFN_DEPT_CD,BB.BUSIN_CD)AS BUSIN_NM,
+						BB.TYP_OCCU_CD,
+						fcBass0320CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD) AS TYP_OCCU_NM,
+						fcBassEx0350CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD,BB.DTIL_OCCU_INTTN_CD,'1')AS DTIL_OCCU_CLS_DIV_NM,
+						BB.HAN_NM AS HAN_NM ,
+						BB.RESN_REGN_NUM AS RESN_REGN_NUM,
+						fcBass0300CDNM(AA.DPOB_CD,AA.FAMY_RELA_DIV_CD) AS FAMY_RELA_DIV_NM ,
+						AA.HAN_NM AS FMLY_HAN_NM ,
+						AA.PAY_FAMY_RESN_REGN_NUM ,
+						AA.FAMY_ALLW_PYMT_YN ,
+						fcBass0300CDNM(BB.DPOB_CD,BB.HDOFC_CODTN_CD) AS HDOFC_DIV_NM ,
+						fcBass0300CDNM(BB.DPOB_CD,AA.FAMY_EXTPY_DIV_CD) AS FAMY_EXTPY_DIV_NM,
+						AA.FAMY_EXTPY_SUM
+					FROM PAYR0530 AA , PSNL0100 BB
+					WHERE AA.DPOB_CD = BB.DPOB_CD
+						AND AA.SYSTEMKEY = BB.SYSTEMKEY
+						AND AA.FAMY_ALLW_PYMT_YN = 'Y'
+				   <isNotEmpty prepend="AND" property="dpobCd" >
+			 	     BB.DPOB_CD=#dpobCd#
+		           </isNotEmpty>
+					   <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	BB.EMYMT_DIV_CD=#emymtDivCd#
+				       </isNotEmpty>  
+				       <isNotEmpty property="deptCd" prepend="AND">
+							<![CDATA[
+							 BB.CURR_AFFN_DEPT_CD
+							]]>
+						<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+							#deptCdArr[]#
+							</iterate>
+						</isNotEmpty>  
+				       <!-- 
+				         <isNotEmpty prepend="AND" property="deptCd" >
+					 	BB.CURR_AFFN_DEPT_CD=#deptCd#
+				       </isNotEmpty> 
+				        -->
+					  <isNotEmpty prepend="AND" property="businCd" >
+					 	BB.BUSIN_CD=#businCd#
+				       </isNotEmpty>  
+				       <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+						 BB.TYP_OCCU_CD
+						]]>
+						<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						 #typOccuCdArr[]#
+						</iterate>
+						</isNotEmpty>  
+				  <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+				    <isNotEmpty property="hdofcCodtnCd" prepend="AND">
+							<![CDATA[
+								HDOFC_CODTN_CD
+							]]>
+							<iterate prepend="IN" property="hdofcCodtnCdArr" open="(" close=")" conjunction=",">
+								#hdofcCodtnCdArr[]#
+							</iterate>
+						</isNotEmpty> 
+				         <isNotEmpty prepend="AND" property="systemkey" >
+					 	BB.SYSTEMKEY=#systemkey#
+				       </isNotEmpty>  
+				       <isNotEmpty prepend="AND" property="hanNm" >
+					 	BB.HAN_NM LIKE '%' || #hanNm# || '%'
+				       </isNotEmpty> 
+				       
+				        <isNotEmpty prepend="AND" property="mangeDeptCd" >
+					 	BB.DEPT_CD=#mangeDeptCd#
+				       </isNotEmpty> 
+				         
+					ORDER BY BB.HDOFC_CODTN_CD ASC,
+					    (SELECT LPAD(DEPT_RANK,5,'0')  
+					           FROM BASS0400 DD
+					           WHERE DD.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+					             AND DD.DPOB_CD = BB.DPOB_CD) ASC ,
+					    AA.PAY_FAMY_RESN_REGN_NUM DESC ,
+					    AA.PAY_FAMY_RSPT_SEIL_NUM ASC 
+	</select>
+	
+	<!-- 가족수당 대상자 조회 개수  -->	
+	<select id="payr0530DAO.selectPayrP410005ToPayr0530ListTotCnt_S" parameterClass="payr0530SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt FROM 
+			(
+				SELECT
+					       BB.DPOB_CD,  
+					       BB.SYSTEMKEY, 
+					       fcBass0300CDNM(BB.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM ,  
+					       fcBass0400CDNM(BB.DPOB_CD,BB.CURR_AFFN_DEPT_CD,'2') AS DEPT_NM, 
+					         BB.BUSIN_CD,
+					        fcBass0500CDNM(BB.DPOB_CD,SUBSTR(BB.BUSIN_CD,1,4),BB.CURR_AFFN_DEPT_CD,BB.BUSIN_CD) AS BUSIN_NM,
+					        BB.TYP_OCCU_CD,
+					        fcBass0320CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD) AS TYP_OCCU_NM,
+					       fcBassEx0350CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD,BB.DTIL_OCCU_INTTN_CD,'1') AS DTIL_OCCU_CLS_DIV_NM,
+					      BB.HAN_NM AS HAN_NM ,
+					     BB.RESN_REGN_NUM AS RESN_REGN_NUM,
+					     fcBass0300CDNM(AA.DPOB_CD,AA.FAMY_RELA_DIV_CD) AS FAMY_RELA_DIV_NM , 
+					    AA.HAN_NM AS  FMLY_HAN_NM ,
+					    AA.PAY_FAMY_RESN_REGN_NUM ,  
+					     AA.FAMY_ALLW_PYMT_YN ,
+					   fcBass0300CDNM(BB.DPOB_CD,BB.HDOFC_CODTN_CD) AS HDOFC_DIV_NM
+					FROM  PAYR0530 AA , PSNL0100 BB
+					WHERE AA.DPOB_CD = BB.DPOB_CD
+					AND   AA.SYSTEMKEY = BB.SYSTEMKEY
+					AND   AA.FAMY_ALLW_PYMT_YN = 'Y'
+				   <isNotEmpty prepend="AND" property="dpobCd" >
+			 	     BB.DPOB_CD=#dpobCd#
+		           </isNotEmpty>
+					   <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	BB.EMYMT_DIV_CD=#emymtDivCd#
+				       </isNotEmpty>  
+				       	<isNotEmpty property="deptCd" prepend="AND">
+							<![CDATA[
+							 BB.CURR_AFFN_DEPT_CD
+							]]>
+						<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+							#deptCdArr[]#
+							</iterate>
+						</isNotEmpty>  
+				       <!--  
+				         <isNotEmpty prepend="AND" property="deptCd" >
+					 	BB.DEPT_CD=#deptCd#
+				       </isNotEmpty> 
+				       -->
+					  <isNotEmpty prepend="AND" property="businCd" >
+					 	BB.BUSIN_CD=#businCd#
+				       </isNotEmpty>  
+				       <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+						 BB.TYP_OCCU_CD
+						]]>
+						<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						 #typOccuCdArr[]#
+						</iterate>
+						</isNotEmpty>  
+				  <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+				    <isNotEmpty property="hdofcCodtnCd" prepend="AND">
+							<![CDATA[
+								HDOFC_CODTN_CD
+							]]>
+							<iterate prepend="IN" property="hdofcCodtnCdArr" open="(" close=")" conjunction=",">
+								#hdofcCodtnCdArr[]#
+							</iterate>
+						</isNotEmpty> 
+				         <isNotEmpty prepend="AND" property="systemkey" >
+					 	BB.SYSTEMKEY=#systemkey#
+				       </isNotEmpty>  
+				       <isNotEmpty prepend="AND" property="hanNm" >
+					 	BB.HAN_NM LIKE '%' || #hanNm# || '%'
+				       </isNotEmpty> 
+				       
+				       <isNotEmpty prepend="AND" property="mangeDeptCd" >
+					 	BB.DEPT_CD=#mangeDeptCd#
+				       </isNotEmpty> 
+				         
+					ORDER BY BB.HDOFC_CODTN_CD ASC,
+					    (SELECT LPAD(DEPT_RANK,5,'0')  
+					           FROM BASS0400 DD
+					           WHERE DD.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+					             AND DD.DPOB_CD = BB.DPOB_CD) ASC ,
+					    AA.PAY_FAMY_RESN_REGN_NUM DESC ,
+					    AA.PAY_FAMY_RSPT_SEIL_NUM ASC 
+			)
+		 
+	</select>
+	
+
+</sqlMap>

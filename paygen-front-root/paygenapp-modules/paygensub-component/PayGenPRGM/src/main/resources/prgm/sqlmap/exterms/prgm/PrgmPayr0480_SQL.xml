@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PGRM_ComPayr0480">
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="prgmComPayr0480SrhVO" type="com.app.exterms.prgm.server.vo.PrgmComPayr0480SrhVO"/>
+	   
+	<select id="prgmComPayr0480DAO.selectComp0500ToPayr0480List_D" parameterClass="prgmComPayr0480SrhVO" resultClass="egovMap">
+			SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+						SELECT DPOB_CD, 
+						       PYMT_DDUC_DIV_CD, 
+						       fcBass0300CDNM(DPOB_CD,PYMT_DDUC_DIV_CD) AS PYMT_DDUC_DIV_NM ,
+						       PAY_EXTPY_CD, 
+						       PAY_EXTPY_GRP_CD, 
+						        fcBass0300CDNM(DPOB_CD,PAY_EXTPY_GRP_CD) AS PAY_EXTPY_GRP_NM ,
+						       PAY_EXTPY_NM , 
+						       PAY_EXTPY_USE_YN ,
+						       PAY_EXTPY_SUM,
+						       PAY_EXTPY_RTO 
+						FROM 
+						( SELECT 
+						   DPOB_CD, PYMT_DDUC_DIV_CD, PAY_EXTPY_CD, PAY_EXTPY_GRP_CD, 
+						   PAY_EXTPY_NM , PAY_EXTPY_USE_YN , (0) AS PAY_EXTPY_SUM, (0.0) AS PAY_EXTPY_RTO
+						FROM PAYR0480
+						WHERE 1 = 1
+					   <isNotEmpty prepend="AND" property="payrTermUseYn" >
+					 	PAYR_TERM_USE_YN=#payrTermUseYn#
+				       </isNotEmpty>
+				        <isEmpty prepend="AND" property="payrTermUseYn" >
+					   	PAY_EXTPY_USE_YN = 'Y' 
+				       </isEmpty> 
+						UNION ALL
+						 SELECT 
+						   DPOB_CD, PYMT_DDUC_DIV_CD,  PAY_DDUC_CD, PAY_DDUC_GRP_CD, 
+						   PAY_DDUC_NM, PAY_DDUC_USE_YN, PAY_DDUC_SUM, 
+						   PAY_DDUC_RTO 
+						FROM PAYR0470 
+						WHERE TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN PAY_DDUC_BGNN_DT AND PAY_DDUC_END_DT
+						  AND PAY_DDUC_USE_YN = 'Y'
+						  ) 
+						WHERE 1=1 
+						<isNotEmpty prepend="AND" property="dpobCd" >
+							 DPOB_CD=#dpobCd#
+						</isNotEmpty> 
+						 <isNotEmpty prepend="AND" property="pymtDducDivCd">
+							 PYMT_DDUC_DIV_CD = #pymtDducDivCd# 
+						</isNotEmpty>
+						   <isNotEmpty prepend="AND" property="payExtpyNm">
+						  PAY_EXTPY_NM LIKE '%' || #payExtpyNm# || '%'
+				       </isNotEmpty> 
+							ORDER BY 
+								DPOB_CD DESC
+									, PAY_EXTPY_CD ASC
+				
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		) AA01 WHERE RNUM >= #firstIndex#
+		]]> 
+	</select>	
+	<select id="prgmComPayr0480DAO.selectComp0500ToPayr0480ListTotCnt_S" parameterClass="prgmComPayr0480SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM 
+				( SELECT 
+				   DPOB_CD, PYMT_DDUC_DIV_CD, PAY_EXTPY_CD, PAY_EXTPY_GRP_CD, 
+				   PAY_EXTPY_NM , PAY_EXTPY_USE_YN , (0) AS PAY_EXTPY_SUM, (0.0) AS PAY_EXTPY_RTO
+				FROM PAYR0480
+				WHERE 1 = 1
+			   <isNotEmpty prepend="AND" property="payrTermUseYn" >
+			 	PAYR_TERM_USE_YN=#payrTermUseYn#
+		       </isNotEmpty>
+		        <isEmpty prepend="AND" property="payrTermUseYn" >
+			   	PAY_EXTPY_USE_YN = 'Y' 
+		       </isEmpty> 
+				UNION ALL
+				 SELECT 
+				   DPOB_CD, PYMT_DDUC_DIV_CD,  PAY_DDUC_CD, PAY_DDUC_GRP_CD, 
+				   PAY_DDUC_NM, PAY_DDUC_USE_YN, PAY_DDUC_SUM, 
+				   PAY_DDUC_RTO 
+				FROM PAYR0470 
+				WHERE TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN PAY_DDUC_BGNN_DT AND PAY_DDUC_END_DT
+				  AND PAY_DDUC_USE_YN = 'Y') 
+			WHERE 1=1
+			<isNotEmpty prepend="AND" property="dpobCd" >
+					 DPOB_CD=#dpobCd#
+				</isNotEmpty> 
+				 <isNotEmpty prepend="AND" property="pymtDducDivCd">
+					 PYMT_DDUC_DIV_CD = #pymtDducDivCd# 
+				</isNotEmpty>
+				   <isNotEmpty prepend="AND" property="payExtpyNm">
+				  PAY_EXTPY_NM LIKE '%' || #payExtpyNm# || '%'
+		       </isNotEmpty> 
+	</select>
+	
+	
+	
+		<select id="prgmComPayr0480DAO.selectPrgmComPayr0480List_D" parameterClass="prgmComPayr0480SrhVO"  resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+							DISTINCT	  DPOB_CD
+								, PAY_EXTPY_CD
+								 , PAY_EXTPY_NM 
+						FROM PAYR0480
+				WHERE 1=1 
+		      <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		      </isNotEmpty>  
+		     <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+			 	PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+		      </isNotEmpty> 
+					ORDER BY 
+				    DPOB_CD ASC
+				   ,PAY_EXTPY_CD DESC
+		
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>	
+	</select>	
+	<select id="prgmComPayr0480DAO.selectPrgmComPayr0480ListTotCnt_S" parameterClass="prgmComPayr0480SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0480
+			WHERE 1=1 
+		      <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		      </isNotEmpty> 
+		      <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+			 	PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+		      </isNotEmpty> 
+				 
+	</select>
+	
+
+</sqlMap>

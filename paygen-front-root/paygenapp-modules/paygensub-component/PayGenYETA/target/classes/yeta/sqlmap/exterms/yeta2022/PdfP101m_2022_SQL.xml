@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PdfP101m_2022">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="pdfP101mSrh_2022_VO" type="com.app.exterms.yearendtax.server.vo.PdfP101mSrh_2022_VO"/>
+	
+	<resultMap id="pdfP101m_2022" class="com.app.exterms.yearendtax.server.vo.PdfP101m_2022_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey69323" column="SYSTEMKEY__69323" columnIndex="4"/>
+		<result property="datCd" column="DAT_CD" columnIndex="5"/>
+		<result property="natAmtMn" column="NAT_AMT_MN" columnIndex="6"/>
+		<result property="wrkpNtf" column="WRKP_NTF" columnIndex="7"/>
+		<result property="rgnPmt" column="RGN_PMT" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap>
+	
+	<insert id="pdfP101m_2022_DAO.insertPdfP101m_S">
+		<![CDATA[
+			INSERT INTO PDF_P101M 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY__69323
+				  , DAT_CD
+				  , NAT_AMT_MN
+				  , WRKP_NTF
+				  , RGN_PMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey69323#
+				  , #datCd#
+				  , #natAmtMn#
+				  , #wrkpNtf#
+				  , #rgnPmt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="pdfP101m_2022_DAO.updatePdfP101m_S">
+		<![CDATA[
+			UPDATE PDF_P101M
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY__69323=#systemkey69323#
+				, DAT_CD=#datCd#
+				, NAT_AMT_MN=#natAmtMn#
+				, WRKP_NTF=#wrkpNtf#
+				, RGN_PMT=#rgnPmt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY__69323=#systemkey69323#
+								AND DAT_CD=#datCd#
+								AND NAT_AMT_MN=#natAmtMn#
+				]]>
+	</update>
+	
+	<delete id="pdfP101m_2022_DAO.deletePdfP101m_S">
+		<![CDATA[
+			DELETE FROM PDF_P101M 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY__69323=#systemkey69323#
+								AND DAT_CD=#datCd#
+								AND NAT_AMT_MN=#natAmtMn#
+				]]>
+	</delete>
+	
+	<select id="pdfP101m_2022_DAO.selectPdfP101m_S" resultMap="pdfP101m_2022">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY__69323
+				, DAT_CD
+				, NAT_AMT_MN
+				, WRKP_NTF
+				, RGN_PMT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PDF_P101M
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY__69323=#systemkey69323#
+								AND DAT_CD=#datCd#
+								AND NAT_AMT_MN=#natAmtMn#
+				]]>
+	</select>
+	
+	<select id="pdfP101m_2022_DAO.selectPdfP101mList_D" parameterClass="pdfP101mSrh_2022_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY__69323
+								, DAT_CD
+								, NAT_AMT_MN
+								, WRKP_NTF
+								, RGN_PMT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PDF_P101M
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY__69323 DESC
+							, DAT_CD DESC
+							, NAT_AMT_MN DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="pdfP101m_2022_DAO.selectPdfP101mListTotCnt_S" parameterClass="pdfP101mSrh_2022_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PDF_P101M
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,1435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Dlgn0200">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="dlgn0200Dto" type="com.app.exterms.diligence.client.dto.Dlgn0200DTO"/>
+	<typeAlias alias="dlgn0200SrhVO" type="com.app.exterms.diligence.server.vo.Dlgn0200SrhVO"/>
+	<typeAlias  alias="dlgn0250SrhVO" type="com.app.exterms.diligence.server.vo.Dlgn0250SrhVO"/>
+	
+	<resultMap id="dlgn0200PayDdlene" class="com.app.exterms.diligence.server.vo.Dlgn0200VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="dilnlazExceDutyYrMnth" column="DILNLAZ_EXCE_DUTY_YR_MNTH" columnIndex="3"/>
+		<result property="payCd" column="PAY_CD" columnIndex="4"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="5"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="6"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="7"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="8"/>
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="9"/>
+		<result property="dilnlazExceDutyBgnnDt" column="DILNLAZ_EXCE_DUTY_BGNN_DT" columnIndex="10"/>
+		<result property="dilnlazExceDutyEndDt" column="DILNLAZ_EXCE_DUTY_END_DT" columnIndex="11"/>
+		<result property="dilnlazPubcHodyDutyNumDys" column="DILNLAZ_PUBC_HODY_DUTY_NUM_DYS" columnIndex="12"/>
+		<result property="dilnlazSatDutyNumDys" column="DILNLAZ_SAT_DUTY_NUM_DYS" columnIndex="13"/>
+		<result property="dilnlazTotNtotNumDys" column="DILNLAZ_TOT_NTOT_NUM_DYS" columnIndex="14"/>
+		<result property="dilnlazTotNtotTm" column="DILNLAZ_TOT_NTOT_TM" columnIndex="15"/>
+		<result property="dilnlazFndtnTmRstDutyTm" column="DILNLAZ_FNDTN_TM_RST_DUTY_TM" columnIndex="16"/>
+		<result property="dilnlazTmRstDutyTm" column="DILNLAZ_TM_RST_DUTY_TM" columnIndex="17"/>
+		<result property="dilnlazTotTmRstDutyTm" column="DILNLAZ_TOT_TM_RST_DUTY_TM" columnIndex="18"/>
+		<result property="dilnlazDdlnePrcsYn" column="DILNLAZ_DDLNE_PRCS_YN" columnIndex="19"/>
+		<result property="dilnlazNoteCtnt" column="DILNLAZ_NOTE_CTNT" columnIndex="20"/>
+		<result property="kybdr" column="KYBDR" columnIndex="21"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="22"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="23"/>
+		<result property="ismt" column="ISMT" columnIndex="24"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="25"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="26"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="27"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="28"/>
+		<result property="dilnlazPubcHodyDutyTm" column="DILNLAZ_PUBC_HODY_DUTY_TM" columnIndex="29"/>
+	</resultMap>
+	 
+	 <resultMap id="dlgn0250" class="com.app.exterms.diligence.server.vo.Dlgn0250VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="3"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="4"/>
+		<result property="dilnlazYrMnth" column="DILNLAZ_YR_MNTH" columnIndex="5"/>
+		<result property="payCd" column="PAY_CD" columnIndex="6"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="7"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="8"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="9"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="10"/>
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="11"/>
+		<result property="dilnlazDutyBgnnDt" column="DILNLAZ_DUTY_BGNN_DT" columnIndex="12"/>
+		<result property="dilnlazDutyEndDt" column="DILNLAZ_DUTY_END_DT" columnIndex="13"/>
+		<result property="dilnlazDutyNumDys" column="DILNLAZ_DUTY_NUM_DYS" columnIndex="14"/>
+		<result property="dilnlazLvsgNumDys" column="DILNLAZ_LVSG_NUM_DYS" columnIndex="15"/>
+		<result property="dilnlazAbnceNumDys" column="DILNLAZ_ABNCE_NUM_DYS" columnIndex="16"/>
+		<result property="dilnlazSckleaNumDys" column="DILNLAZ_SCKLEA_NUM_DYS" columnIndex="17"/>
+		<result property="dilnlazOffvaNumDys" column="DILNLAZ_OFFVA_NUM_DYS" columnIndex="18"/>
+		<result property="dilnlazFmlyEvntNumDys" column="DILNLAZ_FMLY_EVNT_NUM_DYS" columnIndex="19"/>
+		<result property="dilnlazHlthCreNumDys" column="DILNLAZ_HLTH_CRE_NUM_DYS" columnIndex="20"/>
+		<result property="dilnlazTotDutyNumDys" column="DILNLAZ_TOT_DUTY_NUM_DYS" columnIndex="21"/>
+		<result property="dilnlazWklyHldyNumDys" column="DILNLAZ_WKLY_HLDY_NUM_DYS" columnIndex="22"/>
+		<result property="dilnlazPaidPubcHodyNum" column="DILNLAZ_PAID_PUBC_HODY_NUM" columnIndex="23"/> 
+		<result property="dilnlazSpclHodyNumDys" column="DILNLAZ_SPCL_HODY_NUM_DYS" columnIndex="24"/>
+		<result property="dilnlazSatDutyNumDys" column="DILNLAZ_SAT_DUTY_NUM_DYS" columnIndex="25"/>
+		<result property="dilnlazPubcHodyDutyNumDys" column="DILNLAZ_PUBC_HODY_DUTY_NUM_DYS" columnIndex="26"/>
+		<result property="dilnlazAbnceDutyRcgtnDys" column="DILNLAZ_ABNCE_DUTY_RCGTN_DYS" columnIndex="27"/>  
+		<result property="dilnlazPaidHodyNumDys" column="DILNLAZ_PAID_HODY_NUM_DYS" columnIndex="28"/>
+		<result property="dilnlazTfcAssCstNumDys" column="DILNLAZ_TFC_ASS_CST_NUM_DYS" columnIndex="29"/>  
+		<result property="dilnlazTotNtotNumDys" column="DILNLAZ_TOT_NTOT_NUM_DYS" columnIndex="30"/>
+		<result property="dilnlazTotNtotTm" column="DILNLAZ_TOT_NTOT_TM" columnIndex="31"/>
+		<result property="dilnlazFndtnTmRstDutyTm" column="DILNLAZ_FNDTN_TM_RST_DUTY_TM" columnIndex="32"/>
+		<result property="dilnlazTmRstDutyTm" column="DILNLAZ_TM_RST_DUTY_TM" columnIndex="33"/>
+		<result property="dilnlazTotTmRstDutyTm" column="DILNLAZ_TOT_TM_RST_DUTY_TM" columnIndex="34"/> 
+		
+		<result property="hdofcCodtnCd" column="HDOFC_CODTN_CD" columnIndex="35"/> 
+		<result property="retryDt" column="RETRY_DT" columnIndex="36"/> 
+		<result property="levfAbncDivCd" column="LEVF_ABNC_DIV_CD" columnIndex="37"/> 
+		<result property="levfAbncBgnnDt" column="LEVF_ABNC_BGNN_DT" columnIndex="38"/> 
+		<result property="levfAbncEndDt" column="LEVF_ABNC_END_DT" columnIndex="39"/> 
+		<result property="turtyRntmntDt" column="TURTY_RNTMNT_DT" columnIndex="40"/> 
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="41"/> 
+		<result property="dilnlazLnchDys" column="DILNLAZ_LNCH_DYS" columnIndex="42"/> 
+		<result property="dilnlazPubcHodyDutyTm" column="DILNLAZ_PUBC_HODY_DUTY_TM" columnIndex="43"/> 
+	</resultMap>
+	
+	<update id="dlgn0200DAO.updateDlgn0210" parameterClass="dlgn0200Dto">
+		UPDATE DLGN0210
+	 	SET DILNLAZ_DUTY_YN = #dilnlazDutyYn#,
+	       DILNLAZ_DUTY_TM = #dilnlazDutyTm#,
+	       DILNLAZ_NTOT_YN = #dilnlazNtotYn#,
+	       DILNLAZ_NTOT_TM = #dilnlazNtotTm#,
+	          DILNLAZ_TM_RST_DUTY_YN=#dilnlazDutyYn#,
+		   DILNLAZ_TM_RST_DUTY_TM=#dilnlazDutyTm#,
+	       DILNLAZ_HODY_DUTY_YN=#dilnlazHodyDutyYn#,
+		   DILNLAZ_HODY_DUTY_TM=#dilnlazHodyDutyTm#,
+	       ISMT = #ismt#,
+	       REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+	       REVN_ADDR = #revnAddr#
+		WHERE DPOB_CD = #dpobCd#
+	      AND SYSTEMKEY = #systemkey#
+	      AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+	      AND PAY_CD = #payCd#
+	      AND DILNLAZ_APPTN_DT = replace(replace(#dilnlazApptnDt#,'-',''),'.','')
+	</update>
+	
+	<select id="dlgn0200DAO.selectDlgn0210" parameterClass="dlgn0200Dto" resultClass="egovMap">
+	    SELECT A.DPOB_CD,
+	         A.SYSTEMKEY,
+	         A.DILNLAZ_EXCE_DUTY_YR_MNTH,
+	         A.PAY_CD,
+	         TO_CHAR (TO_DATE (A.DILNLAZ_APPTN_DT, 'YYYYMMDD'), 'YYYY.MM.DD') AS DILNLAZ_APPTN_DT,
+	         A.DILNLAZ_DUTY_YN,
+	         A.DILNLAZ_DUTY_TM,
+	         A.DILNLAZ_NTOT_YN,
+	         A.DILNLAZ_NTOT_TM,
+	         A.DILNLAZ_HODY_DUTY_YN,
+	         A.DILNLAZ_HODY_DUTY_TM,
+	         A.KYBDR,
+	         A.INPT_DT,
+	         A.INPT_ADDR,
+	         A.ISMT,
+	         A.REVN_DT,
+	         A.REVN_ADDR,
+	         DECODE(C.PUBC_HODY_YN, 'Y', 2, B.OFFDAY_KUBN ) AS OFFDAY_KUBN
+	    FROM DLGN0210 A, CO_CALENDAR B, (SELECT DPOB_CD, (PUBC_HODY_DT) AS YEAR_MNTH_DAY, PUBC_HODY_YN FROM BASS0200) C
+		WHERE A.DPOB_CD = #dpobCd#
+		    AND A.SYSTEMKEY = #systemkey#
+		    AND A.DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth# 
+		    AND A.PAY_CD = #payCd#
+		    AND A.DILNLAZ_APPTN_DT = B.CALENDAR_DATE(+)
+            AND A.DPOB_CD = C.DPOB_CD(+)
+            AND A.DILNLAZ_APPTN_DT = C.YEAR_MNTH_DAY(+)
+		 ORDER BY A.DILNLAZ_APPTN_DT ASC            
+	</select>
+	
+	<!-- <select id="dlgn0200DAO.selectDlgn0200" parameterClass="dlgn0200Dto" resultClass="egovMap"> -->
+	<select id="dlgn0200DAO.selectDlgn0200" parameterClass="dlgn0200SrhVO" resultClass="egovMap">
+	    SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				 
+		   SELECT
+                  FF.DPOB_CD
+                , FF.SYSTEMKEY
+                , FF.DILNLAZ_EXCE_DUTY_YR_MNTH as DILNLAZ_EXCE_DUTY_YR_MNTH
+                , FF.PAY_CD 
+                 , fcBass0300CDNM(FF.DPOB_CD,FF.PAY_CD) AS PAY_NM
+                , BB.HAN_NM  
+                , BB.RESN_REGN_NUM 
+                , FF.EMYMT_DIV_CD
+                , fcBass0300CDNM(FF.DPOB_CD,FF.EMYMT_DIV_CD) AS EMYMT_DIV_NM
+                , FF.DEPT_CD
+                 , fcBass0400CDNM(FF.DPOB_CD,FF.DEPT_CD,'2') AS DEPT_CD_NM
+                , FF.BUSIN_CD
+                 , fcBass0500CDNM(FF.DPOB_CD,SUBSTR(FF.DILNLAZ_EXCE_DUTY_YR_MNTH,1,4),FF.DEPT_CD,FF.BUSIN_CD) AS BUSIN_CD_NM
+                , FF.TYP_OCCU_CD
+                 , fcBass0320CDNM(FF.DPOB_CD,FF.TYP_OCCU_CD) AS TYP_OCCU_NM
+                , FF.PYSP_GRDE_CD
+                 , fcBass0300CDNM(FF.DPOB_CD,FF.PYSP_GRDE_CD) AS PYSP_GRDE_NM
+                 , FF.DTIL_OCCU_INTTN_CD
+                ,  fcBassEx0350CDNM(FF.DPOB_CD,FF.TYP_OCCU_CD,FF.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM
+                , FF.DTIL_OCCU_CLS_DIV_CD 
+                , FF.DILNLAZ_EXCE_DUTY_BGNN_DT as DILNLAZ_EXCE_DUTY_BGNN_DT
+                , FF.DILNLAZ_EXCE_DUTY_END_DT as DILNLAZ_EXCE_DUTY_END_DT
+                <!-- 
+                , NVL(FF.DILNLAZ_DUTY_NUM_DYS,0) AS DILNLAZ_DUTY_NUM_DYS
+                , NVL(FF.DILNLAZ_LVSG_NUM_DYS,0) AS DILNLAZ_LVSG_NUM_DYS
+                , NVL(FF.DILNLAZ_ABNCE_NUM_DYS,0) AS DILNLAZ_ABNCE_NUM_DYS
+                , NVL(FF.DILNLAZ_SCKLEA_NUM_DYS,0) AS DILNLAZ_SCKLEA_NUM_DYS
+                , NVL(FF.DILNLAZ_OFFVA_NUM_DYS,0) AS DILNLAZ_OFFVA_NUM_DYS
+                , NVL(FF.DILNLAZ_FMLY_EVNT_NUM_DYS,0) AS DILNLAZ_FMLY_EVNT_NUM_DYS
+                , NVL(FF.DILNLAZ_HLTH_CRE_NUM_DYS,0) AS DILNLAZ_HLTH_CRE_NUM_DYS
+                , NVL(FF.DILNLAZ_TOT_DUTY_NUM_DYS,0) AS DILNLAZ_TOT_DUTY_NUM_DYS
+                , NVL(FF.DILNLAZ_WKLY_HLDY_NUM_DYS,0) AS DILNLAZ_WKLY_HLDY_NUM_DYS
+                , NVL(FF.DILNLAZ_PAID_PUBC_HODY_NUM ,0) AS DILNLAZ_PAID_PUBC_HODY_NUM
+                , NVL(FF.DILNLAZ_SPCL_HODY_NUM_DYS,0) AS DILNLAZ_SPCL_HODY_NUM_DYS
+                , NVL(FF.DILNLAZ_SAT_DUTY_NUM_DYS,0) AS DILNLAZ_SAT_DUTY_NUM_DYS
+                , NVL(FF.DILNLAZ_PUBC_HODY_DUTY_NUM_DYS,0) AS DILNLAZ_PUBC_HODY_DUTY_NUM_DYS
+                , NVL(FF.DILNLAZ_ABNCE_DUTY_RCGTN_DYS ,0) AS DILNLAZ_ABNCE_DUTY_RCGTN_DYS
+                , NVL(FF.DILNLAZ_TOT_DUTY_TM,0) AS DILNLAZ_TOT_DUTY_TM
+                , NVL(FF.DILNLAZ_PAID_HODY_NUM_DYS,0) AS DILNLAZ_PAID_HODY_NUM_DYS
+                , NVL(FF.DILNLAZ_TFC_ASS_CST_NUM_DYS,0) AS DILNLAZ_TFC_ASS_CST_NUM_DYS
+                -->
+                 , NVL(FF.DILNLAZ_SAT_DUTY_NUM_DYS,0) AS DILNLAZ_SAT_DUTY_NUM_DYS
+                , NVL(FF.DILNLAZ_PUBC_HODY_DUTY_NUM_DYS,0) AS DILNLAZ_PUBC_HODY_DUTY_NUM_DYS
+                , NVL(FF.DILNLAZ_PUBC_HODY_DUTY_TM,0) AS DILNLAZ_PUBC_HODY_DUTY_TM
+                , NVL(FF.DILNLAZ_TOT_NTOT_NUM_DYS,0) AS DILNLAZ_TOT_NTOT_NUM_DYS
+                , NVL(FF.DILNLAZ_TOT_NTOT_TM,0) AS DILNLAZ_TOT_NTOT_TM
+                , NVL(FF.DILNLAZ_FNDTN_TM_RST_DUTY_TM,0) AS DILNLAZ_FNDTN_TM_RST_DUTY_TM
+                , NVL(FF.DILNLAZ_TM_RST_DUTY_TM,0) AS DILNLAZ_TM_RST_DUTY_TM
+                , NVL(FF.DILNLAZ_TOT_TM_RST_DUTY_TM ,0) AS DILNLAZ_TOT_TM_RST_DUTY_TM
+                , TO_CHAR (TO_DATE (BB.EMYMT_BGNN_DT, 'YYYYMMDD'), 'YYYY.MM.DD') AS EMYMT_BGNN_DT
+                , TO_CHAR (TO_DATE (BB.EMYMT_END_DT, 'YYYYMMDD'), 'YYYY.MM.DD') AS EMYMT_END_DT
+                , fcBassEx0350CDNM (BB.DPOB_CD, BB.TYP_OCCU_CD, BB.DTIL_OCCU_INTTN_CD, '1') AS DTIL_OCCU_INTTN_NM
+                FROM PAYR0500 AA, PSNL0100 BB ,  DLGN0200 FF
+                <!-- 
+                , DLGN0100 GG
+                 -->
+                     WHERE AA.DPOB_CD = BB.DPOB_CD
+                     AND  AA.SYSTEMKEY= BB.SYSTEMKEY 
+                     AND  AA.DPOB_CD = FF.DPOB_CD 
+                     AND  AA.SYSTEMKEY= FF.SYSTEMKEY  
+                     <!-- 
+                     AND  FF.DILNLAZ_YR_MNTH = GG.DILNLAZ_EXCE_DUTY_YR_MNTH 
+                     AND  FF.PAY_CD =  GG.PAY_CD 
+                     AND  AA.DPOB_CD = GG.DPOB_CD 
+                     AND  AA.SYSTEMKEY= GG.SYSTEMKEY  
+                      -->
+                   <isNotEmpty prepend="AND" property="dpobCd" >
+			 	     AA.DPOB_CD=#dpobCd#
+		           </isNotEmpty>  
+				       <isNotEmpty prepend="AND" property="businCd" >
+					 	FF.BUSIN_CD=#businCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	AA.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	BB.EMYMT_DIV_CD=#emymtDivCd#
+					 	</isNotEmpty>
+					 	<isNotEmpty prepend="AND"  property="repbtyBusinDivCd">
+						              BB.REPBTY_BUSIN_DIV_CD = #repbtyBusinDivCd# 
+					  </isNotEmpty>
+				       <isNotEmpty prepend="AND" property="payCd" >
+					 	FF.PAY_CD=#payCd#
+				       </isNotEmpty> 
+				         <isNotEmpty prepend="AND" property="dilnlazExceDutyYrMnth" >
+					 	FF.DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+				       </isNotEmpty>  
+				       <isNotEmpty property="typOccuCd" prepend="AND">
+							<![CDATA[
+							 FF.TYP_OCCU_CD
+							]]>
+							<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+							 #typOccuCdArr[]#
+							</iterate>
+							</isNotEmpty>  
+						  <!--   <isNotEmpty property="pyspGrdeCd" prepend="AND">
+							<![CDATA[
+							 NVL(BB.PYSP_GRDE_CD,'A0060000')
+							]]>
+							<iterate prepend="IN" property="pyspGrdeCdArr" open="(" close=")" conjunction=",">
+							 #pyspGrdeCdArr[]#
+							</iterate>
+							</isNotEmpty>   -->
+							 <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 FF.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>   
+				         <isNotEmpty prepend="AND" property="systemkey" >
+					 	BB.SYSTEMKEY=#systemkey#
+				       </isNotEmpty>  
+				       <isNotEmpty prepend="AND" property="hanNm" >
+					 	BB.HAN_NM LIKE '%' || #hanNm# || '%'
+				       </isNotEmpty> 
+				         AND EXISTS  (
+                          SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+                                            WHERE     C.DPOB_CD = FF.DPOB_CD
+						                        AND C.DEPT_CD = FF.DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(FF.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(FF.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+				 
+                                          )    
+					ORDER BY 
+						FF.DPOB_CD ASC
+						, FF.DILNLAZ_EXCE_DUTY_YR_MNTH DESC
+						, PAY_CD ASC
+						,(SELECT LPAD(DEPT_RANK,5,'0')  
+                                   FROM BASS0400 DD
+                                   WHERE DD.DEPT_CD = FF.DEPT_CD
+                                     AND DD.DPOB_CD = FF.DPOB_CD) ASC 
+					        
+						, BB.RESN_REGN_NUM ASC
+						 , BB.SYSTEMKEY ASC 
+		
+		<![CDATA[					
+	) A 
+	
+)WHERE RNUM >= #firstIndex#
+]]>
+	   <!--  
+	    SELECT A.DPOB_CD,
+		       A.SYSTEMKEY,
+		       A.DILNLAZ_EXCE_DUTY_YR_MNTH,
+		       A.PAY_CD,
+		       A.EMYMT_DIV_CD,
+		       A.DEPT_CD,
+		       A.BUSIN_CD,
+		       A.TYP_OCCU_CD,
+		       A.DTIL_OCCU_INTTN_CD,
+		       A.DTIL_OCCU_CLS_DIV_CD,
+		       A.DILNLAZ_EXCE_DUTY_BGNN_DT,
+		       A.DILNLAZ_EXCE_DUTY_END_DT,
+		       A.DILNLAZ_PUBC_HODY_DUTY_NUM_DYS,
+		       A.DILNLAZ_SAT_DUTY_NUM_DYS,
+		       A.DILNLAZ_TOT_NTOT_NUM_DYS,
+		       A.DILNLAZ_TOT_NTOT_TM,
+		       A.DILNLAZ_FNDTN_TM_RST_DUTY_TM,
+		       A.DILNLAZ_TM_RST_DUTY_TM,
+		       A.DILNLAZ_TOT_TM_RST_DUTY_TM,
+		       A.DILNLAZ_DDLNE_PRCS_YN,
+		       A.DILNLAZ_NOTE_CTNT,
+		       A.KYBDR,
+		       A.INPT_DT,
+		       A.INPT_ADDR,
+		       A.ISMT,
+		       A.REVN_DT,
+		       A.REVN_ADDR,
+		       B.HAN_NM,
+		       fcBass0320CDNM(B.DPOB_CD, B.TYP_OCCU_CD) AS TYP_OCCU_NM , 
+		       fcBassEx0350CDNM(B.DPOB_CD,B.TYP_OCCU_CD,B.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_INTTN_NM ,  
+		       SUBSTR(B.RESN_REGN_NUM,1,6)||'-'||SUBSTR(B.RESN_REGN_NUM,-7) AS RESN_REGN_NUM,
+		       FCBASS0400CDNM(B.DPOB_CD, B.DEPT_CD, '2') AS DEPT_CD_NM,
+		       FCBASS0500CDNM(B.DPOB_CD, TO_CHAR(TO_DATE(B.EMYMT_BGNN_DT,'YYYYMMDD'),'YYYY'), B.CURR_AFFN_DEPT_CD, B.BUSIN_CD) AS BUSIN_CD_NM,
+		       TO_CHAR(TO_DATE(B.EMYMT_BGNN_DT,'YYYYMMDD'),'YYYY.MM.DD') AS EMYMT_BGNN_DT,
+		       TO_CHAR(TO_DATE(B.EMYMT_END_DT,'YYYYMMDD'),'YYYY.MM.DD') AS EMYMT_END_DT
+		FROM DLGN0200 A, PSNL0100 B, PAYR0500 D
+		WHERE 1=1
+		  AND A.DPOB_CD = B.DPOB_CD
+		  AND A.SYSTEMKEY = B.SYSTEMKEY
+		  AND A.DPOB_CD = D.DPOB_CD
+          AND A.SYSTEMKEY= D.SYSTEMKEY 
+		  AND SUBSTR(A.DILNLAZ_EXCE_DUTY_YR_MNTH,1,4) = SUBSTR(#dilnlazExceDutyYrMnth#,1,4)
+		  AND SUBSTR(A.DILNLAZ_EXCE_DUTY_YR_MNTH,-2) = SUBSTR(#dilnlazExceDutyYrMnth#,-2)
+		  
+			<isNotEmpty prepend="AND" property="dpobCd" >
+				A.DPOB_CD=#dpobCd#
+		  	</isNotEmpty>
+            <isNotEmpty prepend="AND" property="dilnlazExceDutyYrMnth" >
+				A.DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+			</isNotEmpty>  
+			<isNotEmpty prepend="AND" property="payCd" >
+				A.PAY_CD=#payCd#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="payrMangDeptCd">
+		        D.PAYR_MANG_DEPT_CD = #payrMangDeptCd#
+		    </isNotEmpty> 
+		    <isNotEmpty prepend="AND" property="hanNm" >
+				B.HAN_NM LIKE '%' || #hanNm# || '%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="resnRegnNum">
+		        B.RESN_REGN_NUM = #resnRegnNum#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="emymtDivCd" >
+				A.EMYMT_DIV_CD=#emymtDivCd#
+			</isNotEmpty>
+				AND EXISTS  (SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' ))  ) C
+                                            WHERE     C.DPOB_CD = B.DPOB_CD
+						                        AND C.DEPT_CD = B.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(B.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(B.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+													<![CDATA[
+												 		C.DEPT_CD
+													]]>
+													<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 		#deptCdArr[]#
+													</iterate>
+											   </isNotEmpty> 
+                         )  
+			<isNotEmpty property="typOccuCd" prepend="AND">
+				<![CDATA[
+					B.TYP_OCCU_CD
+				]]>
+				<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					#typOccuCdArr[]#
+				</iterate>
+			</isNotEmpty>  
+			<isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+				<![CDATA[
+					B.DTIL_OCCU_INTTN_CD
+				]]>
+				<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+					#dtilOccuInttnCdArr[]#
+				</iterate>
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="businCd" >
+				A.BUSIN_CD=#businCd#
+			</isNotEmpty> 	
+			ORDER BY 
+				A.DPOB_CD ASC
+				, A.DILNLAZ_EXCE_DUTY_YR_MNTH DESC
+				, A.PAY_CD ASC
+				,(SELECT LPAD(DEPT_RANK,5,'0')  
+                 	FROM BASS0400 DD
+                  	WHERE DD.DEPT_CD = B.CURR_AFFN_DEPT_CD
+                		AND DD.DPOB_CD = B.DPOB_CD) ASC  
+				, B.RESN_REGN_NUM ASC
+				, B.SYSTEMKEY ASC  
+				-->
+	</select>
+	<!-- 
+		<isNotNull property="emymtDivCd">
+		    <isNotEmpty property="emymtDivCd">
+		        AND A.EMYMT_DIV_CD = #emymtDivCd#
+		    </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="businCd">
+		    <isNotEmpty property="businCd">
+		        AND A.BUSIN_CD = #businCd#
+		    </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="currAffnDeptCd">
+		    <isNotEmpty property="currAffnDeptCd">
+		        AND A.DEPT_CD = #currAffnDeptCd#
+		    </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="deptCd">
+		    <isNotEmpty property="deptCd">
+		        AND B.DEPT_CD = #deptCd#
+			</isNotEmpty>
+		</isNotNull>
+		<isNotNull property="hanNm">
+		    <isNotEmpty property="hanNm">
+		        AND B.HAN_NM = #hanNm#
+			</isNotEmpty>
+		</isNotNull>
+		<isNotNull property="resnRegnNum">
+		    <isNotEmpty property="resnRegnNum">
+		        AND B.RESN_REGN_NUM = #resnRegnNum#
+			</isNotEmpty>
+		</isNotNull>	
+	 -->
+	
+	<!-- 전체조건 재수정 작업 진행  -->
+	<select id="dlgn0200DAO.selectDlgn0200ToRtnData" parameterClass="dlgn0200Dto" resultClass="egovMap">
+    <![CDATA[ 
+		   SELECT DISTINCT BB.DPOB_CD,
+		          BB.SYSTEMKEY,
+		          BB.HAN_NM,
+		           #dilnlazExceDutyYrMnth#  AS DILNLAZ_EXCE_DUTY_YR_MNTH,
+		          #payCd# AS PAY_CD,
+		          BB.EMYMT_DIV_CD,
+		          SS.DEPT_CD,
+		          SS.BUSIN_CD,
+		          SS.TYP_OCCU_CD,
+		          SS.DTIL_OCCU_CLS_DIV_CD,
+		          SS.DTIL_OCCU_INTTN_CD,
+		          #dilnlazExceDutyBgnnDt# AS DILNLAZ_EXCE_DUTY_BGNN_DT,
+		          #dilnlazExceDutyEndDt# AS DILNLAZ_EXCE_DUTY_END_DT , 
+		          ('N') AS DILNLAZ_DDLNE_PRCS_YN,  
+		          SS.EMYMT_BGNN_DT,
+		          SS.EMYMT_END_DT,
+		          BB.HDOFC_CODTN_CD
+		      FROM PAYR0500 AA, PSNL0100 BB , DLGN0100 OO,
+                      (
+         			 SELECT   DISTINCT CC05.DPOB_CD,
+								       CC05.SYSTEMKEY,
+								       CC05.EMYMT_BGNN_DT,
+								       CC05.EMYMT_END_DT,
+								       CC06.DEPT_CD,
+								       CC06.BUSIN_CD,
+								       CC06.TYP_OCCU_CD,
+								       CC06.DTIL_OCCU_CLS_DIV_CD,
+								       CC06.DTIL_OCCU_INTTN_CD
+								  FROM (  SELECT DPOB_CD,
+								                 SYSTEMKEY,
+								                 MIN (EMYMT_BGNN_DT) AS EMYMT_BGNN_DT,
+								                 MAX (NVL (EMYMT_END_DT, TO_CHAR (SYSDATE, 'YYYYMMDD')))
+								                    AS EMYMT_END_DT
+								            FROM PSNL0110 CC01
+								           WHERE    CC01.DPOB_CD =  #dpobCd# 
+					                     			AND  CC01.EMYMT_DIV_CD =  #emymtDivCd#
+					                     			 AND CC01.EMYMT_TYP_CD NOT IN ('A0420990')
+					          ]]>        
+					          		   			<isEqual property="createFlag" compareValue="lump">	
+					          		   			    <![CDATA[  
+					                           		AND ( SUBSTR(#dilnlazExceDutyBgnnDt#,1,6) BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6) 
+					                            	AND  SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN #dilnlazExceDutyBgnnDt#  <= TO_CHAR (SYSDATE,'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR ( SYSDATE, 'YYYYMMDD')  
+                                                                                                      ELSE #dilnlazExceDutyBgnnDt#  END)),1,6)
+			                                       	OR SUBSTR(#dilnlazExceDutyEndDt#,1,6) BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6) 
+			                                       	AND  SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN #dilnlazExceDutyEndDt#  >= TO_CHAR (SYSDATE,'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR ( SYSDATE, 'YYYYMMDD')  
+                                                                                                      ELSE #dilnlazExceDutyEndDt#  END)),1,6))
+					                           ]]>  
+					                           	</isEqual> 
+						                        <isNotEmpty prepend="AND" property="businCd">
+											 		CC01.BUSIN_CD=#businCd#
+										       	</isNotEmpty>  
+				          <![CDATA[      
+								        GROUP BY DPOB_CD, SYSTEMKEY
+								  
+								    UNION ALL
+					                SELECT
+					                      KK01.DPOB_CD,
+					                      KK01.SYSTEMKEY, 
+					                      KK01.EMYMT_BGNN_DT,
+					                      NVL (KK01.EMYMT_END_DT,
+					                                      TO_CHAR (SYSDATE, 'YYYYMMDD')) 
+					                                 AS EMYMT_END_DT 
+					                FROM PSNL0100 KK01, (
+					                                        SELECT DPOB_CD,
+					                                            SYSTEMKEY 
+					                                       FROM PSNL0123 KK
+					                                      WHERE     KK.DPOB_CD =  #dpobCd# 
+					                                            AND LEVF_ABNC_SEIL_NUM =
+					                                                   (  SELECT MAX (LEVF_ABNC_SEIL_NUM)
+					                                                                AS LEVF_ABNC_SEIL_NUM
+					                                                        FROM PSNL0123 JJ
+					                                                       WHERE     JJ.DPOB_CD =  #dpobCd# 
+					                                                             AND JJ.SYSTEMKEY = KK.SYSTEMKEY
+					                                                             AND ((JJ.LEVF_ABNC_BGNN_DT  >=  #dilnlazExceDutyBgnnDt#  AND   JJ.LEVF_ABNC_BGNN_DT  <=  #dilnlazExceDutyEndDt#)
+                              													OR (JJ.LEVF_ABNC_END_DT  >=  #dilnlazExceDutyBgnnDt#  AND   JJ.LEVF_ABNC_END_DT  <=  #dilnlazExceDutyEndDt#)) 
+					                                                    GROUP BY JJ.DPOB_CD, JJ.SYSTEMKEY)
+					                                                    ) KK02 
+					                  WHERE KK01.DPOB_CD = KK02.DPOB_CD
+					                    AND KK01.SYSTEMKEY = KK02.SYSTEMKEY  
+								        
+								        ) CC05,
+								       (SELECT CC02.DPOB_CD,
+								               CC02.SYSTEMKEY,
+								               CC02.DEPT_CD,
+								               CC02.BUSIN_CD,
+								               CC02.TYP_OCCU_CD,
+								               CC02.DTIL_OCCU_CLS_DIV_CD,
+								               CC02.DTIL_OCCU_INTTN_CD
+								          FROM PSNL0110 CC02,
+								               (  SELECT DPOB_CD,
+								                         SYSTEMKEY,
+								                         MAX (CC01.EMYMT_BGNN_DT) AS EMYMT_BGNN_DT
+								                    FROM PSNL0110 CC01
+								                   WHERE  CC01.DPOB_CD =  #dpobCd# 
+					                        				AND  CC01.EMYMT_DIV_CD =  #emymtDivCd#
+					        							]]>
+					                        	 		<isEqual property="createFlag" compareValue="lump"> 
+					                        	 		    <![CDATA[
+						                                  	AND ( SUBSTR(#dilnlazExceDutyBgnnDt#,1,6) BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6) 
+						                                  	AND SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN #dilnlazExceDutyBgnnDt#  <= TO_CHAR (SYSDATE,'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR ( SYSDATE, 'YYYYMMDD')  
+                                                                                                      ELSE #dilnlazExceDutyBgnnDt#  END)),1,6)
+	                                       					OR  SUBSTR(#dilnlazExceDutyEndDt#,1,6) BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6) 
+	                                       					AND SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN #dilnlazExceDutyEndDt#  >= TO_CHAR (SYSDATE,'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR ( SYSDATE, 'YYYYMMDD')  
+                                                                                                      ELSE #dilnlazExceDutyEndDt#  END)),1,6))
+					                                 	]]>
+					                                 	</isEqual> 
+								                        <isNotEmpty prepend="AND" property="businCd">
+													 		CC01.BUSIN_CD=#businCd#
+												       	</isNotEmpty>  
+				          				<![CDATA[
+								                	GROUP BY DPOB_CD, SYSTEMKEY) CC03
+								 		WHERE CC02.DPOB_CD = CC03.DPOB_CD
+											AND CC02.SYSTEMKEY = CC03.SYSTEMKEY
+										    AND CC02.EMYMT_TYP_CD NOT IN ('A0420990')
+				                            AND (CC02.DPOB_CD,CC02.SYSTEMKEY) NOT IN (
+				                                   SELECT DPOB_CD,SYSTEMKEY 
+				                                     FROM PSNL0100
+				                        ]]>             
+				                                    WHERE 
+				                                    <isEqual property="createFlag" compareValue="individ"> 
+						                                  	HDOFC_CODTN_CD  IN ('A0030030')
+					                                </isEqual> 
+					                                <isEqual property="createFlag" compareValue="lump"> 
+						                                  	HDOFC_CODTN_CD  IN ('A0030020', 'A0030030')
+					                                </isEqual> 
+				                                 )  
+										
+										<isEqual property="createFlag" compareValue="lump"> 
+											AND CC02.EMYMT_BGNN_DT = CC03.EMYMT_BGNN_DT
+									  	</isEqual>
+					<![CDATA[		) CC06
+									WHERE CC05.DPOB_CD = CC06.DPOB_CD 
+								   		AND CC05.SYSTEMKEY = CC06.SYSTEMKEY 
+                             ) SS
+                     WHERE AA.DPOB_CD = BB.DPOB_CD
+                     	AND  AA.SYSTEMKEY= BB.SYSTEMKEY 
+                     	AND BB.DPOB_CD = SS.DPOB_CD
+                     	AND BB.SYSTEMKEY = SS.SYSTEMKEY  
+                     	AND AA.DPOB_CD = OO.DPOB_CD  
+                        AND AA.SYSTEMKEY= OO.SYSTEMKEY 
+                        AND OO.PAY_CD =  #payCd# 
+                        AND OO.DILNLAZ_YR_MNTH = #dilnlazExceDutyYrMnth# 
+                      
+					]]>
+					
+					/* 공통 조건 시작(단위기관, 고용구분, 부서, 권한) */
+					<isNotEmpty prepend="AND"  property="payrMangDeptCd">
+		     			AA.PAYR_MANG_DEPT_CD =  #payrMangDeptCd#  
+		    	  	</isNotEmpty> 
+		    	  	
+					<isNotEmpty prepend="AND" property="emymtDivCd">
+		       		 	BB.EMYMT_DIV_CD =  #emymtDivCd#  
+		    	  	</isNotEmpty>
+		    	  	
+					<isNotEmpty prepend="AND" property="businCd" >
+						BB.BUSIN_CD=#businCd#
+					</isNotEmpty>
+		    	  		<!-- AND FF.DILNLAZ_EXCE_DUTY_YR_MNTH  =  #dilnlazExceDutyYrMnth# -->
+		    	  		AND  BB.EMYMT_DIV_CD =  #emymtDivCd#	
+			    	  	AND  EXISTS  (
+	                         SELECT  C.DPOB_CD,
+	                                 C.DTIL_OCCU_INTTN_CD,
+	                                 C.TYP_OCCU_CD,
+	                                 C.DEPT_CD FROM 
+	                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+	                                            WHERE     C.DPOB_CD = SS.DPOB_CD
+							                        AND C.DEPT_CD = SS.DEPT_CD
+							                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(SS.TYP_OCCU_CD,'TT') 
+	                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(SS.DTIL_OCCU_INTTN_CD,'TT')
+	                                               <isNotEmpty property="currAffnDeptCd" prepend="AND">
+													<![CDATA[
+													 C.DEPT_CD
+													]]>
+													<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+													 #deptCdArr[]#
+													</iterate>
+													</isNotEmpty> 
+	                                          ) 
+					/*   공통 조건 종료 */
+					
+					
+					/* 개별 조건 시작(시스템키) */
+					<isEqual property="createFlag" compareValue="individ">	
+					     <isNotEmpty prepend="AND" property="systemkey">
+					 		BB.SYSTEMKEY=#systemkey#
+				       	</isNotEmpty>
+					</isEqual>	
+					/* 개별 조건 종료 */
+					
+					
+					/* 일괄 조건 시작 */
+					<isEqual property="createFlag" compareValue="lump">
+					    AND  BB.HDOFC_CODTN_CD  IN ('A0030010','A0030020','A0030030') 
+						<isNotEmpty prepend="AND"  property="repbtyBusinDivCd">
+							BB.REPBTY_BUSIN_DIV_CD = #repbtyBusinDivCd# 
+						</isNotEmpty>
+		    	  
+                    	<isNotEmpty property="typOccuCd" prepend="AND">
+							<![CDATA[
+					 			SS.TYP_OCCU_CD
+							]]>
+							<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					 			#typOccuCdArr[]#
+							</iterate>
+						</isNotEmpty>  
+	 
+					 	<isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+							<![CDATA[
+								SS.DTIL_OCCU_INTTN_CD
+							]]>
+							<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+								#dtilOccuInttnCdArr[]#
+							</iterate>
+						</isNotEmpty>  
+		            
+					</isEqual>
+				 
+	  </select> 
+	  
+	
+	  
+	<delete id="dlgn0200DAO.deleteDlgn0200" parameterClass="dlgn0200Dto">
+	     <![CDATA[ 
+	    DELETE FROM DLGN0200 A
+	      WHERE A.DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+	          AND A.PAY_CD = #payCd#
+	         AND DPOB_CD = #dpobCd#
+		      AND SYSTEMKEY = #systemkey#
+	     ]]>       
+		</delete>
+	
+    <delete id="dlgn0200DAO.deleteDlgn0210" parameterClass="dlgn0200Dto">
+	     <![CDATA[ 
+		DELETE FROM DLGN0210 A
+	      WHERE A.DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+	          AND A.PAY_CD = #payCd#	
+	      AND DPOB_CD = #dpobCd#
+		      AND SYSTEMKEY = #systemkey#
+	     ]]>       
+		</delete>
+		
+    
+    <!-- 근태 생성 처리 -->
+	<insert id="dlgn0200DAO.insertDlgn0200" parameterClass="dlgn0200Dto">
+	    <![CDATA[
+	    INSERT INTO DLGN0200 (DPOB_CD,
+		                      SYSTEMKEY,
+		                      DILNLAZ_EXCE_DUTY_YR_MNTH,
+		                      PAY_CD,
+		                      EMYMT_DIV_CD,
+		                      DEPT_CD,
+		                      BUSIN_CD,
+		                      TYP_OCCU_CD,
+		                      DTIL_OCCU_INTTN_CD,
+		                      DTIL_OCCU_CLS_DIV_CD,
+		                      DILNLAZ_EXCE_DUTY_BGNN_DT,
+		                      DILNLAZ_EXCE_DUTY_END_DT,
+		                      DILNLAZ_DDLNE_PRCS_YN,
+		                      KYBDR,
+		                      INPT_DT,
+		                      INPT_ADDR,
+		                      ISMT,
+		                      REVN_DT,
+		                      REVN_ADDR)
+		  VALUES (
+		          #dpobCd#,
+		          #systemkey#,
+		          #dilnlazExceDutyYrMnth#,
+		          #payCd# ,
+		          #emymtDivCd#,
+		          #deptCd#,
+		          #businCd#,
+		          #typOccuCd#, 
+		          #dtilOccuInttnCd#,
+		          #dtilOccuClsDivCd#,
+		          #dilnlazExceDutyBgnnDt#,
+		          #dilnlazExceDutyEndDt#, 
+		          #dilnlazDdlnePrcsYn#,
+		          #ismt#,
+		          TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+		          #revnAddr#,
+		          #ismt#,
+		          TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+		          #revnAddr#  
+		  ) 
+		  ]]>                 		                      
+	 		</insert>                     
+		                      
+		 
+	<insert id="dlgn0200DAO.insertDlgn0210" parameterClass="dlgn0200Dto">
+	    INSERT INTO DLGN0210 (DPOB_CD,
+		                      SYSTEMKEY,
+		                      DILNLAZ_EXCE_DUTY_YR_MNTH,
+		                      PAY_CD,
+		                      DILNLAZ_APPTN_DT,
+		                      DILNLAZ_DUTY_YN, DILNLAZ_DUTY_TM, DILNLAZ_NTOT_YN, 
+  							  DILNLAZ_NTOT_TM, DILNLAZ_TM_RST_DUTY_YN, DILNLAZ_TM_RST_DUTY_TM,
+  							  DILNLAZ_HODY_DUTY_YN,DILNLAZ_HODY_DUTY_TM,
+		                      KYBDR,
+		                      INPT_DT,
+		                      INPT_ADDR,
+		                      ISMT,
+		                      REVN_DT,
+		                      REVN_ADDR)
+		SELECT DISTINCT #dpobCd#, #systemkey#, #dilnlazExceDutyYrMnth#, #payCd#, A.DILNLAZ_APPTN_DT,
+		       'N','0','N','0','N','0','N','0',
+				#ismt#, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'), #revnAddr#,
+		        #ismt#, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'), #revnAddr#
+		  FROM 
+		(
+		    SELECT 
+            	A.D AS DILNLAZ_APPTN_DT, B.OFFDAY_KUBN, B.DAY_OF_WEEK, SUBSTR(A.D,1,4) YR
+            FROM 
+            (
+            SELECT TO_CHAR(TO_DATE (#dilnlazExceDutyBgnnDt#, 'YYYYMMDD') + (LEVEL - 1) , 'YYYYMMDD') AS D
+               FROM DUAL
+                    CONNECT BY TO_DATE (#dilnlazExceDutyBgnnDt#, 'YYYYMMDD') + (LEVEL - 1) &lt;= TO_DATE (#dilnlazExceDutyEndDt#, 'YYYYMMDD')
+             )A, CO_CALENDAR B
+             WHERE A.D = B.CALENDAR_DATE 
+		)A 
+	</insert>     
+	
+	
+	<!-- 마감처리 풀기  -->
+	<update id="dlgn0200DAO.updateDlgn0200PayDdlene_S" >
+	    
+		UPDATE DLGN0200
+	 	SET DILNLAZ_DDLNE_PRCS_YN = #dilnlazDdlnePrcsYn#, 
+	       ISMT = #ismt#,
+	       REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+	       REVN_ADDR = #revnAddr#
+		WHERE DPOB_CD = #dpobCd#
+	      AND SYSTEMKEY = #systemkey#
+	      AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+	      AND PAY_CD = #payCd# 
+	</update>
+	 <!--   AND DILNLAZ_APPTN_DT = replace(replace(#dilnlazApptnDt#,'-',''),'.','') -->
+	
+	
+	<insert id="dlgn0200DAO.insertXlsDlgn0200_S">
+		<![CDATA[
+			INSERT INTO DLGN0200 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , DILNLAZ_EXCE_DUTY_YR_MNTH
+				  , PAY_CD
+				  , EMYMT_DIV_CD
+				  , DEPT_CD
+				  , BUSIN_CD
+				  , TYP_OCCU_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , DTIL_OCCU_CLS_DIV_CD
+				  , DILNLAZ_EXCE_DUTY_BGNN_DT
+				  , DILNLAZ_EXCE_DUTY_END_DT
+				  , DILNLAZ_PUBC_HODY_DUTY_NUM_DYS
+				  , DILNLAZ_SAT_DUTY_NUM_DYS
+				  , DILNLAZ_TOT_NTOT_NUM_DYS
+				  , DILNLAZ_TOT_NTOT_TM
+				  , DILNLAZ_FNDTN_TM_RST_DUTY_TM
+				  , DILNLAZ_TM_RST_DUTY_TM
+				  , DILNLAZ_TOT_TM_RST_DUTY_TM
+				  , DILNLAZ_DDLNE_PRCS_YN
+				  , DILNLAZ_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , PYSP_GRDE_CD  
+				  , DILNLAZ_PUBC_HODY_DUTY_TM)
+			    (
+			      SELECT 
+				        DPOB_CD
+					  , SYSTEMKEY
+					  , #dilnlazExceDutyYrMnth#
+					  , #payCd#
+					  , EMYMT_DIV_CD
+					  , DEPT_CD
+					  , BUSIN_CD
+					  , TYP_OCCU_CD
+					  , DTIL_OCCU_INTTN_CD
+					  , DTIL_OCCU_CLS_DIV_CD
+					  , TO_CHAR ( TRUNC (TO_DATE (#dilnlazExceDutyYrMnth#, 'YYYYMM'), 'MONTH') ,'YYYYMMDD')
+					  , TO_CHAR (LAST_DAY (TRUNC (TO_DATE (#dilnlazExceDutyYrMnth#, 'YYYYMM'))) + 1 / 24, 'YYYYMMDD')
+					  , #dilnlazPubcHodyDutyNumDys#
+					  , #dilnlazSatDutyNumDys#
+					  , #dilnlazTotNtotNumDys#
+					  , #dilnlazTotNtotTm#
+					  , #dilnlazFndtnTmRstDutyTm#
+					  , #dilnlazTmRstDutyTm#
+					  , (case when to_number(nvl(#dilnlazTotTmRstDutyTm#,0)) <= 0 then 
+											        to_char(to_number(nvl(#dilnlazFndtnTmRstDutyTm#,0)) + to_number(nvl(#dilnlazTmRstDutyTm#,0)))
+											    else 
+											       #dilnlazTotTmRstDutyTm#
+											    end)
+					  , #dilnlazDdlnePrcsYn#
+					  , #dilnlazNoteCtnt#
+					  , #kybdr#
+					  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  , #inptAddr#
+					  , #ismt#
+					  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  , #revnAddr#
+					  , PYSP_GRDE_CD
+					  ,(to_number(nvl(#dilnlazPubcHodyDutyNumDys#,0)) * 8)
+			       FROM PSNL0100 
+			      WHERE RESN_REGN_NUM = #resnRegnNum#
+				    AND DPOB_CD=#dpobCd# )
+		]]>
+	</insert>
+	
+	<update id="dlgn0200DAO.updateXlsDlgn0200_S">
+		<![CDATA[
+			UPDATE DLGN0200
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+				, PAY_CD=#payCd#
+				, EMYMT_DIV_CD=#emymtDivCd#
+				, DEPT_CD=#deptCd#
+				, BUSIN_CD=#businCd#
+				, TYP_OCCU_CD=#typOccuCd#
+				, DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#
+				, DTIL_OCCU_CLS_DIV_CD=#dtilOccuClsDivCd#
+				, DILNLAZ_EXCE_DUTY_BGNN_DT=#dilnlazExceDutyBgnnDt#
+				, DILNLAZ_EXCE_DUTY_END_DT=#dilnlazExceDutyEndDt#
+				, DILNLAZ_PUBC_HODY_DUTY_NUM_DYS=#dilnlazPubcHodyDutyNumDys#
+				, DILNLAZ_SAT_DUTY_NUM_DYS=#dilnlazSatDutyNumDys#
+				, DILNLAZ_TOT_NTOT_NUM_DYS=#dilnlazTotNtotNumDys#
+				, DILNLAZ_TOT_NTOT_TM=#dilnlazTotNtotTm#
+				, DILNLAZ_FNDTN_TM_RST_DUTY_TM=#dilnlazFndtnTmRstDutyTm#
+				, DILNLAZ_TM_RST_DUTY_TM=#dilnlazTmRstDutyTm#
+				, DILNLAZ_TOT_TM_RST_DUTY_TM=  (case when to_number(nvl(#dilnlazTotTmRstDutyTm#,0)) <= 0 then 
+											        to_char(to_number(nvl(#dilnlazFndtnTmRstDutyTm#,0)) + to_number(nvl(#dilnlazTmRstDutyTm#,0)))
+											    else 
+											       #dilnlazTotTmRstDutyTm#
+											    end)
+				, DILNLAZ_DDLNE_PRCS_YN=#dilnlazDdlnePrcsYn#
+				, DILNLAZ_NOTE_CTNT=#dilnlazNoteCtnt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+				, PYSP_GRDE_CD=#pyspGrdeCd# 
+				, DILNLAZ_PUBC_HODY_DUTY_TM=(#dilnlazPubcHodyDutyNumDys# * 8) 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+								AND PAY_CD=#payCd#
+				]]>
+	</update>
+	<!-- #dilnlazPubcHodyDutyTm# -->
+	<delete id="dlgn0200DAO.deleteXlsDlgn0200_S">
+		<![CDATA[
+			DELETE FROM DLGN0200 
+						WHERE DPOB_CD= #dpobCd#
+								AND SYSTEMKEY= (  SELECT SYSTEMKEY 
+								                    FROM PSNL0100 
+								                   WHERE RESN_REGN_NUM = #resnRegnNum#
+								) 
+								AND DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+								AND PAY_CD=#payCd#
+				]]>
+	</delete>
+	
+	
+	<insert id="dlgn0200DAO.insertDlgn0200_S">
+		<![CDATA[
+			INSERT INTO DLGN0200 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , DILNLAZ_EXCE_DUTY_YR_MNTH
+				  , PAY_CD
+				  , EMYMT_DIV_CD
+				  , DEPT_CD
+				  , BUSIN_CD
+				  , TYP_OCCU_CD
+				  , DTIL_OCCU_INTTN_CD  
+				  , DTIL_OCCU_CLS_DIV_CD
+				  , DILNLAZ_EXCE_DUTY_BGNN_DT
+				  , DILNLAZ_EXCE_DUTY_END_DT
+				  , DILNLAZ_PUBC_HODY_DUTY_NUM_DYS
+				  , DILNLAZ_SAT_DUTY_NUM_DYS
+				  , DILNLAZ_TOT_NTOT_NUM_DYS
+				  , DILNLAZ_TOT_NTOT_TM
+				  , DILNLAZ_FNDTN_TM_RST_DUTY_TM
+				  , DILNLAZ_TM_RST_DUTY_TM
+				  , DILNLAZ_TOT_TM_RST_DUTY_TM
+				  , DILNLAZ_DDLNE_PRCS_YN
+				  , DILNLAZ_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , PYSP_GRDE_CD 
+				  , DILNLAZ_PUBC_HODY_DUTY_TM  )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #dilnlazExceDutyYrMnth#
+				  , #payCd#
+				  , #emymtDivCd#
+				  , #deptCd#
+				  , #businCd#
+				  , #typOccuCd#
+				    , #dtilOccuInttnCd#
+				  , SUBSTR(#dtilOccuInttnCd#,1,8)
+				  , #dilnlazExceDutyBgnnDt#
+				  , #dilnlazExceDutyEndDt#
+				  , #dilnlazPubcHodyDutyNumDys#
+				  , #dilnlazSatDutyNumDys#
+				  , #dilnlazTotNtotNumDys#
+				  , #dilnlazTotNtotTm#
+				  , #dilnlazFndtnTmRstDutyTm#
+				  , #dilnlazTmRstDutyTm#
+				  , #dilnlazTotTmRstDutyTm#
+				  , #dilnlazDdlnePrcsYn#
+				  , #dilnlazNoteCtnt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , SUBSTR(#dtilOccuInttnCd#,9,8) 
+				  , #dilnlazPubcHodyDutyTm# )
+		]]>
+	</insert>
+	
+	<update id="dlgn0200DAO.updateDlgn0200_S">
+		<![CDATA[
+			UPDATE DLGN0200
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+				, PAY_CD=#payCd#
+				, EMYMT_DIV_CD=#emymtDivCd#
+				, DEPT_CD=#deptCd#
+				, BUSIN_CD=#businCd#
+				, TYP_OCCU_CD=#typOccuCd#
+					, DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				, DTIL_OCCU_CLS_DIV_CD=SUBSTR(#dtilOccuInttnCd#,1,8)
+				, DILNLAZ_EXCE_DUTY_BGNN_DT=#dilnlazExceDutyBgnnDt#
+				, DILNLAZ_EXCE_DUTY_END_DT=#dilnlazExceDutyEndDt#
+				, DILNLAZ_PUBC_HODY_DUTY_NUM_DYS=#dilnlazPubcHodyDutyNumDys#
+				, DILNLAZ_SAT_DUTY_NUM_DYS=#dilnlazSatDutyNumDys#
+				, DILNLAZ_TOT_NTOT_NUM_DYS=#dilnlazTotNtotNumDys#
+				, DILNLAZ_TOT_NTOT_TM=#dilnlazTotNtotTm#
+				, DILNLAZ_FNDTN_TM_RST_DUTY_TM=#dilnlazFndtnTmRstDutyTm#
+				, DILNLAZ_TM_RST_DUTY_TM=#dilnlazTmRstDutyTm#
+				, DILNLAZ_TOT_TM_RST_DUTY_TM=#dilnlazTotTmRstDutyTm#
+				, DILNLAZ_DDLNE_PRCS_YN=#dilnlazDdlnePrcsYn#
+				, DILNLAZ_NOTE_CTNT=#dilnlazNoteCtnt# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+				, PYSP_GRDE_CD=SUBSTR(#dtilOccuInttnCd#,9,8)
+				, DILNLAZ_PUBC_HODY_DUTY_TM=#dilnlazPubcHodyDutyTm#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+								AND PAY_CD=#payCd#
+				]]>
+	</update>
+	
+	<delete id="dlgn0200DAO.deleteDlgn0200_S">
+		<![CDATA[
+			DELETE FROM DLGN0200 
+			WHERE DPOB_CD=#dpobCd#
+			AND SYSTEMKEY=#systemkey#
+			AND DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+			AND PAY_CD=#payCd#
+				]]>
+	</delete>
+	
+	<delete id="dlgn0200DAO.deleteDlgn0210_S" parameterClass="dlgn0200Dto">
+		DELETE FROM DLGN0210
+		WHERE DPOB_CD=#dpobCd#
+		AND SYSTEMKEY=#systemkey#
+		AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+		AND PAY_CD = #payCd#
+	</delete>
+	
+	<select id="dlgn0200DAO.selectDlgn0200_S" resultMap="dlgn0200PayDdlene">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, DILNLAZ_EXCE_DUTY_YR_MNTH
+				, PAY_CD
+				, EMYMT_DIV_CD
+				, DEPT_CD
+				, BUSIN_CD
+				, TYP_OCCU_CD
+				, DTIL_OCCU_INTTN_CD
+				, DTIL_OCCU_CLS_DIV_CD
+				, DILNLAZ_EXCE_DUTY_BGNN_DT
+				, DILNLAZ_EXCE_DUTY_END_DT
+				, DILNLAZ_PUBC_HODY_DUTY_NUM_DYS
+				, DILNLAZ_SAT_DUTY_NUM_DYS
+				, DILNLAZ_TOT_NTOT_NUM_DYS
+				, DILNLAZ_TOT_NTOT_TM
+				, DILNLAZ_FNDTN_TM_RST_DUTY_TM
+				, DILNLAZ_TM_RST_DUTY_TM
+				, DILNLAZ_TOT_TM_RST_DUTY_TM
+				, DILNLAZ_DDLNE_PRCS_YN
+				, DILNLAZ_NOTE_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, PYSP_GRDE_CD
+				, DILNLAZ_PUBC_HODY_DUTY_TM
+			FROM DLGN0200
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+								AND PAY_CD=#payCd#
+				]]>
+	</select>
+	
+	<!-- 생성 후 setUpdateManageDlgn0200CommuteService를 하기 위해  -->
+	<select id="dlgn0200DAO.afterSelectDlgn0200" parameterClass="dlgn0200Dto" resultClass="egovMap">
+ 	<![CDATA[
+ 		SELECT FF.DPOB_CD,
+		          FF.SYSTEMKEY,
+		          FF.DILNLAZ_EXCE_DUTY_YR_MNTH,
+		          FF.PAY_CD,
+		          FF.EMYMT_DIV_CD,
+		          FF.DEPT_CD,
+		          FF.BUSIN_CD,
+		          FF.TYP_OCCU_CD,
+		          FF.DTIL_OCCU_INTTN_CD,
+		          FF.DTIL_OCCU_CLS_DIV_CD,
+		          FF.DILNLAZ_EXCE_DUTY_BGNN_DT,
+		          FF.DILNLAZ_EXCE_DUTY_END_DT,
+				  FF.PYSP_GRDE_CD
+		          FROM PAYR0500 AA, PSNL0100 BB ,  DLGN0200 FF,
+                     (
+                     SELECT 
+						  DPOB_CD, SYSTEMKEY, LEVF_ABNC_SEIL_NUM, 
+						   LEVF_ABNC_DIV_CD, LEVF_ABNC_BGNN_DT, LEVF_ABNC_END_DT, 
+						   TURTY_RNTMNT_DT 
+						FROM  PSNL0123  KK
+					    WHERE KK.DPOB_CD = #dpobCd# 
+					      AND LEVF_ABNC_SEIL_NUM = (
+					       SELECT 
+						        MAX(LEVF_ABNC_SEIL_NUM) AS LEVF_ABNC_SEIL_NUM 
+						FROM  PSNL0123  JJ
+					    WHERE JJ.DPOB_CD = #dpobCd# 
+					    AND   JJ.SYSTEMKEY = KK.SYSTEMKEY
+					    AND ((JJ.LEVF_ABNC_BGNN_DT  >=  #dilnlazExceDutyBgnnDt#  AND   JJ.LEVF_ABNC_BGNN_DT  <=  #dilnlazExceDutyEndDt#)
+					          OR (JJ.LEVF_ABNC_END_DT  >=  #dilnlazExceDutyBgnnDt#  AND   JJ.LEVF_ABNC_END_DT  <=  #dilnlazExceDutyEndDt#)) 
+					    GROUP BY JJ.DPOB_CD,JJ.SYSTEMKEY
+					      ) 
+                     )  HH
+                     WHERE AA.DPOB_CD = BB.DPOB_CD
+                     AND  AA.SYSTEMKEY= BB.SYSTEMKEY  
+                     AND  AA.DPOB_CD = FF.DPOB_CD(+)
+                     AND  AA.SYSTEMKEY= FF.SYSTEMKEY(+) 
+                     AND  FF.DILNLAZ_EXCE_DUTY_YR_MNTH(+) =  #dilnlazExceDutyYrMnth#
+                     AND  FF.PAY_CD(+) =  #payCd#								   
+                     AND  BB.EMYMT_DIV_CD =  #emymtDivCd#
+                     AND  AA.DPOB_CD = HH.DPOB_CD(+)
+                     AND  AA.SYSTEMKEY= HH.SYSTEMKEY(+) 
+                      ]]>
+                 <isNotEmpty prepend="AND"  property="payrMangDeptCd">
+		       		 AA.PAYR_MANG_DEPT_CD =  #payrMangDeptCd#  
+		    	  </isNotEmpty> 
+		    	  AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+				 
+                                          )  
+                    <isNotEmpty prepend="AND" property="repbtyBusinDivCd">
+							BB.REPBTY_BUSIN_DIV_CD = #repbtyBusinDivCd# 
+				    	</isNotEmpty>      
+                    <isNotEmpty property="typOccuCd" prepend="AND">
+					<![CDATA[
+					 BB.TYP_OCCU_CD
+					]]>
+					<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						#typOccuCdArr[]#
+					</iterate>
+					</isNotEmpty>  
+					 <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					 <isNotEmpty prepend="AND" property="businCd" >
+					 	BB.BUSIN_CD=#businCd#
+				       </isNotEmpty>  
+                 ORDER BY 
+						BB.DPOB_CD ASC
+						, PAY_CD ASC
+						 ,(SELECT LPAD(DEPT_RANK,5,'0')  
+                                   FROM BASS0400 DD
+                                   WHERE DD.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+                                     AND DD.DPOB_CD = BB.DPOB_CD) ASC  
+						, BB.RESN_REGN_NUM ASC
+		    
+	</select>
+	
+	<!-- dlgn0200 근무실적 엑셀 양식 -->
+	<select id="dlgn0200DAO.selectXlsDlgn0200List_D" parameterClass="dlgn0250SrhVO" resultMap="dlgn0250">
+			<![CDATA[	    
+	            SELECT BB.DPOB_CD
+                , BB.SYSTEMKEY
+                , (#jobYrMnth#) AS DILNLAZ_YR_MNTH
+                , (#payCd#) PAY_CD 
+                , fcBass0300CDNM(BB.DPOB_CD,#payCd#) AS PAY_NM
+                , BB.HAN_NM  
+                , BB.RESN_REGN_NUM 
+                , BB.EMYMT_DIV_CD
+                , fcBass0300CDNM(BB.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM
+                , (SS.DEPT_CD) AS DEPT_CD
+                , fcBass0400CDNM(BB.DPOB_CD,SS.DEPT_CD,'2') AS DEPT_NM
+                , SS.BUSIN_CD
+                , fcBass0500CDNM(BB.DPOB_CD,SUBSTR(SS.BUSIN_CD,1,4),SS.DEPT_CD,SS.BUSIN_CD) AS BUSIN_NM
+                , SS.TYP_OCCU_CD
+                 , fcBass0320CDNM(BB.DPOB_CD,SS.TYP_OCCU_CD) AS TYP_OCCU_NM
+                , BB.PYSP_GRDE_CD
+                , fcBass0300CDNM(BB.DPOB_CD,BB.PYSP_GRDE_CD) AS PYSP_GRDE_NM
+                , SS.DTIL_OCCU_CLS_DIV_CD
+                , SS.DTIL_OCCU_INTTN_CD 
+		        , fcBassEx0350CDNM(BB.DPOB_CD,SS.TYP_OCCU_CD,SS.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM  
+                , BB.HDOFC_CODTN_CD 
+                , (CASE WHEN BB.HDOFC_CODTN_CD = 'A0030020' 
+			               THEN (CASE WHEN BB.RETRY_DT IS NULL THEN 
+			                              (SELECT MAX(EMYMT_END_DT) FROM PSNL0110 A01
+			                               WHERE A01.DPOB_CD = BB.DPOB_CD
+			                                 AND A01.SYSTEMKEY = BB.SYSTEMKEY)
+			                         ELSE BB.RETRY_DT END)
+			               ELSE BB.RETRY_DT END) AS RETRY_DT 
+                , NVL(FF.DILNLAZ_DUTY_BGNN_DT,#rflctnBgnnDt#) AS DILNLAZ_DUTY_BGNN_DT
+                , NVL(FF.DILNLAZ_DUTY_END_DT,#rflctnEndDt#) AS DILNLAZ_DUTY_END_DT
+                , NVL(FF.DILNLAZ_DUTY_NUM_DYS,0) AS DILNLAZ_DUTY_NUM_DYS
+                , NVL(FF.DILNLAZ_LVSG_NUM_DYS,0) AS DILNLAZ_LVSG_NUM_DYS
+                , NVL(FF.DILNLAZ_ABNCE_NUM_DYS,0) AS DILNLAZ_ABNCE_NUM_DYS
+                , NVL(FF.DILNLAZ_SCKLEA_NUM_DYS,0) AS DILNLAZ_SCKLEA_NUM_DYS
+                , NVL(FF.DILNLAZ_OFFVA_NUM_DYS,0) AS DILNLAZ_OFFVA_NUM_DYS
+                , NVL(FF.DILNLAZ_FMLY_EVNT_NUM_DYS,0) AS DILNLAZ_FMLY_EVNT_NUM_DYS
+                , NVL(FF.DILNLAZ_HLTH_CRE_NUM_DYS,0) AS DILNLAZ_HLTH_CRE_NUM_DYS
+                , NVL(FF.DILNLAZ_TOT_DUTY_NUM_DYS,0) AS DILNLAZ_TOT_DUTY_NUM_DYS
+                , NVL(FF.DILNLAZ_WKLY_HLDY_NUM_DYS,0) AS DILNLAZ_WKLY_HLDY_NUM_DYS
+                , NVL(FF.DILNLAZ_PAID_PUBC_HODY_NUM ,0) AS DILNLAZ_PAID_PUBC_HODY_NUM
+                , NVL(FF.DILNLAZ_SPCL_HODY_NUM_DYS,0) AS DILNLAZ_SPCL_HODY_NUM_DYS
+                , NVL(GG.DILNLAZ_SAT_DUTY_NUM_DYS,0) AS DILNLAZ_SAT_DUTY_NUM_DYS
+                , NVL(GG.DILNLAZ_PUBC_HODY_DUTY_NUM_DYS,0) AS DILNLAZ_PUBC_HODY_DUTY_NUM_DYS
+                , NVL(GG.DILNLAZ_PUBC_HODY_DUTY_TM,0) AS DILNLAZ_PUBC_HODY_DUTY_TM
+                , NVL(FF.DILNLAZ_ABNCE_DUTY_RCGTN_DYS ,0) AS DILNLAZ_ABNCE_DUTY_RCGTN_DYS
+                , NVL(FF.DILNLAZ_TOT_DUTY_TM,0) AS DILNLAZ_TOT_DUTY_TM
+                , NVL(FF.DILNLAZ_PAID_HODY_NUM_DYS,0) AS DILNLAZ_PAID_HODY_NUM_DYS
+                , NVL(FF.DILNLAZ_TFC_ASS_CST_NUM_DYS,0) AS DILNLAZ_TFC_ASS_CST_NUM_DYS
+                 , NVL(FF.DILNLAZ_LNCH_DYS,0) AS DILNLAZ_LNCH_DYS
+                
+                , NVL(GG.DILNLAZ_TOT_NTOT_NUM_DYS,0) AS DILNLAZ_TOT_NTOT_NUM_DYS
+                , NVL(GG.DILNLAZ_TOT_NTOT_TM,0) AS DILNLAZ_TOT_NTOT_TM
+                , NVL(GG.DILNLAZ_FNDTN_TM_RST_DUTY_TM,0) AS DILNLAZ_FNDTN_TM_RST_DUTY_TM
+                , NVL(GG.DILNLAZ_TM_RST_DUTY_TM,0) AS DILNLAZ_TM_RST_DUTY_TM
+                , NVL(GG.DILNLAZ_TOT_TM_RST_DUTY_TM ,0) AS DILNLAZ_TOT_TM_RST_DUTY_TM
+                , HH.LEVF_ABNC_DIV_CD 
+                , HH.LEVF_ABNC_BGNN_DT
+                , HH.LEVF_ABNC_END_DT
+                , HH.TURTY_RNTMNT_DT 
+                FROM PAYR0500 AA, PSNL0100 BB , DLGN0100 FF, DLGN0200 GG, 
+                     (
+                     SELECT 
+						  DPOB_CD, SYSTEMKEY, LEVF_ABNC_SEIL_NUM, 
+						   LEVF_ABNC_DIV_CD, LEVF_ABNC_BGNN_DT, LEVF_ABNC_END_DT, 
+						   TURTY_RNTMNT_DT 
+						FROM  PSNL0123  
+					    WHERE KK.DPOB_CD = #dpobCd# 
+					      AND LEVF_ABNC_SEIL_NUM = (
+					       SELECT 
+						        MAX(LEVF_ABNC_SEIL_NUM) AS LEVF_ABNC_SEIL_NUM 
+						FROM  PSNL0123  JJ
+					    WHERE JJ.DPOB_CD = #dpobCd# 
+					    AND   JJ.SYSTEMKEY = KK.SYSTEMKEY
+					    AND ((JJ.LEVF_ABNC_BGNN_DT  >=  #rflctnBgnnDt#  AND   JJ.LEVF_ABNC_BGNN_DT  <=  #rflctnEndDt#)
+					          OR (JJ.LEVF_ABNC_END_DT  >=  #rflctnBgnnDt#  AND   JJ.LEVF_ABNC_END_DT  <=  #rflctnEndDt#)) 
+					    GROUP BY JJ.DPOB_CD,JJ.SYSTEMKEY
+					      ) 
+                     )  HH
+                     ,
+                     (
+                     
+                       SELECT DISTINCT  CC05.DPOB_CD,
+								       CC05.SYSTEMKEY,
+								       CC05.EMYMT_BGNN_DT,
+								       CC05.EMYMT_END_DT,
+								       CC06.DEPT_CD,
+								       CC06.BUSIN_CD,
+								       CC06.TYP_OCCU_CD,
+								       CC06.DTIL_OCCU_CLS_DIV_CD,
+								       CC06.DTIL_OCCU_INTTN_CD
+								  FROM (  SELECT DPOB_CD,
+								                 SYSTEMKEY,
+								                 MIN (EMYMT_BGNN_DT) AS EMYMT_BGNN_DT,
+								                 MAX (NVL (EMYMT_END_DT, TO_CHAR (SYSDATE, 'YYYYMMDD')))
+								                    AS EMYMT_END_DT
+								            FROM PSNL0110 CC01
+								           WHERE    CC01.DPOB_CD =  #dpobCd# 
+					                                  AND  CC01.EMYMT_DIV_CD =  #emymtDivCd#
+					                                 AND ( SUBSTR(#rflctnBgnnDt#,1,6) BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6) 
+					                                    AND  SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN #rflctnBgnnDt#  <= TO_CHAR (SYSDATE,'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR ( SYSDATE, 'YYYYMMDD')  
+                                                                                                      ELSE #rflctnBgnnDt#  END)),1,6)
+                                                     OR SUBSTR(#rflctnEndDt#,1,6) BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6) 
+                                                        AND  SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN #rflctnEndDt#  >= TO_CHAR (SYSDATE,'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR ( SYSDATE, 'YYYYMMDD')  
+                                                                                                      ELSE #rflctnEndDt#  END)),1,6))
+					                        	]]>
+                        <isNotEmpty prepend="AND" property="businCd" >
+					 	CC01.BUSIN_CD=#businCd#
+				       </isNotEmpty>  
+				          <![CDATA[      
+								        GROUP BY DPOB_CD, SYSTEMKEY) CC05,
+								       (SELECT CC02.DPOB_CD,
+								               CC02.SYSTEMKEY,
+								               CC02.DEPT_CD,
+								               CC02.BUSIN_CD,
+								               CC02.TYP_OCCU_CD,
+								               CC02.DTIL_OCCU_CLS_DIV_CD,
+								               CC02.DTIL_OCCU_INTTN_CD
+								          FROM PSNL0110 CC02,
+								               (  SELECT DPOB_CD,
+								                         SYSTEMKEY,
+								                         MAX (CC01.EMYMT_BGNN_DT) AS EMYMT_BGNN_DT
+								                    FROM PSNL0110 CC01
+								                   WHERE  CC01.DPOB_CD =  #dpobCd# 
+					                                  AND  CC01.EMYMT_DIV_CD =  #emymtDivCd#
+					                                 AND ( SUBSTR(#rflctnBgnnDt#,1,6) BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6) 
+					                                 AND  SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN #rflctnBgnnDt#  <= TO_CHAR (SYSDATE,'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR ( SYSDATE, 'YYYYMMDD')  
+                                                                                                      ELSE #rflctnBgnnDt#  END)),1,6)
+                                             OR SUBSTR(#rflctnEndDt#,1,6) BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6) 
+                                             AND  SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN #rflctnEndDt#  >= TO_CHAR (SYSDATE,'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR ( SYSDATE, 'YYYYMMDD')  
+                                                                                                      ELSE #rflctnEndDt#  END)),1,6))
+					                              	]]>
+                        <isNotEmpty prepend="AND" property="businCd" >
+					 	CC01.BUSIN_CD=#businCd#
+				       </isNotEmpty>  
+				          <![CDATA[
+								                GROUP BY DPOB_CD, SYSTEMKEY) CC03
+								         WHERE     CC02.DPOB_CD = CC03.DPOB_CD
+								               AND CC02.SYSTEMKEY = CC03.SYSTEMKEY
+								               AND CC02.EMYMT_BGNN_DT = CC03.EMYMT_BGNN_DT) CC06
+								 WHERE CC05.DPOB_CD = CC06.DPOB_CD 
+								   AND CC05.SYSTEMKEY = CC06.SYSTEMKEY
+     
+                             ) SS
+                     WHERE AA.DPOB_CD = BB.DPOB_CD
+                     AND  AA.SYSTEMKEY= BB.SYSTEMKEY 
+                     AND BB.DPOB_CD = SS.DPOB_CD
+                     AND BB.SYSTEMKEY = SS.SYSTEMKEY
+					]]>
+                      <isNotEmpty prepend="AND" property="systemkey" >
+					 	BB.SYSTEMKEY=#systemkey#
+				       </isNotEmpty>
+				       <![CDATA[  
+                     AND  AA.DPOB_CD = FF.DPOB_CD(+)
+                     AND  AA.SYSTEMKEY= FF.SYSTEMKEY(+) 
+                     AND  FF.DILNLAZ_YR_MNTH(+) =  #jobYrMnth#
+                     AND  FF.PAY_CD(+) =  #payCd#
+                     AND  AA.DPOB_CD = GG.DPOB_CD(+)
+                     AND  AA.SYSTEMKEY= GG.SYSTEMKEY(+) 
+                     AND  GG.DILNLAZ_EXCE_DUTY_YR_MNTH(+) =  #jobYrMnth#
+                     AND  GG.PAY_CD(+) =  #payCd# 
+                     AND  BB.HDOFC_CODTN_CD  IN ('A0030010','A0030020','A0030030')  
+                     AND  BB.EMYMT_DIV_CD =  #emymtDivCd#
+                     AND AA.DPOB_CD = HH.DPOB_CD(+)
+                     AND  AA.SYSTEMKEY= HH.SYSTEMKEY(+) 
+                      ]]>
+                 <isNotEmpty prepend="AND"  property="payrMangDeptCd">
+		       		 AA.PAYR_MANG_DEPT_CD =  #payrMangDeptCd#  
+		    	  </isNotEmpty> 
+		    	  AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' ))) C
+                                            WHERE     C.DPOB_CD = SS.DPOB_CD
+						                        AND C.DEPT_CD = SS.DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(SS.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(SS.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+				 
+                                          )  
+                    <isNotEmpty prepend="AND" property="repbtyBusinDivCd">
+							BB.REPBTY_BUSIN_DIV_CD = #repbtyBusinDivCd# 
+				    	</isNotEmpty>                      
+                    <isNotEmpty property="typOccuCd" prepend="AND">
+					<![CDATA[
+					 SS.TYP_OCCU_CD
+					]]>
+					<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					 #typOccuCdArr[]#
+					</iterate>
+					</isNotEmpty>  
+				   <!--  <isNotEmpty property="pyspGrdeCd" prepend="AND">
+					<![CDATA[
+					 NVL(BB.PYSP_GRDE_CD,'A0060000')
+					]]>
+					<iterate prepend="IN" property="pyspGrdeCdArr" open="(" close=")" conjunction=",">
+					 #pyspGrdeCdArr[]#
+					</iterate>
+					</isNotEmpty>   -->
+					 <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 SS.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					 <isNotEmpty prepend="AND" property="businCd" >
+					 	SS.BUSIN_CD=#businCd#
+				  	</isNotEmpty>  
+                 ORDER BY 
+						FF.DPOB_CD ASC
+						, FF.DILNLAZ_YR_MNTH DESC
+						, PAY_CD ASC
+						 ,(SELECT LPAD(DEPT_RANK,5,'0')  
+                                   FROM BASS0400 DD
+                                   WHERE DD.DEPT_CD = SS.DEPT_CD
+                                     AND DD.DPOB_CD = SS.DPOB_CD) ASC  
+						, BB.RESN_REGN_NUM ASC
+						, BB.SYSTEMKEY ASC   
+	</select>
+	
+<!-- 	<select id="dlgn0200DAO.selectDlgn0200List" parameterClass="dlgn0200SrhVO" resultClass="egovMap"> -->
+<!-- 		SELECT * FROM DLGN0200  -->
+<!-- 	</select> -->
+		
+<!-- 	<select id="dlgn0200DAO.selectDlgn0200ListTotCnt" parameterClass="dlgn0200SrhVO" resultClass="int"> -->
+<!-- 		SELECT COUNT(*) totcnt FROM DLGN0200  -->
+<!-- 	</select> -->
+	
+	
+</sqlMap>

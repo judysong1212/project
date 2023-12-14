@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgPdfYE162015_2023">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+		
+	<insert id="InfcPkgPdfYE162015_2023_DAO.insertPdfYE162015_S">
+		<![CDATA[
+			INSERT INTO PDF_YE162015 
+						 (DPOB_CD,
+                          YRTX_BLGG_YR,
+                          CLUT_SEPT_CD,
+                          SYSTEMKEY,
+                          FILE_APP_PAPR_DIV_CD,
+                          FILE_APP_PAPR_SBT_YN,
+                          FILE_APP_PAPR_SBT_DT,
+                          FILE_APP_PAPR_YETA_YN,
+                          FILE_APP_PAPR_YETA_DT,
+                          KYBDR,
+                          INPT_DT,
+                          INPT_ADDR,
+                          ISMT,
+                          REVN_DT,
+                          REVN_ADDR)
+			     VALUES (#dpobCd#,
+			             #yrtxBlggYr#,
+			             #clutSeptCd#,
+			             #systemkey#,
+			             #fileAppPaprDivCd#,
+			             #fileAppPaprSbtYn#,
+			             TO_CHAR(SYSDATE,'YYYYMMDD'),
+			             #fileAppPaprYetaYn#,
+			             '',
+			             #kybdr#,
+			             TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+			             #inptAddr#,
+			             #ismt#,
+			             TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+			             #revnAddr#)
+		]]>
+	</insert>
+	
+	<delete id="InfcPkgPdfYE162015_2023_DAO.deletePdfYE162015_S">
+		<![CDATA[
+			DELETE FROM PDF_YE162015 
+					WHERE	DPOB_CD = #dpobCd#
+					AND	YRTX_BLGG_YR = #yrtxBlggYr#
+					AND	CLUT_SEPT_CD = #clutSeptCd#
+					AND	SYSTEMKEY = #systemkey#
+					AND	FILE_APP_PAPR_DIV_CD = #fileAppPaprDivCd#	
+				]]>
+	</delete>
+	
+	
+	
+		
+	
+
+</sqlMap>

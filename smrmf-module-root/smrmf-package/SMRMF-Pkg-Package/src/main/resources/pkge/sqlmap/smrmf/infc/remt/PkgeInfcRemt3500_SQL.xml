@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcRemt3500">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgRemt3500SrhVO" type="com.app.smrmf.infc.retirement.server.vo.InfcPkgRemt3500SrhVO"/>
+	 
+	
+	<!-- 급여 데이타 호출   -->
+	<select id="infcPkgRemt3500DAO.selectPayr4100ToRemt3500List_D" parameterClass="infcPkgRemt3500SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT 
+				     AA.DPOB_CD
+				   , AA.SYSTEMKEY
+				   , AA.HAN_NM
+				   , BB.SEVE_PAY_CLUT_MANGE_NUM 
+				   , BB.CALC_SEVE_PAY_PSN_BLGG_YR
+				   , BB.CALC_SEVE_PAY_PSN_DIV_CD
+				   , fcBass0300CDNM(AA.DPOB_CD,BB.CALC_SEVE_PAY_PSN_DIV_CD) AS CALC_SEVE_PAY_PSN_DIV_NM
+				   , BB.ICNC_DT
+				   , BB.RKFCD_DT
+				   , BB.RSGTN_DT
+				   , BB.PYMT_DT
+				   , BB.EEPN_MNTH_ICM_2012_BFR
+				   , BB.EEPN_MNTH_ICM_2013_AFT
+				   , BB.ADD_MNTH_ICM_2012_BFR
+				   , BB.ADD_MNTH_ICM_2013_AFT
+				   , BB.RETRY_PAY_QNTY
+				   , BB.FREE_DTY_RETRY_PAY_QNTY
+				   , BB.ALPAY_TX_AMNT
+				   , BB.LOC_INCM_TX_AMT
+				   , BB.PERN_PYMT_SUM
+				   , BB.SEVE_PAY_CTR_CLUT_NOTE_CTNT  
+				   , BB.AMCRR_CLUT_INSN_YN  
+				FROM PSNL0100 AA, REMT9000 BB , REMT2000 CC 
+				WHERE AA.DPOB_CD = BB.DPOB_CD
+				  AND AA.SYSTEMKEY = BB.SYSTEMKEY
+				  AND BB.DPOB_CD = CC.DPOB_CD(+)
+				  AND BB.SYSTEMKEY = CC.SYSTEMKEY(+)
+				  AND SUBSTR(BB.PYMT_DT,1,6) = CC.CLUT_YR_MNTH(+)
+				  AND BB.CALC_SEVE_PAY_PSN_DIV_CD =CC.CALC_SEVE_PAY_PSN_DIV_CD(+)
+			   <isNotEmpty prepend="AND" property="dpobCd" >
+			 	  AA.DPOB_CD=#dpobCd#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="systemkey" >
+				  AA.SYSTEMKEY=#systemkey#
+			   </isNotEmpty> 
+					ORDER BY 
+					          AA.DPOB_CD DESC
+							, BB.CALC_SEVE_PAY_PSN_BLGG_YR DESC
+							, BB.CALC_SEVE_PAY_PSN_DIV_CD DESC 
+							, BB.PYMT_DT DESC 
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgRemt3500DAO.selectPayr4100ToRemt3500ListTotCnt_S" parameterClass="infcPkgRemt3500SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM  (SELECT 
+					     AA.DPOB_CD
+					   , AA.SYSTEMKEY
+					   , AA.HAN_NM
+					   , BB.SEVE_PAY_CLUT_MANGE_NUM 
+					   , BB.CALC_SEVE_PAY_PSN_BLGG_YR
+					   , BB.CALC_SEVE_PAY_PSN_DIV_CD
+					   , fcBass0300CDNM(AA.DPOB_CD,BB.CALC_SEVE_PAY_PSN_DIV_CD) AS CALC_SEVE_PAY_PSN_DIV_NM
+					   , BB.ICNC_DT
+					   , BB.RKFCD_DT
+					   , BB.RSGTN_DT
+					   , BB.PYMT_DT
+					   , BB.EEPN_MNTH_ICM_2012_BFR
+					   , BB.EEPN_MNTH_ICM_2013_AFT
+					   , BB.ADD_MNTH_ICM_2012_BFR
+					   , BB.ADD_MNTH_ICM_2013_AFT
+					   , BB.RETRY_PAY_QNTY
+					   , BB.FREE_DTY_RETRY_PAY_QNTY
+					   , BB.ALPAY_TX_AMNT
+					   , BB.LOC_INCM_TX_AMT
+					   , BB.PERN_PYMT_SUM
+					   , BB.SEVE_PAY_CTR_CLUT_NOTE_CTNT 
+					   , BB.AMCRR_CLUT_INSN_YN
+					FROM PSNL0100 AA, REMT9000 BB , REMT2000 CC 
+					WHERE AA.DPOB_CD = BB.DPOB_CD
+					  AND AA.SYSTEMKEY = BB.SYSTEMKEY
+					  AND BB.DPOB_CD = CC.DPOB_CD(+)
+					  AND BB.SYSTEMKEY = CC.SYSTEMKEY(+)
+					  AND SUBSTR(BB.PYMT_DT,1,6) = CC.CLUT_YR_MNTH(+)
+					  AND BB.CALC_SEVE_PAY_PSN_DIV_CD =CC.CALC_SEVE_PAY_PSN_DIV_CD(+) 
+			  <isNotEmpty prepend="AND" property="dpobCd" >
+			 	     AA.DPOB_CD=#dpobCd#
+		       </isNotEmpty>
+		        <isNotEmpty prepend="AND" property="systemkey" >
+					 	AA.SYSTEMKEY=#systemkey#
+			    </isNotEmpty> 
+			 )   
+	</select>
+	
+	
+	
+
+</sqlMap>

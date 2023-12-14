@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0600">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="infcPsnl0600Dto" type="com.app.exterms.personal.client.dto.InfcPsnl0600DTO"/>
+	
+	<sql id="defaultWhereSql">
+	    <isNotNull property="searchDeptCd">
+		     <isNotEmpty property="searchDeptCd">
+		 		AND A.DEPT_CD = #searchDeptCd#
+		 	 </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="searchCurrDeptCd">
+		     <isNotEmpty property="searchCurrDeptCd">
+		 		AND A.CURR_AFFN_DEPT_CD = #searchCurrDeptCd#
+		 	 </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="searchEmymtDivCd">
+		     <isNotEmpty property="searchEmymtDivCd">
+		 		AND A.EMYMT_DIV_CD = #searchEmymtDivCd#
+		 	 </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="searchTypOccuCd">
+		     <isNotEmpty property="searchTypOccuCd">
+		 		AND A.TYP_OCCU_CD = #searchTypOccuCd#
+		 	 </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="searchNowDeptDateS">
+		     <isNotEmpty property="searchNowDeptDateS">
+		 		AND A.CURR_DEPT_APPMT_DT &gt;= #searchNowDeptDateS#
+		 	 </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="searchNowDeptDateE">
+		     <isNotEmpty property="searchNowDeptDateE">
+		 		AND A.CURR_DEPT_APPMT_DT &lt;= #searchNowDeptDateE#
+		 	 </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="searchFrstWorkDateS">
+		     <isNotEmpty property="searchFrstWorkDateS">
+		 		AND A.FRST_EMYMT_DT &gt;= #searchFrstWorkDateS#
+		 	 </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="searchFrstWorkDateE">
+		     <isNotEmpty property="searchFrstWorkDateE">
+		 		AND A.FRST_EMYMT_DT &lt;= #searchFrstWorkDateE#
+		 	 </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="searchBirthDateS">
+		     <isNotEmpty property="searchBirthDateS">
+		 		AND SUBSTR(A.RESN_REGN_NUM,1,6) &gt;= #searchBirthDateS#
+		 	 </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="searchBirthDateE">
+		     <isNotEmpty property="searchBirthDateE">
+		 		AND SUBSTR(A.RESN_REGN_NUM,1,6) &lt;= #searchBirthDateE#
+		 	 </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="searchHdofcCodtnCd">
+		     <isNotEmpty property="searchHdofcCodtnCd">
+		 		AND A.HDOFC_CODTN_CD = #searchHdofcCodtnCd# 
+		 	 </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="searchSexType">
+		     <isNotEmpty property="searchSexType">
+		 		AND A.SX_DIV_CD = #searchSexType# 
+		 	 </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="searchWorkYearS">
+		     <isNotEmpty property="searchWorkYearS">
+		 		AND EXISTS ( 
+	                        SELECT D.COMM_CD FROM BASS0300 D
+	                        WHERE RPSTTV_CD = 'A007'
+	                            AND TO_NUMBER(MANGE_ITEM01) &gt;= TO_NUMBER(#searchWorkYearS#)
+	                            AND D.DPOB_CD = A.DPOB_CD
+	                            AND D.COMM_CD = A.LOG_SVC_YR_NUM_CD
+	                        )
+		 	 </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="searchWorkYearE">
+		     <isNotEmpty property="searchWorkYearE">
+		 		AND EXISTS ( 
+	                        SELECT E.COMM_CD FROM BASS0300 E 
+	                        WHERE RPSTTV_CD = 'A007'
+	                            AND TO_NUMBER(MANGE_ITEM01) &lt;= TO_NUMBER(#searchWorkYearE#)
+	                            AND E.DPOB_CD = A.DPOB_CD
+	                            AND E.COMM_CD = A.LOG_SVC_YR_NUM_CD
+	                        )
+		 	 </isNotEmpty>
+		 </isNotNull> 
+		 <isNotNull property="payrMangDeptYn"> 
+		   <isEqual  prepend="AND" property="payrMangDeptYn" compareValue="Y">
+                            NOT  EXISTS 
+                             (SELECT DISTINCT  
+                              (TYP_OCCU_CD ||  NVL(PYSP_GRDE_CD,'A0060000'))  
+                                               FROM SYSM0100 
+                                               WHERE SYSM0100.USE_YN = 'Y' 
+                                                AND A.TYP_OCCU_CD  = SYSM0100.TYP_OCCU_CD
+                                                AND NVL(A.PYSP_GRDE_CD,'A0060000') =  NVL(SYSM0100.PYSP_GRDE_CD,'A0060000')   
+                                                )
+                   </isEqual>    
+         </isNotNull> 
+	</sql>
+	
+	
+	<select id="infcPsnl0600DAO.selectPsnl0600" parameterClass="hashMap" resultClass="egovMap">
+	    <![CDATA[
+	    SELECT ROW_NUMBER() OVER(ORDER BY (SELECT LPAD(DEPT_RANK,5,'0') FROM BASS0400 NN WHERE NN.DEPT_CD = A.CURR_AFFN_DEPT_CD)
+	           ,A.EMYMT_DIV_CD,A.TYP_OCCU_CD, A.PYSP_GRDE_CD,A.RESN_REGN_NUM ) AS RNUM 
+		       ,FCBASS0400CDNM (A.DPOB_CD, A.CURR_AFFN_DEPT_CD, '2') AS CURR_DEPT_NM
+		       ,FCBASS0400CDNM (A.DPOB_CD, A.DEPT_CD, '2') AS DEPT_NM
+		       ,FCBASS0300CDNM(A.DPOB_CD, A.EMYMT_DIV_CD) as EMYMT_DIV_NM
+		       ,A.HAN_NM
+		       ,SUBSTR(A.RESN_REGN_NUM,0,6)||'-'||SUBSTR(A.RESN_REGN_NUM,7) AS RESN_REGN_NUM
+		       ,(fcBass0300CDNM(A.DPOB_CD,A.TYP_OCCU_CD) || DECODE(NVL(A.PYSP_GRDE_CD,'A0060000'), 'A0060000','','[' || fcBass0300CDNM(A.DPOB_CD,A.PYSP_GRDE_CD) || ']' )) AS TYPE_OCCU_NM
+		       ,FCBASS0350CDNM(A.DPOB_CD, A.TYP_OCCU_CD,A.DTIL_OCCU_CLS_DIV_CD, '1' ) as DTIL_OCCU_CLS_DIV_NM
+		       ,FCBASS0500CDNM (A.DPOB_CD, SUBSTR (A.EMYMT_BGNN_DT, 1, 4), A.CURR_AFFN_DEPT_CD, A.BUSIN_CD) AS BUSIN_NM
+		       ,FCBASS0300CDNM(A.DPOB_CD, A.HDOFC_CODTN_CD) as HDOFC_CODTN_NM
+		       ,DECODE(LENGTH(A.FRST_EMYMT_DT), 8, TO_CHAR(TO_DATE(A.FRST_EMYMT_DT,'YYYYMMDD'),'YYYY.MM.DD'),A.FRST_EMYMT_DT) AS FRST_EMYMT_DT
+		       ,DECODE(LENGTH(A.CURR_DEPT_APPMT_DT), 8, TO_CHAR(TO_DATE(A.CURR_DEPT_APPMT_DT,'YYYYMMDD'),'YYYY.MM.DD'),A.CURR_DEPT_APPMT_DT) AS CURR_DEPT_APPMT_DT
+		       ,DECODE(LENGTH(A.RETRY_DT), 8, TO_CHAR(TO_DATE(A.RETRY_DT,'YYYYMMDD'),'YYYY.MM.DD'),A.RETRY_DT) AS RETRY_DT
+		       ,FCBASS0300CDNM(A.DPOB_CD,A.LOG_SVC_YR_NUM_CD) AS LOG_SVC_YR_NUM_NM
+		       ,FCBASS0300CDNM(A.DPOB_CD,A.LOG_SVC_MNTH_ICM_CD ) AS LOG_SVC_MNTH_ICM_NM
+		       ,FCBASS0300CDNM(A.DPOB_CD,B.DABTY_DIV_CD) AS DABTY_DIV_NM 
+		       ,C.HUS_ROAD_NM_FNDTN_ADDR || C.HUS_ROAD_NM_DTL_PATR_ADDR AS ADDR
+		       ,C.HUS_PHN_NUM
+		       ,C.CELL_PHNE_NUM
+		       ,C.EMAIL_ADDR
+		       ,A.PERN_NOTE_CTNT
+		       ,A.SYSTEMKEY 
+		 FROM PSNL0100 A, PSNL0113 B, PSNL0111 C
+		 WHERE A.DPOB_CD = B.DPOB_CD(+)
+		      AND A.SYSTEMKEY = B.SYSTEMKEY(+)
+		      AND A.DPOB_CD = C.DPOB_CD(+)
+		      AND A.SYSTEMKEY = C.SYSTEMKEY(+)
+		 ]]>
+		 <include refid="defaultWhereSql"/>
+		  AND EXISTS  (
+                                             SELECT  C.DPOB_CD, C.DEPT_CD FROM 
+                                                ( 
+                                                SELECT C.*
+                                                FROM (
+                                                    SELECT CC.DPOB_CD, 
+                                                           CC.DEPT_CD,
+                                                           CC.DEPT_NM_HAN,
+                                                           CC.DEPT_NM_RTCHNT,
+                                                           CC.DEPT_NM_ENG,
+                                                           CC.TPLVL_DEPT_CD,
+                                                          (CASE WHEN CC.PAYR_MANG_DEPT_CD IN ('405030200') 
+                                                                     AND CC.DEPT_CD = '405030200'
+                                                             THEN 
+                                                                 (CASE WHEN CC.HHRK_DEPT_CD = '000000000'
+                                                                      THEN  '' ELSE CC.HHRK_DEPT_CD END) 
+                                                             ELSE  CC.HHRK_DEPT_CD 
+                                                              END) AS HHRK_DEPT_CD,                                     
+                                                           CC.PAYR_MANG_DEPT_CD,
+                                                           CC.DEPT_USE_YN,
+                                                           CC.NAT_PENN_SYM,
+                                                           CC.HLTH_INSR_SYM,
+                                                           CC.UMYT_INSR_SYM,
+                                                           CC.IDTL_ACCDT_INSUR_SYM,
+                                                           CC.DEPT_NOTE_CTNT,
+                                                           CC.DEPT_DSPY_YN,
+                                                           CC.MANGE_DEPT_CD,
+                                                           CC.DEPT_RANK
+                                                         FROM BASS0400 CC 
+                                                        WHERE CC.DEPT_USE_YN   = 'Y'
+                                                         <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+                                                             CC.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+                                                           </isNotEmpty>  
+                                                     ) C
+                                              START WITH C.HHRK_DEPT_CD =  (DECODE(#payrMangDeptCd#,'405030200','405000000','000000000')) 
+                                             CONNECT BY PRIOR C.DEPT_CD = C.HHRK_DEPT_CD  
+                                           ) C
+                                           WHERE C.DPOB_CD = A.DPOB_CD 
+                                           AND   C.DEPT_CD = A.CURR_AFFN_DEPT_CD 
+                                          <isNotNull property="searchCurrDeptCd"> 
+                                            <isNotEmpty property="searchCurrDeptCd" prepend="AND"> 
+                                                 C.DEPT_CD = #searchCurrDeptCd#
+                                            </isNotEmpty>   
+                                           </isNotNull>   
+                                         <!--  <isNotEmpty property="deptCd" prepend="AND">
+                                                <![CDATA[
+                                                 C.DEPT_CD
+                                                ]]>
+                                                <iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+                                                 #deptCdArr[]#
+                                                </iterate>
+                                                </isNotEmpty>  --> 
+                                          ) 
+		 ORDER BY  A.DPOB_CD ASC , A.RESN_REGN_NUM ASC
+	</select>
+	
+	<select id="infcPsnl0600DAO.selectPsnl0112" parameterClass="hashMap" resultClass="egovMap">
+	    <![CDATA[
+	    SELECT ROW_NUMBER() OVER(ORDER BY (SELECT LPAD(DEPT_RANK,5,'0') FROM BASS0400 NN WHERE NN.DEPT_CD = A.CURR_AFFN_DEPT_CD)
+	           ,A.EMYMT_DIV_CD,A.TYP_OCCU_CD, A.PYSP_GRDE_CD,A.RESN_REGN_NUM ) AS RNUM 
+		       ,FCBASS0400CDNM (A.DPOB_CD, A.CURR_AFFN_DEPT_CD, '2') AS CURR_DEPT_NM
+		       ,FCBASS0400CDNM (A.DPOB_CD, A.DEPT_CD, '2') AS DEPT_NM
+		       ,FCBASS0300CDNM(A.DPOB_CD, A.EMYMT_DIV_CD) as EMYMT_DIV_NM
+		       ,A.HAN_NM
+		       ,SUBSTR(A.RESN_REGN_NUM,0,6)||'-'||SUBSTR(A.RESN_REGN_NUM,7) AS RESN_REGN_NUM
+		       ,(fcBass0300CDNM(A.DPOB_CD,A.TYP_OCCU_CD) || DECODE(NVL(A.PYSP_GRDE_CD,'A0060000'), 'A0060000','','[' || fcBass0300CDNM(A.DPOB_CD,A.PYSP_GRDE_CD) || ']' )) AS TYPE_OCCU_NM
+		       ,FCBASS0350CDNM(A.DPOB_CD, A.TYP_OCCU_CD,A.DTIL_OCCU_CLS_DIV_CD, '1' ) as DTIL_OCCU_CLS_DIV_NM
+		       ,FCBASS0500CDNM (A.DPOB_CD, SUBSTR (A.EMYMT_BGNN_DT, 1, 4), A.CURR_AFFN_DEPT_CD, A.BUSIN_CD) AS BUSIN_NM
+		       ,FCBASS0300CDNM(A.DPOB_CD, A.HDOFC_CODTN_CD) as HDOFC_CODTN_NM
+		       ,FCBASS0300CDNM(A.DPOB_CD, B.DSAGE_DIV_CD) as DSAGE_DIV_CD
+		       ,DECODE(LENGTH(B.ENRLNT_DT), 8, TO_CHAR(TO_DATE(B.ENRLNT_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.ENRLNT_DT) AS ENRLNT_DT
+		       ,DECODE(LENGTH(B.DSAGE_DT), 8, TO_CHAR(TO_DATE(B.DSAGE_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.DSAGE_DT) AS DSAGE_DT
+		       ,FCBASS0300CDNM(A.DPOB_CD, B.SERVC_RCGTN_PRID_CD) as SERVC_RCGTN_PRID_CD
+		       ,FCBASS0300CDNM(A.DPOB_CD, B.SRVSS_CD) as SRVSS_CD
+		       ,FCBASS0300CDNM(A.DPOB_CD, B.BAGGRP_CD) as BAGGRP_CD
+		       ,FCBASS0300CDNM(A.DPOB_CD, B.ABOTS_CD) as ABOTS_CD
+		       ,FCBASS0300CDNM(A.DPOB_CD, B.CLS_CD) as CLS_CD
+		       ,B.MITY_SILNUM
+		       ,B.MOS
+		       ,FCBASS0300CDNM(A.DPOB_CD, B.EXMTN_REAS_CD) as EXMTN_REAS_CD
+		       ,A.SYSTEMKEY
+		 FROM PSNL0100 A, PSNL0112 B
+		 WHERE A.DPOB_CD = B.DPOB_CD(+)
+		   AND A.SYSTEMKEY = B.SYSTEMKEY(+)
+	    ]]>
+	    <include refid="defaultWhereSql"/>
+	    
+	    <isNotNull property="searchDsageDivCd">
+		     <isNotEmpty property="searchDsageDivCd">
+		 		AND B.DSAGE_DIV_CD = #searchDsageDivCd# 
+		 	 </isNotEmpty>
+		</isNotNull>
+		
+	    <isNotNull property="searchDsageDtS">
+		     <isNotEmpty property="searchDsageDtS">
+		 		AND SUBSTR(B.DSAGE_DT,1,6) &gt;= #searchDsageDtS#
+		 	 </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="searchDsageDtE">
+		     <isNotEmpty property="searchDsageDtE">
+		 		AND SUBSTR(B.DSAGE_DT,1,6) &lt;= #searchDsageDtE#
+		 	 </isNotEmpty>
+		</isNotNull>
+	    
+		<isNotNull property="searchBaggrpCd">
+		     <isNotEmpty property="searchBaggrpCd">
+		 		AND B.BAGGRP_CD = #searchBaggrpCd# 
+		 	 </isNotEmpty>
+		</isNotNull>
+		
+		<isNotNull property="searchAbotsCd">
+		     <isNotEmpty property="searchAbotsCd">
+		 		AND B.ABOTS_CD = #searchAbotsCd# 
+		 	 </isNotEmpty>
+		</isNotNull>
+		
+		<isNotNull property="searchClsCd">
+		     <isNotEmpty property="searchClsCd">
+		 		AND B.CLS_CD = #searchClsCd# 
+		 	 </isNotEmpty>
+		</isNotNull>
+		 
+	</select>
+	
+	<select id="infcPsnl0600DAO.selectPsnl0114" parameterClass="hashMap" resultClass="egovMap">
+			    SELECT ROW_NUMBER() OVER(ORDER BY (SELECT LPAD(DEPT_RANK,5,'0') FROM BASS0400 NN WHERE NN.DEPT_CD = A.CURR_AFFN_DEPT_CD)
+			           ,A.EMYMT_DIV_CD,A.TYP_OCCU_CD, A.PYSP_GRDE_CD,A.RESN_REGN_NUM ) AS RNUM 
+				       ,FCBASS0400CDNM (A.DPOB_CD, A.CURR_AFFN_DEPT_CD, '2') AS CURR_DEPT_NM
+				       ,FCBASS0400CDNM (A.DPOB_CD, A.DEPT_CD, '2') AS DEPT_NM
+				       ,FCBASS0300CDNM(A.DPOB_CD, A.EMYMT_DIV_CD) as EMYMT_DIV_NM
+				       ,A.HAN_NM
+				       ,SUBSTR(A.RESN_REGN_NUM,0,6)||'-'||SUBSTR(A.RESN_REGN_NUM,7) AS RESN_REGN_NUM
+				       ,(fcBass0300CDNM(A.DPOB_CD,A.TYP_OCCU_CD) || DECODE(NVL(A.PYSP_GRDE_CD,'A0060000'), 'A0060000','','[' || fcBass0300CDNM(A.DPOB_CD,A.PYSP_GRDE_CD) || ']' )) AS TYPE_OCCU_NM
+				       ,FCBASS0350CDNM(A.DPOB_CD, A.TYP_OCCU_CD,A.DTIL_OCCU_CLS_DIV_CD, '1' ) as DTIL_OCCU_CLS_DIV_NM
+				       ,FCBASS0500CDNM (A.DPOB_CD, SUBSTR (A.EMYMT_BGNN_DT, 1, 4), A.CURR_AFFN_DEPT_CD, A.BUSIN_CD) AS BUSIN_NM
+		               ,FCBASS0300CDNM(A.DPOB_CD, A.HDOFC_CODTN_CD) as HDOFC_CODTN_NM
+		               ,DECODE(LENGTH(B.JN_DT), 8, TO_CHAR(TO_DATE(B.JN_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.JN_DT) AS JN_DT
+		               ,B.JN_OPZTN_NM
+		               ,FCBASS0300CDNM(A.DPOB_CD, B.ODTY_CD) as ODTY_CD
+		               ,DECODE(LENGTH(B.WIRL_DT), 8, TO_CHAR(TO_DATE(B.WIRL_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.WIRL_DT) AS WIRL_DT
+		               ,A.SYSTEMKEY
+		       FROM PSNL0100 A, PSNL0114 B
+		     WHERE A.DPOB_CD = B.DPOB_CD(+)
+		         AND A.SYSTEMKEY = B.SYSTEMKEY(+)
+		         AND B.OPZTN_SEIL_NUM IS NOT NULL
+        <include refid="defaultWhereSql"/>
+        
+        <isNotNull property="searchjnOpztnNm">
+		     <isNotEmpty property="searchjnOpztnNm">
+		 		AND B.JN_OPZTN_NM LIKE '%' || #searchjnOpztnNm# || '%' 
+		 	 </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="searchJnDtS">
+		     <isNotEmpty property="searchJnDtS">
+		 		AND SUBSTR(B.JN_DT,1,6) &gt;= #searchJnDtS#
+		 	 </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="searchJnDtE">
+		     <isNotEmpty property="searchJnDtE">
+		 		AND SUBSTR(B.JN_DT,1,6) &lt;= #searchJnDtE#
+		 	 </isNotEmpty>
+		</isNotNull>
+        
+        
+	</select>
+	<select id="infcPsnl0600DAO.selectPsnl0116" parameterClass="hashMap" resultClass="egovMap">
+	    SELECT ROW_NUMBER() OVER(ORDER BY (SELECT LPAD(DEPT_RANK,5,'0') FROM BASS0400 NN WHERE NN.DEPT_CD = A.CURR_AFFN_DEPT_CD)
+	           ,A.EMYMT_DIV_CD,A.TYP_OCCU_CD, A.PYSP_GRDE_CD,A.RESN_REGN_NUM ) AS RNUM 
+		       ,FCBASS0400CDNM (A.DPOB_CD, A.CURR_AFFN_DEPT_CD, '2') AS CURR_DEPT_NM
+		       ,FCBASS0400CDNM (A.DPOB_CD, A.DEPT_CD, '2') AS DEPT_NM
+		       ,FCBASS0300CDNM(A.DPOB_CD, A.EMYMT_DIV_CD) as EMYMT_DIV_NM
+		       ,A.HAN_NM
+		       ,SUBSTR(A.RESN_REGN_NUM,0,6)||'-'||SUBSTR(A.RESN_REGN_NUM,7) AS RESN_REGN_NUM
+		       ,(fcBass0300CDNM(A.DPOB_CD,A.TYP_OCCU_CD) || DECODE(NVL(A.PYSP_GRDE_CD,'A0060000'), 'A0060000','','[' || fcBass0300CDNM(A.DPOB_CD,A.PYSP_GRDE_CD) || ']' )) AS TYPE_OCCU_NM
+		       ,FCBASS0350CDNM(A.DPOB_CD, A.TYP_OCCU_CD,A.DTIL_OCCU_CLS_DIV_CD, '1' ) as DTIL_OCCU_CLS_DIV_NM
+		       ,FCBASS0500CDNM (A.DPOB_CD, SUBSTR (A.EMYMT_BGNN_DT, 1, 4), A.CURR_AFFN_DEPT_CD, A.BUSIN_CD) AS BUSIN_NM
+               ,FCBASS0300CDNM(A.DPOB_CD, A.HDOFC_CODTN_CD) as HDOFC_CODTN_NM
+               ,DECODE(LENGTH(B.ETNC_ITSHL_DT), 8, TO_CHAR(TO_DATE(B.ETNC_ITSHL_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.ETNC_ITSHL_DT) AS ETNC_ITSHL_DT  
+               ,DECODE(LENGTH(B.GRDTN_DT), 8, TO_CHAR(TO_DATE(B.GRDTN_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.GRDTN_DT) AS GRDTN_DT 
+               ,FCBASS0300CDNM(A.DPOB_CD, B.ACAD_ABTY_DIV_CD) as ACAD_ABTY_DIV_CD
+               ,FCBASS0300CDNM(A.DPOB_CD, B.SCHL_CD) as SCHL_CD 
+               ,FCBASS0300CDNM(A.DPOB_CD, B.DEPR_MAJR_CD) as DEPR_MAJR_CD
+               ,FCBASS0300CDNM(A.DPOB_CD, B.DEGR_DIV_CD) as DEGR_DIV_CD 
+               ,FCBASS0300CDNM(A.DPOB_CD, B.LESN_YR_NUM_CD) as LESN_YR_NUM_CD
+               ,B.ACAD_ABTY_NOTE_CTNT
+               ,A.SYSTEMKEY 
+       FROM PSNL0100 A, PSNL0116 B
+     WHERE A.DPOB_CD = B.DPOB_CD(+)
+         AND A.SYSTEMKEY = B.SYSTEMKEY(+)
+         AND B.ACAD_ABTY_SEIL_NUM IS NOT NULL
+         
+         <include refid="defaultWhereSql"/>
+         
+         <isNotNull property="searchAcadAbtyDivCd">
+		     <isNotEmpty property="searchAcadAbtyDivCd">
+		 		AND B.ACAD_ABTY_DIV_CD = #searchAcadAbtyDivCd# 
+		 	 </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="searchDegrDivCd">
+		     <isNotEmpty property="searchDegrDivCd">
+		 		AND B.DEGR_DIV_CD = #searchDegrDivCd# 
+		 	 </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="searchDeprMajrCd">
+		     <isNotEmpty property="searchDeprMajrCd">
+		 		AND B.DEPR_MAJR_CD = #searchDeprMajrCd# 
+		 	 </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="searchSchlCd">
+		     <isNotEmpty property="searchSchlCd">
+		 		AND B.SCHL_CD = #searchSchlCd#  
+		 	 </isNotEmpty>
+		</isNotNull>
+	</select>
+	<select id="infcPsnl0600DAO.selectPsnl0119" parameterClass="hashMap" resultClass="egovMap">
+	
+				SELECT ROW_NUMBER() OVER(ORDER BY (SELECT LPAD(DEPT_RANK,5,'0') FROM BASS0400 NN WHERE NN.DEPT_CD = A.CURR_AFFN_DEPT_CD)
+			           ,A.EMYMT_DIV_CD,A.TYP_OCCU_CD, A.PYSP_GRDE_CD,A.RESN_REGN_NUM ) AS RNUM 
+				       ,FCBASS0400CDNM (A.DPOB_CD, A.CURR_AFFN_DEPT_CD, '2') AS CURR_DEPT_NM
+				       ,FCBASS0400CDNM (A.DPOB_CD, A.DEPT_CD, '2') AS DEPT_NM
+				       ,FCBASS0300CDNM(A.DPOB_CD, A.EMYMT_DIV_CD) as EMYMT_DIV_NM
+				       ,A.HAN_NM
+				       ,SUBSTR(A.RESN_REGN_NUM,0,6)||'-'||SUBSTR(A.RESN_REGN_NUM,7) AS RESN_REGN_NUM
+				       ,(fcBass0300CDNM(A.DPOB_CD,A.TYP_OCCU_CD) || DECODE(NVL(A.PYSP_GRDE_CD,'A0060000'), 'A0060000','','[' || fcBass0300CDNM(A.DPOB_CD,A.PYSP_GRDE_CD) || ']' )) AS TYPE_OCCU_NM
+				       ,FCBASS0350CDNM(A.DPOB_CD, A.TYP_OCCU_CD,A.DTIL_OCCU_CLS_DIV_CD, '1' ) as DTIL_OCCU_CLS_DIV_NM
+				       ,FCBASS0500CDNM (A.DPOB_CD, SUBSTR (A.EMYMT_BGNN_DT, 1, 4), A.CURR_AFFN_DEPT_CD, A.BUSIN_CD) AS BUSIN_NM
+		               ,FCBASS0300CDNM(A.DPOB_CD, A.HDOFC_CODTN_CD) as HDOFC_CODTN_NM
+		               ,DECODE(LENGTH(B.CARR_BGNN_DT), 8, TO_CHAR(TO_DATE(B.CARR_BGNN_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.CARR_BGNN_DT) AS CARR_BGNN_DT
+		               ,DECODE(LENGTH(B.CARR_END_DT), 8, TO_CHAR(TO_DATE(B.CARR_END_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.CARR_END_DT) AS CARR_END_DT
+		               ,B.PAE_WORK_NM
+		               ,B.ODTY_NM
+		               ,B.REPBTY_BUSIN_NM
+		               ,B.CARR_NOTE_CTNT
+		               ,A.SYSTEMKEY
+		       FROM PSNL0100 A, PSNL0119 B
+		     WHERE A.DPOB_CD = B.DPOB_CD(+)
+		         AND A.SYSTEMKEY = B.SYSTEMKEY(+)
+		         AND B.CARR_RSPT_SEIL_NUM IS NOT NULL
+		         
+		         <include refid="defaultWhereSql"/>
+		         
+		         <isNotNull property="searchPaeWorkNm">
+				     <isNotEmpty property="searchPaeWorkNm">
+				 		AND B.PAE_WORK_NM LIKE '%' || #searchPaeWorkNm# || '%' 
+				 	 </isNotEmpty>
+				</isNotNull>
+				<isNotNull property="searchCarrBgnnDtS">
+				     <isNotEmpty property="searchCarrBgnnDtS">
+				 		AND SUBSTR(B.CARR_BGNN_DT,1,6) &gt;= #searchCarrBgnnDtS#
+				 	 </isNotEmpty>
+				</isNotNull>
+				<isNotNull property="searchCarrBgnnDtE">
+				     <isNotEmpty property="searchCarrBgnnDtE">
+				 		AND SUBSTR(B.CARR_BGNN_DT,1,6) &lt;= #searchCarrBgnnDtE#
+				 	 </isNotEmpty>
+				</isNotNull>
+		         
+	</select>
+	<select id="infcPsnl0600DAO.selectPsnl0118" parameterClass="hashMap" resultClass="egovMap">
+	
+	SELECT ROW_NUMBER() OVER(ORDER BY (SELECT LPAD(DEPT_RANK,5,'0') FROM BASS0400 NN WHERE NN.DEPT_CD = A.CURR_AFFN_DEPT_CD)
+	           ,A.EMYMT_DIV_CD,A.TYP_OCCU_CD, A.PYSP_GRDE_CD,A.RESN_REGN_NUM ) AS RNUM 
+		       ,FCBASS0400CDNM (A.DPOB_CD, A.CURR_AFFN_DEPT_CD, '2') AS CURR_DEPT_NM
+		       ,FCBASS0400CDNM (A.DPOB_CD, A.DEPT_CD, '2') AS DEPT_NM
+		       ,FCBASS0300CDNM(A.DPOB_CD, A.EMYMT_DIV_CD) as EMYMT_DIV_NM
+		       ,A.HAN_NM
+		       ,SUBSTR(A.RESN_REGN_NUM,0,6)||'-'||SUBSTR(A.RESN_REGN_NUM,7) AS RESN_REGN_NUM
+		       ,(fcBass0300CDNM(A.DPOB_CD,A.TYP_OCCU_CD) || DECODE(NVL(A.PYSP_GRDE_CD,'A0060000'), 'A0060000','','[' || fcBass0300CDNM(A.DPOB_CD,A.PYSP_GRDE_CD) || ']' )) AS TYPE_OCCU_NM
+		       ,FCBASS0350CDNM(A.DPOB_CD, A.TYP_OCCU_CD,A.DTIL_OCCU_CLS_DIV_CD, '1' ) as DTIL_OCCU_CLS_DIV_NM
+		       ,FCBASS0500CDNM (A.DPOB_CD, SUBSTR (A.EMYMT_BGNN_DT, 1, 4), A.CURR_AFFN_DEPT_CD, A.BUSIN_CD) AS BUSIN_NM
+	               ,FCBASS0300CDNM(A.DPOB_CD, A.HDOFC_CODTN_CD) as HDOFC_CODTN_NM
+	               ,DECODE(LENGTH(B.AQTN_DT), 8, TO_CHAR(TO_DATE(B.AQTN_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.AQTN_DT) AS AQTN_DT
+	               ,FCBASS0300CDNM(A.DPOB_CD, B.QFTNT_LICNS_CD) as QFTNT_LICNS_CD
+	               ,B.QFTNT_LICNS_POVNC_CTNT
+	               ,B.EFMN_ISTUT_NM
+	               ,B.QFTNT_LICNS_NUM
+	               ,A.SYSTEMKEY
+	       FROM PSNL0100 A, PSNL0118 B
+	     WHERE A.DPOB_CD = B.DPOB_CD(+)
+	         AND A.SYSTEMKEY = B.SYSTEMKEY(+)
+	         AND B.QFTNT_LICNS_SEIL_NUM IS NOT NULL
+	        <include refid="defaultWhereSql"/>
+	         
+	        <isNotNull property="searchQftntLicnsNum">
+			     <isNotEmpty property="searchQftntLicnsNum">
+			 		AND B.QFTNT_LICNS_NUM LIKE '%' || #searchQftntLicnsNum# || '%' 
+			 	 </isNotEmpty>
+			</isNotNull>
+			<isNotNull property="searchAqtnDtS">
+			     <isNotEmpty property="searchAqtnDtS">
+			 		AND SUBSTR(B.AQTN_DT,1,6) &gt;= #searchAqtnDtS#
+			 	 </isNotEmpty>
+			</isNotNull>
+			<isNotNull property="searchAqtnDtE">
+			     <isNotEmpty property="searchAqtnDtE">
+			 		AND SUBSTR(B.AQTN_DT,1,6) &lt;= #searchAqtnDtE#
+			 	 </isNotEmpty>
+			</isNotNull>
+	         
+	</select>
+	<select id="infcPsnl0600DAO.selectPsnl0120" parameterClass="hashMap" resultClass="egovMap">
+		
+	SELECT ROW_NUMBER() OVER(ORDER BY (SELECT LPAD(DEPT_RANK,5,'0') FROM BASS0400 NN WHERE NN.DEPT_CD = A.CURR_AFFN_DEPT_CD)
+	           ,A.EMYMT_DIV_CD,A.TYP_OCCU_CD, A.PYSP_GRDE_CD,A.RESN_REGN_NUM ) AS RNUM 
+		       ,FCBASS0400CDNM (A.DPOB_CD, A.CURR_AFFN_DEPT_CD, '2') AS CURR_DEPT_NM
+		       ,FCBASS0400CDNM (A.DPOB_CD, A.DEPT_CD, '2') AS DEPT_NM
+		       ,FCBASS0300CDNM(A.DPOB_CD, A.EMYMT_DIV_CD) as EMYMT_DIV_NM
+		       ,A.HAN_NM
+		       ,SUBSTR(A.RESN_REGN_NUM,0,6)||'-'||SUBSTR(A.RESN_REGN_NUM,7) AS RESN_REGN_NUM
+		       ,(fcBass0300CDNM(A.DPOB_CD,A.TYP_OCCU_CD) || DECODE(NVL(A.PYSP_GRDE_CD,'A0060000'), 'A0060000','','[' || fcBass0300CDNM(A.DPOB_CD,A.PYSP_GRDE_CD) || ']' )) AS TYPE_OCCU_NM
+		       ,FCBASS0350CDNM(A.DPOB_CD, A.TYP_OCCU_CD,A.DTIL_OCCU_CLS_DIV_CD, '1' ) as DTIL_OCCU_CLS_DIV_NM
+		       ,FCBASS0500CDNM (A.DPOB_CD, SUBSTR (A.EMYMT_BGNN_DT, 1, 4), A.CURR_AFFN_DEPT_CD, A.BUSIN_CD) AS BUSIN_NM
+	               ,FCBASS0300CDNM(A.DPOB_CD, A.HDOFC_CODTN_CD) as HDOFC_CODTN_NM
+	               ,DECODE(LENGTH(B.EDU_BGNN_DT), 8, TO_CHAR(TO_DATE(B.EDU_BGNN_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.EDU_BGNN_DT) AS EDU_BGNN_DT
+	               ,DECODE(LENGTH(B.EDU_END_DT), 8, TO_CHAR(TO_DATE(B.EDU_END_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.EDU_END_DT) AS EDU_END_DT
+	               ,B.EDU_CMPTE_TM
+	               ,B.EDU_KND_NM
+	               ,B.EDU_ISTUT_NM
+	               ,B.EDU_NOTE_CTNT
+	               ,A.SYSTEMKEY
+	       FROM PSNL0100 A, PSNL0120 B
+	     WHERE A.DPOB_CD = B.DPOB_CD(+)
+	         AND A.SYSTEMKEY = B.SYSTEMKEY(+)
+	         AND B.EDU_SEIL_NUM IS NOT NULL
+         <include refid="defaultWhereSql"/>
+         
+        <isNotNull property="searchEduKndNm">
+		     <isNotEmpty property="searchEduKndNm">
+		 		AND B.EDU_KND_NM LIKE '%' || #searchEduKndNm# || '%' 
+		 	 </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="searchEduBgnnDtS">
+		     <isNotEmpty property="searchEduBgnnDtS">
+		 		AND SUBSTR(B.EDU_BGNN_DT,1,6) &gt;= #searchEduBgnnDtS#
+		 	 </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="searchEduBgnnDtE">
+		     <isNotEmpty property="searchEduBgnnDtE">
+		 		AND SUBSTR(B.EDU_BGNN_DT,1,6) &lt;= #searchEduBgnnDtE#
+		 	 </isNotEmpty>
+		</isNotNull>
+         
+	</select>
+	<select id="infcPsnl0600DAO.selectPsnl0121" parameterClass="hashMap" resultClass="egovMap">
+	
+	SELECT ROW_NUMBER() OVER(ORDER BY (SELECT LPAD(DEPT_RANK,5,'0') FROM BASS0400 NN WHERE NN.DEPT_CD = A.CURR_AFFN_DEPT_CD)
+	           ,A.EMYMT_DIV_CD,A.TYP_OCCU_CD, A.PYSP_GRDE_CD,A.RESN_REGN_NUM ) AS RNUM 
+		       ,FCBASS0400CDNM (A.DPOB_CD, A.CURR_AFFN_DEPT_CD, '2') AS CURR_DEPT_NM
+		       ,FCBASS0400CDNM (A.DPOB_CD, A.DEPT_CD, '2') AS DEPT_NM
+		       ,FCBASS0300CDNM(A.DPOB_CD, A.EMYMT_DIV_CD) as EMYMT_DIV_NM
+		       ,A.HAN_NM
+		       ,SUBSTR(A.RESN_REGN_NUM,0,6)||'-'||SUBSTR(A.RESN_REGN_NUM,7) AS RESN_REGN_NUM
+		       ,(fcBass0300CDNM(A.DPOB_CD,A.TYP_OCCU_CD) || DECODE(NVL(A.PYSP_GRDE_CD,'A0060000'), 'A0060000','','[' || fcBass0300CDNM(A.DPOB_CD,A.PYSP_GRDE_CD) || ']' )) AS TYPE_OCCU_NM
+		       ,FCBASS0350CDNM(A.DPOB_CD, A.TYP_OCCU_CD,A.DTIL_OCCU_CLS_DIV_CD, '1' ) as DTIL_OCCU_CLS_DIV_NM
+		       ,FCBASS0500CDNM (A.DPOB_CD, SUBSTR (A.EMYMT_BGNN_DT, 1, 4), A.CURR_AFFN_DEPT_CD, A.BUSIN_CD) AS BUSIN_NM
+	               ,FCBASS0300CDNM(A.DPOB_CD, A.HDOFC_CODTN_CD) as HDOFC_CODTN_NM
+	               ,B.ACCLD_YR
+	               ,DECODE(LENGTH(B.ACCLD_PRTT_DT), 8, TO_CHAR(TO_DATE(B.ACCLD_PRTT_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.ACCLD_PRTT_DT) AS ACCLD_PRTT_DT
+	               ,FCBASS0300CDNM(A.DPOB_CD, B.ACCLD_KND_CD) as ACCLD_KND_CD
+	               ,FCBASS0300CDNM(A.DPOB_CD, B.ACCLD_DIV_CD) as ACCLD_DIV_CD
+	               ,B.ACCLD_NM
+	               ,B.ACCLD_CFMNT_NUM
+	               ,B.EFMN_ISTUT_NM
+	               ,B.ACCLD_MNANT_CTNT
+	               ,B.ACCLD_NOTE_CTNT
+	               ,A.SYSTEMKEY
+	       FROM PSNL0100 A, PSNL0121 B
+	     WHERE A.DPOB_CD = B.DPOB_CD(+)
+	         AND A.SYSTEMKEY = B.SYSTEMKEY(+)
+	         AND B.ACCLD_SEIL_NUM IS NOT NULL
+         <include refid="defaultWhereSql"/>
+         
+    </select>
+	<select id="infcPsnl0600DAO.selectPsnl0122" parameterClass="hashMap" resultClass="egovMap">
+		
+	SELECT ROW_NUMBER() OVER(ORDER BY (SELECT LPAD(DEPT_RANK,5,'0') FROM BASS0400 NN WHERE NN.DEPT_CD = A.CURR_AFFN_DEPT_CD)
+	           ,A.EMYMT_DIV_CD,A.TYP_OCCU_CD, A.PYSP_GRDE_CD,A.RESN_REGN_NUM ) AS RNUM 
+		       ,FCBASS0400CDNM (A.DPOB_CD, A.CURR_AFFN_DEPT_CD, '2') AS CURR_DEPT_NM
+		       ,FCBASS0400CDNM (A.DPOB_CD, A.DEPT_CD, '2') AS DEPT_NM
+		       ,FCBASS0300CDNM(A.DPOB_CD, A.EMYMT_DIV_CD) as EMYMT_DIV_NM
+		       ,A.HAN_NM
+		       ,SUBSTR(A.RESN_REGN_NUM,0,6)||'-'||SUBSTR(A.RESN_REGN_NUM,7) AS RESN_REGN_NUM
+		       ,(fcBass0300CDNM(A.DPOB_CD,A.TYP_OCCU_CD) || DECODE(NVL(A.PYSP_GRDE_CD,'A0060000'), 'A0060000','','[' || fcBass0300CDNM(A.DPOB_CD,A.PYSP_GRDE_CD) || ']' )) AS TYPE_OCCU_NM
+		       ,FCBASS0350CDNM(A.DPOB_CD, A.TYP_OCCU_CD,A.DTIL_OCCU_CLS_DIV_CD, '1' ) as DTIL_OCCU_CLS_DIV_NM
+		       ,FCBASS0500CDNM (A.DPOB_CD, SUBSTR (A.EMYMT_BGNN_DT, 1, 4), A.CURR_AFFN_DEPT_CD, A.BUSIN_CD) AS BUSIN_NM
+	               ,FCBASS0300CDNM(A.DPOB_CD, A.HDOFC_CODTN_CD) as HDOFC_CODTN_NM
+	               ,DECODE(LENGTH(B.DSNY_ACT_DSPL_DT), 8, TO_CHAR(TO_DATE(B.DSNY_ACT_DSPL_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.DSNY_ACT_DSPL_DT) AS DSNY_ACT_DSPL_DT
+	               ,FCBASS0300CDNM(A.DPOB_CD, B.DSNY_ACT_DIV_CD) as DSNY_ACT_DIV_CD
+	               ,B.DSNY_ACT_NM
+	               ,B.DSNY_ACT_REAS_CTNT
+	               ,B.DSNY_ACT_ECTG_ORGN
+	               ,DECODE(LENGTH(B.DSNY_ACT_BGNN_DT), 8, TO_CHAR(TO_DATE(B.DSNY_ACT_BGNN_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.DSNY_ACT_BGNN_DT) AS DSNY_ACT_BGNN_DT
+	               ,DECODE(LENGTH(B.DSNY_ACT_END_DT), 8, TO_CHAR(TO_DATE(B.DSNY_ACT_END_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.DSNY_ACT_END_DT) AS DSNY_ACT_END_DT
+	               ,DECODE(LENGTH(B.DSNY_ACT_ANSTY_DT), 8, TO_CHAR(TO_DATE(B.DSNY_ACT_ANSTY_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.DSNY_ACT_ANSTY_DT) AS DSNY_ACT_ANSTY_DT
+	               ,FCBASS0300CDNM(A.DPOB_CD, B.DSNY_ACT_ANSTY_DIV_CD) as DSNY_ACT_ANSTY_DIV_CD
+	               ,B.DSNY_ACT_CTWP_MNTH_ICM
+	               ,B.DSNY_ACT_NOTE_CTNT
+	               ,A.SYSTEMKEY
+	       FROM PSNL0100 A, PSNL0122 B
+	     WHERE A.DPOB_CD = B.DPOB_CD(+)
+	         AND A.SYSTEMKEY = B.SYSTEMKEY(+)
+	         AND B.DSNY_ACT_SEIL_NUM IS NOT NULL
+		<include refid="defaultWhereSql"/>
+		
+		<isNotNull property="searchDsnyActDivCd">
+		     <isNotEmpty property="searchDsnyActDivCd">
+		 		AND B.DSNY_ACT_DIV_CD = #searchDsnyActDivCd# 
+		 	 </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="searchDsnyActDsplDtS">
+		     <isNotEmpty property="searchDsnyActDsplDtS">
+		 		AND SUBSTR(B.DSNY_ACT_DSPL_DT,1,6) &gt;= #searchDsnyActDsplDtS#
+		 	 </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="searchDsnyActDsplDtE">
+		     <isNotEmpty property="searchDsnyActDsplDtE">
+		 		AND SUBSTR(B.DSNY_ACT_DSPL_DT,1,6) &lt;= #searchDsnyActDsplDtE#
+		 	 </isNotEmpty>
+		</isNotNull>
+		
+	</select>
+	<select id="infcPsnl0600DAO.selectPsnl0123" parameterClass="hashMap" resultClass="egovMap">
+	
+	SELECT ROW_NUMBER() OVER(ORDER BY (SELECT LPAD(DEPT_RANK,5,'0') FROM BASS0400 NN WHERE NN.DEPT_CD = A.CURR_AFFN_DEPT_CD)
+	           ,A.EMYMT_DIV_CD,A.TYP_OCCU_CD, A.PYSP_GRDE_CD,A.RESN_REGN_NUM ) AS RNUM 
+		       ,FCBASS0400CDNM (A.DPOB_CD, A.CURR_AFFN_DEPT_CD, '2') AS CURR_DEPT_NM
+		       ,FCBASS0400CDNM (A.DPOB_CD, A.DEPT_CD, '2') AS DEPT_NM
+		       ,FCBASS0300CDNM(A.DPOB_CD, A.EMYMT_DIV_CD) as EMYMT_DIV_NM
+		       ,A.HAN_NM
+		       ,SUBSTR(A.RESN_REGN_NUM,0,6)||'-'||SUBSTR(A.RESN_REGN_NUM,7) AS RESN_REGN_NUM
+		       ,(fcBass0300CDNM(A.DPOB_CD,A.TYP_OCCU_CD) || DECODE(NVL(A.PYSP_GRDE_CD,'A0060000'), 'A0060000','','[' || fcBass0300CDNM(A.DPOB_CD,A.PYSP_GRDE_CD) || ']' )) AS TYPE_OCCU_NM
+		       ,FCBASS0350CDNM(A.DPOB_CD, A.TYP_OCCU_CD,A.DTIL_OCCU_CLS_DIV_CD, '1' ) as DTIL_OCCU_CLS_DIV_NM
+		       ,FCBASS0500CDNM (A.DPOB_CD, SUBSTR (A.EMYMT_BGNN_DT, 1, 4), A.CURR_AFFN_DEPT_CD, A.BUSIN_CD) AS BUSIN_NM
+	               ,FCBASS0300CDNM(A.DPOB_CD, A.HDOFC_CODTN_CD) as HDOFC_CODTN_NM
+	               ,FCBASS0300CDNM(A.DPOB_CD, B.LEVF_ABNC_DIV_CD) as LEVF_ABNC_DIV_CD
+	               ,DECODE(LENGTH(B.LEVF_ABNC_BGNN_DT), 8, TO_CHAR(TO_DATE(B.LEVF_ABNC_BGNN_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.LEVF_ABNC_BGNN_DT) AS LEVF_ABNC_BGNN_DT
+	               ,DECODE(LENGTH(B.LEVF_ABNC_END_DT), 8, TO_CHAR(TO_DATE(B.LEVF_ABNC_END_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.LEVF_ABNC_END_DT) AS LEVF_ABNC_END_DT
+	               ,DECODE(LENGTH(B.TURTY_RNTMNT_DT), 8, TO_CHAR(TO_DATE(B.TURTY_RNTMNT_DT,'YYYYMMDD'),'YYYY.MM.DD'),B.TURTY_RNTMNT_DT) AS TURTY_RNTMNT_DT
+	               ,B.LEVF_ABNC_NOTE_CTNT
+	               ,A.SYSTEMKEY
+	       FROM PSNL0100 A, PSNL0123 B
+	     WHERE A.DPOB_CD = B.DPOB_CD(+)
+	         AND A.SYSTEMKEY = B.SYSTEMKEY(+)
+	         AND B.LEVF_ABNC_SEIL_NUM IS NOT NULL
+	     <include refid="defaultWhereSql"/>
+	     
+	    <isNotNull property="searchLevfAbncDivCd">
+		     <isNotEmpty property="searchLevfAbncDivCd">
+		 		AND B.LEVF_ABNC_DIV_CD = #searchLevfAbncDivCd# 
+		 	 </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="searchLevfAbncBgnnDtS">
+		     <isNotEmpty property="searchLevfAbncBgnnDtS">
+		 		AND SUBSTR(B.LEVF_ABNC_BGNN_DT,1,6) &gt;= #searchLevfAbncBgnnDtS#
+		 	 </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="searchLevfAbncBgnnDtE">
+		     <isNotEmpty property="searchLevfAbncBgnnDtE">
+		 		AND SUBSTR(B.LEVF_ABNC_BGNN_DT,1,6) &lt;= #searchLevfAbncBgnnDtE#
+		 	 </isNotEmpty>
+		</isNotNull>
+	     
+	</select>
+</sqlMap>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgPdfG407m_2022">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgPdfG407mSrh_2022_VO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2022.InfcPkgPdfG407mSrh_2022_VO"/>
+	
+	<resultMap id="infcPkgPdfG407m_2022" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2022.InfcPkgPdfG407m_2022_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		
+		<result property="totPreYearSum" column="TOT_PRE_YEAR_SUM" columnIndex="5"/>
+		<result property="totCurrYearSum" column="TOT_CURR_YEAR_SUM" columnIndex="6"/>
+		<result property="resid" column="RESID" columnIndex="7"/>
+		
+		<result property="kybdr" column="KYBDR" columnIndex="8"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="9"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="10"/>
+		<result property="ismt" column="ISMT" columnIndex="11"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="12"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="13"/>
+		
+		<result property="gnrlSum" column="GNRL_SUM" columnIndex="14"/>
+		<result property="tdmrSum" column="TDMR_SUM" columnIndex="15"/>
+		<result property="trpSum" column="TRP_SUM" columnIndex="16"/>
+		<result property="isldSum" column="ISLD_SUM" columnIndex="17"/>
+		<result property="totSum" column="TOT_SUM" columnIndex="18"/>
+		<result property="tfhyGnrlSum" column="TFHY_GNRL_SUM" columnIndex="19"/>
+		<result property="tfhyTdmrSum" column="TFHY_TDMR_SUM" columnIndex="20"/>
+		<result property="tfhyTrpSum" column="TFHY_TRP_SUM" columnIndex="21"/>
+		<result property="tfhyIsldSum" column="TFHY_ISLD_SUM" columnIndex="22"/>
+		<result property="tfhyTotSum" column="TFHY_TOT_SUM" columnIndex="23"/>
+		<result property="shfyGnrlSum" column="SHFY_GNRL_SUM" columnIndex="24"/>
+		<result property="shfyTdmrSum" column="SHFY_TDMR_SUM" columnIndex="25"/>
+		<result property="shfyTrpSum" column="SHFY_TRP_SUM" columnIndex="26"/>
+		<result property="shfyIsldSum" column="SHFY_ISLD_SUM" columnIndex="27"/>
+		<result property="shfyTotSum" column="SHFY_TOT_SUM" columnIndex="28"/>
+		<result property="tdmrTotPreYearSum" column="TDMR_TOT_PRE_YEAR_SUM" columnIndex="29"/>
+		<result property="tdmrTotCurrYearSum" column="TDMR_TOT_CURR_YEAR_SUM" columnIndex="30"/>
+	</resultMap>
+	
+	<insert id="infcPkgPdfG407m_2022_DAO.insertPdfG407m_S">
+		<![CDATA[
+			INSERT INTO PDF_G407M 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , TOT_PRE_YEAR_SUM
+				  , TOT_CURR_YEAR_SUM
+				  , RESID
+				  , GNRL_SUM
+				  , TDMR_SUM
+				  , TRP_SUM
+				  , ISLD_SUM
+				  , TOT_SUM
+				  , TFHY_GNRL_SUM
+				  , TFHY_TDMR_SUM
+				  , TFHY_TRP_SUM
+				  , TFHY_ISLD_SUM
+				  , TFHY_TOT_SUM
+				  , SHFY_GNRL_SUM
+				  , SHFY_TDMR_SUM
+				  , SHFY_TRP_SUM
+				  , SHFY_ISLD_SUM
+				  , SHFY_TOT_SUM
+				  , TDMR_TOT_PRE_YEAR_SUM
+				  , TDMR_TOT_CURR_YEAR_SUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #totPreYearSum#
+				  , #totCurrYearSum#
+				  , #resid#
+				  , #gnrlSum#
+				  , #tdmrSum#
+				  , #trpSum#
+				  , #isldSum#
+				  , #totSum#
+				  , #tfhyGnrlSum#
+				  , #tfhyTdmrSum#
+				  , #tfhyTrpSum#
+				  , #tfhyIsldSum#
+				  , #tfhyTotSum#
+				  , #shfyGnrlSum#
+				  , #shfyTdmrSum#
+				  , #shfyTrpSum#
+				  , #shfyIsldSum#
+				  , #shfyTotSum#
+				  , #tdmrTotPreYearSum#
+				  , #tdmrTotCurrYearSum#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgPdfG407m_2022_DAO.updatePdfG407m_S">
+		<![CDATA[
+			UPDATE PDF_G407M A
+			SET A.TOT_CURR_YEAR_SUM = (SELECT SUM(NVL(B.ZERO_AMT_SUM,0))
+										FROM PDF_G407Y B
+										WHERE B.DAT_CD = 'G0014'
+										AND B.RESID = A.RESID
+										AND B.DPOB_CD = #dpobCd#
+										AND B.YRTX_BLGG_YR=#yrtxBlggYr#
+										AND B.CLUT_SEPT_CD=#clutSeptCd#
+										AND B.SYSTEMKEY=#systemkey#
+										AND B.PDF_DAT_APP_YN = 'Y')
+						WHERE A.DPOB_CD=#dpobCd#
+								AND A.YRTX_BLGG_YR=#yrtxBlggYr#
+								AND A.CLUT_SEPT_CD=#clutSeptCd#
+								AND A.SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPdfG407m_2022_DAO.deletePdfG407m_S">
+		<![CDATA[
+			DELETE FROM PDF_G407M 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<select id="infcPkgPdfG407m_2022_DAO.selectPdfG407m_S" resultMap="infcPkgPdfG407m_2022">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, ZERO_SEIL_NUM
+				, ZERO_AMT_MN
+				, ZERO_MM_AMT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PDF_G407M
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND ZERO_SEIL_NUM=#zeroSeilNum#
+								AND ZERO_AMT_MN=#zeroAmtMn#
+				]]>
+	</select>
+	
+	<select id="infcPkgPdfG407m_2022_DAO.selectPdfG407mList_D" parameterClass="infcPkgPdfG407mSrh_2022_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, ZERO_SEIL_NUM
+								, ZERO_AMT_MN
+								, ZERO_MM_AMT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PDF_G407M
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, ZERO_SEIL_NUM DESC
+							, ZERO_AMT_MN DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgPdfG407m_2022_DAO.selectPdfG407mListTotCnt_S" parameterClass="infcPkgPdfG407mSrh_2022_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PDF_G407M
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

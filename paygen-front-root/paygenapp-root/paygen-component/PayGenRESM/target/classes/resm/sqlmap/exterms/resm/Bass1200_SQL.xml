@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass1200">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass1200SerarchVO" type="com.app.exterms.resm.server.vo.Bass1200SrhVO"/>
+	
+	<resultMap id="bass1200" class="com.app.exterms.resm.server.vo.Bass1200VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="dutyDivCd" column="DUTY_DIV_CD" columnIndex="2"/>
+		<result property="stpInttnSeptVal" column="STP_INTTN_SEPT_VAL" columnIndex="3"/>
+		<result property="gtwkStdTm" column="GTWK_STD_TM" columnIndex="4"/>
+		<result property="ofwkStdTm" column="OFWK_STD_TM" columnIndex="5"/>
+		<result property="eryGtwkBgnnTm" column="ERY_GTWK_BGNN_TM" columnIndex="6"/>
+		<result property="eryGtwkEndTm" column="ERY_GTWK_END_TM" columnIndex="7"/>
+		<result property="norMogDutyBgnnTm" column="NOR_MOG_DUTY_BGNN_TM" columnIndex="8"/>
+		<result property="norMogDutyEndTm" column="NOR_MOG_DUTY_END_TM" columnIndex="9"/>
+		<result property="norDutyLuchBgnnTm" column="NOR_DUTY_LUCH_BGNN_TM" columnIndex="10"/>
+		<result property="norDutyLuchEndTm" column="NOR_DUTY_LUCH_END_TM" columnIndex="11"/>
+		<result property="norDutyAftnBgnnTm" column="NOR_DUTY_AFTN_BGNN_TM" columnIndex="12"/>
+		<result property="norDutyAftnEndTm" column="NOR_DUTY_AFTN_END_TM" columnIndex="13"/>
+		<result property="norDutyTmNum" column="NOR_DUTY_TM_NUM" columnIndex="14"/>
+		<result property="extnnEvngBgnnTm" column="EXTNN_EVNG_BGNN_TM" columnIndex="15"/>
+		<result property="extnnEvngEndTm" column="EXTNN_EVNG_END_TM" columnIndex="16"/>
+		<result property="extnnDutyBgnnTm" column="EXTNN_DUTY_BGNN_TM" columnIndex="17"/>
+		<result property="extnnDutyEndTm" column="EXTNN_DUTY_END_TM" columnIndex="18"/>
+		<result property="extnnEvngMealInsnYn" column="EXTNN_EVNG_MEAL_INSN_YN" columnIndex="19"/>
+		<result property="ngtDutyBgnnTm" column="NGT_DUTY_BGNN_TM" columnIndex="20"/>
+		<result property="ngtDutyEndTm" column="NGT_DUTY_END_TM" columnIndex="21"/>
+		<result property="kybdr" column="KYBDR" columnIndex="22"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="23"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="24"/>
+		<result property="ismt" column="ISMT" columnIndex="25"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="26"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="27"/>
+	</resultMap>
+	
+	<insert id="bass1200DAO.insertBass1200_S">
+		<![CDATA[
+			INSERT INTO BASS1200 
+				( DPOB_CD
+				  , DUTY_DIV_CD
+				  , STP_INTTN_SEPT_VAL
+				  , GTWK_STD_TM
+				  , OFWK_STD_TM
+				  , ERY_GTWK_BGNN_TM
+				  , ERY_GTWK_END_TM
+				  , NOR_MOG_DUTY_BGNN_TM
+				  , NOR_MOG_DUTY_END_TM
+				  , NOR_DUTY_LUCH_BGNN_TM
+				  , NOR_DUTY_LUCH_END_TM
+				  , NOR_DUTY_AFTN_BGNN_TM
+				  , NOR_DUTY_AFTN_END_TM
+				  , NOR_DUTY_TM_NUM
+				  , EXTNN_EVNG_BGNN_TM
+				  , EXTNN_EVNG_END_TM
+				  , EXTNN_DUTY_BGNN_TM
+				  , EXTNN_DUTY_END_TM
+				  , EXTNN_EVNG_MEAL_INSN_YN
+				  , NGT_DUTY_BGNN_TM
+				  , NGT_DUTY_END_TM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #dutyDivCd#
+				  , #stpInttnSeptVal#
+				  , #gtwkStdTm#
+				  , #ofwkStdTm#
+				  , #eryGtwkBgnnTm#
+				  , #eryGtwkEndTm#
+				  , #norMogDutyBgnnTm#
+				  , #norMogDutyEndTm#
+				  , #norDutyLuchBgnnTm#
+				  , #norDutyLuchEndTm#
+				  , #norDutyAftnBgnnTm#
+				  , #norDutyAftnEndTm#
+				  , #norDutyTmNum#
+				  , #extnnEvngBgnnTm#
+				  , #extnnEvngEndTm#
+				  , #extnnDutyBgnnTm#
+				  , #extnnDutyEndTm#
+				  , #extnnEvngMealInsnYn#
+				  , #ngtDutyBgnnTm#
+				  , #ngtDutyEndTm#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass1200DAO.updateBass1200_S">
+		<![CDATA[
+			UPDATE BASS1200
+			SET DPOB_CD=#dpobCd#
+				, DUTY_DIV_CD=#dutyDivCd#
+				, STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				, GTWK_STD_TM=#gtwkStdTm#
+				, OFWK_STD_TM=#ofwkStdTm#
+				, ERY_GTWK_BGNN_TM=#eryGtwkBgnnTm#
+				, ERY_GTWK_END_TM=#eryGtwkEndTm#
+				, NOR_MOG_DUTY_BGNN_TM=#norMogDutyBgnnTm#
+				, NOR_MOG_DUTY_END_TM=#norMogDutyEndTm#
+				, NOR_DUTY_LUCH_BGNN_TM=#norDutyLuchBgnnTm#
+				, NOR_DUTY_LUCH_END_TM=#norDutyLuchEndTm#
+				, NOR_DUTY_AFTN_BGNN_TM=#norDutyAftnBgnnTm#
+				, NOR_DUTY_AFTN_END_TM=#norDutyAftnEndTm#
+				, NOR_DUTY_TM_NUM=#norDutyTmNum#
+				, EXTNN_EVNG_BGNN_TM=#extnnEvngBgnnTm#
+				, EXTNN_EVNG_END_TM=#extnnEvngEndTm#
+				, EXTNN_DUTY_BGNN_TM=#extnnDutyBgnnTm#
+				, EXTNN_DUTY_END_TM=#extnnDutyEndTm#
+				, EXTNN_EVNG_MEAL_INSN_YN=#extnnEvngMealInsnYn#
+				, NGT_DUTY_BGNN_TM=#ngtDutyBgnnTm#
+				, NGT_DUTY_END_TM=#ngtDutyEndTm#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND DUTY_DIV_CD=#dutyDivCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				]]>
+	</update>
+	
+	<delete id="bass1200DAO.deleteBass1200_S">
+		<![CDATA[
+			DELETE FROM BASS1200 
+						WHERE DPOB_CD=#dpobCd#
+								AND DUTY_DIV_CD=#dutyDivCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				]]>
+	</delete>
+	
+	<select id="bass1200DAO.selectBass1200_S" resultMap="bass1200">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, DUTY_DIV_CD
+				, STP_INTTN_SEPT_VAL
+				, GTWK_STD_TM
+				, OFWK_STD_TM
+				, ERY_GTWK_BGNN_TM
+				, ERY_GTWK_END_TM
+				, NOR_MOG_DUTY_BGNN_TM
+				, NOR_MOG_DUTY_END_TM
+				, NOR_DUTY_LUCH_BGNN_TM
+				, NOR_DUTY_LUCH_END_TM
+				, NOR_DUTY_AFTN_BGNN_TM
+				, NOR_DUTY_AFTN_END_TM
+				, NOR_DUTY_TM_NUM
+				, EXTNN_EVNG_BGNN_TM
+				, EXTNN_EVNG_END_TM
+				, EXTNN_DUTY_BGNN_TM
+				, EXTNN_DUTY_END_TM
+				, EXTNN_EVNG_MEAL_INSN_YN
+				, NGT_DUTY_BGNN_TM
+				, NGT_DUTY_END_TM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS1200
+						WHERE DPOB_CD=#dpobCd#
+								AND DUTY_DIV_CD=#dutyDivCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				]]>
+	</select>
+	
+	<select id="bass1200DAO.selectBass1200List_D" parameterClass="bass1200SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, DUTY_DIV_CD
+								, STP_INTTN_SEPT_VAL
+								, GTWK_STD_TM
+								, OFWK_STD_TM
+								, ERY_GTWK_BGNN_TM
+								, ERY_GTWK_END_TM
+								, NOR_MOG_DUTY_BGNN_TM
+								, NOR_MOG_DUTY_END_TM
+								, NOR_DUTY_LUCH_BGNN_TM
+								, NOR_DUTY_LUCH_END_TM
+								, NOR_DUTY_AFTN_BGNN_TM
+								, NOR_DUTY_AFTN_END_TM
+								, NOR_DUTY_TM_NUM
+								, EXTNN_EVNG_BGNN_TM
+								, EXTNN_EVNG_END_TM
+								, EXTNN_DUTY_BGNN_TM
+								, EXTNN_DUTY_END_TM
+								, EXTNN_EVNG_MEAL_INSN_YN
+								, NGT_DUTY_BGNN_TM
+								, NGT_DUTY_END_TM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS1200
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					DUTY_DIV_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, DUTY_DIV_CD DESC
+							, STP_INTTN_SEPT_VAL DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass1200DAO.selectBass1200ListTotCnt_S" parameterClass="bass1200SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS1200
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				DUTY_DIV_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

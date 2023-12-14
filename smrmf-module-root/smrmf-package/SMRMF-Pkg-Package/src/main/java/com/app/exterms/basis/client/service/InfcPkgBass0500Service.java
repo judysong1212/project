@@ -1,0 +1,54 @@
+/*******************************************************************************
+ * Copyright 2011 Google Inc. All Rights Reserved.
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************/
+package com.app.exterms.basis.client.service;
+
+import java.util.List;
+
+import com.app.exterms.basis.client.dto.InfcPkgBass0500DTO;
+import com.app.smrmf.core.msfmainapp.client.exceptions.MSFException;
+import com.app.smrmf.core.msfmainapp.client.utils.MSFFormPanel.ActionDatabase;
+import com.extjs.gxt.ui.client.data.BaseModel;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+
+@RemoteServiceRelativePath("InfcPkgBass0500Service.gwt")
+public interface InfcPkgBass0500Service extends RemoteService {
+	/**
+	 * Utility class for simplifying access to the instance of async service.
+	 */
+	public static class Util {
+		private static InfcPkgBass0500ServiceAsync instance;
+		public static InfcPkgBass0500ServiceAsync getInstance(){
+			if (instance == null) {
+				instance = GWT.create(InfcPkgBass0500Service.class);
+			}
+			return instance;
+		}
+	}
+	
+	public List<BaseModel> getYearList() throws Exception;
+	
+	
+	/** 생성된 사업의 년도를 가져옴 **/
+	public List<BaseModel> getBass0500BusinYrList() throws MSFException;
+	
+	public Long yeta2070ToBass0500OnUpdate(List<InfcPkgBass0500DTO> listPkgBass0500Dto,	ActionDatabase actionDatabase)throws MSFException;
+	public Long yeta3070ToBass0500OnUpdate(List<InfcPkgBass0500DTO> listPkgBass0500Dto,	ActionDatabase actionDatabase)throws MSFException;
+	
+	public Long yeta2070ToBass0500OffUpdate(List<InfcPkgBass0500DTO> listPkgBass0500Dto,	ActionDatabase actionDatabase)throws MSFException;
+	public Long yeta3070ToBass0500OffUpdate(List<InfcPkgBass0500DTO> listPkgBass0500Dto,	ActionDatabase actionDatabase)throws MSFException;
+ 
+}

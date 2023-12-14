@@ -1,0 +1,338 @@
+  SELECT
+        TA02.RSNO_NUMB  ,              
+        TA02.PSCL_HPYN ,                                                                           
+        TA02.VEND_NUMB,                                                                           
+        TA02.VEND_NAME,          
+        TA02.MEDI_CFCD,                                                                                 
+        TA02.CASH_UECT,  
+        TA02.CTIF_TREA,                                                                              
+        TA02.CASH_UEAM,                                                                                 
+        TA02.FRNR_CODE  
+  FROM 
+  (SELECT                                                                                                
+         (SUBSTR(RSNO_NUMB,1,6) || '-' ||  '*******'  ) AS RSNO_NUMB  ,              
+         PSCL_HPYN ,                                                                           
+        (                                                                                        
+        SUBSTR(DECODE(MEDI_CFCD,'1',DECODE(VEND_NUMB,'','',VEND_NUMB),VEND_NUMB),1,3) || '-' ||   
+        SUBSTR(DECODE(MEDI_CFCD,'1',DECODE(VEND_NUMB,'','',VEND_NUMB),VEND_NUMB),4,2) || '-' ||   
+        SUBSTR(DECODE(MEDI_CFCD,'1',DECODE(VEND_NUMB,'','',VEND_NUMB),VEND_NUMB),6,5)              
+                                                                                                   
+        ) AS VEND_NUMB,                                                                           
+        (DECODE(MEDI_CFCD,'1',DECODE(VEND_NAME,'','',VEND_NAME),VEND_NAME)) AS VEND_NAME,          
+        MEDI_CFCD,                                                                                 
+        CASH_UECT,  
+        CTIF_TREA,                                                                              
+        CASH_UEAM,                                                                                 
+        nvl((SELECT FRNR_CODE FROM   YETA3220                                                       
+                             WHERE   YETA3220.DPOB_CD = YETA3140.DPOB_CD 
+                             AND YETA3220.RSNO_NUMB = YETA3140.RSNO_NUMB                        
+                             AND YETA3220.EDAC_RVYY = YETA3140.EDAC_RVYY 
+                              AND YETA3220.SYSTEMKEY = YETA3140.SYSTEMKEY                           
+                             AND YETA3220.SETT_GBCD = YETA3140.SETT_GBCD ),1) AS FRNR_CODE                     
+ FROM  YETA3140)  TA02, 
+      (
+          SELECT                               AD02.DPOB_CD
+                                              ,AD02.SYSTEMKEY
+                                              ,AD02.PAYR_MANG_DEPT_CD
+                                              ,AD02.EMYMT_DIV_CD
+                                              ,AD02.HAN_NM
+                                              ,AD02.RESN_REGN_NUM
+                                              ,DECODE(AD01.EMYMT_DIV_CD,'A0020010',AD02.DEPT_CD,AD01.CURR_AFFN_DEPT_CD) AS DEPT_CD
+                                              ,AD02.BUSIN_CD
+                                              ,DECODE(AD01.EMYMT_DIV_CD,'A0020010',AD02.TYP_OCCU_CD,AD01.TYP_OCCU_CD) AS TYP_OCCU_CD 
+                                              ,DECODE(AD01.DTIL_OCCU_INTTN_CD,'A0020010',AD02.DEPT_CD,AD01.DTIL_OCCU_INTTN_CD) AS DTIL_OCCU_INTTN_CD
+                                              ,DECODE(AD01.EMYMT_DIV_CD,'A0020010',AD02.DTIL_OCCU_CLS_DIV_CD,AD01.DTIL_OCCU_CLS_DIV_CD) AS DTIL_OCCU_CLS_DIV_CD
+                                              ,AD02.ODTY_CD
+                                              ,AD02.PYSP_CD
+                                              ,AD02.PYSP_GRDE_CD
+                                              ,AD02.LOG_SVC_YR_NUM_CD
+                                              ,AD02.LOG_SVC_MNTH_ICM_CD
+                                              ,AD02.FRST_EMYMT_DT
+                                              ,AD02.EMYMT_BGNN_DT
+                                              ,AD02.EMYMT_END_DT
+                                              ,AD01.NATN_CD
+                                              ,AD01.HDOFC_CODTN_CD
+                                              ,AD01.RETRY_DT 
+                                                  FROM PSNL0100 AD01, PAYR0304 AD02,
+                                                (SELECT   NN.DPOB_CD,NN.PYMT_YR_MNTH ,NN.PAY_CD, NN.SYSTEMKEY ,  NN.PAYR_SEIL_NUM 
+                                                         FROM  ( SELECT ROW_NUMBER() OVER (ORDER BY SYSTEMKEY,PYMT_YR_MNTH ASC,PAY_CD ASC) SEL_NUM 
+                                                                     , DPOB_CD, PYMT_YR_MNTH ,PAY_CD, SYSTEMKEY ,  PAYR_SEIL_NUM 
+                                                                   FROM   PAYR0304 
+                                                                  WHERE  PYMT_YR_MNTH LIKE #edacRvyy# ||'%' 
+                                                                   AND EXISTS  (
+                                 SELECT  C.DPOB_CD,
+                                         C.DTIL_OCCU_INTTN_CD,
+                                         C.TYP_OCCU_CD,
+                                         C.DEPT_CD FROM 
+                                                     ( SELECT  AA02.DPOB_CD,
+                                                             AA02.DEPT_CD,
+                                                             AA02.TYP_OCCU_CD,
+                                                             AA02.DTIL_OCCU_INTTN_CD 
+                                                        FROM  BASS0360 AA02  
+                                                        WHERE AA02.PAYR_MANG_DEPT_CD LIKE (DECODE(#payrMangDeptYn#,'Y',#payrMangDeptCd#,DECODE(#deptCd#,'',#payrMangDeptCd#,''))) || '%'  
+                                                        AND   NOT EXISTS (SELECT DPOB_CD 
+                                                                              , TYP_OCCU_CD
+                                                                              , DEPT_CD
+                                                                              , DTIL_OCCU_INTTN_CD
+                                                                        FROM SYSM0700 AA01
+                                                                        WHERE AA01.DPOB_CD = AA02.DPOB_CD
+                                                                          AND AA01.TYP_OCCU_CD = AA02.TYP_OCCU_CD
+                                                                          AND AA01.DEPT_CD = AA02.DEPT_CD
+                                                                         AND AA01.DTIL_OCCU_INTTN_CD = AA02.DTIL_OCCU_INTTN_CD ) 
+                                                        AND (AA02.DPOB_CD,AA02.PAYR_MANG_DEPT_CD) IN (SELECT DPOB_CD, PAYR_MANG_DEPT_CD  
+                                                                                        FROM BASS0150 
+                                                                                         WHERE PAY_MANGE_DEPT_WHLE_PERN_CHRG
+                                                                                             LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,
+                                                                                              DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,
+                                                                                                          (SELECT NVL(USR_ID,'') FROM SYSM0700
+                                                                                                                              WHERE USR_ID = #usrId#))))) || '%'  
+                                                                                       UNION ALL
+                                                                                       SELECT DPOB_CD,
+                                                                                              PAYR_MANG_DEPT_CD
+                                                                                         FROM BASS0150
+                                                                                        WHERE PAYR_MANG_DEPT_CD LIKE (DECODE (#deptCd#, '', #payrMangDeptCd#, ''))   || '%')   
+                                                        UNION ALL                 
+                                                        SELECT  AA03.DPOB_CD
+                                                               , AA03.DEPT_CD 
+                                                               , AA03.TYP_OCCU_CD
+                                                               , AA03.DTIL_OCCU_INTTN_CD 
+                                                        FROM SYSM0700 AA03
+                                                        WHERE AA03.USR_ID LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,  
+                                                                                 DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,''))  
+                                                                                )) || '%'  
+                                                        UNION ALL
+                                                         SELECT   
+                                                                                       BB01.DPOB_CD, BB01.DEPT_CD
+                                                                                       ,('') AS TYP_OCCU_CD ,('') AS DTIL_OCCU_INTTN_CD
+                                                                                     FROM (SELECT AA.DPOB_CD  , AA.DEPT_CD  
+                                                                                                  , AA.TPLVL_DEPT_CD  , AA.HHRK_DEPT_CD  
+                                                                                                 FROM BASS0400 AA 
+                                                                                                WHERE AA.DEPT_USE_YN   = 'Y'  
+                                                                                                 AND  AA.DEPT_CD = #payrMangDeptCd#    
+                                                                                        UNION ALL
+                                                                                        SELECT AA02.*
+                                                                                        FROM (
+                                                                                            SELECT  CC.DPOB_CD   , CC.DEPT_CD  
+                                                                                                  , CC.TPLVL_DEPT_CD , CC.HHRK_DEPT_CD  
+                                                                                                 FROM BASS0400 CC 
+                                                                                                WHERE CC.DEPT_USE_YN   = 'Y'   
+                                                                                             ) AA02
+                                                                                      START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd#   
+                                                                                     CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD ) BB01 
+                                                                                   WHERE  BB01.DPOB_CD= #dpobCd# 
+                                                                                 
+                                                   ) C
+                                                    WHERE     C.DPOB_CD = PAYR0304.DPOB_CD
+                                                        AND C.DEPT_CD = PAYR0304.DEPT_CD
+                                                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(PAYR0304.TYP_OCCU_CD,'TT') 
+                                                        AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(PAYR0304.DTIL_OCCU_INTTN_CD,'TT')
+                                                      <isNotEmpty prepend="AND" property="deptCd" >
+                                                   C.DEPT_CD = #deptCd#
+                                               </isNotEmpty>
+                                                  )
+                                                                  ) NN ,
+                                                                  ( SELECT  MM.DPOB_CD, MM.SYSTEMKEY,  MAX(MM.SEL_NUM) AS SEL_NUM
+                                                                                FROM ( SELECT ROW_NUMBER() OVER (ORDER BY DPOB_CD,SYSTEMKEY,PYMT_YR_MNTH ASC,PAY_CD ASC) SEL_NUM 
+                                                                                     , DPOB_CD , PYMT_YR_MNTH ,PAY_CD, SYSTEMKEY ,  PAYR_SEIL_NUM 
+                                                                                 FROM   PAYR0304 
+                                                                                WHERE  PYMT_YR_MNTH LIKE #edacRvyy# ||'%'  
+                                                                                  AND EXISTS  (
+                                 SELECT  C.DPOB_CD,
+                                         C.DTIL_OCCU_INTTN_CD,
+                                         C.TYP_OCCU_CD,
+                                         C.DEPT_CD FROM 
+                                                     ( SELECT  AA02.DPOB_CD,
+                                                             AA02.DEPT_CD,
+                                                             AA02.TYP_OCCU_CD,
+                                                             AA02.DTIL_OCCU_INTTN_CD 
+                                                        FROM  BASS0360 AA02  
+                                                        WHERE AA02.PAYR_MANG_DEPT_CD LIKE (DECODE(#payrMangDeptYn#,'Y',#payrMangDeptCd#,DECODE(#deptCd#,'',#payrMangDeptCd#,''))) || '%'  
+                                                        AND   NOT EXISTS (SELECT DPOB_CD 
+                                                                              , TYP_OCCU_CD
+                                                                              , DEPT_CD
+                                                                              , DTIL_OCCU_INTTN_CD
+                                                                        FROM SYSM0700 AA01
+                                                                        WHERE AA01.DPOB_CD = AA02.DPOB_CD
+                                                                          AND AA01.TYP_OCCU_CD = AA02.TYP_OCCU_CD
+                                                                          AND AA01.DEPT_CD = AA02.DEPT_CD
+                                                                         AND AA01.DTIL_OCCU_INTTN_CD = AA02.DTIL_OCCU_INTTN_CD ) 
+                                                        AND (AA02.DPOB_CD,AA02.PAYR_MANG_DEPT_CD) IN (SELECT DPOB_CD, PAYR_MANG_DEPT_CD  
+                                                                                        FROM BASS0150 
+                                                                                         WHERE PAY_MANGE_DEPT_WHLE_PERN_CHRG
+                                                                                             LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,
+                                                                                              DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,
+                                                                                                          (SELECT NVL(USR_ID,'') FROM SYSM0700
+                                                                                                                              WHERE USR_ID = #usrId#))))) || '%'  
+                                                                                       UNION ALL
+                                                                                       SELECT DPOB_CD,
+                                                                                              PAYR_MANG_DEPT_CD
+                                                                                         FROM BASS0150
+                                                                                        WHERE PAYR_MANG_DEPT_CD LIKE (DECODE (#deptCd#, '', #payrMangDeptCd#, ''))   || '%')   
+                                                        UNION ALL                 
+                                                        SELECT  AA03.DPOB_CD
+                                                               , AA03.DEPT_CD 
+                                                               , AA03.TYP_OCCU_CD
+                                                               , AA03.DTIL_OCCU_INTTN_CD 
+                                                        FROM SYSM0700 AA03
+                                                        WHERE AA03.USR_ID LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,  
+                                                                                 DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,''))  
+                                                                                )) || '%'  
+                                                        UNION ALL
+                                                         SELECT   
+                                                                                       BB01.DPOB_CD, BB01.DEPT_CD
+                                                                                       ,('') AS TYP_OCCU_CD ,('') AS DTIL_OCCU_INTTN_CD
+                                                                                     FROM (SELECT AA.DPOB_CD  , AA.DEPT_CD  
+                                                                                                  , AA.TPLVL_DEPT_CD  , AA.HHRK_DEPT_CD  
+                                                                                                 FROM BASS0400 AA 
+                                                                                                WHERE AA.DEPT_USE_YN   = 'Y'  
+                                                                                                 AND  AA.DEPT_CD = #payrMangDeptCd#    
+                                                                                        UNION ALL
+                                                                                        SELECT AA02.*
+                                                                                        FROM (
+                                                                                            SELECT  CC.DPOB_CD   , CC.DEPT_CD  
+                                                                                                  , CC.TPLVL_DEPT_CD , CC.HHRK_DEPT_CD  
+                                                                                                 FROM BASS0400 CC 
+                                                                                                WHERE CC.DEPT_USE_YN   = 'Y'   
+                                                                                             ) AA02
+                                                                                      START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd#   
+                                                                                     CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD ) BB01 
+                                                                                   WHERE  BB01.DPOB_CD= #dpobCd# 
+                                                                                 
+                                                   ) C
+                                                    WHERE     C.DPOB_CD = PAYR0304.DPOB_CD
+                                                        AND C.DEPT_CD = PAYR0304.DEPT_CD
+                                                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(PAYR0304.TYP_OCCU_CD,'TT') 
+                                                        AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(PAYR0304.DTIL_OCCU_INTTN_CD,'TT')
+                                                    <isNotEmpty prepend="AND" property="deptCd" >
+                                                   C.DEPT_CD = #deptCd#
+                                               </isNotEmpty>
+                                                  )
+                                                                                     ) MM
+                                                                          GROUP BY DPOB_CD, SYSTEMKEY ) GG
+                                                        WHERE NN.SEL_NUM = GG.SEL_NUM
+                                                           AND NN.DPOB_CD = GG.DPOB_CD 
+                                                           AND NN.SYSTEMKEY = GG.SYSTEMKEY 
+                                                                            ) AD03 
+                                               WHERE   AD02.DPOB_CD = AD01.DPOB_CD
+                                                 AND AD02.SYSTEMKEY = AD01.SYSTEMKEY
+                                                 AND AD02.DPOB_CD  = AD03.DPOB_CD
+                                                 AND AD02.PYMT_YR_MNTH  = AD03.PYMT_YR_MNTH
+                                                 AND AD02.SYSTEMKEY  = AD03.SYSTEMKEY  
+                                                   AND AD02.PAY_CD  = AD03.PAY_CD
+                                                 AND AD02.PAYR_SEIL_NUM  = AD03.PAYR_SEIL_NUM  
+                                                  AND AD02.PYMT_YR_MNTH LIKE #edacRvyy# ||'%' 
+          ) TA01
+    WHERE TA02.SYSTEMKEY = TA01.SYSTEMKEY 
+       AND TA02.DPOB_CD = TA01.DPOB_CD
+   <isNotEmpty prepend="AND" property="edacRvyy" >
+                                     TA02.EDAC_RVYY = #edacRvyy#
+                                </isNotEmpty>  
+                                <isNotEmpty prepend="AND" property="settGbcd" >
+                                     TA02.SETT_GBCD=#settGbcd#
+                                </isNotEmpty>
+                       <isNotEmpty prepend="AND" property="systemkey" >
+                       TA02.SYSTEMKEY=#systemkey#
+             </isNotEmpty> 
+                 AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT  AA02.DPOB_CD,
+                                                     AA02.DEPT_CD,
+                                                     AA02.TYP_OCCU_CD,
+                                                     AA02.DTIL_OCCU_INTTN_CD 
+                                                FROM  BASS0360 AA02  
+                                                WHERE AA02.PAYR_MANG_DEPT_CD LIKE (DECODE(#payrMangDeptYn#,'Y',#payrMangDeptCd#,DECODE(#deptCd#,'',#payrMangDeptCd#,''))) || '%'  
+                                                AND   NOT EXISTS (SELECT DPOB_CD 
+                                                                      , TYP_OCCU_CD
+                                                                      , DEPT_CD
+                                                                      , DTIL_OCCU_INTTN_CD
+                                                                FROM SYSM0700 AA01
+                                                                WHERE AA01.DPOB_CD = AA02.DPOB_CD
+                                                                  AND AA01.TYP_OCCU_CD = AA02.TYP_OCCU_CD
+                                                                  AND AA01.DEPT_CD = AA02.DEPT_CD
+                                                                 AND AA01.DTIL_OCCU_INTTN_CD = AA02.DTIL_OCCU_INTTN_CD ) 
+                                                AND (AA02.DPOB_CD,AA02.PAYR_MANG_DEPT_CD) IN (SELECT DPOB_CD, PAYR_MANG_DEPT_CD  
+                                                                                FROM BASS0150 
+                                                                                 WHERE PAY_MANGE_DEPT_WHLE_PERN_CHRG
+                                                                                     LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,
+                                                                                      DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,
+                                                                                                  (SELECT NVL(USR_ID,'') FROM SYSM0700
+                                                                                                                      WHERE USR_ID = #usrId#))))) || '%'  
+                                                                               UNION ALL
+                                                                               SELECT DPOB_CD,
+                                                                                      PAYR_MANG_DEPT_CD
+                                                                                 FROM BASS0150
+                                                                                WHERE PAYR_MANG_DEPT_CD LIKE (DECODE (#deptCd#, '', #payrMangDeptCd#, ''))   || '%') 
+                                                UNION ALL                 
+                                                SELECT  AA03.DPOB_CD
+                                                       , AA03.DEPT_CD 
+                                                       , AA03.TYP_OCCU_CD
+                                                       , AA03.DTIL_OCCU_INTTN_CD 
+                                                FROM SYSM0700 AA03
+                                                WHERE AA03.USR_ID LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,  
+                                                                         DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,''))  
+                                                                        )) || '%'  
+                                                UNION ALL
+                                                 SELECT   
+                                                                               BB01.DPOB_CD, BB01.DEPT_CD
+                                                                               ,('') AS TYP_OCCU_CD ,('') AS DTIL_OCCU_INTTN_CD
+                                                                             FROM (SELECT AA.DPOB_CD  , AA.DEPT_CD  
+                                                                                          , AA.TPLVL_DEPT_CD  , AA.HHRK_DEPT_CD  
+                                                                                         FROM BASS0400 AA 
+                                                                                        WHERE AA.DEPT_USE_YN   = 'Y'  
+                                                                                         AND  AA.DEPT_CD = #payrMangDeptCd#    
+                                                                                UNION ALL
+                                                                                SELECT AA02.*
+                                                                                FROM (
+                                                                                    SELECT  CC.DPOB_CD   , CC.DEPT_CD  
+                                                                                          , CC.TPLVL_DEPT_CD , CC.HHRK_DEPT_CD  
+                                                                                         FROM BASS0400 CC 
+                                                                                        WHERE CC.DEPT_USE_YN   = 'Y'   
+                                                                                     ) AA02
+                                                                              START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd#   
+                                                                             CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD ) BB01 
+                                                                           WHERE  BB01.DPOB_CD= #dpobCd# 
+                                                                         
+                                           ) C
+                                            WHERE     C.DPOB_CD = TA01.DPOB_CD
+                                                AND C.DEPT_CD = TA01.DEPT_CD
+                                                AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(TA01.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(TA01.DTIL_OCCU_INTTN_CD,'TT')
+                                                 <isNotEmpty property="deptCd" prepend="AND">
+                                                <![CDATA[
+                                                 C.DEPT_CD
+                                                ]]>
+                                                <iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+                                                 #deptCdArr[]#
+                                                </iterate>
+                                                </isNotEmpty>  
+                                          ) 
+                       <isNotEmpty prepend="AND" property="businCd" >
+                         TA01.BUSIN_CD=#businCd#
+                       </isNotEmpty> 
+                       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+                         TA01.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+                       </isNotEmpty> 
+                       <isNotEmpty prepend="AND" property="emymtDivCd" >
+                         TA01.EMYMT_DIV_CD=#emymtDivCd#
+                         </isNotEmpty>  
+                     <isNotEmpty property="typOccuCd" prepend="AND">
+                    <![CDATA[
+                     TA01.TYP_OCCU_CD
+                    ]]>
+                    <iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+                     #typOccuCdArr[]#
+                    </iterate>
+                    </isNotEmpty>  
+                  
+                    <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+                        <![CDATA[
+                             TA01.DTIL_OCCU_INTTN_CD
+                        ]]>
+                        <iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+                             #dtilOccuInttnCdArr[]#
+                        </iterate> 
+                  </isNotEmpty>      
+ 

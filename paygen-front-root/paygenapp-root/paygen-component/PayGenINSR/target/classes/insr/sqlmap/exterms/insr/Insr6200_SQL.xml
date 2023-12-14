@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Insr6200">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="insr6200SerarchVO" type="com.app.exterms.insurance.server.vo.Insr6200SrhVO"/>
+	
+	<resultMap id="insr6200" class="com.app.exterms.insurance.server.vo.Insr6200VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="emymtSeilNum" column="EMYMT_SEIL_NUM" columnIndex="3"/>
+		<result property="idtlAccdtInsurClutYr" column="IDTL_ACCDT_INSUR_CLUT_YR" columnIndex="4"/>
+		<result property="prmmIposDivCd" column="PRMM_IPOS_DIV_CD" columnIndex="5"/>
+		<result property="idtlAccdtInsurAqtnDt" column="IDTL_ACCDT_INSUR_AQTN_DT" columnIndex="6"/>
+		<result property="idtlAccdtInsurLssDt" column="IDTL_ACCDT_INSUR_LSS_DT" columnIndex="7"/>
+		<result property="idtlAccdtPayTotAmnt" column="IDTL_ACCDT_PAY_TOT_AMNT" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap>
+	
+	<insert id="insr6200DAO.insertInsr6200_S">
+		<![CDATA[
+			INSERT INTO INSR6200 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , EMYMT_SEIL_NUM
+				  , IDTL_ACCDT_INSUR_CLUT_YR
+				  , PRMM_IPOS_DIV_CD
+				  , IDTL_ACCDT_INSUR_AQTN_DT
+				  , IDTL_ACCDT_INSUR_LSS_DT
+				  , IDTL_ACCDT_PAY_TOT_AMNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #emymtSeilNum#
+				  , #idtlAccdtInsurClutYr#
+				  , #prmmIposDivCd#
+				  , #idtlAccdtInsurAqtnDt#
+				  , #idtlAccdtInsurLssDt#
+				  , #idtlAccdtPayTotAmnt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="insr6200DAO.updateInsr6200_S">
+		<![CDATA[
+			UPDATE INSR6200
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, EMYMT_SEIL_NUM=#emymtSeilNum#
+				, IDTL_ACCDT_INSUR_CLUT_YR=#idtlAccdtInsurClutYr#
+				, PRMM_IPOS_DIV_CD=#prmmIposDivCd#
+				, IDTL_ACCDT_INSUR_AQTN_DT=#idtlAccdtInsurAqtnDt#
+				, IDTL_ACCDT_INSUR_LSS_DT=#idtlAccdtInsurLssDt#
+				, IDTL_ACCDT_PAY_TOT_AMNT=#idtlAccdtPayTotAmnt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+								AND IDTL_ACCDT_INSUR_CLUT_YR=#idtlAccdtInsurClutYr#
+				]]>
+	</update>
+	
+	<delete id="insr6200DAO.deleteInsr6200_S">
+		<![CDATA[
+			DELETE FROM INSR6200 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+								AND IDTL_ACCDT_INSUR_CLUT_YR=#idtlAccdtInsurClutYr#
+				]]>
+	</delete>
+	
+	<select id="insr6200DAO.selectInsr6200_S" resultMap="insr6200">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, EMYMT_SEIL_NUM
+				, IDTL_ACCDT_INSUR_CLUT_YR
+				, PRMM_IPOS_DIV_CD
+				, IDTL_ACCDT_INSUR_AQTN_DT
+				, IDTL_ACCDT_INSUR_LSS_DT
+				, IDTL_ACCDT_PAY_TOT_AMNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM INSR6200
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+								AND IDTL_ACCDT_INSUR_CLUT_YR=#idtlAccdtInsurClutYr#
+				]]>
+	</select>
+	
+	<select id="insr6200DAO.selectInsr6200List_D" parameterClass="insr6200SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, EMYMT_SEIL_NUM
+								, IDTL_ACCDT_INSUR_CLUT_YR
+								, PRMM_IPOS_DIV_CD
+								, IDTL_ACCDT_INSUR_AQTN_DT
+								, IDTL_ACCDT_INSUR_LSS_DT
+								, IDTL_ACCDT_PAY_TOT_AMNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM INSR6200
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, EMYMT_SEIL_NUM DESC
+							, IDTL_ACCDT_INSUR_CLUT_YR DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="insr6200DAO.selectInsr6200ListTotCnt_S" parameterClass="insr6200SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM INSR6200
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

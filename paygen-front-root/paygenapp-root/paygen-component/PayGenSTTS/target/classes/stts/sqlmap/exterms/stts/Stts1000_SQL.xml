@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Stts1000">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="stts0100SrhVo" type="com.app.exterms.statistics.server.vo.Stts0100SrhVO"/>
+
+	<!-- 기간제운영현황리스트 -->
+	<select id="stts0100DAO.selectPsnl0400ToPsnl0110List" parameterClass="stts0100SrhVo" resultClass="egovMap">
+	<![CDATA[
+				SELECT T.DPOB_CD
+				        , T.SYSTEMKEY
+				        , ( CASE WHEN NVL2(T.RETRY_DT, SYSDATE, TO_DATE(T.RETRY_DT, 'YYYYMMDD') ) - TO_DATE(T.CURR_DEPT_APPMT_DT, 'YYYYMMDD') > 365  
+				                   THEN '기간제[1년~2년미만]'
+				                WHEN NVL2(T.RETRY_DT, SYSDATE, TO_DATE(T.RETRY_DT, 'YYYYMMDD') ) - TO_DATE(T.CURR_DEPT_APPMT_DT, 'YYYYMMDD') <= 365 AND T.DILNLAZ_DUTY_TM >= 40
+				                    THEN '기간제[1년미만]'
+				                WHEN T.DILNLAZ_DUTY_TM < 40
+				                    THEN '기간제[단시간]'
+				                ELSE ''
+				              END ) AS EMYMT_TYP
+				        , T.HAN_NM AS HAN_NM
+				        , DECODE(T.SX_DIV_CD, '', DECODE( SUBSTR(T.RESN_REGN_NUM, 7, 1), '1', '남성', '3', '남성', '2','여성', '4', '여성', '' ), fcBass0300CDNM(T.DPOB_CD, T.SX_DIV_CD)) AS SX_DIV_NM
+				        , (T.HUS_ROAD_NM_FNDTN_ADDR || ' ' || T.HUS_ROAD_NM_DTL_PATR_ADDR) AS ADDR
+				        , T.RESN_REGN_NUM AS RESN_REGN_NUM
+				        , (NVL(T.CELL_PHNE_NUM, T.HUS_PHN_NUM )) AS CELL_PHNE_NUM
+				        , T.DEPT_CD
+				        , T.EMYMT_BGNN_DT
+				        , T.EMYMT_END_DT 
+				        , ( T.EMYMT_BGNN_DT || ' ~ ' ||  T.EMYMT_END_DT ) AS EMYMT_DT
+				        , T.DILNLAZ_DUTY_TM AS DILNLAZ_DUTY_TM
+				        , T.PYMT_TOT_AMNT AS PYMT_TOT_AMNT
+				        , fcBass0500CDNM(T.DPOB_CD, SUBSTR(T.EMYMT_BGNN_DT, 0, 4), T.DEPT_CD, T.BUSIN_CD) AS BUSIN_NM
+				        , fcBass0300CDNM(T.DPOB_CD, T.DABTY_DIV_CD)  AS DABTY_DIV_NM
+				        , fcBass0300CDNM(T.DPOB_CD, T.DABTY_GRDE_CD)  AS DABTY_GRDE_NM
+				        , T.DABTY_AJMT_DT AS DABTY_AJMT_DT
+				        , T.CURR_DEPT_APPMT_DT AS CURR_DEPT_APPMT_DT
+				        , T.RETRY_DT AS RETRY_DT
+				        , DECODE( T.YOOBH_MNTH_DAY, '', DECODE( SUBSTR(T.RESN_REGN_NUM, 7, 1) , '1', TO_CHAR(SYSDATE, 'YYYY') - ( '19' || SUBSTR(T.RESN_REGN_NUM, 0, 2) ) 
+				                                                                              , '2', TO_CHAR(SYSDATE, 'YYYY') - ( '19' || SUBSTR(T.RESN_REGN_NUM, 0, 2) ) 
+				                                                                                   , TO_CHAR(SYSDATE, 'YYYY') - ( '20' || SUBSTR(T.RESN_REGN_NUM, 0, 2) )	 ) 
+				        							, ( TO_CHAR(SYSDATE, 'YYYY') -  SUBSTR(T.YOOBH_MNTH_DAY, 0, 4) ) ) AS AGE
+				        , ( fcBass0400CDNM(T.DPOB_CD, T.DEPT_CD,'2') || '/' || T.BUSIN_REPBTY_EMP_NUM ) AS DEPT_NM
+				
+				FROM (
+				        SELECT PS0100.DPOB_CD
+				                , PS0100.SYSTEMKEY
+				                , PS0100.HAN_NM
+				                , PS0100.SX_DIV_CD
+				                , PS0111.HUS_ROAD_NM_FNDTN_ADDR 
+				                , PS0111.HUS_ROAD_NM_DTL_PATR_ADDR
+				                , PS0100.RESN_REGN_NUM
+				                , PS0111.CELL_PHNE_NUM
+				                , PS0111.HUS_PHN_NUM 
+				                , PS0100.CURR_DEPT_APPMT_DT 
+				                , PS0100.RETRY_DT    
+				                , PS0110.EMYMT_BGNN_DT
+				                , PS0110.EMYMT_END_DT             
+				                , PA0301.PYMT_TOT_AMNT  
+				                , PS0110.BUSIN_CD
+				                , PS0113.DABTY_DIV_CD
+				                , PS0113.DABTY_GRDE_CD
+				                , PS0113.DABTY_AJMT_DT
+				                , PS0100.YOOBH_MNTH_DAY  
+				                , PS0110.DEPT_CD 
+				                , BA0500.BUSIN_REPBTY_EMP_NUM                  
+				                , ROUND( ( (SUM(DL0110.DILNLAZ_DUTY_TM)/60) /4.43) , 0) AS DILNLAZ_DUTY_TM	/*  평균 월 일수 = 365 / 12 = 30.41, 평균 월 주소 = 30/41 / 7 = 4.34 로 반영    */
+				                    
+				            FROM PSNL0100 PS0100    /* 	인사 마스터 	*/
+				                , PSNL0110 PS0110   /* 	인적 고용 	*/
+				                , PSNL0111 PS0111   /* 	인사 인적 	*/
+				                , PSNL0113 PS0113   /* 	인사 신상  	*/
+				                , BASS0500 BA0500   /* 	기초 사업  	*/
+				                , PAYR0301 PA0301   /* 	급여 마스터 	*/
+				                , DLGN0110 DL0110   /* 	복무 기본상세 	*/
+				                    
+				        WHERE PS0100.DPOB_CD 					= PS0110.DPOB_CD
+				                AND PS0100.SYSTEMKEY 			= PS0110.SYSTEMKEY   
+				
+				                AND PS0100.DPOB_CD 				= PS0111.DPOB_CD(+)
+				                AND PS0100.SYSTEMKEY 			= PS0111.SYSTEMKEY(+)   
+				                
+				                AND PS0100.DPOB_CD 				= PS0113.DPOB_CD(+)
+				                AND PS0100.SYSTEMKEY 			= PS0113.SYSTEMKEY(+)   
+				                
+				                AND PS0100.DPOB_CD 				= BA0500.DPOB_CD
+				                AND PS0110.BUSIN_CD 			= BA0500.BUSIN_CD
+				                
+				                AND PS0100.DPOB_CD 				= PA0301.DPOB_CD(+)
+				                AND PS0100.SYSTEMKEY 			= PA0301.SYSTEMKEY(+)
+				                AND	PA0301.PYMT_YR_MNTH(+) 		= #pymtYrMnth#
+				    			AND PA0301.PAY_CD(+) 			= 'B0150000'
+				                
+				                AND PS0100.DPOB_CD 				= DL0110.DPOB_CD(+)
+				                AND PS0100.SYSTEMKEY 			= DL0110.SYSTEMKEY(+)
+				                AND DL0110.DILNLAZ_YR_MNTH(+)	= #pymtYrMnth# 
+				                AND DL0110.PAY_CD(+) 			= 'B0150000'
+				                
+				                
+				              /*  AND DL0110.DILNLAZ_YR_MNTH	= PA0301.PYMT_YR_MNTH(+) 
+				                AND DL0110.PAY_CD 				= PA0301.PAY_CD(+)		*/
+			]]>		
+					 			AND	PS0100.DPOB_CD				= #dpobCd#
+					 			
+				    			
+				     			<isNotEmpty property="deptCd" prepend="AND">
+									<![CDATA[
+										PS0110.DEPT_CD
+									]]>
+									<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+										#deptCdArr[]#
+									</iterate>
+								</isNotEmpty> 
+				    
+                   				<isNotEmpty prepend="AND" property="businCd" >
+					 				PS0110.BUSIN_CD=#businCd#
+				    			</isNotEmpty> 
+			
+			
+			<![CDATA[ 
+			
+				                AND PS0110.EMYMT_BGNN_DT = ( SELECT MIN(EMYMT_BGNN_DT)
+		                                                        FROM PSNL0110
+		                                                       WHERE DPOB_CD = PS0110.DPOB_CD
+		                                                        AND SYSTEMKEY = PS0110.SYSTEMKEY 
+		                                                        AND DEPT_CD = PS0110.DEPT_CD
+		                                                        AND BUSIN_CD = PS0110.BUSIN_CD
+		                                                        AND EMYMT_DIV_CD = PS0110.EMYMT_DIV_CD
+		                                                        AND EMYMT_TYP_CD NOT IN ('A0420040', 'A0420990')
+		                                                        AND SUBSTR( EMYMT_END_DT , 0, 6) >= #pymtYrMnth#
+		                                                        AND SUBSTR( EMYMT_BGNN_DT, 0, 6) <  #pymtYrMnth#
+		                                                     )
+		                                                     
+				         GROUP BY PS0100.DPOB_CD
+				                , PS0100.SYSTEMKEY
+				                , PS0100.HAN_NM
+				                , PS0100.SX_DIV_CD
+				                , PS0111.HUS_ROAD_NM_FNDTN_ADDR
+				                , PS0111.HUS_ROAD_NM_DTL_PATR_ADDR
+				                , PS0100.RESN_REGN_NUM
+				                , PS0111.CELL_PHNE_NUM
+				                , PS0111.HUS_PHN_NUM
+				                , PS0100.CURR_DEPT_APPMT_DT 
+				                , PS0100.RETRY_DT    
+				                , PS0110.EMYMT_BGNN_DT
+				                , PS0110.EMYMT_END_DT             
+				                , PA0301.PYMT_TOT_AMNT  
+				                , PS0110.BUSIN_CD
+				                , PS0113.DABTY_DIV_CD
+				                , PS0113.DABTY_GRDE_CD
+				                , PS0113.DABTY_AJMT_DT
+				                , PS0100.YOOBH_MNTH_DAY  
+				                , PS0110.DEPT_CD
+				                , BA0500.BUSIN_REPBTY_EMP_NUM                                                        
+				                                                                              
+				)T
+				
+				ORDER BY T.DPOB_CD
+				            , ( SELECT LPAD(DEPT_RANK,5,'0')  
+				                 FROM BASS0400 DD
+				                WHERE DD.DEPT_CD = T.DEPT_CD
+				                    AND DD.DPOB_CD = T.DPOB_CD) ASC 
+				            , T.EMYMT_BGNN_DT
+				            , T.RESN_REGN_NUM
+				            , T.SYSTEMKEY DESC   		                                                     
+			
+			]]>
+	</select>
+
+
+
+
+
+
+
+</sqlMap>

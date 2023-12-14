@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Payr0900">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="payr0900SrhVO" type="com.app.exterms.payroll.server.vo.Payr0900SrhVO"/>
+	
+	<resultMap id="payr0900" class="com.app.exterms.payroll.server.vo.Payr0900VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="whdgTxIssNum" column="WHDG_TX_ISS_NUM" columnIndex="2"/>
+		<result property="whdgTxIssYr" column="WHDG_TX_ISS_YR" columnIndex="3"/>
+		<result property="certcIssDivCd" column="CERTC_ISS_DIV_CD" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="whdgTxIssDt" column="WHDG_TX_ISS_DT" columnIndex="6"/>
+		<result property="whdgTxIssNumCpis" column="WHDG_TX_ISS_NUM_CPIS" columnIndex="7"/>
+		<result property="whdgTxIssPrpseCtnt" column="WHDG_TX_ISS_PRPSE_CTNT" columnIndex="8"/>
+		<result property="whdgTxIssIstutNm" column="WHDG_TX_ISS_ISTUT_NM" columnIndex="9"/>
+		<result property="whdgTxIssAppyDt" column="WHDG_TX_ISS_APPY_DT" columnIndex="10"/>
+		<result property="whdgTxIssAppbnDt" column="WHDG_TX_ISS_APPBN_DT" columnIndex="11"/>
+		<result property="whdgTxIssCodTNDivCd" column="WHDG_TX_ISS_COD_T_N_DIV_CD" columnIndex="12"/>
+		<result property="whdgTxIssYn" column="WHDG_TX_ISS_YN" columnIndex="13"/>
+		<result property="whdgTxIssDelYn" column="WHDG_TX_ISS_DEL_YN" columnIndex="14"/>
+		<result property="kybdr" column="KYBDR" columnIndex="15"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="16"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="17"/>
+		<result property="ismt" column="ISMT" columnIndex="18"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="19"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="20"/>
+	</resultMap>
+	
+	<insert id="payr0900DAO.insertPayr0900_S">
+		<![CDATA[
+			INSERT INTO PAYR0900 
+				( DPOB_CD
+				  , WHDG_TX_ISS_NUM
+				  , WHDG_TX_ISS_YR
+				  , CERTC_ISS_DIV_CD
+				  , SYSTEMKEY
+				  , WHDG_TX_ISS_DT
+				  , WHDG_TX_ISS_NUM_CPIS
+				  , WHDG_TX_ISS_PRPSE_CTNT
+				  , WHDG_TX_ISS_ISTUT_NM
+				  , WHDG_TX_ISS_APPY_DT
+				  , WHDG_TX_ISS_APPBN_DT
+				  , WHDG_TX_ISS_COD_T_N_DIV_CD
+				  , WHDG_TX_ISS_YN
+				  , WHDG_TX_ISS_DEL_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #whdgTxIssNum#
+				  , #whdgTxIssYr#
+				  , #certcIssDivCd#
+				  , #systemkey#
+				  , #whdgTxIssDt#
+				  , #whdgTxIssNumCpis#
+				  , #whdgTxIssPrpseCtnt#
+				  , #whdgTxIssIstutNm#
+				  , #whdgTxIssAppyDt#
+				  , #whdgTxIssAppbnDt#
+				  , #whdgTxIssCodTNDivCd#
+				  , #whdgTxIssYn#
+				  , #whdgTxIssDelYn#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="payr0900DAO.updatePayr0900_S">
+		<![CDATA[
+			UPDATE PAYR0900
+			SET DPOB_CD=#dpobCd#
+				, WHDG_TX_ISS_NUM=#whdgTxIssNum#
+				, WHDG_TX_ISS_YR=#whdgTxIssYr#
+				, CERTC_ISS_DIV_CD=#certcIssDivCd#
+				, SYSTEMKEY=#systemkey#
+				, WHDG_TX_ISS_DT=#whdgTxIssDt#
+				, WHDG_TX_ISS_NUM_CPIS=#whdgTxIssNumCpis#
+				, WHDG_TX_ISS_PRPSE_CTNT=#whdgTxIssPrpseCtnt#
+				, WHDG_TX_ISS_ISTUT_NM=#whdgTxIssIstutNm#
+				, WHDG_TX_ISS_APPY_DT=#whdgTxIssAppyDt#
+				, WHDG_TX_ISS_APPBN_DT=#whdgTxIssAppbnDt#
+				, WHDG_TX_ISS_COD_T_N_DIV_CD=#whdgTxIssCodTNDivCd#
+				, WHDG_TX_ISS_YN=#whdgTxIssYn#
+				, WHDG_TX_ISS_DEL_YN=#whdgTxIssDelYn#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND WHDG_TX_ISS_NUM=#whdgTxIssNum#
+				]]>
+	</update>
+	
+	<delete id="payr0900DAO.deletePayr0900_S">
+		<![CDATA[
+			DELETE FROM PAYR0900 
+						WHERE DPOB_CD=#dpobCd#
+								AND WHDG_TX_ISS_NUM=#whdgTxIssNum#
+				]]>
+	</delete>
+	
+	<select id="payr0900DAO.selectPayr0900_S" resultMap="payr0900">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, WHDG_TX_ISS_NUM
+				, WHDG_TX_ISS_YR
+				, CERTC_ISS_DIV_CD
+				, SYSTEMKEY
+				, WHDG_TX_ISS_DT
+				, WHDG_TX_ISS_NUM_CPIS
+				, WHDG_TX_ISS_PRPSE_CTNT
+				, WHDG_TX_ISS_ISTUT_NM
+				, WHDG_TX_ISS_APPY_DT
+				, WHDG_TX_ISS_APPBN_DT
+				, WHDG_TX_ISS_COD_T_N_DIV_CD
+				, WHDG_TX_ISS_YN
+				, WHDG_TX_ISS_DEL_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0900
+						WHERE DPOB_CD=#dpobCd#
+								AND WHDG_TX_ISS_NUM=#whdgTxIssNum#
+				]]>
+	</select>
+	
+	<select id="payr0900DAO.selectPayr0900List_D" parameterClass="payr0900SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, WHDG_TX_ISS_NUM
+								, WHDG_TX_ISS_YR
+								, CERTC_ISS_DIV_CD
+								, SYSTEMKEY
+								, WHDG_TX_ISS_DT
+								, WHDG_TX_ISS_NUM_CPIS
+								, WHDG_TX_ISS_PRPSE_CTNT
+								, WHDG_TX_ISS_ISTUT_NM
+								, WHDG_TX_ISS_APPY_DT
+								, WHDG_TX_ISS_APPBN_DT
+								, WHDG_TX_ISS_COD_T_N_DIV_CD
+								, WHDG_TX_ISS_YN
+								, WHDG_TX_ISS_DEL_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PAYR0900
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					WHDG_TX_ISS_NUM LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, WHDG_TX_ISS_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="payr0900DAO.selectPayr0900ListTotCnt_S" parameterClass="payr0900SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0900
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				WHDG_TX_ISS_NUM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

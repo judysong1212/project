@@ -1,0 +1,2194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<!-- POM file generated with GWT webAppCreator -->
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.paygen.web</groupId>
+		<artifactId>paygen-web</artifactId>
+		<version>2.2.0</version>
+	</parent>
+	<artifactId>PayGenApp</artifactId>
+	<packaging>war</packaging>
+	<name>PayGenApp</name>
+ 
+<!-- sub profile definition -->
+    <profiles>  
+        <profile>
+           <id>yongin</id>
+          <!-- <properties>
+               <environment>yongin</environment>
+               <pkgname>yongin</pkgname>
+               <dlgnname>YongIn</dlgnname>
+               <draftcomp>false</draftcomp> 
+                <distenv>prod</distenv> 
+           </properties> -->
+            <dependencies> 
+	                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				  <!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yongin</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> -->  
+					<!-- ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile>
+       <profile>
+           <id>geoje</id> 
+           <dependencies>
+				     <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-geoje</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency>  
+					 ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile>
+       <profile>
+           <id>gimhae</id> 
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+					<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>		  
+					</dependency>  
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile>
+       <profile>
+           <id>samcheok</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-samcheok</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile>
+       <profile>
+           <id>suwon</id>
+           <dependencies> 
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-suwon</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+       </profile> 
+          <profile>
+           <id>anyang</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-anyang</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+         <profile>
+           <id>ulju</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-ulju</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+        <profile>
+           <id>gm</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-gwangmyeong</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+          <profile>
+           <id>goseong</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency> 
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>    
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-goseong</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+          <profile>
+           <id>ulsannamgu</id>
+            <dependencies>
+                 <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-ulsannamgu</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+       </profile> 
+          <profile>
+           <id>usc</id>
+          <dependencies>
+               <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-usc</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+        <profile>
+           <id>gimcheon</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-gimcheon</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+        <profile>
+               <id>suncheon</id>
+               <dependencies>
+                    <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-suncheon</artifactId>
+					  	<version>${paygen.version}</version>	 	  
+					</dependency>  
+				 ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+          <profile>
+               <id>yangju</id>
+               <dependencies>
+                    <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+			<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangju</artifactId>
+					  	<version>${paygen.version}</version>	 		  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+          <profile>
+               <id>anseong</id>
+               <dependencies>
+                    <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-anseong</artifactId>
+					  	<version>${paygen.version}</version>	 					  
+					</dependency>  
+				 ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile> 
+         <profile>
+               <id>goesan</id>
+               <dependencies>
+                    <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-goesan</artifactId>
+					  	<version>${paygen.version}</version>	 					  
+					</dependency>  
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+         <profile>
+               <id>geochang</id>
+               <dependencies>
+                    <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-geochang</artifactId>
+					  	<version>${paygen.version}</version>	 		  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile> 
+         <profile>
+               <id>hygn</id>
+               <dependencies>
+                    <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+			<!-- 	 <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-hygn</artifactId>
+					  	<version>${paygen.version}</version>	 		  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>  
+        </profile>
+        <profile>
+               <id>andong</id>
+               <dependencies>
+                    <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+			<!-- 	 <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-andong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6.5</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+        <profile>
+               <id>jinan</id>
+               <dependencies>
+                    <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+			<!-- 	 <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-jinan</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency>  
+			</dependencies> 
+        </profile>
+        <!-- 양평  -->
+        <profile>
+			<id>yangpyeong</id>
+			<dependencies>
+			     <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+		 <!-- 제주  -->
+        <profile>
+			<id>jeju</id>
+			<dependencies>
+			     <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+		 <!-- 무주  -->
+        <profile>
+			<id>muju</id>
+			<dependencies>
+			     <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+		 <!-- 옥천  -->
+        <profile>
+			<id>okcheon</id>
+			<dependencies>
+			     <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+		 <!-- 전남  -->
+        <profile>
+			<id>jeonnam</id>
+			<dependencies>
+			     <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+		 <!-- 밀양  -->
+        <profile>
+			<id>miryang</id>
+			<dependencies>
+			     <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+    <!-- 개발을 위해 프로파일 변경 추가  -->
+    <profile>
+               <id>local</id>
+               <!-- 프로젝트 코어 등 추가 jar -->
+			<dependencies> 
+			     <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+				<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>		 	  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+	 <profile>
+               <id>dev</id>
+               <dependencies>
+                    <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+					<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>		 	  
+					</dependency>  
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+ <profile>
+           <id>yongindev</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yongin</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency>  
+				 ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>   
+       </profile>
+       <profile>
+           <id>geojedev</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					<!--	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-geoje</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency>  
+				 ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency>   
+			</dependencies> 
+       </profile>
+       <profile>
+           <id>gimhaedev</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+				<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>		  
+					</dependency>
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency>   
+			</dependencies>  
+					<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation> 
+       </profile>
+       <profile>
+           <id>samcheokdev</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+			<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-samcheok</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile>
+       <profile>
+           <id>suwondev</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-suwon</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+          <profile>
+           <id>anyangdev</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>
+	             <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					  	<scope>provided</scope>	  
+					</dependency>  
+					<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-anyang</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+         <profile>
+           <id>uljudev</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-ulju</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+        <profile>
+           <id>gmdev</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency> 
+	              <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-gwangmyeong</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+          <profile>
+           <id>goseongdev</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+			<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-goseong</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+          <profile>
+           <id>ulsannamgudev</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-ulsannamgu</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+          <profile>
+           <id>uscdev</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+			<!-- 	<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-usc</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+        <profile>
+           <id>gimcheondev</id>
+           <dependencies>
+                <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+					<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+						<artifactId>smrmf-pkg-gimcheon</artifactId>
+					  	<version>${paygen.version}</version> 
+					</dependency> 
+				ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+       </profile> 
+        <profile>
+               <id>suncheondev</id>
+               <dependencies>
+                    <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-suncheon</artifactId>
+					  	<version>${paygen.version}</version>	 	  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+          <profile>
+               <id>yangjudev</id>
+               <dependencies>
+                    <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangju</artifactId>
+					  	<version>${paygen.version}</version>	 		  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+          <profile>
+               <id>anseongdev</id>
+               <dependencies>
+                    <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-anseong</artifactId>
+					  	<version>${paygen.version}</version>	 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile> 
+           <profile>
+               <id>goesandev</id>
+               <dependencies>
+                    <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>     
+				<!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-goesan</artifactId>
+					  	<version>${paygen.version}</version>	 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile> 
+         <profile>
+               <id>geochangdev</id>
+               <dependencies>
+                    <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-geochang</artifactId>
+					  	<version>${paygen.version}</version>	 		  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>   
+        </profile> 
+         <profile>
+               <id>hygndev</id>
+              <dependencies>
+                   <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-hygn</artifactId>
+					  	<version>${paygen.version}</version>	 		  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>   
+        </profile>
+        <profile>
+               <id>andongdev</id>
+               <dependencies>
+                    <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				 <!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-andong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency> 
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency>  
+			</dependencies> 
+        </profile>
+        <profile>
+               <id>jinandev</id>
+               <dependencies>
+                    <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency> 
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>    
+				 <!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-jinan</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+        <profile>
+               <id>yangpyeongdev</id>
+               <dependencies>
+                    <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				 <!-- <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.1c low -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies>
+        </profile>
+        	 <!-- 제주  -->
+        <profile>
+			<id>jejudev</id>
+			<dependencies>
+			     <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+		 <!-- 무주  -->
+        <profile>
+			<id>mujudev</id>
+			<dependencies>
+			     <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+		 <!-- 옥천  -->
+        <profile>
+			<id>okcheondev</id>
+			<dependencies>
+			     <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile> 
+		 <!-- 전남  -->
+        <profile>
+			<id>jeonnamdev</id>
+			<dependencies>
+			     <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency>  
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>   
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile>
+		 <!-- 밀양  -->
+        <profile>
+			<id>miryangdev</id>
+			<dependencies>
+			     <!-- sub dlgn  -->
+	           <dependency>
+					<groupId>com.paygen.${environment}.dlgn</groupId>
+					<artifactId>paygen-${environment}-dlgn</artifactId>
+					<version>${paygen.version}</version>
+				</dependency> 
+			    <dependency>
+				  <groupId>com.app.smrmf.pkg</groupId>
+	 			  <artifactId>smrmf-pkg-${environment}</artifactId>
+				  <version>${paygen.version}</version> 
+	           </dependency> 
+	                <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-gimhae</artifactId>
+					  	<version>${paygen.version}</version>	
+					    <scope>provided</scope> 	  
+					</dependency>    
+				<!--  <dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-yangpyeong</artifactId>
+					  	<version>${paygen.version}</version> 					  
+					</dependency>  
+					ORACLE JDBC driver, need install yourself  oracle 12.2c high -->
+					 <dependency>
+						<groupId>ojdbc</groupId>
+						<artifactId>ojdbc</artifactId>
+						<version>1.6</version> 
+					</dependency> 
+			</dependencies> 
+		</profile>  
+        <!--  개발을 위해 프로파일 변경 추가 -->
+  </profiles> 	
+	  
+	  
+	<dependencies>
+		<!-- gwtUpload inc -->
+		<dependency>
+			<groupId>com.googlecode.gwtupload</groupId>
+			<artifactId>gwtupload</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.googlecode.gwtupload/jsupload 
+			<dependency> 
+				<groupId>com.googlecode.gwtupload</groupId> 
+				<artifactId>jsupload</artifactId> 
+				<version>1.0.1</version> 
+			</dependency> 
+			<dependency> 
+				<groupId>gwtchismes</groupId> 
+				<artifactId>gwtchismes</artifactId> 
+				<version>0.9.7</version> 
+				<scope>system</scope> 
+				<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/gwtchismes-0.9.7.jar</systemPath> 
+			</dependency> 
+			<dependency> 
+				<groupId>org.timepedia.exporter</groupId> 
+				<artifactId>gwtexporter</artifactId> 
+				<version>2.4.0-M1</version> 
+			</dependency> 
+			<dependency> 
+				<groupId>com.google.gwt</groupId> 
+				<artifactId>gwt-incubator</artifactId> 
+				<version>20101117-r1766</version> 
+				<scope>system</scope> 
+				<systemPath>${basedir}/src/main/webapp/WEB-INF/lib/gwt-incubator-20101117-r1766.jar</systemPath> 
+			</dependency> -->
+
+
+		<!-- gwtUpload inc -->
+		<!-- <scope>test</scope> <dependency> <groupId>org.springmodules</groupId> 
+			<artifactId>spring-modules-validation</artifactId> <version>0.9</version> 
+			<scope>system</scope> <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/spring-modules-validation-0.9.jar</systemPath> 
+			</dependency> -->
+		<!-- <dependency> <groupId>gwt-calendar</groupId> <artifactId>gwt-calendar-1.0.1</artifactId> 
+			<version>1.0.1</version> <scope>system</scope> <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/gwt-calendar.jar</systemPath> 
+			</dependency> -->
+		<!-- <dependency> <groupId>com.app.exterms</groupId> <artifactId>ExTerms_Ex</artifactId> 
+			<version>1.0.0</version> <scope>system</scope> <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ExTerms_Ex.jar</systemPath> 
+			</dependency> -->
+
+		<dependency>
+			<groupId>net.zschech</groupId>
+			<artifactId>gwt-java-math</artifactId>
+			<version>1.0.9</version>
+		</dependency>
+		<!-- 프로젝트 코어 등 추가 jar -->
+
+		<!-- <dependency> <groupId>com.paygen.commons</groupId> <artifactId>paygen-commons</artifactId> 
+			<version>${paygen.version}</version> </dependency> <dependency> <groupId>com.paygen.infc</groupId> 
+			<artifactId>paygen-infc</artifactId> <version>${paygen.version}</version> 
+			</dependency> -->
+
+		<!-- <dependency> <groupId>com.paygen.proc</groupId> <artifactId>paygen-proc</artifactId> 
+			<version>${paygen.version}</version> </dependency> -->
+		
+		  <dependency>
+			 <groupId>smrmf.webcore</groupId>
+ 			 <artifactId>smrmf-webcore</artifactId>
+			<version>1.0.0</version> 
+		</dependency>
+		
+		<dependency>
+			<groupId>com.paygen.prgm</groupId>
+			<artifactId>paygen-prgm</artifactId>
+			<version>${paygen.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.paygen.payr</groupId>
+			<artifactId>paygen-payr</artifactId>
+			<version>${paygen.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.paygen.bugt</groupId>
+			<artifactId>paygen-bugt</artifactId>
+			<version>${paygen.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.paygen.dlgn</groupId>
+			<artifactId>paygen-dlgn</artifactId>
+			<version>${paygen.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.paygen.bass</groupId>
+			<artifactId>paygen-bass</artifactId>
+			<version>${paygen.version}</version>
+		</dependency>
+	 
+		<dependency>
+			<groupId>com.paygen.resm</groupId>
+			<artifactId>paygen-resm</artifactId>
+			<version>${paygen.version}</version>
+		</dependency>
+		 
+		<dependency>
+			<groupId>com.paygen.psnl</groupId>
+			<artifactId>paygen-psnl</artifactId>
+			<version>${paygen.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.paygen.insr</groupId>
+			<artifactId>paygen-insr</artifactId>
+			<version>${paygen.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.paygen.remt</groupId>
+			<artifactId>paygen-remt</artifactId>
+			<version>${paygen.version}</version>
+		</dependency>
+		<!-- <dependency> <groupId>com.paygen.sche</groupId> <artifactId>paygen-sche</artifactId> 
+			<version>${paygen.version}</version> </dependency> -->
+		<!-- <dependency> <groupId>com.paygen.yetaprc2015</groupId> <artifactId>paygen-yetaprc2015</artifactId> 
+			<version>${paygen.version}</version> </dependency> -->
+		<dependency>
+			<groupId>com.paygen.yeta</groupId>
+			<artifactId>paygen-yeta</artifactId>
+			<version>${paygen.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.paygen.mncpts</groupId>
+			<artifactId>paygen-mncpts</artifactId>
+			<version>${paygen.version}</version>
+			<type>war</type>
+		</dependency>
+     
+		<dependency>
+			<groupId>com.paygen.stts</groupId>
+			<artifactId>paygen-stts</artifactId>
+			<version>${paygen.version}</version>
+		</dependency>
+        
+	</dependencies>
+
+	<build>
+		<!-- <defaultGoal>install</defaultGoal> -->
+		<directory>${project.basedir}/target</directory><!-- target -->
+		<!-- <finalName>${project.artifactId}-${project.version}</finalName> Generate 
+			compiled stuff in the folder used for developing mode ${webappDirectory} -->
+		<outputDirectory>${project.basedir}/target/classes</outputDirectory>
+		<!--<resources> <resource> <directory>${basedir}/src/main/mncpts/${environment}</directory> 
+			</resource> <resource> <directory>src/main/java</directory> <includes> <include>**/client/**/*.*</include> 
+			<include>**/shared/**/*.*</include> <include>**/*.gwt.xml</include> </includes> 
+			</resource> </resources> <testResources> <testResource> <directory>src/test/resources/${environment}</directory> 
+			</testResource> </testResources> <resources> <resource> <directory>src/main/resources/${environment}</directory> 
+			</resource> </resources> <testResources> <testResource> <directory>src/test/resources/${environment}</directory> 
+			</testResource> </testResources> -->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<phase>clean</phase>
+					</execution>
+				</executions>
+				<configuration>
+			   	    <failOnError>false</failOnError>
+					<filesets>
+						<fileset>
+							<directory>war</directory>
+							<!-- <includes> <include>*</include> </includes> -->
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin> 
+			<!-- GWT Maven Plugin -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>2.7.0</version>
+				<executions>
+					<execution>
+				   <!--    <phase>compile</phase>  -->   
+						  <goals>  
+							<goal>compile</goal>  
+						    <goal>test</goal>
+					   <!--    <goal>i18n</goal>  
+						  <goal>generateAsync</goal>   --> 
+						</goals>  
+					</execution>
+				</executions>  
+				<configuration> 
+			  <!--   <arguments>
+                    <argument>-classpath</argument>
+                   <classpath>${basedir}/${lib.dir}/</classpath>                          
+                </arguments> 
+					  <gwtSdkFirstInClasspath>true</gwtSdkFirstInClasspath>   -->
+				    <localWorkers>4</localWorkers>
+				    <logLevel>INFO</logLevel>
+				      <!-- <extraJvmArgs>-Xms512m -Xmx3072m -XX:PermSize=512M -XX:MaxPermSize=2048m -Xss512k -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+				      </extraJvmArgs> -->
+				      <extraJvmArgs>-Xms1024m -Xmx3072m -XX:PermSize=1024M -XX:MaxPermSize=2048m -Xss1024k -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+				      </extraJvmArgs>
+				      <!-- <extraJvmArgs>-Xmx896M -Xms896m -XX:PermSize=64m -XX:MaxPermSize=128m</extraJvmArgs> -->
+				    <!-- -Xms1024m -Xmx3072m -XX:PermSize=1024M -XX:MaxPermSize=2048m -Xss1024k -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+				    -noverify  -agentpath:C:\eGovFrameDev-2.7.0-64bit\jrebel\lib\jrebel64.dll   
+				      <extraJvmArgs>${jrebel.java.opts}</extraJvmArgs> -->
+<!-- 				      -server -Xms4G -Xmx4G -XX:PermSize=512m -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:ParallelGCThreads=20 -XX:ConcGCThreads=5 -XX:InitiatingHeapOccupancyPercent=70 -->
+				    <optimize>9</optimize> 
+				    <!---    <enableClosureCompiler>true</enableClosureCompiler> 
+				    <useexternalfile>yes</useexternalfile>  
+				    Dgwt.jjs.permutationWorkerFactory=com.google.gwt.dev.ThreadedPermutationWorkerFactory--> 
+				    <!--  gwt빠른컴파일시 적용    -DlocalRepositoryPath=repo --> 
+				    <draftCompile>${draftcomp}</draftCompile>  
+				    <minmemory>4G</minmemory>
+					<maxmemory>4G</maxmemory>  
+					<webappDirectory>${basedir}/war</webappDirectory>
+					<!-- gwt 컴파일 로그레벨적용시 사용  
+					<logLevel>DEBUG</logLevel>  --> 
+					<hostedWebapp>${webappDirectory}</hostedWebapp>
+					<!-- <gen>N:/workPayGen/.generated</gen> 
+				    <generateDirectory>N:\generate-gwt\generated-sources\gwt</generateDirectory>  -->  
+				    <!--  <gen>N:/generate-gwt/generated-sources/gwt</gen>
+				    <workDir>N:/generate-gwt/generated-sources/gwt</workDir> -->
+					<!-- Compile report is not typically needed either, saves hunreds of mb disk 
+					MAVEN_OPTS=-agentpath:C:/eGovFrameDev-2.7.0-64bit/jrebel/lib/jrebel64.dll  -Xms3072M -Xmx3072M 
+					-XX:PermSize=2048M  -XX:MaxPermSize=3071m -Xss2048k -Drebel.log=trace 
+					-agentpath:C:/eGovFrameDev-2.7.0-64bit/jrebel/lib/jrebel64.dll   -->
+                    <compileReport>false</compileReport>
+                    <noServer>true</noServer> 
+                 <!--     <userAgents>ie8</userAgents>  
+                    <userAgents>ie9</userAgents>
+                    <userAgents>ie10</userAgents>   
+                    <userAgents>ie11</userAgents>
+                  <userAgents>gecko1_8</userAgents> -->
+                      <!--  <userAgents>gecko1_9</userAgents>
+       			     <userAgents>chrome</userAgents> -->
+                 <!--   <userAgents>safari</userAgents>  -->
+                     <!-- <userAgents>opera</userAgents>
+                    <style>OBF</style>
+                    <strict>true</strict>      -->
+                    <!--  <compileSourcesArtifacts>
+                    <compileSourcesArtifact>com.app.smrmf.pkg:smrmf-pkg-package</compileSourcesArtifact>
+                    </compileSourcesArtifacts> --> 
+				</configuration>
+				<!-- Plugin configuration. There are many available options, see gwt-maven-plugin 
+					documentation at codehaus.org -->
+				<!-- <configuration>
+					<runTarget>PayGenApp.html</runTarget> 
+					<i18nMessagesBundle>de.chieukam.tutorial.client.Messages</i18nMessagesBundle> 
+				</configuration> -->
+			</plugin> 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				 <version>3.0</version>  
+				    <configuration>
+				        <source>1.6</source>
+                        <target>1.6</target>
+                        <encoding>UTF-8</encoding>  
+					    <logLevel>INFO</logLevel>
+					    <fork>true</fork> 
+					    <extraJvmArgs>-Xms1024m -Xmx3072m -XX:PermSize=1024M -XX:MaxPermSize=2048m -Xss1024k  -XX:+TieredCompilation -XX:TieredStopAtLevel=1</extraJvmArgs>
+				      <!--  -Xms1024m -Xmx3072m -XX:PermSize=1024M -XX:MaxPermSize=2048m -Xss1024k  -XX:+TieredCompilation -XX:TieredStopAtLevel=1 <minmemory>2048m</minmemory>    
+					    <maxmemory>3072m</maxmemory> --> 
+<!-- 					    -server -Xms4G -Xmx4G -XX:PermSize=512m -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:ParallelGCThreads=20 -XX:ConcGCThreads=5 -XX:InitiatingHeapOccupancyPercent=70</extraJvmArgs> -->
+ 					  <!--   
+					        <useexternalfile>yes</useexternalfile> 
+					      <arguments>
+			                <argument>-classpath</argument>
+			                <classpath/> 
+			            </arguments> 
+				     <compilerArgument>-Xlint:all</compilerArgument>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation> --> 
+					 <executions>
+						<execution>
+						      <phase>compile</phase>   
+							  <!--  <goals>  
+							   <goal>compile</goal> 
+							     <goal>test</goal>
+						  		  <goal>i18n</goal>
+								 <goal>generateAsync</goal> 
+							</goals>  -->
+						</execution>
+					</executions>
+				</configuration>
+			</plugin>   
+			
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-resources-plugin</artifactId> 
+				<version>2.6</version> <executions> <execution> <id>copy-resources01</id> 
+				<phase>process-classes</phase> <goals> <goal>copy-resources</goal> </goals> 
+				<configuration> <overwrite>true</overwrite> <outputDirectory>${project.basedir}/war</outputDirectory> 
+				<encoding>UTF-8</encoding> <resources> <resource> <directory>${basedir}/src/main/mncpts/${environment}</directory> 
+				<includes> <include>**/*.properties</include> </includes> </resource> </resources> 
+				</configuration> </execution> </executions> </plugin> <plugin> <artifactId>maven-dependency-plugin</artifactId> 
+				<executions> <execution> <phase>install</phase> <goals> <goal>copy-dependencies</goal> 
+				</goals> <configuration> <outputDirectory>${project.build.directory}/lib</outputDirectory> 
+				</configuration> </execution> </executions> </plugin> -->
+			<!-- Copy static web files before executing gwt:run -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<!-- <goals> 
+  							<goal>exploded</goal> 
+  						</goals>  -->
+					</execution>
+				</executions>
+				<configuration>
+					<warSourceDirectory>${basedir}/src/main/webapp</warSourceDirectory>
+					<webResources>
+						<webResource>
+							<directory>${basedir}/src/main/mncpts/${environment}</directory>
+						</webResource>
+					</webResources>
+					<!-- <warSourceDirectory>war</warSourceDirectory> -->
+					<webappDirectory>${project.basedir}/war</webappDirectory>
+					<outputDirectory>${project.basedir}/target</outputDirectory>
+					<!-- <archive> <manifest> <addClasspath>true</addClasspath> <classpathPrefix>lib/</classpathPrefix> 
+						</manifest> </archive> -->
+				</configuration>
+			</plugin>
+	<!-- 		  <plugin> 
+          			<groupId>org.mortbay.jetty</groupId> 
+         			 <artifactId>jetty-maven-plugin</artifactId> 
+          			<version>${jetty.version}</version> 
+          	    <executions>
+					<execution> 
+						 <goals>
+					        <goal>compile</goal>
+					      </goals> 
+						<phase>run</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<webResources>
+						<webResource>
+							<directory>${basedir}/src/main/mncpts/${environment}</directory>
+						</webResource>
+					</webResources>
+					<warSourceDirectory>${basedir}/src/main/webapp</warSourceDirectory> 
+					<webappDirectory>${project.basedir}/war</webappDirectory>
+					<outputDirectory>${project.basedir}/target</outputDirectory> 
+				</configuration>
+          </plugin>
+          <plugin> 
+			<groupId>org.codehaus.mojo</groupId> 
+ 				<artifactId>build-helper-maven-plugin</artifactId> 
+ 				 <version>1.9.1</version>  
+ 				<executions> 
+ 					<execution>  
+ 						<phase>process-sources</phase> 
+ 						<configuration> 
+ 							<sources> 
+								<source>${project.build.directory}/generated-sources/gwt</source> 
+ 							</sources> 
+ 						</configuration> 
+ 						<goals> 
+ 							<goal>add-source</goal> 
+ 						</goals> 
+ 					</execution> 
+ 				</executions> 
+ 			</plugin>   -->
+           <plugin>
+		    <groupId>com.atlassian.maven.plugins</groupId>
+		    <artifactId>maven-upload-plugin</artifactId>
+		    <version>1.1</version>
+		    <configuration>
+		       <resourceSrc>war</resourceSrc>
+		       <resourceDest>C:/eGovFrameDev-2.7.0-64bit/jboss-as-7.1.1.Final/standalone/deployments/PayGenApp.war</resourceDest> 
+		     </configuration>
+		  </plugin> 
+           <plugin>
+                     <groupId>org.jboss.as.plugins</groupId>
+                     <artifactId>jboss-as-maven-plugin</artifactId>
+                     <version>7.3.Final</version> 
+          </plugin> 
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> 
+				<executions> <execution> <id>copy-dependencies</id> <phase>package</phase> 
+				<goals> <goal>copy-dependencies</goal> </goals> <configuration> <outputDirectory> 
+				${project.build.directory}/lib </outputDirectory> <overWriteReleases>false</overWriteReleases> 
+				<overWriteSnapshots>false</overWriteSnapshots> <overWriteIfNewer>true</overWriteIfNewer> 
+				</configuration> </execution> </executions> </plugin> -->
+		</plugins>  
+	</build>
+</project>

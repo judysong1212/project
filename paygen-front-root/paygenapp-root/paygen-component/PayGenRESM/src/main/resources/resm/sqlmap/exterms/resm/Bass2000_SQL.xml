@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass2000">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass2000SerarchVO" type="com.app.exterms.resm.server.vo.Bass2000SrhVO"/>
+	
+	<resultMap id="bass2000" class="com.app.exterms.resm.server.vo.Bass2000VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="workBusinNum" column="WORK_BUSIN_NUM" columnIndex="2"/>
+		<result property="workBusinCretnYr" column="WORK_BUSIN_CRETN_YR" columnIndex="3"/>
+		<result property="workBusinDivCd" column="WORK_BUSIN_DIV_CD" columnIndex="4"/>
+		<result property="workBusinStgeDivCd" column="WORK_BUSIN_STGE_DIV_CD" columnIndex="5"/>
+		<result property="workBusinBgnnDt" column="WORK_BUSIN_BGNN_DT" columnIndex="6"/>
+		<result property="workBusinEndDt" column="WORK_BUSIN_END_DT" columnIndex="7"/>
+		<result property="workBusinUseYn" column="WORK_BUSIN_USE_YN" columnIndex="8"/>
+		<result property="workBusinCtnt" column="WORK_BUSIN_CTNT" columnIndex="9"/>
+		<result property="kybdr" column="KYBDR" columnIndex="10"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="11"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="12"/>
+		<result property="ismt" column="ISMT" columnIndex="13"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="14"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="15"/>
+	</resultMap>
+	
+	<insert id="bass2000DAO.insertBass2000_S">
+		<![CDATA[
+			INSERT INTO BASS2000 
+				( DPOB_CD
+				  , WORK_BUSIN_NUM
+				  , WORK_BUSIN_CRETN_YR
+				  , WORK_BUSIN_DIV_CD
+				  , WORK_BUSIN_STGE_DIV_CD
+				  , WORK_BUSIN_BGNN_DT
+				  , WORK_BUSIN_END_DT
+				  , WORK_BUSIN_USE_YN
+				  , WORK_BUSIN_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #workBusinNum#
+				  , #workBusinCretnYr#
+				  , #workBusinDivCd#
+				  , #workBusinStgeDivCd#
+				  , #workBusinBgnnDt#
+				  , #workBusinEndDt#
+				  , #workBusinUseYn#
+				  , #workBusinCtnt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass2000DAO.updateBass2000_S">
+		<![CDATA[
+			UPDATE BASS2000
+			SET DPOB_CD=#dpobCd#
+				, WORK_BUSIN_NUM=#workBusinNum#
+				, WORK_BUSIN_CRETN_YR=#workBusinCretnYr#
+				, WORK_BUSIN_DIV_CD=#workBusinDivCd#
+				, WORK_BUSIN_STGE_DIV_CD=#workBusinStgeDivCd#
+				, WORK_BUSIN_BGNN_DT=#workBusinBgnnDt#
+				, WORK_BUSIN_END_DT=#workBusinEndDt#
+				, WORK_BUSIN_USE_YN=#workBusinUseYn#
+				, WORK_BUSIN_CTNT=#workBusinCtnt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND WORK_BUSIN_NUM=#workBusinNum#
+				]]>
+	</update>
+	
+	<delete id="bass2000DAO.deleteBass2000_S">
+		<![CDATA[
+			DELETE FROM BASS2000 
+						WHERE DPOB_CD=#dpobCd#
+								AND WORK_BUSIN_NUM=#workBusinNum#
+				]]>
+	</delete>
+	
+	<select id="bass2000DAO.selectBass2000_S" resultMap="bass2000">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, WORK_BUSIN_NUM
+				, WORK_BUSIN_CRETN_YR
+				, WORK_BUSIN_DIV_CD
+				, WORK_BUSIN_STGE_DIV_CD
+				, WORK_BUSIN_BGNN_DT
+				, WORK_BUSIN_END_DT
+				, WORK_BUSIN_USE_YN
+				, WORK_BUSIN_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS2000
+						WHERE DPOB_CD=#dpobCd#
+								AND WORK_BUSIN_NUM=#workBusinNum#
+				]]>
+	</select>
+	
+	<select id="bass2000DAO.selectBass2000List_D" parameterClass="bass2000SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, WORK_BUSIN_NUM
+								, WORK_BUSIN_CRETN_YR
+								, WORK_BUSIN_DIV_CD
+								, WORK_BUSIN_STGE_DIV_CD
+								, WORK_BUSIN_BGNN_DT
+								, WORK_BUSIN_END_DT
+								, WORK_BUSIN_USE_YN
+								, WORK_BUSIN_CTNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS2000
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					WORK_BUSIN_NUM LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, WORK_BUSIN_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass2000DAO.selectBass2000ListTotCnt_S" parameterClass="bass2000SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS2000
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				WORK_BUSIN_NUM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

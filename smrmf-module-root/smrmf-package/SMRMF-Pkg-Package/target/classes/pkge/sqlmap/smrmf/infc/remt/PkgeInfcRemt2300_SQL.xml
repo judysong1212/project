@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcRemt2300">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgRemt2300SerarchVO" type="com.app.smrmf.infc.retirement.server.vo.InfcPkgRemt2300SrhVO"/>
+	
+	<resultMap id="infcPkgRemt2300" class="com.app.smrmf.infc.retirement.server.vo.InfcPkgRemt2300VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="calcSevePayPsnDivCd" column="CALC_SEVE_PAY_PSN_DIV_CD" columnIndex="2"/>
+		<result property="clutYrMnth" column="CLUT_YR_MNTH" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="payItemCd" column="PAY_ITEM_CD" columnIndex="5"/>
+		<result property="pymtDducDivCd" column="PYMT_DDUC_DIV_CD" columnIndex="6"/>
+		<result property="pymtSum" column="PYMT_SUM" columnIndex="7"/>
+		<result property="kybdr" column="KYBDR" columnIndex="8"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="9"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="10"/>
+		<result property="ismt" column="ISMT" columnIndex="11"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="12"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="13"/>
+	</resultMap>
+	
+	<insert id="infcPkgRemt2300DAO.insertRemt2300_S">
+		<![CDATA[
+			INSERT INTO REMT2300 
+				( DPOB_CD
+				  , CALC_SEVE_PAY_PSN_DIV_CD
+				  , CLUT_YR_MNTH
+				  , SYSTEMKEY
+				  , PAY_ITEM_CD
+				  , PYMT_DDUC_DIV_CD
+				  , PYMT_SUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #calcSevePayPsnDivCd#
+				  , #clutYrMnth#
+				  , #systemkey#
+				  , #payItemCd#
+				  , #pymtDducDivCd#
+				  , #pymtSum#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgRemt2300DAO.updateRemt2300_S">
+		<![CDATA[
+			UPDATE REMT2300
+			SET DPOB_CD=#dpobCd#
+				, CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+				, CLUT_YR_MNTH=#clutYrMnth#
+				, SYSTEMKEY=#systemkey#
+				, PAY_ITEM_CD=#payItemCd#
+				, PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+				, PYMT_SUM=#pymtSum# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+								AND CLUT_YR_MNTH=#clutYrMnth#
+								AND SYSTEMKEY=#systemkey#
+								AND PAY_ITEM_CD=#payItemCd#
+				]]>
+	</update>
+	
+	
+	<update id="infcPkgRemt2300DAO.updateRemt3100ToRemt2300Data_S">
+		<![CDATA[
+        UPDATE REMT2000
+            SET   SEVE_PAY_PYMT_DDUC_SUM= NVL((
+                                                SELECT  
+                                                      NVL(SUM(PYMT_SUM),0) 
+                                                FROM  REMT2300 
+                                                WHERE  REMT2300.DPOB_CD = REMT2000.DPOB_CD
+                                                  AND REMT2300.CALC_SEVE_PAY_PSN_DIV_CD = REMT2000.CALC_SEVE_PAY_PSN_DIV_CD
+                                                  AND REMT2300.CLUT_YR_MNTH  = REMT2000.CLUT_YR_MNTH
+                                                  AND REMT2300.SYSTEMKEY   = REMT2000.SYSTEMKEY
+                                                  AND PYMT_DDUC_DIV_CD = 'B0080030'
+                                           ),SEVE_PAY_PYMT_DDUC_SUM)
+                , SEVE_PAY_TURTY_PYMT_SUM= NVL((
+                                           REMT2000.SEVE_PAY_PYMT_SUM - 
+                                                 NVL((
+                                                        SELECT  
+                                                              NVL(SUM(PYMT_SUM),0) 
+                                                        FROM  REMT2300 
+                                                        WHERE  REMT2300.DPOB_CD = REMT2000.DPOB_CD
+                                                          AND REMT2300.CALC_SEVE_PAY_PSN_DIV_CD = REMT2000.CALC_SEVE_PAY_PSN_DIV_CD
+                                                          AND REMT2300.CLUT_YR_MNTH  = REMT2000.CLUT_YR_MNTH
+                                                          AND REMT2300.SYSTEMKEY   = REMT2000.SYSTEMKEY
+                                                          AND PYMT_DDUC_DIV_CD = 'B0080030'
+                                                   ),SEVE_PAY_PYMT_DDUC_SUM)
+                                            ),SEVE_PAY_TURTY_PYMT_SUM)
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr# 
+			WHERE DPOB_CD=#dpobCd#
+					AND SYSTEMKEY=#systemkey#
+					AND CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+					AND CLUT_YR_MNTH=#clutYrMnth#
+				]]>
+	</update>
+	 
+	
+	<delete id="infcPkgRemt2300DAO.deleteRemt2300_S">
+		<![CDATA[
+			DELETE FROM REMT2300 
+						WHERE DPOB_CD=#dpobCd#
+								AND CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+								AND CLUT_YR_MNTH=#clutYrMnth#
+								AND SYSTEMKEY=#systemkey#
+								AND PAY_ITEM_CD=#payItemCd#
+				]]>
+	</delete>
+	
+	<select id="infcPkgRemt2300DAO.selectRemt2300_S" resultMap="infcPkgRemt2300">
+		<![CDATA[
+		SELECT
+				DPOB_CD
+				, CALC_SEVE_PAY_PSN_DIV_CD
+				, CLUT_YR_MNTH
+				, SYSTEMKEY
+				, PAY_ITEM_CD
+				, PYMT_DDUC_DIV_CD
+				, PYMT_SUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM REMT2300
+						WHERE DPOB_CD=#dpobCd#
+								AND CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+								AND CLUT_YR_MNTH=#clutYrMnth#
+								AND SYSTEMKEY=#systemkey#
+								AND PAY_ITEM_CD=#payItemCd#
+				]]>
+	</select>
+	
+	<select id="infcPkgRemt2300DAO.selectRemt2300List_D" parameterClass="infcPkgRemt2300SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, CALC_SEVE_PAY_PSN_DIV_CD
+								, CLUT_YR_MNTH
+								, SYSTEMKEY
+								, PAY_ITEM_CD
+								, PYMT_DDUC_DIV_CD
+								, PYMT_SUM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM REMT2300
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					CALC_SEVE_PAY_PSN_DIV_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, CALC_SEVE_PAY_PSN_DIV_CD DESC
+							, CLUT_YR_MNTH DESC
+							, SYSTEMKEY DESC
+							, PAY_ITEM_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgRemt2300DAO.selectRemt2300ListTotCnt_S" parameterClass="infcPkgRemt2300SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM REMT2300
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				CALC_SEVE_PAY_PSN_DIV_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+	
+	<!-- 퇴직금공제내역조회  -->
+	<select id="infcPkgRemt2300DAO.selectRemt0100ToRemt2300ListTotCnt_S" parameterClass="infcPkgRemt2300SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM (
+	              SELECT
+                                DPOB_CD
+                              , CALC_SEVE_PAY_PSN_DIV_CD
+                              , CLUT_YR_MNTH
+                              , SYSTEMKEY
+                              , PAY_ITEM_CD
+                              ,(SELECT PAY_DDUC_NM
+                                 FROM PAYR0470 A02
+                                 WHERE A02.DPOB_CD = REMT2300.DPOB_CD
+                                   AND A02.PAY_DDUC_CD = REMT2300.PAY_ITEM_CD ) AS PAY_ITEM_NM
+                              , PYMT_DDUC_DIV_CD
+                              , PYMT_SUM 
+                  FROM REMT2300 
+		         WHERE DPOB_CD=#dpobCd#
+				   AND SYSTEMKEY=#systemkey#
+				   AND CLUT_YR_MNTH=#clutYrMnth#
+				   AND CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#  
+			)
+	</select>
+	
+		<!-- 퇴직금공제내역조회  -->
+		<select id="infcPkgRemt2300DAO.selectRemt0100ToRemt2300List_D" parameterClass="infcPkgRemt2300SerarchVO" resultClass="egovMap">
+	 SELECT * FROM (
+	  SELECT A.*, ROWNUM RNUM FROM (
+				 SELECT
+                                  DPOB_CD
+                                , CALC_SEVE_PAY_PSN_DIV_CD
+                                , CLUT_YR_MNTH
+                                , SYSTEMKEY
+                                , PAY_ITEM_CD
+                                ,(SELECT PAY_DDUC_NM
+                                   FROM PAYR0470 A02
+                                   WHERE A02.DPOB_CD = REMT2300.DPOB_CD
+                                     AND A02.PAY_DDUC_CD = REMT2300.PAY_ITEM_CD ) AS PAY_ITEM_NM
+                                , PYMT_DDUC_DIV_CD
+                                , PYMT_SUM 
+                        FROM REMT2300 
+				        WHERE DPOB_CD=#dpobCd#
+						  AND SYSTEMKEY=#systemkey#
+						  AND CLUT_YR_MNTH=#clutYrMnth#
+						  AND CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#  
+					ORDER BY DPOB_CD DESC
+							, CALC_SEVE_PAY_PSN_DIV_CD DESC
+							, CLUT_YR_MNTH DESC
+							, SYSTEMKEY DESC
+							, PAY_ITEM_CD ASC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	
+
+</sqlMap>

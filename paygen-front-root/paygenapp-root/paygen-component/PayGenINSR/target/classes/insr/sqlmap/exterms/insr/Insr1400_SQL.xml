@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Insr1400">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="insr1400SerarchVO" type="com.app.exterms.insurance.server.vo.Insr1400SrhVO"/>
+	
+	<resultMap id="insr1400" class="com.app.exterms.insurance.server.vo.Insr1400VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="famySeilNum" column="FAMY_SEIL_NUM" columnIndex="3"/>
+		<result property="famyRelaDivCd" column="FAMY_RELA_DIV_CD" columnIndex="4"/>
+		<result property="famyNm" column="FAMY_NM" columnIndex="5"/>
+		<result property="famyResnRegnNum" column="FAMY_RESN_REGN_NUM" columnIndex="6"/>
+		<result property="relaSgn" column="RELA_SGN" columnIndex="7"/>
+		<result property="aqtnLssDivCd" column="AQTN_LSS_DIV_CD" columnIndex="8"/>
+		<result property="aqtnDt" column="AQTN_DT" columnIndex="9"/>
+		<result property="aqtnLssReasCd" column="AQTN_LSS_REAS_CD" columnIndex="10"/>
+		<result property="dbpsnAssttnSgnCd" column="DBPSN_ASSTTN_SGN_CD" columnIndex="11"/>
+		<result property="dbpsnGrdeCd" column="DBPSN_GRDE_CD" columnIndex="12"/>
+		<result property="dbpsnRgstnDt" column="DBPSN_RGSTN_DT" columnIndex="13"/>
+		<result property="dbpsnNatnCd" column="DBPSN_NATN_CD" columnIndex="14"/>
+		<result property="frgnrStyQftntCd" column="FRGNR_STY_QFTNT_CD" columnIndex="15"/>
+		<result property="frgnrStyBgnnDt" column="FRGNR_STY_BGNN_DT" columnIndex="16"/>
+		<result property="frgnrStyEndDt" column="FRGNR_STY_END_DT" columnIndex="17"/>
+		<result property="soctyInsurCmptnDt" column="SOCTY_INSUR_CMPTN_DT" columnIndex="18"/>
+		<result property="socInsrAqtnEmymtNum" column="SOC_INSR_AQTN_EMYMT_NUM" columnIndex="19"/>
+	</resultMap>
+	
+	<insert id="insr1400DAO.insertInsr1400_S">
+		<![CDATA[
+			INSERT INTO INSR1400 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , FAMY_SEIL_NUM
+				  , FAMY_RELA_DIV_CD
+				  , FAMY_NM
+				  , FAMY_RESN_REGN_NUM
+				  , RELA_SGN
+				  , AQTN_LSS_DIV_CD
+				  , AQTN_DT
+				  , AQTN_LSS_REAS_CD
+				  , DBPSN_ASSTTN_SGN_CD
+				  , DBPSN_GRDE_CD
+				  , DBPSN_RGSTN_DT
+				  , DBPSN_NATN_CD
+				  , FRGNR_STY_QFTNT_CD
+				  , FRGNR_STY_BGNN_DT
+				  , FRGNR_STY_END_DT
+				  , SOCTY_INSUR_CMPTN_DT
+				  , SOC_INSR_AQTN_EMYMT_NUM )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #famySeilNum#
+				  , #famyRelaDivCd#
+				  , #famyNm#
+				  , #famyResnRegnNum#
+				  , #relaSgn#
+				  , #aqtnLssDivCd#
+				  , #aqtnDt#
+				  , #aqtnLssReasCd#
+				  , #dbpsnAssttnSgnCd#
+				  , #dbpsnGrdeCd#
+				  , #dbpsnRgstnDt#
+				  , #dbpsnNatnCd#
+				  , #frgnrStyQftntCd#
+				  , #frgnrStyBgnnDt#
+				  , #frgnrStyEndDt#
+				  , #soctyInsurCmptnDt#
+				  , #socInsrAqtnEmymtNum# )
+		]]>
+	</insert>
+	
+	<update id="insr1400DAO.updateInsr1400_S">
+		<![CDATA[
+			UPDATE INSR1400
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, FAMY_SEIL_NUM=#famySeilNum#
+				, FAMY_RELA_DIV_CD=#famyRelaDivCd#
+				, FAMY_NM=#famyNm#
+				, FAMY_RESN_REGN_NUM=#famyResnRegnNum#
+				, RELA_SGN=#relaSgn#
+				, AQTN_LSS_DIV_CD=#aqtnLssDivCd#
+				, AQTN_DT=#aqtnDt#
+				, AQTN_LSS_REAS_CD=#aqtnLssReasCd#
+				, DBPSN_ASSTTN_SGN_CD=#dbpsnAssttnSgnCd#
+				, DBPSN_GRDE_CD=#dbpsnGrdeCd#
+				, DBPSN_RGSTN_DT=#dbpsnRgstnDt#
+				, DBPSN_NATN_CD=#dbpsnNatnCd#
+				, FRGNR_STY_QFTNT_CD=#frgnrStyQftntCd#
+				, FRGNR_STY_BGNN_DT=#frgnrStyBgnnDt#
+				, FRGNR_STY_END_DT=#frgnrStyEndDt#
+				, SOCTY_INSUR_CMPTN_DT=#soctyInsurCmptnDt#
+				, SOC_INSR_AQTN_EMYMT_NUM=#socInsrAqtnEmymtNum#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAMY_SEIL_NUM=#famySeilNum#
+				]]>
+	</update>
+	
+	<delete id="insr1400DAO.deleteInsr1400_S">
+		<![CDATA[
+			DELETE FROM INSR1400 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAMY_SEIL_NUM=#famySeilNum#
+				]]>
+	</delete>
+	
+	<select id="insr1400DAO.selectInsr1400_S" resultMap="insr1400">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, FAMY_SEIL_NUM
+				, FAMY_RELA_DIV_CD
+				, FAMY_NM
+				, FAMY_RESN_REGN_NUM
+				, RELA_SGN
+				, AQTN_LSS_DIV_CD
+				, AQTN_DT
+				, AQTN_LSS_REAS_CD
+				, DBPSN_ASSTTN_SGN_CD
+				, DBPSN_GRDE_CD
+				, DBPSN_RGSTN_DT
+				, DBPSN_NATN_CD
+				, FRGNR_STY_QFTNT_CD
+				, FRGNR_STY_BGNN_DT
+				, FRGNR_STY_END_DT
+				, SOCTY_INSUR_CMPTN_DT
+				, SOC_INSR_AQTN_EMYMT_NUM
+			FROM INSR1400
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAMY_SEIL_NUM=#famySeilNum#
+				]]>
+	</select>
+	
+	<select id="insr1400DAO.selectInsr1400List_D" parameterClass="insr1400SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, FAMY_SEIL_NUM
+								, FAMY_RELA_DIV_CD
+								, FAMY_NM
+								, FAMY_RESN_REGN_NUM
+								, RELA_SGN
+								, AQTN_LSS_DIV_CD
+								, AQTN_DT
+								, AQTN_LSS_REAS_CD
+								, DBPSN_ASSTTN_SGN_CD
+								, DBPSN_GRDE_CD
+								, DBPSN_RGSTN_DT
+								, DBPSN_NATN_CD
+								, FRGNR_STY_QFTNT_CD
+								, FRGNR_STY_BGNN_DT
+								, FRGNR_STY_END_DT
+								, SOCTY_INSUR_CMPTN_DT
+								, SOC_INSR_AQTN_EMYMT_NUM
+						FROM INSR1400
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, FAMY_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="insr1400DAO.selectInsr1400ListTotCnt_S" parameterClass="insr1400SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM INSR1400
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+	
+	<!-- insrP210001 화면 가족사항조회  -->
+	<select id="insr1400DAO.selectInsrP210001ToInsr1400List_D" parameterClass="insr1400SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								 DPOB_CD
+								, SYSTEMKEY
+								, FAMY_SEIL_NUM
+								, FAMY_RELA_DIV_CD
+								, FAMY_RELA_DIV_CD AS famyRelaDivCdcommCd
+								 ,fcBass0300CDNM(DPOB_CD,FAMY_RELA_DIV_CD) AS famyRelaDivCdcommCdNm 
+								, FAMY_NM
+								, FAMY_RESN_REGN_NUM
+								, RELA_SGN 
+								, RELA_SGN AS relaSgncommCd
+								,fcBass0300CDNM(DPOB_CD,RELA_SGN) AS relaSgncommCdNm 
+								, AQTN_LSS_DIV_CD 
+								, AQTN_LSS_DIV_CD AS aqtnLssDivCdcommCd
+								,fcBass0300CDNM(DPOB_CD,AQTN_LSS_DIV_CD) AS aqtnLssDivCdcommCdNm 
+								, AQTN_DT
+								, AQTN_LSS_REAS_CD 
+								, AQTN_LSS_REAS_CD AS aqtnLssReasCdcommCd
+								,fcBass0300CDNM(DPOB_CD,AQTN_LSS_REAS_CD) AS aqtnLssReasCdcommCdNm 
+								, DBPSN_ASSTTN_SGN_CD 
+								, DBPSN_ASSTTN_SGN_CD AS dbpsnAssttnSgnCdcommCd
+								,fcBass0300CDNM(DPOB_CD,DBPSN_ASSTTN_SGN_CD) AS dbpsnAssttnSgnCdcommCdNm 
+								, DBPSN_GRDE_CD 
+								, DBPSN_GRDE_CD AS dbpsnGrdeCdcommCd
+								,fcBass0300CDNM(DPOB_CD,DBPSN_GRDE_CD) AS dbpsnGrdeCdcommCdNm 
+								, DBPSN_RGSTN_DT
+								, DBPSN_NATN_CD 
+								, DBPSN_NATN_CD AS dbpsnNatnCdcommCd
+								,fcBass0300CDNM(DPOB_CD,DBPSN_NATN_CD) AS dbpsnNatnCdcommCdNm 
+								, FRGNR_STY_QFTNT_CD 
+								, FRGNR_STY_QFTNT_CD AS frgnrStyQftntCdcommCd
+								,fcBass0300CDNM(DPOB_CD,FRGNR_STY_QFTNT_CD) AS frgnrStyQftntCdcommCdNm 
+								, FRGNR_STY_BGNN_DT
+								, FRGNR_STY_END_DT
+								, SOCTY_INSUR_CMPTN_DT
+								, SOC_INSR_AQTN_EMYMT_NUM
+						FROM INSR1400
+				WHERE DPOB_CD=#dpobCd# 
+		        <isNotEmpty prepend="AND" property="systemkey" >
+			 	 SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="soctyInsurCmptnDt" >
+			 	 SOCTY_INSUR_CMPTN_DT=#soctyInsurCmptnDt#
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="socInsrAqtnEmymtNum" >
+			 	 SOC_INSR_AQTN_EMYMT_NUM=#socInsrAqtnEmymtNum#
+		       </isNotEmpty> 
+				 
+					ORDER BY 
+						DPOB_CD DESC
+							, FAMY_SEIL_NUM ASC
+							, FAMY_RESN_REGN_NUM ASC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<!-- insrP210001 화면 가족사항조회  -->
+	<select id="insr1400DAO.selectInsrP210001ToInsr1400ListTotCnt_S" parameterClass="insr1400SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM INSR1400
+				WHERE DPOB_CD=#dpobCd# 
+		        <isNotEmpty prepend="AND" property="systemkey" >
+			 	 SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="soctyInsurCmptnDt" >
+			 	 SOCTY_INSUR_CMPTN_DT=#soctyInsurCmptnDt#
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="socInsrAqtnEmymtNum" >
+			 	 SOC_INSR_AQTN_EMYMT_NUM=#socInsrAqtnEmymtNum#
+		       </isNotEmpty> 
+	</select>
+	
+
+</sqlMap>

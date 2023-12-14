@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgYe162520">
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYe162520SrhVO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgYe162520SrhVO"/>
+	
+	<resultMap id="infcPkgYe162520" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgYe162520VO">
+		<result property="comrCdtrNm" column="COMR_CDTR_NM" columnIndex="1"/>  
+		<result property="comrCdtrResnRegnNum" column="COMR_CDTR_RESN_REGN_NUM" columnIndex="2"/> 
+		<result property="comrCnttPridBgnnDt" column="COMR_CNTT_PRID_BGNN_DT" columnIndex="3"/> 
+		<result property="comrCnttPridEndDt" column="COMR_CNTT_PRID_END_DT" columnIndex="4"/> 
+		<result property="comrLoanItrtRate" column="COMR_LOAN_ITRT_RATE" columnIndex="5"/> 
+		<result property="comrPclttAmtftAggr" column="COMR_PCLTT_AMTFT_AGGR" columnIndex="6"/> 
+		<result property="comrPrnilSum" column="COMR_PRNIL_SUM" columnIndex="7"/> 
+		<result property="comrItrtSum" column="COMR_ITRT_SUM" columnIndex="8"/> 
+		<result property="comrDducSum" column="COMR_DDUC_SUM" columnIndex="9"/> 
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="10"/>
+		<result property="comrCalnSeilNum" column="COMR_CALN_SEIL_NUM" columnIndex="11"/> 
+		<result property="dpobCd" column="DPOB_CD" columnIndex="12"/> 
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="ismt" column="ISMT" columnIndex="14"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="15"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="16"/> 
+		<result property="inptDt" column="INPT_DT" columnIndex="17"/>
+		<result property="kybdr" column="KYBDR" columnIndex="18"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="19"/>
+		<result property="ectnFlTrnrCtlYn" column="ECTN_FL_TRNR_CTL_YN" columnIndex="20"/> 
+		<result property="clutseptCd" column="CLUT_SEPT_CD" columnIndex="21"/> 
+	</resultMap>
+	
+ 
+    <!-- G_거주자간_금전소비대차 -->
+	<insert id="infcPkgYe162520DAO.incTaxDeducDec_nts_Yeta2017_Ye162520_Insert_S">
+		<![CDATA[
+             INSERT INTO YE162520  
+                 ( DPOB_CD			/* 사업장코드                     */
+						,YRTX_BLGG_YR		/* 연말정산귀속년도		       */
+						,CLUT_SEPT_CD		/* 정산구분코드		       */
+						,SYSTEMKEY		/* SYSTEMKEY		       */
+						,COMR_CALN_SEIL_NUM	/* 금전소비대차일련번호	       */
+						,TAX_VVAL_KRN_CD		/* 국세청자료구분코드		       */
+						,COMR_CDTR_NM		/* G16_금전소비대차_대주성명	       */
+						,COMR_CDTR_RESN_REGN_NUM	/* G17_금전소비대차_대주주민등록번호   */
+						,COMR_CNTT_PRID_BGNN_DT	/* G18_금전소비대차_계약기간시작일자   */
+						,COMR_CNTT_PRID_END_DT	/* G19_금전소비대차_계약기간종료일자   */
+						,COMR_LOAN_ITRT_RATE	/* G20_금전소비대차_차입금이자율      */
+						,COMR_PCLTT_AMTFT_AGGR	/* G21_금전소비대차_원리금상환액합계   */
+						,COMR_PRNIL_SUM		/* G22_금전소비대차_원금금액	       */
+						,COMR_ITRT_SUM		/* G23_금전소비대차_이자금액	       */
+						,COMR_DDUC_SUM		/* G24_금전소비대차_공제금액	       */
+						,ECTN_FL_TRNR_CTL_YN	/* 전자파일이관여부		       */
+						,KYBDR			/* 입력자			       */
+						,INPT_DT			/* 입력일자		       */
+						,INPT_ADDR		/* 입력주소		       */
+						,ISMT			/* 수정자			       */
+						,REVN_DT			/* 수정일자		       */
+						,REVN_ADDR		/* 수정주소		       */ 
+					) 
+                 (
+                 SELECT 
+						     DPOB_CD
+						   , YRTX_BLGG_YR
+						   , CLUT_SEPT_CD
+						   , SYSTEMKEY
+						   , (SELECT NVL(MAX(COMR_CALN_SEIL_NUM)+1,1)  
+		                       FROM YE162520  
+		                       WHERE DPOB_CD=#dpobCd# 
+		                                 AND YRTX_BLGG_YR=#yrtxBlggYr# 
+		                                 AND CLUT_SEPT_CD=#clutseptCd# 
+		                                 AND SYSTEMKEY=#systemkey#) 
+		                     ,'Y0140000'  /* 국세청 */               
+                           , LSOR_FNM
+                           , TXPR_DSCM_NO_ENC_CNTN 
+						   , CTR_TERM_STR_DT
+						   , CTR_TERM_END_DT
+						   , LNPB_INTRT
+						   , AMT
+						   , PNAMT
+						   , INTR_AMT
+						   , DDC_AMT 
+						   ,'Y'
+					       , #kybdr# 
+		                   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS') 
+		                   , #inptAddr# 
+		                   , #ismt# 
+		                   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS') 
+		                   , #revnAddr#
+						FROM  YE167230 
+					   WHERE DPOB_CD=#dpobCd#
+					     AND YRTX_BLGG_YR=#yrtxBlggYr#
+					     AND CLUT_SEPT_CD=#clutseptCd#
+					     AND SYSTEMKEY=#systemkey#   
+                )
+ 		]]> 
+	</insert>
+	
+	
+	<insert id="infcPkgYe162520DAO.insertYe162520_S">
+		<![CDATA[
+             INSERT INTO YE162520  
+                 ( YRTX_BLGG_YR 
+                   , CLUT_SEPT_CD 
+                   , COMR_CALN_SEIL_NUM 
+                   , DPOB_CD 
+                   , SYSTEMKEY 
+                   , COMR_CDTR_NM 
+                   , COMR_CDTR_RESN_REGN_NUM 
+                   , COMR_CNTT_PRID_BGNN_DT 
+                   , COMR_CNTT_PRID_END_DT 
+                   , COMR_LOAN_ITRT_RATE 
+                   , COMR_PCLTT_AMTFT_AGGR 
+                   , COMR_PRNIL_SUM 
+                   , COMR_ITRT_SUM 
+                   , COMR_DDUC_SUM
+                   , ECTN_FL_TRNR_CTL_YN 
+                   , KYBDR 
+                   , INPT_DT 
+                   , INPT_ADDR 
+                   , ISMT 
+                   , REVN_DT 
+                   , REVN_ADDR ) 
+             VALUES ( #yrtxBlggYr# 
+                   , #clutseptCd# 
+                   , (SELECT NVL(MAX(COMR_CALN_SEIL_NUM)+1,1)  
+                       FROM YE162520  
+                       WHERE DPOB_CD=#dpobCd# 
+                                 AND YRTX_BLGG_YR=#yrtxBlggYr# 
+                                 AND CLUT_SEPT_CD=#clutseptCd# 
+                                 AND SYSTEMKEY=#systemkey#)  
+                   , #dpobCd# 
+                   , #systemkey# 
+                   , #comrCdtrNm# 
+                   , #comrCdtrResnRegnNum# 
+                   , #comrCnttPridBgnnDt# 
+                   , #comrCnttPridEndDt# 
+                   , #comrLoanItrtRate# 
+                   , ((NVL(#comrPrnilSum#,0) +  NVL(#comrItrtSum#,0)) 
+                   , #comrPrnilSum# 
+                   , #comrItrtSum# 
+                   , (((NVL(#comrPrnilSum#,0) +  NVL(#comrItrtSum#,0)) * 0.4)
+                   , #ectnFlTrnrCtlYn# 
+                   , #kybdr# 
+                   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS') 
+                   , #inptAddr# 
+                   , #ismt# 
+                   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS') 
+                   , #revnAddr# )
+ 		]]> 
+	</insert>
+	
+	<update id="infcPkgYe162520DAO.updateYe162520_S">
+		<![CDATA[
+ 		 UPDATE YE162520 
+             SET YRTX_BLGG_YR=#yrtxBlggYr# 
+                 , CLUT_SEPT_CD=#clutseptCd# 
+                 , COMR_CALN_SEIL_NUM=#comrCalnSeilNum# 
+                 , DPOB_CD=#dpobCd# 
+                 , SYSTEMKEY=#systemkey# 
+                 , COMR_CDTR_NM=#comrCdtrNm# 
+                 , COMR_CDTR_RESN_REGN_NUM=#comrCdtrResnRegnNum# 
+                 , COMR_CNTT_PRID_BGNN_DT=#comrCnttPridBgnnDt# 
+                 , COMR_CNTT_PRID_END_DT=#comrCnttPridEndDt# 
+                 , COMR_LOAN_ITRT_RATE=#comrLoanItrtRate# 
+                 , COMR_PCLTT_AMTFT_AGGR=((NVL(#comrPrnilSum#,0) +  NVL(#comrItrtSum#,0)) 
+                 , COMR_PRNIL_SUM=#comrPrnilSum# 
+                 , COMR_ITRT_SUM=#comrItrtSum# 
+                 , COMR_DDUC_SUM=(((NVL(#comrPrnilSum#,0) +  NVL(#comrItrtSum#,0)) * 0.4)
+                 , ECTN_FL_TRNR_CTL_YN=#ectnFlTrnrCtlYn# 
+                 , ISMT=#ismt# 
+                 , REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS') 
+                 , REVN_ADDR=#revnAddr# 
+                         WHERE YRTX_BLGG_YR=#yrtxBlggYr# 
+                                 AND CLUT_SEPT_CD=#clutseptCd# 
+                                 AND COMR_CALN_SEIL_NUM=#comrCalnSeilNum# 
+                                 AND DPOB_CD=#dpobCd# 
+                                 AND SYSTEMKEY=#systemkey# 
+ 				]]> 
+	</update>
+	
+	<delete id="infcPkgYe162520DAO.deleteYe162520_S">
+		<![CDATA[
+ 			DELETE FROM YE162520  
+ 						WHERE YRTX_BLGG_YR=#yrtxBlggYr# 
+ 								AND CLUT_SEPT_CD=#clutseptCd# 
+ 								AND COMR_CALN_SEIL_NUM=#comrCalnSeilNum# 
+ 								AND DPOB_CD=#dpobCd# 
+ 								AND SYSTEMKEY=#systemkey# 
+ 				]]> 
+	</delete>
+	
+	<!-- yeta0100 화면 삭제 -->
+	<delete id="infcPkgYe162520DAO.fnPayr06430_PAYR450_CREATE_Delete_S">
+		<![CDATA[
+ 			DELETE FROM YE162520  
+ 						WHERE YRTX_BLGG_YR=#yrtxBlggYr# 
+ 								AND CLUT_SEPT_CD=#clutseptCd#  
+ 								AND DPOB_CD=#dpobCd#  
+ 				]]>  
+				   <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                   </isNotEmpty> 
+	</delete>
+	
+	
+	<select id="infcPkgYe162520DAO.selectYe162520_S" resultMap="infcPkgYe162520">
+		<![CDATA[
+			SELECT 
+                 YRTX_BLGG_YR 
+                 , CLUT_SEPT_CD 
+                 , COMR_CALN_SEIL_NUM 
+                 , DPOB_CD 
+                 , SYSTEMKEY 
+                 , COMR_CDTR_NM 
+                 , COMR_CDTR_RESN_REGN_NUM 
+                 , COMR_CNTT_PRID_BGNN_DT 
+                 , COMR_CNTT_PRID_END_DT 
+                 , COMR_LOAN_ITRT_RATE 
+                 , COMR_PCLTT_AMTFT_AGGR 
+                 , COMR_PRNIL_SUM 
+                 , COMR_ITRT_SUM 
+                 , COMR_DDUC_SUM
+                 , ECTN_FL_TRNR_CTL_YN 
+                 , KYBDR 
+                 , INPT_DT 
+                 , INPT_ADDR 
+                 , ISMT 
+                 , REVN_DT 
+                 , REVN_ADDR 
+             FROM YE162520 
+                         WHERE YRTX_BLGG_YR=#yrtxBlggYr# 
+                                 AND CLUT_SEPT_CD=#clutseptCd# 
+                                 AND COMR_CALN_SEIL_NUM=#comrCalnSeilNum# 
+                                 AND DPOB_CD=#dpobCd# 
+                                 AND SYSTEMKEY=#systemkey# 
+ 				]]> 
+	</select>
+	
+	<!-- 거주자간 주택임차차입금 원리금 상환액 팝업 금전소비대차계약 리스트 -->
+	<select id="infcPkgYe162520DAO.selectYetaP03004To162520List_D" parameterClass="infcPkgYe162520SrhVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+						SELECT
+										YRTX_BLGG_YR
+										, CLUT_SEPT_CD
+										, fcBass0300CDNM(DPOB_CD, CLUT_SEPT_CD) AS CLUT_SEPT_NM
+										, COMR_CALN_SEIL_NUM
+										, DPOB_CD
+										, SYSTEMKEY
+										, COMR_CDTR_NM
+										, COMR_CDTR_RESN_REGN_NUM
+										, COMR_CNTT_PRID_BGNN_DT
+										, COMR_CNTT_PRID_END_DT
+										, COMR_LOAN_ITRT_RATE
+										, COMR_PCLTT_AMTFT_AGGR
+										, COMR_PRNIL_SUM
+										, COMR_ITRT_SUM
+										, COMR_DDUC_SUM
+										, ECTN_FL_TRNR_CTL_YN
+										, KYBDR
+										, INPT_DT
+										, INPT_ADDR
+										, ISMT
+										, REVN_DT
+										, REVN_ADDR
+								FROM YE162520
+						WHERE 
+							<isNotEmpty property="dpobCd">
+								DPOB_CD=#dpobCd#
+							</isNotEmpty>
+							<isNotEmpty prepend="AND" property="yrtxBlggYr" >
+								YRTX_BLGG_YR=#edacRvyy#
+							</isNotEmpty> 
+							<isNotEmpty prepend="AND" property="clutSeptCd" >
+								CLUT_SEPT_CD=#settGbcd#
+							</isNotEmpty> 
+							<isNotEmpty prepend="AND" property="systemkey" >
+								SYSTEMKEY=#systemkey#
+							</isNotEmpty> 
+						ORDER BY 
+						  YRTX_BLGG_YR DESC
+                            , CLUT_SEPT_CD DESC
+                            , COMR_CALN_SEIL_NUM DESC
+                            , DPOB_CD DESC
+                            , SYSTEMKEY DESC
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>	
+	<!-- 거주자간 주택임차차입금 원리금 상환액 팝업 금전소비대차계약 갯수 -->
+	<select id="infcPkgYe162520DAO.selectYetaP03004To162520ListTotCnt_S" parameterClass="infcPkgYe162520SrhVO" resultClass="int">
+		SELECT COUNT(*) totcnt
+			FROM YE162520
+			WHERE 
+				<isNotEmpty property="dpobCd">
+					DPOB_CD=#dpobCd#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="yrtxBlggYr" > 
+					YRTX_BLGG_YR=#yrtxBlggYr#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="clutSeptCd" >  
+					CLUT_SEPT_CD=#clutSeptCd#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="systemkey" >
+					SYSTEMKEY=#systemkey#
+				</isNotEmpty> 
+	</select>	
+	
+	
+	<select id="infcPkgYe162520DAO.selectYe162520List_D" parameterClass="infcPkgYe162520SrhVO" resultClass="egovMap">
+		SELECT * FROM (
+            SELECT A.*, ROWNUM RNUM FROM (
+                        SELECT
+                                    YRTX_BLGG_YR
+                                    , CLUT_SEPT_CD
+                                    , COMR_CALN_SEIL_NUM
+                                    , DPOB_CD
+                                    , SYSTEMKEY
+                                    , COMR_CDTR_NM
+                                    , COMR_CDTR_RESN_REGN_NUM
+                                    , COMR_CNTT_PRID_BGNN_DT
+                                    , COMR_CNTT_PRID_END_DT
+                                    , COMR_LOAN_ITRT_RATE
+                                    , COMR_PCLTT_AMTFT_AGGR
+                                    , COMR_PRNIL_SUM
+                                    , COMR_ITRT_SUM
+                                    , COMR_DDUC_SUM
+                                    , ECTN_FL_TRNR_CTL_YN
+                                    , KYBDR
+                                    , INPT_DT
+                                    , INPT_ADDR
+                                    , ISMT
+                                    , REVN_DT
+                                    , REVN_ADDR
+                            FROM YE162520
+                    WHERE 1=1
+                    <isEqual prepend="AND" property="searchCondition" compareValue="0">
+                        YRTX_BLGG_YR = #searchKeyword#
+                    </isEqual>
+                    <isEqual prepend="AND" property="searchCondition" compareValue="1">
+                        CLUT_SEPT_CD LIKE '%' || #searchKeyword# || '%'
+                    </isEqual>
+                        ORDER BY 
+                            YRTX_BLGG_YR DESC
+                                , CLUT_SEPT_CD DESC 
+                                , DPOB_CD DESC
+                                , SYSTEMKEY DESC
+                                , COMR_CALN_SEIL_NUM DESC
+            
+            <![CDATA[                    
+             ) A WHERE ROWNUM <= #lastIndex# 
+         )WHERE RNUM >= #firstIndex#
+		 ]]> 
+	</select>
+		
+	<select id="infcPkgYe162520DAO.selectYe162520ListTotCnt_S" parameterClass="infcPkgYe162520SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE162520
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				YRTX_BLGG_YR = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				CLUT_SEPT_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+	
+	
+	
+ 	<select id="infcPkgYe162520DAO.selectYeta2300_Tax_YE162520_01_List_D" parameterClass="infcPkgYe162520SrhVO" resultClass="egovMap">
+ 				   SELECT
+                                    YRTX_BLGG_YR
+                                    , CLUT_SEPT_CD
+                                    , COMR_CALN_SEIL_NUM
+                                    , DPOB_CD
+                                    , SYSTEMKEY
+                                    , COMR_CDTR_NM
+                                    , COMR_CDTR_RESN_REGN_NUM
+                                    , COMR_CNTT_PRID_BGNN_DT
+                                    , COMR_CNTT_PRID_END_DT
+                                    , COMR_LOAN_ITRT_RATE
+                                    , COMR_PCLTT_AMTFT_AGGR
+                                    , COMR_PRNIL_SUM
+                                    , COMR_ITRT_SUM
+                                    , COMR_DDUC_SUM
+                                    , ECTN_FL_TRNR_CTL_YN
+                                    , KYBDR
+                                    , INPT_DT
+                                    , INPT_ADDR
+                                    , ISMT
+                                    , REVN_DT
+                                    , REVN_ADDR
+                            FROM YE162520 
+                    WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#  
+                        ORDER BY 
+                            YRTX_BLGG_YR DESC
+                                , CLUT_SEPT_CD DESC 
+                                , DPOB_CD DESC
+                                , SYSTEMKEY DESC
+                                , COMR_CALN_SEIL_NUM DESC
+				  
+	</select>	
+
+ <update id="infcPkgYe162520DAO.updateYeta2300_Tax_YE162520_01_S">
+		<![CDATA[
+			UPDATE YE162520
+			SET   COMR_DDUC_SUM = #comrDducSum#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+							  	AND COMR_CALN_SEIL_NUM=#comrCalnSeilNum#
+				]]>
+	</update>
+
+</sqlMap>

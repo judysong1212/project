@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcDlgn0300">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="infcPkgDlgn0300Dto" type="com.app.exterms.diligence.client.dto.InfcPkgDlgn0300DTO"/>
+	
+	<select id="infcPkgDlgn0300DAO.selectDlgn0300" parameterClass="infcPkgDlgn0300Dto" resultClass="egovMap">
+	    SELECT 
+			C.HAN_NM
+			, A.DILNLAZ_YR_MNTH
+			, FCBASS0300CDNM(A.DPOB_CD, A.PAY_CD)  AS PAY_CD
+			, FCBASS0300CDNM(A.DPOB_CD, A.EMYMT_DIV_CD)  AS EMYMT_DIV_CD
+			, FCBASS0400CDNM(A.DPOB_CD, A.DEPT_CD, '2') AS DEPT_CD
+			, FCBASS0500CDNM(A.DPOB_CD, TO_CHAR(TO_DATE(C.EMYMT_BGNN_DT,'YYYYMMDD'),'YYYY'), A.DEPT_CD, A.BUSIN_CD) AS BUSIN_CD
+			, FCBASS0320CDNM(A.DPOB_CD, A.TYP_OCCU_CD) AS TYP_OCCU_CD
+			,	 A.DTIL_OCCU_INTTN_CD 
+		          , fcBassEx0350CDNM(A.DPOB_CD,A.TYP_OCCU_CD,A.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM
+			, A.DILNLAZ_DUTY_NUM_DYS
+			, A.DILNLAZ_LVSG_NUM_DYS
+			, A.DILNLAZ_ABNCE_NUM_DYS
+			, A.DILNLAZ_SCKLEA_NUM_DYS
+			, A.DILNLAZ_OFFVA_NUM_DYS
+			, A.DILNLAZ_FMLY_EVNT_NUM_DYS
+			, A.DILNLAZ_HLTH_CRE_NUM_DYS
+			, A.DILNLAZ_TOT_DUTY_NUM_DYS
+			, A.DILNLAZ_WKLY_HLDY_NUM_DYS
+			, A.DILNLAZ_PAID_PUBC_HODY_NUM
+			, A.DILNLAZ_DDLNE_PRCS_YN
+			, B.DILNLAZ_PUBC_HODY_DUTY_NUM_DYS
+			, B.DILNLAZ_SAT_DUTY_NUM_DYS
+			, B.DILNLAZ_TOT_NTOT_NUM_DYS
+			, B.DILNLAZ_TOT_NTOT_TM
+			, B.DILNLAZ_FNDTN_TM_RST_DUTY_TM
+			, B.DILNLAZ_TM_RST_DUTY_TM
+			, B.DILNLAZ_TOT_TM_RST_DUTY_TM
+		FROM DLGN0100 A, DLGN0200 B, PSNL0100 C
+	   WHERE A.DPOB_CD = B.DPOB_CD(+)
+			AND A.SYSTEMKEY = B.SYSTEMKEY(+)
+			AND A.DILNLAZ_YR_MNTH = B.DILNLAZ_EXCE_DUTY_YR_MNTH(+)
+			AND A.PAY_CD = B.PAY_CD(+)
+			AND A.DPOB_CD = C.DPOB_CD
+			AND A.SYSTEMKEY = C.SYSTEMKEY
+		 	AND SUBSTR(A.DILNLAZ_YR_MNTH,1,4) = SUBSTR(#dilnlazYrMnth#,1,4)
+		    AND SUBSTR(A.DILNLAZ_YR_MNTH,-2) = SUBSTR(#dilnlazYrMnth#,-2)
+		<isNotNull property="emymtDivCd">
+		    <isNotEmpty property="emymtDivCd">
+		        AND A.EMYMT_DIV_CD = #emymtDivCd#
+		    </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="businCd">
+		    <isNotEmpty property="businCd">
+		        AND A.BUSIN_CD = #businCd#
+		    </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="currAffnDeptCd">
+		    <isNotEmpty property="currAffnDeptCd">
+		        AND A.DEPT_CD = #currAffnDeptCd#
+		    </isNotEmpty>
+		</isNotNull>
+		<isNotNull property="deptCd">
+		    <isNotEmpty property="deptCd">
+		        AND C.DEPT_CD = #deptCd#
+			</isNotEmpty>
+		</isNotNull>
+		<isNotNull property="hanNm">
+		    <isNotEmpty property="hanNm">
+		        AND C.HAN_NM = #hanNm#
+			</isNotEmpty>
+		</isNotNull>
+		<isNotNull property="resnRegnNum">
+		    <isNotEmpty property="resnRegnNum">
+		        AND C.RESN_REGN_NUM = #resnRegnNum#
+			</isNotEmpty>
+		</isNotNull>
+		ORDER BY A.PAY_CD, A.EMYMT_DIV_CD, A.DEPT_CD, A.BUSIN_CD, A.TYP_OCCU_CD, C.HAN_NM
+	</select>
+	
+	
+	
+</sqlMap>

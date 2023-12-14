@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass0450">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass0450SerarchVO" type="com.app.exterms.resm.server.vo.Bass0450SrhVO"/>
+	
+	<resultMap id="bass0450" class="com.app.exterms.resm.server.vo.Bass0450VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="hhrkDeptGrpCd" column="HHRK_DEPT_GRP_CD" columnIndex="2"/>
+		<result property="usrId" column="USR_ID" columnIndex="3"/>
+		<result property="hhrkSrhSectiSeilNum" column="HHRK_SRH_SECTI_SEIL_NUM" columnIndex="4"/>
+		<result property="kybdr" column="KYBDR" columnIndex="5"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="6"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="7"/>
+		<result property="ismt" column="ISMT" columnIndex="8"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="9"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="10"/>
+	</resultMap>
+	
+	<insert id="bass0450DAO.insertBass0450_S">
+		<![CDATA[
+			INSERT INTO BASS0450 
+				( DPOB_CD
+				  , HHRK_DEPT_GRP_CD
+				  , USR_ID
+				  , HHRK_SRH_SECTI_SEIL_NUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #hhrkDeptGrpCd#
+				  , #usrId#
+				  , #hhrkSrhSectiSeilNum#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass0450DAO.updateBass0450_S">
+		<![CDATA[
+			UPDATE BASS0450
+			SET DPOB_CD=#dpobCd#
+				, HHRK_DEPT_GRP_CD=#hhrkDeptGrpCd#
+				, USR_ID=#usrId#
+				, HHRK_SRH_SECTI_SEIL_NUM=#hhrkSrhSectiSeilNum#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND HHRK_DEPT_GRP_CD=#hhrkDeptGrpCd#
+								AND USR_ID=#usrId#
+				]]>
+	</update>
+	
+	<delete id="bass0450DAO.deleteBass0450_S">
+		<![CDATA[
+			DELETE FROM BASS0450 
+						WHERE DPOB_CD=#dpobCd#
+								AND HHRK_DEPT_GRP_CD=#hhrkDeptGrpCd#
+								AND USR_ID=#usrId#
+				]]>
+	</delete>
+	
+	<select id="bass0450DAO.selectBass0450_S" resultMap="bass0450">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, HHRK_DEPT_GRP_CD
+				, USR_ID
+				, HHRK_SRH_SECTI_SEIL_NUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS0450
+						WHERE DPOB_CD=#dpobCd#
+								AND HHRK_DEPT_GRP_CD=#hhrkDeptGrpCd#
+								AND USR_ID=#usrId#
+				]]>
+	</select>
+	
+	<select id="bass0450DAO.selectBass0450List_D" parameterClass="bass0450SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, HHRK_DEPT_GRP_CD
+								, USR_ID
+								, HHRK_SRH_SECTI_SEIL_NUM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS0450
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					HHRK_DEPT_GRP_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, HHRK_DEPT_GRP_CD DESC
+							, USR_ID DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass0450DAO.selectBass0450ListTotCnt_S" parameterClass="bass0450SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0450
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				HHRK_DEPT_GRP_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

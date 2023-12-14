@@ -1,0 +1,635 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass0350">
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass0350DTO" type="com.app.exterms.basis.client.dto.Bass0350DTO"/>
+	<typeAlias  alias="bass0360SrhVO" type="com.app.exterms.basis.server.vo.Bass0360SrhVO"/>
+	<typeAlias  alias="bass0350SerarchVO" type="com.app.exterms.basis.server.vo.Bass0350SrhVO"/>
+	<typeAlias  alias="bass035001vo" type="com.app.exterms.basis.server.vo.Bass0350VO"/>	
+	
+		<update id="bass0350DAO.saveBass0350" parameterClass="bass0350DTO">
+			MERGE INTO BASS0350
+			     USING DUAL ON (DPOB_CD = #dpobCd# AND TYP_OCCU_CD = #typOccuCd# AND DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd# )
+			WHEN MATCHED
+			THEN
+			   UPDATE 
+			      SET  DTIL_OCCU_CLS_NM = (CASE WHEN #pyspGrdeCd# = 'A0060000' 
+                          					THEN NVL(SUBSTR(#dtilOccuClsNm#,1,(INSTR(#dtilOccuClsNm#, '[')-1)), #dtilOccuClsNm#)
+											ELSE NVL(SUBSTR(#dtilOccuClsNm#,1,(INSTR(#dtilOccuClsNm#, '[')-1)), #dtilOccuClsNm#) ||'[' || fcBass0300CDNM(#dpobCd#, #pyspGrdeCd#) || ']'
+                             				END),
+				       DTIL_OCCU_CLS_CTNT = #dtilOccuClsCtnt#,
+				       DTIL_OCCU_CLS_USE_YN = #dtilOccuClsUseYn#,
+				       PYSP_GRDE_CD = #pyspGrdeCd#,
+				       CHNG_TGT_YN = #chngTgtYn#,
+				       ISMT = #ismt#,
+				       REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+				       REVN_ADDR = #revnAddr#,
+				       DTIL_OCCU_CLS_ORD = #dtilOccuClsOrd# ,
+				       DTIL_OCCU_JBFML_DIV_CD = #dtilOccuJbfmlDivCd# ,
+				       BGG_LOG_SVC_YR_NUM_CD = #bggLogSvcYrNumCd#,
+				       DTIL_OCCLS_APPTN_UCST_CD = #dtilOcclsApptnUcstCd#,
+				       DTIL_OCCLS_APPTN_UCST_SUM = #dtilOcclsApptnUcstSum#,
+				       CHNG_TYP_OCCU_CD = #chngTypOccuCd#,
+				       CHNG_DTIL_OCCU_INTTN_CD = #chngDtilOccuInttnCd#,
+				       DTIL_OCCU_INTTN_STDT = #dtilOccuInttnStdt#,
+				       DTIL_OCCU_INTTN_EDDT = #dtilOccuInttnEddt#,
+				       DTIL_OCCU_INTTN_ACC_CD = #dtilOccuInttnAccCd#,
+				       DTIL_TERM_USE_YN = #dtilTermUseYn#,
+				       DTIL_OCCLS_APPTN_UCST_DYS = #dtilOcclsApptnUcstDys#
+			WHEN NOT MATCHED
+			THEN
+			   INSERT 
+						( DPOB_CD,
+	                      TYP_OCCU_CD,
+	                      PYSP_GRDE_CD,
+	                      DTIL_OCCU_CLS_DIV_CD,
+	                      DTIL_OCCU_CLS_NM,
+	                      DTIL_OCCU_CLS_CTNT,
+	                      DTIL_OCCU_CLS_USE_YN,
+	                      CHNG_TGT_YN,
+	                      KYBDR,
+	                      INPT_DT,
+	                      INPT_ADDR,
+	                      ISMT,
+	                      REVN_DT,
+	                      REVN_ADDR,
+	                      DTIL_OCCU_CLS_ORD,
+	                      DTIL_OCCU_INTTN_CD,
+	                      DTIL_OCCU_JBFML_DIV_CD,
+	                      BGG_LOG_SVC_YR_NUM_CD,
+	                      DTIL_OCCLS_APPTN_UCST_CD,
+	                      DTIL_OCCLS_APPTN_UCST_SUM,
+	                      CHNG_TYP_OCCU_CD,
+	                      CHNG_DTIL_OCCU_INTTN_CD,
+	                      DTIL_OCCU_INTTN_STDT,
+	                      DTIL_OCCU_INTTN_EDDT,
+	                      DTIL_OCCU_INTTN_ACC_CD,
+				       	  DTIL_TERM_USE_YN,
+				       	  DTIL_OCCLS_APPTN_UCST_DYS)
+				VALUES ( #dpobCd#,
+			             #typOccuCd#,
+			             #pyspGrdeCd#,
+			             ( SELECT SUBSTR(#typOccuCd#,-4) || LPAD(TO_NUMBER(SUBSTR(MAX(DTIL_OCCU_CLS_DIV_CD),-4))+1,4,'0')
+						   								FROM BASS0350
+						  								WHERE 
+														DPOB_CD =#dpobCd#
+														AND TYP_OCCU_CD = #typOccuCd#
+														AND ROWNUM = 1),
+						 (CASE WHEN #pyspGrdeCd# = 'A0060000' 
+                          		THEN #dtilOccuClsNm#
+								ELSE  #dtilOccuClsNm# ||'[' || fcBass0300CDNM(#dpobCd#, #pyspGrdeCd#) || ']'
+                             	END),
+                             		
+			             #dtilOccuClsCtnt#,
+			             #dtilOccuClsUseYn#,
+			             #chngTgtYn#,
+			             #ismt#,
+			             TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+			             #revnAddr#,
+			             #ismt#,
+			             TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+			             #revnAddr#,
+			             #dtilOccuClsOrd#,
+			             (SELECT SUBSTR(#typOccuCd#,-4) || LPAD(TO_NUMBER(SUBSTR(MAX(DTIL_OCCU_CLS_DIV_CD),-4))+1,4,'0')
+						   FROM BASS0350
+						  WHERE 
+							DPOB_CD =#dpobCd#
+							AND TYP_OCCU_CD = #typOccuCd#
+							AND ROWNUM = 1) || #pyspGrdeCd#,
+							#dtilOccuJbfmlDivCd# ,
+							#bggLogSvcYrNumCd#,
+							#dtilOcclsApptnUcstCd#,
+							#dtilOcclsApptnUcstSum#,
+							#chngTypOccuCd#,
+							#chngDtilOccuInttnCd#,
+							#dtilOccuInttnStdt#,
+							#dtilOccuInttnEddt#,
+							#dtilOccuInttnAccCd#,
+							#dtilTermUseYn#,
+							#dtilOcclsApptnUcstDys#
+							
+				)		
+			
+	    
+	</update>
+	
+	<update id="bass0350DAO.updateBass0350" parameterClass="bass0350DTO">
+		UPDATE BASS0350
+			SET DTIL_OCCU_CLS_NM = (CASE WHEN #pyspGrdeCd# = 'A0060000' 
+                          					THEN NVL(SUBSTR(#dtilOccuClsNm#,1,(INSTR(#dtilOccuClsNm#, '[')-1)), #dtilOccuClsNm#)
+											ELSE NVL(SUBSTR(#dtilOccuClsNm#,1,(INSTR(#dtilOccuClsNm#, '[')-1)), #dtilOccuClsNm#) ||'[' || fcBass0300CDNM(#dpobCd#, #pyspGrdeCd#) || ']'
+                             				END)
+				, DTIL_OCCU_CLS_CTNT = #dtilOccuClsCtnt#
+				, DTIL_OCCU_CLS_USE_YN = #dtilOccuClsUseYn#
+				, PYSP_GRDE_CD = #pyspGrdeCd#
+				, CHNG_TGT_YN = #chngTgtYn#
+				, ISMT = #ismt#
+				, REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR = #revnAddr#
+				, DTIL_OCCU_CLS_ORD = #dtilOccuClsOrd#
+				, TYP_OCCU_CD = #typOccuCd# 
+				, DTIL_OCCU_JBFML_DIV_CD = #dtilOccuJbfmlDivCd# 
+				, BGG_LOG_SVC_YR_NUM_CD = #bggLogSvcYrNumCd#
+				, DTIL_OCCLS_APPTN_UCST_CD = #dtilOcclsApptnUcstCd#
+				, DTIL_OCCLS_APPTN_UCST_SUM = #dtilOcclsApptnUcstSum#
+				, CHNG_TYP_OCCU_CD = #chngTypOccuCd#
+				, CHNG_DTIL_OCCU_INTTN_CD = #chngDtilOccuInttnCd#
+				, DTIL_OCCU_INTTN_STDT = #dtilOccuInttnStdt#
+				, DTIL_OCCU_INTTN_EDDT = #dtilOccuInttnEddt#
+				, DTIL_OCCU_INTTN_ACC_CD = #dtilOccuInttnAccCd#
+				, DTIL_TERM_USE_YN = #dtilTermUseYn#
+				, DTIL_OCCLS_APPTN_UCST_DYS = #dtilOcclsApptnUcstDys#
+		WHERE DPOB_CD = #dpobCd# 
+			AND DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd# 
+	</update>	
+		
+	<insert id="bass0350DAO.insertBass0350" parameterClass="bass0350DTO">
+		<![CDATA[
+			INSERT INTO BASS0350
+				(  DPOB_CD,
+	                      TYP_OCCU_CD,
+	                      PYSP_GRDE_CD,
+	                      DTIL_OCCU_CLS_DIV_CD,
+	                      DTIL_OCCU_CLS_NM,
+	                      DTIL_OCCU_CLS_CTNT,
+	                      DTIL_OCCU_CLS_USE_YN,
+	                      CHNG_TGT_YN,
+	                      KYBDR,
+	                      INPT_DT,
+	                      INPT_ADDR,
+	                      ISMT,
+	                      REVN_DT,
+	                      REVN_ADDR,
+	                      DTIL_OCCU_CLS_ORD,
+	                      DTIL_OCCU_INTTN_CD,
+	                      DTIL_OCCU_JBFML_DIV_CD,
+	                      BGG_LOG_SVC_YR_NUM_CD,
+	                      DTIL_OCCLS_APPTN_UCST_CD,
+	                      DTIL_OCCLS_APPTN_UCST_SUM,
+	                      CHNG_TYP_OCCU_CD,
+	                      CHNG_DTIL_OCCU_INTTN_CD,
+	                      DTIL_OCCU_INTTN_STDT,
+	                      DTIL_OCCU_INTTN_EDDT,
+	                      DTIL_OCCU_INTTN_ACC_CD,
+	                      DTIL_TERM_USE_YN,
+	                      DTIL_OCCLS_APPTN_UCST_DYS)
+				VALUES ( #dpobCd#,
+			             #typOccuCd#,
+			             #pyspGrdeCd#,
+			             ( SELECT SUBSTR(#typOccuCd#,-4) || LPAD(MAX(TO_NUMBER(SUBSTR(DTIL_OCCU_CLS_DIV_CD,-4)))+1,4,'0')
+						   								FROM BASS0350
+						  								WHERE 
+														DPOB_CD =#dpobCd#
+														AND TYP_OCCU_CD = #typOccuCd#
+														),
+						 (CASE WHEN #pyspGrdeCd# = 'A0060000' 
+                          		THEN #dtilOccuClsNm#
+								ELSE  #dtilOccuClsNm# ||'[' || fcBass0300CDNM(#dpobCd#, #pyspGrdeCd#) || ']'
+                             	END),
+                             		
+			             #dtilOccuClsCtnt#,
+			             #dtilOccuClsUseYn#,
+			             #chngTgtYn#,
+			             #ismt#,
+			             TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+			             #revnAddr#,
+			             #ismt#,
+			             TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+			             #revnAddr#,
+			             #dtilOccuClsOrd#,
+			             (SELECT SUBSTR(#typOccuCd#,-4) || LPAD(MAX(TO_NUMBER(SUBSTR(DTIL_OCCU_CLS_DIV_CD,-4)))+1,4,'0')
+						   FROM BASS0350
+						  WHERE 
+							DPOB_CD =#dpobCd#
+							AND TYP_OCCU_CD = #typOccuCd#) || #pyspGrdeCd#,
+						   #dtilOccuJbfmlDivCd# ,
+						   #bggLogSvcYrNumCd#,
+						   #dtilOcclsApptnUcstCd#,
+					    	#dtilOcclsApptnUcstSum#,
+							#chngTypOccuCd#,
+							#chngDtilOccuInttnCd#,
+							#dtilOccuInttnStdt#,
+							#dtilOccuInttnEddt#,
+							#dtilOccuInttnAccCd#,
+							#dtilTermUseYn#,
+							#dtilOcclsApptnUcstDys#
+				)
+		]]>
+	</insert>
+	
+	
+	<delete id="bass0350DAO.deleteBass0350" parameterClass="bass0350DTO">
+		<![CDATA[
+			DELETE FROM BASS0350 
+			WHERE DPOB_CD = #dpobCd# 
+			  AND TYP_OCCU_CD = #typOccuCd# 
+			  AND DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd# 
+			]]>
+	</delete>
+	
+	<select id="bass0350DAO.selectBass0350List" parameterClass="bass0350DTO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+						SELECT C.DPOB_CD,
+						       (SELECT B.DPOB_NM FROM BASS0100 B WHERE B.DPOB_CD = C.DPOB_CD ) AS DPOB_NM,
+		                       C.TYP_OCCU_CD,
+		                       FCBASS0320CDNM(C.DPOB_CD, C.TYP_OCCU_CD ) as TYP_OCCU_NM,
+		                       C.PYSP_GRDE_CD,
+		                       FCBASS0300CDNM(C.DPOB_CD, C.PYSP_GRDE_CD ) as PYSP_GRDE_NM,
+		                       C.DTIL_OCCU_INTTN_CD,
+		                       C.DTIL_OCCU_CLS_DIV_CD,
+		                       C.DTIL_OCCU_CLS_NM,
+		                       C.DTIL_OCCU_CLS_CTNT,
+		                       C.DTIL_OCCU_CLS_USE_YN,
+		                       C.CHNG_TGT_YN,
+		                       C.KYBDR,
+		                       C.INPT_DT,
+		                       C.INPT_ADDR,
+		                       C.ISMT,
+		                       C.REVN_DT,
+		                       C.REVN_ADDR,
+		                       C.DTIL_OCCU_CLS_ORD,
+		                       C.DTIL_OCCU_JBFML_DIV_CD,
+		                       FCBASS0300CDNM(C.DPOB_CD, C.DTIL_OCCU_JBFML_DIV_CD ) as DTIL_OCCU_JBFML_DIV_NM,
+		                       C.BGG_LOG_SVC_YR_NUM_CD,
+		                       FCBASS0300CDNM(C.DPOB_CD, C.BGG_LOG_SVC_YR_NUM_CD ) as BGG_LOG_SVC_YR_NUM_NM,
+		                       C.DTIL_OCCLS_APPTN_UCST_CD,
+		                       FCBASS0300CDNM(C.DPOB_CD, C.DTIL_OCCLS_APPTN_UCST_CD ) as DTIL_OCCLS_APPTN_UCST_NM,
+	                      	   C.DTIL_OCCLS_APPTN_UCST_SUM,
+	                      	   C.CHNG_TYP_OCCU_CD,
+	                      	   fcBass0320CDNM(C.DPOB_CD, C.CHNG_TYP_OCCU_CD ) as CHNG_TYP_OCCU_NM,
+	                      	   C.CHNG_DTIL_OCCU_INTTN_CD,
+	                      	   fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.CHNG_DTIL_OCCU_INTTN_CD,'1') AS CHNG_DTIL_OCCU_INTTN_NM,
+	                      	   C.DTIL_OCCU_INTTN_STDT,
+	                     	   C.DTIL_OCCU_INTTN_EDDT,
+	                     	   C.DTIL_OCCU_INTTN_ACC_CD,
+	                     	   FCBASS0300CDNM(C.DPOB_CD, C.DTIL_OCCU_INTTN_ACC_CD ) as DTIL_OCCU_INTTN_ACC_NM,
+	                     	   C.DTIL_TERM_USE_YN,
+	                     	   C.DTIL_OCCLS_APPTN_UCST_DYS	                     	   
+						  FROM BASS0350 C
+						WHERE 1=1
+						<isNotNull property="dpobCd">
+						    <isNotEmpty property="dpobCd">
+						        AND C.DPOB_CD = #dpobCd#
+						    </isNotEmpty>
+						</isNotNull>
+						<isNotNull property="typOccuCd">
+						    <isNotEmpty property="typOccuCd">
+						        AND C.TYP_OCCU_CD = #typOccuCd#
+						    </isNotEmpty>
+						</isNotNull>
+						<isNotNull property="dtilOccuClsNm">
+						    <isNotEmpty property="dtilOccuClsNm">
+						        AND C.DTIL_OCCU_CLS_NM like '%' || #dtilOccuClsNm# || '%'
+						    </isNotEmpty>
+						</isNotNull>
+						AND C.DTIL_OCCU_CLS_USE_YN  = NVL(#dtilOccuClsUseYn#,'Y')				
+						ORDER BY C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_CLS_ORD ASC
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>	
+	
+	<select id="bass0350DAO.selectBass0350ListTotCnt" parameterClass="bass0350DTO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0350
+			WHERE 1=1
+			<isNotNull property="dpobCd">
+			    <isNotEmpty property="dpobCd">
+			        AND DPOB_CD = #dpobCd#
+			    </isNotEmpty>
+			</isNotNull>
+			<isNotNull property="typOccuCd">
+			    <isNotEmpty property="typOccuCd">
+			        AND TYP_OCCU_CD = #typOccuCd#
+			    </isNotEmpty>
+			</isNotNull>    
+			<isNotNull property="dtilOccuClsNm">
+				<isNotEmpty property="dtilOccuClsNm">
+				    AND DTIL_OCCU_CLS_NM like '%' || #dtilOccuClsNm# || '%'
+				</isNotEmpty>
+			</isNotNull>
+			AND DTIL_OCCU_CLS_USE_YN  = NVL(#dtilOccuClsUseYn#,'Y')
+	</select>
+	
+	
+	
+	<select id="bass0350DAO.selectBass0450ToBass0350List_D" parameterClass="bass0360SrhVO" resultClass="egovMap">
+		SELECT
+			C.DPOB_CD, C.TYP_OCCU_CD,C.DTIL_OCCU_INTTN_CD,
+			fcBass0320CDNM(C.DPOB_CD, C.TYP_OCCU_CD) AS TYP_OCCU_NM,
+			C.DTIL_OCCU_CLS_NM,
+			C.DTIL_OCCU_CLS_USE_YN  
+		FROM BASS0350 C
+		WHERE C.DPOB_CD=#dpobCd# 
+			<isNotNull property="dtilOccuClsNm">
+			    <isNotEmpty property="dtilOccuClsNm">
+			        AND C.DTIL_OCCU_CLS_NM LIKE '%' || #dtilOccuClsNm# || '%'
+			    </isNotEmpty>
+			</isNotNull>			  
+			AND NOT EXISTS (SELECT 1 FROM BASS0360 D 
+			                 WHERE D.DPOB_CD=#dpobCd#  
+				<isNotEmpty property="deptCd">
+					AND D.DEPT_CD = #deptCd#
+				</isNotEmpty> 
+		    AND  C.DPOB_CD =  D.DPOB_CD 
+			AND C.TYP_OCCU_CD = D.TYP_OCCU_CD
+			AND C.DTIL_OCCU_INTTN_CD = D.DTIL_OCCU_INTTN_CD)
+	</select>	
+	
+	<select id="bass0350DAO.selectBass0450ToBass0350ListTotCnt_S" parameterClass="bass0360SrhVO" resultClass="int">
+		SELECT COUNT(*) totcnt
+			FROM BASS0350 C
+			WHERE  C.DPOB_CD=#dpobCd# 		 
+			    <isNotEmpty property="dtilOccuClsNm">
+			        AND C.DTIL_OCCU_CLS_NM LIKE '%' || #dtilOccuClsNm# || '%'
+			    </isNotEmpty> 
+			AND NOT EXISTS (SELECT 1 FROM BASS0360 D 
+			                 WHERE  D.DPOB_CD=#dpobCd#  
+				<isNotEmpty property="deptCd">
+					AND D.DEPT_CD = #deptCd#
+				</isNotEmpty> 
+		   AND  C.DPOB_CD =  D.DPOB_CD 	
+			AND C.TYP_OCCU_CD = D.TYP_OCCU_CD
+			AND C.DTIL_OCCU_INTTN_CD = D.DTIL_OCCU_INTTN_CD)
+	</select>
+	 
+<select id="bass0350DAO.selectBassP035001ListTotCnt" parameterClass="bass035001vo" resultClass="int">
+	SELECT COUNT(*) totcnt
+			FROM BASS0350
+			WHERE 1=1
+			<isNotNull property="dpobCd">
+			    <isNotEmpty property="dpobCd">
+			        AND DPOB_CD = #dpobCd#
+			    </isNotEmpty>
+			</isNotNull>
+			<isNotNull property="typOccuCd">
+			    <isNotEmpty property="typOccuCd">
+			        AND TYP_OCCU_CD = #typOccuCd#
+			    </isNotEmpty>
+			</isNotNull>    
+			<isNotNull property="dtilOccuClsNm">
+				<isNotEmpty property="dtilOccuClsNm">
+				    AND DTIL_OCCU_CLS_NM = #dtilOccuClsNm#
+				</isNotEmpty>
+			</isNotNull>
+</select>
+<select id="bass0350DAO.selectBassP035001List" parameterClass="bass035001vo"  resultClass="egovMap">	
+						SELECT C.DPOB_CD,
+						       (SELECT B.DPOB_NM FROM BASS0100 B WHERE B.DPOB_CD = C.DPOB_CD ) AS DPOB_NM,
+		                       C.TYP_OCCU_CD,
+		                       FCBASS0320CDNM(C.DPOB_CD, C.TYP_OCCU_CD ) as TYP_OCCU_NM,
+		                       C.PYSP_GRDE_CD,
+		                       FCBASS0300CDNM(C.DPOB_CD, C.PYSP_GRDE_CD ) as PYSP_GRDE_NM,
+		                       C.DTIL_OCCU_INTTN_CD,
+		                       C.DTIL_OCCU_CLS_DIV_CD,
+		                       C.DTIL_OCCU_CLS_NM,
+		                       C.DTIL_OCCU_CLS_CTNT,
+		                       C.DTIL_OCCU_CLS_USE_YN,
+		                       C.CHNG_TGT_YN,
+		                       C.KYBDR,
+		                       C.INPT_DT,
+		                       C.INPT_ADDR,
+		                       C.ISMT,
+		                       C.REVN_DT,
+		                       C.REVN_ADDR,
+		                       C.DTIL_OCCU_CLS_ORD,
+		                       C.DTIL_OCCU_JBFML_DIV_CD,
+		                       FCBASS0300CDNM(C.DPOB_CD, C.DTIL_OCCU_JBFML_DIV_CD ) as DTIL_OCCU_JBFML_DIV_NM,
+		                       C.BGG_LOG_SVC_YR_NUM_CD,
+		                       FCBASS0300CDNM(C.DPOB_CD, C.BGG_LOG_SVC_YR_NUM_CD ) as BGG_LOG_SVC_YR_NUM_NM,
+		                       C.DTIL_OCCLS_APPTN_UCST_CD,
+		                       FCBASS0300CDNM(C.DPOB_CD, C.DTIL_OCCLS_APPTN_UCST_CD ) as DTIL_OCCLS_APPTN_UCST_NM,
+	                      	   C.DTIL_OCCLS_APPTN_UCST_SUM,
+	                      	   C.CHNG_TYP_OCCU_CD,
+	                      	   fcBass0320CDNM(C.DPOB_CD, C.CHNG_TYP_OCCU_CD ) as CHNG_TYP_OCCU_NM,
+	                      	   C.CHNG_DTIL_OCCU_INTTN_CD,
+	                      	   fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.CHNG_DTIL_OCCU_INTTN_CD,'1') AS CHNG_DTIL_OCCU_INTTN_NM,
+	                      	   C.DTIL_OCCU_INTTN_STDT,
+	                     	   C.DTIL_OCCU_INTTN_EDDT,
+	                     	   C.DTIL_OCCU_INTTN_ACC_CD,
+	                     	   FCBASS0300CDNM(C.DPOB_CD, C.DTIL_OCCU_INTTN_ACC_CD ) as DTIL_OCCU_INTTN_ACC_NM,
+	                     	   C.DTIL_TERM_USE_YN,
+	                     	   C.DTIL_OCCLS_APPTN_UCST_DYS	                     	   
+						  FROM BASS0350 C
+						WHERE 1=1
+						<isNotNull property="dpobCd">
+						    <isNotEmpty property="dpobCd">
+						        AND C.DPOB_CD = #dpobCd#
+						    </isNotEmpty>
+						</isNotNull>
+						<isNotNull property="typOccuCd">
+						    <isNotEmpty property="typOccuCd">
+						        AND C.TYP_OCCU_CD = #typOccuCd#
+						    </isNotEmpty>
+						</isNotNull>
+						<isNotNull property="dtilOccuClsNm">
+						    <isNotEmpty property="dtilOccuClsNm">
+						        AND C.DTIL_OCCU_CLS_NM like '%' || #dtilOccuClsNm# || '%'
+						    </isNotEmpty>
+						</isNotNull>			
+						ORDER BY C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_CLS_ORD ASC
+</select>
+<update id="bass0350DAO.updateBassP035001" parameterClass="bass035001vo">
+	<![CDATA[
+			UPDATE BASS0350
+			SET DPOB_CD=#dpobCd#
+				, TYP_OCCU_CD=#typOccuCd#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+				, REVN_ADDR=#revnAddr#
+				 WHERE DPOB_CD=#dpobCd#
+				  AND DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+	]]>
+</update>
+<select id="bass0350DAO.selectXlsBass0350ListTotCnt" parameterClass="bass035001vo" resultClass="int">
+	SELECT COUNT(*) totcnt
+			FROM BASS0350
+			WHERE 1=1
+			<isNotNull property="dpobCd">
+			    <isNotEmpty property="dpobCd">
+			        AND DPOB_CD = #dpobCd#
+			    </isNotEmpty>
+			</isNotNull>
+			<isNotNull property="typOccuCd">
+			    <isNotEmpty property="typOccuCd">
+			        AND TYP_OCCU_CD = #typOccuCd#
+			    </isNotEmpty>
+			</isNotNull> 
+</select>
+<select id="bass0350DAO.selectXlsBass0350List_D" parameterClass="bass0350SerarchVO" resultClass="egovMap">
+						SELECT C.DPOB_CD,
+						       (SELECT B.DPOB_NM FROM BASS0100 B WHERE B.DPOB_CD = C.DPOB_CD ) AS DPOB_NM,
+		                       C.TYP_OCCU_CD,
+		                       FCBASS0320CDNM(C.DPOB_CD, C.TYP_OCCU_CD ) as TYP_OCCU_NM,
+		                       C.PYSP_GRDE_CD,
+		                       FCBASS0300CDNM(C.DPOB_CD, C.PYSP_GRDE_CD ) as PYSP_GRDE_NM,
+		                       C.DTIL_OCCU_INTTN_CD,
+		                       C.DTIL_OCCU_CLS_DIV_CD,
+		                       C.DTIL_OCCU_CLS_NM,
+		                       C.DTIL_OCCU_CLS_CTNT,
+		                       C.DTIL_OCCU_CLS_USE_YN,
+		                       C.CHNG_TGT_YN,
+		                       C.KYBDR,
+		                       C.INPT_DT,
+		                       C.INPT_ADDR,
+		                       C.ISMT,
+		                       C.REVN_DT,
+		                       C.REVN_ADDR,
+		                       C.DTIL_OCCU_CLS_ORD,
+		                       C.DTIL_OCCU_JBFML_DIV_CD,
+		                       FCBASS0300CDNM(C.DPOB_CD, C.DTIL_OCCU_JBFML_DIV_CD ) as DTIL_OCCU_JBFML_DIV_NM,
+		                       C.BGG_LOG_SVC_YR_NUM_CD,
+		                       FCBASS0300CDNM(C.DPOB_CD, C.BGG_LOG_SVC_YR_NUM_CD ) as BGG_LOG_SVC_YR_NUM_NM,
+		                       C.DTIL_OCCLS_APPTN_UCST_CD,
+		                       FCBASS0300CDNM(C.DPOB_CD, C.DTIL_OCCLS_APPTN_UCST_CD ) as DTIL_OCCLS_APPTN_UCST_NM,
+	                      	   C.DTIL_OCCLS_APPTN_UCST_SUM,
+	                      	   C.CHNG_TYP_OCCU_CD,
+	                      	   fcBass0320CDNM(C.DPOB_CD, C.CHNG_TYP_OCCU_CD ) as CHNG_TYP_OCCU_NM,
+	                      	   C.CHNG_DTIL_OCCU_INTTN_CD,
+	                      	   fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.CHNG_DTIL_OCCU_INTTN_CD,'1') AS CHNG_DTIL_OCCU_INTTN_NM,
+	                      	   C.DTIL_OCCU_INTTN_STDT,
+	                     	   C.DTIL_OCCU_INTTN_EDDT,
+	                     	   C.DTIL_OCCU_INTTN_ACC_CD,
+	                     	   FCBASS0300CDNM(C.DPOB_CD, C.DTIL_OCCU_INTTN_ACC_CD ) as DTIL_OCCU_INTTN_ACC_NM,
+	                     	   C.DTIL_TERM_USE_YN,
+	                     	   C.DTIL_OCCLS_APPTN_UCST_DYS	                     	   
+						  FROM BASS0350 C
+						WHERE 1=1
+						<isNotNull property="dpobCd">
+						    <isNotEmpty property="dpobCd">
+						        AND C.DPOB_CD = #dpobCd#
+						    </isNotEmpty>
+						</isNotNull>
+						<isNotNull property="typOccuCd">
+						    <isNotEmpty property="typOccuCd">
+						        AND C.TYP_OCCU_CD = #typOccuCd#
+						    </isNotEmpty>
+						</isNotNull>
+						<isNotNull property="dtilOccuClsNm">
+						    <isNotEmpty property="dtilOccuClsNm">
+						        AND C.DTIL_OCCU_CLS_NM like '%' || #dtilOccuClsNm# || '%'
+						    </isNotEmpty>
+						</isNotNull>
+						AND C.DTIL_OCCU_CLS_USE_YN  = NVL(#dtilOccuClsUseYn#,'Y')			
+						ORDER BY C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_CLS_ORD ASC
+</select>
+<insert id="bass0350DAO.insertXlsBass0350_S" parameterClass="bass035001vo">
+<![CDATA[
+			INSERT INTO BASS0350
+					(  	 DPOB_CD,
+	                     TYP_OCCU_CD,
+	                     PYSP_GRDE_CD,
+	                     DTIL_OCCU_CLS_DIV_CD,
+	                     DTIL_OCCU_CLS_NM,
+	                     DTIL_OCCU_CLS_CTNT,
+	                     DTIL_OCCU_CLS_USE_YN,
+	                     CHNG_TGT_YN,
+	                     KYBDR,
+	                     INPT_DT,
+	                     INPT_ADDR,
+	                     ISMT,
+	                     REVN_DT,
+	                     REVN_ADDR,
+	                     DTIL_OCCU_CLS_ORD,
+	                     DTIL_OCCU_INTTN_CD,
+	                     DTIL_OCCU_JBFML_DIV_CD,
+	                     BGG_LOG_SVC_YR_NUM_CD,
+	                     DTIL_OCCLS_APPTN_UCST_CD,
+	                     DTIL_OCCLS_APPTN_UCST_SUM,
+	                     CHNG_TYP_OCCU_CD,
+	                     CHNG_DTIL_OCCU_INTTN_CD,
+	                     DTIL_OCCU_INTTN_STDT,
+	                     DTIL_OCCU_INTTN_EDDT,
+	                     DTIL_OCCU_INTTN_ACC_CD,
+	                     DTIL_TERM_USE_YN,
+	                     DTIL_OCCLS_APPTN_UCST_DYS)
+				VALUES ( #dpobCd#,
+			             #typOccuCd#,
+			             #pyspGrdeCd#,
+			             ( SELECT SUBSTR(#typOccuCd#,-4) || LPAD(MAX(TO_NUMBER(SUBSTR(DTIL_OCCU_CLS_DIV_CD,-4)))+1,4,'0')
+						   								FROM BASS0350
+						  								WHERE 
+														DPOB_CD =#dpobCd#
+														AND TYP_OCCU_CD = #typOccuCd#
+														),
+						 (CASE WHEN #pyspGrdeCd# = 'A0060000' 
+                          		THEN #dtilOccuClsNm#
+								ELSE  #dtilOccuClsNm# ||'[' || fcBass0300CDNM(#dpobCd#, #pyspGrdeCd#) || ']'
+                             	END),
+                             		
+			             #dtilOccuClsCtnt#,
+			             NVL(#dtilOccuClsUseYn#,'N'),
+			             NVL(#chngTgtYn#,'N'),
+			             #ismt#,
+			             TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+			             #revnAddr#,
+			             #ismt#,
+			             TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+			             #revnAddr#,
+			             #dtilOccuClsOrd#,
+			             (SELECT SUBSTR(#typOccuCd#,-4) || LPAD(MAX(TO_NUMBER(SUBSTR(DTIL_OCCU_CLS_DIV_CD,-4)))+1,4,'0')
+						   FROM BASS0350
+						  WHERE 
+							DPOB_CD =#dpobCd#
+							AND TYP_OCCU_CD = #typOccuCd#) || #pyspGrdeCd#,
+						 #dtilOccuJbfmlDivCd# ,
+						 #bggLogSvcYrNumCd#,
+						 #dtilOcclsApptnUcstCd#,
+					     NVL(#dtilOcclsApptnUcstSum#,'0'),
+						 #chngTypOccuCd#,
+						 #chngDtilOccuInttnCd#,
+						 NVL(#dtilOccuInttnStdt#,TO_CHAR(SYSDATE, 'YYYYMMDD')),
+						 NVL(#dtilOccuInttnEddt#,'99991231'),
+						 #dtilOccuInttnAccCd#,
+						 #dtilTermUseYn#,
+						 #dtilOcclsApptnUcstDys#
+				)
+		]]></insert>
+<update id="bass0350DAO.updateXlsBass0350_S">
+<![CDATA[
+			UPDATE BASS0350 AA
+  			 SET AA.DTIL_OCCU_CLS_USE_YN = 'N',
+     			 AA.DTIL_OCCU_INTTN_EDDT =
+       			   (SELECT TO_CHAR (TO_DATE (BB.DTIL_OCCU_INTTN_STDT, 'YYYYMMDD') - 1,
+                           'YYYYMMDD')
+             			FROM BASS0350 BB
+           					 WHERE  BB.DTIL_OCCU_INTTN_CD = (SELECT CC.DTIL_OCCU_INTTN_CD FROM BASS0350 CC WHERE CC.DTIL_OCCU_CLS_NM = #dtilOccuClsNm#)
+                  				AND BB.DPOB_CD = #dpobCd#)
+ 			WHERE     AA.DPOB_CD = #dpobCd#
+    			   AND AA.DTIL_OCCU_INTTN_CD = #chngDtilOccuInttnCd#
+     			   AND AA.DTIL_OCCU_CLS_USE_YN = 'Y'
+		]]>
+</update>
+<update id="bass0350DAO.updateChrBass0350">
+<![CDATA[
+			UPDATE BASS0350 AA
+  			 SET AA.DTIL_OCCU_CLS_USE_YN = 'N',
+     			 AA.DTIL_OCCU_INTTN_EDDT =
+       			   (SELECT TO_CHAR (TO_DATE (BB.DTIL_OCCU_INTTN_STDT, 'YYYYMMDD') - 1,
+                           'YYYYMMDD')
+             			FROM BASS0350 BB
+           					 WHERE  BB.DTIL_OCCU_INTTN_CD = (SELECT CC.DTIL_OCCU_INTTN_CD 
+           					 									FROM BASS0350 CC 
+           					 										WHERE CC.DTIL_OCCU_CLS_NM = #dtilOccuClsNm#)
+                  				AND BB.DPOB_CD = #dpobCd#)
+ 			WHERE     AA.DPOB_CD = #dpobCd#
+    			   AND AA.DTIL_OCCU_INTTN_CD = #chngDtilOccuInttnCd#
+     			   AND AA.DTIL_OCCU_CLS_USE_YN = 'Y'
+		]]>
+</update>
+<select id="bass0350DAO.selectXlsPsnl2100ToBass0350List_D" parameterClass="bass0350SerarchVO" resultClass="egovMap">
+		SELECT 	DPOB_CD,
+			   	(SELECT B.DPOB_NM FROM BASS0100 B WHERE B.DPOB_CD = DPOB_CD ) AS DPOB_NM,
+		       	TYP_OCCU_CD,
+		       	FCBASS0320CDNM(DPOB_CD, TYP_OCCU_CD ) as TYP_OCCU_NM,
+		       	DTIL_OCCU_INTTN_CD,
+		       	DTIL_OCCU_CLS_DIV_CD,
+		      	DTIL_OCCU_CLS_NM
+ 		 FROM	BASS0350
+ 		WHERE DPOB_CD = #dpobCd#	
+ 			AND DTIL_OCCU_CLS_USE_YN = 'Y'
+</select>
+</sqlMap>

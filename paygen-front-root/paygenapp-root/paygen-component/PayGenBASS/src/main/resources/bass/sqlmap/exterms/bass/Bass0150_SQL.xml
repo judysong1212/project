@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass0150">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="Bass0150DTO" type="com.app.exterms.basis.client.dto.Bass0150DTO"/>
+	
+	
+	
+	<select id="bass0150DAO.getDpobCd" resultClass="egovMap">
+	    SELECT DPOB_CD AS COMM_CD, DPOB_NM AS COMM_CD_NM
+		  FROM BASS0100
+		 ORDER BY DPOB_NM ASC
+	</select>
+	
+	<update id="bass0150DAO.saveBass0150" parameterClass="Bass0150DTO">
+			MERGE INTO BASS0150
+			     USING DUAL ON (DPOB_CD = #dpobCd# AND PAYR_MANG_DEPT_CD = #payrMangDeptCd# )
+			WHEN MATCHED
+			THEN
+			   UPDATE 
+			      SET  PAY_MANGE_DEPT_NM = #payMangeDeptNm#,
+				       DEGTR_RESN_REGN_NUM = replace(#degtrResnRegnNum#,'-',''),
+				       DEGTR_NM = #degtrNm#,
+				       BUSOPR_RGSTN_NUM = replace(#busoprRgstnNum#,'-',''),
+				       CORP_RGSTN_NUM = replace(#corpRgstnNum#,'-',''),
+				       CORP_DIV_CD = #corpDivCd#,
+				       PAY_MANGE_DEPT_ZPCD = replace(#payMangeDeptZpcd#,'-',''),
+				       PAY_MANGE_DEPT_F_NDTN_ADDR = #payMangeDeptFNdtnAddr#,
+				       PAY_MANGE_DEPT_DTL_PATR_ADDR = #payMangeDeptDtlPatrAddr#,
+				       PAY_MANGE_DEPT_PHN_NUM = #payMangeDeptPhnNum#,
+				       PAY_MANGE_DEPT_FAX_NUM = #payMangeDeptFaxNum#,
+				       PAY_MANGE_DEPT_SEAL_WRD_NM = #payMangeDeptSealWrdNm#,
+				       PAY_MANGE_DEPT_SEAL_RFTA_NM = #payMangeDeptSealRftaNm#,
+<isNotNull property="payMangeDeptSealFlNm"><isNotEmpty property="payMangeDeptSealFlNm">PAY_MANGE_DEPT_SEAL_FL_NM = #payMangeDeptSealFlNm#,</isNotEmpty></isNotNull>
+				       PAY_MANGE_DEPT_F_NDTN_USE_YN = #payMangeDeptFNdtnUseYn#,
+				       PAY_MANGE_DEPT_WHLE_PERN_CHRG = #payMangeDeptWhlePernChrg#,
+				       PAY_MANGE_DEPT_DIV_TSK_OFFR = #payMangeDeptDivTskOffr#,
+				       ACC_CD = #accCd#,
+				       HLTH_INSR_SYM = #hlthInsrSym#,
+				       HLTH_INSR_OFCE_SYM = #hlthInsrOfceSym#,
+				       NAT_PENN_SYM = #natPennSym#,
+				       UMYT_INSR_SYM = #umytInsrSym#,
+				       IDTL_ACCDT_INSUR_SYM = #idtlAccdtInsurSym#,
+				       CLLN_DEBR_NM = #cllnDebrNm#,
+				       HMTX_ID = #hmtxId#,
+				       TX_OFFC_CD = #txOffcCd#,
+				       BNK_CD = #bnkCd#,
+				       GRO_TNSR_CD = #groTnsrCd#,
+				       ISMT = #ismt#,
+				       REVN_DT = TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS'),
+				       REVN_ADDR = #revnAddr#					
+			WHEN NOT MATCHED
+			THEN
+			   INSERT 
+						( DPOB_CD,
+	                      PAYR_MANG_DEPT_CD,
+	                      PAY_MANGE_DEPT_NM,
+	                      DEGTR_RESN_REGN_NUM,
+	                      DEGTR_NM,
+	                      BUSOPR_RGSTN_NUM,
+	                      CORP_RGSTN_NUM,
+	                      CORP_DIV_CD,
+	                      PAY_MANGE_DEPT_ZPCD,
+	                      PAY_MANGE_DEPT_F_NDTN_ADDR,
+	                      PAY_MANGE_DEPT_DTL_PATR_ADDR,
+	                      PAY_MANGE_DEPT_PHN_NUM,
+	                      PAY_MANGE_DEPT_FAX_NUM,
+	                      PAY_MANGE_DEPT_SEAL_WRD_NM,
+	                      PAY_MANGE_DEPT_SEAL_RFTA_NM,
+	                      PAY_MANGE_DEPT_SEAL_FL_NM,
+	                      PAY_MANGE_DEPT_F_NDTN_USE_YN,
+	                      PAY_MANGE_DEPT_WHLE_PERN_CHRG,
+	                      PAY_MANGE_DEPT_DIV_TSK_OFFR,
+	                      ACC_CD,
+	                      HLTH_INSR_SYM,
+	                      HLTH_INSR_OFCE_SYM,
+	                      NAT_PENN_SYM,
+	                      UMYT_INSR_SYM,
+	                      IDTL_ACCDT_INSUR_SYM,
+	                      CLLN_DEBR_NM,
+	                      HMTX_ID,
+	                      TX_OFFC_CD,
+	                      BNK_CD,
+	                      GRO_TNSR_CD,
+	                      KYBDR,
+	                      INPT_DT,
+	                      INPT_ADDR,
+	                      ISMT,
+	                      REVN_DT,
+	                      REVN_ADDR)
+				VALUES ( #dpobCd#,
+			             #payrMangDeptCd#,
+			             #payMangeDeptNm#,
+			             replace(#degtrResnRegnNum#,'-',''),
+			             #degtrNm#,
+			             replace(#busoprRgstnNum#,'-',''),
+			             replace(#corpRgstnNum#,'-',''),
+			             #corpDivCd#,
+			             replace(#payMangeDeptZpcd#,'-',''),
+			             #payMangeDeptFNdtnAddr#,
+			             #payMangeDeptDtlPatrAddr#,
+			             #payMangeDeptPhnNum#,
+			             #payMangeDeptFaxNum#,
+			             #payMangeDeptSealWrdNm#,
+			             #payMangeDeptSealRftaNm#,
+			             #payMangeDeptSealFlNm#,
+			             #payMangeDeptFNdtnUseYn#,
+			             #payMangeDeptWhlePernChrg#,
+			             #payMangeDeptDivTskOffr#,
+			             #accCd#,
+			             #hlthInsrSym#,
+			             #hlthInsrOfceSym#,
+			             #natPennSym#,
+			             #umytInsrSym#,
+			             #idtlAccdtInsurSym#,
+			             #cllnDebrNm#,
+			             #hmtxId#,
+			             #txOffcCd#,
+			             #bnkCd#,
+			             #groTnsrCd#,
+			             #ismt#,
+			             TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS'),
+			             #revnAddr#,
+			             #ismt#,
+			             TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS'),
+			             #revnAddr#)
+	</update>
+	
+	
+	
+	<delete id="bass0150DAO.deleteBass0150" parameterClass="Bass0150DTO">
+		<![CDATA[
+			DELETE FROM BASS0150 WHERE DPOB_CD=#dpobCd# AND PAYR_MANG_DEPT_CD = #payrMangDeptCd#
+			]]>
+	</delete>
+	
+	
+	
+	<select id="bass0150DAO.selectBass0150List" parameterClass="Bass0150DTO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+						SELECT C.DPOB_CD || C.PAYR_MANG_DEPT_CD as DPOB_CD_PAYR_MANG_DEPT_CD,
+							   C.DPOB_CD,
+							   (SELECT B.DPOB_NM FROM BASS0100 B WHERE B.DPOB_CD = C.DPOB_CD ) AS DPOB_NM ,
+						       C.PAYR_MANG_DEPT_CD,
+						       C.PAY_MANGE_DEPT_NM,
+						       REGEXP_REPLACE(C.DEGTR_RESN_REGN_NUM,'(^.{6})','\1-') as DEGTR_RESN_REGN_NUM,
+						       C.DEGTR_NM,
+						       DECODE(LENGTH(C.BUSOPR_RGSTN_NUM),10,
+								            SUBSTR(C.BUSOPR_RGSTN_NUM,1,3)||'-'||
+								            SUBSTR(C.BUSOPR_RGSTN_NUM,4,2)||'-'||
+								            SUBSTR(C.BUSOPR_RGSTN_NUM,6,5)
+								          ,C.BUSOPR_RGSTN_NUM) as BUSOPR_RGSTN_NUM,
+						       REGEXP_REPLACE(C.CORP_RGSTN_NUM,'(^.{6})','\1-') as CORP_RGSTN_NUM,
+						       C.CORP_DIV_CD,
+						       REGEXP_REPLACE(C.PAY_MANGE_DEPT_ZPCD,'(^.{3})','\1-') as PAY_MANGE_DEPT_ZPCD,
+						       C.PAY_MANGE_DEPT_F_NDTN_ADDR,
+						       C.PAY_MANGE_DEPT_DTL_PATR_ADDR,
+						       C.PAY_MANGE_DEPT_PHN_NUM,
+						       C.PAY_MANGE_DEPT_FAX_NUM,
+						       C.PAY_MANGE_DEPT_SEAL_WRD_NM,
+						       C.PAY_MANGE_DEPT_SEAL_RFTA_NM,
+						       C.PAY_MANGE_DEPT_SEAL_FL_NM,
+						       C.PAY_MANGE_DEPT_F_NDTN_USE_YN,
+						       C.PAY_MANGE_DEPT_WHLE_PERN_CHRG,
+						       (SELECT D.USR_NM FROM SYSM0100 D WHERE D.USR_ID = C.PAY_MANGE_DEPT_WHLE_PERN_CHRG)AS PAY_MANGE_DEPT_WHLE_PERN_NM,
+						       C.PAY_MANGE_DEPT_DIV_TSK_OFFR,
+						       (SELECT D.USR_NM FROM SYSM0100 D WHERE D.USR_ID = C.PAY_MANGE_DEPT_DIV_TSK_OFFR)AS PAY_MANGE_DEPT_DIV_TSK_NM,
+						       C.ACC_CD,
+						       C.HLTH_INSR_SYM,
+						       C.NAT_PENN_SYM,
+						       C.UMYT_INSR_SYM,
+						       C.CLLN_DEBR_NM,
+						       C.HMTX_ID,
+						       C.TX_OFFC_CD,
+						       C.BNK_CD,
+						       C.GRO_TNSR_CD,
+						       C.KYBDR,
+						       C.INPT_DT,
+						       C.INPT_ADDR,
+						       C.ISMT,
+						       C.REVN_DT,
+						       C.REVN_ADDR,
+						       C.HLTH_INSR_OFCE_SYM,
+						       C.IDTL_ACCDT_INSUR_SYM
+						  FROM BASS0150 C
+						WHERE 1=1
+						<isNotNull property="payMangeDeptNm">
+						    <isNotEmpty property="payMangeDeptNm">
+						        AND C.PAY_MANGE_DEPT_NM like '%'|| #payMangeDeptNm# || '%'
+						    </isNotEmpty>
+						</isNotNull>
+						<isNotNull property="degtrNm">
+						    <isNotEmpty property="degtrNm">
+						        AND C.DEGTR_NM like '%'|| #degtrNm# || '%'
+						    </isNotEmpty>
+						</isNotNull>
+						ORDER BY C.DPOB_CD, C.PAYR_MANG_DEPT_CD ASC
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+			</select>	
+			<select id="bass0150DAO.selectBass0150ListTotCnt" parameterClass="Bass0150DTO" resultClass="int">
+					SELECT COUNT(*) totcnt
+					FROM BASS0150
+					WHERE 1=1
+					<isNotNull property="payMangeDeptNm">
+					    <isNotEmpty property="payMangeDeptNm">
+					        AND PAY_MANGE_DEPT_NM like '%'|| #payMangeDeptNm# || '%'
+					    </isNotEmpty>
+					</isNotNull>
+					<isNotNull property="degtrNm">
+					    <isNotEmpty property="degtrNm">
+					        AND DEGTR_NM like '%'|| #degtrNm# || '%'
+					    </isNotEmpty>
+					</isNotNull>
+	</select>
+
+</sqlMap>

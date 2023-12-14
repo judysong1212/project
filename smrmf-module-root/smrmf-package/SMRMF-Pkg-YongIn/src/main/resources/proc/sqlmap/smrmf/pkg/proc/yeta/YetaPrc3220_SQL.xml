@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="YetaPrc3220">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="yetaPrc3220SrhVO" type="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta3220SrhVO"/>
+	
+	<resultMap id="yetaPrc3220" class="com.app.smrmf.infc.yearendtax.server.vo.InfcPkgYeta3220VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="edacRvyy" column="EDAC_RVYY" columnIndex="2"/>
+		<result property="settGbcd" column="SETT_GBCD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="rsnoNumb" column="RSNO_NUMB" columnIndex="5"/>
+		<result property="relhCode" column="RELH_CODE" columnIndex="6"/>
+		<result property="kornName" column="KORN_NAME" columnIndex="7"/>
+		<result property="frnrCode" column="FRNR_CODE" columnIndex="8"/>
+		<result property="baseDdyn" column="BASE_DDYN" columnIndex="9"/>
+		<result property="psclDdyn" column="PSCL_DDYN" columnIndex="10"/>
+		<result property="brddCtyn" column="BRDD_CTYN" columnIndex="11"/>
+		<result property="faddCtyn" column="FADD_CTYN" columnIndex="12"/>
+		<result property="rpctDdyn" column="RPCT_DDYN" columnIndex="13"/>
+		<result property="bithDdyn" column="BITH_DDYN" columnIndex="14"/>
+		<result property="pantOnyn" column="PANT_ONYN" columnIndex="15"/>
+		<result property="insuPayr" column="INSU_PAYR" columnIndex="16"/>
+		<result property="insuRtyr" column="INSU_RTYR" columnIndex="17"/>
+		<result property="psclIurr" column="PSCL_IURR" columnIndex="18"/>
+		<result property="mediCost" column="MEDI_COST" columnIndex="19"/>
+		<result property="educCost" column="EDUC_COST" columnIndex="20"/>
+		<result property="cdteCard" column="CDTE_CARD" columnIndex="21"/>
+		<result property="cashRece" column="CASH_RECE" columnIndex="22"/>
+		<result property="jiblCard" column="JIBL_CARD" columnIndex="23"/>
+		<result property="grpyAmnt" column="GRPY_AMNT" columnIndex="24"/>
+		<result property="mgntStvd" column="MGNT_STVD" columnIndex="25"/>
+		<result property="ctrbAmnt" column="CTRB_AMNT" columnIndex="26"/>
+		<result property="insuFetc" column="INSU_FETC" columnIndex="27"/>
+		<result property="insuRtet" column="INSU_RTET" columnIndex="28"/>
+		<result property="psclIurt" column="PSCL_IURT" columnIndex="29"/>
+		<result property="mediExps" column="MEDI_EXPS" columnIndex="30"/>
+		<result property="educOtec" column="EDUC_OTEC" columnIndex="31"/>
+		<result property="cdteCdec" column="CDTE_CDEC" columnIndex="32"/>
+		<result property="jiblCdec" column="JIBL_CDEC" columnIndex="33"/>
+		<result property="grpyAtec" column="GRPY_ATEC" columnIndex="34"/>
+		<result property="mgntSdec" column="MGNT_SDEC" columnIndex="35"/>
+		<result property="ctrbAmec" column="CTRB_AMEC" columnIndex="36"/>
+		<result property="kybdr" column="KYBDR" columnIndex="37"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="38"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="39"/>
+		<result property="ismt" column="ISMT" columnIndex="40"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="41"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="42"/>
+	</resultMap>
+	
+	<insert id="yetaPrc3220DAO.insertYetaPrc3220_S">
+		<![CDATA[
+			INSERT INTO YETA3220 
+				( DPOB_CD
+				  , EDAC_RVYY
+				  , SETT_GBCD
+				  , SYSTEMKEY
+				  , RSNO_NUMB
+				  , RELH_CODE
+				  , KORN_NAME
+				  , FRNR_CODE
+				  , BASE_DDYN
+				  , PSCL_DDYN
+				  , BRDD_CTYN
+				  , FADD_CTYN
+				  , RPCT_DDYN
+				  , BITH_DDYN
+				  , PANT_ONYN
+				  , INSU_PAYR
+				  , INSU_RTYR
+				  , PSCL_IURR
+				  , MEDI_COST
+				  , EDUC_COST
+				  , CDTE_CARD
+				  , CASH_RECE
+				  , JIBL_CARD
+				  , GRPY_AMNT
+				  , MGNT_STVD
+				  , CTRB_AMNT
+				  , INSU_FETC
+				  , INSU_RTET
+				  , PSCL_IURT
+				  , MEDI_EXPS
+				  , EDUC_OTEC
+				  , CDTE_CDEC
+				  , JIBL_CDEC
+				  , GRPY_ATEC
+				  , MGNT_SDEC
+				  , CTRB_AMEC
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #edacRvyy#
+				  , #settGbcd#
+				  , #systemkey#
+				  , #rsnoNumb#
+				  , #relhCode#
+				  , #kornName#
+				  , #frnrCode#
+				  , #baseDdyn#
+				  , #psclDdyn#
+				  , #brddCtyn#
+				  , #faddCtyn#
+				  , #rpctDdyn#
+				  , #bithDdyn#
+				  , #pantOnyn#
+				  , #insuPayr#
+				  , #insuRtyr#
+				  , #psclIurr#
+				  , #mediCost#
+				  , #educCost#
+				  , #cdteCard#
+				  , #cashRece#
+				  , #jiblCard#
+				  , #grpyAmnt#
+				  , #mgntStvd#
+				  , #ctrbAmnt#
+				  , #insuFetc#
+				  , #insuRtet#
+				  , #psclIurt#
+				  , #mediExps#
+				  , #educOtec#
+				  , #cdteCdec#
+				  , #jiblCdec#
+				  , #grpyAtec#
+				  , #mgntSdec#
+				  , #ctrbAmec#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<!-- yeta0100 화면 대상자 가족사항  -->
+	<insert id="yetaPrc3220DAO.fnPayr06430_PAYR410_2014_CREATE_Insert_S">
+		<![CDATA[
+			INSERT INTO YETA3220 
+				(   DPOB_CD
+				  , EDAC_RVYY
+				  , SETT_GBCD
+				  , SYSTEMKEY
+				  , RSNO_NUMB
+				  , RELH_CODE
+				  , KORN_NAME
+				  , PSCL_DDYN
+				  , BASE_DDYN 
+				  , FRNR_CODE
+				  , PANT_ONYN 
+				  , BRDD_CTYN
+				  , RPCT_DDYN
+				  , BITH_DDYN 
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+				  SELECT         AA.DPOB_CD 
+				              , AA.EDAC_RVYY    
+							  ,   AA.SETT_GBCD                                  
+				              ,   AA.SYSTEMKEY                                   
+				              ,   BB.RSNO_NUMB               
+				              ,  BB.FAMY_RELA_DIV_CD                                    
+				              ,  BB.HAN_NM                                   
+				              ,   BB.DABPN_DDUC_YN               
+				          , BB.BASE_DDYN                                        
+				          ,DECODE(SUBSTR(BB.RSNO_NUMB, 7, 1), '5', '9', DECODE(SUBSTR(BB.RSNO_NUMB, 7, 1), '6', '9', '1'))    
+				          ,('') AS PANT_ONYN                                   
+				          , BB.BRDD_CTYN                                                             
+				          , BB.RPCT_DDYN                                                            
+				          , BB.BITH_DDYN
+				          , #kybdr#
+						  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						  , #inptAddr#
+						  , #ismt#
+						  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						  , #revnAddr#                                                               
+				          FROM                                                            
+				          YETA2000 AA,                                                        
+				           (                                                              
+				           SELECT  A02.DPOB_CD,                                                      
+				           A02.SYSTEMKEY,   A02.FAMY_RELA_DIV_CD,                                           
+				           (CASE WHEN A02.DABPN_DDUC_YN = 'Y' THEN '1'  WHEN A02.FAMY_RELA_DIV_CD = 'A0190002' THEN '1'                 
+				           ELSE CASE WHEN                                               
+				                          (CASE WHEN (SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,7,1)) IN ('3','4') THEN '20' || SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6)  
+				                                ELSE '19' ||  SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6) END) <= '19551231'  
+				                     THEN '1' 
+				                     ELSE  CASE WHEN  A02.FAMY_RELA_DIV_CD = 'A0190100'             
+				                                THEN  CASE WHEN (CASE WHEN (SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,7,1)) IN ('3','4') THEN '20' || SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6)  
+				                                                      ELSE '19' ||  SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6) END) >= '19980101'    
+				                                           THEN '1'  ELSE '0' END
+				                                ELSE  CASE WHEN (CASE WHEN (SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,7,1)) IN ('3','4') THEN '20' || SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6)  
+				                                                       ELSE '19' ||  SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6) END) >= '19950101'    
+				                                            THEN '1'  ELSE '0' END         
+				           END       END          END ) AS BASE_DDYN,                          
+				           A02.HAN_NM,                                             
+				           A02.PAY_FAMY_RESN_REGN_NUM AS RSNO_NUMB,                                             
+				           DECODE(TRIM(A02.DABPN_DDUC_YN),'Y','1','0') AS  DABPN_DDUC_YN  ,         
+				            ('0') AS  BRDD_CTYN ,      
+				               ( CASE WHEN (CASE WHEN (SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,7,1)) IN ('3','4') THEN '20' || SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6)   
+				                                    ELSE '19' ||  SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6) END) <= '19451231'     
+				                          THEN '1'  ELSE '0' END   ) AS  RPCT_DDYN , 
+				  
+				              ( '0' ) AS  BITH_DDYN  
+				           FROM PSNL0100 A01, PAYR0530 A02                                          
+				           WHERE A01.SYSTEMKEY = A02.SYSTEMKEY                    
+				            AND A02.FAMY_RELA_DIV_CD != 'A0190001'    
+				         	]]>  
+				       <isNotEmpty prepend="AND" property="systemkey" >
+                         A01.SYSTEMKEY=#systemkey#
+                       </isNotEmpty>                           
+				 
+				     <![CDATA[
+				 
+				           UNION                                                              
+				           SELECT   
+						   A01.DPOB_CD,                                                          
+				           A01.SYSTEMKEY,  
+						   ('A0190001') AS DABTY_DIV_CD,                        
+				           ('1') AS BASE_DDYN ,                                                        
+				           A01.HAN_NM,                                                 
+				           A01.RESN_REGN_NUM,                                                 
+				           (CASE WHEN A02.DABTY_DIV_CD IS NULL THEN '0'                      
+				           ELSE   DECODE(A02.DABTY_DIV_CD ,'A0370000','0','1') END) AS  OBST_GBCD     
+				          , ('0') AS BRDD_CTYN                                                             
+				          , ('0') AS RPCT_DDYN                                                            
+				          , ('0') AS BITH_DDYN                                                            
+				           FROM PSNL0100 A01, PSNL0113 A02                                                      
+				           WHERE A01.SYSTEMKEY = A02.SYSTEMKEY(+)   
+						     AND A01.DPOB_CD = A02.DPOB_CD(+)   
+						     
+						     	]]>  
+					 
+                          <isNotEmpty prepend="AND" property="systemkey" >
+                         A01.SYSTEMKEY=#systemkey#
+                       </isNotEmpty>                           
+	 
+				 <![CDATA[
+				          ) BB                                                            
+				          WHERE AA.DPOB_CD = BB.DPOB_CD
+						   AND  AA.SYSTEMKEY = BB.SYSTEMKEY                          
+				           AND BB.RSNO_NUMB IS NOT NULL  
+				           AND EDAC_RVYY = #edacRvyy#
+				           AND  SETT_GBCD = #settGbcd#
+				           AND AA.DPOB_CD=#dpobCd# 
+                    ]]>  
+                        AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+                                            WHERE     C.DPOB_CD = AA.DPOB_CD
+						                        AND C.DEPT_CD = AA.DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(AA.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(AA.DTIL_OCCU_INTTN_CD,'TT')
+                                        	    <isNotEmpty prepend="AND" property="deptCd" >
+							                       C.DEPT_CD = #deptCd#
+							                   </isNotEmpty>
+                                          ) 
+                       <isNotEmpty prepend="AND" property="businCd" >
+                         AA.BUSIN_CD=#businCd#
+                       </isNotEmpty> 
+                       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+                         AA.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+                       </isNotEmpty> 
+                       <isNotEmpty prepend="AND" property="emymtDivCd" >
+                         AA.EMYMT_DIV_CD=#emymtDivCd#
+                         </isNotEmpty>  
+                     <isNotEmpty prepend="AND" property="typOccuCd" >
+                      AA.TYP_OCCU_CD = #typOccuCd#
+                   </isNotEmpty> 
+                     <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+                      AA.DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#
+                   </isNotEmpty> 
+                   <isEqual prepend="AND" property="addCheck" compareValue="ADD"> 
+                    NOT EXISTS (
+                       SELECT * FROM   YETA3220 KK01
+                        WHERE KK01.DPOB_CD = AA.DPOB_CD
+                          AND KK01.EDAC_RVYY = #edacRvyy#
+                          AND KK01.SETT_GBCD = #settGbcd#
+                          AND KK01.EDAC_RVYY = AA.EDAC_RVYY
+                           AND KK01.SETT_GBCD =  AA.SETT_GBCD
+                          AND KK01.SYSTEMKEY =  AA.SYSTEMKEY 
+                    )
+                  </isEqual> 
+		 
+	</insert>
+	
+	
+	<!-- yeta0100 화면 업데이트 가족사항 업데이트 410 고용/건강보험료외 업데이트 -->
+		<update id="yetaPrc3220DAO.fnPayr06430_PAYR410_2014_INSU_FETC_Update_S">
+		<![CDATA[
+			  UPDATE YETA3220                                         
+           SET INSU_FETC = (SELECT (SPCI_BHLH + SPCI_HHLH + SPCI_BEPF + SPCI_JEPF)                         
+                             FROM  YETA2000         
+                             WHERE YETA2000.DPOB_CD = YETA3220.DPOB_CD
+                             AND YETA2000.EDAC_RVYY =  YETA3220.EDAC_RVYY          
+                             AND YETA2000.SETT_GBCD =  YETA3220.SETT_GBCD           
+                             AND YETA2000.SYSTEMKEY =  YETA3220.SYSTEMKEY )             
+    WHERE EXISTS                                  
+          (                                             
+          SELECT 1                                      
+            FROM (
+              SELECT BB01.*, BB02.PAYR_MANG_DEPT_CD FROM  PSNL0100 BB01,PAYR0500 BB02
+              WHERE BB01.DPOB_CD = BB02.DPOB_CD  
+                AND BB01.SYSTEMKEY = BB02.SYSTEMKEY  
+               )  PSNL0100                        
+          WHERE SUBSTR(PSNL0100.RESN_REGN_NUM,7,1) IN  ('2','1')    
+            AND PSNL0100.SYSTEMKEY = YETA3220.SYSTEMKEY  
+            AND PSNL0100.DPOB_CD = YETA3220.DPOB_CD 
+            AND YETA3220.RELH_CODE = 'A0190001'   
+            AND YETA3220.DPOB_CD=#dpobCd#
+            AND YETA3220.EDAC_RVYY=#edacRvyy#
+            AND YETA3220.SETT_GBCD=#settGbcd#
+            ]]>
+             <isNotEmpty prepend="AND" property="systemkey" >
+                         YETA3220.SYSTEMKEY=#systemkey#
+             </isNotEmpty> 
+                 AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+                                            WHERE     C.DPOB_CD = PSNL0100.DPOB_CD
+						                        AND C.DEPT_CD = PSNL0100.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(PSNL0100.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(PSNL0100.DTIL_OCCU_INTTN_CD,'TT')
+                                        	     <isNotEmpty prepend="AND" property="deptCd" >
+							                       C.DEPT_CD = #deptCd#
+							                   </isNotEmpty>
+                                          ) 
+                       <isNotEmpty prepend="AND" property="businCd" >
+                         PSNL0100.BUSIN_CD=#businCd#
+                       </isNotEmpty> 
+                       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+                         PSNL0100.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+                       </isNotEmpty> 
+                       <isNotEmpty prepend="AND" property="emymtDivCd" >
+                         PSNL0100.EMYMT_DIV_CD=#emymtDivCd#
+                         </isNotEmpty>  
+                     <isNotEmpty prepend="AND" property="typOccuCd" >
+                      PSNL0100.TYP_OCCU_CD = #typOccuCd#
+                   </isNotEmpty> 
+                     <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+                      PSNL0100.DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#
+                   </isNotEmpty> 
+                   
+             <![CDATA[
+            GROUP BY PSNL0100.SYSTEMKEY  ) 
+			 ]]>	
+	</update>
+	
+		
+		<!-- 부녀자공제란 여성근로소득자 본인인경우 업데이트 처리 -->
+		<update id="yetaPrc3220DAO.fnPayr06430_PAYR410_2014_CREATE_Update_S">
+		<![CDATA[
+			  UPDATE YETA3220                                         
+           SET FADD_CTYN = '1'                 
+	    WHERE EXISTS                                  
+	          (                                             
+	          SELECT 1                                      
+	            FROM  (
+              SELECT BB01.*, BB02.PAYR_MANG_DEPT_CD FROM  PSNL0100 BB01,PAYR0500 BB02
+              WHERE BB01.DPOB_CD = BB02.DPOB_CD  
+                AND BB01.SYSTEMKEY = BB02.SYSTEMKEY  
+               )  PSNL0100                       
+	          WHERE SUBSTR(PSNL0100.RESN_REGN_NUM,7,1) IN  ('2')    
+	            AND PSNL0100.SYSTEMKEY = YETA3220.SYSTEMKEY  
+	            AND PSNL0100.DPOB_CD = YETA3220.DPOB_CD 
+	            AND YETA3220.RELH_CODE = 'A0190001'   
+	            AND YETA3220.DPOB_CD=#dpobCd#
+	            AND YETA3220.EDAC_RVYY=#edacRvyy#
+	            AND YETA3220.SETT_GBCD=#settGbcd#
+	            ]]>
+	             <isNotEmpty prepend="AND" property="systemkey" >
+	                         YETA3220.SYSTEMKEY=#systemkey#
+	             </isNotEmpty> 
+	                 AND EXISTS  (
+	                         SELECT  C.DPOB_CD,
+	                                 C.DTIL_OCCU_INTTN_CD,
+	                                 C.TYP_OCCU_CD,
+	                                 C.DEPT_CD FROM 
+	                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+	                                            WHERE     C.DPOB_CD = PSNL0100.DPOB_CD
+							                        AND C.DEPT_CD = PSNL0100.CURR_AFFN_DEPT_CD
+							                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(PSNL0100.TYP_OCCU_CD,'TT') 
+	                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(PSNL0100.DTIL_OCCU_INTTN_CD,'TT')
+	                                        	     <isNotEmpty prepend="AND" property="deptCd" >
+							                       C.DEPT_CD = #deptCd#
+							                   </isNotEmpty>
+	                                          ) 
+	                       <isNotEmpty prepend="AND" property="businCd" >
+	                         PSNL0100.BUSIN_CD=#businCd#
+	                       </isNotEmpty> 
+	                       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+	                         PSNL0100.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+	                       </isNotEmpty> 
+	                     <isNotEmpty prepend="AND" property="typOccuCd" >
+                      PSNL0100.TYP_OCCU_CD = #typOccuCd#
+                   </isNotEmpty> 
+                     <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+                      PSNL0100.DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#
+                   </isNotEmpty> 
+	             <![CDATA[
+	            GROUP BY PSNL0100.SYSTEMKEY  ) 
+			 ]]>	
+	</update>
+	
+		
+	
+	
+	<update id="yetaPrc3220DAO.updateYetaPrc3220_S">
+		<![CDATA[
+			UPDATE YETA3220
+			SET DPOB_CD=#dpobCd#
+				, EDAC_RVYY=#edacRvyy#
+				, SETT_GBCD=#settGbcd#
+				, SYSTEMKEY=#systemkey#
+				, RSNO_NUMB=#rsnoNumb#
+				, RELH_CODE=#relhCode#
+				, KORN_NAME=#kornName#
+				, FRNR_CODE=#frnrCode#
+				, BASE_DDYN=#baseDdyn#
+				, PSCL_DDYN=#psclDdyn#
+				, BRDD_CTYN=#brddCtyn#
+				, FADD_CTYN=#faddCtyn#
+				, RPCT_DDYN=#rpctDdyn#
+				, BITH_DDYN=#bithDdyn#
+				, PANT_ONYN=#pantOnyn#
+				, INSU_PAYR=#insuPayr#
+				, INSU_RTYR=#insuRtyr#
+				, PSCL_IURR=#psclIurr#
+				, MEDI_COST=#mediCost#
+				, EDUC_COST=#educCost#
+				, CDTE_CARD=#cdteCard#
+				, CASH_RECE=#cashRece#
+				, JIBL_CARD=#jiblCard#
+				, GRPY_AMNT=#grpyAmnt#
+				, MGNT_STVD=#mgntStvd#
+				, CTRB_AMNT=#ctrbAmnt#
+				, INSU_FETC=#insuFetc#
+				, INSU_RTET=#insuRtet#
+				, PSCL_IURT=#psclIurt#
+				, MEDI_EXPS=#mediExps#
+				, EDUC_OTEC=#educOtec#
+				, CDTE_CDEC=#cdteCdec#
+				, JIBL_CDEC=#jiblCdec#
+				, GRPY_ATEC=#grpyAtec#
+				, MGNT_SDEC=#mgntSdec#
+				, CTRB_AMEC=#ctrbAmec#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND RSNO_NUMB=#rsnoNumb#
+				]]>
+	</update>
+	
+	<update id="yetaPrc3220DAO.fnPayr06430_PAYR410_2015_01_Update">
+		<![CDATA[
+			UPDATE YETA3220
+			SET   INSU_RTYR=#insuRtyr#
+				, MEDI_COST=#mediCost#
+				, EDUC_COST=#educCost#
+				, CDTE_CARD=#cdteCard#
+				, JIBL_CARD=#jiblCard#
+				, CASH_RECE=#cashRece#
+				, GRPY_AMNT=#grpyAmnt#
+				, MGNT_STVD=#mgntStvd#
+				, CTRB_AMNT=#ctrbAmnt# 
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND RSNO_NUMB=#rsnoNumb#
+				]]>
+	</update>
+	
+	
+	<delete id="yetaPrc3220DAO.deleteYetaPrc3220_S">
+		<![CDATA[
+			DELETE FROM YETA3220 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND RSNO_NUMB=#rsnoNumb#
+				]]>
+	</delete>
+	   
+	<!-- yeta0100 대상자관리 화면- 삭제  -->
+		<delete id="yetaPrc3220DAO.fnPayr06430_PAYR410_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3220 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd# 
+				]]>
+				 <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                   </isNotEmpty> 
+	</delete>
+	
+	
+	<select id="yetaPrc3220DAO.selectYetaPrc3220_S" resultMap="yetaPrc3220">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, EDAC_RVYY
+				, SETT_GBCD
+				, SYSTEMKEY
+				, RSNO_NUMB
+				, RELH_CODE
+				, KORN_NAME
+				, FRNR_CODE
+				, BASE_DDYN
+				, PSCL_DDYN
+				, BRDD_CTYN
+				, FADD_CTYN
+				, RPCT_DDYN
+				, BITH_DDYN
+				, PANT_ONYN
+				, INSU_PAYR
+				, INSU_RTYR
+				, PSCL_IURR
+				, MEDI_COST
+				, EDUC_COST
+				, CDTE_CARD
+				, CASH_RECE
+				, JIBL_CARD
+				, GRPY_AMNT
+				, MGNT_STVD
+				, CTRB_AMNT
+				, INSU_FETC
+				, INSU_RTET
+				, PSCL_IURT
+				, MEDI_EXPS
+				, EDUC_OTEC
+				, CDTE_CDEC
+				, JIBL_CDEC
+				, GRPY_ATEC
+				, MGNT_SDEC
+				, CTRB_AMEC
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YETA3220
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND RSNO_NUMB=#rsnoNumb#
+				]]>
+	</select>
+	
+	<!-- 대상자정보에 따른 인정공제 리스트 쿼리 -->
+	<select id="yetaPrc3220DAO.selectYetaPrc0300To3220List" parameterClass="yetaPrc3220SrhVO" resultClass="egovMap">
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+					SELECT
+									DPOB_CD
+									, EDAC_RVYY
+									, SETT_GBCD
+									, SYSTEMKEY
+									, RSNO_NUMB
+									, RELH_CODE
+									, KORN_NAME
+									, FRNR_CODE
+									, BASE_DDYN
+									, PSCL_DDYN
+									, BRDD_CTYN
+									, FADD_CTYN
+									, RPCT_DDYN
+									, BITH_DDYN
+									, PANT_ONYN
+									, INSU_PAYR
+									, INSU_RTYR
+									, PSCL_IURR
+									, MEDI_COST
+									, EDUC_COST
+									, CDTE_CARD
+									, CASH_RECE
+									, JIBL_CARD
+									, GRPY_AMNT
+									, MGNT_STVD
+									, CTRB_AMNT
+									, INSU_FETC
+									, INSU_RTET
+									, PSCL_IURT
+									, MEDI_EXPS
+									, EDUC_OTEC
+									, CDTE_CDEC
+									, JIBL_CDEC
+									, GRPY_ATEC
+									, MGNT_SDEC
+									, CTRB_AMEC
+									, KYBDR
+									, INPT_DT
+									, INPT_ADDR
+									, ISMT
+									, REVN_DT
+									, REVN_ADDR
+							FROM YETA3220
+					WHERE 
+					<isNotEmpty property="dpobCd" >
+						DPOB_CD=#dpobCd#
+			 		</isNotEmpty>
+					<isNotEmpty property="systemkey" >
+						SYSTEMKEY=#systemkey#
+					</isNotEmpty> 
+						ORDER BY 
+							DPOB_CD DESC
+								, SYSTEMKEY DESC
+								, SETT_GBCD DESC
+								, SYSTEMKEY DESC
+								, RSNO_NUMB DESC
+			
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM > #firstIndex#
+	]]>
+	</select>
+	
+	<!-- 대상자정보 선택에 따른 인적공제명세 수 구하는 쿼리 -->
+	<select id="yetaPrc3220DAO.selectYetaPrc0300To3220ListTotCnt_S" parameterClass="yetaPrc3220SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3220
+			WHERE 
+				<isNotEmpty property="dpobCd" >
+					DPOB_CD=#dpobCd#
+			 	</isNotEmpty>
+				<isNotEmpty property="systemkey" >
+					SYSTEMKEY=#systemkey#
+				</isNotEmpty> 
+	</select>
+	
+	<select id="yetaPrc3220DAO.selectYetaPrc3220List_D" parameterClass="yetaPrc3220SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, EDAC_RVYY
+								, SETT_GBCD
+								, SYSTEMKEY
+								, RSNO_NUMB
+								, RELH_CODE
+								, KORN_NAME
+								, FRNR_CODE
+								, BASE_DDYN
+								, PSCL_DDYN
+								, BRDD_CTYN
+								, FADD_CTYN
+								, RPCT_DDYN
+								, BITH_DDYN
+								, PANT_ONYN
+								, INSU_PAYR
+								, INSU_RTYR
+								, PSCL_IURR
+								, MEDI_COST
+								, EDUC_COST
+								, CDTE_CARD
+								, CASH_RECE
+								, JIBL_CARD
+								, GRPY_AMNT
+								, MGNT_STVD
+								, CTRB_AMNT
+								, INSU_FETC
+								, INSU_RTET
+								, PSCL_IURT
+								, MEDI_EXPS
+								, EDUC_OTEC
+								, CDTE_CDEC
+								, JIBL_CDEC
+								, GRPY_ATEC
+								, MGNT_SDEC
+								, CTRB_AMEC
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YETA3220
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, EDAC_RVYY DESC
+							, SETT_GBCD DESC
+							, SYSTEMKEY DESC
+							, RSNO_NUMB DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="yetaPrc3220DAO.selectYetaPrc3220ListTotCnt_S" parameterClass="yetaPrc3220SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3220
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+		<select id="yetaPrc3220DAO.fnPayr06430_PAYR410_2014_SelectAll" parameterClass="yetaPrc3220SrhVO" resultClass="egovMap">
+ SELECT
+								DPOB_CD
+								, EDAC_RVYY
+								, SETT_GBCD
+								, SYSTEMKEY
+								, RSNO_NUMB
+								, RELH_CODE
+								, KORN_NAME
+								, FRNR_CODE
+								, BASE_DDYN
+								, PSCL_DDYN
+								, BRDD_CTYN
+								, FADD_CTYN
+								, RPCT_DDYN
+								, BITH_DDYN
+								, PANT_ONYN
+								, INSU_PAYR
+								, INSU_RTYR
+								, PSCL_IURR
+								, MEDI_COST
+								, EDUC_COST
+								, CDTE_CARD
+								, CASH_RECE
+								, JIBL_CARD
+								, GRPY_AMNT
+								, MGNT_STVD
+								, CTRB_AMNT
+								, INSU_FETC
+								, INSU_RTET
+								, PSCL_IURT
+								, MEDI_EXPS
+								, EDUC_OTEC
+								, CDTE_CDEC
+								, JIBL_CDEC
+								, GRPY_ATEC
+								, MGNT_SDEC
+								, CTRB_AMEC
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YETA3220
+			        WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey# 
+				 ORDER BY RELH_CODE ASC ,  SUBSTR(RSNO_NUMB, 1, 6) 	ASC			
+	</select>
+	
+	
+
+</sqlMap>

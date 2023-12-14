@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0116">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="psnl0116Dto" type="com.app.exterms.personal.client.dto.Psnl0116DTO"/>
+	<typeAlias  alias="psnl0116SerarchVO" type="com.app.exterms.personal.server.vo.Psnl0116DefaultVO"/>
+	<typeAlias  alias="psnl0116Vo" type="com.app.exterms.personal.server.vo.Psnl0116VO"/>
+	
+	<!-- 
+	<resultMap id="psnl0116" class="com.app.exterms.personal.server.vo.Psnl0116VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="acadAbtySeilNum" column="ACAD_ABTY_SEIL_NUM" columnIndex="3"/>
+		<result property="etncItshlDt" column="ETNC_ITSHL_DT" columnIndex="4"/>
+		<result property="grdtnDt" column="GRDTN_DT" columnIndex="5"/>
+		<result property="acadAbtyDivCd" column="ACAD_ABTY_DIV_CD" columnIndex="6"/>
+		<result property="schlCd" column="SCHL_CD" columnIndex="7"/>
+		<result property="deprMajrCd" column="DEPR_MAJR_CD" columnIndex="8"/>
+		<result property="mjrSpctyNm" column="MJR_SPCTY_NM" columnIndex="9"/>
+		<result property="mnrNm" column="MNR_NM" columnIndex="10"/>
+		<result property="natnCd" column="NATN_CD" columnIndex="11"/>
+		<result property="degrNm" column="DEGR_NM" columnIndex="12"/>
+		<result property="degrDivCd" column="DEGR_DIV_CD" columnIndex="13"/>
+		<result property="degrAqtnDt" column="DEGR_AQTN_DT" columnIndex="14"/>
+		<result property="lesnYrNumCd" column="LESN_YR_NUM_CD" columnIndex="15"/>
+		<result property="acadAbtyNoteCtnt" column="ACAD_ABTY_NOTE_CTNT" columnIndex="16"/>
+		<result property="kybdr" column="KYBDR" columnIndex="17"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="18"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="19"/>
+		<result property="ismt" column="ISMT" columnIndex="20"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="21"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="22"/>
+	</resultMap>
+	 -->
+
+	<!-- <insert id="psnl0116DAO.insertPsnl0116" parameterClass="psnl0116Dto"> -->
+	<insert id="psnl0116DAO.insertPsnl0116" parameterClass="psnl0116Vo">
+		<![CDATA[
+			INSERT INTO PSNL0116 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , ACAD_ABTY_SEIL_NUM
+				  , ETNC_ITSHL_DT
+				  , GRDTN_DT
+				  , ACAD_ABTY_DIV_CD
+				  , SCHL_CD
+				  , DEPR_MAJR_CD
+				  , MJR_SPCTY_NM
+				  , MNR_NM
+				  , NATN_CD
+				  , DEGR_NM
+				  , DEGR_DIV_CD
+				  , DEGR_AQTN_DT
+				  , LESN_YR_NUM_CD
+				  , ACAD_ABTY_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , (select NVL(MAX(ACAD_ABTY_SEIL_NUM)+1,1) from PSNL0116 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#) 
+				  , #etncItshlDt#
+				  , #grdtnDt#
+				  , #acadAbtyDivCd#
+				  , #schlCd#
+				  , #deprMajrCd#
+				  , #mjrSpctyNm#
+				  , #mnrNm#
+				  , #natnCd#
+				  , #degrNm#
+				  , #degrDivCd#
+				  , #degrAqtnDt#
+				  , #lesnYrNumCd#
+				  , #acadAbtyNoteCtnt#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	
+	<!-- <update id="psnl0116DAO.updatePsnl0116" parameterClass="psnl0116Dto"> -->
+	<update id="psnl0116DAO.updatePsnl0116" parameterClass="psnl0116Vo">
+		UPDATE PSNL0116
+			SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				<isNotNull property="etncItshlDt"><isNotEmpty property="etncItshlDt">, ETNC_ITSHL_DT = #etncItshlDt#</isNotEmpty></isNotNull>
+				<isNotNull property="grdtnDt"><isNotEmpty property="grdtnDt">, GRDTN_DT = #grdtnDt# </isNotEmpty></isNotNull>
+				<isNotNull property="acadAbtyDivCd"><isNotEmpty property="acadAbtyDivCd">, ACAD_ABTY_DIV_CD=#acadAbtyDivCd#</isNotEmpty></isNotNull>
+				<isNotNull property="schlCd"><isNotEmpty property="schlCd">, SCHL_CD=#schlCd#</isNotEmpty></isNotNull>
+				<isNotNull property="deprMajrCd"><isNotEmpty property="deprMajrCd">, DEPR_MAJR_CD=#deprMajrCd#</isNotEmpty></isNotNull>
+				<isNotNull property="mjrSpctyNm"><isNotEmpty property="mjrSpctyNm">, MJR_SPCTY_NM=#mjrSpctyNm#</isNotEmpty></isNotNull>
+				<isNotNull property="mnrNm"><isNotEmpty property="mnrNm">, MNR_NM=#mnrNm#</isNotEmpty></isNotNull>
+				<isNotNull property="natnCd"><isNotEmpty property="natnCd">, NATN_CD=#natnCd#</isNotEmpty></isNotNull>
+				<isNotNull property="degrNm"><isNotEmpty property="degrNm">, DEGR_NM=#degrNm#</isNotEmpty></isNotNull>
+				<isNotNull property="degrDivCd"><isNotEmpty property="degrDivCd">, DEGR_DIV_CD=#degrDivCd#</isNotEmpty></isNotNull>
+				<isNotNull property="degrAqtnDt"><isNotEmpty property="degrAqtnDt">, DEGR_AQTN_DT=#degrAqtnDt#</isNotEmpty></isNotNull>
+				<isNotNull property="lesnYrNumCd"><isNotEmpty property="lesnYrNumCd">, LESN_YR_NUM_CD=#lesnYrNumCd#</isNotEmpty></isNotNull>
+				<isNotNull property="acadAbtyNoteCtnt"><isNotEmpty property="acadAbtyNoteCtnt">, ACAD_ABTY_NOTE_CTNT=#acadAbtyNoteCtnt#</isNotEmpty></isNotNull>
+				<isNotNull property="ismt"><isNotEmpty property="ismt">, ISMT=#ismt#</isNotEmpty></isNotNull>
+				<isNotNull property="revnAddr"><isNotEmpty property="revnAddr">, REVN_ADDR=#revnAddr#</isNotEmpty></isNotNull>
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				AND ACAD_ABTY_SEIL_NUM=#acadAbtySeilNum#
+		
+	</update>
+	
+	<!--<delete id="psnl0116DAO.deletePsnl0116" parameterClass="psnl0116Dto">  -->
+	<delete id="psnl0116DAO.deletePsnl0116" parameterClass="psnl0116Vo">
+		<![CDATA[
+			DELETE FROM PSNL0116 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND ACAD_ABTY_SEIL_NUM=#acadAbtySeilNum#
+				]]>
+	</delete>
+	
+	<delete id="psnl0116DAO.deletePsnl0116_H" parameterClass="hashMap">
+		<![CDATA[
+			DELETE FROM PSNL0116 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<select id="psnl0116DAO.selectPsnl0116" resultClass="egovMap" parameterClass="hashMap">
+		<![CDATA[
+			SELECT
+				A.DPOB_CD
+				, A.SYSTEMKEY
+				, A.ACAD_ABTY_SEIL_NUM
+				, TO_DATE(A.ETNC_ITSHL_DT , 'YYYYMMDD') ETNC_ITSHL_DT
+				, TO_DATE(A.GRDTN_DT, 'YYYYMMDD') GRDTN_DT
+				, A.ACAD_ABTY_DIV_CD
+				, A.SCHL_CD
+				, (SELECT B.COMM_CD_NM FROM BASS0300 B WHERE B.COMM_CD = A.SCHL_CD AND ROWNUM = 1) as SCHL_CD_NM
+				, A.DEPR_MAJR_CD
+				, fcBass0300CDNM(A.DPOB_CD,A.DEPR_MAJR_CD) AS DEPR_MAJR_NM 
+				, A.MJR_SPCTY_NM
+				, A.MNR_NM
+				, A.NATN_CD
+				, A.DEGR_NM
+				, A.DEGR_DIV_CD
+				, A.DEGR_AQTN_DT
+				, A.LESN_YR_NUM_CD
+				, A.ACAD_ABTY_NOTE_CTNT
+				, A.KYBDR
+				, A.INPT_DT
+				, A.INPT_ADDR
+				, A.ISMT
+				, A.REVN_DT
+				, A.REVN_ADDR
+			FROM PSNL0116 A
+			WHERE DPOB_CD=#dpobCd#
+			AND SYSTEMKEY=#systemkey#
+							
+				]]>
+				<isNotNull property="acadAbtySeilNum">
+				    <isNotEmpty property="acadAbtySeilNum">
+	AND ACAD_ABTY_SEIL_NUM=#acadAbtySeilNum#				        
+				    </isNotEmpty>
+				</isNotNull>
+	</select>
+	
+
+</sqlMap>

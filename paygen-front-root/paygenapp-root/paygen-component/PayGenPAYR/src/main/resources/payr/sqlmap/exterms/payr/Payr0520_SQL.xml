@@ -1,0 +1,2326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Payr0520">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="payr0520SrhVO" type="com.app.exterms.payroll.server.vo.Payr0520SrhVO"/>
+	<typeAlias  alias="payr0520Dto" type="com.app.exterms.payroll.client.dto.Payr0520DTO"/>
+	<typeAlias  alias="Payr0520VO" type="com.app.exterms.payroll.server.vo.Payr0520VO"/>
+	
+	<resultMap id="payr0520" class="com.app.exterms.payroll.server.vo.Payr0520VO">
+	     <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="payItemCd" column="PAY_ITEM_CD" columnIndex="3"/>
+		<result property="pymtDducItemSilNum" column="PYMT_DDUC_ITEM_SIL_NUM" columnIndex="4"/>
+		<result property="pymtDducDivCd" column="PYMT_DDUC_DIV_CD" columnIndex="5"/>
+		<result property="pymtDducSum" column="PYMT_DDUC_SUM" columnIndex="6"/>
+		<result property="pymtDducRate" column="PYMT_DDUC_RATE" columnIndex="7"/>
+		<result property="pymtDducFreeDtySum" column="PYMT_DDUC_FREE_DTY_SUM" columnIndex="8"/>
+		<result property="pymtDducItemCretnDivCd" column="PYMT_DDUC_ITEM_CRETN_DIV_CD" columnIndex="9"/>
+		<result property="pymtDducItemNoteCtnt" column="PYMT_DDUC_ITEM_NOTE_CTNT" columnIndex="10"/>
+		<result property="pymtDducItemBgnnDt" column="PYMT_DDUC_ITEM_BGNN_DT" columnIndex="11"/>
+		<result property="pymtDducItemEndDt" column="PYMT_DDUC_ITEM_END_DT" columnIndex="12"/>
+		<result property="pymtDducItemDelYn" column="PYMT_DDUC_ITEM_DEL_YN" columnIndex="13"/>
+		<result property="kybdr" column="KYBDR" columnIndex="14"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="15"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="16"/>
+		<result property="ismt" column="ISMT" columnIndex="17"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="18"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="19"/>
+	</resultMap>
+	
+	<insert id="payr0520DAO.insertPayr0520" parameterClass="payr0520Dto">
+	    INSERT INTO PAYR0520 
+				( SYSTEMKEY
+				  , DPOB_CD
+				  , PAY_ITEM_CD
+				  , PYMT_DDUC_ITEM_SIL_NUM
+				  , PYMT_DDUC_DIV_CD
+				  , PYMT_DDUC_SUM
+				  , PYMT_DDUC_RATE
+				  , PYMT_DDUC_FREE_DTY_SUM
+				  , PYMT_DDUC_ITEM_CRETN_DIV_CD
+				  , PYMT_DDUC_ITEM_NOTE_CTNT
+				  , PYMT_DDUC_ITEM_BGNN_DT
+				  , PYMT_DDUC_ITEM_END_DT
+				  , PYMT_DDUC_ITEM_DEL_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #systemkey#
+			      , #dpobCd#
+				  , #payItemCd#
+				  , (SELECT NVL(MAX(PYMT_DDUC_ITEM_SIL_NUM),0)+1 FROM PAYR0520 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey# AND PAY_ITEM_CD = #payItemCd#)
+				  , #pymtDducDivCd#
+				  , #pymtDducSum#
+				  , #pymtDducRate#
+				  , #pymtDducFreeDtySum#
+				  , #pymtDducItemCretnDivCd#
+				  , #pymtDducItemNoteCtnt#
+				  , #pymtDducItemBgnnDt#
+				  , #pymtDducItemEndDt#
+				  , #pymtDducItemDelYn#
+				  , #ismt#
+				  , TO_CHAR (SYSDATE, 'YYYYMMDDHH24MISS')
+				  , #revnAddr#
+				  , #ismt#
+				  , TO_CHAR (SYSDATE, 'YYYYMMDDHH24MISS')
+				  , #revnAddr# )
+	</insert>
+	
+	<update id="payr0520DAO.updatePayr0520" parameterClass="payr0520Dto">
+	    UPDATE PAYR0520 
+	       SET PYMT_DDUC_ITEM_DEL_YN = #pymtDducItemDelYn#
+	          ,PYMT_DDUC_ITEM_END_DT = #pymtDducItemEndDt#
+         WHERE DPOB_CD = #dpobCd#
+	       AND SYSTEMKEY = #systemkey#
+	       AND PAY_ITEM_CD = #payItemCd#
+	       AND PYMT_DDUC_ITEM_SIL_NUM = #pymtDducItemSilNum#    
+	</update>
+	
+	
+	<!-- 수당공제 엑셀 양식을 출력한다. -->
+	<select id="payr0520DAO.selectXlsPayr0520List" parameterClass="Payr0520VO" resultClass="egovMap">
+		SELECT 	(#payYr#) AS PAY_YR
+	    		, (#pymtDducDivCd#) AS PYMT_DDUC_DIV_CD	
+				, fcBass0300CDNM(#dpobCd#, #pymtDducDivCd#) AS PYMT_DDUC_DIV_NM
+				, PAY_ITEM_CD
+				, PAY_ITEM_NM	
+				, TO_CHAR(SYSDATE, 'YYYYMMDD') AS PYMT_DDUC_ITEM_BGNN_DT			
+				, TO_CHAR(SYSDATE, 'YYYYMMDD') AS PYMT_DDUC_ITEM_END_DT	
+		FROM
+				(<isNotEmpty property="payDducCd">
+				    SELECT DISTINCT PAY_DDUC_CD AS PAY_ITEM_CD
+				    				, PAY_DDUC_NM AS PAY_ITEM_NM
+				      FROM PAYR0470
+				    WHERE DPOB_CD = #dpobCd#
+						AND PAY_DDUC_CD=#payDducCd#
+				</isNotEmpty>
+				<isNotEmpty property="payExtpyCd">
+				    SELECT DISTINCT PAY_EXTPY_CD AS PAY_ITEM_CD
+				    				, PAY_EXTPY_NM AS PAY_ITEM_NM
+				      FROM PAYR0480
+				    WHERE DPOB_CD = #dpobCd#
+						AND PAY_EXTPY_CD=#payExtpyCd#
+				</isNotEmpty>
+				)
+	</select>
+	
+	
+	<select id="payr0520DAO.getPayr0520List" parameterClass="payr0520Dto" resultClass="egovMap">
+	    SELECT DPOB_CD,
+		       SYSTEMKEY,
+		       PAY_ITEM_CD,
+		       PYMT_DDUC_ITEM_SIL_NUM,
+		       PYMT_DDUC_DIV_CD,
+		       PYMT_DDUC_SUM,
+		       PYMT_DDUC_RATE,
+		       PYMT_DDUC_FREE_DTY_SUM,
+		       PYMT_DDUC_ITEM_CRETN_DIV_CD,
+		       PYMT_DDUC_ITEM_NOTE_CTNT,
+		       PYMT_DDUC_ITEM_BGNN_DT,
+		       PYMT_DDUC_ITEM_END_DT,
+		       PYMT_DDUC_ITEM_DEL_YN,
+		       KYBDR,
+		       INPT_DT,
+		       INPT_ADDR,
+		       ISMT,
+		       REVN_DT,
+		       REVN_ADDR
+		  FROM PAYR0520
+		 WHERE     DPOB_CD = #dpobCd#
+		       AND SYSTEMKEY = #systemkey#
+		       AND PAY_ITEM_CD = #payItemCd#
+		       AND PYMT_DDUC_ITEM_DEL_YN = #pymtDducItemDelYn#
+		       AND PYMT_DDUC_ITEM_END_DT = #pymtDducItemEndDt#
+		       AND PYMT_DDUC_DIV_CD = #pymtDducDivCd#
+	</select>
+
+		<select id="payr0520DAO.selectPayr0520CehckCnt_S" parameterClass="Payr0520VO" resultClass="int">
+			<![CDATA[
+		    SELECT  COUNT (*)
+			FROM    (
+			    SELECT  AA.DPOB_CD, AA.SYSTEMKEY, AA.PAY_ITEM_CD,
+			            (SELECT PAY_DDUC_NM
+			             FROM   PAYR0470
+			             WHERE  PAYR0470.DPOB_CD = AA.DPOB_CD
+			             AND    PAYR0470.PAY_DDUC_CD = AA.PAY_ITEM_CD
+			            ) AS PAY_ITEM_NM
+			    FROM    PAYR0520 AA, PSNL0100 BB
+			    WHERE	AA.DPOB_CD = BB.DPOB_CD 
+			    AND		AA.SYSTEMKEY = BB.SYSTEMKEY
+			    AND		AA.DPOB_CD=#dpobCd#
+			    AND		AA.SYSTEMKEY=#systemkey#
+			    AND		AA.PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+			    AND		AA.PAY_ITEM_CD=#payItemCd#
+			     ]]>
+			    <isNotEmpty prepend="AND" property="checkIU" >
+			    <![CDATA[
+			    AA.PYMT_DDUC_ITEM_SIL_NUM <> #pymtDducItemSilNum#
+			     ]]>
+                </isNotEmpty>
+                <![CDATA[
+                AND	(	
+	                		#pymtDducItemBgnnDt# BETWEEN AA.PYMT_DDUC_ITEM_BGNN_DT AND AA.PYMT_DDUC_ITEM_END_DT 
+	                		OR 
+							#pymtDducItemEndDt# BETWEEN AA.PYMT_DDUC_ITEM_BGNN_DT AND AA.PYMT_DDUC_ITEM_END_DT
+                		)
+			    )
+		   		]]>
+	</select>
+	
+	<insert id="payr0520DAO.insertPayr0520_S">
+		<![CDATA[
+			INSERT INTO PAYR0520 
+				( SYSTEMKEY
+				  , DPOB_CD
+				  , PAY_ITEM_CD
+				  , PYMT_DDUC_ITEM_SIL_NUM
+				  , PYMT_DDUC_DIV_CD
+				  , PYMT_DDUC_SUM
+				  , PYMT_DDUC_RATE
+				  , PYMT_DDUC_FREE_DTY_SUM
+				  , PYMT_DDUC_ITEM_CRETN_DIV_CD
+				  , PYMT_DDUC_ITEM_NOTE_CTNT
+				  , PYMT_DDUC_ITEM_BGNN_DT
+				  , PYMT_DDUC_ITEM_END_DT
+				  , PYMT_DDUC_ITEM_DEL_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #systemkey#
+					, #dpobCd#
+				  	, #payItemCd#
+				  	, (SELECT NVL(MAX(PYMT_DDUC_ITEM_SIL_NUM),0)+1 FROM PAYR0520 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey# AND PAY_ITEM_CD = #payItemCd#)
+				  	, #pymtDducDivCd#
+				  	, #pymtDducSum#
+				  	, #pymtDducRate#
+				  	, #pymtDducFreeDtySum#
+				  	, #pymtDducItemCretnDivCd#
+				  	, #pymtDducItemNoteCtnt#
+				  	, #pymtDducItemBgnnDt#
+				  	, #pymtDducItemEndDt#
+				  	, #pymtDducItemDelYn#
+				  	, #kybdr#
+				  	, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  	, #inptAddr#
+				  	, #ismt#
+				  	, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  	, #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="payr0520DAO.updatePayr0520_S">
+		<![CDATA[
+			UPDATE PAYR0520
+			SET SYSTEMKEY=#systemkey#
+			, DPOB_CD=#dpobCd#
+				, PAY_ITEM_CD=#payItemCd#
+				, PYMT_DDUC_ITEM_SIL_NUM=#pymtDducItemSilNum#
+				, PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+				, PYMT_DDUC_SUM=#pymtDducSum#
+				, PYMT_DDUC_RATE=#pymtDducRate#
+				, PYMT_DDUC_FREE_DTY_SUM=#pymtDducFreeDtySum#
+				, PYMT_DDUC_ITEM_CRETN_DIV_CD=#pymtDducItemCretnDivCd#
+				, PYMT_DDUC_ITEM_NOTE_CTNT=#pymtDducItemNoteCtnt#
+				, PYMT_DDUC_ITEM_BGNN_DT=#pymtDducItemBgnnDt#
+				, PYMT_DDUC_ITEM_END_DT=#pymtDducItemEndDt#
+				, PYMT_DDUC_ITEM_DEL_YN=#pymtDducItemDelYn# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE  DPOB_CD=#dpobCd#
+						        AND SYSTEMKEY=#systemkey#
+								AND PAY_ITEM_CD=#payItemCd#
+								AND PYMT_DDUC_ITEM_SIL_NUM=#pymtDducItemSilNum#
+				]]>
+	</update>
+	
+	<delete id="payr0520DAO.deletePayr0520_S">
+		<![CDATA[
+			DELETE FROM PAYR0520 
+						WHERE  DPOB_CD=#dpobCd#
+						        AND SYSTEMKEY=#systemkey#
+								AND PAY_ITEM_CD=#payItemCd#
+								AND PYMT_DDUC_ITEM_SIL_NUM=#pymtDducItemSilNum#
+				]]>
+	</delete>
+	
+	<insert id="payr0520DAO.xlsInsertPayr0520_S">
+		<![CDATA[
+			INSERT INTO PAYR0520 
+					( DPOB_CD 
+					, SYSTEMKEY
+				  	, PAY_ITEM_CD
+				  	, PYMT_DDUC_ITEM_SIL_NUM
+				  	, PYMT_DDUC_DIV_CD
+				  	, PYMT_DDUC_SUM
+				  	, PYMT_DDUC_FREE_DTY_SUM
+				  	, PYMT_DDUC_RATE
+				  	, PYMT_DDUC_ITEM_NOTE_CTNT
+				  	, PYMT_DDUC_ITEM_BGNN_DT
+				    , PYMT_DDUC_ITEM_END_DT
+				  	, PYMT_DDUC_ITEM_DEL_YN
+				  	, KYBDR
+				  	, INPT_DT
+				  	, INPT_ADDR
+				  	, ISMT
+				  	, REVN_DT
+				  	, REVN_ADDR )
+			VALUES ( #dpobCd#
+			        , ( SELECT SYSTEMKEY FROM PSNL0100 WHERE RESN_REGN_NUM = REPLACE(#resnRegnNum#,'-',''))
+				  	, #payItemCd#
+				  	, ( SELECT NVL(MAX(PYMT_DDUC_ITEM_SIL_NUM),0)+1 
+				  		 FROM PAYR0520 
+				  		WHERE DPOB_CD = #dpobCd# 
+				  		AND SYSTEMKEY = ( SELECT SYSTEMKEY FROM PSNL0100 WHERE RESN_REGN_NUM = REPLACE(#resnRegnNum#,'-','')) 
+				  		AND PAY_ITEM_CD = #payItemCd#
+				  	  )
+				  	, #pymtDducDivCd#
+				  	, #pymtDducSum#
+				  	, #pymtDducFreeDtySum#
+				  	, #pymtDducRate#
+				  	, #pymtDducItemNoteCtnt#
+				  	, #pymtDducItemBgnnDt#
+				  	, #pymtDducItemEndDt#
+				  	, 'N'
+				  	, #kybdr#
+				  	, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  	, #inptAddr#
+				  	, #ismt#
+				  	, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  	, #revnAddr# )
+		]]>
+	</insert>
+
+	<delete id="payr0520DAO.xlsDeletePayr0520_S">
+		<![CDATA[
+			DELETE FROM PAYR0520 
+						WHERE  DPOB_CD=#dpobCd#
+						        AND SYSTEMKEY=	( SELECT SYSTEMKEY 
+						        					FROM PSNL0100 
+						        				  WHERE DPOB_CD = #dpobCd#
+						        				  	AND RESN_REGN_NUM = #resnRegnNum#
+						        				)
+								AND PAY_ITEM_CD=#payItemCd#
+								AND PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+				                AND	(	
+					            		#pymtDducItemBgnnDt# BETWEEN PYMT_DDUC_ITEM_BGNN_DT AND PYMT_DDUC_ITEM_END_DT 
+					           			OR 
+										#pymtDducItemEndDt# BETWEEN PYMT_DDUC_ITEM_BGNN_DT AND PYMT_DDUC_ITEM_END_DT
+				             		)
+				]]>
+	</delete>	
+	
+	<select id="payr0520DAO.selectPayr0520_S" resultMap="payr0520">
+		<![CDATA[
+			SELECT
+				SYSTEMKEY
+				, DPOB_CD
+				, PAY_ITEM_CD
+				, PYMT_DDUC_ITEM_SIL_NUM
+				, PYMT_DDUC_DIV_CD
+				, PYMT_DDUC_SUM
+				, PYMT_DDUC_RATE
+				, PYMT_DDUC_FREE_DTY_SUM
+				, PYMT_DDUC_ITEM_CRETN_DIV_CD
+				, PYMT_DDUC_ITEM_NOTE_CTNT
+				, PYMT_DDUC_ITEM_BGNN_DT
+				, PYMT_DDUC_ITEM_END_DT
+				, PYMT_DDUC_ITEM_DEL_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0520
+						WHERE DPOB_CD=#dpobCd#
+						        AND SYSTEMKEY=#systemkey#
+						        ]]>
+						        <isNotEmpty prepend="AND" property="payItemCd" >
+								    PAY_ITEM_CD=#payItemCd#
+			                    </isNotEmpty>   
+			                    <isNotEmpty property="pymtDducItemSilNum" >
+			                        <isNotEqual prepend="AND" property="pymtDducItemSilNum" compareValue="0">
+					  					PYMT_DDUC_ITEM_SIL_NUM=#pymtDducItemSilNum#
+									</isNotEqual> 
+			                    </isNotEmpty>  
+	</select>
+	
+	<select id="payr0520DAO.selectPayr0520List_D" parameterClass="payr0520SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT  DISTINCT   DPOB_CD
+                                , SYSTEMKEY 
+                                , PAY_YR 
+                                , OCCU_CLSS_PAY_CMPTTN_STD
+                                , PAY_ITEM_CD
+                                , PAY_ITEM_NM 
+                                , PYMT_DDUC_DIV_CD
+                                , pymtDducDivCdcommCd
+                                , pymtDducDivCdcommCdNm
+                                , PYMT_DDUC_SUM
+                                , PYMT_DDUC_RATE
+                                , PYMT_DDUC_FREE_DTY_SUM 
+                                , PYMT_DDUC_ITEM_NOTE_CTNT
+                                , PYMT_DDUC_ITEM_BGNN_DT
+                                , PYMT_DDUC_ITEM_END_DT
+                                , PYMT_DDUC_ITEM_DEL_YN 
+                                , UCST_NOTE_CTNT
+                        FROM
+                         (SELECT   DPOB_CD
+                                  , SYSTEMKEY 
+                                  , SUBSTR(PYMT_DDUC_ITEM_BGNN_DT,1,4) AS PAY_YR 
+                                  , ('') AS PAY_CD 
+                                  , PYMT_DDUC_ITEM_BGNN_DT AS OCCU_CLSS_PAY_CMPTTN_STD 
+                                 , PAY_ITEM_CD
+                                                        ,(SELECT
+                                                                 PAY_EXTPY_NM
+                                                           FROM 
+                                                               ( SELECT 
+                                                                   DPOB_CD, PYMT_DDUC_DIV_CD, PAY_EXTPY_CD , 
+                                                                   PAY_EXTPY_NM  
+                                                                FROM PAYR0480 
+                                                                UNION ALL
+                                                                 SELECT 
+                                                                   DPOB_CD, PYMT_DDUC_DIV_CD,  PAY_DDUC_CD , 
+                                                                   PAY_DDUC_NM 
+                                                                FROM PAYR0470 ) NN
+                                                              WHERE NN.DPOB_CD = PAYR0520.DPOB_CD
+                                                                AND NN.PAY_EXTPY_CD = PAYR0520.PAY_ITEM_CD
+                                                                )  AS PAY_ITEM_NM 
+                                                        , PYMT_DDUC_DIV_CD
+                                                        , PYMT_DDUC_DIV_CD  AS pymtDducDivCdcommCd
+                                                        , fcBass0300CDNM(DPOB_CD,PYMT_DDUC_DIV_CD) AS pymtDducDivCdcommCdNm
+                                                        , PYMT_DDUC_SUM
+                                                        , PYMT_DDUC_RATE
+                                                        , PYMT_DDUC_FREE_DTY_SUM 
+                                                          , PYMT_DDUC_ITEM_BGNN_DT
+                                                        , PYMT_DDUC_ITEM_END_DT
+                                                        , PYMT_DDUC_ITEM_DEL_YN 
+                                                        , PYMT_DDUC_ITEM_NOTE_CTNT 
+                                                        , ('') AS UCST_NOTE_CTNT
+                          FROM PAYR0520
+                        UNION ALL
+                         SELECT
+                                   KK.DPOB_CD, 
+                                       KK.SYSTEMKEY, 
+                                       KK.PAY_YR,
+                                       KK.PAY_CD,
+                                       KK.OCCU_CLSS_PAY_CMPTTN_STD, 
+                                       KK.PAYR_ITEM_CD  ,
+                                       KK.ITEM_NM,
+                                       KK.PYMT_DDUC_DIV_CD, 
+                                       KK.pymtDducDivCdcommCd,
+                                       KK.pymtDducDivCdcommCdNm, 
+                                       (CASE WHEN KK.PAYR_ITEM_CD = 'C9050100'
+                                            THEN (
+                                                    SELECT  
+                                                           SUM(CASE WHEN FAMY_ALLW_PYMT_YN = 'Y' THEN  NVL(FAMY_EXTPY_SUM,0) ELSE  0 END) AS FAMY_EXTPY_SUM 
+                                                        FROM  PAYR0530
+                                                        WHERE  PAYR0530.DPOB_CD = KK.DPOB_CD
+                                                          AND  PAYR0530.SYSTEMKEY = KK.SYSTEMKEY 
+                                            )
+                                            ELSE 
+                                               CASE WHEN KK.PAYR_ITEM_CD = 'C9060100'
+                                                    THEN (
+                                                            SELECT  
+                                                                   SUM(NVL(SCHL_EXPN_ADMCL_EXTPY_SUM,0)) AS SCHL_EXPN_ADMCL_EXTPY_SUM  
+                                                                FROM  PAYR0530
+                                                                WHERE  PAYR0530.DPOB_CD = KK.DPOB_CD
+                                                                  AND  PAYR0530.SYSTEMKEY = KK.SYSTEMKEY 
+                                                    )
+                                                    ELSE 
+                                                        KK.PYMT_DDUC_SUM
+                                                    END
+                                            END) AS PYMT_DDUC_SUM
+                                       ,  
+                                       KK.PYMT_DDUC_RATE,
+                                       
+                                       (CASE WHEN KK.PAYR_ITEM_CD = 'C9050100'
+                                            THEN (
+                                                    SELECT  
+                                                           SUM(CASE WHEN CHDN_CHD_RRG_EPNS_DDUC_YN = 'Y' THEN  NVL(FAMY_EXTPY_SUM,0) ELSE  0 END) AS FREE_FAMY_EXTPY_SUM 
+                                                        FROM  PAYR0530
+                                                        WHERE  PAYR0530.DPOB_CD = KK.DPOB_CD
+                                                          AND  PAYR0530.SYSTEMKEY = KK.SYSTEMKEY 
+                                            )
+                                            ELSE 
+                                               KK.FREE_DTY_SUM
+                                            END) AS FREE_DTY_SUM ,  
+                                       KK.ITEM_APPTN_BGNN_DT,
+                                       KK.ITEM_APPTN_END_DT,
+                                       KK.PAY_ITEM_USE_YN, 
+                                       KK.PAY_ITEM_NOTE_CTNT , KK.UCST_NOTE_CTNT   
+            FROM 
+            (                   
+               SELECT 
+                                       HH.DPOB_CD, 
+                                       HH.SYSTEMKEY, 
+                                       HH.PAY_YR,
+                                       HH.PAY_CD,
+                                       GG.OCCU_CLSS_PAY_CMPTTN_STD, 
+                                       DECODE(NVL(GG.PAYR_ITEM_CD,'TT'),'TT',HH.PAYR_ITEM_CD,GG.PAYR_ITEM_CD) AS  PAYR_ITEM_CD  ,
+                                       HH.ITEM_NM,
+                                       HH.PYMT_DDUC_DIV_CD, 
+                                       HH.PYMT_DDUC_DIV_CD  AS pymtDducDivCdcommCd,
+                                       fcBass0300CDNM(HH.DPOB_CD,HH.PYMT_DDUC_DIV_CD) AS pymtDducDivCdcommCdNm,
+                                       DECODE(NVL(GG.UCST_SUM,0), 0,HH.PYMT_DDUC_SUM,GG.UCST_SUM) AS PYMT_DDUC_SUM,  HH.PYMT_DDUC_RATE,
+                                       HH.FREE_DTY_SUM,  
+                                       DECODE(NVL(GG.UCST_DGM_BGNN_DT,'TT'),'TT',HH.ITEM_APPTN_BGNN_DT, GG.UCST_DGM_BGNN_DT) AS ITEM_APPTN_BGNN_DT,
+                                       DECODE(NVL(GG.UCST_DGM_END_DT,'TT'),'TT',HH.ITEM_APPTN_END_DT, GG.UCST_DGM_END_DT) AS ITEM_APPTN_END_DT,
+                                       DECODE(NVL(GG.UCST_DGM_USE_YN,'TT'),'TT',HH.PAY_ITEM_USE_YN, GG.UCST_DGM_USE_YN) AS PAY_ITEM_USE_YN, 
+                                       HH.PAY_ITEM_NOTE_CTNT , GG.UCST_NOTE_CTNT  
+                                     FROM   
+                                     (SELECT 
+                                       AA.DPOB_CD, 
+                                       DD.SYSTEMKEY, 
+                                       AA.PAY_YR, 
+                                       AA.PAY_CD,
+                                       AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM, 
+                                       AA.PAYR_ITEM_SEIL_NUM ,  
+                                       AA.PAYR_IMCD  AS  PAYR_ITEM_CD  ,
+                                       AA.ITEM_NM,
+                                       AA.PYMT_DDUC_DIV_CD, 
+                                       AA.PYMT_DDUC_DIV_CD  AS pymtDducDivCdcommCd,
+                                       fcBass0300CDNM(AA.DPOB_CD,AA.PYMT_DDUC_DIV_CD) AS pymtDducDivCdcommCdNm,
+                                       AA.PYMT_DDUC_SUM ,  AA.PYMT_DDUC_RATE,
+                                       DECODE(AA.TXTN_DIV_CD,'B0050001',0,AA.FREE_DTY_SUM) AS FREE_DTY_SUM,  
+                                       AA.ITEM_APPTN_BGNN_DT ,
+                                       AA.ITEM_APPTN_END_DT ,
+                                       AA.PAY_ITEM_USE_YN , 
+                                       AA.PAY_ITEM_NOTE_CTNT   
+                                    FROM PAYR0410 AA, PAYR0400 CC, PSNL0100 DD
+                                    WHERE CC.DPOB_CD  = AA.DPOB_CD 
+                                      AND CC.TYP_OCCU_GRDE_MPPG_SEIL_NUM = AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM   
+                                      AND CC.DPOB_CD  = DD.DPOB_CD 
+                                      AND CC.TYP_OCCU_CD = DD.TYP_OCCU_CD
+                                      AND CC.PYSP_GRDE_CD = NVL(DD.PYSP_GRDE_CD,'A0060000')
+                                      AND CC.DTIL_OCCU_CLS_DIV_CD = DD.DTIL_OCCU_CLS_DIV_CD
+                                      <isNotEmpty prepend="AND" property="payYr" >
+															 	       AA.PAY_YR = #payYr#  
+									   </isNotEmpty> 
+									    <isNotEmpty prepend="AND" property="systemkey" >
+																	 	DD.SYSTEMKEY=#systemkey#
+										   </isNotEmpty>   
+                                      ) HH, 
+                                      (SELECT 
+                                       A02.DPOB_CD, 
+                                       A02.SYSTEMKEY, 
+                                       A01.PAY_YR,
+                                       A01.OCCU_CLSS_PAY_CMPTTN_STD,  
+                                       A01.TYP_OCCU_GRDE_MPPG_SEIL_NUM, 
+                                       A01.PAYR_ITEM_SEIL_NUM , 
+                                       A01.PAYR_ITEM_CD , 
+                                       ( SELECT  
+                                           PAY_EXTPY_NM  
+                                        FROM PAYR0480 NN 
+                                      WHERE NN.DPOB_CD = A01.DPOB_CD
+                                        AND NN.PAY_EXTPY_CD = A01.PAYR_ITEM_CD
+                                        )  AS ITEM_NM  , 
+                                       A01.UCST_SUM  , 
+                                        A01.UCST_DGM_BGNN_DT ,
+                                        A01.UCST_DGM_END_DT ,
+                                        A01.UCST_DGM_USE_YN , 
+                                        A01.UCST_NOTE_CTNT 
+                                    FROM   PAYR0440 A01,  (
+                                         SELECT DISTINCT AA02.DPOB_CD, AA01.SYSTEMKEY, 
+                                                                     (CASE WHEN  AA01.LOG_SVC_YR_NUM_CD = AA03.PYSP_LOG_SVC_YR_NUM_CD 
+                                                                               THEN
+                                                                                  AA03.PYSP_LOG_SVC_YR_NUM_CD 
+                                                                               ELSE
+                                                                                  AA07.PYSP_LOG_SVC_YR_NUM_CD01
+                                                                            END) AS PYSP_LOG_SVC_YR_NUM_CD, 
+                                                                   AA07.PAY_YR,
+                                                                   AA02.TYP_OCCU_CD,
+                                                                   AA02.DTIL_OCCU_INTTN_CD,
+                                                                   AA07.OCCU_CLSS_PAY_CMPTTN_STD,
+                                                                   AA07.TYP_OCCU_GRDE_MPPG_SEIL_NUM  
+                                                              FROM PAYR0440 AA03,
+                                                                   PAYR0400 AA02,
+                                                                   PSNL0100 AA01,
+                                                                   (  SELECT DPOB_CD, PAY_YR,
+                                                                             MAX (PYSP_LOG_SVC_YR_NUM_CD) AS PYSP_LOG_SVC_YR_NUM_CD01,
+                                                                             OCCU_CLSS_PAY_CMPTTN_STD,
+                                                                             TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                                                                        FROM PAYR0440
+                                                                    GROUP BY PAY_YR,DPOB_CD,
+                                                                             OCCU_CLSS_PAY_CMPTTN_STD,
+                                                                             TYP_OCCU_GRDE_MPPG_SEIL_NUM) AA07
+                                                             WHERE AA03.DPOB_CD = AA02.DPOB_CD
+                                                               AND AA03.TYP_OCCU_GRDE_MPPG_SEIL_NUM =  AA02.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                                                             <isNotEmpty prepend="AND" property="payYr" >
+															 	   AA03.PAY_YR =   #payYr#  
+														       </isNotEmpty>  
+                                                               AND AA03.OCCU_CLSS_PAY_CMPTTN_STD = AA07.OCCU_CLSS_PAY_CMPTTN_STD
+                                                               AND AA03.TYP_OCCU_GRDE_MPPG_SEIL_NUM =
+                                                                      AA07.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                                                               AND AA03.PAY_YR = AA07.PAY_YR 
+                                                               AND AA03.DPOB_CD = AA07.DPOB_CD
+                                                               AND AA01.TYP_OCCU_CD = AA02.TYP_OCCU_CD
+                                                               AND AA01.DTIL_OCCU_INTTN_CD =  AA02.DTIL_OCCU_INTTN_CD 
+                                                                   <isNotEmpty prepend="AND" property="systemkey" >
+																	 	AA01.SYSTEMKEY=#systemkey#
+																  </isNotEmpty> 
+                                    ) A02
+                                    WHERE A01.DPOB_CD  = A02.DPOB_CD 
+                                      AND A01.PYSP_LOG_SVC_YR_NUM_CD =A02.PYSP_LOG_SVC_YR_NUM_CD
+                                      AND A01.TYP_OCCU_GRDE_MPPG_SEIL_NUM =  A02.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+                                      AND A01.PAY_YR = A02.PAY_YR
+                                      AND A01.OCCU_CLSS_PAY_CMPTTN_STD = A02.OCCU_CLSS_PAY_CMPTTN_STD
+                                      ) GG   
+                                    WHERE HH.DPOB_CD  = GG.DPOB_CD 
+                                       AND HH.SYSTEMKEY = GG.SYSTEMKEY 
+                                      AND HH.PAY_YR  = GG.PAY_YR 
+                                      AND HH.TYP_OCCU_GRDE_MPPG_SEIL_NUM = GG.TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+                                      AND NVL(HH.PAYR_ITEM_CD,HH.PAYR_ITEM_SEIL_NUM) = NVL(GG.PAYR_ITEM_CD ,GG.PAYR_ITEM_SEIL_NUM )  
+                                      
+                                      ) KK 
+                        UNION ALL
+                        SELECT 
+                           EE.DPOB_CD, 
+                           FF.SYSTEMKEY,
+                           EE.PAY_YR,
+                           EE.PAY_CD,
+                           EE.ITEM_APPTN_BGNN_DT AS OCCU_CLSS_PAY_CMPTTN_STD ,
+                           EE.PAY_ITEM_CD, EE.ITEM_NM, 
+                           EE.PYMT_DDUC_DIV_CD, 
+                           EE.PYMT_DDUC_DIV_CD  AS pymtDducDivCdcommCd,
+                           fcBass0300CDNM(EE.DPOB_CD,EE.PYMT_DDUC_DIV_CD) AS pymtDducDivCdcommCdNm,
+                            EE.PYMT_DDUC_SUM, 
+                            EE.PYMT_DDUC_RATE, 
+                            DECODE(EE.TXTN_DIV_CD,'B0050001',0,EE.FREE_DTY_SUM) AS FREE_DTY_SUM, 
+                             EE.ITEM_APPTN_BGNN_DT, EE.ITEM_APPTN_END_DT, 
+                             EE.PAY_ITEM_USE_YN,  
+                            EE.PAY_ITEM_NOTE_CTNT ,  ('')
+                        FROM  PAYR0490 EE , PSNL0100 FF
+                        WHERE EE.DPOB_CD  = FF.DPOB_CD 
+                          AND EE.BUSIN_CD = FF.BUSIN_CD 
+                          AND FF.DEPT_CD = FF.DEPT_CD     
+                        )
+            
+            <isNotEmpty  property="dpobCd" >
+			 	WHERE DPOB_CD=#dpobCd#
+		       </isNotEmpty>   
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+		       <isNotEmpty property="pymtDducDivCd" prepend="AND">
+						<![CDATA[
+						 PYMT_DDUC_DIV_CD
+						]]>
+						<iterate prepend="IN" property="pymtDducDivCdArr" open="(" close=")" conjunction=",">
+						 #pymtDducDivCdArr[]#
+						</iterate>
+				</isNotEmpty>   
+		        <isNotEmpty prepend="AND" property="payYr" >
+			 	   #payYr# BETWEEN SUBSTR(PYMT_DDUC_ITEM_BGNN_DT,1,4) AND SUBSTR(PYMT_DDUC_ITEM_END_DT,1,4)
+		       </isNotEmpty> 
+                    ORDER BY   
+                      PYMT_DDUC_ITEM_END_DT DESC
+                    , NVL(OCCU_CLSS_PAY_CMPTTN_STD,PYMT_DDUC_ITEM_END_DT) DESC
+                    , pymtDducDivCdcommCd ASC 
+                    , PYMT_DDUC_ITEM_DEL_YN ASC 
+                    , PAY_ITEM_CD ASC    
+				
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="payr0520DAO.selectPayr0520ListTotCnt_S" parameterClass="payr0520SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM  
+			   (
+			     SELECT   DPOB_CD
+                                , SYSTEMKEY 
+                                , PAY_YR
+                                , OCCU_CLSS_PAY_CMPTTN_STD
+                                , PAY_ITEM_CD
+                                , PAY_ITEM_NM 
+                                , PYMT_DDUC_DIV_CD
+                                , pymtDducDivCdcommCd
+                                , pymtDducDivCdcommCdNm
+                                , PYMT_DDUC_SUM
+                                , PYMT_DDUC_RATE
+                                , PYMT_DDUC_FREE_DTY_SUM 
+                                , PYMT_DDUC_ITEM_NOTE_CTNT
+                                , PYMT_DDUC_ITEM_BGNN_DT
+                                , PYMT_DDUC_ITEM_END_DT
+                                , PYMT_DDUC_ITEM_DEL_YN 
+                                , UCST_NOTE_CTNT
+                        FROM
+							 (SELECT   DPOB_CD
+							          , SYSTEMKEY 
+							          , SUBSTR(PYMT_DDUC_ITEM_BGNN_DT,1,4) AS PAY_YR 
+							          , PYMT_DDUC_ITEM_BGNN_DT AS OCCU_CLSS_PAY_CMPTTN_STD 
+							         , PAY_ITEM_CD
+							                                ,(SELECT
+							                                         PAY_EXTPY_NM
+							                                   FROM 
+							                                       ( SELECT 
+							                                           DPOB_CD, PYMT_DDUC_DIV_CD, PAY_EXTPY_CD , 
+							                                           PAY_EXTPY_NM  
+							                                        FROM PAYR0480 
+							                                        UNION ALL
+							                                         SELECT 
+							                                           DPOB_CD, PYMT_DDUC_DIV_CD,  PAY_DDUC_CD , 
+							                                           PAY_DDUC_NM 
+							                                        FROM PAYR0470 ) NN
+							                                      WHERE NN.DPOB_CD = PAYR0520.DPOB_CD
+							                                        AND NN.PAY_EXTPY_CD = PAYR0520.PAY_ITEM_CD
+							                                        )  AS PAY_ITEM_NM 
+							                                , PYMT_DDUC_DIV_CD
+							                                , PYMT_DDUC_DIV_CD  AS pymtDducDivCdcommCd
+							                                , fcBass0300CDNM(DPOB_CD,PYMT_DDUC_DIV_CD) AS pymtDducDivCdcommCdNm
+							                                , PYMT_DDUC_SUM
+							                                , PYMT_DDUC_RATE
+							                                , PYMT_DDUC_FREE_DTY_SUM 
+							                                  , PYMT_DDUC_ITEM_BGNN_DT
+							                                , PYMT_DDUC_ITEM_END_DT
+							                                , PYMT_DDUC_ITEM_DEL_YN 
+							                                , PYMT_DDUC_ITEM_NOTE_CTNT 
+							                                , ('') AS UCST_NOTE_CTNT
+							  FROM PAYR0520
+							UNION ALL
+							SELECT   DPOB_CD
+						          , SYSTEMKEY 
+						          , SUBSTR(PYMT_DDUC_ITEM_BGNN_DT,1,4) AS PAY_YR 
+						          , PYMT_DDUC_ITEM_BGNN_DT AS OCCU_CLSS_PAY_CMPTTN_STD 
+						         , PAY_ITEM_CD
+						                                ,(SELECT
+						                                         PAY_EXTPY_NM
+						                                   FROM 
+						                                       ( SELECT 
+						                                           DPOB_CD, PYMT_DDUC_DIV_CD, PAY_EXTPY_CD , 
+						                                           PAY_EXTPY_NM  
+						                                        FROM PAYR0480 
+						                                        UNION ALL
+						                                         SELECT 
+						                                           DPOB_CD, PYMT_DDUC_DIV_CD,  PAY_DDUC_CD , 
+						                                           PAY_DDUC_NM 
+						                                        FROM PAYR0470 ) NN
+						                                      WHERE NN.DPOB_CD = PAYR0520.DPOB_CD
+						                                        AND NN.PAY_EXTPY_CD = PAYR0520.PAY_ITEM_CD
+						                                        )  AS PAY_ITEM_NM 
+						                                , PYMT_DDUC_DIV_CD
+						                                , PYMT_DDUC_DIV_CD  AS pymtDducDivCdcommCd
+						                                , fcBass0300CDNM(DPOB_CD,PYMT_DDUC_DIV_CD) AS pymtDducDivCdcommCdNm
+						                                , PYMT_DDUC_SUM
+						                                , PYMT_DDUC_RATE
+						                                , PYMT_DDUC_FREE_DTY_SUM 
+						                                  , PYMT_DDUC_ITEM_BGNN_DT
+						                                , PYMT_DDUC_ITEM_END_DT
+						                                , PYMT_DDUC_ITEM_DEL_YN 
+						                                , PYMT_DDUC_ITEM_NOTE_CTNT 
+						                                , ('') AS UCST_NOTE_CTNT
+						  FROM PAYR0520
+						UNION ALL
+						 SELECT
+			                       KK.DPOB_CD, 
+			                           KK.SYSTEMKEY, 
+			                           KK.PAY_YR,
+			                           KK.OCCU_CLSS_PAY_CMPTTN_STD, 
+			                           KK.PAYR_ITEM_CD  ,
+			                           KK.ITEM_NM,
+			                           KK.PYMT_DDUC_DIV_CD, 
+			                           KK.pymtDducDivCdcommCd,
+			                           KK.pymtDducDivCdcommCdNm, 
+			                           (CASE WHEN KK.PAYR_ITEM_CD = 'C9050100'
+			                                THEN (
+			                                        SELECT  
+			                                               SUM(CASE WHEN FAMY_ALLW_PYMT_YN = 'Y' THEN  NVL(FAMY_EXTPY_SUM,0) ELSE  0 END) AS FAMY_EXTPY_SUM 
+			                                            FROM  PAYR0530
+			                                            WHERE  PAYR0530.DPOB_CD = KK.DPOB_CD
+			                                              AND  PAYR0530.SYSTEMKEY = KK.SYSTEMKEY 
+			                                )
+			                                ELSE 
+			                                   CASE WHEN KK.PAYR_ITEM_CD = 'C9060100'
+			                                        THEN (
+			                                                SELECT  
+			                                                       SUM(NVL(SCHL_EXPN_ADMCL_EXTPY_SUM,0)) AS SCHL_EXPN_ADMCL_EXTPY_SUM  
+			                                                    FROM  PAYR0530
+			                                                    WHERE  PAYR0530.DPOB_CD = KK.DPOB_CD
+			                                                      AND  PAYR0530.SYSTEMKEY = KK.SYSTEMKEY 
+			                                        )
+			                                        ELSE 
+			                                            KK.PYMT_DDUC_SUM
+			                                        END
+			                                END) AS PYMT_DDUC_SUM
+			                           ,  
+			                           KK.PYMT_DDUC_RATE,
+			                           
+			                           (CASE WHEN KK.PAYR_ITEM_CD = 'C9050100'
+			                                THEN (
+			                                        SELECT  
+			                                               SUM(CASE WHEN CHDN_CHD_RRG_EPNS_DDUC_YN = 'Y' THEN  NVL(FAMY_EXTPY_SUM,0) ELSE  0 END) AS FREE_FAMY_EXTPY_SUM 
+			                                            FROM  PAYR0530
+			                                            WHERE  PAYR0530.DPOB_CD = KK.DPOB_CD
+			                                              AND  PAYR0530.SYSTEMKEY = KK.SYSTEMKEY 
+			                                )
+			                                ELSE 
+			                                   KK.FREE_DTY_SUM
+			                                END) AS FREE_DTY_SUM ,  
+			                           KK.ITEM_APPTN_BGNN_DT,
+			                           KK.ITEM_APPTN_END_DT,
+			                           KK.PAY_ITEM_USE_YN, 
+			                           KK.PAY_ITEM_NOTE_CTNT , KK.UCST_NOTE_CTNT   
+			FROM 
+			(                   
+			   SELECT 
+			                           HH.DPOB_CD, 
+			                           HH.SYSTEMKEY, 
+			                           HH.PAY_YR,
+			                           GG.OCCU_CLSS_PAY_CMPTTN_STD, 
+			                           DECODE(NVL(GG.PAYR_ITEM_CD,'TT'),'TT',HH.PAYR_ITEM_CD,GG.PAYR_ITEM_CD) AS  PAYR_ITEM_CD  ,
+			                           HH.ITEM_NM,
+			                           HH.PYMT_DDUC_DIV_CD, 
+			                           HH.PYMT_DDUC_DIV_CD  AS pymtDducDivCdcommCd,
+			                           fcBass0300CDNM(HH.DPOB_CD,HH.PYMT_DDUC_DIV_CD) AS pymtDducDivCdcommCdNm,
+			                           DECODE(NVL(GG.UCST_SUM,0), 0,HH.PYMT_DDUC_SUM,GG.UCST_SUM) AS PYMT_DDUC_SUM,  HH.PYMT_DDUC_RATE,
+			                           HH.FREE_DTY_SUM,  
+			                           DECODE(NVL(GG.UCST_DGM_BGNN_DT,'TT'),'TT',HH.ITEM_APPTN_BGNN_DT, GG.UCST_DGM_BGNN_DT) AS ITEM_APPTN_BGNN_DT,
+			                           DECODE(NVL(GG.UCST_DGM_END_DT,'TT'),'TT',HH.ITEM_APPTN_END_DT, GG.UCST_DGM_END_DT) AS ITEM_APPTN_END_DT,
+			                           DECODE(NVL(GG.UCST_DGM_USE_YN,'TT'),'TT',HH.PAY_ITEM_USE_YN, GG.UCST_DGM_USE_YN) AS PAY_ITEM_USE_YN, 
+			                           HH.PAY_ITEM_NOTE_CTNT , GG.UCST_NOTE_CTNT  
+			                         FROM   
+			                         (SELECT 
+			                           AA.DPOB_CD, 
+			                           DD.SYSTEMKEY, 
+			                           AA.PAY_YR, 
+			                           AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM, 
+			                           AA.PAYR_ITEM_SEIL_NUM ,  
+			                           AA.PAYR_IMCD  AS  PAYR_ITEM_CD  ,
+			                           AA.ITEM_NM,
+			                           AA.PYMT_DDUC_DIV_CD, 
+			                           AA.PYMT_DDUC_DIV_CD  AS pymtDducDivCdcommCd,
+			                           fcBass0300CDNM(AA.DPOB_CD,AA.PYMT_DDUC_DIV_CD) AS pymtDducDivCdcommCdNm,
+			                           AA.PYMT_DDUC_SUM ,  AA.PYMT_DDUC_RATE,
+			                           DECODE(AA.TXTN_DIV_CD,'B0050001',0,AA.FREE_DTY_SUM) AS FREE_DTY_SUM,  
+			                           AA.ITEM_APPTN_BGNN_DT ,
+			                           AA.ITEM_APPTN_END_DT ,
+			                           AA.PAY_ITEM_USE_YN , 
+			                           AA.PAY_ITEM_NOTE_CTNT   
+			                        FROM PAYR0410 AA, PAYR0400 CC, PSNL0100 DD
+			                        WHERE CC.DPOB_CD  = AA.DPOB_CD 
+			                          AND CC.TYP_OCCU_GRDE_MPPG_SEIL_NUM = AA.TYP_OCCU_GRDE_MPPG_SEIL_NUM   
+			                          AND CC.DPOB_CD  = DD.DPOB_CD 
+			                          AND CC.TYP_OCCU_CD = DD.TYP_OCCU_CD
+			                          AND CC.PYSP_GRDE_CD = NVL(DD.PYSP_GRDE_CD,'A0060000')
+			                          AND CC.DTIL_OCCU_CLS_DIV_CD = DD.DTIL_OCCU_CLS_DIV_CD) HH, 
+			                          (SELECT 
+			                           A02.DPOB_CD, 
+			                           A02.SYSTEMKEY, 
+			                           A01.PAY_YR,
+			                           A01.OCCU_CLSS_PAY_CMPTTN_STD,  
+			                           A01.TYP_OCCU_GRDE_MPPG_SEIL_NUM, 
+			                           A01.PAYR_ITEM_SEIL_NUM , 
+			                           A01.PAYR_ITEM_CD , 
+			                           ( SELECT  
+			                               PAY_EXTPY_NM  
+			                            FROM PAYR0480 NN 
+			                          WHERE NN.DPOB_CD = A01.DPOB_CD
+			                            AND NN.PAY_EXTPY_CD = A01.PAYR_ITEM_CD
+			                            )  AS ITEM_NM  , 
+			                           A01.UCST_SUM  , 
+			                            A01.UCST_DGM_BGNN_DT ,
+			                            A01.UCST_DGM_END_DT ,
+			                            A01.UCST_DGM_USE_YN , 
+			                            A01.UCST_NOTE_CTNT 
+			                        FROM   PAYR0440 A01,  PSNL0100 A02
+			                        WHERE    A01.DPOB_CD  = A02.DPOB_CD 
+			                          AND A01.PYSP_LOG_SVC_YR_NUM_CD =A02.LOG_SVC_YR_NUM_CD) GG   
+			                        WHERE HH.DPOB_CD  = GG.DPOB_CD(+)
+			                          AND HH.SYSTEMKEY = GG.SYSTEMKEY(+)
+			                          AND HH.PAY_YR  = GG.PAY_YR(+)
+			                          AND HH.TYP_OCCU_GRDE_MPPG_SEIL_NUM = GG.TYP_OCCU_GRDE_MPPG_SEIL_NUM(+) 
+			                          AND NVL(HH.PAYR_ITEM_CD,HH.PAYR_ITEM_SEIL_NUM) = NVL(GG.PAYR_ITEM_CD(+),GG.PAYR_ITEM_SEIL_NUM(+)) 
+			                          ) KK 
+						UNION ALL
+						SELECT 
+						   EE.DPOB_CD, 
+						   FF.SYSTEMKEY,
+						   EE.PAY_YR,
+						   EE.ITEM_APPTN_BGNN_DT AS OCCU_CLSS_PAY_CMPTTN_STD ,
+						   EE.PAY_ITEM_CD, EE.ITEM_NM, 
+						   EE.PYMT_DDUC_DIV_CD, 
+						   EE.PYMT_DDUC_DIV_CD  AS pymtDducDivCdcommCd,
+						   fcBass0300CDNM(EE.DPOB_CD,EE.PYMT_DDUC_DIV_CD) AS pymtDducDivCdcommCdNm,
+						    EE.PYMT_DDUC_SUM, 
+						    EE.PYMT_DDUC_RATE, 
+						    DECODE(EE.TXTN_DIV_CD,'B0050001',0,EE.FREE_DTY_SUM) AS FREE_DTY_SUM, 
+						     EE.ITEM_APPTN_BGNN_DT, EE.ITEM_APPTN_END_DT, 
+						     EE.PAY_ITEM_USE_YN,  
+						   EE.PAY_ITEM_NOTE_CTNT ,  ('')
+						FROM  PAYR0490 EE , PSNL0100 FF
+						WHERE EE.DPOB_CD  = FF.DPOB_CD 
+						  AND EE.BUSIN_CD = FF.BUSIN_CD 
+						  AND FF.DEPT_CD = FF.DEPT_CD  
+							UNION ALL
+							SELECT 
+							   EE.DPOB_CD, 
+							   FF.SYSTEMKEY,
+							   EE.PAY_YR,
+							   EE.ITEM_APPTN_BGNN_DT AS OCCU_CLSS_PAY_CMPTTN_STD ,
+							   EE.PAY_ITEM_CD, EE.ITEM_NM, 
+							   EE.PYMT_DDUC_DIV_CD, 
+							   EE.PYMT_DDUC_DIV_CD  AS pymtDducDivCdcommCd,
+							   fcBass0300CDNM(EE.DPOB_CD,EE.PYMT_DDUC_DIV_CD) AS pymtDducDivCdcommCdNm,
+							    EE.PYMT_DDUC_SUM, 
+							    EE.PYMT_DDUC_RATE, 
+							    DECODE(EE.TXTN_DIV_CD,'B0050001',0,EE.FREE_DTY_SUM) AS FREE_DTY_SUM, 
+							     EE.ITEM_APPTN_BGNN_DT, EE.ITEM_APPTN_END_DT, 
+							     EE.PAY_ITEM_USE_YN,  
+							   EE.PAY_ITEM_NOTE_CTNT ,  ('')
+							FROM  PAYR0490 EE , PSNL0100 FF
+							WHERE EE.DPOB_CD  = FF.DPOB_CD 
+							  AND EE.BUSIN_CD = FF.BUSIN_CD 
+							  AND FF.DEPT_CD = FF.DEPT_CD     
+							)
+			 
+			  <isNotEmpty   property="dpobCd" >
+			 	WHERE DPOB_CD=#dpobCd#
+		      </isNotEmpty>   
+		      <isNotEmpty prepend="AND" property="systemkey" >
+			 	SYSTEMKEY=#systemkey#
+		      </isNotEmpty> 
+		           <isNotEmpty property="pymtDducDivCd" prepend="AND">
+						<![CDATA[
+						 PYMT_DDUC_DIV_CD
+						]]>
+						<iterate prepend="IN" property="pymtDducDivCdArr" open="(" close=")" conjunction=",">
+						 #pymtDducDivCdArr[]#
+						</iterate>
+			  </isNotEmpty>  
+		      <isNotEmpty prepend="AND" property="payYr" >
+			 	   #payYr# BETWEEN SUBSTR(PYMT_DDUC_ITEM_BGNN_DT,1,4) AND SUBSTR(PYMT_DDUC_ITEM_END_DT,1,4)
+		       </isNotEmpty> 
+		        )
+	</select>
+	
+	 
+	<!-- 공제 리스트 -->
+	<select id="payr0520DAO.selectPayr0520ToPayr3200DducdivcdList_D" parameterClass="payr0520SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+							DISTINCT AA.DPOB_CD
+								, AA.PAY_ITEM_CD
+								, AA.PYMT_DDUC_DIV_CD
+								, (SELECT  PAY_DDUC_NM 
+						              FROM PAYR0470
+									WHERE PAYR0470.DPOB_CD = AA.DPOB_CD
+											AND PAYR0470.PAY_DDUC_CD = AA.PAY_ITEM_CD ) AS PAY_ITEM_NM 
+								, AA.PYMT_DDUC_ITEM_DEL_YN
+						FROM PAYR0520 AA, PSNL0100 BB
+				WHERE     AA.DPOB_CD = BB.DPOB_CD
+						  AND AA.SYSTEMKEY = BB.SYSTEMKEY  
+						  
+				<isNotEmpty prepend="AND" property="mangeDeptCd" >
+					BB.DEPT_CD = #mangeDeptCd#
+	 			</isNotEmpty>
+						    
+		       AND EXISTS  (
+                            SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT  AA02.DPOB_CD,
+					                                 AA02.DEPT_CD,
+					                                 AA02.TYP_OCCU_CD,
+					                                 AA02.DTIL_OCCU_INTTN_CD 
+												FROM  BASS0360 AA02  
+												WHERE AA02.PAYR_MANG_DEPT_CD LIKE (DECODE(#payrMangDeptYn#,'Y',#payrMangDeptCd#,DECODE(#deptCd#,'',#payrMangDeptCd#,''))) || '%'  
+												AND   NOT EXISTS (SELECT DPOB_CD 
+												                      , TYP_OCCU_CD
+												                      , DEPT_CD
+												                      , DTIL_OCCU_INTTN_CD
+												                FROM SYSM0700 AA01
+												                WHERE AA01.DPOB_CD = AA02.DPOB_CD
+												                  AND AA01.TYP_OCCU_CD = AA02.TYP_OCCU_CD
+												                  AND AA01.DEPT_CD = AA02.DEPT_CD
+												                 AND AA01.DTIL_OCCU_INTTN_CD = AA02.DTIL_OCCU_INTTN_CD ) 
+												AND (AA02.DPOB_CD,AA02.PAYR_MANG_DEPT_CD) IN (SELECT DPOB_CD, PAYR_MANG_DEPT_CD  
+												                                FROM BASS0150 
+												                                 WHERE PAY_MANGE_DEPT_WHLE_PERN_CHRG
+												                                     LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,
+												                                      DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,
+												                                                  (SELECT NVL(USR_ID,'') FROM SYSM0700
+					                                                                                                  WHERE USR_ID = #usrId#))))) || '%'  
+					                                                           UNION ALL
+					                                                           SELECT DPOB_CD,
+                                                                                      PAYR_MANG_DEPT_CD
+                                                                                 FROM BASS0150
+                                                                                WHERE PAYR_MANG_DEPT_CD LIKE (DECODE (#deptCd#, '', #payrMangDeptCd#, ''))   || '%')   
+												UNION ALL                 
+											    SELECT  AA03.DPOB_CD
+												       , AA03.DEPT_CD 
+												       , AA03.TYP_OCCU_CD
+												       , AA03.DTIL_OCCU_INTTN_CD 
+												FROM SYSM0700 AA03
+												WHERE AA03.USR_ID LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,  
+												                         DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,''))  
+												                        )) || '%'  
+												UNION ALL
+												 SELECT   
+								                                               BB01.DPOB_CD, BB01.DEPT_CD
+								                                               ,('') AS TYP_OCCU_CD ,('') AS DTIL_OCCU_INTTN_CD
+								                                             FROM (SELECT AA.DPOB_CD  , AA.DEPT_CD  
+								                                                          , AA.TPLVL_DEPT_CD  , AA.HHRK_DEPT_CD  
+								                                                         FROM BASS0400 AA 
+								                                                        WHERE AA.DEPT_USE_YN   = 'Y'  
+								                                                         AND  AA.DEPT_CD = #payrMangDeptCd#    
+								                                                UNION ALL
+								                                                SELECT AA02.*
+								                                                FROM (
+								                                                    SELECT  CC.DPOB_CD   , CC.DEPT_CD  
+								                                                          , CC.TPLVL_DEPT_CD , CC.HHRK_DEPT_CD  
+								                                                         FROM BASS0400 CC 
+								                                                        WHERE CC.DEPT_USE_YN   = 'Y'   
+								                                                     ) AA02
+								                                              START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd#   
+								                                             CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD ) BB01 
+								                                           WHERE  BB01.DPOB_CD= #dpobCd# 
+								                                         
+                                           ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          ) 
+                  <!--                       
+				 <isEqual prepend="AND" property="dataStatus" compareValue="0">
+				    TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN AA.PYMT_DDUC_ITEM_BGNN_DT AND AA.PYMT_DDUC_ITEM_END_DT     
+				  </isEqual> 
+				 -->
+				 <isNotEmpty prepend="AND" property="payYr" >
+			 	      #payYr#  BETWEEN SUBSTR(AA.PYMT_DDUC_ITEM_BGNN_DT,1,4) AND SUBSTR(nvl(AA.PYMT_DDUC_ITEM_END_DT,(to_char(sysdate,'YYYYMMDD'))), 1, 4)  
+			     </isNotEmpty> 
+				 <isEqual prepend="AND" property="dataStatus" compareValue="1">
+				    TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN AA.PYMT_DDUC_ITEM_BGNN_DT AND nvl(AA.PYMT_DDUC_ITEM_END_DT,(to_char(sysdate,'YYYYMMDD')))   
+				  </isEqual>
+				  <isEqual prepend="AND" property="dataStatus" compareValue="2">
+				    <![CDATA[  AA.PYMT_DDUC_ITEM_END_DT < TO_CHAR(SYSDATE,'YYYYMMDD')     ]]>
+				  </isEqual>    
+				  <isNotEmpty prepend="AND" property="dpobCd" >
+			 	      AA.DPOB_CD=#dpobCd#
+			       </isNotEmpty>  
+			        <isNotEmpty prepend="AND" property="emymtDivCd" >
+				 	 BB.EMYMT_DIV_CD=#emymtDivCd#
+			       </isNotEmpty>  
+			       	<isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+					  BB.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+				    </isNotEmpty>
+			       <isNotEmpty prepend="AND" property="businCd" >
+				 	 BB.BUSIN_CD=#businCd#
+			       </isNotEmpty> 
+			        <isNotEmpty property="typOccuCd" prepend="AND">
+					<![CDATA[
+					 BB.TYP_OCCU_CD
+					]]>
+					<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					 #typOccuCdArr[]#
+					</iterate>
+					</isNotEmpty>  
+				      <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					 <!--  <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+					<![CDATA[
+					 BB.DTIL_OCCU_CLS_DIV_CD
+					]]>
+					<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+					 #dtilOccuClsDivCdArr[]#
+					</iterate>
+					</isNotEmpty>  -->
+			       <isNotEmpty prepend="AND" property="systemkey" >
+				 	 AA.SYSTEMKEY=#systemkey#
+			       </isNotEmpty> 
+			       <isNotEmpty prepend="AND" property="hanNm" >
+				 	 BB.HAN_NM LIKE '%' || #hanNm# || '%'
+			       </isNotEmpty> 
+			         <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+				 	AA.PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+			       </isNotEmpty>  
+			          <isNotEmpty prepend="AND" property="payItemCd" >
+				 	AA.PAY_ITEM_CD=#payItemCd#
+			       </isNotEmpty>
+					ORDER BY   AA.PYMT_DDUC_DIV_CD, AA.PAY_ITEM_CD ASC 
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	
+	<!-- 수당 리스트 출력 -->
+	<select id="payr0520DAO.selectPayr0520ToPayr5400ExtpyCdList_D" parameterClass="payr0520SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+							DISTINCT AA.DPOB_CD
+								, AA.PAY_ITEM_CD
+								, AA.PYMT_DDUC_DIV_CD
+								, (SELECT  PAY_EXTPY_NM 
+						              FROM PAYR0480
+									WHERE PAYR0480.DPOB_CD = AA.DPOB_CD
+											AND PAYR0480.PAY_EXTPY_CD = AA.PAY_ITEM_CD ) AS PAY_ITEM_NM 
+								, AA.PYMT_DDUC_ITEM_DEL_YN
+						FROM PAYR0520 AA, PSNL0100 BB
+				WHERE     AA.DPOB_CD = BB.DPOB_CD
+						  AND AA.SYSTEMKEY = BB.SYSTEMKEY    
+		       AND EXISTS  (
+                            SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT  AA02.DPOB_CD,
+					                                 AA02.DEPT_CD,
+					                                 AA02.TYP_OCCU_CD,
+					                                 AA02.DTIL_OCCU_INTTN_CD 
+												FROM  BASS0360 AA02  
+												WHERE AA02.PAYR_MANG_DEPT_CD LIKE (DECODE(#payrMangDeptYn#,'Y',#payrMangDeptCd#,DECODE(#deptCd#,'',#payrMangDeptCd#,''))) || '%'  
+												AND   NOT EXISTS (SELECT DPOB_CD 
+												                      , TYP_OCCU_CD
+												                      , DEPT_CD
+												                      , DTIL_OCCU_INTTN_CD
+												                FROM SYSM0700 AA01
+												                WHERE AA01.DPOB_CD = AA02.DPOB_CD
+												                  AND AA01.TYP_OCCU_CD = AA02.TYP_OCCU_CD
+												                  AND AA01.DEPT_CD = AA02.DEPT_CD
+												                 AND AA01.DTIL_OCCU_INTTN_CD = AA02.DTIL_OCCU_INTTN_CD ) 
+												AND (AA02.DPOB_CD,AA02.PAYR_MANG_DEPT_CD) IN (SELECT DPOB_CD, PAYR_MANG_DEPT_CD  
+												                                FROM BASS0150 
+												                                 WHERE PAY_MANGE_DEPT_WHLE_PERN_CHRG
+												                                     LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,
+												                                      DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,
+												                                                  (SELECT NVL(USR_ID,'') FROM SYSM0700
+					                                                                                                  WHERE USR_ID = #usrId#))))) || '%'  
+					                                                           UNION ALL
+					                                                           SELECT DPOB_CD,
+                                                                                      PAYR_MANG_DEPT_CD
+                                                                                 FROM BASS0150
+                                                                                WHERE PAYR_MANG_DEPT_CD LIKE (DECODE (#deptCd#, '', #payrMangDeptCd#, ''))   || '%')   
+												UNION ALL                 
+											    SELECT  AA03.DPOB_CD
+												       , AA03.DEPT_CD 
+												       , AA03.TYP_OCCU_CD
+												       , AA03.DTIL_OCCU_INTTN_CD 
+												FROM SYSM0700 AA03
+												WHERE AA03.USR_ID LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,  
+												                         DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,''))  
+												                        )) || '%'  
+												UNION ALL
+												 SELECT   
+								                                               BB01.DPOB_CD, BB01.DEPT_CD
+								                                               ,('') AS TYP_OCCU_CD ,('') AS DTIL_OCCU_INTTN_CD
+								                                             FROM (SELECT AA.DPOB_CD  , AA.DEPT_CD  
+								                                                          , AA.TPLVL_DEPT_CD  , AA.HHRK_DEPT_CD  
+								                                                         FROM BASS0400 AA 
+								                                                        WHERE AA.DEPT_USE_YN   = 'Y'  
+								                                                         AND  AA.DEPT_CD = #payrMangDeptCd#    
+								                                                UNION ALL
+								                                                SELECT AA02.*
+								                                                FROM (
+								                                                    SELECT  CC.DPOB_CD   , CC.DEPT_CD  
+								                                                          , CC.TPLVL_DEPT_CD , CC.HHRK_DEPT_CD  
+								                                                         FROM BASS0400 CC 
+								                                                        WHERE CC.DEPT_USE_YN   = 'Y'   
+								                                                     ) AA02
+								                                              START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd#   
+								                                             CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD ) BB01 
+								                                           WHERE  BB01.DPOB_CD= #dpobCd# 
+								                                         
+                                           ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          ) 
+            	<isNotEmpty prepend="AND" property="payYr" >
+					#payYr#  BETWEEN SUBSTR(AA.PYMT_DDUC_ITEM_BGNN_DT,1,4) AND SUBSTR(AA.PYMT_DDUC_ITEM_END_DT,1,4)   
+				 </isNotEmpty>                         
+                 <isEqual prepend="AND" property="dataStatus" compareValue="1">
+				    TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN AA.PYMT_DDUC_ITEM_BGNN_DT AND AA.PYMT_DDUC_ITEM_END_DT     
+				  </isEqual>
+				  <isEqual prepend="AND" property="dataStatus" compareValue="2">
+				    <![CDATA[  AA.PYMT_DDUC_ITEM_END_DT < TO_CHAR(SYSDATE,'YYYYMMDD')     ]]>
+				  </isEqual>
+				  <!--                        
+				 <isEqual prepend="AND" property="dataStatus" compareValue="0">
+				    TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN AA.PYMT_DDUC_ITEM_BGNN_DT AND AA.PYMT_DDUC_ITEM_END_DT     
+				  </isEqual> 
+				    --> 
+				  <isNotEmpty prepend="AND" property="dpobCd" >
+			 	      AA.DPOB_CD=#dpobCd#
+			       </isNotEmpty>  
+			       
+			        <isNotEmpty prepend="AND" property="emymtDivCd" >
+				 	 BB.EMYMT_DIV_CD=#emymtDivCd#
+			       </isNotEmpty> 
+			       
+			       	<isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+						BB.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+					</isNotEmpty> 
+			       
+			       <isNotEmpty prepend="AND" property="businCd" >
+				 	 BB.BUSIN_CD=#businCd#
+			       </isNotEmpty> 
+			        <isNotEmpty property="typOccuCd" prepend="AND">
+					<![CDATA[
+					 BB.TYP_OCCU_CD
+					]]>
+					<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					 #typOccuCdArr[]#
+					</iterate>
+					</isNotEmpty>  
+				      <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					 <!--  <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+					<![CDATA[
+					 BB.DTIL_OCCU_CLS_DIV_CD
+					]]>
+					<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+					 #dtilOccuClsDivCdArr[]#
+					</iterate>
+					</isNotEmpty>  -->
+			       <isNotEmpty prepend="AND" property="systemkey" >
+				 	 AA.SYSTEMKEY=#systemkey#
+			       </isNotEmpty> 
+			       <isNotEmpty prepend="AND" property="hanNm" >
+				 	 BB.HAN_NM LIKE '%' || #hanNm# || '%'
+			       </isNotEmpty> 
+			         <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+				 	AA.PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+			       </isNotEmpty>  
+			          <isNotEmpty prepend="AND" property="payItemCd" >
+				 	AA.PAY_ITEM_CD=#payItemCd#
+			       </isNotEmpty>
+			       
+			       	<isNotEmpty prepend="AND" property="mangeDeptCd" >
+						BB.DEPT_CD = #mangeDeptCd#
+					</isNotEmpty>
+					ORDER BY   AA.DPOB_CD ASC, AA.PAY_ITEM_CD DESC
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>
+	
+	<!--  <isNotEmpty prepend="AND" property="deptCd" >
+				 	 BB.CURR_AFFN_DEPT_CD=#deptCd#
+			       </isNotEmpty>  -->
+	<!-- 공제 리스트  -->
+	<select id="payr0520DAO.selectPayr0520ToPayr3200DducdivcdListTotCnt_S" parameterClass="payr0520SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM 
+			(  SELECT
+					DISTINCT AA.DPOB_CD
+						, AA.PAY_ITEM_CD
+						, (SELECT  PAY_DDUC_NM 
+						              FROM PAYR0470
+									WHERE PAYR0470.DPOB_CD = AA.DPOB_CD
+											AND PAYR0470.PAY_DDUC_CD = AA.PAY_ITEM_CD ) AS PAY_ITEM_NM  
+			FROM PAYR0520 AA, PSNL0100 BB
+				WHERE     AA.DPOB_CD = BB.DPOB_CD
+						  AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+						  
+				<isNotEmpty prepend="AND" property="mangeDeptCd" >
+					BB.DEPT_CD = #mangeDeptCd#
+	 			</isNotEmpty>		  
+		       AND EXISTS  (
+                            SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT  AA02.DPOB_CD,
+					                                 AA02.DEPT_CD,
+					                                 AA02.TYP_OCCU_CD,
+					                                 AA02.DTIL_OCCU_INTTN_CD 
+												FROM  BASS0360 AA02  
+												WHERE AA02.PAYR_MANG_DEPT_CD LIKE (DECODE(#payrMangDeptYn#,'Y',#payrMangDeptCd#,DECODE(#deptCd#,'',#payrMangDeptCd#,''))) || '%'  
+												AND   NOT EXISTS (SELECT DPOB_CD 
+												                      , TYP_OCCU_CD
+												                      , DEPT_CD
+												                      , DTIL_OCCU_INTTN_CD
+												                FROM SYSM0700 AA01
+												                WHERE AA01.DPOB_CD = AA02.DPOB_CD
+												                  AND AA01.TYP_OCCU_CD = AA02.TYP_OCCU_CD
+												                  AND AA01.DEPT_CD = AA02.DEPT_CD
+												                 AND AA01.DTIL_OCCU_INTTN_CD = AA02.DTIL_OCCU_INTTN_CD ) 
+												AND (AA02.DPOB_CD,AA02.PAYR_MANG_DEPT_CD) IN (SELECT DPOB_CD, PAYR_MANG_DEPT_CD  
+												                                FROM BASS0150 
+												                                 WHERE PAY_MANGE_DEPT_WHLE_PERN_CHRG
+												                                     LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,
+												                                      DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,
+												                                                  (SELECT NVL(USR_ID,'') FROM SYSM0700
+					                                                                                                  WHERE USR_ID = #usrId#))))) || '%'  
+					                                                           UNION ALL
+					                                                           SELECT DPOB_CD,
+                                                                                      PAYR_MANG_DEPT_CD
+                                                                                 FROM BASS0150
+                                                                                WHERE PAYR_MANG_DEPT_CD LIKE (DECODE (#deptCd#, '', #payrMangDeptCd#, ''))   || '%') 
+												UNION ALL                 
+											    SELECT  AA03.DPOB_CD
+												       , AA03.DEPT_CD 
+												       , AA03.TYP_OCCU_CD
+												       , AA03.DTIL_OCCU_INTTN_CD 
+												FROM SYSM0700 AA03
+												WHERE AA03.USR_ID LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,  
+												                         DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,''))  
+												                        )) || '%'  
+												UNION ALL
+												 SELECT   
+								                                               BB01.DPOB_CD, BB01.DEPT_CD
+								                                               ,('') AS TYP_OCCU_CD ,('') AS DTIL_OCCU_INTTN_CD
+								                                             FROM (SELECT AA.DPOB_CD  , AA.DEPT_CD  
+								                                                          , AA.TPLVL_DEPT_CD  , AA.HHRK_DEPT_CD  
+								                                                         FROM BASS0400 AA 
+								                                                        WHERE AA.DEPT_USE_YN   = 'Y'  
+								                                                         AND  AA.DEPT_CD = #payrMangDeptCd#    
+								                                                UNION ALL
+								                                                SELECT AA02.*
+								                                                FROM (
+								                                                    SELECT  CC.DPOB_CD   , CC.DEPT_CD  
+								                                                          , CC.TPLVL_DEPT_CD , CC.HHRK_DEPT_CD  
+								                                                         FROM BASS0400 CC 
+								                                                        WHERE CC.DEPT_USE_YN   = 'Y'   
+								                                                     ) AA02
+								                                              START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd#   
+								                                             CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD ) BB01 
+								                                           WHERE  BB01.DPOB_CD= #dpobCd# 
+								                                         
+                                           ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          ) 
+                   <!--  
+			      <isEqual prepend="AND" property="dataStatus" compareValue="0">
+				    TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN AA.ETC_DDUC_BGNN_DT AND AA.ETC_DDUC_END_DT     
+				  </isEqual> 
+				  -->
+				  <isEqual prepend="AND" property="dataStatus" compareValue="1">
+				    TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN AA.PYMT_DDUC_ITEM_BGNN_DT AND nvl(AA.PYMT_DDUC_ITEM_END_DT,(to_char(sysdate,'YYYYMMDD')))  
+				  </isEqual>
+				  <isEqual prepend="AND" property="dataStatus" compareValue="2">
+				    <![CDATA[  AA.PYMT_DDUC_ITEM_END_DT < TO_CHAR(SYSDATE,'YYYYMMDD')     ]]>
+				  </isEqual>
+				  <isNotEmpty prepend="AND" property="payYr" >
+			 	      #payYr#  BETWEEN SUBSTR(AA.PYMT_DDUC_ITEM_BGNN_DT,1,4) AND SUBSTR(nvl(AA.PYMT_DDUC_ITEM_END_DT,(to_char(sysdate,'YYYYMMDD'))),1,4)   
+			      </isNotEmpty> 
+				  <isNotEmpty prepend="AND" property="dpobCd" >
+			 	      AA.DPOB_CD=#dpobCd#
+			       </isNotEmpty>  
+			        <isNotEmpty prepend="AND" property="emymtDivCd" >
+				 	 BB.EMYMT_DIV_CD=#emymtDivCd#
+			       </isNotEmpty> 
+			       <isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+						BB.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+					</isNotEmpty>
+			       <isNotEmpty prepend="AND" property="businCd" >
+				 	 BB.BUSIN_CD=#businCd#
+			       </isNotEmpty> 
+			        <isNotEmpty property="typOccuCd" prepend="AND">
+					<![CDATA[
+					 BB.TYP_OCCU_CD
+					]]>
+					<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					 #typOccuCdArr[]#
+					</iterate>
+					</isNotEmpty>  
+				    <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					<!--   <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+					<![CDATA[
+					 BB.DTIL_OCCU_CLS_DIV_CD
+					]]>
+					<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+					 #dtilOccuClsDivCdArr[]#
+					</iterate>
+					</isNotEmpty>  -->
+			       <isNotEmpty prepend="AND" property="systemkey" >
+				 	 AA.SYSTEMKEY=#systemkey#
+			       </isNotEmpty> 
+			       <isNotEmpty prepend="AND" property="hanNm" >
+				 	 BB.HAN_NM LIKE '%' || #hanNm# || '%'
+			       </isNotEmpty> 
+			         <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+				 	AA.PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+			       </isNotEmpty> 
+			       <isNotEmpty prepend="AND" property="payItemCd" >
+				 	AA.PAY_ITEM_CD=#payItemCd#
+			       </isNotEmpty>
+		    )   
+	</select>
+	
+	<!-- 수당 리스트 출력  -->
+	<select id="payr0520DAO.selectPayr0520ToPayr5400ExtpyCdListTotCnt_S" parameterClass="payr0520SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM 
+			(  SELECT
+					DISTINCT AA.DPOB_CD
+						, AA.PAY_ITEM_CD
+						, (SELECT  PAY_EXTPY_NM 
+						              FROM PAYR0480
+									WHERE PAYR0480.DPOB_CD = AA.DPOB_CD
+											AND PAYR0480.PAY_EXTPY_CD = AA.PAY_ITEM_CD ) AS PAY_ITEM_NM  
+			FROM PAYR0520 AA, PSNL0100 BB
+				WHERE     AA.DPOB_CD = BB.DPOB_CD
+						  AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+		       AND EXISTS  (
+                            SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT  AA02.DPOB_CD,
+					                                 AA02.DEPT_CD,
+					                                 AA02.TYP_OCCU_CD,
+					                                 AA02.DTIL_OCCU_INTTN_CD 
+												FROM  BASS0360 AA02  
+												WHERE AA02.PAYR_MANG_DEPT_CD LIKE (DECODE(#payrMangDeptYn#,'Y',#payrMangDeptCd#,DECODE(#deptCd#,'',#payrMangDeptCd#,''))) || '%'  
+												AND   NOT EXISTS (SELECT DPOB_CD 
+												                      , TYP_OCCU_CD
+												                      , DEPT_CD
+												                      , DTIL_OCCU_INTTN_CD
+												                FROM SYSM0700 AA01
+												                WHERE AA01.DPOB_CD = AA02.DPOB_CD
+												                  AND AA01.TYP_OCCU_CD = AA02.TYP_OCCU_CD
+												                  AND AA01.DEPT_CD = AA02.DEPT_CD
+												                 AND AA01.DTIL_OCCU_INTTN_CD = AA02.DTIL_OCCU_INTTN_CD ) 
+												AND (AA02.DPOB_CD,AA02.PAYR_MANG_DEPT_CD) IN (SELECT DPOB_CD, PAYR_MANG_DEPT_CD  
+												                                FROM BASS0150 
+												                                 WHERE PAY_MANGE_DEPT_WHLE_PERN_CHRG
+												                                     LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,
+												                                      DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,
+												                                                  (SELECT NVL(USR_ID,'') FROM SYSM0700
+					                                                                                                  WHERE USR_ID = #usrId#))))) || '%'  
+					                                                           UNION ALL
+					                                                           SELECT DPOB_CD,
+                                                                                      PAYR_MANG_DEPT_CD
+                                                                                 FROM BASS0150
+                                                                                WHERE PAYR_MANG_DEPT_CD LIKE (DECODE (#deptCd#, '', #payrMangDeptCd#, ''))   || '%') 
+												UNION ALL                 
+											    SELECT  AA03.DPOB_CD
+												       , AA03.DEPT_CD 
+												       , AA03.TYP_OCCU_CD
+												       , AA03.DTIL_OCCU_INTTN_CD 
+												FROM SYSM0700 AA03
+												WHERE AA03.USR_ID LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,  
+												                         DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,''))  
+												                        )) || '%'  
+												UNION ALL
+												 SELECT   
+								                                               BB01.DPOB_CD, BB01.DEPT_CD
+								                                               ,('') AS TYP_OCCU_CD ,('') AS DTIL_OCCU_INTTN_CD
+								                                             FROM (SELECT AA.DPOB_CD  , AA.DEPT_CD  
+								                                                          , AA.TPLVL_DEPT_CD  , AA.HHRK_DEPT_CD  
+								                                                         FROM BASS0400 AA 
+								                                                        WHERE AA.DEPT_USE_YN   = 'Y'  
+								                                                         AND  AA.DEPT_CD = #payrMangDeptCd#    
+								                                                UNION ALL
+								                                                SELECT AA02.*
+								                                                FROM (
+								                                                    SELECT  CC.DPOB_CD   , CC.DEPT_CD  
+								                                                          , CC.TPLVL_DEPT_CD , CC.HHRK_DEPT_CD  
+								                                                         FROM BASS0400 CC 
+								                                                        WHERE CC.DEPT_USE_YN   = 'Y'   
+								                                                     ) AA02
+								                                              START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd#   
+								                                             CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD ) BB01 
+								                                           WHERE  BB01.DPOB_CD= #dpobCd# 
+								                                         
+                                           ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          ) 
+                   <isNotEmpty prepend="AND" property="payYr" >
+			 	      #payYr#  BETWEEN SUBSTR(AA.PYMT_DDUC_ITEM_BGNN_DT,1,4) AND SUBSTR(AA.PYMT_DDUC_ITEM_END_DT,1,4)   
+			        </isNotEmpty>                         
+                   <!--                       
+			      <isEqual prepend="AND" property="dataStatus" compareValue="0">
+				    TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN AA.ETC_DDUC_BGNN_DT AND AA.ETC_DDUC_END_DT     
+				  </isEqual> 
+				  -->
+				  <isEqual prepend="AND" property="dataStatus" compareValue="1">
+				    TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN AA.PYMT_DDUC_ITEM_BGNN_DT AND AA.PYMT_DDUC_ITEM_END_DT     
+				  </isEqual>
+				  <isEqual prepend="AND" property="dataStatus" compareValue="2">
+				    <![CDATA[  AA.PYMT_DDUC_ITEM_END_DT < TO_CHAR(SYSDATE,'YYYYMMDD')     ]]>
+				  </isEqual>
+				  <isNotEmpty prepend="AND" property="dpobCd" >
+			 	      AA.DPOB_CD=#dpobCd#
+			       </isNotEmpty>  
+			        <isNotEmpty prepend="AND" property="emymtDivCd" >
+				 	 BB.EMYMT_DIV_CD=#emymtDivCd#
+			       </isNotEmpty>  
+			       
+			       <isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+				 	 BB.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+			       </isNotEmpty>  
+			       
+			       <isNotEmpty prepend="AND" property="businCd" >
+				 	 BB.BUSIN_CD=#businCd#
+			       </isNotEmpty> 
+			        <isNotEmpty property="typOccuCd" prepend="AND">
+					<![CDATA[
+					 BB.TYP_OCCU_CD
+					]]>
+					<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					 #typOccuCdArr[]#
+					</iterate>
+					</isNotEmpty>  
+				    <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					<!--   <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+					<![CDATA[
+					 BB.DTIL_OCCU_CLS_DIV_CD
+					]]>
+					<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+					 #dtilOccuClsDivCdArr[]#
+					</iterate>
+					</isNotEmpty>  -->
+			       <isNotEmpty prepend="AND" property="systemkey" >
+				 	 AA.SYSTEMKEY=#systemkey#
+			       </isNotEmpty> 
+			       <isNotEmpty prepend="AND" property="hanNm" >
+				 	 BB.HAN_NM LIKE '%' || #hanNm# || '%'
+			       </isNotEmpty> 
+			         <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+				 	AA.PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+			       </isNotEmpty> 
+			       <isNotEmpty prepend="AND" property="payItemCd" >
+				 	AA.PAY_ITEM_CD=#payItemCd#
+			       </isNotEmpty>
+			       <isNotEmpty prepend="AND" property="mangeDeptCd" >
+						BB.DEPT_CD = #mangeDeptCd#
+	 				</isNotEmpty>
+			       
+		    )   
+	</select>
+	
+	<!-- 개별 공제 대상자 리스트 -->
+	<select id="payr0520DAO.selectPayr0520ToPayr3200List_D" parameterClass="payr0520SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT           AA.DPOB_CD
+								, AA.SYSTEMKEY  
+								, BB.HAN_NM
+								, BB.RESN_REGN_NUM
+								, BB.DEPT_CD
+								, fcBass0400CDNM(AA.DPOB_CD,BB.CURR_AFFN_DEPT_CD,'2') AS DEPT_NM
+								, BB.BUSIN_CD 
+								, BB.TYP_OCCU_CD
+								, fcBass0320CDNM(AA.DPOB_CD,BB.TYP_OCCU_CD) AS TYP_OCCU_NM
+								, BB.DTIL_OCCU_CLS_DIV_CD 
+								, BB.DTIL_OCCU_INTTN_CD 
+		         				 , fcBassEx0350CDNM(AA.DPOB_CD,BB.TYP_OCCU_CD,BB.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM
+								, BB.ODTY_CD
+								, fcBass0300CDNM(AA.DPOB_CD,BB.ODTY_CD) AS ODTY_NM
+								, BB.PYSP_CD
+								, fcBass0300CDNM(AA.DPOB_CD,BB.PYSP_CD) AS PYSP_NM
+								, BB.PYSP_GRDE_CD
+								, fcBass0300CDNM(AA.DPOB_CD,BB.PYSP_GRDE_CD) AS PYSP_GRDE_NM
+								, BB.LOG_SVC_YR_NUM_CD
+								, fcBass0300CDNM(AA.DPOB_CD,BB.LOG_SVC_YR_NUM_CD) AS LOG_SVC_YR_NUM_NM
+								, BB.LOG_SVC_MNTH_ICM_CD
+								, fcBass0300CDNM(AA.DPOB_CD,BB.EMYMT_DIV_CD) AS LOG_SVC_MNTH_ICM_NM 
+								, AA.PAY_ITEM_CD
+								, (SELECT  PAY_DDUC_NM 
+						              FROM PAYR0470
+									WHERE PAYR0470.DPOB_CD = AA.DPOB_CD
+											AND PAYR0470.PAY_DDUC_CD = AA.PAY_ITEM_CD ) AS PAY_ITEM_NM
+								, AA.PAY_ITEM_CD as payItemCdpayDducCd
+								, (SELECT  PAY_DDUC_NM 
+						              FROM PAYR0470
+									WHERE PAYR0470.DPOB_CD = AA.DPOB_CD
+											AND PAYR0470.PAY_DDUC_CD = AA.PAY_ITEM_CD ) AS payItemCdpayDducNm    
+								, AA.PYMT_DDUC_ITEM_SIL_NUM
+								, AA.PYMT_DDUC_DIV_CD
+								, fcBass0300CDNM(AA.DPOB_CD,AA.PYMT_DDUC_DIV_CD) AS PYMT_DDUC_DIV_NM 
+								, AA.PYMT_DDUC_SUM
+								, AA.PYMT_DDUC_RATE
+								, AA.PYMT_DDUC_FREE_DTY_SUM
+								, AA.PYMT_DDUC_ITEM_CRETN_DIV_CD
+								, fcBass0300CDNM(AA.DPOB_CD,AA.PYMT_DDUC_ITEM_CRETN_DIV_CD) AS PYMT_DDUC_ITEM_CRETN_DIV_NM 
+								, AA.PYMT_DDUC_ITEM_NOTE_CTNT
+								, AA.PYMT_DDUC_ITEM_BGNN_DT
+								, AA.PYMT_DDUC_ITEM_END_DT
+								, AA.PYMT_DDUC_ITEM_DEL_YN 
+						FROM PAYR0520 AA, PSNL0100 BB
+				WHERE     AA.DPOB_CD = BB.DPOB_CD
+						  AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+		       AND EXISTS  (
+                           SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT  AA02.DPOB_CD,
+					                                 AA02.DEPT_CD,
+					                                 AA02.TYP_OCCU_CD,
+					                                 AA02.DTIL_OCCU_INTTN_CD 
+												FROM  BASS0360 AA02  
+												WHERE AA02.PAYR_MANG_DEPT_CD LIKE (DECODE(#payrMangDeptYn#,'Y',#payrMangDeptCd#,DECODE(#deptCd#,'',#payrMangDeptCd#,''))) || '%'  
+												AND   NOT EXISTS (SELECT DPOB_CD 
+												                      , TYP_OCCU_CD
+												                      , DEPT_CD
+												                      , DTIL_OCCU_INTTN_CD
+												                FROM SYSM0700 AA01
+												                WHERE AA01.DPOB_CD = AA02.DPOB_CD
+												                  AND AA01.TYP_OCCU_CD = AA02.TYP_OCCU_CD
+												                  AND AA01.DEPT_CD = AA02.DEPT_CD
+												                 AND AA01.DTIL_OCCU_INTTN_CD = AA02.DTIL_OCCU_INTTN_CD ) 
+												AND (AA02.DPOB_CD,AA02.PAYR_MANG_DEPT_CD) IN (SELECT DPOB_CD, PAYR_MANG_DEPT_CD  
+												                                FROM BASS0150 
+												                                 WHERE PAY_MANGE_DEPT_WHLE_PERN_CHRG
+												                                     LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,
+												                                      DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,
+												                                                  (SELECT NVL(USR_ID,'') FROM SYSM0700
+					                                                                                                  WHERE USR_ID = #usrId#))))) || '%'  
+					                                                           UNION ALL
+					                                                           SELECT DPOB_CD,
+                                                                                      PAYR_MANG_DEPT_CD
+                                                                                 FROM BASS0150
+                                                                                WHERE PAYR_MANG_DEPT_CD LIKE (DECODE (#deptCd#, '', #payrMangDeptCd#, ''))   || '%') 
+												UNION ALL                 
+											    SELECT  AA03.DPOB_CD
+												      , AA03.DEPT_CD 
+												       , AA03.TYP_OCCU_CD
+												       , AA03.DTIL_OCCU_INTTN_CD 
+												FROM SYSM0700 AA03
+												WHERE AA03.USR_ID LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,  
+												                         DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,''))  
+												                        )) || '%'  
+												UNION ALL
+												 SELECT   
+								                                               BB01.DPOB_CD, BB01.DEPT_CD
+								                                               ,('') AS TYP_OCCU_CD ,('') AS DTIL_OCCU_INTTN_CD
+								                                             FROM (SELECT AA.DPOB_CD  , AA.DEPT_CD  
+								                                                          , AA.TPLVL_DEPT_CD  , AA.HHRK_DEPT_CD  
+								                                                         FROM BASS0400 AA 
+								                                                        WHERE AA.DEPT_USE_YN   = 'Y'  
+								                                                         AND  AA.DEPT_CD = #payrMangDeptCd#    
+								                                                UNION ALL
+								                                                SELECT AA02.*
+								                                                FROM (
+								                                                    SELECT  CC.DPOB_CD   , CC.DEPT_CD  
+								                                                          , CC.TPLVL_DEPT_CD , CC.HHRK_DEPT_CD  
+								                                                         FROM BASS0400 CC 
+								                                                        WHERE CC.DEPT_USE_YN   = 'Y'   
+								                                                     ) AA02
+								                                              START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd#   
+								                                             CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD ) BB01 
+								                                           WHERE  BB01.DPOB_CD= #dpobCd# 
+								                                         
+                                           ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          ) 
+                                          
+                                          
+                 <!--                        
+				 <isEqual prepend="AND" property="dataStatus" compareValue="0">
+				    TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN AA.PYMT_DDUC_ITEM_BGNN_DT AND AA.PYMT_DDUC_ITEM_END_DT     
+				  </isEqual> 
+				  -->  
+				  <isEqual prepend="AND" property="dataStatus" compareValue="1">
+				    TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN AA.PYMT_DDUC_ITEM_BGNN_DT AND AA.PYMT_DDUC_ITEM_END_DT     
+				  </isEqual>
+				  <isEqual prepend="AND" property="dataStatus" compareValue="2">
+				    <![CDATA[  AA.PYMT_DDUC_ITEM_END_DT < TO_CHAR(SYSDATE,'YYYYMMDD')     ]]>
+				  </isEqual>
+				  
+				  <isNotEmpty prepend="AND" property="dpobCd" >
+			 	      AA.DPOB_CD=#dpobCd#
+			       </isNotEmpty>  
+			       <isNotEmpty prepend="AND" property="payYr" >
+			 	      #payYr#  BETWEEN SUBSTR(AA.PYMT_DDUC_ITEM_BGNN_DT,1,4) AND SUBSTR(AA.PYMT_DDUC_ITEM_END_DT,1,4)   
+			        </isNotEmpty> 
+			        <isNotEmpty prepend="AND" property="emymtDivCd" >
+				 	 BB.EMYMT_DIV_CD=#emymtDivCd#
+			       </isNotEmpty>  
+			       <isNotEmpty prepend="AND" property="businCd" >
+				 	 BB.BUSIN_CD=#businCd#
+			       </isNotEmpty> 
+			       <isNotEmpty property="typOccuCd" prepend="AND">
+					<![CDATA[
+					 BB.TYP_OCCU_CD
+					]]>
+					<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					 #typOccuCdArr[]#
+					</iterate>
+					</isNotEmpty>  
+				     <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					<!--   <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+					<![CDATA[
+					 BB.DTIL_OCCU_CLS_DIV_CD
+					]]>
+					<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+					 #dtilOccuClsDivCdArr[]#
+					</iterate>
+					</isNotEmpty>  -->
+			       <isNotEmpty prepend="AND" property="systemkey" >
+				 	 AA.SYSTEMKEY=#systemkey#
+			       </isNotEmpty> 
+			       <isNotEmpty prepend="AND" property="hanNm" >
+				 	 BB.HAN_NM LIKE '%' || #hanNm# || '%'
+			       </isNotEmpty> 
+			         <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+				 	AA.PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+			       </isNotEmpty>  
+			       <isNotEmpty prepend="AND" property="payItemCd" >
+				 	AA.PAY_ITEM_CD=#payItemCd#
+			       </isNotEmpty>
+					ORDER BY  AA.DPOB_CD ASC
+					          ,(SELECT LPAD(DEPT_RANK,5,'0')  
+                                   FROM BASS0400 DD
+                                   WHERE DD.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+                                     AND DD.DPOB_CD = BB.DPOB_CD) ASC 
+					        ,  BB.RESN_REGN_NUM ASC
+					         , AA.PAY_ITEM_CD ASC 
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>
+	
+	<!-- 개별 수당 대상자 정보 리스트 -->
+	<select id="payr0520DAO.selectPayr0520ToPayr5400List_D" parameterClass="payr0520SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT           AA.DPOB_CD
+								, AA.SYSTEMKEY  
+								, BB.HAN_NM
+								, BB.RESN_REGN_NUM
+								, BB.DEPT_CD
+								, fcBass0400CDNM(AA.DPOB_CD,BB.CURR_AFFN_DEPT_CD,'2') AS DEPT_NM
+								, BB.BUSIN_CD 
+								, BB.TYP_OCCU_CD
+								, fcBass0320CDNM(AA.DPOB_CD,BB.TYP_OCCU_CD) AS TYP_OCCU_NM
+								, BB.DTIL_OCCU_CLS_DIV_CD 
+								, BB.DTIL_OCCU_INTTN_CD 
+		         				 , fcBassEx0350CDNM(AA.DPOB_CD,BB.TYP_OCCU_CD,BB.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM
+								, BB.ODTY_CD
+								, fcBass0300CDNM(AA.DPOB_CD,BB.ODTY_CD) AS ODTY_NM
+								, BB.PYSP_CD
+								, fcBass0300CDNM(AA.DPOB_CD,BB.PYSP_CD) AS PYSP_NM
+								, BB.PYSP_GRDE_CD
+								, fcBass0300CDNM(AA.DPOB_CD,BB.PYSP_GRDE_CD) AS PYSP_GRDE_NM
+								, BB.LOG_SVC_YR_NUM_CD
+								, fcBass0300CDNM(AA.DPOB_CD,BB.LOG_SVC_YR_NUM_CD) AS LOG_SVC_YR_NUM_NM
+								, BB.LOG_SVC_MNTH_ICM_CD
+								, fcBass0300CDNM(AA.DPOB_CD,BB.EMYMT_DIV_CD) AS LOG_SVC_MNTH_ICM_NM 
+								, AA.PAY_ITEM_CD
+								, (SELECT  PAY_EXTPY_NM 
+						              FROM PAYR0480
+									WHERE PAYR0480.DPOB_CD = AA.DPOB_CD
+											AND PAYR0480.PAY_EXTPY_CD = AA.PAY_ITEM_CD ) AS PAY_ITEM_NM
+								, AA.PAY_ITEM_CD as payItemCdpayExtpyCd
+								, (SELECT  PAY_EXTPY_NM 
+						              FROM PAYR0480
+									WHERE PAYR0480.DPOB_CD = AA.DPOB_CD
+											AND PAYR0480.PAY_EXTPY_CD = AA.PAY_ITEM_CD ) AS payItemCdpayExtpyNm
+								, AA.PYMT_DDUC_ITEM_SIL_NUM
+								, AA.PYMT_DDUC_DIV_CD
+								, fcBass0300CDNM(AA.DPOB_CD,AA.PYMT_DDUC_DIV_CD) AS PYMT_DDUC_DIV_NM 
+								, AA.PYMT_DDUC_SUM
+								, AA.PYMT_DDUC_RATE
+								, AA.PYMT_DDUC_FREE_DTY_SUM
+								, AA.PYMT_DDUC_ITEM_CRETN_DIV_CD
+								, fcBass0300CDNM(AA.DPOB_CD,AA.PYMT_DDUC_ITEM_CRETN_DIV_CD) AS PYMT_DDUC_ITEM_CRETN_DIV_NM 
+								, AA.PYMT_DDUC_ITEM_NOTE_CTNT
+								, AA.PYMT_DDUC_ITEM_BGNN_DT
+								, AA.PYMT_DDUC_ITEM_END_DT
+								, AA.PYMT_DDUC_ITEM_DEL_YN 
+						FROM PAYR0520 AA, PSNL0100 BB
+				WHERE     AA.DPOB_CD = BB.DPOB_CD
+						  AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+		       AND EXISTS  (
+                           SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT  AA02.DPOB_CD,
+					                                 AA02.DEPT_CD,
+					                                 AA02.TYP_OCCU_CD,
+					                                 AA02.DTIL_OCCU_INTTN_CD 
+												FROM  BASS0360 AA02  
+												WHERE AA02.PAYR_MANG_DEPT_CD LIKE (DECODE(#payrMangDeptYn#,'Y',#payrMangDeptCd#,DECODE(#deptCd#,'',#payrMangDeptCd#,''))) || '%'  
+												AND   NOT EXISTS (SELECT DPOB_CD 
+												                      , TYP_OCCU_CD
+												                      , DEPT_CD
+												                      , DTIL_OCCU_INTTN_CD
+												                FROM SYSM0700 AA01
+												                WHERE AA01.DPOB_CD = AA02.DPOB_CD
+												                  AND AA01.TYP_OCCU_CD = AA02.TYP_OCCU_CD
+												                  AND AA01.DEPT_CD = AA02.DEPT_CD
+												                 AND AA01.DTIL_OCCU_INTTN_CD = AA02.DTIL_OCCU_INTTN_CD ) 
+												AND (AA02.DPOB_CD,AA02.PAYR_MANG_DEPT_CD) IN (SELECT DPOB_CD, PAYR_MANG_DEPT_CD  
+												                                FROM BASS0150 
+												                                 WHERE PAY_MANGE_DEPT_WHLE_PERN_CHRG
+												                                     LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,
+												                                      DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,
+												                                                  (SELECT NVL(USR_ID,'') FROM SYSM0700
+					                                                                                                  WHERE USR_ID = #usrId#))))) || '%'  
+					                                                           UNION ALL
+					                                                           SELECT DPOB_CD,
+                                                                                      PAYR_MANG_DEPT_CD
+                                                                                 FROM BASS0150
+                                                                                WHERE PAYR_MANG_DEPT_CD LIKE (DECODE (#deptCd#, '', #payrMangDeptCd#, ''))   || '%') 
+												UNION ALL                 
+											    SELECT  AA03.DPOB_CD
+												      , AA03.DEPT_CD 
+												       , AA03.TYP_OCCU_CD
+												       , AA03.DTIL_OCCU_INTTN_CD 
+												FROM SYSM0700 AA03
+												WHERE AA03.USR_ID LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,  
+												                         DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,''))  
+												                        )) || '%'  
+												UNION ALL
+												 SELECT   
+								                                               BB01.DPOB_CD, BB01.DEPT_CD
+								                                               ,('') AS TYP_OCCU_CD ,('') AS DTIL_OCCU_INTTN_CD
+								                                             FROM (SELECT AA.DPOB_CD  , AA.DEPT_CD  
+								                                                          , AA.TPLVL_DEPT_CD  , AA.HHRK_DEPT_CD  
+								                                                         FROM BASS0400 AA 
+								                                                        WHERE AA.DEPT_USE_YN   = 'Y'  
+								                                                         AND  AA.DEPT_CD = #payrMangDeptCd#    
+								                                                UNION ALL
+								                                                SELECT AA02.*
+								                                                FROM (
+								                                                    SELECT  CC.DPOB_CD   , CC.DEPT_CD  
+								                                                          , CC.TPLVL_DEPT_CD , CC.HHRK_DEPT_CD  
+								                                                         FROM BASS0400 CC 
+								                                                        WHERE CC.DEPT_USE_YN   = 'Y'   
+								                                                     ) AA02
+								                                              START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd#   
+								                                             CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD ) BB01 
+								                                           WHERE  BB01.DPOB_CD= #dpobCd# 
+								                                         
+                                           ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          ) 
+                   <!--                  
+				 <isEqual prepend="AND" property="dataStatus" compareValue="0">
+				    TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN AA.PYMT_DDUC_ITEM_BGNN_DT AND AA.PYMT_DDUC_ITEM_END_DT     
+				  </isEqual> 
+				  -->    
+				  <isEqual prepend="AND" property="dataStatus" compareValue="1">
+				    TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN AA.PYMT_DDUC_ITEM_BGNN_DT AND AA.PYMT_DDUC_ITEM_END_DT     
+				  </isEqual>
+				  <isEqual prepend="AND" property="dataStatus" compareValue="2">
+				    <![CDATA[  AA.PYMT_DDUC_ITEM_END_DT < TO_CHAR(SYSDATE,'YYYYMMDD')     ]]>
+				  </isEqual>   
+				  <isNotEmpty prepend="AND" property="dpobCd" >
+			 	      AA.DPOB_CD=#dpobCd#
+			       </isNotEmpty>  
+			       <isNotEmpty prepend="AND" property="payYr" >
+			 	      #payYr#  BETWEEN SUBSTR(AA.PYMT_DDUC_ITEM_BGNN_DT,1,4) AND SUBSTR(AA.PYMT_DDUC_ITEM_END_DT,1,4)   
+			        </isNotEmpty> 
+			        <isNotEmpty prepend="AND" property="emymtDivCd" >
+				 	 BB.EMYMT_DIV_CD=#emymtDivCd#
+			       </isNotEmpty>  
+			       <isNotEmpty prepend="AND" property="businCd" >
+				 	 BB.BUSIN_CD=#businCd#
+			       </isNotEmpty> 
+			       <isNotEmpty property="typOccuCd" prepend="AND">
+					<![CDATA[
+					 BB.TYP_OCCU_CD
+					]]>
+					<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					 #typOccuCdArr[]#
+					</iterate>
+					</isNotEmpty>  
+				     <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					<!--   <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+					<![CDATA[
+					 BB.DTIL_OCCU_CLS_DIV_CD
+					]]>
+					<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+					 #dtilOccuClsDivCdArr[]#
+					</iterate>
+					</isNotEmpty>  -->
+			       <isNotEmpty prepend="AND" property="systemkey" >
+				 	 AA.SYSTEMKEY=#systemkey#
+			       </isNotEmpty> 
+			       <isNotEmpty prepend="AND" property="hanNm" >
+				 	 BB.HAN_NM LIKE '%' || #hanNm# || '%'
+			       </isNotEmpty> 
+			         <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+				 	AA.PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+			       </isNotEmpty>  
+			       <isNotEmpty prepend="AND" property="payItemCd" >
+				 	AA.PAY_ITEM_CD=#payItemCd#
+			       </isNotEmpty>
+					ORDER BY  AA.DPOB_CD ASC
+					          ,(SELECT LPAD(DEPT_RANK,5,'0')  
+                                   FROM BASS0400 DD
+                                   WHERE DD.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+                                     AND DD.DPOB_CD = BB.DPOB_CD) ASC 
+					        ,  BB.RESN_REGN_NUM ASC
+					         , AA.PAY_ITEM_CD ASC 
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</select>
+	
+	<!-- 개별 공제 대상자  -->
+	<select id="payr0520DAO.selectPayr0520ToPayr3200ListTotCnt_S" parameterClass="payr0520SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM 
+			(  SELECT     AA.DPOB_CD
+			            , AA.SYSTEMKEY
+						, AA.PAY_ITEM_CD
+						, (SELECT  PAY_DDUC_NM 
+						              FROM PAYR0470
+									WHERE PAYR0470.DPOB_CD = AA.DPOB_CD
+											AND PAYR0470.PAY_DDUC_CD = AA.PAY_ITEM_CD ) AS PAY_ITEM_NM  
+			FROM PAYR0520 AA, PSNL0100 BB
+				WHERE     AA.DPOB_CD = BB.DPOB_CD
+			 			  AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+				  <isEqual prepend="AND" property="dataStatus" compareValue="1">
+				    TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN AA.PYMT_DDUC_ITEM_BGNN_DT AND AA.PYMT_DDUC_ITEM_END_DT     
+				  </isEqual>
+				  <isEqual prepend="AND" property="dataStatus" compareValue="2">
+				    <![CDATA[  
+				    AA.PYMT_DDUC_ITEM_END_DT < TO_CHAR(SYSDATE,'YYYYMMDD')     
+				    ]]>
+				  </isEqual>
+				  <isNotEmpty prepend="AND" property="dpobCd" >
+			 	      AA.DPOB_CD=#dpobCd#
+			       </isNotEmpty>  
+			       <isNotEmpty prepend="AND" property="payYr" >
+			 	      #payYr#  BETWEEN SUBSTR(AA.PYMT_DDUC_ITEM_BGNN_DT,1,4) AND SUBSTR(AA.PYMT_DDUC_ITEM_END_DT,1,4)   
+			        </isNotEmpty> 
+			        <isNotEmpty prepend="AND" property="emymtDivCd" >
+				 	 BB.EMYMT_DIV_CD=#emymtDivCd#
+			       </isNotEmpty> 
+		            AND EXISTS  (
+                            SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT  AA02.DPOB_CD,
+					                                 AA02.DEPT_CD,
+					                                 AA02.TYP_OCCU_CD,
+					                                 AA02.DTIL_OCCU_INTTN_CD 
+												FROM  BASS0360 AA02  
+												WHERE AA02.PAYR_MANG_DEPT_CD LIKE (DECODE(#payrMangDeptYn#,'Y',#payrMangDeptCd#,DECODE(#deptCd#,'',#payrMangDeptCd#,''))) || '%'  
+												AND   NOT EXISTS (SELECT DPOB_CD 
+												                      , TYP_OCCU_CD
+												                      , DEPT_CD
+												                      , DTIL_OCCU_INTTN_CD
+												                FROM SYSM0700 AA01
+												                WHERE AA01.DPOB_CD = AA02.DPOB_CD
+												                  AND AA01.TYP_OCCU_CD = AA02.TYP_OCCU_CD
+												                  AND AA01.DEPT_CD = AA02.DEPT_CD
+												                 AND AA01.DTIL_OCCU_INTTN_CD = AA02.DTIL_OCCU_INTTN_CD ) 
+												AND (AA02.DPOB_CD,AA02.PAYR_MANG_DEPT_CD) IN (SELECT DPOB_CD, PAYR_MANG_DEPT_CD  
+												                                FROM BASS0150 
+												                                 WHERE PAY_MANGE_DEPT_WHLE_PERN_CHRG
+												                                     LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,
+												                                      DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,
+												                                                  (SELECT NVL(USR_ID,'') FROM SYSM0700
+					                                                                                                  WHERE USR_ID = #usrId#))))) || '%'  
+					                                                           UNION ALL
+					                                                           SELECT DPOB_CD,
+                                                                                      PAYR_MANG_DEPT_CD
+                                                                                 FROM BASS0150
+                                                                                WHERE PAYR_MANG_DEPT_CD LIKE (DECODE (#deptCd#, '', #payrMangDeptCd#, ''))   || '%')  
+												UNION ALL                 
+											    SELECT  AA03.DPOB_CD
+												       , AA03.DEPT_CD 
+												       , AA03.TYP_OCCU_CD
+												       , AA03.DTIL_OCCU_INTTN_CD 
+												FROM SYSM0700 AA03
+												WHERE AA03.USR_ID LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,  
+												                         DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,''))  
+												                        )) || '%'  
+												UNION ALL
+												 SELECT   
+								                                               BB01.DPOB_CD, BB01.DEPT_CD
+								                                               ,('') AS TYP_OCCU_CD ,('') AS DTIL_OCCU_INTTN_CD
+								                                             FROM (SELECT AA.DPOB_CD  , AA.DEPT_CD  
+								                                                          , AA.TPLVL_DEPT_CD  , AA.HHRK_DEPT_CD  
+								                                                         FROM BASS0400 AA 
+								                                                        WHERE AA.DEPT_USE_YN   = 'Y'  
+								                                                         AND  AA.DEPT_CD = #payrMangDeptCd#    
+								                                                UNION ALL
+								                                                SELECT AA02.*
+								                                                FROM (
+								                                                    SELECT  CC.DPOB_CD   , CC.DEPT_CD  
+								                                                          , CC.TPLVL_DEPT_CD , CC.HHRK_DEPT_CD  
+								                                                         FROM BASS0400 CC 
+								                                                        WHERE CC.DEPT_USE_YN   = 'Y'   
+								                                                     ) AA02
+								                                              START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd#   
+								                                             CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD ) BB01 
+								                                           WHERE  BB01.DPOB_CD= #dpobCd# 
+								                                         
+                                           ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          ) 
+			       <isNotEmpty prepend="AND" property="businCd" >
+				 	 BB.BUSIN_CD=#businCd#
+			       </isNotEmpty> 
+			       <isNotEmpty property="typOccuCd" prepend="AND">
+					<![CDATA[
+					 BB.TYP_OCCU_CD
+					]]>
+					<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					 #typOccuCdArr[]#
+					</iterate>
+					</isNotEmpty>  
+				    <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					<!--   <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+					<![CDATA[
+					 BB.DTIL_OCCU_CLS_DIV_CD
+					]]>
+					<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+					 #dtilOccuClsDivCdArr[]#
+					</iterate>
+					</isNotEmpty>  -->
+			       <isNotEmpty prepend="AND" property="systemkey" >
+				 	 AA.SYSTEMKEY=#systemkey#
+			       </isNotEmpty> 
+			       <isNotEmpty prepend="AND" property="hanNm" >
+				 	 BB.HAN_NM LIKE '%' || #hanNm# || '%'
+			       </isNotEmpty> 
+			         <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+				 	AA.PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+			       </isNotEmpty> 
+			        <isNotEmpty prepend="AND" property="payItemCd" >
+				 	AA.PAY_ITEM_CD=#payItemCd#
+			       </isNotEmpty> 
+		    )   
+	</select>
+	
+	<!--  개별 수당 대상자 정보 리스트 -->
+	<select id="payr0520DAO.selectPayr0520ToPayr5400ListTotCnt_S" parameterClass="payr0520SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM 
+			(  SELECT     AA.DPOB_CD
+			            , AA.SYSTEMKEY
+						, AA.PAY_ITEM_CD
+						, (SELECT  PAY_EXTPY_NM 
+						              FROM PAYR0480
+									WHERE PAYR0480.DPOB_CD = AA.DPOB_CD
+											AND PAYR0480.PAY_EXTPY_CD = AA.PAY_ITEM_CD ) AS PAY_ITEM_NM  
+			FROM PAYR0520 AA, PSNL0100 BB
+				WHERE     AA.DPOB_CD = BB.DPOB_CD
+			 			  AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+			      <isEqual prepend="AND" property="dataStatus" compareValue="0">
+				    TO_CHAR(SYSDATE,'YYYYMMDD') BETWEEN AA.PYMT_DDUC_ITEM_BGNN_DT AND AA.PYMT_DDUC_ITEM_END_DT     
+				  </isEqual> 
+				  <isNotEmpty prepend="AND" property="dpobCd" >
+			 	      AA.DPOB_CD=#dpobCd#
+			       </isNotEmpty>  
+			       <isNotEmpty prepend="AND" property="payYr" >
+			 	      #payYr#  BETWEEN SUBSTR(AA.PYMT_DDUC_ITEM_BGNN_DT,1,4) AND SUBSTR(AA.PYMT_DDUC_ITEM_END_DT,1,4)   
+			        </isNotEmpty> 
+			        <isNotEmpty prepend="AND" property="emymtDivCd" >
+				 	 BB.EMYMT_DIV_CD=#emymtDivCd#
+			       </isNotEmpty> 
+		            AND EXISTS  (
+                            SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT  AA02.DPOB_CD,
+					                                 AA02.DEPT_CD,
+					                                 AA02.TYP_OCCU_CD,
+					                                 AA02.DTIL_OCCU_INTTN_CD 
+												FROM  BASS0360 AA02  
+												WHERE AA02.PAYR_MANG_DEPT_CD LIKE (DECODE(#payrMangDeptYn#,'Y',#payrMangDeptCd#,DECODE(#deptCd#,'',#payrMangDeptCd#,''))) || '%'  
+												AND   NOT EXISTS (SELECT DPOB_CD 
+												                      , TYP_OCCU_CD
+												                      , DEPT_CD
+												                      , DTIL_OCCU_INTTN_CD
+												                FROM SYSM0700 AA01
+												                WHERE AA01.DPOB_CD = AA02.DPOB_CD
+												                  AND AA01.TYP_OCCU_CD = AA02.TYP_OCCU_CD
+												                  AND AA01.DEPT_CD = AA02.DEPT_CD
+												                 AND AA01.DTIL_OCCU_INTTN_CD = AA02.DTIL_OCCU_INTTN_CD ) 
+												AND (AA02.DPOB_CD,AA02.PAYR_MANG_DEPT_CD) IN (SELECT DPOB_CD, PAYR_MANG_DEPT_CD  
+												                                FROM BASS0150 
+												                                 WHERE PAY_MANGE_DEPT_WHLE_PERN_CHRG
+												                                     LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,
+												                                      DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,
+												                                                  (SELECT NVL(USR_ID,'') FROM SYSM0700
+					                                                                                                  WHERE USR_ID = #usrId#))))) || '%'  
+					                                                           UNION ALL
+					                                                           SELECT DPOB_CD,
+                                                                                      PAYR_MANG_DEPT_CD
+                                                                                 FROM BASS0150
+                                                                                WHERE PAYR_MANG_DEPT_CD LIKE (DECODE (#deptCd#, '', #payrMangDeptCd#, ''))   || '%')  
+												UNION ALL                 
+											    SELECT  AA03.DPOB_CD
+												       , AA03.DEPT_CD 
+												       , AA03.TYP_OCCU_CD
+												       , AA03.DTIL_OCCU_INTTN_CD 
+												FROM SYSM0700 AA03
+												WHERE AA03.USR_ID LIKE (DECODE(#payrMangDeptYn#,'Y',#usrId#, DECODE(#payrMangDeptYn#,'N',#usrId#,  
+												                         DECODE(#payrMangDeptCd#,#deptCdAuth#,#usrId#,''))  
+												                        )) || '%'  
+												UNION ALL
+												 SELECT   
+								                                               BB01.DPOB_CD, BB01.DEPT_CD
+								                                               ,('') AS TYP_OCCU_CD ,('') AS DTIL_OCCU_INTTN_CD
+								                                             FROM (SELECT AA.DPOB_CD  , AA.DEPT_CD  
+								                                                          , AA.TPLVL_DEPT_CD  , AA.HHRK_DEPT_CD  
+								                                                         FROM BASS0400 AA 
+								                                                        WHERE AA.DEPT_USE_YN   = 'Y'  
+								                                                         AND  AA.DEPT_CD = #payrMangDeptCd#    
+								                                                UNION ALL
+								                                                SELECT AA02.*
+								                                                FROM (
+								                                                    SELECT  CC.DPOB_CD   , CC.DEPT_CD  
+								                                                          , CC.TPLVL_DEPT_CD , CC.HHRK_DEPT_CD  
+								                                                         FROM BASS0400 CC 
+								                                                        WHERE CC.DEPT_USE_YN   = 'Y'   
+								                                                     ) AA02
+								                                              START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd#   
+								                                             CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD ) BB01 
+								                                           WHERE  BB01.DPOB_CD= #dpobCd# 
+								                                         
+                                           ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          ) 
+			       <isNotEmpty prepend="AND" property="businCd" >
+				 	 BB.BUSIN_CD=#businCd#
+			       </isNotEmpty> 
+			       <isNotEmpty property="typOccuCd" prepend="AND">
+					<![CDATA[
+					 BB.TYP_OCCU_CD
+					]]>
+					<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					 #typOccuCdArr[]#
+					</iterate>
+					</isNotEmpty>  
+				    <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					<!--   <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+					<![CDATA[
+					 BB.DTIL_OCCU_CLS_DIV_CD
+					]]>
+					<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+					 #dtilOccuClsDivCdArr[]#
+					</iterate>
+					</isNotEmpty>  -->
+			       <isNotEmpty prepend="AND" property="systemkey" >
+				 	 AA.SYSTEMKEY=#systemkey#
+			       </isNotEmpty> 
+			       <isNotEmpty prepend="AND" property="hanNm" >
+				 	 BB.HAN_NM LIKE '%' || #hanNm# || '%'
+			       </isNotEmpty> 
+			         <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+				 	AA.PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+			       </isNotEmpty> 
+			        <isNotEmpty prepend="AND" property="payItemCd" >
+				 	AA.PAY_ITEM_CD=#payItemCd#
+			       </isNotEmpty> 
+		    )   
+	</select>
+	
+	 
+	<!-- TODO 급여마스터 개인공제 데이타    -->
+ <select id="payr0520DAO.selectPayr0520ToPayrCalcList_D" parameterClass="payr0520SrhVO" resultClass="egovMap">
+ 
+			SELECT
+				              SYSTEMKEY
+								  , DPOB_CD
+								, PAY_ITEM_CD
+								,(
+								SELECT
+									PAY_DDUC_NM
+									FROM
+									(SELECT
+										  DPOB_CD
+										, PAY_DDUC_CD 
+										, PAY_DDUC_NM 
+									FROM PAYR0470
+									UNION ALL
+									 SELECT 
+										DPOB_CD
+										, PAY_EXTPY_CD 
+										, PAY_EXTPY_NM 
+									FROM PAYR0480) AA
+								WHERE AA.DPOB_CD =  PAYR0520.DPOB_CD
+								AND AA.PAY_DDUC_CD = PAYR0520.PAY_ITEM_CD
+								) AS PAY_ITEM_NM  
+								, PYMT_DDUC_ITEM_SIL_NUM
+								, PYMT_DDUC_DIV_CD
+								, fcBass0300CDNM(DPOB_CD,PYMT_DDUC_DIV_CD) AS PYMT_DDUC_DIV_NM
+								, PYMT_DDUC_SUM
+								, PYMT_DDUC_RATE
+								, PYMT_DDUC_FREE_DTY_SUM
+								, PYMT_DDUC_ITEM_CRETN_DIV_CD
+								, fcBass0300CDNM(DPOB_CD,PYMT_DDUC_ITEM_CRETN_DIV_CD) AS PYMT_DDUC_ITEM_CRETN_DIV_NM
+								, PYMT_DDUC_ITEM_NOTE_CTNT
+								, PYMT_DDUC_ITEM_BGNN_DT
+								, PYMT_DDUC_ITEM_END_DT
+								, PYMT_DDUC_ITEM_DEL_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PAYR0520
+				WHERE 1=1
+			 <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>   
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+			 	PYMT_DDUC_DIV_CD = #pymtDducDivCd#  
+		       </isNotEmpty> 
+			   <isNotEmpty prepend="AND" property="pymtDt" >
+				    #pymtDt# BETWEEN PYMT_DDUC_ITEM_BGNN_DT AND PYMT_DDUC_ITEM_END_DT     
+			  </isNotEmpty> 
+			  ORDER BY PYMT_DDUC_ITEM_END_DT DESC 
+					, PYMT_DDUC_ITEM_BGNN_DT DESC
+					, PYMT_DDUC_ITEM_DEL_YN ASC 
+					,PAY_ITEM_CD ASC 
+					, PYMT_DDUC_ITEM_SIL_NUM DESC
+	</select>	
+
+</sqlMap>

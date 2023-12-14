@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Insr2530">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="insr2530SerarchVO" type="com.app.exterms.insurance.server.vo.Insr2530SrhVO"/>
+	
+	<resultMap id="insr2530" class="com.app.exterms.insurance.server.vo.Insr2530VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="retryYrMnth" column="RETRY_YR_MNTH" columnIndex="3"/>
+		<result property="socInsrLssEmymtNum" column="SOC_INSR_LSS_EMYMT_NUM" columnIndex="4"/>
+		<result property="stdExtnnSeilNum" column="STD_EXTNN_SEIL_NUM" columnIndex="5"/>
+		<result property="stdExtnnBgnnDt" column="STD_EXTNN_BGNN_DT" columnIndex="6"/>
+		<result property="stdExtnnEndDt" column="STD_EXTNN_END_DT" columnIndex="7"/>
+		<result property="stdExtnnReasCd" column="STD_EXTNN_REAS_CD" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap>
+	
+	<insert id="insr2530DAO.insertInsr2530_S">
+<!-- 	    <selectKey keyProperty="stdExtnnSeilNum" resultType="int" order="BEFORE">
+			 SELECT NVL(MAX(STD_EXTNN_SEIL_NUM),0) + 1 stdExtnnSeilNum FROM INSR2530
+		</selectKey> -->
+		<![CDATA[
+			INSERT INTO INSR2530 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , RETRY_YR_MNTH
+				  , SOC_INSR_LSS_EMYMT_NUM
+				  , STD_EXTNN_SEIL_NUM
+				  , STD_EXTNN_BGNN_DT
+				  , STD_EXTNN_END_DT
+				  , STD_EXTNN_REAS_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #retryYrMnth#
+				  , #socInsrLssEmymtNum#
+				  , #stdExtnnSeilNum#
+				  , #stdExtnnBgnnDt#
+				  , #stdExtnnEndDt#
+				  , #stdExtnnReasCd#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #ismt#
+				  , #inptAddr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="insr2530DAO.updateInsr2530_S">
+		<![CDATA[
+			UPDATE INSR2530
+			SET 
+				STD_EXTNN_BGNN_DT=#stdExtnnBgnnDt#
+				, STD_EXTNN_END_DT=#stdExtnnEndDt#
+				, STD_EXTNN_REAS_CD=#stdExtnnReasCd#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND RETRY_YR_MNTH=#retryYrMnth#
+								AND SOC_INSR_LSS_EMYMT_NUM=#socInsrLssEmymtNum#
+								AND STD_EXTNN_SEIL_NUM=#stdExtnnSeilNum#
+				]]>
+	</update>
+	
+	<delete id="insr2530DAO.deleteInsr2530_S">
+		<![CDATA[
+			DELETE FROM INSR2530 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND RETRY_YR_MNTH=#retryYrMnth#
+								AND SOC_INSR_LSS_EMYMT_NUM=#socInsrLssEmymtNum#
+								AND STD_EXTNN_SEIL_NUM=#stdExtnnSeilNum#
+				]]>
+	</delete>
+	
+	<select id="insr2530DAO.selectInsr2530_S" resultMap="insr2530">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, RETRY_YR_MNTH
+				, SOC_INSR_LSS_EMYMT_NUM
+				, STD_EXTNN_SEIL_NUM
+				, STD_EXTNN_BGNN_DT
+				, STD_EXTNN_END_DT
+				, STD_EXTNN_REAS_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM INSR2530
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND RETRY_YR_MNTH=#retryYrMnth#
+								AND SOC_INSR_LSS_EMYMT_NUM=#socInsrLssEmymtNum#
+								AND STD_EXTNN_SEIL_NUM=#stdExtnnSeilNum#
+				]]>
+	</select>
+	
+	<select id="insr2530DAO.selectInsr2530List_D" parameterClass="insr2530SerarchVO" resultMap="insr2530">
+				SELECT
+						A.DPOB_CD
+						, A.SYSTEMKEY
+						, A.RETRY_YR_MNTH
+						, A.SOC_INSR_LSS_EMYMT_NUM
+						, A.STD_EXTNN_SEIL_NUM
+						, A.STD_EXTNN_BGNN_DT
+						, A.STD_EXTNN_END_DT
+						, A.STD_EXTNN_REAS_CD
+						, A.KYBDR
+						, A.INPT_DT
+						, A.INPT_ADDR
+						, A.ISMT
+						, A.REVN_DT
+						, A.REVN_ADDR							
+						FROM INSR2530 A , INSR2500 B
+				WHERE A.DPOB_CD = B.DPOB_CD
+				  AND A.SYSTEMKEY = B.SYSTEMKEY
+				  AND A.RETRY_YR_MNTH = B.RETRY_YR_MNTH
+				  AND A.SOC_INSR_LSS_EMYMT_NUM = B.SOC_INSR_LSS_EMYMT_NUM
+				  AND A.DPOB_CD = #dpobCd#
+				  AND A.SYSTEMKEY = #systemkey#
+				  <!-- AND A.RETRY_YR_MNTH = #retryYrMnth# -->
+				  AND A.SOC_INSR_LSS_EMYMT_NUM = #socInsrLssEmymtNum#				
+					ORDER BY 
+						A.DPOB_CD DESC
+							, A.SYSTEMKEY DESC
+							, A.RETRY_YR_MNTH DESC
+							, A.SOC_INSR_LSS_EMYMT_NUM DESC
+							, A.STD_EXTNN_SEIL_NUM DESC
+		
+	</select>	
+	<select id="insr2530DAO.selectInsr2530ListTotCnt_S" parameterClass="insr2530SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM INSR2530
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

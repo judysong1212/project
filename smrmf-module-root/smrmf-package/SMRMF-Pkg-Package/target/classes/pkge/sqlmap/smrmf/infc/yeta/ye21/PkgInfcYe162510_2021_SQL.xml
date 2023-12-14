@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgYe162510_2021">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYe162510Srh_2021_VO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2021.InfcPkgYe162510Srh_2021_VO"/>
+	
+	<resultMap id="infcPkgYe162510_2021" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2021.InfcPkgYe162510_2021_VO">
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="1"/> 
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="2"/> 
+		<result property="mnthRntQntySeilNum" column="MNTH_RNT_QNTY_SEIL_NUM" columnIndex="3"/> 
+		<result property="dpobCd" column="DPOB_CD" columnIndex="4"/> 
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/> 
+		<result property="mnthRnttyLehdrNm" column="MNTH_RNTTY_LEHDR_NM" columnIndex="6"/> 
+		<result property="mnthRnttyBurRgsum" column="MNTH_RNTTY_BUR_RGSUM" columnIndex="7"/> 
+		<result property="mnthRnttyHusFrmCd" column="MNTH_RNTTY_HUS_FRM_CD" columnIndex="8"/> 
+		<result property="mnthRnttyHusCnttArea" column="MNTH_RNTTY_HUS_CNTT_AREA" columnIndex="9"/> 
+		<result property="mnthRnttyRntlAddr" column="MNTH_RNTTY_RNTL_ADDR" columnIndex="10"/> 
+		<result property="mnthRnttyRntlBgnnDt" column="MNTH_RNTTY_RNTL_BGNN_DT" columnIndex="11"/> 
+		<result property="mnthRnttyRntlEndDt" column="MNTH_RNTTY_RNTL_END_DT" columnIndex="12"/>  
+		<result property="mnthRnttyYrlyMnthSum" column="MNTH_RNTTY_YRLY_MNTH_SUM" columnIndex="13"/> 
+		<result property="mnthRnttyTxDducSum" column="MNTH_RNTTY_TX_DDUC_SUM" columnIndex="14"/> 
+		<result property="kybdr" column="KYBDR" columnIndex="15"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="16"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="17"/>
+		<result property="ismt" column="ISMT" columnIndex="18"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="19"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="20"/>
+		<result property="ectnFlTrnrCtlYn" column="ECTN_FL_TRNR_CTL_YN" columnIndex="21"/> 
+	</resultMap>
+	
+	
+	
+	<!-- 월세액 소득공제반영 추가 20211230 -->
+	<insert id="infcPkgYe162510_2021_DAO.PdfYeta6200_J501Y_YE162510_Insert_S">
+	 <![CDATA[
+	 	INSERT INTO YE162510 (DPOB_CD,
+                      YRTX_BLGG_YR,
+                      CLUT_SEPT_CD,
+                      SYSTEMKEY,
+                      MNTH_RNT_QNTY_SEIL_NUM,
+                      TAX_VVAL_KRN_CD,
+                      MNTH_RNTTY_LEHDR_NM,
+                      MNTH_RNTTY_BUR_RGSUM,
+                      MNTH_RNTTY_HUS_FRM_CD,
+                      MNTH_RNTTY_HUS_CNTT_AREA,
+                      MNTH_RNTTY_RNTL_ADDR,
+                      MNTH_RNTTY_RNTL_BGNN_DT,
+                      MNTH_RNTTY_RNTL_END_DT,
+                      MNTH_RNTTY_YRLY_MNTH_SUM,
+                      MNTH_RNTTY_TX_DDUC_SUM,
+                      MNTH_RNTTY_YRLY_TGT_SUM,
+                      ECTN_FL_TRNR_CTL_YN,
+                      KYBDR,
+                      INPT_DT,
+                      INPT_ADDR,
+                      ISMT,
+                      REVN_DT,
+                      REVN_ADDR)
+	 	(SELECT AC02.DPOB_CD,
+           AC02.YRTX_BLGG_YR,
+           AC02.CLUT_SEPT_CD,
+           AC02.SYSTEMKEY,
+           (  (ROW_NUMBER ()
+                  OVER (ORDER BY
+                           AC02.DPOB_CD ASC,
+                           AC02.YRTX_BLGG_YR ASC,
+                           AC02.CLUT_SEPT_CD ASC,
+                           AC02.SYSTEMKEY ASC))
+            + (SELECT (NVL (MAX (MNTH_RNT_QNTY_SEIL_NUM), 0) + 1)
+                 FROM YE162510 AA
+	 					WHERE DPOB_CD = #dpobCd#
+	 						AND YRTX_BLGG_YR = #yrtxBlggYr#
+	 						AND CLUT_SEPT_CD = #clutSeptCd#
+	 						AND SYSTEMKEY = #systemkey#)) AS ROWCNT,
+	 			'Y0140000',
+	 			AC03.LSOR_NM,
+           AC03.LSOR_NO,
+           AC03.RENTAL_CD,
+           AC03.RENTAL_AREA,
+           AC03.RENTAL_ADR,
+           AC03.RENTAL_ST,
+           AC03.RENTAL_DT,
+           /*2021연말정산_수정*/
+           AC03.RENTAL_AMT_SUM,
+           /*2021연말정산_수정*/
+		   '0',
+		   AC03.RENTAL_AMT_SUM,
+           '',
+	 			#kybdr#,
+	 			TO_CHAR (SYSDATE, 'YYYYMMDDHHMISS'),
+	 			#inptAddr#,
+	 			#ismt#,
+	 			TO_CHAR (SYSDATE, 'YYYYMMDDHHMISS'),
+	 			#revnAddr#
+	 	 FROM YE161030 AC02,
+           (  SELECT AA.DPOB_CD,
+                     AA.YRTX_BLGG_YR,
+                     AA.CLUT_SEPT_CD,
+                     AA.SYSTEMKEY,
+                     AA.RESID,
+                     AA.NAME,
+                     AA.DAT_CD,
+                     AA.LSOR_NO,
+                     AA.LSOR_NM,
+                     AA.RENTAL_AREA,
+                     AA.RENTAL_ST,
+                     AA.RENTAL_DT,
+                     AA.RENTAL_ADR,
+                     (CASE AA.RENTAL_CD WHEN '01' THEN 'Y0070001'
+                       WHEN '02' THEN 'Y0070002'
+                       WHEN '03' THEN 'Y0070003'
+                       WHEN '04' THEN 'Y0070004'
+                       WHEN '05' THEN 'Y0070005'
+                       WHEN '06' THEN 'Y0070006'
+                       WHEN '07' THEN 'Y0070008'
+                       WHEN '99' THEN 'Y0070009'
+                    END) AS RENTAL_CD,
+                     SUM (AA.RENTAL_AMT_SUM) AS RENTAL_AMT_SUM,
+                     COUNT (AA.RESID) AS SCNT
+                FROM PDF_J501Y AA
+	 		 	WHERE AA.DPOB_CD = #dpobCd#
+	 		 		AND AA.YRTX_BLGG_YR = #yrtxBlggYr#
+	 		 		AND AA.CLUT_SEPT_CD = #clutSeptCd#
+	 		 		AND AA.SYSTEMKEY = #systemkey#
+	 		 		AND AA.PDF_DAT_APP_YN = 'Y'
+	 		 		AND EXISTS
+                            (SELECT *
+                               FROM YE161030 AC01
+                              WHERE     AC01.DPOB_CD = AA.DPOB_CD
+                                    AND AC01.YRTX_BLGG_YR = AA.YRTX_BLGG_YR
+                                    AND AC01.CLUT_SEPT_CD = AA.CLUT_SEPT_CD
+                                    AND AC01.SYSTEMKEY = AA.SYSTEMKEY
+                                    AND AC01.TXPR_DSCM_NO_CNTN = AA.RESID)
+            GROUP BY AA.DPOB_CD,
+                     AA.YRTX_BLGG_YR,
+                     AA.CLUT_SEPT_CD,
+                     AA.SYSTEMKEY,
+                     AA.RESID,
+                     AA.NAME,
+                     AA.DAT_CD,
+                     AA.LSOR_NO,
+                     AA.LSOR_NM,
+                     AA.RENTAL_AREA,
+                     AA.RENTAL_ST,
+                     AA.RENTAL_DT,
+                     AA.RENTAL_ADR,
+                     AA.RENTAL_CD) AC03
+	 	 WHERE AC02.DPOB_CD = #dpobCd#
+	 	   AND AC02.YRTX_BLGG_YR = #yrtxBlggYr#
+		   AND AC02.CLUT_SEPT_CD = #clutSeptCd#
+		   AND AC02.SYSTEMKEY = #systemkey#
+		   AND AC02.DPOB_CD = AC03.DPOB_CD
+		   AND AC02.YRTX_BLGG_YR = AC03.YRTX_BLGG_YR
+		   AND AC02.CLUT_SEPT_CD = AC03.CLUT_SEPT_CD
+		   AND AC02.SYSTEMKEY = AC03.SYSTEMKEY
+		   AND AC02.TXPR_DSCM_NO_CNTN = AC03.RESID)
+	]]>
+	
+	</insert>
+	
+	
+	<delete id="infcPkgYe162510_2021_DAO.PdfYeta6200_J501Y_YE162510_Delete_S">
+		<![CDATA[
+			DELETE FROM YE162510 AA
+						WHERE AA.DPOB_CD=#dpobCd#
+								AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+								AND AA.CLUT_SEPT_CD=#clutSeptCd#
+								AND AA.SYSTEMKEY=#systemkey#
+								AND AA.TAX_VVAL_KRN_CD = 'Y0140000'  /* 국세청 */ 
+								AND EXISTS ( SELECT * FROM  PDF_J501Y BB
+			 							   WHERE BB.DPOB_CD= AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR= AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD= AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY= AA.SYSTEMKEY
+											AND BB.MAN_SEIL_NUM + 1 = AA.MNTH_RNT_QNTY_SEIL_NUM)
+				]]>
+	</delete>
+	
+	
+	
+	 <!-- G_월세액소득공제명세 -->
+	<insert id="infcPkgYe162510_2021_DAO.incTaxDeducDec_nts_Yeta2021_Ye162510_Insert_S"> 
+		<![CDATA[
+ 			INSERT INTO YE162510  
+                 ( 
+                    DPOB_CD 
+                   ,  YRTX_BLGG_YR 
+                   , CLUT_SEPT_CD 
+                     , SYSTEMKEY 
+                   , MNTH_RNT_QNTY_SEIL_NUM  
+                   , TAX_VVAL_KRN_CD
+                   , MNTH_RNTTY_LEHDR_NM 
+                   , MNTH_RNTTY_BUR_RGSUM 
+                   , MNTH_RNTTY_HUS_FRM_CD 
+                   , MNTH_RNTTY_HUS_CNTT_AREA 
+                   , MNTH_RNTTY_RNTL_ADDR 
+                   , MNTH_RNTTY_RNTL_BGNN_DT 
+                   , MNTH_RNTTY_RNTL_END_DT 
+                   , MNTH_RNTTY_YRLY_MNTH_SUM 
+                   , MNTH_RNTTY_TX_DDUC_SUM 
+                   , ECTN_FL_TRNR_CTL_YN
+                   , KYBDR 
+                   , INPT_DT 
+                   , INPT_ADDR 
+                   , ISMT 
+                   , REVN_DT 
+                   , REVN_ADDR ) 
+               (  
+					SELECT 
+					DPOB_CD, YRTX_BLGG_YR, CLUT_SEPT_CD, 
+					   SYSTEMKEY
+					   ,  (SELECT NVL(MAX(MNTH_RNT_QNTY_SEIL_NUM)+1,1)  
+                         FROM YE162510  
+                         WHERE DPOB_CD=#dpobCd# 
+                             AND YRTX_BLGG_YR=#yrtxBlggYr# 
+                             AND CLUT_SEPT_CD=#clutSeptCd# 
+                             AND SYSTEMKEY=#systemkey#)  
+                         ,'Y0140000'  /* 국세청 */ 
+                         	   ,  LSOR_FNM 
+					   , TXPR_DSCM_NO_ENC_CNTN
+					   , (CASE WHEN TRIM(HSNG_TYPE_CL_CD) = '단독주택' THEN 'Y0070001'
+					    WHEN TRIM(HSNG_TYPE_CL_CD) = '다가구' THEN 'Y0070002'
+					     WHEN TRIM(HSNG_TYPE_CL_CD) = '다세대주택' THEN 'Y0070003'
+					      WHEN TRIM(HSNG_TYPE_CL_CD) = '연립주택' THEN 'Y0070004'
+					       WHEN TRIM(HSNG_TYPE_CL_CD) = '아파트' THEN 'Y0070005'
+					        WHEN TRIM(HSNG_TYPE_CL_CD) = '오피스텔' THEN 'Y0070006'
+					         WHEN TRIM(HSNG_TYPE_CL_CD) = '고시원' THEN 'Y0070008'
+					         ELSE 'Y0070009' END)
+					   ,  HSNG_CTR_SFL
+					   , MMR_LSRN_CTRP_ADR 
+					   , MMR_CTR_TERM_STRT_DT
+				     , MMR_CTR_TERM_END_DT  
+				     ,  USE_AMT
+				     , MMR_DDC_AMT 
+				     ,'Y'
+				        , #kybdr# 
+                   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS') 
+                   , #inptAddr# 
+                   , #ismt# 
+                   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS') 
+                   , #revnAddr#
+					FROM  YE167220 
+               WHERE DPOB_CD=#dpobCd#
+					   AND YRTX_BLGG_YR=#yrtxBlggYr#
+					   AND CLUT_SEPT_CD=#clutSeptCd#
+					   AND SYSTEMKEY=#systemkey# 
+                 )
+ 		]]> 
+	</insert>
+	
+	<update id="infcPkgYe162510_2021_DAO.updateYe162510_S">
+		<![CDATA[
+ 		UPDATE YE162510 
+             SET YRTX_BLGG_YR=#yrtxBlggYr# 
+                 , CLUT_SEPT_CD=#clutSeptCd# 
+                 , MNTH_RNT_QNTY_SEIL_NUM=#mnthRntQntySeilNum# 
+                 , DPOB_CD=#dpobCd# 
+                 , SYSTEMKEY=#systemkey# 
+                 , MNTH_RNTTY_LEHDR_NM=#mnthRnttyLehdrNm# 
+                 , MNTH_RNTTY_BUR_RGSUM=#mnthRnttyBurRgsum# 
+                 , MNTH_RNTTY_HUS_FRM_CD=(fcBass0300ITEMNM(#dpobCd#, #mnthRnttyHusFrmCd#, '11')) 
+                 , MNTH_RNTTY_HUS_CNTT_AREA=#mnthRnttyHusCnttArea# 
+                 , MNTH_RNTTY_RNTL_ADDR=#mnthRnttyRntlAddr# 
+                 , MNTH_RNTTY_RNTL_BGNN_DT=#mnthRnttyRntlBgnnDt# 
+                 , MNTH_RNTTY_RNTL_END_DT=#mnthRnttyRntlEndDt# 
+                 , MNTH_RNTTY_YRLY_MNTH_SUM=#mnthRnttyYrlyMnthSum# 
+                 , MNTH_RNTTY_TX_DDUC_SUM=(CASE WHEN  ((CASE WHEN  NVL(#mnthRnttyTxDducSum#,0) > 7500000 THEN  7500000        
+                            ELSE  NVL(#mnthRnttyTxDducSum#,0)   END) * 0.10) > 750000 THEN  750000        
+                           ELSE   (CASE WHEN  NVL(#mnthRnttyTxDducSum#,0) > 7500000 THEN  7500000        
+                             ELSE  NVL(#mnthRnttyTxDducSum#,0)   END) * 0.10      END)  
+                 , ECTN_FL_TRNR_CTL_YN=#ectnFlTrnrCtlYn#
+                 , ISMT=#ismt# 
+                 , REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS') 
+                 , REVN_ADDR=#revnAddr# 
+                         WHERE YRTX_BLGG_YR=#yrtxBlggYr# 
+                                 AND CLUT_SEPT_CD=#clutSeptCd# 
+                                 AND MNTH_RNT_QNTY_SEIL_NUM=#mnthRntQntySeilNum# 
+                                 AND DPOB_CD=#dpobCd# 
+                                 AND SYSTEMKEY=#systemkey#  
+ 				]]> 
+	</update>
+	
+	<delete id="infcPkgYe162510_2021_DAO.deleteYe162510_S">
+		<![CDATA[
+ 			DELETE FROM YE162510  
+ 						WHERE YRTX_BLGG_YR=#yrtxBlggYr# 
+ 								AND CLUT_SEPT_CD=#clutSeptCd# 
+ 								AND MNTH_RNT_QNTY_SEIL_NUM=#mnthRntQntySeilNum# 
+ 								AND DPOB_CD=#dpobCd# 
+ 								AND SYSTEMKEY=#systemkey# 
+ 				]]> 
+	</delete>
+	
+	<!-- yeta0100 화면 연말정산대상자관리  -->
+	 <delete id="infcPkgYe162510_2021_DAO.fnPayr06430_PAYR452_CREATE_Delete_S">
+		<![CDATA[
+ 			DELETE FROM YE162510  
+ 						WHERE YRTX_BLGG_YR=#yrtxBlggYr# 
+ 								AND CLUT_SEPT_CD=#clutSeptCd#  
+ 								AND DPOB_CD=#dpobCd#  
+ 				]]> 
+				<isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                   </isNotEmpty> 
+		    		  			    
+	</delete>
+	
+	
+	<select id="infcPkgYe162510_2021_DAO.selectYe162510_S" resultMap="infcPkgYe162510_2021">
+		<![CDATA[
+ 			SELECT 
+                 YRTX_BLGG_YR 
+                 , CLUT_SEPT_CD 
+                 , MNTH_RNT_QNTY_SEIL_NUM 
+                 , DPOB_CD 
+                 , SYSTEMKEY 
+                 , MNTH_RNTTY_LEHDR_NM 
+                 , MNTH_RNTTY_BUR_RGSUM 
+                 , MNTH_RNTTY_HUS_FRM_CD 
+                 , MNTH_RNTTY_HUS_CNTT_AREA 
+                 , MNTH_RNTTY_RNTL_ADDR 
+                 , MNTH_RNTTY_RNTL_BGNN_DT 
+                 , MNTH_RNTTY_RNTL_END_DT 
+                 , MNTH_RNTTY_YRLY_MNTH_SUM 
+                 , MNTH_RNTTY_TX_DDUC_SUM
+                 , ECTN_FL_TRNR_CTL_YN 
+                 , KYBDR 
+                 , INPT_DT 
+                 , INPT_ADDR 
+                 , ISMT 
+                 , REVN_DT 
+                 , REVN_ADDR 
+             FROM YE162510 
+                         WHERE YRTX_BLGG_YR=#yrtxBlggYr# 
+                                 AND CLUT_SEPT_CD=#clutSeptCd# 
+                                 AND MNTH_RNT_QNTY_SEIL_NUM=#mnthRntQntySeilNum# 
+                                 AND DPOB_CD=#dpobCd# 
+                                 AND SYSTEMKEY=#systemkey# 
+ 				]]> 
+	</select>
+	
+	<!-- 월세액소득공제 리스트 -->
+	<select id="infcPkgYe162510_2021_DAO.selectYeT13019To162510List_D" parameterClass="infcPkgYe162510Srh_2021_VO" resultClass="egovMap">
+		SELECT * FROM (
+            SELECT A.*, ROWNUM RNUM FROM (
+                        SELECT
+                                        YRTX_BLGG_YR
+                                        , CLUT_SEPT_CD
+                                        , fcBass0300CDNM(DPOB_CD, CLUT_SEPT_CD) AS CLUT_SEPT_NM
+                                        , CLUT_SEPT_CD as settGbcdcommCd
+                                        , MNTH_RNT_QNTY_SEIL_NUM
+                                        , DPOB_CD
+                                        , SYSTEMKEY
+                                        , MNTH_RNTTY_LEHDR_NM
+                                        , MNTH_RNTTY_BUR_RGSUM
+                                        , MNTH_RNTTY_HUS_FRM_CD
+                                        , fcBass0300CDNM(DPOB_CD, MNTH_RNTTY_HUS_FRM_CD) AS MNTH_RNTTY_HUS_FRM_NM
+                                        , (SELECT C.COMM_CD 
+                                            FROM BASS0300 C
+                                            WHERE C.DPOB_CD = DPOB_CD
+                                                    AND C.RPSTTV_CD = 'Y007'
+                                                    AND    C.MANGE_ITEM11 = MNTH_RNTTY_HUS_FRM_CD)AS mnrnTyhucommCd
+                                        , fcBass0300CDNM(DPOB_CD, (SELECT C.COMM_CD 
+                                                                    FROM BASS0300 C
+                                                                    WHERE C.DPOB_CD = DPOB_CD
+                                                                        AND C.RPSTTV_CD = 'Y007'
+                                                                        AND    C.MANGE_ITEM11 = MNTH_RNTTY_HUS_FRM_CD)) AS mnrnTyhucommCdNm 
+                                        , MNTH_RNTTY_HUS_CNTT_AREA
+                                        , MNTH_RNTTY_RNTL_ADDR
+                                        , MNTH_RNTTY_RNTL_BGNN_DT
+                                        , MNTH_RNTTY_RNTL_END_DT
+                                        , MNTH_RNTTY_YRLY_MNTH_SUM
+                                        , MNTH_RNTTY_TX_DDUC_SUM
+                                        , KYBDR
+                                        , INPT_DT
+                                        , INPT_ADDR
+                                        , ISMT
+                                        , REVN_DT
+                                        , REVN_ADDR
+                                        , ECTN_FL_TRNR_CTL_YN
+                                FROM YE162510
+                        WHERE 
+                            <isNotEmpty property="dpobCd">
+                                DPOB_CD=#dpobCd#
+                            </isNotEmpty>
+                            <isNotEmpty prepend="AND" property="yrtxBlggYr" >
+                                YRTX_BLGG_YR=#yrtxBlggYr#
+                            </isNotEmpty> 
+                            <isNotEmpty prepend="AND" property="clutSeptCd" >
+                                CLUT_SEPT_CD=#clutSeptCd#
+                            </isNotEmpty> 
+                            <isNotEmpty prepend="AND" property="systemkey" >
+                                SYSTEMKEY=#systemkey#
+                            </isNotEmpty> 
+                        ORDER BY 
+                            YRTX_BLGG_YR DESC
+                            , CLUT_SEPT_CD DESC
+                            , MNTH_RNT_QNTY_SEIL_NUM DESC
+                            , DPOB_CD DESC
+                            , SYSTEMKEY DESC
+                
+                <![CDATA[                    
+            ) A WHERE ROWNUM <= #lastIndex#
+        )WHERE RNUM >= #firstIndex#
+        ]]>
+	</select>	
+	<!-- 월세액소득공제 갯수 -->
+	<select id="infcPkgYe162510_2021_DAO.selectYetaT13019To162510ListTotCnt_S" parameterClass="infcPkgYe162510Srh_2021_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE162510
+			WHERE 
+				<isNotEmpty property="dpobCd">
+                    DPOB_CD=#dpobCd#
+                </isNotEmpty>
+                <isNotEmpty prepend="AND" property="yrtxBlggYr" >
+                    YRTX_BLGG_YR=#yrtxBlggYr#
+                </isNotEmpty> 
+                <isNotEmpty prepend="AND" property="clutSeptCd" >
+                    CLUT_SEPT_CD=#clutSeptCd#
+                </isNotEmpty> 
+                <isNotEmpty prepend="AND" property="systemkey" >
+                    SYSTEMKEY=#systemkey#
+                </isNotEmpty> 
+	</select>
+	
+	<select id="infcPkgYe162510_2021_DAO.selectYe162510List_D" parameterClass="infcPkgYe162510Srh_2021_VO" resultClass="egovMap">
+	SELECT * FROM (
+        SELECT A.*, ROWNUM RNUM FROM (
+                    SELECT
+                                    YRTX_BLGG_YR
+                                    , CLUT_SEPT_CD
+                                    , MNTH_RNT_QNTY_SEIL_NUM
+                                    , DPOB_CD
+                                    , SYSTEMKEY
+                                    , MNTH_RNTTY_LEHDR_NM
+                                    , MNTH_RNTTY_BUR_RGSUM
+                                    , MNTH_RNTTY_HUS_FRM_CD
+                                    , MNTH_RNTTY_HUS_CNTT_AREA
+                                    , MNTH_RNTTY_RNTL_ADDR
+                                    , MNTH_RNTTY_RNTL_BGNN_DT
+                                    , MNTH_RNTTY_RNTL_END_DT
+                                    , MNTH_RNTTY_YRLY_MNTH_SUM
+                                    , MNTH_RNTTY_TX_DDUC_SUM
+                                    , ECTN_FL_TRNR_CTL_YN
+                                    , KYBDR
+                                    , INPT_DT
+                                    , INPT_ADDR
+                                    , ISMT
+                                    , REVN_DT
+                                    , REVN_ADDR
+                            FROM YE162510
+                    WHERE 1=1
+                    <isEqual prepend="AND" property="searchCondition" compareValue="0">
+                        YRTX_BLGG_YR = #searchKeyword#
+                    </isEqual>
+                    <isEqual prepend="AND" property="searchCondition" compareValue="1">
+                        CLUT_SEPT_CD LIKE '%' || #searchKeyword# || '%'
+                    </isEqual>
+                        ORDER BY 
+                            YRTX_BLGG_YR DESC
+                                , CLUT_SEPT_CD DESC
+                                , MNTH_RNT_QNTY_SEIL_NUM DESC
+                                , DPOB_CD DESC
+                                , SYSTEMKEY DESC
+            
+            <![CDATA[                    
+         ) A WHERE ROWNUM <= #lastIndex# 
+     )WHERE RNUM >= #firstIndex# 
+	 ]]> 
+	</select>
+		
+	<select id="infcPkgYe162510_2021_DAO.selectYe162510ListTotCnt_S" parameterClass="infcPkgYe162510Srh_2021_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE162510
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				YRTX_BLGG_YR = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				CLUT_SEPT_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+	
+	
+ 	<select id="infcPkgYe162510_2021_DAO.selectYeta6300_Tax_YE162510_01_List_D" parameterClass="infcPkgYe162510Srh_2021_VO" resultClass="egovMap">
+ 				  SELECT
+                                    YRTX_BLGG_YR
+                                    , CLUT_SEPT_CD
+                                    , MNTH_RNT_QNTY_SEIL_NUM
+                                    , DPOB_CD
+                                    , SYSTEMKEY
+                                    , MNTH_RNTTY_LEHDR_NM
+                                    , MNTH_RNTTY_BUR_RGSUM
+                                    , MNTH_RNTTY_HUS_FRM_CD
+                                    , MNTH_RNTTY_HUS_CNTT_AREA
+                                    , MNTH_RNTTY_RNTL_ADDR
+                                    , MNTH_RNTTY_RNTL_BGNN_DT
+                                    , MNTH_RNTTY_RNTL_END_DT
+                                    , MNTH_RNTTY_YRLY_MNTH_SUM
+                                    , MNTH_RNTTY_TX_DDUC_SUM
+                                    , MNTH_RNTTY_YRLY_TGT_SUM
+                                    , ECTN_FL_TRNR_CTL_YN
+                                    , KYBDR
+                                    , INPT_DT
+                                    , INPT_ADDR
+                                    , ISMT
+                                    , REVN_DT
+                                    , REVN_ADDR
+                            FROM YE162510
+                    WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey# 
+                        ORDER BY 
+                            YRTX_BLGG_YR DESC
+                                , CLUT_SEPT_CD DESC 
+                                , DPOB_CD DESC
+                                , SYSTEMKEY DESC
+                                  , MNTH_RNT_QNTY_SEIL_NUM DESC
+				  
+	</select>	
+
+ <update id="infcPkgYe162510_2021_DAO.updateYeta6300_Tax_YE162510_01_S">
+		<![CDATA[
+			UPDATE YE162510
+			SET   MNTH_RNTTY_YRLY_TGT_SUM = #mnthRnttyYrlyTgtSum#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+							  	AND MNTH_RNT_QNTY_SEIL_NUM=#mnthRntQntySeilNum#
+				]]>
+	</update>
+	
+  <update id="infcPkgYe162510_2021_DAO.updateYeta6300_Tax_Ye162510_02_S">
+		<![CDATA[
+			UPDATE YE162510 AC03
+			SET                                    
+              MNTH_RNTTY_TX_DDUC_SUM =(SELECT  
+                                        (CASE WHEN  ((CASE WHEN  NVL(AC01.MNTH_RNTTY_YRLY_TGT_SUM,0) > 7500000 THEN  7500000       
+                                                                       ELSE  NVL(AC01.MNTH_RNTTY_YRLY_TGT_SUM,0)   END) * (
+			CASE WHEN ac02.yeta_0c29 > 55000000  AND ac02.yeta_0c29 <= 70000000 THEN 0.10
+			WHEN ac02.yeta_0c29 <= 55000000 THEN 0.12
+			ELSE 0.00 end
+			)) > 750000 THEN  750000       
+                                                           ELSE   (CASE WHEN  NVL(AC01.MNTH_RNTTY_YRLY_TGT_SUM,0) > 7500000 THEN  7500000       
+                                                                        ELSE  NVL(AC01.MNTH_RNTTY_YRLY_TGT_SUM,0)   END) * (
+			CASE WHEN ac02.yeta_0c29 > 55000000  AND ac02.yeta_0c29 <= 70000000 THEN 0.10
+			WHEN ac02.yeta_0c29 <= 55000000 THEN 0.12
+			ELSE 0.00 end
+			)      END)  
+                                        FROM YE169010 AC02 , YE162510 AC01                                                                          
+										 WHERE  AC02.DPOB_CD = AC01.DPOB_CD
+							               AND AC02.YRTX_BLGG_YR = AC01.YRTX_BLGG_YR 
+							               AND AC02.CLUT_SEPT_CD = AC01.CLUT_SEPT_CD 
+							               AND AC02.SYSTEMKEY = AC01.SYSTEMKEY 
+							               AND  AC01.DPOB_CD = AC03.DPOB_CD
+							               AND AC01.YRTX_BLGG_YR = AC03.YRTX_BLGG_YR 
+							               AND AC01.CLUT_SEPT_CD = AC03.CLUT_SEPT_CD 
+							               AND AC01.SYSTEMKEY = AC03.SYSTEMKEY 
+							               AND AC01.MNTH_RNT_QNTY_SEIL_NUM = AC03.MNTH_RNT_QNTY_SEIL_NUM 
+                                        )  
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE AC03.DPOB_CD=#dpobCd#
+								AND AC03.YRTX_BLGG_YR=#yrtxBlggYr#
+								AND AC03.CLUT_SEPT_CD=#clutSeptCd#
+								AND AC03.SYSTEMKEY=#systemkey#
+							
+				]]>
+	</update>
+</sqlMap>

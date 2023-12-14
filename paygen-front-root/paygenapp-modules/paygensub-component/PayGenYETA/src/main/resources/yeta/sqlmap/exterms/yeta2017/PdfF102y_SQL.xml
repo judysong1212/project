@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PdfF102y">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="pdfF102ySrhVO" type="com.app.exterms.yearendtax.server.vo.PdfF102ySrhVO"/>
+	
+	<resultMap id="pdfF102y" class="com.app.exterms.yearendtax.server.vo.PdfF102yVO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="accNo" column="ACC_NO" columnIndex="5"/>
+		<result property="formCd" column="FORM_CD" columnIndex="6"/>
+		<result property="resid" column="RESID" columnIndex="7"/>
+		<result property="name" column="NAME" columnIndex="8"/>
+		<result property="datCd" column="DAT_CD" columnIndex="9"/>
+		<result property="busnid" column="BUSNID" columnIndex="10"/>
+		<result property="tradeNm" column="TRADE_NM" columnIndex="11"/>
+		<result property="comCd" column="COM_CD" columnIndex="12"/>
+		<result property="pensionCd" column="PENSION_CD" columnIndex="13"/>
+		<result property="annTotAmt" column="ANN_TOT_AMT" columnIndex="14"/>
+		<result property="taxYearAmt" column="TAX_YEAR_AMT" columnIndex="15"/>
+		<result property="ddctBsAssAmt" column="DDCT_BS_ASS_AMT" columnIndex="16"/>
+		<result property="retirPnsnAmtSum" column="RETIR_PNSN_AMT_SUM" columnIndex="17"/>
+		<result property="pdfDatAppYn" column="PDF_DAT_APP_YN" columnIndex="18"/>
+		<result property="kybdr" column="KYBDR" columnIndex="19"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="20"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="21"/>
+		<result property="ismt" column="ISMT" columnIndex="22"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="23"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="24"/>
+	</resultMap>
+	
+	<insert id="pdfF102yDAO.insertPdfF102y_S">
+		<![CDATA[
+			INSERT INTO PDF_F102Y 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , ACC_NO
+				  , FORM_CD
+				  , RESID
+				  , NAME
+				  , DAT_CD
+				  , BUSNID
+				  , TRADE_NM
+				  , COM_CD
+				  , PENSION_CD
+				  , ANN_TOT_AMT
+				  , TAX_YEAR_AMT
+				  , DDCT_BS_ASS_AMT
+				  , RETIR_PNSN_AMT_SUM
+				  , PDF_DAT_APP_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #accNo#
+				  , #formCd#
+				  , #resid#
+				  , #name#
+				  , #datCd#
+				  , #busnid#
+				  , #tradeNm#
+				  , #comCd#
+				  , #pensionCd#
+				  , #annTotAmt#
+				  , #taxYearAmt#
+				  , #ddctBsAssAmt#
+				  , #retirPnsnAmtSum#
+				  , #pdfDatAppYn#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="pdfF102yDAO.updatePdfF102y_S">
+		<![CDATA[
+			UPDATE PDF_F102Y
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, ACC_NO=#accNo#
+				, FORM_CD=#formCd#
+				, RESID=#resid#
+				, NAME=#name#
+				, DAT_CD=#datCd#
+				, BUSNID=#busnid#
+				, TRADE_NM=#tradeNm#
+				, COM_CD=#comCd#
+				, PENSION_CD=#pensionCd#
+				, ANN_TOT_AMT=#annTotAmt#
+				, TAX_YEAR_AMT=#taxYearAmt#
+				, DDCT_BS_ASS_AMT=#ddctBsAssAmt#
+				, RETIR_PNSN_AMT_SUM=#retirPnsnAmtSum#
+				, PDF_DAT_APP_YN=#pdfDatAppYn#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND ACC_NO=#accNo#
+				]]>
+	</update>
+	
+	<delete id="pdfF102yDAO.deletePdfF102y_S">
+		<![CDATA[
+			DELETE FROM PDF_F102Y 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND ACC_NO=#accNo#
+				]]>
+	</delete>
+	
+	<select id="pdfF102yDAO.selectPdfF102y_S" resultMap="pdfF102y">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, ACC_NO
+				, FORM_CD
+				, RESID
+				, NAME
+				, DAT_CD
+				, BUSNID
+				, TRADE_NM
+				, COM_CD
+				, PENSION_CD
+				, ANN_TOT_AMT
+				, TAX_YEAR_AMT
+				, DDCT_BS_ASS_AMT
+				, RETIR_PNSN_AMT_SUM
+				, PDF_DAT_APP_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PDF_F102Y
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND ACC_NO=#accNo#
+				]]>
+	</select>
+	
+	<select id="pdfF102yDAO.selectPdfF102yList_D" parameterClass="pdfF102ySrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, ACC_NO
+								, FORM_CD
+								, RESID
+								, NAME
+								, DAT_CD
+								, BUSNID
+								, TRADE_NM
+								, COM_CD
+								, PENSION_CD
+								, ANN_TOT_AMT
+								, TAX_YEAR_AMT
+								, DDCT_BS_ASS_AMT
+								, RETIR_PNSN_AMT_SUM
+								, PDF_DAT_APP_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PDF_F102Y
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, ACC_NO DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="pdfF102yDAO.selectPdfF102yListTotCnt_S" parameterClass="pdfF102ySrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PDF_F102Y
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

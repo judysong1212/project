@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcRemt3200">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgRemt3200SerarchVO" type="com.app.smrmf.infc.retirement.server.vo.InfcPkgRemt3200SrhVO"/>
+	
+	<resultMap id="infcPkgRemt3200" class="com.app.smrmf.infc.retirement.server.vo.InfcPkgRemt3200VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="clutYrMnth" column="CLUT_YR_MNTH" columnIndex="2"/>
+		<result property="calcSevePayPsnDivCd" column="CALC_SEVE_PAY_PSN_DIV_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="antyAccuSeilNum" column="ANTY_ACCU_SEIL_NUM" columnIndex="5"/>
+		<result property="antyAccuBusoprNum" column="ANTY_ACCU_BUSOPR_NUM" columnIndex="6"/>
+		<result property="antyAccuBusoprNm" column="ANTY_ACCU_BUSOPR_NM" columnIndex="7"/>
+		<result property="antyAccuAccuNum" column="ANTY_ACCU_ACCU_NUM" columnIndex="8"/>
+		<result property="antyAccuDepitSum" column="ANTY_ACCU_DEPIT_SUM" columnIndex="9"/>
+		<result property="antyAccuDepitDt" column="ANTY_ACCU_DEPIT_DT" columnIndex="10"/>
+		<result property="kybdr" column="KYBDR" columnIndex="11"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="12"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="13"/>
+		<result property="ismt" column="ISMT" columnIndex="14"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="15"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="16"/>
+	</resultMap>
+	
+	<insert id="infcPkgRemt3200DAO.insertRemt3200_S">
+		<![CDATA[
+			INSERT INTO REMT3200 
+				( DPOB_CD
+				  , CLUT_YR_MNTH
+				  , CALC_SEVE_PAY_PSN_DIV_CD
+				  , SYSTEMKEY
+				  , ANTY_ACCU_SEIL_NUM
+				  , ANTY_ACCU_BUSOPR_NUM
+				  , ANTY_ACCU_BUSOPR_NM
+				  , ANTY_ACCU_ACCU_NUM
+				  , ANTY_ACCU_DEPIT_SUM
+				  , ANTY_ACCU_DEPIT_DT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #clutYrMnth#
+				  , #calcSevePayPsnDivCd#
+				  , #systemkey#
+				  , #antyAccuSeilNum#
+				  , #antyAccuBusoprNum#
+				  , #antyAccuBusoprNm#
+				  , #antyAccuAccuNum#
+				  , #antyAccuDepitSum#
+				  , #antyAccuDepitDt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgRemt3200DAO.updateRemt3200_S">
+		<![CDATA[
+			UPDATE REMT3200
+			SET DPOB_CD=#dpobCd#
+				, CLUT_YR_MNTH=#clutYrMnth#
+				, CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+				, SYSTEMKEY=#systemkey#
+				, ANTY_ACCU_SEIL_NUM=#antyAccuSeilNum#
+				, ANTY_ACCU_BUSOPR_NUM=#antyAccuBusoprNum#
+				, ANTY_ACCU_BUSOPR_NM=#antyAccuBusoprNm#
+				, ANTY_ACCU_ACCU_NUM=#antyAccuAccuNum#
+				, ANTY_ACCU_DEPIT_SUM=#antyAccuDepitSum#
+				, ANTY_ACCU_DEPIT_DT=#antyAccuDepitDt# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+							    AND CLUT_YR_MNTH=#clutYrMnth#
+								AND CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+								AND SYSTEMKEY=#systemkey#
+								AND ANTY_ACCU_SEIL_NUM=#antyAccuSeilNum#
+				]]>
+	</update>
+	
+	<delete id="infcPkgRemt3200DAO.deleteRemt3200_S">
+		<![CDATA[
+			DELETE FROM REMT3200 
+						WHERE DPOB_CD=#dpobCd#
+								AND CLUT_YR_MNTH=#clutYrMnth#
+								AND CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+								AND SYSTEMKEY=#systemkey#
+								AND ANTY_ACCU_SEIL_NUM=#antyAccuSeilNum#
+				]]>
+	</delete>
+	
+	<select id="infcPkgRemt3200DAO.selectRemt3200_S" resultMap="infcPkgRemt3200">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, CLUT_YR_MNTH
+				, CALC_SEVE_PAY_PSN_DIV_CD
+				, SYSTEMKEY
+				, ANTY_ACCU_SEIL_NUM
+				, ANTY_ACCU_BUSOPR_NUM
+				, ANTY_ACCU_BUSOPR_NM
+				, ANTY_ACCU_ACCU_NUM
+				, ANTY_ACCU_DEPIT_SUM
+				, ANTY_ACCU_DEPIT_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM REMT3200
+			WHERE DPOB_CD=#dpobCd#
+				AND CLUT_YR_MNTH=#clutYrMnth#
+				AND CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+				AND SYSTEMKEY=#systemkey#
+				AND ANTY_ACCU_SEIL_NUM=#antyAccuSeilNum#
+				]]>
+	</select>
+	
+	<select id="infcPkgRemt3200DAO.selectRemt3200List_D" parameterClass="infcPkgRemt3200SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, CLUT_YR_MNTH
+								, CALC_SEVE_PAY_PSN_DIV_CD
+								, SYSTEMKEY
+								, ANTY_ACCU_SEIL_NUM
+								, ANTY_ACCU_BUSOPR_NUM
+								, ANTY_ACCU_BUSOPR_NM
+								, ANTY_ACCU_ACCU_NUM
+								, ANTY_ACCU_DEPIT_SUM
+								, ANTY_ACCU_DEPIT_DT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM REMT3200
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					CLUT_YR_MNTH LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, CLUT_YR_MNTH DESC
+							, CALC_SEVE_PAY_PSN_DIV_CD DESC
+							, SYSTEMKEY DESC
+							, ANTY_ACCU_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgRemt3200DAO.selectRemt3200ListTotCnt_S" parameterClass="infcPkgRemt3200SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM REMT3200
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				CLUT_YR_MNTH LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

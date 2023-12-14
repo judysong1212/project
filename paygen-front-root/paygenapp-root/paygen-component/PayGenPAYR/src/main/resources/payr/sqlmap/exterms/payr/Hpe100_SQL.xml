@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Hpe100DAO">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="hpe100Dto" type="com.app.exterms.payroll.client.dto.Hpe100DTO"/>
+	
+	
+	<!-- 추가_20200925 -->
+	<insert id="Hpe100DAO.setPayr7100DataSave" parameterClass="hpe100Dto">
+		INSERT INTO HPE000T
+		     ( DPOB_CD          	, YEAR_YYYY     	, HALF_YEAR         , DPOB_NM               , TX_OFFC_CD
+		     , BUSOPR_RGSTN_NUM 	, DPOB_ZPCD     	, DPOB_FNDTN_ADDR   , DPOB_DTL_PATR_ADDR    , DEGTR_NM
+		     , CORP_RGSTN_NUM   	, DEPT_CD       	, DEPT_NM           , HOMETAX_ID            , SUBMITTER
+		     , TAX_AGENT_NO     	, TAX_PGM_CODE  	, RESN_REGN_NUM     , USR_ID                , USR_NM
+		     , USR_TEL          	, KYBDR         	, INPT_DT           , INPT_ADDR             , ISMT
+		     , REVN_DT          	, REVN_ADDR     	)
+		VALUES
+		     ( #DPOB_CD#        	, #YEAR_YYYY#   	, #HALF_YEAR#       , #DPOB_NM#             , #TX_OFFC_CD#
+		     , #BUSOPR_RGSTN_NUM#	, #DPOB_ZPCD#   	, #DPOB_FNDTN_ADDR# , #DPOB_DTL_PATR_ADDR#  , #DEGTR_NM#
+		     , #CORP_RGSTN_NUM# 	, #DEPT_CD#     	, #DEPT_NM#         , #HOMETAX_ID#          , #SUBMITTER#
+		     , #TAX_AGENT_NO#   	, #TAX_PGM_CODE#	, #RESN_REGN_NUM#   , #usrId#               , #USR_NM#
+		     , #USR_TEL#        	, #KYBDR#       	, SYSDATE           , #INPT_ADDR#          , #ISMT#
+		     , SYSDATE          	, #REVN_ADDR#   	)
+	</insert>
+	
+	
+	<!-- 추가_20200925 -->
+	<select id="Hpe100DAO.selectPayr7100DataList" parameterClass="hpe100Dto" resultClass="egovMap">
+		SELECT DPOB_CD
+			  ,YEAR_YYYY
+			  ,HALF_YEAR
+			  ,DPOB_NM
+			  ,TX_OFFC_CD
+			  ,BUSOPR_RGSTN_NUM
+			  ,DPOB_ZPCD
+			  ,DPOB_FNDTN_ADDR
+			  ,DPOB_DTL_PATR_ADDR
+			  ,DEGTR_NM
+			  ,CORP_RGSTN_NUM
+			  ,DEPT_CD
+			  ,DEPT_NM
+			  ,HOMETAX_ID
+			  ,SUBMITTER
+			  ,TAX_AGENT_NO
+			  ,TAX_PGM_CODE
+			  ,RESN_REGN_NUM
+			  ,USR_ID
+			  ,USR_NM
+			  ,USR_TEL
+			  ,KYBDR
+			  ,INPT_DT
+			  ,INPT_ADDR
+			  ,ISMT
+			  ,REVN_DT
+			  ,REVN_ADDR
+		FROM HPE000T
+		WHERE DPOB_CD = #DPOB_CD#
+		  AND BUSOPR_RGSTN_NUM = #BUSOPR_RGSTN_NUM#
+		  AND YEAR_YYYY = #YEAR_YYYY#
+		  AND HALF_YEAR = #HALF_YEAR#
+		  AND DEPT_CD = #DEPT_CD#
+		  AND USR_ID = #usrId# 
+	</select>
+	
+	<!-- 추가_20200925 -->
+	<update id="Hpe100DAO.setPayr7100DataUpdate" parameterClass="hpe100Dto">
+		UPDATE HPE000T
+		   SET DPOB_NM              = #DPOB_NM#
+		     , TX_OFFC_CD           = #TX_OFFC_CD#
+		     , DPOB_ZPCD            = #DPOB_ZPCD#
+		     , DPOB_FNDTN_ADDR      = #DPOB_FNDTN_ADDR#
+		     , DPOB_DTL_PATR_ADDR   = #DPOB_DTL_PATR_ADDR#
+		     , DEGTR_NM             = #DEGTR_NM#
+		     , CORP_RGSTN_NUM       = #CORP_RGSTN_NUM#
+		     , DEPT_NM              = #DEPT_NM#
+		     , HOMETAX_ID           = #HOMETAX_ID#
+		     , SUBMITTER            = #SUBMITTER#
+		     , TAX_AGENT_NO         = #TAX_AGENT_NO#
+		     , TAX_PGM_CODE         = #TAX_PGM_CODE#
+		     , RESN_REGN_NUM        = #RESN_REGN_NUM#
+		     , USR_NM               = #USR_NM#
+		     , USR_TEL              = #USR_TEL#
+		     , ISMT                 = #usrId#
+		     , REVN_DT              = SYSDATE
+		     , REVN_ADDR            = #REVN_ADDR#
+		 WHERE DPOB_CD = #DPOB_CD#
+		  AND BUSOPR_RGSTN_NUM = #BUSOPR_RGSTN_NUM#
+		  AND YEAR_YYYY = #YEAR_YYYY#
+		  AND HALF_YEAR = #HALF_YEAR#
+		  AND DEPT_CD = #DEPT_CD#
+		  AND USR_ID = #usrId#
+	</update>
+	
+	
+
+	<!-- 20210614 조회 쿼리문 변경 -->
+	<select id="Hpe100DAO.selectHpe100ToPayr7100DataList" parameterClass="hpe100Dto" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+						            SELECT 
+						            <!-- B.* -->   
+						               B.DPOB_CD
+									 , B.YEAR_YYYY
+						             , (CASE WHEN B.HALF_YEAR = '1' THEN '상반기'
+						                     WHEN B.HALF_YEAR = '2' THEN '하반기'
+						                     ELSE '' END) AS HALF_YEAR
+						             , B.EMYMT_DIV_CD
+						             , B.DEPT_CD
+						             , B.PERSON_NUMB
+						             , B.RESN_REGN_NUM
+						             , B.HAN_NM
+						             , B.CELL_PHNE_NUM, B.FRGNR_DIV_CD, B.RESIDENT_CD
+						             , (SELECT COMM_CD_NM FROM BASS0300 WHERE RPSTTV_CD = 'A001' AND SUBSTR(DTL_CD,3,2) = B.NATN_CD) AS NATN_CD
+						             , B.EMYMT_BGNN_DT, B.EMYMT_END_DT
+						             , SUM(B.TXTN_TOT_AMNT) AS TXTN_TOT_AMNT
+						             , SUM(B.FREE_DTY_TOT_AMT) AS FREE_DTY_TOT_AMT
+						             , B.KYBDR, B.INPT_DT, B.INPT_ADDR, B.ISMT, B.REVN_DT, B.REVN_ADDR 
+						             , B.TEMPC_01, B.TEMPC_02, B.TEMPC_03, B.TEMPN_01, B.TEMPN_02, B.TEMPN_03 
+			                        FROM HPE100T B, PSNL0100 C
+			                        WHERE B.YEAR_YYYY = #SrhYrtxBlggYr# 
+			                        <isNotEmpty prepend="AND" property="DPOB_CD">
+			                        B.DPOB_CD = #DPOB_CD# 
+			                        </isNotEmpty>
+			                        AND B.HALF_YEAR = #HALF_YEAR# 
+			                        <isNotEmpty prepend="AND" property="SrhEmymtDivCd">
+			                        B.EMYMT_DIV_CD = #SrhEmymtDivCd#
+			                        </isNotEmpty>
+			                        <isNotEmpty prepend="AND" property="SrhDeptCd">
+						 	  	 	B.DEPT_CD = #SrhDeptCd#
+					       		    </isNotEmpty>
+					       		    <isNotEmpty prepend="AND" property="SrhTypOccuCd">
+					       		    C.TYP_OCCU_CD = #SrhTypOccuCd#
+					       		    </isNotEmpty>
+					       		    <isNotEmpty prepend="AND" property="SrhDtilOccuInttnCd">
+					       		    C.DTIL_OCCU_INTTN_CD = #SrhDtilOccuInttnCd#
+					       		    </isNotEmpty>
+					       		    <isNotEmpty prepend="AND" property="SrhBusinCd">
+					       		    C.BUSIN_CD = #SrhBusinCd#
+					       		    </isNotEmpty>
+					       		    AND B.DEPT_CD = C.DEPT_CD
+	                       			AND B.DPOB_CD = C.DPOB_CD
+	                       			AND B.PERSON_NUMB = C.SYSTEMKEY
+                        			GROUP BY B.DPOB_CD, B.YEAR_YYYY, B.HALF_YEAR, B.EMYMT_DIV_CD, B.DEPT_CD
+							               , B.PERSON_NUMB, B.RESN_REGN_NUM, B.HAN_NM
+							               , B.CELL_PHNE_NUM, B.FRGNR_DIV_CD, B.RESIDENT_CD, B.NATN_CD
+							               , B.EMYMT_BGNN_DT, B.EMYMT_END_DT
+							               , B.KYBDR, B.INPT_DT, B.INPT_ADDR, B.ISMT, B.REVN_DT, B.REVN_ADDR 
+							               , B.TEMPC_01, B.TEMPC_02, B.TEMPC_03, B.TEMPN_01, B.TEMPN_02, B.TEMPN_03   
+						       		ORDER BY B.DPOB_CD, B.YEAR_YYYY, B.HALF_YEAR, B.EMYMT_DIV_CD, B.DEPT_CD, B.PERSON_NUMB   
+                       			
+		<isNotEqual  property="lastIndex" compareValue="-1">
+		 <![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+		</isNotEqual>	
+		<isEqual   property="lastIndex" compareValue="-1">
+		  <![CDATA[					
+			) A  
+		)
+		]]>
+		</isEqual>
+	</select>
+	
+	<!-- 추가_20200925 -->
+	<!-- 20210614 조회 쿼리문 변경 -->
+	<select id="Hpe100DAO.selectHpe100ToPayr7100DataListTotCnt" parameterClass="hpe100Dto" resultClass="int">
+		SELECT COUNT(*)	AS totcnt FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+						       SELECT 
+						             <!-- B.* -->
+						               B.DPOB_CD
+									 , B.YEAR_YYYY
+						             , (CASE WHEN B.HALF_YEAR = '1' THEN '상반기'
+						                     WHEN B.HALF_YEAR = '2' THEN '하반기'
+						                     ELSE '' END) AS HALF_YEAR
+						             , B.EMYMT_DIV_CD
+						             , B.DEPT_CD
+						             , B.PERSON_NUMB
+						             , B.RESN_REGN_NUM
+						             , B.HAN_NM
+						             , B.CELL_PHNE_NUM, B.FRGNR_DIV_CD, B.RESIDENT_CD
+						             , (SELECT COMM_CD_NM FROM BASS0300 WHERE RPSTTV_CD = 'A001' AND SUBSTR(DTL_CD,3,2) = B.NATN_CD) AS NATN_CD
+						             , B.EMYMT_BGNN_DT, B.EMYMT_END_DT
+						             , SUM(B.TXTN_TOT_AMNT) AS TXTN_TOT_AMNT
+						             , SUM(B.FREE_DTY_TOT_AMT) AS FREE_DTY_TOT_AMT
+						             , B.KYBDR, B.INPT_DT, B.INPT_ADDR, B.ISMT, B.REVN_DT, B.REVN_ADDR 
+						             , B.TEMPC_01, B.TEMPC_02, B.TEMPC_03, B.TEMPN_01, B.TEMPN_02, B.TEMPN_03 
+		                        FROM HPE100T B, PSNL0100 C
+		                        WHERE B.YEAR_YYYY = #SrhYrtxBlggYr# 
+		                        <isNotEmpty prepend="AND" property="DPOB_CD">
+		                        B.DPOB_CD = #DPOB_CD# 
+		                        </isNotEmpty>
+		                        AND B.HALF_YEAR = #HALF_YEAR# 
+		                        <isNotEmpty prepend="AND" property="SrhEmymtDivCd">
+		                        B.EMYMT_DIV_CD = #SrhEmymtDivCd#
+		                        </isNotEmpty>
+		                        <isNotEmpty prepend="AND" property="SrhDeptCd">
+					 	  	 	B.DEPT_CD = #SrhDeptCd#
+				       		    </isNotEmpty>
+				       		    <isNotEmpty prepend="AND" property="SrhTypOccuCd">
+				       		    C.TYP_OCCU_CD = #SrhTypOccuCd#
+				       		    </isNotEmpty>
+				       		    <isNotEmpty prepend="AND" property="SrhDtilOccuInttnCd">
+				       		    C.DTIL_OCCU_INTTN_CD = #SrhDtilOccuInttnCd#
+				       		    </isNotEmpty>
+				       		    <isNotEmpty prepend="AND" property="SrhBusinCd">
+				       		    C.BUSIN_CD = #SrhBusinCd#
+				       		    </isNotEmpty>
+				       		    AND B.DEPT_CD = C.DEPT_CD
+                       			AND B.DPOB_CD = C.DPOB_CD
+                       			AND B.PERSON_NUMB = C.SYSTEMKEY
+                       			GROUP BY B.DPOB_CD, B.YEAR_YYYY, B.HALF_YEAR, B.EMYMT_DIV_CD, B.DEPT_CD
+						             , B.PERSON_NUMB, B.RESN_REGN_NUM, B.HAN_NM
+						             , B.CELL_PHNE_NUM, B.FRGNR_DIV_CD, B.RESIDENT_CD, B.NATN_CD
+						             , B.EMYMT_BGNN_DT, B.EMYMT_END_DT
+						             , B.KYBDR, B.INPT_DT, B.INPT_ADDR, B.ISMT, B.REVN_DT, B.REVN_ADDR 
+						             , B.TEMPC_01, B.TEMPC_02, B.TEMPC_03, B.TEMPN_01, B.TEMPN_02, B.TEMPN_03   
+						       	ORDER BY B.DPOB_CD, B.YEAR_YYYY, B.HALF_YEAR, B.EMYMT_DIV_CD, B.DEPT_CD, B.PERSON_NUMB   
+                       			
+			) A
+		) A 
+	</select>
+	
+	<!-- 추가_20200925 -->
+	<update id="Hpe100DAO.setPayr7100SummaryData" parameterClass="hpe100Dto">
+		DECLARE
+		    P_DPOB_CD       NVARCHAR2(14);
+		    P_YEAR_YYYY     NVARCHAR2(04);
+		    P_HALF_YEAR     NVARCHAR2(01);
+		    P_EMYMT_DIV_CD  NVARCHAR2(08);
+		    P_USER_ID       NVARCHAR2(20);
+		
+		BEGIN
+		    P_DPOB_CD   := #DPOB_CD#;
+		    P_YEAR_YYYY := #YEAR_YYYY#;
+		    P_HALF_YEAR := #HALF_YEAR#;
+		    P_EMYMT_DIV_CD := #SrhEmymtDivCd#;
+		    P_USER_ID   := #usrId#;
+		
+		    USP_HUMAN_HPE100UKR_GetPayAmt(P_DPOB_CD, P_YEAR_YYYY, P_HALF_YEAR,P_EMYMT_DIV_CD, P_USER_ID);
+		END;
+	</update>
+	<!-- 추가_20200925 -->
+	<insert id="Hpe100DAO.InsertHPE000" parameterClass="hpe100Dto">
+		INSERT INTO HPE000T
+		     ( DPOB_CD          	, YEAR_YYYY     	, HALF_YEAR         , DPOB_NM               , TX_OFFC_CD
+		     , BUSOPR_RGSTN_NUM 	, DPOB_ZPCD     	, DPOB_FNDTN_ADDR   , DPOB_DTL_PATR_ADDR    , DEGTR_NM
+		     , CORP_RGSTN_NUM   	, DEPT_CD       	, DEPT_NM           , HOMETAX_ID            , SUBMITTER
+		     , TAX_AGENT_NO     	, TAX_PGM_CODE  	, RESN_REGN_NUM     , USR_ID                , USR_NM
+		     , USR_TEL          	, KYBDR         	, INPT_DT           , INPT_ADDR             , ISMT
+		     , REVN_DT          	, REVN_ADDR     	)
+		VALUES
+		     ( #DPOB_CD#        	, #YEAR_YYYY#   	, #HALF_YEAR#       , #DPOB_NM#             , #TX_OFFC_CD#
+		     , #BUSOPR_RGSTN_NUM#	, #DPOB_ZPCD#   	, #DPOB_FNDTN_ADDR# , #DPOB_DTL_PATR_ADDR#  , #DEGTR_NM#
+		     , #CORP_RGSTN_NUM# 	, #DEPT_CD#     	, #DEPT_NM#         , #HOMETAX_ID#          , #SUBMITTER#
+		     , #TAX_AGENT_NO#   	, #TAX_PGM_CODE#	, #RESN_REGN_NUM#   , #usrId#               , #USR_NM#
+		     , #USR_TEL#        	, #KYBDR#       	, SYSDATE           , #INPT_ADDR#          , #ISMT#
+		     , SYSDATE          	, #REVN_ADDR#   	)
+	</insert>
+	<!-- 추가_20200925 -->
+	<update id="Hpe100DAO.UpdateHPE000" parameterClass="hpe100Dto">
+		UPDATE HPE000T
+		   SET DPOB_NM              = #DPOB_NM#
+		     , TX_OFFC_CD           = #TX_OFFC_CD#
+		     , DPOB_ZPCD            = #DPOB_ZPCD#
+		     , DPOB_FNDTN_ADDR      = #DPOB_FNDTN_ADDR#
+		     , DPOB_DTL_PATR_ADDR   = #DPOB_DTL_PATR_ADDR#
+		     , DEGTR_NM             = #DEGTR_NM#
+		     , CORP_RGSTN_NUM       = #CORP_RGSTN_NUM#
+		     , DEPT_NM              = #DEPT_NM#
+		     , HOMETAX_ID           = #HOMETAX_ID#
+		     , SUBMITTER            = #SUBMITTER#
+		     , TAX_AGENT_NO         = #TAX_AGENT_NO#
+		     , TAX_PGM_CODE         = #TAX_PGM_CODE#
+		     , RESN_REGN_NUM        = #RESN_REGN_NUM#
+		     , USR_NM               = #USR_NM#
+		     , USR_TEL              = #USR_TEL#
+		     , ISMT                 = #usrId#
+		     , REVN_DT              = SYSDATE
+		     , REVN_ADDR            = #REVN_ADDR#
+		 WHERE DPOB_CD = #DPOB_CD#
+		  AND BUSOPR_RGSTN_NUM = #BUSOPR_RGSTN_NUM#
+		  AND YEAR_YYYY = #YEAR_YYYY#
+		  AND HALF_YEAR = #HALF_YEAR#
+		  AND DEPT_CD = #DEPT_CD#  
+		  AND USR_ID = #usrId#
+	</update>
+	
+	<!-- 추가_20200925 -->
+	<!-- 20210615 부서코드변경 -->
+	<select id="Hpe100DAO.selectPayr7100BasisInit" parameterClass="hpe100Dto" resultClass="egovMap">
+	    SELECT B.DPOB_CD
+	         , C.DPOB_NM
+	         , D.TX_OFFC_CD
+	         , C.BUSOPR_RGSTN_NUM
+	         , C.DPOB_ZPCD
+	         , C.DPOB_FNDTN_ADDR
+	         , C.DPOB_DTL_PATR_ADDR
+	         , C.DEGTR_NM
+	         , C.CORP_RGSTN_NUM
+	         , A.DEPT_CD
+	         , B.DEPT_NM_RTCHNT
+	         , A.USR_NM
+	         , NVL(A.USR_TEL, C.DPOB_PHN_NUM)   AS USR_TEL
+	         , #YEAR_YYYY#                      AS YEAR_YYYY
+	         , #HALF_YEAR#                      AS HALF_YEAR
+	         , TO_CHAR(SYSDATE, 'YYYYMMDD')     AS SUBMIT_DATE
+	         , ''                               AS HOMETAX_ID
+	         , '2'                              AS SUBMITTER
+	         , ''                               AS TAX_AGENT_NO
+	         , '9000'                           AS TAX_PGM_CODE
+	         , ''                               AS RESN_REGN_NUM
+	      FROM SYSM0100 A
+	            INNER JOIN      BASS0400 B
+	                         ON B.DEPT_CD = #DEPT_CD#
+	            INNER JOIN      BASS0100 C
+	                         ON B.DPOB_CD = C.DPOB_CD
+	            INNER JOIN      BASS0150 D
+	                         ON B.DPOB_CD = D.DPOB_CD
+	                        AND B.PAYR_MANG_DEPT_CD = D.PAYR_MANG_DEPT_CD
+	     WHERE A.USR_ID = #UsrId#
+	       
+	</select>
+	
+	<!-- 추가_20200925 -->
+	<!-- 20210614 수정 -->
+	<select id="Hpe100DAO.selectPayr7100BasisSave" parameterClass="hpe100Dto" resultClass="egovMap">
+	    SELECT DPOB_CD
+	         , DPOB_NM
+	         , TX_OFFC_CD
+	         , BUSOPR_RGSTN_NUM
+	         , DPOB_ZPCD
+	         , DPOB_FNDTN_ADDR
+	         , DPOB_DTL_PATR_ADDR
+	         , DEGTR_NM
+	         , CORP_RGSTN_NUM
+	         , DEPT_CD
+	         , DEPT_NM
+	         , USR_NM
+	         , USR_TEL
+	         , YEAR_YYYY
+	         , HALF_YEAR
+	         , TO_CHAR(SYSDATE, 'YYYYMMDD')     AS SUBMIT_DATE
+	         , HOMETAX_ID
+	         , SUBMITTER
+	         , TAX_AGENT_NO
+	         , TAX_PGM_CODE
+	         , RESN_REGN_NUM
+	      FROM HPE000T
+	     WHERE DPOB_CD   = #DPOB_CD#
+	       AND YEAR_YYYY = #YEAR_YYYY#
+	       AND HALF_YEAR = #HALF_YEAR#
+	       AND DEPT_CD   = #DEPT_CD#
+	       AND USR_ID    = #UsrId#
+	</select>
+	
+	<select id="Hpe100DAO.selectWorkPayListA" parameterClass="hpe100Dto" resultClass="egovMap">
+        SELECT A.DPOB_CD,
+       		A.DPOB_NM,
+       		A.TX_OFFC_CD,
+       		REPLACE (A.BUSOPR_RGSTN_NUM, '-', '') AS BUSOPR_RGSTN_NUM,
+      	 	A.DPOB_ZPCD,
+       		A.DPOB_FNDTN_ADDR,
+       		A.DEGTR_NM,
+       		REPLACE (A.CORP_RGSTN_NUM, '-', '') AS CORP_RGSTN_NUM,
+       		A.DEPT_CD,
+       		A.DEPT_NM,
+       		A.USR_NM,
+       		REPLACE (A.USR_TEL, '-', '') AS USR_TEL,
+       		A.YEAR_YYYY,
+       		A.HALF_YEAR,
+       		TO_CHAR (SYSDATE, 'YYYYMMDD') AS SUBMIT_DATE,
+       		A.HOMETAX_ID,
+       		A.SUBMITTER,
+       		A.TAX_AGENT_NO,
+       		A.TAX_PGM_CODE,
+       		REPLACE (A.RESN_REGN_NUM, '-', '') AS RESN_REGN_NUM,
+	   		SUM (B.TXTN_TOT_AMNT) AS TXTN_TOT_AMNT,
+       		SUM (B.FREE_DTY_TOT_AMT) AS FREE_DTY_TOT_AMT
+          FROM HPE000T A , HPE100T B 
+                  WHERE A.DPOB_CD = B.DPOB_CD 
+	   				AND A.YEAR_YYYY = B.YEAR_YYYY
+	   				AND A.HALF_YEAR = B.HALF_YEAR
+              		AND A.YEAR_YYYY   = #YEAR_YYYY#
+                    AND A.HALF_YEAR   = #HALF_YEAR#
+                    AND A.DPOB_CD     = #DPOB_CD#
+                    AND A.USR_ID       = #usrId#
+            GROUP BY  A.DPOB_CD,
+       				  A.DPOB_NM,
+                      A.TX_OFFC_CD,
+                      A.BUSOPR_RGSTN_NUM,
+                      A.DPOB_ZPCD,
+                      A.DPOB_FNDTN_ADDR,
+                      A.DEGTR_NM,
+                      A.CORP_RGSTN_NUM,
+                      A.DEPT_CD,
+                      A.DEPT_NM,
+                      A.USR_NM,
+                      A.USR_TEL,
+                      A.YEAR_YYYY,
+                      A.HALF_YEAR,
+                      A.HOMETAX_ID,
+                      A.SUBMITTER,
+                      A.TAX_AGENT_NO,
+                      A.TAX_PGM_CODE,
+                      A.RESN_REGN_NUM
+	</select>
+	
+	<!-- 추가_20200925 -->
+	<select id="Hpe100DAO.selectWorkPayListC" parameterClass="hpe100Dto" resultClass="egovMap">
+
+<!--     SELECT A.PERSON_NUMB
+	         , A.RESN_REGN_NUM
+	         , A.HAN_NM
+	         , B.BUSOPR_RGSTN_NUM
+	         , B.TX_OFFC_CD
+	         , REPLACE(A.CELL_PHNE_NUM, '-', '') AS CELL_PHNE_NUM
+	         , NVL(A.FRGNR_DIV_CD, '1') AS FRGNR_DIV_CD
+	         , A.RESIDENT_CD
+	         , A.NATN_CD
+	         , A.EMYMT_BGNN_DT
+	         , A.EMYMT_END_DT
+	         , A.TXTN_TOT_AMNT
+	         , A.FREE_DTY_TOT_AMT
+	      FROM HPE100T A, HPE000T B
+	     WHERE A.YEAR_YYYY = B.YEAR_YYYY
+       		AND A.HALF_YEAR = B.HALF_YEAR
+       		AND A.DPOB_CD = B.DPOB_CD
+	     	AND A.DPOB_CD = #DPOB_CD#
+	       	AND A.YEAR_YYYY = #YEAR_YYYY#
+	       	AND A.HALF_YEAR = #HALF_YEAR#
+	       	AND B.DEPT_CD = #DEPT_CD#
+	       	AND A.KYBDR     = #usrId#
+	       	
+	      -->  	
+	 <!--2021년 하반기 간이세액명세서 양식변경 수정작업 (PDS-2022.01.11)-->     
+		SELECT C.PERSON_NUMB
+	         , C.RESN_REGN_NUM
+	         , C.HAN_NM
+	         , C.BUSOPR_RGSTN_NUM
+	         , C.TX_OFFC_CD
+	         , C.CELL_PHNE_NUM
+	         , C.FRGNR_DIV_CD
+	         , C.RESIDENT_CD
+	         , C.NATN_CD
+	         , C.EMYMT_BGNN_DT
+	         , C.EMYMT_END_DT
+	         , SUM(C.TXTN_TOT_AMNT_A) AS TXTN_TOT_AMNT_A
+	         , SUM(C.FREE_DTY_TOT_AMT_A) AS FREE_DTY_TOT_AMT_A
+	         , SUM(C.TXTN_TOT_AMNT_B) AS TXTN_TOT_AMNT_B
+	         , SUM(C.FREE_DTY_TOT_AMT_B) AS FREE_DTY_TOT_AMT_B
+	         , SUM(C.TXTN_TOT_AMNT_C) AS TXTN_TOT_AMNT_C
+	         , SUM(C.FREE_DTY_TOT_AMT_C) AS FREE_DTY_TOT_AMT_C
+	         , SUM(C.TXTN_TOT_AMNT_D) AS TXTN_TOT_AMNT_D
+	         , SUM(C.FREE_DTY_TOT_AMT_D) AS FREE_DTY_TOT_AMT_D
+	         , SUM(C.TXTN_TOT_AMNT_E) AS TXTN_TOT_AMNT_E
+	         , SUM(C.FREE_DTY_TOT_AMT_E) AS FREE_DTY_TOT_AMT_E
+	         , SUM(C.TXTN_TOT_AMNT_F) AS TXTN_TOT_AMNT_F
+	         , SUM(C.FREE_DTY_TOT_AMT_F) AS FREE_DTY_TOT_AMT_F
+	
+	  FROM( 
+	        SELECT 
+	           A.PERSON_NUMB
+	         , A.RESN_REGN_NUM
+	         , A.HAN_NM
+	         , B.BUSOPR_RGSTN_NUM
+	         , B.TX_OFFC_CD
+	         , REPLACE(A.CELL_PHNE_NUM, '-', '') AS CELL_PHNE_NUM
+	         , NVL(A.FRGNR_DIV_CD, '1') AS FRGNR_DIV_CD
+	         , A.RESIDENT_CD
+	         , A.NATN_CD
+	         , A.EMYMT_BGNN_DT
+	         , A.EMYMT_END_DT
+	         , CASE WHEN A.PYMT_YR_MNTH = '202201' OR A.PYMT_YR_MNTH = '202207' THEN A.TXTN_TOT_AMNT
+	                ELSE 0 END AS TXTN_TOT_AMNT_A
+	         , CASE WHEN A.PYMT_YR_MNTH = '202201' OR A.PYMT_YR_MNTH = '202207' THEN A.FREE_DTY_TOT_AMT
+	                ELSE 0 END AS FREE_DTY_TOT_AMT_A
+	         , CASE WHEN A.PYMT_YR_MNTH = '202202' OR A.PYMT_YR_MNTH = '202208' THEN A.TXTN_TOT_AMNT
+	                ELSE 0 END AS TXTN_TOT_AMNT_B
+	         , CASE WHEN A.PYMT_YR_MNTH = '202202' OR A.PYMT_YR_MNTH = '202208' THEN A.FREE_DTY_TOT_AMT
+	                ELSE 0 END AS FREE_DTY_TOT_AMT_B
+	         , CASE WHEN A.PYMT_YR_MNTH = '202203' OR A.PYMT_YR_MNTH = '202209' THEN A.TXTN_TOT_AMNT
+	                ELSE 0 END AS TXTN_TOT_AMNT_C
+	         , CASE WHEN A.PYMT_YR_MNTH = '202203' OR A.PYMT_YR_MNTH = '202209' THEN A.FREE_DTY_TOT_AMT
+	                ELSE 0 END AS FREE_DTY_TOT_AMT_C
+	         , CASE WHEN A.PYMT_YR_MNTH = '202204' OR A.PYMT_YR_MNTH = '202210' THEN A.TXTN_TOT_AMNT
+	                ELSE 0 END AS TXTN_TOT_AMNT_D
+	         , CASE WHEN A.PYMT_YR_MNTH = '202204' OR A.PYMT_YR_MNTH = '202210' THEN A.FREE_DTY_TOT_AMT
+	                ELSE 0 END AS FREE_DTY_TOT_AMT_D
+	         , CASE WHEN A.PYMT_YR_MNTH = '202205' OR A.PYMT_YR_MNTH = '202211' THEN A.TXTN_TOT_AMNT
+	                ELSE 0 END AS TXTN_TOT_AMNT_E
+	         , CASE WHEN A.PYMT_YR_MNTH = '202205' OR A.PYMT_YR_MNTH = '202211' THEN A.FREE_DTY_TOT_AMT
+	                ELSE 0 END AS FREE_DTY_TOT_AMT_E
+	         , CASE WHEN A.PYMT_YR_MNTH = '202206' OR A.PYMT_YR_MNTH = '202212' THEN A.TXTN_TOT_AMNT
+	                ELSE 0 END AS TXTN_TOT_AMNT_F 
+	         , CASE WHEN A.PYMT_YR_MNTH = '202206' OR A.PYMT_YR_MNTH = '202212' THEN A.FREE_DTY_TOT_AMT
+	                ELSE 0 END AS FREE_DTY_TOT_AMT_F
+	       FROM HPE100T A, HPE000T B
+	       WHERE A.YEAR_YYYY = B.YEAR_YYYY
+	            AND A.HALF_YEAR = B.HALF_YEAR
+	            AND A.DPOB_CD = B.DPOB_CD
+	            AND A.YEAR_YYYY = #YEAR_YYYY#
+		       	AND A.HALF_YEAR = #HALF_YEAR#
+		       	AND B.DEPT_CD = #DEPT_CD#
+		       	AND A.KYBDR     = #usrId#
+	       ) C         
+	 GROUP BY C.PERSON_NUMB, C.RESN_REGN_NUM, C.HAN_NM, C.BUSOPR_RGSTN_NUM, C.TX_OFFC_CD, C.CELL_PHNE_NUM, C.FRGNR_DIV_CD, 
+	          C.RESIDENT_CD, C.NATN_CD, C.EMYMT_BGNN_DT, C.EMYMT_END_DT
+	 ORDER BY C.PERSON_NUMB ASC  
+ 	       	
+	</select>
+</sqlMap>

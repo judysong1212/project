@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0410">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="psnl0410Dto" type="com.app.exterms.personal.client.dto.Psnl0410DTO"/>
+	
+	<select id="psnl0410DAO.selectPsnl0410" parameterClass="psnl0410Dto" resultClass="egovMap">
+	    
+	    SELECT A.DPOB_CD,
+		       A.SYSTEMKEY,
+		       A.HAN_NM,
+		       FCBASS0400CDNM (A.DPOB_CD, A.CURR_AFFN_DEPT_CD, '2') AS DEPT_CD,
+		       FCBASS0300CDNM (A.DPOB_CD, A.HDOFC_CODTN_CD) AS HDOFC_CODTN_CD,
+		       B.ISS_PRPSE_CTNT,
+		       B.ISS_NUM_CPIS,
+		       FCBASS0300CDNM (B.DPOB_CD, B.CERTC_DIV_CD) AS CERTC_DIV_CD,
+		       B.PRF_ISS_NUM
+		  FROM PSNL0100 A, PSNL0550 B
+		 WHERE A.DPOB_CD = B.DPOB_CD 
+		   AND A.SYSTEMKEY = B.SYSTEMKEY
+		   AND B.CERTC_ISS_DT IS NOT NULL
+	    <isNotNull property="hanNm">
+		     <isNotEmpty property="hanNm">
+		         AND A.HAN_NM = #hanNm#  
+		     </isNotEmpty>
+		 </isNotNull>
+		<isNotNull property="systemkey">
+		     <isNotEmpty property="systemkey">
+		         AND A.SYSTEMKEY = #systemkey#  
+		     </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="resnRegnNum">
+		     <isNotEmpty property="resnRegnNum">
+		         AND A.RESN_REGN_NUM = REPLACE(#resnRegnNum#,'-','')  
+		     </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="searchCertcIssDtS">
+		     <isNotEmpty property="searchCertcIssDtS">
+		 		AND B.CERTC_ISS_DT &gt;= #searchCertcIssDtS#
+		 	 </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="searchCertcIssDtE">
+		     <isNotEmpty property="searchCertcIssDtE">
+		 		AND B.CERTC_ISS_DT &lt;= #searchCertcIssDtE#
+		 	 </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="certcDivCd">
+		     <isNotEmpty property="certcDivCd">
+		         AND B.CERTC_DIV_CD = #certcDivCd#  
+		     </isNotEmpty>
+		 </isNotNull>
+		 ORDER BY A.CURR_AFFN_DEPT_CD, A.HDOFC_CODTN_CD, A.HAN_NM
+	</select>
+	
+	
+</sqlMap>

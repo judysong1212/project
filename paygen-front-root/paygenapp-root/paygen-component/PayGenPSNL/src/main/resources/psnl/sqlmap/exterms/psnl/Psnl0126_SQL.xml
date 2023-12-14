@@ -1,0 +1,1827 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0126">
+    
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="psnl0126SrhVO" type="com.app.exterms.personal.server.vo.Psnl0126SrhVO"/>
+	<typeAlias  alias="psnl0126Vo" type="com.app.exterms.personal.server.vo.Psnl0126VO"/>
+	
+	<resultMap id="psnl0126" class="com.app.exterms.personal.server.vo.Psnl0126VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="hodyApptnYr" column="HODY_APPTN_YR" columnIndex="3"/>
+		<result property="hodyNumDysSysCalc" column="HODY_NUM_DYS_SYS_CALC" columnIndex="4"/>
+		<result property="hodyApptnNumDys" column="HODY_APPTN_NUM_DYS" columnIndex="5"/>
+		<result property="hodyUseNumDys" column="HODY_USE_NUM_DYS" columnIndex="6"/>
+		<result property="hodyRstNumDys" column="HODY_RST_NUM_DYS" columnIndex="7"/>
+		<result property="hodyBgnnDt" column="HODY_BGNN_DT" columnIndex="8"/>
+		<result property="hodyEndDt" column="HODY_END_DT" columnIndex="9"/>
+		<result property="hodyNoteCtnt" column="HODY_NOTE_CTNT" columnIndex="10"/>
+		<result property="hodyFixYn" column="HODY_FIX_YN" columnIndex="11"/>
+		<result property="lvsgCoptnCstApptnYn" column="LVSG_COPTN_CST_APPTN_YN" columnIndex="12"/>
+		<result property="lvsgCoptnCstApptnDt" column="LVSG_COPTN_CST_APPTN_DT" columnIndex="13"/>
+		<result property="kybdr" column="KYBDR" columnIndex="14"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="15"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="16"/>
+		<result property="ismt" column="ISMT" columnIndex="17"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="18"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="19"/>
+		<result property="hodyFixDt" column="HODY_FIX_DT" columnIndex="20"/>
+		<result property="hodyNumDys" column="HODY_NUM_DYS" columnIndex="21"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="22"/>
+		<result property="deptNm" column="DEPT_NM" columnIndex="23"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="24"/>
+		<result property="yoobhMnthDay" column="YOOBH_MNTH_DAY" columnIndex="24"/>
+	</resultMap>
+	
+	<insert id="psnl0126DAO.insertPsnl0126_S">
+		<![CDATA[
+			INSERT INTO PSNL0126 
+				( DPOB_CD
+					  , SYSTEMKEY
+					  , HODY_APPTN_YR
+					  , HODY_NUM_DYS_SYS_CALC
+					  , HODY_APPTN_NUM_DYS
+					  , HODY_USE_NUM_DYS
+					  , HODY_RST_NUM_DYS
+					  , HODY_BGNN_DT
+					  , HODY_END_DT
+					  , HODY_NOTE_CTNT
+					  , HODY_FIX_YN
+					  , LVSG_COPTN_CST_APPTN_YN
+					  , LVSG_COPTN_CST_APPTN_DT
+					  , KYBDR
+					  , INPT_DT
+					  , INPT_ADDR
+					  , ISMT
+					  , REVN_DT
+					  , REVN_ADDR
+					  , SPCL_HODY_NUM_DYS
+					  , SPCL_HODY_USE_DYS )
+				VALUES ( #dpobCd#
+					  , #systemkey#
+					  , #hodyApptnYr#
+					  , #hodyNumDysSysCalc#
+					  , #hodyApptnNumDys#
+					  , #hodyUseNumDys#
+					  , #hodyRstNumDys#
+					  , #hodyBgnnDt#
+					  , #hodyEndDt#
+					  , #hodyNoteCtnt#
+					  , #hodyFixYn#
+					  , #lvsgCoptnCstApptnYn#
+					  , #lvsgCoptnCstApptnDt#
+					  , #kybdr#
+					  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  , #inptAddr#
+					  , #ismt#
+					  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  , #revnAddr#
+					  , #spclHodyNumDys#
+					  , #spclHodyUseDys#)
+		]]>
+	</insert>
+	
+	<!-- 사용안함 -->
+	<update id="psnl0126DAO.updatePsnl0126_NOTUSE">
+		<![CDATA[
+		MERGE INTO PSNL0126
+				USING DUAL 
+					ON (DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#)
+			WHEN MATCHED
+            THEN		
+				UPDATE SET HODY_APPTN_YR=#hodyApptnYr#
+						, HODY_NUM_DYS_SYS_CALC=#hodyNumDysSysCalc#
+						, HODY_APPTN_NUM_DYS=#hodyApptnNumDys#
+						, HODY_USE_NUM_DYS=#hodyUseNumDys#
+						, HODY_RST_NUM_DYS=#hodyRstNumDys#
+						, HODY_BGNN_DT=#hodyBgnnDt#
+						, HODY_END_DT=#hodyEndDt#
+						, HODY_NOTE_CTNT=#hodyNoteCtnt#
+						, HODY_FIX_YN=#hodyFixYn#
+						, LVSG_COPTN_CST_APPTN_YN=#lvsgCoptnCstApptnYn#
+						, LVSG_COPTN_CST_APPTN_DT=#lvsgCoptnCstApptnDt#
+						, ISMT=#ismt#
+						, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						, REVN_ADDR=#revnAddr#
+						, SPCL_HODY_USE_DYS=#spclHodyUseDys#
+					WHERE DPOB_CD=#dpobCd#
+						AND SYSTEMKEY=#systemkey#
+						AND HODY_APPTN_YR=#hodyApptnYr#
+			WHEN NOT MATCHED
+            THEN	
+            	INSERT
+					( DPOB_CD
+					  , SYSTEMKEY
+					  , HODY_APPTN_YR
+					  , HODY_NUM_DYS_SYS_CALC
+					  , HODY_APPTN_NUM_DYS
+					  , HODY_USE_NUM_DYS
+					  , HODY_RST_NUM_DYS
+					  , HODY_BGNN_DT
+					  , HODY_END_DT
+					  , HODY_NOTE_CTNT
+					  , HODY_FIX_YN
+					  , LVSG_COPTN_CST_APPTN_YN
+					  , LVSG_COPTN_CST_APPTN_DT
+					  , KYBDR
+					  , INPT_DT
+					  , INPT_ADDR
+					  , ISMT
+					  , REVN_DT
+					  , REVN_ADDR
+					  , SPCL_HODY_USE_DYS )
+				VALUES ( #dpobCd#
+					  , #systemkey#
+					  , #hodyApptnYr#
+					  , #hodyNumDysSysCalc#
+					  , #hodyApptnNumDys#
+					  , #hodyUseNumDys#
+					  , #hodyRstNumDys#
+					  , #hodyBgnnDt#
+					  , #hodyEndDt#
+					  , #hodyNoteCtnt#
+					  , #hodyFixYn#
+					  , #lvsgCoptnCstApptnYn#
+					  , #lvsgCoptnCstApptnDt#
+					  , #kybdr#
+					  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  , #inptAddr#
+					  , #ismt#
+					  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  , #revnAddr# 
+					  , #spclHodyUseDys#)						
+				]]>
+	</update>
+	
+	<update id="psnl0126DAO.updatePsnl0126_S">
+		<![CDATA[
+			UPDATE PSNL0126
+			SET  ISMT=#ismt#
+		]]>
+						<isNotNull property="hodyNumDysSysCalc"><isNotEmpty property="hodyNumDysSysCalc">, HODY_NUM_DYS_SYS_CALC=#hodyNumDysSysCalc#</isNotEmpty></isNotNull>
+						<isNotNull property="hodyApptnNumDys"><isNotEmpty property="hodyApptnNumDys">, HODY_APPTN_NUM_DYS=#hodyApptnNumDys#</isNotEmpty></isNotNull>
+						<isNotNull property="hodyUseNumDys"><isNotEmpty property="hodyUseNumDys">, HODY_USE_NUM_DYS=#hodyUseNumDys#</isNotEmpty></isNotNull>
+						<isNotNull property="hodyRstNumDys"><isNotEmpty property="hodyRstNumDys">, HODY_RST_NUM_DYS=#hodyRstNumDys#</isNotEmpty></isNotNull>
+						<isNotNull property="hodyBgnnDt"><isNotEmpty property="hodyBgnnDt">, HODY_BGNN_DT=#hodyBgnnDt#</isNotEmpty></isNotNull>
+						<isNotNull property="hodyEndDt"><isNotEmpty property="hodyEndDt">, HODY_END_DT=#hodyEndDt#</isNotEmpty></isNotNull>
+						<isNotNull property="hodyNoteCtnt"><isNotEmpty property="hodyNoteCtnt">, HODY_NOTE_CTNT=#hodyNoteCtnt#</isNotEmpty></isNotNull>
+						<isNotNull property="hodyFixYn"><isNotEmpty property="hodyFixYn">, HODY_FIX_YN=#hodyFixYn#</isNotEmpty></isNotNull>
+						, HODY_FIX_DT = #hodyFixDt#
+						<isNotNull property="lvsgCoptnCstApptnYn"><isNotEmpty property="lvsgCoptnCstApptnYn">, LVSG_COPTN_CST_APPTN_YN=#lvsgCoptnCstApptnYn#</isNotEmpty></isNotNull>
+						, LVSG_COPTN_CST_APPTN_DT=#lvsgCoptnCstApptnDt#
+						, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						, REVN_ADDR=#revnAddr#
+						<isNotNull property="spclHodyNumDys"><isNotEmpty property="spclHodyNumDys">, SPCL_HODY_NUM_DYS = #spclHodyNumDys#</isNotEmpty></isNotNull>
+						<isNotNull property="spclHodyUseDys"><isNotEmpty property="spclHodyUseDys">, SPCL_HODY_USE_DYS = #spclHodyUseDys#</isNotEmpty></isNotNull>
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				AND HODY_APPTN_YR=#hodyApptnYr#
+				<isEqual  property="hodyFixYn" compareValue="Y">
+				AND HODY_FIX_YN = 'N'
+				</isEqual>
+			
+	</update>
+	
+	<update id="psnl0126DAO.updatePsnl0126_hodyNumDysSysCalc">
+		<![CDATA[
+			UPDATE PSNL0126
+			SET 
+		]]>	 
+		
+						 HODY_NUM_DYS_SYS_CALC=#hodyNumDysSysCalc#
+						, ISMT=#ismt#
+						, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						, REVN_ADDR=#revnAddr#
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				AND HODY_APPTN_YR=#hodyApptnYr#
+				
+			
+	</update>
+	<delete id="psnl0126DAO.deletePsnl0126_S">
+		<![CDATA[
+			DELETE FROM PSNL0126 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND HODY_APPTN_YR=#hodyApptnYr#
+								AND HODY_FIX_YN = 'N'
+				]]>
+	</delete>
+<!-- 엑셀업로드(JXLS 사용)  -->
+<insert id="psnl0126DAO.insertXlsPsnl0126_S" parameterClass="psnl0126Vo">
+		<![CDATA[
+			INSERT INTO PSNL0126 
+				( DPOB_CD
+					  , SYSTEMKEY
+					  , HODY_APPTN_YR
+					  , HODY_NUM_DYS_SYS_CALC
+					  , HODY_APPTN_NUM_DYS
+					  , HODY_USE_NUM_DYS
+					  , HODY_RST_NUM_DYS
+					  , HODY_BGNN_DT
+					  , HODY_END_DT
+					  , HODY_NOTE_CTNT
+					  , HODY_FIX_YN
+					  , LVSG_COPTN_CST_APPTN_YN
+					  , LVSG_COPTN_CST_APPTN_DT
+					  , KYBDR
+					  , INPT_DT
+					  , INPT_ADDR
+					  , ISMT
+					  , REVN_DT
+					  , REVN_ADDR
+					  , SPCL_HODY_NUM_DYS
+					  , SPCL_HODY_USE_DYS )
+				VALUES (#dpobCd#
+					  ,(SELECT SYSTEMKEY 
+							FROM PSNL0100 
+						WHERE 
+							RESN_REGN_NUM = REPLACE(#resnRegnNum#,'-',''))
+					  , #hodyApptnYr#
+					  , #hodyNumDysSysCalc#
+					  , #hodyApptnNumDys#
+					  , #hodyUseNumDys#
+					  , (( #hodyApptnNumDys# + #spclHodyNumDys#) - ( #hodyUseNumDys# + #spclHodyUseDys#))
+					  , #hodyBgnnDt#
+					  , #hodyEndDt#
+					  , #hodyNoteCtnt#
+					  , #hodyFixYn#
+					  , #lvsgCoptnCstApptnYn#
+					  , #lvsgCoptnCstApptnDt#
+					  , #kybdr#
+					  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  , #inptAddr#
+					  , #ismt#
+					  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  , #revnAddr#
+					  , #spclHodyNumDys#
+					  , #spclHodyUseDys#)
+		]]>
+	</insert>
+	
+	<delete id="psnl0126DAO.deleteXlsPsnl0126_S" parameterClass="psnl0126Vo">
+		<![CDATA[
+			DELETE FROM PSNL0126
+						WHERE DPOB_CD = #dpobCd#
+							AND SYSTEMKEY=(SELECT SYSTEMKEY 
+						  					FROM PSNL0100 
+						  					WHERE 
+						  						RESN_REGN_NUM = REPLACE(#resnRegnNum#,'-',''))
+						  	AND HODY_APPTN_YR=#hodyApptnYr#
+       ]]>                    
+	</delete>
+	
+<!-- 엑셀업로드(옛날버전)  -->
+<insert id="psnl0126DAO.insertExcelPsnl0126_S">
+		<![CDATA[
+			INSERT INTO PSNL0126 
+				( DPOB_CD
+					  , SYSTEMKEY
+					  , HODY_APPTN_YR
+					  , HODY_NUM_DYS_SYS_CALC
+					  , HODY_APPTN_NUM_DYS
+					  , HODY_USE_NUM_DYS
+					  , HODY_RST_NUM_DYS
+					  , HODY_BGNN_DT
+					  , HODY_END_DT
+					  , HODY_NOTE_CTNT
+					  , HODY_FIX_YN
+					  , LVSG_COPTN_CST_APPTN_YN
+					  , LVSG_COPTN_CST_APPTN_DT
+					  , KYBDR
+					  , INPT_DT
+					  , INPT_ADDR
+					  , ISMT
+					  , REVN_DT
+					  , REVN_ADDR )
+				VALUES ( #dpobCd#
+					  ,(SELECT SYSTEMKEY 
+							FROM PSNL0100 
+						WHERE 
+							DPOB_CD=#dpobCd#
+							AND RESN_REGN_NUM = REPLACE(#resnRegnNum#,'-',''))
+					  , #hodyApptnYr#
+					  , #hodyNumDysSysCalc#
+					  , #hodyApptnNumDys#
+					  , #hodyUseNumDys#
+					  , #hodyRstNumDys#
+					  , #hodyBgnnDt#
+					  , #hodyEndDt#
+					  , #hodyNoteCtnt#
+					  , #hodyFixYn#
+					  , #lvsgCoptnCstApptnYn#
+					  , #lvsgCoptnCstApptnDt#
+					  , #kybdr#
+					  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  , #inptAddr#
+					  , #ismt#
+					  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  , #revnAddr#)
+		]]>
+	</insert>
+	
+	<delete id="psnl0126DAO.deleteExcelPsnl0126_S">
+		<![CDATA[
+			DELETE FROM PSNL0126
+						WHERE DPOB_CD=#dpobCd#
+						  AND SYSTEMKEY=(SELECT SYSTEMKEY 
+						  					FROM PSNL0100 
+						  					WHERE 
+						  						DPOB_CD=#dpobCd#
+												AND RESN_REGN_NUM = REPLACE(#resnRegnNum#,'-','')
+						   				)
+						  AND HODY_APPTN_YR=#hodyApptnYr#
+       ]]>                    
+	</delete>
+	
+	<update id="psnl0126DAO.updateExcelPsnl0126_S">
+		<![CDATA[
+			UPDATE PSNL0126 A, PSNL0100 B
+			SET A.DPOB_CD = #dpobCd#
+						, A.HODY_NUM_DYS_SYS_CALC=#hodyNumDysSysCalc#
+						, A.HODY_APPTN_NUM_DYS=#hodyApptnNumDys#
+						, A.HODY_USE_NUM_DYS=#hodyUseNumDys#
+						, A.HODY_RST_NUM_DYS=#hodyRstNumDys#
+						, A.HODY_BGNN_DT=#hodyBgnnDt#
+						, A.HODY_END_DT=#hodyEndDt#
+						, A.HODY_NOTE_CTNT=#hodyNoteCtnt#
+						, A.HODY_FIX_YN=#hodyFixYn#
+						, A.HODY_FIX_DT = #hodyFixDt#
+						, A.LVSG_COPTN_CST_APPTN_YN=#lvsgCoptnCstApptnYn#
+						, A.LVSG_COPTN_CST_APPTN_DT=#lvsgCoptnCstApptnDt#
+						, A.ISMT=#ismt#
+						, A.REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						, A.REVN_ADDR=#revnAddr#
+						, A.SPCL_HODY_USE_DYS=#spclHodyUseDys#
+			WHERE A.DPOB_CD=#dpobCd#
+				AND A.DPOB_CD = B.DPOB_CD
+				AND A.SYSTEMKEY=#systemkey#
+				AND A.SYSTEMKEY=B.SYSTEMKEY
+				AND B.RESN_REGN_NUM = #resnRegnNum#
+				AND A.HODY_APPTN_YR=#hodyApptnYr#
+				]]>
+	</update>
+	
+	
+	<select id="psnl0126DAO.selectPsnl0126_S" resultMap="psnl0126">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, HODY_APPTN_YR
+				, HODY_NUM_DYS_SYS_CALC
+				, HODY_APPTN_NUM_DYS
+				, HODY_USE_NUM_DYS
+				, HODY_RST_NUM_DYS
+				, HODY_BGNN_DT
+				, HODY_END_DT
+				, HODY_NOTE_CTNT
+				, HODY_FIX_YN
+				, LVSG_COPTN_CST_APPTN_YN
+				, LVSG_COPTN_CST_APPTN_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, SPCL_HODY_USE_DYS
+			FROM PSNL0126
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND HODY_APPTN_YR=#hodyApptnYr#
+				]]>
+	</select>
+	
+	<select id="psnl0126DAO.selectPsnl0126List_P" parameterClass="psnl0126SrhVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT T.*, ROWNUM RNUM FROM (
+				SELECT 
+					A.DPOB_CD
+					, A.SYSTEMKEY
+					, A.HODY_APPTN_YR
+					, A.HODY_NUM_DYS_SYS_CALC
+					, A.HODY_APPTN_NUM_DYS
+					, A.HODY_USE_NUM_DYS
+					, A.HODY_RST_NUM_DYS
+					, A.HODY_BGNN_DT
+					, A.HODY_END_DT
+					, A.HODY_NOTE_CTNT
+					, A.HODY_FIX_YN
+					, A.HODY_FIX_DT
+					, A.LVSG_COPTN_CST_APPTN_YN
+					, A.LVSG_COPTN_CST_APPTN_DT
+					, A.SPCL_HODY_NUM_DYS
+					, A.SPCL_HODY_USE_DYS
+					, A.KYBDR
+					, A.INPT_DT
+					, A.INPT_ADDR
+					, A.ISMT
+					, A.REVN_DT
+					, A.REVN_ADDR
+			        , B.HAN_NM
+			        , B.ENG_NM
+			        , B.CHIN_CHAR_NM
+			        , B.RESN_REGN_NUM
+			        , B.SX_DIV_CD
+			        , B.YOOBH_MNTH_DAY
+			        , B.SCLC_DIV_CD
+			        , B.NATN_CD
+			        , fcBass0300CDNM(B.DPOB_CD, B.NATN_CD) AS NATN_NM
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.NATN_CD, '12') AS NATN_ITEM
+			        , B.DEPT_CD
+			        , fcBass0400CDNM(B.DPOB_CD, B.DEPT_CD,'2') AS DEPT_NM
+			        , B.BUSIN_CD
+			        , NVL2(B.BUSIN_CD, '(' || (SELECT E.BUSIN_APPTN_YR
+                               					FROM BASS0500 E
+                             					WHERE  B.DPOB_CD = E.DPOB_CD
+                                    				AND B.CURR_AFFN_DEPT_CD = E.DEPT_CD
+                                    				AND B.BUSIN_CD = E.BUSIN_CD
+                                    				AND SUBSTR (B.EMYMT_BGNN_DT, 1, 4) = E.BUSIN_APPTN_YR)
+                         					|| ')'
+                         				|| (SELECT E.BUSIN_NM 
+                         					FROM BASS0500 E
+                             				WHERE  B.DPOB_CD = E.DPOB_CD
+                                    			AND B.CURR_AFFN_DEPT_CD = E.DEPT_CD
+                                    			AND B.BUSIN_CD = E.BUSIN_CD
+                                    			AND SUBSTR (B.EMYMT_BGNN_DT, 1, 4) = E.BUSIN_APPTN_YR), '')AS BUSIN_NM
+			        , B.CURR_AFFN_DEPT_CD
+			        , fcBass0400CDNM(B.DPOB_CD, B.CURR_AFFN_DEPT_CD,'2') AS CURR_AFFN_DEPT_NM
+			        , B.REPBTY_BUSIN_DIV_CD
+			        ,  B.TYP_OCCU_CD 
+			        , fcBass0320CDNM(B.DPOB_CD, B.TYP_OCCU_CD) AS TYP_OCCU_NM 
+			        , B.ODTY_CD
+			        , B.FRST_EMYMT_DT
+			        , B.EMYMT_DIV_CD
+			        , B.EMYMT_BGNN_DT
+			        , B.EMYMT_END_DT
+			        , B.PYSP_CD
+			        , B.HDOFC_CODTN_CD
+			        , B.RETRY_DT
+			        , B.RETRY_REAS_CTNT
+			        , B.FRGNR_DIV_CD
+			        , B.PSPT_NUM
+			        , B.STY_BGNN_DT
+			        , B.STY_END_DT
+			        , B.END_SCHL
+			        , B.END_DEGR_DIV_CD
+			        , B.PMTN_SCDU_DT
+			        , B.PYSP_PRMTN_SCDU_DT
+			        , B.REYMN_SCDU_DT
+			        , B.LOG_SVC_YR_NUM_CD
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1') AS LOG_SVC_YR_NUM
+			        , fcBass0300CDNM(B.DPOB_CD, B.LOG_SVC_YR_NUM_CD) AS LOG_SVC_YR_NUM_NM
+			        , B.LOG_SVC_MNTH_ICM_CD
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.LOG_SVC_MNTH_ICM_CD, '1') AS LOG_SVC_MNTH_ICM
+			        , fcBass0300CDNM(B.DPOB_CD, B.LOG_SVC_MNTH_ICM_CD) AS LOG_SVC_MNTH_NM
+			        , B.CURR_PYSP_APPMT_DT
+			        , B.CURR_DEPT_APPMT_DT
+			        , B.PERN_NOTE_CTNT
+			        , NVL(B.PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+			        , B.DTIL_OCCU_CLS_DIV_CD	
+			        , B.DTIL_OCCU_INTTN_CD 
+					 , fcBassEx0350CDNM(B.DPOB_CD, B.TYP_OCCU_CD, B.DTIL_OCCU_INTTN_CD,'1') AS DTIL_OCCU_INTTN_NM	      
+			      	, D.PAYR_MANG_DEPT_CD
+				FROM PSNL0126 A, PSNL0100 B, PAYR0500 D
+				WHERE 
+					A.DPOB_CD = B.DPOB_CD
+					AND A.DPOB_CD = D.DPOB_CD
+					AND A.SYSTEMKEY = B.SYSTEMKEY 
+					AND A.SYSTEMKEY = D.SYSTEMKEY
+					<!--  AND B.HDOFC_CODTN_CD NOT IN ('A0030020') -->
+					<isNotEmpty prepend="AND" property="dpobCd" >
+					 	A.DPOB_CD=#dpobCd#
+				    </isNotEmpty>
+				    
+					<isNotEmpty property="hdofcCodtnCd" prepend="AND">
+						<![CDATA[
+							B.HDOFC_CODTN_CD
+						]]>
+						<iterate prepend="IN" property="hdofcCodtnCdArr" open="(" close=")" conjunction=",">
+							#hdofcCodtnCdArr[]#
+						</iterate>
+					</isNotEmpty>
+					<isNotEmpty prepend="AND" property="mangeDeptCd" >
+					 	B.DEPT_CD = #mangeDeptCd#
+				    </isNotEmpty> 
+				    <isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+			         B.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+			        </isNotEmpty> 
+					<isEmpty property="hdofcCodtnCd" prepend="AND">
+						B.HDOFC_CODTN_CD NOT IN ('A0030020') 
+					</isEmpty>
+				    AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' ))) C
+                                            WHERE     C.DPOB_CD = B.DPOB_CD
+						                        AND C.DEPT_CD = B.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(B.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(B.DTIL_OCCU_INTTN_CD,'TT')
+                                                
+                                                
+                                                <isNotEmpty property="deptCd" prepend="AND">
+												    C.DEPT_CD IN ( SELECT BA0400.DEPT_CD
+																			FROM BASS0400 BA0400
+																		WHERE BA0400.DEPT_USE_YN = 'Y'
+																		START WITH BA0400.DEPT_CD 							
+																			<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+																				#deptCdArr[]#
+																			</iterate>
+												                         CONNECT BY PRIOR BA0400.DEPT_CD = BA0400.HHRK_DEPT_CD
+																		 ) 
+												</isNotEmpty>
+                                                
+                                                <!-- 
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+												 -->
+                                          )
+                    <isNotEmpty prepend="AND" property="businCd" >
+					 	B.BUSIN_CD=#businCd#
+				    </isNotEmpty> 
+					<isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	D.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				    </isNotEmpty> 
+				    <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	B.EMYMT_DIV_CD=#emymtDivCd#
+					</isNotEmpty>
+					<isNotEmpty prepend="AND" property="hodyApptnYr" >
+					 	A.HODY_APPTN_YR = #hodyApptnYr#
+				    </isNotEmpty>  
+				    <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+							 B.TYP_OCCU_CD
+						]]>
+						<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						 	 #typOccuCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					<!-- <isNotEmpty property="pyspGrdeCd" prepend="AND">
+						<![CDATA[
+							 NVL(B.PYSP_GRDE_CD,'A0060000')
+						]]>
+						<iterate prepend="IN" property="pyspGrdeCdArr" open="(" close=")" conjunction=",">
+							 #pyspGrdeCdArr[]#
+						</iterate>
+					</isNotEmpty>   -->
+				 <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 B.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+				    <isNotEmpty prepend="AND" property="systemkey" >
+					 	A.SYSTEMKEY=#systemkey#
+				    </isNotEmpty>  
+				    <isNotEmpty prepend="AND" property="hanNm" >
+					 	B.HAN_NM LIKE '%' || #hanNm# || '%'
+				    </isNotEmpty>       
+					<isEqual  property="hodyFixYn" compareValue="Y">
+				 		AND A.HODY_FIX_YN = 'N'
+					</isEqual>	
+					ORDER BY 
+						A.DPOB_CD DESC
+							, A.SYSTEMKEY DESC
+							, A.HODY_APPTN_YR DESC
+		
+	<isNotEqual  property="lastIndex" compareValue="-1">
+ 	<![CDATA[					
+				) T WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+	]]>
+	</isNotEqual>	
+	<isEqual   property="lastIndex" compareValue="-1">
+  	<![CDATA[					
+		) T  
+	)
+	]]>
+	</isEqual>	
+	</select>	
+	
+	<select id="psnl0126DAO.selectPsnl0126ListTotCnt_S" parameterClass="psnl0126SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM (	
+				SELECT A.DPOB_CD 
+						, A.SYSTEMKEY 
+				FROM PSNL0126 A, PSNL0100 B, PAYR0500 D
+				WHERE 
+					A.DPOB_CD = B.DPOB_CD
+					AND A.DPOB_CD = D.DPOB_CD
+					AND A.SYSTEMKEY = B.SYSTEMKEY 
+					AND A.SYSTEMKEY = D.SYSTEMKEY
+					<!-- AND B.HDOFC_CODTN_CD NOT IN ('A0030020') -->
+					
+					<isNotEmpty prepend="AND" property="dpobCd" >
+					 	A.DPOB_CD=#dpobCd#
+				    </isNotEmpty>
+				    
+					<isNotEmpty property="hdofcCodtnCd" prepend="AND">
+						<![CDATA[
+							B.HDOFC_CODTN_CD
+						]]>
+						<iterate prepend="IN" property="hdofcCodtnCdArr" open="(" close=")" conjunction=",">
+							#hdofcCodtnCdArr[]#
+						</iterate>
+					</isNotEmpty>
+					<isEmpty property="hdofcCodtnCd" prepend="AND">
+						B.HDOFC_CODTN_CD NOT IN ('A0030020') 
+					</isEmpty>
+					
+				    AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' ))) C
+                                            WHERE     C.DPOB_CD = B.DPOB_CD
+						                        AND C.DEPT_CD = B.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(B.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(B.DTIL_OCCU_INTTN_CD,'TT')
+                                                
+                                                
+                                                <isNotEmpty property="deptCd" prepend="AND">
+													C.DEPT_CD IN ( SELECT BA0400.DEPT_CD
+																			FROM BASS0400 BA0400
+																		WHERE BA0400.DEPT_USE_YN = 'Y'
+																		START WITH BA0400.DEPT_CD 							
+																			<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+																				#deptCdArr[]#
+																			</iterate>
+												                         CONNECT BY PRIOR BA0400.DEPT_CD = BA0400.HHRK_DEPT_CD
+																		 ) 
+												</isNotEmpty>
+                                                
+                                                <!-- 
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+												 -->
+                                          )
+                    <isNotEmpty prepend="AND" property="businCd" >
+					 	B.BUSIN_CD=#businCd#
+				    </isNotEmpty> 
+					<isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	D.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				    </isNotEmpty> 
+				    <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	B.EMYMT_DIV_CD=#emymtDivCd#
+					</isNotEmpty>
+					<isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	B.EMYMT_DIV_CD=#emymtDivCd#
+					</isNotEmpty>
+					<isNotEmpty prepend="AND" property="mangeDeptCd" >
+					 	B.DEPT_CD = #mangeDeptCd#
+				    </isNotEmpty>  
+				    <isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+			         B.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+			        </isNotEmpty> 
+				    <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+							 B.TYP_OCCU_CD
+						]]>
+						<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						 	 #typOccuCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					<!-- <isNotEmpty property="pyspGrdeCd" prepend="AND">
+						<![CDATA[
+							 NVL(B.PYSP_GRDE_CD,'A0060000')
+						]]>
+						<iterate prepend="IN" property="pyspGrdeCdArr" open="(" close=")" conjunction=",">
+							 #pyspGrdeCdArr[]#
+						</iterate>
+					</isNotEmpty>   -->
+				 <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 B.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+				    <isNotEmpty prepend="AND" property="systemkey" >
+					 	A.SYSTEMKEY=#systemkey#
+				    </isNotEmpty>  
+				    <isNotEmpty prepend="AND" property="hanNm" >
+					 	B.HAN_NM LIKE '%' || #hanNm# || '%'
+				    </isNotEmpty>
+					<isEqual  property="hodyFixYn" compareValue="Y">
+				 		AND A.HODY_FIX_YN = 'N'
+					</isEqual>	
+	)
+	</select>
+	
+	
+	<!-- 휴가일수산정 List -->
+	<select id="psnl0126DAO.selectPsnl0126HolidayCountList" parameterClass="psnl0126SrhVO" resultMap="psnl0126">
+				SELECT 
+					A.DPOB_CD
+					, A.SYSTEMKEY
+					, A.HODY_APPTN_YR
+					, A.HODY_NUM_DYS_SYS_CALC
+					, A.HODY_APPTN_NUM_DYS
+					, A.HODY_USE_NUM_DYS
+					, A.HODY_RST_NUM_DYS
+					, A.HODY_BGNN_DT
+					, A.HODY_END_DT
+					, A.HODY_NOTE_CTNT
+					, A.HODY_FIX_YN
+					, A.LVSG_COPTN_CST_APPTN_YN
+					, A.LVSG_COPTN_CST_APPTN_DT
+					, A.SPCL_HODY_NUM_DYS
+					, A.SPCL_HODY_USE_DYS
+					, A.KYBDR
+					, A.INPT_DT
+					, A.INPT_ADDR
+					, A.ISMT
+					, A.REVN_DT
+					, A.REVN_ADDR
+					, A.HODY_FIX_DT
+			        , B.HAN_NM
+			        , B.ENG_NM
+			        , B.CHIN_CHAR_NM
+			        , SUBSTR(B.RESN_REGN_NUM,1,6)||'-'||SUBSTR(B.RESN_REGN_NUM,-7) AS RESN_REGN_NUM
+			        , B.SX_DIV_CD
+			        , B.YOOBH_MNTH_DAY
+			        , B.SCLC_DIV_CD
+			        , B.NATN_CD
+			        , fcBass0300CDNM(B.DPOB_CD, B.NATN_CD) AS NATN_NM
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.NATN_CD, '12') AS NATN_ITEM
+			        , B.DEPT_CD
+			        , fcBass0400CDNM(B.DPOB_CD, B.DEPT_CD,'2') AS DEPT_NM
+			        , B.BUSIN_CD
+			        , NVL2(B.BUSIN_CD, '(' || (SELECT E.BUSIN_APPTN_YR
+                               					FROM BASS0500 E
+                             					WHERE  B.DPOB_CD = E.DPOB_CD
+                                    				AND B.CURR_AFFN_DEPT_CD = E.DEPT_CD
+                                    				AND B.BUSIN_CD = E.BUSIN_CD
+                                    				AND SUBSTR (B.EMYMT_BGNN_DT, 1, 4) = E.BUSIN_APPTN_YR)
+                         					|| ')'
+                         				|| (SELECT E.BUSIN_NM 
+                         					FROM BASS0500 E
+                             				WHERE  B.DPOB_CD = E.DPOB_CD
+                                    			AND B.CURR_AFFN_DEPT_CD = E.DEPT_CD
+                                    			AND B.BUSIN_CD = E.BUSIN_CD
+                                    			AND SUBSTR (B.EMYMT_BGNN_DT, 1, 4) = E.BUSIN_APPTN_YR), '')AS BUSIN_NM
+			        , B.CURR_AFFN_DEPT_CD
+			        , fcBass0400CDNM(B.DPOB_CD, B.CURR_AFFN_DEPT_CD,'2') AS CURR_AFFN_DEPT_NM
+			        , B.REPBTY_BUSIN_DIV_CD
+			        ,  B.TYP_OCCU_CD 
+			        , fcBass0320CDNM(B.DPOB_CD, B.TYP_OCCU_CD) AS TYP_OCCU_NM 
+			        , B.ODTY_CD
+			        , B.FRST_EMYMT_DT
+			        , B.EMYMT_DIV_CD
+			        , B.EMYMT_BGNN_DT
+			        , B.EMYMT_END_DT
+			        , B.PYSP_CD
+			        , B.HDOFC_CODTN_CD
+			        , B.RETRY_DT
+			        , B.RETRY_REAS_CTNT
+			        , B.FRGNR_DIV_CD
+			        , B.PSPT_NUM
+			        , B.STY_BGNN_DT
+			        , B.STY_END_DT
+			        , B.END_SCHL
+			        , B.END_DEGR_DIV_CD
+			        , B.PMTN_SCDU_DT
+			        , B.PYSP_PRMTN_SCDU_DT
+			        , B.REYMN_SCDU_DT
+			        , B.LOG_SVC_YR_NUM_CD
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1') AS LOG_SVC_YR_NUM
+			        , fcBass0300CDNM(B.DPOB_CD, B.LOG_SVC_YR_NUM_CD) AS LOG_SVC_YR_NUM_NM
+			        , B.LOG_SVC_MNTH_ICM_CD
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.LOG_SVC_MNTH_ICM_CD, '1') AS LOG_SVC_MNTH_ICM
+			        , fcBass0300CDNM(B.DPOB_CD, B.LOG_SVC_MNTH_ICM_CD) AS LOG_SVC_MNTH_NM
+			        , B.CURR_PYSP_APPMT_DT
+			        , B.CURR_DEPT_APPMT_DT
+			        , B.PERN_NOTE_CTNT
+			        , NVL(B.PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+			        , B.DTIL_OCCU_CLS_DIV_CD
+			        , B.DTIL_OCCU_INTTN_CD 
+					, fcBassEx0350CDNM(B.DPOB_CD, B.TYP_OCCU_CD, B.DTIL_OCCU_INTTN_CD,'1') AS DTIL_OCCU_INTTN_NM	 			      
+			      	, D.PAYR_MANG_DEPT_CD
+			        , NVL((SELECT MIN(F.HODY_NUM_DYS)
+			                FROM PSNL2100 F
+			              WHERE A.DPOB_CD = F.DPOB_CD(+)
+			                AND B.TYP_OCCU_CD = F.TYP_OCCU_CD(+)
+			                AND B.DTIL_OCCU_INTTN_CD = F.DTIL_OCCU_INTTN_CD(+)
+			                AND NVL (fcBass0300ITEMNM (B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1'), 0)<![CDATA[ >= ]]> F.HODY_NUM_DYS_OVR(+)
+			                AND NVL (fcBass0300ITEMNM (B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1'), 0) <![CDATA[ < ]]> F.HODY_NUM_DYS_UDR(+)
+			           		AND #hodyBgnnDt# <![CDATA[ >= ]]> F.HODY_NUM_DYS_BGNN_DT(+)
+                   			AND #hodyEndDt# <![CDATA[ <=  ]]> F.HODY_NUM_DYS_END_DT(+)
+			                AND F.HODY_NUM_DYS_USE_YN = 'Y'            
+			                ), '0') AS HODY_NUM_DYS
+				FROM PSNL0126 A, PSNL0100 B, PAYR0500 D
+				WHERE  
+					A.DPOB_CD = B.DPOB_CD
+					AND A.DPOB_CD = D.DPOB_CD
+					AND A.SYSTEMKEY = B.SYSTEMKEY
+					AND A.SYSTEMKEY = D.SYSTEMKEY 
+					AND B.HDOFC_CODTN_CD NOT IN ('A0030020')
+					
+					<!-- 
+					AND B.DPOB_CD = F.DPOB_CD(+)
+					AND B.TYP_OCCU_CD = F.TYP_OCCU_CD(+) 
+					AND B.DTIL_OCCU_INTTN_CD = F.DTIL_OCCU_INTTN_CD(+) 
+					AND NVL(fcBass0300ITEMNM(B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1'), 0) <![CDATA[ >= ]]> F.HODY_NUM_DYS_OVR(+)
+                    AND NVL(fcBass0300ITEMNM(B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1'), 0) <![CDATA[ <  ]]> F.HODY_NUM_DYS_UDR(+)
+                    AND F.HODY_NUM_DYS_USE_YN = 'Y'
+                    AND #hodyBgnnDt# <![CDATA[ >= ]]> F.HODY_NUM_DYS_BGNN_DT(+)
+                    AND #hodyEndDt# <![CDATA[ <=  ]]> F.HODY_NUM_DYS_END_DT(+)
+                     -->
+					<isNotEmpty prepend="AND" property="dpobCd" >
+					 	A.DPOB_CD=#dpobCd#
+				    </isNotEmpty>
+				    AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' ))) C
+                                            WHERE     C.DPOB_CD = B.DPOB_CD
+						                        AND C.DEPT_CD = B.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(B.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(B.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          )
+                    <isNotEmpty prepend="AND" property="businCd" >
+					 	B.BUSIN_CD=#businCd#
+				    </isNotEmpty> 
+				    <isNotEmpty prepend="AND" property="hodyApptnYr" >
+					 	A.HODY_APPTN_YR = #hodyApptnYr#
+				    </isNotEmpty> 
+				    <isNotEmpty prepend="AND" property="hodyBgnnDt" >
+					 	A.HODY_BGNN_DT <![CDATA[ >= ]]> #hodyBgnnDt#
+				    </isNotEmpty> 
+				    <isNotEmpty prepend="AND" property="hodyEndDt" >
+					 	A.HODY_END_DT <![CDATA[ <= ]]> #hodyEndDt#
+				    </isNotEmpty> 
+					<isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	D.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				    </isNotEmpty> 
+				    <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	B.EMYMT_DIV_CD=#emymtDivCd#
+					</isNotEmpty>
+				    <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+							 B.TYP_OCCU_CD
+						]]>
+						<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						 	 #typOccuCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					<!-- <isNotEmpty property="pyspGrdeCd" prepend="AND">
+						<![CDATA[
+							 NVL(B.PYSP_GRDE_CD,'A0060000')
+						]]>
+						<iterate prepend="IN" property="pyspGrdeCdArr" open="(" close=")" conjunction=",">
+							 #pyspGrdeCdArr[]#
+						</iterate>
+					</isNotEmpty>   -->
+					 <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 B.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					 <isNotEmpty prepend="AND" property="systemkey" >
+					 	A.SYSTEMKEY=#systemkey#
+				    </isNotEmpty> 
+				    <isNotEmpty prepend="AND" property="hanNm" >
+					 	B.HAN_NM LIKE '%' || #hanNm# || '%'
+					</isNotEmpty>  
+						AND A.HODY_FIX_YN = 'N'
+					<!--  
+					<isEqual  property="hodyFixYn" compareValue="Y">
+				 		AND A.HODY_FIX_YN = 'N'
+					</isEqual>	-->                   
+					ORDER BY 
+						A.DPOB_CD DESC
+							, A.SYSTEMKEY DESC
+							, A.HODY_APPTN_YR DESC
+	</select>
+	
+	
+	<!-- 휴가일수산정내역 psnl0126 엑셀저장  -->
+	<select id="psnl0126DAO.selectXlsFilePsnl0126List_D" parameterClass="psnl0126SrhVO" resultClass="egovMap">
+	    SELECT 
+					A.DPOB_CD
+					, A.SYSTEMKEY
+					, A.HODY_APPTN_YR
+					, A.HODY_NUM_DYS_SYS_CALC
+					, A.HODY_APPTN_NUM_DYS
+					, A.HODY_USE_NUM_DYS
+					, A.HODY_RST_NUM_DYS
+					, A.HODY_BGNN_DT
+					, A.HODY_END_DT
+					, A.HODY_NOTE_CTNT
+					, A.HODY_FIX_YN
+					, A.HODY_FIX_DT
+					, A.LVSG_COPTN_CST_APPTN_YN
+					, A.LVSG_COPTN_CST_APPTN_DT
+					, A.SPCL_HODY_NUM_DYS
+					, A.KYBDR
+					, A.INPT_DT
+					, A.INPT_ADDR
+					, A.ISMT
+					, A.REVN_DT
+					, A.REVN_ADDR
+					, A.SPCL_HODY_NUM_DYS
+					, A.SPCL_HODY_USE_DYS
+			        , B.HAN_NM
+			        , B.ENG_NM
+			        , B.CHIN_CHAR_NM
+			        , B.RESN_REGN_NUM
+			        , B.SX_DIV_CD
+			        , B.YOOBH_MNTH_DAY
+			        , B.SCLC_DIV_CD
+			        , B.NATN_CD
+			        , fcBass0300CDNM(B.DPOB_CD, B.NATN_CD) AS NATN_NM
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.NATN_CD, '12') AS NATN_ITEM
+			        , B.DEPT_CD
+			        , fcBass0400CDNM(B.DPOB_CD, B.DEPT_CD,'2') AS DEPT_NM
+			        , B.BUSIN_CD
+			        , NVL2(B.BUSIN_CD, '(' || (SELECT E.BUSIN_APPTN_YR
+                               					FROM BASS0500 E
+                             					WHERE  B.DPOB_CD = E.DPOB_CD
+                                    				AND B.CURR_AFFN_DEPT_CD = E.DEPT_CD
+                                    				AND B.BUSIN_CD = E.BUSIN_CD
+                                    				AND SUBSTR (B.EMYMT_BGNN_DT, 1, 4) = E.BUSIN_APPTN_YR)
+                         					|| ')'
+                         				|| (SELECT E.BUSIN_NM 
+                         					FROM BASS0500 E
+                             				WHERE  B.DPOB_CD = E.DPOB_CD
+                                    			AND B.CURR_AFFN_DEPT_CD = E.DEPT_CD
+                                    			AND B.BUSIN_CD = E.BUSIN_CD
+                                    			AND SUBSTR (B.EMYMT_BGNN_DT, 1, 4) = E.BUSIN_APPTN_YR), '')AS BUSIN_NM
+			        , B.CURR_AFFN_DEPT_CD
+			        , fcBass0400CDNM(B.DPOB_CD, B.CURR_AFFN_DEPT_CD,'2') AS CURR_AFFN_DEPT_NM
+			        , B.REPBTY_BUSIN_DIV_CD
+			        ,  B.TYP_OCCU_CD 
+			        , fcBass0320CDNM(B.DPOB_CD, B.TYP_OCCU_CD) AS TYP_OCCU_NM 
+			        , B.ODTY_CD
+			        , B.FRST_EMYMT_DT
+			        , B.EMYMT_DIV_CD
+			        , B.EMYMT_BGNN_DT
+			        , B.EMYMT_END_DT
+			        , B.PYSP_CD
+			        , B.HDOFC_CODTN_CD
+			        , B.RETRY_DT
+			        , B.RETRY_REAS_CTNT
+			        , B.FRGNR_DIV_CD
+			        , B.PSPT_NUM
+			        , B.STY_BGNN_DT
+			        , B.STY_END_DT
+			        , B.END_SCHL
+			        , B.END_DEGR_DIV_CD
+			        , B.PMTN_SCDU_DT
+			        , B.PYSP_PRMTN_SCDU_DT
+			        , B.REYMN_SCDU_DT
+			        , B.LOG_SVC_YR_NUM_CD
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1') AS LOG_SVC_YR_NUM
+			        , fcBass0300CDNM(B.DPOB_CD, B.LOG_SVC_YR_NUM_CD) AS LOG_SVC_YR_NUM_NM
+			        , B.LOG_SVC_MNTH_ICM_CD
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.LOG_SVC_MNTH_ICM_CD, '1') AS LOG_SVC_MNTH_ICM
+			        , fcBass0300CDNM(B.DPOB_CD, B.LOG_SVC_MNTH_ICM_CD) AS LOG_SVC_MNTH_NM
+			        , B.CURR_PYSP_APPMT_DT
+			        , B.CURR_DEPT_APPMT_DT
+			        , B.PERN_NOTE_CTNT
+			        , NVL(B.PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+			        , B.DTIL_OCCU_CLS_DIV_CD	
+			          , B.DTIL_OCCU_INTTN_CD 
+					 , fcBassEx0350CDNM(B.DPOB_CD, B.TYP_OCCU_CD, B.DTIL_OCCU_INTTN_CD,'1') AS DTIL_OCCU_INTTN_NM	 				      
+			      	, D.PAYR_MANG_DEPT_CD
+				FROM PSNL0126 A, PSNL0100 B, PAYR0500 D
+				WHERE 
+					A.DPOB_CD = B.DPOB_CD
+					AND A.DPOB_CD = D.DPOB_CD
+					AND A.SYSTEMKEY = B.SYSTEMKEY 
+					AND A.SYSTEMKEY = D.SYSTEMKEY  
+					<isNotEmpty prepend="AND" property="dpobCd" >
+					 	A.DPOB_CD=#dpobCd#
+				    </isNotEmpty>
+					<!-- AND B.HDOFC_CODTN_CD NOT IN ('A0030020') -->
+					<isNotEmpty property="hdofcCodtnCd" prepend="AND">
+						<![CDATA[
+							B.HDOFC_CODTN_CD
+						]]>
+						<iterate prepend="IN" property="hdofcCodtnCdArr" open="(" close=")" conjunction=",">
+							#hdofcCodtnCdArr[]#
+						</iterate>
+					</isNotEmpty>
+					<isEmpty property="hdofcCodtnCd" prepend="AND">
+						B.HDOFC_CODTN_CD NOT IN ('A0030020') 
+					</isEmpty>
+					<isNotEmpty property="mangeDeptCd" prepend="AND">
+						B.DEPT_CD = #mangeDeptCd#
+					</isNotEmpty>
+					<isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+			         B.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+			        </isNotEmpty>  
+				     AND EXISTS  (
+                        SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+                                            WHERE     C.DPOB_CD = B.DPOB_CD
+						                        AND C.DEPT_CD = B.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(B.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(B.DTIL_OCCU_INTTN_CD,'TT')
+                                                
+												<isNotEmpty property="deptCd" prepend="AND">
+												    C.DEPT_CD IN ( SELECT BA0400.DEPT_CD
+																			FROM BASS0400 BA0400
+																		WHERE BA0400.DEPT_USE_YN = 'Y'
+																		START WITH BA0400.DEPT_CD 							
+																			<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+																				#deptCdArr[]#
+																			</iterate>
+												                         CONNECT BY PRIOR BA0400.DEPT_CD = BA0400.HHRK_DEPT_CD
+																		 ) 
+												</isNotEmpty>
+                                                
+                                                <!-- 
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+												 -->
+                                          )
+                    <isNotEmpty prepend="AND" property="businCd" >
+					 	B.BUSIN_CD=#businCd#
+				    </isNotEmpty> 
+					<isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	D.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				    </isNotEmpty> 
+				    <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	B.EMYMT_DIV_CD=#emymtDivCd#
+					</isNotEmpty>
+					<isNotEmpty prepend="AND" property="hodyApptnYr" >
+					 	A.HODY_APPTN_YR = #hodyApptnYr#
+				    </isNotEmpty>  
+				    <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+							 B.TYP_OCCU_CD
+						]]>
+						<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						 	 #typOccuCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					<!-- <isNotEmpty property="pyspGrdeCd" prepend="AND">
+						<![CDATA[
+							 NVL(B.PYSP_GRDE_CD,'A0060000')
+						]]>
+						<iterate prepend="IN" property="pyspGrdeCdArr" open="(" close=")" conjunction=",">
+							 #[]#
+						</iterate>
+					</isNotEmpty>   -->
+					 <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 B.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							#dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+				    <isNotEmpty prepend="AND" property="systemkey" >
+					 	A.SYSTEMKEY=#systemkey#
+				    </isNotEmpty>  
+				    <isNotEmpty prepend="AND" property="hanNm" >
+					 	B.HAN_NM LIKE '%' || #hanNm# || '%'
+				    </isNotEmpty>  
+				    <isEqual  property="hodyFixYn" compareValue="Y">
+				 		AND A.HODY_FIX_YN = 'N'
+					</isEqual>                      
+					ORDER BY 
+						A.DPOB_CD DESC 
+							, A.HODY_APPTN_YR DESC
+							 ,(SELECT LPAD(DEPT_RANK,5,'0')  
+                                   FROM BASS0400 DD
+                                   WHERE DD.DEPT_CD = B.CURR_AFFN_DEPT_CD
+                                     AND DD.DPOB_CD = B.DPOB_CD) ASC  
+	</select>
+
+
+	<!-- 엑셀 양식 저장 -->
+	<select id="psnl0126DAO.selectXlsTmpPsnl0126List_D" parameterClass="psnl0126SrhVO" resultClass="egovMap">
+	    SELECT 
+					A.DPOB_CD
+					, A.SYSTEMKEY
+					, A.HODY_APPTN_YR	
+					, A.HODY_NUM_DYS_SYS_CALC	
+					, A.HODY_APPTN_NUM_DYS	
+					, A.HODY_USE_NUM_DYS	
+					, A.HODY_RST_NUM_DYS	
+					, A.HODY_BGNN_DT	
+					, A.HODY_END_DT	
+					, A.HODY_NOTE_CTNT	
+					, A.HODY_FIX_YN	
+					, A.LVSG_COPTN_CST_APPTN_YN	
+					, A.LVSG_COPTN_CST_APPTN_DT	
+					, A.HODY_FIX_DT	
+					, A.SPCL_HODY_NUM_DYS
+					, A.SPCL_HODY_USE_DYS	
+			        , B.HAN_NM
+			        , B.ENG_NM
+			        , B.CHIN_CHAR_NM
+			        , B.RESN_REGN_NUM
+			        , B.SX_DIV_CD
+			        , B.YOOBH_MNTH_DAY
+			        , B.SCLC_DIV_CD
+			        , B.NATN_CD
+			        , fcBass0300CDNM(B.DPOB_CD, B.NATN_CD) AS NATN_NM
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.NATN_CD, '12') AS NATN_ITEM
+			        , B.DEPT_CD
+			        , fcBass0400CDNM(B.DPOB_CD, B.DEPT_CD,'2') AS DEPT_NM
+			        , B.BUSIN_CD
+			        , NVL2(B.BUSIN_CD, '(' || (SELECT E.BUSIN_APPTN_YR
+                               					FROM BASS0500 E
+                             					WHERE  B.DPOB_CD = E.DPOB_CD
+                                    				AND B.CURR_AFFN_DEPT_CD = E.DEPT_CD
+                                    				AND B.BUSIN_CD = E.BUSIN_CD
+                                    				AND SUBSTR (B.EMYMT_BGNN_DT, 1, 4) = E.BUSIN_APPTN_YR)
+                         					|| ')'
+                         				|| (SELECT E.BUSIN_NM 
+                         					FROM BASS0500 E
+                             				WHERE  B.DPOB_CD = E.DPOB_CD
+                                    			AND B.CURR_AFFN_DEPT_CD = E.DEPT_CD
+                                    			AND B.BUSIN_CD = E.BUSIN_CD
+                                    			AND SUBSTR (B.EMYMT_BGNN_DT, 1, 4) = E.BUSIN_APPTN_YR), '')AS BUSIN_NM
+			        , B.CURR_AFFN_DEPT_CD
+			        , fcBass0400CDNM(B.DPOB_CD, B.CURR_AFFN_DEPT_CD,'2') AS CURR_AFFN_DEPT_NM
+			        , B.REPBTY_BUSIN_DIV_CD
+			        , B.TYP_OCCU_CD 
+			        , fcBass0320CDNM(B.DPOB_CD, B.TYP_OCCU_CD) AS TYP_OCCU_NM 
+			        , B.ODTY_CD
+			        , B.FRST_EMYMT_DT
+			        , B.EMYMT_DIV_CD
+			        , B.EMYMT_BGNN_DT
+			        , B.EMYMT_END_DT
+			        , B.PYSP_CD
+			        , B.HDOFC_CODTN_CD
+			        , B.RETRY_DT
+			        , B.RETRY_REAS_CTNT
+			        , B.FRGNR_DIV_CD
+			        , B.PSPT_NUM
+			        , B.STY_BGNN_DT
+			        , B.STY_END_DT
+			        , B.END_SCHL
+			        , B.END_DEGR_DIV_CD
+			        , B.PMTN_SCDU_DT
+			        , B.PYSP_PRMTN_SCDU_DT
+			        , B.REYMN_SCDU_DT
+			        , B.LOG_SVC_YR_NUM_CD
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1') AS LOG_SVC_YR_NUM
+			        , fcBass0300CDNM(B.DPOB_CD, B.LOG_SVC_YR_NUM_CD) AS LOG_SVC_YR_NUM_NM
+			        , B.LOG_SVC_MNTH_ICM_CD
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.LOG_SVC_MNTH_ICM_CD, '1') AS LOG_SVC_MNTH_ICM
+			        , fcBass0300CDNM(B.DPOB_CD, B.LOG_SVC_MNTH_ICM_CD) AS LOG_SVC_MNTH_NM
+			        , B.CURR_PYSP_APPMT_DT
+			        , B.CURR_DEPT_APPMT_DT
+			        , B.PERN_NOTE_CTNT
+			        , NVL(B.PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+			        , B.DTIL_OCCU_CLS_DIV_CD	
+			        , B.DTIL_OCCU_INTTN_CD 
+					, fcBassEx0350CDNM(B.DPOB_CD, B.TYP_OCCU_CD, B.DTIL_OCCU_INTTN_CD,'1') AS DTIL_OCCU_INTTN_NM	 				      
+			      	, D.PAYR_MANG_DEPT_CD
+				FROM PSNL0126 A, PSNL0100 B, PAYR0500 D
+				WHERE A.DPOB_CD = B.DPOB_CD
+					AND A.SYSTEMKEY = B.SYSTEMKEY 
+				    AND A.DPOB_CD = D.DPOB_CD
+				    AND A.SYSTEMKEY = D.SYSTEMKEY 
+					AND A.HODY_APPTN_YR = #hodyApptnYr#
+					AND B.HDOFC_CODTN_CD NOT IN ('A0030020') 
+					<isNotEmpty prepend="AND" property="dpobCd" >
+					 	B.DPOB_CD=#dpobCd#
+				    </isNotEmpty>
+				     AND EXISTS  (
+                        SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' ))) C
+                                            WHERE     C.DPOB_CD = B.DPOB_CD
+						                        AND C.DEPT_CD = B.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(B.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(B.DTIL_OCCU_INTTN_CD,'TT')
+                                                
+												<isNotEmpty property="deptCd" prepend="AND">
+												    C.DEPT_CD IN ( SELECT BA0400.DEPT_CD
+																			FROM BASS0400 BA0400
+																		WHERE BA0400.DEPT_USE_YN = 'Y'
+																		START WITH BA0400.DEPT_CD 							
+																			<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+																				#deptCdArr[]#
+																			</iterate>
+												                         CONNECT BY PRIOR BA0400.DEPT_CD = BA0400.HHRK_DEPT_CD
+																		 ) 
+												</isNotEmpty>
+                                                
+                                                <!-- 
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+												 -->
+                                          )
+                    <isNotEmpty prepend="AND" property="businCd" >
+					 	B.BUSIN_CD=#businCd#
+				    </isNotEmpty> 
+				    <!--  
+					<isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	D.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				    </isNotEmpty> 
+				    -->
+				    <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	B.EMYMT_DIV_CD=#emymtDivCd#
+					</isNotEmpty>
+				    <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+							 B.TYP_OCCU_CD
+						]]>
+						<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						 	 #typOccuCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					 <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 B.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							#dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+				    <isNotEmpty prepend="AND" property="systemkey" >
+					 	B.SYSTEMKEY=#systemkey#
+				    </isNotEmpty>  
+				    <isNotEmpty prepend="AND" property="hanNm" >
+					 	B.HAN_NM LIKE '%' || #hanNm# || '%'
+				    </isNotEmpty>
+					<isEqual  property="hodyFixYn" compareValue="Y">
+				 		AND A.HODY_FIX_YN = 'N'
+					</isEqual>	
+				    
+					ORDER BY
+						B.DPOB_CD DESC
+						,( SELECT LPAD(DEPT_RANK,5,'0')
+							FROM BASS0400 DD
+						   WHERE DD.DEPT_CD = B.CURR_AFFN_DEPT_CD
+							AND DD.DPOB_CD = B.DPOB_CD) ASC  
+	</select>
+<select id="psnl0126DAO.selectPsnlP029001HolidayCountList" parameterClass="psnl0126SrhVO" resultClass="egovMap">
+	SELECT 
+					A.DPOB_CD
+					, A.SYSTEMKEY
+					, A.HODY_APPTN_YR
+					, A.HODY_APPTN_NUM_DYS
+					, A.HODY_USE_NUM_DYS
+					, A.HODY_RST_NUM_DYS
+					, A.HODY_BGNN_DT
+					, A.HODY_END_DT
+					, A.HODY_NOTE_CTNT
+					, A.HODY_FIX_YN
+					, A.LVSG_COPTN_CST_APPTN_YN
+					, A.LVSG_COPTN_CST_APPTN_DT
+					, A.SPCL_HODY_NUM_DYS
+					, A.SPCL_HODY_USE_DYS
+					, A.KYBDR
+					, A.INPT_DT
+					, A.INPT_ADDR
+					, A.ISMT
+					, A.REVN_DT
+					, A.REVN_ADDR
+					, A.HODY_FIX_DT
+			        , B.HAN_NM
+			        , B.ENG_NM
+			        , B.CHIN_CHAR_NM
+			        , SUBSTR(B.RESN_REGN_NUM,1,6)||'-'||SUBSTR(B.RESN_REGN_NUM,-7) AS RESN_REGN_NUM
+			        , B.SX_DIV_CD
+			        , B.YOOBH_MNTH_DAY
+			        , B.SCLC_DIV_CD
+			        , B.NATN_CD
+			        , fcBass0300CDNM(B.DPOB_CD, B.NATN_CD) AS NATN_NM
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.NATN_CD, '12') AS NATN_ITEM
+			        , B.DEPT_CD
+			        , fcBass0400CDNM(B.DPOB_CD, B.DEPT_CD,'2') AS DEPT_NM
+			        , B.BUSIN_CD
+			        , NVL2(B.BUSIN_CD, '(' || (SELECT E.BUSIN_APPTN_YR
+                               					FROM BASS0500 E
+                             					WHERE  B.DPOB_CD = E.DPOB_CD
+                                    				AND B.CURR_AFFN_DEPT_CD = E.DEPT_CD
+                                    				AND B.BUSIN_CD = E.BUSIN_CD
+                                    				AND SUBSTR (B.EMYMT_BGNN_DT, 1, 4) = E.BUSIN_APPTN_YR)
+                         					|| ')'
+                         				|| (SELECT E.BUSIN_NM 
+                         					FROM BASS0500 E
+                             				WHERE  B.DPOB_CD = E.DPOB_CD
+                                    			AND B.CURR_AFFN_DEPT_CD = E.DEPT_CD
+                                    			AND B.BUSIN_CD = E.BUSIN_CD
+                                    			AND SUBSTR (B.EMYMT_BGNN_DT, 1, 4) = E.BUSIN_APPTN_YR), '')AS BUSIN_NM
+			        , B.CURR_AFFN_DEPT_CD
+			        , fcBass0400CDNM(B.DPOB_CD, B.CURR_AFFN_DEPT_CD,'2') AS CURR_AFFN_DEPT_NM
+			        , B.REPBTY_BUSIN_DIV_CD
+			        ,  B.TYP_OCCU_CD 
+			        , fcBass0320CDNM(B.DPOB_CD, B.TYP_OCCU_CD) AS TYP_OCCU_NM 
+			        , B.ODTY_CD
+			        , B.FRST_EMYMT_DT
+			        , B.EMYMT_DIV_CD
+			        , B.EMYMT_BGNN_DT
+			        , B.EMYMT_END_DT
+			        , B.PYSP_CD
+			        , B.HDOFC_CODTN_CD
+			        , B.RETRY_DT
+			        , B.RETRY_REAS_CTNT
+			        , B.FRGNR_DIV_CD
+			        , B.PSPT_NUM
+			        , B.STY_BGNN_DT
+			        , B.STY_END_DT
+			        , B.END_SCHL
+			        , B.END_DEGR_DIV_CD
+			        , B.PMTN_SCDU_DT
+			        , B.PYSP_PRMTN_SCDU_DT
+			        , B.REYMN_SCDU_DT
+			        , B.LOG_SVC_YR_NUM_CD
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1') AS LOG_SVC_YR_NUM
+			        , fcBass0300CDNM(B.DPOB_CD, B.LOG_SVC_YR_NUM_CD) AS LOG_SVC_YR_NUM_NM
+			        , B.LOG_SVC_MNTH_ICM_CD
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.LOG_SVC_MNTH_ICM_CD, '1') AS LOG_SVC_MNTH_ICM
+			        , fcBass0300CDNM(B.DPOB_CD, B.LOG_SVC_MNTH_ICM_CD) AS LOG_SVC_MNTH_NM
+			        , B.CURR_PYSP_APPMT_DT
+			        , B.CURR_DEPT_APPMT_DT
+			        , B.PERN_NOTE_CTNT
+			        , NVL(B.PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+			        , B.DTIL_OCCU_CLS_DIV_CD
+			        , B.DTIL_OCCU_INTTN_CD 
+					, fcBassEx0350CDNM(B.DPOB_CD, B.TYP_OCCU_CD, B.DTIL_OCCU_INTTN_CD,'1') AS DTIL_OCCU_INTTN_NM	 			      
+			      	, D.PAYR_MANG_DEPT_CD
+			        , NVL((SELECT MIN(F.HODY_NUM_DYS)
+			                FROM PSNL2100 F
+			              WHERE A.DPOB_CD = F.DPOB_CD(+)
+			                AND B.TYP_OCCU_CD = F.TYP_OCCU_CD(+)
+			                AND B.DTIL_OCCU_INTTN_CD = F.DTIL_OCCU_INTTN_CD(+)
+			                AND NVL (fcBass0300ITEMNM (B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1'), 0)<![CDATA[ >= ]]> F.HODY_NUM_DYS_OVR(+)
+			                AND NVL (fcBass0300ITEMNM (B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1'), 0) <![CDATA[ < ]]> F.HODY_NUM_DYS_UDR(+)
+			           		AND #hodyBgnnDt# <![CDATA[ >= ]]> F.HODY_NUM_DYS_BGNN_DT(+)
+                   			AND #hodyEndDt# <![CDATA[ <=  ]]> F.HODY_NUM_DYS_END_DT(+)
+			                AND F.HODY_NUM_DYS_USE_YN = 'Y'            
+			                ), '0') AS HODY_NUM_DYS_SYS_CALC
+			        , NVL((SELECT MIN(F.HODY_NUM_DYS)
+			                FROM PSNL2100 F
+			              WHERE A.DPOB_CD = F.DPOB_CD(+)
+			                AND B.TYP_OCCU_CD = F.TYP_OCCU_CD(+)
+			                AND B.DTIL_OCCU_INTTN_CD = F.DTIL_OCCU_INTTN_CD(+)
+			                AND NVL (fcBass0300ITEMNM (B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1'), 0)<![CDATA[ >= ]]> F.HODY_NUM_DYS_OVR(+)
+			                AND NVL (fcBass0300ITEMNM (B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1'), 0) <![CDATA[ < ]]> F.HODY_NUM_DYS_UDR(+)
+			           		AND #hodyBgnnDt# <![CDATA[ >= ]]> F.HODY_NUM_DYS_BGNN_DT(+)
+                   			AND #hodyEndDt# <![CDATA[ <=  ]]> F.HODY_NUM_DYS_END_DT(+)
+			                AND F.HODY_NUM_DYS_USE_YN = 'Y'            
+			                ), '0') AS CHN_NUM_DYS
+				FROM PSNL0126 A, PSNL0100 B, PAYR0500 D
+				WHERE  
+					A.DPOB_CD = B.DPOB_CD
+					AND A.DPOB_CD = D.DPOB_CD
+					AND A.SYSTEMKEY = B.SYSTEMKEY
+					AND A.SYSTEMKEY = D.SYSTEMKEY 
+					AND B.HDOFC_CODTN_CD NOT IN ('A0030020')
+					<isNotEmpty prepend="AND" property="dpobCd" >
+					 	A.DPOB_CD=#dpobCd#
+				    </isNotEmpty>
+				    AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+                                            WHERE     C.DPOB_CD = B.DPOB_CD
+						                        AND C.DEPT_CD = B.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(B.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(B.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          )
+                    <isNotEmpty prepend="AND" property="businCd" >
+					 	B.BUSIN_CD=#businCd#
+				    </isNotEmpty> 
+				    <isNotEmpty prepend="AND" property="hodyApptnYr" >
+					 	A.HODY_APPTN_YR = #hodyApptnYr#
+				    </isNotEmpty> 
+				    <isNotEmpty prepend="AND" property="hodyBgnnDt" >
+					 	A.HODY_BGNN_DT <![CDATA[ >= ]]> #hodyBgnnDt#
+				    </isNotEmpty> 
+				    <isNotEmpty prepend="AND" property="hodyEndDt" >
+					 	A.HODY_END_DT <![CDATA[ <= ]]> #hodyEndDt#
+				    </isNotEmpty> 
+					<isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	D.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				    </isNotEmpty> 
+				    <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	B.EMYMT_DIV_CD=#emymtDivCd#
+					</isNotEmpty>
+				    <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+							 B.TYP_OCCU_CD
+						]]>
+						<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						 	 #typOccuCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					<!-- <isNotEmpty property="pyspGrdeCd" prepend="AND">
+						<![CDATA[
+							 NVL(B.PYSP_GRDE_CD,'A0060000')
+						]]>
+						<iterate prepend="IN" property="pyspGrdeCdArr" open="(" close=")" conjunction=",">
+							 #pyspGrdeCdArr[]#
+						</iterate>
+					</isNotEmpty>   -->
+					 <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 B.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					 <isNotEmpty prepend="AND" property="systemkey" >
+					 	A.SYSTEMKEY=#systemkey#
+				    </isNotEmpty> 
+				    <isNotEmpty prepend="AND" property="hanNm" >
+					 	B.HAN_NM LIKE '%' || #hanNm# || '%'
+					</isNotEmpty>  
+						AND A.HODY_FIX_YN = 'N'
+					<!--  
+					<isEqual  property="hodyFixYn" compareValue="Y">
+				 		AND A.HODY_FIX_YN = 'N'
+					</isEqual>	-->                   
+					ORDER BY 
+						A.DPOB_CD DESC
+							, A.SYSTEMKEY DESC
+							, A.HODY_APPTN_YR DESC
+</select>
+
+
+<update id="psnl0126DAO.updatePsnlP029001ToPsnl0126_hodyNumDysSysCalc">
+		<![CDATA[
+			UPDATE PSNL0126
+			SET 
+		]]>	 		
+					  HODY_NUM_DYS_SYS_CALC=#hodyNumDysSysCalc#
+					, ISMT=#ismt#
+					, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					, REVN_ADDR=#revnAddr#
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				AND HODY_APPTN_YR=#hodyApptnYr#
+				
+			
+</update>
+
+<select id="psnl0126DAO.selectPsnlP029002HolidayCountList" parameterClass="psnl0126SrhVO" resultClass="egovMap">
+	SELECT 
+					A.DPOB_CD
+					, A.SYSTEMKEY
+					, A.HODY_APPTN_YR
+					, A.HODY_APPTN_NUM_DYS
+					, A.HODY_USE_NUM_DYS
+					, A.HODY_RST_NUM_DYS
+					, A.HODY_BGNN_DT
+					, A.HODY_END_DT
+					, A.HODY_NOTE_CTNT
+					, A.HODY_FIX_YN
+					, A.LVSG_COPTN_CST_APPTN_YN
+					, A.LVSG_COPTN_CST_APPTN_DT
+					, A.SPCL_HODY_NUM_DYS
+					, A.SPCL_HODY_USE_DYS
+					, A.KYBDR
+					, A.INPT_DT
+					, A.INPT_ADDR
+					, A.ISMT
+					, A.REVN_DT
+					, A.REVN_ADDR
+					, A.HODY_FIX_DT
+			        , B.HAN_NM
+			        , B.ENG_NM
+			        , B.CHIN_CHAR_NM
+			        , SUBSTR(B.RESN_REGN_NUM,1,6)||'-'||SUBSTR(B.RESN_REGN_NUM,-7) AS RESN_REGN_NUM
+			        , B.SX_DIV_CD
+			        , B.YOOBH_MNTH_DAY
+			        , B.SCLC_DIV_CD
+			        , B.NATN_CD
+			        , fcBass0300CDNM(B.DPOB_CD, B.NATN_CD) AS NATN_NM
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.NATN_CD, '12') AS NATN_ITEM
+			        , B.DEPT_CD
+			        , fcBass0400CDNM(B.DPOB_CD, B.DEPT_CD,'2') AS DEPT_NM
+			        , B.BUSIN_CD
+			        , NVL2(B.BUSIN_CD, '(' || (SELECT E.BUSIN_APPTN_YR
+                               					FROM BASS0500 E
+                             					WHERE  B.DPOB_CD = E.DPOB_CD
+                                    				AND B.CURR_AFFN_DEPT_CD = E.DEPT_CD
+                                    				AND B.BUSIN_CD = E.BUSIN_CD
+                                    				AND SUBSTR (B.EMYMT_BGNN_DT, 1, 4) = E.BUSIN_APPTN_YR)
+                         					|| ')'
+                         				|| (SELECT E.BUSIN_NM 
+                         					FROM BASS0500 E
+                             				WHERE  B.DPOB_CD = E.DPOB_CD
+                                    			AND B.CURR_AFFN_DEPT_CD = E.DEPT_CD
+                                    			AND B.BUSIN_CD = E.BUSIN_CD
+                                    			AND SUBSTR (B.EMYMT_BGNN_DT, 1, 4) = E.BUSIN_APPTN_YR), '')AS BUSIN_NM
+			        , B.CURR_AFFN_DEPT_CD
+			        , fcBass0400CDNM(B.DPOB_CD, B.CURR_AFFN_DEPT_CD,'2') AS CURR_AFFN_DEPT_NM
+			        , B.REPBTY_BUSIN_DIV_CD
+			        ,  B.TYP_OCCU_CD 
+			        , fcBass0320CDNM(B.DPOB_CD, B.TYP_OCCU_CD) AS TYP_OCCU_NM 
+			        , B.ODTY_CD
+			        , B.FRST_EMYMT_DT
+			        , B.EMYMT_DIV_CD
+			        , B.EMYMT_BGNN_DT
+			        , B.EMYMT_END_DT
+			        , B.PYSP_CD
+			        , B.HDOFC_CODTN_CD
+			        , B.RETRY_DT
+			        , B.RETRY_REAS_CTNT
+			        , B.FRGNR_DIV_CD
+			        , B.PSPT_NUM
+			        , B.STY_BGNN_DT
+			        , B.STY_END_DT
+			        , B.END_SCHL
+			        , B.END_DEGR_DIV_CD
+			        , B.PMTN_SCDU_DT
+			        , B.PYSP_PRMTN_SCDU_DT
+			        , B.REYMN_SCDU_DT
+			        , B.LOG_SVC_YR_NUM_CD
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1') AS LOG_SVC_YR_NUM
+			        , fcBass0300CDNM(B.DPOB_CD, B.LOG_SVC_YR_NUM_CD) AS LOG_SVC_YR_NUM_NM
+			        , B.LOG_SVC_MNTH_ICM_CD
+			        , fcBass0300ITEMNM(B.DPOB_CD, B.LOG_SVC_MNTH_ICM_CD, '1') AS LOG_SVC_MNTH_ICM
+			        , fcBass0300CDNM(B.DPOB_CD, B.LOG_SVC_MNTH_ICM_CD) AS LOG_SVC_MNTH_NM
+			        , B.CURR_PYSP_APPMT_DT
+			        , B.CURR_DEPT_APPMT_DT
+			        , B.PERN_NOTE_CTNT
+			        , NVL(B.PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+			        , B.DTIL_OCCU_CLS_DIV_CD
+			        , B.DTIL_OCCU_INTTN_CD 
+					, fcBassEx0350CDNM(B.DPOB_CD, B.TYP_OCCU_CD, B.DTIL_OCCU_INTTN_CD,'1') AS DTIL_OCCU_INTTN_NM	 			      
+			      	, D.PAYR_MANG_DEPT_CD
+			        , NVL((SELECT MIN(F.HODY_NUM_DYS)
+			                FROM PSNL2100 F
+			              WHERE A.DPOB_CD = F.DPOB_CD(+)
+			                AND B.TYP_OCCU_CD = F.TYP_OCCU_CD(+)
+			                AND B.DTIL_OCCU_INTTN_CD = F.DTIL_OCCU_INTTN_CD(+)
+			                AND NVL (fcBass0300ITEMNM (B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1'), 0)<![CDATA[ >= ]]> F.HODY_NUM_DYS_OVR(+)
+			                AND NVL (fcBass0300ITEMNM (B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1'), 0) <![CDATA[ < ]]> F.HODY_NUM_DYS_UDR(+)
+			           		AND #hodyBgnnDt# <![CDATA[ >= ]]> F.HODY_NUM_DYS_BGNN_DT(+)
+                   			AND #hodyEndDt# <![CDATA[ <=  ]]> F.HODY_NUM_DYS_END_DT(+)
+			                AND F.HODY_NUM_DYS_USE_YN = 'Y'            
+			                ), '0') AS HODY_NUM_DYS_SYS_CALC
+			        , NVL((SELECT MIN(F.HODY_NUM_DYS)
+			                FROM PSNL2100 F
+			              WHERE A.DPOB_CD = F.DPOB_CD(+)
+			                AND B.TYP_OCCU_CD = F.TYP_OCCU_CD(+)
+			                AND B.DTIL_OCCU_INTTN_CD = F.DTIL_OCCU_INTTN_CD(+)
+			                AND NVL (fcBass0300ITEMNM (B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1'), 0)<![CDATA[ >= ]]> F.HODY_NUM_DYS_OVR(+)
+			                AND NVL (fcBass0300ITEMNM (B.DPOB_CD, B.LOG_SVC_YR_NUM_CD, '1'), 0) <![CDATA[ < ]]> F.HODY_NUM_DYS_UDR(+)
+			           		AND #hodyBgnnDt# <![CDATA[ >= ]]> F.HODY_NUM_DYS_BGNN_DT(+)
+                   			AND #hodyEndDt# <![CDATA[ <=  ]]> F.HODY_NUM_DYS_END_DT(+)
+			                AND F.HODY_NUM_DYS_USE_YN = 'Y'            
+			                ), '0') AS CHN_NUM_DYS
+				FROM PSNL0126 A, PSNL0100 B, PAYR0500 D
+				WHERE  
+					A.DPOB_CD = B.DPOB_CD
+					AND A.DPOB_CD = D.DPOB_CD
+					AND A.SYSTEMKEY = B.SYSTEMKEY
+					AND A.SYSTEMKEY = D.SYSTEMKEY 
+					AND B.HDOFC_CODTN_CD NOT IN ('A0030020')
+					<isNotEmpty prepend="AND" property="dpobCd" >
+					 	A.DPOB_CD=#dpobCd#
+				    </isNotEmpty>				    
+                    <isNotEmpty prepend="AND" property="businCd" >
+					 	B.BUSIN_CD=#businCd#
+				    </isNotEmpty> 
+				    <isNotEmpty prepend="AND" property="hodyApptnYr" >
+					 	A.HODY_APPTN_YR = #hodyApptnYr#
+				    </isNotEmpty> 
+					<isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	D.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				    </isNotEmpty> 
+				    <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	B.EMYMT_DIV_CD=#emymtDivCd#
+					</isNotEmpty>
+				    <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+							 B.TYP_OCCU_CD
+						]]>
+						<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						 	 #typOccuCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					 <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 B.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					 <isNotEmpty prepend="AND" property="systemkey" >
+					 	A.SYSTEMKEY=#systemkey#
+				    </isNotEmpty> 
+				    <isNotEmpty prepend="AND" property="hanNm" >
+					 	B.HAN_NM LIKE '%' || #hanNm# || '%'
+					</isNotEmpty>  
+						AND A.HODY_FIX_YN = 'N'   
+					ORDER BY 
+						A.DPOB_CD DESC
+							, A.SYSTEMKEY DESC
+							, A.HODY_APPTN_YR DESC
+</select>
+	<!-- <isNotNull property="resnRegnGbn">
+	            <isEqual property="resnRegnGbn" compareValue="Y">
+								SELECT SYSTEMKEY
+							 				 	FROM	PSNL0100 
+													WHERE	  RESN_REGN_NUM = REPLACE(#resnRegnNum#, '-', '')
+								 
+				</isEqual>
+			</isNotNull>
+			<isNotNull property="resnRegnGbn">
+				<isEqual property="resnRegnGbn" compareValue="N">
+						    	SELECT SYSTEMKEY
+	  											FROM   PSNL0100
+	 						 						WHERE  HAN_NM = #hanNm#
+	       					 								AND    YOOBH_MNTH_DAY = CASE 
+	            																						WHEN LENGTH(#resnRegnNum#) = 6 THEN '19'||#resnRegnNum#
+	            																						WHEN LENGTH(#resnRegnNum#) = 8 THEN #resnRegnNum#
+	            																						END							
+				</isEqual>	
+			</isNotNull>  -->
+	
+<select id="psnl0126DAO.selectPsnl0126ToPsnlP029002ExlDataListChk" parameterClass="psnl0126Vo" resultClass="egovMap">	
+	SELECT
+			  #hodyApptnYr# AS HODY_APPTN_YR
+			, #hanNm# AS HAN_NM
+			, (CASE 	
+						WHEN LENGTH(#resnRegnNum#) = 13 THEN '19'||SUBSTR(#resnRegnNum#,1,6)
+            			WHEN LENGTH(#resnRegnNum#) = 6 THEN '19'||#resnRegnNum#
+            			WHEN LENGTH(#resnRegnNum#) = 8 THEN #resnRegnNum#
+            			END) AS YOOBH_MNTH_DAY
+            , #resnRegnNum# AS RESN_REGN_NUM 
+            , (CASE
+            		WHEN #resnRegnGbn# = NULL THEN ''
+            		WHEN #resnRegnGbn# = 'Y' THEN (SELECT SYSTEMKEY
+							 				 	FROM	PSNL0100 
+													WHERE	  RESN_REGN_NUM = REPLACE(#resnRegnNum#, '-', ''))
+            		WHEN #resnRegnGbn# = 'N' THEN (SELECT SYSTEMKEY
+	  											FROM   PSNL0100
+	 						 						WHERE  HAN_NM = #hanNm#
+	       					 								AND    YOOBH_MNTH_DAY = CASE 
+	            																						WHEN LENGTH(#resnRegnNum#) = 6 THEN '19'||#resnRegnNum#
+	            																						WHEN LENGTH(#resnRegnNum#) = 8 THEN #resnRegnNum#
+	            																						END			)
+				END)AS SYSTEMKEY
+			, NVL (
+            			(SELECT 'Y'
+              							 FROM PSNL0126
+             								 WHERE     	                    							
+	                   							DPOB_CD = #dpobCd#
+	                   							AND SYSTEMKEY = (CASE
+																            		WHEN #resnRegnGbn# = NULL THEN ''
+																            		WHEN #resnRegnGbn# = 'Y' THEN (SELECT SYSTEMKEY
+																							 				 	FROM	PSNL0100 
+																													WHERE	  RESN_REGN_NUM = REPLACE(#resnRegnNum#, '-', ''))
+																            		WHEN #resnRegnGbn# = 'N' THEN (SELECT SYSTEMKEY
+																	  											FROM   PSNL0100
+																	 						 						WHERE  HAN_NM = #hanNm#
+																	       					 								AND    YOOBH_MNTH_DAY = CASE 
+																	            																						WHEN LENGTH(#resnRegnNum#) = 6 THEN '19'||#resnRegnNum#
+																	            																						WHEN LENGTH(#resnRegnNum#) = 8 THEN #resnRegnNum#
+																	            																						END			)
+																				END)											
+                    							AND ROWNUM = 1),'N') AS HODY_NUM_DYS_USE_YN	
+ 	FROM DUAL
+</select>
+<!-- NVL(
+	                   							(
+	                   							<isNotNull property="resnRegnGbn">
+		                   							<isEqual property="resnRegnGbn" compareValue="Y">
+																(SELECT SYSTEMKEY
+							 													FROM	PSNL0100 
+																				 WHERE	  RESN_REGN_NUM = REPLACE(#resnRegnNum#, '-', '')
+																)  
+													</isEqual>
+												</isNotNull>
+												<isNotNull property="resnRegnGbn">
+													<isEqual property="resnRegnGbn" compareValue="N">
+						    									(SELECT SYSTEMKEY
+	  																			FROM   PSNL0100
+	 						 													WHERE  HAN_NM = #hanNm#
+	       					 														AND    YOOBH_MNTH_DAY = CASE 
+	            																												WHEN LENGTH(#resnRegnNum#) = 6 THEN '19'||#resnRegnNum#
+	            																												WHEN LENGTH(#resnRegnNum#) = 8 THEN #resnRegnNum#
+	            																									 			END
+																)
+													</isEqual>
+												</isNotNull>),'')	 -->
+
+<delete id="psnl0126DAO.deleteXlsPsnlP029002_S" parameterClass="psnl0126Vo">
+		<![CDATA[
+			DELETE FROM PSNL0126
+						WHERE DPOB_CD = #dpobCd#
+							AND SYSTEMKEY= #systemkey#
+						  	AND HODY_APPTN_YR=#hodyApptnYr#
+       ]]>                    
+</delete>
+	
+<insert id="psnl0126DAO.insertXlsPsnlP029002_S" parameterClass="psnl0126Vo">
+		<![CDATA[
+			INSERT INTO PSNL0126 
+				( DPOB_CD
+					  , SYSTEMKEY
+					  , HODY_APPTN_YR
+					  , HODY_NUM_DYS_SYS_CALC
+					  , HODY_APPTN_NUM_DYS
+					  , HODY_USE_NUM_DYS
+					  , HODY_RST_NUM_DYS
+					  , HODY_BGNN_DT
+					  , HODY_END_DT
+					  , HODY_NOTE_CTNT
+					  , HODY_FIX_YN
+					  , LVSG_COPTN_CST_APPTN_YN
+					  , KYBDR
+					  , INPT_DT
+					  , INPT_ADDR
+					  , ISMT
+					  , REVN_DT
+					  , REVN_ADDR
+					  , SPCL_HODY_NUM_DYS
+					  , SPCL_HODY_USE_DYS )
+				VALUES (#dpobCd#
+					  , #systemkey#
+					  , #hodyApptnYr#
+					  , #hodyNumDysSysCalc#
+					  , #hodyApptnNumDys#
+					  , #hodyUseNumDys#
+					  , #hodyRstNumDys#
+					  , #hodyBgnnDt#
+					  , #hodyEndDt#
+					  , #hodyNoteCtnt#
+					  , #hodyFixYn#
+					  , NVL(#lvsgCoptnCstApptnYn#,'N')
+					  , #kybdr#
+					  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  , #inptAddr#
+					  , #ismt#
+					  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  , #revnAddr#
+					  , #spclHodyNumDys#
+					  , #spclHodyUseDys#)
+		]]>
+</insert>
+</sqlMap>
+
+

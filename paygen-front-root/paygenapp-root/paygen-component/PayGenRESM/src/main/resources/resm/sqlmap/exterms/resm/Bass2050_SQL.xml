@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass2050">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass2050SerarchVO" type="com.app.exterms.resm.server.vo.Bass2050SrhVO"/>
+	
+	<resultMap id="bass2050" class="com.app.exterms.resm.server.vo.Bass2050VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="workBusinNum" column="WORK_BUSIN_NUM" columnIndex="2"/>
+		<result property="workUntBusinNum" column="WORK_UNT_BUSIN_NUM" columnIndex="3"/>
+		<result property="busnDtlTypOccuCd" column="BUSN_DTL_TYP_OCCU_CD" columnIndex="4"/>
+		<result property="busnSmlrDtlTypOccuCd" column="BUSN_SMLR_DTL_TYP_OCCU_CD" columnIndex="5"/>
+		<result property="workBusinRepbtyDeptCd" column="WORK_BUSIN_REPBTY_DEPT_CD" columnIndex="6"/>
+		<result property="workBusinPernChrgId" column="WORK_BUSIN_PERN_CHRG_ID" columnIndex="7"/>
+		<result property="dtilOcclsApptnUcstCd" column="DTIL_OCCLS_APPTN_UCST_CD" columnIndex="8"/>
+		<result property="txtnFrmDivCd" column="TXTN_FRM_DIV_CD" columnIndex="9"/>
+		<result property="untDpobCd" column="UNT_DPOB_CD" columnIndex="10"/>
+		<result property="socInsrSymInttnCd" column="SOC_INSR_SYM_INTTN_CD" columnIndex="11"/>
+		<result property="untBusinAccCd" column="UNT_BUSIN_ACC_CD" columnIndex="12"/>
+		<result property="workUntBusinCtnt" column="WORK_UNT_BUSIN_CTNT" columnIndex="13"/>
+		<result property="kybdr" column="KYBDR" columnIndex="14"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="15"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="16"/>
+		<result property="ismt" column="ISMT" columnIndex="17"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="18"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="19"/>
+	</resultMap>
+	
+	<insert id="bass2050DAO.insertBass2050_S">
+		<![CDATA[
+			INSERT INTO BASS2050 
+				( DPOB_CD
+				  , WORK_BUSIN_NUM
+				  , WORK_UNT_BUSIN_NUM
+				  , BUSN_DTL_TYP_OCCU_CD
+				  , BUSN_SMLR_DTL_TYP_OCCU_CD
+				  , WORK_BUSIN_REPBTY_DEPT_CD
+				  , WORK_BUSIN_PERN_CHRG_ID
+				  , DTIL_OCCLS_APPTN_UCST_CD
+				  , TXTN_FRM_DIV_CD
+				  , UNT_DPOB_CD
+				  , SOC_INSR_SYM_INTTN_CD
+				  , UNT_BUSIN_ACC_CD
+				  , WORK_UNT_BUSIN_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #workBusinNum#
+				  , #workUntBusinNum#
+				  , #busnDtlTypOccuCd#
+				  , #busnSmlrDtlTypOccuCd#
+				  , #workBusinRepbtyDeptCd#
+				  , #workBusinPernChrgId#
+				  , #dtilOcclsApptnUcstCd#
+				  , #txtnFrmDivCd#
+				  , #untDpobCd#
+				  , #socInsrSymInttnCd#
+				  , #untBusinAccCd#
+				  , #workUntBusinCtnt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass2050DAO.updateBass2050_S">
+		<![CDATA[
+			UPDATE BASS2050
+			SET DPOB_CD=#dpobCd#
+				, WORK_BUSIN_NUM=#workBusinNum#
+				, WORK_UNT_BUSIN_NUM=#workUntBusinNum#
+				, BUSN_DTL_TYP_OCCU_CD=#busnDtlTypOccuCd#
+				, BUSN_SMLR_DTL_TYP_OCCU_CD=#busnSmlrDtlTypOccuCd#
+				, WORK_BUSIN_REPBTY_DEPT_CD=#workBusinRepbtyDeptCd#
+				, WORK_BUSIN_PERN_CHRG_ID=#workBusinPernChrgId#
+				, DTIL_OCCLS_APPTN_UCST_CD=#dtilOcclsApptnUcstCd#
+				, TXTN_FRM_DIV_CD=#txtnFrmDivCd#
+				, UNT_DPOB_CD=#untDpobCd#
+				, SOC_INSR_SYM_INTTN_CD=#socInsrSymInttnCd#
+				, UNT_BUSIN_ACC_CD=#untBusinAccCd#
+				, WORK_UNT_BUSIN_CTNT=#workUntBusinCtnt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND WORK_BUSIN_NUM=#workBusinNum#
+								AND WORK_UNT_BUSIN_NUM=#workUntBusinNum#
+				]]>
+	</update>
+	
+	<delete id="bass2050DAO.deleteBass2050_S">
+		<![CDATA[
+			DELETE FROM BASS2050 
+						WHERE DPOB_CD=#dpobCd#
+								AND WORK_BUSIN_NUM=#workBusinNum#
+								AND WORK_UNT_BUSIN_NUM=#workUntBusinNum#
+				]]>
+	</delete>
+	
+	<select id="bass2050DAO.selectBass2050_S" resultMap="bass2050">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, WORK_BUSIN_NUM
+				, WORK_UNT_BUSIN_NUM
+				, BUSN_DTL_TYP_OCCU_CD
+				, BUSN_SMLR_DTL_TYP_OCCU_CD
+				, WORK_BUSIN_REPBTY_DEPT_CD
+				, WORK_BUSIN_PERN_CHRG_ID
+				, DTIL_OCCLS_APPTN_UCST_CD
+				, TXTN_FRM_DIV_CD
+				, UNT_DPOB_CD
+				, SOC_INSR_SYM_INTTN_CD
+				, UNT_BUSIN_ACC_CD
+				, WORK_UNT_BUSIN_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS2050
+						WHERE DPOB_CD=#dpobCd#
+								AND WORK_BUSIN_NUM=#workBusinNum#
+								AND WORK_UNT_BUSIN_NUM=#workUntBusinNum#
+				]]>
+	</select>
+	
+	<select id="bass2050DAO.selectBass2050List_D" parameterClass="bass2050SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, WORK_BUSIN_NUM
+								, WORK_UNT_BUSIN_NUM
+								, BUSN_DTL_TYP_OCCU_CD
+								, BUSN_SMLR_DTL_TYP_OCCU_CD
+								, WORK_BUSIN_REPBTY_DEPT_CD
+								, WORK_BUSIN_PERN_CHRG_ID
+								, DTIL_OCCLS_APPTN_UCST_CD
+								, TXTN_FRM_DIV_CD
+								, UNT_DPOB_CD
+								, SOC_INSR_SYM_INTTN_CD
+								, UNT_BUSIN_ACC_CD
+								, WORK_UNT_BUSIN_CTNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS2050
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					WORK_BUSIN_NUM LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, WORK_BUSIN_NUM DESC
+							, WORK_UNT_BUSIN_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass2050DAO.selectBass2050ListTotCnt_S" parameterClass="bass2050SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS2050
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				WORK_BUSIN_NUM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

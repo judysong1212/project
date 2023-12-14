@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Insr5300">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="insr5300SerarchVO" type="com.app.exterms.insurance.server.vo.Insr5300SrhVO"/>
+	
+	<resultMap id="insr5300" class="com.app.exterms.insurance.server.vo.Insr5300VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="emymtSeilNum" column="EMYMT_SEIL_NUM" columnIndex="3"/>
+		<result property="umytInsrClutYr" column="UMYT_INSR_CLUT_YR" columnIndex="4"/>
+		<result property="prmmIposDivCd" column="PRMM_IPOS_DIV_CD" columnIndex="5"/>
+		<result property="umytInsrAqtnDt" column="UMYT_INSR_AQTN_DT" columnIndex="6"/>
+		<result property="umytInsrLssDt" column="UMYT_INSR_LSS_DT" columnIndex="7"/>
+		<result property="umytInsrPayTotAmnt" column="UMYT_INSR_PAY_TOT_AMNT" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap>
+	
+	<insert id="insr5300DAO.insertInsr5300_S">
+		<![CDATA[
+			INSERT INTO INSR5300 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , EMYMT_SEIL_NUM
+				  , UMYT_INSR_CLUT_YR
+				  , PRMM_IPOS_DIV_CD
+				  , UMYT_INSR_AQTN_DT
+				  , UMYT_INSR_LSS_DT
+				  , UMYT_INSR_PAY_TOT_AMNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #emymtSeilNum#
+				  , #umytInsrClutYr#
+				  , #prmmIposDivCd#
+				  , #umytInsrAqtnDt#
+				  , #umytInsrLssDt#
+				  , #umytInsrPayTotAmnt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="insr5300DAO.updateInsr5300_S">
+		<![CDATA[
+			UPDATE INSR5300
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, EMYMT_SEIL_NUM=#emymtSeilNum#
+				, UMYT_INSR_CLUT_YR=#umytInsrClutYr#
+				, PRMM_IPOS_DIV_CD=#prmmIposDivCd#
+				, UMYT_INSR_AQTN_DT=#umytInsrAqtnDt#
+				, UMYT_INSR_LSS_DT=#umytInsrLssDt#
+				, UMYT_INSR_PAY_TOT_AMNT=#umytInsrPayTotAmnt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+								AND UMYT_INSR_CLUT_YR=#umytInsrClutYr#
+				]]>
+	</update>
+	
+	<delete id="insr5300DAO.deleteInsr5300_S">
+		<![CDATA[
+			DELETE FROM INSR5300 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+								AND UMYT_INSR_CLUT_YR=#umytInsrClutYr#
+				]]>
+	</delete>
+	
+	<select id="insr5300DAO.selectInsr5300_S" resultMap="insr5300">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, EMYMT_SEIL_NUM
+				, UMYT_INSR_CLUT_YR
+				, PRMM_IPOS_DIV_CD
+				, UMYT_INSR_AQTN_DT
+				, UMYT_INSR_LSS_DT
+				, UMYT_INSR_PAY_TOT_AMNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM INSR5300
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+								AND UMYT_INSR_CLUT_YR=#umytInsrClutYr#
+				]]>
+	</select>
+	
+	<select id="insr5300DAO.selectInsr5300List_D" parameterClass="insr5300SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, EMYMT_SEIL_NUM
+								, UMYT_INSR_CLUT_YR
+								, PRMM_IPOS_DIV_CD
+								, UMYT_INSR_AQTN_DT
+								, UMYT_INSR_LSS_DT
+								, UMYT_INSR_PAY_TOT_AMNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM INSR5300
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, EMYMT_SEIL_NUM DESC
+							, UMYT_INSR_CLUT_YR DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="insr5300DAO.selectInsr5300ListTotCnt_S" parameterClass="insr5300SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM INSR5300
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

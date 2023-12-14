@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgPdfO101m_2023">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgPdfO101mSrh_2023_VO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2023.InfcPkgPdfO101mSrh_2023_VO"/>
+	
+	<resultMap id="infcPkgPdfO101m_2023" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2023.InfcPkgPdfO101m_2023_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="datCd" column="DAT_CD" columnIndex="4"/>
+		<result property="hlthAmtMn" column="HLTH_AMT_MN" columnIndex="5"/>
+		<result property="hiNtf" column="HI_NTF" columnIndex="6"/>
+		<result property="ltrmNtf" column="LTRM_NTF" columnIndex="7"/>
+		<result property="hiPmt" column="HI_PMT" columnIndex="8"/>
+		<result property="ltrmPmt" column="LTRM_PMT" columnIndex="9"/>
+		<result property="kybdr" column="KYBDR" columnIndex="10"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="11"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="12"/>
+		<result property="ismt" column="ISMT" columnIndex="13"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="14"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="15"/>
+	</resultMap>
+	
+	<insert id="infcPkgPdfO101m_2023_DAO.insertPdfO101m_S">
+		<![CDATA[
+			INSERT INTO PDF_O101M 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , DAT_CD
+				  , HLTH_AMT_MN
+				  , HI_NTF
+				  , LTRM_NTF
+				  , HI_PMT
+				  , LTRM_PMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #datCd#
+				  , #hlthAmtMn#
+				  , #hiNtf#
+				  , #ltrmNtf#
+				  , #hiPmt#
+				  , #ltrmPmt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgPdfO101m_2023_DAO.updatePdfO101m_S">
+		<![CDATA[
+			UPDATE PDF_O101M
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, DAT_CD=#datCd#
+				, HLTH_AMT_MN=#hlthAmtMn#
+				, HI_NTF=#hiNtf#
+				, LTRM_NTF=#ltrmNtf#
+				, HI_PMT=#hiPmt#
+				, LTRM_PMT=#ltrmPmt#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND DAT_CD=#datCd#
+								AND HLTH_AMT_MN=#hlthAmtMn#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPdfO101m_2023_DAO.deletePdfO101m_S">
+		<![CDATA[
+			DELETE FROM PDF_O101M 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND DAT_CD=#datCd#
+								AND HLTH_AMT_MN=#hlthAmtMn#
+								AND SYSTEMKEY = #systemkey#
+				]]>
+	</delete>
+	
+	<select id="infcPkgPdfO101m_2023_DAO.selectPdfO101m_S" resultMap="infcPkgPdfO101m_2023">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, DAT_CD
+				, HLTH_AMT_MN
+				, HI_NTF
+				, LTRM_NTF
+				, HI_PMT
+				, LTRM_PMT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PDF_O101M
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND DAT_CD=#datCd#
+								AND HLTH_AMT_MN=#hlthAmtMn#
+				]]>
+	</select>
+	
+	<select id="infcPkgPdfO101m_2023_DAO.selectPdfO101mList_D" parameterClass="infcPkgPdfO101mSrh_2023_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, DAT_CD
+								, HLTH_AMT_MN
+								, HI_NTF
+								, LTRM_NTF
+								, HI_PMT
+								, LTRM_PMT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PDF_O101M
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, DAT_CD DESC
+							, HLTH_AMT_MN DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgPdfO101m_2023_DAO.selectPdfO101mListTotCnt_S" parameterClass="infcPkgPdfO101mSrh_2023_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PDF_O101M
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

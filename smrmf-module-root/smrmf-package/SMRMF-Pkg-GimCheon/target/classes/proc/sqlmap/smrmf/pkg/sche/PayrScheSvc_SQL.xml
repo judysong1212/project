@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PayrScheSvcDAO">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	
+     <!-- 가족사항 스케줄링 2017.04.11 -->	                  
+    <select id="payrScheSvcDAO.selectFamyTgtUnCheckList_D" resultClass="egovMap">
+		<![CDATA[  
+           SELECT 
+				   DPOB_CD, SYSTEMKEY, PAY_FAMY_RSPT_SEIL_NUM, 
+				   PAY_FAMY_RESN_REGN_NUM, HAN_NM, FAMY_RELA_DIV_CD, 
+				   FAMY_ALLW_PYMT_YN,FNDTN_DDUC_YN,CHDN_CHD_RRG_EPNS_DDUC_YN,
+				   (CASE WHEN  SUBSTR(PAY_FAMY_RESN_REGN_NUM,7,1) IN ('3','4') THEN  '20' || SUBSTR(PAY_FAMY_RESN_REGN_NUM,1,6)
+				         ELSE  '19' || SUBSTR(PAY_FAMY_RESN_REGN_NUM,1,6)  
+				         END) AS BRITH_DAY   
+			 FROM PAYR0530
+			WHERE FAMY_ALLW_PYMT_YN = 'Y'
+			  AND FAMY_RELA_DIV_CD  = 'A0190005'
+		 ]]> 
+	 </select> 	
+
+</sqlMap>

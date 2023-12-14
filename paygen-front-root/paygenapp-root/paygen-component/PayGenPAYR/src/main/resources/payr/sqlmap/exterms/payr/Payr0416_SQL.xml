@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Payr0416">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="payr0416SrhVo" type="com.app.exterms.payroll.server.vo.Payr0416SrhVO"/>
+	
+	<resultMap id="payr0416" class="com.app.exterms.payroll.server.vo.Payr0416VO">
+		<result property="payYr" column="PAY_YR" columnIndex="1"/>
+		<result property="dpobCd" column="DPOB_CD" columnIndex="2"/>
+		<result property="dtilOccuDlySeilNum" column="DTIL_OCCU_DLY_SEIL_NUM" columnIndex="3"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="4"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="5"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="6"/>
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="7"/>
+		<result property="kybdr" column="KYBDR" columnIndex="8"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="9"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="10"/>
+		<result property="ismt" column="ISMT" columnIndex="11"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="12"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="13"/>
+	</resultMap>
+	
+	<resultMap id="payr0416_payr520003" class="com.app.exterms.payroll.server.vo.Payr0416VO">
+		<result property="dtilOccuDlySeilNum" column="DTIL_OCCU_DLY_SEIL_NUM" columnIndex="1"/>
+	</resultMap>
+	
+	<insert id="payr0416DAO.insertPayr0416_S">
+		<![CDATA[
+			INSERT INTO PAYR0416 
+				( PAY_YR
+				  , DPOB_CD
+				  , DEPT_CD
+				  , DTIL_OCCU_DLY_SEIL_NUM
+				  , TYP_OCCU_CD
+				  , PYSP_GRDE_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , DTIL_OCCU_CLS_DIV_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #payYr#
+				  , #dpobCd#
+				  , #deptCd#
+				  , ( SELECT NVL(MAX(DTIL_OCCU_DLY_SEIL_NUM),0) + 1 
+			           	FROM PAYR0416
+			          WHERE DPOB_CD = #dpobCd#
+			           	AND PAY_YR = #payYr#
+			          )  				  
+				  , #typOccuCd#
+				  , #pyspGrdeCd#
+				  , #dtilOccuInttnCd#
+				  , SUBSTR(#dtilOccuInttnCd#,'0', '8')
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE, 'YYYYMMDD')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE, 'YYYYMMDD')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+		<insert id="payr0416DAO.insertPayr0416_COPY">
+		<![CDATA[
+			INSERT INTO PAYR0416 
+				( PAY_YR
+				  , DPOB_CD
+				  , DEPT_CD
+				  , DTIL_OCCU_DLY_SEIL_NUM
+				  , TYP_OCCU_CD
+				  , PYSP_GRDE_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , DTIL_OCCU_CLS_DIV_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #payYr#
+				  , #dpobCd#
+				  , ( SELECT DEPT_CD
+				       FROM PAYR0416
+				      WHERE DPOB_CD = #dpobCd#
+			           	AND PAY_YR = #payYr#
+			           	AND DTIL_OCCU_DLY_SEIL_NUM = #dtilOccuDlySeilNum#
+				     )
+				   
+				  , ( SELECT NVL(MAX(DTIL_OCCU_DLY_SEIL_NUM),0) + 1 
+			           	FROM PAYR0416
+			          WHERE DPOB_CD = #dpobCd#
+			           	AND PAY_YR = #payYr#
+			          )  				  
+				  ,  ( SELECT TYP_OCCU_CD
+				       FROM PAYR0416
+				      WHERE DPOB_CD = #dpobCd#
+			           	AND PAY_YR = #payYr#
+			           	AND DTIL_OCCU_DLY_SEIL_NUM = #dtilOccuDlySeilNum#
+				     )
+				  , ( SELECT PYSP_GRDE_CD
+				       FROM PAYR0416
+				      WHERE DPOB_CD = #dpobCd#
+			           	AND PAY_YR = #payYr#
+			           	AND DTIL_OCCU_DLY_SEIL_NUM = #dtilOccuDlySeilNum#
+				     )
+				  , ( SELECT DTIL_OCCU_INTTN_CD
+				       FROM PAYR0416
+				      WHERE DPOB_CD = #dpobCd#
+			           	AND PAY_YR = #payYr#
+			           	AND DTIL_OCCU_DLY_SEIL_NUM = #dtilOccuDlySeilNum#
+				     ) 
+				  , ( SELECT SUBSTR(DTIL_OCCU_INTTN_CD,'0', '8')
+				       FROM PAYR0416
+				      WHERE DPOB_CD = #dpobCd#
+			           	AND PAY_YR = #payYr#
+			           	AND DTIL_OCCU_DLY_SEIL_NUM = #dtilOccuDlySeilNum#
+				     ) 
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE, 'YYYYMMDD')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE, 'YYYYMMDD')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	
+	
+	<update id="payr0416DAO.updatePayr0416_S">
+		<![CDATA[
+			UPDATE PAYR0416
+			SET PAY_YR=#payYr#
+				, DPOB_CD=#dpobCd#
+				, DTIL_OCCU_DLY_SEIL_NUM=#dtilOccuDlySeilNum#
+				, TYP_OCCU_CD=#typOccuCd#
+				, PYSP_GRDE_CD=#pyspGrdeCd#
+				, DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				, DTIL_OCCU_CLS_DIV_CD=#dtilOccuClsDivCd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE PAY_YR=#payYr#
+								AND DPOB_CD=#dpobCd#
+								AND DTIL_OCCU_DLY_SEIL_NUM=#dtilOccuDlySeilNum#
+				]]>
+	</update>
+	
+	<delete id="payr0416DAO.deletePayr0416_S">
+		<![CDATA[
+			DELETE FROM PAYR0416 
+						WHERE PAY_YR=#payYr#
+								AND DPOB_CD=#dpobCd#
+								AND DTIL_OCCU_DLY_SEIL_NUM=#dtilOccuDlySeilNum#
+				]]>
+	</delete>
+	
+	<select id="payr0416DAO.selectPayr0416_S" resultMap="payr0416">
+		<![CDATA[
+			SELECT
+				PAY_YR
+				, DPOB_CD
+				, DTIL_OCCU_DLY_SEIL_NUM
+				, TYP_OCCU_CD
+				, PYSP_GRDE_CD
+				, DTIL_OCCU_INTTN_CD
+				, DTIL_OCCU_CLS_DIV_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0416
+						WHERE PAY_YR=#payYr#
+								AND DPOB_CD=#dpobCd#
+								AND DTIL_OCCU_DLY_SEIL_NUM=#dtilOccuDlySeilNum#
+				]]>
+	</select>
+	
+	<select id="payr0416DAO.selectPayr0416List_D" parameterClass="payr0416SrhVo" resultClass="egovMap">
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+				SELECT DISTINCT AA.DTIL_OCCU_DLY_SEIL_NUM
+								, AA.PAY_YR    
+					            , AA.DPOB_CD    
+					            , AA.TYP_OCCU_CD
+					            , AA.DEPT_CD
+					            , fcBass0400CDNM(AA.DPOB_CD,AA.DEPT_CD,'2') AS DEPT_NM  
+					            , fcBass0320CDNM(AA.DPOB_CD,AA.TYP_OCCU_CD) AS TYP_OCCU_NM      
+					            , AA.PYSP_GRDE_CD    
+					            , fcBass0300CDNM(AA.DPOB_CD, AA.PYSP_GRDE_CD) AS PYSP_GRDE_NM  
+					            , AA.DTIL_OCCU_INTTN_CD    
+					            , fcBassEx0350CDNM(AA.DPOB_CD,AA.TYP_OCCU_CD,AA.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_INTTN_NM 
+					            , AA.DTIL_OCCU_CLS_DIV_CD 
+				  FROM PAYR0416 AA, PAYR0417 BB
+				WHERE 1=1
+					AND AA.DPOB_CD = BB.DPOB_CD(+)
+    				AND AA.PAY_YR = BB.PAY_YR(+)
+    				AND AA.DTIL_OCCU_DLY_SEIL_NUM = BB.DTIL_OCCU_DLY_SEIL_NUM(+)
+				 	<isNotEmpty prepend="AND" property="dpobCd" >
+			 	 		AA.DPOB_CD=#dpobCd#
+		       		</isNotEmpty> 
+		       		<isNotEmpty prepend="AND" property="deptCd" >
+			 	   		AA.DEPT_CD=#deptCd# 
+		       		</isNotEmpty> 
+		         	<isNotEmpty prepend="AND" property="payYr" >
+			 	   		AA.PAY_YR=#payYr# 
+		       		</isNotEmpty> 
+		       		<isEqual property="chkPayrMangDeptCd" compareValue="Y">	
+			        	<isNotEmpty prepend="AND" property="payrMangDeptCd" >
+						 	BB.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				  		</isNotEmpty> 		       		
+			  		</isEqual>		       		
+			        <isNotEmpty prepend="AND" property="typOccuCd" >
+				 	   AA.TYP_OCCU_CD=#typOccuCd# 
+			       	</isNotEmpty> 
+		        	<isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 AA.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+		         	<isNotEmpty prepend="AND" property="pymtDducDivCd" >
+			 	  		BB.PYMT_DDUC_DIV_CD = #pymtDducDivCd#
+		       		</isNotEmpty> 
+
+				ORDER BY AA.PAY_YR DESC
+						, AA.DPOB_CD DESC
+						, AA.DTIL_OCCU_DLY_SEIL_NUM DESC
+			
+			<![CDATA[					
+		) A WHERE ROWNUM <= #lastIndex#
+	)WHERE RNUM >= #firstIndex#
+	]]>
+	</select>	
+	
+	<!-- 이전년도직종세 리스트 -->
+	<select id="payr0416DAO.selectBeforePayr0416List_D" parameterClass="payr0416SrhVo" resultClass="egovMap">
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+					 SELECT DISTINCT AA.DTIL_OCCU_DLY_SEIL_NUM
+								, AA.PAY_YR    
+					            , AA.DPOB_CD    
+					            , AA.TYP_OCCU_CD
+					            , AA.DEPT_CD
+					            , fcBass0400CDNM(AA.DPOB_CD,AA.DEPT_CD,'2') AS DEPT_NM  
+					            , fcBass0320CDNM(AA.DPOB_CD,AA.TYP_OCCU_CD) AS TYP_OCCU_NM      
+					            , AA.PYSP_GRDE_CD    
+					            , fcBass0300CDNM(AA.DPOB_CD, AA.PYSP_GRDE_CD) AS PYSP_GRDE_NM  
+					            , AA.DTIL_OCCU_INTTN_CD    
+					            , fcBassEx0350CDNM(AA.DPOB_CD,AA.TYP_OCCU_CD,AA.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_INTTN_NM 
+					            , AA.DTIL_OCCU_CLS_DIV_CD 
+					            , ( SELECT NVL2(DTIL_OCCU_DLY_SEIL_NUM,'Y','N')
+	                                    FROM PAYR0416 
+	                                    WHERE PAY_YR = #createYr#
+	                                      AND DTIL_OCCU_DLY_SEIL_NUM = AA.DTIL_OCCU_DLY_SEIL_NUM
+	                                      AND DPOB_CD = AA.DPOB_CD
+	                                  )AS TRANSFER_YN  
+	                                  
+				  FROM PAYR0416 AA, PAYR0417 BB
+				  
+				WHERE AND AA.DPOB_CD = BB.DPOB_CD(+)
+    				AND AA.PAY_YR = BB.PAY_YR(+)
+    				AND AA.DTIL_OCCU_DLY_SEIL_NUM = BB.DTIL_OCCU_DLY_SEIL_NUM(+)
+				 	<isNotEmpty prepend="AND" property="dpobCd" >
+			 	 		AA.DPOB_CD=#dpobCd#
+		       		</isNotEmpty> 
+		       		<isNotEmpty prepend="AND" property="deptCd" >
+			 	   		AA.DEPT_CD=#deptCd# 
+		       		</isNotEmpty> 
+		         	<isNotEmpty prepend="AND" property="payYr" >
+			 	   		AA.PAY_YR=#payYr# 
+		       		</isNotEmpty> 
+		       		<isEqual property="chkPayrMangDeptCd" compareValue="Y">	
+			        	<isNotEmpty prepend="AND" property="payrMangDeptCd" >
+						 	BB.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				  		</isNotEmpty> 		       		
+			  		</isEqual>		       		
+			        <isNotEmpty prepend="AND" property="typOccuCd" >
+				 	   AA.TYP_OCCU_CD=#typOccuCd# 
+			       	</isNotEmpty> 
+		        	<isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 AA.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+		         	<isNotEmpty prepend="AND" property="pymtDducDivCd" >
+			 	  		BB.PYMT_DDUC_DIV_CD = #pymtDducDivCd#
+		       		</isNotEmpty> 
+				ORDER BY AA.PAY_YR DESC
+						, AA.DPOB_CD DESC
+						, AA.DTIL_OCCU_DLY_SEIL_NUM DESC
+			
+			<![CDATA[					
+		) A WHERE ROWNUM <= #lastIndex#
+	)WHERE RNUM >= #firstIndex#
+	]]>
+	</select>	
+	
+	<select id="payr0416DAO.selectBeforePayr0416ListTotCnt_S" parameterClass="payr0416SrhVo" resultClass="int">
+		SELECT COUNT(*) totcnt
+			FROM  (
+					SELECT A.*, ROWNUM RNUM FROM (
+					 SELECT DISTINCT AA.DTIL_OCCU_DLY_SEIL_NUM
+								, AA.PAY_YR    
+					            , AA.DPOB_CD    
+					            , AA.TYP_OCCU_CD
+					            , AA.DEPT_CD
+					            , fcBass0400CDNM(AA.DPOB_CD,AA.DEPT_CD,'2') AS DEPT_NM  
+					            , fcBass0320CDNM(AA.DPOB_CD,AA.TYP_OCCU_CD) AS TYP_OCCU_NM      
+					            , AA.PYSP_GRDE_CD    
+					            , fcBass0300CDNM(AA.DPOB_CD, AA.PYSP_GRDE_CD) AS PYSP_GRDE_NM  
+					            , AA.DTIL_OCCU_INTTN_CD    
+					            , fcBassEx0350CDNM(AA.DPOB_CD,AA.TYP_OCCU_CD,AA.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_INTTN_NM 
+					            , AA.DTIL_OCCU_CLS_DIV_CD 
+					            , ( SELECT NVL2(DTIL_OCCU_DLY_SEIL_NUM,'Y','N')
+	                                    FROM PAYR0416 
+	                                    WHERE PAY_YR = #createYr#
+	                                      AND DTIL_OCCU_DLY_SEIL_NUM = AA.DTIL_OCCU_DLY_SEIL_NUM
+	                                      AND DPOB_CD = AA.DPOB_CD
+	                                  )AS TRANSFER_YN  
+	                                  
+				  FROM PAYR0416 AA, PAYR0417 BB
+				  
+				WHERE AND AA.DPOB_CD = BB.DPOB_CD(+)
+    				AND AA.PAY_YR = BB.PAY_YR(+)
+    				AND AA.DTIL_OCCU_DLY_SEIL_NUM = BB.DTIL_OCCU_DLY_SEIL_NUM(+)
+				 	<isNotEmpty prepend="AND" property="dpobCd" >
+			 	 		AA.DPOB_CD=#dpobCd#
+		       		</isNotEmpty> 
+		       		<isNotEmpty prepend="AND" property="deptCd" >
+			 	   		AA.DEPT_CD=#deptCd# 
+		       		</isNotEmpty> 
+		         	<isNotEmpty prepend="AND" property="payYr" >
+			 	   		AA.PAY_YR=#payYr# 
+		       		</isNotEmpty> 
+		       		<isEqual property="chkPayrMangDeptCd" compareValue="Y">	
+			        	<isNotEmpty prepend="AND" property="payrMangDeptCd" >
+						 	BB.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				  		</isNotEmpty> 		       		
+			  		</isEqual>		       		
+			        <isNotEmpty prepend="AND" property="typOccuCd" >
+				 	   AA.TYP_OCCU_CD=#typOccuCd# 
+			       	</isNotEmpty> 
+		        	<isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 AA.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+		         	<isNotEmpty prepend="AND" property="pymtDducDivCd" >
+			 	  		BB.PYMT_DDUC_DIV_CD = #pymtDducDivCd#
+		       		</isNotEmpty> 
+				ORDER BY AA.PAY_YR DESC
+						, AA.DPOB_CD DESC
+						, AA.DTIL_OCCU_DLY_SEIL_NUM DESC
+					)
+	</select>	
+	
+	
+	
+	<!-- 공무직단가(일용)항목 엑셀 리스트 -->
+	<select id="payr0416DAO.selectXlsPayr0416List" parameterClass="payr0416SrhVo" resultClass="egovMap">
+			SELECT AA.PAY_YR                    
+			                , AA.DPOB_CD                    
+			                , AA.DTIL_OCCU_DLY_SEIL_NUM    
+			                , AA.DEPT_CD                    
+			                , AA.TYP_OCCU_CD  
+			                , fcBass0320CDNM (AA.DPOB_CD, AA.TYP_OCCU_CD) AS TYP_OCCU_NM              
+			                , AA.PYSP_GRDE_CD       
+			                , fcBass0300CDNM (AA.DPOB_CD, AA.PYSP_GRDE_CD) AS PYSP_GRDE_NM     
+			                , AA.DTIL_OCCU_INTTN_CD    
+			                , fcBassEx0350CDNM (AA.DPOB_CD,AA.TYP_OCCU_CD, AA.DTIL_OCCU_INTTN_CD, '1') AS DTIL_OCCU_INTTN_NM    
+			                , AA.DTIL_OCCU_CLS_DIV_CD
+			                
+			                , BB.PAYR_MANG_DEPT_CD
+			                , BB.PAYR_IMCD
+			                , BB.ITEM_NM
+			                , BB.PAY_CD
+			                , fcBass0300CDNM (AA.DPOB_CD, BB.PAY_CD) AS PAY_NM
+			                , BB.PYMT_DDUC_DIV_CD
+			                , fcBass0300CDNM (AA.DPOB_CD, BB.PYMT_DDUC_DIV_CD)AS PYMT_DDUC_DIV_NM
+			                , BB.PYMT_DDUC_FRM_CD
+			                , fcBass0300CDNM (AA.DPOB_CD, BB.PYMT_DDUC_FRM_CD)AS PYMT_DDUC_FRM_NM
+			                , BB.PYMT_DDUC_RATE
+			                , BB.PYMT_DDUC_SUM
+			                , BB.TXTN_DIV_CD
+			                , fcBass0300CDNM (AA.DPOB_CD, BB.TXTN_DIV_CD) AS TXTN_DIV_NM
+			                , BB.FREE_DTY_RATE
+			                , BB.FREE_DTY_SUM
+			                , BB.JAN
+			                , BB.FEB
+			                , BB.MAR
+			                , BB.APR
+			                , BB.MAY
+			                , BB.JUN
+			                , BB.JUL
+			                , BB.AUG
+			                , BB.SEP
+			                , BB.OCT
+			                , BB.NOV
+			                , BB.DEC
+			                , BB.RNGE_ORD
+			                , BB.SUM_OHR_ITEM_APPTN_YN
+			                , BB.PAY_ITEM_USE_YN
+			                , BB.ITEM_APPTN_BGNN_DT
+			                , BB.ITEM_APPTN_END_DT
+			                , BB.DAY_MNTH_AMNT_DIV_CD
+			                , fcBass0300CDNM (AA.DPOB_CD, BB.DAY_MNTH_AMNT_DIV_CD)AS DAY_MNTH_AMNT_DIV_NM
+			                , BB.CALC_STD_DIV_CD
+			                , fcBass0300CDNM (AA.DPOB_CD, BB.CALC_STD_DIV_CD)AS CALC_STD_DIV_NM
+			                , BB.CALC_STD_FUNC
+			                , BB.EMYMT_DIV_CD
+			                , fcBass0300CDNM (AA.DPOB_CD, BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM
+			                , BB.USALY_AMNT_YN
+			                , BB.PAY_ITEM_NOTE_CTNT
+				                      
+				  FROM PAYR0416 AA, PAYR0417 BB
+				WHERE AA.PAY_YR = BB.PAY_YR(+)
+                 	AND AA.DPOB_CD = BB.DPOB_CD(+)
+               		AND AA.DTIL_OCCU_DLY_SEIL_NUM = BB.DTIL_OCCU_DLY_SEIL_NUM(+)
+				 	<isNotEmpty prepend="AND" property="dpobCd" >
+			 	 		AA.DPOB_CD=#dpobCd#
+		       		</isNotEmpty> 
+		       		<isNotEmpty prepend="AND" property="deptCd" >
+			 	   		AA.DEPT_CD=#deptCd# 
+		       		</isNotEmpty> 
+		         	<isNotEmpty prepend="AND" property="payYr" >
+			 	   		AA.PAY_YR=#payYr# 
+		       		</isNotEmpty> 
+		       		<isEqual property="chkPayrMangDeptCd" compareValue="Y">	
+			        	<isNotEmpty prepend="AND" property="payrMangDeptCd" >
+						 	BB.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				  		</isNotEmpty> 		       		
+			  		</isEqual>		       		
+			        <isNotEmpty prepend="AND" property="typOccuCd" >
+				 	   AA.TYP_OCCU_CD=#typOccuCd# 
+			       	</isNotEmpty> 
+		        	<isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 AA.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+		         	<isNotEmpty prepend="AND" property="pymtDducDivCd" >
+			 	  		BB.PYMT_DDUC_DIV_CD = #pymtDducDivCd#
+		       		</isNotEmpty> 
+
+				ORDER BY AA.PAY_YR DESC
+						, AA.DPOB_CD DESC
+						, AA.DTIL_OCCU_DLY_SEIL_NUM DESC
+						, BB.ITEM_DLY_SEIL_NUM DESC
+	</select>	
+	
+	
+	
+	<select id="payr0416DAO.selectPayr0416ListTotCnt_S" parameterClass="payr0416SrhVO" resultClass="int">
+		SELECT COUNT(*) totcnt
+			FROM  (
+				SELECT   AA.PAY_YR    
+				            , AA.DPOB_CD    
+				            , AA.DTIL_OCCU_DLY_SEIL_NUM    
+				            , AA.DEPT_CD        
+				            , AA.TYP_OCCU_CD  
+				            , fcBass0320CDNM(AA.DPOB_CD,AA.TYP_OCCU_CD) AS TYP_OCCU_NM      
+				            , AA.PYSP_GRDE_CD    
+				            , AA.DTIL_OCCU_INTTN_CD    
+				            , fcBassEx0350CDNM(AA.DPOB_CD,AA.TYP_OCCU_CD,AA.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_INTTN_NM 
+				            , AA.DTIL_OCCU_CLS_DIV_CD 
+				            , BB.DTIL_OCCU_DLY_SEIL_NUM    
+				            , BB.PAYR_MANG_DEPT_CD    
+				            , BB.PAYR_IMCD        
+				            , BB.ITEM_NM            
+				            , BB.PAY_CD  
+				            , fcBass0300CDNM(AA.DPOB_CD,BB.PAY_CD) AS PAY_NM              
+				            , BB.PYMT_DDUC_DIV_CD    
+				            , fcBass0300CDNM(AA.DPOB_CD,BB.PYMT_DDUC_DIV_CD) AS PYMT_DDUC_DIV_NM
+				            , BB.PYMT_DDUC_FRM_CD  
+				            , fcBass0300CDNM(AA.DPOB_CD,BB.PYMT_DDUC_FRM_CD) AS PYMT_DDUC_FRM_NM  
+				            , BB.PYMT_DDUC_RATE        
+				            , BB.PYMT_DDUC_SUM        
+				            , BB.TXTN_DIV_CD 
+				            , fcBass0300CDNM(AA.DPOB_CD,BB.TXTN_DIV_CD) AS TXTN_DIV_NM           
+				  FROM PAYR0416 AA, PAYR0417 BB
+				WHERE 1=1
+					AND AA.DPOB_CD = BB.DPOB_CD(+)
+    				AND AA.PAY_YR = BB.PAY_YR(+)
+    				AND AA.DTIL_OCCU_DLY_SEIL_NUM = BB.DTIL_OCCU_DLY_SEIL_NUM(+)
+				 	<isNotEmpty prepend="AND" property="dpobCd" >
+			 	 		AA.DPOB_CD=#dpobCd#
+		       		</isNotEmpty> 
+		         	<isNotEmpty prepend="AND" property="payYr" >
+			 	   		AA.PAY_YR=#payYr# 
+		       		</isNotEmpty> 
+		       		<isNotEmpty prepend="AND" property="deptCd" >
+			 	   		AA.DEPT_CD=#deptCd# 
+		       		</isNotEmpty> 
+		       		<isEqual property="chkPayrMangDeptCd" compareValue="Y">	
+			        	<isNotEmpty prepend="AND" property="payrMangDeptCd" >
+						 	BB.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				  		</isNotEmpty> 		       		
+			  		</isEqual>
+			        <isNotEmpty prepend="AND" property="typOccuCd" >
+				 	   AA.TYP_OCCU_CD=#typOccuCd# 
+			       	</isNotEmpty> 
+		        	<isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 AA.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+		         	<isNotEmpty prepend="AND" property="pymtDducDivCd" >
+			 	  		BB.PYMT_DDUC_DIV_CD = #pymtDducDivCd#
+		       		</isNotEmpty> 
+				)
+	</select>
+	
+	<select id="payr0416DAO.selectPayr5250002ToPayr0416ListTotCnt_S" parameterClass="payr0416SrhVO" resultClass="int">
+		SELECT COUNT(*) totcnt
+			FROM  (
+					SELECT #payrImcd# AS PAYR_IMCD
+								   , #itemNm# AS ITEM_NM
+								   , A.DTIL_OCCU_DLY_SEIL_NUM
+								   , A.DEPT_CD
+								   , fcBass0400CDNM(A.DPOB_CD, A.DEPT_CD,'2') AS DEPT_NM 
+								   , fcBass0320CDNM(A.DPOB_CD,A.TYP_OCCU_CD) AS TYP_OCCU_NM 
+								   , fcBassEx0350CDNM(A.DPOB_CD, A.TYP_OCCU_CD, A.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM
+								   , fcBass0300CDNM(A.DPOB_CD,#payCd#) AS PAY_NM
+								   , ( SELECT NVL2(DTIL_OCCU_DLY_SEIL_NUM,'Y','N')
+										FROM PAYR0417
+										WHERE DPOB_CD = A.DPOB_CD
+										  AND DTIL_OCCU_DLY_SEIL_NUM = A.DTIL_OCCU_DLY_SEIL_NUM
+										  AND PAYR_IMCD = #payrImcd#
+										  AND PAY_YR = #payYr#
+										  AND PAY_CD = #payCd#
+									  ) AS CREATE_YN
+							FROM PAYR0416 A, PAYR0417 B
+							WHERE A.DTIL_OCCU_DLY_SEIL_NUM = B.DTIL_OCCU_DLY_SEIL_NUM
+								AND A.DPOB_CD = #dpobCd#
+								AND A.PAY_YR = #payYr# 
+		       )
+	</select>	
+	
+	<select id="payr0416DAO.selectPayr5250002ToPayr0416List_D" parameterClass="payr0416SrhVO" resultClass="egovMap">
+	SELECT * FROM (
+		SELECT AA.*, ROWNUM RNUM FROM (
+		    SELECT #payrImcd# AS PAYR_IMCD
+						   , #itemNm# AS ITEM_NM
+						   , A.DTIL_OCCU_DLY_SEIL_NUM
+						   , A.DEPT_CD
+						   , fcBass0400CDNM(A.DPOB_CD, A.DEPT_CD,'2') AS DEPT_NM 
+						   , fcBass0320CDNM(A.DPOB_CD,A.TYP_OCCU_CD) AS TYP_OCCU_NM 
+						   , fcBassEx0350CDNM(A.DPOB_CD, A.TYP_OCCU_CD, A.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM
+						   , fcBass0300CDNM(A.DPOB_CD,#payCd#) AS PAY_NM
+						   , ( SELECT NVL2(DTIL_OCCU_DLY_SEIL_NUM,'Y','N')
+								FROM PAYR0417
+								WHERE DPOB_CD = A.DPOB_CD
+								  AND DTIL_OCCU_DLY_SEIL_NUM = A.DTIL_OCCU_DLY_SEIL_NUM
+								  AND PAYR_IMCD = #payrImcd#
+								  AND PAY_YR = #payYr#
+								  AND PAY_CD = #payCd#
+							  ) AS CREATE_YN
+					FROM PAYR0416 A, PAYR0417 B
+					WHERE A.DTIL_OCCU_DLY_SEIL_NUM = B.DTIL_OCCU_DLY_SEIL_NUM
+						AND A.DPOB_CD = #dpobCd#
+						AND A.PAY_YR = #payYr#   		
+	<![CDATA[					
+		) AA WHERE ROWNUM <= #lastIndex#
+	)WHERE RNUM >= #firstIndex#
+	]]>   
+    </select> 
+    
+	<select id="payr0416DAO.selectPayr0416PayYrList_D" parameterClass="payr0416SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT 
+								DISTINCT  PAY_YR
+								, (PAY_YR) AS PAY_YR_DISP 
+						FROM PAYR0416
+				WHERE 	DPOB_CD=#dpobCd# 
+					ORDER BY   PAY_YR DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="payr0416DAO.selectPayr0416PayYrListTotCnt_S" parameterClass="payr0416SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0416
+			WHERE  DPOB_CD=#dpobCd# 
+	</select> 
+	
+	<select id="payr0416DAO.selectPayrP525003ToPayr0416List_D" parameterClass="payr0416SrhVo" resultMap="payr0416_payr520003">
+		SELECT  NVL(AA.DTIL_OCCU_DLY_SEIL_NUM,'') AS DTIL_OCCU_DLY_SEIL_NUM								
+				  FROM PAYR0416 AA
+				WHERE 
+			 	 		AA.DPOB_CD=#dpobCd#
+		         	<isNotEmpty prepend="AND" property="payYr" >
+			 	   		AA.PAY_YR=#payYr# 
+		       		</isNotEmpty> 
+			        <isNotEmpty prepend="AND" property="typOccuCd" >
+				 	   AA.TYP_OCCU_CD=#typOccuCd# 
+			       	</isNotEmpty> 
+		        	<isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+							 AA.DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#
+					</isNotEmpty>  
+							
+		</select> 
+	
+
+</sqlMap>

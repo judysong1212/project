@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ManageCommute">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcDlgn0100MCSrhVO" type="com.app.smrmf.infc.diligence.server.vo.InfcPkgDlgn0100SrhVO"/> 
+	<typeAlias  alias="infcDlgn0200MCSrhVO" type="com.app.smrmf.infc.diligence.server.vo.InfcPkgDlgn0200SrhVO"/>
+	
+	
+	<resultMap id="infcDlgn0100MC" class="com.app.smrmf.infc.diligence.server.vo.InfcPkgDlgn0100VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="dilnlazYrMnth" column="DILNLAZ_YR_MNTH" columnIndex="3"/>
+		<result property="payCd" column="PAY_CD" columnIndex="4"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="5"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="6"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="7"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="8"/>
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="9"/>
+		<result property="dilnlazDutyBgnnDt" column="DILNLAZ_DUTY_BGNN_DT" columnIndex="10"/>
+		<result property="dilnlazDutyEndDt" column="DILNLAZ_DUTY_END_DT" columnIndex="11"/>
+		<result property="dilnlazDutyNumDys" column="DILNLAZ_DUTY_NUM_DYS" columnIndex="12"/>
+		<result property="dilnlazLvsgNumDys" column="DILNLAZ_LVSG_NUM_DYS" columnIndex="13"/>
+		<result property="dilnlazAbnceNumDys" column="DILNLAZ_ABNCE_NUM_DYS" columnIndex="14"/>
+		<result property="dilnlazSckleaNumDys" column="DILNLAZ_SCKLEA_NUM_DYS" columnIndex="15"/>
+		<result property="dilnlazOffvaNumDys" column="DILNLAZ_OFFVA_NUM_DYS" columnIndex="16"/>
+		<result property="dilnlazFmlyEvntNumDys" column="DILNLAZ_FMLY_EVNT_NUM_DYS" columnIndex="17"/>
+		<result property="dilnlazHlthCreNumDys" column="DILNLAZ_HLTH_CRE_NUM_DYS" columnIndex="18"/>
+		<result property="dilnlazTotDutyNumDys" column="DILNLAZ_TOT_DUTY_NUM_DYS" columnIndex="19"/>
+		<result property="dilnlazWklyHldyNumDys" column="DILNLAZ_WKLY_HLDY_NUM_DYS" columnIndex="20"/>
+		<result property="dilnlazPaidPubcHodyNum" column="DILNLAZ_PAID_PUBC_HODY_NUM" columnIndex="21"/>
+		<result property="dilnlazDdlnePrcsYn" column="DILNLAZ_DDLNE_PRCS_YN" columnIndex="22"/>
+		<result property="dilnlazNoteCtnt" column="DILNLAZ_NOTE_CTNT" columnIndex="23"/>
+		<result property="kybdr" column="KYBDR" columnIndex="24"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="25"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="26"/>
+		<result property="ismt" column="ISMT" columnIndex="27"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="28"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="29"/>
+		<result property="dilnlazSpclHodyNumDys" column="DILNLAZ_SPCL_HODY_NUM_DYS" columnIndex="30"/>
+		<result property="dilnlazSatDutyNumDys" column="DILNLAZ_SAT_DUTY_NUM_DYS" columnIndex="31"/>
+		<result property="dilnlazHodyDutyNumDys" column="DILNLAZ_HODY_DUTY_NUM_DYS" columnIndex="32"/>
+		<result property="dilnlazAbnceDutyRcgtnDys" column="DILNLAZ_ABNCE_DUTY_RCGTN_DYS" columnIndex="33"/>
+		<result property="dilnlazTotDutyTm" column="DILNLAZ_TOT_DUTY_TM" columnIndex="34"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="35"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="36"/>  
+		<result property="dilnlazPaidHodyNumDys" column="DILNLAZ_PAID_HODY_NUM_DYS" columnIndex="37"/>  
+		<result property="dilnlazTfcAssCstNumDys" column="DILNLAZ_TFC_ASS_CST_NUM_DYS" columnIndex="38"/>  
+		<result property="dilnlazLnchDys" column="DILNLAZ_LNCH_DYS" columnIndex="39"/>  
+	</resultMap>
+	  
+	<resultMap id="infcDlgn0200MC" class="com.app.smrmf.infc.diligence.server.vo.InfcPkgDlgn0200VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="dilnlazExceDutyYrMnth" column="DILNLAZ_EXCE_DUTY_YR_MNTH" columnIndex="3"/>
+		<result property="payCd" column="PAY_CD" columnIndex="4"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="5"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="6"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="7"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="8"/>
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="9"/>
+		<result property="dilnlazExceDutyBgnnDt" column="DILNLAZ_EXCE_DUTY_BGNN_DT" columnIndex="10"/>
+		<result property="dilnlazExceDutyEndDt" column="DILNLAZ_EXCE_DUTY_END_DT" columnIndex="11"/>
+		<result property="dilnlazPubcHodyDutyNumDys" column="DILNLAZ_PUBC_HODY_DUTY_NUM_DYS" columnIndex="12"/>
+		<result property="dilnlazSatDutyNumDys" column="DILNLAZ_SAT_DUTY_NUM_DYS" columnIndex="13"/>
+		<result property="dilnlazTotNtotNumDys" column="DILNLAZ_TOT_NTOT_NUM_DYS" columnIndex="14"/>
+		<result property="dilnlazTotNtotTm" column="DILNLAZ_TOT_NTOT_TM" columnIndex="15"/>
+		<result property="dilnlazFndtnTmRstDutyTm" column="DILNLAZ_FNDTN_TM_RST_DUTY_TM" columnIndex="16"/>
+		<result property="dilnlazTmRstDutyTm" column="DILNLAZ_TM_RST_DUTY_TM" columnIndex="17"/>
+		<result property="dilnlazTotTmRstDutyTm" column="DILNLAZ_TOT_TM_RST_DUTY_TM" columnIndex="18"/>
+		<result property="dilnlazDdlnePrcsYn" column="DILNLAZ_DDLNE_PRCS_YN" columnIndex="19"/>
+		<result property="dilnlazNoteCtnt" column="DILNLAZ_NOTE_CTNT" columnIndex="20"/>
+		<result property="kybdr" column="KYBDR" columnIndex="21"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="22"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="23"/>
+		<result property="ismt" column="ISMT" columnIndex="24"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="25"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="26"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="27"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="28"/>  
+		<result property="dilnlazPubcHodyDutyTm" column="DILNLAZ_PUBC_HODY_DUTY_TM" columnIndex="29"/>
+	</resultMap>
+	 
+	 
+    <select id="manageCommuteDAO.selectInfcDlgn0110TotList_D" parameterClass="infcDlgn0100MCSrhVO" resultClass="egovMap">
+       	<![CDATA[ 
+         SELECT 
+           BB.DPOB_CD, BB.SYSTEMKEY, BB.DILNLAZ_YR_MNTH, 
+           BB.PAY_CD, BB.DILNLAZ_DUTY_NUM_DYS, 
+           
+           SUM( CASE WHEN DILNLAZ_HODY_YN = 'Y' THEN '0' 
+                ELSE NVL(DILNLAZ_DUTY_TM,0)  END  
+           ) AS DILNLAZ_DUTY_TM_SM , 
+           
+           (ROUND((SUM(
+            CASE WHEN DILNLAZ_HODY_YN = 'Y' THEN '0' 
+                ELSE NVL(DILNLAZ_DUTY_TM,0)  END   
+            ) / 8),4) + ROUND((SUM(
+            CASE WHEN DILNLAZ_LVSG_YN = 'Y' AND NVL(DILNLAZ_DUTY_TM,'0') <> '0' THEN (8 - TO_NUMBER(NVL(DILNLAZ_DUTY_TM,0))) 
+                 WHEN DILNLAZ_LVSG_YN = 'Y' AND NVL(DILNLAZ_DUTY_TM,'0') = '0' THEN 8
+                ELSE 0  END   
+          )/8),4)  + SUM(DECODE(DILNLAZ_OFFVA_YN,'Y',1,0))
+           + SUM(DECODE(DILNLAZ_FMLY_EVNT_YN,'Y',1,0))
+           + SUM(DECODE(DILNLAZ_SPCL_HODY_YN,'Y',1,0))) AS  DILNLAZ_TOT_DUTY_NUM_DYS ,
+          
+          
+           SUM(DECODE(DILNLAZ_DUTY_YN,'Y',1,0)) AS DILNLAZ_DUTY_CNT,
+           SUM(DECODE(DILNLAZ_ABNCE_YN,'Y',1,0)) AS DILNLAZ_ABNCE_CNT,  
+ 
+          ROUND((SUM(
+            CASE WHEN DILNLAZ_LVSG_YN = 'Y' AND NVL(DILNLAZ_DUTY_TM,'0') <> '0' THEN (8 - TO_NUMBER(NVL(DILNLAZ_DUTY_TM,0))) 
+                 WHEN DILNLAZ_LVSG_YN = 'Y' AND NVL(DILNLAZ_DUTY_TM,'0') = '0' THEN 8
+                ELSE 0  END   
+          )/8),4) AS DILNLAZ_LVSG_CNT, 
+            
+           SUM(DECODE(DILNLAZ_SCKLEA_YN,'Y',1,0)) AS DILNLAZ_SCKLEA_CNT, 
+           
+           SUM(DECODE(DILNLAZ_OFFVA_YN,'Y',1,0)) AS DILNLAZ_OFFVA_CNT,  
+           
+           SUM(DECODE(DILNLAZ_FMLY_EVNT_YN,'Y',1,0)) AS DILNLAZ_FMLY_EVNT_CNT, 
+           SUM(DECODE(DILNLAZ_HLTH_CRE_YN,'Y',1,0)) AS DILNLAZ_HLTH_CRE_CNT, 
+           SUM(DECODE(DILNLAZ_ETC_DIV_CD,'N0010010',1,0)) AS DILNLAZ_ABNCE_DUTY_RCGTN_CNT,
+           SUM(DECODE(DILNLAZ_SPCL_HODY_YN,'Y',1,0)) AS DILNLAZ_SPCL_HODY_CNT,
+           SUM(DECODE(DILNLAZ_HODY_YN,'Y',1,0)) AS DILNLAZ_HODY_YN_CNT,
+           ROUND((SUM(CASE WHEN DILNLAZ_HODY_YN = 'Y' THEN TO_NUMBER(DILNLAZ_DUTY_TM)  
+                ELSE 0  END )/8),4) AS DILNLAZ_HODY_YN_TM, 
+          
+           (SUM(DECODE(DILNLAZ_TFC_ASS_CST_YN,'Y',1,0))) AS  DILNLAZ_TFC_ASS_CST_NUM_DYS ,
+          (SUM(DECODE(DILNLAZ_LNCH_YN,'Y',1,0))) AS  DILNLAZ_LNCH_DYS ,
+            
+           SUM(DECODE(DILNLAZ_TFC_ASS_CST_YN,'Y',1,0)) AS DILNLAZ_TFC_ASS_CST_YN_CNT, 
+           
+       ((SELECT  
+              SUM(OFFDAY_KUBN)  
+        FROM  CO_CALENDAR CC
+        WHERE  CC.OFFDAY_KUBN = '1'
+        AND CC.CALENDAR_DATE >= BB.DILNLAZ_DUTY_BGNN_DT
+        AND CC.CALENDAR_DATE <= BB.DILNLAZ_DUTY_END_DT
+        ) +  (SELECT  
+              COUNT(PAID_PUBC_HODY_YN)
+        FROM  BASS0200 DD
+         WHERE (DD.PUBC_HODY_DT) >= (CASE WHEN BB.DILNLAZ_DUTY_BGNN_DT >= CC.EMYMT_BGNN_DT THEN BB.DILNLAZ_DUTY_BGNN_DT ELSE CC.EMYMT_BGNN_DT END)
+          AND (DD.PUBC_HODY_DT) <= (CASE WHEN BB.DILNLAZ_DUTY_END_DT <= CC.EMYMT_END_DT THEN BB.DILNLAZ_DUTY_END_DT ELSE CC.EMYMT_END_DT END)
+          AND  DD.PUBC_HODY_YN = 'Y'
+          AND  DD.PAID_PUBC_HODY_YN = 'Y'
+        )) AS DILNLAZ_HODY_DUTY_NUM_DYS,
+        
+         (ROUND((SUM(
+            CASE WHEN DILNLAZ_HODY_YN = 'Y' THEN '0' 
+                ELSE NVL(DILNLAZ_DUTY_TM,0)  END   
+            ) / 8),4) + ROUND((SUM(
+            CASE WHEN DILNLAZ_LVSG_YN = 'Y' AND NVL(DILNLAZ_DUTY_TM,'0') <> '0' THEN (8 - TO_NUMBER(NVL(DILNLAZ_DUTY_TM,0))) 
+                 WHEN DILNLAZ_LVSG_YN = 'Y' AND NVL(DILNLAZ_DUTY_TM,'0') = '0' THEN 8
+                ELSE 0  END   
+          )/8),4)  + SUM(DECODE(DILNLAZ_OFFVA_YN,'Y',1,0))
+           + SUM(DECODE(DILNLAZ_FMLY_EVNT_YN,'Y',1,0))
+           + SUM(DECODE(DILNLAZ_SPCL_HODY_YN,'Y',1,0))) AS DILNLAZ_WKD_DUTY_NUM_DYS,
+           (SELECT  
+              SUM(OFFDAY_KUBN)  
+        FROM  CO_CALENDAR CC
+        WHERE  CC.OFFDAY_KUBN = '1'
+        AND CC.CALENDAR_DATE >= BB.DILNLAZ_DUTY_BGNN_DT
+        AND CC.CALENDAR_DATE <= BB.DILNLAZ_DUTY_END_DT
+        ) AS OFFDAY_CNT,
+        
+        
+        (SELECT  
+              COUNT(PUBC_HODY_YN)
+        FROM  BASS0200 DD
+        WHERE (DD.PUBC_HODY_DT) >= (CASE WHEN BB.DILNLAZ_DUTY_BGNN_DT >= CC.EMYMT_BGNN_DT THEN BB.DILNLAZ_DUTY_BGNN_DT ELSE CC.EMYMT_BGNN_DT END)
+          AND (DD.PUBC_HODY_DT) <= (CASE WHEN BB.DILNLAZ_DUTY_END_DT <= CC.EMYMT_END_DT THEN BB.DILNLAZ_DUTY_END_DT ELSE CC.EMYMT_END_DT END) 
+          AND  DD.PUBC_HODY_YN = 'Y'
+          AND  DD.PAID_PUBC_HODY_YN = 'N'
+        ) AS PUBC_HODY_YN_CNT,
+        
+        (SELECT  
+              COUNT(PAID_PUBC_HODY_YN)
+        FROM  BASS0200 DD
+         WHERE (DD.PUBC_HODY_DT) >= (CASE WHEN BB.DILNLAZ_DUTY_BGNN_DT >= CC.EMYMT_BGNN_DT THEN BB.DILNLAZ_DUTY_BGNN_DT ELSE CC.EMYMT_BGNN_DT END)
+          AND (DD.PUBC_HODY_DT) <= (CASE WHEN BB.DILNLAZ_DUTY_END_DT <= CC.EMYMT_END_DT THEN BB.DILNLAZ_DUTY_END_DT ELSE CC.EMYMT_END_DT END)
+          AND  DD.PUBC_HODY_YN = 'Y'
+          AND  DD.PAID_PUBC_HODY_YN = 'Y'
+        ) AS PAID_PUBC_HODY_YN_CNT
+        
+        FROM DLGN0110 AA, DLGN0100 BB,
+        (
+        
+         SELECT 
+               DPOB_CD, SYSTEMKEY,   
+               MIN(EMYMT_BGNN_DT) AS EMYMT_BGNN_DT, 
+               MAX(NVL(EMYMT_END_DT,TO_CHAR(LAST_DAY(SYSDATE),'YYYYMMDD'))) AS EMYMT_END_DT 
+            FROM PSNL0110 CC01
+            WHERE CC01.DPOB_CD =  #dpobCd#
+              AND  CC01.EMYMT_DIV_CD =  #emymtDivCd#
+              AND #dilnlazYrMnth#  BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6) 
+              AND  SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN (#dilnlazYrMnth# || '01')  <= TO_CHAR (LAST_DAY(SYSDATE),'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR ( LAST_DAY(SYSDATE), 'YYYYMMDD')  
+                                                                                                      ELSE (#dilnlazYrMnth# || '01')  END)),1,6)
+               ]]>
+                <isNotEmpty prepend="AND" property="businCd" >
+					 	 CC01.BUSIN_CD=#businCd#
+				 </isNotEmpty>
+              	<![CDATA[  
+            GROUP BY DPOB_CD, SYSTEMKEY 
+         )CC
+        WHERE AA.DPOB_CD = BB.DPOB_CD 
+          AND AA.SYSTEMKEY = BB.SYSTEMKEY
+          AND AA.DILNLAZ_YR_MNTH = BB.DILNLAZ_YR_MNTH
+          AND AA.PAY_CD = BB.PAY_CD 
+           AND  CC.DPOB_CD = BB.DPOB_CD
+          AND CC.SYSTEMKEY = BB.SYSTEMKEY
+		  AND BB.DPOB_CD = #dpobCd#
+		  AND BB.DILNLAZ_YR_MNTH = #dilnlazYrMnth# 
+		  AND BB.PAY_CD = #payCd#
+		  AND BB.EMYMT_DIV_CD = #emymtDivCd#
+		  ]]>
+		     <isNotEmpty prepend="AND" property="typOccuCd" >
+			 	  BB.TYP_OCCU_CD=#typOccuCd# 
+		       </isNotEmpty> 
+		       <!--   <isNotEmpty prepend="AND" property="pyspGrdeCd" >
+			 	   NVL(BB.PYSP_GRDE_CD,'A0060000')=#pyspGrdeCd#
+		       </isNotEmpty>  -->
+		       <isNotEmpty prepend="AND"  property="dtilOccuInttnCd" >
+					 	        BB.DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#  
+				 </isNotEmpty> 
+		        <!--  <isNotEmpty prepend="AND" property="dtilOccuClsDivCd" >
+			 	  BB.DTIL_OCCU_CLS_DIV_CD=#dtilOccuClsDivCd# 
+		       </isNotEmpty>  -->
+		         <isNotEmpty prepend="AND" property="systemkey" >
+					 	 BB.SYSTEMKEY=#systemkey#
+				 </isNotEmpty>  
+				   <isNotEmpty prepend="AND" property="businCd" >
+					 	 BB.BUSIN_CD=#businCd#
+				 </isNotEmpty>
+		 GROUP BY BB.DPOB_CD, BB.SYSTEMKEY
+		     , BB.DILNLAZ_YR_MNTH,BB.PAY_CD ,BB.DILNLAZ_DUTY_NUM_DYS 
+		     , BB.EMYMT_DIV_CD, BB.DILNLAZ_DUTY_BGNN_DT
+		     , BB.DILNLAZ_DUTY_END_DT
+             , CC.EMYMT_BGNN_DT  
+           , CC.EMYMT_END_DT
+  
+	</select>	
+	<!--  AND BB.SYSTEMKEY = '19950024'  -->
+	
+	<update id="manageCommuteDAO.updateManageCommuteInfcDlgn0100_S">
+		<![CDATA[
+			UPDATE DLGN0100
+			SET   DILNLAZ_LVSG_NUM_DYS=#dilnlazLvsgNumDys#
+				, DILNLAZ_ABNCE_NUM_DYS=#dilnlazAbnceNumDys#
+				, DILNLAZ_SCKLEA_NUM_DYS=#dilnlazSckleaNumDys#
+				, DILNLAZ_OFFVA_NUM_DYS=#dilnlazOffvaNumDys#
+				, DILNLAZ_FMLY_EVNT_NUM_DYS=#dilnlazFmlyEvntNumDys#
+				, DILNLAZ_HLTH_CRE_NUM_DYS=#dilnlazHlthCreNumDys#
+				, DILNLAZ_TOT_DUTY_NUM_DYS=#dilnlazTotDutyNumDys#
+				, DILNLAZ_WKLY_HLDY_NUM_DYS=#dilnlazWklyHldyNumDys#
+				, DILNLAZ_PAID_PUBC_HODY_NUM=#dilnlazPaidPubcHodyNum# 
+				, DILNLAZ_SPCL_HODY_NUM_DYS=#dilnlazSpclHodyNumDys#
+				, DILNLAZ_SAT_DUTY_NUM_DYS =#dilnlazSatDutyNumDys#		
+                , DILNLAZ_HODY_DUTY_NUM_DYS =#dilnlazHodyDutyNumDys#
+				, DILNLAZ_WKD_DUTY_NUM_DYS = #dilnlazWkdDutyNumDys# 		
+                , DILNLAZ_ABNCE_DUTY_RCGTN_DYS =#dilnlazAbnceDutyRcgtnDys#
+                , DILNLAZ_TOT_DUTY_TM =#dilnlazTotDutyTm#	
+                , DILNLAZ_PAID_HODY_NUM_DYS = #dilnlazPaidHodyNumDys#
+                , DILNLAZ_TFC_ASS_CST_NUM_DYS= #dilnlazTfcAssCstNumDys#
+                , DILNLAZ_LNCH_DYS= #dilnlazLnchDys#
+                , DILNLAZ_BUTP_DYS=#dilnlazButpDys# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDD')
+				, REVN_ADDR=#revnAddr# 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND DILNLAZ_YR_MNTH=#dilnlazYrMnth#
+								AND PAY_CD=#payCd#
+				]]>
+	</update>
+	
+	
+	
+    <select id="manageCommuteDAO.selectInfcDlgn0210TotList_D" parameterClass="infcDlgn0200MCSrhVO" resultClass="egovMap">
+       	<![CDATA[ 
+       SELECT 
+			   BB.DPOB_CD, BB.SYSTEMKEY, BB.DILNLAZ_EXCE_DUTY_YR_MNTH, 
+			   BB.PAY_CD, 
+			    SUM(DECODE(AA.DILNLAZ_DUTY_YN,'Y',1,0)) AS DILNLAZ_DUTY_CNT, 
+			    SUM(DECODE(AA.DILNLAZ_DUTY_YN,'Y',NVL(AA.DILNLAZ_DUTY_TM,0),0)) AS DILNLAZ_DUTY_SUM,
+			    SUM(DECODE(AA.DILNLAZ_NTOT_YN,'Y',1,0)) AS DILNLAZ_NTOT_CNT, 
+			    SUM(DECODE(AA.DILNLAZ_NTOT_YN,'Y',NVL(AA.DILNLAZ_NTOT_TM,0),0)) AS DILNLAZ_NTOT_SUM, 
+			    SUM(DECODE(AA.DILNLAZ_TM_RST_DUTY_YN,'Y',1,0)) AS DILNLAZ_TM_RST_DUTY_CNT, 
+			    SUM(DECODE(AA.DILNLAZ_TM_RST_DUTY_YN,'Y',NVL(AA.DILNLAZ_TM_RST_DUTY_TM,0),0)) AS DILNLAZ_TM_RST_DUTY_TM,
+			    SUM(DECODE(AA.DILNLAZ_HODY_DUTY_YN,'Y',1,0)) AS DILNLAZ_HODY_DUTY_CNT, 
+                ROUND((SUM(CASE WHEN AA.DILNLAZ_HODY_DUTY_YN = 'Y' THEN TO_NUMBER(NVL(AA.DILNLAZ_HODY_DUTY_TM,0)) 
+                ELSE 0  END )/8),4) AS DILNLAZ_HODY_YN_TM ,
+                 SUM(DECODE(AA.DILNLAZ_HODY_DUTY_YN,'Y',NVL(AA.DILNLAZ_HODY_DUTY_TM,0),0)) AS DILNLAZ_PUBC_HODY_DUTY_TM,
+                SUM(DECODE(AA.DILNLAZ_HODY_DUTY_YN,'Y',NVL(AA.DILNLAZ_HODY_NTOT_TM,0),0)) AS DILNLAZ_HODY_TOT_NTOT_TM 
+			FROM DLGN0210 AA, DLGN0200 BB
+			WHERE AA.DPOB_CD = BB.DPOB_CD 
+			  AND AA.SYSTEMKEY = BB.SYSTEMKEY
+			  AND AA.DILNLAZ_EXCE_DUTY_YR_MNTH = BB.DILNLAZ_EXCE_DUTY_YR_MNTH
+			  AND AA.PAY_CD = BB.PAY_CD  
+		  AND BB.DPOB_CD = #dpobCd#
+		  AND BB.DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth# 
+		  AND BB.PAY_CD = #payCd#
+		  AND BB.EMYMT_DIV_CD = #emymtDivCd#
+		  ]]>
+		     <isNotEmpty prepend="AND" property="typOccuCd" >
+			 	  BB.TYP_OCCU_CD=#typOccuCd# 
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND"  property="dtilOccuInttnCd" >
+					  BB.DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#  
+				 </isNotEmpty>  
+		         <isNotEmpty prepend="AND" property="systemkey" >
+					 	 BB.SYSTEMKEY=#systemkey#
+				 </isNotEmpty>  
+				    <isNotEmpty prepend="AND" property="businCd" >
+					 	 BB.BUSIN_CD=#businCd#
+				 </isNotEmpty>
+		GROUP BY BB.DPOB_CD, BB.SYSTEMKEY
+     		   , BB.DILNLAZ_EXCE_DUTY_YR_MNTH,BB.PAY_CD 
+     		   , BB.EMYMT_DIV_CD 
+	</select>	
+	<!--  AND BB.SYSTEMKEY = '19950024'  -->
+	
+	<update id="manageCommuteDAO.updateManageCommuteInfcDlgn0200_S">
+		<![CDATA[
+			 UPDATE DLGN0200
+			SET   DILNLAZ_PUBC_HODY_DUTY_NUM_DYS=#dilnlazPubcHodyDutyNumDys#
+			    , DILNLAZ_PUBC_HODY_DUTY_TM=#dilnlazPubcHodyDutyTm# 
+				, DILNLAZ_SAT_DUTY_NUM_DYS=#dilnlazSatDutyNumDys#
+				, DILNLAZ_TOT_NTOT_NUM_DYS=#dilnlazTotNtotNumDys#
+				, DILNLAZ_TOT_NTOT_TM=#dilnlazTotNtotTm#
+				, DILNLAZ_FNDTN_TM_RST_DUTY_TM=#dilnlazFndtnTmRstDutyTm#
+				, DILNLAZ_TM_RST_DUTY_TM=#dilnlazTmRstDutyTm#
+				, DILNLAZ_TOT_TM_RST_DUTY_TM=#dilnlazTotTmRstDutyTm# 
+				, DILNLAZ_HODY_TOT_NTOT_TM = #dilnlazHodyTotNtotTm#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDD')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+								AND PAY_CD=#payCd#
+				]]>
+	</update>
+	 
+	
+	 <!-- 분단위 처리 쿼리 신규추가   20170414  --> 
+	  <select id="manageCommuteDAO.selectInfcDlgn0110HHMiTotList_D" parameterClass="infcDlgn0100MCSrhVO" resultClass="egovMap">
+       	<![CDATA[ 
+         SELECT 
+	            BB.DPOB_CD, BB.SYSTEMKEY, BB.DILNLAZ_YR_MNTH, 
+	            BB.PAY_CD , BB.DILNLAZ_DUTY_NUM_DYS, 
+	           
+	           ROUND(((SUM( CASE WHEN DILNLAZ_HODY_YN = 'Y' THEN '0' 
+	                ELSE NVL(DILNLAZ_DUTY_TM,0)  END  
+	           ))/60),4) AS DILNLAZ_DUTY_TM_SM , 
+	           
+	           (ROUND((((SUM(
+	            CASE WHEN DILNLAZ_HODY_YN = 'Y' THEN '0' 
+	                ELSE NVL(DILNLAZ_DUTY_TM,0)  END   
+	            )) /60) / 8),4) + ROUND((((SUM(
+	            CASE WHEN DILNLAZ_LVSG_YN = 'Y' AND NVL(DILNLAZ_DUTY_TM,'0') <> '0' THEN ((8 * 60) - TO_NUMBER(NVL(DILNLAZ_DUTY_TM,0))) 
+	                 WHEN DILNLAZ_LVSG_YN = 'Y' AND NVL(DILNLAZ_DUTY_TM,'0') = '0' THEN (8 * 60)
+	                ELSE 0  END   
+	          )) / 60) /8),4)  + SUM(DECODE(DILNLAZ_OFFVA_YN,'Y',1,0))
+	           + SUM(DECODE(DILNLAZ_FMLY_EVNT_YN,'Y',1,0))
+	           + SUM(DECODE(DILNLAZ_SPCL_HODY_YN,'Y',1,0))) AS  DILNLAZ_TOT_DUTY_NUM_DYS ,
+	          
+	          
+	           SUM(DECODE(DILNLAZ_DUTY_YN,'Y',1,0)) AS DILNLAZ_DUTY_CNT,
+	           SUM(DECODE(DILNLAZ_ABNCE_YN,'Y',1,0)) AS DILNLAZ_ABNCE_CNT,  
+	 
+	          ROUND((((SUM(
+	            CASE WHEN DILNLAZ_LVSG_YN = 'Y' AND NVL(DILNLAZ_DUTY_TM,'0') <> '0' THEN ((8 *60) - TO_NUMBER(NVL(DILNLAZ_DUTY_TM,0))) 
+	                 WHEN DILNLAZ_LVSG_YN = 'Y' AND NVL(DILNLAZ_DUTY_TM,'0') = '0' THEN (8 * 60)
+	                ELSE 0  END   
+	          )) /60)/8),4) AS DILNLAZ_LVSG_CNT, 
+	            
+	           SUM(DECODE(DILNLAZ_SCKLEA_YN,'Y',1,0)) AS DILNLAZ_SCKLEA_CNT, 
+	           
+	           SUM(DECODE(DILNLAZ_OFFVA_YN,'Y',1,0)) AS DILNLAZ_OFFVA_CNT,  
+	           
+	           SUM(DECODE(DILNLAZ_FMLY_EVNT_YN,'Y',1,0)) AS DILNLAZ_FMLY_EVNT_CNT, 
+	           SUM(DECODE(DILNLAZ_HLTH_CRE_YN,'Y',1,0)) AS DILNLAZ_HLTH_CRE_CNT, 
+	           SUM(DECODE(DILNLAZ_ETC_DIV_CD,'N0010010',1,0)) AS DILNLAZ_ABNCE_DUTY_RCGTN_CNT,
+	           SUM(DECODE(DILNLAZ_SPCL_HODY_YN,'Y',1,0)) AS DILNLAZ_SPCL_HODY_CNT,
+	           SUM(DECODE(DILNLAZ_HODY_YN,'Y',1,0)) AS DILNLAZ_HODY_YN_CNT,
+	           ROUND((((SUM(CASE WHEN DILNLAZ_HODY_YN = 'Y' THEN TO_NUMBER(DILNLAZ_DUTY_TM)  
+	                ELSE 0  END ))/60)/8),4) AS DILNLAZ_HODY_YN_TM, 
+	           
+	            ( SUM(DECODE(DILNLAZ_TFC_ASS_CST_YN,'Y',1,0)) ) AS  DILNLAZ_TFC_ASS_CST_NUM_DYS ,
+	           ( SUM(DECODE(DILNLAZ_LNCH_YN,'Y',1,0)) ) AS  DILNLAZ_LNCH_DYS ,
+	           ( SUM(DECODE(DILNLAZ_BUTP_YN,'Y',1,0))) AS  DILNLAZ_BUTP_YN_CNT ,
+	           SUM(DECODE(DILNLAZ_TFC_ASS_CST_YN,'Y',1,0)) AS DILNLAZ_TFC_ASS_CST_YN_CNT, 
+	           
+       ((SELECT  
+              SUM(OFFDAY_KUBN)  
+        FROM  CO_CALENDAR CC
+        WHERE  CC.OFFDAY_KUBN = '1'
+        AND CC.CALENDAR_DATE >= BB.DILNLAZ_DUTY_BGNN_DT
+        AND CC.CALENDAR_DATE <= BB.DILNLAZ_DUTY_END_DT
+        ) +  (SELECT  
+              COUNT(PAID_PUBC_HODY_YN)
+        FROM  BASS0200 DD
+         WHERE (DD.PUBC_HODY_DT) >= (CASE WHEN BB.DILNLAZ_DUTY_BGNN_DT >= CC.EMYMT_BGNN_DT THEN BB.DILNLAZ_DUTY_BGNN_DT ELSE CC.EMYMT_BGNN_DT END)
+          AND (DD.PUBC_HODY_DT) <= (CASE WHEN BB.DILNLAZ_DUTY_END_DT <= CC.EMYMT_END_DT THEN BB.DILNLAZ_DUTY_END_DT ELSE CC.EMYMT_END_DT END)
+          AND  DD.PUBC_HODY_YN = 'Y'
+          AND  DD.PAID_PUBC_HODY_YN = 'Y'
+        )) AS DILNLAZ_HODY_DUTY_NUM_DYS,
+        
+         (ROUND((((SUM(
+	              CASE WHEN DILNLAZ_HODY_YN = 'Y' THEN '0' 
+	                   ELSE NVL(DILNLAZ_DUTY_TM,0)  END   
+	            )) /60) / 8),4) + ROUND((((SUM(
+	            CASE WHEN DILNLAZ_LVSG_YN = 'Y' AND NVL(DILNLAZ_DUTY_TM,'0') <> '0' THEN ((8 * 60) - TO_NUMBER(NVL(DILNLAZ_DUTY_TM,0))) 
+	                 WHEN DILNLAZ_LVSG_YN = 'Y' AND NVL(DILNLAZ_DUTY_TM,'0') = '0' THEN (8 * 60)
+	                ELSE 0  END   
+	          )) / 60) /8),4)  + SUM(DECODE(DILNLAZ_OFFVA_YN,'Y',1,0))
+	           + SUM(DECODE(DILNLAZ_FMLY_EVNT_YN,'Y',1,0))
+	           + SUM(DECODE(DILNLAZ_SPCL_HODY_YN,'Y',1,0)))  AS DILNLAZ_WKD_DUTY_NUM_DYS,
+	           
+	           (SELECT  
+	              SUM(OFFDAY_KUBN)  
+	        FROM  CO_CALENDAR CC
+	        WHERE  CC.OFFDAY_KUBN = '1'
+	        AND CC.CALENDAR_DATE >= BB.DILNLAZ_DUTY_BGNN_DT
+	        AND CC.CALENDAR_DATE <= BB.DILNLAZ_DUTY_END_DT
+	        ) AS OFFDAY_CNT,
+	        
+	        
+	        (SELECT  
+	              COUNT(PUBC_HODY_YN)
+	        FROM  BASS0200 DD
+	        WHERE (DD.PUBC_HODY_DT) >= (CASE WHEN BB.DILNLAZ_DUTY_BGNN_DT >= CC.EMYMT_BGNN_DT THEN BB.DILNLAZ_DUTY_BGNN_DT ELSE CC.EMYMT_BGNN_DT END)
+	          AND (DD.PUBC_HODY_DT) <= (CASE WHEN BB.DILNLAZ_DUTY_END_DT <= CC.EMYMT_END_DT THEN BB.DILNLAZ_DUTY_END_DT ELSE CC.EMYMT_END_DT END) 
+	          AND  DD.PUBC_HODY_YN = 'Y'
+	          AND  DD.PAID_PUBC_HODY_YN = 'N'
+	        ) AS PUBC_HODY_YN_CNT,
+	        
+	        (SELECT  
+	              COUNT(PAID_PUBC_HODY_YN)
+	        FROM  BASS0200 DD
+	         WHERE (DD.PUBC_HODY_DT) >= (CASE WHEN BB.DILNLAZ_DUTY_BGNN_DT >= CC.EMYMT_BGNN_DT THEN BB.DILNLAZ_DUTY_BGNN_DT ELSE CC.EMYMT_BGNN_DT END)
+	          AND (DD.PUBC_HODY_DT) <= (CASE WHEN BB.DILNLAZ_DUTY_END_DT <= CC.EMYMT_END_DT THEN BB.DILNLAZ_DUTY_END_DT ELSE CC.EMYMT_END_DT END)
+	          AND  DD.PUBC_HODY_YN = 'Y'
+	          AND  DD.PAID_PUBC_HODY_YN = 'Y'
+	        ) AS PAID_PUBC_HODY_YN_CNT
+        
+        FROM DLGN0110 AA, DLGN0100 BB,
+        (
+        
+         SELECT 
+               DPOB_CD, SYSTEMKEY,   
+               MIN(EMYMT_BGNN_DT) AS EMYMT_BGNN_DT, 
+               MAX(NVL(EMYMT_END_DT,TO_CHAR( LAST_DAY(SYSDATE),'YYYYMMDD'))) AS EMYMT_END_DT 
+            FROM PSNL0110 CC01
+            WHERE CC01.DPOB_CD =  #dpobCd#
+              AND  CC01.EMYMT_DIV_CD =  #emymtDivCd#
+              AND #dilnlazYrMnth#  BETWEEN SUBSTR(CC01.EMYMT_BGNN_DT,1,6) 
+              AND  SUBSTR(NVL(CC01.EMYMT_END_DT,(CASE WHEN (#dilnlazYrMnth# || '01')  <= TO_CHAR ( LAST_DAY(SYSDATE),'YYYYMMDD') 
+                                                                                                      THEN  TO_CHAR (  LAST_DAY(SYSDATE), 'YYYYMMDD')  
+                                                                                                      ELSE (#dilnlazYrMnth# || '01')  END)),1,6)
+               ]]>
+                <isNotEmpty prepend="AND" property="businCd" >
+					 	 CC01.BUSIN_CD=#businCd#
+				 </isNotEmpty>
+              	<![CDATA[  
+            GROUP BY DPOB_CD, SYSTEMKEY 
+         )CC
+        WHERE AA.DPOB_CD = BB.DPOB_CD 
+          AND AA.SYSTEMKEY = BB.SYSTEMKEY
+          AND AA.DILNLAZ_YR_MNTH = BB.DILNLAZ_YR_MNTH
+          AND AA.PAY_CD = BB.PAY_CD 
+           AND  CC.DPOB_CD = BB.DPOB_CD
+          AND CC.SYSTEMKEY = BB.SYSTEMKEY
+		  AND BB.DPOB_CD = #dpobCd#
+		  AND BB.DILNLAZ_YR_MNTH = #dilnlazYrMnth# 
+		  AND BB.PAY_CD = #payCd#
+		  AND BB.EMYMT_DIV_CD = #emymtDivCd#
+		  ]]>
+		     <isNotEmpty prepend="AND" property="typOccuCd" >
+			 	  BB.TYP_OCCU_CD=#typOccuCd# 
+		       </isNotEmpty> 
+		       <!--   <isNotEmpty prepend="AND" property="pyspGrdeCd" >
+			 	   NVL(BB.PYSP_GRDE_CD,'A0060000')=#pyspGrdeCd#
+		       </isNotEmpty>  -->
+		       <isNotEmpty prepend="AND"  property="dtilOccuInttnCd" >
+					 	        BB.DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#  
+				 </isNotEmpty> 
+		        <!--  <isNotEmpty prepend="AND" property="dtilOccuClsDivCd" >
+			 	  BB.DTIL_OCCU_CLS_DIV_CD=#dtilOccuClsDivCd# 
+		       </isNotEmpty>  -->
+		         <isNotEmpty prepend="AND" property="systemkey" >
+					 	 BB.SYSTEMKEY=#systemkey#
+				 </isNotEmpty>  
+				   <isNotEmpty prepend="AND" property="businCd" >
+					 	 BB.BUSIN_CD=#businCd#
+				 </isNotEmpty>
+		 GROUP BY BB.DPOB_CD, BB.SYSTEMKEY
+		     , BB.DILNLAZ_YR_MNTH,BB.PAY_CD ,BB.DILNLAZ_DUTY_NUM_DYS 
+		     , BB.EMYMT_DIV_CD, BB.DILNLAZ_DUTY_BGNN_DT
+		     , BB.DILNLAZ_DUTY_END_DT
+             , CC.EMYMT_BGNN_DT  
+           , CC.EMYMT_END_DT
+  
+	</select>	
+	
+	
+	 <select id="manageCommuteDAO.selectInfcDlgn0210HHMiTotList_D" parameterClass="infcDlgn0200MCSrhVO" resultClass="egovMap">
+       	<![CDATA[ 
+       SELECT 
+			   BB.DPOB_CD, BB.SYSTEMKEY, BB.DILNLAZ_EXCE_DUTY_YR_MNTH, 
+               BB.PAY_CD, 
+                SUM(DECODE(AA.DILNLAZ_DUTY_YN,'Y',1,0)) AS DILNLAZ_DUTY_CNT, 
+                ROUND(((SUM(DECODE(AA.DILNLAZ_DUTY_YN,'Y',NVL(AA.DILNLAZ_DUTY_TM,0),0)))/60),4) AS DILNLAZ_DUTY_SUM,
+                SUM(DECODE(AA.DILNLAZ_NTOT_YN,'Y',1,0)) AS DILNLAZ_NTOT_CNT, 
+                ROUND(((SUM(DECODE(AA.DILNLAZ_NTOT_YN,'Y',NVL(AA.DILNLAZ_NTOT_TM,0),0)))/60),4) AS DILNLAZ_NTOT_SUM, 
+                SUM(DECODE(AA.DILNLAZ_TM_RST_DUTY_YN,'Y',1,0)) AS DILNLAZ_TM_RST_DUTY_CNT, 
+                ROUND((( SUM(DECODE(AA.DILNLAZ_TM_RST_DUTY_YN,'Y',NVL(AA.DILNLAZ_TM_RST_DUTY_TM,0),0)))/60),4) AS DILNLAZ_TM_RST_DUTY_TM,
+                SUM(DECODE(AA.DILNLAZ_HODY_DUTY_YN,'Y',1,0)) AS DILNLAZ_HODY_DUTY_CNT, 
+                ROUND((((SUM(CASE WHEN AA.DILNLAZ_HODY_DUTY_YN = 'Y' THEN TO_NUMBER(NVL(AA.DILNLAZ_HODY_DUTY_TM,0)) 
+                ELSE 0  END ))/60)/8),4) AS DILNLAZ_HODY_YN_TM ,
+                 SUM(DECODE(AA.DILNLAZ_HODY_DUTY_YN,'Y',NVL(AA.DILNLAZ_HODY_DUTY_TM,0),0)) AS DILNLAZ_PUBC_HODY_DUTY_TM,
+                SUM(DECODE(AA.DILNLAZ_HODY_DUTY_YN,'Y',NVL(AA.DILNLAZ_HODY_NTOT_TM,0),0)) AS DILNLAZ_HODY_TOT_NTOT_TM 
+			FROM DLGN0210 AA, DLGN0200 BB
+			WHERE AA.DPOB_CD = BB.DPOB_CD 
+			  AND AA.SYSTEMKEY = BB.SYSTEMKEY
+			  AND AA.DILNLAZ_EXCE_DUTY_YR_MNTH = BB.DILNLAZ_EXCE_DUTY_YR_MNTH
+			  AND AA.PAY_CD = BB.PAY_CD  
+		  AND BB.DPOB_CD = #dpobCd#
+		  AND BB.DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth# 
+		  AND BB.PAY_CD = #payCd#
+		  AND BB.EMYMT_DIV_CD = #emymtDivCd#
+		  ]]>
+		     <isNotEmpty prepend="AND" property="typOccuCd" >
+			 	  BB.TYP_OCCU_CD=#typOccuCd# 
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND"  property="dtilOccuInttnCd" >
+					  BB.DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#  
+				 </isNotEmpty>  
+		         <isNotEmpty prepend="AND" property="systemkey" >
+					 	 BB.SYSTEMKEY=#systemkey#
+				 </isNotEmpty>  
+				    <isNotEmpty prepend="AND" property="businCd" >
+					 	 BB.BUSIN_CD=#businCd#
+				 </isNotEmpty>
+		 GROUP BY BB.DPOB_CD, BB.SYSTEMKEY
+     		    , BB.DILNLAZ_EXCE_DUTY_YR_MNTH,BB.PAY_CD 
+     		    , BB.EMYMT_DIV_CD 
+	</select>	
+	
+</sqlMap>

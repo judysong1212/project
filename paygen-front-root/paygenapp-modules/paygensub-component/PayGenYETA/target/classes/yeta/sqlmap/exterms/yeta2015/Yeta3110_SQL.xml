@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Yeta3110">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="yeta3110SrhVo" type="com.app.exterms.yearendtax.server.vo.Yeta3110SrhVO"/>
+	
+	<resultMap id="yeta3110" class="com.app.exterms.yearendtax.server.vo.Yeta3110VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="edacRvyy" column="EDAC_RVYY" columnIndex="2"/>
+		<result property="settGbcd" column="SETT_GBCD" columnIndex="3"/>
+		<result property="siteNumb" column="SITE_NUMB" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="jeymStdt" column="JEYM_STDT" columnIndex="6"/>
+		<result property="jeymEddt" column="JEYM_EDDT" columnIndex="7"/>
+		<result property="jutrEddt" column="JUTR_EDDT" columnIndex="8"/>
+		<result property="jutrStdt" column="JUTR_STDT" columnIndex="9"/>
+		<result property="siteCtnt" column="SITE_CTNT" columnIndex="10"/>
+		<result property="payrTotl" column="PAYR_TOTL" columnIndex="11"/>
+		<result property="bonsAmnt" column="BONS_AMNT" columnIndex="12"/>
+		<result property="dtmnBtam" column="DTMN_BTAM" columnIndex="13"/>
+		<result property="stckPrft" column="STCK_PRFT" columnIndex="14"/>
+		<result property="unonAmnt" column="UNON_AMNT" columnIndex="15"/>
+		<result property="ofrrExli" column="OFRR_EXLI" columnIndex="16"/>
+		<result property="taxeTotl" column="TAXE_TOTL" columnIndex="17"/>
+		<result property="reseSmam" column="RESE_SMAM" columnIndex="18"/>
+		<result property="earnTaxn" column="EARN_TAXN" columnIndex="19"/>
+		<result property="ihtxTaxn" column="IHTX_TAXN" columnIndex="20"/>
+		<result property="farmTaxn" column="FARM_TAXN" columnIndex="21"/>
+		<result property="annuMuam" column="ANNU_MUAM" columnIndex="22"/>
+		<result property="annuDdam" column="ANNU_DDAM" columnIndex="23"/>
+		<result property="auetMuam" column="AUET_MUAM" columnIndex="24"/>
+		<result property="auetSold" column="AUET_SOLD" columnIndex="25"/>
+		<result property="auetTech" column="AUET_TECH" columnIndex="26"/>
+		<result property="auetFect" column="AUET_FECT" columnIndex="27"/>
+		<result property="auetDdam" column="AUET_DDAM" columnIndex="28"/>
+		<result property="auetDold" column="AUET_DOLD" columnIndex="29"/>
+		<result property="auetDech" column="AUET_DECH" columnIndex="30"/>
+		<result property="auetDect" column="AUET_DECT" columnIndex="31"/>
+		<result property="rtreMuam" column="RTRE_MUAM" columnIndex="32"/>
+		<result property="rtrePsct" column="RTRE_PSCT" columnIndex="33"/>
+		<result property="rtreAnsv" column="RTRE_ANSV" columnIndex="34"/>
+		<result property="rtreDdam" column="RTRE_DDAM" columnIndex="35"/>
+		<result property="rtreDsct" column="RTRE_DSCT" columnIndex="36"/>
+		<result property="rtreDnsv" column="RTRE_DNSV" columnIndex="37"/>
+		<result property="hlthDbam" column="HLTH_DBAM" columnIndex="38"/>
+		<result property="hlthMuam" column="HLTH_MUAM" columnIndex="39"/>
+		<result property="upisJuam" column="UPIS_JUAM" columnIndex="40"/>
+		<result property="upisMuam" column="UPIS_MUAM" columnIndex="41"/>
+		<result property="mangGbyn" column="MANG_GBYN" columnIndex="42"/>
+		<result property="wthdSbyn" column="WTHD_SBYN" columnIndex="43"/>
+		<result property="kybdr" column="KYBDR" columnIndex="44"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="45"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="46"/>
+		<result property="ismt" column="ISMT" columnIndex="47"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="48"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="49"/>
+	</resultMap>
+	
+	<insert id="yeta3110DAO.insertYeta3110_S">
+		<![CDATA[
+			INSERT INTO YETA3110 
+				( DPOB_CD
+				  , EDAC_RVYY
+				  , SETT_GBCD
+				  , SITE_NUMB
+				  , SYSTEMKEY
+				  , JEYM_STDT
+				  , JEYM_EDDT
+				  , JUTR_EDDT
+				  , JUTR_STDT
+				  , SITE_CTNT
+				  , PAYR_TOTL
+				  , BONS_AMNT
+				  , DTMN_BTAM
+				  , STCK_PRFT
+				  , UNON_AMNT
+				  , OFRR_EXLI
+				  , TAXE_TOTL
+				  , RESE_SMAM
+				  , EARN_TAXN
+				  , IHTX_TAXN
+				  , FARM_TAXN
+				  , ANNU_MUAM
+				  , ANNU_DDAM
+				  , AUET_MUAM
+				  , AUET_SOLD
+				  , AUET_TECH
+				  , AUET_FECT
+				  , AUET_DDAM
+				  , AUET_DOLD
+				  , AUET_DECH
+				  , AUET_DECT
+				  , RTRE_MUAM
+				  , RTRE_PSCT
+				  , RTRE_ANSV
+				  , RTRE_DDAM
+				  , RTRE_DSCT
+				  , RTRE_DNSV
+				  , HLTH_DBAM
+				  , HLTH_MUAM
+				  , UPIS_JUAM
+				  , UPIS_MUAM
+				  , MANG_GBYN
+				  , WTHD_SBYN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #edacRvyy#
+				  , #settGbcd#
+				  , #siteNumb#
+				  , #systemkey#
+				  , #jeymStdt#
+				  , #jeymEddt#
+				  , #jutrEddt#
+				  , #jutrStdt#
+				  , #siteCtnt#
+				  , #payrTotl#
+				  , #bonsAmnt#
+				  , #dtmnBtam#
+				  , #stckPrft#
+				  , #unonAmnt#
+				  , #ofrrExli#
+				  , #taxeTotl#
+				  , #reseSmam#
+				  , #earnTaxn#
+				  , #ihtxTaxn#
+				  , #farmTaxn#
+				  , #annuMuam#
+				  , #annuDdam#
+				  , #auetMuam#
+				  , #auetSold#
+				  , #auetTech#
+				  , #auetFect#
+				  , #auetDdam#
+				  , #auetDold#
+				  , #auetDech#
+				  , #auetDect#
+				  , #rtreMuam#
+				  , #rtrePsct#
+				  , #rtreAnsv#
+				  , #rtreDdam#
+				  , #rtreDsct#
+				  , #rtreDnsv#
+				  , #hlthDbam#
+				  , #hlthMuam#
+				  , #upisJuam#
+				  , #upisMuam#
+				  , #mangGbyn#
+				  , #wthdSbyn#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="yeta3110DAO.updateYeta3110_S">
+		<![CDATA[
+			UPDATE YETA3110
+			SET DPOB_CD=#dpobCd#
+				, EDAC_RVYY=#edacRvyy#
+				, SETT_GBCD=#settGbcd#
+				, SITE_NUMB=#siteNumb#
+				, SYSTEMKEY=#systemkey#
+				, JEYM_STDT=#jeymStdt#
+				, JEYM_EDDT=#jeymEddt#
+				, JUTR_EDDT=#jutrEddt#
+				, JUTR_STDT=#jutrStdt#
+				, SITE_CTNT=#siteCtnt#
+				, PAYR_TOTL=#payrTotl#
+				, BONS_AMNT=#bonsAmnt#
+				, DTMN_BTAM=#dtmnBtam#
+				, STCK_PRFT=#stckPrft#
+				, UNON_AMNT=#unonAmnt#
+				, OFRR_EXLI=#ofrrExli#
+				, TAXE_TOTL=#taxeTotl#
+				, RESE_SMAM=#reseSmam#
+				, EARN_TAXN=#earnTaxn#
+				, IHTX_TAXN=#ihtxTaxn#
+				, FARM_TAXN=#farmTaxn#
+				, ANNU_MUAM=#annuMuam#
+				, ANNU_DDAM=#annuDdam#
+				, AUET_MUAM=#auetMuam#
+				, AUET_SOLD=#auetSold#
+				, AUET_TECH=#auetTech#
+				, AUET_FECT=#auetFect#
+				, AUET_DDAM=#auetDdam#
+				, AUET_DOLD=#auetDold#
+				, AUET_DECH=#auetDech#
+				, AUET_DECT=#auetDect#
+				, RTRE_MUAM=#rtreMuam#
+				, RTRE_PSCT=#rtrePsct#
+				, RTRE_ANSV=#rtreAnsv#
+				, RTRE_DDAM=#rtreDdam#
+				, RTRE_DSCT=#rtreDsct#
+				, RTRE_DNSV=#rtreDnsv#
+				, HLTH_DBAM=#hlthDbam#
+				, HLTH_MUAM=#hlthMuam#
+				, UPIS_JUAM=#upisJuam#
+				, UPIS_MUAM=#upisMuam#
+				, MANG_GBYN=#mangGbyn#
+				, WTHD_SBYN=#wthdSbyn#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SITE_NUMB=#siteNumb#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	
+	<delete id="yeta3110DAO.deleteYeta3110_S">
+		<![CDATA[
+			DELETE FROM YETA3110 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SITE_NUMB=#siteNumb#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<!-- 종전근무지 삭제  -->
+		<delete id="yeta3110DAO.fnPayr06430_PAYR435_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3110 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#  
+				]]>
+				 <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                   </isNotEmpty> 
+		    		  			    
+	</delete>
+	
+	
+	<select id="yeta3110DAO.selectYeta3110_S" resultMap="yeta3110">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, EDAC_RVYY
+				, SETT_GBCD
+				, SITE_NUMB
+				, SYSTEMKEY
+				, JEYM_STDT
+				, JEYM_EDDT
+				, JUTR_EDDT
+				, JUTR_STDT
+				, SITE_CTNT
+				, PAYR_TOTL
+				, BONS_AMNT
+				, DTMN_BTAM
+				, STCK_PRFT
+				, UNON_AMNT
+				, OFRR_EXLI
+				, TAXE_TOTL
+				, RESE_SMAM
+				, EARN_TAXN
+				, IHTX_TAXN
+				, FARM_TAXN
+				, ANNU_MUAM
+				, ANNU_DDAM
+				, AUET_MUAM
+				, AUET_SOLD
+				, AUET_TECH
+				, AUET_FECT
+				, AUET_DDAM
+				, AUET_DOLD
+				, AUET_DECH
+				, AUET_DECT
+				, RTRE_MUAM
+				, RTRE_PSCT
+				, RTRE_ANSV
+				, RTRE_DDAM
+				, RTRE_DSCT
+				, RTRE_DNSV
+				, HLTH_DBAM
+				, HLTH_MUAM
+				, UPIS_JUAM
+				, UPIS_MUAM
+				, MANG_GBYN
+				, WTHD_SBYN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YETA3110
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SITE_NUMB=#siteNumb#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+	<select id="yeta3110DAO.selectYeta3110List_D" parameterClass="yeta3110SrhVo" resultClass="egovMap">
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+					SELECT
+									A.DPOB_CD
+									, A.EDAC_RVYY
+									, A.SETT_GBCD
+									, fcBass0300CDNM(A.DPOB_CD, A.SETT_GBCD) AS SETT_GBNM
+									, A.SETT_GBCD AS settGbcdcommCd 
+									, fcBass0300CDNM(A.DPOB_CD, A.SETT_GBCD) AS settGbcdcommCdNm 
+									, A.SITE_NUMB
+									, A.SYSTEMKEY
+									, A.JEYM_STDT
+									, A.JEYM_EDDT
+									, A.JUTR_EDDT
+									, A.JUTR_STDT
+									, A.SITE_CTNT
+									, A.PAYR_TOTL
+									, A.BONS_AMNT
+									, A.DTMN_BTAM
+									, A.STCK_PRFT
+									, A.UNON_AMNT
+									, A.OFRR_EXLI
+									, A.TAXE_TOTL
+									, A.RESE_SMAM
+									, A.EARN_TAXN
+									, A.IHTX_TAXN
+									, A.FARM_TAXN
+									, A.ANNU_MUAM
+									, A.ANNU_DDAM
+									, A.AUET_MUAM
+									, A.AUET_SOLD
+									, A.AUET_TECH
+									, A.AUET_FECT
+									, A.AUET_DDAM
+									, A.AUET_DOLD
+									, A.AUET_DECH
+									, A.AUET_DECT
+									, A.RTRE_MUAM
+									, A.RTRE_PSCT
+									, A.RTRE_ANSV
+									, A.RTRE_DDAM
+									, A.RTRE_DSCT
+									, A.RTRE_DNSV
+									, A.HLTH_DBAM
+									, A.HLTH_MUAM
+									, A.UPIS_JUAM
+									, A.UPIS_MUAM
+									, A.MANG_GBYN
+									, A.WTHD_SBYN
+									, A.KYBDR
+									, A.INPT_DT
+									, A.INPT_ADDR
+									, A.ISMT
+									, A.REVN_DT
+									, A.REVN_ADDR
+									, B.HAN_NM
+					FROM YETA3110 A, PSNL0100 B
+					WHERE
+						A.DPOB_CD = B.DPOB_CD
+							AND A.SYSTEMKEY = B.SYSTEMKEY
+							<isNotEmpty prepend="AND" property="dpobCd">
+								A.DPOB_CD=#dpobCd#
+							</isNotEmpty>
+							<isNotEmpty prepend="AND" property="edacRvyy" >
+								A.EDAC_RVYY=#edacRvyy#
+							</isNotEmpty> 
+							<isNotEmpty prepend="AND" property="settGbcd" >
+								A.SETT_GBCD=#settGbcd#
+							</isNotEmpty> 
+							<isNotEmpty prepend="AND" property="systemkey" >
+								A.SYSTEMKEY=#systemkey#
+							</isNotEmpty>  
+						ORDER BY 
+							A.DPOB_CD DESC
+								, A.EDAC_RVYY DESC
+								, A.SETT_GBCD DESC
+								, A.SITE_NUMB DESC
+								, A.SYSTEMKEY DESC
+			
+			<![CDATA[					
+		) A WHERE ROWNUM <= #lastIndex#
+	)WHERE RNUM >= #firstIndex#
+	]]>
+	</select>	
+	<select id="yeta3110DAO.selectYeta3110ListTotCnt_S" parameterClass="yeta3110SrhVo" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3110 A, PSNL0100 B
+			WHERE 
+				A.DPOB_CD = B.DPOB_CD
+				AND A.SYSTEMKEY = B.SYSTEMKEY
+				<isNotEmpty prepend="AND" property="dpobCd">
+					A.DPOB_CD=#dpobCd#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="edacRvyy" >
+					A.EDAC_RVYY=#edacRvyy#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="settGbcd" >
+					A.SETT_GBCD=#settGbcd#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="systemkey" >
+					A.SYSTEMKEY=#systemkey#
+				</isNotEmpty>  
+	</select>
+
+</sqlMap>

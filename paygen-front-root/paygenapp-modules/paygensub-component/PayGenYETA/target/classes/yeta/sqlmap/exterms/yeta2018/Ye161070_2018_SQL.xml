@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye161070_2018">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ye161070Srh_2018_VO" type="com.app.exterms.yearendtax.server.vo.Ye161070Srh_2018_VO"/>
+	
+	<!-- 
+	<resultMap id="ye161070_2018" class="com.app.exterms.yearendtax.server.vo.Ye161070_2018_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="yr2000PnsnSvngUseAmt" column="YR2000_PNSN_SVNG_USE_AMT" columnIndex="5"/>
+		<result property="yr2000PnsnSvngDdcAmt" column="YR2000_PNSN_SVNG_DDC_AMT" columnIndex="6"/>
+		<result property="smceSbizUseAmt" column="SMCE_SBIZ_USE_AMT" columnIndex="7"/>
+		<result property="smceSbizDdcAmt" column="SMCE_SBIZ_DDC_AMT" columnIndex="8"/>
+		<result property="sbcSvngUseAmt" column="SBC_SVNG_USE_AMT" columnIndex="9"/>
+		<result property="sbcSvngDdcAmt" column="SBC_SVNG_DDC_AMT" columnIndex="10"/>
+		<result property="lbrrPrptSvngUseAmt" column="LBRR_PRPT_SVNG_USE_AMT" columnIndex="11"/>
+		<result property="lbrrPrptSvngDdcAmt" column="LBRR_PRPT_SVNG_DDC_AMT" columnIndex="12"/>
+		<result property="hsngSvngUseAmt" column="HSNG_SVNG_USE_AMT" columnIndex="13"/>
+		<result property="hsngSvngDdcAmt" column="HSNG_SVNG_DDC_AMT" columnIndex="14"/>
+		<result property="hsngIncUseAmtSum" column="HSNG_INC_USE_AMT_SUM" columnIndex="15"/>
+		<result property="hsngIncDdcAmtSum" column="HSNG_INC_DDC_AMT_SUM" columnIndex="16"/>
+		<result property="cpivAsctUseAmt2" column="CPIV_ASCT_USE_AMT2" columnIndex="17"/>
+		<result property="cpivAsctDdcAmt2" column="CPIV_ASCT_DDC_AMT2" columnIndex="18"/>
+		<result property="cpivVntUseAmt2" column="CPIV_VNT_USE_AMT2" columnIndex="19"/>
+		<result property="cpivVntDdcAmt2" column="CPIV_VNT_DDC_AMT2" columnIndex="20"/>
+		<result property="cpivAsctUseAmt1" column="CPIV_ASCT_USE_AMT1" columnIndex="21"/>
+		<result property="cpivAsctDdcAmt1" column="CPIV_ASCT_DDC_AMT1" columnIndex="22"/>
+		<result property="cpivVntUseAmt1" column="CPIV_VNT_USE_AMT1" columnIndex="23"/>
+		<result property="cpivVntDdcAmt1" column="CPIV_VNT_DDC_AMT1" columnIndex="24"/>
+		<result property="cpivAsctUseAmt0" column="CPIV_ASCT_USE_AMT0" columnIndex="25"/>
+		<result property="cpivAsctDdcAmt0" column="CPIV_ASCT_DDC_AMT0" columnIndex="26"/>
+		<result property="cpivVntUseAmt0" column="CPIV_VNT_USE_AMT0" columnIndex="27"/>
+		<result property="cpivVntDdcAmt0" column="CPIV_VNT_DDC_AMT0" columnIndex="28"/>
+		<result property="ivcpInvmUseAmtSum" column="IVCP_INVM_USE_AMT_SUM" columnIndex="29"/>
+		<result property="ivcpInvmDdcAmtSum" column="IVCP_INVM_DDC_AMT_SUM" columnIndex="30"/>
+		<result property="crdcUseAmt" column="CRDC_USE_AMT" columnIndex="31"/>
+		<result property="drtpCardUseAmt" column="DRTP_CARD_USE_AMT" columnIndex="32"/>
+		<result property="cshptUseAmt" column="CSHPT_USE_AMT" columnIndex="33"/>
+		<result property="tdmrUseAmt" column="TDMR_USE_AMT" columnIndex="34"/>
+		<result property="pbtUseAmt" column="PBT_USE_AMT" columnIndex="35"/>
+		<result property="crdcSumUseAmt" column="CRDC_SUM_USE_AMT" columnIndex="36"/>
+		<result property="rdcSumDdcAmt" column="RDC_SUM_DDC_AMT" columnIndex="37"/>
+		<result property="prsCrdcUseAmt1" column="PRS_CRDC_USE_AMT1" columnIndex="38"/>
+		<result property="tyYrPrsCrdcUseAmt" column="TY_YR_PRS_CRDC_USE_AMT" columnIndex="39"/>
+		<result property="pyrPrsAddDdcrtUseAmt" column="PYR_PRS_ADD_DDCRT_USE_AMT" columnIndex="40"/>
+		<result property="tyShfyPrsAddDdcrtUseAmt" column="TY_SHFY_PRS_ADD_DDCRT_USE_AMT" columnIndex="41"/>
+		<result property="emstAsctCntrUseAmt" column="EMST_ASCT_CNTR_USE_AMT" columnIndex="42"/>
+		<result property="emstAsctCntrDdcAmt" column="EMST_ASCT_CNTR_DDC_AMT" columnIndex="43"/>
+		<result property="empMntnSnmcUseAmt" column="EMP_MNTN_SNMC_USE_AMT" columnIndex="44"/>
+		<result property="empMntnSnmcDdcAmt" column="EMP_MNTN_SNMC_DDC_AMT" columnIndex="45"/>
+		<result property="ltrmCniSsUseAmt" column="LTRM_CNI_SS_USE_AMT" columnIndex="46"/>
+		<result property="ltrmCniSsDdcAmt" column="LTRM_CNI_SS_DDC_AMT" columnIndex="47"/>
+		<result property="kybdr" column="KYBDR" columnIndex="48"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="49"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="50"/>
+		<result property="ismt" column="ISMT" columnIndex="51"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="52"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="53"/>
+	</resultMap>
+	 -->
+	
+	
+	<!-- 
+	#############################################################################
+	######################## 2018년도 연말정산 로직 시작 ############################
+	#############################################################################
+	 -->
+	
+	<!-- 
+			, PRS_CRDC_USE_AMT1 			= #prsCrdcUseAmt1#
+			, TY_YR_PRS_CRDC_USE_AMT 		= #tyYrPrsCrdcUseAmt#
+			, PYR_PRS_ADD_DDCRT_USE_AMT 	= #pyrPrsAddDdcrtUseAmt#
+			, TY_SHFY_PRS_ADD_DDCRT_USE_AMT = #tyShfyPrsAddDdcrtUseAmt#	
+	 -->
+	<update id="ye161070_2018_DAO.updateYeta3300ToYe161070tabItem06_S">
+		<![CDATA[
+			UPDATE YE161070
+				SET YR2000_PNSN_SVNG_USE_AMT 			= #yr2000PnsnSvngUseAmt#
+						, SMCE_SBIZ_USE_AMT 			= #smceSbizUseAmt#		
+						, SBC_SVNG_USE_AMT 				= #sbcSvngUseAmt#		
+						, LBRR_PRPT_SVNG_USE_AMT 		= #lbrrPrptSvngUseAmt#	
+						, HSNG_SVNG_USE_AMT 			= #hsngSvngUseAmt#	
+						, HSNG_INC_USE_AMT_SUM			= #hsngIncUseAmtSum#	
+						, CPIV16_ASCT_USE_AMT 			= #cpiv16AsctUseAmt#	
+						, CPIV16_VNT_USE_AMT 			= #cpiv16VntUseAmt#	
+						, CPIV17_ASCT_USE_AMT 			= #cpiv17AsctUseAmt#	
+						, CPIV17_VNT_USE_AMT 			= #cpiv17VntUseAmt#
+						, CPIV18_ASCT_USE_AMT 			= #cpiv18AsctUseAmt#	
+						, CPIV18_VNT_USE_AMT 			= #cpiv18VntUseAmt#	
+						, IVCP_INVM_USE_AMT_SUM 		= #ivcpInvmUseAmtSum#
+						, ISMT							= #ismt#
+						, REVN_DT						= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')	
+						, REVN_ADDR						= #revnAddr#
+						
+				WHERE DPOB_CD			=#dpobCd#
+					AND YRTX_BLGG_YR	=#yrtxBlggYr#
+					AND CLUT_SEPT_CD	=#clutSeptCd#
+					AND SYSTEMKEY		=#systemkey#
+				]]>
+	</update>
+	
+	<update id="ye161070_2018_DAO.updateYeta3300ToYe161070tabItem07_S">
+		<![CDATA[
+			UPDATE YE161070
+				SET EMST_ASCT_CNTR_USE_AMT				= #emstAsctCntrUseAmt#
+						, EMP_MNTN_SNMC_USE_AMT 		= #empMntnSnmcUseAmt#			
+						, ISMT							= #ismt#
+						, REVN_DT						= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')	
+						, REVN_ADDR						= #revnAddr#
+						
+				WHERE DPOB_CD			=#dpobCd#
+					AND YRTX_BLGG_YR	=#yrtxBlggYr#
+					AND CLUT_SEPT_CD	=#clutSeptCd#
+					AND SYSTEMKEY		=#systemkey#
+				]]>
+	</update>
+	
+	
+	
+	<select id="ye161070_2018_DAO.seleteYeta3300ToYe161070_D" parameterClass="ye161070Srh_2018_VO" resultClass="egovMap">
+		<![CDATA[
+			SELECT DPOB_CD							
+					, YRTX_BLGG_YR					
+					, CLUT_SEPT_CD					
+					, SYSTEMKEY						
+					, YR2000_PNSN_SVNG_USE_AMT		
+					, YR2000_PNSN_SVNG_DDC_AMT		
+					, SMCE_SBIZ_USE_AMT				
+					, SMCE_SBIZ_DDC_AMT				
+					, SBC_SVNG_USE_AMT				
+					, SBC_SVNG_DDC_AMT				
+					, LBRR_PRPT_SVNG_USE_AMT		
+					, LBRR_PRPT_SVNG_DDC_AMT		
+					, HSNG_SVNG_USE_AMT				
+					, HSNG_SVNG_DDC_AMT				
+					, HSNG_INC_USE_AMT_SUM			
+					, HSNG_INC_DDC_AMT_SUM			
+					, CPIV16_ASCT_USE_AMT			
+					, CPIV16_ASCT_DDC_AMT			
+					, CPIV16_VNT_USE_AMT			
+					, CPIV16_VNT_DDC_AMT			
+					, CPIV17_ASCT_USE_AMT			
+					, CPIV17_ASCT_DDC_AMT			
+					, CPIV17_VNT_USE_AMT			
+					, CPIV17_VNT_DDC_AMT			
+					, CPIV18_ASCT_USE_AMT			
+					, CPIV18_ASCT_DDC_AMT			
+					, CPIV18_VNT_USE_AMT			
+					, CPIV18_VNT_DDC_AMT			
+					, IVCP_INVM_USE_AMT_SUM			
+					, IVCP_INVM_DDC_AMT_SUM			
+					, CRDC_USE_AMT					
+					, DRTP_CARD_USE_AMT				
+					, CSHPT_USE_AMT					
+					, TDMR_USE_AMT					
+					, PBT_USE_AMT					
+					, BOOK_SHOW_AMT					
+					, CRDC_SUM_USE_AMT				
+					, RDC_SUM_DDC_AMT				
+					, PRS_CRDC_USE_AMT1				
+					, TY_YR_PRS_CRDC_USE_AMT		
+					, PYR_PRS_ADD_DDCRT_USE_AMT		
+					, TY_SHFY_PRS_ADD_DDCRT_USE_AMT	
+					, EMST_ASCT_CNTR_USE_AMT		
+					, EMST_ASCT_CNTR_DDC_AMT		
+					, EMP_MNTN_SNMC_USE_AMT			
+					, EMP_MNTN_SNMC_DDC_AMT			
+					, LTRM_CNI_SS_USE_AMT			
+					, LTRM_CNI_SS_DDC_AMT			
+							
+			  FROM YE161070
+			  
+			WHERE DPOB_CD 			= #dpobCd#				
+				AND YRTX_BLGG_YR 	= #yrtxBlggYr#	
+				AND CLUT_SEPT_CD	= #clutSeptCd#		
+				AND SYSTEMKEY	  	= #systemkey#
+		]]>
+	</select>
+		
+	
+	<!-- 
+	#############################################################################
+	######################## 2018년도 연말정산 로직 종료 ############################
+	#############################################################################
+	 -->	
+	
+
+<!-- +++++++++++++++++++++++++ 2018년도 귀속 로직  시작 ++++++++++++++++++++++++++++++ -->
+
+<delete id="ye161070_2018_DAO.deleteYetaP310001_Ye161070VO_2018_Delete_S">
+		<![CDATA[
+			DELETE FROM YE161070 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+</delete>
+
+<!-- +++++++++++++++++++++++++ 2018년도 귀속 로직  종료 ++++++++++++++++++++++++++++++ -->	
+	
+
+</sqlMap>

@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcPayr0305">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgPayr0305SrhVO" type="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0305SrhVO"/>
+	
+	<resultMap id="infcPkgPayr0305" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0305VO">
+	    <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="pymtYrMnth" column="PYMT_YR_MNTH" columnIndex="2"/>
+		<result property="payCd" column="PAY_CD" columnIndex="3"/>
+		<result property="payrSeilNum" column="PAYR_SEIL_NUM" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="workIncmTxtnSum" column="WORK_INCM_TXTN_SUM" columnIndex="6"/>
+		<result property="paySectiCtrSum" column="PAY_SECTI_CTR_SUM" columnIndex="7"/>
+		<result property="yrlyTotPayQNty" column="YRLY_TOT_PAY_Q_NTY" columnIndex="8"/>
+		<result property="eandIncmDducSum" column="EAND_INCM_DDUC_SUM" columnIndex="9"/>
+		<result property="eandIncmSum" column="EAND_INCM_SUM" columnIndex="10"/>
+		<result property="hmnDducNumPeplNum" column="HMN_DDUC_NUM_PEPL_NUM" columnIndex="11"/>
+		<result property="hmnDducTwenSqntsChdnNum" column="HMN_DDUC_TWEN_SQNTS_CHDN_NUM" columnIndex="12"/>
+		<result property="hmnDducSum" column="HMN_DDUC_SUM" columnIndex="13"/>
+		<result property="antyPrmmDducSum" column="ANTY_PRMM_DDUC_SUM" columnIndex="14"/>
+		<result property="spclIncmDducEtcSum" column="SPCL_INCM_DDUC_ETC_SUM" columnIndex="15"/>
+		<result property="txtnStdSum" column="TXTN_STD_SUM" columnIndex="16"/>
+		<result property="txtnStdApptnTxrt" column="TXTN_STD_APPTN_TXRT" columnIndex="17"/>
+		<result property="txtnStdPgivDducSum" column="TXTN_STD_PGIV_DDUC_SUM" columnIndex="18"/>
+		<result property="calcTxAmnt" column="CALC_TX_AMNT" columnIndex="19"/>
+		<result property="eandIncmTxAmnt" column="EAND_INCM_TX_AMNT" columnIndex="20"/>
+		<result property="deinTxAmnt" column="DEIN_TX_AMNT" columnIndex="21"/>
+		<result property="txtbSimfTxs" column="TXTB_SIMF_TXS" columnIndex="22"/>
+		<result property="locIncmTxAmt" column="LOC_INCM_TX_AMT" columnIndex="23"/>
+		<result property="kybdr" column="KYBDR" columnIndex="24"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="25"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="26"/>
+		<result property="ismt" column="ISMT" columnIndex="27"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="28"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="29"/> 
+		<result property="addIncmTxRate" column="ADD_INCM_TX_RATE" columnIndex="30"/>
+		<result property="turtyIncmTxQnty" column="TURTY_INCM_TX_QNTY" columnIndex="31"/>
+		<result property="mnlTxtbSimfTxs" column="MNL_TXTB_SIMF_TXS" columnIndex="32"/>
+		<result property="mnlLocTxAmt" column="MNL_LOC_TX_AMT" columnIndex="33"/>
+		<result property="mnlTxtbSimfYn" column="MNL_TXTB_SIMF_YN" columnIndex="34"/> 
+	</resultMap>
+	
+	<insert id="infcPkgPayr0305DAO.insertPayr0305_S">
+		<![CDATA[
+			INSERT INTO PAYR0305 
+				( DPOB_CD
+				  , PYMT_YR_MNTH
+				  , PAY_CD
+				  , PAYR_SEIL_NUM
+				  , SYSTEMKEY
+				  , WORK_INCM_TXTN_SUM
+				  , PAY_SECTI_CTR_SUM
+				  , YRLY_TOT_PAY_Q_NTY
+				  , EAND_INCM_DDUC_SUM
+				  , EAND_INCM_SUM
+				  , HMN_DDUC_NUM_PEPL_NUM
+				  , HMN_DDUC_TWEN_SQNTS_CHDN_NUM
+				  , HMN_DDUC_SUM
+				  , ANTY_PRMM_DDUC_SUM
+				  , SPCL_INCM_DDUC_ETC_SUM
+				  , TXTN_STD_SUM
+				  , TXTN_STD_APPTN_TXRT
+				  , TXTN_STD_PGIV_DDUC_SUM
+				  , CALC_TX_AMNT
+				  , EAND_INCM_TX_AMNT
+				  , DEIN_TX_AMNT
+				  , TXTB_SIMF_TXS
+				  , LOC_INCM_TX_AMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR 
+				  , ADD_INCM_TX_RATE
+				  , TURTY_INCM_TX_QNTY)
+			VALUES ( #dpobCd#
+				  , #pymtYrMnth#
+				  , #payCd#
+				  , #payrSeilNum#
+				  , #systemkey#
+				  , #workIncmTxtnSum#
+				  , #paySectiCtrSum#
+				  , #yrlyTotPayQNty#
+				  , #eandIncmDducSum#
+				  , #eandIncmSum#
+				  , #hmnDducNumPeplNum#
+				  , #hmnDducTwenSqntsChdnNum#
+				  , #hmnDducSum#
+				  , #antyPrmmDducSum#
+				  , #spclIncmDducEtcSum#
+				  , #txtnStdSum#
+				  , #txtnStdApptnTxrt#
+				  , #txtnStdPgivDducSum#
+				  , #calcTxAmnt#
+				  , #eandIncmTxAmnt#
+				  , #deinTxAmnt#
+				  , #txtbSimfTxs#
+				  , #locIncmTxAmt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #addIncmTxRate#
+				  , #turtyIncmTxQnty#  )
+		]]>
+	</insert>
+	
+	<update id="infcPkgPayr0305DAO.updatePayr0305_S">
+		<![CDATA[
+				UPDATE PAYR0305
+			SET DPOB_CD=#dpobCd#
+				, PYMT_YR_MNTH=#pymtYrMnth#
+				, PAY_CD=#payCd#
+				, PAYR_SEIL_NUM=#payrSeilNum#
+				, SYSTEMKEY=#systemkey#
+				, WORK_INCM_TXTN_SUM=#workIncmTxtnSum#
+				, PAY_SECTI_CTR_SUM=#paySectiCtrSum#
+				, YRLY_TOT_PAY_Q_NTY=#yrlyTotPayQNty#
+				, EAND_INCM_DDUC_SUM=#eandIncmDducSum#
+				, EAND_INCM_SUM=#eandIncmSum#
+				, HMN_DDUC_NUM_PEPL_NUM=#hmnDducNumPeplNum#
+				, HMN_DDUC_TWEN_SQNTS_CHDN_NUM=#hmnDducTwenSqntsChdnNum#
+				, HMN_DDUC_SUM=#hmnDducSum#
+				, ANTY_PRMM_DDUC_SUM=#antyPrmmDducSum#
+				, SPCL_INCM_DDUC_ETC_SUM=#spclIncmDducEtcSum#
+				, TXTN_STD_SUM=#txtnStdSum#
+				, TXTN_STD_APPTN_TXRT=#txtnStdApptnTxrt#
+				, TXTN_STD_PGIV_DDUC_SUM=#txtnStdPgivDducSum#
+				, CALC_TX_AMNT=#calcTxAmnt#
+				, EAND_INCM_TX_AMNT=#eandIncmTxAmnt#
+				, DEIN_TX_AMNT=#deinTxAmnt#
+				, TXTB_SIMF_TXS=#txtbSimfTxs#
+				, LOC_INCM_TX_AMT=#locIncmTxAmt# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+				, ADD_INCM_TX_RATE=#addIncmTxRate#
+				, TURTY_INCM_TX_QNTY=#turtyIncmTxQnty#
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	 
+	<update id="infcPkgPayr0305DAO.updatePayr0302ToPayr0305_S">
+<![CDATA[
+				UPDATE PAYR0305
+			SET  
+				  MNL_TXTB_SIMF_TXS=#mnlTxtbSimfTxs# 
+				, MNL_LOC_TX_AMT=#mnlLocTxAmt#
+				, MNL_TXTB_SIMF_YN=#mnlTxtbSimfYn#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+				
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+</update>
+	
+	
+	<delete id="infcPkgPayr0305DAO.deletePayr0305_S">
+		<![CDATA[
+		DELETE FROM PAYR0305 
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	
+		<delete id="infcPkgPayr0305DAO.deletePayCalculationPayr0305_S">
+		<![CDATA[
+			DELETE FROM PAYR0305 
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum# 
+					]]>						
+						<isNotEmpty prepend="AND" property="systemkey" >
+					 	  SYSTEMKEY=#systemkey#
+				        </isNotEmpty>  	 
+	</delete>
+	
+	
+	
+	<select id="infcPkgPayr0305DAO.selectPayr0305_S" resultMap="infcPkgPayr0305">
+		<![CDATA[
+				SELECT
+				DPOB_CD
+				, PYMT_YR_MNTH
+				, PAY_CD
+				, PAYR_SEIL_NUM
+				, SYSTEMKEY
+				, WORK_INCM_TXTN_SUM
+				, PAY_SECTI_CTR_SUM
+				, YRLY_TOT_PAY_Q_NTY
+				, EAND_INCM_DDUC_SUM
+				, EAND_INCM_SUM
+				, HMN_DDUC_NUM_PEPL_NUM
+				, HMN_DDUC_TWEN_SQNTS_CHDN_NUM
+				, HMN_DDUC_SUM
+				, ANTY_PRMM_DDUC_SUM
+				, SPCL_INCM_DDUC_ETC_SUM
+				, TXTN_STD_SUM
+				, TXTN_STD_APPTN_TXRT
+				, TXTN_STD_PGIV_DDUC_SUM
+				, CALC_TX_AMNT
+				, EAND_INCM_TX_AMNT
+				, DEIN_TX_AMNT
+				, TXTB_SIMF_TXS
+				, LOC_INCM_TX_AMT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, ADD_INCM_TX_RATE
+				, TURTY_INCM_TX_QNTY
+				    , MNL_TXTB_SIMF_TXS
+        		, MNL_LOC_TX_AMT
+        		, MNL_TXTB_SIMF_YN
+			FROM PAYR0305
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+	<select id="infcPkgPayr0305DAO.selectPayr0305List_D" parameterClass="infcPkgPayr0305SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT            AA.DPOB_CD
+                                , BB.EMYMT_DIV_CD
+                                , fcBass0300CDNM(AA.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM
+                                , BB.HAN_NM
+                                , BB.RESN_REGN_NUM
+                                , BB.DEPT_CD
+                                , fcBass0400CDNM(AA.DPOB_CD,BB.DEPT_CD,'2') AS DEPT_NM  
+                                , AA.PYMT_YR_MNTH
+                                , AA.PAY_CD
+                                , fcBass0300CDNM(AA.DPOB_CD,AA.PAY_CD) AS PAY_NM
+                                , AA.SYSTEMKEY
+                                , FF.PAYR_MANG_DEPT_CD
+                               ,  (SELECT  PAY_MANGE_DEPT_NM 
+                                    FROM BASS0150 SS
+                                    WHERE   SS.DPOB_CD = AA.DPOB_CD
+                                     AND    SS.PAYR_MANG_DEPT_CD = FF.PAYR_MANG_DEPT_CD ) AS PAYR_MANG_DEPT_NM  
+                                , AA.PAYR_SEIL_NUM
+                                , AA.WORK_INCM_TXTN_SUM
+                                , AA.PAY_SECTI_CTR_SUM
+                                , AA.YRLY_TOT_PAY_Q_NTY
+                                , AA.EAND_INCM_DDUC_SUM
+                                , AA.HMN_DDUC_NUM_PEPL_NUM
+                                , AA.HMN_DDUC_TWEN_SQNTS_CHDN_NUM
+                                , AA.HMN_DDUC_SUM
+                                , AA.ANTY_PRMM_DDUC_SUM
+                                , AA.SPCL_INCM_DDUC_ETC_SUM
+                                , AA.TXTN_STD_SUM
+                                , AA.TXTN_STD_APPTN_TXRT
+                                , AA.TXTN_STD_PGIV_DDUC_SUM
+                                , AA.CALC_TX_AMNT
+                                , AA.EAND_INCM_TX_AMNT
+                                , AA.DEIN_TX_AMNT
+                                , AA.TXTB_SIMF_TXS
+                                , AA.KYBDR
+                                , AA.INPT_DT
+                                , AA.INPT_ADDR
+                                , AA.ISMT
+                                , AA.REVN_DT
+                                , AA.REVN_ADDR
+                                ,AA.EAND_INCM_SUM
+                                ,AA.LOC_INCM_TX_AMT  
+                                , AA.ADD_INCM_TX_RATE
+			                	, AA.TURTY_INCM_TX_QNTY
+			                	    , AA.MNL_TXTB_SIMF_TXS
+        		, AA.MNL_LOC_TX_AMT
+        		, AA.MNL_TXTB_SIMF_YN
+                        FROM PAYR0305 AA, PAYR0304 BB ,PAYR0300 FF 
+                       WHERE AA.DPOB_CD  =  BB.DPOB_CD
+                         AND AA.PYMT_YR_MNTH = BB.PYMT_YR_MNTH 
+                         AND AA.SYSTEMKEY = BB.SYSTEMKEY
+                         AND AA.PAY_CD = BB.PAY_CD 
+                         AND AA.PAYR_SEIL_NUM  = BB.PAYR_SEIL_NUM 
+                         AND AA.DPOB_CD = FF.DPOB_CD
+                         AND AA.PYMT_YR_MNTH = FF.PYMT_YR_MNTH
+                         AND AA.PAY_CD  = FF.PAY_CD  
+                         AND AA.PAYR_SEIL_NUM  = FF.PAYR_SEIL_NUM  
+                           <isNotEmpty prepend="AND" property="dpobCd" >
+					 	AA.DPOB_CD=#dpobCd#
+				       </isNotEmpty> 
+				          <isNotEmpty prepend="AND" property="pymtYrMnth" >
+					 	AA.PYMT_YR_MNTH = #pymtYrMnth# 
+				       </isNotEmpty> 
+				        <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	BB.EMYMT_DIV_CD=#emymtDivCd#
+				       </isNotEmpty> 
+				        <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	BB.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				       </isNotEmpty>  
+				       <isNotEmpty prepend="AND" property="payCd" >
+					 	AA.PAY_CD=#payCd#
+				       </isNotEmpty>   
+                         AND EXISTS  (
+                                     SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' ))) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                           
+                                          )  
+                       <isNotEmpty prepend="AND" property="businCd" >
+					 	BB.BUSIN_CD=#businCd#
+				       </isNotEmpty> 
+				       <isNotEmpty property="typOccuCd" prepend="AND">
+							<![CDATA[
+							 BB.TYP_OCCU_CD
+							]]>
+							<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+							 #typOccuCdArr[]#
+							</iterate>
+							</isNotEmpty>  
+						 <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>    
+				         <isNotEmpty prepend="AND" property="systemkey" >
+					 	BB.SYSTEMKEY=#systemkey#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="hanNm" >
+					 	BB.HAN_NM LIKE '%' || #hanNm# || '%'
+				       </isNotEmpty>  
+				             
+                        ORDER BY 
+                              AA.PYMT_YR_MNTH DESC
+                            , FF.PAYR_MANG_DEPT_CD ASC
+                            , AA.PAY_CD ASC 
+                              ,(SELECT LPAD(DEPT_RANK,5,'0')  
+                               FROM BASS0400 DD
+                               WHERE DD.DEPT_CD = BB.DEPT_CD
+                                 AND DD.DPOB_CD = BB.DPOB_CD) ASC 
+                            , BB.RESN_REGN_NUM ASC
+				 
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgPayr0305DAO.selectPayr0305ListTotCnt_S" parameterClass="infcPkgPayr0305SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			    FROM PAYR0305 AA, PAYR0304 BB ,PAYR0300 FF 
+                       WHERE AA.DPOB_CD  =  BB.DPOB_CD
+                         AND AA.PYMT_YR_MNTH = BB.PYMT_YR_MNTH 
+                         AND AA.SYSTEMKEY = BB.SYSTEMKEY
+                         AND AA.PAY_CD = BB.PAY_CD 
+                         AND AA.PAYR_SEIL_NUM  = BB.PAYR_SEIL_NUM 
+                         AND AA.DPOB_CD = FF.DPOB_CD
+                         AND AA.PYMT_YR_MNTH = FF.PYMT_YR_MNTH
+                         AND AA.PAY_CD  = FF.PAY_CD  
+                         AND AA.PAYR_SEIL_NUM  = FF.PAYR_SEIL_NUM  
+                           <isNotEmpty prepend="AND" property="dpobCd" >
+					 	AA.DPOB_CD=#dpobCd#
+				       </isNotEmpty> 
+				          <isNotEmpty prepend="AND" property="pymtYrMnth" >
+					 	AA.PYMT_YR_MNTH = #pymtYrMnth# 
+				       </isNotEmpty> 
+				        <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	BB.EMYMT_DIV_CD=#emymtDivCd#
+				       </isNotEmpty> 
+				        <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	BB.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				       </isNotEmpty>  
+				       <isNotEmpty prepend="AND" property="payCd" >
+					 	AA.PAY_CD=#payCd#
+				       </isNotEmpty>   
+                         AND EXISTS  (
+                                     SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                           
+                                          )  
+                       <isNotEmpty prepend="AND" property="businCd" >
+					 	BB.BUSIN_CD=#businCd#
+				       </isNotEmpty> 
+				        <isNotEmpty property="typOccuCd" prepend="AND">
+							<![CDATA[
+							 BB.TYP_OCCU_CD
+							]]>
+							<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+							 #typOccuCdArr[]#
+							</iterate>
+							</isNotEmpty>  
+						   <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>    
+				       <isNotEmpty prepend="AND" property="systemkey" >
+					 	BB.SYSTEMKEY=#systemkey#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="hanNm" >
+					 	BB.HAN_NM LIKE '%' || #hanNm# || '%'
+				       </isNotEmpty> 
+	</select>
+
+</sqlMap>

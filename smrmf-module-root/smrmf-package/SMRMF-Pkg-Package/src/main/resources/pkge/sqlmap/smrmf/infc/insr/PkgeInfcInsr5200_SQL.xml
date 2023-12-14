@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInsr5200">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="pkgeInsr5200SerarchVO" type="com.app.smrmf.infc.insurance.server.vo.InfcPkgInsr5200SrhVO"/> 
+	
+	<resultMap id="pkgeInsr5200" class="com.app.smrmf.infc.insurance.server.vo.InfcPkgInsr5200VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="dducYrMnth" column="DDUC_YR_MNTH" columnIndex="3"/>
+		<result property="emymtSeilNum" column="EMYMT_SEIL_NUM" columnIndex="4"/>
+		<result property="iposYrMnth" column="IPOS_YR_MNTH" columnIndex="5"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="6"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="7"/>
+		<result property="umytInsrBgnnDt" column="UMYT_INSR_BGNN_DT" columnIndex="8"/>
+		<result property="umytInsrEndDt" column="UMYT_INSR_END_DT" columnIndex="9"/>
+		<result property="mnthAvgPayMnthAmnt" column="MNTH_AVG_PAY_MNTH_AMNT" columnIndex="10"/>
+		<result property="cmpttnWkppUneplrtSum" column="CMPTTN_WKPP_UNEPLRT_SUM" columnIndex="11"/>
+		<result property="cmpttnEplrUneplrtSum" column="CMPTTN_EPLR_UNEPLRT_SUM" columnIndex="12"/>
+		<result property="cmpttnEplrFncdsnInsurSum" column="CMPTTN_EPLR_FNCDSN_INSUR_SUM" columnIndex="13"/>
+		<result property="recpttnWkppUneplrtSum" column="RECPTTN_WKPP_UNEPLRT_SUM" columnIndex="14"/>
+		<result property="recpttnEplrUneplrtSum" column="RECPTTN_EPLR_UNEPLRT_SUM" columnIndex="15"/>
+		<result property="recpttnEplrFncdsnSum" column="RECPTTN_EPLR_FNCDSN_SUM" columnIndex="16"/>
+		<result property="clutPayTotAmnt" column="CLUT_PAY_TOT_AMNT" columnIndex="17"/>
+		<result property="clutWkppUneplrtSum" column="CLUT_WKPP_UNEPLRT_SUM" columnIndex="18"/>
+		<result property="clutEplrUneplrtSum" column="CLUT_EPLR_UNEPLRT_SUM" columnIndex="19"/>
+		<result property="clutEplrFncdsnSum" column="CLUT_EPLR_FNCDSN_SUM" columnIndex="20"/>
+		<result property="umytInsrApmrt" column="UMYT_INSR_APMRT" columnIndex="21"/>
+		<result property="payCalcEmymtInsurSum" column="PAY_CALC_EMYMT_INSUR_SUM" columnIndex="22"/>
+		<result property="indvUneplrtPymtAggrSum" column="INDV_UNEPLRT_PYMT_AGGR_SUM" columnIndex="23"/>
+		<result property="eplrUneplrtPymtAggrSum" column="EPLR_UNEPLRT_PYMT_AGGR_SUM" columnIndex="24"/>
+		<result property="eplrFncdsnAggrSum" column="EPLR_FNCDSN_AGGR_SUM" columnIndex="25"/>
+		<result property="umytPayrDducYrMnth" column="UMYT_PAYR_DDUC_YR_MNTH" columnIndex="26"/>
+		<result property="umytInsrPrcsDt" column="UMYT_INSR_PRCS_DT" columnIndex="27"/>
+		<result property="umytInsrPrcsYn" column="UMYT_INSR_PRCS_YN" columnIndex="28"/>
+		<result property="umytInsrPrmmSrd" column="UMYT_INSR_PRMM_SRD" columnIndex="29"/>
+		<result property="divdPymtDivCd" column="DIVD_PYMT_DIV_CD" columnIndex="30"/>
+		<result property="divdPymt" column="DIVD_PYMT" columnIndex="31"/>
+		<result property="kybdr" column="KYBDR" columnIndex="32"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="33"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="34"/>
+		<result property="ismt" column="ISMT" columnIndex="35"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="36"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="37"/>
+	</resultMap>
+	
+	  
+	<!-- 20170411 - 급여 반영  후 처리 작업 진행  -->
+	<update id="infcPkgInsr5200DAO.updatePayrToInsr5200">
+		<![CDATA[
+			UPDATE INSR5200
+			SET     UMYT_INSR_PRCS_DT 	= TO_CHAR(SYSDATE, 'YYYYMMDD')	        /*  처리일자  */
+				  , UMYT_INSR_PRCS_YN  	= 'Y'				                    /*   처리여부  */ 
+				  , ISMT		 = #ismt#										/* 수정자	*/
+				  , REVN_DT		 = TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')			/* 수정일자	*/
+				  , REVN_ADDR	 = #revnAddr#									/* 수정주소	*/
+				WHERE DPOB_CD=#dpobCd#
+				  AND SYSTEMKEY=#systemkey#
+				  AND UMYT_PAYR_DDUC_YR_MNTH=#umytPayrDducYrMnth#
+				 
+		]]>
+	</update> 
+	<!--  AND EMYMT_SEIL_NUM=#emymtSeilNum# -->
+	
+	<!-- 20170411 - 급여 반영  후 초기화 처리  -->
+	<update id="infcPkgInsr5200DAO.updatePayCancelInsr5200">
+		<![CDATA[
+			UPDATE	INSR5200
+			SET UMYT_INSR_PRCS_DT	 = TO_CHAR(SYSDATE, 'YYYYMMDD')	        /*  처리일자  */
+			  , UMYT_INSR_PRCS_YN	= 'N'			                        /*   처리여부  */ 
+	          , ISMT		 = #ismt#										/* 수정자	*/
+		      , REVN_DT		 = TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')			/* 수정일자	*/
+		      , REVN_ADDR	 = #revnAddr#									/* 수정주소	*/
+			WHERE	DPOB_CD		  =	#dpobCd#
+			AND		UMYT_PAYR_DDUC_YR_MNTH=#umytPayrDducYrMnth#
+			AND		SYSTEMKEY	  =	#systemkey#
+		]]>
+	</update>
+
+</sqlMap>

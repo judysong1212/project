@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PdfC202m_2023">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="pdfC202mSrh_2023_VO" type="com.app.exterms.yearendtax.server.vo.PdfC202mSrh_2023_VO"/>
+	
+	<resultMap id="pdfC202m_2023" class="com.app.exterms.yearendtax.server.vo.PdfC202m_2023_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="3"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="4"/>
+		<result property="jbEdiSeilNum" column="JB_EDI_SEIL_NUM" columnIndex="5"/>
+		<result property="jobEdiAmtMm" column="JOB_EDI_AMT_MM" columnIndex="6"/>
+		<result property="kybdr" column="KYBDR" columnIndex="7"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="8"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="9"/>
+		<result property="ismt" column="ISMT" columnIndex="10"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="11"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="12"/>
+	</resultMap>
+	
+	<insert id="pdfC202m_2023_DAO.insertPdfC202m_S">
+		<![CDATA[
+			INSERT INTO PDF_C202M 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , JB_EDI_SEIL_NUM
+				  , JOB_EDI_AMT_MM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #jbEdiSeilNum#
+				  , #jobEdiAmtMm#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="pdfC202m_2023_DAO.updatePdfC202m_S">
+		<![CDATA[
+			UPDATE PDF_C202M
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, JB_EDI_SEIL_NUM=#jbEdiSeilNum#
+				, JOB_EDI_AMT_MM=#jobEdiAmtMm#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND JB_EDI_SEIL_NUM=#jbEdiSeilNum#
+				]]>
+	</update>
+	
+	<delete id="pdfC202m_2023_DAO.deletePdfC202m_S">
+		<![CDATA[
+			DELETE FROM PDF_C202M 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND JB_EDI_SEIL_NUM=#jbEdiSeilNum#
+				]]>
+	</delete>
+	
+	<select id="pdfC202m_2023_DAO.selectPdfC202m_S" resultMap="pdfC202m_2023">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, JB_EDI_SEIL_NUM
+				, JOB_EDI_AMT_MM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PDF_C202M
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND JB_EDI_SEIL_NUM=#jbEdiSeilNum#
+				]]>
+	</select>
+	
+	<select id="pdfC202m_2023_DAO.selectPdfC202mList_D" parameterClass="pdfC202mSrh_2023_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, JB_EDI_SEIL_NUM
+								, JOB_EDI_AMT_MM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PDF_C202M
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, JB_EDI_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="pdfC202m_2023_DAO.selectPdfC202mListTotCnt_S" parameterClass="pdfC202mSrh_2023_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PDF_C202M
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye167410">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYe167410SrhVO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgYe167410SrhVO"/>
+	
+	<resultMap id="infcPkgYe167410" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgYe167410VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="3"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="4"/>
+		<result property="formCd" column="FORM_CD" columnIndex="5"/>
+		<result property="tnm" column="TNM" columnIndex="6"/>
+		<result property="bsnoEncCntn" column="BSNO_ENC_CNTN" columnIndex="7"/>
+		<result property="fnm" column="FNM" columnIndex="8"/>
+		<result property="resno" column="RESNO" columnIndex="9"/>
+		<result property="adr" column="ADR" columnIndex="10"/>
+		<result property="pfbAdr" column="PFB_ADR" columnIndex="11"/>
+		<result property="kybdr" column="KYBDR" columnIndex="12"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="13"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="14"/>
+		<result property="ismt" column="ISMT" columnIndex="15"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="16"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="17"/>
+	</resultMap>
+	
+	<insert id="infcPkgYe167410DAO.insertYe167410_S">
+		<![CDATA[
+			INSERT INTO YE167410 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , FORM_CD
+				  , TNM
+				  , BSNO_ENC_CNTN
+				  , FNM
+				  , RESNO
+				  , ADR
+				  , PFB_ADR
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #formCd#
+				  , #tnm#
+				  , #bsnoEncCntn#
+				  , #fnm#
+				  , #resno#
+				  , #adr#
+				  , #pfbAdr#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgYe167410DAO.updateYe167410_S">
+		<![CDATA[
+			UPDATE YE167410
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, FORM_CD=#formCd#
+				, TNM=#tnm#
+				, BSNO_ENC_CNTN=#bsnoEncCntn#
+				, FNM=#fnm#
+				, RESNO=#resno#
+				, ADR=#adr#
+				, PFB_ADR=#pfbAdr#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+				]]>
+	</update>
+	
+	<delete id="infcPkgYe167410DAO.deleteYe167410_S">
+		<![CDATA[
+			DELETE FROM YE167410 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+				]]>
+	</delete>
+	
+	<select id="infcPkgYe167410DAO.selectYe167410_S" resultMap="infcPkgYe167410">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, FORM_CD
+				, TNM
+				, BSNO_ENC_CNTN
+				, FNM
+				, RESNO
+				, ADR
+				, PFB_ADR
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE167410
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+				]]>
+	</select>
+	
+	<select id="infcPkgYe167410DAO.selectYe167410List_D" parameterClass="infcPkgYe167410SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, FORM_CD
+								, TNM
+								, BSNO_ENC_CNTN
+								, FNM
+								, RESNO
+								, ADR
+								, PFB_ADR
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE167410
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgYe167410DAO.selectYe167410ListTotCnt_S" parameterClass="infcPkgYe167410SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE167410
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

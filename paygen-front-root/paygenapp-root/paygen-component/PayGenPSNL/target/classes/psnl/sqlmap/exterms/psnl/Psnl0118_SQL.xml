@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0118">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="psnl0118Dto" type="com.app.exterms.personal.client.dto.Psnl0118DTO"/>
+	<typeAlias  alias="psnl0118SerarchVO" type="com.app.exterms.personal.server.vo.Psnl0118DefaultVO"/>
+	<typeAlias  alias="psnl0118Vo" type="com.app.exterms.personal.server.vo.Psnl0118VO"/>
+	
+	<!-- 
+	<resultMap id="psnl0118" class="com.app.exterms.personal.server.vo.Psnl0118VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="qftntLicnsSeilNum" column="QFTNT_LICNS_SEIL_NUM" columnIndex="3"/>
+		<result property="aqtnDt" column="AQTN_DT" columnIndex="4"/>
+		<result property="qftntLicnsCd" column="QFTNT_LICNS_CD" columnIndex="5"/>
+		<result property="qftntLicnsPovncCtnt" column="QFTNT_LICNS_POVNC_CTNT" columnIndex="6"/>
+		<result property="efmnIstutNm" column="EFMN_ISTUT_NM" columnIndex="7"/>
+		<result property="qftntLicnsNum" column="QFTNT_LICNS_NUM" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap>
+	 -->
+	
+	<!-- <insert id="psnl0118DAO.insertPsnl0118" parameterClass="psnl0118Dto"> -->
+	<insert id="psnl0118DAO.insertPsnl0118" parameterClass="psnl0118Vo">
+		<![CDATA[
+			INSERT INTO PSNL0118 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , QFTNT_LICNS_SEIL_NUM
+				  , AQTN_DT
+				  , QFTNT_LICNS_CD
+				  , QFTNT_LICNS_POVNC_CTNT
+				  , EFMN_ISTUT_NM
+				  , QFTNT_LICNS_NUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , (select NVL(MAX(QFTNT_LICNS_SEIL_NUM)+1,1) from PSNL0118 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#) 
+				  , #aqtnDt#
+				  , #qftntLicnsCd#
+				  , #qftntLicnsPovncCtnt#
+				  , #efmnIstutNm#
+				  , #qftntLicnsNum#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<!-- <update id="psnl0118DAO.updatePsnl0118" parameterClass="psnl0118Dto"> -->
+	<update id="psnl0118DAO.updatePsnl0118" parameterClass="psnl0118Vo">
+		
+			UPDATE PSNL0118
+			SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				<isNotNull property="aqtnDt"><isNotEmpty property="aqtnDt">, AQTN_DT = #aqtnDt#</isNotEmpty></isNotNull>
+				<isNotNull property="qftntLicnsCd"><isNotEmpty property="qftntLicnsCd">, QFTNT_LICNS_CD = #qftntLicnsCd#</isNotEmpty></isNotNull>
+				<isNotNull property="qftntLicnsPovncCtnt"><isNotEmpty property="qftntLicnsPovncCtnt">, QFTNT_LICNS_POVNC_CTNT=#qftntLicnsPovncCtnt#</isNotEmpty></isNotNull>
+				<isNotNull property="efmnIstutNm"><isNotEmpty property="efmnIstutNm">, EFMN_ISTUT_NM=#efmnIstutNm#</isNotEmpty></isNotNull>
+				<isNotNull property="qftntLicnsNum"><isNotEmpty property="qftntLicnsNum">, QFTNT_LICNS_NUM=#qftntLicnsNum#</isNotEmpty></isNotNull>
+				<isNotNull property="ismt"><isNotEmpty property="ismt">, ISMT=#ismt#</isNotEmpty></isNotNull>
+				<isNotNull property="revnAddr"><isNotEmpty property="revnAddr">, REVN_ADDR=#revnAddr#</isNotEmpty></isNotNull>
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				AND QFTNT_LICNS_SEIL_NUM=#qftntLicnsSeilNum#
+		
+	</update>
+	
+	<!-- <delete id="psnl0118DAO.deletePsnl0118" parameterClass="psnl0118Dto"> -->
+	<delete id="psnl0118DAO.deletePsnl0118" parameterClass="psnl0118Vo">
+		<![CDATA[
+			DELETE FROM PSNL0118 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND QFTNT_LICNS_SEIL_NUM=#qftntLicnsSeilNum#
+				]]>
+	</delete>
+	
+	<select id="psnl0118DAO.selectPsnl0118" resultClass="egovMap" parameterClass="hashMap">
+		<![CDATA[
+			SELECT
+				A.DPOB_CD
+				, A.SYSTEMKEY
+				, A.QFTNT_LICNS_SEIL_NUM
+				, TO_DATE(A.AQTN_DT, 'YYYYMMDD') AQTN_DT
+				, A.QFTNT_LICNS_CD
+				, (SELECT B.COMM_CD_NM FROM BASS0300 B WHERE B.RPSTTV_CD = 'A014' AND B.COMM_CD = A.QFTNT_LICNS_CD AND ROWNUM = 1) as QFTNT_LICNS_CD_NM
+				, A.QFTNT_LICNS_POVNC_CTNT
+				, A.EFMN_ISTUT_NM
+				, A.QFTNT_LICNS_NUM
+				, A.KYBDR
+				, A.INPT_DT
+				, A.INPT_ADDR
+				, A.ISMT
+				, A.REVN_DT
+				, A.REVN_ADDR
+			FROM PSNL0118 A
+						WHERE A.DPOB_CD=#dpobCd#
+								AND A.SYSTEMKEY=#systemkey#
+			]]>
+			<isNotNull property="qftntLicnsSeilNum">
+			    <isNotEmpty property="qftntLicnsSeilNum">
+			        AND QFTNT_LICNS_SEIL_NUM=#qftntLicnsSeilNum#
+			    </isNotEmpty>
+			</isNotNull>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcPayr0303">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgPayr0303SrhVO" type="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0303SrhVO"/>
+	
+	<resultMap id="infcPkgPayr0303" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0303VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="reattyYr" column="REATTY_YR" columnIndex="2"/>
+		<result property="payCd" column="PAY_CD" columnIndex="3"/>
+		<result property="reattyStpDsptyNum" column="REATTY_STP_DSPTY_NUM" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="pymtYrMnth" column="PYMT_YR_MNTH" columnIndex="6"/>
+		<result property="payItemCd" column="PAY_ITEM_CD" columnIndex="7"/>
+		<result property="pymtDducDivCd" column="PYMT_DDUC_DIV_CD" columnIndex="8"/>
+		<result property="bfrPymtDducSum" column="BFR_PYMT_DDUC_SUM" columnIndex="9"/>
+		<result property="dilnlazDutyTmDys" column="DILNLAZ_DUTY_TM_DYS" columnIndex="10"/>
+		<result property="pymtDducSum" column="PYMT_DDUC_SUM" columnIndex="11"/>
+		<result property="reattyPymtDducSrd" column="REATTY_PYMT_DDUC_SRD" columnIndex="12"/>
+		<result property="pymtDducTxtnAmnt" column="PYMT_DDUC_TXTN_AMNT" columnIndex="13"/>
+		<result property="pymtDducFreeDtySum" column="PYMT_DDUC_FREE_DTY_SUM" columnIndex="14"/>
+		<result property="kybdr" column="KYBDR" columnIndex="15"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="16"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="17"/>
+		<result property="ismt" column="ISMT" columnIndex="18"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="19"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="20"/>
+	</resultMap>
+	
+	<insert id="infcPkgPayr0303DAO.insertPayr0303_S">
+		<![CDATA[
+	INSERT INTO PAYR0303 
+			( DPOB_CD
+				  , REATTY_YR
+				  , PAY_CD
+				  , REATTY_STP_DSPTY_NUM
+				  , SYSTEMKEY
+				  , PYMT_YR_MNTH
+				  , PAY_ITEM_CD
+				  , PYMT_DDUC_DIV_CD
+				  , BFR_PYMT_DDUC_SUM
+				  , DILNLAZ_DUTY_TM_DYS
+				  , PYMT_DDUC_SUM
+				  , REATTY_PYMT_DDUC_SRD
+				  , PYMT_DDUC_TXTN_AMNT
+				  , PYMT_DDUC_FREE_DTY_SUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #reattyYr#
+				  , #payCd#
+				  , #reattyStpDsptyNum#
+				  , #systemkey#
+				  , #pymtYrMnth#
+				  , #payItemCd#
+				  , #pymtDducDivCd#
+				  , #bfrPymtDducSum#
+				  , #dilnlazDutyTmDys#
+				  , #pymtDducSum#
+				  , #reattyPymtDducSrd#
+				  , #pymtDducTxtnAmnt#
+				  , #pymtDducFreeDtySum#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgPayr0303DAO.updatePayr0303_S">
+		<![CDATA[
+			UPDATE PAYR0303
+			SET DPOB_CD=#dpobCd#
+			, REATTY_YR=#reattyYr#
+				, PAY_CD=#payCd#
+				, REATTY_STP_DSPTY_NUM=#reattyStpDsptyNum#
+				, SYSTEMKEY=#systemkey#
+				, PYMT_YR_MNTH=#pymtYrMnth#
+				, PAY_ITEM_CD=#payItemCd#
+				, PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+				, BFR_PYMT_DDUC_SUM=#bfrPymtDducSum#
+				, DILNLAZ_DUTY_TM_DYS=#dilnlazDutyTmDys#
+				, PYMT_DDUC_SUM=#pymtDducSum#
+				, REATTY_PYMT_DDUC_SRD=#reattyPymtDducSrd#
+				, PYMT_DDUC_TXTN_AMNT=#pymtDducTxtnAmnt#
+				, PYMT_DDUC_FREE_DTY_SUM=#pymtDducFreeDtySum#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND REATTY_YR=#reattyYr#
+								AND PAY_CD=#payCd#
+								AND REATTY_STP_DSPTY_NUM=#reattyStpDsptyNum#
+								AND PAY_ITEM_CD=#payItemCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPayr0303DAO.deletePayr0303_S">
+		<![CDATA[
+				DELETE FROM PAYR0303 
+						WHERE DPOB_CD=#dpobCd#
+								AND REATTY_YR=#reattyYr#
+								AND PAY_CD=#payCd#
+								AND REATTY_STP_DSPTY_NUM=#reattyStpDsptyNum#
+								AND PAY_ITEM_CD=#payItemCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<select id="infcPkgPayr0303DAO.selectPayr0303_S" resultMap="infcPkgPayr0303">
+		<![CDATA[
+			SELECT
+			    DPOB_CD
+				, REATTY_YR
+				, PAY_CD
+				, REATTY_STP_DSPTY_NUM
+				, SYSTEMKEY
+				, PYMT_YR_MNTH
+				, PAY_ITEM_CD
+				, PYMT_DDUC_DIV_CD
+				, BFR_PYMT_DDUC_SUM
+				, DILNLAZ_DUTY_TM_DYS
+				, PYMT_DDUC_SUM
+				, REATTY_PYMT_DDUC_SRD
+				, PYMT_DDUC_TXTN_AMNT
+				, PYMT_DDUC_FREE_DTY_SUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0303
+						WHERE DPOB_CD=#dpobCd#
+								AND REATTY_YR=#reattyYr#
+								AND PAY_CD=#payCd#
+								AND REATTY_STP_DSPTY_NUM=#reattyStpDsptyNum#
+								AND PAY_ITEM_CD=#payItemCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+	<select id="infcPkgPayr0303DAO.selectPayr0303List_D" parameterClass="infcPkgPayr0303SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+							DPOB_CD
+								, REATTY_YR
+								, PAY_CD
+								, REATTY_STP_DSPTY_NUM
+								, SYSTEMKEY
+								, PYMT_YR_MNTH
+								, PAY_ITEM_CD
+								, PYMT_DDUC_DIV_CD
+								, BFR_PYMT_DDUC_SUM
+								, DILNLAZ_DUTY_TM_DYS
+								, PYMT_DDUC_SUM
+								, REATTY_PYMT_DDUC_SRD
+								, PYMT_DDUC_TXTN_AMNT
+								, PYMT_DDUC_FREE_DTY_SUM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PAYR0303
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					REATTY_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, REATTY_YR DESC
+							, PAY_CD DESC
+							, REATTY_STP_DSPTY_NUM DESC
+							, PAY_ITEM_CD DESC
+							, SYSTEMKEY DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgPayr0303DAO.selectPayr0303ListTotCnt_S" parameterClass="infcPkgPayr0303SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0303
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				REATTY_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass2650">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass2650SerarchVO" type="com.app.exterms.resm.server.vo.Bass2650SrhVO"/>
+	
+	<resultMap id="bass2650" class="com.app.exterms.resm.server.vo.Bass2650VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="stpInttnSeptVal" column="STP_INTTN_SEPT_VAL" columnIndex="2"/>
+		<result property="pymtDducItemCd" column="PYMT_DDUC_ITEM_CD" columnIndex="3"/>
+		<result property="workBusinNum" column="WORK_BUSIN_NUM" columnIndex="4"/>
+		<result property="workUntBusinNum" column="WORK_UNT_BUSIN_NUM" columnIndex="5"/>
+		<result property="mangeUntBusinNum" column="MANGE_UNT_BUSIN_NUM" columnIndex="6"/>
+		<result property="kybdr" column="KYBDR" columnIndex="7"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="8"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="9"/>
+		<result property="ismt" column="ISMT" columnIndex="10"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="11"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="12"/>
+	</resultMap>
+	
+	<insert id="bass2650DAO.insertBass2650_S">
+		<![CDATA[
+			INSERT INTO BASS2650 
+				( DPOB_CD
+				  , STP_INTTN_SEPT_VAL
+				  , PYMT_DDUC_ITEM_CD
+				  , WORK_BUSIN_NUM
+				  , WORK_UNT_BUSIN_NUM
+				  , MANGE_UNT_BUSIN_NUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #stpInttnSeptVal#
+				  , #pymtDducItemCd#
+				  , #workBusinNum#
+				  , #workUntBusinNum#
+				  , #mangeUntBusinNum#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass2650DAO.updateBass2650_S">
+		<![CDATA[
+			UPDATE BASS2650
+			SET DPOB_CD=#dpobCd#
+				, STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				, PYMT_DDUC_ITEM_CD=#pymtDducItemCd#
+				, WORK_BUSIN_NUM=#workBusinNum#
+				, WORK_UNT_BUSIN_NUM=#workUntBusinNum#
+				, MANGE_UNT_BUSIN_NUM=#mangeUntBusinNum#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+								AND PYMT_DDUC_ITEM_CD=#pymtDducItemCd#
+				]]>
+	</update>
+	
+	<delete id="bass2650DAO.deleteBass2650_S">
+		<![CDATA[
+			DELETE FROM BASS2650 
+						WHERE DPOB_CD=#dpobCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+								AND PYMT_DDUC_ITEM_CD=#pymtDducItemCd#
+				]]>
+	</delete>
+	
+	<select id="bass2650DAO.selectBass2650_S" resultMap="bass2650">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, STP_INTTN_SEPT_VAL
+				, PYMT_DDUC_ITEM_CD
+				, WORK_BUSIN_NUM
+				, WORK_UNT_BUSIN_NUM
+				, MANGE_UNT_BUSIN_NUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS2650
+						WHERE DPOB_CD=#dpobCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+								AND PYMT_DDUC_ITEM_CD=#pymtDducItemCd#
+				]]>
+	</select>
+	
+	<select id="bass2650DAO.selectBass2650List_D" parameterClass="bass2650SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, STP_INTTN_SEPT_VAL
+								, PYMT_DDUC_ITEM_CD
+								, WORK_BUSIN_NUM
+								, WORK_UNT_BUSIN_NUM
+								, MANGE_UNT_BUSIN_NUM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS2650
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					STP_INTTN_SEPT_VAL LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, STP_INTTN_SEPT_VAL DESC
+							, PYMT_DDUC_ITEM_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass2650DAO.selectBass2650ListTotCnt_S" parameterClass="bass2650SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS2650
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				STP_INTTN_SEPT_VAL LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

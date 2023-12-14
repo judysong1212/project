@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye16Ta3150">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ye16Ta3150SrhVo" type="com.app.exterms.yearendtax.server.vo.Yeta3150SrhVO"/>
+	<typeAlias  alias="ye16Ta3150Vo" type="com.app.exterms.yearendtax.server.vo.Yeta3150VO"/>
+	
+	<resultMap id="ye16Ta3150" class="com.app.exterms.yearendtax.server.vo.Yeta3150VO">
+		<result property="edacDtnu" column="EDAC_DTNU" columnIndex="1"/>
+		<result property="edacRvyy" column="EDAC_RVYY" columnIndex="2"/>
+		<result property="settGbcd" column="SETT_GBCD" columnIndex="3"/>
+		<result property="dpobCd" column="DPOB_CD" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="fmacGbcd" column="FMAC_GBCD" columnIndex="6"/>
+		<result property="edacOtam" column="EDAC_OTAM" columnIndex="7"/>
+		<result property="rsnoNumb" column="RSNO_NUMB" columnIndex="8"/>
+			<result property="guksYeno" column="GUKS_YENO" columnIndex="9"/>
+	</resultMap>
+	
+	
+	
+	<!-- yeta1100  화면 교육비삭제 -->
+	<delete id="ye16Ta3150DAO.fnYeta1100_YETA3150_2016_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3150 
+						WHERE EDAC_RVYY=#edacRvyy#
+						  AND SETT_GBCD=#settGbcd# 
+						  AND DPOB_CD=#dpobCd# 
+				]]>
+				 <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                 </isNotEmpty> 
+	</delete>
+	
+	
+	
+	
+	
+	
+	<!-- 가족교육비 대상자 등록 -->
+	<insert id="ye16Ta3150DAO.insertYeta3150_S">
+		<![CDATA[
+			INSERT INTO YETA3150 
+				( EDAC_DTNU
+				  , EDAC_RVYY
+				  , SETT_GBCD
+				  , DPOB_CD
+				  , SYSTEMKEY
+				  , RSNO_NUMB
+				  , FMAC_GBCD
+				  , EDAC_OTAM
+				  ,GUKS_YENO )
+			VALUES ( (SELECT NVL(MAX(EDAC_DTNU)+1,1) 
+						FROM YETA3150 
+						WHERE DPOB_CD=#dpobCd#
+							AND EDAC_RVYY=#edacRvyy#
+							AND SETT_GBCD=#settGbcd#
+							AND SYSTEMKEY=#systemkey#) 
+				  , #edacRvyy#
+				  , #settGbcd#
+				  , #dpobCd#
+				  , #systemkey#
+				  , #rsnoNumb#
+				  , #fmacGbcd#
+				  , #edacOtam# 
+				  ,#guksYeno#)
+		]]>
+	</insert>
+	
+	<!-- 가족교육비 대상자 수정 -->
+	<update id="ye16Ta3150DAO.updateYeta3150_S">
+		<![CDATA[
+			UPDATE YETA3150
+			SET FMAC_GBCD=#fmacGbcd#
+				, EDAC_OTAM=#edacOtam# 
+			WHERE EDAC_DTNU=#edacDtnu#
+					AND EDAC_RVYY=#edacRvyy#
+					AND SETT_GBCD=#settGbcd#
+					AND DPOB_CD=#dpobCd#
+					AND SYSTEMKEY=#systemkey#
+					AND RSNO_NUMB = #rsnoNumb#
+				]]>
+	</update>
+	
+	<!-- 가족교육비 대상자 삭제 -->
+	<delete id="ye16Ta3150DAO.deleteYeta3150_S">
+		<![CDATA[
+			DELETE FROM YETA3150 
+						WHERE EDAC_DTNU=#edacDtnu#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<!-- yeta0100  화면 교육비삭제 -->
+	<delete id="ye16Ta3150DAO.fnPayr06430_PAYR445_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3150 
+						WHERE EDAC_RVYY=#edacRvyy#
+						  AND SETT_GBCD=#settGbcd# 
+						  AND DPOB_CD=#dpobCd# 
+				]]>
+				 <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                 </isNotEmpty> 
+	</delete>
+	
+	<!-- 가족교육비 대상자 조회 -->
+	<select id="ye16Ta3150DAO.selectYeta3150_S" parameterClass="ye16Ta3150SrhVo" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				A.EDAC_DTNU
+				, A.EDAC_RVYY
+				, A.SETT_GBCD
+				, A.DPOB_CD
+				, A.SYSTEMKEY
+				, A.RSNO_NUMB
+				, A.RSNO_NUMB AS RSNO_NUMB2
+				, A.FMAC_GBCD
+				, A.FMAC_GBCD as fmacGbcdcommCd
+				, fcBass0300CDNM(A.DPOB_CD, A.FMAC_GBCD) AS fmacGbcdcommCdNm 
+				, A.EDAC_OTAM
+				, A.GUKS_YENO
+				, B.KORN_NAME
+				, B.RELH_CODE
+			FROM YETA3150 A, YETA3220 B
+			WHERE
+				A.DPOB_CD = B.DPOB_CD
+				AND A.EDAC_RVYY = B.EDAC_RVYY
+				AND A.SETT_GBCD = B.SETT_GBCD
+				AND A.SYSTEMKEY = B.SYSTEMKEY
+				AND A.RSNO_NUMB = B.RSNO_NUMB
+				AND A.DPOB_CD=#dpobCd#	
+				AND A.EDAC_RVYY=#edacRvyy#
+				AND A.SETT_GBCD=#settGbcd#
+				AND A.SYSTEMKEY=#systemkey#
+			ORDER BY
+				A.RSNO_NUMB DESC 
+			
+		]]>
+	</select>
+	
+	<select id="ye16Ta3150DAO.selectYeta3150List_D" parameterClass="ye16Ta3150SrhVo" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								EDAC_DTNU
+								, EDAC_RVYY
+								, SETT_GBCD
+								, DPOB_CD
+								, SYSTEMKEY
+								, RSNO_NUMB
+								, FMAC_GBCD
+								, EDAC_OTAM
+								, GUKS_YENO
+						FROM YETA3150
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					EDAC_DTNU = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						EDAC_DTNU DESC
+							, EDAC_RVYY DESC
+							, SETT_GBCD DESC
+							, DPOB_CD DESC
+							, SYSTEMKEY DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="ye16Ta3150DAO.selectYeta3150ListTotCnt_S" parameterClass="ye16Ta3150SrhVo" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3150
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				EDAC_DTNU = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

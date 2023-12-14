@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass0320">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass0320SerarchVO" type="com.app.exterms.basis.server.vo.Bass0320SrhVO"/>
+	<typeAlias  alias="bass0320VO" type="com.app.exterms.basis.server.vo.Bass0320VO"/>
+	
+	<resultMap id="bass0320" class="com.app.exterms.basis.server.vo.Bass0320VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="2"/>
+		<result property="typOccuNm" column="TYP_OCCU_NM" columnIndex="3"/>
+		<result property="typOccuUseYn" column="TYP_OCCU_USE_YN" columnIndex="4"/>
+		<result property="typOccuCtnt" column="TYP_OCCU_CTNT" columnIndex="5"/>
+		<result property="typOccuOrd" column="TYP_OCCU_ORD" columnIndex="6"/>
+		<result property="typOccuJbfmlDivCd" column="TYP_OCCU_JBFML_DIV_CD" columnIndex="7"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>		
+		<result property="chngTypOccuCd" column="CHNG_TYP_OCCU_CD" columnIndex="15"/>
+		<result property="typOccuStdt" column="TYP_OCCU_STDT" columnIndex="16"/>
+		<result property="typOccuEddt" column="TYP_OCCU_EDDT" columnIndex="16"/>
+	</resultMap>
+	
+	<insert id="bass0320DAO.insertBass0320_S">
+		<![CDATA[
+			INSERT INTO BASS0320 
+				(   DPOB_CD
+				  , TYP_OCCU_CD
+				  , TYP_OCCU_NM
+				  , TYP_OCCU_USE_YN
+				  , TYP_OCCU_CTNT
+				  , TYP_OCCU_ORD
+				  , TYP_OCCU_JBFML_DIV_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , CHNG_TYP_OCCU_CD
+				  , TYP_OCCU_STDT
+				  , TYP_OCCU_EDDT)
+			VALUES ( #dpobCd#
+				  ,  (
+				      SELECT 'A041' || (LPAD((NVL(MAX(SUBSTR(TYP_OCCU_CD,5,4)),0) + 1),4,'0')) 
+				        FROM BASS0320
+				        WHERE DPOB_CD = #dpobCd#
+				    )
+				  , #typOccuNm#
+				  , #typOccuUseYn#
+				  , #typOccuCtnt#
+				  , #typOccuOrd#
+				  , #typOccuJbfmlDivCd#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+				  , #revnAddr#
+				  , #chngTypOccuCd#
+				  , #typOccuStdt#
+				  , #typOccuEddt#)
+		]]>
+	</insert>
+	
+	<update id="bass0320DAO.updateBass0320_S">
+		<![CDATA[
+			UPDATE BASS0320
+			SET DPOB_CD=#dpobCd#
+				, TYP_OCCU_CD=#typOccuCd#
+				, TYP_OCCU_NM=#typOccuNm#
+				, TYP_OCCU_USE_YN=#typOccuUseYn#
+				, TYP_OCCU_CTNT=#typOccuCtnt#
+				, TYP_OCCU_ORD=#typOccuOrd#
+				, TYP_OCCU_JBFML_DIV_CD=#typOccuJbfmlDivCd#
+				, CHNG_TYP_OCCU_CD=#chngTypOccuCd#
+				, TYP_OCCU_STDT=#typOccuStdt#
+				, TYP_OCCU_EDDT=#typOccuEddt#
+				, PYSP_GRDE_CD=#pyspGrdeCd# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+				, REVN_ADDR=#revnAddr#
+				 WHERE DPOB_CD=#dpobCd#
+				  AND TYP_OCCU_CD=#typOccuCd#
+				]]>
+	</update>
+	
+	<delete id="bass0320DAO.deleteBass0320_S">
+		<![CDATA[
+			DELETE FROM BASS0320 
+						WHERE DPOB_CD=#dpobCd#
+								AND TYP_OCCU_CD=#typOccuCd#
+				]]>
+	</delete>
+	
+	<select id="bass0320DAO.selectBass0320_S" resultMap="bass0320">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, TYP_OCCU_CD
+				, TYP_OCCU_NM
+				, TYP_OCCU_USE_YN
+				, TYP_OCCU_CTNT
+				, TYP_OCCU_ORD
+				, TYP_OCCU_JBFML_DIV_CD
+				, PYSP_GRDE_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, CHNG_TYP_OCCU_CD
+				, fcBass0320CDNM(DPOB_CD, CHNG_TYP_OCCU_CD ) as CHNG_TYP_OCCU_NM
+				, TYP_OCCU_STDT
+				, TYP_OCCU_EDDT
+			FROM BASS0320
+						WHERE DPOB_CD=#dpobCd#
+								AND TYP_OCCU_CD=#typOccuCd#
+				]]>
+	</select>
+	
+	<select id="bass0320DAO.selectBass0320List_D" parameterClass="bass0320SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, TYP_OCCU_CD
+								, TYP_OCCU_NM
+								, TYP_OCCU_USE_YN
+								, TYP_OCCU_CTNT
+								, TYP_OCCU_ORD
+								, TYP_OCCU_JBFML_DIV_CD
+								, PYSP_GRDE_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+								, CHNG_TYP_OCCU_CD
+								, fcBass0320CDNM(DPOB_CD, CHNG_TYP_OCCU_CD ) as CHNG_TYP_OCCU_NM
+								, TYP_OCCU_STDT
+								, TYP_OCCU_EDDT
+						FROM BASS0320
+				WHERE 1=1
+						<isNotNull property="dpobCd">
+						    <isNotEmpty property="dpobCd">
+						        AND DPOB_CD = #dpobCd#						        
+						    </isNotEmpty>
+						</isNotNull>
+						<isNotNull property="typOccuNm">
+						    <isNotEmpty property="typOccuNm">
+						        AND TYP_OCCU_NM = #typOccuNm#
+						    </isNotEmpty>
+						</isNotNull>
+				  			  AND TYP_OCCU_USE_YN = NVL(#typOccuUseYn#,'Y')
+					ORDER BY 
+						DPOB_CD DESC
+					 , TYP_OCCU_ORD ASC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="bass0320DAO.selectBass0320ListTotCnt_S" parameterClass="bass0320SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0320
+			WHERE 1=1
+			<isNotNull property="dpobCd">
+						    <isNotEmpty property="dpobCd">
+						        AND DPOB_CD = #dpobCd#
+						    </isNotEmpty>
+						</isNotNull>
+						<isNotNull property="typOccuNm">
+						    <isNotEmpty property="typOccuNm">
+						        AND TYP_OCCU_NM = #typOccuNm#
+						    </isNotEmpty>
+						</isNotNull>
+						AND TYP_OCCU_USE_YN = NVL(#typOccuUseYn#,'Y')
+	</select>
+
+	<select id="bass0320DAO.selectXlsBass0320List_D" parameterClass="bass0320SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+		SELECT A.*
+				FROM (
+						SELECT
+                                    DPOB_CD
+                                  , TYP_OCCU_CD
+                                  , TYP_OCCU_NM
+                                  , TYP_OCCU_USE_YN
+                                  , TYP_OCCU_CTNT
+                                  , TYP_OCCU_ORD
+                                  , TYP_OCCU_JBFML_DIV_CD
+                                  , PYSP_GRDE_CD                                  
+                                  , CHNG_TYP_OCCU_CD
+                                  , fcBass0320CDNM(DPOB_CD, CHNG_TYP_OCCU_CD ) as CHNG_TYP_OCCU_NM
+                                  , TYP_OCCU_STDT
+                                  , TYP_OCCU_EDDT                             
+                        FROM BASS0320
+                        WHERE 1=1
+				<isNotNull property="dpobCd">
+						    <isNotEmpty property="dpobCd">
+						        AND DPOB_CD = #dpobCd#
+						    </isNotEmpty>
+						</isNotNull>
+						<isNotNull property="typOccuNm">
+						    <isNotEmpty property="typOccuNm">
+						        AND TYP_OCCU_NM = #typOccuNm#
+						    </isNotEmpty>
+						</isNotNull>
+						 AND TYP_OCCU_USE_YN = NVL(#typOccuUseYn#,'Y')
+					ORDER BY 
+						DPOB_CD DESC
+					 , TYP_OCCU_ORD ASC	
+					 ) A 
+				)	          
+	</select>
+<insert id="bass0320DAO.insertXlsBass0320_S" parameterClass="bass0320VO">
+<![CDATA[
+			INSERT INTO BASS0320 
+				(   DPOB_CD
+				  , TYP_OCCU_CD
+				  , TYP_OCCU_NM
+				  , TYP_OCCU_USE_YN
+				  , TYP_OCCU_CTNT
+				  , TYP_OCCU_ORD
+				  , TYP_OCCU_JBFML_DIV_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , CHNG_TYP_OCCU_CD
+				  , TYP_OCCU_STDT
+				  , TYP_OCCU_EDDT)
+			VALUES ( #dpobCd#
+				  ,  (
+				      SELECT 'A041' || (LPAD((NVL(MAX(SUBSTR(TYP_OCCU_CD,5,4)),0) + 1),4,'0')) 
+				        FROM BASS0320
+				        WHERE DPOB_CD = #dpobCd#
+				    )
+				  , #typOccuNm#
+				  , #typOccuUseYn#
+				  , #typOccuCtnt#
+				  , #typOccuOrd#
+				  , #typOccuJbfmlDivCd#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+				  , #revnAddr#
+				  , #chngTypOccuCd#
+				  , NVL(#typOccuStdt#,TO_CHAR(SYSDATE, 'YYYYMMDD'))
+				  , NVL(#typOccuEddt#,'99991231'))
+		]]>
+</insert>
+<update id="bass0320DAO.updateXlsBass0320_S">
+	<![CDATA[
+			UPDATE BASS0320 AA
+  			 SET AA.TYP_OCCU_USE_YN = 'N',
+     			 AA.TYP_OCCU_EDDT =
+       			   (SELECT TO_CHAR (TO_DATE (BB.TYP_OCCU_STDT, 'YYYYMMDD') - 1,
+                           'YYYYMMDD')
+             			FROM BASS0320 BB
+           					 WHERE  BB.TYP_OCCU_NM = #typOccuNm#
+                  				AND BB.DPOB_CD = #dpobCd#)
+ 			WHERE     AA.DPOB_CD = #dpobCd#
+    			   AND AA.TYP_OCCU_CD = #chngTypOccuCd#
+     			   AND AA.TYP_OCCU_USE_YN = 'Y'
+		]]>
+</update>
+</sqlMap>

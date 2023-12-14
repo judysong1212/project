@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass1400">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass1400SerarchVO" type="com.app.exterms.resm.server.vo.Bass1400SrhVO"/>
+	
+	<resultMap id="bass1400" class="com.app.exterms.resm.server.vo.Bass1400VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="stpInttnSeptVal" column="STP_INTTN_SEPT_VAL" columnIndex="2"/>
+		<result property="wkdyEryGtwkExtpyMgftn" column="WKDY_ERY_GTWK_EXTPY_MGFTN" columnIndex="3"/>
+		<result property="wkdyEryGtwkExtpySum" column="WKDY_ERY_GTWK_EXTPY_SUM" columnIndex="4"/>
+		<result property="wkdyNorDutyExtpyMgftn" column="WKDY_NOR_DUTY_EXTPY_MGFTN" columnIndex="5"/>
+		<result property="wkdyNorDutyExtpySum" column="WKDY_NOR_DUTY_EXTPY_SUM" columnIndex="6"/>
+		<result property="wkdyExtnnExtpyMgftn" column="WKDY_EXTNN_EXTPY_MGFTN" columnIndex="7"/>
+		<result property="wkdyExtnnExtpySum" column="WKDY_EXTNN_EXTPY_SUM" columnIndex="8"/>
+		<result property="wkdyNgtExtpyMgftn" column="WKDY_NGT_EXTPY_MGFTN" columnIndex="9"/>
+		<result property="wkdyNgtExtpySum" column="WKDY_NGT_EXTPY_SUM" columnIndex="10"/>
+		<result property="pubcHodyNorDutyMgftn" column="PUBC_HODY_NOR_DUTY_MGFTN" columnIndex="11"/>
+		<result property="pubcHodyNorDutySum" column="PUBC_HODY_NOR_DUTY_SUM" columnIndex="12"/>
+		<result property="pubcHodyExtnnMgftn" column="PUBC_HODY_EXTNN_MGFTN" columnIndex="13"/>
+		<result property="pubcHodyExtnnSum" column="PUBC_HODY_EXTNN_SUM" columnIndex="14"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="15"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="16"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="17"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="18"/>
+		<result property="payDutyTmCalcSeilNum" column="PAY_DUTY_TM_CALC_SEIL_NUM" columnIndex="19"/>
+		<result property="kybdr" column="KYBDR" columnIndex="20"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="21"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="22"/>
+		<result property="ismt" column="ISMT" columnIndex="23"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="24"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="25"/>
+	</resultMap>
+	
+	<insert id="bass1400DAO.insertBass1400_S">
+		<![CDATA[
+			INSERT INTO BASS1400 
+				( DPOB_CD
+				  , STP_INTTN_SEPT_VAL
+				  , WKDY_ERY_GTWK_EXTPY_MGFTN
+				  , WKDY_ERY_GTWK_EXTPY_SUM
+				  , WKDY_NOR_DUTY_EXTPY_MGFTN
+				  , WKDY_NOR_DUTY_EXTPY_SUM
+				  , WKDY_EXTNN_EXTPY_MGFTN
+				  , WKDY_EXTNN_EXTPY_SUM
+				  , WKDY_NGT_EXTPY_MGFTN
+				  , WKDY_NGT_EXTPY_SUM
+				  , PUBC_HODY_NOR_DUTY_MGFTN
+				  , PUBC_HODY_NOR_DUTY_SUM
+				  , PUBC_HODY_EXTNN_MGFTN
+				  , PUBC_HODY_EXTNN_SUM
+				  , TYP_OCCU_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , BUSIN_CD
+				  , DEPT_CD
+				  , PAY_DUTY_TM_CALC_SEIL_NUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #stpInttnSeptVal#
+				  , #wkdyEryGtwkExtpyMgftn#
+				  , #wkdyEryGtwkExtpySum#
+				  , #wkdyNorDutyExtpyMgftn#
+				  , #wkdyNorDutyExtpySum#
+				  , #wkdyExtnnExtpyMgftn#
+				  , #wkdyExtnnExtpySum#
+				  , #wkdyNgtExtpyMgftn#
+				  , #wkdyNgtExtpySum#
+				  , #pubcHodyNorDutyMgftn#
+				  , #pubcHodyNorDutySum#
+				  , #pubcHodyExtnnMgftn#
+				  , #pubcHodyExtnnSum#
+				  , #typOccuCd#
+				  , #dtilOccuInttnCd#
+				  , #businCd#
+				  , #deptCd#
+				  , #payDutyTmCalcSeilNum#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass1400DAO.updateBass1400_S">
+		<![CDATA[
+			UPDATE BASS1400
+			SET DPOB_CD=#dpobCd#
+				, STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				, WKDY_ERY_GTWK_EXTPY_MGFTN=#wkdyEryGtwkExtpyMgftn#
+				, WKDY_ERY_GTWK_EXTPY_SUM=#wkdyEryGtwkExtpySum#
+				, WKDY_NOR_DUTY_EXTPY_MGFTN=#wkdyNorDutyExtpyMgftn#
+				, WKDY_NOR_DUTY_EXTPY_SUM=#wkdyNorDutyExtpySum#
+				, WKDY_EXTNN_EXTPY_MGFTN=#wkdyExtnnExtpyMgftn#
+				, WKDY_EXTNN_EXTPY_SUM=#wkdyExtnnExtpySum#
+				, WKDY_NGT_EXTPY_MGFTN=#wkdyNgtExtpyMgftn#
+				, WKDY_NGT_EXTPY_SUM=#wkdyNgtExtpySum#
+				, PUBC_HODY_NOR_DUTY_MGFTN=#pubcHodyNorDutyMgftn#
+				, PUBC_HODY_NOR_DUTY_SUM=#pubcHodyNorDutySum#
+				, PUBC_HODY_EXTNN_MGFTN=#pubcHodyExtnnMgftn#
+				, PUBC_HODY_EXTNN_SUM=#pubcHodyExtnnSum#
+				, TYP_OCCU_CD=#typOccuCd#
+				, DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				, BUSIN_CD=#businCd#
+				, DEPT_CD=#deptCd#
+				, PAY_DUTY_TM_CALC_SEIL_NUM=#payDutyTmCalcSeilNum#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				]]>
+	</update>
+	
+	<delete id="bass1400DAO.deleteBass1400_S">
+		<![CDATA[
+			DELETE FROM BASS1400 
+						WHERE DPOB_CD=#dpobCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				]]>
+	</delete>
+	
+	<select id="bass1400DAO.selectBass1400_S" resultMap="bass1400">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, STP_INTTN_SEPT_VAL
+				, WKDY_ERY_GTWK_EXTPY_MGFTN
+				, WKDY_ERY_GTWK_EXTPY_SUM
+				, WKDY_NOR_DUTY_EXTPY_MGFTN
+				, WKDY_NOR_DUTY_EXTPY_SUM
+				, WKDY_EXTNN_EXTPY_MGFTN
+				, WKDY_EXTNN_EXTPY_SUM
+				, WKDY_NGT_EXTPY_MGFTN
+				, WKDY_NGT_EXTPY_SUM
+				, PUBC_HODY_NOR_DUTY_MGFTN
+				, PUBC_HODY_NOR_DUTY_SUM
+				, PUBC_HODY_EXTNN_MGFTN
+				, PUBC_HODY_EXTNN_SUM
+				, TYP_OCCU_CD
+				, DTIL_OCCU_INTTN_CD
+				, BUSIN_CD
+				, DEPT_CD
+				, PAY_DUTY_TM_CALC_SEIL_NUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS1400
+						WHERE DPOB_CD=#dpobCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				]]>
+	</select>
+	
+	<select id="bass1400DAO.selectBass1400List_D" parameterClass="bass1400SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, STP_INTTN_SEPT_VAL
+								, WKDY_ERY_GTWK_EXTPY_MGFTN
+								, WKDY_ERY_GTWK_EXTPY_SUM
+								, WKDY_NOR_DUTY_EXTPY_MGFTN
+								, WKDY_NOR_DUTY_EXTPY_SUM
+								, WKDY_EXTNN_EXTPY_MGFTN
+								, WKDY_EXTNN_EXTPY_SUM
+								, WKDY_NGT_EXTPY_MGFTN
+								, WKDY_NGT_EXTPY_SUM
+								, PUBC_HODY_NOR_DUTY_MGFTN
+								, PUBC_HODY_NOR_DUTY_SUM
+								, PUBC_HODY_EXTNN_MGFTN
+								, PUBC_HODY_EXTNN_SUM
+								, TYP_OCCU_CD
+								, DTIL_OCCU_INTTN_CD
+								, BUSIN_CD
+								, DEPT_CD
+								, PAY_DUTY_TM_CALC_SEIL_NUM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS1400
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					STP_INTTN_SEPT_VAL LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, STP_INTTN_SEPT_VAL DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass1400DAO.selectBass1400ListTotCnt_S" parameterClass="bass1400SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS1400
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				STP_INTTN_SEPT_VAL LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgYe162030_2018">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYe162030Srh_2018_VO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2018.InfcPkgYe162030Srh_2018_VO"/>
+	
+	<resultMap id="infcPkgYe162030_2018" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2018.InfcPkgYe162030_2018_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="hsngPrptSvngAccNo" column="HSNG_PRPT_SVNG_ACC_NO" columnIndex="5"/>
+		<result property="hsngPrptSvngSvngCl" column="HSNG_PRPT_SVNG_SVNG_CL" columnIndex="6"/>
+		<result property="jnngDt" column="JNNG_DT" columnIndex="7"/>
+		<result property="hsngPrptSvngFnnOrgnCd" column="HSNG_PRPT_SVNG_FNN_ORGN_CD" columnIndex="8"/>
+		<result property="hsngPrptSvngFnnCmp" column="HSNG_PRPT_SVNG_FNN_CMP" columnIndex="9"/>
+		<result property="hsngPrptSvngPymAmt" column="HSNG_PRPT_SVNG_PYM_AMT" columnIndex="10"/>
+		<result property="hsngPrptSvngIncDdcAmt" column="HSNG_PRPT_SVNG_INC_DDC_AMT" columnIndex="11"/>
+		<result property="kybdr" column="KYBDR" columnIndex="12"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="13"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="14"/>
+		<result property="ismt" column="ISMT" columnIndex="15"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="16"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="17"/>
+	</resultMap>
+	
+
+<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직  시작 ++++++++++++++++++++++++++++++ --> 
+ 
+ <!--   주택마련저축   -->
+<delete id="infcPkgYe162030_2018_DAO.PdfYeta3200_J301Y_YE162030_Delete_S">
+		<![CDATA[
+			DELETE FROM YE162030 AA
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey# 
+					            AND TAX_VVAL_KRN_CD = 'Y0140000'  /* 국세청 */   
+								AND EXISTS (SELECT * FROM PDF_J301Y BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY  
+										)
+								
+				]]>  
+	</delete>
+	
+<!-- 주택마련저축  -->
+<insert id="infcPkgYe162030_2018_DAO.PdfYeta3200_J301Y_YE162030_Insert_S">
+		<![CDATA[
+			INSERT INTO YE162030 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , HSNG_PRPT_SVNG_ACC_NO
+				  , TAX_VVAL_KRN_CD
+				  , HSNG_PRPT_SVNG_SVNG_CL
+				  , JNNG_DT
+				  , HSNG_PRPT_SVNG_FNN_ORGN_CD
+				  , HSNG_PRPT_SVNG_FNN_CMP
+				  , HSNG_PRPT_SVNG_PYM_AMT
+				  , HSNG_PRPT_SVNG_INC_DDC_AMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR  
+ )
+			  (SELECT 
+				     AC02.DPOB_CD
+				   , AC02.YRTX_BLGG_YR
+				   , AC02.CLUT_SEPT_CD
+				   , AC02.SYSTEMKEY
+				   , AC03.HOME_SEIL_SUM
+				   ,'Y0140000'  /* 국세청 */ 
+				   , AC03.SAVING_GUBN
+				   , AC03.REG_DT
+				   , AC03.COM_CD
+				   , AC03.TRADE_NM
+				   , AC03.HOME_AMT_SUM
+				   , 0
+				   , #kybdr#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #inptAddr#
+				   , #ismt#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #revnAddr#   
+		FROM YE161030  AC02, (   
+											  SELECT    AA.DPOB_CD
+													 ,  AA.YRTX_BLGG_YR
+											 		 ,  AA.CLUT_SEPT_CD
+													 ,  AA.SYSTEMKEY
+													 ,  AA.RESID
+													 ,  AA.HOME_SEIL_SUM 
+													 , DECODE(AA.SAVING_GUBN,'1','Y0040050',(DECODE(AA.SAVING_GUBN,'2','Y0040060','Y0040080'))) AS SAVING_GUBN
+						                             , AA.REG_DT 
+													 , AA.COM_CD
+													 , AA.TRADE_NM
+													 , AA.HOME_AMT_SUM													 
+										              FROM   PDF_J301Y  AA   
+										               WHERE AA.DPOB_CD=#dpobCd#
+														 AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+														 AND AA.CLUT_SEPT_CD=#clutSeptCd#
+														 AND AA.SYSTEMKEY=#systemkey# 
+														 AND AA.PDF_DAT_APP_YN = 'Y'
+														 AND EXISTS
+														 (SELECT * FROM YE161030 AC01
+										              			   WHERE  AC01.DPOB_CD=#dpobCd#
+														            AND AC01.YRTX_BLGG_YR=#yrtxBlggYr#
+														            AND AC01.CLUT_SEPT_CD=#clutSeptCd#
+														            AND AC01.SYSTEMKEY=#systemkey# 
+																    AND AC01.DPOB_CD = AA.DPOB_CD
+													                AND AC01.YRTX_BLGG_YR = AA.YRTX_BLGG_YR 
+													                AND AC01.CLUT_SEPT_CD = AA.CLUT_SEPT_CD 
+													                AND AC01.SYSTEMKEY = AA.SYSTEMKEY 
+													                AND AC01.FAMY_RELA_DIV_CD = 'A0190001' ) 
+					) AC03
+					 WHERE AC02.DPOB_CD=#dpobCd#
+					   AND AC02.YRTX_BLGG_YR=#yrtxBlggYr#
+					   AND AC02.CLUT_SEPT_CD=#clutSeptCd#
+					   AND AC02.SYSTEMKEY=#systemkey#
+					   AND AC02.DPOB_CD = AC03.DPOB_CD
+		               AND AC02.YRTX_BLGG_YR = AC03.YRTX_BLGG_YR 
+		               AND AC02.CLUT_SEPT_CD = AC03.CLUT_SEPT_CD 
+		               AND AC02.SYSTEMKEY = AC03.SYSTEMKEY 
+		               AND AC02.TXPR_DSCM_NO_CNTN = AC03.RESID 
+				      )
+		]]>
+	</insert>
+	
+
+	
+	<!--  //F_주택마련저축  -->
+<insert id="infcPkgYe162030_2018_DAO.incTaxDeducDec_nts_Yeta2018_Ye162030_Insert_S">
+		<![CDATA[
+			INSERT INTO YE162030 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , HSNG_PRPT_SVNG_ACC_NO
+				  ,TAX_VVAL_KRN_CD
+				  , HSNG_PRPT_SVNG_SVNG_CL
+				  , JNNG_DT
+				  , HSNG_PRPT_SVNG_FNN_ORGN_CD
+				  , HSNG_PRPT_SVNG_FNN_CMP
+				  , HSNG_PRPT_SVNG_PYM_AMT
+				  , HSNG_PRPT_SVNG_INC_DDC_AMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR  
+ )
+			  (
+			  
+			  SELECT 
+                  DPOB_CD, YRTX_BLGG_YR, CLUT_SEPT_CD, 
+                  SYSTEMKEY
+                  , HSNG_PRPT_SVNG_ACC_NO
+                  ,'Y0140000'  /* 국세청 */ 
+                  ,  (CASE WHEN TRIM(HSNG_PRPT_SVNG_SVNG_CL) = '주택마련저축-청약저축' THEN 'Y0040050'
+				                WHEN TRIM(HSNG_PRPT_SVNG_SVNG_CL) = '주택마련저축-주택청약종합저축' THEN 'Y0040060'
+				                WHEN TRIM(HSNG_PRPT_SVNG_SVNG_CL) = '주택마련저축-근로자주택마련저축' THEN 'Y0040080'
+				                ELSE '99999999' END) 
+                  , JNNG_DT
+                  , HSNG_PRPT_SVNG_FNN_ORGN_CD
+                  , HSNG_PRPT_SVNG_FNN_CMP
+                  , HSNG_PRPT_SVNG_PYM_AMT
+                  , HSNG_PRPT_SVNG_INC_DDC_AMT
+                  , #kybdr#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #inptAddr#
+				   , #ismt#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #revnAddr#  
+					FROM  YE167140 
+			       WHERE DPOB_CD=#dpobCd#
+					   AND YRTX_BLGG_YR=#yrtxBlggYr#
+					   AND CLUT_SEPT_CD=#clutSeptCd#
+					   AND SYSTEMKEY=#systemkey#
+			   
+				      )
+		]]>
+		
+	</insert>	
+		<select id="infcPkgYE162030_2018_DAO.selectYeta3300_Tax_YE162030_01_List_D" parameterClass="infcPkgYe162030Srh_2018_VO" resultClass="egovMap">
+ 					SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, HSNG_PRPT_SVNG_ACC_NO
+								, HSNG_PRPT_SVNG_SVNG_CL
+								, JNNG_DT
+								, HSNG_PRPT_SVNG_FNN_ORGN_CD
+								, HSNG_PRPT_SVNG_FNN_CMP
+								, HSNG_PRPT_SVNG_PYM_AMT
+								, HSNG_PRPT_SVNG_INC_DDC_AMT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE162030 
+				   WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#  
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, HSNG_PRPT_SVNG_ACC_NO DESC
+ 
+	</select>	
+
+ <update id="infcPkgYE162030_2018_DAO.updateYeta3300_Tax_YE162030_01_S">
+		<![CDATA[
+			UPDATE YE162030 
+			SET   HSNG_PRPT_SVNG_INC_DDC_AMT = #hsngPrptSvngIncDdcAmt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+							  	AND HSNG_PRPT_SVNG_ACC_NO=#hsngPrptSvngAccNo#
+				]]>
+	</update>
+<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직  종료 ++++++++++++++++++++++++++++++ -->	
+ 
+	  
+	<insert id="infcPkgYe162030_2018_DAO.insertYe162030_S">
+		<![CDATA[
+			INSERT INTO YE162030 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , HSNG_PRPT_SVNG_ACC_NO
+				  , HSNG_PRPT_SVNG_SVNG_CL
+				  , JNNG_DT
+				  , HSNG_PRPT_SVNG_FNN_ORGN_CD
+				  , HSNG_PRPT_SVNG_FNN_CMP
+				  , HSNG_PRPT_SVNG_PYM_AMT
+				  , HSNG_PRPT_SVNG_INC_DDC_AMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #hsngPrptSvngAccNo#
+				  , #hsngPrptSvngSvngCl#
+				  , #jnngDt#
+				  , #hsngPrptSvngFnnOrgnCd#
+				  , #hsngPrptSvngFnnCmp#
+				  , #hsngPrptSvngPymAmt#
+				  , #hsngPrptSvngIncDdcAmt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgYe162030_2018_DAO.updateYe162030_S">
+		<![CDATA[
+			UPDATE YE162030
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, HSNG_PRPT_SVNG_ACC_NO=#hsngPrptSvngAccNo#
+				, HSNG_PRPT_SVNG_SVNG_CL=#hsngPrptSvngSvngCl#
+				, JNNG_DT=#jnngDt#
+				, HSNG_PRPT_SVNG_FNN_ORGN_CD=#hsngPrptSvngFnnOrgnCd#
+				, HSNG_PRPT_SVNG_FNN_CMP=#hsngPrptSvngFnnCmp#
+				, HSNG_PRPT_SVNG_PYM_AMT=#hsngPrptSvngPymAmt#
+				, HSNG_PRPT_SVNG_INC_DDC_AMT=#hsngPrptSvngIncDdcAmt#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND HSNG_PRPT_SVNG_ACC_NO=#hsngPrptSvngAccNo#
+				]]>
+	</update>
+	
+	<delete id="infcPkgYe162030_2018_DAO.deleteYe162030_S">
+		<![CDATA[
+			DELETE FROM YE162030 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND HSNG_PRPT_SVNG_ACC_NO=#hsngPrptSvngAccNo#
+				]]>
+	</delete>
+	
+	<select id="infcPkgYe162030_2018_DAO.selectYe162030_S" resultMap="infcPkgYe162030_2018">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, HSNG_PRPT_SVNG_ACC_NO
+				, HSNG_PRPT_SVNG_SVNG_CL
+				, JNNG_DT
+				, HSNG_PRPT_SVNG_FNN_ORGN_CD
+				, HSNG_PRPT_SVNG_FNN_CMP
+				, HSNG_PRPT_SVNG_PYM_AMT
+				, HSNG_PRPT_SVNG_INC_DDC_AMT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE162030
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND HSNG_PRPT_SVNG_ACC_NO=#hsngPrptSvngAccNo#
+				]]>
+	</select>
+	
+	<select id="infcPkgYe162030_2018_DAO.selectYe162030List_D" parameterClass="infcPkgYe162030Srh_2018_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, HSNG_PRPT_SVNG_ACC_NO
+								, HSNG_PRPT_SVNG_SVNG_CL
+								, JNNG_DT
+								, HSNG_PRPT_SVNG_FNN_ORGN_CD
+								, HSNG_PRPT_SVNG_FNN_CMP
+								, HSNG_PRPT_SVNG_PYM_AMT
+								, HSNG_PRPT_SVNG_INC_DDC_AMT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE162030
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, HSNG_PRPT_SVNG_ACC_NO DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgYe162030_2018_DAO.selectYe162030ListTotCnt_S" parameterClass="infcPkgYe162030Srh_2018_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE162030
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

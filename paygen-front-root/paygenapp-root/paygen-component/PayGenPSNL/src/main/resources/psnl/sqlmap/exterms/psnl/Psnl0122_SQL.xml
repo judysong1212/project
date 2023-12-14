@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0122">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	
+	<typeAlias alias="psnl0122Dto" type="com.app.exterms.personal.client.dto.Psnl0122DTO"/>
+    <typeAlias  alias="psnl0122SerarchVO" type="com.app.exterms.personal.server.vo.Psnl0122DefaultVO"/>
+     <typeAlias  alias="psnl0122Vo" type="com.app.exterms.personal.server.vo.Psnl0122VO"/>
+	
+	<resultMap id="psnl0122" class="com.app.exterms.personal.server.vo.Psnl0122VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="dsnyActSeilNum" column="DSNY_ACT_SEIL_NUM" columnIndex="3"/>
+		<result property="dsnyActDsplDt" column="DSNY_ACT_DSPL_DT" columnIndex="4"/>
+		<result property="dsnyActDivCd" column="DSNY_ACT_DIV_CD" columnIndex="5"/>
+		<result property="dsnyActNm" column="DSNY_ACT_NM" columnIndex="6"/>
+		<result property="dsnyActReasCtnt" column="DSNY_ACT_REAS_CTNT" columnIndex="7"/>
+		<result property="dsnyActEctgOrgn" column="DSNY_ACT_ECTG_ORGN" columnIndex="8"/>
+		<result property="dsnyActNoteCtnt" column="DSNY_ACT_NOTE_CTNT" columnIndex="9"/>
+		<result property="dsnyActBgnnDt" column="DSNY_ACT_BGNN_DT" columnIndex="10"/>
+		<result property="dsnyActEndDt" column="DSNY_ACT_END_DT" columnIndex="11"/>
+		<result property="dsnyActCtwpRate" column="DSNY_ACT_CTWP_RATE" columnIndex="12"/>
+		<result property="dsnyActCtwpMnthIcm" column="DSNY_ACT_CTWP_MNTH_ICM" columnIndex="13"/>
+		<result property="dsnyActAnstyDt" column="DSNY_ACT_ANSTY_DT" columnIndex="14"/>
+		<result property="dsnyActAnstyDivCd" column="DSNY_ACT_ANSTY_DIV_CD" columnIndex="15"/>
+		<result property="kybdr" column="KYBDR" columnIndex="16"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="17"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="18"/>
+		<result property="ismt" column="ISMT" columnIndex="19"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="20"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="21"/>
+	</resultMap>
+	
+	<!-- <insert id="psnl0122DAO.insertPsnl0122" parameterClass="psnl0122Dto"> -->
+	<insert id="psnl0122DAO.insertPsnl0122" parameterClass="psnl0122Vo">
+		<![CDATA[
+			INSERT INTO PSNL0122 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , DSNY_ACT_SEIL_NUM
+				  , DSNY_ACT_DSPL_DT
+				  , DSNY_ACT_DIV_CD
+				  , DSNY_ACT_NM
+				  , DSNY_ACT_REAS_CTNT
+				  , DSNY_ACT_ECTG_ORGN
+				  , DSNY_ACT_NOTE_CTNT
+				  , DSNY_ACT_BGNN_DT
+				  , DSNY_ACT_END_DT
+				  , DSNY_ACT_CTWP_RATE
+				  , DSNY_ACT_CTWP_MNTH_ICM
+				  , DSNY_ACT_ANSTY_DT
+				  , DSNY_ACT_ANSTY_DIV_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , (select NVL(MAX(DSNY_ACT_SEIL_NUM)+1,1) from PSNL0122 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#) 
+				  , #dsnyActDsplDt#
+				  , #dsnyActDivCd#
+				  , #dsnyActNm#
+				  , #dsnyActReasCtnt#
+				  , #dsnyActEctgOrgn#
+				  , #dsnyActNoteCtnt#
+				  , #dsnyActBgnnDt#
+				  , #dsnyActEndDt#
+				  , #dsnyActCtwpRate#
+				  , #dsnyActCtwpMnthIcm#
+				  , #dsnyActAnstyDt#
+				  , #dsnyActAnstyDivCd#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<!-- <update id="psnl0122DAO.updatePsnl0122" parameterClass="psnl0122Dto"> -->
+	<update id="psnl0122DAO.updatePsnl0122" parameterClass="psnl0122Vo">
+	
+			UPDATE PSNL0122
+			SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				<isNotNull property="dsnyActDsplDt"><isNotEmpty property="dsnyActDsplDt">, DSNY_ACT_DSPL_DT = #dsnyActDsplDt#</isNotEmpty></isNotNull>
+				<isNotNull property="dsnyActDivCd"><isNotEmpty property="dsnyActDivCd">, DSNY_ACT_DIV_CD=#dsnyActDivCd#</isNotEmpty></isNotNull>
+				<isNotNull property="dsnyActNm"><isNotEmpty property="dsnyActNm">, DSNY_ACT_NM=#dsnyActNm#</isNotEmpty></isNotNull>
+				<isNotNull property="dsnyActReasCtnt"><isNotEmpty property="dsnyActReasCtnt">, DSNY_ACT_REAS_CTNT=#dsnyActReasCtnt#</isNotEmpty></isNotNull>
+				<isNotNull property="dsnyActEctgOrgn"><isNotEmpty property="dsnyActEctgOrgn">, DSNY_ACT_ECTG_ORGN=#dsnyActEctgOrgn#</isNotEmpty></isNotNull>
+				<isNotNull property="dsnyActNoteCtnt"><isNotEmpty property="dsnyActNoteCtnt">, DSNY_ACT_NOTE_CTNT=#dsnyActNoteCtnt#</isNotEmpty></isNotNull>
+				<isNotNull property="dsnyActBgnnDt"><isNotEmpty property="dsnyActBgnnDt">, DSNY_ACT_BGNN_DT= #dsnyActBgnnDt#</isNotEmpty></isNotNull>
+				<isNotNull property="dsnyActEndDt"><isNotEmpty property="dsnyActEndDt">, DSNY_ACT_END_DT= #dsnyActEndDt# </isNotEmpty></isNotNull>
+				<isNotNull property="dsnyActCtwpRate"><isNotEmpty property="dsnyActCtwpRate">, DSNY_ACT_CTWP_RATE=#dsnyActCtwpRate#</isNotEmpty></isNotNull>
+				<isNotNull property="dsnyActCtwpMnthIcm"><isNotEmpty property="dsnyActCtwpMnthIcm">, DSNY_ACT_CTWP_MNTH_ICM=#dsnyActCtwpMnthIcm#</isNotEmpty></isNotNull>
+				<isNotNull property="dsnyActAnstyDt"><isNotEmpty property="dsnyActAnstyDt">, DSNY_ACT_ANSTY_DT= #dsnyActAnstyDt#</isNotEmpty></isNotNull>
+				<isNotNull property="dsnyActAnstyDivCd"><isNotEmpty property="dsnyActAnstyDivCd">, DSNY_ACT_ANSTY_DIV_CD=#dsnyActAnstyDivCd#</isNotEmpty></isNotNull>
+				<isNotNull property="ismt"><isNotEmpty property="ismt">, ISMT=#ismt#</isNotEmpty></isNotNull>
+				<isNotNull property="revnAddr"><isNotEmpty property="revnAddr">, REVN_ADDR=#revnAddr#</isNotEmpty></isNotNull>
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				AND DSNY_ACT_SEIL_NUM=#dsnyActSeilNum#
+	</update>
+	
+	<!-- <delete id="psnl0122DAO.deletePsnl0122" parameterClass="psnl0122Dto"> -->
+	<delete id="psnl0122DAO.deletePsnl0122" parameterClass="psnl0122Vo">
+		<![CDATA[
+			DELETE FROM PSNL0122 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND DSNY_ACT_SEIL_NUM=#dsnyActSeilNum#
+				]]>
+	</delete>
+	
+	<select id="psnl0122DAO.selectPsnl0122" resultClass="egovMap" parameterClass="hashMap">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, DSNY_ACT_SEIL_NUM
+				
+				, TO_DATE( DSNY_ACT_DSPL_DT ,'YYYYMMDD') DSNY_ACT_DSPL_DT
+				
+				, DSNY_ACT_DIV_CD
+				, DSNY_ACT_NM
+				, DSNY_ACT_REAS_CTNT
+				, DSNY_ACT_ECTG_ORGN
+				, DSNY_ACT_NOTE_CTNT
+				
+				, TO_DATE( DSNY_ACT_BGNN_DT ,'YYYYMMDD') DSNY_ACT_BGNN_DT
+				, TO_DATE( DSNY_ACT_END_DT ,'YYYYMMDD') DSNY_ACT_END_DT
+				
+				, DSNY_ACT_CTWP_RATE
+				, DSNY_ACT_CTWP_MNTH_ICM
+				
+				, TO_DATE( DSNY_ACT_ANSTY_DT ,'YYYYMMDD') DSNY_ACT_ANSTY_DT
+				
+				, DSNY_ACT_ANSTY_DIV_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PSNL0122
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+			<isNotNull property="dsnyActSeilNum">
+			    <isNotEmpty property="dsnyActSeilNum">
+			        AND DSNY_ACT_SEIL_NUM=#dsnyActSeilNum#
+			    </isNotEmpty>
+			</isNotNull>
+	</select>
+	
+</sqlMap>

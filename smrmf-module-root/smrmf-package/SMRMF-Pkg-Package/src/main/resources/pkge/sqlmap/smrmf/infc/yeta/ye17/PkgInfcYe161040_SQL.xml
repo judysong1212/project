@@ -1,0 +1,1191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgYe161040">
+
+	<typeAlias alias="egovMap"
+		type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="infcPkgYe161040SrhVO"
+		type="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgYe161040SrhVO" />
+
+	<resultMap id="infcPkgYe161040"
+		class="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgYe161040VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1" />
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR"
+			columnIndex="2" />
+		<result property="clutSeptCd" column="CLUT_SEPT_CD"
+			columnIndex="3" />
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4" />
+		<result property="txprDscmNoCntn" column="TXPR_DSCM_NO_CNTN"
+			columnIndex="5" />
+		<result property="cdVvalKrnCd" column="CD_VVAL_KRN_CD"
+			columnIndex="6" />
+		<result property="hifeDdcTrgtAmt" column="HIFE_DDC_TRGT_AMT"
+			columnIndex="7" />
+		<result property="cvrgInscDdcTrgtAmt" column="CVRG_INSC_DDC_TRGT_AMT"
+			columnIndex="8" />
+		<result property="dsbrDdcTrgtAmt" column="DSBR_DDC_TRGT_AMT"
+			columnIndex="9" />
+		<result property="mdxpsDdcTrgtAmt" column="MDXPS_DDC_TRGT_AMT"
+			columnIndex="10" />
+		<result property="scxpsDdcTrgtAmt" column="SCXPS_DDC_TRGT_AMT"
+			columnIndex="11" />
+		<result property="crdcDdcTrgtAmt" column="CRDC_DDC_TRGT_AMT"
+			columnIndex="12" />
+		<result property="drtpCardDdcTrgtAmt" column="DRTP_CARD_DDC_TRGT_AMT"
+			columnIndex="13" />
+		<result property="cshptDdcTrgtAmt" column="CSHPT_DDC_TRGT_AMT"
+			columnIndex="14" />
+		<result property="tdmrDdcTrgtAmt" column="TDMR_DDC_TRGT_AMT"
+			columnIndex="15" />
+		<result property="pbtDdcTrgtAmt" column="PBT_DDC_TRGT_AMT"
+			columnIndex="16" />
+		<result property="conbDdcTrgtAmt" column="CONB_DDC_TRGT_AMT"
+			columnIndex="17" />
+		<result property="kybdr" column="KYBDR" columnIndex="18" />
+		<result property="inptDt" column="INPT_DT" columnIndex="19" />
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="20" />
+		<result property="ismt" column="ISMT" columnIndex="21" />
+		<result property="revnDt" column="REVN_DT" columnIndex="22" />
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="23" />
+	</resultMap>
+
+	<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직 시작 ++++++++++++++++++++++++++++++ -->
+	<insert id="infcPkgYe161040DAO.fnYeta2100_YE161040_2017_CREATE_Insert01_S">
+		<![CDATA[
+			INSERT INTO YE161040 
+				(   DPOB_CD		/* 	사업장코드         	 */
+					,YRTX_BLGG_YR		/* 귀속연도		 */
+					,CLUT_SEPT_CD		/* 연말정산구분코드		 */
+					,SYSTEMKEY		/* SYSTEMKEY		 */
+					,TXPR_DSCM_NO_CNTN	/* 주민등록번호		  */
+					,CD_VVAL_KRN_CD		/* 소득공제명세자료구분코드  */
+					,HIFE_DDC_TRGT_AMT	/* 건강등보험료		  */
+					,MCUR_UI_TRGT_AMT	/* 고용보험료		 */
+					,CVRG_INSC_DDC_TRGT_AMT	/* 보장성보험료		  */
+					,DSBR_DDC_TRGT_AMT	/* 장애인전용보장성보험료	  */
+					,MDXPS_DDC_TRGT_AMT	/* 의료비금액		 */
+					,SCXPS_DDC_TRGT_AMT	/* 교육비금액		 */
+					,CRDC_DDC_TRGT_AMT	/* 신용카드_전통대중제외금액	 */
+					,DRTP_CARD_DDC_TRGT_AMT	/* 직불카드등_전통대중제외금액	 */
+					,CSHPT_DDC_TRGT_AMT	/* 현금영수증_전통대중제외금액	 */
+					,TDMR_DDC_TRGT_AMT	/* 전통시작사용금액		 */
+					,PBT_DDC_TRGT_AMT	/* 대중교통이용금액		 */
+					,CONB_DDC_TRGT_AMT	/* 기부금액		 */
+					,KYBDR			/* 입력자			  */
+					,INPT_DT		/* 	입력일자		 */
+					,INPT_ADDR		/* 입력주소		 */
+					,ISMT			/* 수정자			  */
+					,REVN_DT		/* 	수정일자		 */
+					,REVN_ADDR		/* 수정주소		 */
+ )
+				  SELECT 	   AA.DPOB_CD		 /* 	사업장코드 	   */
+								,AA.YRTX_BLGG_YR		/* 귀속연도	   */
+								,AA.CLUT_SEPT_CD		/* 연말정산구분코드	   */
+								,AA.SYSTEMKEY		/* SYSTEMKEY	   */                               
+				              , BB.RSNO_NUMB    
+				              ,'Y0140000'  /* 국세청 */           
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+					          , #kybdr#
+							  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+							  , #inptAddr#
+							  , #ismt#
+							  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+							  , #revnAddr#                                                               
+					FROM  YE161010 AA                                                       
+						 , (                                                              
+				           SELECT  A02.DPOB_CD,                                                      
+				           A02.SYSTEMKEY,   A02.FAMY_RELA_DIV_CD,   A02.FAMY_SUPPT_RELA_DIV_CD  ,                                       
+				           (CASE WHEN A02.DABPN_DDUC_YN = 'Y' THEN '1'  WHEN A02.FAMY_RELA_DIV_CD = 'A0190002' THEN '1'                 
+				           ELSE CASE WHEN                                               
+				                          (CASE WHEN (SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,7,1)) IN ('3','4') THEN '20' || SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6)  
+				                                ELSE '19' ||  SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6) END) <= '19571231'  
+				                     THEN '1' 
+				                     ELSE  CASE WHEN  A02.FAMY_RELA_DIV_CD = 'A0190100'             
+				                                THEN  CASE WHEN (CASE WHEN (SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,7,1)) IN ('3','4') THEN '20' || SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6)  
+				                                                      ELSE '19' ||  SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6) END) >= '19990102'    
+				                                           THEN '1'  ELSE '0' END
+				                                ELSE  CASE WHEN (CASE WHEN (SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,7,1)) IN ('3','4') THEN '20' || SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6)  
+				                                                       ELSE '19' ||  SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6) END) >= '19970101'    
+				                                            THEN '1'  ELSE '0' END         
+				           END       END          END ) AS BASE_DDYN,                          
+				           A02.HAN_NM,                                             
+				           A02.PAY_FAMY_RESN_REGN_NUM AS RSNO_NUMB,                                             
+				           DECODE(TRIM(A02.DABPN_DDUC_YN),'Y','1','0') AS  DABPN_DDUC_YN  ,         
+				            ('0') AS  BRDD_CTYN ,      
+				               ( CASE WHEN (CASE WHEN (SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,7,1)) IN ('3','4') THEN '20' || SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6)   
+				                                    ELSE '19' ||  SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6) END) <= '19471231'     
+				                          THEN '1'  ELSE '0' END   ) AS  RPCT_DDYN , 
+				  
+				              ( '0' ) AS  BITH_DDYN  
+				           FROM PSNL0100 A01, PAYR0530 A02                                          
+				           WHERE A01.SYSTEMKEY = A02.SYSTEMKEY                    
+				            AND A02.FAMY_RELA_DIV_CD != 'A0190001'  
+				            AND   A01.SYSTEMKEY=#systemkey#
+				          
+				           UNION                                                              
+				           SELECT   
+						   A01.DPOB_CD,                                                          
+				           A01.SYSTEMKEY,  
+						   ('A0190001') AS DABTY_DIV_CD,    
+						       ('Y0120000') AS FAMY_SUPPT_RELA_DIV_CD,                    
+				           ('1') AS BASE_DDYN ,                                                        
+				           A01.HAN_NM,                                                 
+				           A01.RESN_REGN_NUM,                                                 
+				           (CASE WHEN A02.DABTY_DIV_CD IS NULL THEN '0'                      
+				           ELSE   DECODE(A02.DABTY_DIV_CD ,'A0370000','0','1') END) AS  OBST_GBCD     
+				          , ('0') AS BRDD_CTYN                                                             
+				          , ('0') AS RPCT_DDYN                                                            
+				          , ('0') AS BITH_DDYN                                                            
+				           FROM PSNL0100 A01, PSNL0113 A02                                                      
+				           WHERE A01.SYSTEMKEY = A02.SYSTEMKEY(+)   
+						     AND A01.DPOB_CD = A02.DPOB_CD(+)   
+						     AND A01.SYSTEMKEY=#systemkey#     
+						     	]]>  
+				 <![CDATA[
+				          ) BB                                                            
+				          WHERE AA.DPOB_CD = BB.DPOB_CD
+							AND  AA.SYSTEMKEY = BB.SYSTEMKEY                          
+				           	AND BB.RSNO_NUMB IS NOT NULL  
+				           	AND YRTX_BLGG_YR = #yrtxBlggYr#
+				           	AND  CLUT_SEPT_CD = #clutSeptCd#
+				           	AND AA.DPOB_CD=#dpobCd# 
+				           	 AND AA.SYSTEMKEY=#systemkey#  
+                    ]]>
+
+
+	</insert>
+
+	<!-- <isNotEmpty prepend="AND" property="businCd" > AA.BUSIN_CD=#businCd# 
+		</isNotEmpty> <isNotEmpty prepend="AND" property="payrMangDeptCd" > AA.PAYR_MANG_DEPT_CD=#payrMangDeptCd# 
+		</isNotEmpty> <isNotEmpty prepend="AND" property="emymtDivCd" > AA.EMYMT_DIV_CD=#emymtDivCd# 
+		</isNotEmpty> <isNotEmpty property="typOccuCd" prepend="AND"> <![CDATA[ AA.TYP_OCCU_CD 
+		]]> <iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=","> 
+		#typOccuCdArr[]# </iterate> </isNotEmpty> <isNotEmpty property="dtilOccuInttnCd" 
+		prepend="AND"> <![CDATA[ AA.DTIL_OCCU_INTTN_CD ]]> <iterate prepend="IN" 
+		property="dtilOccuInttnCdArr" open="(" close=")" conjunction=","> #dtilOccuInttnCdArr[]# 
+		</iterate> </isNotEmpty> <isNotEmpty prepend="AND" property="typOccuCd" > 
+		AA.TYP_OCCU_CD = #typOccuCd# </isNotEmpty> <isNotEmpty prepend="AND" property="dtilOccuInttnCd" 
+		> AA.DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd# </isNotEmpty> <isEqual prepend="AND" 
+		property="addCheck" compareValue="ADD"> NOT EXISTS ( SELECT * FROM YETA3220 
+		KK01 WHERE KK01.DPOB_CD = AA.DPOB_CD AND KK01.YRTX_BLGG_YR = #yrtxBlggYr# 
+		AND KK01.CLUT_SEPT_CD = #clutSeptCd# AND KK01.YRTX_BLGG_YR = AA.YRTX_BLGG_YR 
+		AND KK01.CLUT_SEPT_CD = AA.CLUT_SEPT_CD AND KK01.SYSTEMKEY = AA.SYSTEMKEY 
+		) </isEqual> -->
+
+
+	<insert id="infcPkgYe161040DAO.fnYeta2100_YE161040_2017_CREATE_Insert02_S">
+		<![CDATA[
+			INSERT INTO YE161040 
+				(   DPOB_CD		/* 	사업장코드         	 */
+					,YRTX_BLGG_YR		/* 귀속연도		 */
+					,CLUT_SEPT_CD		/* 연말정산구분코드		 */
+					,SYSTEMKEY		/* SYSTEMKEY		 */
+					,TXPR_DSCM_NO_CNTN	/* 주민등록번호		  */
+					,CD_VVAL_KRN_CD		/* 소득공제명세자료구분코드  */
+					,HIFE_DDC_TRGT_AMT	/* 건강등보험료		  */
+					,MCUR_UI_TRGT_AMT	/* 고용보험료		 */
+					,CVRG_INSC_DDC_TRGT_AMT	/* 보장성보험료		  */
+					,DSBR_DDC_TRGT_AMT	/* 장애인전용보장성보험료	  */
+					,MDXPS_DDC_TRGT_AMT	/* 의료비금액		 */
+					,SCXPS_DDC_TRGT_AMT	/* 교육비금액		 */
+					,CRDC_DDC_TRGT_AMT	/* 신용카드_전통대중제외금액	 */
+					,DRTP_CARD_DDC_TRGT_AMT	/* 직불카드등_전통대중제외금액	 */
+					,CSHPT_DDC_TRGT_AMT	/* 현금영수증_전통대중제외금액	 */
+					,TDMR_DDC_TRGT_AMT	/* 전통시작사용금액		 */
+					,PBT_DDC_TRGT_AMT	/* 대중교통이용금액		 */
+					,CONB_DDC_TRGT_AMT	/* 기부금액		 */
+					,KYBDR			/* 입력자			  */
+					,INPT_DT		/* 	입력일자		 */
+					,INPT_ADDR		/* 입력주소		 */
+					,ISMT			/* 수정자			  */
+					,REVN_DT		/* 	수정일자		 */
+					,REVN_ADDR		/* 수정주소		 */
+ )
+				  SELECT 	   AA.DPOB_CD		 /* 	사업장코드 	   */
+								,AA.YRTX_BLGG_YR		/* 귀속연도	   */
+								,AA.CLUT_SEPT_CD		/* 연말정산구분코드	   */
+								,AA.SYSTEMKEY		/* SYSTEMKEY	   */                               
+				              , BB.RSNO_NUMB    
+				              ,'Y0140001'  /* 국세청외 */           
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+				             ,0
+					          , #kybdr#
+							  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+							  , #inptAddr#
+							  , #ismt#
+							  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+							  , #revnAddr#                                                               
+					FROM  YE161010 AA                                                       
+						 , (                                                              
+				           SELECT  A02.DPOB_CD,                                                      
+				           A02.SYSTEMKEY,   A02.FAMY_RELA_DIV_CD,   A02.FAMY_SUPPT_RELA_DIV_CD  ,                                       
+				           (CASE WHEN A02.DABPN_DDUC_YN = 'Y' THEN '1'  WHEN A02.FAMY_RELA_DIV_CD = 'A0190002' THEN '1'                 
+				           ELSE CASE WHEN                                               
+				                          (CASE WHEN (SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,7,1)) IN ('3','4') THEN '20' || SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6)  
+				                                ELSE '19' ||  SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6) END) <= '19571231'  
+				                     THEN '1' 
+				                     ELSE  CASE WHEN  A02.FAMY_RELA_DIV_CD = 'A0190100'             
+				                                THEN  CASE WHEN (CASE WHEN (SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,7,1)) IN ('3','4') THEN '20' || SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6)  
+				                                                      ELSE '19' ||  SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6) END) >= '19990102'    
+				                                           THEN '1'  ELSE '0' END
+				                                ELSE  CASE WHEN (CASE WHEN (SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,7,1)) IN ('3','4') THEN '20' || SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6)  
+				                                                       ELSE '19' ||  SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6) END) >= '19970101'    
+				                                            THEN '1'  ELSE '0' END         
+				           END       END          END ) AS BASE_DDYN,                          
+				           A02.HAN_NM,                                             
+				           A02.PAY_FAMY_RESN_REGN_NUM AS RSNO_NUMB,                                             
+				           DECODE(TRIM(A02.DABPN_DDUC_YN),'Y','1','0') AS  DABPN_DDUC_YN  ,         
+				            ('0') AS  BRDD_CTYN ,      
+				               ( CASE WHEN (CASE WHEN (SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,7,1)) IN ('3','4') THEN '20' || SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6)   
+				                                    ELSE '19' ||  SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6) END) <= '19471231'     
+				                          THEN '1'  ELSE '0' END   ) AS  RPCT_DDYN , 
+				  
+				              ( '0' ) AS  BITH_DDYN  
+				           FROM PSNL0100 A01, PAYR0530 A02                                          
+				           WHERE A01.SYSTEMKEY = A02.SYSTEMKEY                    
+				            AND A02.FAMY_RELA_DIV_CD != 'A0190001'  
+				            AND   A01.SYSTEMKEY=#systemkey#
+				          
+				           UNION                                                              
+				           SELECT   
+						   A01.DPOB_CD,                                                          
+				           A01.SYSTEMKEY,  
+						   ('A0190001') AS DABTY_DIV_CD,    
+						       ('Y0120000') AS FAMY_SUPPT_RELA_DIV_CD,                    
+				           ('1') AS BASE_DDYN ,                                                        
+				           A01.HAN_NM,                                                 
+				           A01.RESN_REGN_NUM,                                                 
+				           (CASE WHEN A02.DABTY_DIV_CD IS NULL THEN '0'                      
+				           ELSE   DECODE(A02.DABTY_DIV_CD ,'A0370000','0','1') END) AS  OBST_GBCD     
+				          , ('0') AS BRDD_CTYN                                                             
+				          , ('0') AS RPCT_DDYN                                                            
+				          , ('0') AS BITH_DDYN                                                            
+				           FROM PSNL0100 A01, PSNL0113 A02                                                      
+				           WHERE A01.SYSTEMKEY = A02.SYSTEMKEY(+)   
+						     AND A01.DPOB_CD = A02.DPOB_CD(+)   
+						     AND A01.SYSTEMKEY=#systemkey#     
+						     	]]>  
+				 <![CDATA[
+				          ) BB                                                            
+				          WHERE AA.DPOB_CD = BB.DPOB_CD
+							AND  AA.SYSTEMKEY = BB.SYSTEMKEY                          
+				           	AND BB.RSNO_NUMB IS NOT NULL  
+				           	AND YRTX_BLGG_YR = #yrtxBlggYr#
+				           	AND  CLUT_SEPT_CD = #clutSeptCd#
+				           	AND AA.DPOB_CD=#dpobCd# 
+				           	 	 AND AA.SYSTEMKEY=#systemkey#  
+                    ]]>
+
+
+	</insert>
+
+ 
+	<!-- 가족사항 업데이트 410 고용/건강보험료외 업데이트 종주건강보험료 -->
+	<update
+		id="infcPkgYe161040DAO.fnYeta2100_YE161040_2017_INSU_FETC_Update_S">
+		<![CDATA[
+		
+		DECLARE BEGIN  
+		
+         UPDATE YE161040  AA                                       
+           SET HIFE_DDC_TRGT_AMT = NVL((CASE WHEN NVL((SELECT SUM(NVL(HIFE_DDC_TRGT_AMT,0)) 
+			 								FROM	 YE161040 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY  
+										    AND BB.CD_VVAL_KRN_CD =  'Y0140000'
+			  						 ),0) > 0 THEN  (SELECT (NVL(HTHR_HIFE_AMT,0) + NVL(MCUR_HIFE_AMT,0) + NVL(MCUR_HIFE_AREA_AMT,0) )    /* 보험료_건강고용등외   */                    
+						                             FROM  YE161060         
+						                             WHERE YE161060.DPOB_CD =   AA.DPOB_CD
+						                             AND YE161060.YRTX_BLGG_YR =    AA.YRTX_BLGG_YR          
+						                             AND YE161060.CLUT_SEPT_CD =    AA.CLUT_SEPT_CD           
+						                             AND YE161060.SYSTEMKEY =    AA.SYSTEMKEY ) - NVL((SELECT SUM(NVL(HIFE_DDC_TRGT_AMT,0)) 
+																	 								FROM	 YE161040 BB
+																	 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+																									AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+																									AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+																									AND BB.SYSTEMKEY=AA.SYSTEMKEY  
+																								    AND BB.CD_VVAL_KRN_CD =  'Y0140000'
+																	  						 ),0)
+				                    
+				                    ELSE  NVL((SELECT (NVL(HTHR_HIFE_AMT,0) + NVL(MCUR_HIFE_AMT,0) + NVL(MCUR_HIFE_AREA_AMT,0) )    /* 보험료_건강고용등외   */                    
+					                             FROM  YE161060         
+					                             WHERE YE161060.DPOB_CD =   AA.DPOB_CD
+					                             AND YE161060.YRTX_BLGG_YR =    AA.YRTX_BLGG_YR          
+					                             AND YE161060.CLUT_SEPT_CD =    AA.CLUT_SEPT_CD           
+					                             AND YE161060.SYSTEMKEY =    AA.SYSTEMKEY ),0)
+					                             END),0) 
+            WHERE   AA.DPOB_CD=#dpobCd#
+            AND   AA.YRTX_BLGG_YR=#yrtxBlggYr#
+            AND   AA.CLUT_SEPT_CD=#clutSeptCd#
+            AND   AA.CD_VVAL_KRN_CD =  'Y0140001'
+            AND   AA.SYSTEMKEY=#systemkey# 
+            AND AA.TXPR_DSCM_NO_CNTN = (
+					            		       	SELECT TXPR_DSCM_NO_CNTN FROM YE161030
+					              			   WHERE  YE161030.DPOB_CD=#dpobCd#
+									            AND YE161030.YRTX_BLGG_YR=#yrtxBlggYr#
+									            AND YE161030.CLUT_SEPT_CD=#clutSeptCd#
+									            AND YE161030.SYSTEMKEY=#systemkey#
+									            AND YE161030.FAMY_RELA_DIV_CD =  'A0190001'  
+                              ) ; 
+           
+	    UPDATE YE161040                                         
+           SET   MCUR_UI_TRGT_AMT = NVL((SELECT ( NVL(HTHR_UI_AMT,0) + NVL(MCUR_UI_AMT,0))      /* 고용보험_외   */                    
+                             FROM  YE161060         
+                             WHERE YE161060.DPOB_CD = YE161040.DPOB_CD
+                             AND YE161060.YRTX_BLGG_YR =  YE161040.YRTX_BLGG_YR          
+                             AND YE161060.CLUT_SEPT_CD =  YE161040.CLUT_SEPT_CD           
+                             AND YE161060.SYSTEMKEY =  YE161040.SYSTEMKEY ),0)                                           
+                          WHERE  YE161040.TXPR_DSCM_NO_CNTN = (
+					            		       	SELECT TXPR_DSCM_NO_CNTN FROM YE161030
+					              			   WHERE  YE161030.DPOB_CD=#dpobCd#
+									            AND YE161030.YRTX_BLGG_YR=#yrtxBlggYr#
+									            AND YE161030.CLUT_SEPT_CD=#clutSeptCd#
+									            AND YE161030.SYSTEMKEY=#systemkey#
+									            AND YE161030.FAMY_RELA_DIV_CD =  'A0190001'  
+                              ) 
+            AND YE161040.DPOB_CD=#dpobCd#
+            AND YE161040.YRTX_BLGG_YR=#yrtxBlggYr#
+            AND YE161040.CLUT_SEPT_CD=#clutSeptCd#
+            AND YE161040.CD_VVAL_KRN_CD = 'Y0140001'  /* 국세청외 */   
+            AND YE161040.SYSTEMKEY=#systemkey# ;
+
+END; 
+
+		
+			 ]]>
+	</update>
+
+
+
+	<!-- <isNotEmpty prepend="AND" property="businCd" > PSNL0100.BUSIN_CD=#businCd# 
+		</isNotEmpty> <isNotEmpty prepend="AND" property="payrMangDeptCd" > PSNL0100.PAYR_MANG_DEPT_CD=#payrMangDeptCd# 
+		</isNotEmpty> <isNotEmpty prepend="AND" property="emymtDivCd" > PSNL0100.EMYMT_DIV_CD=#emymtDivCd# 
+		</isNotEmpty> <isNotEmpty property="typOccuCd" prepend="AND"> <![CDATA[ PSNL0100.TYP_OCCU_CD 
+		]]> <iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=","> 
+		#typOccuCdArr[]# </iterate> </isNotEmpty> <isNotEmpty property="dtilOccuInttnCd" 
+		prepend="AND"> <![CDATA[ PSNL0100.DTIL_OCCU_INTTN_CD ]]> <iterate prepend="IN" 
+		property="dtilOccuInttnCdArr" open="(" close=")" conjunction=","> #dtilOccuInttnCdArr[]# 
+		</iterate> </isNotEmpty> -->
+
+
+	<!-- 본인,가족사항 업데이트/보장성보험, 장애인전용보장성보험 -->
+	<update id="infcPkgYe161040DAO.PdfYeta2017_A102Y_YE161040_Update_S">
+		<![CDATA[
+			  UPDATE YE161040 AA  
+			  SET CVRG_INSC_DDC_TRGT_AMT=NVL((SELECT SUM(NVL(INSU_PAY_SUM,0))
+			 								FROM	 PDF_A102Y BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.RESID = AA.TXPR_DSCM_NO_CNTN
+											AND BB.DAT_CD = 'G0001'
+											AND BB.PDF_DAT_APP_YN = 'Y'
+			  							),0) 
+			  
+				, DSBR_DDC_TRGT_AMT=NVL((SELECT SUM(NVL(INSU_PAY_SUM,0))
+			 								FROM PDF_A102Y BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.RESID = AA.TXPR_DSCM_NO_CNTN
+											AND BB.DAT_CD = 'G0002'
+											AND BB.PDF_DAT_APP_YN = 'Y'
+			  							),0)
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE AA.DPOB_CD=#dpobCd#
+								AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+								AND AA.CLUT_SEPT_CD=#clutSeptCd#
+								AND AA.SYSTEMKEY=#systemkey#
+								AND AA.CD_VVAL_KRN_CD='Y0140000' 
+						        AND AA.TXPR_DSCM_NO_CNTN IN ( 	SELECT TXPR_DSCM_NO_CNTN FROM YE161030
+									              			     WHERE  YE161030.DPOB_CD=#dpobCd#
+													               AND YE161030.YRTX_BLGG_YR=#yrtxBlggYr#
+													               AND YE161030.CLUT_SEPT_CD=#clutSeptCd#
+													               AND YE161030.SYSTEMKEY=#systemkey#
+													               AND YE161030.BSC_DDC_CL_CD =  '1'  ) 
+            ]]>
+	</update>
+
+
+	<!-- 본인,가족사항 업데이트/의료비업데이트 -->
+	<update id="infcPkgYe161040DAO.PdfYeta2017_B101Y_YE161040_Update_S">
+		<![CDATA[
+			  UPDATE YE161040 AA  
+			  SET MDXPS_DDC_TRGT_AMT=NVL((SELECT SUM(NVL(MAN_SUM,0))
+			 								FROM	 PDF_B101Y BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.RESID = AA.TXPR_DSCM_NO_CNTN 
+											  AND BB.PDF_DAT_APP_YN = 'Y'
+			  							),0)  
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE AA.DPOB_CD=#dpobCd#
+								AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+								AND AA.CLUT_SEPT_CD=#clutSeptCd#
+								AND AA.SYSTEMKEY=#systemkey#
+								AND AA.CD_VVAL_KRN_CD='Y0140000'  /* 국세청 */     
+            ]]>
+	</update>
+
+	<!-- 본인,가족사항 업데이트/교육비 -->
+	<update id="infcPkgYe161040DAO.PdfYeta2017_C101Y_YE161040_Update_S">
+		<![CDATA[
+			  UPDATE YE161040 AA  
+			  SET SCXPS_DDC_TRGT_AMT=NVL((SELECT SUM(NVL(SCXPS_USE_AMT,0))
+			 							   FROM YE161090 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.FAM_RESNO_ENC_CNTN = AA.TXPR_DSCM_NO_CNTN  
+											AND BB.CD_VVAL_KRN_CD = 'Y0140000'  /* 국세청 */     
+			  							),0)  
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE AA.DPOB_CD=#dpobCd#
+								AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+								AND AA.CLUT_SEPT_CD=#clutSeptCd#
+								AND AA.SYSTEMKEY=#systemkey#
+								AND AA.CD_VVAL_KRN_CD='Y0140000'  /* 국세청 */     
+            ]]>
+	</update>
+
+
+
+
+	<!-- 본인,가족사항 업데이트/의료비업데이트 화면호출시 사용 -->
+	<update id="infcPkgYe161040DAO.incDdcYeta2017_B101Y_YE161040_Update_S">
+		<![CDATA[
+			  UPDATE YE161040 AA  
+			  SET MDXPS_DDC_TRGT_AMT=NVL((SELECT SUM(NVL(USE_AMT,0))
+			 								FROM  YE164010 BB
+			 							   WHERE AA.DPOB_CD=BB.DPOB_CD
+										 	AND AA.YRTX_BLGG_YR=BB.YRTX_BLGG_YR
+											AND AA.CLUT_SEPT_CD=BB.CLUT_SEPT_CD
+											AND AA.SYSTEMKEY=BB.SYSTEMKEY 
+											AND AA.TXPR_DSCM_NO_CNTN =  BB.RESNO_ENC_CNTN
+										    AND AA.CD_VVAL_KRN_CD =  BB.MDXPS_VVAL_KRN_CD
+			  							),0)  
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE AA.DPOB_CD=#dpobCd#
+								AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+								AND AA.CLUT_SEPT_CD=#clutSeptCd#
+								AND AA.SYSTEMKEY=#systemkey#
+								AND AA.CD_VVAL_KRN_CD='Y0140001'  /* 기타 */     
+            ]]>
+	</update>
+
+	<!-- 본인,가족사항 업데이트/교육비 화면호출시 사용 -->
+	<update id="infcPkgYe161040DAO.incDdcYeta2017_C101Y_YE161040_Update_S">
+		<![CDATA[
+			  UPDATE YE161040 AA  
+			  SET SCXPS_DDC_TRGT_AMT=NVL((SELECT SUM(NVL(SCXPS_USE_AMT,0))
+			 									FROM YE161090 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.FAM_RESNO_ENC_CNTN = AA.TXPR_DSCM_NO_CNTN  
+											AND BB.CD_VVAL_KRN_CD = 'Y0140001'  /* 기타 */     
+			  							),0)  
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE AA.DPOB_CD=#dpobCd#
+								AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+								AND AA.CLUT_SEPT_CD=#clutSeptCd#
+								AND AA.SYSTEMKEY=#systemkey#
+								AND AA.CD_VVAL_KRN_CD='Y0140001'  /* 기타 */     
+            ]]>
+	</update>
+
+	<!-- 본인,가족사항 업데이트/신용카드 -->
+	<update id="infcPkgYe161040DAO.PdfYeta2017_G106Y_YE161040_Update_S">
+		<![CDATA[
+		   UPDATE YE161040 AA  
+			  SET CRDC_DDC_TRGT_AMT=NVL((SELECT SUM(NVL(CARD_AMT_SUM,0))
+			 								FROM	 PDF_G106Y BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.RESID = AA.TXPR_DSCM_NO_CNTN 
+											AND BB.USE_PLACE_CD = '1'
+										    AND BB.PDF_DAT_APP_YN = 'Y'
+			  							),0)  
+			  							
+			  ,TDMR_DDC_TRGT_AMT=NVL((SELECT SUM(NVL(BB01.CARD_AMT_SUM,0)) FROM 
+			                    ((SELECT  (NVL(CARD_AMT_SUM,0)) AS CARD_AMT_SUM, RESID
+			 					 	FROM PDF_G106Y BB
+			 							   WHERE BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey#
+											 AND BB.USE_PLACE_CD = '2'
+										     AND BB.PDF_DAT_APP_YN = 'Y'
+								UNION ALL		    
+								SELECT  (NVL(CASH_CARD_SUM,0)) AS CARD_AMT_SUM, RESID
+			 								FROM	 PDF_G206Y BB
+			 							   WHERE  BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey#
+											AND BB.USE_PLACE_CD = '2'
+										    AND BB.PDF_DAT_APP_YN = 'Y'
+								UNION ALL		    
+							    SELECT  (NVL(DIR_CARD_AMT_SUM,0)) AS CARD_AMT_SUM, RESID
+			 								FROM	 PDF_G306Y BB
+			 							   WHERE  BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey#
+											AND BB.USE_PLACE_CD = '2'
+										    AND BB.PDF_DAT_APP_YN = 'Y'			    		    
+			  							)) BB01
+			  							WHERE BB01.RESID = AA.TXPR_DSCM_NO_CNTN 
+			  							),TDMR_DDC_TRGT_AMT) 
+			  							 
+			  ,PBT_DDC_TRGT_AMT=NVL( (SELECT SUM(NVL(BB01.CARD_AMT_SUM,0)) FROM 
+			                               (SELECT  (NVL(CARD_AMT_SUM,0)) AS CARD_AMT_SUM, RESID
+			 								FROM	 PDF_G106Y BB
+			 							   WHERE  BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey#
+											AND BB.USE_PLACE_CD = '3'
+										    AND BB.PDF_DAT_APP_YN = 'Y'
+								UNION ALL
+								SELECT  (NVL(CASH_CARD_SUM,0)) AS CARD_AMT_SUM, RESID
+			 								FROM	 PDF_G206Y BB
+			 							   WHERE  BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey# 
+											AND BB.USE_PLACE_CD = '3'
+										    AND BB.PDF_DAT_APP_YN = 'Y'
+							   UNION ALL
+							   SELECT  (NVL(DIR_CARD_AMT_SUM,0)) AS CARD_AMT_SUM, RESID
+			 								FROM	 PDF_G306Y BB
+			 							   WHERE  BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey# 
+											AND BB.USE_PLACE_CD = '3'
+										    AND BB.PDF_DAT_APP_YN = 'Y'
+			  							) BB01
+			  							WHERE BB01.RESID = AA.TXPR_DSCM_NO_CNTN 
+			  							),PBT_DDC_TRGT_AMT)  														
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE AA.DPOB_CD=#dpobCd#
+								AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+								AND AA.CLUT_SEPT_CD=#clutSeptCd#
+								AND AA.SYSTEMKEY=#systemkey#
+								AND AA.CD_VVAL_KRN_CD='Y0140000'  /* 국세청 */   
+            ]]>
+	</update>
+
+
+	<!-- 본인,가족사항 업데이트/현금영수증 -->
+	<update id="infcPkgYe161040DAO.PdfYeta2017_G206Y_YE161040_Update_S">
+		<![CDATA[
+		   UPDATE YE161040 AA  
+			  SET CSHPT_DDC_TRGT_AMT=NVL(
+			                          (SELECT SUM(NVL(CASH_CARD_SUM,0))
+			 								FROM	 PDF_G206Y BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.RESID = AA.TXPR_DSCM_NO_CNTN 
+											AND BB.USE_PLACE_CD = '1'
+										    AND BB.PDF_DAT_APP_YN = 'Y'
+			  							),0)  
+			  							
+			  ,TDMR_DDC_TRGT_AMT=NVL((SELECT  SUM(NVL(CARD_AMT_SUM,0)) FROM  
+			                      (SELECT (NVL(CARD_AMT_SUM,0)) AS CARD_AMT_SUM, BB.RESID
+			 								FROM	 PDF_G106Y BB
+			 							   WHERE BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey#   
+											AND BB.USE_PLACE_CD = '2'
+										    AND BB.PDF_DAT_APP_YN = 'Y'
+								UNION ALL		    
+								SELECT (NVL(CASH_CARD_SUM,0)) AS CARD_AMT_SUM, BB.RESID
+			 								FROM	 PDF_G206Y BB
+			 							   WHERE  BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey#   
+											AND BB.USE_PLACE_CD = '2'
+										    AND BB.PDF_DAT_APP_YN = 'Y'
+								UNION ALL		    
+							SELECT (NVL(DIR_CARD_AMT_SUM,0)) AS CARD_AMT_SUM, BB.RESID
+			 								FROM	 PDF_G306Y BB
+			 							   WHERE BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey#  
+											AND BB.USE_PLACE_CD = '2'
+										    AND BB.PDF_DAT_APP_YN = 'Y'			    		    
+			  							)  BB01 
+			  							WHERE  BB01.RESID = AA.TXPR_DSCM_NO_CNTN 
+			  							),0) 
+			  							 
+			  ,PBT_DDC_TRGT_AMT=NVL((SELECT  SUM(NVL(CARD_AMT_SUM,0)) FROM 
+			                     (SELECT (NVL(CARD_AMT_SUM,0)) AS CARD_AMT_SUM, BB.RESID
+			 								FROM	 PDF_G106Y BB
+			 							   WHERE  BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey#  
+											AND BB.USE_PLACE_CD = '3'
+										    AND BB.PDF_DAT_APP_YN = 'Y'
+								UNION ALL
+								SELECT (NVL(CASH_CARD_SUM,0)) AS CARD_AMT_SUM, BB.RESID
+			 								FROM	 PDF_G206Y BB
+			 							   WHERE  BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey#  
+											AND BB.USE_PLACE_CD = '3'
+										    AND BB.PDF_DAT_APP_YN = 'Y'
+							   UNION ALL
+							   SELECT (NVL(DIR_CARD_AMT_SUM,0)) AS CARD_AMT_SUM, BB.RESID
+			 								FROM	 PDF_G306Y BB
+			 							   WHERE BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey#  
+											AND BB.USE_PLACE_CD = '3'
+										    AND BB.PDF_DAT_APP_YN = 'Y'
+			  							) BB01 
+			  							WHERE  BB01.RESID = AA.TXPR_DSCM_NO_CNTN ),0)  														
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE AA.DPOB_CD=#dpobCd#
+								AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+								AND AA.CLUT_SEPT_CD=#clutSeptCd#
+								AND AA.SYSTEMKEY=#systemkey#
+								AND AA.CD_VVAL_KRN_CD='Y0140000'  /* 국세청 */   
+            ]]>
+	</update>
+
+	<!-- 본인,가족사항 업데이트/직불카드 -->
+	<update id="infcPkgYe161040DAO.PdfYeta2017_G306Y_YE161040_Update_S">
+		<![CDATA[
+		   UPDATE YE161040 AA  
+			  SET DRTP_CARD_DDC_TRGT_AMT=NVL((SELECT SUM(NVL(DIR_CARD_AMT_SUM,0))
+			 								FROM	 PDF_G306Y BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.RESID = AA.TXPR_DSCM_NO_CNTN 
+											AND BB.USE_PLACE_CD = '1'
+										    AND BB.PDF_DAT_APP_YN = 'Y'
+			  							),0)  
+			  							
+			  ,TDMR_DDC_TRGT_AMT=NVL((SELECT  SUM(NVL(CARD_AMT_SUM,0)) FROM 
+			                           (SELECT (NVL(CARD_AMT_SUM,0)) AS CARD_AMT_SUM, BB.RESID
+			 								FROM	 PDF_G106Y BB
+			 							   WHERE  BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey#  
+											AND BB.USE_PLACE_CD = '2'
+										    AND BB.PDF_DAT_APP_YN = 'Y'
+								UNION ALL		    
+								SELECT (NVL(CASH_CARD_SUM,0)) AS CARD_AMT_SUM, BB.RESID
+			 								FROM	 PDF_G206Y BB
+			 							   WHERE BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey#  
+											AND BB.USE_PLACE_CD = '2'
+										    AND BB.PDF_DAT_APP_YN = 'Y'
+								UNION ALL		    
+							SELECT (NVL(DIR_CARD_AMT_SUM,0)) AS CARD_AMT_SUM, BB.RESID
+			 								FROM	 PDF_G306Y BB
+			 							   WHERE BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey#  
+											AND BB.USE_PLACE_CD = '2'
+										    AND BB.PDF_DAT_APP_YN = 'Y'			    		    
+			  							) BB01 
+			  							WHERE  BB01.RESID = AA.TXPR_DSCM_NO_CNTN ),0) 
+			  							 
+			  ,PBT_DDC_TRGT_AMT=NVL((SELECT  SUM(NVL(CARD_AMT_SUM,0)) FROM 
+			                              (SELECT (NVL(CARD_AMT_SUM,0)) AS CARD_AMT_SUM, BB.RESID
+			 								FROM	 PDF_G106Y BB
+			 							   WHERE BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey#  
+											AND BB.USE_PLACE_CD = '3'
+										    AND BB.PDF_DAT_APP_YN = 'Y'
+								UNION ALL
+								SELECT (NVL(CASH_CARD_SUM,0)) AS CARD_AMT_SUM, BB.RESID
+			 								FROM	 PDF_G206Y BB
+			 							   WHERE BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey#  
+											AND BB.USE_PLACE_CD = '3'
+										    AND BB.PDF_DAT_APP_YN = 'Y'
+							   UNION ALL
+							   SELECT (NVL(DIR_CARD_AMT_SUM,0)) AS CARD_AMT_SUM, BB.RESID
+			 								FROM	 PDF_G306Y BB
+			 							   WHERE  BB.DPOB_CD=#dpobCd#
+												AND BB.YRTX_BLGG_YR=#yrtxBlggYr#
+												AND BB.CLUT_SEPT_CD=#clutSeptCd#
+												AND BB.SYSTEMKEY=#systemkey#  
+											AND BB.USE_PLACE_CD = '3'
+										    AND BB.PDF_DAT_APP_YN = 'Y'
+			  							) BB01 
+			  							WHERE  BB01.RESID = AA.TXPR_DSCM_NO_CNTN ),0)  														
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE AA.DPOB_CD=#dpobCd#
+								AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+								AND AA.CLUT_SEPT_CD=#clutSeptCd#
+								AND AA.SYSTEMKEY=#systemkey#
+								AND AA.CD_VVAL_KRN_CD='Y0140000'  /* 국세청 */   
+            ]]>
+	</update>
+
+	<!-- 본인,가족사항 업데이트/건강보험료 금액 -->
+	<update id="infcPkgYe161040DAO.PdfYeta2017_O101M_YE161040_Update_S">
+		<![CDATA[
+		
+			DECLARE BEGIN 
+			
+             UPDATE YE161040 AA  
+			  SET HIFE_DDC_TRGT_AMT=NVL((SELECT SUM(NVL(HLTH_AMT_SUM,0))
+			 								FROM	 PDF_O101Y BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.RESID = AA.TXPR_DSCM_NO_CNTN   
+											AND BB.PDF_DAT_APP_YN = 'Y'
+			  							),0)  
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE AA.DPOB_CD=#dpobCd#
+								AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+								AND AA.CLUT_SEPT_CD=#clutSeptCd#
+								AND AA.SYSTEMKEY=#systemkey#
+								AND AA.CD_VVAL_KRN_CD='Y0140000';  /* 국세청 */     
+								
+			 UPDATE YE161040 AA  
+			  SET HIFE_DDC_TRGT_AMT= 0 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE AA.DPOB_CD=#dpobCd#
+								AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+								AND AA.CLUT_SEPT_CD=#clutSeptCd#
+								AND AA.SYSTEMKEY=#systemkey#
+								AND AA.CD_VVAL_KRN_CD='Y0140001' ; /* 국세청외 */     					
+		  
+
+         END;  
+			 
+            ]]>
+	</update>
+
+<!-- 기부금결과   -->
+	<update id="infcPkgYe161040DAO.fnYeta2200_L102Y_YE161040_2017_Update_S">
+		<![CDATA[
+ 	DECLARE BEGIN 
+			UPDATE YE161040 AA
+			   SET  CONB_DDC_TRGT_AMT	=  NVL( (SELECT SUM(NVL(BB.USE_SUM_AMT,0))
+			 												FROM	 YE165010 BB
+							 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+														 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+															AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+															AND BB.SYSTEMKEY=AA.SYSTEMKEY  
+															AND BB.YRS_MATE_CL_CD = AA.CD_VVAL_KRN_CD
+															 AND BB.CONB_CHG_CD  NOT IN  ('31','50') 
+															AND BB.RESNO_ENC_CNTN = AA.TXPR_DSCM_NO_CNTN
+							  							) ,0)  
+					 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr# 
+				 WHERE AA.DPOB_CD=#dpobCd#
+					AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+					AND AA.CLUT_SEPT_CD=#clutSeptCd#
+					AND AA.SYSTEMKEY=#systemkey#
+					AND AA.CD_VVAL_KRN_CD = 'Y0140000';
+					
+				UPDATE YE161040 AA
+			   SET  CONB_DDC_TRGT_AMT	=  NVL( (SELECT SUM(NVL(BB.USE_SUM_AMT,0))
+			 												FROM	 YE165010 BB
+							 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+														 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+															AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+															AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+															 AND BB.CONB_CHG_CD  NOT IN  ('31','50')  
+															AND BB.YRS_MATE_CL_CD  = AA.CD_VVAL_KRN_CD
+															AND BB.RESNO_ENC_CNTN = AA.TXPR_DSCM_NO_CNTN
+							  							) ,0)  
+					 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr# 
+				 WHERE DPOB_CD=#dpobCd#
+					AND YRTX_BLGG_YR=#yrtxBlggYr#
+					AND CLUT_SEPT_CD=#clutSeptCd#
+					AND SYSTEMKEY=#systemkey#  			
+					AND AA.CD_VVAL_KRN_CD = 'Y0140001';
+	   END;  				
+				]]>
+	</update>  
+	<!-- E_소득세액공제명세 -->
+	<insert
+		id="infcPkgYe161040DAO.incTaxDeducDec_nts_Yeta2017_Ye161040_Insert_S">
+		<![CDATA[
+			INSERT INTO YE161040 
+				(   DPOB_CD		   /* 	사업장코드         	 */
+					,YRTX_BLGG_YR		/* 귀속연도		 */
+					,CLUT_SEPT_CD		/* 연말정산구분코드		 */
+					,SYSTEMKEY		/* SYSTEMKEY		 */
+					,TXPR_DSCM_NO_CNTN	/* 주민등록번호		  */
+					,CD_VVAL_KRN_CD		/* 소득공제명세자료구분코드  */
+					,HIFE_DDC_TRGT_AMT	/* 건강등보험료		  */
+					,MCUR_UI_TRGT_AMT	/* 고용보험료		 */
+					,CVRG_INSC_DDC_TRGT_AMT	/* 보장성보험료		  */
+					,DSBR_DDC_TRGT_AMT	/* 장애인전용보장성보험료	  */
+					,MDXPS_DDC_TRGT_AMT	/* 의료비금액		 */
+					,SCXPS_DDC_TRGT_AMT	/* 교육비금액		 */
+					,CRDC_DDC_TRGT_AMT	/* 신용카드_전통대중제외금액	 */
+					,DRTP_CARD_DDC_TRGT_AMT	/* 직불카드등_전통대중제외금액	 */
+					,CSHPT_DDC_TRGT_AMT	/* 현금영수증_전통대중제외금액	 */
+					,TDMR_DDC_TRGT_AMT	/* 전통시작사용금액		 */
+					,PBT_DDC_TRGT_AMT	/* 대중교통이용금액		 */
+					,CONB_DDC_TRGT_AMT	/* 기부금액		 */
+					,KYBDR			/* 입력자			  */
+					,INPT_DT		/* 	입력일자		 */
+					,INPT_ADDR		/* 입력주소		 */
+					,ISMT			/* 수정자			  */
+					,REVN_DT		/* 	수정일자		 */
+					,REVN_ADDR		/* 수정주소		 */
+ )
+				  SELECT 	     AA.DPOB_CD		        /* 	사업장코드 	   */
+								,AA.YRTX_BLGG_YR		/* 귀속연도	   */
+								,AA.CLUT_SEPT_CD		/* 연말정산구분코드	   */
+								,AA.SYSTEMKEY		/* SYSTEMKEY	   */                               
+				                ,BB.TXPR_DSCM_NO_CNTN    
+				                ,BB.CD_VVAL_KRN_NM         
+				                ,BB.HIFE_DDC_TRGT_AMT
+				                , (CASE
+							           WHEN     BB.FAMY_RELA_DIV_CD = 'A0190001'
+							                AND BB.CD_VVAL_KRN_NM = 'Y0140001'
+							           THEN
+							              (SELECT SUM (AC05.SPCI_EMPF)
+							                 FROM YE160401 AC05
+							                WHERE     AC05.DPOB_CD = AA.DPOB_CD
+							                      AND AC05.YRTX_BLGG_YR = AA.YRTX_BLGG_YR
+							                      AND AC05.CLUT_SEPT_CD = AA.CLUT_SEPT_CD
+							                      AND AC05.SYSTEMKEY = AA.SYSTEMKEY)
+							        END)
+				               , BB.CVRG_INSC_DDC_TRGT_AMT
+				               , BB.DSBR_DDC_TRGT_AMT
+				               , BB.MDXPS_DDC_TRGT_AMT
+				               , BB.SCXPS_DDC_TRGT_AMT
+				               , BB.CRDC_DDC_TRGT_AMT
+				               , BB.DRTP_CARD_DDC_TRGT_AMT
+				               , BB.CSHPT_DDC_TRGT_AMT
+				               , BB.TDMR_DDC_TRGT_AMT
+				               , BB.PBT_DDC_TRGT_AMT
+				               , BB.CONB_DDC_TRGT_AMT
+					          , #kybdr#
+							  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+							  , #inptAddr#
+							  , #ismt#
+							  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+							  , #revnAddr#                                                               
+					FROM  YE161010 AA                                                       
+						 , (                                                              
+				           SELECT 
+									   DPOB_CD, YRTX_BLGG_YR, CLUT_SEPT_CD, 
+									   TXPR_DSCM_NO_CNTN,
+									   (SELECT FAMY_RELA_DIV_CD  FROM  YE161030
+															    WHERE YE161030.DPOB_CD = YE167030.DPOB_CD
+																	AND YE161030.SYSTEMKEY = YE167030.SYSTEMKEY 
+													 				AND YE161030.YRTX_BLGG_YR = YE167030.YRTX_BLGG_YR
+													 				AND YE161030.CLUT_SEPT_CD = YE167030.CLUT_SEPT_CD 
+													 				AND YE161030.TXPR_DSCM_NO_CNTN = YE167030.TXPR_DSCM_NO_CNTN ) AS FAMY_RELA_DIV_CD,
+									    (CASE WHEN TRIM(CD_VVAL_KRN_NM) = '국세청자료' THEN 'Y0140000' ELSE 'Y0140001' END) AS CD_VVAL_KRN_NM , SYSTEMKEY, 
+									   HIFE_DDC_TRGT_AMT, CVRG_INSC_DDC_TRGT_AMT, DSBR_DDC_TRGT_AMT, 
+									   MDXPS_DDC_TRGT_AMT, SCXPS_DDC_TRGT_AMT, CRDC_DDC_TRGT_AMT, 
+									   DRTP_CARD_DDC_TRGT_AMT, CSHPT_DDC_TRGT_AMT, TDMR_DDC_TRGT_AMT, 
+									   PBT_DDC_TRGT_AMT, CONB_DDC_TRGT_AMT 
+									FROM  YE167030  
+									    	WHERE YRTX_BLGG_YR = #yrtxBlggYr#
+													           	AND CLUT_SEPT_CD = #clutSeptCd#
+													           	AND DPOB_CD=#dpobCd# 
+													            AND SYSTEMKEY=#systemkey#    
+						     	]]>  
+				 <![CDATA[
+				          ) BB                                                            
+				          WHERE AA.DPOB_CD = BB.DPOB_CD
+							AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+							 AND AA.YRTX_BLGG_YR=BB.YRTX_BLGG_YR
+							 AND AA.CLUT_SEPT_CD=BB.CLUT_SEPT_CD 
+				           	AND AA.YRTX_BLGG_YR = #yrtxBlggYr#
+				           	AND AA.CLUT_SEPT_CD = #clutSeptCd#
+				           	AND AA.DPOB_CD=#dpobCd# 
+				            AND AA.SYSTEMKEY=#systemkey#  
+                    ]]>
+
+
+	</insert>
+
+	<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직 종료 ++++++++++++++++++++++++++++++ -->
+
+	<insert id="infcPkgYe161040DAO.insertYe161040_S">
+		<![CDATA[
+			INSERT INTO YE161040 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , TXPR_DSCM_NO_CNTN
+				  , CD_VVAL_KRN_CD
+				  , HIFE_DDC_TRGT_AMT
+				  , CVRG_INSC_DDC_TRGT_AMT
+				  , DSBR_DDC_TRGT_AMT
+				  , MDXPS_DDC_TRGT_AMT
+				  , SCXPS_DDC_TRGT_AMT
+				  , CRDC_DDC_TRGT_AMT
+				  , DRTP_CARD_DDC_TRGT_AMT
+				  , CSHPT_DDC_TRGT_AMT
+				  , TDMR_DDC_TRGT_AMT
+				  , PBT_DDC_TRGT_AMT
+				  , CONB_DDC_TRGT_AMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #txprDscmNoCntn#
+				  , #cdVvalKrnCd#
+				  , #hifeDdcTrgtAmt#
+				  , #cvrgInscDdcTrgtAmt#
+				  , #dsbrDdcTrgtAmt#
+				  , #mdxpsDdcTrgtAmt#
+				  , #scxpsDdcTrgtAmt#
+				  , #crdcDdcTrgtAmt#
+				  , #drtpCardDdcTrgtAmt#
+				  , #cshptDdcTrgtAmt#
+				  , #tdmrDdcTrgtAmt#
+				  , #pbtDdcTrgtAmt#
+				  , #conbDdcTrgtAmt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+
+	<update id="infcPkgYe161040DAO.updateYe161040_S">
+		<![CDATA[
+			UPDATE YE161040
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, TXPR_DSCM_NO_CNTN=#txprDscmNoCntn#
+				, CD_VVAL_KRN_CD=#cdVvalKrnCd#
+				, HIFE_DDC_TRGT_AMT=#hifeDdcTrgtAmt#
+				, CVRG_INSC_DDC_TRGT_AMT=#cvrgInscDdcTrgtAmt#
+				, DSBR_DDC_TRGT_AMT=#dsbrDdcTrgtAmt#
+				, MDXPS_DDC_TRGT_AMT=#mdxpsDdcTrgtAmt#
+				, SCXPS_DDC_TRGT_AMT=#scxpsDdcTrgtAmt#
+				, CRDC_DDC_TRGT_AMT=#crdcDdcTrgtAmt#
+				, DRTP_CARD_DDC_TRGT_AMT=#drtpCardDdcTrgtAmt#
+				, CSHPT_DDC_TRGT_AMT=#cshptDdcTrgtAmt#
+				, TDMR_DDC_TRGT_AMT=#tdmrDdcTrgtAmt#
+				, PBT_DDC_TRGT_AMT=#pbtDdcTrgtAmt#
+				, CONB_DDC_TRGT_AMT=#conbDdcTrgtAmt#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND TXPR_DSCM_NO_CNTN=#txprDscmNoCntn#
+								AND CD_VVAL_KRN_CD=#cdVvalKrnCd#
+				]]>
+	</update>
+
+	<delete id="infcPkgYe161040DAO.deleteYe161040_S">
+		<![CDATA[
+			DELETE FROM YE161040 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND TXPR_DSCM_NO_CNTN=#txprDscmNoCntn#
+								AND CD_VVAL_KRN_CD=#cdVvalKrnCd#
+				]]>
+	</delete>
+
+	<select id="infcPkgYe161040DAO.selectYe161040_S" resultMap="infcPkgYe161040">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, TXPR_DSCM_NO_CNTN
+				, CD_VVAL_KRN_CD
+				, HIFE_DDC_TRGT_AMT
+				, CVRG_INSC_DDC_TRGT_AMT
+				, DSBR_DDC_TRGT_AMT
+				, MDXPS_DDC_TRGT_AMT
+				, SCXPS_DDC_TRGT_AMT
+				, CRDC_DDC_TRGT_AMT
+				, DRTP_CARD_DDC_TRGT_AMT
+				, CSHPT_DDC_TRGT_AMT
+				, TDMR_DDC_TRGT_AMT
+				, PBT_DDC_TRGT_AMT
+				, CONB_DDC_TRGT_AMT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE161040
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND TXPR_DSCM_NO_CNTN=#txprDscmNoCntn#
+								AND CD_VVAL_KRN_CD=#cdVvalKrnCd#
+				]]>
+	</select>
+
+	<select id="infcPkgYe161040DAO.selectYe161040List_D"
+		parameterClass="infcPkgYe161040SrhVO" resultClass="egovMap">
+		SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+		SELECT
+		DPOB_CD
+		, YRTX_BLGG_YR
+		, CLUT_SEPT_CD
+		, SYSTEMKEY
+		, TXPR_DSCM_NO_CNTN
+		, CD_VVAL_KRN_CD
+		, HIFE_DDC_TRGT_AMT
+		, CVRG_INSC_DDC_TRGT_AMT
+		, DSBR_DDC_TRGT_AMT
+		, MDXPS_DDC_TRGT_AMT
+		, SCXPS_DDC_TRGT_AMT
+		, CRDC_DDC_TRGT_AMT
+		, DRTP_CARD_DDC_TRGT_AMT
+		, CSHPT_DDC_TRGT_AMT
+		, TDMR_DDC_TRGT_AMT
+		, PBT_DDC_TRGT_AMT
+		, CONB_DDC_TRGT_AMT
+		, KYBDR
+		, INPT_DT
+		, INPT_ADDR
+		, ISMT
+		, REVN_DT
+		, REVN_ADDR
+		FROM YE161040
+		WHERE 1=1
+		<isEqual prepend="AND" property="searchCondition"
+			compareValue="0">
+			DPOB_CD = #searchKeyword#
+		</isEqual>
+		<isEqual prepend="AND" property="searchCondition"
+			compareValue="1">
+			YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+		</isEqual>
+		ORDER BY
+		DPOB_CD DESC
+		, YRTX_BLGG_YR DESC
+		, CLUT_SEPT_CD DESC
+		, SYSTEMKEY DESC
+		, TXPR_DSCM_NO_CNTN DESC
+		, CD_VVAL_KRN_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>
+	<select id="infcPkgYe161040DAO.selectYe161040ListTotCnt_S"
+		parameterClass="infcPkgYe161040SrhVO" resultClass="int">
+		SELECT COUNT(*) totcnt
+		FROM YE161040
+		WHERE 1=1
+		<isEqual prepend="AND" property="searchCondition"
+			compareValue="0">
+			DPOB_CD = #searchKeyword#
+		</isEqual>
+		<isEqual prepend="AND" property="searchCondition"
+			compareValue="1">
+			YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+		</isEqual>
+	</select>
+
+</sqlMap>

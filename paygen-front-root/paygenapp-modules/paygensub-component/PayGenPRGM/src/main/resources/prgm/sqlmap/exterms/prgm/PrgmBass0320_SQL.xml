@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PGRM_Bass0320">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<!-- <typeAlias  alias="prgmComBass0320SerarchVO" type="com.app.exterms.basis.server.vo.PrgmComBass0320SrhVO"/> -->
+	<typeAlias  alias="prgmComSearchVO" type="com.app.exterms.prgm.server.vo.PrgmComSearchVO"/>
+	
+	<resultMap id="prgmComBass0320" class="com.app.exterms.prgm.server.vo.PrgmComBass0320VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="2"/>
+		<result property="typOccuNm" column="TYP_OCCU_NM" columnIndex="3"/>
+		<result property="typOccuUseYn" column="TYP_OCCU_USE_YN" columnIndex="4"/>
+		<result property="typOccuCtnt" column="TYP_OCCU_CTNT" columnIndex="5"/>
+		<result property="typOccuOrd" column="TYP_OCCU_ORD" columnIndex="6"/>
+		<result property="typOccuJbfmlDivCd" column="TYP_OCCU_JBFML_DIV_CD" columnIndex="7"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap> 
+	
+	<!-- 직종 콤보박스처리  -->
+<select id="prgmComBass0320DAO.selectBass0320ComboTypOccuCdList_D" parameterClass="prgmComSearchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+	       SELECT 
+	                        A01.DPOB_CD
+						                , A01.TYP_OCCU_CD
+						  	<isNotEqual  property="typOccuUseYn" compareValue="A">
+								   , A01.TYP_OCCU_NM
+								</isNotEqual>	
+								<isEqual   property="typOccuUseYn" compareValue="A">
+								     ,('[' || DECODE(A01.TYP_OCCU_USE_YN,'Y','Y','X') || ']' || A01.TYP_OCCU_NM) AS TYP_OCCU_NM
+								</isEqual>   
+						                , A01.TYP_OCCU_USE_YN
+						                , A01.TYP_OCCU_CTNT
+						                , A01.TYP_OCCU_ORD
+						                , A01.TYP_OCCU_JBFML_DIV_CD
+						                , A01.PYSP_GRDE_CD  
+	       FROM 
+					(		SELECT DISTINCT   AA.DPOB_CD
+						                , AA.TYP_OCCU_CD
+						                , AA.TYP_OCCU_NM
+						                , AA.TYP_OCCU_USE_YN
+						                , AA.TYP_OCCU_CTNT
+						                , AA.TYP_OCCU_ORD
+						                , AA.TYP_OCCU_JBFML_DIV_CD
+						                , AA.PYSP_GRDE_CD  
+						        FROM BASS0320 AA, 
+						                ( 
+						               SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM  
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' ))) C 
+                                                 <isNotEmpty property="deptCd" prepend="WHERE">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]# 
+												</iterate>
+												</isNotEmpty>   
+						                ) BB 
+						WHERE AA.DPOB_CD = BB.DPOB_CD
+						  AND AA.TYP_OCCU_CD = BB.TYP_OCCU_CD   
+                     <isEmpty property="ymdGb" prepend="AND">			  
+                          AA.TYP_OCCU_USE_YN = 'Y' 
+                      </isEmpty>     
+					  <isEqual property="ymdGb" compareValue="Y"> 
+						<isNotEmpty prepend="AND" property="strDate" >
+                             #strDate# BETWEEN SUBSTR((NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                               AND SUBSTR((NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                       	</isNotEmpty>	 
+					  </isEqual>
+                	<isEqual   property="ymdGb" compareValue="YM">
+					   	<isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN SUBSTR((NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                               AND SUBSTR((NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                       	</isNotEmpty>
+					</isEqual>
+					<isEqual   property="ymdGb" compareValue="YMD">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN (NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                               AND (NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+                       </isNotEmpty>
+					</isEqual>   
+            		<isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+						((AA.TYP_OCCU_CD = #typOccuCd#) OR (AA.CHNG_TYP_OCCU_CD
+						]]>
+					   	<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					     #typOccuCdArr[]#
+					  	</iterate>
+					  	)
+					</isNotEmpty>    
+					<isNotEmpty prepend="AND" property="dpobCd" >
+					 	AA.DPOB_CD=#dpobCd#
+					</isNotEmpty>  
+					) A01 
+					ORDER BY A01.DPOB_CD
+					              , A01.TYP_OCCU_USE_YN DESC 
+						                , A01.TYP_OCCU_NM ASC 
+						                , A01.TYP_OCCU_ORD ASC
+ 		<isNotEqual  property="lastIndex" compareValue="-1">
+		 <![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+		</isNotEqual>	
+		<isEqual   property="lastIndex" compareValue="-1">
+		  <![CDATA[					
+				) A  
+			)
+			]]>
+		</isEqual>	
+	</select>	
+	
+	<select id="prgmComBass0320DAO.selectBass0320ComboTypOccuCdListTotCnt_S" parameterClass="prgmComSearchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM (
+				SELECT DISTINCT   AA.DPOB_CD
+						                , AA.TYP_OCCU_CD
+						                , AA.TYP_OCCU_NM
+						                , AA.TYP_OCCU_USE_YN
+						                , AA.TYP_OCCU_CTNT
+						                , AA.TYP_OCCU_ORD
+						                , AA.TYP_OCCU_JBFML_DIV_CD
+						                , AA.PYSP_GRDE_CD  
+						        FROM BASS0320 AA, 
+						                ( 
+						                SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM  
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' ))) C 
+                                                 <isNotEmpty property="deptCd" prepend="WHERE">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]# 
+												</iterate>
+												</isNotEmpty>   
+						                ) BB 
+						WHERE AA.DPOB_CD = BB.DPOB_CD
+						  AND AA.TYP_OCCU_CD = BB.TYP_OCCU_CD     
+			    		<isEmpty property="ymdGb" prepend="AND">			  
+                          AA.TYP_OCCU_USE_YN = 'Y' 
+                 		</isEmpty>     
+					  	<isEqual property="ymdGb" compareValue="Y"> 
+					   		<isNotEmpty prepend="AND" property="strDate" >
+                             #strDate# BETWEEN SUBSTR((NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                               AND SUBSTR((NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                       		</isNotEmpty>	 
+					  	</isEqual>
+                     	<isEqual   property="ymdGb" compareValue="YM">
+					   		<isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN SUBSTR((NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                               AND SUBSTR((NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                       		</isNotEmpty>
+					  	</isEqual>
+					 	<isEqual   property="ymdGb" compareValue="YMD">
+					   		<isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN (NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                               AND (NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+                       		</isNotEmpty>
+					 	</isEqual>   
+                     	<isNotEmpty property="typOccuCd" prepend="AND">
+							<![CDATA[
+							((AA.TYP_OCCU_CD = #typOccuCd#) OR (AA.CHNG_TYP_OCCU_CD
+							]]>
+						   <iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						     #typOccuCdArr[]#
+						  </iterate>
+						  )
+					 	</isNotEmpty>     
+						<isNotEmpty prepend="AND" property="dpobCd" >
+							 AA.DPOB_CD=#dpobCd#
+						</isNotEmpty>  
+			)
+	</select>
+	
+
+ <select id="prgmComBass0320DAO.selectBass0320TypOccuCdList_D" parameterClass="prgmComSearchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+	 SELECT 
+	                           A01.DPOB_CD
+						                , A01.TYP_OCCU_CD
+						                 	<isNotEqual  property="typOccuUseYn" compareValue="A">
+								   , A01.TYP_OCCU_NM
+								</isNotEqual>	
+								<isEqual   property="typOccuUseYn" compareValue="A">
+								     ,('[' || DECODE(A01.TYP_OCCU_USE_YN,'Y','Y','X') || ']' || A01.TYP_OCCU_NM) AS TYP_OCCU_NM
+								</isEqual>    
+						                , A01.TYP_OCCU_USE_YN 
+	       FROM 
+					(	
+			     	SELECT            AA.DPOB_CD
+								, AA.TYP_OCCU_CD
+							    , AA.TYP_OCCU_NM 
+							     , AA.TYP_OCCU_USE_YN 
+						FROM BASS0320 AA,
+						(
+						  SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM  
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' ))) C 
+                                                 <isNotEmpty property="deptCd" prepend="WHERE">
+													<![CDATA[
+													 C.DEPT_CD
+													]]>
+													<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+													 #deptCdArr[]# 
+													</iterate>
+												</isNotEmpty>   
+						) BB
+				WHERE AA.DPOB_CD = BB.DPOB_CD  
+				  AND AA.TYP_OCCU_CD = BB.TYP_OCCU_CD 
+			  	<isEmpty property="ymdGb" prepend="AND">			  
+                          AA.TYP_OCCU_USE_YN = 'Y' 
+              	</isEmpty>     
+					<isEqual property="ymdGb" compareValue="Y"> 
+						<isNotEmpty prepend="AND" property="strDate" >
+                             #strDate# BETWEEN SUBSTR((NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                               AND SUBSTR((NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                  		</isNotEmpty>	 
+					</isEqual>
+                 	<isEqual   property="ymdGb" compareValue="YM">
+						<isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN SUBSTR((NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                               AND SUBSTR((NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                       	</isNotEmpty>
+					</isEqual>
+					<isEqual   property="ymdGb" compareValue="YMD">
+						<isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN (NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                               AND (NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+               			</isNotEmpty>
+					</isEqual>   
+                 	<isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+						((AA.TYP_OCCU_CD = #typOccuCd#) OR (AA.CHNG_TYP_OCCU_CD
+						]]>
+					   	<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					     #typOccuCdArr[]#
+					  	</iterate>
+					  )
+					</isNotEmpty>    
+					<isNotEmpty prepend="AND" property="dpobCd" >
+					   AA.DPOB_CD=#dpobCd#
+					</isNotEmpty>
+			   GROUP BY  AA.DPOB_CD,   AA.TYP_OCCU_USE_YN, AA.TYP_OCCU_NM ,AA.TYP_OCCU_CD
+			   	) A01 
+					ORDER BY A01.DPOB_CD
+					                   , A01.TYP_OCCU_USE_YN DESC 
+						                , A01.TYP_OCCU_NM ASC  
+	<isNotEqual  property="lastIndex" compareValue="-1">
+	 <![CDATA[					
+		) A WHERE ROWNUM <= #lastIndex#
+	) WHERE RNUM >= #firstIndex#
+	]]>
+	</isNotEqual>	
+	<isEqual   property="lastIndex" compareValue="-1">
+	  <![CDATA[					
+		) A  
+	)
+	]]>
+	</isEqual>	
+</select>	
+
+ 
+
+ <select id="prgmComBass0320DAO.selectNonBass0320TypOccuCdList_D" parameterClass="prgmComSearchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				 SELECT 
+	                           A01.DPOB_CD
+						                , A01.TYP_OCCU_CD
+						           	<isNotEqual  property="typOccuUseYn" compareValue="A">
+								   , A01.TYP_OCCU_NM
+								</isNotEqual>	
+								<isEqual   property="typOccuUseYn" compareValue="A">
+								     ,('[' || DECODE(A01.TYP_OCCU_USE_YN,'Y','Y','X') || ']' || A01.TYP_OCCU_NM) AS TYP_OCCU_NM
+								</isEqual>   
+						                , A01.TYP_OCCU_USE_YN 
+	       FROM 
+					(	
+			     	SELECT            AA.DPOB_CD
+								, AA.TYP_OCCU_CD
+							    , AA.TYP_OCCU_NM 
+							     , AA.TYP_OCCU_USE_YN 
+						FROM BASS0320 AA 
+				WHERE  AA.DPOB_CD=#dpobCd# 
+				<isNotEmpty property="typOccuUseYn" prepend="AND">		
+					<isNotEqual  property="typOccuUseYn" compareValue="A">
+								    AA.TYP_OCCU_USE_YN = #typOccuUseYn# 
+								</isNotEqual>	
+								<isEqual   property="typOccuUseYn" compareValue="A">
+								    AA.TYP_OCCU_USE_YN IN ('Y','N') 
+								</isEqual>    
+                  </isNotEmpty>   
+                  <isEmpty property="typOccuUseYn" prepend="AND">	                   
+			       		<!-- <isEmpty property="ymdGb" prepend="AND"> -->			  
+                          AA.TYP_OCCU_USE_YN IN ('Y','N') 
+                 		 <!-- </isEmpty>   -->   
+                   </isEmpty>                   
+					  <isEqual property="ymdGb" compareValue="Y"> 
+						<isNotEmpty prepend="AND" property="strDate" >
+                             #strDate# BETWEEN SUBSTR((NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                               AND SUBSTR((NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                       	</isNotEmpty>	 
+					</isEqual>
+                 	<isEqual   property="ymdGb" compareValue="YM">
+						<isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN SUBSTR((NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                               AND SUBSTR((NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                       	</isNotEmpty>
+					</isEqual>
+					<isEqual   property="ymdGb" compareValue="YMD">
+						<isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN (NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                               AND (NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+                       	</isNotEmpty>
+					</isEqual>   
+             		<isNotEmpty property="typOccuCd" prepend="AND">
+							<![CDATA[
+							((AA.TYP_OCCU_CD = #typOccuCd#) OR (AA.CHNG_TYP_OCCU_CD
+							]]>
+						   <iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						     #typOccuCdArr[]#
+						  </iterate>
+						  )
+					</isNotEmpty>    
+			 GROUP BY  AA.DPOB_CD,   AA.TYP_OCCU_USE_YN, AA.TYP_OCCU_NM ,AA.TYP_OCCU_CD
+			   	) A01 
+					ORDER BY A01.DPOB_CD
+					                   , A01.TYP_OCCU_USE_YN DESC 
+						                , A01.TYP_OCCU_NM ASC  
+	<isNotEqual  property="lastIndex" compareValue="-1">
+	 <![CDATA[					
+		) A WHERE ROWNUM <= #lastIndex#
+	) WHERE RNUM >= #firstIndex#
+	]]>
+	</isNotEqual>	
+	<isEqual   property="lastIndex" compareValue="-1">
+	  <![CDATA[					
+		) A  
+	)
+	]]>
+	</isEqual>	
+	
+	</select>	
+		
+</sqlMap>

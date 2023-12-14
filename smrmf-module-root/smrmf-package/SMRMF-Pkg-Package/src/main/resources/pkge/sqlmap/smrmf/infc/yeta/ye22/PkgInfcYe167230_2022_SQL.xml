@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgYe167230_2022">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYe167230Srh_2022_VO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2022.InfcPkgYe167230Srh_2022_VO"/>
+	
+	<resultMap id="infcPkgYe167230_2022" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2022.InfcPkgYe167230_2022_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="txprDscmNoEncCntn" column="TXPR_DSCM_NO_ENC_CNTN" columnIndex="5"/>
+		<result property="ctrTermStrDt" column="CTR_TERM_STR_DT" columnIndex="6"/>
+		<result property="lsorFnm" column="LSOR_FNM" columnIndex="7"/>
+		<result property="ctrTermEndDt" column="CTR_TERM_END_DT" columnIndex="8"/>
+		<result property="lnpbIntrt" column="LNPB_INTRT" columnIndex="9"/>
+		<result property="amt" column="AMT" columnIndex="10"/>
+		<result property="pnamt" column="PNAMT" columnIndex="11"/>
+		<result property="intrAmt" column="INTR_AMT" columnIndex="12"/>
+		<result property="ddcAmt" column="DDC_AMT" columnIndex="13"/>
+		<result property="kybdr" column="KYBDR" columnIndex="14"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="15"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="16"/>
+		<result property="ismt" column="ISMT" columnIndex="17"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="18"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="19"/>
+	</resultMap>
+	
+	<insert id="infcPkgYe167230_2022_DAO.insertYe167230_S">
+		<![CDATA[
+			INSERT INTO YE167230 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , TXPR_DSCM_NO_ENC_CNTN
+				  , CTR_TERM_STR_DT
+				  , LSOR_FNM
+				  , CTR_TERM_END_DT
+				  , LNPB_INTRT
+				  , AMT
+				  , PNAMT
+				  , INTR_AMT
+				  , DDC_AMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #txprDscmNoEncCntn#
+				  , #ctrTermStrDt#
+				  , #lsorFnm#
+				  , #ctrTermEndDt#
+				  , #lnpbIntrt#
+				  , #amt#
+				  , #pnamt#
+				  , #intrAmt#
+				  , #ddcAmt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgYe167230_2022_DAO.updateYe167230_S">
+		<![CDATA[
+			UPDATE YE167230
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, TXPR_DSCM_NO_ENC_CNTN=#txprDscmNoEncCntn#
+				, CTR_TERM_STR_DT=#ctrTermStrDt#
+				, LSOR_FNM=#lsorFnm#
+				, CTR_TERM_END_DT=#ctrTermEndDt#
+				, LNPB_INTRT=#lnpbIntrt#
+				, AMT=#amt#
+				, PNAMT=#pnamt#
+				, INTR_AMT=#intrAmt#
+				, DDC_AMT=#ddcAmt#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND TXPR_DSCM_NO_ENC_CNTN=#txprDscmNoEncCntn#
+								AND CTR_TERM_STR_DT=#ctrTermStrDt#
+				]]>
+	</update>
+	
+	<delete id="infcPkgYe167230_2022_DAO.deleteYe167230_S">
+		<![CDATA[
+			DELETE FROM YE167230 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<select id="infcPkgYe167230_2022_DAO.selectYe167230_S" resultMap="infcPkgYe167230_2022">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, TXPR_DSCM_NO_ENC_CNTN
+				, CTR_TERM_STR_DT
+				, LSOR_FNM
+				, CTR_TERM_END_DT
+				, LNPB_INTRT
+				, AMT
+				, PNAMT
+				, INTR_AMT
+				, DDC_AMT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE167230
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND TXPR_DSCM_NO_ENC_CNTN=#txprDscmNoEncCntn#
+								AND CTR_TERM_STR_DT=#ctrTermStrDt#
+				]]>
+	</select>
+	
+	<select id="infcPkgYe167230_2022_DAO.selectYe167230List_D" parameterClass="infcPkgYe167230Srh_2022_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, TXPR_DSCM_NO_ENC_CNTN
+								, CTR_TERM_STR_DT
+								, LSOR_FNM
+								, CTR_TERM_END_DT
+								, LNPB_INTRT
+								, AMT
+								, PNAMT
+								, INTR_AMT
+								, DDC_AMT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE167230
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, TXPR_DSCM_NO_ENC_CNTN DESC
+							, CTR_TERM_STR_DT DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgYe167230_2022_DAO.selectYe167230ListTotCnt_S" parameterClass="infcPkgYe167230Srh_2022_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE167230
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye162530">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ye162530SrhVo" type="com.app.exterms.yearendtax.server.vo.Ye162530SrhVO"/>
+	
+	<resultMap id="ye162530" class="com.app.exterms.yearendtax.server.vo.Ye162530VO">
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="1"/> 
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="2"/> 
+		<result property="rntlCttSeilNum" column="RNTL_CTT_SEIL_NUM" columnIndex="3"/>  
+		<result property="dpobCd" column="DPOB_CD" columnIndex="4"/> 
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/> 
+		<result property="rntlCttLehdrNm" column="RNTL_CTT_LEHDR_NM" columnIndex="6"/>   
+		<result property="rntlCttBusoprRgstnum" column="RNTL_CTT_BUSOPR_RGSTNUM" columnIndex="7"/>  
+		<result property="rntlCttHusFrmCd" column="RNTL_CTT_HUS_FRM_CD" columnIndex="8"/>  
+		<result property="rntlCttHusCnttArea" column="RNTL_CTT_HUS_CNTT_AREA" columnIndex="9"/> 
+		<result property="rntlCttAddr" column="RNTL_CTT_ADDR" columnIndex="10"/> 
+		<result property="rntlCttPridBgnnDt" column="RNTL_CTT_PRID_BGNN_DT" columnIndex="11"/> 
+		<result property="rntlCttPridEndDt" column="RNTL_CTT_PRID_END_DT" columnIndex="12"/> 
+		<result property="rntlCttChrtrGrnteSum" column="RNTL_CTT_CHRTR_GRNTE_SUM" columnIndex="13"/> 
+		<result property="kybdr" column="KYBDR" columnIndex="14"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="15"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="16"/>
+		<result property="ismt" column="ISMT" columnIndex="17"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="18"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="19"/>
+		<result property="ectnFlTrnrCtlYn" column="ECTN_FL_TRNR_CTL_YN" columnIndex="20"/> 
+	</resultMap>
+	
+	
+	<!-- 
+	#############################################################################
+	######################## 2017년도 연말정산 로직 시작 ############################
+	#############################################################################
+	 -->
+	 
+	<insert id="ye162530DAO.insertYetaP23004ToYe162530_S">
+		<![CDATA[
+			INSERT INTO YE162530 
+				( DPOB_CD					
+					, YRTX_BLGG_YR			
+					, CLUT_SEPT_CD			
+					, SYSTEMKEY				
+					, RNTL_CTT_SEIL_NUM	
+					, TAX_VVAL_KRN_CD	
+					, RNTL_CTT_LEHDR_NM		
+					, RNTL_CTT_BUSOPR_RGSTNUM	
+					, RNTL_CTT_HUS_FRM_CD		
+					, RNTL_CTT_HUS_CNTT_AREA	
+					, RNTL_CTT_ADDR			
+					, RNTL_CTT_PRID_BGNN_DT	
+					, RNTL_CTT_PRID_END_DT	
+					, RNTL_CTT_CHRTR_GRNTE_SUM
+					, KYBDR					
+					, INPT_DT					
+					, INPT_ADDR				
+					, ISMT					
+					, REVN_DT					
+					, REVN_ADDR )
+			VALUES ( #dpobCd#					
+						, #yrtxBlggYr#			
+						, #clutSeptCd#			
+						, #systemkey#				
+						, ( SELECT NVL( MAX(RNTL_CTT_SEIL_NUM)+1 ,1)  
+                       		  FROM YE162530  
+                            WHERE DPOB_CD=#dpobCd# 
+		         				AND YRTX_BLGG_YR=#yrtxBlggYr# 
+		                        AND CLUT_SEPT_CD=#clutSeptCd# 
+                                AND SYSTEMKEY=#systemkey# )  
+                        , #taxVvalKrnCd#        	
+						, #rntlCttLehdrNm#		
+						, #rntlCttBusoprRgstnum#	
+						, #rntlCttHusFrmCd#		
+						, #rntlCttHusCnttArea#	
+						, #rntlCttAddr#			
+						, #rntlCttPridBgnnDt#	
+						, #rntlCttPridEndDt#	
+						, #rntlCttChrtrGrnteSum#
+						, #kybdr#					
+						, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')				
+						, #inptAddr#				
+						, #ismt#					
+						, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')					
+						, #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="ye162530DAO.updateYetaP23004ToYe162530_S">
+		<![CDATA[
+		UPDATE YE162530
+			SET RNTL_CTT_LEHDR_NM			= #rntlCttLehdrNm#		
+				, RNTL_CTT_BUSOPR_RGSTNUM	= #rntlCttBusoprRgstnum#	
+				, RNTL_CTT_HUS_FRM_CD		= #rntlCttHusFrmCd#		
+				, RNTL_CTT_HUS_CNTT_AREA	= #rntlCttHusCnttArea#	
+				, RNTL_CTT_ADDR				= #rntlCttAddr#			
+				, RNTL_CTT_PRID_BGNN_DT		= #rntlCttPridBgnnDt#	
+				, RNTL_CTT_PRID_END_DT		= #rntlCttPridEndDt#
+				, RNTL_CTT_CHRTR_GRNTE_SUM	= #rntlCttChrtrGrnteSum#
+				, ISMT						= #ismt#					
+				, REVN_DT					= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')		
+				, REVN_ADDR					= #revnAddr#
+				
+		WHERE DPOB_CD 				= #dpobCd#					
+			AND YRTX_BLGG_YR 		= #yrtxBlggYr#		
+			AND CLUT_SEPT_CD 		= #clutSeptCd#		
+			AND SYSTEMKEY 			= #systemkey#		
+			AND RNTL_CTT_SEIL_NUM	= #rntlCttSeilNum#	
+			AND TAX_VVAL_KRN_CD 	= #taxVvalKrnCd#
+		]]>
+	</update>
+	
+	<delete id="ye162530DAO.deleteYetaP23004ToYe162530_S">
+		<![CDATA[
+			DELETE FROM YE162530 
+				WHERE DPOB_CD 				= #dpobCd#					
+					AND YRTX_BLGG_YR 		= #yrtxBlggYr#		
+					AND CLUT_SEPT_CD 		= #clutSeptCd#		
+					AND SYSTEMKEY 			= #systemkey#		
+					AND RNTL_CTT_SEIL_NUM	= #rntlCttSeilNum#	
+					AND TAX_VVAL_KRN_CD 	= #taxVvalKrnCd#
+			]]>
+	</delete>
+	
+	
+	<select id="ye162530DAO.seleteYetaP23004ToYe162530_D" parameterClass="ye162530SrhVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM 
+				FROM ( SELECT DPOB_CD					
+								, YRTX_BLGG_YR			
+								, CLUT_SEPT_CD			
+								, SYSTEMKEY				
+								, RNTL_CTT_SEIL_NUM	
+								, TAX_VVAL_KRN_CD
+								, fcBass0300CDNM(DPOB_CD, TAX_VVAL_KRN_CD) AS TAX_VVAL_KRN_NM	
+								, RNTL_CTT_LEHDR_NM		
+								, RNTL_CTT_BUSOPR_RGSTNUM	
+								, RNTL_CTT_HUS_FRM_CD		
+								, RNTL_CTT_HUS_FRM_CD AS rntlCttHusFrmCdcommCd	
+								, fcBass0300CDNM(DPOB_CD, RNTL_CTT_HUS_FRM_CD) AS rntlCttHusFrmCdcommCdNm 		
+								, RNTL_CTT_HUS_CNTT_AREA	
+								, RNTL_CTT_ADDR			
+								, RNTL_CTT_PRID_BGNN_DT	
+								, RNTL_CTT_PRID_END_DT	
+								, RNTL_CTT_CHRTR_GRNTE_SUM
+								, KYBDR					
+								, INPT_DT					
+								, INPT_ADDR				
+								, ISMT					
+								, REVN_DT					
+								, REVN_ADDR	
+													
+							FROM YE162530
+							
+						WHERE DPOB_CD=#dpobCd#
+							AND YRTX_BLGG_YR=#yrtxBlggYr#
+							AND CLUT_SEPT_CD=#clutSeptCd#
+							AND SYSTEMKEY=#systemkey#
+							
+						ORDER BY DPOB_CD					
+								, YRTX_BLGG_YR			
+								, CLUT_SEPT_CD			
+								, SYSTEMKEY		
+								, RNTL_CTT_PRID_BGNN_DT	
+								, RNTL_CTT_LEHDR_NM	
+								
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>	
+	
+	<select id="ye162530DAO.seleteYetaP23004ToYe162530ListCnt_S" parameterClass="ye162530SrhVO" resultClass="int">
+		SELECT COUNT(SYSTEMKEY) totcnt
+		  FROM YE162530
+		WHERE DPOB_CD 				= #dpobCd#					
+			AND YRTX_BLGG_YR 		= #yrtxBlggYr#		
+			AND CLUT_SEPT_CD 		= #clutSeptCd#		
+			AND SYSTEMKEY 			= #systemkey#
+	</select>	 
+	 
+	<!-- 
+	#############################################################################
+	######################## 2017년도 연말정산 로직 종료 ############################
+	#############################################################################
+	 -->	
+	
+	
+<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직  시작 ++++++++++++++++++++++++++++++ -->
+
+	<delete id="ye162530DAO.deleteYetaP210001_Ye162530VO_2017_Delete_S">
+		<![CDATA[
+			DELETE FROM YE162530 
+						WHERE YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd# 
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+
+<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직  종료 ++++++++++++++++++++++++++++++ -->	
+	
+	
+	
+	
+	<insert id="ye162530DAO.insertYe162530_S">
+		<![CDATA[
+			INSERT INTO YE162530 
+                ( YRTX_BLGG_YR
+                  , CLUT_SEPT_CD
+                  , LEAS_SQNO
+                  , DPOB_CD
+                  , SYSTEMKEY
+                  , RNTL_CTT_LEHDR_NM
+                  , RNTL_CTT_BUSOPR_RGSTNUM
+                  , RNTL_CTT_HUS_FRM_CD
+                  , RNTL_CTT_HUS_CNTT_AREA
+                  , RNTL_CTT_ADDR
+                  , RNTL_CTT_PRID_BGNN_DT
+                  , RNTL_CTT_PRID_END_DT
+                  , RNTL_CTT_CHRTR_GRNTE_SUM 
+                  , ECTN_FL_TRNR_CTL_YN )
+            VALUES ( #yrtxBlggYr#
+                  , #clutSeptCd#
+                  , (SELECT NVL(MAX(LEAS_SQNO)+1,1) 
+                      FROM YE162530 
+                      WHERE DPOB_CD=#dpobCd#
+                                AND YRTX_BLGG_YR=#yrtxBlggYr#
+                                AND CLUT_SEPT_CD=#clutSeptCd#
+                                AND SYSTEMKEY=#systemkey#) 
+                  , #dpobCd#
+                  , #systemkey#
+                  , #rntlCttLehdrNm#
+                  , #rntlCttBusoprRgstnNum#
+                  , (fcBass0300ITEMNM(#dpobCd#, #rntlCttHusFrmCd#, '11'))
+                  , #rntlCttHusCnttArea#
+                  , #rntlCttAddr#
+                  , #rntlCttPridBgnnDt#
+                  , #rntlCttPridEndDt#
+                  , #rntlCttChrtrGrnteSum# 
+                  , #ectnFlTrnrCtlYn# )
+		]]>
+	</insert>
+	
+	<update id="ye162530DAO.updateYe162530_S">
+		<![CDATA[
+			UPDATE YE162530
+            SET YRTX_BLGG_YR=#yrtxBlggYr#
+                , CLUT_SEPT_CD=#clutSeptCd#
+                , RNTL_CTT_SEIL_NUM=#rntlCttSeilNum#
+                , DPOB_CD=#dpobCd#
+                , SYSTEMKEY=#systemkey#
+                , RNTL_CTT_LEHDR_NM=#rntlCttLehdrNm#
+                , RNTL_CTT_BUSOPR_RGSTNUM=#rntlCttBusoprRgstnNum#
+                , RNTL_CTT_HUS_FRM_CD=(fcBass0300ITEMNM(#dpobCd#, #rntlCttHusFrmCd#, '11'))
+                , RNTL_CTT_HUS_CNTT_AREA=#rntlCttHusCnttArea#
+                , RNTL_CTT_ADDR=#rntlCttAddr#
+                , RNTL_CTT_PRID_BGNN_DT=#rntlCttPridBgnnDt#
+                , RNTL_CTT_PRID_END_DT=#rntlCttPridEndDt#
+                , RNTL_CTT_CHRTR_GRNTE_SUM=#rntlCttChrtrGrnteSum#
+                , ECTN_FL_TRNR_CTL_YN=#ectnFlTrnrCtlYn#
+                        WHERE YRTX_BLGG_YR=#yrtxBlggYr#
+                                AND CLUT_SEPT_CD=#clutSeptCd#
+                                AND RNTL_CTT_SEIL_NUM=#rntlCttSeilNum#
+                                AND DPOB_CD=#dpobCd#
+                                AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	
+	<delete id="ye162530DAO.deleteYe162530_S">
+		<![CDATA[
+			DELETE FROM YE162530 
+						WHERE YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND RNTL_CTT_SEIL_NUM=#rntlCttSeilNum#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<!-- yeta0100 화면 연말정산 대상자 관리  -->
+		<delete id="ye162530DAO.fnPayr06430_PAYR451_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YE162530 
+						WHERE YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd# 
+								AND DPOB_CD=#dpobCd# 
+				]]>
+				  <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                   </isNotEmpty> 
+		    		  			    
+	</delete>
+	
+	
+	<select id="ye162530DAO.selectYe162530_S" resultMap="ye162530">
+		<![CDATA[
+			SELECT
+	                YRTX_BLGG_YR
+	                , CLUT_SEPT_CD
+	                , RNTL_CTT_SEIL_NUM
+	                , DPOB_CD
+	                , SYSTEMKEY
+	                , RNTL_CTT_LEHDR_NM
+	                , RNTL_CTT_BUSOPR_RGSTNUM
+	                , RNTL_CTT_HUS_FRM_CD
+	                , RNTL_CTT_HUS_CNTT_AREA
+	                , RNTL_CTT_ADDR
+	                , RNTL_CTT_PRID_BGNN_DT
+	                , RNTL_CTT_PRID_END_DT
+	                , RNTL_CTT_CHRTR_GRNTE_SUM
+	                , ECTN_FL_TRNR_CTL_YN
+	            FROM YE162530
+	                        WHERE YRTX_BLGG_YR=#yrtxBlggYr#
+	                                AND CLUT_SEPT_CD=#clutSeptCd#
+	                                AND RNTL_CTT_SEIL_NUM=#rntlCttSeilNum#
+	                                AND DPOB_CD=#dpobCd#
+	                                AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+	<select id="ye162530DAO.selectYe162530List_D" parameterClass="ye162530SrhVo" resultClass="egovMap">
+	SELECT * FROM (
+        SELECT A.*, ROWNUM RNUM FROM (
+                    SELECT
+                                    YRTX_BLGG_YR
+                                    , CLUT_SEPT_CD
+                                    , CLUT_SEPT_CD AS settGbcdcommCd 
+                                    , fcBass0300CDNM(DPOB_CD, CLUT_SEPT_CD) AS settGbcdcommCdNm 
+                                    , RNTL_CTT_SEIL_NUM
+                                    , DPOB_CD
+                                    , SYSTEMKEY
+                                    , RNTL_CTT_LEHDR_NM
+                                    , RNTL_CTT_BUSOPR_RGSTNUM
+                                    , RNTL_CTT_HUS_FRM_CD
+                                    , (SELECT C.COMM_CD 
+                                            FROM BASS0300 C
+                                            WHERE C.DPOB_CD = DPOB_CD
+                                                    AND C.RPSTTV_CD = 'Y007'
+                                                    AND    C.MANGE_ITEM11 = RNTL_CTT_HUS_FRM_CD)AS leasTyhucommCd
+                                        , fcBass0300CDNM(DPOB_CD, (SELECT C.COMM_CD 
+                                                                    FROM BASS0300 C
+                                                                    WHERE C.DPOB_CD = DPOB_CD
+                                                                        AND C.RPSTTV_CD = 'Y007'
+                                                                        AND    C.MANGE_ITEM11 = RNTL_CTT_HUS_FRM_CD)) AS leasTyhucommCdNm 
+                                    , RNTL_CTT_HUS_CNTT_AREA
+                                    , RNTL_CTT_ADDR
+                                    , RNTL_CTT_PRID_BGNN_DT
+                                    , RNTL_CTT_PRID_END_DT
+                                    , RNTL_CTT_CHRTR_GRNTE_SUM
+                                    , KYBDR
+                                    , INPT_DT
+                                    , INPT_ADDR
+                                    , ISMT
+                                    , REVN_DT
+                                    , REVN_ADDR
+                                    , ECTN_FL_TRNR_CTL_YN
+                            FROM YE162530
+                    WHERE 
+                        <isNotEmpty property="dpobCd">
+                            DPOB_CD=#dpobCd#
+                        </isNotEmpty>
+                        <isNotEmpty prepend="AND" property="yrtxBlggYr" >
+                            YRTX_BLGG_YR=#edacRvyy#
+                        </isNotEmpty> 
+                        <isNotEmpty prepend="AND" property="clutSeptCd" >
+                            CLUT_SEPT_CD=#settGbcd#
+                        </isNotEmpty> 
+                        <isNotEmpty prepend="AND" property="systemkey" >
+                            SYSTEMKEY=#systemkey#
+                        </isNotEmpty>  
+                        ORDER BY 
+                            YRTX_BLGG_YR DESC
+                                , CLUT_SEPT_CD DESC
+                                , RNTL_CTT_SEIL_NUM DESC
+                                , DPOB_CD DESC
+                                , SYSTEMKEY DESC
+            
+            <![CDATA[                    
+        ) A WHERE ROWNUM <= #lastIndex#
+    )WHERE RNUM >= #firstIndex#
+    ]]>
+	</select>	
+	<select id="ye162530DAO.selectYe162530ListTotCnt_S" parameterClass="ye162530SrhVo" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE162530
+			WHERE 
+				<isNotEmpty property="dpobCd">
+					DPOB_CD=#dpobCd#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="yrtxBlggYr" >
+					YRTX_BLGG_YR=#edacRvyy#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="clutSeptCd" >
+					CLUT_SEPT_CD=#settGbcd#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="systemkey" >
+					SYSTEMKEY=#systemkey#
+				</isNotEmpty>  
+	</select>
+
+</sqlMap>

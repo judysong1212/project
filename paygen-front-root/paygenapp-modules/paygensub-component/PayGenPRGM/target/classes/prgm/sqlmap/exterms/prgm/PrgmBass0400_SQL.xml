@@ -1,0 +1,1044 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PGRM_Bass0400">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="prgmComSearchVO" type="com.app.exterms.prgm.server.vo.PrgmComSearchVO"/>
+	
+	<resultMap id="prgmComBass0400" class="com.app.exterms.prgm.server.vo.PrgmComBass0400VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="2"/>
+		<result property="deptNmHan" column="DEPT_NM_HAN" columnIndex="3"/>
+		<result property="deptNmRtchnt" column="DEPT_NM_RTCHNT" columnIndex="4"/>
+		<result property="deptNmEng" column="DEPT_NM_ENG" columnIndex="5"/>
+		<result property="tplvlDeptCd" column="TPLVL_DEPT_CD" columnIndex="6"/>
+		<result property="hhrkDeptCd" column="HHRK_DEPT_CD" columnIndex="7"/>
+		<result property="deptUseYn" column="DEPT_USE_YN" columnIndex="8"/>
+		<result property="natPennSym" column="NAT_PENN_SYM" columnIndex="9"/>
+		<result property="hlthInsrSym" column="HLTH_INSR_SYM" columnIndex="10"/>
+		<result property="umytInsrSym" column="UMYT_INSR_SYM" columnIndex="11"/>
+		<result property="idtlAccdtInsurSym" column="IDTL_ACCDT_INSUR_SYM" columnIndex="12"/>
+		<result property="deptNoteCtnt" column="DEPT_NOTE_CTNT" columnIndex="13"/>
+	  
+		<result property="deptDspyYn" column="DEPT_DSPY_YN" columnIndex="14"/>
+		<result property="mangeDeptCd" column="MANGE_DEPT_CD" columnIndex="15"/>
+		
+		<result property="kybdr" column="KYBDR" columnIndex="16"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="17"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="18"/>
+		<result property="ismt" column="ISMT" columnIndex="19"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="20"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="21"/>
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="22"/> 
+	</resultMap>
+	 
+<!-- 관리부서코드  -->	 
+	<select id="prgmComBass0400DAO.selectMangDeptBass0400List_D" parameterClass="prgmComSearchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM ( 
+						 SELECT 
+				               C.*
+				            FROM   
+				            ( SELECT DISTINCT 
+                                            AC01.LVL
+                                          , AC01.DPOB_CD  
+                                          , AC01.DPOB_NM
+                                          , AC01.DEPT_CD
+                                          , AC01.DEPT_NM_HAN
+                                          , AC01.DEPT_NM_RTCHNT
+                                          , AC01.DEPT_NM_ENG
+                                          , AC01.TPLVL_DEPT_CD
+                                          , AC01.TPLVL_DEPT_NM 
+                                          , AC01.HHRK_DEPT_CD  
+                                          , AC01.HHRK_DEPT_NM                                 
+                                          , AC01.PAYR_MANG_DEPT_CD 
+                                          , AC01.DEPT_USE_YN
+                                          , AC01.NAT_PENN_SYM
+                                          , AC01.HLTH_INSR_SYM
+                                          , AC01.UMYT_INSR_SYM
+                                          , AC01.IDTL_ACCDT_INSUR_SYM
+                                          , AC01.DEPT_NOTE_CTNT
+                                          , AC01.DEPT_DSPY_YN
+                                          , (AC01.DEPT_CD) AS MANGE_DEPT_CD 
+                                          , AC01.DEPT_RANK
+                                          , AC01.DEPT_CRE_DT
+                                          , AC01.DEPT_END_DT
+                                       FROM 
+                                         (SELECT LEVEL LVL,AA02.*
+                                                FROM (
+                                                    SELECT CC.DPOB_CD  
+                                                          , (SELECT B.DPOB_NM FROM BASS0100 B WHERE B.DPOB_CD =  CC.DPOB_CD ) AS DPOB_NM
+                                                          , CC.DEPT_CD
+                                                          , CC.DEPT_NM_HAN
+                                                          , CC.DEPT_NM_RTCHNT
+                                                          , CC.DEPT_NM_ENG
+                                                          , CC.TPLVL_DEPT_CD
+                                                          , fcBass0400CDNM(CC.DPOB_CD,CC.TPLVL_DEPT_CD,'2') AS TPLVL_DEPT_NM 
+                                                          , CC.HHRK_DEPT_CD  
+                                                          , fcBass0400CDNM(CC.DPOB_CD,CC.HHRK_DEPT_CD,'2') AS  HHRK_DEPT_NM                                 
+                                                          , CC.PAYR_MANG_DEPT_CD 
+                                                          , CC.DEPT_USE_YN
+                                                          , CC.NAT_PENN_SYM
+                                                          , CC.HLTH_INSR_SYM
+                                                          , CC.UMYT_INSR_SYM
+                                                          , CC.IDTL_ACCDT_INSUR_SYM
+                                                          , CC.DEPT_NOTE_CTNT
+                                                          , CC.DEPT_DSPY_YN 
+                                                          , CC.DEPT_RANK
+                                                          , CC.DEPT_CRE_DT
+                                                          , CC.DEPT_END_DT
+                                                         FROM BASS0400 CC
+                                                     ) AA02
+                                              START WITH AA02.HHRK_DEPT_CD  = #tplvlDeptCd#
+                                              CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD ) AC01,PSNL0100 AC02
+                                              WHERE AC01.DPOB_CD = AC02.DPOB_CD
+                                                AND AC01.DEPT_CD = AC02.DEPT_CD  
+                                                 <isNotEmpty prepend="AND" property="deptDspyYn" >
+                                                     AC01.DEPT_USE_YN   =   #deptDspyYn#   
+                                                 </isNotEmpty>   
+                                                 <isNotEmpty prepend="AND" property="deptDspyYn" >
+                                                     AC01.DEPT_DSPY_YN  =  #deptDspyYn#   
+                                                 </isNotEmpty>   
+                                                      ) C
+				             WHERE  C.DPOB_CD=#dpobCd# 
+                            <isNotEmpty prepend="AND" property="mangeDeptCd">
+								 C.MANGE_DEPT_CD = #mangeDeptCd#
+							</isNotEmpty>
+							
+							<isEqual property="ymdGb" compareValue="Y"> 
+					   			<isNotEmpty prepend="AND" property="strDate" >
+		                             #strDate# BETWEEN SUBSTR((NVL(C.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+		                                               AND SUBSTR((NVL(C.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                       			</isNotEmpty>	 
+					  		</isEqual>
+					  		
+		                 	<isEqual   property="ymdGb" compareValue="YM">
+								<isNotEmpty prepend="AND" property="strDate" >
+		                                #strDate# BETWEEN SUBSTR((NVL(C.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+		                                               AND SUBSTR((NVL(C.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+		                       	</isNotEmpty>
+							</isEqual>
+							<isEqual   property="ymdGb" compareValue="YMD">
+								<isNotEmpty prepend="AND" property="strDate" >
+		                                #strDate# BETWEEN (NVL(C.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+		                                               AND (NVL(C.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+		                       	</isNotEmpty>
+							</isEqual>   
+				             ORDER BY C.DEPT_USE_YN DESC 
+				                 , LPAD(C.DEPT_RANK,5,'0' )  ASC  
+		<isNotEqual  property="lastIndex" compareValue="-1">
+			 <![CDATA[					
+				) A WHERE ROWNUM <= #lastIndex#
+			)WHERE RNUM >= #firstIndex#
+			]]>
+		</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>	 
+	</select>
+		
+	<select id="prgmComBass0400DAO.selectMangDeptBass0400ListTotCnt_S" parameterClass="prgmComSearchVO" resultClass="int">
+		SELECT 
+		   COUNT(*) AS totcnt
+		  	FROM BASS0400 AA 
+            WHERE 1=1
+             <isNotEmpty prepend="AND" property="deptDspyYn" >
+                                                             AA.DEPT_USE_YN   =   #deptDspyYn#   
+                                                         </isNotEmpty>  
+              <isNotEmpty prepend="AND" property="deptDspyYn" >
+					  AA.DEPT_DSPY_YN  =  #deptDspyYn#   
+			 </isNotEmpty>  
+               <isNotEmpty prepend="AND" property="mangeDeptCd">
+					 AA.MANGE_DEPT_CD = #mangeDeptCd#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="dpobCd" >
+					  AA.DPOB_CD=#dpobCd#
+				</isNotEmpty>
+				
+				<isEqual property="ymdGb" compareValue="Y"> 
+					<isNotEmpty prepend="AND" property="strDate" >
+                             #strDate# BETWEEN SUBSTR((NVL(C.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                               AND SUBSTR((NVL(C.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+            		</isNotEmpty>	 
+				</isEqual>
+				
+       			<isEqual   property="ymdGb" compareValue="YM">
+					<isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN SUBSTR((NVL(C.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                               AND SUBSTR((NVL(C.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+               		</isNotEmpty>
+				</isEqual>
+				
+				<isEqual   property="ymdGb" compareValue="YMD">
+					<isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN (NVL(C.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                               AND (NVL(C.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+              		</isNotEmpty>
+				</isEqual>   
+	</select>	 
+	
+<!-- 소속부서코드  -->	 
+	<select id="prgmComBass0400DAO.selectBass0400List_D" parameterClass="prgmComSearchVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM ( 
+			              
+										SELECT 
+											                   KK.DPOB_CD   
+                                                                  , KK.DEPT_CD
+                                                                  , KK.DEPT_NM_HAN
+                                                                <isNotEqual  property="typOccuUseYn" compareValue="A">
+                                                                   , KK.DEPT_NM_RTCHNT
+                                                                    </isNotEqual>    
+                                                                   <isEqual   property="typOccuUseYn" compareValue="A">
+                                                                     ,('[' || DECODE(KK.DEPT_USE_YN,'Y','Y','X') || ']' ||   KK.DEPT_NM_RTCHNT) AS DEPT_NM_RTCHNT
+                                                                  </isEqual>  
+                                                                  , KK.DEPT_NM_ENG
+                                                                  , KK.TPLVL_DEPT_CD
+                                                                  , fcBass0400CDNM(KK.DPOB_CD,KK.TPLVL_DEPT_CD,'2') AS TPLVL_DEPT_NM 
+                                                                  , KK.HHRK_DEPT_CD  
+                                                                  , fcBass0400CDNM(KK.DPOB_CD,KK.HHRK_DEPT_CD,'2') AS  HHRK_DEPT_NM                                 
+                                                                  , KK.PAYR_MANG_DEPT_CD 
+                                                                  , KK.DEPT_USE_YN
+                                                                  , KK.NAT_PENN_SYM
+                                                                  , KK.HLTH_INSR_SYM
+                                                                  , KK.UMYT_INSR_SYM
+                                                                  , KK.IDTL_ACCDT_INSUR_SYM
+                                                                  , KK.DEPT_NOTE_CTNT
+                                                                  , KK.DEPT_DSPY_YN
+                                                                  , KK.MANGE_DEPT_CD
+                                                                  , fcBass0400CDNM(KK.DPOB_CD,KK.MANGE_DEPT_CD,'2') AS MANGE_DEPT_NM
+                                                                  , KK.DEPT_RANK
+                                                                  , KK.DEPT_CRE_DT 
+                                                                  ,  KK.DEPT_END_DT
+														FROM BASS0400 KK
+														WHERE (KK.DPOB_CD , KK.DEPT_CD) IN   
+														(SELECT
+														       JJ.DPOB_CD,  
+														       JJ.DEPT_CD01 AS DEPT_CD
+														FROM
+														(SELECT 
+														       C.DPOB_CD, 
+														       C.DEPT_CD,
+														       C.DEPT_NM_HAN, 
+														       C.MANGE_DEPT_CD,
+														       C.DEPT_CRE_DT,
+														       C.DEPT_END_DT,
+														       C.DEPT_CD AS DEPT_CD01
+														  FROM (SELECT AA.DPOB_CD, AA.DEPT_CD, AA.DEPT_NM_HAN,AA.MANGE_DEPT_CD,AA.HHRK_DEPT_CD,AA.BEF_DEPT_CD,AA.BEF_DEPT_CD02
+														    ,  AA.DEPT_CRE_DT,AA.DEPT_END_DT
+														          FROM BASS0400 AA
+														         WHERE  AA.DPOB_CD=#dpobCd#
+														             <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>  
+		                                                         AND  AA.DEPT_CD = #payrMangDeptCd# 
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>  
+														        UNION ALL
+														            SELECT AA02.DPOB_CD,AA02.DEPT_CD,AA02.DEPT_NM_HAN,AA02.MANGE_DEPT_CD,AA02.HHRK_DEPT_CD,AA02.BEF_DEPT_CD,AA02.BEF_DEPT_CD02
+														                  ,AA02.DEPT_CRE_DT,AA02.DEPT_END_DT
+														              FROM (SELECT CC.DPOB_CD, CC.DEPT_CD, CC.DEPT_NM_HAN,CC.MANGE_DEPT_CD,CC.HHRK_DEPT_CD ,CC.BEF_DEPT_CD,CC.BEF_DEPT_CD02
+														                     ,  CC.DEPT_CRE_DT,CC.DEPT_END_DT
+														                      FROM BASS0400 CC
+														                     WHERE  CC.DPOB_CD=#dpobCd#
+														                          <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>   
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>    
+		                                                         ) AA02
+														        START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd# 
+														        CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD) C
+														         UNION ALL
+														        SELECT 
+														       C.DPOB_CD,  
+														       C.DEPT_CD , 
+														       C.DEPT_NM_HAN,
+														        C.MANGE_DEPT_CD,
+														       C.DEPT_CRE_DT,
+														       C.DEPT_END_DT,
+														       C.BEF_DEPT_CD AS DEPT_CD01
+														  FROM (SELECT AA.DPOB_CD, AA.DEPT_CD,  AA.DEPT_NM_HAN,AA.MANGE_DEPT_CD,AA.HHRK_DEPT_CD,AA.BEF_DEPT_CD,AA.BEF_DEPT_CD02
+														    ,  AA.DEPT_CRE_DT,AA.DEPT_END_DT
+														          FROM BASS0400 AA
+														         WHERE   AA.DPOB_CD=#dpobCd#
+														              <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>  
+		                                                         AND  AA.DEPT_CD = #payrMangDeptCd# 
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>  
+														        UNION ALL
+														            SELECT AA02.DPOB_CD, AA02.DEPT_CD,  AA02.DEPT_NM_HAN,AA02.MANGE_DEPT_CD,AA02.HHRK_DEPT_CD ,AA02.BEF_DEPT_CD,AA02.BEF_DEPT_CD02
+														              ,  AA02.DEPT_CRE_DT,AA02.DEPT_END_DT
+														              FROM (SELECT CC.DPOB_CD, CC.DEPT_CD,  CC.DEPT_NM_HAN,CC.MANGE_DEPT_CD,CC.HHRK_DEPT_CD ,CC.BEF_DEPT_CD,CC.BEF_DEPT_CD02
+														                ,  CC.DEPT_CRE_DT,CC.DEPT_END_DT
+														                      FROM BASS0400 CC
+														                     WHERE   CC.DPOB_CD=#dpobCd#
+														                           <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>   
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>  
+		                                                    
+																	) AA02
+														        START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd# 
+														        CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD) C
+														        UNION ALL
+														        SELECT 
+														       C.DPOB_CD,  
+														       C.DEPT_CD, 
+														       C.DEPT_NM_HAN,
+														        C.MANGE_DEPT_CD,
+														       C.DEPT_CRE_DT,
+														       C.DEPT_END_DT,
+														       C.BEF_DEPT_CD02 AS DEPT_CD01
+														  FROM (SELECT AA.DPOB_CD, AA.DEPT_CD,  AA.DEPT_NM_HAN,AA.MANGE_DEPT_CD,AA.HHRK_DEPT_CD,AA.BEF_DEPT_CD,AA.BEF_DEPT_CD02
+														    ,  AA.DEPT_CRE_DT,AA.DEPT_END_DT
+														          FROM BASS0400 AA
+														         WHERE AA.DPOB_CD=#dpobCd#
+														              <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>  
+		                                                         AND  AA.DEPT_CD = #payrMangDeptCd# 
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>  
+														         UNION ALL
+														            SELECT AA02.DPOB_CD, AA02.DEPT_CD, AA02.DEPT_NM_HAN,AA02.MANGE_DEPT_CD,AA02.HHRK_DEPT_CD ,AA02.BEF_DEPT_CD,AA02.BEF_DEPT_CD02
+														                  ,  AA02.DEPT_CRE_DT,AA02.DEPT_END_DT
+														              FROM (SELECT CC.DPOB_CD, CC.DEPT_CD, CC.DEPT_NM_HAN, CC.MANGE_DEPT_CD,CC.HHRK_DEPT_CD ,CC.BEF_DEPT_CD,CC.BEF_DEPT_CD02
+														                           , CC.DEPT_CRE_DT,CC.DEPT_END_DT
+														                      FROM BASS0400 CC
+														                     WHERE  CC.DPOB_CD=#dpobCd#
+														                           <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>   
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>   
+																	) AA02
+														        START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd# 
+														        CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD) C) JJ
+														  WHERE  DEPT_CD01 IS NOT NULL
+														  <isNotEmpty prepend="AND" property="deptCd">
+											              	 	JJ.DEPT_CD LIKE (DECODE(#payrMangDeptCd# ,#deptCd#,'',#deptCd#) || '%') 
+											                </isNotEmpty>  
+                                 
+								                                <isNotEmpty prepend="AND" property="mangeDeptCd">
+								                                    JJ.DEPT_CD IN (
+								                                          SELECT CURR_AFFN_DEPT_CD FROM PSNL0100 
+								                                            WHERE DEPT_CD = #mangeDeptCd#
+								                                    ) 
+								                                </isNotEmpty>
+                                
+											                    <isEqual property="ymdGb" compareValue="Y"> 
+                                                                       <isNotEmpty prepend="AND" property="strDate" >
+                                                                             #strDate# BETWEEN SUBSTR((NVL(JJ.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                                                                               AND SUBSTR((NVL(JJ.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                                                                       </isNotEmpty>     
+                                                                      </isEqual>
+                                                                      
+                                                                     <isEqual   property="ymdGb" compareValue="YM">
+                                                                       <isNotEmpty prepend="AND" property="strDate" >
+                                                                                #strDate# BETWEEN SUBSTR((NVL(JJ.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                                                                               AND SUBSTR((NVL(JJ.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                                                                       </isNotEmpty>
+                                                                      </isEqual>
+                                                              
+                                                                    <isEqual   property="ymdGb" compareValue="YMD">
+                                                                       <isNotEmpty prepend="AND" property="strDate" >
+                                                                                #strDate# BETWEEN (NVL(JJ.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                                                                               AND (NVL(JJ.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+                                                                         </isNotEmpty>
+                                                                    </isEqual>   
+											                <isNotEmpty prepend="AND" property="deptNm">
+										 						JJ.DEPT_NM_HAN LIKE '%' || #deptNm# || '%'
+															</isNotEmpty>
+														        ) 
+														         ORDER BY KK.DEPT_USE_YN DESC 
+														          , LPAD(KK.DEPT_RANK,5,'0')  ASC  
+														          
+          
+          
+		<isNotEqual  property="lastIndex" compareValue="-1">
+			 <![CDATA[					
+				) A WHERE ROWNUM <= #lastIndex#
+			)WHERE RNUM >= #firstIndex#
+			]]>
+		</isNotEqual>
+			
+		<isEqual   property="lastIndex" compareValue="-1">
+		  <![CDATA[					
+				) A  
+			)
+			]]>
+		</isEqual>	
+		 
+	</select>	
+	
+	<select id="prgmComBass0400DAO.selectBass0400ListTotCnt_S" parameterClass="prgmComSearchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			    FROM (
+			    	SELECT 
+											                   KK.DPOB_CD   
+                                                                  , KK.DEPT_CD
+                                                                  , KK.DEPT_NM_HAN
+                                                                  , KK.DEPT_NM_RTCHNT
+                                                                  , KK.DEPT_NM_ENG
+                                                                  , KK.TPLVL_DEPT_CD
+                                                                  , fcBass0400CDNM(KK.DPOB_CD,KK.TPLVL_DEPT_CD,'2') AS TPLVL_DEPT_NM 
+                                                                  , KK.HHRK_DEPT_CD  
+                                                                  , fcBass0400CDNM(KK.DPOB_CD,KK.HHRK_DEPT_CD,'2') AS  HHRK_DEPT_NM                                 
+                                                                  , KK.PAYR_MANG_DEPT_CD 
+                                                                  , KK.DEPT_USE_YN
+                                                                  , KK.NAT_PENN_SYM
+                                                                  , KK.HLTH_INSR_SYM
+                                                                  , KK.UMYT_INSR_SYM
+                                                                  , KK.IDTL_ACCDT_INSUR_SYM
+                                                                  , KK.DEPT_NOTE_CTNT
+                                                                  , KK.DEPT_DSPY_YN
+                                                                  , KK.MANGE_DEPT_CD
+                                                                  , fcBass0400CDNM(KK.DPOB_CD,KK.MANGE_DEPT_CD,'2') AS MANGE_DEPT_NM
+                                                                  , KK.DEPT_RANK
+                                                                  , KK.DEPT_CRE_DT 
+                                                                  ,  KK.DEPT_END_DT
+														FROM BASS0400 KK
+														WHERE (KK.DPOB_CD , KK.DEPT_CD) IN   
+														(SELECT
+														       JJ.DPOB_CD,  
+														       JJ.DEPT_CD01 AS DEPT_CD
+														FROM
+														(SELECT 
+														       C.DPOB_CD, 
+														       C.DEPT_CD,
+														       C.DEPT_NM_HAN, 
+														       C.MANGE_DEPT_CD,
+														       C.DEPT_CRE_DT,
+														       C.DEPT_END_DT,
+														       C.DEPT_CD AS DEPT_CD01
+														  FROM (SELECT AA.DPOB_CD, AA.DEPT_CD, AA.DEPT_NM_HAN,AA.MANGE_DEPT_CD,AA.HHRK_DEPT_CD,AA.BEF_DEPT_CD,AA.BEF_DEPT_CD02
+														    ,  AA.DEPT_CRE_DT,AA.DEPT_END_DT
+														          FROM BASS0400 AA
+														         WHERE  AA.DPOB_CD=#dpobCd#
+														             <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>  
+		                                                         AND  AA.DEPT_CD = #payrMangDeptCd# 
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>  
+														        UNION ALL
+														            SELECT AA02.DPOB_CD, AA02.DEPT_CD, AA02.DEPT_NM_HAN,AA02.MANGE_DEPT_CD,AA02.HHRK_DEPT_CD ,AA02.BEF_DEPT_CD,AA02.BEF_DEPT_CD02
+														              ,  AA02.DEPT_CRE_DT,AA02.DEPT_END_DT
+														              FROM (SELECT CC.DPOB_CD, CC.DEPT_CD, CC.DEPT_NM_HAN,CC.MANGE_DEPT_CD,CC.HHRK_DEPT_CD ,CC.BEF_DEPT_CD,CC.BEF_DEPT_CD02
+														                ,  CC.DEPT_CRE_DT,CC.DEPT_END_DT
+														                      FROM BASS0400 CC
+														                     WHERE  CC.DPOB_CD=#dpobCd#
+														                          <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>   
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>    
+		                                                         ) AA02
+														        START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd# 
+														        CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD) C
+														         UNION ALL
+														        SELECT 
+														       C.DPOB_CD,  
+														       C.DEPT_CD , 
+														       C.DEPT_NM_HAN,
+														        C.MANGE_DEPT_CD,
+														       C.DEPT_CRE_DT,
+														       C.DEPT_END_DT,
+														       C.BEF_DEPT_CD AS DEPT_CD01
+														  FROM (SELECT AA.DPOB_CD, AA.DEPT_CD,  AA.DEPT_NM_HAN,AA.MANGE_DEPT_CD,AA.HHRK_DEPT_CD,AA.BEF_DEPT_CD,AA.BEF_DEPT_CD02
+														    ,  AA.DEPT_CRE_DT,AA.DEPT_END_DT
+														          FROM BASS0400 AA
+														         WHERE   AA.DPOB_CD=#dpobCd#
+														              <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>  
+		                                                         AND  AA.DEPT_CD = #payrMangDeptCd# 
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>  
+														        UNION ALL
+														            SELECT AA02.DPOB_CD, AA02.DEPT_CD,  AA02.DEPT_NM_HAN,AA02.MANGE_DEPT_CD,AA02.HHRK_DEPT_CD ,AA02.BEF_DEPT_CD,AA02.BEF_DEPT_CD02
+														              ,  AA02.DEPT_CRE_DT,AA02.DEPT_END_DT
+														              FROM (SELECT CC.DPOB_CD, CC.DEPT_CD,  CC.DEPT_NM_HAN,CC.MANGE_DEPT_CD,CC.HHRK_DEPT_CD ,CC.BEF_DEPT_CD,CC.BEF_DEPT_CD02
+														                ,  CC.DEPT_CRE_DT,CC.DEPT_END_DT
+														                      FROM BASS0400 CC
+														                     WHERE   CC.DPOB_CD=#dpobCd#
+														                           <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>   
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>  
+		                                                    
+																	) AA02
+														        START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd# 
+														        CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD) C
+														        UNION ALL
+														        SELECT 
+														       C.DPOB_CD,  
+														       C.DEPT_CD, 
+														       C.DEPT_NM_HAN,
+														        C.MANGE_DEPT_CD,
+														       C.DEPT_CRE_DT,
+														       C.DEPT_END_DT,
+														       C.BEF_DEPT_CD02 AS DEPT_CD01
+														  FROM (SELECT AA.DPOB_CD, AA.DEPT_CD,  AA.DEPT_NM_HAN,AA.MANGE_DEPT_CD,AA.HHRK_DEPT_CD,AA.BEF_DEPT_CD,AA.BEF_DEPT_CD02
+														    ,  AA.DEPT_CRE_DT,AA.DEPT_END_DT
+														          FROM BASS0400 AA
+														         WHERE AA.DPOB_CD=#dpobCd#
+														              <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>  
+		                                                         AND  AA.DEPT_CD = #payrMangDeptCd# 
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>  
+														         UNION ALL
+														            SELECT AA02.DPOB_CD, AA02.DEPT_CD, AA02.DEPT_NM_HAN,AA02.MANGE_DEPT_CD,AA02.HHRK_DEPT_CD ,AA02.BEF_DEPT_CD,AA02.BEF_DEPT_CD02
+														                  ,  AA02.DEPT_CRE_DT,AA02.DEPT_END_DT
+														              FROM (SELECT CC.DPOB_CD, CC.DEPT_CD, CC.DEPT_NM_HAN, CC.MANGE_DEPT_CD,CC.HHRK_DEPT_CD ,CC.BEF_DEPT_CD,CC.BEF_DEPT_CD02
+														                           , CC.DEPT_CRE_DT,CC.DEPT_END_DT
+														                      FROM BASS0400 CC
+														                     WHERE  CC.DPOB_CD=#dpobCd#
+														                           <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>   
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>   
+																	) AA02
+														        START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd# 
+														        CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD) C) JJ
+														  WHERE  DEPT_CD01 IS NOT NULL
+														  <isNotEmpty prepend="AND" property="deptCd">
+											              	 	JJ.DEPT_CD LIKE (DECODE(#payrMangDeptCd# ,#deptCd#,'',#deptCd#) || '%') 
+											                </isNotEmpty>  
+											                
+                                  								<isNotEmpty prepend="AND" property="mangeDeptCd">
+								                                    JJ.DEPT_CD IN (
+								                                          SELECT CURR_AFFN_DEPT_CD FROM PSNL0100 
+								                                            WHERE DEPT_CD = #mangeDeptCd#
+								                                    ) 
+								                                </isNotEmpty>
+                                
+											                    <isEqual property="ymdGb" compareValue="Y"> 
+                                                                       <isNotEmpty prepend="AND" property="strDate" >
+                                                                             #strDate# BETWEEN SUBSTR((NVL(JJ.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                                                                               AND SUBSTR((NVL(JJ.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                                                                       </isNotEmpty>     
+                                                                      </isEqual>
+                                                                      
+                                                                     <isEqual   property="ymdGb" compareValue="YM">
+                                                                       <isNotEmpty prepend="AND" property="strDate" >
+                                                                                #strDate# BETWEEN SUBSTR((NVL(JJ.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                                                                               AND SUBSTR((NVL(JJ.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                                                                       </isNotEmpty>
+                                                                      </isEqual>
+                                                              
+                                                                    <isEqual   property="ymdGb" compareValue="YMD">
+                                                                       <isNotEmpty prepend="AND" property="strDate" >
+                                                                                #strDate# BETWEEN (NVL(JJ.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                                                                               AND (NVL(JJ.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+                                                                         </isNotEmpty>
+                                                                    </isEqual>   
+											                <isNotEmpty prepend="AND" property="deptNm">
+										 						JJ.DEPT_NM_HAN LIKE '%' || #deptNm# || '%'
+															</isNotEmpty>
+														        ) 
+			    )
+	</select>
+	
+	<!-- 급여부서코드 처리릉 위해 추가  -->
+	<select id="prgmComBass0400DAO.selectPayrWithBass0400List_D" parameterClass="prgmComSearchVO" resultClass="egovMap">
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM ( 
+					   		SELECT 
+											                   KK.DPOB_CD   
+                                                                  , KK.DEPT_CD
+                                                                  , KK.DEPT_NM_HAN
+                                                                    <isNotEqual  property="typOccuUseYn" compareValue="A">
+                                                                   , KK.DEPT_NM_RTCHNT
+                                                                    </isNotEqual>    
+                                                                   <isEqual   property="typOccuUseYn" compareValue="A">
+                                                                     ,('[' || DECODE(KK.DEPT_USE_YN,'Y','Y','X') || ']' ||   KK.DEPT_NM_RTCHNT) AS DEPT_NM_RTCHNT
+                                                                  </isEqual>  
+                                                                  , KK.DEPT_NM_ENG
+                                                                  , KK.TPLVL_DEPT_CD
+                                                                  , fcBass0400CDNM(KK.DPOB_CD,KK.TPLVL_DEPT_CD,'2') AS TPLVL_DEPT_NM 
+                                                                  , KK.HHRK_DEPT_CD  
+                                                                  , fcBass0400CDNM(KK.DPOB_CD,KK.HHRK_DEPT_CD,'2') AS  HHRK_DEPT_NM                                 
+                                                                  , KK.PAYR_MANG_DEPT_CD 
+                                                                  , KK.DEPT_USE_YN
+                                                                  , KK.NAT_PENN_SYM
+                                                                  , KK.HLTH_INSR_SYM
+                                                                  , KK.UMYT_INSR_SYM
+                                                                  , KK.IDTL_ACCDT_INSUR_SYM
+                                                                  , KK.DEPT_NOTE_CTNT
+                                                                  , KK.DEPT_DSPY_YN
+                                                                  , KK.MANGE_DEPT_CD
+                                                                  , fcBass0400CDNM(KK.DPOB_CD,KK.MANGE_DEPT_CD,'2') AS MANGE_DEPT_NM
+                                                                  , KK.DEPT_RANK
+                                                                  , KK.DEPT_CRE_DT 
+                                                                  ,  KK.DEPT_END_DT
+														FROM BASS0400 KK
+														WHERE (KK.DPOB_CD , KK.DEPT_CD) IN   
+														(SELECT
+														       JJ.DPOB_CD,  
+														       JJ.DEPT_CD01 AS DEPT_CD
+														FROM
+														(SELECT 
+														       C.DPOB_CD, 
+														       C.DEPT_CD,
+														       C.DEPT_NM_HAN, 
+														       C.MANGE_DEPT_CD,
+														       C.DEPT_CRE_DT,
+														       C.DEPT_END_DT,
+														       C.DEPT_CD AS DEPT_CD01
+														  FROM (SELECT AA.DPOB_CD, AA.DEPT_CD, AA.DEPT_NM_HAN,AA.MANGE_DEPT_CD,AA.HHRK_DEPT_CD,AA.BEF_DEPT_CD,AA.BEF_DEPT_CD02
+														    ,  AA.DEPT_CRE_DT,AA.DEPT_END_DT
+														          FROM BASS0400 AA
+														         WHERE  AA.DPOB_CD=#dpobCd#
+														             <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>  
+		                                                         AND  AA.DEPT_CD = #payrMangDeptCd# 
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>  
+														        UNION ALL
+														            SELECT AA02.DPOB_CD, AA02.DEPT_CD, AA02.DEPT_NM_HAN,AA02.MANGE_DEPT_CD,AA02.HHRK_DEPT_CD ,AA02.BEF_DEPT_CD,AA02.BEF_DEPT_CD02
+														              ,  AA02.DEPT_CRE_DT,AA02.DEPT_END_DT
+														              FROM (SELECT CC.DPOB_CD, CC.DEPT_CD, CC.DEPT_NM_HAN,CC.MANGE_DEPT_CD,CC.HHRK_DEPT_CD ,CC.BEF_DEPT_CD,CC.BEF_DEPT_CD02
+														                ,  CC.DEPT_CRE_DT,CC.DEPT_END_DT
+														                      FROM BASS0400 CC
+														                     WHERE  CC.DPOB_CD=#dpobCd#
+														                          <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>   
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>    
+		                                                         ) AA02
+														        START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd# 
+														        CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD) C
+														         UNION ALL
+														        SELECT 
+														       C.DPOB_CD,  
+														       C.DEPT_CD , 
+														       C.DEPT_NM_HAN,
+														        C.MANGE_DEPT_CD,
+														       C.DEPT_CRE_DT,
+														       C.DEPT_END_DT,
+														       C.BEF_DEPT_CD AS DEPT_CD01
+														  FROM (SELECT AA.DPOB_CD, AA.DEPT_CD,  AA.DEPT_NM_HAN,AA.MANGE_DEPT_CD,AA.HHRK_DEPT_CD,AA.BEF_DEPT_CD,AA.BEF_DEPT_CD02
+														    ,  AA.DEPT_CRE_DT,AA.DEPT_END_DT
+														          FROM BASS0400 AA
+														         WHERE   AA.DPOB_CD=#dpobCd#
+														              <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>  
+		                                                         AND  AA.DEPT_CD = #payrMangDeptCd# 
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>  
+														        UNION ALL
+														            SELECT AA02.DPOB_CD, AA02.DEPT_CD,  AA02.DEPT_NM_HAN,AA02.MANGE_DEPT_CD,AA02.HHRK_DEPT_CD ,AA02.BEF_DEPT_CD,AA02.BEF_DEPT_CD02
+														              ,  AA02.DEPT_CRE_DT,AA02.DEPT_END_DT
+														              FROM (SELECT CC.DPOB_CD, CC.DEPT_CD,  CC.DEPT_NM_HAN,CC.MANGE_DEPT_CD,CC.HHRK_DEPT_CD ,CC.BEF_DEPT_CD,CC.BEF_DEPT_CD02
+														                ,  CC.DEPT_CRE_DT,CC.DEPT_END_DT
+														                      FROM BASS0400 CC
+														                     WHERE   CC.DPOB_CD=#dpobCd#
+														                           <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>   
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>  
+		                                                    
+																	) AA02
+														        START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd# 
+														        CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD) C
+														        UNION ALL
+														        SELECT 
+														       C.DPOB_CD,  
+														       C.DEPT_CD, 
+														       C.DEPT_NM_HAN,
+														        C.MANGE_DEPT_CD,
+														       C.DEPT_CRE_DT,
+														       C.DEPT_END_DT,
+														       C.BEF_DEPT_CD02 AS DEPT_CD01
+														  FROM (SELECT AA.DPOB_CD, AA.DEPT_CD,  AA.DEPT_NM_HAN,AA.MANGE_DEPT_CD,AA.HHRK_DEPT_CD,AA.BEF_DEPT_CD,AA.BEF_DEPT_CD02
+														    ,  AA.DEPT_CRE_DT,AA.DEPT_END_DT
+														          FROM BASS0400 AA
+														         WHERE AA.DPOB_CD=#dpobCd#
+														              <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>  
+		                                                         AND  AA.DEPT_CD = #payrMangDeptCd# 
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>  
+														         UNION ALL
+														            SELECT AA02.DPOB_CD, AA02.DEPT_CD, AA02.DEPT_NM_HAN,AA02.MANGE_DEPT_CD,AA02.HHRK_DEPT_CD ,AA02.BEF_DEPT_CD,AA02.BEF_DEPT_CD02
+														                  ,  AA02.DEPT_CRE_DT,AA02.DEPT_END_DT
+														              FROM (SELECT CC.DPOB_CD, CC.DEPT_CD, CC.DEPT_NM_HAN, CC.MANGE_DEPT_CD,CC.HHRK_DEPT_CD ,CC.BEF_DEPT_CD,CC.BEF_DEPT_CD02
+														                           , CC.DEPT_CRE_DT,CC.DEPT_END_DT
+														                      FROM BASS0400 CC
+														                     WHERE  CC.DPOB_CD=#dpobCd#
+														                           <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>   
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>   
+																	) AA02
+														        START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd# 
+														        CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD) C) JJ
+														  WHERE  DEPT_CD01 IS NOT NULL
+														  <isNotEmpty prepend="AND" property="deptCd">
+											              	 	JJ.DEPT_CD LIKE (DECODE(#payrMangDeptCd# ,#deptCd#,'',#deptCd#) || '%') 
+											                </isNotEmpty>  
+											                
+                                 
+								                                <isNotEmpty prepend="AND" property="mangeDeptCd">
+								                                    JJ.DEPT_CD IN (
+								                                          SELECT CURR_AFFN_DEPT_CD FROM PSNL0100 
+								                                            WHERE DEPT_CD = #mangeDeptCd#
+								                                    ) 
+								                                </isNotEmpty>
+                                
+											                   <isEqual property="ymdGb" compareValue="Y"> 
+								                                   <isNotEmpty prepend="AND" property="strDate" >
+								                                         #strDate# BETWEEN SUBSTR((NVL(JJ.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+								                                                           AND SUBSTR((NVL(JJ.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+								                                   </isNotEmpty>     
+								                                  </isEqual>
+								                                  
+								                                   <isEqual   property="ymdGb" compareValue="YM">
+								                                    <isNotEmpty prepend="AND" property="strDate" >
+								                                            #strDate# BETWEEN SUBSTR((NVL(JJ.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+								                                                           AND SUBSTR((NVL(JJ.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+								                                       </isNotEmpty>
+								                                 </isEqual>
+								                                
+								                                 <isEqual   property="ymdGb" compareValue="YMD">
+								                                       <isNotEmpty prepend="AND" property="strDate" >
+								                                        #strDate# BETWEEN (NVL(JJ.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+								                                                       AND (NVL(JJ.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+								                                       </isNotEmpty>
+								                                 </isEqual>   
+                                
+                                 
+											                <isNotEmpty prepend="AND" property="deptNm">
+										 						JJ.DEPT_NM_HAN LIKE '%' || #deptNm# || '%'
+															</isNotEmpty>
+														        ) 
+														         ORDER BY KK.DEPT_USE_YN DESC 
+														          , LPAD(KK.DEPT_RANK,5,'0')  ASC  
+														          
+                    
+		<isNotEqual  property="lastIndex" compareValue="-1">
+		 <![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+		</isNotEqual>	
+		
+		<isEqual   property="lastIndex" compareValue="-1">
+		  <![CDATA[					
+				) A  
+			)
+			]]>
+		</isEqual>	 
+ 	</select>	
+<!--  SELECT DISTINCT 
+								   BB.DPOB_CD,
+								   (SELECT B.DPOB_NM FROM BASS0100 B WHERE B.DPOB_CD = BB.DPOB_CD ) AS DPOB_NM,
+								   BB.DEPT_CD,
+								   BB.DEPT_NM_HAN,
+								   BB.DEPT_NM_RTCHNT,
+								   BB.DEPT_NM_ENG,
+								   BB.TPLVL_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = BB.DPOB_CD AND B.DEPT_CD = BB.TPLVL_DEPT_CD  ) AS TPLVL_DEPT_CD_NM,
+								   BB.HHRK_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = BB.DPOB_CD AND B.DEPT_CD = BB.HHRK_DEPT_CD  ) AS HHRK_DEPT_CD_NM,
+								   BB.PAYR_MANG_DEPT_CD,
+								   BB.DEPT_USE_YN,
+								   BB.NAT_PENN_SYM,
+								   BB.HLTH_INSR_SYM,
+								   BB.UMYT_INSR_SYM,
+								   BB.IDTL_ACCDT_INSUR_SYM,
+								   BB.DEPT_NOTE_CTNT,
+								   BB.DEPT_DSPY_YN,
+								   BB.DEPT_RANK,
+								   BB.MANGE_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = BB.DPOB_CD AND B.DEPT_CD = BB.MANGE_DEPT_CD  ) AS MANGE_DEPT_CD_NM ,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = BB.DPOB_CD AND B.DEPT_CD = BB.MANGE_DEPT_CD  ) AS MANGE_DEPT_NM ,
+								   ( SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = BB.DPOB_CD AND B.DEPT_CD = BB.MANGE_DEPT_CD  ) AS MANGE_DEPT_NM_RTCHNT  
+								FROM BASS0400 BB, PSNL0100 CC 
+								WHERE BB.DEPT_USE_YN   = 'Y'
+								   <isNotEmpty prepend="AND" property="deptDspyYn" >
+								      BB.DEPT_DSPY_YN  =  #deptDspyYn#   
+								   </isNotEmpty>  
+								   AND CC.HDOFC_CODTN_CD = 'A0030010'
+								   <isNotEmpty prepend="AND" property="emymtDivCd" >
+								      CC.EMYMT_DIV_CD   = #emymtDivCd#
+								   </isNotEmpty> 
+								  AND BB.DEPT_CD = CC.CURR_AFFN_DEPT_CD
+								  AND BB.DPOB_CD = CC.DPOB_CD  
+								UNION ALL
+								SELECT 
+								    C.DPOB_CD,
+								   (SELECT B.DPOB_NM FROM BASS0100 B WHERE B.DPOB_CD =  C.DPOB_CD ) AS DPOB_NM,
+								    C.DEPT_CD,
+								    C.DEPT_NM_HAN,
+								    C.DEPT_NM_RTCHNT,
+								    C.DEPT_NM_ENG,
+								    C.TPLVL_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD =  C.DPOB_CD AND B.DEPT_CD =  C.TPLVL_DEPT_CD  ) AS TPLVL_DEPT_CD_NM,
+								    C.HHRK_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD =  C.DPOB_CD AND B.DEPT_CD =  C.HHRK_DEPT_CD  ) AS HHRK_DEPT_CD_NM,
+								    C.PAYR_MANG_DEPT_CD,
+								    C.DEPT_USE_YN,
+								    C.NAT_PENN_SYM,
+								    C.HLTH_INSR_SYM,
+								    C.UMYT_INSR_SYM,
+								    C.IDTL_ACCDT_INSUR_SYM,
+								    C.DEPT_NOTE_CTNT,
+								    C.DEPT_DSPY_YN,
+								    C.DEPT_RANK,
+								    C.MANGE_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD =  C.DPOB_CD AND B.DEPT_CD =  C.MANGE_DEPT_CD  ) AS MANGE_DEPT_CD_NM ,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD =  C.DPOB_CD AND B.DEPT_CD =  C.MANGE_DEPT_CD  ) AS MANGE_DEPT_NM ,
+								   ( SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = C.DPOB_CD AND B.DEPT_CD =  C.MANGE_DEPT_CD  ) AS MANGE_DEPT_NM_RTCHNT 
+								FROM BASS0400 C
+								WHERE C.DEPT_USE_YN   = 'Y'
+								 AND (C.DPOB_CD,C.DEPT_CD) IN (SELECT 
+								                                    DPOB_CD, PAYR_MANG_DEPT_CD AS DEPT_CD
+								                                 FROM  BASS0150 
+								                                WHERE PAY_MANGE_DEPT_F_NDTN_USE_YN = 'Y') 
+								   <isNotEmpty prepend="AND" property="deptDspyYn" >
+								      C.DEPT_DSPY_YN  =  #deptDspyYn#   
+								   </isNotEmpty>
+							 ) AA 
+				             WHERE 1=1
+				            <isNotEmpty prepend="AND" property="dpobCd" >
+								 AA.DPOB_CD=#dpobCd#
+							</isNotEmpty>
+							  <isNotEmpty prepend="AND" property="payrMangDeptCd">
+					 		   AA.PAYR_MANG_DEPT_CD  = #payrMangDeptCd#
+							</isNotEmpty>
+                            <isNotEmpty prepend="AND" property="mangeDeptCd">
+					 		   AA.MANGE_DEPT_CD = #mangeDeptCd#
+							</isNotEmpty>
+							<isNotEmpty prepend="AND" property="deptCd">
+								AA.DEPT_CD = #deptCd#
+							</isNotEmpty>
+							<isNotEmpty prepend="AND" property="deptNm">
+								AA.DEPT_NM_HAN LIKE '%' || #deptNm# || '%'
+							</isNotEmpty> -->
+
+	<select id="prgmComBass0400DAO.selectPayrWithBass0400ListTotCnt_S" parameterClass="prgmComSearchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			    FROM (
+			      	SELECT 
+											                   KK.DPOB_CD   
+                                                                  , KK.DEPT_CD
+                                                                  , KK.DEPT_NM_HAN
+                                                                    <isNotEqual  property="typOccuUseYn" compareValue="A">
+                                                                   , KK.DEPT_NM_RTCHNT
+                                                                    </isNotEqual>    
+                                                                   <isEqual   property="typOccuUseYn" compareValue="A">
+                                                                     ,('[' || DECODE(KK.DEPT_USE_YN,'Y','Y','X') || ']' ||   KK.DEPT_NM_RTCHNT) AS DEPT_NM_RTCHNT
+                                                                  </isEqual>  
+                                                                  , KK.DEPT_NM_ENG
+                                                                  , KK.TPLVL_DEPT_CD
+                                                                  , fcBass0400CDNM(KK.DPOB_CD,KK.TPLVL_DEPT_CD,'2') AS TPLVL_DEPT_NM 
+                                                                  , KK.HHRK_DEPT_CD  
+                                                                  , fcBass0400CDNM(KK.DPOB_CD,KK.HHRK_DEPT_CD,'2') AS  HHRK_DEPT_NM                                 
+                                                                  , KK.PAYR_MANG_DEPT_CD 
+                                                                  , KK.DEPT_USE_YN
+                                                                  , KK.NAT_PENN_SYM
+                                                                  , KK.HLTH_INSR_SYM
+                                                                  , KK.UMYT_INSR_SYM
+                                                                  , KK.IDTL_ACCDT_INSUR_SYM
+                                                                  , KK.DEPT_NOTE_CTNT
+                                                                  , KK.DEPT_DSPY_YN
+                                                                  , KK.MANGE_DEPT_CD
+                                                                  , fcBass0400CDNM(KK.DPOB_CD,KK.MANGE_DEPT_CD,'2') AS MANGE_DEPT_NM
+                                                                  , KK.DEPT_RANK
+                                                                  , KK.DEPT_CRE_DT 
+                                                                  ,  KK.DEPT_END_DT
+														FROM BASS0400 KK
+														WHERE (KK.DPOB_CD , KK.DEPT_CD) IN   
+														(SELECT
+														       JJ.DPOB_CD,  
+														       JJ.DEPT_CD01 AS DEPT_CD
+														FROM
+														(SELECT 
+														       C.DPOB_CD, 
+														       C.DEPT_CD,
+														       C.DEPT_NM_HAN, 
+														       C.MANGE_DEPT_CD,
+														       C.DEPT_CRE_DT,
+														       C.DEPT_END_DT,
+														       C.DEPT_CD AS DEPT_CD01
+														  FROM (SELECT AA.DPOB_CD, AA.DEPT_CD, AA.DEPT_NM_HAN,AA.MANGE_DEPT_CD,AA.HHRK_DEPT_CD,AA.BEF_DEPT_CD,AA.BEF_DEPT_CD02
+														    ,  AA.DEPT_CRE_DT,AA.DEPT_END_DT
+														          FROM BASS0400 AA
+														         WHERE  AA.DPOB_CD=#dpobCd#
+														             <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>  
+		                                                         AND  AA.DEPT_CD = #payrMangDeptCd# 
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>  
+														        UNION ALL
+														            SELECT AA02.DPOB_CD, AA02.DEPT_CD, AA02.DEPT_NM_HAN,AA02.MANGE_DEPT_CD,AA02.HHRK_DEPT_CD ,AA02.BEF_DEPT_CD,AA02.BEF_DEPT_CD02
+														              ,  AA02.DEPT_CRE_DT,AA02.DEPT_END_DT
+														              FROM (SELECT CC.DPOB_CD, CC.DEPT_CD, CC.DEPT_NM_HAN,CC.MANGE_DEPT_CD,CC.HHRK_DEPT_CD ,CC.BEF_DEPT_CD,CC.BEF_DEPT_CD02
+														                ,  CC.DEPT_CRE_DT,CC.DEPT_END_DT
+														                      FROM BASS0400 CC
+														                     WHERE  CC.DPOB_CD=#dpobCd#
+														                          <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>   
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>    
+		                                                         ) AA02
+														        START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd# 
+														        CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD) C
+														         UNION ALL
+														        SELECT 
+														       C.DPOB_CD,  
+														       C.DEPT_CD , 
+														       C.DEPT_NM_HAN,
+														        C.MANGE_DEPT_CD,
+														       C.DEPT_CRE_DT,
+														       C.DEPT_END_DT,
+														       C.BEF_DEPT_CD AS DEPT_CD01
+														  FROM (SELECT AA.DPOB_CD, AA.DEPT_CD,  AA.DEPT_NM_HAN,AA.MANGE_DEPT_CD,AA.HHRK_DEPT_CD,AA.BEF_DEPT_CD,AA.BEF_DEPT_CD02
+														    ,  AA.DEPT_CRE_DT,AA.DEPT_END_DT
+														          FROM BASS0400 AA
+														         WHERE   AA.DPOB_CD=#dpobCd#
+														              <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>  
+		                                                         AND  AA.DEPT_CD = #payrMangDeptCd# 
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>  
+														        UNION ALL
+														            SELECT AA02.DPOB_CD, AA02.DEPT_CD,  AA02.DEPT_NM_HAN,AA02.MANGE_DEPT_CD,AA02.HHRK_DEPT_CD ,AA02.BEF_DEPT_CD,AA02.BEF_DEPT_CD02
+														              ,  AA02.DEPT_CRE_DT,AA02.DEPT_END_DT
+														              FROM (SELECT CC.DPOB_CD, CC.DEPT_CD,  CC.DEPT_NM_HAN,CC.MANGE_DEPT_CD,CC.HHRK_DEPT_CD ,CC.BEF_DEPT_CD,CC.BEF_DEPT_CD02
+														                ,  CC.DEPT_CRE_DT,CC.DEPT_END_DT
+														                      FROM BASS0400 CC
+														                     WHERE   CC.DPOB_CD=#dpobCd#
+														                           <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>   
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>  
+		                                                    
+																	) AA02
+														        START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd# 
+														        CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD) C
+														        UNION ALL
+														        SELECT 
+														       C.DPOB_CD,  
+														       C.DEPT_CD, 
+														       C.DEPT_NM_HAN,
+														        C.MANGE_DEPT_CD,
+														       C.DEPT_CRE_DT,
+														       C.DEPT_END_DT,
+														       C.BEF_DEPT_CD02 AS DEPT_CD01
+														  FROM (SELECT AA.DPOB_CD, AA.DEPT_CD,  AA.DEPT_NM_HAN,AA.MANGE_DEPT_CD,AA.HHRK_DEPT_CD,AA.BEF_DEPT_CD,AA.BEF_DEPT_CD02
+														    ,  AA.DEPT_CRE_DT,AA.DEPT_END_DT
+														          FROM BASS0400 AA
+														         WHERE AA.DPOB_CD=#dpobCd#
+														              <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>  
+		                                                         AND  AA.DEPT_CD = #payrMangDeptCd# 
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             AA.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>  
+														         UNION ALL
+														            SELECT AA02.DPOB_CD, AA02.DEPT_CD, AA02.DEPT_NM_HAN,AA02.MANGE_DEPT_CD,AA02.HHRK_DEPT_CD ,AA02.BEF_DEPT_CD,AA02.BEF_DEPT_CD02
+														                  ,  AA02.DEPT_CRE_DT,AA02.DEPT_END_DT
+														              FROM (SELECT CC.DPOB_CD, CC.DEPT_CD, CC.DEPT_NM_HAN, CC.MANGE_DEPT_CD,CC.HHRK_DEPT_CD ,CC.BEF_DEPT_CD,CC.BEF_DEPT_CD02
+														                           , CC.DEPT_CRE_DT,CC.DEPT_END_DT
+														                      FROM BASS0400 CC
+														                     WHERE  CC.DPOB_CD=#dpobCd#
+														                           <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_USE_YN   =   #deptDspyYn#   
+		                                                         </isNotEmpty>   
+		                                                         <isNotEmpty prepend="AND" property="deptDspyYn" >
+		                                                             CC.DEPT_DSPY_YN  =  #deptDspyYn#   
+		                                                         </isNotEmpty>   
+																	) AA02
+														        START WITH AA02.HHRK_DEPT_CD =  #payrMangDeptCd# 
+														        CONNECT BY PRIOR AA02.DEPT_CD = AA02.HHRK_DEPT_CD) C) JJ
+														  WHERE  DEPT_CD01 IS NOT NULL
+														  <isNotEmpty prepend="AND" property="deptCd">
+											              	 	JJ.DEPT_CD LIKE (DECODE(#payrMangDeptCd# ,#deptCd#,'',#deptCd#) || '%') 
+											                </isNotEmpty>  
+											                
+                                 
+								                               <isNotEmpty prepend="AND" property="mangeDeptCd">
+								                                    JJ.DEPT_CD IN (
+								                                          SELECT CURR_AFFN_DEPT_CD FROM PSNL0100 
+								                                            WHERE DEPT_CD = #mangeDeptCd#
+								                                    ) 
+								                                </isNotEmpty>
+                                
+											                   <isEqual property="ymdGb" compareValue="Y"> 
+								                                   <isNotEmpty prepend="AND" property="strDate" >
+								                                         #strDate# BETWEEN SUBSTR((NVL(JJ.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+								                                                           AND SUBSTR((NVL(JJ.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+								                                   </isNotEmpty>     
+								                                  </isEqual>
+								                                  
+								                                   <isEqual   property="ymdGb" compareValue="YM">
+								                                    <isNotEmpty prepend="AND" property="strDate" >
+								                                            #strDate# BETWEEN SUBSTR((NVL(JJ.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+								                                                           AND SUBSTR((NVL(JJ.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+								                                       </isNotEmpty>
+								                                 </isEqual>
+								                                
+								                                 <isEqual   property="ymdGb" compareValue="YMD">
+								                                       <isNotEmpty prepend="AND" property="strDate" >
+								                                        #strDate# BETWEEN (NVL(JJ.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+								                                                       AND (NVL(JJ.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+								                                       </isNotEmpty>
+								                                 </isEqual>   
+                                
+                                 
+											                <isNotEmpty prepend="AND" property="deptNm">
+										 						JJ.DEPT_NM_HAN LIKE '%' || #deptNm# || '%'
+															</isNotEmpty>
+														        ) 
+			    ) 
+	</select>
+
+</sqlMap>

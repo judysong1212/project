@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcPayr0600">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgPayr0600SrhVO" type="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0600SrhVO"/>
+	
+	<resultMap id="infcPkgPayr0600" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0600VO">
+		<result property="dilWrkrIncmBlggYr" column="DIL_WRKR_INCM_BLGG_YR" columnIndex="1"/>
+		<result property="dilWrkrBlggQatrDivCd" column="DIL_WRKR_BLGG_QATR_DIV_CD" columnIndex="2"/>
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="3"/>
+		<result property="dpobCd" column="DPOB_CD" columnIndex="4"/>
+		<result property="dilWrkrIncmSumtDataNum" column="DIL_WRKR_INCM_SUMT_DATA_NUM" columnIndex="5"/>
+		<result property="dilWrkrIncmSumtDt" column="DIL_WRKR_INCM_SUMT_DT" columnIndex="6"/>
+		<result property="degtrNm" column="DEGTR_NM" columnIndex="7"/>
+		<result property="corpNmFmnm" column="CORP_NM_FMNM" columnIndex="8"/>
+		<result property="busoprRgstnNum" column="BUSOPR_RGSTN_NUM" columnIndex="9"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="10"/>
+		<result property="corpNum" column="CORP_NUM" columnIndex="11"/>
+		<result property="incmRegrstDebrZpcd" column="INCM_REGRST_DEBR_ZPCD" columnIndex="12"/>
+		<result property="incmRegrstDebrFndtnAddr" column="INCM_REGRST_DEBR_FNDTN_ADDR" columnIndex="13"/>
+		<result property="incmRegrstDebrDtlPatrAddr" column="INCM_REGRST_DEBR_DTL_PATR_ADDR" columnIndex="14"/>
+		<result property="juriTxOffcCd" column="JURI_TX_OFFC_CD" columnIndex="15"/>
+		<result property="pentrCd" column="PENTR_CD" columnIndex="16"/>
+		<result property="txDeptyNum" column="TX_DEPTY_NUM" columnIndex="17"/>
+		<result property="hmtxId" column="HMTX_ID" columnIndex="18"/>
+		<result property="txPgmCd" column="TX_PGM_CD" columnIndex="19"/>
+		<result property="pernChrgDeptNm" column="PERN_CHRG_DEPT_NM" columnIndex="20"/>
+		<result property="pernChrgNm" column="PERN_CHRG_NM" columnIndex="21"/>
+		<result property="pernChrgPhnNum" column="PERN_CHRG_PHN_NUM" columnIndex="22"/>
+		<result property="dilWrkrIncmSumtDdlneDt" column="DIL_WRKR_INCM_SUMT_DDLNE_DT" columnIndex="23"/>
+		<result property="dilWrkrIncmSumtDdlneYn" column="DIL_WRKR_INCM_SUMT_DDLNE_YN" columnIndex="24"/>
+		<result property="kybdr" column="KYBDR" columnIndex="25"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="26"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="27"/>
+		<result property="ismt" column="ISMT" columnIndex="28"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="29"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="30"/>
+	</resultMap>
+	
+	<insert id="infcPkgPayr0600DAO.insertPayr0600_S">
+		<![CDATA[
+			INSERT INTO PAYR0600 
+				( DIL_WRKR_INCM_BLGG_YR
+				  , DIL_WRKR_BLGG_QATR_DIV_CD
+				  , PAYR_MANG_DEPT_CD
+				  , DPOB_CD
+				  , DIL_WRKR_INCM_SUMT_DATA_NUM
+				  , DIL_WRKR_INCM_SUMT_DT
+				  , DEGTR_NM
+				  , CORP_NM_FMNM
+				  , BUSOPR_RGSTN_NUM
+				  , RESN_REGN_NUM
+				  , CORP_NUM
+				  , INCM_REGRST_DEBR_ZPCD
+				  , INCM_REGRST_DEBR_FNDTN_ADDR
+				  , INCM_REGRST_DEBR_DTL_PATR_ADDR
+				  , JURI_TX_OFFC_CD
+				  , PENTR_CD
+				  , TX_DEPTY_NUM
+				  , HMTX_ID
+				  , TX_PGM_CD
+				  , PERN_CHRG_DEPT_NM
+				  , PERN_CHRG_NM
+				  , PERN_CHRG_PHN_NUM
+				  , DIL_WRKR_INCM_SUMT_DDLNE_DT
+				  , DIL_WRKR_INCM_SUMT_DDLNE_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dilWrkrIncmBlggYr#
+				  , #dilWrkrBlggQatrDivCd#
+				  , #payrMangDeptCd#
+				  , #dpobCd#
+				  , #dilWrkrIncmSumtDataNum#
+				  , #dilWrkrIncmSumtDt#
+				  , #degtrNm#
+				  , #corpNmFmnm#
+				  , #busoprRgstnNum#
+				  , #resnRegnNum#
+				  , #corpNum#
+				  , #incmRegrstDebrZpcd#
+				  , #incmRegrstDebrFndtnAddr#
+				  , #incmRegrstDebrDtlPatrAddr#
+				  , #juriTxOffcCd#
+				  , #pentrCd#
+				  , #txDeptyNum#
+				  , #hmtxId#
+				  , #txPgmCd#
+				  , #pernChrgDeptNm#
+				  , #pernChrgNm#
+				  , #pernChrgPhnNum#
+				  , #dilWrkrIncmSumtDdlneDt#
+				  , #dilWrkrIncmSumtDdlneYn#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgPayr0600DAO.updatePayr0600_S">
+		<![CDATA[
+			UPDATE PAYR0600
+			SET DIL_WRKR_INCM_BLGG_YR=#dilWrkrIncmBlggYr#
+				, DIL_WRKR_BLGG_QATR_DIV_CD=#dilWrkrBlggQatrDivCd#
+				, PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				, DPOB_CD=#dpobCd#
+				, DIL_WRKR_INCM_SUMT_DATA_NUM=#dilWrkrIncmSumtDataNum#
+				, DIL_WRKR_INCM_SUMT_DT=#dilWrkrIncmSumtDt#
+				, DEGTR_NM=#degtrNm#
+				, CORP_NM_FMNM=#corpNmFmnm#
+				, BUSOPR_RGSTN_NUM=#busoprRgstnNum#
+				, RESN_REGN_NUM=#resnRegnNum#
+				, CORP_NUM=#corpNum#
+				, INCM_REGRST_DEBR_ZPCD=#incmRegrstDebrZpcd#
+				, INCM_REGRST_DEBR_FNDTN_ADDR=#incmRegrstDebrFndtnAddr#
+				, INCM_REGRST_DEBR_DTL_PATR_ADDR=#incmRegrstDebrDtlPatrAddr#
+				, JURI_TX_OFFC_CD=#juriTxOffcCd#
+				, PENTR_CD=#pentrCd#
+				, TX_DEPTY_NUM=#txDeptyNum#
+				, HMTX_ID=#hmtxId#
+				, TX_PGM_CD=#txPgmCd#
+				, PERN_CHRG_DEPT_NM=#pernChrgDeptNm#
+				, PERN_CHRG_NM=#pernChrgNm#
+				, PERN_CHRG_PHN_NUM=#pernChrgPhnNum#
+				, DIL_WRKR_INCM_SUMT_DDLNE_DT=#dilWrkrIncmSumtDdlneDt#
+				, DIL_WRKR_INCM_SUMT_DDLNE_YN=#dilWrkrIncmSumtDdlneYn#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DIL_WRKR_INCM_BLGG_YR=#dilWrkrIncmBlggYr#
+								AND DIL_WRKR_BLGG_QATR_DIV_CD=#dilWrkrBlggQatrDivCd#
+								AND PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPayr0600DAO.deletePayr0600_S">
+		<![CDATA[
+			DELETE FROM PAYR0600 
+						WHERE DIL_WRKR_INCM_BLGG_YR=#dilWrkrIncmBlggYr#
+								AND DIL_WRKR_BLGG_QATR_DIV_CD=#dilWrkrBlggQatrDivCd#
+								AND PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				]]>
+	</delete>
+	
+	<select id="infcPkgPayr0600DAO.selectPayr0600_S" resultMap="infcPkgPayr0600">
+		<![CDATA[
+			SELECT
+				DIL_WRKR_INCM_BLGG_YR
+				, DIL_WRKR_BLGG_QATR_DIV_CD
+				, PAYR_MANG_DEPT_CD
+				, DPOB_CD
+				, DIL_WRKR_INCM_SUMT_DATA_NUM
+				, DIL_WRKR_INCM_SUMT_DT
+				, DEGTR_NM
+				, CORP_NM_FMNM
+				, BUSOPR_RGSTN_NUM
+				, RESN_REGN_NUM
+				, CORP_NUM
+				, INCM_REGRST_DEBR_ZPCD
+				, INCM_REGRST_DEBR_FNDTN_ADDR
+				, INCM_REGRST_DEBR_DTL_PATR_ADDR
+				, JURI_TX_OFFC_CD
+				, PENTR_CD
+				, TX_DEPTY_NUM
+				, HMTX_ID
+				, TX_PGM_CD
+				, PERN_CHRG_DEPT_NM
+				, PERN_CHRG_NM
+				, PERN_CHRG_PHN_NUM
+				, DIL_WRKR_INCM_SUMT_DDLNE_DT
+				, DIL_WRKR_INCM_SUMT_DDLNE_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0600
+						WHERE DIL_WRKR_INCM_BLGG_YR=#dilWrkrIncmBlggYr#
+								AND DIL_WRKR_BLGG_QATR_DIV_CD=#dilWrkrBlggQatrDivCd#
+								AND PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				]]>
+	</select>
+	
+	<select id="infcPkgPayr0600DAO.selectPayr0600List_D" parameterClass="infcPkgPayr0600SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DIL_WRKR_INCM_BLGG_YR
+								, DIL_WRKR_BLGG_QATR_DIV_CD
+								, PAYR_MANG_DEPT_CD
+								, DPOB_CD
+								, DIL_WRKR_INCM_SUMT_DATA_NUM
+								, DIL_WRKR_INCM_SUMT_DT
+								, DEGTR_NM
+								, CORP_NM_FMNM
+								, BUSOPR_RGSTN_NUM
+								, RESN_REGN_NUM
+								, CORP_NUM
+								, INCM_REGRST_DEBR_ZPCD
+								, INCM_REGRST_DEBR_FNDTN_ADDR
+								, INCM_REGRST_DEBR_DTL_PATR_ADDR
+								, JURI_TX_OFFC_CD
+								, PENTR_CD
+								, TX_DEPTY_NUM
+								, HMTX_ID
+								, TX_PGM_CD
+								, PERN_CHRG_DEPT_NM
+								, PERN_CHRG_NM
+								, PERN_CHRG_PHN_NUM
+								, DIL_WRKR_INCM_SUMT_DDLNE_DT
+								, DIL_WRKR_INCM_SUMT_DDLNE_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PAYR0600
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DIL_WRKR_INCM_BLGG_YR = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					DIL_WRKR_BLGG_QATR_DIV_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DIL_WRKR_INCM_BLGG_YR DESC
+							, DIL_WRKR_BLGG_QATR_DIV_CD DESC
+							, PAYR_MANG_DEPT_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgPayr0600DAO.selectPayr0600ListTotCnt_S" parameterClass="infcPkgPayr0600SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0600
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DIL_WRKR_INCM_BLGG_YR = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				DIL_WRKR_BLGG_QATR_DIV_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+	<select id="infcPkgPayr0600DAO.selectPayr0600DtlWrkrIncmBlggYrList_D" parameterClass="infcPkgPayr0600SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT         
+				                DPOB_CD
+								,DIL_WRKR_INCM_BLGG_YR
+								,(DIL_WRKR_INCM_BLGG_YR) AS DIL_WRKR_INCM_BLGG_YR_DISP 
+						FROM PAYR0600
+				WHERE 1=1 
+				 <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>
+					ORDER BY 
+						DIL_WRKR_INCM_BLGG_YR DESC 
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgPayr0600DAO.selectPayr0600DtlWrkrIncmBlggYrListTotCnt_S" parameterClass="infcPkgPayr0600SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0600
+			WHERE 1=1 
+			 <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>
+	</select>
+	
+	
+	
+
+</sqlMap>

@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Payr0485">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="payr0485SrhVo" type="com.app.exterms.payroll.server.vo.Payr0485SrhVO"/>
+	<typeAlias  alias="payr0485Vo" type="com.app.exterms.payroll.server.vo.Payr0485VO"/>
+	
+	<resultMap id="payr0485" class="com.app.exterms.payroll.server.vo.Payr0485VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="2"/>
+		<result property="payItemCd" column="PAY_ITEM_CD" columnIndex="3"/>
+		<result property="accAccCd" column="ACC_ACC_CD" columnIndex="4"/>
+		<result property="sevePayYn" column="SEVE_PAY_YN" columnIndex="5"/>
+		<result property="yrtxDotnCd" column="YRTX_DOTN_CD" columnIndex="6"/>
+		<result property="yrtxFreeDtyReduCd" column="YRTX_FREE_DTY_REDU_CD" columnIndex="7"/>
+		<result property="payrTermUseYn" column="PAYR_TERM_USE_YN" columnIndex="8"/>
+		<result property="extptDducDspyYn" column="EXTPT_DDUC_DSPY_YN" columnIndex="9"/>
+		<result property="extptDducUseYn" column="EXTPT_DDUC_USE_YN" columnIndex="10"/>
+		<result property="extptDducRngeOrd" column="EXTPT_DDUC_RNGE_ORD" columnIndex="11"/>
+		<result property="kybdr" column="KYBDR" columnIndex="12"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="13"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="14"/>
+		<result property="ismt" column="ISMT" columnIndex="15"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="16"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="17"/>
+	</resultMap>
+	
+	<insert id="payr0485DAO.insertPayr0485_S">
+		<![CDATA[
+			INSERT INTO PAYR0485 
+				( DPOB_CD
+				  , EMYMT_DIV_CD
+				  , PAY_ITEM_CD
+				  , ACC_ACC_CD
+				  , SEVE_PAY_YN
+				  , YRTX_DOTN_CD
+				  , YRTX_FREE_DTY_REDU_CD
+				  , PAYR_TERM_USE_YN
+				  , EXTPT_DDUC_DSPY_YN
+				  , EXTPT_DDUC_USE_YN
+				  , EXTPT_DDUC_RNGE_ORD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #emymtDivCd#
+				  , #payItemCd#
+				  , #accAccCd#
+				  , #sevePayYn#
+				  , #yrtxDotnCd#
+				  , #yrtxFreeDtyReduCd#
+				  , #payrTermUseYn#
+				  , #extptDducDspyYn#
+				  , #extptDducUseYn#
+				  , #extptDducRngeOrd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+		<insert id="payr0485DAO.insertPayr0485_I">
+		<![CDATA[
+			INSERT INTO PAYR0485 
+				( DPOB_CD
+				  , EMYMT_DIV_CD 	
+				  , PAY_ITEM_CD
+				  , ACC_ACC_CD
+				  , SEVE_PAY_YN
+				  , EXTPT_DDUC_DSPY_YN
+				  , EXTPT_DDUC_USE_YN
+				  , PYMT_DDUC_DIV_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #emymtDivCd# 
+				  , #payItemCd#
+				  , #accAccCd#
+				  , #sevePayYn#
+				  , #extptDducDspyYn#
+				  , #extptDducUseYn#
+				  , #pymtDducDivCd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="payr0485DAO.updatePayr0485_S">
+		<![CDATA[
+			UPDATE PAYR0485
+			SET DPOB_CD=#dpobCd#
+				, EMYMT_DIV_CD=#emymtDivCd#
+				, PAY_ITEM_CD=#payItemCd#
+				, ACC_ACC_CD=#accAccCd#
+				, SEVE_PAY_YN=#sevePayYn#
+				, YRTX_DOTN_CD=#yrtxDotnCd#
+				, YRTX_FREE_DTY_REDU_CD=#yrtxFreeDtyReduCd#
+				, PAYR_TERM_USE_YN=#payrTermUseYn#
+				, EXTPT_DDUC_DSPY_YN=#extptDducDspyYn#
+				, EXTPT_DDUC_USE_YN=#extptDducUseYn#
+				, EXTPT_DDUC_RNGE_ORD=#extptDducRngeOrd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND PAY_ITEM_CD=#payItemCd#
+				]]>
+	</update>
+	
+	<update id="payr0485DAO.updatePayr0485_I">
+		<![CDATA[
+			UPDATE PAYR0485
+				SET DPOB_CD=#dpobCd#
+					, ACC_ACC_CD=#accAccCd#
+					, SEVE_PAY_YN=#sevePayYn#
+					, YRTX_DOTN_CD=#yrtxDotnCd#
+					, YRTX_FREE_DTY_REDU_CD=#yrtxFreeDtyReduCd#
+					, PAYR_TERM_USE_YN=#payrTermUseYn#
+					, EXTPT_DDUC_DSPY_YN=#extptDducDspyYn#
+					, EXTPT_DDUC_USE_YN=#extptDducUseYn#
+					, ISMT=#ismt#
+					, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')	
+					, REVN_ADDR=#revnAddr#
+			WHERE DPOB_CD=#dpobCd#
+				AND PAY_ITEM_CD=#payItemCd#
+				AND EMYMT_DIV_CD=#emymtDivCd#
+		]]>
+	</update>
+	
+	<update id="payr0485DAO.payrUpdate0485Yn">
+		<![CDATA[
+			UPDATE PAYR0485 
+    		  SET EXTPT_DDUC_USE_YN = 'N'
+    		WHERE DPOB_CD = #dpobCd#
+    		    AND PAY_ITEM_CD = #payItemCd#
+	    		AND EXISTS ( SELECT PAY_ITEM_CD 
+	    						FROM PAYR0302 
+	    					 WHERE DPOB_CD = #dpobCd#
+	    						AND PAY_ITEM_CD=#payItemCd#
+	    			    	)    		
+    			
+		]]>
+	</update>
+	
+	<delete id="payr0485DAO.payrDelte0485">
+		<![CDATA[
+			DELETE FROM PAYR0485 
+				WHERE DPOB_CD = #dpobCd#
+	    			AND PAY_ITEM_CD=#payItemCd#
+	    			AND NOT EXISTS ( SELECT PAY_ITEM_CD 
+	    								FROM PAYR0302 
+	    							WHERE DPOB_CD = #dpobCd#
+	    								AND PAY_ITEM_CD=#payItemCd#
+	    			               )
+		]]>
+	</delete>
+	
+	<delete id="payr0485DAO.deletePayr0485_S">
+		<![CDATA[
+			DELETE FROM PAYR0485 
+						WHERE DPOB_CD=#dpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND PAY_ITEM_CD=#payItemCd#
+				]]>
+	</delete>
+	
+	<select id="payr0485DAO.selectPayr0485_S" parameterClass="payr0485SrhVo" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, EMYMT_DIV_CD
+				, PAY_ITEM_CD
+				, ( SELECT BB.PAY_DDUC_NM 
+					FROM
+					(SELECT DPOB_CD, PAY_DDUC_CD, PAY_DDUC_NM
+					    FROM PAYR0470
+					      WHERE DPOB_CD = #dpobCd#
+					    UNION ALL
+					    SELECT DPOB_CD, PAY_EXTPY_CD, PAY_EXTPY_NM
+					      FROM PAYR0480
+					    WHERE DPOB_CD = #dpobCd# 
+					)BB    
+					WHERE DPOB_CD = BB.DPOB_CD
+						AND PAY_ITEM_CD = BB.PAY_DDUC_CD
+				   )AS PAY_ITEM_NM
+				, ACC_ACC_CD
+				, SEVE_PAY_YN
+				, YRTX_DOTN_CD
+				, YRTX_FREE_DTY_REDU_CD
+				, PAYR_TERM_USE_YN
+				, EXTPT_DDUC_DSPY_YN
+				, EXTPT_DDUC_USE_YN
+				, EXTPT_DDUC_RNGE_ORD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0485
+			WHERE 1=1
+		]]>				
+			<isNotEmpty prepend="AND" property="dpobCd">
+				DPOB_CD = #dpobCd#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="emymtDivCd">
+				EMYMT_DIV_CD = #emymtDivCd#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="payItemCd">
+				PAY_ITEM_CD = #payItemCd#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="extptDducDspyYn">
+				EXTPT_DDUC_DSPY_YN = #extptDducDspyYn#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="extptDducUseYn">
+				EXTPT_DDUC_USE_YN = #extptDducUseYn#
+			</isNotEmpty>
+				
+	</select>
+	
+	<select id="payr0485DAO.selectPayr0485List_D" parameterClass="payr0485SrhVo" resultClass="egovMap">
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+					SELECT
+									DPOB_CD
+									, EMYMT_DIV_CD
+									, PAY_ITEM_CD
+									, ACC_ACC_CD
+									, SEVE_PAY_YN
+									, YRTX_DOTN_CD
+									, YRTX_FREE_DTY_REDU_CD
+									, PAYR_TERM_USE_YN
+									, EXTPT_DDUC_DSPY_YN
+									, EXTPT_DDUC_USE_YN
+									, EXTPT_DDUC_RNGE_ORD
+									, KYBDR
+									, INPT_DT
+									, INPT_ADDR
+									, ISMT
+									, REVN_DT
+									, REVN_ADDR
+							FROM PAYR0485
+					WHERE 1=1
+					<isEqual prepend="AND" property="searchCondition" compareValue="0">
+						DPOB_CD = #searchKeyword#
+					</isEqual>
+					<isEqual prepend="AND" property="searchCondition" compareValue="1">
+						EMYMT_DIV_CD LIKE '%' || #searchKeyword# || '%'
+					</isEqual>
+						ORDER BY 
+							DPOB_CD DESC
+								, EMYMT_DIV_CD DESC
+								, PAY_ITEM_CD DESC
+			
+			<![CDATA[					
+		) A WHERE ROWNUM <= #lastIndex#
+	)WHERE RNUM > #firstIndex#
+	]]>
+	</select>	
+	<!--
+		<select id="payr0485DAO.selectPayr0485ListTotCnt_S" parameterClass="payr0485SrhVo" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0485
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				EMYMT_DIV_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+	  -->
+	<select id="payr0485DAO.selectPayr0485ListTotCnt_S" parameterClass="payr0485SrhVo" resultClass="int">
+			SELECT COUNT(*) totcnt
+				FROM (
+								  SELECT   P.DPOB_CD,
+								           P.PYMT_DDUC_DIV_CD,
+										   fcBass0300CDNM (P.DPOB_CD, P.PYMT_DDUC_DIV_CD)AS PYMT_DDUC_DIV_NM,
+									       P.PAY_EXTPY_GRP_CD,
+									       fcBass0300CDNM (P.DPOB_CD, PAY_EXTPY_GRP_CD)AS PAY_EXTPY_GRP_NM,
+									       P.PAY_EXTPY_NM,
+									       P.PAY_EXTPY_USE_YN,
+									       P.PAY_EXTPY_CD,
+									       fcBass0300CDNM (#dpobCd#, A.YRTX_DOTN_CD) AS YRTX_DOTN_NM,
+									       fcBass0300CDNM (#dpobCd#, A.YRTX_FREE_DTY_REDU_CD) AS YRTX_FREE_DTY_REDU_NM,                             
+									       fcBass0300CDNM (#dpobCd#, A.ACC_ACC_CD) AS ACC_ACC_NM,                             
+									       A.EMYMT_DIV_CD,
+									       A.PAY_ITEM_CD,
+									       A.ACC_ACC_CD,
+									       A.SEVE_PAY_YN,
+									       A.YRTX_DOTN_CD,
+									       A.YRTX_FREE_DTY_REDU_CD,
+									       A.PAYR_TERM_USE_YN,
+									       A.EXTPT_DDUC_DSPY_YN,
+									       A.EXTPT_DDUC_USE_YN,
+									       A.EXTPT_DDUC_RNGE_ORD
+									   FROM PAYR0480 P, PAYR0485 A   
+									 WHERE P.PAY_EXTPY_CD = A.PAY_ITEM_CD
+										
+								 UNION ALL
+								 SELECT 	R.DPOB_CD,
+									        R.PYMT_DDUC_DIV_CD, 
+									        fcBass0300CDNM (R.DPOB_CD, R.PYMT_DDUC_DIV_CD)AS PYMT_DDUC_DIV_NM,
+									       	R.PAY_DDUC_GRP_CD AS PAY_EXTPY_GRP_CD,
+									       	fcBass0300CDNM (R.DPOB_CD, PAY_DDUC_GRP_CD) AS PAY_EXTPY_GRP_NM,
+									       	R.PAY_DDUC_NM,
+									       	R.PAY_DDUC_USE_YN,
+									       	R.PAY_DDUC_CD,
+									       	'' AS TEMP1,
+									       	'' AS TEMP2,
+									       	'' AS TEMP3, 
+									       	A.EMYMT_DIV_CD,
+									       	A.PAY_ITEM_CD,
+									       	A.ACC_ACC_CD,
+									       	A.SEVE_PAY_YN,
+									       	A.YRTX_DOTN_CD,
+									       	A.YRTX_FREE_DTY_REDU_CD,
+									       	A.PAYR_TERM_USE_YN,
+									       	A.EXTPT_DDUC_DSPY_YN,
+									       	A.EXTPT_DDUC_USE_YN,
+									       	A.EXTPT_DDUC_RNGE_ORD
+										FROM PAYR0470 R, PAYR0485 A   
+								 	WHERE R.PAY_DDUC_CD = A.PAY_ITEM_CD
+							) T
+						WHERE 1=1	
+						    <isNotEmpty prepend="AND" property="dpobCd" >
+							   	T.DPOB_CD = #dpobCd#
+						  	</isNotEmpty>
+						  	
+						   <isNotEmpty prepend="AND" property="emymtDivCd" >
+							   	T.EMYMT_DIV_CD = #emymtDivCd#
+						  	</isNotEmpty>
+						  	
+						  	<isNotEmpty property="pymtDducDivCd" prepend="AND">
+								T.PYMT_DDUC_DIV_CD = #pymtDducDivCd#
+						  	</isNotEmpty>
+						  	  	
+							<isNotEmpty property="dtilPayExtpyGrpCd" prepend="AND">
+								T.PAY_EXTPY_GRP_CD
+								<iterate prepend="IN" property="dtilPayExtpyGrpCdArr" open="(" close=")" conjunction=",">
+									#dtilPayExtpyGrpCdArr[]#
+								</iterate>
+							</isNotEmpty>		
+	</select>
+	
+	<!-- 수당공제항목조회  -->
+	<select id="payr0485DAO.selectPayr0145ToPayr0485List" parameterClass="payr0485SrhVo" resultClass="egovMap">
+	SELECT T.* 
+	  FROM (
+				  SELECT   P.DPOB_CD,
+				           P.PYMT_DDUC_DIV_CD,
+						   fcBass0300CDNM (P.DPOB_CD, P.PYMT_DDUC_DIV_CD)AS PYMT_DDUC_DIV_NM,
+					       P.PAY_EXTPY_GRP_CD,
+					       fcBass0300CDNM (P.DPOB_CD, PAY_EXTPY_GRP_CD)AS PAY_EXTPY_GRP_NM,
+					       P.PAY_EXTPY_NM,
+					       P.PAY_EXTPY_USE_YN,
+					       P.PAY_EXTPY_CD,
+					       fcBass0300CDNM (#dpobCd#, A.YRTX_DOTN_CD) AS YRTX_DOTN_NM,
+					       fcBass0300CDNM (#dpobCd#, A.YRTX_FREE_DTY_REDU_CD) AS YRTX_FREE_DTY_REDU_NM,                             
+					       fcBass0300CDNM (#dpobCd#, A.ACC_ACC_CD) AS ACC_ACC_NM,                             
+					       A.EMYMT_DIV_CD,
+					       A.PAY_ITEM_CD,
+					       A.ACC_ACC_CD,
+					       A.SEVE_PAY_YN,
+					       A.YRTX_DOTN_CD,
+					       A.YRTX_FREE_DTY_REDU_CD,
+					       A.PAYR_TERM_USE_YN,
+					       A.EXTPT_DDUC_DSPY_YN,
+					       A.EXTPT_DDUC_USE_YN,
+					       A.EXTPT_DDUC_RNGE_ORD
+					   FROM PAYR0480 P, PAYR0485 A   
+					 WHERE P.PAY_EXTPY_CD = A.PAY_ITEM_CD
+						
+				 UNION ALL
+				 SELECT 	R.DPOB_CD,
+					        R.PYMT_DDUC_DIV_CD, 
+					        fcBass0300CDNM (R.DPOB_CD, R.PYMT_DDUC_DIV_CD)AS PYMT_DDUC_DIV_NM,
+					       	R.PAY_DDUC_GRP_CD AS PAY_EXTPY_GRP_CD,
+					       	fcBass0300CDNM (R.DPOB_CD, PAY_DDUC_GRP_CD) AS PAY_EXTPY_GRP_NM,
+					       	R.PAY_DDUC_NM,
+					       	R.PAY_DDUC_USE_YN,
+					       	R.PAY_DDUC_CD,
+					       	'' AS TEMP1,
+					       	'' AS TEMP2,
+					       	'' AS TEMP3, 
+					       	A.EMYMT_DIV_CD,
+					       	A.PAY_ITEM_CD,
+					       	A.ACC_ACC_CD,
+					       	A.SEVE_PAY_YN,
+					       	A.YRTX_DOTN_CD,
+					       	A.YRTX_FREE_DTY_REDU_CD,
+					       	A.PAYR_TERM_USE_YN,
+					       	A.EXTPT_DDUC_DSPY_YN,
+					       	A.EXTPT_DDUC_USE_YN,
+					       	A.EXTPT_DDUC_RNGE_ORD
+						FROM PAYR0470 R, PAYR0485 A   
+				 	WHERE R.PAY_DDUC_CD = A.PAY_ITEM_CD
+			) T
+		WHERE 1=1	
+		    <isNotEmpty prepend="AND" property="dpobCd" >
+			   	T.DPOB_CD = #dpobCd#
+		  	</isNotEmpty>
+		  	
+		   <isNotEmpty prepend="AND" property="emymtDivCd" >
+			   	T.EMYMT_DIV_CD = #emymtDivCd#
+		  	</isNotEmpty>
+		  	
+		  	<isNotEmpty property="pymtDducDivCd" prepend="AND">
+				T.PYMT_DDUC_DIV_CD = #pymtDducDivCd#
+		  	</isNotEmpty>
+		  	  	
+			<isNotEmpty property="dtilPayExtpyGrpCd" prepend="AND">
+				T.PAY_EXTPY_GRP_CD
+				<iterate prepend="IN" property="dtilPayExtpyGrpCdArr" open="(" close=")" conjunction=",">
+					#dtilPayExtpyGrpCdArr[]#
+				</iterate>
+			</isNotEmpty>			 
+			 
+			 
+	</select>
+	
+	<select id="payr0485DAO.selectXlsPayr1450List" parameterClass="payr0485SrhVo" resultClass="egovMap">
+	SELECT T.* 
+	  FROM ( SELECT P.DPOB_CD,
+	  				P.PYMT_DDUC_DIV_CD,
+	  				fcBass0300CDNM (P.DPOB_CD, P.PYMT_DDUC_DIV_CD)AS PYMT_DDUC_DIV_NM,
+			        P.PAY_EXTPY_GRP_CD,
+			       fcBass0300CDNM (#dpobCd#, PAY_EXTPY_GRP_CD)AS PAY_EXTPY_GRP_NM,
+			       P.PAY_EXTPY_NM,
+			       P.PAY_EXTPY_USE_YN,
+			       P.PAY_EXTPY_CD,
+			       fcBass0300CDNM (#dpobCd#, A.YRTX_DOTN_CD) AS YRTX_DOTN_NM,
+			       fcBass0300CDNM (#dpobCd#, A.YRTX_FREE_DTY_REDU_CD) AS YRTX_FREE_DTY_REDU_NM,                             
+			       fcBass0300CDNM (#dpobCd#, A.ACC_ACC_CD) AS ACC_ACC_NM,                             
+			       A.EMYMT_DIV_CD,
+			       A.PAY_ITEM_CD,
+			       A.ACC_ACC_CD,
+			       A.SEVE_PAY_YN,
+			       A.YRTX_DOTN_CD,
+			       A.YRTX_FREE_DTY_REDU_CD,
+			       A.PAYR_TERM_USE_YN,
+			       A.EXTPT_DDUC_DSPY_YN,
+			       A.EXTPT_DDUC_USE_YN,
+			       A.EXTPT_DDUC_RNGE_ORD
+			   FROM PAYR0480 P, PAYR0485 A   
+			 WHERE P.PAY_EXTPY_CD = A.PAY_ITEM_CD
+			 UNION ALL
+			 SELECT R.DPOB_CD,
+			 		R.PYMT_DDUC_DIV_CD, 
+			 		fcBass0300CDNM (R.DPOB_CD, R.PYMT_DDUC_DIV_CD)AS PYMT_DDUC_DIV_NM,
+			        R.PAY_DDUC_GRP_CD AS PAY_EXTPY_GRP_CD,
+			       fcBass0300CDNM (#dpobCd#, PAY_DDUC_GRP_CD) AS PAY_EXTPY_GRP_NM,
+			       R.PAY_DDUC_NM,
+			       R.PAY_DDUC_USE_YN,
+			       R.PAY_DDUC_CD,
+			       '' AS TEMP1,
+			       '' AS TEMP2,
+			       '' AS TEMP3, 
+			       A.EMYMT_DIV_CD,
+			       A.PAY_ITEM_CD,
+			       A.ACC_ACC_CD,
+			       A.SEVE_PAY_YN,
+			       A.YRTX_DOTN_CD,
+			       A.YRTX_FREE_DTY_REDU_CD,
+			       A.PAYR_TERM_USE_YN,
+			       A.EXTPT_DDUC_DSPY_YN,
+			       A.EXTPT_DDUC_USE_YN,
+			       A.EXTPT_DDUC_RNGE_ORD
+			    FROM PAYR0470 R, PAYR0485 A   
+			  WHERE R.PAY_DDUC_CD = A.PAY_ITEM_CD
+			) T   
+		WHERE 1=1
+			<isNotEmpty prepend="AND" property="dpobCd" >
+				T.DPOB_CD = #dpobCd#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="pymtDducDivCd" >
+				T.PYMT_DDUC_DIV_CD = #pymtDducDivCd#
+			</isNotEmpty>
+			<isNotEmpty property="dtilPayExtpyGrpCd" prepend="AND">
+				T.PAY_EXTPY_GRP_CD
+				
+				<iterate prepend="IN" property="dtilPayExtpyGrpCdArr" open="(" close=")" conjunction=",">
+					#dtilPayExtpyGrpCdArr[]#
+				</iterate>
+			 </isNotEmpty>
+	</select>
+</sqlMap>

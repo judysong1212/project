@@ -1,0 +1,198 @@
+/*******************************************************************************
+ * Copyright 2011 Google Inc. All Rights Reserved.
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************/
+package com.app.exterms.payroll.client.service;
+
+import java.util.List;
+
+import com.app.exterms.payroll.client.dto.Payr0500DTO;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+
+
+public interface PayrP410004ServiceAsync {
+	
+ 	public void activityOnUpdatePayrP410004Save(List<Payr0500DTO> listPayr0500Dto, AsyncCallback<Long> callback);
+
+//	/**
+//	 * PAYR0500을 등록한다.
+//	 * @param vo - 등록할 정보가 담긴 Payr0500VO
+//	 * @return 등록 결과
+//	 * @exception Exception
+//	 */
+//	public String insertPayr0500(Payr0500VO vo);
+//    
+//    /**
+//	 * PAYR0500을 수정한다.
+//	 * @param vo - 수정할 정보가 담긴 Payr0500VO
+//	 * @return void형
+//	 * @exception Exception
+//	 */
+//	public void updatePayr0500(Payr0500VO vo);
+//    
+//    /**
+//	 * PAYR0500을 삭제한다.
+//	 * @param vo - 삭제할 정보가 담긴 Payr0500VO
+//	 * @return void형 
+//	 * @exception Exception
+//	 */
+//	public void deletePayr0500(Payr0500VO vo);
+//    
+//    /**
+//	 * PAYR0500을 조회한다.
+//	 * @param vo - 조회할 정보가 담긴 Payr0500VO
+//	 * @return 조회한 PAYR0500
+//	 * @exception Exception
+//	 */
+//	public Payr0500VO selectPayr0500(Payr0500VO vo);
+//    
+//    /**
+//	 * PAYR0500 목록을 조회한다.
+//	 * @param searchVO - 조회할 정보가 담긴 VO
+//	 * @return PAYR0500 목록
+//	 * @exception Exception
+//	 */
+//	public List selectPayr0500List(Payr0500SrhVO searchVO);
+//    
+//    /**
+//	 * PAYR0500 총 갯수를 조회한다.
+//	 * @param searchVO - 조회할 정보가 담긴 VO
+//	 * @return PAYR0500 총 갯수
+//	 * @exception
+//	 */
+//	public int selectPayr0500ListTotCnt(Payr0500SrhVO searchVO);
+//	
+//	
+//	/**
+//	 * PAYR0520을 등록한다.
+//	 * @param vo - 등록할 정보가 담긴 Payr0520VO
+//	 * @return 등록 결과
+//	 * @exception Exception
+//	 */
+//	public String insertPayr0520(Payr0520VO vo);
+//    
+//    /**
+//	 * PAYR0520을 수정한다.
+//	 * @param vo - 수정할 정보가 담긴 Payr0520VO
+//	 * @return void형
+//	 * @exception Exception
+//	 */
+//	public void updatePayr0520(Payr0520VO vo);
+//    
+//    /**
+//	 * PAYR0520을 삭제한다.
+//	 * @param vo - 삭제할 정보가 담긴 Payr0520VO
+//	 * @return void형 
+//	 * @exception Exception
+//	 */
+//	public void deletePayr0520(Payr0520VO vo);
+//    
+//    /**
+//	 * PAYR0520을 조회한다.
+//	 * @param vo - 조회할 정보가 담긴 Payr0520VO
+//	 * @return 조회한 PAYR0520
+//	 * @exception Exception
+//	 */
+//	public Payr0520VO selectPayr0520(Payr0520VO vo);
+//    
+//    /**
+//	 * PAYR0520 목록을 조회한다.
+//	 * @param searchVO - 조회할 정보가 담긴 VO
+//	 * @return PAYR0520 목록
+//	 * @exception Exception
+//	 */
+//	public List selectPayr0520List(Payr0520SrhVO searchVO);
+//    
+//    /**
+//	 * PAYR0520 총 갯수를 조회한다.
+//	 * @param searchVO - 조회할 정보가 담긴 VO
+//	 * @return PAYR0520 총 갯수
+//	 * @exception
+//	 */
+//	public int selectPayr0520ListTotCnt(Payr0520SrhVO searchVO);
+//	
+//	/**
+//	 * PAYR0530을 등록한다.
+//	 * @param vo - 등록할 정보가 담긴 Payr0530VO
+//	 * @return 등록 결과
+//	 * @exception Exception
+//	 */
+//	public String insertPayr0530(Payr0530VO vo);
+//    
+//    /**
+//	 * PAYR0530을 수정한다.
+//	 * @param vo - 수정할 정보가 담긴 Payr0530VO
+//	 * @return void형
+//	 * @exception Exception
+//	 */
+//	public void updatePayr0530(Payr0530VO vo);
+//    
+//    /**
+//	 * PAYR0530을 삭제한다.
+//	 * @param vo - 삭제할 정보가 담긴 Payr0530VO
+//	 * @return void형 
+//	 * @exception Exception
+//	 */
+//	public void deletePayr0530(Payr0530VO vo);
+//    
+//    /**
+//	 * PAYR0530을 조회한다.
+//	 * @param vo - 조회할 정보가 담긴 Payr0530VO
+//	 * @return 조회한 PAYR0530
+//	 * @exception Exception
+//	 */
+//	public Payr0530VO selectPayr0530(Payr0530VO vo);
+//    
+//    /**
+//	 * PAYR0530 목록을 조회한다.
+//	 * @param searchVO - 조회할 정보가 담긴 VO
+//	 * @return PAYR0530 목록
+//	 * @exception Exception
+//	 */
+//	public List selectPayr0530List(Payr0530SrhVO searchVO);
+//    
+//    /**
+//	 * PAYR0530 총 갯수를 조회한다.
+//	 * @param searchVO - 조회할 정보가 담긴 VO
+//	 * @return PAYR0530 총 갯수
+//	 * @exception
+//	 */
+//	public int selectPayr0530ListTotCnt(Payr0530SrhVO searchVO);
+//	
+//	/**
+//	 * PAYR0540을 등록한다.
+//	 * @param vo - 등록할 정보가 담긴 Payr0540VO
+//	 * @return 등록 결과
+//	 * @exception Exception
+//	 */
+//	public String insertPayr0540(Payr0540VO vo);
+//    
+//    /**
+//	 * PAYR0540을 수정한다.
+//	 * @param vo - 수정할 정보가 담긴 Payr0540VO
+//	 * @return void형
+//	 * @exception Exception
+//	 */
+//	public void updatePayr0540(Payr0540VO vo);
+//    
+//    /**
+//	 * PAYR0540을 삭제한다.
+//	 * @param vo - 삭제할 정보가 담긴 Payr0540VO
+//	 * @return void형 
+//	 * @exception Exception
+//	 */
+//	public void deletePayr0540(Payr0540VO vo);
+//    
+
+	
+}

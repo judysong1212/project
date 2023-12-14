@@ -1,0 +1,761 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Payr0100">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="payr0100SrhVO" type="com.app.exterms.payroll.server.vo.Payr0100SrhVO"/>
+	
+	<resultMap id="payr0100" class="com.app.exterms.payroll.server.vo.Payr0100VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="apptnYr" column="APPTN_YR" columnIndex="2"/>
+		<result property="eandIncmTxtbSimfTxsNum" column="EAND_INCM_TXTB_SIMF_TXS_NUM" columnIndex="3"/>
+		<result property="apptnStdBgnnDt" column="APPTN_STD_BGNN_DT" columnIndex="4"/>
+		<result property="apptnStdEndDt" column="APPTN_STD_END_DT" columnIndex="5"/>
+		<result property="ovr" column="OVR" columnIndex="6"/>
+		<result property="udr" column="UDR" columnIndex="7"/>
+		<result property="oneOfPepl" column="ONE_OF_PEPL" columnIndex="8"/>
+		<result property="twoOfPepl" column="TWO_OF_PEPL" columnIndex="9"/>
+		<result property="treOfGerl" column="TRE_OF_GERL" columnIndex="10"/>
+		<result property="treOfMlchd" column="TRE_OF_MLCHD" columnIndex="11"/>
+		<result property="furOfGerl" column="FUR_OF_GERL" columnIndex="12"/>
+		<result property="furOfMlchd" column="FUR_OF_MLCHD" columnIndex="13"/>
+		<result property="fveOfGerl" column="FVE_OF_GERL" columnIndex="14"/>
+		<result property="fveOfMlchd" column="FVE_OF_MLCHD" columnIndex="15"/>
+		<result property="sixOfGerl" column="SIX_OF_GERL" columnIndex="16"/>
+		<result property="sixOfMlchd" column="SIX_OF_MLCHD" columnIndex="17"/>
+		<result property="svnOfGerl" column="SVN_OF_GERL" columnIndex="18"/>
+		<result property="svnOfMlchd" column="SVN_OF_MLCHD" columnIndex="19"/>
+		<result property="egtOfGerl" column="EGT_OF_GERL" columnIndex="20"/>
+		<result property="egtOfMlchd" column="EGT_OF_MLCHD" columnIndex="21"/>
+		<result property="nineOfGerl" column="NINE_OF_GERL" columnIndex="22"/>
+		<result property="nineOfMlchd" column="NINE_OF_MLCHD" columnIndex="23"/>
+		<result property="tenOfGerl" column="TEN_OF_GERL" columnIndex="24"/>
+		<result property="tenOfMlchd" column="TEN_OF_MLCHD" columnIndex="25"/>
+		<result property="evthOfGerl" column="EVTH_OF_GERL" columnIndex="26"/>
+		<result property="evthOfMlchd" column="EVTH_OF_MLCHD" columnIndex="27"/>
+		<result property="kybdr" column="KYBDR" columnIndex="28"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="29"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="30"/>
+		<result property="ismt" column="ISMT" columnIndex="31"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="32"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="33"/>
+	</resultMap>
+	
+	<insert id="payr0100DAO.insertPayr0100_S">
+		<![CDATA[
+			INSERT INTO PAYR0100 
+				( DPOB_CD
+				  , APPTN_YR
+				  , EAND_INCM_TXTB_SIMF_TXS_NUM
+				  , APPTN_STD_BGNN_DT
+				  , APPTN_STD_END_DT
+				  , OVR
+				  , UDR
+				  , ONE_OF_PEPL
+				  , TWO_OF_PEPL
+				  , TRE_OF_GERL
+				  , TRE_OF_MLCHD
+				  , FUR_OF_GERL
+				  , FUR_OF_MLCHD
+				  , FVE_OF_GERL
+				  , FVE_OF_MLCHD
+				  , SIX_OF_GERL
+				  , SIX_OF_MLCHD
+				  , SVN_OF_GERL
+				  , SVN_OF_MLCHD
+				  , EGT_OF_GERL
+				  , EGT_OF_MLCHD
+				  , NINE_OF_GERL
+				  , NINE_OF_MLCHD
+				  , TEN_OF_GERL
+				  , TEN_OF_MLCHD
+				  , EVTH_OF_GERL
+				  , EVTH_OF_MLCHD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #apptnYr#
+				  , #eandIncmTxtbSimfTxsNum#
+				  , REPLACE(#apptnStdBgnnDt#,'.','')
+				  , REPLACE(#apptnStdEndDt#,'.','')
+				  , #ovr#
+				  , #udr#
+				  , #oneOfPepl#
+				  , #twoOfPepl#
+				  , #treOfGerl#
+				  , #treOfMlchd#
+				  , #furOfGerl#
+				  , #furOfMlchd#
+				  , #fveOfGerl#
+				  , #fveOfMlchd#
+				  , #sixOfGerl#
+				  , #sixOfMlchd#
+				  , #svnOfGerl#
+				  , #svnOfMlchd#
+				  , #egtOfGerl#
+				  , #egtOfMlchd#
+				  , #nineOfGerl#
+				  , #nineOfMlchd#
+				  , #tenOfGerl#
+				  , #tenOfMlchd#
+				  , #evthOfGerl#
+				  , #evthOfMlchd#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<!-- 간이세액표 마감 처리 : 종료일자, 사용여부 UPDATE 처리 함 -->
+	<update id="payr0100DAO.updatePayr0100_APPTN_STD_END_DT">
+		<![CDATA[
+			UPDATE PAYR0100
+			SET APPTN_STD_END_DT = CASE WHEN (SELECT MAX(APPTN_STD_BGNN_DT) 
+												FROM PAYR0100 
+												WHERE APPTN_YR=#apptnYr# 
+													AND APPTN_STD_BGNN_DT < REPLACE(#apptnStdEndDt#,'.','')) IS NULL
+									 	 THEN '99991231'
+										ELSE  TO_CHAR ((TO_DATE (REPLACE(#apptnStdEndDt#,'.',''), 'YYYYMMDD') - 1), 'YYYYMMDD')
+										 END 
+		]]>		
+			    , EAND_INCM_BASE_YN =  CASE WHEN #apptnStdEndDt# &lt; (SELECT MAX(APPTN_STD_BGNN_DT) FROM PAYR0100)  
+		<![CDATA[	    				THEN 'N' 
+										ELSE 'Y'
+										END
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+		]]>		
+			WHERE 
+			<isNotEmpty property="dpobCd" >
+			    DPOB_CD=#dpobCd#
+			</isNotEmpty>   
+			<isNotEmpty prepend="AND" property="apptnYr" > 
+				APPTN_YR=#apptnYr#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="apptnStdEndDt" >
+			 	APPTN_STD_BGNN_DT <![CDATA[ <=  ]]>REPLACE(#apptnStdEndDt#,'.','')
+		    </isNotEmpty>
+		
+	</update>
+	
+	<update id="payr0100DAO.updatePayr0100_S">
+		<![CDATA[
+			UPDATE PAYR0100
+			SET DPOB_CD=#dpobCd#
+				, APPTN_YR=#apptnYr#
+				, EAND_INCM_TXTB_SIMF_TXS_NUM=#eandIncmTxtbSimfTxsNum#
+				, APPTN_STD_BGNN_DT=REPLACE(#apptnStdBgnnDt#,'.','')
+				, APPTN_STD_END_DT=REPLACE(#apptnStdEndDt#,'.','')
+				, OVR=#ovr#
+				, UDR=#udr#
+				, ONE_OF_PEPL=#oneOfPepl#
+				, TWO_OF_PEPL=#twoOfPepl#
+				, TRE_OF_GERL=#treOfGerl#
+				, TRE_OF_MLCHD=#treOfMlchd#
+				, FUR_OF_GERL=#furOfGerl#
+				, FUR_OF_MLCHD=#furOfMlchd#
+				, FVE_OF_GERL=#fveOfGerl#
+				, FVE_OF_MLCHD=#fveOfMlchd#
+				, SIX_OF_GERL=#sixOfGerl#
+				, SIX_OF_MLCHD=#sixOfMlchd#
+				, SVN_OF_GERL=#svnOfGerl#
+				, SVN_OF_MLCHD=#svnOfMlchd#
+				, EGT_OF_GERL=#egtOfGerl#
+				, EGT_OF_MLCHD=#egtOfMlchd#
+				, NINE_OF_GERL=#nineOfGerl#
+				, NINE_OF_MLCHD=#nineOfMlchd#
+				, TEN_OF_GERL=#tenOfGerl#
+				, TEN_OF_MLCHD=#tenOfMlchd#
+				, EVTH_OF_GERL=#evthOfGerl#
+				, EVTH_OF_MLCHD=#evthOfMlchd# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND APPTN_YR=#apptnYr#
+								AND EAND_INCM_TXTB_SIMF_TXS_NUM=#eandIncmTxtbSimfTxsNum#
+				]]>
+	</update>
+	
+	<delete id="payr0100DAO.deletePayr0100_S">
+		<![CDATA[
+			DELETE FROM PAYR0100 
+						WHERE DPOB_CD=#dpobCd#
+								AND APPTN_YR=#apptnYr#
+								AND EAND_INCM_BASE_DT=REPLACE(#eandIncmBaseDt#,'.','')
+				]]>
+	</delete>
+	
+	<select id="payr0100DAO.selectPayr0100_S" resultMap="payr0100">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, APPTN_YR
+				, EAND_INCM_TXTB_SIMF_TXS_NUM
+				, APPTN_STD_BGNN_DT
+				, APPTN_STD_END_DT
+				, OVR
+				, UDR
+				, ONE_OF_PEPL
+				, TWO_OF_PEPL
+				, TRE_OF_GERL
+				, TRE_OF_MLCHD
+				, FUR_OF_GERL
+				, FUR_OF_MLCHD
+				, FVE_OF_GERL
+				, FVE_OF_MLCHD
+				, SIX_OF_GERL
+				, SIX_OF_MLCHD
+				, SVN_OF_GERL
+				, SVN_OF_MLCHD
+				, EGT_OF_GERL
+				, EGT_OF_MLCHD
+				, NINE_OF_GERL
+				, NINE_OF_MLCHD
+				, TEN_OF_GERL
+				, TEN_OF_MLCHD
+				, EVTH_OF_GERL
+				, EVTH_OF_MLCHD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0100
+						WHERE DPOB_CD=#dpobCd#
+								AND APPTN_YR=#apptnYr#
+								AND EAND_INCM_TXTB_SIMF_TXS_NUM=#eandIncmTxtbSimfTxsNum#
+				]]>
+	</select>
+	
+	<select id="payr0100DAO.selectPayr0100List_D" parameterClass="payr0100SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								  DPOB_CD
+								, APPTN_YR
+								, EAND_INCM_TXTB_SIMF_TXS_NUM
+								, APPTN_STD_BGNN_DT
+								, APPTN_STD_END_DT
+								, OVR 
+								, UDR
+								, ONE_OF_PEPL
+								, TWO_OF_PEPL
+								, TRE_OF_GERL
+								, TRE_OF_MLCHD
+								, FUR_OF_GERL
+								, FUR_OF_MLCHD
+								, FVE_OF_GERL
+								, FVE_OF_MLCHD
+								, SIX_OF_GERL
+								, SIX_OF_MLCHD
+								, SVN_OF_GERL
+								, SVN_OF_MLCHD
+								, EGT_OF_GERL
+								, EGT_OF_MLCHD
+								, NINE_OF_GERL
+								, NINE_OF_MLCHD
+								, TEN_OF_GERL
+								, TEN_OF_MLCHD
+								, EVTH_OF_GERL
+								, EVTH_OF_MLCHD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PAYR0100
+				WHERE 1=1
+		    <isNotEmpty prepend="AND" property="apptnYr">
+				APPTN_YR = #apptnYr#
+		    </isNotEmpty>  
+		    <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		    </isNotEmpty>
+		    <isNotEmpty prepend="AND" property="apptnStdBgnnDt" >
+			 	APPTN_STD_BGNN_DT=REPLACE(#apptnStdBgnnDt#,'.','')
+		    </isNotEmpty>
+					ORDER BY 
+						DPOB_CD DESC
+							, APPTN_YR DESC
+							, EAND_INCM_TXTB_SIMF_TXS_NUM ASC
+		
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>	
+	</select>	
+	<select id="payr0100DAO.selectPayr0100ListTotCnt_S" parameterClass="payr0100SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0100
+			WHERE 
+			<isNotEmpty property="dpobCd">
+			 	DPOB_CD=#dpobCd#
+		    </isNotEmpty>
+		    <isNotEmpty prepend="AND" property="apptnYr">
+			 	APPTN_YR=#apptnYr#
+		    </isNotEmpty>
+		    <isNotEmpty prepend="AND" property="apptnStdEndDt">
+			 	APPTN_STD_END_DT=#apptnStdEndDt#
+		    </isNotEmpty>
+	</select>
+
+	<!-- 년도가지고 오는 쿼리  -->
+		<select id="payr0100DAO.selectPayr0100ApptnYrList_D" parameterClass="payr0100SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM ( 
+				SELECT  
+						DISTINCT APPTN_YR
+							, (APPTN_YR) AS APPTN_YR_DISP 
+						FROM PAYR0100
+				WHERE 1=1 
+		    <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		    </isNotEmpty> 
+					ORDER BY  APPTN_YR DESC 
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>			 
+	</select>
+	
+		<!-- 년도가지고 오는 쿼리  -->
+		<select id="payr0100DAO.selectPayr0100ApptnYrListTotCnt_S"  parameterClass="payr0100SrhVO" resultClass="int">
+ 
+			SELECT COUNT(*) totcnt
+			FROM 
+         (	SELECT  
+						DISTINCT APPTN_YR
+							, (APPTN_YR) AS APPTN_YR_DISP 
+						FROM PAYR0100 
+			WHERE 1=1 
+		    <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		    </isNotEmpty> 
+		 )
+	</select>	
+	
+		
+	<!-- 이전 날짜 중 가장 최근 데이터의 마감처리 안된 년도를 가져옴 
+	<select id="payr0100DAO.getPayr0100ApptnYrList" parameterClass="payr0100SrhVO" resultClass="egovMap">
+		SELECT  
+			DISTINCT AA.APPTN_YR
+				, AA.APPTN_STD_BGNN_DT
+			FROM (SELECT APPTN_YR, MAX(APPTN_STD_BGNN_DT)AS APPTN_STD_BGNN_DT
+					FROM PAYR0100
+					WHERE  
+				<isNotEmpty property="dpobCd" >
+					DPOB_CD=#dpobCd#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="apptnYr" >
+					APPTN_YR =#dpobCd#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="apptnStdEndDt" >
+			 		APPTN_STD_END_DT <![CDATA[ < ]]> REPLACE(#apptnStdEndDt#,'.','')
+		    	</isNotEmpty> 
+		    	GROUP BY APPTN_YR, APPTN_STD_BGNN_DT)AA
+			ORDER BY  AA.APPTN_YR DESC, AA.APPTN_STD_BGNN_DT DESC
+	</select>
+	-->
+	
+	<!-- 이관시 적용년도 데이터 리스트 가져옴  -->
+	<select id="payr0100DAO.getPayr0100BeforeList" parameterClass="payr0100SrhVO" resultClass="egovMap">
+		SELECT  
+ 			DPOB_CD
+				  , APPTN_YR
+				  , EAND_INCM_TXTB_SIMF_TXS_NUM
+				  , APPTN_STD_BGNN_DT
+				  , APPTN_STD_END_DT
+				  , OVR
+				  , UDR
+				  , ONE_OF_PEPL
+				  , TWO_OF_PEPL
+				  , TRE_OF_GERL
+				  , TRE_OF_MLCHD
+				  , FUR_OF_GERL
+				  , FUR_OF_MLCHD
+				  , FVE_OF_GERL
+				  , FVE_OF_MLCHD
+				  , SIX_OF_GERL
+				  , SIX_OF_MLCHD
+				  , SVN_OF_GERL
+				  , SVN_OF_MLCHD
+				  , EGT_OF_GERL
+				  , EGT_OF_MLCHD
+				  , NINE_OF_GERL
+				  , NINE_OF_MLCHD
+				  , TEN_OF_GERL
+				  , TEN_OF_MLCHD
+				  , EVTH_OF_GERL
+				  , EVTH_OF_MLCHD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+		FROM PAYR0100
+		WHERE  
+			<isNotEmpty property="dpobCd" >
+				DPOB_CD=#dpobCd#
+			</isNotEmpty> 
+			<isNotEmpty prepend="AND" property="apptnYr" >
+			 	APPTN_YR=#apptnYr#
+		    </isNotEmpty> 
+			<isNotEmpty prepend="AND" property="apptnStdBgnnDt" >
+		 		APPTN_STD_BGNN_DT =REPLACE(#apptnStdBgnnDt#,'.','')
+		   	</isNotEmpty>
+		ORDER BY  APPTN_YR ASC, EAND_INCM_TXTB_SIMF_TXS_NUM ASC
+	</select>			
+	
+		
+		
+	<!-- 기준일자가지고 오는 쿼리  -->
+		<select id="payr0100DAO.selectPayr0100ApptnStdBgnnDtList_D" parameterClass="payr0100SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM ( 
+				SELECT  
+						DISTINCT APPTN_YR, APPTN_STD_BGNN_DT
+							, (TO_CHAR(TO_DATE(APPTN_STD_BGNN_DT,'YYYYMMDD'),'YYYY.MM.DD')) AS APPTN_STD_BGNN_DT_DISP 
+						FROM PAYR0100
+				WHERE 1=1 
+		    <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		    </isNotEmpty> 
+		    <isNotEmpty prepend="AND" property="apptnYr" >
+			 	APPTN_YR=#apptnYr#
+		    </isNotEmpty> 
+					ORDER BY  APPTN_YR DESC 
+					,APPTN_STD_BGNN_DT DESC 
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>			 
+	</select>
+	
+		<!-- 기준일자가지고 오는 쿼리  -->
+		<select id="payr0100DAO.selectPayr0100ApptnStdBgnnDtListTotCnt_S"  parameterClass="payr0100SrhVO" resultClass="int">
+ 
+			SELECT COUNT(*) totcnt
+			FROM 
+         (	SELECT  
+						DISTINCT APPTN_YR,APPTN_STD_BGNN_DT
+							, (APPTN_STD_BGNN_DT) AS APPTN_YR_DISP 
+						FROM PAYR0100 
+			WHERE 1=1 
+		    <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		    </isNotEmpty> 
+		      <isNotEmpty prepend="AND" property="apptnYr" >
+			 	APPTN_YR=#apptnYr#
+		    </isNotEmpty> 
+		 )
+	</select>	
+	
+	<!-- ################ 간이소득세액이관 ################ -->
+	<insert id="payr0100DAO.transferPayr0100_S">
+		<![CDATA[
+			INSERT INTO PAYR0100 
+				( DPOB_CD
+				  , APPTN_YR
+				  , EAND_INCM_TXTB_SIMF_TXS_NUM
+				  , EAND_INCM_BASE_DT
+				  , APPTN_STD_BGNN_DT
+				  , APPTN_STD_END_DT
+				  , EAND_INCM_BASE_YN
+				  , OVR
+				  , UDR
+				  , ONE_OF_PEPL
+				  , TWO_OF_PEPL
+				  , TRE_OF_GERL
+				  , TRE_OF_MLCHD
+				  , FUR_OF_GERL
+				  , FUR_OF_MLCHD
+				  , FVE_OF_GERL
+				  , FVE_OF_MLCHD
+				  , SIX_OF_GERL
+				  , SIX_OF_MLCHD
+				  , SVN_OF_GERL
+				  , SVN_OF_MLCHD
+				  , EGT_OF_GERL
+				  , EGT_OF_MLCHD
+				  , NINE_OF_GERL
+				  , NINE_OF_MLCHD
+				  , TEN_OF_GERL
+				  , TEN_OF_MLCHD
+				  , EVTH_OF_GERL
+				  , EVTH_OF_MLCHD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #apptnYr#
+				  , #eandIncmTxtbSimfTxsNum#
+				
+				  , CASE WHEN (SELECT MAX(APPTN_STD_BGNN_DT) 
+			      				FROM PAYR0100 
+			      				WHERE APPTN_YR = #apptnYr# 
+			      					AND APPTN_STD_BGNN_DT <= REPLACE(#apptnStdBgnnDt#,'.','')) IS NULL
+					THEN NVL2(REPLACE(#eandIncmBaseDt#,'.',''), TO_NCHAR(REPLACE(#eandIncmBaseDt#,'.','')), REPLACE(#eandIncmBaseDt#,'.',''))
+					ELSE NVL2(REPLACE(#eandIncmBaseDt#,'.',''), TO_NCHAR(REPLACE(#apptnStdBgnnDt#,'.','')), REPLACE(#apptnStdBgnnDt#,'.',''))
+					END
+			      , CASE WHEN (SELECT MAX(APPTN_STD_BGNN_DT) 
+			      				FROM PAYR0100 
+			      				WHERE APPTN_YR = #apptnYr# 
+			      					AND APPTN_STD_BGNN_DT <= REPLACE(#apptnStdBgnnDt#,'.','')) IS NULL
+					THEN NVL2(REPLACE(#eandIncmBaseDt#,'.',''), TO_NCHAR(REPLACE(#eandIncmBaseDt#,'.','')), REPLACE(#eandIncmBaseDt#,'.',''))
+					ELSE NVL2(REPLACE(#eandIncmBaseDt#,'.',''), TO_NCHAR(REPLACE(#apptnStdBgnnDt#,'.','')), REPLACE(#apptnStdBgnnDt#,'.',''))
+					END
+				  , CASE WHEN (SELECT MIN(APPTN_STD_BGNN_DT) 
+			      				FROM PAYR0100 
+			      				WHERE APPTN_YR = #apptnYr# 
+			      					AND APPTN_STD_BGNN_DT <= REPLACE(#apptnStdBgnnDt#,'.','')) IS NULL
+					 THEN NVL2(REPLACE(#apptnStdEndDt#,'.',''), TO_NCHAR(REPLACE(#apptnStdEndDt#,'.','')), REPLACE(#apptnStdEndDt#,'.',''))
+					WHEN (SELECT MIN(APPTN_STD_BGNN_DT) 
+			      				FROM PAYR0100 
+			      				WHERE APPTN_YR = #apptnYr# 
+			      					AND APPTN_STD_BGNN_DT <= REPLACE(#apptnStdBgnnDt#,'.','')) = REPLACE(#apptnStdBgnnDt#,'.','')
+					 THEN NVL2(REPLACE(#apptnStdEndDt#,'.',''), TO_NCHAR(REPLACE(#apptnStdEndDt#,'.','')), REPLACE(#apptnStdEndDt#,'.',''))
+					ELSE NVL2(TO_CHAR ((TO_DATE (REPLACE(#tempApptnStdEndDt#,'.',''), 'YYYYMMDD') - 1), 'YYYYMMDD') 
+									, TO_NCHAR(TO_CHAR ((TO_DATE (REPLACE(#tempApptnStdEndDt#,'.',''), 'YYYYMMDD') - 1), 'YYYYMMDD'))
+									, TO_CHAR ((TO_DATE (REPLACE(#tempApptnStdEndDt#,'.',''), 'YYYYMMDD') - 1), 'YYYYMMDD') )
+					END
+		]]>			
+				  , CASE WHEN REPLACE(#apptnStdEndDt#,'.','') &lt; (SELECT MAX(APPTN_STD_BGNN_DT) FROM PAYR0100)  
+				  
+		<![CDATA[	THEN 'N' 
+					ELSE 'Y'
+					END
+				  , #ovr#
+				  , #udr#
+				  , #oneOfPepl#
+				  , #twoOfPepl#
+				  , #treOfGerl#
+				  , #treOfMlchd#
+				  , #furOfGerl#
+				  , #furOfMlchd#
+				  , #fveOfGerl#
+				  , #fveOfMlchd#
+				  , #sixOfGerl#
+				  , #sixOfMlchd#
+				  , #svnOfGerl#
+				  , #svnOfMlchd#
+				  , #egtOfGerl#
+				  , #egtOfMlchd#
+				  , #nineOfGerl#
+				  , #nineOfMlchd#
+				  , #tenOfGerl#
+				  , #tenOfMlchd#
+				  , #evthOfGerl#
+				  , #evthOfMlchd#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>	
+	</insert>	
+	
+	<delete id="payr0100DAO.transferPayr0100_D">
+		<![CDATA[
+			DELETE FROM PAYR0100 
+				WHERE DPOB_CD=#dpobCd#
+					AND APPTN_YR=#apptnYr#
+					AND APPTN_STD_BGNN_DT=REPLACE(#apptnStdBgnnDt#,'.','')
+					AND EAND_INCM_TXTB_SIMF_TXS_NUM = #eandIncmTxtbSimfTxsNum#
+		]]>
+	</delete>		
+	<!-- ################ 간이소득세액이관 ################ -->
+	
+	
+		
+	<!-- ################ 엑셀 구현 ################ -->
+	<insert id="payr0100DAO.insertXlsPayr0100_S">
+		<![CDATA[
+			INSERT INTO PAYR0100 
+				( DPOB_CD
+				  , APPTN_YR
+				  , EAND_INCM_TXTB_SIMF_TXS_NUM
+				  , EAND_INCM_BASE_DT
+				  , APPTN_STD_BGNN_DT
+				  , APPTN_STD_END_DT
+				  , OVR
+				  , UDR
+				  , ONE_OF_PEPL
+				  , TWO_OF_PEPL
+				  , TRE_OF_GERL
+				  , TRE_OF_MLCHD
+				  , FUR_OF_GERL
+				  , FUR_OF_MLCHD
+				  , FVE_OF_GERL
+				  , FVE_OF_MLCHD
+				  , SIX_OF_GERL
+				  , SIX_OF_MLCHD
+				  , SVN_OF_GERL
+				  , SVN_OF_MLCHD
+				  , EGT_OF_GERL
+				  , EGT_OF_MLCHD
+				  , NINE_OF_GERL
+				  , NINE_OF_MLCHD
+				  , TEN_OF_GERL
+				  , TEN_OF_MLCHD
+				  , EVTH_OF_GERL
+				  , EVTH_OF_MLCHD
+				  , EAND_INCM_BASE_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #apptnYr#
+				  ,(select NVL(MAX(EAND_INCM_TXTB_SIMF_TXS_NUM)+1,1) 
+				  	FROM PAYR0100 
+				  	WHERE DPOB_CD = #dpobCd# 
+				  		AND APPTN_YR = #apptnYr# 
+				  		AND APPTN_STD_BGNN_DT=REPLACE(#apptnStdBgnnDt#,'.','')) 
+				  , REPLACE(#eandIncmBaseDt#,'.','')
+				  , REPLACE(#apptnStdBgnnDt#,'.','')
+				  , REPLACE(#apptnStdEndDt#,'.','')
+				  , #ovr#
+				  , #udr#
+				  , #oneOfPepl#
+				  , #twoOfPepl#
+				  , #treOfGerl#
+				  , #treOfMlchd#
+				  , #furOfGerl#
+				  , #furOfMlchd#
+				  , #fveOfGerl#
+				  , #fveOfMlchd#
+				  , #sixOfGerl#
+				  , #sixOfMlchd#
+				  , #svnOfGerl#
+				  , #svnOfMlchd#
+				  , #egtOfGerl#
+				  , #egtOfMlchd#
+				  , #nineOfGerl#
+				  , #nineOfMlchd#
+				  , #tenOfGerl#
+				  , #tenOfMlchd#
+				  , #evthOfGerl#
+				  , #evthOfMlchd#
+		]]>		  
+				  , CASE WHEN #apptnStdBgnnDt# &lt; (SELECT MAX(APPTN_STD_BGNN_DT) FROM PAYR0100)  
+					THEN 'N' 
+					ELSE 'Y'
+					END
+		<![CDATA[				              
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+
+		]]>	
+	</insert>	
+	
+	
+	<delete id="payr0100DAO.deleteXlsPayr0100_S">
+		<![CDATA[
+			DELETE FROM PAYR0100 
+				WHERE DPOB_CD=#dpobCd#
+					AND APPTN_YR=#apptnYr#
+					AND APPTN_STD_BGNN_DT=REPLACE(#apptnStdBgnnDt#,'.','')
+		]]>
+	</delete>
+	
+	
+	<select id="payr0100DAO.selectXlsPayr0100List_D" parameterClass="payr0100SrhVO" resultClass="egovMap">
+						SELECT
+										  DPOB_CD
+										, APPTN_YR
+										, EAND_INCM_TXTB_SIMF_TXS_NUM
+										, APPTN_STD_BGNN_DT
+										, APPTN_STD_END_DT
+										, OVR 
+										, UDR
+										, ONE_OF_PEPL
+										, TWO_OF_PEPL
+										, TRE_OF_GERL
+										, TRE_OF_MLCHD
+										, FUR_OF_GERL
+										, FUR_OF_MLCHD
+										, FVE_OF_GERL
+										, FVE_OF_MLCHD
+										, SIX_OF_GERL
+										, SIX_OF_MLCHD
+										, SVN_OF_GERL
+										, SVN_OF_MLCHD
+										, EGT_OF_GERL
+										, EGT_OF_MLCHD
+										, NINE_OF_GERL
+										, NINE_OF_MLCHD
+										, TEN_OF_GERL
+										, TEN_OF_MLCHD
+										, EVTH_OF_GERL
+										, EVTH_OF_MLCHD
+										, EAND_INCM_BASE_YN
+										, KYBDR
+										, INPT_DT
+										, INPT_ADDR
+										, ISMT
+										, REVN_DT
+										, REVN_ADDR
+								FROM PAYR0100
+					WHERE			
+					<isNotEmpty property="dpobCd" >
+					 	DPOB_CD=#dpobCd#
+				    </isNotEmpty>
+				    <isNotEmpty prepend="AND" property="apptnYr">
+						APPTN_YR = #apptnYr#
+				    </isNotEmpty>  
+							ORDER BY 
+								DPOB_CD DESC
+									, APPTN_YR DESC
+									, EAND_INCM_TXTB_SIMF_TXS_NUM ASC
+	</select>
+	<!-- ################ 엑셀 구현 ################ -->
+		
+			
+	
+</sqlMap>

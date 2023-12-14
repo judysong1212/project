@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgYe161030_2022">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYe161030Srh_2022_VO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2022.InfcPkgYe161030Srh_2022_VO"/>
+	
+	<resultMap id="infcPkgYe161030_2022" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2022.InfcPkgYe161030_2022_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="txprDscmNoCntn" column="TXPR_DSCM_NO_CNTN" columnIndex="5"/>
+		<result property="suptFmlyRltClCd" column="SUPT_FMLY_RLT_CL_CD" columnIndex="6"/>
+		<result property="nnfClCd" column="NNF_CL_CD" columnIndex="7"/>
+		<result property="child" column="CHILD" columnIndex="8"/>
+		<result property="txprNm" column="TXPR_NM" columnIndex="9"/>
+		<result property="bscDdcClCd" column="BSC_DDC_CL_CD" columnIndex="10"/>
+		<result property="wmnDdcClCd" column="WMN_DDC_CL_CD" columnIndex="11"/>
+		<result property="snprntFmlyDdcClCd" column="SNPRNT_FMLY_DDC_CL_CD" columnIndex="12"/>
+		<result property="sccDdcClCd" column="SCC_DDC_CL_CD" columnIndex="13"/>
+		<result property="dsbrDdcClCd" column="DSBR_DDC_CL_CD" columnIndex="14"/>
+		<result property="chbtAtprDdcClCd" column="CHBT_ATPR_DDC_CL_CD" columnIndex="15"/>
+		<result property="age6Lt" column="AGE6_LT" columnIndex="16"/>
+		<result property="schoolYn" column="SCHOOL_YN" columnIndex="17"/>
+		<result property="kybdr" column="KYBDR" columnIndex="18"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="19"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="20"/>
+		<result property="ismt" column="ISMT" columnIndex="21"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="22"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="23"/>
+	</resultMap>
+	
+	
+<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직  시작 ++++++++++++++++++++++++++++++ -->
+<insert id="infcPkgYe161030_2022_DAO.fnYeta7100_YE161030_2022_CREATE_Insert_S">
+		<![CDATA[
+			INSERT INTO YE161030 
+				(    DPOB_CD		 /* 	사업장코드 	   */
+					,YRTX_BLGG_YR		/* 귀속연도	   */
+					,CLUT_SEPT_CD		/* 연말정산구분코드	   */
+					,SYSTEMKEY		/* SYSTEMKEY	   */
+					,TXPR_DSCM_NO_CNTN	/* 주민등록번호	   */
+				    ,FAMY_RELA_DIV_CD  /* 인사가족관계코드 */
+					,SUPT_FMLY_RLT_CL_CD	/* 부양관계코드	   */
+					,NNF_CL_CD		/* 내외국인구분	   */
+					,TXPR_NM		/* 	성명	   */
+					,BSC_DDC_CL_CD		/* 기본공제여부	   */
+					,DSBR_DDC_CL_CD		/* 장애인여부	   */
+					,WMN_DDC_CL_CD		/* 부녀자여부	   */
+					,SCC_DDC_CL_CD		/* 경로우대여부	   */
+					,SNPRNT_FMLY_DDC_CL_CD	/* 한부모여부	   */
+					,CHBT_ATPR_DDC_CL_CD	/* 출산입양여부	   */
+					,AGE6_LT		/* 	6세이하여부	   */
+					,EDU_DDC_DVCD		/* 교육비공제구분	   */
+					,KYBDR			/* 입력자		   */
+					,INPT_DT		/* 	입력일자	   */
+					,INPT_ADDR		/* 입력주소	   */
+					,ISMT			/* 수정자		   */
+					,REVN_DT		/* 	수정일자	   */
+					,REVN_ADDR		/* 수정주소	   */
+ )
+				  SELECT 	   AA.DPOB_CD		 /* 	사업장코드 	   */
+								,AA.YRTX_BLGG_YR		/* 귀속연도	   */
+								,AA.CLUT_SEPT_CD		/* 연말정산구분코드	   */
+								,AA.SYSTEMKEY		/* SYSTEMKEY	   */                               
+				              , BB.RSNO_NUMB               
+				              , BB.FAMY_RELA_DIV_CD   
+				              ,(CASE WHEN BB.FAMY_SUPPT_RELA_DIV_CD IS NULL THEN (CASE WHEN BB.FAMY_RELA_DIV_CD IN ('A0190001')  THEN 'Y0120000'       
+						             WHEN BB.FAMY_RELA_DIV_CD IN ('A0190003','A0190004','A0190009','A0190010','A0190017','A0190018','A0190019','A0190053','A0190054','A0190055','A0190056','A0190051','A0190050','A0190078','A0190079')  THEN 'Y0120001'  
+						             WHEN BB.FAMY_RELA_DIV_CD IN ('A0190011','A0190012','A0190013')  THEN 'Y0120002'                                                                                         
+						             WHEN BB.FAMY_RELA_DIV_CD IN ('A0190002','A0190007')  THEN 'Y0120003'                                                                                                                          
+						             WHEN BB.FAMY_RELA_DIV_CD IN ('A0190005')  THEN 'Y0120004'   
+						             WHEN BB.FAMY_RELA_DIV_CD IN ('A0190040','A0190032','A0190099','A0190076' ,'A0190100')  THEN 'Y0120005'                                                                                                                        
+						             WHEN BB.FAMY_RELA_DIV_CD IN ('A0190038','A0190022','A0190021','A0190020','A0190023','A0190025','A0190033','A0190035','A0190037','A0190051','A0190052','A0190089','A0190053','A0190090','A0190091','A0190032')  THEN 'Y0120006'            
+						             WHEN BB.FAMY_RELA_DIV_CD IN ('A0190109')  THEN 'Y0120007'                            
+						             WHEN BB.FAMY_RELA_DIV_CD IN ('A0190100')  THEN 'Y0120008'  END ) 
+						        ELSE BB.FAMY_SUPPT_RELA_DIV_CD END) AS FAMY_SUPPT_RELA_DIV_CD                                 
+				              , DECODE(SUBSTR(BB.RSNO_NUMB, 7, 1), '5', '9', DECODE(SUBSTR(BB.RSNO_NUMB, 7, 1), '6', '9', '1'))    
+				              , BB.HAN_NM       
+				              , BB.BASE_DDYN                       
+				              , BB.DABPN_DDUC_YN 
+				              ,('') AS WMN_DDC_CL_CD 
+				              , BB.RPCT_DDYN   
+				              ,('') AS PANT_ONYN 
+				              , BB.BITH_DDYN  
+					          , BB.BRDD_CTYN                          
+					           ,'' 
+					          , #kybdr#
+							  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+							  , #inptAddr#
+							  , #ismt#
+							  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+							  , #revnAddr#                                                               
+					FROM  YE161010 AA                                                       
+						 , (                                                              
+				           SELECT  A02.DPOB_CD,                                                      
+				           A02.SYSTEMKEY,   A02.FAMY_RELA_DIV_CD,   A02.FAMY_SUPPT_RELA_DIV_CD  ,                                       
+				           (CASE WHEN A02.DABPN_DDUC_YN = 'Y' THEN '1'  WHEN A02.FAMY_RELA_DIV_CD = 'A0190002' THEN '1'                 
+				           ELSE CASE WHEN                                               
+				                          (CASE WHEN (SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,7,1)) IN ('3','4') THEN '20' || SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6)  
+				                                ELSE '19' ||  SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6) END) <= '19621231'  
+				                     THEN '1' 
+				                     ELSE  CASE WHEN  A02.FAMY_RELA_DIV_CD = 'A0190100'             
+				                                THEN  CASE WHEN (CASE WHEN (SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,7,1)) IN ('3','4') THEN '20' || SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6)  
+				                                                      ELSE '19' ||  SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6) END) >= '20040101'    
+				                                           THEN '1'  ELSE '0' END
+				                                ELSE  CASE WHEN (CASE WHEN (SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,7,1)) IN ('3','4') THEN '20' || SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6)  
+				                                                       ELSE '19' ||  SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6) END) >= '20020101'    
+				                                            THEN '1'  ELSE '0' END         
+				           END       END          END ) AS BASE_DDYN,                          
+				           A02.HAN_NM,                                             
+				           A02.PAY_FAMY_RESN_REGN_NUM AS RSNO_NUMB,                                             
+				           DECODE(TRIM(A02.DABPN_DDUC_YN),'Y','1','0') AS  DABPN_DDUC_YN  ,         
+				            ('0') AS  BRDD_CTYN ,      
+				               ( CASE WHEN (CASE WHEN (SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,7,1)) IN ('3','4') THEN '20' || SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6)   
+				                                    ELSE '19' ||  SUBSTR(A02.PAY_FAMY_RESN_REGN_NUM,1,6) END) <= '19521231'     
+				                          THEN '1'  ELSE '0' END   ) AS  RPCT_DDYN , 
+				  
+				              ( '0' ) AS  BITH_DDYN  
+				           FROM PSNL0100 A01, PAYR0530 A02                                          
+				           WHERE A01.SYSTEMKEY = A02.SYSTEMKEY                    
+				            AND A02.FAMY_RELA_DIV_CD != 'A0190001'  
+				            AND   A01.SYSTEMKEY=#systemkey#
+				          
+				           UNION                                                              
+				           SELECT   
+						   A01.DPOB_CD,                                                          
+				           A01.SYSTEMKEY,  
+						   ('A0190001') AS DABTY_DIV_CD,    
+						       ('Y0120000') AS FAMY_SUPPT_RELA_DIV_CD,                    
+				           ('1') AS BASE_DDYN ,                                                        
+				           A01.HAN_NM,                                                 
+				           A01.RESN_REGN_NUM,                                                 
+				           (CASE WHEN A02.DABTY_DIV_CD IS NULL THEN '0'                      
+				           ELSE   DECODE(A02.DABTY_DIV_CD ,'A0370000','0','1') END) AS  OBST_GBCD     
+				          , ('0') AS BRDD_CTYN                                                             
+				          , ('0') AS RPCT_DDYN                                                            
+				          , ('0') AS BITH_DDYN                                                            
+				           FROM PSNL0100 A01, PSNL0113 A02                                                      
+				           WHERE A01.SYSTEMKEY = A02.SYSTEMKEY(+)   
+						     AND A01.DPOB_CD = A02.DPOB_CD(+)   
+						     AND A01.SYSTEMKEY=#systemkey#     
+						     	]]>  
+				 <![CDATA[
+				          ) BB                                                            
+				          WHERE AA.DPOB_CD = BB.DPOB_CD
+							AND  AA.SYSTEMKEY = BB.SYSTEMKEY                          
+				           	AND BB.RSNO_NUMB IS NOT NULL  
+				           	AND YRTX_BLGG_YR = #yrtxBlggYr#
+				           	AND  CLUT_SEPT_CD = #clutSeptCd#
+				           	AND AA.DPOB_CD=#dpobCd# 
+                    ]]>  
+	</insert>
+	
+                  
+     <!-- 부녀자공제란 여성근로소득자 본인인경우 업데이트 처리 -->
+	<update id="infcPkgYe161030_2022_DAO.fnYeta7100_YE161030_2022_CREATE_Update_S">
+		<![CDATA[
+			  UPDATE YE161030                                         
+           SET WMN_DDC_CL_CD = CASE WHEN WMN_DDC_CL_CD <> '1' THEN WMN_DDC_CL_CD
+                                  ELSE (      
+						          SELECT (CASE WHEN NVL(YETA_0C65,0) <= 30000000 THEN '1' ELSE '0' END)  
+						           FROM YE169010 AC01
+						            WHERE AC01.DPOB_CD    = YE161030.DPOB_CD
+									  AND AC01.YRTX_BLGG_YR = YE161030.YRTX_BLGG_YR
+									  AND AC01.CLUT_SEPT_CD = YE161030.CLUT_SEPT_CD
+									  AND AC01.SYSTEMKEY    = YE161030.SYSTEMKEY
+                                       )  END               
+	      WHERE EXISTS                                  
+	          (                                             
+	          SELECT 1                                      
+	            FROM  (
+              SELECT BB01.*, BB02.PAYR_MANG_DEPT_CD FROM  PSNL0100 BB01,PAYR0500 BB02
+              WHERE BB01.DPOB_CD = BB02.DPOB_CD  
+                AND BB01.SYSTEMKEY = BB02.SYSTEMKEY  
+               )  PSNL0100                       
+	          WHERE SUBSTR(PSNL0100.RESN_REGN_NUM,7,1) IN  ('2')    
+	            AND PSNL0100.SYSTEMKEY = YE161030.SYSTEMKEY  
+	            AND PSNL0100.DPOB_CD = YE161030.DPOB_CD 
+	            AND  YE161030.DPOB_CD=#dpobCd#
+	            AND YE161030.YRTX_BLGG_YR=#yrtxBlggYr#
+	            AND YE161030.CLUT_SEPT_CD=#clutSeptCd#
+	            AND YE161030.SYSTEMKEY=#systemkey#
+	            AND YE161030.FAMY_RELA_DIV_CD =  'A0190001'  
+	            GROUP BY PSNL0100.SYSTEMKEY  ) 
+			 ]]>	
+	</update>	
+              
+	<!-- E_인적공제명세  -->
+		<insert id="infcPkgYe161030_2022_DAO.incTaxDeducDec_nts_Yeta2022_Ye161030_insert_S">
+		<![CDATA[
+			INSERT INTO YE161030 
+				(    DPOB_CD		 /* 	사업장코드 	   */
+					,YRTX_BLGG_YR		/* 귀속연도	   */
+					,CLUT_SEPT_CD		/* 연말정산구분코드	   */
+					,SYSTEMKEY		/* SYSTEMKEY	   */
+					,TXPR_DSCM_NO_CNTN	/* 주민등록번호	   */
+				   ,  FAMY_RELA_DIV_CD  /* 인사가족관계코드 */
+					,SUPT_FMLY_RLT_CL_CD	/* 부양관계코드	   */
+					,NNF_CL_CD		/* 내외국인구분	   */
+					,TXPR_NM		/* 	성명	   */
+					,BSC_DDC_CL_CD		/* 기본공제여부	   */
+					,DSBR_DDC_CL_CD		/* 장애인여부	   */
+					,WMN_DDC_CL_CD		/* 부녀자여부	   */
+					,SCC_DDC_CL_CD		/* 경로우대여부	   */
+					,SNPRNT_FMLY_DDC_CL_CD	/* 한부모여부	   */
+					,CHBT_ATPR_DDC_CL_CD	/* 출산입양여부	   */
+					,AGE6_LT		/* 	6세이하여부	   */
+					,EDU_DDC_DVCD		/* 교육비공제구분	   */
+					,KYBDR			/* 입력자		   */
+					,INPT_DT		/* 	입력일자	   */
+					,INPT_ADDR		/* 입력주소	   */
+					,ISMT			/* 수정자		   */
+					,REVN_DT		/* 	수정일자	   */
+					,REVN_ADDR		/* 수정주소	   */
+ )
+ 
+           ( SELECT 
+			                 AC02.DPOB_CD			/* 사업장코드        */
+							,AC02.YRTX_BLGG_YR		/* 귀속연도	  */
+							,AC02.CLUT_SEPT_CD		/* 연말정산구분코드	  */
+							,AC02.SYSTEMKEY		/* SYSTEMKEY	  */
+							,AC02.TXPR_DSCM_NO_CNTN	/* 주민등록번호	   */ 
+							, (CASE WHEN (SELECT RESN_REGN_NUM FROM PSNL0100
+							                    WHERE  PSNL0100.DPOB_CD = AC02.DPOB_CD 
+							                    AND PSNL0100.RESN_REGN_NUM  =  AC02.TXPR_DSCM_NO_CNTN  ) 
+							                    =  AC02.TXPR_DSCM_NO_CNTN  THEN 'A0190001'
+							        ELSE  
+										 (SELECT FAMY_RELA_DIV_CD FROM PSNL0115
+										         WHERE PSNL0115.DPOB_CD = AC02.DPOB_CD                                     
+									               AND PSNL0115.SYSTEMKEY = AC02.SYSTEMKEY 
+									               AND PSNL0115.FAMY_RESN_REGN_NUM = AC02.TXPR_DSCM_NO_CNTN)
+									END)               
+							,(SELECT COMM_CD FROM BASS0300 
+								            WHERE TRIM(MANGE_ITEM11) = AC02.SUPT_FMLY_RLT_CL_CD 
+								            AND RPSTTV_CD = 'Y012')  	/* 가족관계코드	   */ 
+							,(CASE WHEN TRIM(AC02.NNF_CL_CD) = '외국인' THEN '9' ELSE '1' END)		/* 내외국인구분	   */ 
+							,AC02.TXPR_NM			/* 성명		  */
+							,DECODE(AC02.BSC_DDC_CL_CD,'Y','1','0')  		/* 기본공제여부	   */
+							,AC02.DSBR_DDC_CL_CD		/* 장애인여부	  */
+							,DECODE(AC02.WMN_DDC_CL_CD,'Y','1','0') 	/* 부녀자여부	  */ 
+							,DECODE(AC02.SCC_DDC_CL_CD,'Y','1','0') 	/* 경로우대여부	   */
+							,DECODE(AC02.SNPRNT_FMLY_DDC_CL_CD,'Y','1','0') 	/* 한부모여부	  */
+							,AC02.CHBT_ATPR_DDC_CL_CD   /* 출산입양여부	   */
+							,DECODE(AC02.AGE6_LT,'Y','1','0') 			/* 6세이하여부	  */
+							,''
+							  , #kybdr#
+							  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+							  , #inptAddr#
+							  , #ismt#
+							  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+							  , #revnAddr#
+				       FROM YE167020 AC02
+								WHERE  AC02.DPOB_CD=#dpobCd#
+					            AND AC02.YRTX_BLGG_YR=#yrtxBlggYr#
+					            AND AC02.CLUT_SEPT_CD=#clutSeptCd#
+					            AND AC02.SYSTEMKEY=#systemkey# 
+						          AND AC02.CD_VVAL_KRN_NM  LIKE '국세청자료%' 
+             
+	              ) 
+			 ]]>	
+	</insert>	
+	
+	 
+<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직  종료 ++++++++++++++++++++++++++++++ -->
+
+	<insert id="infcPkgYe161030_2022_DAO.insertYe161030_S">
+		<![CDATA[
+			INSERT INTO YE161030 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , TXPR_DSCM_NO_CNTN
+				  , SUPT_FMLY_RLT_CL_CD
+				  , NNF_CL_CD
+				  , CHILD
+				  , TXPR_NM
+				  , BSC_DDC_CL_CD
+				  , WMN_DDC_CL_CD
+				  , SNPRNT_FMLY_DDC_CL_CD
+				  , SCC_DDC_CL_CD
+				  , DSBR_DDC_CL_CD
+				  , CHBT_ATPR_DDC_CL_CD
+				  , AGE6_LT
+				  , SCHOOL_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #txprDscmNoCntn#
+				  , #suptFmlyRltClCd#
+				  , #nnfClCd#
+				  , #child#
+				  , #txprNm#
+				  , #bscDdcClCd#
+				  , #wmnDdcClCd#
+				  , #snprntFmlyDdcClCd#
+				  , #sccDdcClCd#
+				  , #dsbrDdcClCd#
+				  , #chbtAtprDdcClCd#
+				  , #age6Lt#
+				  , #schoolYn#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgYe161030_2022_DAO.updateYe161030_S">
+		<![CDATA[
+			UPDATE YE161030
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, TXPR_DSCM_NO_CNTN=#txprDscmNoCntn#
+				, SUPT_FMLY_RLT_CL_CD=#suptFmlyRltClCd#
+				, NNF_CL_CD=#nnfClCd#
+				, CHILD=#child#
+				, TXPR_NM=#txprNm#
+				, BSC_DDC_CL_CD=#bscDdcClCd#
+				, WMN_DDC_CL_CD=#wmnDdcClCd#
+				, SNPRNT_FMLY_DDC_CL_CD=#snprntFmlyDdcClCd#
+				, SCC_DDC_CL_CD=#sccDdcClCd#
+				, DSBR_DDC_CL_CD=#dsbrDdcClCd#
+				, CHBT_ATPR_DDC_CL_CD=#chbtAtprDdcClCd#
+				, AGE6_LT=#age6Lt#
+				, SCHOOL_YN=#schoolYn#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND TXPR_DSCM_NO_CNTN=#txprDscmNoCntn#
+				]]>
+	</update>
+	
+	<delete id="infcPkgYe161030_2022_DAO.deleteYe161030_S">
+		<![CDATA[
+			DELETE FROM YE161030 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND TXPR_DSCM_NO_CNTN=#txprDscmNoCntn#
+				]]>
+	</delete>
+	
+	<select id="infcPkgYe161030_2022_DAO.selectYe161030_S" resultMap="infcPkgYe161030_2022">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, TXPR_DSCM_NO_CNTN
+				, SUPT_FMLY_RLT_CL_CD
+				, NNF_CL_CD
+				, CHILD
+				, TXPR_NM
+				, BSC_DDC_CL_CD
+				, WMN_DDC_CL_CD
+				, SNPRNT_FMLY_DDC_CL_CD
+				, SCC_DDC_CL_CD
+				, DSBR_DDC_CL_CD
+				, CHBT_ATPR_DDC_CL_CD
+				, AGE6_LT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE161030
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND TXPR_DSCM_NO_CNTN=#txprDscmNoCntn#
+				]]>
+	</select>
+	
+	<select id="infcPkgYe161030_2022_DAO.selectYe161030List_D" parameterClass="infcPkgYe161030Srh_2022_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, TXPR_DSCM_NO_CNTN
+								, SUPT_FMLY_RLT_CL_CD
+								, NNF_CL_CD
+								, CHILD
+								, TXPR_NM
+								, BSC_DDC_CL_CD
+								, WMN_DDC_CL_CD
+								, SNPRNT_FMLY_DDC_CL_CD
+								, SCC_DDC_CL_CD
+								, DSBR_DDC_CL_CD
+								, CHBT_ATPR_DDC_CL_CD
+								, AGE6_LT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE161030
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, TXPR_DSCM_NO_CNTN DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgYe161030_2022_DAO.selectYe161030ListTotCnt_S" parameterClass="infcPkgYe161030Srh_2022_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE161030
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

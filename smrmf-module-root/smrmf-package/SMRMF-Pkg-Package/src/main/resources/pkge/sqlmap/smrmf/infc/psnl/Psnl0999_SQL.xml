@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0999">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPsnl0999SerarchVO" type="com.app.exterms.personal.server.vo.InfcPsnl0999DefaultVO"/>
+	
+	<resultMap id="infcPsnl0999" class="com.app.exterms.personal.server.vo.InfcPsnl0999VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="chngBdtaSeilNum" column="CHNG_BDTA_SEIL_NUM" columnIndex="3"/>
+		<result property="chngDt" column="CHNG_DT" columnIndex="4"/>
+		<result property="chngCd" column="CHNG_CD" columnIndex="5"/>
+		<result property="chngBfrCtnt" column="CHNG_BFR_CTNT" columnIndex="6"/>
+		<result property="chngAftCtnt" column="CHNG_AFT_CTNT" columnIndex="7"/>
+		<result property="prcsYn" column="PRCS_YN" columnIndex="8"/>
+		<result property="chngReasCtnt" column="CHNG_REAS_CTNT" columnIndex="9"/>
+		<result property="kybdr" column="KYBDR" columnIndex="10"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="11"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="12"/>
+		<result property="ismt" column="ISMT" columnIndex="13"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="14"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="15"/>
+	</resultMap>
+	
+	<insert id="infcPsnl0999DAO.insertPsnl0999_S">
+		<![CDATA[
+			INSERT INTO PSNL0999 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , CHNG_BDTA_SEIL_NUM
+				  , CHNG_DT
+				  , CHNG_CD
+				  , CHNG_BFR_CTNT
+				  , CHNG_AFT_CTNT
+				  , PRCS_YN
+				  , CHNG_REAS_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #chngBdtaSeilNum#
+				  , #chngDt#
+				  , #chngCd#
+				  , #chngBfrCtnt#
+				  , #chngAftCtnt#
+				  , #prcsYn#
+				  , #chngReasCtnt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPsnl0999DAO.updatePsnl0999_S">
+		<![CDATA[
+			UPDATE PSNL0999
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, CHNG_BDTA_SEIL_NUM=#chngBdtaSeilNum#
+				, CHNG_DT=#chngDt#
+				, CHNG_CD=#chngCd#
+				, CHNG_BFR_CTNT=#chngBfrCtnt#
+				, CHNG_AFT_CTNT=#chngAftCtnt#
+				, PRCS_YN=#prcsYn#
+				, CHNG_REAS_CTNT=#chngReasCtnt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND CHNG_BDTA_SEIL_NUM=#chngBdtaSeilNum#
+				]]>
+	</update>
+	
+	<delete id="infcPsnl0999DAO.deletePsnl0999_S">
+		<![CDATA[
+			DELETE FROM PSNL0999 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND CHNG_BDTA_SEIL_NUM=#chngBdtaSeilNum#
+				]]>
+	</delete>
+	
+	<select id="infcPsnl0999DAO.selectPsnl0999_S" resultMap="infcPsnl0999">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, CHNG_BDTA_SEIL_NUM
+				, CHNG_DT
+				, CHNG_CD
+				, CHNG_BFR_CTNT
+				, CHNG_AFT_CTNT
+				, PRCS_YN
+				, CHNG_REAS_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PSNL0999
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND CHNG_BDTA_SEIL_NUM=#chngBdtaSeilNum#
+				]]>
+	</select>
+	
+	<select id="infcPsnl0999DAO.selectPsnl0999List_D" parameterClass="infcPsnl0999SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, CHNG_BDTA_SEIL_NUM
+								, CHNG_DT
+								, CHNG_CD
+								, CHNG_BFR_CTNT
+								, CHNG_AFT_CTNT
+								, PRCS_YN
+								, CHNG_REAS_CTNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PSNL0999
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, CHNG_BDTA_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPsnl0999DAO.selectPsnl0999ListTotCnt_S" parameterClass="infcPsnl0999SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PSNL0999
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

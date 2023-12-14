@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye160401_2021">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ye160401Srh_2021_Vo" type="com.app.exterms.yearendtax.server.vo.Ye160401Srh_2021_VO"/>
+	
+	<resultMap id="ye160401_2021" class="com.app.exterms.yearendtax.server.vo.Ye160401_2021_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="elctYymm" column="ELCT_YYMM" columnIndex="5"/>
+		<result property="elctDate" column="ELCT_DATE" columnIndex="6"/>
+		<result property="suprTxam" column="SUPR_TXAM" columnIndex="7"/>
+		<result property="buamTxam" column="BUAM_TXAM" columnIndex="8"/>
+		<result property="inbsAmnt" column="INBS_AMNT" columnIndex="9"/>
+		<result property="stckInam" column="STCK_INAM" columnIndex="10"/>
+		<result property="spbmTxam" column="SPBM_TXAM" columnIndex="11"/>
+		<result property="ecinTxam" column="ECIN_TXAM" columnIndex="12"/>
+		<result property="taxmEcin" column="TAXM_ECIN" columnIndex="13"/>
+		<result property="spciHlth" column="SPCI_HLTH" columnIndex="14"/>
+		<result property="spciEmpf" column="SPCI_EMPF" columnIndex="15"/>
+		<result property="natnPsnf" column="NATN_PSNF" columnIndex="16"/>
+		<result property="earnTaxn" column="EARN_TAXN" columnIndex="17"/>
+		<result property="ihtxTaxn" column="IHTX_TAXN" columnIndex="18"/>
+		<result property="etccTxam" column="ETCC_TXAM" columnIndex="19"/>
+		<result property="etccEtam" column="ETCC_ETAM" columnIndex="20"/>
+		<result property="payPymtSumTotAmnt" column="PAY_PYMT_SUM_TOT_AMNT" columnIndex="21"/>
+		<result property="payPymtFreeDtySum" column="PAY_PYMT_FREE_DTY_SUM" columnIndex="22"/>
+		<result property="currWorkFreeDtusAmnt" column="CURR_WORK_FREE_DTUS_AMNT" columnIndex="23"/>
+		<result property="currWorkEmptkWdrwSum" column="CURR_WORK_EMPTK_WDRW_SUM" columnIndex="24"/>
+		<result property="currWorkEcteRetceSum" column="CURR_WORK_ECTE_RETCE_SUM" columnIndex="25"/>
+		<result property="currWorkRcpInsurSum" column="CURR_WORK_RCP_INSUR_SUM" columnIndex="26"/>
+		<result property="currWorkRcpAggrSum" column="CURR_WORK_RCP_AGGR_SUM" columnIndex="27"/>
+		<result property="kybdr" column="KYBDR" columnIndex="28"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="29"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="30"/>
+		<result property="ismt" column="ISMT" columnIndex="31"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="32"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="33"/>
+	</resultMap>
+	
+	<insert id="ye160401_2021_DAO.insertYe160401_S">
+		<![CDATA[
+			INSERT INTO YE160401 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , ELCT_YYMM
+				  , ELCT_DATE
+				  , SUPR_TXAM
+				  , BUAM_TXAM
+				  , INBS_AMNT
+				  , STCK_INAM
+				  , SPBM_TXAM
+				  , ECIN_TXAM
+				  , TAXM_ECIN
+				  , SPCI_HLTH
+				  , SPCI_EMPF
+				  , NATN_PSNF
+				  , EARN_TAXN
+				  , IHTX_TAXN
+				  , NNKS_SSUM
+				  , ETCC_TXAM
+				  , ETCC_ETAM
+				  , PAY_PYMT_SUM_TOT_AMNT
+				  , PAY_PYMT_FREE_DTY_SUM
+				  , CURR_WORK_FREE_DTUS_AMNT
+				  , CURR_WORK_EMPTK_WDRW_SUM
+				  , CURR_WORK_ECTE_RETCE_SUM
+				  , CURR_WORK_RCP_INSUR_SUM
+				  , CURR_WORK_RCP_AGGR_SUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #elctYymm#
+				  , #elctDate#
+				  , #suprTxam#
+				  , #buamTxam#
+				  , #inbsAmnt#
+				  , #stckInam#
+				  , #spbmTxam#
+				  , #ecinTxam#
+				  , #taxmEcin#
+				  , #spciHlth#
+				  , #spciEmpf#
+				  , #natnPsnf#
+				  , #earnTaxn#
+				  , #ihtxTaxn#
+				  , #nnksSsum#
+				  , #etccTxam#
+				  , #etccEtam#
+				  , #payPymtSumTotAmnt#
+				  , #payPymtFreeDtySum#
+				  , #currWorkFreeDtusAmnt#
+				  , #currWorkEmptkWdrwSum#
+				  , #currWorkEcteRetceSum#
+				  , #currWorkRcpInsurSum#
+				  , #currWorkRcpAggrSum#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="ye160401_2021_DAO.updateYe160401_S">
+		<![CDATA[
+			UPDATE YE160401
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, ELCT_YYMM=#elctYymm#
+				, ELCT_DATE=#elctDate#
+				, SUPR_TXAM=#suprTxam#
+				, BUAM_TXAM=#buamTxam#
+				, INBS_AMNT=#inbsAmnt#
+				, STCK_INAM=#stckInam#
+				, SPBM_TXAM=#spbmTxam#
+				, ECIN_TXAM=#ecinTxam#
+				, TAXM_ECIN=#taxmEcin#
+				, SPCI_HLTH=#spciHlth#
+				, SPCI_EMPF=#spciEmpf#
+				, NATN_PSNF=#natnPsnf#
+				, EARN_TAXN=#earnTaxn#
+				, IHTX_TAXN=#ihtxTaxn#
+				, ETCC_TXAM=#etccTxam#
+				, NNKS_SSUM=#nnksSsum#
+				, ETCC_ETAM=#etccEtam#
+				, PAY_PYMT_SUM_TOT_AMNT=#payPymtSumTotAmnt#
+				, PAY_PYMT_FREE_DTY_SUM=#payPymtFreeDtySum#
+				, CURR_WORK_FREE_DTUS_AMNT=#currWorkFreeDtusAmnt#
+				, CURR_WORK_EMPTK_WDRW_SUM=#currWorkEmptkWdrwSum#
+				, CURR_WORK_ECTE_RETCE_SUM=#currWorkEcteRetceSum#
+				, CURR_WORK_RCP_INSUR_SUM=#currWorkRcpInsurSum#
+				, CURR_WORK_RCP_AGGR_SUM=#currWorkRcpAggrSum#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND ELCT_YYMM=#elctYymm#
+				]]>
+	</update>
+	
+	<delete id="ye160401_2021_DAO.deleteYe160401_S">
+		<![CDATA[
+			DELETE FROM YE160401 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND ELCT_YYMM=#elctYymm#
+				]]>
+	</delete>
+	
+	<delete id="ye160401_2021_DAO.deleteYeta1100ToYe160401_S">
+		<![CDATA[
+			DELETE FROM YE160401 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	
+	
+	<delete id="ye160401_2021_DAO.fnYeta1100_Ye160401_CREATE_Delete">
+		<![CDATA[ 
+		
+	 	DECLARE BEGIN 
+            
+		 
+		  DELETE FROM YE160402  WHERE DPOB_CD=#dpobCd# AND YRTX_BLGG_YR=#yrtxBlggYr# AND CLUT_SEPT_CD=#clutSeptCd# AND SYSTEMKEY=#systemkey#; 
+		  DELETE FROM YE160403 WHERE DPOB_CD=#dpobCd# AND YRTX_BLGG_YR=#yrtxBlggYr# AND CLUT_SEPT_CD=#clutSeptCd# AND SYSTEMKEY=#systemkey#;    
+		 
+		   DELETE FROM YE161040 WHERE DPOB_CD=#dpobCd# AND YRTX_BLGG_YR=#yrtxBlggYr# AND CLUT_SEPT_CD=#clutSeptCd# AND SYSTEMKEY=#systemkey#;  
+		   DELETE FROM YE161050  WHERE DPOB_CD=#dpobCd# AND YRTX_BLGG_YR=#yrtxBlggYr# AND CLUT_SEPT_CD=#clutSeptCd# AND SYSTEMKEY=#systemkey#; 
+		   DELETE FROM YE161055 WHERE DPOB_CD=#dpobCd# AND YRTX_BLGG_YR=#yrtxBlggYr# AND CLUT_SEPT_CD=#clutSeptCd# AND SYSTEMKEY=#systemkey#; 
+		   DELETE FROM YE161060 WHERE DPOB_CD=#dpobCd# AND YRTX_BLGG_YR=#yrtxBlggYr# AND CLUT_SEPT_CD=#clutSeptCd# AND SYSTEMKEY=#systemkey#;  
+		   DELETE FROM YE166010 WHERE DPOB_CD=#dpobCd# AND YRTX_BLGG_YR=#yrtxBlggYr# AND CLUT_SEPT_CD=#clutSeptCd# AND SYSTEMKEY=#systemkey#; 
+		   DELETE FROM YE166020 WHERE DPOB_CD=#dpobCd# AND YRTX_BLGG_YR=#yrtxBlggYr# AND CLUT_SEPT_CD=#clutSeptCd# AND SYSTEMKEY=#systemkey#; 
+		  
+		   DELETE FROM YE166030 WHERE DPOB_CD=#dpobCd# AND YRTX_BLGG_YR=#yrtxBlggYr# AND CLUT_SEPT_CD=#clutSeptCd# AND SYSTEMKEY=#systemkey#; 
+		   DELETE FROM YE166040 WHERE DPOB_CD=#dpobCd# AND YRTX_BLGG_YR=#yrtxBlggYr# AND CLUT_SEPT_CD=#clutSeptCd# AND SYSTEMKEY=#systemkey#;
+		  
+		   DELETE FROM YE161070 WHERE DPOB_CD=#dpobCd# AND YRTX_BLGG_YR=#yrtxBlggYr# AND CLUT_SEPT_CD=#clutSeptCd# AND SYSTEMKEY=#systemkey#; 
+		   DELETE FROM YE161080 WHERE DPOB_CD=#dpobCd# AND YRTX_BLGG_YR=#yrtxBlggYr# AND CLUT_SEPT_CD=#clutSeptCd# AND SYSTEMKEY=#systemkey#;  
+		   
+		   DELETE FROM YE169010  WHERE DPOB_CD=#dpobCd# AND YRTX_BLGG_YR=#yrtxBlggYr# AND CLUT_SEPT_CD=#clutSeptCd# AND SYSTEMKEY=#systemkey#; 
+		   DELETE FROM YE169010A  WHERE DPOB_CD=#dpobCd# AND YRTX_BLGG_YR=#yrtxBlggYr# AND CLUT_SEPT_CD=#clutSeptCd# AND SYSTEMKEY=#systemkey#;   
+		  
+		   DELETE FROM YE160401  WHERE DPOB_CD=#dpobCd# AND YRTX_BLGG_YR=#yrtxBlggYr# AND CLUT_SEPT_CD=#clutSeptCd# AND SYSTEMKEY=#systemkey#; 
+
+END; 
+				]]> 
+	</delete>
+	<!-- AND ELCT_YYMM IN ( SELECT AA.PYYT_YR_MNTH
+													FROM PYYT0302 AA
+												   WHERE AA.DPOB_CD=#dpobCd#
+													AND AA.SYSTEMKEY = #systemkey#) -->
+	
+	<select id="ye160401_2021_DAO.selectYe160401_S" resultMap="ye160401_2021">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, ELCT_YYMM
+				, ELCT_DATE
+				, SUPR_TXAM
+				, BUAM_TXAM
+				, INBS_AMNT
+				, STCK_INAM
+				, SPBM_TXAM
+				, ECIN_TXAM
+				, TAXM_ECIN
+				, SPCI_HLTH
+				, SPCI_EMPF
+				, NATN_PSNF
+				, EARN_TAXN
+				, IHTX_TAXN
+				, NNKS_SSUM
+				, ETCC_TXAM
+				, ETCC_ETAM
+				, PAY_PYMT_SUM_TOT_AMNT
+				, PAY_PYMT_FREE_DTY_SUM
+				, CURR_WORK_FREE_DTUS_AMNT
+				, CURR_WORK_EMPTK_WDRW_SUM
+				, CURR_WORK_ECTE_RETCE_SUM
+				, CURR_WORK_RCP_INSUR_SUM
+				, CURR_WORK_RCP_AGGR_SUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE160401
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND ELCT_YYMM=#elctYymm#
+				]]>
+	</select>
+	
+	<select id="ye160401_2021_DAO.selectYe160401List_D" parameterClass="ye160401Srh_2021_Vo" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, ELCT_YYMM
+								, ELCT_DATE
+								, SUPR_TXAM
+								, BUAM_TXAM
+								, INBS_AMNT
+								, STCK_INAM
+								, SPBM_TXAM
+								, ECIN_TXAM
+								, TAXM_ECIN
+								, SPCI_HLTH
+								, SPCI_EMPF
+								, NATN_PSNF
+								, EARN_TAXN
+								, NNKS_SSUM
+								, IHTX_TAXN
+								, ETCC_TXAM
+								, ETCC_ETAM
+								, PAY_PYMT_SUM_TOT_AMNT
+								, PAY_PYMT_FREE_DTY_SUM
+								, CURR_WORK_FREE_DTUS_AMNT
+								, CURR_WORK_EMPTK_WDRW_SUM
+								, CURR_WORK_ECTE_RETCE_SUM
+								, CURR_WORK_RCP_INSUR_SUM
+								, CURR_WORK_RCP_AGGR_SUM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE160401
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, ELCT_YYMM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="ye160401_2021_DAO.selectYe160401ListTotCnt_S" parameterClass="ye160401Srh_2021_Vo" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE160401
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+	<!-- ##################################### 2021년도 귀속 로직  시작  ##################################### -->
+	
+	<delete id="ye160401_2021_DAO.deleteYetaP610001_Ye160401VO_2021_Delete_S">
+		<![CDATA[
+			DELETE FROM YE160401 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+</sqlMap>

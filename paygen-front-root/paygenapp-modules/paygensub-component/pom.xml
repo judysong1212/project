@@ -1,0 +1,111 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.paygen</groupId>
+    <artifactId>paygenapp-modules</artifactId>
+    <version>2.2.0</version>
+  </parent>
+  <groupId>com.paygen.comp</groupId>
+  <artifactId>paygensub-component</artifactId>
+  <packaging>pom</packaging> 
+  <name>${project.artifactId}</name>
+  <description>Component</description>
+  
+    <modules>  
+        <module>PayGenPRGM</module>  
+		<module>PayGenREMT</module>  
+		<module>PayGenYETA</module>    
+	</modules>  
+	  <dependencies>
+				<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-${environment}</artifactId>
+					  	<version>${paygen.version}</version> 
+	          </dependency>  
+	 </dependencies>
+	 <build> 
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					 <version>3.0</version> 
+					<configuration>
+						<source>1.6</source>
+                        <target>1.6</target>
+                        <encoding>UTF-8</encoding>  
+					    <logLevel>INFO</logLevel>
+					    <fork>true</fork>
+					    <extraJvmArgs>-server -Xms4G -Xmx4G -XX:PermSize=512m -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:ParallelGCThreads=20 -XX:ConcGCThreads=5 -XX:InitiatingHeapOccupancyPercent=70</extraJvmArgs>
+				        <!-- <minmemory>2048m</minmemory>
+					    <maxmemory>3072m</maxmemory>  -->
+					    <executions>
+							<execution>
+							      <!--<phase>compile</phase> -Xmx3072m -Xss1024k -->  
+								  <goals> 
+									<goal>compile</goal> 
+									<goal>test</goal>
+								<!--	<goal>i18n</goal>
+									 <goal>generateAsync</goal> -->
+								</goals>  
+							</execution>
+						</executions>
+					</configuration>
+				</plugin>  
+						<!-- Make this jar executable -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					  <configuration>
+				 	<!-- DO NOT include log4j.properties file in your Jar 
+					  <excludes>
+						<exclude>**/log4j.properties</exclude>
+					  </excludes> -->
+					   <excludes>
+			            	<exclude>**/client/**/*.txt</exclude> 
+			            	<exclude>rebel.xml</exclude>  
+			            	<exclude>rebel-remote.xml</exclude>
+			            </excludes>
+					    <!-- but be sure to exclude the source from the final jar file
+				      <includes>
+				        <include>**/*.java</include>
+				        <include>**/*.gwt.xml</include>
+				      </includes>  -->  
+				      <failOnMissingWebXml>false</failOnMissingWebXml> 
+				     <!--     <archive>
+		               <manifest>
+		                 <addClasspath>true</addClasspath>
+		                <classpathPrefix>lib/</classpathPrefix>  
+		            
+		              <classpathLayoutType>repository</classpathLayoutType>
+		              NOTE: Deprecated in version 2.4. Use 'classpathLayoutType' instead. 
+		              <classpathMavenRepositoryLayout>true</classpathMavenRepositoryLayout> 
+		            </manifest>
+		            </archive>    -->
+					</configuration>
+				</plugin> 	 
+				<!-- EMMA   -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>emma-maven-plugin</artifactId>
+					<version>1.0-alpha-1</version>
+				</plugin>
+				<!-- PMD manven plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-pmd-plugin</artifactId>
+					<version>2.4</version>
+				</plugin> 
+			</plugins>
+		</pluginManagement>
+		<plugins> 
+			<!--  JavaDoc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.5</version>
+			</plugin> 
+		</plugins> 
+	</build>
+  
+</project>

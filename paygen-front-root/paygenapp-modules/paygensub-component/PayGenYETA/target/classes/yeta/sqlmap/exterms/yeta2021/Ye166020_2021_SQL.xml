@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye166020_2021">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ye166020Srh_2021_VO" type="com.app.exterms.yearendtax.server.vo.Ye166020Srh_2021_VO"/>
+	
+	<resultMap id="ye166020_2021" class="com.app.exterms.yearendtax.server.vo.Ye166020_2021_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="famResnoEncCntn" column="FAM_RESNO_ENC_CNTN" columnIndex="5"/>
+		<result property="dataCd" column="DATA_CD" columnIndex="6"/>
+		<result property="nnfCl" column="NNF_CL" columnIndex="7"/>
+		<result property="suptFmlyRltCl" column="SUPT_FMLY_RLT_CL" columnIndex="8"/>
+		<result property="suptFmlyFnm" column="SUPT_FMLY_FNM" columnIndex="9"/>
+		<result property="suptFmlyBhdt" column="SUPT_FMLY_BHDT" columnIndex="10"/>
+		<result property="crdcUseAmtSum" column="CRDC_USE_AMT_SUM" columnIndex="11"/>
+		<result property="crdcUseAmt" column="CRDC_USE_AMT" columnIndex="12"/>
+		<result property="cshptUseAmt" column="CSHPT_USE_AMT" columnIndex="13"/>
+		<result property="drtpCardUseAmt" column="DRTP_CARD_USE_AMT" columnIndex="14"/>
+		<result property="tdmrUseAmt" column="TDMR_USE_AMT" columnIndex="15"/>
+		<result property="etcUseAmt" column="ETC_USE_AMT" columnIndex="16"/>
+		<result property="kybdr" column="KYBDR" columnIndex="17"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="18"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="19"/>
+		<result property="ismt" column="ISMT" columnIndex="20"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="21"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="22"/>
+	</resultMap>
+
+	
+<!-- +++++++++++++++++++++++++ 2021년도 귀속 로직  시작 ++++++++++++++++++++++++++++++ -->
+
+
+	<delete id="ye166020_2021_DAO.deleteYetaP610001_Ye166020VO_2021_Delete_S">
+		<![CDATA[
+			DELETE FROM YE166020 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+	 			]]>
+	</delete>
+	
+
+<!-- +++++++++++++++++++++++++ 2021년도 귀속 로직  종료 ++++++++++++++++++++++++++++++ -->
+	
+	<insert id="ye166020_2021_DAO.insertYe166020_S">
+		<![CDATA[
+			INSERT INTO YE166020 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , FAM_RESNO_ENC_CNTN
+				  , DATA_CD
+				  , NNF_CL
+				  , SUPT_FMLY_RLT_CL
+				  , SUPT_FMLY_FNM
+				  , SUPT_FMLY_BHDT
+				  , CRDC_USE_AMT_SUM
+				  , CRDC_USE_AMT
+				  , CSHPT_USE_AMT
+				  , DRTP_CARD_USE_AMT
+				  , TDMR_USE_AMT
+				  , ETC_USE_AMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #famResnoEncCntn#
+				  , #dataCd#
+				  , #nnfCl#
+				  , #suptFmlyRltCl#
+				  , #suptFmlyFnm#
+				  , #suptFmlyBhdt#
+				  , #crdcUseAmtSum#
+				  , #crdcUseAmt#
+				  , #cshptUseAmt#
+				  , #drtpCardUseAmt#
+				  , #tdmrUseAmt#
+				  , #etcUseAmt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="ye166020_2021_DAO.updateYe166020_S">
+		<![CDATA[
+			UPDATE YE166020
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+				, DATA_CD=#dataCd#
+				, NNF_CL=#nnfCl#
+				, SUPT_FMLY_RLT_CL=#suptFmlyRltCl#
+				, SUPT_FMLY_FNM=#suptFmlyFnm#
+				, SUPT_FMLY_BHDT=#suptFmlyBhdt#
+				, CRDC_USE_AMT_SUM=#crdcUseAmtSum#
+				, CRDC_USE_AMT=#crdcUseAmt#
+				, CSHPT_USE_AMT=#cshptUseAmt#
+				, DRTP_CARD_USE_AMT=#drtpCardUseAmt#
+				, TDMR_USE_AMT=#tdmrUseAmt#
+				, ETC_USE_AMT=#etcUseAmt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+								AND DATA_CD=#dataCd#
+				]]>
+	</update>
+	
+	<delete id="ye166020_2021_DAO.deleteYe166020_S">
+		<![CDATA[
+			DELETE FROM YE166020 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+								AND DATA_CD=#dataCd#
+				]]>
+	</delete>
+	
+	<select id="ye166020_2021_DAO.selectYe166020_S" resultMap="ye166020_2021">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, FAM_RESNO_ENC_CNTN
+				, DATA_CD
+				, NNF_CL
+				, SUPT_FMLY_RLT_CL
+				, SUPT_FMLY_FNM
+				, SUPT_FMLY_BHDT
+				, CRDC_USE_AMT_SUM
+				, CRDC_USE_AMT
+				, CSHPT_USE_AMT
+				, DRTP_CARD_USE_AMT
+				, TDMR_USE_AMT
+				, ETC_USE_AMT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE166020
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+								AND DATA_CD=#dataCd#
+				]]>
+	</select>
+	
+	<select id="ye166020_2021_DAO.selectYe166020List_D" parameterClass="ye166020Srh_2021_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, FAM_RESNO_ENC_CNTN
+								, DATA_CD
+								, NNF_CL
+								, SUPT_FMLY_RLT_CL
+								, SUPT_FMLY_FNM
+								, SUPT_FMLY_BHDT
+								, CRDC_USE_AMT_SUM
+								, CRDC_USE_AMT
+								, CSHPT_USE_AMT
+								, DRTP_CARD_USE_AMT
+								, TDMR_USE_AMT
+								, ETC_USE_AMT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE166020
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, FAM_RESNO_ENC_CNTN DESC
+							, DATA_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="ye166020_2021_DAO.selectYe166020ListTotCnt_S" parameterClass="ye166020Srh_2021_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE166020
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

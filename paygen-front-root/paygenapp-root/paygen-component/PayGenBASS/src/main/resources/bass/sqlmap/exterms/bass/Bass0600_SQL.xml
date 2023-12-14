@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass0600">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass0600SerarchVO" type="com.app.exterms.basis.server.vo.Bass0600SrhVO"/>
+	
+	<resultMap id="bass0600" class="com.app.exterms.basis.server.vo.Bass0600VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="trnrCtlJobDivCd" column="TRNR_CTL_JOB_DIV_CD" columnIndex="2"/>
+		<result property="trnrCtlJobSeilNum" column="TRNR_CTL_JOB_SEIL_NUM" columnIndex="3"/>
+		<result property="trnrCtlJobDt" column="TRNR_CTL_JOB_DT" columnIndex="4"/>
+		<result property="trnrCtlJobBgnnDtntm" column="TRNR_CTL_JOB_BGNN_DTNTM" columnIndex="5"/>
+		<result property="trnrCtlJobEndDtntm" column="TRNR_CTL_JOB_END_DTNTM" columnIndex="6"/>
+		<result property="trnrCtlJobCtnt" column="TRNR_CTL_JOB_CTNT" columnIndex="7"/>
+		<result property="trnrCtlJobCmpltnYn" column="TRNR_CTL_JOB_CMPLTN_YN" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap>
+	
+	<insert id="bass0600DAO.insertBass0600_S">
+		<![CDATA[ 
+			UPDATE PSNL0100
+			 SET SEC_RESN_NUM=#secResnNum#  
+			     ,RESN_REGN_NUM =#resnRegnNum#  
+			     ,ORG_RESN_NUM=#orgResnNum#  
+		    WHERE DPOB_CD=#dpobCd#
+		    AND SYSTEMKEY=#systemkey#  
+		]]>
+	</insert>
+	<!-- INSERT INTO BASS0600 
+				( DPOB_CD
+				  , TRNR_CTL_JOB_DIV_CD
+				  , TRNR_CTL_JOB_SEIL_NUM
+				  , TRNR_CTL_JOB_DT
+				  , TRNR_CTL_JOB_BGNN_DTNTM
+				  , TRNR_CTL_JOB_END_DTNTM
+				  , TRNR_CTL_JOB_CTNT
+				  , TRNR_CTL_JOB_CMPLTN_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #trnrCtlJobDivCd#
+				  , #trnrCtlJobSeilNum#
+				  , #trnrCtlJobDt#
+				  , #trnrCtlJobBgnnDtntm#
+				  , #trnrCtlJobEndDtntm#
+				  , #trnrCtlJobCtnt#
+				  , #trnrCtlJobCmpltnYn#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# ) -->
+	<update id="bass0600DAO.updateBass0600_S">
+		<![CDATA[
+			UPDATE BASS0600
+			SET DPOB_CD=#dpobCd#
+				, TRNR_CTL_JOB_DIV_CD=#trnrCtlJobDivCd#
+				, TRNR_CTL_JOB_SEIL_NUM=#trnrCtlJobSeilNum#
+				, TRNR_CTL_JOB_DT=#trnrCtlJobDt#
+				, TRNR_CTL_JOB_BGNN_DTNTM=#trnrCtlJobBgnnDtntm#
+				, TRNR_CTL_JOB_END_DTNTM=#trnrCtlJobEndDtntm#
+				, TRNR_CTL_JOB_CTNT=#trnrCtlJobCtnt#
+				, TRNR_CTL_JOB_CMPLTN_YN=#trnrCtlJobCmpltnYn#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND TRNR_CTL_JOB_DIV_CD=#trnrCtlJobDivCd#
+								AND TRNR_CTL_JOB_SEIL_NUM=#trnrCtlJobSeilNum#
+				]]>
+	</update>
+	
+	<delete id="bass0600DAO.deleteBass0600_S">
+		<![CDATA[
+			DELETE FROM BASS0600 
+						WHERE DPOB_CD=#dpobCd#
+								AND TRNR_CTL_JOB_DIV_CD=#trnrCtlJobDivCd#
+								AND TRNR_CTL_JOB_SEIL_NUM=#trnrCtlJobSeilNum#
+				]]>
+	</delete>
+	
+	<select id="bass0600DAO.selectBass0600_S" resultMap="bass0600">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, TRNR_CTL_JOB_DIV_CD
+				, TRNR_CTL_JOB_SEIL_NUM
+				, TRNR_CTL_JOB_DT
+				, TRNR_CTL_JOB_BGNN_DTNTM
+				, TRNR_CTL_JOB_END_DTNTM
+				, TRNR_CTL_JOB_CTNT
+				, TRNR_CTL_JOB_CMPLTN_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS0600
+						WHERE DPOB_CD=#dpobCd#
+								AND TRNR_CTL_JOB_DIV_CD=#trnrCtlJobDivCd#
+								AND TRNR_CTL_JOB_SEIL_NUM=#trnrCtlJobSeilNum#
+				]]>
+	</select>
+	
+	<select id="bass0600DAO.selectBass0600List_D" parameterClass="bass0600SerarchVO" resultClass="egovMap"> 
+	    SELECT 
+			DPOB_CD, SYSTEMKEY,   RESN_REGN_NUM ,   SEC_RESN_NUM
+			FROM  PSNL0100 
+	</select>	
+	
+	<!--
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, TRNR_CTL_JOB_DIV_CD
+								, TRNR_CTL_JOB_SEIL_NUM
+								, TRNR_CTL_JOB_DT
+								, TRNR_CTL_JOB_BGNN_DTNTM
+								, TRNR_CTL_JOB_END_DTNTM
+								, TRNR_CTL_JOB_CTNT
+								, TRNR_CTL_JOB_CMPLTN_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS0600
+				WHERE 1=1
+			 	<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					TRNR_CTL_JOB_DIV_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual> 
+					ORDER BY 
+						DPOB_CD DESC
+							, TRNR_CTL_JOB_DIV_CD DESC
+							, TRNR_CTL_JOB_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>-->
+	<select id="bass0600DAO.selectBass0600ListTotCnt_S" parameterClass="bass0600SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0600
+			WHERE 1=1
+		<!-- 	<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				TRNR_CTL_JOB_DIV_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual> -->
+	</select>
+	
+	<select id="bass0600DAO.selectBass0600ToPsnl0115List_D" parameterClass="bass0600SerarchVO" resultClass="egovMap">
+                SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, FAMY_SEIL_NUM 
+								, FAMY_RESN_REGN_NUM 
+								, FAMY_SEC_REGN_NUM
+								, FAMY_ORG_REGN_NUM
+						FROM PSNL0115 
+	</select>	
+	
+	<update id="bass0600DAO.updatePsnl0115_S">
+		<![CDATA[
+			UPDATE PSNL0115
+			SET   FAMY_RESN_REGN_NUM=#famyResnRegnNum# 
+				, FAMY_SEC_REGN_NUM=#famySecRegnNum#
+				, FAMY_ORG_REGN_NUM=#famyOrgRegnNum#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAMY_SEIL_NUM=#famySeilNum#
+				]]>
+	</update> 
+	
+	<select id="bass0600DAO.selectBass0600ToPayr0530List_D" parameterClass="bass0600SerarchVO" resultClass="egovMap">
+              SELECT 
+				   DPOB_CD, SYSTEMKEY, PAY_FAMY_RSPT_SEIL_NUM, 
+				   PAY_FAMY_RESN_REGN_NUM 
+				FROM  PAYR0530
+	</select>	
+	
+	<update id="bass0600DAO.updatePayr0530_S">
+		<![CDATA[ 
+			UPDATE PAYR0530
+			SET   PAY_FAMY_RESN_REGN_NUM=#payFamyResnRegnNum# 
+				 WHERE DPOB_CD=#dpobCd#
+				   AND SYSTEMKEY=#systemkey#
+				   AND PAY_FAMY_RSPT_SEIL_NUM=#payFamyRsptSeilNum# 
+				]]>
+	</update> 
+	
+	<!-- 암호화 관련 오류 패치  -->
+	<select id="bass0600DAO.selectYetaAllList_D" parameterClass="bass0600SerarchVO" resultClass="egovMap">
+   SELECT DISTINCT RESID   FROM 
+				(SELECT RESID  FROM PDF_C101Y
+				UNION ALL
+				
+				SELECT RESID  FROM PDF_A102Y
+				UNION ALL
+				SELECT INSU1_RESID  FROM PDF_A102Y
+				UNION ALL
+				SELECT INSU2_RESID_1  FROM PDF_A102Y
+				UNION ALL
+				SELECT INSU2_RESID_2  FROM PDF_A102Y
+				UNION ALL
+				SELECT INSU2_RESID_3  FROM PDF_A102Y
+				UNION ALL
+				
+				SELECT RESID  FROM PDF_C101Y
+				UNION ALL
+				SELECT RESID  FROM PDF_C202Y
+				UNION ALL
+				SELECT RESID   FROM PDF_C301Y
+				UNION ALL
+				SELECT RESID  FROM PDF_C401Y
+				UNION ALL
+				SELECT RESID  FROM PDF_D101Y
+				UNION ALL
+				SELECT RESID  FROM PDF_E102Y
+				UNION ALL
+				SELECT RESID  FROM PDF_F102Y
+				UNION ALL
+				SELECT RESID FROM PDF_G107Y
+				UNION ALL
+				SELECT RESID FROM PDF_G207Y
+				UNION ALL
+				SELECT RESID  FROM PDF_G307Y
+				UNION ALL
+				SELECT RESID FROM PDF_J101Y
+				UNION ALL
+				SELECT RESID FROM PDF_J203Y
+				UNION ALL
+				SELECT RESID  FROM PDF_J301Y
+				UNION ALL
+				SELECT RESID  FROM PDF_J401Y
+				UNION ALL
+				SELECT RESID FROM PDF_K101Y
+				UNION ALL
+				SELECT RESID FROM PDF_L102Y
+				UNION ALL
+				SELECT RESID FROM PDF_N101Y
+				UNION ALL
+				SELECT RESID FROM PDF_O101Y
+				UNION ALL
+				SELECT RESID FROM PDF_P102Y
+				UNION ALL
+				SELECT FAM_RESNO_ENC_CNTN AS RESID FROM YE167520
+				UNION ALL
+				SELECT RESNO_ENC_CNTN AS RESID FROM YE164010
+				UNION ALL
+				SELECT RESN_REGN_NUM AS RESID FROM YE160404
+				UNION ALL
+				SELECT RESU_NUMB AS RESID FROM YE161005
+				UNION ALL
+				SELECT RESNO_ENC_CNTN AS RESID FROM YE161020
+				UNION ALL
+				SELECT TXPR_DSCM_NO_CNTN AS RESID FROM YE161030
+				UNION ALL
+				SELECT TXPR_DSCM_NO_CNTN AS RESID FROM YE161040
+				UNION ALL
+				SELECT FAM_RESNO_ENC_CNTN AS RESID FROM YE161090
+				UNION ALL
+				SELECT MNTH_RNTTY_BUR_RGSUM AS RESID FROM YE162510
+				UNION ALL
+				SELECT COMR_CDTR_RESN_REGN_NUM AS RESID FROM YE162520
+				UNION ALL
+				SELECT RNTL_CTT_BUSOPR_RGSTNUM AS RESID FROM YE162530
+				UNION ALL
+				SELECT RESNO_ENC_CNTN AS RESID FROM YE164010
+				UNION ALL
+				SELECT RESNO_ENC_CNTN AS RESID FROM YE165010 
+				UNION ALL
+				SELECT FAM_RESNO_ENC_CNTN AS RESID FROM YE166020
+					UNION ALL
+				SELECT RESNO_ENC_CNTN AS RESID FROM YE167010
+					UNION ALL
+				SELECT TXPR_DSCM_NO_CNTN AS RESID FROM YE167020
+					UNION ALL
+				SELECT TXPR_DSCM_NO_CNTN AS RESID FROM YE167030
+					UNION ALL
+				SELECT FAM_RESNO_ENC_CNTN AS RESID FROM YE167080
+					UNION ALL
+				SELECT RESNO_ENC_CNTN AS RESID FROM YE167110
+					UNION ALL
+				SELECT RESNO_ENC_CNTN AS RESID FROM YE167210
+					UNION ALL
+				SELECT TXPR_DSCM_NO_ENC_CNTN AS RESID FROM YE167220
+				UNION ALL
+				SELECT TXPR_DSCM_NO_ENC_CNTN AS RESID FROM YE167230
+				UNION ALL
+				SELECT XPR_DSCM_NO_ENC_CNTN AS RESID FROM YE167240
+				UNION ALL
+				SELECT RESNO AS RESID FROM YE167310
+				UNION ALL
+				SELECT RESNO_ENC_CNTN AS RESID FROM YE167320
+				UNION ALL
+				SELECT RESNO AS RESID FROM YE167410
+				UNION ALL
+				SELECT RESNO_ENC_CNTN AS RESID FROM YE167420
+				UNION ALL
+				SELECT TXPR_DSCM_NO_CNTN AS RESID FROM YE167530
+				)
+	</select>
+	
+	
+	<!-- 암호화 테이블 업데이트  -->
+	
+	<update id="bass0600DAO.updateYetaAll_S">
+		<![CDATA[
+		  	DECLARE BEGIN 
+            
+            UPDATE PDF_A102Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+            UPDATE PDF_A102Y SET INSU1_RESID = #resid#  WHERE INSU1_RESID = #oldresid#;
+            UPDATE PDF_A102Y SET INSU2_RESID_1 = #resid#  WHERE INSU2_RESID_1 = #oldresid#;
+            UPDATE PDF_A102Y SET INSU2_RESID_2 = #resid#  WHERE INSU2_RESID_2 = #oldresid#;
+            UPDATE PDF_A102Y SET INSU2_RESID_3 = #resid#  WHERE INSU2_RESID_3 = #oldresid#; 
+		    UPDATE PDF_C101Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_C202Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_C301Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_C401Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_D101Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_E102Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_F102Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_G107Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_G207Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_G307Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_J101Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_J203Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_J301Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_J401Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_K101Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_L102Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_N101Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_O101Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE PDF_P102Y SET RESID = #resid#  WHERE RESID = #oldresid#;
+			UPDATE YE167520 SET FAM_RESNO_ENC_CNTN = #resid#  WHERE FAM_RESNO_ENC_CNTN = #oldresid#;
+		    UPDATE YE164010 SET RESNO_ENC_CNTN = #resid#  WHERE RESNO_ENC_CNTN = #oldresid#;
+		    UPDATE YE160404 SET RESN_REGN_NUM = #resid#  WHERE RESN_REGN_NUM = #oldresid#;
+		    UPDATE YE161005 SET RESU_NUMB = #resid#  WHERE RESU_NUMB = #oldresid#;
+		    UPDATE YE161020 SET RESNO_ENC_CNTN = #resid#  WHERE RESNO_ENC_CNTN = #oldresid#;
+		    UPDATE YE161030 SET TXPR_DSCM_NO_CNTN = #resid#  WHERE TXPR_DSCM_NO_CNTN = #oldresid#;
+		    UPDATE YE161040 SET TXPR_DSCM_NO_CNTN = #resid#  WHERE TXPR_DSCM_NO_CNTN = #oldresid#; 
+		    UPDATE YE161090 SET FAM_RESNO_ENC_CNTN = #resid#  WHERE FAM_RESNO_ENC_CNTN = #oldresid#; 
+		    UPDATE YE162510 SET MNTH_RNTTY_BUR_RGSUM = #resid#  WHERE MNTH_RNTTY_BUR_RGSUM = #oldresid#; 
+		    UPDATE YE162520 SET COMR_CDTR_RESN_REGN_NUM = #resid#  WHERE COMR_CDTR_RESN_REGN_NUM = #oldresid#; 
+		    UPDATE YE162530 SET RNTL_CTT_BUSOPR_RGSTNUM = #resid#  WHERE RNTL_CTT_BUSOPR_RGSTNUM = #oldresid#; 
+		    UPDATE YE164010 SET RESNO_ENC_CNTN = #resid#  WHERE RESNO_ENC_CNTN = #oldresid#;
+		    UPDATE YE165010 SET RESNO_ENC_CNTN = #resid#  WHERE RESNO_ENC_CNTN = #oldresid#;  
+		    UPDATE YE166020 SET FAM_RESNO_ENC_CNTN = #resid#  WHERE FAM_RESNO_ENC_CNTN = #oldresid#;   
+		    UPDATE YE167010 SET RESNO_ENC_CNTN = #resid#  WHERE RESNO_ENC_CNTN = #oldresid#;   
+		    UPDATE YE167020 SET TXPR_DSCM_NO_CNTN = #resid#  WHERE TXPR_DSCM_NO_CNTN = #oldresid#;    
+		    UPDATE YE167030 SET TXPR_DSCM_NO_CNTN = #resid#  WHERE TXPR_DSCM_NO_CNTN = #oldresid#;    
+		    UPDATE YE167080 SET FAM_RESNO_ENC_CNTN = #resid#  WHERE FAM_RESNO_ENC_CNTN = #oldresid#;      
+		    UPDATE YE167110 SET RESNO_ENC_CNTN = #resid#  WHERE RESNO_ENC_CNTN = #oldresid#; 
+		    UPDATE YE167210 SET RESNO_ENC_CNTN = #resid#  WHERE RESNO_ENC_CNTN = #oldresid#;  
+		    UPDATE YE167220 SET TXPR_DSCM_NO_ENC_CNTN = #resid#  WHERE TXPR_DSCM_NO_ENC_CNTN = #oldresid#;     
+		    UPDATE YE167230 SET TXPR_DSCM_NO_ENC_CNTN = #resid#  WHERE TXPR_DSCM_NO_ENC_CNTN = #oldresid#;    
+		    UPDATE YE167240 SET XPR_DSCM_NO_ENC_CNTN = #resid#  WHERE XPR_DSCM_NO_ENC_CNTN = #oldresid#; 
+		    UPDATE YE167310 SET RESNO = #resid#  WHERE RESNO = #oldresid#;   
+		    UPDATE YE167320 SET RESNO_ENC_CNTN = #resid#  WHERE RESNO_ENC_CNTN = #oldresid#; 
+		    UPDATE YE167410 SET RESNO = #resid#  WHERE RESNO = #oldresid#;   
+		    UPDATE YE167420 SET RESNO_ENC_CNTN = #resid#  WHERE RESNO_ENC_CNTN = #oldresid#; 
+		    UPDATE YE167530 SET TXPR_DSCM_NO_CNTN = #resid#  WHERE TXPR_DSCM_NO_CNTN = #oldresid#;                       
+            END; 
+		]]>
+	</update>
+</sqlMap>

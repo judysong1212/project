@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PGRM_Bass0200">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="prgmComSearchVO" type="com.app.exterms.prgm.server.vo.PrgmComSearchVO"/>
+	
+	<resultMap id="prgmComBass0200" class="com.app.exterms.prgm.server.vo.PrgmComBass0200VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="year" column="YEAR" columnIndex="2"/>
+		<result property="mnth" column="MNTH" columnIndex="3"/>
+		<result property="day" column="DAY" columnIndex="4"/>
+		<result property="dotwCd" column="DOTW_CD" columnIndex="5"/>
+		<result property="pubcHodyCtnt" column="PUBC_HODY_CTNT" columnIndex="6"/>
+		<result property="pubcHodyYn" column="PUBC_HODY_YN" columnIndex="7"/>
+		<result property="paidPubcHodyYn" column="PAID_PUBC_HODY_YN" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap>
+	
+	<insert id="prgmComBass0200DAO.insertBass0200_S">
+		<![CDATA[
+			INSERT INTO BASS0200 
+				( DPOB_CD
+				  , YEAR
+				  , MNTH
+				  , DAY
+				  , DOTW_CD
+				  , PUBC_HODY_CTNT
+				  , PUBC_HODY_YN
+				  , PAID_PUBC_HODY_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #year#
+				  , #mnth#
+				  , #day#
+				  , #dotwCd#
+				  , #pubcHodyCtnt#
+				  , #pubcHodyYn#
+				  , #paidPubcHodyYn#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="prgmComBass0200DAO.updateBass0200_S">
+		<![CDATA[
+			UPDATE BASS0200
+			SET DPOB_CD=#dpobCd#
+				, YEAR=#year#
+				, MNTH=#mnth#
+				, DAY=#day#
+				, DOTW_CD=#dotwCd#
+				, PUBC_HODY_CTNT=#pubcHodyCtnt#
+				, PUBC_HODY_YN=#pubcHodyYn#
+				, PAID_PUBC_HODY_YN=#paidPubcHodyYn#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YEAR=#year#
+								AND MNTH=#mnth#
+								AND DAY=#day#
+				]]>
+	</update>
+	
+	<delete id="prgmComBass0200DAO.deleteBass0200_S">
+		<![CDATA[
+			DELETE FROM BASS0200 
+						WHERE DPOB_CD=#dpobCd#
+								AND YEAR=#year#
+								AND MNTH=#mnth#
+								AND DAY=#day#
+				]]>
+	</delete>
+	
+	<select id="prgmComBass0200DAO.selectBass0200_S" resultMap="prgmComBass0200">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YEAR
+				, MNTH
+				, DAY
+				, DOTW_CD
+				, PUBC_HODY_CTNT
+				, PUBC_HODY_YN
+				, PAID_PUBC_HODY_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS0200
+						WHERE DPOB_CD=#dpobCd#
+								AND YEAR=#year#
+								AND MNTH=#mnth#
+								AND DAY=#day#
+				]]>
+	</select>
+	
+	<select id="prgmComBass0200DAO.selectBass0200List_D" parameterClass="prgmComSearchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YEAR
+								, MNTH
+								, DAY
+								, DOTW_CD
+								, PUBC_HODY_CTNT
+								, PUBC_HODY_YN
+								, PAID_PUBC_HODY_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS0200
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YEAR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YEAR DESC
+							, MNTH DESC
+							, DAY DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="prgmComBass0200DAO.selectBass0200ListTotCnt_S" parameterClass="prgmComSearchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0200
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YEAR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

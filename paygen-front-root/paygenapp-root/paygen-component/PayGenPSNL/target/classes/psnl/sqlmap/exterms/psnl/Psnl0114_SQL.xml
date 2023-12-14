@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0114">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="psnl0114Dto" type="com.app.exterms.personal.client.dto.Psnl0114DTO"/>
+    <typeAlias  alias="psnl0114SerarchVO" type="com.app.exterms.personal.server.vo.Psnl0114DefaultVO"/>
+    <typeAlias  alias="psnl0114Vo" type="com.app.exterms.personal.server.vo.Psnl0114VO"/>
+    
+    <!-- 
+	<resultMap id="psnl0114" class="com.app.exterms.personal.server.vo.Psnl0114VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="opztnSeilNum" column="OPZTN_SEIL_NUM" columnIndex="3"/>
+		<result property="jnDt" column="JN_DT" columnIndex="4"/>
+		<result property="jnOpztnNm" column="JN_OPZTN_NM" columnIndex="5"/>
+		<result property="odtyCd" column="ODTY_CD" columnIndex="6"/>
+		<result property="wirlDt" column="WIRL_DT" columnIndex="7"/>
+		<result property="kybdr" column="KYBDR" columnIndex="8"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="9"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="10"/>
+		<result property="ismt" column="ISMT" columnIndex="11"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="12"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="13"/>
+	</resultMap>
+	 -->
+	 
+	 <!--<insert id="psnl0114DAO.insertPsnl0114" parameterClass="psnl0114Dto">  -->
+	<insert id="psnl0114DAO.insertPsnl0114" parameterClass="psnl0114Vo">
+		<![CDATA[
+			INSERT INTO PSNL0114 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , OPZTN_SEIL_NUM
+				  , JN_DT
+				  , JN_OPZTN_NM
+				  , ODTY_NM
+				  , WIRL_DT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , JN_PAYR_DDUC_DIV_CD
+				  , JN_PAYR_DDUC_YN
+				  , JN_CNTB_DDUC_DIV_CD
+				  , JN_CNTB_MKNM
+				  , TXEM_RDUC_DIV_CD
+				  , JN_CTNT)
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , (select NVL(MAX(OPZTN_SEIL_NUM)+1,1) from PSNL0114 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#) 
+				  , #jnDt#
+				  , #jnOpztnNm#
+				  , #odtyNm#
+				  , #wirlDt#
+				  , #kybdr#
+				  , TO_DATE(TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_DATE(TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),'YYYYMMDDHHMISS')
+				  , #revnAddr# 
+				  , #jnPayrDducDivCd#
+				  , #jnPayrDducYn#
+				  , #jnCntbDducDivCd#
+				  , #jnCntbMknm#
+				  , #txemRducDivCd#
+				  , #jnCtnt#)
+		]]>
+	</insert>
+	
+	<update id="psnl0114DAO.updatePsnl0114" parameterClass="psnl0114Vo">
+		UPDATE PSNL0114 
+			SET REVN_DT= TO_DATE(TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),'YYYYMMDDHHMISS')
+	<isNotNull property="jnDt">				<isNotEmpty property="jnDt">			, JN_DT = #jnDt#						</isNotEmpty></isNotNull>
+	<isNotNull property="jnOpztnNm">		<isNotEmpty property="jnOpztnNm">		, JN_OPZTN_NM=#jnOpztnNm#				</isNotEmpty></isNotNull>
+	<isNotNull property="odtyNm">			<isNotEmpty property="odtyNm">			, ODTY_NM=#odtyNm#						</isNotEmpty></isNotNull>
+	<isNotNull property="wirlDt">			<isNotEmpty property="wirlDt">			, WIRL_DT = #wirlDt#					</isNotEmpty></isNotNull>
+	<isNotNull property="ismt">				<isNotEmpty property="ismt">			, ISMT=#ismt#							</isNotEmpty></isNotNull>
+	<isNotNull property="revnAddr">			<isNotEmpty property="revnAddr">		, REVN_ADDR=#revnAddr#					</isNotEmpty></isNotNull>
+	<isNotNull property="jnPayrDducDivCd">	<isNotEmpty property="jnPayrDducDivCd">	, JN_PAYR_DDUC_DIV_CD=#jnPayrDducDivCd#	</isNotEmpty></isNotNull>
+	<isNotNull property="jnPayrDducYn">		<isNotEmpty property="jnPayrDducYn">	, JN_PAYR_DDUC_YN=#jnPayrDducYn#		</isNotEmpty></isNotNull>
+	<isNotNull property="jnCntbDducDivCd">	<isNotEmpty property="jnCntbDducDivCd">	, JN_CNTB_DDUC_DIV_CD=#jnCntbDducDivCd#	</isNotEmpty></isNotNull>
+	<isNotNull property="jnCntbMknm">		<isNotEmpty property="jnCntbMknm">		, JN_CNTB_MKNM=#jnCntbMknm#				</isNotEmpty></isNotNull>
+	<isNotNull property="txemRducDivCd">	<isNotEmpty property="txemRducDivCd">	, TXEM_RDUC_DIV_CD=#txemRducDivCd#		</isNotEmpty></isNotNull>
+	<isNotNull property="jnCtnt">			<isNotEmpty property="jnCtnt">			, JN_CTNT=#jnCtnt#						</isNotEmpty></isNotNull>
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				AND OPZTN_SEIL_NUM=#opztnSeilNum#
+	</update>
+	
+	<!-- 단체 삭제 -->
+	<!-- <delete id="psnl0114DAO.deletePsnl0114" parameterClass="psnl0114Dto"> -->
+	<delete id="psnl0114DAO.deletePsnl0114" parameterClass="psnl0114Vo">
+		<![CDATA[
+			DELETE FROM PSNL0114 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND OPZTN_SEIL_NUM=#opztnSeilNum#
+				]]>
+	</delete>
+	
+	
+	
+	<select id="psnl0114DAO.selectPsnl0114" resultClass="egovMap" parameterClass="hashMap">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, OPZTN_SEIL_NUM
+				, TO_DATE(JN_DT,'YYYYMMDD') JN_DT
+				, JN_OPZTN_NM
+				, ODTY_NM
+				, TO_DATE(WIRL_DT,'YYYYMMDD') WIRL_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, JN_PAYR_DDUC_DIV_CD
+				, JN_PAYR_DDUC_YN	
+				, JN_CNTB_DDUC_DIV_CD
+				, JN_CNTB_MKNM		
+				, TXEM_RDUC_DIV_CD	
+				, JN_CTNT			
+			  FROM PSNL0114
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+								
+				]]>
+		<isNotNull property="opztnSeilNum">
+		    <isNotEmpty property="opztnSeilNum">
+		        AND OPZTN_SEIL_NUM=#opztnSeilNum#
+		    </isNotEmpty>
+		</isNotNull>
+	</select>
+	
+	<!-- 급여공제항목을 가져온다. -->
+	<select id="psnl0114DAO.getPayrDducCd" resultClass="egovMap">
+	    SELECT PAY_DDUC_CD AS COMM_CD
+	    		, PAY_DDUC_NM AS COMM_CD_NM
+		 FROM PAYR0470
+		  WHERE PAY_DDUC_CD IN ('D9500400' ,'D9200100' ,'D9500700' ,'D9500300' ,'D9501600' ,'D0830100' ,'D9500500' ,'D9600200')
+		ORDER BY PAY_DDUC_CD
+	</select>
+	
+
+</sqlMap>

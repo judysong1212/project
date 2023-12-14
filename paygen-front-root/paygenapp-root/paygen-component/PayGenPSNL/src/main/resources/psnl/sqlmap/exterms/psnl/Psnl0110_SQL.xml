@@ -1,0 +1,1362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+ 
+<sqlMap namespace="Psnl0110"> 
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	
+	<typeAlias alias="psnl0110Dto" type="com.app.exterms.personal.client.dto.Psnl0110DTO"/>
+	<!-- <typeAlias alias="psnl0110SrhVo" type="com.app.exterms.personal.server.vo.Psnl0110DefaultVO"/> -->
+	<typeAlias alias="psnl0110SrhVo" type="com.app.exterms.personal.server.vo.Psnl0110SrhVO"/>
+	<typeAlias alias="psnl0110Vo" type="com.app.exterms.personal.server.vo.Psnl0110VO" />
+	<typeAlias  alias="infcPkgBass0360SrhVo" type="com.app.smrmf.infc.basis.server.vo.InfcPkgBass0360SrhVO"/>
+	<typeAlias  alias="infcPkgBass0360Vo" type="com.app.smrmf.infc.basis.server.vo.InfcPkgBass0360VO"/>
+	
+	
+	<!-- 
+		<resultMap id="psnl0110" class="com.app.exterms.personal.server.vo.Psnl0110VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="emymtSeilNum" column="EMYMT_SEIL_NUM" columnIndex="3"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="4"/>
+		<result property="emymtTypCd" column="EMYMT_TYP_CD" columnIndex="5"/>
+		<result property="emymtBgnnDt" column="EMYMT_BGNN_DT" columnIndex="6"/>
+		<result property="emymtEndDt" column="EMYMT_END_DT" columnIndex="7"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="8"/>
+		<result property="currPaeWorkNm" column="CURR_PAE_WORK_NM" columnIndex="9"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="10"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="11"/>
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="12"/>
+		<result property="odtyCd" column="ODTY_CD" columnIndex="13"/>
+		<result property="payPymtDivCd" column="PAY_PYMT_DIV_CD" columnIndex="14"/>
+		<result property="emymtSum" column="EMYMT_SUM" columnIndex="15"/>
+		<result property="emymtReasCtnt" column="EMYMT_REAS_CTNT" columnIndex="16"/>
+		<result property="certNumHuhd" column="CERT_NUM_HUHD" columnIndex="17"/>
+		<result property="rducBgnnDt" column="RDUC_BGNN_DT" columnIndex="18"/>
+		<result property="kybdr" column="KYBDR" columnIndex="19"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="20"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="21"/>
+		<result property="ismt" column="ISMT" columnIndex="22"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="23"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="24"/>
+		<result property="rducEndDt" column="RDUC_END_DT" columnIndex="25"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="26"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="27"/>
+	</resultMap>
+	 -->
+	 <resultMap id="psnl0110" class="com.app.exterms.personal.server.vo.Psnl0110VO">
+		<result property="dpobCd" 			column="DPOB_CD" 				columnIndex="1"/>
+		<result property="systemkey" 		column="SYSTEMKEY" 				columnIndex="2"/>
+		<result property="deptCd" 			column="DEPT_CD" 				columnIndex="2"/>
+		<result property="typOccuCd" 		column="TYP_OCCU_CD" 			columnIndex="3"/>
+		<result property="dtilOccuInttnCd" 	column="DTIL_OCCU_INTTN_CD" 	columnIndex="4"/>
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" 	columnIndex="5"/>
+		<result property="businCd" 			column="BUSIN_CD" 				columnIndex="6"/>
+	</resultMap>
+
+	
+	<!--<update id="psnl0110DAO.mergeIntoPayr0500" parameterClass="psnl0110Dto" > -->
+	<update id="psnl0110DAO.mergeIntoPayr0500" parameterClass="psnl0110Vo" >
+	    MERGE INTO PAYR0500
+                 USING DUAL
+                    ON (DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#)
+            WHEN MATCHED
+            THEN
+               UPDATE SET PAYR_MANG_DEPT_CD = NVL((SELECT NVL(B.PAYR_MANG_DEPT_CD,C.TPLVL_DEPT_CD)  
+               									 FROM PSNL0100 A, BASS0360 B , BASS0400 C
+                                                WHERE A.DPOB_CD = #dpobCd#
+                                                  AND A.SYSTEMKEY = #systemkey#
+                                                  AND A.DPOB_CD  = B.DPOB_CD
+                                                  AND A.CURR_AFFN_DEPT_CD = B.DEPT_CD
+                                                  AND A.DPOB_CD  = C.DPOB_CD
+                                                  AND A.CURR_AFFN_DEPT_CD = C.DEPT_CD
+                                                  AND ROWNUM = 1), SUBSTR(#dpobCd#,5,9))
+                        , EMYMT_DIV_CD = #emymtDivCd#
+                        , ISMT=#ismt#
+                        , REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+                        , REVN_ADDR=#revnAddr#
+           WHEN NOT MATCHED
+            THEN
+               INSERT 
+                        ( DPOB_CD
+                          , SYSTEMKEY
+                          , PAYR_MANG_DEPT_CD
+                          , EMYMT_DIV_CD
+                          , PAY_RCPT_YN
+                          , MNTH_PAY_DLYWAG_SUM
+						  , DAY_WORK_YN
+						  , ADD_INCM_TX_APPTN_RTO_CD
+						  , ADD_INCM_TX_APPTN_YR_MNTH
+						  , ADD_INCM_TX_APPTN_YN 
+                          , KYBDR
+                          , INPT_DT
+                          , INPT_ADDR
+                          , ISMT
+                          , REVN_DT
+                          , REVN_ADDR )
+                VALUES ( #dpobCd#
+                          , #systemkey#
+                          , NVL((SELECT NVL(B.PAYR_MANG_DEPT_CD,C.TPLVL_DEPT_CD)  
+   									 FROM PSNL0100 A, BASS0360 B , BASS0400 C
+                                    WHERE A.DPOB_CD = #dpobCd#
+                                      AND A.SYSTEMKEY = #systemkey#
+                                      AND A.DPOB_CD  = B.DPOB_CD
+                                      AND A.CURR_AFFN_DEPT_CD = B.DEPT_CD
+                                      AND A.DPOB_CD  = C.DPOB_CD
+                                      AND A.CURR_AFFN_DEPT_CD = C.DEPT_CD
+                                      AND ROWNUM = 1), SUBSTR(#dpobCd#,5,9))
+                          , #emymtDivCd#
+                          , 'Y'
+                          , 0
+                          , 'N'
+                          , #addIncmTxApptnRtoCd#
+                          , ''
+                          , 'N'
+                          , #ismt#
+                          , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+                          , #revnAddr#
+                          , #ismt#
+                          , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+                          , #revnAddr# )
+	</update>	
+	
+	<!-- 고용 정보 변경에 따른 PAYR0500 단위기관코드 업데이트 처리 -->
+	<update id="psnl0110DAO.updatePayrMangDeptCdPayr0500" parameterClass="psnl0110Vo">
+	    UPDATE PAYR0500
+			SET PAYR_MANG_DEPT_CD = #payrMangDeptCd#
+				, ISMT= #ismt#
+        	 	, REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+        		, REVN_ADDR  = #revnAddr#
+		WHERE DPOB_CD = #dpobCd#
+		    AND SYSTEMKEY = #systemkey#
+	</update>
+	
+	<!-- 단위기관 코드가 등록되어 있는지 체크  -->
+	<select id="psnl0110DAO.selectBass0360PayrMangDeptCdTotCnt" parameterClass="infcPkgBass0360SrhVo" resultClass="int">
+		SELECT COUNT(*) 
+			FROM BASS0360 
+		WHERE DPOB_CD 				= #dpobCd#  
+			AND DEPT_CD 			= #deptCd#  
+			AND TYP_OCCU_CD			= #typOccuCd# 
+			AND DTIL_OCCU_INTTN_CD	= #dtilOccuInttnCd# 
+			AND PAYR_MANG_DEPT_CD	= #payrMangDeptCd#
+	</select>	
+	
+	<!-- 가장 최신의 고용 이력 데이터를 가져온다.(신규고용, 직제개편, 전보, 재고용 중) -->
+	<select id="psnl0110DAO.selectPsnl0110MaxData" resultMap="psnl0110"  parameterClass = "psnl0110SrhVo" >
+		SELECT DPOB_CD
+		       	, SYSTEMKEY
+		       	, DEPT_CD
+				, TYP_OCCU_CD
+				, DTIL_OCCU_INTTN_CD
+				, DTIL_OCCU_CLS_DIV_CD
+				, BUSIN_CD
+			FROM PSNL0110
+		WHERE DPOB_CD = #dpobCd#	
+			AND SYSTEMKEY = #systemkey#
+			AND EMYMT_TYP_CD IN ('A0420010' ,'A0420020', 'A0420030' ,'A0420050', 'A0420060', ' A0420090')	
+			AND EMYMT_BGNN_DT = ( SELECT MAX(A.EMYMT_BGNN_DT)
+									FROM PSNL0110 A
+								  WHERE A.DPOB_CD = #dpobCd#
+									AND A.SYSTEMKEY = #systemkey#
+									AND A.EMYMT_TYP_CD IN ('A0420010' ,'A0420020', 'A0420030' ,'A0420050', 'A0420060', ' A0420090')	
+								)
+	</select>
+
+	<!-- <update id="psnl0110DAO.updateYearMst" parameterClass="hashMap"> -->
+	<update id="psnl0110DAO.updateYearMst" parameterClass="psnl0110Vo">
+	    UPDATE PSNL0100
+			SET LOG_SVC_YR_NUM_CD = (	SELECT COMM_CD 
+										FROM BASS0300
+		                      			WHERE RPSTTV_CD ='A007'
+		                             		AND MANGE_ITEM01 = #year#
+		                             )
+		WHERE DPOB_CD = #dpobCd#
+		    AND SYSTEMKEY = #systemkey#
+	</update>
+	
+	<!-- <update id="psnl0110DAO.updateMonthMst" parameterClass="hashMap"> -->
+	<update id="psnl0110DAO.updateMonthMst" parameterClass="psnl0110Vo">
+	    UPDATE PSNL0100
+		SET LOG_SVC_MNTH_ICM_CD = (	SELECT COMM_CD 
+									FROM BASS0300
+		                           	WHERE RPSTTV_CD ='A006'
+		                               AND MANGE_ITEM01 = #month#
+		                          )
+		WHERE DPOB_CD = #dpobCd#
+		    AND SYSTEMKEY = #systemkey#
+	</update>
+	
+	<!-- <select id="psnl0110DAO.getLogSvcData" resultClass="egovMap" parameterClass="psnl0110Dto" > -->
+	<select id="psnl0110DAO.getLogSvcData" resultClass="egovMap" parameterClass="psnl0110Vo" >
+	    SELECT SERVC_RCGTN_PRID_CD,
+		       DSAGE_DT,
+		       ENRLNT_DT,
+		       DIFF_MONTHS,
+		       DIFF_YEAR,
+		       DIFF_MONTH
+		  FROM (SELECT SERVC_RCGTN_PRID_CD,
+		               DSAGE_DT,
+		               ENRLNT_DT,
+		               TRIM (
+		                  TO_CHAR (
+		                     (TO_DATE (DSAGE_DT, 'YYYYMMDD')
+		                      - TO_DATE (ENRLNT_DT, 'YYYYMMDD'))
+		                     / 365
+		                     * 12,
+		                     '9999999999'))
+		                  AS DIFF_MONTHS,
+		               DECODE (
+		                  LENGTH (
+		                     (TO_DATE (DSAGE_DT, 'YYYYMMDD')
+		                      - TO_DATE (ENRLNT_DT, 'YYYYMMDD')) YEAR TO MONTH),
+		                  6, SUBSTR (
+		                        (TO_DATE (DSAGE_DT, 'YYYYMMDD')
+		                         - TO_DATE (ENRLNT_DT, 'YYYYMMDD')) YEAR TO MONTH,
+		                        2,
+		                        2),
+		                  '')
+		                  AS DIFF_YEAR,
+		               DECODE (
+		                  LENGTH (
+		                     (TO_DATE (DSAGE_DT, 'YYYYMMDD')
+		                      - TO_DATE (ENRLNT_DT, 'YYYYMMDD')) YEAR TO MONTH),
+		                  6, SUBSTR (
+		                        (TO_DATE (DSAGE_DT, 'YYYYMMDD')
+		                         - TO_DATE (ENRLNT_DT, 'YYYYMMDD')) YEAR TO MONTH,
+		                        5,
+		                        2),
+		                  '')
+		                  AS DIFF_MONTH
+		          FROM PSNL0112
+		         WHERE     1 = 1
+		               AND SERVC_RCGTN_PRID_CD &lt;&gt; 'A0290000'
+		               AND SYSTEMKEY = #systemkey#
+		               AND DPOB_CD = #dpobCd# )
+	</select>
+	
+
+	
+	<!-- 고용 시작, 종료일자 -->
+	<!-- 
+	<update id="psnl0110DAO.updateEmymtEndDate" parameterClass="psnl0110Vo">
+		UPDATE PSNL0110 A
+			SET A.EMYMT_END_DT =   CASE WHEN A.EMYMT_DIV_CD = 'A0020010' AND A.EMYMT_TYP_CD = 'A0420990' 
+									THEN  '' 
+									WHEN  A.EMYMT_DIV_CD = 'A0020020'  THEN  A.EMYMT_END_DT
+									ELSE  TO_CHAR (TO_DATE (#emymtBgnnDt#, 'YYYYMMDD') - 1, 'yyyymmdd') 
+									END  
+			WHERE A.DPOB_CD = #dpobCd# AND A.SYSTEMKEY = #systemkey#
+				AND A.EMYMT_BGNN_DT =(	SELECT MAX (EMYMT_BGNN_DT)
+						         		FROM PSNL0110 B
+						                WHERE	A.DPOB_CD = B.DPOB_CD
+						                      AND A.SYSTEMKEY = B.SYSTEMKEY
+						                      AND EMYMT_BGNN_DT &lt;&gt; #emymtBgnnDt#
+						              )
+	</update>
+	 -->
+	 
+	<update id="psnl0110DAO.updateEmymtEndDate" parameterClass="psnl0110Vo">
+	<![CDATA[
+		UPDATE PSNL0110 A
+			SET A.EMYMT_END_DT = TO_CHAR (TO_DATE (#emymtBgnnDt#, 'YYYYMMDD') - 1, 'YYYYMMDD')  
+			WHERE A.DPOB_CD = #dpobCd# 
+				AND A.SYSTEMKEY = #systemkey#
+				AND A.EMYMT_BGNN_DT = (	SELECT MAX (B.EMYMT_BGNN_DT)
+						         		FROM PSNL0110 B
+						                WHERE	B.DPOB_CD = #dpobCd# 
+						                      AND B.SYSTEMKEY = #systemkey#
+						                      AND B.EMYMT_BGNN_DT < #emymtBgnnDt#
+						               )
+	]]>					              
+	</update>
+	 
+	
+	
+	
+	
+	 <!-- <update id="psnl0110DAO.updateEmymtEndNull" parameterClass="psnl0110Dto"> -->
+	<update id="psnl0110DAO.updateEmymtEndNull" parameterClass="psnl0110Vo">
+	UPDATE PSNL0110 A
+		SET A.EMYMT_END_DT = CASE WHEN A.EMYMT_DIV_CD = 'A0020010' AND A.EMYMT_TYP_CD = 'A0420990' 
+								THEN  '' 
+								WHEN  A.EMYMT_DIV_CD = 'A0020020'  THEN  A.EMYMT_END_DT
+								ELSE ''
+								END 
+		WHERE A.DPOB_CD = #dpobCd# AND A.SYSTEMKEY = #systemkey#
+			AND A.EMYMT_BGNN_DT =(	SELECT MAX (EMYMT_BGNN_DT)
+					                 FROM PSNL0110 B
+					                WHERE	A.DPOB_CD = B.DPOB_CD
+					                      AND A.SYSTEMKEY = B.SYSTEMKEY
+					                      AND EMYMT_BGNN_DT &lt;&gt; #emymtBgnnDt#
+					              )
+	</update>
+	
+	
+	
+	<insert id="psnl0110DAO.insertPsnl0100ToPsnl0110" parameterClass="psnl0110Vo">
+		<![CDATA[
+				INSERT INTO PSNL0110 
+					( DPOB_CD
+					  , SYSTEMKEY
+					  , EMYMT_SEIL_NUM
+					  , EMYMT_DIV_CD
+					  , EMYMT_TYP_CD
+					  , EMYMT_BGNN_DT
+					  , EMYMT_END_DT
+					  , DEPT_CD
+					  , CURR_PAE_WORK_NM
+					  , BUSIN_CD
+					  , TYP_OCCU_CD
+					  , DTIL_OCCU_INTTN_CD
+					  , DTIL_OCCU_CLS_DIV_CD
+					  , ODTY_CD
+					  , PAY_PYMT_DIV_CD
+					  , EMYMT_SUM
+					  , EMYMT_REAS_CTNT
+					  , CERT_NUM_HUHD
+					  , RDUC_BGNN_DT
+					  , KYBDR
+					  , INPT_DT
+					  , INPT_ADDR
+					  , ISMT
+					  , REVN_DT
+					  , REVN_ADDR
+					  , RDUC_END_DT
+					  , PYSP_GRDE_CD
+					  , WORK_HOUR_STANDARD )
+				VALUES ( #dpobCd#
+					  , #systemkey#
+					  , ( SELECT NVL(MAX(EMYMT_SEIL_NUM)+1,1) 
+					  		FROM PSNL0110 
+					  	  WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#) 
+					  , #emymtDivCd#
+					  , #emymtTypCd#
+					  , #emymtBgnnDt#
+					  , #emymtEndDt#
+					  , #deptCd#
+					  , #currPaeWorkNm#
+					  , #businCd#
+					  , ( SELECT A.TYP_OCCU_CD
+							FROM PSNL0110 A
+						 WHERE A.EMYMT_BGNN_DT = ( SELECT MAX(B.EMYMT_BGNN_DT)
+													FROM PSNL0110 B
+												   WHERE B.DPOB_CD = A.DPOB_CD
+													AND B.SYSTEMKEY = A.SYSTEMKEY
+													AND B.DPOB_CD = #dpobCd#
+													AND B.SYSTEMKEY = #systemkey#
+													AND B.EMYMT_BGNN_DT < #emymtBgnnDt#
+												)
+							AND ROWNUM = 1											
+						 )
+					  , ( SELECT A.DTIL_OCCU_INTTN_CD 
+							FROM PSNL0110 A 
+						   WHERE A.EMYMT_BGNN_DT = ( SELECT MAX(B.EMYMT_BGNN_DT)
+														FROM PSNL0110 B 
+													  WHERE B.DPOB_CD = A.DPOB_CD
+														AND B.SYSTEMKEY = A.SYSTEMKEY
+														AND B.DPOB_CD = #dpobCd#
+														AND B.SYSTEMKEY = #systemkey# 
+														AND B.EMYMT_BGNN_DT < #emymtBgnnDt#
+													)
+								AND ROWNUM = 1										
+				 		)
+					  , ( SELECT A.DTIL_OCCU_CLS_DIV_CD 
+							FROM PSNL0110 A 
+						   WHERE A.EMYMT_BGNN_DT = ( SELECT MAX(B.EMYMT_BGNN_DT)
+														FROM PSNL0110 B 
+													  WHERE B.DPOB_CD = A.DPOB_CD
+														AND B.SYSTEMKEY = A.SYSTEMKEY
+														AND B.DPOB_CD = #dpobCd#
+														AND B.SYSTEMKEY = #systemkey# 
+														AND B.EMYMT_BGNN_DT < #emymtBgnnDt#
+													)
+								AND ROWNUM = 1										
+				 		)
+					  ,  ( SELECT A.ODTY_CD 
+							FROM PSNL0110 A 
+						   WHERE A.EMYMT_BGNN_DT = ( SELECT MAX(B.EMYMT_BGNN_DT)
+														FROM PSNL0110 B 
+													  WHERE B.DPOB_CD = A.DPOB_CD
+														AND B.SYSTEMKEY = A.SYSTEMKEY
+														AND B.DPOB_CD = #dpobCd#
+														AND B.SYSTEMKEY = #systemkey# 
+														AND B.EMYMT_BGNN_DT < #emymtBgnnDt#
+													)
+								AND ROWNUM = 1										
+				 		) 
+					  , #payPymtDivCd#
+					  , #emymtSum#
+					  , #emymtReasCtnt#
+					  , #certNumHuhd#
+					  , #rducBgnnDt#
+					  , #ismt#
+					  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  , #revnAddr#
+					  , #ismt#
+					  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  , #revnAddr#
+					  , #rducEndDt#
+					  ,  SUBSTR(#dtilOccuInttnCd#,9,8)
+					  , #workHourStandard# )
+			]]>
+	</insert>
+	
+	
+	<insert id="psnl0110DAO.insertPsnl0110" parameterClass="psnl0110Dto">
+		<![CDATA[
+				INSERT INTO PSNL0110 
+					( DPOB_CD
+					  , SYSTEMKEY
+					  , EMYMT_SEIL_NUM
+					  , EMYMT_DIV_CD
+					  , EMYMT_TYP_CD
+					  , EMYMT_BGNN_DT
+					  , EMYMT_END_DT
+					  , DEPT_CD
+					  , CURR_PAE_WORK_NM
+					  , BUSIN_CD
+					  , TYP_OCCU_CD
+					  , DTIL_OCCU_INTTN_CD
+					  , DTIL_OCCU_CLS_DIV_CD
+					  , ODTY_CD
+					  , PAY_PYMT_DIV_CD
+					  , EMYMT_SUM
+					  , EMYMT_REAS_CTNT
+					  , CERT_NUM_HUHD
+					  , RDUC_BGNN_DT
+					  , KYBDR
+					  , INPT_DT
+					  , INPT_ADDR
+					  , ISMT
+					  , REVN_DT
+					  , REVN_ADDR
+					  , RDUC_END_DT
+					  , PYSP_GRDE_CD
+					  , WORK_HOUR_STANDARD )
+				VALUES ( #dpobCd#
+					  , #systemkey#
+					  , (select NVL(MAX(EMYMT_SEIL_NUM)+1,1) from PSNL0110 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#) 
+					  , #emymtDivCd#
+					  , #emymtTypCd#
+					  , #emymtBgnnDt#
+					  , #emymtEndDt#
+					  , #deptCd#
+					  , #currPaeWorkNm#
+					  , #businCd#
+					  , #typOccuCd#
+					  , #dtilOccuInttnCd#
+					  , SUBSTR(#dtilOccuInttnCd#,1,8)
+					  , #odtyCd#
+					  , #payPymtDivCd#
+					  , #emymtSum#
+					  , #emymtReasCtnt#
+					  , #certNumHuhd#
+					  , #rducBgnnDt#
+					  , #ismt#
+					  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  , #revnAddr#
+					  , #ismt#
+					  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  , #revnAddr#
+					  , #rducEndDt#
+					  ,  SUBSTR(#dtilOccuInttnCd#,9,8)
+					  , #workHourStandard# )
+			]]>
+	</insert>
+	
+	<insert id="psnl0110DAO.insertPsnl0110Vo" parameterClass="psnl0110Vo">
+		<![CDATA[
+			INSERT INTO PSNL0110 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , EMYMT_SEIL_NUM
+				  , EMYMT_DIV_CD
+				  , EMYMT_TYP_CD
+				  , EMYMT_BGNN_DT
+				  , EMYMT_END_DT
+				  , DEPT_CD
+				  , CURR_PAE_WORK_NM
+				  , BUSIN_CD
+				  , TYP_OCCU_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , DTIL_OCCU_CLS_DIV_CD
+				  , ODTY_CD
+				  , PAY_PYMT_DIV_CD
+				  , EMYMT_SUM
+				  , EMYMT_REAS_CTNT
+				  , CERT_NUM_HUHD
+				  , RDUC_BGNN_DT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , RDUC_END_DT
+				  , PYSP_GRDE_CD
+				  , RETRY_REAS_CTNT
+				  , RETRY_DIV_CD
+				  , WORK_HOUR_STANDARD
+				   )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , (select NVL(MAX(EMYMT_SEIL_NUM)+1,1) from PSNL0110 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#) 
+				  , #emymtDivCd#
+				  , #emymtTypCd#
+				  , #emymtBgnnDt#
+				  , #emymtEndDt#
+				  , (CASE 
+						WHEN #emymtTypCd# = 'A0030020' OR #emymtTypCd# = 'A0030030' OR #emymtTypCd# = 'A0420990' 
+							THEN  NVL2(#deptCd#
+										, #deptCd#
+										, (	SELECT A.DEPT_CD 
+											FROM PSNL0110 A 
+											WHERE
+												EMYMT_BGNN_DT = (	SELECT MAX( EMYMT_BGNN_DT) 
+												 					FROM PSNL0110 B 
+												    				WHERE B.DPOB_CD = A.DPOB_CD
+																		AND B.SYSTEMKEY = A.SYSTEMKEY
+																		AND B.DPOB_CD = #dpobCd#
+																		AND B.SYSTEMKEY = #systemkey#
+																		AND B.EMYMT_TYP_CD NOT IN ('A0030020', 'A0030030', 'A0420040', 'A0420990')))
+										)
+						ELSE #deptCd#
+					END) 
+				  , (CASE 
+						WHEN #emymtTypCd# = 'A0030020' OR #emymtTypCd# = 'A0030030' OR #emymtTypCd# = 'A0420990'
+							THEN  NVL2(#currPaeWorkNm#
+										, #currPaeWorkNm#
+										, (SELECT A.CURR_PAE_WORK_NM 
+											FROM PSNL0110 A 
+											WHERE EMYMT_BGNN_DT = (	SELECT MAX(EMYMT_BGNN_DT) 
+												    				FROM PSNL0110 B 
+												    				WHERE B.DPOB_CD = A.DPOB_CD
+																		AND B.SYSTEMKEY = A.SYSTEMKEY
+																		AND B.DPOB_CD = #dpobCd#
+																		AND B.SYSTEMKEY = #systemkey#
+																		AND B.EMYMT_TYP_CD NOT IN ('A0030020', 'A0030030', 'A0420040', 'A0420990')))
+										)
+						ELSE #currPaeWorkNm#
+					END) 
+				  , #businCd#
+				  , (CASE 
+						WHEN #emymtTypCd# = 'A0030020' OR #emymtTypCd# = 'A0030030' OR #emymtTypCd# = 'A0420990' 
+							AND #emymtDivCd#= 'A0020010'
+						THEN  NVL2(#typOccuCd#
+									, #typOccuCd#
+									, (SELECT A.TYP_OCCU_CD 
+										FROM PSNL0110 A 
+										WHERE
+											EMYMT_BGNN_DT = (SELECT MAX(EMYMT_BGNN_DT) 
+												    			FROM PSNL0110 B 
+												    		 WHERE B.DPOB_CD = A.DPOB_CD
+																AND B.SYSTEMKEY = A.SYSTEMKEY
+																AND B.DPOB_CD = #dpobCd#
+																AND B.SYSTEMKEY = #systemkey#
+																AND B.EMYMT_TYP_CD NOT IN ('A0030020', 'A0030030', 'A0420040', 'A0420990')))
+									)
+						ELSE #typOccuCd#
+					END) 
+				  , (CASE 
+						WHEN #emymtTypCd# = 'A0030020' OR #emymtTypCd# = 'A0030030' OR #emymtTypCd# = 'A0420990' 
+							THEN  NVL2(#dtilOccuInttnCd#
+										, #dtilOccuInttnCd#
+										, (SELECT A.DTIL_OCCU_INTTN_CD 
+											FROM PSNL0110 A 
+											WHERE
+												EMYMT_BGNN_DT = ( SELECT MAX( EMYMT_BGNN_DT) 
+												    				FROM PSNL0110 B 
+												    				WHERE B.DPOB_CD = A.DPOB_CD
+																		AND B.SYSTEMKEY = A.SYSTEMKEY
+																		AND B.DPOB_CD = #dpobCd#
+																		AND B.SYSTEMKEY = #systemkey#
+																		AND B.EMYMT_TYP_CD NOT IN ('A0030020', 'A0030030', 'A0420040', 'A0420990')))
+										)
+						ELSE #dtilOccuInttnCd#
+					END) 
+				  , (CASE 
+						WHEN #emymtTypCd# = 'A0030020' OR #emymtTypCd# = 'A0030030' OR #emymtTypCd# = 'A0420990' 
+							AND #emymtDivCd#= 'A0020010'
+						THEN  NVL2(SUBSTR(#dtilOccuInttnCd#,1,8)
+									, SUBSTR(#dtilOccuInttnCd#,1,8)
+									, (SELECT SUBSTR(A.DTIL_OCCU_INTTN_CD,1,8) 
+										FROM PSNL0110 A 
+										WHERE EMYMT_BGNN_DT = ( SELECT MAX(EMYMT_BGNN_DT) 
+																FROM PSNL0110 B 
+																WHERE B.DPOB_CD = A.DPOB_CD
+																	AND B.SYSTEMKEY = A.SYSTEMKEY
+																	AND B.DPOB_CD = #dpobCd#
+																	AND B.SYSTEMKEY = #systemkey#
+																	AND B.EMYMT_TYP_CD NOT IN ('A0030020', 'A0030030', 'A0420040', 'A0420990')))
+									)	
+						ELSE SUBSTR(#dtilOccuInttnCd#,1,8) 
+					END) 
+				  , (CASE 
+						WHEN #emymtTypCd# = 'A0030020' OR #emymtTypCd# = 'A0030030' OR #emymtTypCd# = 'A0420990'
+							THEN  NVL2(#odtyCd#
+										, #odtyCd#
+										, (SELECT A.ODTY_CD 
+											FROM PSNL0110 A 
+											WHERE EMYMT_BGNN_DT = (	SELECT MAX(EMYMT_BGNN_DT) 
+												    				FROM PSNL0110 B 
+												    				WHERE B.DPOB_CD = A.DPOB_CD
+																		AND B.SYSTEMKEY = A.SYSTEMKEY
+																		AND B.DPOB_CD = #dpobCd#
+																		AND B.SYSTEMKEY = #systemkey#
+																		AND B.EMYMT_TYP_CD NOT IN ('A0030020', 'A0030030', 'A0420040', 'A0420990')))
+										)
+						ELSE #odtyCd#
+					END) 
+				  , #payPymtDivCd#
+				  , #emymtSum#
+				  , #emymtReasCtnt#
+				  , #certNumHuhd#
+				  , #rducBgnnDt#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #rducEndDt#
+				  ,  SUBSTR(#dtilOccuInttnCd#,9,8) 
+				  , #retryReasCtnt#
+				  , #retryDivCd#
+				  , #workHourStandard#
+				  )
+		]]>
+	</insert>
+	
+	<!-- <update id="psnl0110DAO.updatePsnl0110" parameterClass="psnl0110Dto"> -->
+	<update id="psnl0110DAO.updatePsnl0110" parameterClass="psnl0110Vo">
+		
+			UPDATE PSNL0110
+			SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, EMYMT_DIV_CD=#emymtDivCd#
+				, EMYMT_TYP_CD=#emymtTypCd#
+				, EMYMT_BGNN_DT= #emymtBgnnDt#
+				, EMYMT_END_DT= #emymtEndDt#
+				, DEPT_CD = (CASE 
+								WHEN #emymtTypCd# = 'A0030020' OR #emymtTypCd# = 'A0030030' OR #emymtTypCd# = 'A0420990' 
+									THEN  NVL2(#deptCd#
+												, #deptCd#
+												, (	SELECT A.DEPT_CD 
+													FROM PSNL0110 A 
+													WHERE
+												 		EMYMT_BGNN_DT = (	SELECT MAX( EMYMT_BGNN_DT) 
+												    						FROM PSNL0110 B 
+												    						WHERE B.DPOB_CD = A.DPOB_CD
+																				AND B.SYSTEMKEY = A.SYSTEMKEY
+																				AND B.DPOB_CD = #dpobCd#
+																				AND B.SYSTEMKEY = #systemkey#
+																				AND B.EMYMT_TYP_CD NOT IN ('A0030020', 'A0030030', 'A0420040', 'A0420990')))
+											)
+								ELSE #deptCd#
+							 	END) 
+				, CURR_PAE_WORK_NM=(CASE 
+									WHEN #emymtTypCd# = 'A0030020' OR #emymtTypCd# = 'A0030030' OR #emymtTypCd# = 'A0420990'
+										THEN  NVL2(#currPaeWorkNm#
+													, #currPaeWorkNm#
+													, (SELECT A.CURR_PAE_WORK_NM 
+														FROM PSNL0110 A 
+														WHERE EMYMT_BGNN_DT = (	SELECT MAX(EMYMT_BGNN_DT) 
+												    							FROM PSNL0110 B 
+												    							WHERE B.DPOB_CD = A.DPOB_CD
+																					AND B.SYSTEMKEY = A.SYSTEMKEY
+																					AND B.DPOB_CD = #dpobCd#
+																				AND B.SYSTEMKEY = #systemkey#
+																				AND B.EMYMT_TYP_CD NOT IN ('A0030020', 'A0030030', 'A0420040', 'A0420990')))
+												)		
+								ELSE #currPaeWorkNm#
+								END) 
+				, BUSIN_CD=#businCd#
+				, TYP_OCCU_CD = (CASE 
+								WHEN #emymtTypCd# = 'A0030020' OR #emymtTypCd# = 'A0030030' OR #emymtTypCd# = 'A0420990' 
+									AND #emymtDivCd#= 'A0020010'
+									THEN  NVL2(#typOccuCd#
+												, #typOccuCd#
+												, (SELECT A.TYP_OCCU_CD 
+												   	FROM PSNL0110 A 
+												  	WHERE
+												    	EMYMT_BGNN_DT = (	SELECT MAX(EMYMT_BGNN_DT) 
+												    						FROM PSNL0110 B 
+												    						WHERE B.DPOB_CD = A.DPOB_CD
+																				AND B.SYSTEMKEY = A.SYSTEMKEY
+																				AND B.DPOB_CD = #dpobCd#
+																				AND B.SYSTEMKEY = #systemkey#
+																				AND B.EMYMT_TYP_CD NOT IN ('A0030020', 'A0030030', 'A0420040', 'A0420990')))
+											)
+								ELSE #typOccuCd#
+							 	END) 
+				,  DTIL_OCCU_CLS_DIV_CD = (CASE 
+											WHEN #emymtTypCd# = 'A0030020' OR #emymtTypCd# = 'A0030030' OR #emymtTypCd# = 'A0420990' 
+												AND #emymtDivCd#= 'A0020010'
+												THEN  NVL2(SUBSTR(#dtilOccuInttnCd#,1,8)
+															, SUBSTR(#dtilOccuInttnCd#,1,8)
+															, (SELECT SUBSTR(A.DTIL_OCCU_INTTN_CD,1,8) 
+																FROM PSNL0110 A 
+																WHERE EMYMT_BGNN_DT = ( SELECT MAX(EMYMT_BGNN_DT) 
+																						FROM PSNL0110 B 
+																						WHERE B.DPOB_CD = A.DPOB_CD
+																							AND B.SYSTEMKEY = A.SYSTEMKEY
+																							AND B.DPOB_CD = #dpobCd#
+																							AND B.SYSTEMKEY = #systemkey#
+																							AND B.EMYMT_TYP_CD NOT IN ('A0030020', 'A0030030', 'A0420040', 'A0420990')))
+															)	
+											ELSE SUBSTR(#dtilOccuInttnCd#,1,8) 
+										 	END) 
+				, ODTY_CD = (CASE 
+								WHEN #emymtTypCd# = 'A0030020' OR #emymtTypCd# = 'A0030030' OR #emymtTypCd# = 'A0420990'
+								 
+									THEN  NVL2(#odtyCd#
+												, #odtyCd#
+												, (SELECT A.ODTY_CD 
+												  FROM PSNL0110 A 
+												  WHERE EMYMT_BGNN_DT = (	SELECT MAX(EMYMT_BGNN_DT) 
+												    						FROM PSNL0110 B 
+												    						WHERE B.DPOB_CD = A.DPOB_CD
+																				AND B.SYSTEMKEY = A.SYSTEMKEY
+																				AND B.DPOB_CD = #dpobCd#
+																				AND B.SYSTEMKEY = #systemkey#
+																				AND B.EMYMT_TYP_CD NOT IN ('A0030020', 'A0030030', 'A0420040', 'A0420990')))
+											)
+								ELSE #odtyCd#
+							 	END) 
+				, PAY_PYMT_DIV_CD=#payPymtDivCd#
+				, EMYMT_SUM=#emymtSum#
+				, EMYMT_REAS_CTNT=#emymtReasCtnt#
+				, CERT_NUM_HUHD=#certNumHuhd#
+				, RDUC_BGNN_DT=#rducBgnnDt#
+				, RDUC_END_DT=#rducEndDt#
+				, ISMT=#ismt#
+				, REVN_ADDR=#revnAddr#
+				, RETRY_REAS_CTNT=#retryReasCtnt#
+				, RETRY_DIV_CD=#retryDivCd#
+				, DTIL_OCCU_INTTN_CD = (CASE 
+								WHEN #emymtTypCd# = 'A0030020' OR #emymtTypCd# = 'A0030030' OR #emymtTypCd# = 'A0420990' 
+									THEN  NVL2(#dtilOccuInttnCd#, #dtilOccuInttnCd#, (SELECT A.DTIL_OCCU_INTTN_CD 
+												    				FROM PSNL0110 A 
+												    				WHERE
+												    					EMYMT_BGNN_DT = ( SELECT MAX( EMYMT_BGNN_DT) 
+												    										  FROM PSNL0110 B 
+												    										  WHERE B.DPOB_CD = A.DPOB_CD
+																						       AND B.SYSTEMKEY = A.SYSTEMKEY
+																						       AND B.DPOB_CD = #dpobCd#
+																						       AND B.SYSTEMKEY = #systemkey#
+																						       AND B.EMYMT_TYP_CD NOT IN ('A0030020', 'A0030030', 'A0420040', 'A0420990')))
+											)
+								ELSE #dtilOccuInttnCd#
+							 	END) 
+				, WORK_HOUR_STANDARD=#workHourStandard#
+		WHERE DPOB_CD=#dpobCd#
+		AND SYSTEMKEY=#systemkey#
+		AND EMYMT_SEIL_NUM=#emymtSeilNum#
+	</update>
+
+	<!--  psnl0110Dto.setDpobCd(changePsnl0123List.get(i).getDpobCd());    /** column 사업장코드 : dpobCd */
+                            psnl0110Dto.setSystemkey(changePsnl0123List.get(i).getSystemkey());    /** column SYSTEMKEY : systemkey */ 
+                            psnl0110Dto.setEmymtTypCd("A0420040");    /** column 고용유형코드 : emymtTypCd */
+                            psnl0110Dto.setEmymtBgnnDt(changePsnl0123List.get(i).getLevfAbncBgnnDt());    /** column 고용시작일자 : emymtBgnnDt */
+                            psnl0110Dto.setEmymtEndDt(changePsnl0123List.get(i).getLevfAbncEndDt());    /** column 고용종료일자 : emymtEndDt */
+                          -->
+                          
+	<!-- 
+	<update id="psnl0110DAO.updatePsnl0100ToPsnl0110" parameterClass="psnl0110Dto"> 
+			UPDATE PSNL0110
+			SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS') 
+		<isNotNull property="emymtEndDt"><isNotEmpty property="emymtEndDt">, EMYMT_END_DT= #emymtEndDt#</isNotEmpty></isNotNull> 
+		<isNotNull property="ismt"><isNotEmpty property="ismt">, ISMT=#ismt#</isNotEmpty></isNotNull>
+		<isNotNull property="revnAddr"><isNotEmpty property="revnAddr">, REVN_ADDR=#revnAddr#</isNotEmpty></isNotNull> 
+		WHERE DPOB_CD=#dpobCd#
+			AND SYSTEMKEY=#systemkey#
+			AND EMYMT_TYP_CD=#emymtTypCd#
+			AND EMYMT_BGNN_DT=#emymtBgnnDt#
+	</update>
+	 -->
+	
+	<update id="psnl0110DAO.updatePsnl0100ToPsnl0110" parameterClass="psnl0110Vo"> 
+			UPDATE PSNL0110
+			SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS') 
+		<isNotNull property="emymtEndDt"><isNotEmpty property="emymtEndDt">, EMYMT_END_DT= #emymtEndDt#</isNotEmpty></isNotNull> 
+		<isNotNull property="ismt"><isNotEmpty property="ismt">, ISMT=#ismt#</isNotEmpty></isNotNull>
+		<isNotNull property="revnAddr"><isNotEmpty property="revnAddr">, REVN_ADDR=#revnAddr#</isNotEmpty></isNotNull> 
+		<isNotNull property="emymtReasCtnt"><isNotEmpty property="emymtReasCtnt">, EMYMT_REAS_CTNT=#emymtReasCtnt#</isNotEmpty></isNotNull> 
+		WHERE DPOB_CD=#dpobCd#
+			AND SYSTEMKEY=#systemkey#
+			AND EMYMT_TYP_CD=#emymtTypCd#
+			AND EMYMT_BGNN_DT=#emymtBgnnDt#
+	</update>
+	
+	
+	<!-- <delete id="psnl0110DAO.deletePsnl0110" parameterClass="psnl0110Dto">  -->
+	<delete id="psnl0110DAO.deletePsnl0110" parameterClass="psnl0110Vo">
+		DELETE FROM PSNL0110
+		WHERE DPOB_CD=#dpobCd#
+			AND SYSTEMKEY=#systemkey#
+			AND EMYMT_SEIL_NUM=#emymtSeilNum#
+	</delete>
+	
+	<delete id="psnl0110DAO.deletePsnl0100ToPsnl0110" parameterClass="psnl0110Dto">
+		DELETE FROM PSNL0110
+		WHERE DPOB_CD=#dpobCd#
+			AND SYSTEMKEY=#systemkey#
+			AND EMYMT_TYP_CD=#emymtTypCd#
+			AND EMYMT_BGNN_DT=TO_CHAR(#emymtBgnnDt#,'yyyymmdd')
+	</delete>
+	
+	
+	
+	
+	<!-- 20210520_양평 근무시간 조회시 적용 -->		
+	<select id="psnl0110DAO.selectPsnl0110" resultClass="egovMap" parameterClass="hashMap">
+		
+			SELECT
+				A.DPOB_CD
+				, A.SYSTEMKEY
+				, A.EMYMT_SEIL_NUM
+				, A.EMYMT_DIV_CD
+				, A.EMYMT_TYP_CD
+				, TO_DATE(A.EMYMT_BGNN_DT,'YYYYMMDD')AS EMYMT_BGNN_DT
+				, TO_DATE(A.EMYMT_END_DT,'YYYYMMDD')AS EMYMT_END_DT
+				, A.DEPT_CD
+				, fcBass0400CDNM(A.DPOB_CD,DEPT_CD,'2') AS DEPT_NM
+				, A.CURR_PAE_WORK_NM
+				, A.BUSIN_CD 
+				, A.TYP_OCCU_CD 
+				, A.DTIL_OCCU_INTTN_CD
+				, A.DTIL_OCCU_CLS_DIV_CD
+				, A.ODTY_CD
+				, A.PAY_PYMT_DIV_CD
+				, A.EMYMT_SUM
+				, A.EMYMT_REAS_CTNT
+				, A.CERT_NUM_HUHD
+				, A.RDUC_BGNN_DT
+				, A.KYBDR
+				, A.INPT_DT
+				, A.INPT_ADDR
+				, A.ISMT
+				, A.REVN_DT
+				, A.REVN_ADDR
+				, A.RDUC_END_DT
+				, NVL(A.PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+				, A.RETRY_REAS_CTNT
+				, A.RETRY_DIV_CD
+				, (SELECT H.DILNLAZ_TM_RST_DUTY_TM
+            FROM (SELECT B.DILNLAZ_TM_RST_DUTY_TM, C.EMYMT_SEIL_NUM
+                    FROM BASS0500 B, PSNL0110 C
+                   WHERE     C.DPOB_CD = #dpobCd#
+                         AND C.DPOB_CD = B.DPOB_CD
+                         AND C.SYSTEMKEY = #systemkey#
+                         AND C.BUSIN_CD = B.BUSIN_CD
+                         AND B.BUSIN_CD =
+                                (SELECT A.BUSIN_CD
+                                   FROM PSNL0110 A
+                                  WHERE     A.DPOB_CD = #dpobCd#
+                                        AND A.SYSTEMKEY = #systemkey#
+                                        AND A.EMYMT_SEIL_NUM = C.EMYMT_SEIL_NUM))
+                 H
+           WHERE A.EMYMT_SEIL_NUM = H.EMYMT_SEIL_NUM)
+            AS WORK_HOUR_STANDARD
+			FROM PSNL0110 A
+			WHERE A.DPOB_CD=#dpobCd#
+			AND A.SYSTEMKEY=#systemkey#
+			
+			<isEqual prepend="AND" property="emymtDivCd" compareValue="A0020010">
+                    A.EMYMT_DIV_CD = #emymtDivCd#
+			</isEqual>
+			
+		<isNotNull property="emymtSeilNum">
+			<isNotEmpty property="emymtSeilNum">
+				AND A.EMYMT_SEIL_NUM=#emymtSeilNum#
+			</isNotEmpty>
+		</isNotNull>
+		
+		ORDER BY A.EMYMT_BGNN_DT DESC
+					, A.EMYMT_SEIL_NUM DESC
+					, A.EMYMT_END_DT DESC
+
+		
+	</select>
+	
+	
+	
+	<!-- 20210524 기존쿼리문 -->
+	<!-- <select id="psnl0110DAO.selectPsnl0110" resultClass="egovMap" parameterClass="hashMap">
+		
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, EMYMT_SEIL_NUM
+				, EMYMT_DIV_CD
+				, EMYMT_TYP_CD
+				, TO_DATE(EMYMT_BGNN_DT,'YYYYMMDD')AS EMYMT_BGNN_DT
+				, TO_DATE(EMYMT_END_DT,'YYYYMMDD')AS EMYMT_END_DT
+				, DEPT_CD
+				, fcBass0400CDNM(DPOB_CD,DEPT_CD,'2') AS DEPT_NM
+				, CURR_PAE_WORK_NM
+				, BUSIN_CD 
+				, TYP_OCCU_CD 
+				, DTIL_OCCU_INTTN_CD
+				, DTIL_OCCU_CLS_DIV_CD
+				, ODTY_CD
+				, PAY_PYMT_DIV_CD
+				, EMYMT_SUM
+				, EMYMT_REAS_CTNT
+				, CERT_NUM_HUHD
+				, RDUC_BGNN_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, RDUC_END_DT
+				, NVL(PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+				, RETRY_REAS_CTNT
+				, RETRY_DIV_CD
+				, WORK_HOUR_STANDARD
+			FROM PSNL0110
+			WHERE DPOB_CD=#dpobCd#
+			AND SYSTEMKEY=#systemkey#
+			
+			<isEqual prepend="AND" property="emymtDivCd" compareValue="A0020010">
+                    EMYMT_DIV_CD = #emymtDivCd#
+			</isEqual>
+			
+		<isNotNull property="emymtSeilNum">
+			<isNotEmpty property="emymtSeilNum">
+				AND EMYMT_SEIL_NUM=#emymtSeilNum#
+			</isNotEmpty>
+		</isNotNull>
+		
+		ORDER BY EMYMT_BGNN_DT DESC
+					, EMYMT_SEIL_NUM DESC
+					, EMYMT_END_DT DESC
+
+		
+	</select> -->
+	
+	
+	
+	
+	
+	<!-- <select id="psnl0110DAO.selectInsrPsnl0110" resultClass="egovMap" parameterClass="psnl0110Dto">  -->
+	<select id="psnl0110DAO.selectInsrPsnl0110" resultClass="egovMap" parameterClass="psnl0110Vo"> 
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, EMYMT_SEIL_NUM
+				, EMYMT_DIV_CD
+				, EMYMT_TYP_CD
+				, TO_DATE(EMYMT_BGNN_DT,'YYYYMMDD') EMYMT_BGNN_DT
+				, TO_DATE(EMYMT_END_DT,'YYYYMMDD') EMYMT_END_DT
+				, DEPT_CD
+				, fcBass0400CDNM(DPOB_CD,DEPT_CD,'2') AS DEPT_NM
+				, CURR_PAE_WORK_NM
+				, BUSIN_CD 
+				,  TYP_OCCU_CD 
+				, DTIL_OCCU_INTTN_CD
+				, DTIL_OCCU_CLS_DIV_CD
+				, ODTY_CD
+				, PAY_PYMT_DIV_CD
+				, EMYMT_SUM
+				, EMYMT_REAS_CTNT
+				, CERT_NUM_HUHD
+				, RDUC_BGNN_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, RDUC_END_DT
+				, NVL(PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+				, WORK_HOUR_STANDARD
+			FROM PSNL0110
+			WHERE DPOB_CD=#dpobCd#
+			AND SYSTEMKEY=#systemkey# 
+				AND EMYMT_SEIL_NUM= (SELECT MAX(EMYMT_SEIL_NUM) 
+			                                FROM PSNL0110 TP01 
+			                                WHERE TP01.DPOB_CD  = #dpobCd#
+			                                AND  TP01.SYSTEMKEY = #systemkey# 
+			                                AND  TP01.EMYMT_TYP_CD = 'A0420010')
+		
+		ORDER BY EMYMT_BGNN_DT DESC 
+	</select>
+	
+	<!-- 고용정보이력 체크 -->
+	<select id="psnl0110DAO.selectPsnl0100ToPsnl0110List" resultClass="egovMap" parameterClass="psnl0110SrhVo"> 
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, EMYMT_SEIL_NUM
+				, EMYMT_DIV_CD
+				, EMYMT_TYP_CD
+				, TO_DATE(EMYMT_BGNN_DT,'YYYYMMDD') EMYMT_BGNN_DT
+				, TO_DATE(EMYMT_END_DT,'YYYYMMDD') EMYMT_END_DT
+				, DEPT_CD
+				, fcBass0400CDNM(DPOB_CD,DEPT_CD,'2') AS DEPT_NM
+				, CURR_PAE_WORK_NM
+				, BUSIN_CD 
+				,  TYP_OCCU_CD 
+				, DTIL_OCCU_INTTN_CD
+				, DTIL_OCCU_CLS_DIV_CD
+				, ODTY_CD
+				, PAY_PYMT_DIV_CD
+				, EMYMT_SUM
+				, EMYMT_REAS_CTNT
+				, CERT_NUM_HUHD
+				, RDUC_BGNN_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, RDUC_END_DT
+				, NVL(PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+				, WORK_HOUR_STANDARD
+			FROM PSNL0110
+			WHERE DPOB_CD=#dpobCd#
+			AND SYSTEMKEY=#systemkey# 
+				AND EMYMT_SEIL_NUM= (SELECT MAX(EMYMT_SEIL_NUM) 
+			                                FROM PSNL0110 TP01 
+			                                WHERE TP01.DPOB_CD  = #dpobCd#
+			                                AND  TP01.SYSTEMKEY = #systemkey# 
+			                                AND  TP01.EMYMT_TYP_CD = 'A0420010')
+		
+		ORDER BY EMYMT_BGNN_DT DESC 
+	</select> 
+	
+	<!-- 사회보험이력 체크 -->
+	<select id="psnl0110DAO.selectPsnl0110Insr1200List" resultClass="egovMap" parameterClass="psnl0110SrhVo"> 
+			SELECT
+				A.DPOB_CD
+				, A.SYSTEMKEY
+				, A.EMYMT_SEIL_NUM
+			FROM PSNL0110 A, INSR1200 B
+			WHERE
+				A.DPOB_CD = B.DPOB_CD
+			AND B.DPOB_CD = #dpobCd#
+			AND A.SYSTEMKEY = B.SYSTEMKEY 
+			AND B.SYSTEMKEY = #systemkey# 
+			AND A.EMYMT_SEIL_NUM = B.SOC_INSR_AQTN_EMYMT_NUM
+		ORDER BY A.EMYMT_BGNN_DT DESC 
+	</select>
+	
+	
+	
+	
+	<!-- 엑셀 업로드 시 관리부서, 소속부서, 고용유형코드, 주민등록번호, 사업코드 유효성 체크 
+	<select id="psnl0110DAO.selectPsnlExcelDataListChk" resultClass="egovMap" parameterClass="psnl0110SrhVo"> 
+	 WITH TA01 
+	        AS (   
+	            SELECT LEVEL lv,
+	                   REGEXP_SUBSTR (v,
+	                                  '[^,]+',
+	                                  1,
+	                                  LEVEL)
+	                      dept_cd
+	              FROM (SELECT '00,535010300,535010400,535010400,00' v FROM DUAL) 
+	        CONNECT BY LEVEL <= REGEXP_COUNT (v, '[^,]+')
+	
+	    )   
+	 , TA02 
+	    AS (   
+	            SELECT LEVEL lv,
+	                   REGEXP_SUBSTR (v,
+	                                  '[^,]+',
+	                                  1,
+	                                  LEVEL)
+	                      dept_cd
+	              FROM (SELECT '00,535010300,535010400,535010400,00' v FROM DUAL) 
+	        CONNECT BY LEVEL <= REGEXP_COUNT (v, '[^,]+')
+	             )
+	 , TA03
+	    AS (   
+	            SELECT LEVEL lv,
+	                   REGEXP_SUBSTR (v,
+	                                  '[^,]+',
+	                                  1,
+	                                  LEVEL)
+	                      emymt_typ_cd
+	              FROM (SELECT '00,A0420010,535010400,A0420010,00' v FROM DUAL) 
+	        CONNECT BY LEVEL <= REGEXP_COUNT (v, '[^,]+')
+	             )     
+	 , TA04
+	    AS (   
+	            SELECT LEVEL lv,
+	                   REGEXP_SUBSTR (v,
+	                                  '[^,]+',
+	                                  1,
+	                                  LEVEL)
+	                      RESN_REGN_NUM
+	              FROM (SELECT '00,7505261ABxMuf,535010400,7505261ABxMuf,00' v FROM DUAL) 
+	        CONNECT BY LEVEL <= REGEXP_COUNT (v, '[^,]+')
+	             )  
+	 , TA05
+	    AS (   
+	            SELECT LEVEL lv,
+	                   REGEXP_SUBSTR (v,
+	                                  '[^,]+',
+	                                  1,
+	                                  LEVEL)
+	                      BUSIN_CD
+	              FROM (SELECT '00,7505261ABxMuf,20160072,7505261ABxMuf,20160072' v FROM DUAL) 
+	        CONNECT BY LEVEL <= REGEXP_COUNT (v, '[^,]+')
+	             )                                  
+	   
+	
+	SELECT TA01.LV
+	    ,TA01.DEPT_CD as mange_Dept_CD
+	    , fcBass0400CDNM(#dpobCd#, TA01.DEPT_CD,'2') AS MANGE_DEPT_NM
+	    , TA02.DEPT_CD AS CURR_AFFN_DEPT_CD
+	    , fcBass0400CDNM(#dpobCd#, TA02.DEPT_CD,'2') AS CURR_AFFN_DEPT_NM
+	    , TA03.EMYMT_TYP_CD
+	    , fcBass0300CDNM(#dpobCd#, TA03.EMYMT_TYP_CD) AS EMYMT_TYP_NM
+	    , TA05.BUSIN_CD
+	    , fcBass0500CDNM(#dpobCd#, #businApptnYr#, TA02.DEPT_CD, TA05.BUSIN_CD) AS BUSIN_NM
+	    , TA04.RESN_REGN_NUM
+	    ,  (CASE WHEN (SELECT DEPT_CD FROM BASS0400 AA WHERE TA01.dept_cd = AA.DEPT_CD) IS NOT NULL   
+	        THEN 'Y'
+	        ELSE 'N'
+	        END
+	         )
+	     || '/' 
+	      || (CASE WHEN (SELECT DEPT_CD FROM BASS0400 AA WHERE TA02.DEPT_CD = AA.DEPT_CD) IS NOT NULL   
+	        THEN 'Y'
+	        ELSE 'N'
+	        END) 
+	     || '/'   
+	      || (CASE WHEN (SELECT COMM_CD FROM BASS0300 AA WHERE TA03.EMYMT_TYP_CD = AA.COMM_CD) IS NOT NULL   
+	        THEN 'Y'
+	        ELSE 'N'
+	        END) 
+	     || '/'   
+	      || (CASE WHEN LENGTH(TA04.RESN_REGN_NUM) != 13
+	        THEN 'X'
+	        WHEN (SELECT RESN_REGN_NUM FROM PSNL0100 AA WHERE TA04.RESN_REGN_NUM = AA.RESN_REGN_NUM) IS NOT NULL   
+	        THEN 'Y'
+	        ELSE 'N'
+	        END) 
+	     || '/'   
+	      || (CASE WHEN (SELECT BUSIN_CD FROM BASS0500 AA WHERE TA05.BUSIN_CD = AA.BUSIN_CD) IS NOT NULL   
+	        THEN 'Y'
+	        ELSE 'N'
+	        END) AS DATA_RETURN 
+	
+	FROM TA01, TA02, TA03, TA04, TA05
+	    WHERE TA01.LV = TA02.LV
+	        AND TA01.LV = TA03.LV
+	        AND TA01.LV = TA04.LV
+	        AND TA01.LV = TA05.LV
+	</select>
+	-->	
+	<select id="psnl0110DAO.selectPsnlExlDataListChk" resultClass="egovMap" parameterClass="psnl0110Vo"> 
+		SELECT 
+		     #deptCd# as MANGE_DEPT_CD
+		    , fcBass0400CDNM(#dpobCd#, #deptCd#,'2') AS MANGE_DEPT_NM
+		    , #currAffnDeptCd# AS CURR_AFFN_DEPT_CD
+		    , fcBass0400CDNM(#dpobCd#, #currAffnDeptCd#,'2') AS CURR_AFFN_DEPT_NM
+		    , #emymtTypCd# AS EMYMT_TYP_CD
+		    , fcBass0300CDNM(#dpobCd#, #emymtTypCd#) AS EMYMT_TYP_NM
+		    , #businCd# AS BUSIN_CD
+		    , fcBass0500CDNM(#dpobCd#, #businApptnYr#, #currAffnDeptCd#, #businCd#) AS BUSIN_NM
+		    , (SELECT SYSTEMKEY FROM PSNL0100 WHERE DPOB_CD = #dpobCd# AND RESN_REGN_NUM = #resnRegnNum#) AS SYSTEMKEY
+		    , #resnRegnNum# AS RESN_REGN_NUM
+		    , (CASE WHEN (SELECT DEPT_CD FROM BASS0400 AA WHERE AA.DEPT_CD = #deptCd#) IS NOT NULL   
+		        THEN 'Y'
+		       ELSE 'N'
+		       END)
+			     || '/' 
+			     || (CASE WHEN (SELECT DEPT_CD FROM BASS0400 AA WHERE AA.DPOB_CD = #dpobCd# AND AA.DEPT_CD = #currAffnDeptCd#) IS NOT NULL   
+			          THEN 'Y'
+			         ELSE 'N'
+			         END) 
+			     || '/'   
+			     || (CASE WHEN (SELECT COMM_CD FROM BASS0300 AA WHERE AA.DPOB_CD = #dpobCd# AND AA.COMM_CD = #emymtTypCd#) IS NOT NULL   
+			          THEN 'Y'
+			         ELSE 'N'
+			         END) 
+			     || '/'   
+			     || (CASE WHEN LENGTH(#resnRegnNum#) != 13
+			          THEN 'N'
+			         WHEN (SELECT RESN_REGN_NUM FROM PSNL0100 AA WHERE AA.DPOB_CD = #dpobCd# AND AA.RESN_REGN_NUM = #resnRegnNum#) IS NOT NULL  
+			         		AND #emymtNewTypCd# = '02'
+			          THEN 'Y'
+			         WHEN (SELECT RESN_REGN_NUM FROM PSNL0100 AA WHERE AA.DPOB_CD = #dpobCd# AND AA.RESN_REGN_NUM = #resnRegnNum#) IS NULL  
+			         		AND #emymtNewTypCd# = '02'
+			          THEN 'N' 
+			         WHEN (SELECT RESN_REGN_NUM FROM PSNL0100 AA WHERE AA.DPOB_CD = #dpobCd# AND AA.RESN_REGN_NUM = #resnRegnNum#) IS NULL  
+			         		AND #emymtNewTypCd# = '01'
+			          THEN 'Y' 
+			         ELSE 'N'
+			         END) 
+			     || '/'   
+			     || (CASE WHEN (SELECT BUSIN_CD FROM BASS0500 AA WHERE AA.DPOB_CD = #dpobCd# AND AA.BUSIN_CD = #businCd#) IS NOT NULL   
+			          THEN 'Y'
+			         ELSE 'N'
+			         END) AS DATA_CHK 
+		
+		FROM DUAL
+	</select>
+	
+	
+	
+	<!-- 인사(무기) 기간제고용 이력을 가져온다. -->
+	<select id="psnl0110DAO.selectPsnl0110List" resultClass="egovMap" parameterClass="psnl0110SrhVo">
+		SELECT	DPOB_CD
+			   , SYSTEMKEY
+			   , EMYMT_SEIL_NUM
+			   , EMYMT_DIV_CD
+			   , fcBass0300CDNM(DPOB_CD, EMYMT_DIV_CD) AS EMYMT_DIV_NM
+			   , EMYMT_DIV_CD AS emymtDivCdcommCd
+			   , fcBass0300CDNM(DPOB_CD, EMYMT_DIV_CD) AS emymtDivCdcommCdNm
+			   , EMYMT_TYP_CD
+			   , fcBass0300CDNM(DPOB_CD, EMYMT_TYP_CD) AS EMYMT_DIV_NM
+			   , EMYMT_TYP_CD AS emymtTypCdcommCd
+			   , fcBass0300CDNM(DPOB_CD, EMYMT_TYP_CD) AS emymtTypCdcommCdNm
+			   , EMYMT_BGNN_DT
+			   , EMYMT_END_DT
+			   , DEPT_CD
+			   , fcBass0400CDNM(DPOB_CD, DEPT_CD,'2') AS DEPT_NM
+			   , DEPT_CD AS deptCddeptCd
+			   , fcBass0400CDNM(DPOB_CD, DEPT_CD,'2') AS deptCddeptNmRtchnt
+			   , CURR_PAE_WORK_NM
+			   , BUSIN_CD
+			   , fcBass0500CDNM(DPOB_CD, SUBSTR (EMYMT_BGNN_DT, 1, 4), DEPT_CD, BUSIN_CD)AS BUSIN_NM
+			   , BUSIN_CD AS businCdbusinCd
+			   , fcBass0500CDNM(DPOB_CD, SUBSTR (EMYMT_BGNN_DT, 1, 4), DEPT_CD, BUSIN_CD)AS businCdbusinNm
+			   , TYP_OCCU_CD
+			   , DTIL_OCCU_CLS_DIV_CD
+			   , ODTY_CD
+			   , fcBass0300CDNM(DPOB_CD, ODTY_CD) AS ODTY_NM
+			   , ODTY_CD AS odtyCdcommCd
+			   , fcBass0300CDNM(DPOB_CD, ODTY_CD) AS odtyCdcommCdNm
+			   , PAY_PYMT_DIV_CD
+			   , EMYMT_SUM
+			   , EMYMT_REAS_CTNT
+			   , CERT_NUM_HUHD
+			   , RDUC_BGNN_DT
+			   , KYBDR
+			   , INPT_DT
+			   , INPT_ADDR
+			   , ISMT
+			   , REVN_DT
+			   , REVN_ADDR
+			   , RDUC_END_DT
+			   , NVL(PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+			   , DTIL_OCCU_INTTN_CD
+			   , CVSN_RTO_DIV_CD
+			   , DUTY_YR_NUM
+			   , DUTY_MNTH_ICM
+			   , DUTY_DAY_NUM
+			   , DUTY_TOT_DAY_NUM
+			   , RETRY_REAS_CTNT
+			   , RETRY_DIV_CD
+			FROM PSNL0110
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				AND NVL(EMYMT_DIV_CD, 'TT') != 'A0020010'
+			ORDER BY EMYMT_BGNN_DT DESC	
+	</select>
+	
+	
+	<select id="psnl0110DAO.selectPsnl0110ListCnt_S" parameterClass="psnl0110SrhVo" resultClass="int">
+	   	SELECT COUNT(*) 
+	   	FROM (
+			   	SELECT	DPOB_CD
+					   , SYSTEMKEY
+					   , EMYMT_SEIL_NUM
+					   , EMYMT_DIV_CD
+					   , EMYMT_TYP_CD
+					   , EMYMT_BGNN_DT
+					   , EMYMT_END_DT
+					   , DEPT_CD
+					   , CURR_PAE_WORK_NM
+					   , BUSIN_CD
+					   , TYP_OCCU_CD
+					   , DTIL_OCCU_CLS_DIV_CD
+					   , ODTY_CD
+					   , PAY_PYMT_DIV_CD
+					   , EMYMT_SUM
+					   , EMYMT_REAS_CTNT
+					   , CERT_NUM_HUHD
+					   , RDUC_BGNN_DT
+					   , KYBDR
+					   , INPT_DT
+					   , INPT_ADDR
+					   , ISMT
+					   , REVN_DT
+					   , REVN_ADDR
+					   , RDUC_END_DT
+					   , NVL(PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+					   , DTIL_OCCU_INTTN_CD
+					   , CVSN_RTO_DIV_CD
+					   , DUTY_YR_NUM
+					   , DUTY_MNTH_ICM
+					   , DUTY_DAY_NUM
+					   , DUTY_TOT_DAY_NUM
+					   , RETRY_REAS_CTNT
+			   		   , RETRY_DIV_CD
+					FROM PSNL0110
+					WHERE DPOB_CD=#dpobCd#
+						AND SYSTEMKEY=#systemkey#
+						AND EMYMT_DIV_CD != 'A0020010'
+	   		  )
+	   	
+	</select>
+
+	<select id="psnl0110DAO.selectPsnl0110Chk2017EnterCnt_S_02" resultClass="int" parameterClass="hashMap" >
+		 <![CDATA[
+			SELECT  COUNT(*)
+			FROM	PSNL0110 A
+			WHERE A.DPOB_CD=#dpobCd#
+			AND   A.SYSTEMKEY=#systemkey#
+			AND   A.EMYMT_BGNN_DT = (	SELECT MAX(EMYMT_BGNN_DT) 
+									FROM PSNL0110 B 
+									WHERE B.DPOB_CD = A.DPOB_CD
+									AND B.SYSTEMKEY = A.SYSTEMKEY )
+			AND SUBSTR(A.EMYMT_BGNN_DT,1,4) >= '2017' 
+			AND ( A.EMYMT_END_DT IS NULL  OR A.RETRY_REAS_CTNT IS NULL  OR  A.RETRY_DIV_CD IS NULL  )
+		]]>
+	</select>
+		
+		
+	<select id="psnl0110DAO.selectPsnl0110Chk2017EnterCnt_S_01" parameterClass="hashMap"  resultClass="int" >
+			 
+			SELECT  COUNT(*)
+			FROM	PSNL0110 A
+			WHERE A.DPOB_CD=#dpobCd#
+			AND   A.SYSTEMKEY=#systemkey#
+			AND   A.EMYMT_BGNN_DT = (	SELECT MAX(B.EMYMT_BGNN_DT) 
+									FROM PSNL0110 B 
+									WHERE B.DPOB_CD = A.DPOB_CD
+									AND B.SYSTEMKEY = A.SYSTEMKEY )
+    		 <![CDATA[
+    		AND A.EMYMT_TYP_CD <> 'A0420990'
+      		]]>
+      		<![CDATA[
+      		AND    ( SUBSTR(A.EMYMT_BGNN_DT,1,4) >= '2017'  )
+			]]>
+	</select>	
+	
+	
+	<!-- 기간제 신규고용 업로드 -->
+	<delete id="psnl0110DAO.deletePsnl0110Vo" parameterClass="psnl0110Vo">
+		DELETE FROM PSNL0110
+		WHERE DPOB_CD=#dpobCd#
+			AND SYSTEMKEY=#systemkey#
+			AND EMYMT_DIV_CD=#emymtDivCd#
+			AND EMYMT_BGNN_DT=#emymtBgnnDt#
+			AND EMYMT_END_DT=#emymtEndDt#
+			AND DEPT_CD=#deptCd#
+			AND BUSIN_CD=#businCd#
+	</delete>
+
+
+</sqlMap>

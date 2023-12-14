@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Insr5400">
+
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>	
+	<typeAlias  alias="insr5400SrhVO" type="com.app.exterms.insurance.server.vo.Insr5400SrhVO"/>
+	<typeAlias  alias="insr5400VO" type="com.app.exterms.insurance.server.vo.Insr5400VO"/>
+
+	<resultMap id="insr5400VO" class="com.app.exterms.insurance.server.vo.Insr5400VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="deptNm" column="DEPT_NM" columnIndex="2"/>
+		<result property="acntHodrNm" column="ACNT_HODR_NM" columnIndex="3"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="4"/>
+		<result property="prmmIposDivCd" column="PRMM_IPOS_DIV_CD" columnIndex="5"/>
+		<result property="idtlAccdtInsurAqtnDt" column="IDTL_ACCDT_INSUR_AQTN_DT" columnIndex="6"/>
+		<result property="idtlAccdtInsurLssDt" column="IDTL_ACCDT_INSUR_LSS_DT" columnIndex="7"/>
+		<result property="idtlAccdtPayTotAmnt" column="IDTL_ACCDT_PAY_TOT_AMNT" columnIndex="8"/>
+		<result property="umytInsrAqtnDt" column="UMYT_INSR_AQTN_DT" columnIndex="9"/>
+		<result property="umytInsrLssDt" column="UMYT_INSR_LSS_DT" columnIndex="10"/>
+		<result property="umytInsrPayTotAmnt" column="UMYT_INSR_PAY_TOT_AMNT" columnIndex="11"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="12"/>
+		<result property="typOccuNm" column="TYP_OCCU_NM" columnIndex="13"/>
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="14"/>
+		<result property="payCd" column="PAY_CD" columnIndex="15"/>
+		<result property="payCdNm" column="PAY_CD_NM" columnIndex="16"/>
+		<result property="emymtSeilNum" column="EMYMT_SEIL_NUM" columnIndex="17"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="18"/>
+	</resultMap>
+
+	<insert id="insr5400DAO.insertInsr5300_S">
+		<![CDATA[
+			INSERT INTO INSR5300 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , EMYMT_SEIL_NUM
+				  , UMYT_INSR_CLUT_YR
+				  , PRMM_IPOS_DIV_CD
+				  , UMYT_INSR_AQTN_DT
+				  , UMYT_INSR_LSS_DT
+				  , UMYT_INSR_PAY_TOT_AMNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #emymtSeilNum#
+				  , #umytInsrClutYr#
+				  , #prmmIposDivCd#
+				  , #umytInsrAqtnDt#
+				  , #umytInsrLssDt#
+				  , #umytInsrPayTotAmnt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="insr5400DAO.updateInsr5300_S">
+		<![CDATA[
+			UPDATE INSR5300
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, EMYMT_SEIL_NUM=#emymtSeilNum#
+				, UMYT_INSR_CLUT_YR=#umytInsrClutYr#
+				, PRMM_IPOS_DIV_CD=#prmmIposDivCd#
+				, UMYT_INSR_AQTN_DT=#umytInsrAqtnDt#
+				, UMYT_INSR_LSS_DT=#umytInsrLssDt#
+				, UMYT_INSR_PAY_TOT_AMNT=#umytInsrPayTotAmnt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+								AND UMYT_INSR_CLUT_YR=#umytInsrClutYr#
+				]]>
+	</update>
+	
+	<delete id="insr5400DAO.deleteInsr5300_S">
+		<![CDATA[
+			DELETE FROM INSR5300 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+								AND UMYT_INSR_CLUT_YR=#umytInsrClutYr#
+				]]>
+	</delete>
+
+	<select id="insr5400DAO.selectInsr5300ToInsr5400ListCnt" parameterClass="insr5400SrhVO"  resultClass="int">
+	    <![CDATA[
+	SELECT COUNT(*) totcnt
+	FROM
+	(	SELECT
+			    AA01.DPOB_CD
+			    ,AA01.CURR_AFFN_DEPT_CD
+			    ,#srhHlthInsrYr# AS SRH_HLTH_INSR_YR
+			    ,AA01.DEPT_NM
+			    ,AA01.ACNT_HODR_NM
+			    ,AA01.RESN_REGN_NUM
+			    ,DECODE(AA02.PRMM_IPOS_DIV_CD,'',AA03.PRMM_IPOS_DIV_CD) AS PRMM_IPOS_DIV_CD
+
+			    ,NVL(AA03.DPOB_CD,AA01.DPOB_CD) AS IDTL_DPOB_CD
+			    ,NVL(AA03.IDTL_ACCDT_INSUR_CLUT_YR,#srhHlthInsrYr#) AS IDTL_ACCDT_INSUR_CLUT_YR
+			    ,NVL(AA03.SYSTEMKEY, AA01.SYSTEMKEY) AS IDTL_SYSTEMKEY
+			    ,NVL(AA03.EMYMT_SEIL_NUM,AA01.EMYMT_SEIL_NUM) AS EMYMT_SEIL_NUM1
+			    ,AA03.IDTL_ACCDT_INSUR_AQTN_DT
+			    ,AA03.IDTL_ACCDT_INSUR_LSS_DT
+			    ,AA03.IDTL_ACCDT_PAY_TOT_AMNT
+
+			    ,NVL(AA02.DPOB_CD,AA01.DPOB_CD) AS UMYT_DPOB_CD
+			    ,NVL(AA02.UMYT_INSR_CLUT_YR,#srhHlthInsrYr#) AS UMYT_INSR_CLUT_YR
+			    ,NVL(AA02.SYSTEMKEY, AA01.SYSTEMKEY) AS UMYT_SYSTEMKEY
+			    ,NVL(AA02.EMYMT_SEIL_NUM,AA01.EMYMT_SEIL_NUM) AS EMYMT_SEIL_NUM2
+			    ,AA02.UMYT_INSR_AQTN_DT
+			    ,AA02.UMYT_INSR_LSS_DT
+			    ,AA02.UMYT_INSR_PAY_TOT_AMNT
+
+			    ,AA01.TYP_OCCU_CD
+			    ,AA01.TYP_OCCU_NM
+			    ,AA01.DTIL_OCCU_CLS_DIV_CD
+			    ,AA01.PAY_CD
+			    ,AA01.PAY_CD_NM
+			    ,AA01.EMYMT_SEIL_NUM
+			    ,AA01.DTIL_OCCU_INTTN_CD
+			FROM
+			(
+			    SELECT AB02.DPOB_CD
+			        ,AB01.CURR_AFFN_DEPT_CD
+			        ,fcBass0400CDNM (AB02.DPOB_CD, AB01.CURR_AFFN_DEPT_CD, '2') AS DEPT_NM
+			        ,AB03.ACNT_HODR_NM
+			        ,AB01.RESN_REGN_NUM
+			        ,AB01.TYP_OCCU_CD
+			        ,(
+			            SELECT B.TYP_OCCU_NM
+			            FROM BASS0320 B
+			            WHERE AB01.DPOB_CD = B.DPOB_CD
+			                AND AB01.TYP_OCCU_CD = B.TYP_OCCU_CD
+			         ) AS TYP_OCCU_NM
+			        ,AB01.DTIL_OCCU_CLS_DIV_CD
+			        ,AB03.PAY_CD
+			        ,(
+			            SELECT AB04.COMM_CD_NM
+			            FROM BASS0300 AB04
+			            WHERE AB04.COMM_CD = AB03.PAY_CD
+			         ) AS PAY_CD_NM
+			        ,SUBSTR(AB02.EMYMT_BGNN_DT,1,4) AS EMYMT_BGNN_DT
+			        ,SUBSTR(AB02.EMYMT_END_DT,1,4) AS EMYMT_END_DT
+			        ,AB02.EMYMT_SEIL_NUM
+			        ,AB01.SYSTEMKEY
+			        ,AB01.DTIL_OCCU_INTTN_CD
+			    FROM PSNL0100 AB01
+			        ,PSNL0110 AB02
+			        ,PSNL0130 AB03
+			    WHERE AB01.SYSTEMKEY = AB02.SYSTEMKEY
+			        AND AB01.DPOB_CD = AB02.DPOB_CD
+			        AND AB02.SYSTEMKEY = AB03.SYSTEMKEY
+			        AND AB02.DPOB_CD = AB03.DPOB_CD
+			        AND AB03.PAY_CD = #payCd#
+			        AND SUBSTR(AB02.EMYMT_BGNN_DT,1,4) <= #srhHlthInsrYr#
+			        AND SUBSTR(AB02.EMYMT_END_DT,1,4) >= #srhHlthInsrYr#
+			    ORDER BY AB02.DPOB_CD
+			        ,AB02.EMYMT_SEIL_NUM
+			        ,AB03.ACNT_HODR_NM
+			) AA01
+			    , INSR5300 AA02
+			    , INSR6200 AA03
+            WHERE AA01.DPOB_CD = AA02.DPOB_CD(+)
+                AND AA01.SYSTEMKEY = AA02.SYSTEMKEY(+)
+                AND AA01.EMYMT_SEIL_NUM = AA02.EMYMT_SEIL_NUM(+)
+                AND #srhHlthInsrYr# = AA02.UMYT_INSR_CLUT_YR(+)
+                AND AA01.DPOB_CD = AA03.DPOB_CD(+)
+                AND AA01.SYSTEMKEY = AA03.SYSTEMKEY(+)
+                AND AA01.EMYMT_SEIL_NUM = AA03.EMYMT_SEIL_NUM(+)
+                AND #srhHlthInsrYr# = AA03.IDTL_ACCDT_INSUR_CLUT_YR(+)
+	)
+	]]>
+	</select>
+
+	<select id="insr5400DAO.selectInsr5300ToInsr5400List" parameterClass="insr5400SrhVO" resultClass="egovMap">
+	       <![CDATA[
+			SELECT
+			    AA01.DPOB_CD
+			    ,AA01.CURR_AFFN_DEPT_CD
+			    ,#srhHlthInsrYr# AS SRH_HLTH_INSR_YR
+			    ,AA01.SYSTEMKEY
+			    ,AA01.DEPT_NM
+			    ,AA01.ACNT_HODR_NM
+			    ,AA01.RESN_REGN_NUM
+			    ,DECODE(AA02.PRMM_IPOS_DIV_CD,'',AA03.PRMM_IPOS_DIV_CD) AS PRMM_IPOS_DIV_CD
+
+			    ,NVL(AA03.DPOB_CD,AA01.DPOB_CD) AS IDTL_DPOB_CD
+			    ,NVL(AA03.IDTL_ACCDT_INSUR_CLUT_YR,#srhHlthInsrYr#) AS IDTL_ACCDT_INSUR_CLUT_YR
+			    ,NVL(AA03.SYSTEMKEY, AA01.SYSTEMKEY) AS IDTL_SYSTEMKEY
+			    ,NVL(AA03.EMYMT_SEIL_NUM,AA01.EMYMT_SEIL_NUM) AS EMYMT_SEIL_NUM1
+			    ,AA03.IDTL_ACCDT_INSUR_AQTN_DT
+			    ,AA03.IDTL_ACCDT_INSUR_LSS_DT
+			    ,AA03.IDTL_ACCDT_PAY_TOT_AMNT
+
+			    ,NVL(AA02.DPOB_CD,AA01.DPOB_CD) AS UMYT_DPOB_CD
+			    ,NVL(AA02.UMYT_INSR_CLUT_YR,#srhHlthInsrYr#) AS UMYT_INSR_CLUT_YR
+			    ,NVL(AA02.SYSTEMKEY, AA01.SYSTEMKEY) AS UMYT_SYSTEMKEY
+			    ,NVL(AA02.EMYMT_SEIL_NUM,AA01.EMYMT_SEIL_NUM) AS EMYMT_SEIL_NUM2
+			    ,AA02.UMYT_INSR_AQTN_DT
+			    ,AA02.UMYT_INSR_LSS_DT
+			    ,AA02.UMYT_INSR_PAY_TOT_AMNT
+
+			    ,AA01.TYP_OCCU_CD
+			    ,AA01.TYP_OCCU_NM
+			    ,AA01.DTIL_OCCU_CLS_DIV_CD
+			    ,AA01.DTIL_OCCU_CLS_DIV_CD_NM
+			    ,AA01.PAY_CD
+			    ,AA01.PAY_CD_NM
+			    ,AA01.EMYMT_SEIL_NUM
+			    ,AA01.DTIL_OCCU_INTTN_CD
+			FROM
+			(
+			    SELECT AB02.DPOB_CD
+			        ,AB01.CURR_AFFN_DEPT_CD
+			        ,fcBass0400CDNM (AB02.DPOB_CD, AB01.CURR_AFFN_DEPT_CD, '2') AS DEPT_NM
+			        ,AB03.ACNT_HODR_NM
+			        ,AB01.RESN_REGN_NUM
+			        ,AB01.TYP_OCCU_CD
+			        ,(
+			            SELECT B.TYP_OCCU_NM
+			            FROM BASS0320 B
+			            WHERE AB01.DPOB_CD = B.DPOB_CD
+			                AND AB01.TYP_OCCU_CD = B.TYP_OCCU_CD
+			         ) AS TYP_OCCU_NM
+			        ,AB01.DTIL_OCCU_CLS_DIV_CD
+			        ,fcBass0350CDNM(AB02.DPOB_CD,AB01.TYP_OCCU_CD,AB01.DTIL_OCCU_CLS_DIV_CD,'1') AS DTIL_OCCU_CLS_DIV_CD_NM
+			        ,AB03.PAY_CD
+			        ,(
+			            SELECT AB04.COMM_CD_NM
+			            FROM BASS0300 AB04
+			            WHERE AB04.COMM_CD = AB03.PAY_CD
+			         ) AS PAY_CD_NM
+			        ,SUBSTR(AB02.EMYMT_BGNN_DT,1,4) AS EMYMT_BGNN_DT
+			        ,SUBSTR(AB02.EMYMT_END_DT,1,4) AS EMYMT_END_DT
+			        ,AB02.EMYMT_SEIL_NUM
+			        ,AB01.SYSTEMKEY
+			        ,AB01.DTIL_OCCU_INTTN_CD
+			    FROM PSNL0100 AB01
+			        ,PSNL0110 AB02
+			        ,PSNL0130 AB03
+			    WHERE AB01.SYSTEMKEY = AB02.SYSTEMKEY
+			        AND AB01.DPOB_CD = AB02.DPOB_CD
+			        AND AB02.SYSTEMKEY = AB03.SYSTEMKEY
+			        AND AB02.DPOB_CD = AB03.DPOB_CD
+			        AND AB03.PAY_CD = #payCd#
+			        AND SUBSTR(AB02.EMYMT_BGNN_DT,1,4) <= #srhHlthInsrYr#
+			        AND SUBSTR(AB02.EMYMT_END_DT,1,4) >= #srhHlthInsrYr#
+			]]>
+
+			<isNotEmpty property="emymtDivCd">
+			AND AB02.EMYMT_DIV_CD = #emymtDivCd#
+			</isNotEmpty>
+
+			<isNotEmpty property="deptCd">
+			AND AB02.DEPT_CD = #deptCd#
+			</isNotEmpty>
+
+			<isNotEmpty property="typOccuCd">
+			AND AB01.TYP_OCCU_CD = #typOccuCd#
+			</isNotEmpty>
+
+			<isNotEmpty property="dtilOccuInttnCd">
+			AND AB01.DTIL_OCCU_CLS_DIV_CD = #dtilOccuInttnCd#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="mangeDeptCd" >
+	         AB01.DEPT_CD=#mangeDeptCd#
+	        </isNotEmpty>      
+	        <isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+	         AB01.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+	        </isNotEmpty>  
+	        <![CDATA[
+			    ORDER BY AB02.DPOB_CD
+			        ,AB02.EMYMT_SEIL_NUM
+			        ,AB03.ACNT_HODR_NM
+			) AA01
+			    , INSR5300 AA02
+			    , INSR6200 AA03
+            WHERE AA01.DPOB_CD = AA02.DPOB_CD(+)
+                AND AA01.SYSTEMKEY = AA02.SYSTEMKEY(+)
+                AND AA01.EMYMT_SEIL_NUM = AA02.EMYMT_SEIL_NUM(+)
+                AND #srhHlthInsrYr# = AA02.UMYT_INSR_CLUT_YR(+)
+                AND AA01.DPOB_CD = AA03.DPOB_CD(+)
+                AND AA01.SYSTEMKEY = AA03.SYSTEMKEY(+)
+                AND AA01.EMYMT_SEIL_NUM = AA03.EMYMT_SEIL_NUM(+)
+                AND #srhHlthInsrYr# = AA03.IDTL_ACCDT_INSUR_CLUT_YR(+)
+			]]>
+
+	        <![CDATA[
+		        AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+                                            WHERE     C.DPOB_CD = AA01.DPOB_CD
+						                        AND C.DEPT_CD = AA01.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(AA01.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(AA01.DTIL_OCCU_INTTN_CD,'TT')
+												]]>
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          )
+	</select>
+
+	<select id="insr5400DAO.selectInsr5300Cnt" parameterClass="insr5400SrhVO" resultClass="int">
+	    <![CDATA[
+		SELECT COUNT(*) totcnt
+		FROM
+		(
+			SELECT *
+			FROM INSR5300
+			WHERE DPOB_CD = #umytDpobCd#
+			    AND UMYT_INSR_CLUT_YR = #umytInsrClutYr#
+			    AND SYSTEMKEY = #umytSystemkey#
+			    AND EMYMT_SEIL_NUM = #emymtSeilNum2#
+		)
+		]]>
+	</select>
+
+	<select id="insr5400DAO.selectInsr6200Cnt" parameterClass="insr5400SrhVO" resultClass="int">
+	    <![CDATA[
+		SELECT COUNT(*) totcnt
+		FROM
+		(
+			SELECT *
+			FROM INSR6200
+			WHERE DPOB_CD = #idtlDpobCd#
+			    AND IDTL_ACCDT_INSUR_CLUT_YR = #idtlAccdtInsurClutYr#
+			    AND SYSTEMKEY = #idtlSystemkey#
+			    AND EMYMT_SEIL_NUM = #emymtSeilNum1#
+		)
+		]]>
+	</select>
+
+
+	<select id="insr5400DAO.selectInsr5300ToInsr5400ListXls" parameterClass="insr5400SrhVO" resultClass="egovMap">
+	       <![CDATA[
+			SELECT
+			    AA01.DPOB_CD
+			    ,AA01.CURR_AFFN_DEPT_CD
+			    ,#srhHlthInsrYr# AS SRH_HLTH_INSR_YR
+			    ,AA01.SYSTEMKEY
+			    ,AA01.DEPT_NM
+			    ,AA01.ACNT_HODR_NM
+			    ,AA01.RESN_REGN_NUM
+			    ,DECODE(AA02.PRMM_IPOS_DIV_CD,'',AA03.PRMM_IPOS_DIV_CD) AS PRMM_IPOS_DIV_CD
+
+			    ,NVL(AA03.DPOB_CD,AA01.DPOB_CD) AS IDTL_DPOB_CD
+			    ,NVL(AA03.IDTL_ACCDT_INSUR_CLUT_YR,#srhHlthInsrYr#) AS IDTL_ACCDT_INSUR_CLUT_YR
+			    ,NVL(AA03.SYSTEMKEY, AA01.SYSTEMKEY) AS IDTL_SYSTEMKEY
+			    ,NVL(AA03.EMYMT_SEIL_NUM,AA01.EMYMT_SEIL_NUM) AS EMYMT_SEIL_NUM1
+			    ,AA03.IDTL_ACCDT_INSUR_AQTN_DT
+			    ,AA03.IDTL_ACCDT_INSUR_LSS_DT
+			    ,AA03.IDTL_ACCDT_PAY_TOT_AMNT
+
+			    ,NVL(AA02.DPOB_CD,AA01.DPOB_CD) AS UMYT_DPOB_CD
+			    ,NVL(AA02.UMYT_INSR_CLUT_YR,#srhHlthInsrYr#) AS UMYT_INSR_CLUT_YR
+			    ,NVL(AA02.SYSTEMKEY, AA01.SYSTEMKEY) AS UMYT_SYSTEMKEY
+			    ,NVL(AA02.EMYMT_SEIL_NUM,AA01.EMYMT_SEIL_NUM) AS EMYMT_SEIL_NUM2
+			    ,AA02.UMYT_INSR_AQTN_DT
+			    ,AA02.UMYT_INSR_LSS_DT
+			    ,AA02.UMYT_INSR_PAY_TOT_AMNT
+
+			    ,AA01.TYP_OCCU_CD
+			    ,AA01.TYP_OCCU_NM
+			    ,AA01.DTIL_OCCU_CLS_DIV_CD
+			    ,AA01.DTIL_OCCU_CLS_DIV_CD_NM
+			    ,AA01.PAY_CD
+			    ,AA01.PAY_CD_NM
+			    ,AA01.EMYMT_SEIL_NUM
+			    ,AA01.DTIL_OCCU_INTTN_CD
+			FROM
+			(
+			    SELECT AB02.DPOB_CD
+			        ,AB01.CURR_AFFN_DEPT_CD
+			        ,fcBass0400CDNM (AB02.DPOB_CD, AB01.CURR_AFFN_DEPT_CD, '2') AS DEPT_NM
+			        ,AB03.ACNT_HODR_NM
+			        ,AB01.RESN_REGN_NUM
+			        ,AB01.TYP_OCCU_CD
+			        ,(
+			            SELECT B.TYP_OCCU_NM
+			            FROM BASS0320 B
+			            WHERE AB01.DPOB_CD = B.DPOB_CD
+			                AND AB01.TYP_OCCU_CD = B.TYP_OCCU_CD
+			         ) AS TYP_OCCU_NM
+			        ,AB01.DTIL_OCCU_CLS_DIV_CD
+			        ,fcBass0350CDNM(AB02.DPOB_CD,AB01.TYP_OCCU_CD,AB01.DTIL_OCCU_CLS_DIV_CD,'1') AS DTIL_OCCU_CLS_DIV_CD_NM
+			        ,AB03.PAY_CD
+			        ,(
+			            SELECT AB04.COMM_CD_NM
+			            FROM BASS0300 AB04
+			            WHERE AB04.COMM_CD = AB03.PAY_CD
+			         ) AS PAY_CD_NM
+			        ,SUBSTR(AB02.EMYMT_BGNN_DT,1,4) AS EMYMT_BGNN_DT
+			        ,SUBSTR(AB02.EMYMT_END_DT,1,4) AS EMYMT_END_DT
+			        ,AB02.EMYMT_SEIL_NUM
+			        ,AB01.SYSTEMKEY
+			        ,AB01.DTIL_OCCU_INTTN_CD
+			    FROM PSNL0100 AB01
+			        ,PSNL0110 AB02
+			        ,PSNL0130 AB03
+			    WHERE AB01.SYSTEMKEY = AB02.SYSTEMKEY
+			        AND AB01.DPOB_CD = AB02.DPOB_CD
+			        AND AB02.SYSTEMKEY = AB03.SYSTEMKEY
+			        AND AB02.DPOB_CD = AB03.DPOB_CD
+			        AND AB03.PAY_CD = #payCd#
+			        AND SUBSTR(AB02.EMYMT_BGNN_DT,1,4) <= #srhHlthInsrYr#
+			        AND SUBSTR(AB02.EMYMT_END_DT,1,4) >= #srhHlthInsrYr#
+			]]>
+
+			<isNotEmpty property="emymtDivCd">
+			AND AB02.EMYMT_DIV_CD = #emymtDivCd#
+			</isNotEmpty>
+
+			<isNotEmpty property="deptCd">
+			AND AB02.DEPT_CD = #deptCd#
+			</isNotEmpty>
+
+			<isNotEmpty property="typOccuCd">
+			AND AB01.TYP_OCCU_CD = #typOccuCd#
+			</isNotEmpty>
+
+			<isNotEmpty property="dtilOccuInttnCd">
+			AND AB01.DTIL_OCCU_CLS_DIV_CD = #dtilOccuInttnCd#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="mangeDeptCd" >
+	         AB01.DEPT_CD=#mangeDeptCd#
+	        </isNotEmpty>      
+	        <isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+	         AB01.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+	        </isNotEmpty>  
+	        <![CDATA[
+			    ORDER BY AB02.DPOB_CD
+			        ,AB02.EMYMT_SEIL_NUM
+			        ,AB03.ACNT_HODR_NM
+			) AA01
+			    , INSR5300 AA02
+			    , INSR6200 AA03
+            WHERE AA01.DPOB_CD = AA02.DPOB_CD(+)
+                AND AA01.SYSTEMKEY = AA02.SYSTEMKEY(+)
+                AND AA01.EMYMT_SEIL_NUM = AA02.EMYMT_SEIL_NUM(+)
+                AND #srhHlthInsrYr# = AA02.UMYT_INSR_CLUT_YR(+)
+                AND AA01.DPOB_CD = AA03.DPOB_CD(+)
+                AND AA01.SYSTEMKEY = AA03.SYSTEMKEY(+)
+                AND AA01.EMYMT_SEIL_NUM = AA03.EMYMT_SEIL_NUM(+)
+                AND #srhHlthInsrYr# = AA03.IDTL_ACCDT_INSUR_CLUT_YR(+)
+			]]>
+
+	        <![CDATA[
+		        AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+                                            WHERE     C.DPOB_CD = AA01.DPOB_CD
+						                        AND C.DEPT_CD = AA01.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(AA01.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(AA01.DTIL_OCCU_INTTN_CD,'TT')
+												]]>
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          )
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<insert id="insr5400DAO.insertInsr5300">
+	    <![CDATA[
+		INSERT INTO INSR5300
+		(
+		    DPOB_CD
+		    ,UMYT_INSR_CLUT_YR
+		    ,SYSTEMKEY
+		    ,EMYMT_SEIL_NUM
+		    ,UMYT_INSR_AQTN_DT
+		    ,UMYT_INSR_LSS_DT
+		    ,UMYT_INSR_PAY_TOT_AMNT
+		)VALUES
+		(
+			#umytDpobCd#
+			,#umytInsrClutYr#
+			,#umytSystemkey#
+			,#emymtSeilNum2#
+			,#umytInsrAqtnDt#
+			,#umytInsrLssDt#
+			,#umytInsrPayTotAmnt#
+		)
+		]]>
+	</insert>
+
+	<insert id="insr5400DAO.insertInsr6200">
+	    <![CDATA[
+		INSERT INTO INSR6200
+		(
+		    DPOB_CD
+		    ,IDTL_ACCDT_INSUR_CLUT_YR
+		    ,SYSTEMKEY
+		    ,EMYMT_SEIL_NUM
+		    ,IDTL_ACCDT_INSUR_AQTN_DT
+		    ,IDTL_ACCDT_INSUR_LSS_DT
+		    ,IDTL_ACCDT_PAY_TOT_AMNT
+		)VALUES
+		(
+			#idtlDpobCd#
+			,#idtlAccdtInsurClutYr#
+			,#idtlSystemkey#
+			,#emymtSeilNum1#
+			,#idtlAccdtInsurAqtnDt#
+			,#idtlAccdtInsurLssDt#
+			,#idtlAccdtPayTotAmnt#
+		)
+		]]>
+	</insert>
+
+	<update id="insr5400DAO.updateInsr5300">
+	    <![CDATA[
+		UPDATE INSR5300
+		SET UMYT_INSR_AQTN_DT = #umytInsrAqtnDt#
+		    ,UMYT_INSR_LSS_DT = #umytInsrLssDt#
+		    ,UMYT_INSR_PAY_TOT_AMNT = #umytInsrPayTotAmnt#
+		WHERE DPOB_CD = #umytDpobCd#
+			AND UMYT_INSR_CLUT_YR = #umytInsrClutYr#
+			AND SYSTEMKEY = #umytSystemkey#
+			AND EMYMT_SEIL_NUM = #emymtSeilNum2#
+		]]>
+	</update>
+
+	<update id="insr5400DAO.updateInsr6200">
+	    <![CDATA[
+		UPDATE INSR6200
+		SET IDTL_ACCDT_INSUR_AQTN_DT = #idtlAccdtInsurAqtnDt#
+		    ,IDTL_ACCDT_INSUR_LSS_DT = #idtlAccdtInsurLssDt#
+		    ,IDTL_ACCDT_PAY_TOT_AMNT = #idtlAccdtPayTotAmnt#
+		WHERE DPOB_CD = #idtlDpobCd#
+			AND IDTL_ACCDT_INSUR_CLUT_YR = #idtlAccdtInsurClutYr#
+			AND SYSTEMKEY = #idtlSystemkey#
+			AND EMYMT_SEIL_NUM = #emymtSeilNum1#
+		]]>
+	</update>
+
+</sqlMap>

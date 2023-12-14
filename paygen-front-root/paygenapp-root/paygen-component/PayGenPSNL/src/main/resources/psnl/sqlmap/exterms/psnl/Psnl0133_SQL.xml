@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0133">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	
+	<typeAlias alias="psnl0133Dto" type="com.app.exterms.personal.client.dto.Psnl0133DTO"/>
+    <typeAlias  alias="psnl0133SrhVo" type="com.app.exterms.personal.server.vo.Psnl0133SrhVO"/>
+	<typeAlias  alias="psnl0133Vo" type="com.app.exterms.personal.server.vo.Psnl0133VO"/>
+	
+	
+	<insert id="psnl0133DAO.insertPsnl0133" parameterClass="psnl0133Vo">
+		<![CDATA[
+			INSERT INTO PSNL0133 
+				( DPOB_CD				
+					, SYSTEMKEY			
+					, DUTY_SITTN_SEIL_NUM	
+					, DUTY_SITTN_TTL		
+					, DUTY_SITTN_CMPTN_DT	
+					, DUTY_SITTN_PPG_PERN	
+					, DUTY_SITTN_CTNT		
+					, DUTY_SITTN_SGCTRT	
+					, DUTY_DEPT_CD
+					, KYBDR				
+					, INPT_DT				
+					, INPT_ADDR			
+					, REVN_DT				
+					, ISMT				
+					, REVN_ADDR	 )
+			VALUES ( #dpobCd#
+						, #systemkey#
+					 	, (  SELECT NVL(MAX(DUTY_SITTN_SEIL_NUM)+1,1) FROM PSNL0133 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#   ) 
+						, #dutySittnTtl#		
+						, #dutySittnCmptnDt#
+						, #dutySittnPpgPern#	
+						, #dutySittnCtnt#		
+						, #dutySittnSgctrt#	
+						, #dutyDeptCd#
+					  	, #ismt#
+					  	, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  	, #revnAddr#
+					  	, #ismt#
+					  	, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					  	, #revnAddr# )
+			]]>
+	</insert>
+	
+	<update id="psnl0133DAO.updatePsnl0133" parameterClass="psnl0133Vo">
+	
+			UPDATE PSNL0133
+				SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					, ISMT=#ismt#
+					, REVN_ADDR=#revnAddr#
+					, DUTY_SITTN_TTL=#dutySittnTtl#		
+					, DUTY_SITTN_CMPTN_DT=#dutySittnCmptnDt#
+					<!-- , DUTY_SITTN_PPG_PERN=#dutySittnPpgPern# -->
+					, DUTY_SITTN_CTNT=#dutySittnCtnt#	
+					, DUTY_SITTN_SGCTRT=#dutySittnSgctrt#
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				AND DUTY_SITTN_SEIL_NUM=#dutySittnSeilNum#
+	</update>
+	
+	<delete id="psnl0133DAO.deletePsnl0133" parameterClass="psnl0133Vo">
+		<![CDATA[
+			DELETE FROM PSNL0133 
+				WHERE DPOB_CD=#dpobCd#
+					AND SYSTEMKEY=#systemkey#
+					AND DUTY_SITTN_SEIL_NUM=#dutySittnSeilNum#
+		]]>
+	</delete>
+	 
+	 
+	<select id="psnl0133DAO.selectPsnl0133" resultClass="egovMap" parameterClass="psnl0133SrhVo">
+		<![CDATA[
+			SELECT ROWNUM RNUM, T.*
+			  FROM ( SELECT A.DPOB_CD				
+							, A.SYSTEMKEY			
+							, A.DUTY_SITTN_SEIL_NUM	
+							, A.DUTY_SITTN_TTL		
+							, TO_DATE( A.DUTY_SITTN_CMPTN_DT ,'YYYYMMDD')AS DUTY_SITTN_CMPTN_DT 	
+							, ( ( SELECT USR_NM FROM SYSM0100  WHERE USR_ID = A.DUTY_SITTN_PPG_PERN ) || '( ' || A.DUTY_SITTN_PPG_PERN || ' )'  ) AS DUTY_SITTN_PPG_PERN
+							, A.DUTY_SITTN_CTNT		
+							, A.DUTY_SITTN_SGCTRT	
+							, A.DUTY_DEPT_CD	
+							, fcBass0400CDNM(A.DPOB_CD, A.DUTY_DEPT_CD,'2') AS DUTY_DEPT_NM
+							, A.KYBDR				
+							, A.INPT_DT				
+							, A.INPT_ADDR			
+							, A.REVN_DT				
+							, A.ISMT 		
+							, A.REVN_ADDR				
+						FROM PSNL0133 A
+					WHERE A.DPOB_CD=#dpobCd#
+						AND A.SYSTEMKEY=#systemkey#
+					ORDER BY A.DUTY_SITTN_CMPTN_DT DESC)T
+			ORDER BY RNUM DESC
+		]]>
+	</select>
+	
+</sqlMap>

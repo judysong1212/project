@@ -1,0 +1,892 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Payr0350">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="payr0350SerarchVO" type="com.app.exterms.payroll.server.vo.Payr0350SrhVO"/>
+	
+	<resultMap id="payr0350" class="com.app.exterms.payroll.server.vo.Payr0350VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="reattyYr" column="REATTY_YR" columnIndex="2"/>
+		<result property="payCd" column="PAY_CD" columnIndex="3"/>
+		<result property="reattyStpDsptyNum" column="REATTY_STP_DSPTY_NUM" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="reattyApptnSumJan" column="REATTY_APPTN_SUM_JAN" columnIndex="6"/>
+		<result property="reattyApptnSumFeb" column="REATTY_APPTN_SUM_FEB" columnIndex="7"/>
+		<result property="reattyApptnSumMar" column="REATTY_APPTN_SUM_MAR" columnIndex="8"/>
+		<result property="reattyApptnSumApr" column="REATTY_APPTN_SUM_APR" columnIndex="9"/>
+		<result property="reattyApptnSumMay" column="REATTY_APPTN_SUM_MAY" columnIndex="10"/>
+		<result property="reattyApptnSumJun" column="REATTY_APPTN_SUM_JUN" columnIndex="11"/>
+		<result property="reattyApptnSumJul" column="REATTY_APPTN_SUM_JUL" columnIndex="12"/>
+		<result property="reattyApptnSumAug" column="REATTY_APPTN_SUM_AUG" columnIndex="13"/>
+		<result property="reattyApptnSumSep" column="REATTY_APPTN_SUM_SEP" columnIndex="14"/>
+		<result property="reattyApptnSumOct" column="REATTY_APPTN_SUM_OCT" columnIndex="15"/>
+		<result property="reattyApptnSumNov" column="REATTY_APPTN_SUM_NOV" columnIndex="16"/>
+		<result property="reattyApptnSumDec" column="REATTY_APPTN_SUM_DEC" columnIndex="17"/>
+		<result property="reattyApptnSumAggr" column="REATTY_APPTN_SUM_AGGR" columnIndex="18"/>
+		<result property="reattyItemNoteCtnt" column="REATTY_ITEM_NOTE_CTNT" columnIndex="19"/>
+		<result property="reattyPymtYrMnth" column="REATTY_PYMT_YR_MNTH" columnIndex="20"/>
+		<result property="reattyPymtPrcsYn" column="REATTY_PYMT_PRCS_YN" columnIndex="21"/>
+		<result property="reattyDdlneDt" column="REATTY_DDLNE_DT" columnIndex="22"/>
+		<result property="reattyDdlneYn" column="REATTY_DDLNE_YN" columnIndex="23"/>
+		<result property="kybdr" column="KYBDR" columnIndex="24"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="25"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="26"/>
+		<result property="ismt" column="ISMT" columnIndex="27"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="28"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="29"/>
+	</resultMap>
+	
+	<insert id="payr0350DAO.insertPayr0350_S">
+		<![CDATA[
+			INSERT INTO PAYR0350 
+				( DPOB_CD
+				  , REATTY_YR
+				  , PAY_CD
+				  , REATTY_STP_DSPTY_NUM
+				  , SYSTEMKEY
+				  , REATTY_APPTN_SUM_JAN
+				  , REATTY_APPTN_SUM_FEB
+				  , REATTY_APPTN_SUM_MAR
+				  , REATTY_APPTN_SUM_APR
+				  , REATTY_APPTN_SUM_MAY
+				  , REATTY_APPTN_SUM_JUN
+				  , REATTY_APPTN_SUM_JUL
+				  , REATTY_APPTN_SUM_AUG
+				  , REATTY_APPTN_SUM_SEP
+				  , REATTY_APPTN_SUM_OCT
+				  , REATTY_APPTN_SUM_NOV
+				  , REATTY_APPTN_SUM_DEC
+				  , REATTY_APPTN_SUM_AGGR
+				  , REATTY_ITEM_NOTE_CTNT
+				  , REATTY_PYMT_YR_MNTH
+				  , REATTY_PYMT_PRCS_YN
+				  , REATTY_DDLNE_DT
+				  , REATTY_DDLNE_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #reattyYr#
+				  , #payCd#
+				  , #reattyStpDsptyNum#
+				  , #systemkey#
+				  , #reattyApptnSumJan#
+				  , #reattyApptnSumFeb#
+				  , #reattyApptnSumMar#
+				  , #reattyApptnSumApr#
+				  , #reattyApptnSumMay#
+				  , #reattyApptnSumJun#
+				  , #reattyApptnSumJul#
+				  , #reattyApptnSumAug#
+				  , #reattyApptnSumSep#
+				  , #reattyApptnSumOct#
+				  , #reattyApptnSumNov#
+				  , #reattyApptnSumDec#
+				  , #reattyApptnSumAggr#
+				  , #reattyItemNoteCtnt#
+				  , #reattyPymtYrMnth#
+				  , #reattyPymtPrcsYn#
+				  , #reattyDdlneDt#
+				  , #reattyDdlneYn#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="payr0350DAO.updatePayr0350_S">
+		<![CDATA[
+			UPDATE PAYR0350
+			SET DPOB_CD=#dpobCd#
+				, REATTY_YR=#reattyYr#
+				, PAY_CD=#payCd#
+				, REATTY_STP_DSPTY_NUM=#reattyStpDsptyNum#
+				, SYSTEMKEY=#systemkey#
+				, REATTY_APPTN_SUM_JAN=#reattyApptnSumJan#
+				, REATTY_APPTN_SUM_FEB=#reattyApptnSumFeb#
+				, REATTY_APPTN_SUM_MAR=#reattyApptnSumMar#
+				, REATTY_APPTN_SUM_APR=#reattyApptnSumApr#
+				, REATTY_APPTN_SUM_MAY=#reattyApptnSumMay#
+				, REATTY_APPTN_SUM_JUN=#reattyApptnSumJun#
+				, REATTY_APPTN_SUM_JUL=#reattyApptnSumJul#
+				, REATTY_APPTN_SUM_AUG=#reattyApptnSumAug#
+				, REATTY_APPTN_SUM_SEP=#reattyApptnSumSep#
+				, REATTY_APPTN_SUM_OCT=#reattyApptnSumOct#
+				, REATTY_APPTN_SUM_NOV=#reattyApptnSumNov#
+				, REATTY_APPTN_SUM_DEC=#reattyApptnSumDec#
+				, REATTY_APPTN_SUM_AGGR=#reattyApptnSumAggr#
+				, REATTY_ITEM_NOTE_CTNT=#reattyItemNoteCtnt#
+				, REATTY_PYMT_YR_MNTH=#reattyPymtYrMnth#
+				, REATTY_PYMT_PRCS_YN=#reattyPymtPrcsYn#
+				, REATTY_DDLNE_DT=#reattyDdlneDt#
+				, REATTY_DDLNE_YN=#reattyDdlneYn# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND REATTY_YR=#reattyYr#
+								AND PAY_CD=#payCd#
+								AND REATTY_STP_DSPTY_NUM=#reattyStpDsptyNum#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	
+	<delete id="payr0350DAO.deletePayr0350_S">
+		<![CDATA[
+			DELETE FROM PAYR0350 
+						WHERE DPOB_CD=#dpobCd#
+								AND REATTY_YR=#reattyYr#
+								AND PAY_CD=#payCd#
+								AND REATTY_STP_DSPTY_NUM=#reattyStpDsptyNum#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<!--  화면  payr4210 삭제  -->
+    <delete id="payr0350DAO.deletePayr4210ToPayr0350_S">
+		<![CDATA[
+			DELETE FROM PAYR0350 
+						WHERE DPOB_CD=#dpobCd#
+								AND REATTY_YR=#reattyYr#
+								AND PAY_CD=#payCd#
+								AND REATTY_STP_DSPTY_NUM=#reattyStpDsptyNum#
+								]]>
+								<isNotEmpty prepend="AND" property="systemkey" >
+			 	           			SYSTEMKEY=#systemkey#
+		      					 </isNotEmpty>   
+				
+	 </delete>
+	
+	
+	
+	<select id="payr0350DAO.selectPayr0350_S" resultMap="payr0350">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, REATTY_YR
+				, PAY_CD
+				, REATTY_STP_DSPTY_NUM
+				, SYSTEMKEY
+				, REATTY_APPTN_SUM_JAN
+				, REATTY_APPTN_SUM_FEB
+				, REATTY_APPTN_SUM_MAR
+				, REATTY_APPTN_SUM_APR
+				, REATTY_APPTN_SUM_MAY
+				, REATTY_APPTN_SUM_JUN
+				, REATTY_APPTN_SUM_JUL
+				, REATTY_APPTN_SUM_AUG
+				, REATTY_APPTN_SUM_SEP
+				, REATTY_APPTN_SUM_OCT
+				, REATTY_APPTN_SUM_NOV
+				, REATTY_APPTN_SUM_DEC
+				, REATTY_APPTN_SUM_AGGR
+				, REATTY_ITEM_NOTE_CTNT
+				, REATTY_PYMT_YR_MNTH
+				, REATTY_PYMT_PRCS_YN
+				, REATTY_DDLNE_DT
+				, REATTY_DDLNE_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PAYR0350
+						WHERE DPOB_CD=#dpobCd#
+								AND REATTY_YR=#reattyYr#
+								AND PAY_CD=#payCd#
+								AND REATTY_STP_DSPTY_NUM=#reattyStpDsptyNum#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+	<select id="payr0350DAO.selectPayr0350List_D" parameterClass="payr0350SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, REATTY_YR
+								, PAY_CD
+								, REATTY_STP_DSPTY_NUM
+								, SYSTEMKEY
+								, REATTY_APPTN_SUM_JAN
+								, REATTY_APPTN_SUM_FEB
+								, REATTY_APPTN_SUM_MAR
+								, REATTY_APPTN_SUM_APR
+								, REATTY_APPTN_SUM_MAY
+								, REATTY_APPTN_SUM_JUN
+								, REATTY_APPTN_SUM_JUL
+								, REATTY_APPTN_SUM_AUG
+								, REATTY_APPTN_SUM_SEP
+								, REATTY_APPTN_SUM_OCT
+								, REATTY_APPTN_SUM_NOV
+								, REATTY_APPTN_SUM_DEC
+								, REATTY_APPTN_SUM_AGGR
+								, REATTY_ITEM_NOTE_CTNT
+								, REATTY_PYMT_YR_MNTH
+								, REATTY_PYMT_PRCS_YN
+								, REATTY_DDLNE_DT
+								, REATTY_DDLNE_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PAYR0350
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					REATTY_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, REATTY_YR DESC
+							, PAY_CD DESC
+							, REATTY_STP_DSPTY_NUM DESC
+							, SYSTEMKEY DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="payr0350DAO.selectPayr0350ListTotCnt_S" parameterClass="payr0350SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0350
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				REATTY_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+	
+	<!-- payr4210 화면에서 소급계산 결과내역 -->
+	<select id="payr0350DAO.selectPayr4210ToPayr0350List_D" parameterClass="payr0350SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				 SELECT
+                      AA.DPOB_CD
+                    , AA.REATTY_YR
+                    , AA.PAY_CD
+                    ,fcBass0300CDNM(AA.DPOB_CD,AA.PAY_CD) AS PAY_NM 
+                    , AA.REATTY_STP_DSPTY_NUM
+                    , AA.SYSTEMKEY
+                    , AA.REATTY_APPTN_SUM_JAN
+                    , AA.REATTY_APPTN_SUM_FEB
+                    , AA.REATTY_APPTN_SUM_MAR
+                    , AA.REATTY_APPTN_SUM_APR
+                    , AA.REATTY_APPTN_SUM_MAY
+                    , AA.REATTY_APPTN_SUM_JUN
+                    , AA.REATTY_APPTN_SUM_JUL
+                    , AA.REATTY_APPTN_SUM_AUG
+                    , AA.REATTY_APPTN_SUM_SEP
+                    , AA.REATTY_APPTN_SUM_OCT
+                    , AA.REATTY_APPTN_SUM_NOV
+                    , AA.REATTY_APPTN_SUM_DEC
+                    , AA.REATTY_APPTN_SUM_AGGR
+                    , AA.REATTY_ITEM_NOTE_CTNT
+                    , AA.REATTY_PYMT_YR_MNTH
+                    , AA.REATTY_PYMT_PRCS_YN
+                    , AA.REATTY_DDLNE_DT
+                    , AA.REATTY_DDLNE_YN
+                    , BB.CURR_AFFN_DEPT_CD AS DEPT_CD
+                    , fcBass0400CDNM(BB.DPOB_CD,BB.CURR_AFFN_DEPT_CD,'2') AS DEPT_NM 
+                    ,BB.TYP_OCCU_CD 
+                    , fcBass0320CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD)   AS TYP_OCCU_NM
+                    ,NVL(BB.PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+                    ,BB.BUSIN_CD
+                    ,fcBass0500CDNM(BB.DPOB_CD,SUBSTR(BB.BUSIN_CD,1,4),BB.DEPT_CD,BB.BUSIN_CD) AS BUSIN_NM   
+                    ,BB.EMYMT_DIV_CD
+                    ,fcBass0300CDNM(BB.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM 
+                    ,BB.DTIL_OCCU_CLS_DIV_CD
+                    , BB.DTIL_OCCU_INTTN_CD 
+		            , fcBassEx0350CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD,BB.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM
+                    ,CC.PAYR_MANG_DEPT_CD
+                    ,fcBass0400CDNM(CC.DPOB_CD,CC.PAYR_MANG_DEPT_CD,'2') AS PAYR_MANG_DEPT_NM  
+                FROM PAYR0350 AA, PSNL0100 BB,PAYR0500 CC  
+                    WHERE AA.DPOB_CD=BB.DPOB_CD  
+                      AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+                      AND AA.DPOB_CD=CC.DPOB_CD   
+                      AND AA.SYSTEMKEY = CC.SYSTEMKEY 
+		              AND AA.DPOB_CD=#dpobCd#
+					  AND AA.REATTY_YR=#reattyYr#
+					  AND AA.PAY_CD=#payCd#
+					  AND AA.REATTY_STP_DSPTY_NUM=#reattyStpDsptyNum#
+					  AND AA.SYSTEMKEY=#systemkey#
+					ORDER BY 
+						      AA.DPOB_CD DESC
+							, AA.REATTY_YR DESC
+							, AA.PAY_CD DESC
+							, AA.REATTY_STP_DSPTY_NUM DESC
+							 ,(SELECT LPAD(DEPT_RANK,5,'0')  
+                                   FROM BASS0400 DD
+                                   WHERE DD.DEPT_CD =  BB.CURR_AFFN_DEPT_CD  
+                                     AND DD.DPOB_CD = BB.DPOB_CD) ASC 
+                            , BB.RESN_REGN_NUM ASC
+							, AA.SYSTEMKEY ASC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<!-- payr4210 화면에서 소급계산 결과내역 -->
+	<select id="payr0350DAO.selectPayr4210ToPayr0350ListTotCnt_S" parameterClass="payr0350SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM  (
+			 SELECT
+                      AA.DPOB_CD
+                    , AA.REATTY_YR
+                    , AA.PAY_CD
+                    ,fcBass0300CDNM(AA.DPOB_CD,AA.PAY_CD) AS PAY_NM 
+                    , AA.REATTY_STP_DSPTY_NUM
+                    , AA.SYSTEMKEY
+                    , AA.REATTY_APPTN_SUM_JAN
+                    , AA.REATTY_APPTN_SUM_FEB
+                    , AA.REATTY_APPTN_SUM_MAR
+                    , AA.REATTY_APPTN_SUM_APR
+                    , AA.REATTY_APPTN_SUM_MAY
+                    , AA.REATTY_APPTN_SUM_JUN
+                    , AA.REATTY_APPTN_SUM_JUL
+                    , AA.REATTY_APPTN_SUM_AUG
+                    , AA.REATTY_APPTN_SUM_SEP
+                    , AA.REATTY_APPTN_SUM_OCT
+                    , AA.REATTY_APPTN_SUM_NOV
+                    , AA.REATTY_APPTN_SUM_DEC
+                    , AA.REATTY_APPTN_SUM_AGGR
+                    , AA.REATTY_ITEM_NOTE_CTNT
+                    , AA.REATTY_PYMT_YR_MNTH
+                    , AA.REATTY_PYMT_PRCS_YN
+                    , AA.REATTY_DDLNE_DT
+                    , AA.REATTY_DDLNE_YN
+                    , BB.CURR_AFFN_DEPT_CD AS DEPT_CD
+                    , fcBass0400CDNM(BB.DPOB_CD,BB.CURR_AFFN_DEPT_CD,'2') AS DEPT_NM 
+                    ,BB.TYP_OCCU_CD 
+                    , fcBass0320CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD)   AS TYP_OCCU_NM
+                    ,NVL(BB.PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+                    ,BB.BUSIN_CD
+                    ,fcBass0500CDNM(BB.DPOB_CD,SUBSTR(BB.BUSIN_CD,1,4),BB.DEPT_CD,BB.BUSIN_CD) AS BUSIN_NM   
+                    ,BB.EMYMT_DIV_CD
+                    ,fcBass0300CDNM(BB.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM 
+                    ,BB.DTIL_OCCU_CLS_DIV_CD
+                    ,CC.PAYR_MANG_DEPT_CD
+                    ,fcBass0400CDNM(CC.DPOB_CD,CC.PAYR_MANG_DEPT_CD,'2') AS PAYR_MANG_DEPT_NM  
+                FROM PAYR0350 AA, PSNL0100 BB,PAYR0500 CC  
+                    WHERE AA.DPOB_CD=BB.DPOB_CD  
+                      AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+                      AND AA.DPOB_CD=CC.DPOB_CD   
+                      AND AA.SYSTEMKEY = CC.SYSTEMKEY 
+		              AND AA.DPOB_CD=#dpobCd#
+					  AND AA.REATTY_YR=#reattyYr#
+					  AND AA.PAY_CD=#payCd#
+					  AND AA.REATTY_STP_DSPTY_NUM=#reattyStpDsptyNum#
+					  AND AA.SYSTEMKEY=#systemkey#
+			)
+	</select>
+	
+	<select id="payr0350DAO.selectXlsPayr4210List_D" parameterClass="payr0350SerarchVO" resultClass="int"> 
+			 SELECT
+                      AA.DPOB_CD
+                    , AA.REATTY_YR
+                    , AA.PAY_CD
+                    ,fcBass0300CDNM(AA.DPOB_CD,AA.PAY_CD) AS PAY_NM 
+                    , AA.REATTY_STP_DSPTY_NUM
+                    , AA.SYSTEMKEY
+                    , AA.REATTY_APPTN_SUM_JAN
+                    , AA.REATTY_APPTN_SUM_FEB
+                    , AA.REATTY_APPTN_SUM_MAR
+                    , AA.REATTY_APPTN_SUM_APR
+                    , AA.REATTY_APPTN_SUM_MAY
+                    , AA.REATTY_APPTN_SUM_JUN
+                    , AA.REATTY_APPTN_SUM_JUL
+                    , AA.REATTY_APPTN_SUM_AUG
+                    , AA.REATTY_APPTN_SUM_SEP
+                    , AA.REATTY_APPTN_SUM_OCT
+                    , AA.REATTY_APPTN_SUM_NOV
+                    , AA.REATTY_APPTN_SUM_DEC
+                    , AA.REATTY_APPTN_SUM_AGGR
+                    , AA.REATTY_ITEM_NOTE_CTNT
+                    , AA.REATTY_PYMT_YR_MNTH
+                    , AA.REATTY_PYMT_PRCS_YN
+                    , AA.REATTY_DDLNE_DT
+                    , AA.REATTY_DDLNE_YN
+                    , BB.CURR_AFFN_DEPT_CD AS DEPT_CD
+                    , fcBass0400CDNM(BB.DPOB_CD,BB.CURR_AFFN_DEPT_CD,'2') AS DEPT_NM 
+                    ,BB.TYP_OCCU_CD 
+                    , fcBass0300CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD)  AS TYP_OCCU_NM
+                    ,NVL(BB.PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+                    ,BB.BUSIN_CD
+                    ,fcBass0500CDNM(BB.DPOB_CD,SUBSTR(BB.BUSIN_CD,1,4),BB.DEPT_CD,BB.BUSIN_CD) AS BUSIN_NM   
+                    ,BB.EMYMT_DIV_CD
+                    ,fcBass0300CDNM(BB.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM 
+                    ,BB.DTIL_OCCU_CLS_DIV_CD
+                    , BB.DTIL_OCCU_INTTN_CD 
+		            , fcBassEx0350CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD,BB.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM 
+                    ,CC.PAYR_MANG_DEPT_CD
+                    ,fcBass0400CDNM(CC.DPOB_CD,CC.PAYR_MANG_DEPT_CD,'2') AS PAYR_MANG_DEPT_NM  
+                FROM PAYR0350 AA, PSNL0100 BB,PAYR0500 CC  
+                    WHERE AA.DPOB_CD=BB.DPOB_CD  
+                      AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+                      AND AA.DPOB_CD=CC.DPOB_CD   
+                      AND AA.SYSTEMKEY = CC.SYSTEMKEY  
+                        <isNotEmpty prepend="AND" property="dpobCd" >
+			 	     AA.DPOB_CD=#dpobCd#
+		           </isNotEmpty> 
+		         AND EXISTS  (
+                           SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' ))) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+				 
+                                          ) 
+				       <isNotEmpty prepend="AND" property="businCd" >
+					 	BB.BUSIN_CD=#businCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	CC.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	BB.EMYMT_DIV_CD=#emymtDivCd#
+				       </isNotEmpty> 
+				       	<isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+						BB.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="mangeDeptCd" >
+						BB.MANGE_DEPT_CD = #mangeDeptCd#
+	 					</isNotEmpty>
+				       <isNotEmpty prepend="AND" property="payCd" >
+					 	AA.PAY_CD=#payCd#
+				       </isNotEmpty> 
+				         <isNotEmpty prepend="AND" property="reattyApptnYrMnth" >
+					 	AA.REATTY_APPTN_YR_MNTH = #reattyApptnYrMnth#
+				       </isNotEmpty>  
+				       <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+						 BB.TYP_OCCU_CD
+						]]>
+						<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						 #typOccuCdArr[]#
+						</iterate>
+						</isNotEmpty>  
+					   <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+						<!--   <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+						<![CDATA[
+						 BB.DTIL_OCCU_CLS_DIV_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+						 #dtilOccuClsDivCdArr[]#
+						</iterate>
+						</isNotEmpty>   -->
+				         <isNotEmpty prepend="AND" property="systemkey" >
+					 	BB.systemkey=#systemkey#
+				       </isNotEmpty>  
+				       <isNotEmpty prepend="AND" property="hanNm" >
+					 	BB.HAN_NM(+)  LIKE '%' || #hanNm# || '%'
+					 	 </isNotEmpty>  
+	</select>
+	
+	<!-- payr4220 - 급여소급내역관리 화면  소급대상자정보 가져오기 -->
+	<select id="payr0350DAO.selectPayr4220ToPayr0350TgtList_D" parameterClass="payr0350SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+		    SELECT
+                      AA.DPOB_CD
+                    , AA.REATTY_YR
+                    , AA.PAY_CD
+                    ,fcBass0300CDNM(AA.DPOB_CD,AA.PAY_CD) AS PAY_NM 
+                    , AA.REATTY_STP_DSPTY_NUM
+                    , AA.SYSTEMKEY
+                    , AA.REATTY_APPTN_SUM_JAN
+                    , AA.REATTY_APPTN_SUM_FEB
+                    , AA.REATTY_APPTN_SUM_MAR
+                    , AA.REATTY_APPTN_SUM_APR
+                    , AA.REATTY_APPTN_SUM_MAY
+                    , AA.REATTY_APPTN_SUM_JUN
+                    , AA.REATTY_APPTN_SUM_JUL
+                    , AA.REATTY_APPTN_SUM_AUG
+                    , AA.REATTY_APPTN_SUM_SEP
+                    , AA.REATTY_APPTN_SUM_OCT
+                    , AA.REATTY_APPTN_SUM_NOV
+                    , AA.REATTY_APPTN_SUM_DEC
+                    , AA.REATTY_APPTN_SUM_AGGR
+                    , AA.REATTY_ITEM_NOTE_CTNT
+                    , AA.REATTY_PYMT_YR_MNTH
+                    , AA.REATTY_PYMT_PRCS_YN
+                    , AA.REATTY_DDLNE_DT
+                    , AA.REATTY_DDLNE_YN
+                    , BB.CURR_AFFN_DEPT_CD AS DEPT_CD
+                    , fcBass0400CDNM(BB.DPOB_CD,BB.CURR_AFFN_DEPT_CD,'2') AS DEPT_NM 
+                    ,BB.TYP_OCCU_CD 
+                    , fcBass0320CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD)  AS TYP_OCCU_NM
+                    ,NVL(BB.PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+                    ,BB.BUSIN_CD
+                    ,fcBass0500CDNM(BB.DPOB_CD,SUBSTR(BB.BUSIN_CD,1,4),BB.DEPT_CD,BB.BUSIN_CD) AS BUSIN_NM   
+                    ,BB.EMYMT_DIV_CD
+                    ,fcBass0300CDNM(BB.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM 
+                    ,BB.DTIL_OCCU_CLS_DIV_CD
+                    ,BB.DTIL_OCCU_INTTN_CD 
+		            , fcBassEx0350CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD,BB.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM 
+                    ,CC.PAYR_MANG_DEPT_CD
+                    ,fcBass0400CDNM(CC.DPOB_CD,CC.PAYR_MANG_DEPT_CD,'2') AS PAYR_MANG_DEPT_NM  
+                    ,DD.REATTY_APPTN_YR_MNTH
+                FROM PAYR0350 AA, PSNL0100 BB,PAYR0500 CC , PAYR0360 DD
+                    WHERE AA.DPOB_CD=BB.DPOB_CD  
+                      AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+                      AND AA.DPOB_CD=CC.DPOB_CD   
+                      AND AA.SYSTEMKEY = CC.SYSTEMKEY  
+                      AND AA.DPOB_CD=DD.DPOB_CD
+					  AND AA.REATTY_YR=DD.REATTY_YR
+					  AND AA.PAY_CD=DD.PAY_CD
+					  AND AA.REATTY_STP_DSPTY_NUM=DD.REATTY_STP_DSPTY_NUM
+                 <isNotEmpty prepend="AND" property="dpobCd" >
+			 	     AA.DPOB_CD=#dpobCd#
+		           </isNotEmpty> 
+		         AND EXISTS  (
+                           SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          ) 
+				       <isNotEmpty prepend="AND" property="businCd" >
+					 	BB.BUSIN_CD=#businCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	CC.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	BB.EMYMT_DIV_CD=#emymtDivCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="payCd" >
+					 	AA.PAY_CD=#payCd#
+				       </isNotEmpty> 
+				         <isNotEmpty prepend="AND" property="reattyApptnYrMnth" >
+					 	DD.REATTY_APPTN_YR_MNTH = #reattyApptnYrMnth#
+				       </isNotEmpty>  
+				       <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+						 BB.TYP_OCCU_CD
+						]]>
+						<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						 #typOccuCdArr[]#
+						</iterate>
+						</isNotEmpty>  
+					   	 <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+						<!--   <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+						<![CDATA[
+						 BB.DTIL_OCCU_CLS_DIV_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+						 #dtilOccuClsDivCdArr[]#
+						</iterate>
+						</isNotEmpty>   -->
+				         <isNotEmpty prepend="AND" property="systemkey" >
+					 	BB.systemkey=#systemkey#
+				       </isNotEmpty>  
+				       <isNotEmpty prepend="AND" property="hanNm" >
+					 	BB.HAN_NM(+)  LIKE '%' || #hanNm# || '%'
+				       </isNotEmpty>  
+				       
+				       <isNotEmpty prepend="AND" property="mangeDeptCd" >
+						BB.DEPT_CD = #mangeDeptCd#
+					 	</isNotEmpty>
+					 	
+					 	<isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+						BB.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+						</isNotEmpty>
+					 	
+					 	
+					ORDER BY 
+						      AA.DPOB_CD DESC
+							, AA.REATTY_YR DESC
+							, AA.PAY_CD DESC
+							, AA.REATTY_STP_DSPTY_NUM DESC
+							 ,(SELECT LPAD(DEPT_RANK,5,'0')  
+                                   FROM BASS0400 DD
+                                   WHERE DD.DEPT_CD =  BB.CURR_AFFN_DEPT_CD  
+                                     AND DD.DPOB_CD = BB.DPOB_CD) ASC 
+                            , BB.RESN_REGN_NUM ASC
+							, AA.SYSTEMKEY ASC
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<!-- payr4220 - 급여소급내역관리 화면    소급대상자정보 가져오기  -->
+	<select id="payr0350DAO.selectPayr4220ToPayr0350TgtListTotCnt_S" parameterClass="payr0350SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM  (
+			SELECT
+                      AA.DPOB_CD
+                    , AA.REATTY_YR
+                    , AA.PAY_CD
+                    ,fcBass0300CDNM(AA.DPOB_CD,AA.PAY_CD) AS PAY_NM 
+                    , AA.REATTY_STP_DSPTY_NUM
+                    , AA.SYSTEMKEY
+                    , AA.REATTY_APPTN_SUM_JAN
+                    , AA.REATTY_APPTN_SUM_FEB
+                    , AA.REATTY_APPTN_SUM_MAR
+                    , AA.REATTY_APPTN_SUM_APR
+                    , AA.REATTY_APPTN_SUM_MAY
+                    , AA.REATTY_APPTN_SUM_JUN
+                    , AA.REATTY_APPTN_SUM_JUL
+                    , AA.REATTY_APPTN_SUM_AUG
+                    , AA.REATTY_APPTN_SUM_SEP
+                    , AA.REATTY_APPTN_SUM_OCT
+                    , AA.REATTY_APPTN_SUM_NOV
+                    , AA.REATTY_APPTN_SUM_DEC
+                    , AA.REATTY_APPTN_SUM_AGGR
+                    , AA.REATTY_ITEM_NOTE_CTNT
+                    , AA.REATTY_PYMT_YR_MNTH
+                    , AA.REATTY_PYMT_PRCS_YN
+                    , AA.REATTY_DDLNE_DT
+                    , AA.REATTY_DDLNE_YN
+                    , BB.CURR_AFFN_DEPT_CD AS DEPT_CD
+                    , fcBass0400CDNM(BB.DPOB_CD,BB.CURR_AFFN_DEPT_CD,'2') AS DEPT_NM 
+                    ,BB.TYP_OCCU_CD 
+                    ,fcBass0320CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD) AS TYP_OCCU_NM
+                    ,NVL(BB.PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+                    ,BB.BUSIN_CD
+                    ,fcBass0500CDNM(BB.DPOB_CD,SUBSTR(BB.BUSIN_CD,1,4),BB.DEPT_CD,BB.BUSIN_CD) AS BUSIN_NM   
+                    ,BB.EMYMT_DIV_CD
+                    ,fcBass0300CDNM(BB.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM 
+                    ,BB.DTIL_OCCU_CLS_DIV_CD
+                    ,CC.PAYR_MANG_DEPT_CD
+                    ,fcBass0400CDNM(CC.DPOB_CD,CC.PAYR_MANG_DEPT_CD,'2') AS PAYR_MANG_DEPT_NM  
+                    ,DD.REATTY_APPTN_YR_MNTH
+                FROM PAYR0350 AA, PSNL0100 BB,PAYR0500 CC , PAYR0360 DD
+                    WHERE AA.DPOB_CD=BB.DPOB_CD  
+                      AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+                      AND AA.DPOB_CD=CC.DPOB_CD   
+                      AND AA.SYSTEMKEY = CC.SYSTEMKEY  
+                      AND AA.DPOB_CD=DD.DPOB_CD
+					  AND AA.REATTY_YR=DD.REATTY_YR
+					  AND AA.PAY_CD=DD.PAY_CD
+					  AND AA.REATTY_STP_DSPTY_NUM=DD.REATTY_STP_DSPTY_NUM
+                 <isNotEmpty prepend="AND" property="dpobCd" >
+			 	     AA.DPOB_CD=#dpobCd#
+		           </isNotEmpty> 
+		         AND EXISTS  (
+                            SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          ) 
+				       <isNotEmpty prepend="AND" property="businCd" >
+					 	BB.BUSIN_CD=#businCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	CC.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	BB.EMYMT_DIV_CD=#emymtDivCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="payCd" >
+					 	AA.PAY_CD=#payCd#
+				       </isNotEmpty> 
+				         <isNotEmpty prepend="AND" property="reattyApptnYrMnth" >
+					 	DD.REATTY_APPTN_YR_MNTH = #reattyApptnYrMnth#
+				       </isNotEmpty>  
+				       <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+						 BB.TYP_OCCU_CD
+						]]>
+						<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						 #typOccuCdArr[]#
+						</iterate>
+						</isNotEmpty>  
+					   	 <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+						<!--   <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+						<![CDATA[
+						 BB.DTIL_OCCU_CLS_DIV_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+						 #dtilOccuClsDivCdArr[]#
+						</iterate>
+						</isNotEmpty>   -->
+				         <isNotEmpty prepend="AND" property="systemkey" >
+					 	BB.systemkey=#systemkey#
+				       </isNotEmpty>  
+				       <isNotEmpty prepend="AND" property="hanNm" >
+					 	BB.HAN_NM(+)  LIKE '%' || #hanNm# || '%'
+				       </isNotEmpty> 
+				       
+				       <isNotEmpty prepend="AND" property="mangeDeptCd" >
+						BB.DEPT_CD = #mangeDeptCd#
+					 	</isNotEmpty> 
+					 	
+					 	<isNotEmpty prepend="AND" property="repbtyBusinDivCd" >
+						BB.REPBTY_BUSIN_DIV_CD=#repbtyBusinDivCd#
+						</isNotEmpty>
+			)
+	</select>
+	
+		<!-- payr4220 - 급여소급내역관리 화면 소급 월별 합계  -->
+	<select id="payr0350DAO.selectPayr4220ToPayr0350SumList_D" parameterClass="payr0350SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+		    SELECT
+                      AA.DPOB_CD
+                    , AA.REATTY_YR
+                    , AA.PAY_CD
+                    ,fcBass0300CDNM(AA.DPOB_CD,AA.PAY_CD) AS PAY_NM 
+                    , AA.REATTY_STP_DSPTY_NUM
+                    , AA.SYSTEMKEY
+                    , AA.REATTY_APPTN_SUM_JAN
+                    , AA.REATTY_APPTN_SUM_FEB
+                    , AA.REATTY_APPTN_SUM_MAR
+                    , AA.REATTY_APPTN_SUM_APR
+                    , AA.REATTY_APPTN_SUM_MAY
+                    , AA.REATTY_APPTN_SUM_JUN
+                    , AA.REATTY_APPTN_SUM_JUL
+                    , AA.REATTY_APPTN_SUM_AUG
+                    , AA.REATTY_APPTN_SUM_SEP
+                    , AA.REATTY_APPTN_SUM_OCT
+                    , AA.REATTY_APPTN_SUM_NOV
+                    , AA.REATTY_APPTN_SUM_DEC
+                    , AA.REATTY_APPTN_SUM_AGGR
+                    , AA.REATTY_ITEM_NOTE_CTNT
+                    , AA.REATTY_PYMT_YR_MNTH
+                    , AA.REATTY_PYMT_PRCS_YN
+                    , AA.REATTY_DDLNE_DT
+                    , AA.REATTY_DDLNE_YN 
+                FROM PAYR0350 AA, PSNL0100 BB 
+                    WHERE AA.DPOB_CD=BB.DPOB_CD  
+                      AND AA.SYSTEMKEY = BB.SYSTEMKEY  
+                      AND AA.DPOB_CD=#dpobCd#
+					  AND AA.REATTY_YR=#reattyYr#
+					  AND AA.PAY_CD=#payCd#
+					  AND AA.REATTY_STP_DSPTY_NUM=#reattyStpDsptyNum#
+					  AND AA.SYSTEMKEY=#systemkey#
+					ORDER BY 
+						      AA.DPOB_CD DESC
+							, AA.REATTY_YR DESC
+							, AA.PAY_CD DESC
+							, AA.REATTY_STP_DSPTY_NUM DESC
+							 ,(SELECT LPAD(DEPT_RANK,5,'0')  
+                                   FROM BASS0400 DD
+                                   WHERE DD.DEPT_CD =  BB.CURR_AFFN_DEPT_CD  
+                                     AND DD.DPOB_CD = BB.DPOB_CD) ASC 
+                            , BB.RESN_REGN_NUM ASC
+							, AA.SYSTEMKEY ASC
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+		<!-- payr4220 - 급여소급내역관리 화면 소급 월별 합계  -->
+	<select id="payr0350DAO.selectPayr4220ToPayr0350SumListTotCnt_S" parameterClass="payr0350SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM  (
+			 SELECT
+                      AA.DPOB_CD
+                    , AA.REATTY_YR
+                    , AA.PAY_CD
+                    ,fcBass0300CDNM(AA.DPOB_CD,AA.PAY_CD) AS PAY_NM 
+                    , AA.REATTY_STP_DSPTY_NUM
+                    , AA.SYSTEMKEY
+                    , AA.REATTY_APPTN_SUM_JAN
+                    , AA.REATTY_APPTN_SUM_FEB
+                    , AA.REATTY_APPTN_SUM_MAR
+                    , AA.REATTY_APPTN_SUM_APR
+                    , AA.REATTY_APPTN_SUM_MAY
+                    , AA.REATTY_APPTN_SUM_JUN
+                    , AA.REATTY_APPTN_SUM_JUL
+                    , AA.REATTY_APPTN_SUM_AUG
+                    , AA.REATTY_APPTN_SUM_SEP
+                    , AA.REATTY_APPTN_SUM_OCT
+                    , AA.REATTY_APPTN_SUM_NOV
+                    , AA.REATTY_APPTN_SUM_DEC
+                    , AA.REATTY_APPTN_SUM_AGGR
+                    , AA.REATTY_ITEM_NOTE_CTNT
+                    , AA.REATTY_PYMT_YR_MNTH
+                    , AA.REATTY_PYMT_PRCS_YN
+                    , AA.REATTY_DDLNE_DT
+                    , AA.REATTY_DDLNE_YN 
+                FROM PAYR0350 AA, PSNL0100 BB 
+                    WHERE AA.DPOB_CD=BB.DPOB_CD  
+                      AND AA.SYSTEMKEY = BB.SYSTEMKEY  
+                      AND AA.DPOB_CD=#dpobCd#
+					  AND AA.REATTY_YR=#reattyYr#
+					  AND AA.PAY_CD=#payCd#
+					  AND AA.REATTY_STP_DSPTY_NUM=#reattyStpDsptyNum#
+					  AND AA.SYSTEMKEY=#systemkey#
+			)
+	</select> 
+</sqlMap>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Insr1300">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="insr1300SerarchVO" type="com.app.exterms.insurance.server.vo.Insr1300SrhVO"/>
+	
+	<resultMap id="insr1300" class="com.app.exterms.insurance.server.vo.Insr1300VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="soctyInsurCmptnDt" column="SOCTY_INSUR_CMPTN_DT" columnIndex="3"/>
+		<result property="socInsrAqtnEmymtNum" column="SOC_INSR_AQTN_EMYMT_NUM" columnIndex="4"/>
+		<result property="natPennIncmMnthAmnt" column="NAT_PENN_INCM_MNTH_AMNT" columnIndex="5"/>
+		<result property="hlthInsrMnthRuntnAmnt" column="HLTH_INSR_MNTH_RUNTN_AMNT" columnIndex="6"/>
+		<result property="umytInsrPayMnthAmnt" column="UMYT_INSR_PAY_MNTH_AMNT" columnIndex="7"/>
+		<result property="idtlAccdtPayMnthAmnt" column="IDTL_ACCDT_PAY_MNTH_AMNT" columnIndex="8"/>
+		<result property="note" column="NOTE" columnIndex="9"/>
+		<result property="kybdr" column="KYBDR" columnIndex="10"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="11"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="12"/>
+		<result property="ismt" column="ISMT" columnIndex="13"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="14"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="15"/>
+	</resultMap>
+	
+	<insert id="insr1300DAO.insertInsr1300_S">
+		<![CDATA[
+			INSERT INTO INSR1300 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , SOCTY_INSUR_CMPTN_DT
+				  , SOC_INSR_AQTN_EMYMT_NUM
+				  , NAT_PENN_INCM_MNTH_AMNT
+				  , HLTH_INSR_MNTH_RUNTN_AMNT
+				  , UMYT_INSR_PAY_MNTH_AMNT
+				  , IDTL_ACCDT_PAY_MNTH_AMNT
+				  , NOTE
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  ,  #systemkey#
+				  , TO_CHAR(SYSDATE,'YYYYMMDD')
+				  ,  (
+					   SELECT MAX(AA.EMYMT_SEIL_NUM)
+					   FROM PSNL0110 AA
+					   WHERE AA.DPOB_CD = #dpobCd#
+					     AND AA.SYSTEMKEY = #systemkey#
+					     AND EMYMT_TYP_CD = 'A0420010'
+				  )
+				  , #natPennIncmMnthAmnt#
+				  , #hlthInsrMnthRuntnAmnt#
+				  , #umytInsrPayMnthAmnt#
+				  , #idtlAccdtPayMnthAmnt#
+				  , #note#
+				  , #kybdr#
+				  ,  TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  ,  TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="insr1300DAO.updateInsr1300_S">
+		<![CDATA[
+			UPDATE INSR1300
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, SOCTY_INSUR_CMPTN_DT=#soctyInsurCmptnDt#
+				, SOC_INSR_AQTN_EMYMT_NUM=#socInsrAqtnEmymtNum#
+				, NAT_PENN_INCM_MNTH_AMNT=#natPennIncmMnthAmnt#
+				, HLTH_INSR_MNTH_RUNTN_AMNT=#hlthInsrMnthRuntnAmnt#
+				, UMYT_INSR_PAY_MNTH_AMNT=#umytInsrPayMnthAmnt#
+				, IDTL_ACCDT_PAY_MNTH_AMNT=#idtlAccdtPayMnthAmnt#
+				, NOTE=#note# 
+				, ISMT=#ismt#
+				, REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND SOCTY_INSUR_CMPTN_DT=#soctyInsurCmptnDt#
+								AND SOC_INSR_AQTN_EMYMT_NUM=#socInsrAqtnEmymtNum#
+				]]>
+	</update>
+	
+	<delete id="insr1300DAO.deleteInsr1300_S">
+		<![CDATA[
+			DELETE FROM INSR1300 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND SOCTY_INSUR_CMPTN_DT=#soctyInsurCmptnDt#
+								AND SOC_INSR_AQTN_EMYMT_NUM=#socInsrAqtnEmymtNum#
+				]]>
+	</delete>
+	
+	<select id="insr1300DAO.selectInsr1300_S" resultMap="insr1300">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, SOCTY_INSUR_CMPTN_DT
+				, SOC_INSR_AQTN_EMYMT_NUM
+				, NAT_PENN_INCM_MNTH_AMNT
+				, HLTH_INSR_MNTH_RUNTN_AMNT
+				, UMYT_INSR_PAY_MNTH_AMNT
+				, IDTL_ACCDT_PAY_MNTH_AMNT
+				, NOTE
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM INSR1300
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND SOCTY_INSUR_CMPTN_DT=#soctyInsurCmptnDt#
+								AND SOC_INSR_AQTN_EMYMT_NUM=#socInsrAqtnEmymtNum#
+				]]>
+	</select>
+	
+	<select id="insr1300DAO.selectInsr1300List_D" parameterClass="insr1300SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, SOCTY_INSUR_CMPTN_DT
+								, SOC_INSR_AQTN_EMYMT_NUM
+								, NAT_PENN_INCM_MNTH_AMNT
+								, HLTH_INSR_MNTH_RUNTN_AMNT
+								, UMYT_INSR_PAY_MNTH_AMNT
+								, IDTL_ACCDT_PAY_MNTH_AMNT
+								, NOTE
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM INSR1300
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, SOCTY_INSUR_CMPTN_DT DESC
+							, SOC_INSR_AQTN_EMYMT_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="insr1300DAO.selectInsr1300ListTotCnt_S" parameterClass="insr1300SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM INSR1300
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

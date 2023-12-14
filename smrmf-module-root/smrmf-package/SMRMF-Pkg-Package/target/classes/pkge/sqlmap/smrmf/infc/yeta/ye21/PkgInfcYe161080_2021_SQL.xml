@@ -1,0 +1,2024 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgYe161080_2021">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYe161080Srh_2021_VO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2021.InfcPkgYe161080Srh_2021_VO"/>
+	
+	<resultMap id="infcPkgYe161080_2021" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2021.InfcPkgYe161080_2021_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="frgrLbrrEntcPupCd" column="FRGR_LBRR_ENTC_PUP_CD" columnIndex="5"/>
+		<result property="frgrLbrrLbrOfrDt" column="FRGR_LBRR_LBR_OFR_DT" columnIndex="6"/>
+		<result property="frgrLbrrReExryDt" column="FRGR_LBRR_RE_EXRY_DT" columnIndex="7"/>
+		<result property="frgrLbrrReRcpnDt" column="FRGR_LBRR_RE_RCPN_DT" columnIndex="8"/>
+		<result property="frgrLbrrReAlfaSbmsDt" column="FRGR_LBRR_RE_ALFA_SBMS_DT" columnIndex="9"/>
+		<result property="frgrLbrrErinImnRcpnDt" column="FRGR_LBRR_ERIN_IMN_RCPN_DT" columnIndex="10"/>
+		<result property="frgrLbrrErinImnSbmsDt" column="FRGR_LBRR_ERIN_IMN_SBMS_DT" columnIndex="11"/>
+		<result property="yupSnmcReStrtDt" column="YUP_SNMC_RE_STRT_DT" columnIndex="12"/>
+		<result property="yupSnmcReEndDt" column="YUP_SNMC_RE_END_DT" columnIndex="13"/>
+		<result property="sctcHpUseAmt" column="SCTC_HP_USE_AMT" columnIndex="14"/>
+		<result property="sctcHpDdcTrgtAmt" column="SCTC_HP_DDC_TRGT_AMT" columnIndex="15"/>
+		<result property="sctcHpDdcAmt" column="SCTC_HP_DDC_AMT" columnIndex="16"/>
+		<result property="rtpnUseAmt" column="RTPN_USE_AMT" columnIndex="17"/>
+		<result property="rtpnDdcTrgtAmt" column="RTPN_DDC_TRGT_AMT" columnIndex="18"/>
+		<result property="rtpnDdcAmt" column="RTPN_DDC_AMT" columnIndex="19"/>
+		
+		<result property="rtpnIsaUseAmt" column="RTPN_ISA_USE_AMT" columnIndex="20"/>
+		<result property="rtpnDdcIsaTrgtAmt" column="RTPN_DDC_ISA_TRGT_AMT" columnIndex="21"/>
+		<result property="rtpnDdcIsaAmt" column="RTPN_DDC_ISA_AMT" columnIndex="22"/>
+		
+		<result property="pnsnSvngUseAmt" column="PNSN_SVNG_USE_AMT" columnIndex="23"/>
+		<result property="pnsnSvngDdcTrgtAmt" column="PNSN_SVNG_DDC_TRGT_AMT" columnIndex="24"/>
+		<result property="pnsnSvngDdcAmt" column="PNSN_SVNG_DDC_AMT" columnIndex="25"/>
+		
+		<result property="pnsnSvngIsaUseAmt" column="PNSN_SVNG_ISA_USE_AMT" columnIndex="26"/>
+		<result property="pnsnSvngDdcIsaTrgtAmt" column="PNSN_SVNG_DDC_ISA_TRGT_AMT" columnIndex="27"/>
+		<result property="pnsnSvngDdcIsaAmt" column="PNSN_SVNG_DDC_ISA_AMT" columnIndex="28"/>
+		
+		
+		<result property="pnsnAccUseAmtSum" column="PNSN_ACC_USE_AMT_SUM" columnIndex="29"/>
+		<result property="pnsnAccDdcTrgtAmtSum" column="PNSN_ACC_DDC_TRGT_AMT_SUM" columnIndex="30"/>
+		<result property="pnsnAccDdcAmtSum" column="PNSN_ACC_DDC_AMT_SUM" columnIndex="31"/>
+		<result property="cvrgInscUseAmt" column="CVRG_INSC_USE_AMT" columnIndex="32"/>
+		<result property="cvrgInscDdcTrgtAmt2" column="CVRG_INSC_DDC_TRGT_AMT2" columnIndex="33"/>
+		<result property="cvrgInscDdcAmt" column="CVRG_INSC_DDC_AMT" columnIndex="34"/>
+		<result property="dsbrEuCvrgUseAmt" column="DSBR_EU_CVRG_USE_AMT" columnIndex="35"/>
+		<result property="dsbrEuCvrgDdcTrgtAmt" column="DSBR_EU_CVRG_DDC_TRGT_AMT" columnIndex="36"/>
+		<result property="dsbrEuCvrgDdcAmt" column="DSBR_EU_CVRG_DDC_AMT" columnIndex="37"/>
+		<result property="infeePymUseAmtSum" column="INFEE_PYM_USE_AMT_SUM" columnIndex="38"/>
+		<result property="infeePymDdcTrgtAmtSum" column="INFEE_PYM_DDC_TRGT_AMT_SUM" columnIndex="39"/>
+		<result property="infeePymDdcAmtSum" column="INFEE_PYM_DDC_AMT_SUM" columnIndex="40"/>
+		<result property="mdxpsSftSprcdUseAmt" column="MDXPS_SFT_SPRCD_USE_AMT" columnIndex="41"/>
+		<result property="mdxpsSftSprcdDdcTrgtAmt" column="MDXPS_SFT_SPRCD_DDC_TRGT_AMT" columnIndex="42"/>
+		<result property="mdxpsSftSprcdDdcAmt" column="MDXPS_SFT_SPRCD_DDC_AMT" columnIndex="43"/>
+		<result property="mdxpsPrsUseAmt" column="MDXPS_PRS_USE_AMT" columnIndex="44"/>
+		<result property="mdxpsPrsDdcTrgtAmt" column="MDXPS_PRS_DDC_TRGT_AMT" columnIndex="45"/>
+		<result property="mdxpsPrsDdcAmt" column="MDXPS_PRS_DDC_AMT" columnIndex="46"/>
+		<result property="mdxpsOthUseAmt" column="MDXPS_OTH_USE_AMT" columnIndex="47"/>
+		<result property="mdxpsOthDdcTrgtAmt" column="MDXPS_OTH_DDC_TRGT_AMT" columnIndex="48"/>
+		<result property="mdxpsOthDdcAmt" column="MDXPS_OTH_DDC_AMT" columnIndex="49"/>
+		<result property="mdxpsUseAmtSum" column="MDXPS_USE_AMT_SUM" columnIndex="50"/>
+		<result property="mdxpsDdcTrgtAmtSum" column="MDXPS_DDC_TRGT_AMT_SUM" columnIndex="51"/>
+		<result property="mdxpsDdcAmtSum" column="MDXPS_DDC_AMT_SUM" columnIndex="52"/>
+		<result property="scxpsPrsUseAmt" column="SCXPS_PRS_USE_AMT" columnIndex="53"/>
+		<result property="scxpsPrsDdcTrgtAmt" column="SCXPS_PRS_DDC_TRGT_AMT" columnIndex="54"/>
+		<result property="scxpsPrsDdcAmt" column="SCXPS_PRS_DDC_AMT" columnIndex="55"/>
+		<result property="scxpsKidUseAmt" column="SCXPS_KID_USE_AMT" columnIndex="56"/>
+		<result property="scxpsKidDdcTrgtAmt" column="SCXPS_KID_DDC_TRGT_AMT" columnIndex="57"/>
+		<result property="scxpsKidDdcAmt" column="SCXPS_KID_DDC_AMT" columnIndex="58"/>
+		<result property="scxpsStdUseAmt" column="SCXPS_STD_USE_AMT" columnIndex="59"/>
+		<result property="scxpsStdDdcTrgtAmt" column="SCXPS_STD_DDC_TRGT_AMT" columnIndex="60"/>
+		<result property="scxpsStdDdcAmt" column="SCXPS_STD_DDC_AMT" columnIndex="61"/>
+		<result property="scxpsUndUseAmt" column="SCXPS_UND_USE_AMT" columnIndex="62"/>
+		<result property="scxpsUndDdcTrgtAmt" column="SCXPS_UND_DDC_TRGT_AMT" columnIndex="63"/>
+		<result property="scxpsUndDdcAmt" column="SCXPS_UND_DDC_AMT" columnIndex="64"/>
+		<result property="scxpsDsbrUseAmt" column="SCXPS_DSBR_USE_AMT" columnIndex="65"/>
+		<result property="scxpsDsbrDdcTrgtAmt" column="SCXPS_DSBR_DDC_TRGT_AMT" columnIndex="66"/>
+		<result property="scxpsDsbrDdcAmt" column="SCXPS_DSBR_DDC_AMT" columnIndex="67"/>
+		<result property="scxpsKidCount" column="SCXPS_KID_COUNT" columnIndex="68"/>
+		<result property="scxpsStdCount" column="SCXPS_STD_COUNT" columnIndex="69"/>
+		<result property="scxpsUndCount" column="SCXPS_UND_COUNT" columnIndex="70"/>
+		<result property="scxpsDsbrCount" column="SCXPS_DSBR_COUNT" columnIndex="71"/>
+		<result property="scxpsUseAmtSum" column="SCXPS_USE_AMT_SUM" columnIndex="72"/>
+		<result property="scxpsDdcTrgtAmtSum" column="SCXPS_DDC_TRGT_AMT_SUM" columnIndex="73"/>
+		<result property="scxpsDdcAmtSum" column="SCXPS_DDC_AMT_SUM" columnIndex="74"/>
+		<result property="conb10ttswLtUseAmt" column="CONB10TTSW_LT_USE_AMT" columnIndex="75"/>
+		<result property="conb10ttswLtDdcTrgtAmt" column="CONB10TTSW_LT_DDC_TRGT_AMT" columnIndex="76"/>
+		<result property="conb10ttswLtDdcAmt" column="CONB10TTSW_LT_DDC_AMT" columnIndex="77"/>
+		<result property="conb10excsLtUseAmt" column="CONB10EXCS_LT_USE_AMT" columnIndex="78"/>
+		<result property="conb10excsLtDdcTrgtAmt" column="CONB10EXCS_LT_DDC_TRGT_AMT" columnIndex="79"/>
+		<result property="conb10excsLtDdcAmt" column="CONB10EXCS_LT_DDC_AMT" columnIndex="80"/>
+		<result property="conbLglUseAmt" column="CONB_LGL_USE_AMT" columnIndex="81"/>
+		<result property="conbLglDdcTrgtAmt" column="CONB_LGL_DDC_TRGT_AMT" columnIndex="82"/>
+		<result property="conbLglDdcAmt" column="CONB_LGL_DDC_AMT" columnIndex="83"/>
+		<result property="conbEmstAsctUseAmt" column="CONB_EMST_ASCT_USE_AMT" columnIndex="84"/>
+		<result property="conbEmstAsctDdcTrgtAmt" column="CONB_EMST_ASCT_DDC_TRGT_AMT" columnIndex="85"/>
+		<result property="conbEmstAsctDdcAmt" column="CONB_EMST_ASCT_DDC_AMT" columnIndex="86"/>
+		<result property="conbReliOrgOthUseAmt" column="CONB_RELI_ORG_OTH_USE_AMT" columnIndex="87"/>
+		<result property="conbReliOrgOthDdcTrgtAmt" column="CONB_RELI_ORG_OTH_DDC_TRGT_AMT" columnIndex="88"/>
+		<result property="conbReliOrgOthDdcAmt" column="CONB_RELI_ORG_OTH_DDC_AMT" columnIndex="89"/>
+		<result property="conbReliOrgUseAmt" column="CONB_RELI_ORG_USE_AMT" columnIndex="90"/>
+		<result property="conbReliOrgDdcTrgtAmt" column="CONB_RELI_ORG_DDC_TRGT_AMT" columnIndex="91"/>
+		<result property="conbReliOrgDdcAmt" column="CONB_RELI_ORG_DDC_AMT" columnIndex="92"/>
+		<result property="conbUseAmtSum" column="CONB_USE_AMT_SUM" columnIndex="93"/>
+		<result property="conbDdcTrgtAmtSum" column="CONB_DDC_TRGT_AMT_SUM" columnIndex="94"/>
+		<result property="conbDdcAmtSum" column="CONB_DDC_AMT_SUM" columnIndex="95"/>
+		<result property="ovrsSurcIncFmt" column="OVRS_SURC_INC_FMT" columnIndex="96"/>
+		<result property="frgnPmtFcTxamt" column="FRGN_PMT_FC_TXAMT" columnIndex="97"/>
+		<result property="frgnPmtWcTxamt" column="FRGN_PMT_WC_TXAMT" columnIndex="98"/>
+		<result property="frgnPmtTxamtTxpNtnNm" column="FRGN_PMT_TXAMT_TXP_NTN_NM" columnIndex="99"/>
+		<result property="frgnPmtTxamtPmtDt" column="FRGN_PMT_TXAMT_PMT_DT" columnIndex="100"/>
+		<result property="frgnPmtTxamtAlfaSbmsDt" column="FRGN_PMT_TXAMT_ALFA_SBMS_DT" columnIndex="101"/>
+		<result property="frgnPmtTxamtAbrdWkarNm" column="FRGN_PMT_TXAMT_ABRD_WKAR_NM" columnIndex="102"/>
+		<result property="frgnDtyTermStdt" column="FRGN_DTY_TERM_STDT" columnIndex="103"/>
+		<result property="frgnPmtTxamtRfoNm" column="FRGN_PMT_TXAMT_RFO_NM" columnIndex="104"/>
+		<result property="hsngTennLnpbUseAmt" column="HSNG_TENN_LNPB_USE_AMT" columnIndex="105"/>
+		<result property="hsngTennLnpbDdcAmt" column="HSNG_TENN_LNPB_DDC_AMT" columnIndex="106"/>
+		<result property="mmrUseAmt" column="MMR_USE_AMT" columnIndex="107"/>
+		<result property="mmrDdcAmt" column="MMR_DDC_AMT" columnIndex="108"/>
+		<result property="cd218" column="CD218" columnIndex="109"/>
+		<result property="d219" column="D219" columnIndex="110"/>
+		<result property="prcspWorkIncmSumtYn" column="PRCSP_WORK_INCM_SUMT_YN" columnIndex="111"/>
+		<result property="cd225" column="CD225" columnIndex="112"/>
+		<result property="cd226" column="CD226" columnIndex="113"/>
+		<result property="cd227" column="CD227" columnIndex="114"/>
+		<result property="cd228" column="CD228" columnIndex="115"/>
+		<result property="incmDducWtnnteSumtDt" column="INCM_DDUC_WTNNTE_SUMT_DT" columnIndex="116"/>
+		<result property="kybdr" column="KYBDR" columnIndex="117"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="118"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="119"/>
+		<result property="ismt" column="ISMT" columnIndex="120"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="121"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="122"/>
+		<result property="frgnDtyTermEddt" column="FRGN_DTY_TERM_EDDT" columnIndex="123"/>
+		<result property="fileAppPaprSbtYn" column="FILE_APP_PAPR_SBT_YN" columnIndex="124"/>
+		<result property="txlgItctAmnt" column="TXLG_ITCT_AMNT" columnIndex="125"/>
+		<result property="txlgBstaAmnt" column="TXLG_BSTA_AMNT" columnIndex="126"/>
+		<result property="txlgWktaAmnt" column="TXLG_WKTA_AMNT" columnIndex="127"/>
+		<result property="txlgCltaAmnt" column="TXLG_CLTA_AMNT" columnIndex="128"/>
+		<result property="txlgFrtaAmnt" column="TXLG_FRTA_AMNT" columnIndex="129"/>
+		<result property="txlgTxtyAmnt" column="TXLG_TXTY_AMNT" columnIndex="130"/>
+		<result property="mdxpsLsInsrTrAmt" column="MDXPS_LS_INSR_TR_AMT" columnIndex="131"/>
+	</resultMap>
+	
+	
+	
+<!-- +++++++++++++++++++++++++ 2021년도 귀속 로직  시작 ++++++++++++++++++++++++++++++ -->
+
+	<insert id="infcPkgYe161080_2021_DAO.fnYeta6100_YE161080_2021_CREATE_Insert_S">
+		<![CDATA[
+				INSERT INTO YE161080 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , FRGR_LBRR_ENTC_PUP_CD
+				  , FRGR_LBRR_LBR_OFR_DT
+				  , FRGR_LBRR_RE_EXRY_DT
+				  , FRGR_LBRR_RE_RCPN_DT
+				  , FRGR_LBRR_RE_ALFA_SBMS_DT
+				  , FRGR_LBRR_ERIN_IMN_RCPN_DT
+				  , FRGR_LBRR_ERIN_IMN_SBMS_DT
+				  , YUP_SNMC_RE_STRT_DT
+				  , YUP_SNMC_RE_END_DT
+				  , SCTC_HP_USE_AMT
+				  , SCTC_HP_DDC_TRGT_AMT
+				  , SCTC_HP_DDC_AMT
+				  , RTPN_USE_AMT
+				  , RTPN_DDC_TRGT_AMT
+				  , RTPN_DDC_AMT
+				  , PNSN_SVNG_USE_AMT
+				  , PNSN_SVNG_DDC_TRGT_AMT
+				  , PNSN_SVNG_DDC_AMT
+				  , PNSN_ACC_USE_AMT_SUM
+				  , PNSN_ACC_DDC_TRGT_AMT_SUM
+				  , PNSN_ACC_DDC_AMT_SUM
+				  , CVRG_INSC_USE_AMT
+				  , CVRG_INSC_DDC_TRGT_AMT2
+				  , CVRG_INSC_DDC_AMT
+				  , DSBR_EU_CVRG_USE_AMT
+				  , DSBR_EU_CVRG_DDC_TRGT_AMT
+				  , DSBR_EU_CVRG_DDC_AMT
+				  , INFEE_PYM_USE_AMT_SUM
+				  , INFEE_PYM_DDC_TRGT_AMT_SUM
+				  , INFEE_PYM_DDC_AMT_SUM
+				  , MDXPS_SFT_SPRCD_USE_AMT
+				  , MDXPS_SFT_SPRCD_DDC_TRGT_AMT
+				  , MDXPS_SFT_SPRCD_DDC_AMT
+				  , MDXPS_PRS_USE_AMT
+				  , MDXPS_PRS_DDC_TRGT_AMT
+				  , MDXPS_PRS_DDC_AMT
+				  , MDXPS_OTH_USE_AMT
+				  , MDXPS_OTH_DDC_TRGT_AMT
+				  , MDXPS_OTH_DDC_AMT
+				  , MDXPS_USE_AMT_SUM
+				  , MDXPS_DDC_TRGT_AMT_SUM
+				  , MDXPS_DDC_AMT_SUM
+				  , SCXPS_PRS_USE_AMT
+				  , SCXPS_PRS_DDC_TRGT_AMT
+				  , SCXPS_PRS_DDC_AMT
+				  , SCXPS_KID_USE_AMT
+				  , SCXPS_KID_DDC_TRGT_AMT
+				  , SCXPS_KID_DDC_AMT
+				  , SCXPS_STD_USE_AMT
+				  , SCXPS_STD_DDC_TRGT_AMT
+				  , SCXPS_STD_DDC_AMT
+				  , SCXPS_UND_USE_AMT
+				  , SCXPS_UND_DDC_TRGT_AMT
+				  , SCXPS_UND_DDC_AMT
+				  , SCXPS_DSBR_USE_AMT
+				  , SCXPS_DSBR_DDC_TRGT_AMT
+				  , SCXPS_DSBR_DDC_AMT
+				  , SCXPS_KID_COUNT
+				  , SCXPS_STD_COUNT
+				  , SCXPS_UND_COUNT
+				  , SCXPS_DSBR_COUNT
+				  , SCXPS_USE_AMT_SUM
+				  , SCXPS_DDC_TRGT_AMT_SUM
+				  , SCXPS_DDC_AMT_SUM
+				  , CONB10TTSW_LT_USE_AMT
+				  , CONB10TTSW_LT_DDC_TRGT_AMT
+				  , CONB10TTSW_LT_DDC_AMT
+				  , CONB10EXCS_LT_USE_AMT
+				  , CONB10EXCS_LT_DDC_TRGT_AMT
+				  , CONB10EXCS_LT_DDC_AMT
+				  , CONB_LGL_USE_AMT
+				  , CONB_LGL_DDC_TRGT_AMT
+				  , CONB_LGL_DDC_AMT
+				  , CONB_EMST_ASCT_USE_AMT
+				  , CONB_EMST_ASCT_DDC_TRGT_AMT
+				  , CONB_EMST_ASCT_DDC_AMT
+				  , CONB_RELI_ORG_OTH_USE_AMT
+				  , CONB_RELI_ORG_OTH_DDC_TRGT_AMT
+				  , CONB_RELI_ORG_OTH_DDC_AMT
+				  , CONB_RELI_ORG_USE_AMT
+				  , CONB_RELI_ORG_DDC_TRGT_AMT
+				  , CONB_RELI_ORG_DDC_AMT
+				  , CONB_USE_AMT_SUM
+				  , CONB_DDC_TRGT_AMT_SUM
+				  , CONB_DDC_AMT_SUM
+				  , OVRS_SURC_INC_FMT
+				  , FRGN_PMT_FC_TXAMT
+				  , FRGN_PMT_WC_TXAMT
+				  , FRGN_PMT_TXAMT_TXP_NTN_NM
+				  , FRGN_PMT_TXAMT_PMT_DT
+				  , FRGN_PMT_TXAMT_ALFA_SBMS_DT
+				  , FRGN_PMT_TXAMT_ABRD_WKAR_NM
+				  , FRGN_DTY_TERM_STDT
+				  , FRGN_PMT_TXAMT_RFO_NM
+				  , HSNG_TENN_LNPB_USE_AMT
+				  , HSNG_TENN_LNPB_DDC_AMT
+				  , MMR_USE_AMT
+				  , MMR_DDC_AMT
+				  , CD218
+				  , D219
+				  , PRCSP_WORK_INCM_SUMT_YN
+				  , CD225
+				  , CD226
+				  , CD227
+				  , CD228
+				  , INCM_DDUC_WTNNTE_SUMT_DT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , FRGN_DTY_TERM_EDDT
+				  , FILE_APP_PAPR_SBT_YN
+				  , TXLG_ITCT_AMNT
+				  , TXLG_BSTA_AMNT
+				  , TXLG_WKTA_AMNT
+				  , TXLG_CLTA_AMNT
+				  , TXLG_FRTA_AMNT
+				  , TXLG_TXTY_AMNT
+				  , MDXPS_LS_INSR_TR_AMT )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , ''
+				  , ''
+				  , ''
+				  , ''
+				  , ''
+				  , ''
+				  , ''
+				  , ''
+				  , ''
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , ''
+				  , ''
+				  , ''
+				  , ''
+				  , ''
+				  , ''
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , ''
+				  , 'N'
+				  , 'N'
+				  , 'N'
+				  , 'N'
+				  , 'N'
+				  , 'N'
+				  , ''
+			      , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# 
+				  , ''
+				  , 'N'
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0 ) 
+		]]>
+	</insert>
+	
+	<!-- 안성 급여자료이관 시 노조회비 기부금처리 -->
+	<update id="infcPkgYe161080_2021_DAO.fnYeta6100_YE161080_2021_CREATE_Update_AS">
+		UPDATE YE161080 SET
+		CONB_RELI_ORG_OTH_USE_AMT = (SELECT SUM(USE_SUM_AMT) FROM YE165010 WHERE DPOB_CD=#dpobCd# 
+																			 AND YRTX_BLGG_YR=#yrtxBlggYr# 
+																			 AND CLUT_SEPT_CD=#clutSeptCd# 
+																	         AND SYSTEMKEY=#systemkey#
+																	         AND DNTCNTN LIKE '노조회비'
+																	         AND BSNO_ENC_CNTN LIKE '1428284431')
+		WHERE DPOB_CD=#dpobCd# 
+		  AND YRTX_BLGG_YR=#yrtxBlggYr# 
+		  AND CLUT_SEPT_CD=#clutSeptCd# 
+          AND SYSTEMKEY=#systemkey#
+	</update>
+	
+	 <!--  C_세액감면및공제  --> 
+	<insert id="infcPkgYe161080_2021_DAO.incTaxDeducDec_nts_Yeta2021_Ye161080_Insert_S">
+		<![CDATA[
+				INSERT INTO YE161080 
+				(   DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , FRGR_LBRR_ENTC_PUP_CD
+				  , FRGR_LBRR_LBR_OFR_DT
+				  , FRGR_LBRR_RE_EXRY_DT
+				  , FRGR_LBRR_RE_RCPN_DT
+				  , FRGR_LBRR_RE_ALFA_SBMS_DT
+				  , FRGR_LBRR_ERIN_IMN_RCPN_DT
+				  , FRGR_LBRR_ERIN_IMN_SBMS_DT
+				  , YUP_SNMC_RE_STRT_DT
+				  , YUP_SNMC_RE_END_DT
+				  , SCTC_HP_USE_AMT
+				  , SCTC_HP_DDC_TRGT_AMT
+				  , SCTC_HP_DDC_AMT
+				  , RTPN_USE_AMT
+				  , RTPN_DDC_TRGT_AMT
+				  , RTPN_DDC_AMT
+				  , PNSN_SVNG_USE_AMT
+				  , PNSN_SVNG_DDC_TRGT_AMT
+				  , PNSN_SVNG_DDC_AMT
+				  , PNSN_ACC_USE_AMT_SUM
+				  , PNSN_ACC_DDC_TRGT_AMT_SUM
+				  , PNSN_ACC_DDC_AMT_SUM
+				  , CVRG_INSC_USE_AMT
+				  , CVRG_INSC_DDC_TRGT_AMT2
+				  , CVRG_INSC_DDC_AMT
+				  , DSBR_EU_CVRG_USE_AMT
+				  , DSBR_EU_CVRG_DDC_TRGT_AMT
+				  , DSBR_EU_CVRG_DDC_AMT
+				  , INFEE_PYM_USE_AMT_SUM
+				  , INFEE_PYM_DDC_TRGT_AMT_SUM
+				  , INFEE_PYM_DDC_AMT_SUM
+				  , MDXPS_SFT_SPRCD_USE_AMT
+				  , MDXPS_SFT_SPRCD_DDC_TRGT_AMT
+				  , MDXPS_SFT_SPRCD_DDC_AMT
+				  , MDXPS_PRS_USE_AMT
+				  , MDXPS_PRS_DDC_TRGT_AMT
+				  , MDXPS_PRS_DDC_AMT
+				  , MDXPS_OTH_USE_AMT
+				  , MDXPS_OTH_DDC_TRGT_AMT
+				  , MDXPS_OTH_DDC_AMT
+				  , MDXPS_USE_AMT_SUM
+				  , MDXPS_DDC_TRGT_AMT_SUM
+				  , MDXPS_DDC_AMT_SUM
+				  , SCXPS_PRS_USE_AMT
+				  , SCXPS_PRS_DDC_TRGT_AMT
+				  , SCXPS_PRS_DDC_AMT
+				  , SCXPS_KID_USE_AMT
+				  , SCXPS_KID_DDC_TRGT_AMT
+				  , SCXPS_KID_DDC_AMT
+				  , SCXPS_STD_USE_AMT
+				  , SCXPS_STD_DDC_TRGT_AMT
+				  , SCXPS_STD_DDC_AMT
+				  , SCXPS_UND_USE_AMT
+				  , SCXPS_UND_DDC_TRGT_AMT
+				  , SCXPS_UND_DDC_AMT
+				  , SCXPS_DSBR_USE_AMT
+				  , SCXPS_DSBR_DDC_TRGT_AMT
+				  , SCXPS_DSBR_DDC_AMT
+				  , SCXPS_KID_COUNT
+				  , SCXPS_STD_COUNT
+				  , SCXPS_UND_COUNT
+				  , SCXPS_DSBR_COUNT
+				  , SCXPS_USE_AMT_SUM
+				  , SCXPS_DDC_TRGT_AMT_SUM
+				  , SCXPS_DDC_AMT_SUM
+				  , CONB10TTSW_LT_USE_AMT
+				  , CONB10TTSW_LT_DDC_TRGT_AMT
+				  , CONB10TTSW_LT_DDC_AMT
+				  , CONB10EXCS_LT_USE_AMT
+				  , CONB10EXCS_LT_DDC_TRGT_AMT
+				  , CONB10EXCS_LT_DDC_AMT
+				  , CONB_LGL_USE_AMT
+				  , CONB_LGL_DDC_TRGT_AMT
+				  , CONB_LGL_DDC_AMT
+				  , CONB_EMST_ASCT_USE_AMT
+				  , CONB_EMST_ASCT_DDC_TRGT_AMT
+				  , CONB_EMST_ASCT_DDC_AMT
+				  , CONB_RELI_ORG_OTH_USE_AMT
+				  , CONB_RELI_ORG_OTH_DDC_TRGT_AMT
+				  , CONB_RELI_ORG_OTH_DDC_AMT
+				  , CONB_RELI_ORG_USE_AMT
+				  , CONB_RELI_ORG_DDC_TRGT_AMT
+				  , CONB_RELI_ORG_DDC_AMT
+				  , CONB_USE_AMT_SUM
+				  , CONB_DDC_TRGT_AMT_SUM
+				  , CONB_DDC_AMT_SUM
+				  , OVRS_SURC_INC_FMT
+				  , FRGN_PMT_FC_TXAMT
+				  , FRGN_PMT_WC_TXAMT
+				  , FRGN_PMT_TXAMT_TXP_NTN_NM
+				  , FRGN_PMT_TXAMT_PMT_DT
+				  , FRGN_PMT_TXAMT_ALFA_SBMS_DT
+				  , FRGN_PMT_TXAMT_ABRD_WKAR_NM
+				  , FRGN_DTY_TERM_STDT
+				   , FRGN_DTY_TERM_EDDT
+				  , FRGN_PMT_TXAMT_RFO_NM
+				  , HSNG_TENN_LNPB_USE_AMT
+				  , HSNG_TENN_LNPB_DDC_AMT
+				  , MMR_USE_AMT
+				  , MMR_DDC_AMT
+				  , CD218
+				  , D219
+				  , PRCSP_WORK_INCM_SUMT_YN
+				  , CD225
+				  , CD226
+				  , CD227
+				  , CD228
+				  , INCM_DDUC_WTNNTE_SUMT_DT 
+				  , FILE_APP_PAPR_SBT_YN
+				  , TXLG_ITCT_AMNT
+				  , TXLG_BSTA_AMNT
+				  , TXLG_WKTA_AMNT
+				  , TXLG_CLTA_AMNT
+				  , TXLG_FRTA_AMNT
+				  , TXLG_TXTY_AMNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  )
+			  (   
+					SELECT DPOB_CD, 
+					     YRTX_BLGG_YR,
+					       CLUT_SEPT_CD,
+					       SYSTEMKEY, 
+					       FRGR_LBRR_ENTC_PUP_CD ,
+					       (TCH_INTD_CTR_YN || GVRN_AGMN_YN || STCL_RE_YN || TXA_TRA_RE_YN)
+					       FRGR_LBRR_LBR_OFR_DT,
+					       FRGR_LBRR_RE_EXRY_DT,
+					       FRGR_LBRR_RE_RCPN_DT,
+					       FRGR_LBRR_RE_ALFA_SBMS_DT,
+					       FRGR_LBRR_ERIN_IMN_RCPN_DT,
+					       FRGR_LBRR_ERIN_IMN_SBMS_DT,
+					       YUP_SNMC_RE_STRT_DT,
+					       YUP_SNMC_RE_END_DT,
+					       SCTC_HP_USE_AMT,
+					       SCTC_HP_DDC_TRGT_AMT,
+					       SCTC_HP_DDC_AMT,
+					       RTPN_USE_AMT,
+					       RTPN_DDC_TRGT_AMT,
+					       RTPN_DDC_AMT,
+					       PNSN_SVNG_USE_AMT,
+					       PNSN_SVNG_DDC_TRGT_AMT,
+					       PNSN_SVNG_DDC_AMT,
+					       PNSN_ACC_USE_AMT_SUM,
+					       PNSN_ACC_DDC_TRGT_AMT_SUM,
+					       PNSN_ACC_DDC_AMT_SUM,
+					       CVRG_INSC_USE_AMT,
+					       CVRG_INSC_DDC_TRGT_AMT2,
+					       CVRG_INSC_DDC_AMT,
+					       DSBR_EU_CVRG_USE_AMT,
+					       DSBR_EU_CVRG_DDC_TRGT_AMT,
+					       DSBR_EU_CVRG_DDC_AMT,
+					       INFEE_PYM_USE_AMT_SUM,
+					       INFEE_PYM_DDC_TRGT_AMT_SUM,
+					       INFEE_PYM_DDC_AMT_SUM,
+					       MDXPS_SFT_XPNS_USE_AMT,
+					       MDXPS_SFT_XPNS_DDCTGT_AMT,
+					       MDXPS_SFT_XPNS_DDC_AMT,
+					       MDXPS_PRS_USE_AMT,
+					       MDXPS_PRS_DDC_TRGT_AMT,
+					       MDXPS_PRS_DDC_AMT,
+					       MDXPS_OTH_USE_AMT,
+					       MDXPS_OTH_DDC_TRGT_AMT,
+					       MDXPS_OTH_DDC_AMT,
+					       MDXPS_USE_AMT_SUM,
+					       MDXPS_DDC_TRGT_AMT_SUM,
+					       MDXPS_DDC_AMT_SUM,
+					       SCXPS_PRS_USE_AMT,
+					       SCXPS_PRS_DDC_TRGT_AMT,
+					       SCXPS_PRS_DDC_AMT,
+					       SCXPS_KID_USE_AMT,
+					       SCXPS_KID_DDC_TRGT_AMT,
+					       SCXPS_KID_DDC_AMT,
+					       SCXPS_STD_USE_AMT,
+					       SCXPS_STD_DDC_TRGT_AMT,
+					       SCXPS_STD_DDC_AMT,
+					       SCXPS_UND_USE_AMT,
+					       SCXPS_UND_DDC_TRGT_AMT,
+					       SCXPS_UND_DDC_AMT,
+					       SCXPS_DSBR_USE_AMT,
+					       SCXPS_DSBR_DDC_TRGT_AMT,
+					       SCXPS_DSBR_DDC_AMT,
+					       SCXPS_KID_COUNT,
+					       SCXPS_STD_COUNT,
+					       SCXPS_UND_COUNT,
+					       SCXPS_DSBR_COUNT,
+					       SCXPS_USE_AMT_SUM,
+					       SCXPS_DDC_TRGT_AMT_SUM,
+					       SCXPS_DDC_AMT_SUM,
+					       CONB10TTSW_LT_USE_AMT,
+					       CONB10TTSW_LT_DDC_TRGT_AMT,
+					       CONB10TTSW_LT_DDC_AMT,
+					       CONB10EXCS_LT_USE_AMT,
+					       CONB10EXCS_LT_DDC_TRGT_AMT,
+					       CONB10EXCS_LT_DDC_AMT,
+					       CONB_LGL_USE_AMT,
+					       CONB_LGL_DDC_TRGT_AMT,
+					       CONB_LGL_DDC_AMT,
+					       CONB_EMST_ASCT_USE_AMT,
+					       CONB_EMST_ASCT_DDC_TRGT_AMT,
+					       CONB_EMST_ASCT_DDC_AMT,
+					       CONB_RELI_ORG_OTH_USE_AMT,
+					       CONB_RELI_ORG_OTH_DDC_TRGT_AMT,
+					       CONB_RELI_ORG_OTH_DDC_AMT,
+					       CONB_RELI_ORG_USE_AMT,
+					       CONB_RELI_ORG_DDC_TRGT_AMT,
+					       CONB_RELI_ORG_DDC_AMT,
+					       CONB_USE_AMT_SUM,
+					       CONB_DDC_TRGT_AMT_SUM,
+					       CONB_DDC_AMT_SUM,
+					       OVRS_SURC_INC_FMT,
+					       FRGN_PMT_FC_TXAMT,
+					       FRGN_PMT_WC_TXAMT,
+					       FRGN_PMT_TXAMT_TXP_NTN_NM,
+					       FRGN_PMT_TXAMT_PMT_DT,
+					       FRGN_PMT_TXAMT_ALFA_SBMS_DT,
+					       FRGN_PMT_TXAMT_ABRD_WKAR_NM,
+					       (CASE WHEN LENGTH(FRGN_DTY_TERM) > 0 THEN '2021' || SUBSTR(FRGN_DTY_TERM,1,4) ELSE '' END),
+					       (CASE WHEN LENGTH(FRGN_DTY_TERM) > 0 THEN '2021' || SUBSTR(FRGN_DTY_TERM,4,8) ELSE '' END) ,
+					       FRGN_PMT_TXAMT_RFO_NM,
+					       HSNG_TENN_LNPB_USE_AMT,
+					       HSNG_TENN_LNPB_DDC_AMT,
+					       MMR_USE_AMT,
+					       MMR_DDC_AMT,
+					       CD218,
+					       CD219, 
+					       PRCSP_WORK_INCM_SUMT_YN,
+					       CD225,
+					       CD226,
+					       CD227,
+					       CD228,
+					       INCM_DDUC_WTNNTE_SUMT_DT 
+						  , 'N'
+						  , 0
+						  , 0
+						  , 0
+						  , 0
+						  , 0
+						  , 0  
+						   , #kybdr#
+						  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						  , #inptAddr#
+						  , #ismt#
+						  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						  , #revnAddr#  
+		               FROM YE167070 
+					 	WHERE DPOB_CD=#dpobCd#
+										AND YRTX_BLGG_YR=#yrtxBlggYr#
+										AND CLUT_SEPT_CD=#clutSeptCd#
+										AND SYSTEMKEY=#systemkey#   
+								) 
+		]]>
+	</insert>
+	
+	<insert id="infcPkgYe161080_2021_DAO.incTaxDeducDec_nts_Yeta2021_Ye161080_Insert_01_S">
+		<![CDATA[
+		DECLARE BEGIN 
+		
+		    DELETE FROM YE160404
+		    WHERE PRCSP_BUSOPR_RGSTNUM IN  (   
+										SELECT   NVL(CD220,'-') 
+							               FROM YE167070 
+										 	WHERE DPOB_CD=#dpobCd#
+															AND YRTX_BLGG_YR=#yrtxBlggYr#
+															AND CLUT_SEPT_CD=#clutSeptCd#
+															AND SYSTEMKEY=#systemkey#   
+							           	) ;
+           
+           INSERT INTO YE160404
+				( DPOB_CD						
+					, YRTX_BLGG_YR				
+					, CLUT_SEPT_CD				
+					, SYSTEMKEY	
+					, PRCSP_BUSOPR_RGSTNUM				
+					, WHDG_DEBR_BUSOPR_RGSTNUM	
+					, PRCSP_SEIL_NUM				
+					, RESN_REGN_NUM				
+					, PRCSP_TXPYR_ASOC_YN			
+					, PRCSP_FMNM_NM		  
+					, PRCSP_AGGR_SUM	 
+					, PRCSP_INCM_TX_SUM			
+					, PRCSP_RGON_INCM_TX_SUM		
+					, PRCSP_NNKS_SUM 
+					, PRCSP_PRCS_YN				
+					, PRCSP_WHDG_REIP_SUMT_YN		
+					, KYBDR						
+					, INPT_DT						
+					, INPT_ADDR				
+					, ISMT					
+					, REVN_DT					
+					, REVN_ADDR
+				  )
+			  (   
+					SELECT DPOB_CD, 
+					      YRTX_BLGG_YR,
+					       CLUT_SEPT_CD,
+					       SYSTEMKEY, 
+					       NVL(CD220,'-'),
+					       NVL(CD220,'-'),
+					       ( ( ROW_NUMBER() OVER (ORDER BY DPOB_CD ASC,
+											           YRTX_BLGG_YR ASC,
+											           CLUT_SEPT_CD ASC,
+											           SYSTEMKEY ASC))  + 
+                               (SELECT (NVL (MAX (PRCSP_SEIL_NUM), 0) + 1)
+					              FROM YE160404 AA
+					             WHERE     DPOB_CD = #dpobCd#
+					                   AND YRTX_BLGG_YR = #yrtxBlggYr#
+					                   AND CLUT_SEPT_CD = #clutSeptCd#
+					                   AND SYSTEMKEY = #systemkey#))   AS ROWCNT  ,  
+					      (SELECT RESNO_ENC_CNTN
+				                 FROM YE167010
+				                WHERE     DPOB_CD = #dpobCd#
+						                   AND YRTX_BLGG_YR = #yrtxBlggYr#
+						                   AND CLUT_SEPT_CD = #clutSeptCd#
+						                   AND SYSTEMKEY = #systemkey#),
+					       '',
+					       '2',
+					       CD222, 
+						   CD221, 
+						   CD223,
+						   TRUNC((CD223 * 0.1),-1) ,
+						   0,
+					       PRCSP_WORK_INCM_SUMT_YN, 
+						   #kybdr#
+						  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						  , #inptAddr#
+						  , #ismt#
+						  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						  , #revnAddr#  
+		               FROM YE167070 
+					 	WHERE DPOB_CD=#dpobCd#
+										AND YRTX_BLGG_YR=#yrtxBlggYr#
+										AND CLUT_SEPT_CD=#clutSeptCd#
+										AND SYSTEMKEY=#systemkey#   
+								) ;
+        END;  
+		]]>
+	</insert>
+	
+	
+	<!-- 2021연말정산_추가 -->
+	<update id="infcPkgYe161080_2021_DAO.fnYeta6200_J501Y_YE161080_2021_Update_S">
+		<![CDATA[
+			UPDATE YE161080 AA
+			SET   MMR_USE_AMT=NVL((SELECT SUM(NVL(MNTH_RNTTY_YRLY_MNTH_SUM,0))
+			 								FROM	 YE162510 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+										 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+			  							),0) 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr# 
+				 WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey# 
+				]]>
+	</update>
+	
+	
+	
+	 
+	<update id="infcPkgYe161080_2021_DAO.fnYeta6200_A102Y_YE161080_2021_Update_S">
+		<![CDATA[
+		
+			UPDATE YE161080 AA
+			SET   CVRG_INSC_USE_AMT=NVL((SELECT SUM(NVL(CVRG_INSC_DDC_TRGT_AMT,0))
+			 								FROM	 YE161040 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+										 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+			  							),0) 
+				 
+				, DSBR_EU_CVRG_USE_AMT=NVL((SELECT SUM(NVL(DSBR_DDC_TRGT_AMT,0))
+			 									FROM YE161040 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+			  							),0)  
+				 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr# 
+				 WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey# 
+				]]>
+	</update>
+	
+	<!--  교육비 계산  -->
+	<update id="infcPkgYe161080_2021_DAO.fnYeta6200_C101Y_YE161080_2021_Update_S">
+		<![CDATA[ 
+	
+			UPDATE YE161080 AA
+			SET   SCXPS_PRS_USE_AMT=NVL((SELECT SUM(NVL(SCXPS_USE_AMT,0))
+			 									FROM YE161090 BB 
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+										 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+											AND BB.SCXPS_STD = 'Y0030005'
+			  							),0) /* 교육비_소득자본인납입금액   */
+				 
+				, SCXPS_KID_USE_AMT=NVL((SELECT SUM(NVL(SCXPS_USE_AMT,0))
+			 								FROM	 YE161090 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+											AND BB.SCXPS_STD = 'Y0030010'
+			  							),0) 	/* 교육비_취학전아동납입금액  */
+			  							
+			  , SCXPS_STD_USE_AMT=NVL((SELECT SUM(NVL(SCXPS_USE_AMT,0))
+			 								FROM	 YE161090 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+											AND BB.SCXPS_STD = 'Y0030020'
+			  							),0)   /* 교육비_초중고등학교납입금액    */  
+			  							
+			  , SCXPS_UND_USE_AMT=NVL((SELECT SUM(NVL(SCXPS_USE_AMT,0))
+			 								FROM	 YE161090 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+											AND BB.SCXPS_STD = 'Y0030030'
+			  							),0)   /* 교육비_대학생납입금액  */
+			  							
+			  , SCXPS_DSBR_USE_AMT=NVL((SELECT SUM(NVL(SCXPS_USE_AMT,0))
+			 								FROM	 YE161090 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+											AND BB.SCXPS_STD = 'Y0030040'
+			  							),0) /* 교육비_장애인납입금액  */	
+			  							
+  			  , SCXPS_KID_COUNT=NVL((SELECT COUNT(FAM_RESNO_ENC_CNTN)
+			 								FROM	(SELECT DISTINCT 
+															DPOB_CD
+															,YRTX_BLGG_YR
+															,CLUT_SEPT_CD 
+															,SYSTEMKEY
+															,SCXPS_STD
+															,FAM_RESNO_ENC_CNTN 
+			 								          FROM  YE161090
+			 								          )
+			 								           BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+											AND BB.SCXPS_STD = 'Y0030010'
+			  							),0) /* 교육비_취학전아동인원수  */	
+			  							
+					
+				
+				 , SCXPS_STD_COUNT=NVL((SELECT  COUNT(FAM_RESNO_ENC_CNTN)
+			 								FROM	(SELECT DISTINCT 
+															DPOB_CD
+															,YRTX_BLGG_YR
+															,CLUT_SEPT_CD 
+															,SYSTEMKEY
+															,SCXPS_STD
+															,FAM_RESNO_ENC_CNTN 
+			 								          FROM  YE161090
+			 								          )
+			 								           BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+											AND BB.SCXPS_STD = 'Y0030020'
+			  							),0) /* 교육비_초중고등학교인원수  */	
+					
+				
+				 , SCXPS_UND_COUNT=NVL((SELECT  COUNT(FAM_RESNO_ENC_CNTN)
+			 								FROM	(SELECT DISTINCT 
+															DPOB_CD
+															,YRTX_BLGG_YR
+															,CLUT_SEPT_CD 
+															,SYSTEMKEY
+															,SCXPS_STD
+															,FAM_RESNO_ENC_CNTN 
+			 								          FROM  YE161090
+			 								          )
+			 								           BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+											AND BB.SCXPS_STD = 'Y0030030'
+			  							),0) /* 교육비_대학생인원수  */	
+			  							
+					
+				
+				 , SCXPS_DSBR_COUNT = NVL((SELECT  COUNT(FAM_RESNO_ENC_CNTN)
+			 								FROM	(SELECT DISTINCT 
+															DPOB_CD
+															,YRTX_BLGG_YR
+															,CLUT_SEPT_CD 
+															,SYSTEMKEY
+															,SCXPS_STD
+															,FAM_RESNO_ENC_CNTN 
+			 								          FROM  YE161090
+			 								          )
+			 								           BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+											AND BB.SCXPS_STD = 'Y0030040'
+			  							),0) /* 교육비_장애인인원수 */	
+					 																										
+				 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr# 
+				 WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey# 
+				]]>
+	</update>
+	
+	<!-- 연금저축  -->
+	<update id="infcPkgYe161080_2021_DAO.fnYeta6200_E102Y_YE161080_2021_Update_S">
+		<![CDATA[
+		
+			UPDATE YE161080 AA
+			   SET PNSN_SVNG_USE_AMT=NVL((SELECT SUM(NVL(PNSN_SVNG_ACC_PYM_AMT,0) - NVL(PNSN_SVNG_ACC_ISA_AMT, 0))
+			 								FROM	 YE162010 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+										 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+											AND BB.PNSN_SVNG_ACC_PNSN_SVNG_CL = 'Y0040040'
+			  							),0)
+			  	, PNSN_SVNG_ISA_USE_AMT=NVL((SELECT SUM(NVL(PNSN_SVNG_ACC_ISA_AMT, 0))
+			  								FROM YE162010 BB
+				 							WHERE BB.DPOB_CD=AA.DPOB_CD
+										 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+											AND BB.PNSN_SVNG_ACC_PNSN_SVNG_CL = 'Y0040040'
+										),0)
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr# 
+				 WHERE DPOB_CD=#dpobCd#
+					AND YRTX_BLGG_YR=#yrtxBlggYr#
+					AND CLUT_SEPT_CD=#clutSeptCd#
+					AND SYSTEMKEY=#systemkey# 
+				]]>
+	</update>
+	
+	<!-- 퇴직연금  -->
+	<update id="infcPkgYe161080_2021_DAO.fnYeta6200_F102Y_YE161080_2021_Update_S">
+		<![CDATA[
+		
+			UPDATE YE161080 AA
+			   SET SCTC_HP_USE_AMT=NVL((SELECT SUM(NVL(RTPN_ACC_PYM_AMT,0))
+			 								FROM	 YE162020 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+										 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+											AND BB.RTPN_ACC_RTPN_CL = 'Y0040020'
+			  							),0) 
+				 
+			 , RTPN_USE_AMT=NVL((SELECT SUM(NVL(RTPN_ACC_PYM_AMT,0) - NVL(RTPN_ACC_ISA_AMT,0))
+			 								FROM	 YE162020 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+										 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+											AND BB.RTPN_ACC_RTPN_CL = 'Y0040010'
+			  							),0) 
+			  , RTPN_ISA_USE_AMT=NVL((SELECT SUM(NVL(RTPN_ACC_ISA_AMT,0))
+			 								FROM	 YE162020 BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+										 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+											AND BB.RTPN_ACC_RTPN_CL = 'Y0040010'
+			  							),0) 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr# 
+				 WHERE DPOB_CD=#dpobCd#
+					AND YRTX_BLGG_YR=#yrtxBlggYr#
+					AND CLUT_SEPT_CD=#clutSeptCd#
+					AND SYSTEMKEY=#systemkey# 
+				]]>
+	</update>
+	
+	
+	<!-- 기부금결과   -->
+	<update id="infcPkgYe161080_2021_DAO.fnYeta6200_L102Y_YE161080_2021_Update_S">
+		<![CDATA[
+ 
+			UPDATE YE161080 AA
+			   SET CONB10TTSW_LT_USE_AMT = NVL((CASE WHEN (SELECT SUM(NVL(USE_AMT,0))
+			 												FROM	 YE165030 BB
+							 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+														 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+															AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+															AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+															AND BB.ATTR_YR = '2021'
+															AND BB.CONB_CDDL = 'B0230020'
+							  							)  > 100000 THEN 100000
+			  						      ELSE (SELECT SUM(NVL(USE_AMT,0))
+						 								FROM	 YE165030 BB
+						 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+													 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+														AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+														AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+														AND BB.ATTR_YR = '2021'
+														AND BB.CONB_CDDL = 'B0230020'
+						  							) END),0) 		/* 기부금_정치자금기부금10이하기부금 B0230010  */
+					,CONB10EXCS_LT_USE_AMT	 = NVL((CASE WHEN (SELECT SUM(NVL(USE_AMT,0))
+								 												FROM	 YE165030 BB
+												 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+																			 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+																				AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+																				AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+																				AND BB.ATTR_YR >= '2021'
+																				AND BB.CONB_CDDL = 'B0230020'
+												  							)  > 100000 THEN (SELECT SUM(NVL(USE_AMT,0))
+								 												FROM	 YE165030 BB
+												 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+																			 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+																				AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+																				AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+																				AND BB.ATTR_YR = '2021'
+																				AND BB.CONB_CDDL = 'B0230020'
+												  							) - 100000
+								  						      ELSE  0 END),0) 	/* 기부금_정치자금기부금10초과기부금액  */
+					,CONB_LGL_USE_AMT	=  NVL( (SELECT SUM(NVL(USE_AMT,0))
+			 												FROM	 YE165030 BB
+							 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+														 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+															AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+															AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+															AND BB.ATTR_YR >= '2021'
+															AND BB.CONB_CDDL = 'B0230010'
+							  							) ,0) 	/* 	기부금_법정기부금납입금액  B0230010  */
+					,CONB_EMST_ASCT_USE_AMT		=  NVL( (SELECT SUM(NVL(USE_AMT,0))
+			 												FROM	 YE165030 BB
+							 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+														 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+															AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+															AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+															AND BB.ATTR_YR = '2021'
+															AND BB.CONB_CDDL = 'B0230042'
+							  							) ,0) 	/* 기부금_우리사주조합기부금납입금액   B0230042 */
+					,CONB_RELI_ORG_OTH_USE_AMT =  NVL( (SELECT SUM(NVL(USE_AMT,0))
+			 												FROM	 YE165030 BB
+							 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+														 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+															AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+															AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+															AND BB.ATTR_YR >= '2021'
+															AND BB.CONB_CDDL = 'B0230040'
+							  							) ,0)	/* 기부금_지정기부금종교단체외기부금액 B0230040  */
+					,CONB_RELI_ORG_USE_AMT	 =  NVL( (SELECT SUM(NVL(USE_AMT,0))
+			 												FROM	 YE165030 BB
+							 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+														 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+															AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+															AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+															AND BB.ATTR_YR >= '2021'
+															AND BB.CONB_CDDL = 'B0230041'
+							  							) ,0)	/* 기부금_지정기부금종교단체기부금액    B0230041*/
+			 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr# 
+				 WHERE DPOB_CD=#dpobCd#
+					AND YRTX_BLGG_YR=#yrtxBlggYr#
+					AND CLUT_SEPT_CD=#clutSeptCd#
+					AND SYSTEMKEY=#systemkey# 
+				]]>
+	</update>  
+	 
+	<!-- 의료비정리 합계  -->
+	<update id="infcPkgYe161080_2021_DAO.fnYeta6200_B101Y_YE161080_2021_Update_S">
+		<![CDATA[ 
+		UPDATE YE161080 AA
+			   SET   MDXPS_SFT_SPRCD_USE_AMT  =  NVL( (SELECT SUM(NVL(USE_AMT,0))
+			 												FROM	YE161030 CC, YE164010 BB
+							 							     WHERE CC.DPOB_CD=BB.DPOB_CD
+														 	AND CC.YRTX_BLGG_YR=BB.YRTX_BLGG_YR
+															AND CC.CLUT_SEPT_CD=BB.CLUT_SEPT_CD
+															AND CC.SYSTEMKEY=BB.SYSTEMKEY 
+															AND CC.TXPR_DSCM_NO_CNTN =  BB.RESNO_ENC_CNTN
+															AND BB.DPOB_CD=AA.DPOB_CD
+														 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+															AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+															AND BB.SYSTEMKEY=AA.SYSTEMKEY  
+															AND BB.YN2 = '1' AND BB.YN4 <> '1'
+							  							) ,0)	/* 의료비_난임시술비납입금액 */ 
+					,MDXPS_PRS_USE_AMT = NVL((SELECT SUM(NVL(USE_AMT,0))
+			 								FROM YE161030 CC, YE164010 BB
+			 							   WHERE CC.DPOB_CD=BB.DPOB_CD
+										 	AND CC.YRTX_BLGG_YR=BB.YRTX_BLGG_YR
+											AND CC.CLUT_SEPT_CD=BB.CLUT_SEPT_CD
+											AND CC.SYSTEMKEY=BB.SYSTEMKEY 
+											AND CC.TXPR_DSCM_NO_CNTN =  BB.RESNO_ENC_CNTN
+											AND ((CC.DSBR_DDC_CL_CD = '1')
+											     OR (CC.FAMY_RELA_DIV_CD = 'A0190001')
+											     OR ( (CASE WHEN (CASE WHEN (SUBSTR(CC.TXPR_DSCM_NO_CNTN,7,1)) IN ('3','4') THEN '20' || SUBSTR(CC.TXPR_DSCM_NO_CNTN,1,6)   
+				                                    ELSE '19' ||  SUBSTR(CC.TXPR_DSCM_NO_CNTN,1,6) END) <= '19561231'     
+				                                THEN '1'  ELSE '0' END) = '1' ))
+			 							    AND BB.DPOB_CD=AA.DPOB_CD
+										 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+										    AND BB.YN2 <> '1' AND BB.YN3 <> '1'
+			  							),0)
+			  							+	NVL((SELECT SUM(LEAST(2000000,NVL(USE_AMT,0)))
+			 								FROM YE161030 CC, YE164010 BB, YE169010 DD
+			 							   WHERE CC.DPOB_CD=BB.DPOB_CD
+										 	AND CC.YRTX_BLGG_YR=BB.YRTX_BLGG_YR
+											AND CC.CLUT_SEPT_CD=BB.CLUT_SEPT_CD
+											AND CC.SYSTEMKEY=BB.SYSTEMKEY 
+											AND CC.TXPR_DSCM_NO_CNTN =  BB.RESNO_ENC_CNTN
+											AND ((CC.DSBR_DDC_CL_CD = '1')
+											     OR (CC.FAMY_RELA_DIV_CD = 'A0190001')
+											     OR ( (CASE WHEN (CASE WHEN (SUBSTR(CC.TXPR_DSCM_NO_CNTN,7,1)) IN ('3','4') THEN '20' || SUBSTR(CC.TXPR_DSCM_NO_CNTN,1,6)   
+				                                    ELSE '19' ||  SUBSTR(CC.TXPR_DSCM_NO_CNTN,1,6) END) <= '19561231'     
+				                                THEN '1'  ELSE '0' END) = '1' ))
+			 							    AND BB.DPOB_CD=AA.DPOB_CD
+										 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND AA.SYSTEMKEY=DD.SYSTEMKEY 
+										    AND BB.YN3 = '1' AND BB.YN2 <> '1' AND BB.YN4 <> '1'),0)
+			  						/* 의료비_본인65세이상장애인납입금액 산후조리원비용추가 */
+					,MDXPS_OTH_USE_AMT	= NVL((SELECT SUM(NVL(USE_AMT,0))
+			 								FROM YE161030 CC, YE164010 BB
+			 							   WHERE CC.DPOB_CD=BB.DPOB_CD
+										 	AND CC.YRTX_BLGG_YR=BB.YRTX_BLGG_YR
+											AND CC.CLUT_SEPT_CD=BB.CLUT_SEPT_CD
+											AND CC.SYSTEMKEY=BB.SYSTEMKEY 
+											AND CC.TXPR_DSCM_NO_CNTN =  BB.RESNO_ENC_CNTN
+											AND ( CC.DPOB_CD
+											    , CC.YRTX_BLGG_YR
+											    , CC.CLUT_SEPT_CD
+											    , CC.SYSTEMKEY
+											    , CC.TXPR_DSCM_NO_CNTN) NOT IN  (SELECT DD.DPOB_CD
+																  , DD.YRTX_BLGG_YR
+																  , DD.CLUT_SEPT_CD
+																  , DD.SYSTEMKEY
+																  , DD.TXPR_DSCM_NO_CNTN
+																 FROM YE161030 DD
+																 WHERE  ((DD.DSBR_DDC_CL_CD = '1')
+																     OR (DD.FAMY_RELA_DIV_CD = 'A0190001')
+																     OR ( (CASE WHEN (CASE WHEN (SUBSTR(DD.TXPR_DSCM_NO_CNTN,7,1)) IN ('3','4') THEN '20' || SUBSTR(DD.TXPR_DSCM_NO_CNTN,1,6)   
+									                                    ELSE '19' ||  SUBSTR(DD.TXPR_DSCM_NO_CNTN,1,6) END) <= '19561231'     
+									                                THEN '1'  ELSE '0' END) = '1' ))) 
+			 							    AND BB.DPOB_CD=AA.DPOB_CD
+										 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+										    AND BB.YN2 <> '1'  AND BB.YN3 <> '1'
+			  							),0)
+			  							+	NVL((SELECT SUM(LEAST(2000000,NVL(USE_AMT,0)))
+			 								FROM YE161030 CC, YE164010 BB, YE169010 EE
+			 							   WHERE CC.DPOB_CD=BB.DPOB_CD
+										 	AND CC.YRTX_BLGG_YR=BB.YRTX_BLGG_YR
+											AND CC.CLUT_SEPT_CD=BB.CLUT_SEPT_CD
+											AND CC.SYSTEMKEY=BB.SYSTEMKEY 
+											AND CC.TXPR_DSCM_NO_CNTN =  BB.RESNO_ENC_CNTN
+											AND ( CC.DPOB_CD
+											    , CC.YRTX_BLGG_YR
+											    , CC.CLUT_SEPT_CD
+											    , CC.SYSTEMKEY
+											    , CC.TXPR_DSCM_NO_CNTN) NOT IN  (SELECT DD.DPOB_CD
+																  , DD.YRTX_BLGG_YR
+																  , DD.CLUT_SEPT_CD
+																  , DD.SYSTEMKEY
+																  , DD.TXPR_DSCM_NO_CNTN
+																 FROM YE161030 DD
+																 WHERE  ((DD.DSBR_DDC_CL_CD = '1')
+																     OR (DD.FAMY_RELA_DIV_CD = 'A0190001')
+																     OR ( (CASE WHEN (CASE WHEN (SUBSTR(DD.TXPR_DSCM_NO_CNTN,7,1)) IN ('3','4') THEN '20' || SUBSTR(DD.TXPR_DSCM_NO_CNTN,1,6)   
+									                                    ELSE '19' ||  SUBSTR(DD.TXPR_DSCM_NO_CNTN,1,6) END) <= '19561231'     
+									                                THEN '1'  ELSE '0' END) = '1' ))) 
+			 							    AND BB.DPOB_CD=AA.DPOB_CD
+										 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY 
+											AND AA.SYSTEMKEY=EE.SYSTEMKEY
+										    AND BB.YN3 = '1' AND BB.YN2 <> '1' AND BB.YN4 <> '1' 
+			  							),0)
+			  							/* 의료비_그밖의공제대상자납입금액  산후조리원비용추가*/
+			  	, MDXPS_LS_INSR_TR_AMT = NVL( (SELECT SUM(NVL(USE_AMT,0))
+			 												FROM	YE161030 CC, YE164010 BB
+							 							     WHERE CC.DPOB_CD=BB.DPOB_CD
+														 	AND CC.YRTX_BLGG_YR=BB.YRTX_BLGG_YR
+															AND CC.CLUT_SEPT_CD=BB.CLUT_SEPT_CD
+															AND CC.SYSTEMKEY=BB.SYSTEMKEY 
+															AND CC.TXPR_DSCM_NO_CNTN =  BB.RESNO_ENC_CNTN
+															AND BB.DPOB_CD=AA.DPOB_CD
+														 	AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+															AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+															AND BB.SYSTEMKEY=AA.SYSTEMKEY  
+															AND BB.YN4 = '1' 
+							  							) ,0)	/* 의료비_실손보험금보전금액 */ 
+ 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr# 
+				 WHERE DPOB_CD=#dpobCd#
+					AND YRTX_BLGG_YR=#yrtxBlggYr#
+					AND CLUT_SEPT_CD=#clutSeptCd#
+					AND SYSTEMKEY=#systemkey# 
+				]]>
+	</update>
+	
+	
+	
+	
+	
+	
+	<!-- 실손보험정리 합계  2021연말정산-->
+	<update id="infcPkgYe161080_2021_DAO.fnYeta6200_B201Y_YE161080_2021_Update_S">
+		 
+		 
+		 <![CDATA[
+		 	UPDATE YE161080 AA
+		 	SET MEDXPS_USE_AMT_SUM = NVL((SELECT SUM(NVL(MED_PYM_AMT,0))
+		 							 	  FROM YE161030 CC, YE166030 BB
+		 							 	  WHERE CC.DPOB_CD=BB.DPOB_CD
+		 							 	  AND CC.YRTX_BLGG_YR=BB.YRTX_BLGG_YR
+										  AND CC.CLUT_SEPT_CD=BB.CLUT_SEPT_CD
+										  AND CC.SYSTEMKEY=BB.SYSTEMKEY
+										  AND CC.TXPR_DSCM_NO_CNTN =  BB.MED_BSNO_RESID
+										  AND BB.DPOB_CD=AA.DPOB_CD
+										  AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+										  AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+										  AND BB.SYSTEMKEY=AA.SYSTEMKEY
+		 								),0)
+		 		, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr# 
+				 WHERE DPOB_CD=#dpobCd#
+					AND YRTX_BLGG_YR=#yrtxBlggYr#
+					AND CLUT_SEPT_CD=#clutSeptCd#
+					AND SYSTEMKEY=#systemkey#
+		 ]]>	
+	</update>
+	
+	
+	
+	
+	 
+	<!-- 합계금액계 -->
+		<update id="infcPkgYe161080_2021_DAO.incDdcYeta2021_All_YE161080_2021_Update_S">
+		<![CDATA[
+				UPDATE YE161080 
+			SET  PNSN_ACC_USE_AMT_SUM = 	(SCTC_HP_USE_AMT + RTPN_USE_AMT + PNSN_SVNG_USE_AMT)	/*  연금계좌납입금액합계  */
+				,INFEE_PYM_USE_AMT_SUM = (CVRG_INSC_USE_AMT + DSBR_EU_CVRG_USE_AMT)		/*  보험료납입금액합계			 */
+				,MDXPS_USE_AMT_SUM =(MDXPS_SFT_SPRCD_USE_AMT + MDXPS_PRS_USE_AMT + MDXPS_OTH_USE_AMT + MDXPS_LS_INSR_TR_AMT)		/*  의료비납입금액합계  */
+				,SCXPS_USE_AMT_SUM =(SCXPS_PRS_USE_AMT + SCXPS_KID_USE_AMT + SCXPS_STD_USE_AMT + SCXPS_UND_USE_AMT + SCXPS_DSBR_USE_AMT)		/*  교육비납입금액합계  */
+				,CONB_USE_AMT_SUM = (CONB10TTSW_LT_USE_AMT + CONB10EXCS_LT_USE_AMT + CONB_LGL_USE_AMT + CONB_EMST_ASCT_USE_AMT + CONB_RELI_ORG_OTH_USE_AMT + CONB_RELI_ORG_USE_AMT) /*  기부금납입금액합계  */
+				
+				,  MMR_USE_AMT = NVL( (SELECT SUM(NVL(MNTH_RNTTY_YRLY_MNTH_SUM,0))
+			 												FROM  YE162510 BB
+							 							   WHERE BB.DPOB_CD=YE161080.DPOB_CD
+														 	AND BB.YRTX_BLGG_YR=YE161080.YRTX_BLGG_YR
+															AND BB.CLUT_SEPT_CD=YE161080.CLUT_SEPT_CD
+															AND BB.SYSTEMKEY=YE161080.SYSTEMKEY  
+							  							) ,0)		  		
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+				 
+				]]>
+	</update>
+	
+	
+<!-- +++++++++++++++++++++++++ 2021년도 귀속 로직  종료 ++++++++++++++++++++++++++++++ -->
+
+	<insert id="infcPkgYe161080_2021_DAO.insertYe161080_S">
+		<![CDATA[
+				INSERT INTO YE161080 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , FRGR_LBRR_ENTC_PUP_CD
+				  , FRGR_LBRR_LBR_OFR_DT
+				  , FRGR_LBRR_RE_EXRY_DT
+				  , FRGR_LBRR_RE_RCPN_DT
+				  , FRGR_LBRR_RE_ALFA_SBMS_DT
+				  , FRGR_LBRR_ERIN_IMN_RCPN_DT
+				  , FRGR_LBRR_ERIN_IMN_SBMS_DT
+				  , YUP_SNMC_RE_STRT_DT
+				  , YUP_SNMC_RE_END_DT
+				  , SCTC_HP_USE_AMT
+				  , SCTC_HP_DDC_TRGT_AMT
+				  , SCTC_HP_DDC_AMT
+				  , RTPN_USE_AMT
+				  , RTPN_DDC_TRGT_AMT
+				  , RTPN_DDC_AMT
+				  , PNSN_SVNG_USE_AMT
+				  , PNSN_SVNG_DDC_TRGT_AMT
+				  , PNSN_SVNG_DDC_AMT
+				  , PNSN_ACC_USE_AMT_SUM
+				  , PNSN_ACC_DDC_TRGT_AMT_SUM
+				  , PNSN_ACC_DDC_AMT_SUM
+				  , CVRG_INSC_USE_AMT
+				  , CVRG_INSC_DDC_TRGT_AMT2
+				  , CVRG_INSC_DDC_AMT
+				  , DSBR_EU_CVRG_USE_AMT
+				  , DSBR_EU_CVRG_DDC_TRGT_AMT
+				  , DSBR_EU_CVRG_DDC_AMT
+				  , INFEE_PYM_USE_AMT_SUM
+				  , INFEE_PYM_DDC_TRGT_AMT_SUM
+				  , INFEE_PYM_DDC_AMT_SUM
+				  , MDXPS_SFT_SPRCD_USE_AMT
+				  , MDXPS_SFT_SPRCD_DDC_TRGT_AMT
+				  , MDXPS_SFT_SPRCD_DDC_AMT
+				  , MDXPS_PRS_USE_AMT
+				  , MDXPS_PRS_DDC_TRGT_AMT
+				  , MDXPS_PRS_DDC_AMT
+				  , MDXPS_OTH_USE_AMT
+				  , MDXPS_OTH_DDC_TRGT_AMT
+				  , MDXPS_OTH_DDC_AMT
+				  , MDXPS_USE_AMT_SUM
+				  , MDXPS_DDC_TRGT_AMT_SUM
+				  , MDXPS_DDC_AMT_SUM
+				  , SCXPS_PRS_USE_AMT
+				  , SCXPS_PRS_DDC_TRGT_AMT
+				  , SCXPS_PRS_DDC_AMT
+				  , SCXPS_KID_USE_AMT
+				  , SCXPS_KID_DDC_TRGT_AMT
+				  , SCXPS_KID_DDC_AMT
+				  , SCXPS_STD_USE_AMT
+				  , SCXPS_STD_DDC_TRGT_AMT
+				  , SCXPS_STD_DDC_AMT
+				  , SCXPS_UND_USE_AMT
+				  , SCXPS_UND_DDC_TRGT_AMT
+				  , SCXPS_UND_DDC_AMT
+				  , SCXPS_DSBR_USE_AMT
+				  , SCXPS_DSBR_DDC_TRGT_AMT
+				  , SCXPS_DSBR_DDC_AMT
+				  , SCXPS_KID_COUNT
+				  , SCXPS_STD_COUNT
+				  , SCXPS_UND_COUNT
+				  , SCXPS_DSBR_COUNT
+				  , SCXPS_USE_AMT_SUM
+				  , SCXPS_DDC_TRGT_AMT_SUM
+				  , SCXPS_DDC_AMT_SUM
+				  , CONB10TTSW_LT_USE_AMT
+				  , CONB10TTSW_LT_DDC_TRGT_AMT
+				  , CONB10TTSW_LT_DDC_AMT
+				  , CONB10EXCS_LT_USE_AMT
+				  , CONB10EXCS_LT_DDC_TRGT_AMT
+				  , CONB10EXCS_LT_DDC_AMT
+				  , CONB_LGL_USE_AMT
+				  , CONB_LGL_DDC_TRGT_AMT
+				  , CONB_LGL_DDC_AMT
+				  , CONB_EMST_ASCT_USE_AMT
+				  , CONB_EMST_ASCT_DDC_TRGT_AMT
+				  , CONB_EMST_ASCT_DDC_AMT
+				  , CONB_RELI_ORG_OTH_USE_AMT
+				  , CONB_RELI_ORG_OTH_DDC_TRGT_AMT
+				  , CONB_RELI_ORG_OTH_DDC_AMT
+				  , CONB_RELI_ORG_USE_AMT
+				  , CONB_RELI_ORG_DDC_TRGT_AMT
+				  , CONB_RELI_ORG_DDC_AMT
+				  , CONB_USE_AMT_SUM
+				  , CONB_DDC_TRGT_AMT_SUM
+				  , CONB_DDC_AMT_SUM
+				  , OVRS_SURC_INC_FMT
+				  , FRGN_PMT_FC_TXAMT
+				  , FRGN_PMT_WC_TXAMT
+				  , FRGN_PMT_TXAMT_TXP_NTN_NM
+				  , FRGN_PMT_TXAMT_PMT_DT
+				  , FRGN_PMT_TXAMT_ALFA_SBMS_DT
+				  , FRGN_PMT_TXAMT_ABRD_WKAR_NM
+				  , FRGN_DTY_TERM_STDT
+				  , FRGN_PMT_TXAMT_RFO_NM
+				  , HSNG_TENN_LNPB_USE_AMT
+				  , HSNG_TENN_LNPB_DDC_AMT
+				  , MMR_USE_AMT
+				  , MMR_DDC_AMT
+				  , CD218
+				  , D219
+				  , PRCSP_WORK_INCM_SUMT_YN
+				  , CD225
+				  , CD226
+				  , CD227
+				  , CD228
+				  , INCM_DDUC_WTNNTE_SUMT_DT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , FRGN_DTY_TERM_EDDT
+				  , FILE_APP_PAPR_SBT_YN
+				  , TXLG_ITCT_AMNT
+				  , TXLG_BSTA_AMNT
+				  , TXLG_WKTA_AMNT
+				  , TXLG_CLTA_AMNT
+				  , TXLG_FRTA_AMNT
+				  , TXLG_TXTY_AMNT
+				  , MDXPS_LS_INSR_TR_AMT )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #frgrLbrrEntcPupCd#
+				  , #frgrLbrrLbrOfrDt#
+				  , #frgrLbrrReExryDt#
+				  , #frgrLbrrReRcpnDt#
+				  , #frgrLbrrReAlfaSbmsDt#
+				  , #frgrLbrrErinImnRcpnDt#
+				  , #frgrLbrrErinImnSbmsDt#
+				  , #yupSnmcReStrtDt#
+				  , #yupSnmcReEndDt#
+				  , #sctcHpUseAmt#
+				  , #sctcHpDdcTrgtAmt#
+				  , #sctcHpDdcAmt#
+				  , #rtpnUseAmt#
+				  , #rtpnDdcTrgtAmt#
+				  , #rtpnDdcAmt#
+				  , #pnsnSvngUseAmt#
+				  , #pnsnSvngDdcTrgtAmt#
+				  , #pnsnSvngDdcAmt#
+				  , #pnsnAccUseAmtSum#
+				  , #pnsnAccDdcTrgtAmtSum#
+				  , #pnsnAccDdcAmtSum#
+				  , #cvrgInscUseAmt#
+				  , #cvrgInscDdcTrgtAmt2#
+				  , #cvrgInscDdcAmt#
+				  , #dsbrEuCvrgUseAmt#
+				  , #dsbrEuCvrgDdcTrgtAmt#
+				  , #dsbrEuCvrgDdcAmt#
+				  , #infeePymUseAmtSum#
+				  , #infeePymDdcTrgtAmtSum#
+				  , #infeePymDdcAmtSum#
+				  , #mdxpsSftSprcdUseAmt#
+				  , #mdxpsSftSprcdDdcTrgtAmt#
+				  , #mdxpsSftSprcdDdcAmt#
+				  , #mdxpsPrsUseAmt#
+				  , #mdxpsPrsDdcTrgtAmt#
+				  , #mdxpsPrsDdcAmt#
+				  , #mdxpsOthUseAmt#
+				  , #mdxpsOthDdcTrgtAmt#
+				  , #mdxpsOthDdcAmt#
+				  , #mdxpsUseAmtSum#
+				  , #mdxpsDdcTrgtAmtSum#
+				  , #mdxpsDdcAmtSum#
+				  , #scxpsPrsUseAmt#
+				  , #scxpsPrsDdcTrgtAmt#
+				  , #scxpsPrsDdcAmt#
+				  , #scxpsKidUseAmt#
+				  , #scxpsKidDdcTrgtAmt#
+				  , #scxpsKidDdcAmt#
+				  , #scxpsStdUseAmt#
+				  , #scxpsStdDdcTrgtAmt#
+				  , #scxpsStdDdcAmt#
+				  , #scxpsUndUseAmt#
+				  , #scxpsUndDdcTrgtAmt#
+				  , #scxpsUndDdcAmt#
+				  , #scxpsDsbrUseAmt#
+				  , #scxpsDsbrDdcTrgtAmt#
+				  , #scxpsDsbrDdcAmt#
+				  , #scxpsKidCount#
+				  , #scxpsStdCount#
+				  , #scxpsUndCount#
+				  , #scxpsDsbrCount#
+				  , #scxpsUseAmtSum#
+				  , #scxpsDdcTrgtAmtSum#
+				  , #scxpsDdcAmtSum#
+				  , #conb10ttswLtUseAmt#
+				  , #conb10ttswLtDdcTrgtAmt#
+				  , #conb10ttswLtDdcAmt#
+				  , #conb10excsLtUseAmt#
+				  , #conb10excsLtDdcTrgtAmt#
+				  , #conb10excsLtDdcAmt#
+				  , #conbLglUseAmt#
+				  , #conbLglDdcTrgtAmt#
+				  , #conbLglDdcAmt#
+				  , #conbEmstAsctUseAmt#
+				  , #conbEmstAsctDdcTrgtAmt#
+				  , #conbEmstAsctDdcAmt#
+				  , #conbReliOrgOthUseAmt#
+				  , #conbReliOrgOthDdcTrgtAmt#
+				  , #conbReliOrgOthDdcAmt#
+				  , #conbReliOrgUseAmt#
+				  , #conbReliOrgDdcTrgtAmt#
+				  , #conbReliOrgDdcAmt#
+				  , #conbUseAmtSum#
+				  , #conbDdcTrgtAmtSum#
+				  , #conbDdcAmtSum#
+				  , #ovrsSurcIncFmt#
+				  , #frgnPmtFcTxamt#
+				  , #frgnPmtWcTxamt#
+				  , #frgnPmtTxamtTxpNtnNm#
+				  , #frgnPmtTxamtPmtDt#
+				  , #frgnPmtTxamtAlfaSbmsDt#
+				  , #frgnPmtTxamtAbrdWkarNm#
+				  , #frgnDtyTermStdt#
+				  , #frgnPmtTxamtRfoNm#
+				  , #hsngTennLnpbUseAmt#
+				  , #hsngTennLnpbDdcAmt#
+				  , #mmrUseAmt#
+				  , #mmrDdcAmt#
+				  , #cd218#
+				  , #d219#
+				  , #prcspWorkIncmSumtYn#
+				  , #cd225#
+				  , #cd226#
+				  , #cd227#
+				  , #cd228#
+				  , #incmDducWtnnteSumtDt#
+			      , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# 
+				  , #frgnDtyTermEddt#
+				  , #fileAppPaprSbtYn#
+				  , #txlgItctAmnt#
+				  , #txlgBstaAmnt#
+				  , #txlgWktaAmnt#
+				  , #txlgCltaAmnt#
+				  , #txlgFrtaAmnt#
+				  , #txlgTxtyAmnt#
+				  , #mdxpsLsInsrTrAmt# ) 
+		]]>
+	</insert>
+	
+	<update id="infcPkgYe161080_2021_DAO.updateYe161080_S">
+		<![CDATA[
+				UPDATE YE161080
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, FRGR_LBRR_ENTC_PUP_CD=#frgrLbrrEntcPupCd#
+				, FRGR_LBRR_LBR_OFR_DT=#frgrLbrrLbrOfrDt#
+				, FRGR_LBRR_RE_EXRY_DT=#frgrLbrrReExryDt#
+				, FRGR_LBRR_RE_RCPN_DT=#frgrLbrrReRcpnDt#
+				, FRGR_LBRR_RE_ALFA_SBMS_DT=#frgrLbrrReAlfaSbmsDt#
+				, FRGR_LBRR_ERIN_IMN_RCPN_DT=#frgrLbrrErinImnRcpnDt#
+				, FRGR_LBRR_ERIN_IMN_SBMS_DT=#frgrLbrrErinImnSbmsDt#
+				, YUP_SNMC_RE_STRT_DT=#yupSnmcReStrtDt#
+				, YUP_SNMC_RE_END_DT=#yupSnmcReEndDt#
+				, SCTC_HP_USE_AMT=#sctcHpUseAmt#
+				, SCTC_HP_DDC_TRGT_AMT=#sctcHpDdcTrgtAmt#
+				, SCTC_HP_DDC_AMT=#sctcHpDdcAmt#
+				, RTPN_USE_AMT=#rtpnUseAmt#
+				, RTPN_DDC_TRGT_AMT=#rtpnDdcTrgtAmt#
+				, RTPN_DDC_AMT=#rtpnDdcAmt#
+				, PNSN_SVNG_USE_AMT=#pnsnSvngUseAmt#
+				, PNSN_SVNG_DDC_TRGT_AMT=#pnsnSvngDdcTrgtAmt#
+				, PNSN_SVNG_DDC_AMT=#pnsnSvngDdcAmt#
+				, PNSN_ACC_USE_AMT_SUM=#pnsnAccUseAmtSum#
+				, PNSN_ACC_DDC_TRGT_AMT_SUM=#pnsnAccDdcTrgtAmtSum#
+				, PNSN_ACC_DDC_AMT_SUM=#pnsnAccDdcAmtSum#
+				, CVRG_INSC_USE_AMT=#cvrgInscUseAmt#
+				, CVRG_INSC_DDC_TRGT_AMT2=#cvrgInscDdcTrgtAmt2#
+				, CVRG_INSC_DDC_AMT=#cvrgInscDdcAmt#
+				, DSBR_EU_CVRG_USE_AMT=#dsbrEuCvrgUseAmt#
+				, DSBR_EU_CVRG_DDC_TRGT_AMT=#dsbrEuCvrgDdcTrgtAmt#
+				, DSBR_EU_CVRG_DDC_AMT=#dsbrEuCvrgDdcAmt#
+				, INFEE_PYM_USE_AMT_SUM=#infeePymUseAmtSum#
+				, INFEE_PYM_DDC_TRGT_AMT_SUM=#infeePymDdcTrgtAmtSum#
+				, INFEE_PYM_DDC_AMT_SUM=#infeePymDdcAmtSum#
+				, MDXPS_SFT_SPRCD_USE_AMT=#mdxpsSftSprcdUseAmt#
+				, MDXPS_SFT_SPRCD_DDC_TRGT_AMT=#mdxpsSftSprcdDdcTrgtAmt#
+				, MDXPS_SFT_SPRCD_DDC_AMT=#mdxpsSftSprcdDdcAmt#
+				, MDXPS_PRS_USE_AMT=#mdxpsPrsUseAmt#
+				, MDXPS_PRS_DDC_TRGT_AMT=#mdxpsPrsDdcTrgtAmt#
+				, MDXPS_PRS_DDC_AMT=#mdxpsPrsDdcAmt#
+				, MDXPS_OTH_USE_AMT=#mdxpsOthUseAmt#
+				, MDXPS_OTH_DDC_TRGT_AMT=#mdxpsOthDdcTrgtAmt#
+				, MDXPS_OTH_DDC_AMT=#mdxpsOthDdcAmt#
+				, MDXPS_USE_AMT_SUM=#mdxpsUseAmtSum#
+				, MDXPS_DDC_TRGT_AMT_SUM=#mdxpsDdcTrgtAmtSum#
+				, MDXPS_DDC_AMT_SUM=#mdxpsDdcAmtSum#
+				, SCXPS_PRS_USE_AMT=#scxpsPrsUseAmt#
+				, SCXPS_PRS_DDC_TRGT_AMT=#scxpsPrsDdcTrgtAmt#
+				, SCXPS_PRS_DDC_AMT=#scxpsPrsDdcAmt#
+				, SCXPS_KID_USE_AMT=#scxpsKidUseAmt#
+				, SCXPS_KID_DDC_TRGT_AMT=#scxpsKidDdcTrgtAmt#
+				, SCXPS_KID_DDC_AMT=#scxpsKidDdcAmt#
+				, SCXPS_STD_USE_AMT=#scxpsStdUseAmt#
+				, SCXPS_STD_DDC_TRGT_AMT=#scxpsStdDdcTrgtAmt#
+				, SCXPS_STD_DDC_AMT=#scxpsStdDdcAmt#
+				, SCXPS_UND_USE_AMT=#scxpsUndUseAmt#
+				, SCXPS_UND_DDC_TRGT_AMT=#scxpsUndDdcTrgtAmt#
+				, SCXPS_UND_DDC_AMT=#scxpsUndDdcAmt#
+				, SCXPS_DSBR_USE_AMT=#scxpsDsbrUseAmt#
+				, SCXPS_DSBR_DDC_TRGT_AMT=#scxpsDsbrDdcTrgtAmt#
+				, SCXPS_DSBR_DDC_AMT=#scxpsDsbrDdcAmt#
+				, SCXPS_KID_COUNT=#scxpsKidCount#
+				, SCXPS_STD_COUNT=#scxpsStdCount#
+				, SCXPS_UND_COUNT=#scxpsUndCount#
+				, SCXPS_DSBR_COUNT=#scxpsDsbrCount#
+				, SCXPS_USE_AMT_SUM=#scxpsUseAmtSum#
+				, SCXPS_DDC_TRGT_AMT_SUM=#scxpsDdcTrgtAmtSum#
+				, SCXPS_DDC_AMT_SUM=#scxpsDdcAmtSum#
+				, CONB10TTSW_LT_USE_AMT=#conb10ttswLtUseAmt#
+				, CONB10TTSW_LT_DDC_TRGT_AMT=#conb10ttswLtDdcTrgtAmt#
+				, CONB10TTSW_LT_DDC_AMT=#conb10ttswLtDdcAmt#
+				, CONB10EXCS_LT_USE_AMT=#conb10excsLtUseAmt#
+				, CONB10EXCS_LT_DDC_TRGT_AMT=#conb10excsLtDdcTrgtAmt#
+				, CONB10EXCS_LT_DDC_AMT=#conb10excsLtDdcAmt#
+				, CONB_LGL_USE_AMT=#conbLglUseAmt#
+				, CONB_LGL_DDC_TRGT_AMT=#conbLglDdcTrgtAmt#
+				, CONB_LGL_DDC_AMT=#conbLglDdcAmt#
+				, CONB_EMST_ASCT_USE_AMT=#conbEmstAsctUseAmt#
+				, CONB_EMST_ASCT_DDC_TRGT_AMT=#conbEmstAsctDdcTrgtAmt#
+				, CONB_EMST_ASCT_DDC_AMT=#conbEmstAsctDdcAmt#
+				, CONB_RELI_ORG_OTH_USE_AMT=#conbReliOrgOthUseAmt#
+				, CONB_RELI_ORG_OTH_DDC_TRGT_AMT=#conbReliOrgOthDdcTrgtAmt#
+				, CONB_RELI_ORG_OTH_DDC_AMT=#conbReliOrgOthDdcAmt#
+				, CONB_RELI_ORG_USE_AMT=#conbReliOrgUseAmt#
+				, CONB_RELI_ORG_DDC_TRGT_AMT=#conbReliOrgDdcTrgtAmt#
+				, CONB_RELI_ORG_DDC_AMT=#conbReliOrgDdcAmt#
+				, CONB_USE_AMT_SUM=#conbUseAmtSum#
+				, CONB_DDC_TRGT_AMT_SUM=#conbDdcTrgtAmtSum#
+				, CONB_DDC_AMT_SUM=#conbDdcAmtSum#
+				, OVRS_SURC_INC_FMT=#ovrsSurcIncFmt#
+				, FRGN_PMT_FC_TXAMT=#frgnPmtFcTxamt#
+				, FRGN_PMT_WC_TXAMT=#frgnPmtWcTxamt#
+				, FRGN_PMT_TXAMT_TXP_NTN_NM=#frgnPmtTxamtTxpNtnNm#
+				, FRGN_PMT_TXAMT_PMT_DT=#frgnPmtTxamtPmtDt#
+				, FRGN_PMT_TXAMT_ALFA_SBMS_DT=#frgnPmtTxamtAlfaSbmsDt#
+				, FRGN_PMT_TXAMT_ABRD_WKAR_NM=#frgnPmtTxamtAbrdWkarNm#
+				, FRGN_DTY_TERM_STDT=#frgnDtyTermStdt#
+				, FRGN_PMT_TXAMT_RFO_NM=#frgnPmtTxamtRfoNm#
+				, HSNG_TENN_LNPB_USE_AMT=#hsngTennLnpbUseAmt#
+				, HSNG_TENN_LNPB_DDC_AMT=#hsngTennLnpbDdcAmt#
+				, MMR_USE_AMT=#mmrUseAmt#
+				, MMR_DDC_AMT=#mmrDdcAmt#
+				, CD218=#cd218#
+				, D219=#d219#
+				, PRCSP_WORK_INCM_SUMT_YN=#prcspWorkIncmSumtYn#
+				, CD225=#cd225#
+				, CD226=#cd226#
+				, CD227=#cd227#
+				, CD228=#cd228#
+				, INCM_DDUC_WTNNTE_SUMT_DT=#incmDducWtnnteSumtDt#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+				, FRGN_DTY_TERM_EDDT=#frgnDtyTermEddt#
+				, FILE_APP_PAPR_SBT_YN=#fileAppPaprSbtYn#
+				, TXLG_ITCT_AMNT=#txlgItctAmnt#
+				, TXLG_BSTA_AMNT=#txlgBstaAmnt#
+				, TXLG_WKTA_AMNT=#txlgWktaAmnt#
+				, TXLG_CLTA_AMNT=#txlgCltaAmnt#
+				, TXLG_FRTA_AMNT=#txlgFrtaAmnt#
+				, TXLG_TXTY_AMNT=#txlgTxtyAmnt#
+				, MDXPS_LS_INSR_TR_AMT=#mdxpsLsInsrTrAmt#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+				 
+				]]>
+	</update>
+	
+	<delete id="infcPkgYe161080_2021_DAO.deleteYe161080_S">
+		<![CDATA[
+			DELETE FROM YE161080 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<select id="infcPkgYe161080_2021_DAO.selectYe161080_S" resultMap="infcPkgYe161080_2021">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, FRGR_LBRR_ENTC_PUP_CD
+				, FRGR_LBRR_LBR_OFR_DT
+				, FRGR_LBRR_RE_EXRY_DT
+				, FRGR_LBRR_RE_RCPN_DT
+				, FRGR_LBRR_RE_ALFA_SBMS_DT
+				, FRGR_LBRR_ERIN_IMN_RCPN_DT
+				, FRGR_LBRR_ERIN_IMN_SBMS_DT
+				, YUP_SNMC_RE_STRT_DT
+				, YUP_SNMC_RE_END_DT
+				, SCTC_HP_USE_AMT
+				, SCTC_HP_DDC_TRGT_AMT
+				, SCTC_HP_DDC_AMT
+				, RTPN_USE_AMT
+				, RTPN_DDC_TRGT_AMT
+				, RTPN_DDC_AMT
+				, PNSN_SVNG_USE_AMT
+				, PNSN_SVNG_DDC_TRGT_AMT
+				, PNSN_SVNG_DDC_AMT
+				, PNSN_ACC_USE_AMT_SUM
+				, PNSN_ACC_DDC_TRGT_AMT_SUM
+				, PNSN_ACC_DDC_AMT_SUM
+				, CVRG_INSC_USE_AMT
+				, CVRG_INSC_DDC_TRGT_AMT2
+				, CVRG_INSC_DDC_AMT
+				, DSBR_EU_CVRG_USE_AMT
+				, DSBR_EU_CVRG_DDC_TRGT_AMT
+				, DSBR_EU_CVRG_DDC_AMT
+				, INFEE_PYM_USE_AMT_SUM
+				, INFEE_PYM_DDC_TRGT_AMT_SUM
+				, INFEE_PYM_DDC_AMT_SUM
+				, MDXPS_SFT_SPRCD_USE_AMT
+				, MDXPS_SFT_SPRCD_DDC_TRGT_AMT
+				, MDXPS_SFT_SPRCD_DDC_AMT
+				, MDXPS_PRS_USE_AMT
+				, MDXPS_PRS_DDC_TRGT_AMT
+				, MDXPS_PRS_DDC_AMT
+				, MDXPS_OTH_USE_AMT
+				, MDXPS_OTH_DDC_TRGT_AMT
+				, MDXPS_OTH_DDC_AMT
+				, MDXPS_USE_AMT_SUM
+				, MDXPS_DDC_TRGT_AMT_SUM
+				, MDXPS_DDC_AMT_SUM
+				, SCXPS_PRS_USE_AMT
+				, SCXPS_PRS_DDC_TRGT_AMT
+				, SCXPS_PRS_DDC_AMT
+				, SCXPS_KID_USE_AMT
+				, SCXPS_KID_DDC_TRGT_AMT
+				, SCXPS_KID_DDC_AMT
+				, SCXPS_STD_USE_AMT
+				, SCXPS_STD_DDC_TRGT_AMT
+				, SCXPS_STD_DDC_AMT
+				, SCXPS_UND_USE_AMT
+				, SCXPS_UND_DDC_TRGT_AMT
+				, SCXPS_UND_DDC_AMT
+				, SCXPS_DSBR_USE_AMT
+				, SCXPS_DSBR_DDC_TRGT_AMT
+				, SCXPS_DSBR_DDC_AMT
+				, SCXPS_KID_COUNT
+				, SCXPS_STD_COUNT
+				, SCXPS_UND_COUNT
+				, SCXPS_DSBR_COUNT
+				, SCXPS_USE_AMT_SUM
+				, SCXPS_DDC_TRGT_AMT_SUM
+				, SCXPS_DDC_AMT_SUM
+				, CONB10TTSW_LT_USE_AMT
+				, CONB10TTSW_LT_DDC_TRGT_AMT
+				, CONB10TTSW_LT_DDC_AMT
+				, CONB10EXCS_LT_USE_AMT
+				, CONB10EXCS_LT_DDC_TRGT_AMT
+				, CONB10EXCS_LT_DDC_AMT
+				, CONB_LGL_USE_AMT
+				, CONB_LGL_DDC_TRGT_AMT
+				, CONB_LGL_DDC_AMT
+				, CONB_EMST_ASCT_USE_AMT
+				, CONB_EMST_ASCT_DDC_TRGT_AMT
+				, CONB_EMST_ASCT_DDC_AMT
+				, CONB_RELI_ORG_OTH_USE_AMT
+				, CONB_RELI_ORG_OTH_DDC_TRGT_AMT
+				, CONB_RELI_ORG_OTH_DDC_AMT
+				, CONB_RELI_ORG_USE_AMT
+				, CONB_RELI_ORG_DDC_TRGT_AMT
+				, CONB_RELI_ORG_DDC_AMT
+				, CONB_USE_AMT_SUM
+				, CONB_DDC_TRGT_AMT_SUM
+				, CONB_DDC_AMT_SUM
+				, OVRS_SURC_INC_FMT
+				, FRGN_PMT_FC_TXAMT
+				, FRGN_PMT_WC_TXAMT
+				, FRGN_PMT_TXAMT_TXP_NTN_NM
+				, FRGN_PMT_TXAMT_PMT_DT
+				, FRGN_PMT_TXAMT_ALFA_SBMS_DT
+				, FRGN_PMT_TXAMT_ABRD_WKAR_NM
+				, FRGN_DTY_TERM_STDT
+				, FRGN_PMT_TXAMT_RFO_NM
+				, HSNG_TENN_LNPB_USE_AMT
+				, HSNG_TENN_LNPB_DDC_AMT
+				, MMR_USE_AMT
+				, MMR_DDC_AMT
+				, CD218
+				, D219
+				, PRCSP_WORK_INCM_SUMT_YN
+				, CD225
+				, CD226
+				, CD227
+				, CD228
+				, INCM_DDUC_WTNNTE_SUMT_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, FRGN_DTY_TERM_EDDT
+				, FILE_APP_PAPR_SBT_YN
+				, TXLG_ITCT_AMNT
+				, TXLG_BSTA_AMNT
+				, TXLG_WKTA_AMNT
+				, TXLG_CLTA_AMNT
+				, TXLG_FRTA_AMNT
+				, TXLG_TXTY_AMNT
+				, MDXPS_LS_INSR_TR_AMT
+			FROM YE161080
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+	<select id="infcPkgYe161080_2021_DAO.selectYe161080List_D" parameterClass="infcPkgYe161080Srh_2021_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, FRGR_LBRR_ENTC_PUP_CD
+								, FRGR_LBRR_LBR_OFR_DT
+								, FRGR_LBRR_RE_EXRY_DT
+								, FRGR_LBRR_RE_RCPN_DT
+								, FRGR_LBRR_RE_ALFA_SBMS_DT
+								, FRGR_LBRR_ERIN_IMN_RCPN_DT
+								, FRGR_LBRR_ERIN_IMN_SBMS_DT
+								, YUP_SNMC_RE_STRT_DT
+								, YUP_SNMC_RE_END_DT
+								, SCTC_HP_USE_AMT
+								, SCTC_HP_DDC_TRGT_AMT
+								, SCTC_HP_DDC_AMT
+								, RTPN_USE_AMT
+								, RTPN_DDC_TRGT_AMT
+								, RTPN_DDC_AMT
+								, PNSN_SVNG_USE_AMT
+								, PNSN_SVNG_DDC_TRGT_AMT
+								, PNSN_SVNG_DDC_AMT
+								, PNSN_ACC_USE_AMT_SUM
+								, PNSN_ACC_DDC_TRGT_AMT_SUM
+								, PNSN_ACC_DDC_AMT_SUM
+								, CVRG_INSC_USE_AMT
+								, CVRG_INSC_DDC_TRGT_AMT2
+								, CVRG_INSC_DDC_AMT
+								, DSBR_EU_CVRG_USE_AMT
+								, DSBR_EU_CVRG_DDC_TRGT_AMT
+								, DSBR_EU_CVRG_DDC_AMT
+								, INFEE_PYM_USE_AMT_SUM
+								, INFEE_PYM_DDC_TRGT_AMT_SUM
+								, INFEE_PYM_DDC_AMT_SUM
+								, MDXPS_SFT_SPRCD_USE_AMT
+								, MDXPS_SFT_SPRCD_DDC_TRGT_AMT
+								, MDXPS_SFT_SPRCD_DDC_AMT
+								, MDXPS_PRS_USE_AMT
+								, MDXPS_PRS_DDC_TRGT_AMT
+								, MDXPS_PRS_DDC_AMT
+								, MDXPS_OTH_USE_AMT
+								, MDXPS_OTH_DDC_TRGT_AMT
+								, MDXPS_OTH_DDC_AMT
+								, MDXPS_USE_AMT_SUM
+								, MDXPS_DDC_TRGT_AMT_SUM
+								, MDXPS_DDC_AMT_SUM
+								, SCXPS_PRS_USE_AMT
+								, SCXPS_PRS_DDC_TRGT_AMT
+								, SCXPS_PRS_DDC_AMT
+								, SCXPS_KID_USE_AMT
+								, SCXPS_KID_DDC_TRGT_AMT
+								, SCXPS_KID_DDC_AMT
+								, SCXPS_STD_USE_AMT
+								, SCXPS_STD_DDC_TRGT_AMT
+								, SCXPS_STD_DDC_AMT
+								, SCXPS_UND_USE_AMT
+								, SCXPS_UND_DDC_TRGT_AMT
+								, SCXPS_UND_DDC_AMT
+								, SCXPS_DSBR_USE_AMT
+								, SCXPS_DSBR_DDC_TRGT_AMT
+								, SCXPS_DSBR_DDC_AMT
+								, SCXPS_KID_COUNT
+								, SCXPS_STD_COUNT
+								, SCXPS_UND_COUNT
+								, SCXPS_DSBR_COUNT
+								, SCXPS_USE_AMT_SUM
+								, SCXPS_DDC_TRGT_AMT_SUM
+								, SCXPS_DDC_AMT_SUM
+								, CONB10TTSW_LT_USE_AMT
+								, CONB10TTSW_LT_DDC_TRGT_AMT
+								, CONB10TTSW_LT_DDC_AMT
+								, CONB10EXCS_LT_USE_AMT
+								, CONB10EXCS_LT_DDC_TRGT_AMT
+								, CONB10EXCS_LT_DDC_AMT
+								, CONB_LGL_USE_AMT
+								, CONB_LGL_DDC_TRGT_AMT
+								, CONB_LGL_DDC_AMT
+								, CONB_EMST_ASCT_USE_AMT
+								, CONB_EMST_ASCT_DDC_TRGT_AMT
+								, CONB_EMST_ASCT_DDC_AMT
+								, CONB_RELI_ORG_OTH_USE_AMT
+								, CONB_RELI_ORG_OTH_DDC_TRGT_AMT
+								, CONB_RELI_ORG_OTH_DDC_AMT
+								, CONB_RELI_ORG_USE_AMT
+								, CONB_RELI_ORG_DDC_TRGT_AMT
+								, CONB_RELI_ORG_DDC_AMT
+								, CONB_USE_AMT_SUM
+								, CONB_DDC_TRGT_AMT_SUM
+								, CONB_DDC_AMT_SUM
+								, OVRS_SURC_INC_FMT
+								, FRGN_PMT_FC_TXAMT
+								, FRGN_PMT_WC_TXAMT
+								, FRGN_PMT_TXAMT_TXP_NTN_NM
+								, FRGN_PMT_TXAMT_PMT_DT
+								, FRGN_PMT_TXAMT_ALFA_SBMS_DT
+								, FRGN_PMT_TXAMT_ABRD_WKAR_NM
+								, FRGN_DTY_TERM_STDT
+								, FRGN_PMT_TXAMT_RFO_NM
+								, HSNG_TENN_LNPB_USE_AMT
+								, HSNG_TENN_LNPB_DDC_AMT
+								, MMR_USE_AMT
+								, MMR_DDC_AMT
+								, CD218
+								, D219
+								, PRCSP_WORK_INCM_SUMT_YN
+								, CD225
+								, CD226
+								, CD227
+								, CD228
+								, INCM_DDUC_WTNNTE_SUMT_DT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+								, FRGN_DTY_TERM_EDDT
+								, FILE_APP_PAPR_SBT_YN
+								, TXLG_ITCT_AMNT
+								, TXLG_BSTA_AMNT
+								, TXLG_WKTA_AMNT
+								, TXLG_CLTA_AMNT
+								, TXLG_FRTA_AMNT
+								, TXLG_TXTY_AMNT
+								, MDXPS_LS_INSR_TR_AMT
+						FROM YE161080
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgYe161080_2021_DAO.selectYe161080ListTotCnt_S" parameterClass="infcPkgYe161080Srh_2021_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE161080
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

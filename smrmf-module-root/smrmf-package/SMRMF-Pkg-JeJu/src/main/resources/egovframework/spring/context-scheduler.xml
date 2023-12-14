@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+ 
+ 
+ 
+   <!-- 시스템 커넥션 health check 절대 지우면 안됨   -->
+    <bean id="healthTask" class="com.app.smrmf.sche.quartz.HealthTask"/> 
+   <!-- 시스템 커넥션 health check 절대 지우면 안됨   -->
+    <bean id="dummyTask" class="com.app.smrmf.pkg.sche.quartz.DummyTask"/>
+    <bean id="schePsnl0123Task" class="com.app.smrmf.pkg.sche.quartz.SchePsnl0123Task"/>
+    <bean id="schePsnl0100EndToPsnl0100Task" class="com.app.smrmf.pkg.sche.quartz.SchePsnl0100EndToPsnl0100Task"/>
+ 
+     <bean id="scheTranSysmTask" class="com.app.smrmf.pkg.sche.quartz.ScheTranSysmTask"/>
+       
+     
+	 <bean name="dummyJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+	    <property name="jobClass" value="com.app.smrmf.pkg.sche.quartz.DummyJobBean"/>
+	    <property name="jobDataAsMap">
+	        <map>
+	             <entry key="dummyTask" value-ref="dummyTask"/>
+	        </map>
+	    </property>
+    </bean>
+    
+    
+     <bean name="schePsnl0123Job" class="org.springframework.scheduling.quartz.JobDetailBean">
+	    <property name="jobClass" value="com.app.smrmf.pkg.sche.quartz.SchePsnl0123JobBean"/>
+	    <property name="jobDataAsMap">
+	        <map>
+	             <entry key="schePsnl0123Task" value-ref="schePsnl0123Task"/>
+	        </map>
+	    </property>
+    </bean>
+    
+       <bean name="schePsnl0100EndJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+	    <property name="jobClass" value="com.app.smrmf.pkg.sche.quartz.SchePsnl0100EndToPsnl0100JobBean"/>
+	    <property name="jobDataAsMap">
+	        <map>
+	             <entry key="schePsnl0100EndToPsnl0100Task" value-ref="schePsnl0100EndToPsnl0100Task"/>
+	        </map>
+	    </property>
+    </bean>
+ 
+    <bean name="healthTaskCheck" class="org.springframework.scheduling.quartz.JobDetailBean">
+	    <property name="jobClass" value="com.app.smrmf.sche.quartz.HealthTaskBean"/>
+	    <property name="jobDataAsMap">
+	        <map>
+	             <entry key="healthTask" value-ref="healthTask"/>
+	        </map>
+	    </property>
+	<!--    <property name="applicationContextJobDataKey" value="applicationContext" />  --> 
+    </bean>
+    
+     <bean name="scheTramSysmJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+	    <property name="jobClass" value="com.app.smrmf.pkg.sche.quartz.ScheTramSysmJobBean"/>
+	    <property name="jobDataAsMap">
+	        <map>
+	             <entry key="scheTranSysmTask" value-ref="scheTranSysmTask"/>
+	        </map>
+	    </property>
+    </bean>
+    
+	<!-- <bean id="simpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		  <property name="jobDetail" ref="dummyJob"/>
+		  <property name="startDelay" value="1000"/>
+		  <property name="repeatInterval" value="3000"/>
+	</bean>  --> 
+	
+   <bean id="cronTrigger01" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	  <property name="jobDetail" ref="dummyJob"/>
+	 <!-- <property name="cronExpression" value="*/50 * * * * ?" /> --> 
+	   <property name="cronExpression" value="0 0 01 * * ?" />  
+  </bean>
+  
+  <bean id="cronTrigger02" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	  <property name="jobDetail" ref="schePsnl0123Job"/>
+	    <!-- <property name="cronExpression" value="*/50 * * * * ?" />  --> 
+	    <property name="cronExpression" value="0 05 01 * * ?" /> 
+  </bean>    
+  
+   <bean id="cronTrigger03" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	  <property name="jobDetail" ref="schePsnl0100EndJob"/>
+	  <!--   <property name="cronExpression" value="*/50 * * * * ?" /> -->  
+	   <property name="cronExpression" value="0 10 01 * * ?" /> 
+  </bean>    
+    
+     <bean id="healthCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	  <property name="jobDetail" ref="healthTaskCheck"/> 
+	   <property name="cronExpression" value="0 0/5 * * * ?" />  
+  </bean>
+ 
+        <bean id="scheTramSysmCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	  <property name="jobDetail" ref="scheTramSysmJob"/>
+	   <property name="cronExpression" value="*/50 * * * * ?" />
+	  <!--  <property name="cronExpression" value="0 30 01 * * ?" />   --> 
+  </bean>
+  
+   <bean id="schedulerFactory"   class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+    <property name="jobDetails"> 
+		<list> 
+			<ref bean="dummyJob" /> 
+			<ref bean="schePsnl0123Job" /> 
+			<ref bean="schePsnl0100EndJob" /> 
+			<ref bean="healthTaskCheck" />  
+			<ref bean="scheTramSysmJob" />  
+		</list> 
+	</property> 
+       <property name="triggers">
+           <list>
+               <ref bean="cronTrigger01"/>
+               <ref bean="cronTrigger02"/>
+               <ref bean="cronTrigger03"/> 
+               <ref bean="healthCronTrigger"/> 
+               <ref bean="scheTramSysmCronTrigger"/> 
+           </list>
+       </property> 
+       <property name="applicationContextSchedulerContextKey" value="applicationContext"/> 
+   </bean>
+  
+    
+</beans>

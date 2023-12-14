@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl2100">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="psnl2100SerarchVO" type="com.app.exterms.basis.server.vo.Psnl2100SrhVO"/>
+	
+	<resultMap id="psnl2100" class="com.app.exterms.basis.server.vo.Psnl2100VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="hodyNumDysSeilNum" column="HODY_NUM_DYS_SEIL_NUM" columnIndex="2"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="3"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="4"/>
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="5"/>
+		<result property="hodyNumDysOvr" column="HODY_NUM_DYS_OVR" columnIndex="6"/>
+		<result property="hodyNumDysUdr" column="HODY_NUM_DYS_UDR" columnIndex="7"/>
+		<result property="hodyNumDysFrmCd" column="HODY_NUM_DYS_FRM_CD" columnIndex="8"/>
+		<result property="hodyNumDys" column="HODY_NUM_DYS" columnIndex="9"/>
+		<result property="hodyNumDysRate" column="HODY_NUM_DYS_RATE" columnIndex="10"/>
+		<result property="hodyNumDysBgnnDt" column="HODY_NUM_DYS_BGNN_DT" columnIndex="11"/>
+		<result property="hodyNumDysEndDt" column="HODY_NUM_DYS_END_DT" columnIndex="12"/>
+		<result property="hodyNumDysUseYn" column="HODY_NUM_DYS_USE_YN" columnIndex="13"/>
+		<result property="hodyNumDysNoteCtnt" column="HODY_NUM_DYS_NOTE_CTNT" columnIndex="14"/>
+		<result property="kybdr" column="KYBDR" columnIndex="15"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="16"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="17"/>
+		<result property="ismt" column="ISMT" columnIndex="18"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="19"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="20"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="21"/>
+		
+	</resultMap>
+	
+	<insert id="psnl2100DAO.insertPsnl2100_S">
+		<![CDATA[
+			INSERT INTO PSNL2100 
+				( DPOB_CD
+				  , HODY_NUM_DYS_SEIL_NUM
+				  , TYP_OCCU_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , PYSP_GRDE_CD
+				  , DTIL_OCCU_CLS_DIV_CD
+				  , HODY_NUM_DYS_OVR
+				  , HODY_NUM_DYS_UDR
+				  , HODY_NUM_DYS_FRM_CD
+				  , HODY_NUM_DYS
+				  , HODY_NUM_DYS_RATE
+				  , HODY_NUM_DYS_BGNN_DT
+				  , HODY_NUM_DYS_END_DT
+				  , HODY_NUM_DYS_USE_YN
+				  , HODY_NUM_DYS_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , (SELECT 
+    					NVL(MAX(HODY_NUM_DYS_SEIL_NUM), 0) + 1
+						FROM PSNL2100
+						WHERE DPOB_CD = #dpobCd#)
+				  , #typOccuCd#
+				  , #dtilOccuInttnCd#
+				  , SUBSTR(#dtilOccuInttnCd#,1,8)
+				  , SUBSTR(#dtilOccuInttnCd#,9,8)
+				  , #hodyNumDysOvr#
+				  , #hodyNumDysUdr#
+				  , #hodyNumDysFrmCd#
+				  , #hodyNumDys#
+				  , #hodyNumDysRate#
+				  , #hodyNumDysBgnnDt#
+				  , #hodyNumDysEndDt#
+				  , #hodyNumDysUseYn#
+				  , #hodyNumDysNoteCtnt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="psnl2100DAO.updatePsnl2100_S">
+		<![CDATA[
+			UPDATE PSNL2100
+			SET DPOB_CD=#dpobCd#
+				, HODY_NUM_DYS_SEIL_NUM=#hodyNumDysSeilNum#
+				, TYP_OCCU_CD=#typOccuCd#
+				, DTIL_OCCU_INTTN_CD = #dtilOccuClsDivCd#
+				, PYSP_GRDE_CD=SUBSTR(#dtilOccuClsDivCd#,1,8)
+				, DTIL_OCCU_CLS_DIV_CD=SUBSTR(#dtilOccuClsDivCd#,9,8)
+				, HODY_NUM_DYS_OVR=#hodyNumDysOvr#
+				, HODY_NUM_DYS_UDR=#hodyNumDysUdr#
+				, HODY_NUM_DYS_FRM_CD=#hodyNumDysFrmCd#
+				, HODY_NUM_DYS=#hodyNumDys#
+				, HODY_NUM_DYS_RATE=#hodyNumDysRate#
+				, HODY_NUM_DYS_BGNN_DT=#hodyNumDysBgnnDt#
+				, HODY_NUM_DYS_END_DT=#hodyNumDysEndDt#
+				, HODY_NUM_DYS_USE_YN=#hodyNumDysUseYn#
+				, HODY_NUM_DYS_NOTE_CTNT=#hodyNumDysNoteCtnt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND HODY_NUM_DYS_SEIL_NUM=#hodyNumDysSeilNum#
+				]]>
+	</update>
+	
+	<delete id="psnl2100DAO.deletePsnl2100_S">
+		<![CDATA[
+			DELETE FROM PSNL2100 
+						WHERE DPOB_CD=#dpobCd#
+								AND HODY_NUM_DYS_SEIL_NUM=#hodyNumDysSeilNum#
+				]]>
+	</delete>
+	
+	<select id="psnl2100DAO.selectPsnl2100_S" resultMap="psnl2100">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, HODY_NUM_DYS_SEIL_NUM
+				, DTIL_OCCU_INTTN_CD
+				, TYP_OCCU_CD
+				, PYSP_GRDE_CD
+				, DTIL_OCCU_CLS_DIV_CD
+				, HODY_NUM_DYS_OVR
+				, HODY_NUM_DYS_UDR
+				, HODY_NUM_DYS_FRM_CD
+				, HODY_NUM_DYS
+				, HODY_NUM_DYS_RATE
+				, HODY_NUM_DYS_BGNN_DT
+				, HODY_NUM_DYS_END_DT
+				, HODY_NUM_DYS_USE_YN
+				, HODY_NUM_DYS_NOTE_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PSNL2100
+						WHERE DPOB_CD=#dpobCd#
+								AND HODY_NUM_DYS_SEIL_NUM=#hodyNumDysSeilNum#
+				]]>
+	</select>
+	
+	<select id="psnl2100DAO.selectPsnl2100List_D" parameterClass="psnl2100SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, HODY_NUM_DYS_SEIL_NUM 
+								, TYP_OCCU_CD
+								, (TYP_OCCU_CD)  AS typOccuCdtypOccuCd
+								, fcBass0320CDNM(DPOB_CD,TYP_OCCU_CD)  AS typOccuCdtypOccuNm
+								, DTIL_OCCU_INTTN_CD
+								, DTIL_OCCU_INTTN_CD AS dtilOccuInttnCddtilOccuInttnCd
+								, fcBassEx0350CDNM(DPOB_CD, TYP_OCCU_CD, DTIL_OCCU_INTTN_CD,'1') AS dtilOccuInttnCddtilOccuClsNm
+								, HODY_NUM_DYS_OVR
+								, HODY_NUM_DYS_UDR
+								, HODY_NUM_DYS_FRM_CD
+								, HODY_NUM_DYS
+								, HODY_NUM_DYS_RATE
+								, HODY_NUM_DYS_BGNN_DT
+								, HODY_NUM_DYS_END_DT
+								, HODY_NUM_DYS_USE_YN
+								, HODY_NUM_DYS_NOTE_CTNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PSNL2100
+				WHERE  DPOB_CD=#dpobCd# 
+		        <isNotEmpty prepend="AND" property="typOccuCd" >
+			 	TYP_OCCU_CD=#typOccuCd#
+		        </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="dtilOccuClsDivCd" >
+			 	DTIL_OCCU_INTTN_CD=#dtilOccuClsDivCd#
+		        </isNotEmpty>
+		        <isNotEmpty prepend="AND" property="hodyNumDysUseYn" >
+			 	HODY_NUM_DYS_USE_YN= #hodyNumDysUseYn#
+		        </isNotEmpty>		       
+					ORDER BY 
+						DPOB_CD DESC
+							, HODY_NUM_DYS_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<!-- , PYSP_GRDE_CD
+								, fcBass0300CDNM(DPOB_CD,PYSP_GRDE_CD) AS PYSP_GRDE_NM 
+								, DTIL_OCCU_CLS_DIV_CD
+								, DTIL_OCCU_CLS_DIV_CD AS dtilOccuClsDivCdcommCd
+								, fcBass0350CDNM(DPOB_CD, TYP_OCCU_CD, DTIL_OCCU_CLS_DIV_CD,'1') AS dtilOccuClsDivCdcommCdNm 
+				  <isNotEmpty prepend="AND" property="pyspGrdeCd" >
+			 	NVL(PYSP_GRDE_CD,'A0060000')=#pyspGrdeCd#
+		        </isNotEmpty>				-->
+	<select id="psnl2100DAO.selectPsnl2100ListTotCnt_S" parameterClass="psnl2100SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PSNL2100
+			WHERE DPOB_CD=#dpobCd# 
+		        <isNotEmpty prepend="AND" property="typOccuCd" >
+			 	TYP_OCCU_CD=#typOccuCd#
+		        </isNotEmpty>
+		         <isNotEmpty prepend="AND" property="dtilOccuClsDivCd" >
+			 	DTIL_OCCU_INTTN_CD=#dtilOccuClsDivCd#
+		        </isNotEmpty>
+		        <isNotEmpty prepend="AND" property="hodyNumDysUseYn" >
+			 	HODY_NUM_DYS_USE_YN= #hodyNumDysUseYn#
+		        </isNotEmpty>
+	</select>
+
+<insert id="psnl2100DAO.insertXlsPsnl2100_S">
+<![CDATA[
+			INSERT INTO PSNL2100 
+				( DPOB_CD
+				  , HODY_NUM_DYS_SEIL_NUM
+				  , TYP_OCCU_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , PYSP_GRDE_CD
+				  , DTIL_OCCU_CLS_DIV_CD
+				  , HODY_NUM_DYS_OVR
+				  , HODY_NUM_DYS_UDR
+				  , HODY_NUM_DYS_FRM_CD
+				  , HODY_NUM_DYS
+				  , HODY_NUM_DYS_RATE
+				  , HODY_NUM_DYS_BGNN_DT
+				  , HODY_NUM_DYS_END_DT
+				  , HODY_NUM_DYS_USE_YN
+				  , HODY_NUM_DYS_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , (SELECT 
+    					NVL(MAX(HODY_NUM_DYS_SEIL_NUM), 0) + 1
+						FROM PSNL2100
+						WHERE DPOB_CD = #dpobCd#)
+				  , #typOccuCd#
+				  , #dtilOccuInttnCd#
+				  , SUBSTR(#dtilOccuInttnCd#,1,8)
+				  , SUBSTR(#dtilOccuInttnCd#,9,8)
+				  , #hodyNumDysOvr#
+				  , #hodyNumDysUdr#
+				  , #hodyNumDysFrmCd#
+				  , #hodyNumDys#
+				  , #hodyNumDysRate#
+				  , NVL(#hodyNumDysBgnnDt#,TO_CHAR(SYSDATE, 'YYYYMMDD'))
+				  , NVL(#hodyNumDysEndDt#,'99991231')
+				  , NVL(#hodyNumDysUseYn#,'Y')
+				  , #hodyNumDysNoteCtnt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+</insert>
+<select id="psnl2100DAO.selectCopyPsnl2100_D" resultMap="psnl2100">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, HODY_NUM_DYS_SEIL_NUM
+				, DTIL_OCCU_INTTN_CD
+				, TYP_OCCU_CD
+				, (TYP_OCCU_CD) AS typOccuCdtypOccuCd
+         		, fcBass0320CDNM (DPOB_CD, TYP_OCCU_CD) AS typOccuCdtypOccuNm
+                , DTIL_OCCU_INTTN_CD
+                , DTIL_OCCU_INTTN_CD AS dtilOccuInttnCddtilOccuInttnCd
+                , fcBassEx0350CDNM (DPOB_CD, TYP_OCCU_CD,
+                          					 DTIL_OCCU_INTTN_CD, '1') AS dtilOccuInttnCddtilOccuClsNm
+				, PYSP_GRDE_CD
+				, DTIL_OCCU_CLS_DIV_CD
+				, HODY_NUM_DYS_OVR
+				, HODY_NUM_DYS_UDR
+				, HODY_NUM_DYS_FRM_CD
+				, HODY_NUM_DYS
+				, HODY_NUM_DYS_RATE
+				, HODY_NUM_DYS_BGNN_DT
+				, HODY_NUM_DYS_END_DT
+				, HODY_NUM_DYS_USE_YN
+				, HODY_NUM_DYS_NOTE_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PSNL2100
+						WHERE DPOB_CD=#dpobCd#
+								AND TYP_OCCU_CD = #typOccuCd#
+								AND DTIL_OCCU_INTTN_CD = #dtilOccuInttnCd#
+		]]>
+</select>
+<insert id="psnl2100DAO.insertCopyPsnl2100_S">
+		<![CDATA[
+			INSERT INTO PSNL2100 
+				( DPOB_CD
+				  , HODY_NUM_DYS_SEIL_NUM
+				  , TYP_OCCU_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , PYSP_GRDE_CD
+				  , DTIL_OCCU_CLS_DIV_CD
+				  , HODY_NUM_DYS_OVR
+				  , HODY_NUM_DYS_UDR
+				  , HODY_NUM_DYS_FRM_CD
+				  , HODY_NUM_DYS
+				  , HODY_NUM_DYS_RATE
+				  , HODY_NUM_DYS_BGNN_DT
+				  , HODY_NUM_DYS_END_DT
+				  , HODY_NUM_DYS_USE_YN
+				  , HODY_NUM_DYS_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , (SELECT 
+    					NVL(MAX(HODY_NUM_DYS_SEIL_NUM), 0) + 1
+						FROM PSNL2100
+						WHERE DPOB_CD = #dpobCd#)
+				  , #typOccuCd#
+				  , #dtilOccuInttnCd#
+				  , SUBSTR(#dtilOccuInttnCd#,1,8)
+				  , SUBSTR(#dtilOccuInttnCd#,9,8)
+				  , #hodyNumDysOvr#
+				  , #hodyNumDysUdr#
+				  , #hodyNumDysFrmCd#
+				  , #hodyNumDys#
+				  , #hodyNumDysRate#
+				  , NVL(#hodyNumDysBgnnDt#,TO_CHAR(SYSDATE, 'YYYYMMDD'))
+				  , NVL(#hodyNumDysEndDt#,'99991231')
+				  , NVL(#hodyNumDysUseYn#,'Y')
+				  , #hodyNumDysNoteCtnt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+</insert>
+<update id="psnl2100DAO.updateCopyPsnl2100_S">
+		UPDATE PSNL2100 AA
+  			 SET AA.HODY_NUM_DYS_USE_YN = 'N',
+     			 AA.HODY_NUM_DYS_END_DT = TO_CHAR(TO_DATE (#hodyNumDysBgnnDt#, 'YYYYMMDD') - 1, 'YYYYMMDD')       			   
+ 			WHERE  AA.DPOB_CD = #dpobCd#
+ 				AND AA.DTIL_OCCU_INTTN_CD = #basicDtilOccuClsDivCd#
+ 				AND AA.HODY_NUM_DYS_USE_YN = 'Y'
+</update>
+<select id="psnl2100DAO.selectBass031001ToPsnl2100List_D" parameterClass="psnl2100SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT         C.TYP_OCCU_CD,
+		                       FCBASS0320CDNM(C.DPOB_CD, C.TYP_OCCU_CD ) as TYP_OCCU_NM,		                       
+		                       C.DTIL_OCCU_INTTN_CD,
+		                       C.DTIL_OCCU_CLS_DIV_CD,
+		                       C.DTIL_OCCU_CLS_NM,
+		                       C.DTIL_OCCU_CLS_USE_YN,		                       
+	                     	   NVL (
+            						(SELECT HODY_NUM_DYS_USE_YN
+              							 FROM PSNL2100
+             								 WHERE     
+	                    							TYP_OCCU_CD = #typOccuCd#
+	                   							AND DPOB_CD = #dpobCd#
+                    							AND DTIL_OCCU_INTTN_CD = C.DTIL_OCCU_INTTN_CD
+                    							AND ROWNUM = 1),'N') AS HODY_NUM_DYS_USE_YN	                     	   
+						  FROM BASS0350 C
+				WHERE C.DPOB_CD=#dpobCd# 
+		        <isNotEmpty prepend="AND" property="typOccuCd" >
+			 	C.TYP_OCCU_CD=#typOccuCd#
+		        </isNotEmpty> 	       
+					ORDER BY 
+						C.DPOB_CD DESC
+						 , C.DTIL_OCCU_CLS_USE_YN DESC
+							, HODY_NUM_DYS_USE_YN ASC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</select>	
+
+<select id="psnl2100DAO.selectBass031001ToPsnl2100ListTotCnt_S" parameterClass="psnl2100SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0350
+			WHERE 
+			<isNotNull property="dpobCd">
+			    <isNotEmpty property="dpobCd">
+			        DPOB_CD = #dpobCd#
+			    </isNotEmpty>
+			</isNotNull>
+			<isNotNull property="typOccuCd">
+			    <isNotEmpty property="typOccuCd">
+			        AND TYP_OCCU_CD = #typOccuCd#
+			    </isNotEmpty>
+			</isNotNull>  
+</select>
+</sqlMap>

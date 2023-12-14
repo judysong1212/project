@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Insr0200">
+	
+		<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="insr0200Dto" type="com.app.exterms.insurance.client.dto.Insr0200DTO"/>
+	
+	<select id="insr0200DAO.selectInsr0240" parameterClass="insr0200Dto" resultClass="egovMap">
+	    SELECT INSR0240.DPOB_CD,
+		       INSR0240.HLTH_INSR_STD_YR,
+		       to_date(INSR0240.HLTH_INSR_BGNN_DT,'yyyymmdd') as HLTH_INSR_BGNN_DT,
+		       INSR0240.HLTH_INSR_MINM_MNTH_RUNTN_AMNT,
+		       INSR0240.HLTH_INSR_BST_MNTH_RUNTN_AMNT,
+		       INSR0240.HLTH_INSR_USR_BRDN_APMRT,
+		       INSR0240.HLTH_INSR_HMLF_BRDN_APMRT,
+		       INSR0240.HLTH_RCPTN_USR_BRDN_APMRT,
+		       INSR0240.HLTH_RCPTN_HMLF_BRDN_APMRT,
+		       to_date(INSR0240.HLTH_INSR_END_DT,'yyyymmdd') as HLTH_INSR_END_DT,
+		       INSR0240.KYBDR,
+		       INSR0240.INPT_DT,
+		       INSR0240.INPT_ADDR,
+		       INSR0240.ISMT,
+		       INSR0240.REVN_DT,
+		       INSR0240.REVN_ADDR
+		  FROM INSR0240
+		 WHERE INSR0240.DPOB_CD = #dpobCd#
+		   AND INSR0240.HLTH_INSR_STD_YR = #hlthInsrStdYr#
+		 ORDER BY DPOB_CD, HLTH_INSR_STD_YR, HLTH_INSR_BGNN_DT DESC
+	</select>
+	
+	<select id="insr0200DAO.selectInsr0250" parameterClass="insr0200Dto" resultClass="egovMap">
+	    SELECT INSR0250.DPOB_CD,
+		       INSR0250.NAT_PENN_STD_YR,
+		       to_date(INSR0250.NAT_PENN_BGNN_DT, 'yyyymmdd') as NAT_PENN_BGNN_DT,
+		       to_date(INSR0250.NAT_PENN_END_DT, 'yyyymmdd') as NAT_PENN_END_DT,
+		       INSR0250.NAT_PENN_MINM_INCM_MNTH_AMNT,
+		       INSR0250.NAT_PENN_BST_INCM_MNTH_AMNT,
+		       INSR0250.NAT_PENN_USR_BRDN_APMRT,
+		       INSR0250.NAT_PENN_HMLF_BRDN_APMRT,
+		       INSR0250.KYBDR,
+		       INSR0250.INPT_DT,
+		       INSR0250.INPT_ADDR,
+		       INSR0250.ISMT,
+		       INSR0250.REVN_DT,
+		       INSR0250.REVN_ADDR
+		  FROM INSR0250
+		 WHERE INSR0250.DPOB_CD = #dpobCd#
+		   AND INSR0250.NAT_PENN_STD_YR = #natPennStdYr#
+		 ORDER BY DPOB_CD, NAT_PENN_STD_YR, NAT_PENN_BGNN_DT DESC
+	</select>
+	
+	<select id="insr0200DAO.selectInsr0260" parameterClass="insr0200Dto" resultClass="egovMap">
+	    SELECT INSR0260.DPOB_CD,
+		       INSR0260.UMYT_INSR_STD_YR,
+		       to_date(INSR0260.UMYT_INSR_BGNN_DT, 'yyyymmdd') as UMYT_INSR_BGNN_DT,
+		       INSR0260.UMYT_INSR_MINM_INCM_MNTH_AMNT,
+		       INSR0260.UMYT_INSR_BST_INCM_MNTH_AMNT,
+		       INSR0260.UMYT_INSR_HMLF_BRDN_APMRT,
+		       INSR0260.UMYT_INSR_USR_BRDN_APMRT,
+		       INSR0260.UMYT_INSR_USR_SFTY_EBIS_APMRT,
+		       to_date(INSR0260.UMYT_INSR_END_DT, 'yyyymmdd') as UMYT_INSR_END_DT,
+		       INSR0260.KYBDR,
+		       INSR0260.INPT_DT,
+		       INSR0260.INPT_ADDR,
+		       INSR0260.ISMT,
+		       INSR0260.REVN_DT,
+		       INSR0260.REVN_ADDR
+		  FROM INSR0260
+		 WHERE INSR0260.DPOB_CD = #dpobCd#
+		   AND INSR0260.UMYT_INSR_STD_YR = #umytInsrStdYr#
+		  ORDER BY DPOB_CD, UMYT_INSR_STD_YR, UMYT_INSR_BGNN_DT DESC
+		  
+	</select>
+	
+	<select id="insr0200DAO.selectInsr0270" parameterClass="insr0200Dto" resultClass="egovMap">
+	    SELECT INSR0270.DPOB_CD,
+		       INSR0270.IDTL_ACCDT_INSUR_STD_YR,
+		       to_date(INSR0270.IDTL_ACCDT_INSUR_BGNN_DT, 'yyyymmdd') as IDTL_ACCDT_INSUR_BGNN_DT,
+		       INSR0270.IDTL_ACCDT_INSUR_USR_APMRT,
+		       to_date(INSR0270.IDTL_ACCDT_INSUR_END_DT, 'yyyymmdd') as IDTL_ACCDT_INSUR_END_DT,
+		       INSR0270.KYBDR,
+		       INSR0270.INPT_DT,
+		       INSR0270.INPT_ADDR,
+		       INSR0270.ISMT,
+		       INSR0270.REVN_DT,
+		       INSR0270.REVN_ADDR
+		  FROM INSR0270
+	     WHERE INSR0270.DPOB_CD = #dpobCd#
+	       AND INSR0270.IDTL_ACCDT_INSUR_STD_YR = #idtlAccdtInsurStdYr#
+	      ORDER BY DPOB_CD, IDTL_ACCDT_INSUR_STD_YR, IDTL_ACCDT_INSUR_BGNN_DT DESC
+	</select>
+	
+	<delete id="insr0200DAO.deleteInsr0240" parameterClass="insr0200Dto">
+	    DELETE FROM INSR0240 
+	     WHERE DPOB_CD = #dpobCd# 
+	       AND HLTH_INSR_STD_YR = #hlthInsrStdYr# 
+	       AND HLTH_INSR_BGNN_DT = to_char(#hlthInsrBgnnDt#, 'yyyymmdd') 
+	</delete>
+	<delete id="insr0200DAO.deleteInsr0250" parameterClass="insr0200Dto">
+	    DELETE FROM INSR0250 
+	     WHERE DPOB_CD = #dpobCd# 
+	       AND NAT_PENN_STD_YR = #natPennStdYr# 
+	       AND NAT_PENN_BGNN_DT = to_char(#natPennBgnnDt#,'yyyymmdd') 
+	</delete>
+	<delete id="insr0200DAO.deleteInsr0260" parameterClass="insr0200Dto">
+	    DELETE FROM INSR0260 
+	     WHERE DPOB_CD = #dpobCd# 
+	       AND UMYT_INSR_STD_YR = #umytInsrStdYr# 
+	       AND UMYT_INSR_BGNN_DT = to_char(#umytInsrBgnnDt#,'yyyymmdd')
+	</delete>
+	<delete id="insr0200DAO.deleteInsr0270" parameterClass="insr0200Dto">
+	    DELETE FROM INSR0270 
+	     WHERE DPOB_CD = #dpobCd# 
+	       AND IDTL_ACCDT_INSUR_STD_YR = #idtlAccdtInsurStdYr# 
+	       AND IDTL_ACCDT_INSUR_BGNN_DT = to_char(#idtlAccdtInsurBgnnDt#,'yyyymmdd')
+	</delete>
+	
+	<insert id="insr0200DAO.insertInsr0240" parameterClass="insr0200Dto">
+	    INSERT INTO INSR0240 (DPOB_CD,
+		                      HLTH_INSR_STD_YR,
+		                      HLTH_INSR_BGNN_DT,
+		                      HLTH_INSR_MINM_MNTH_RUNTN_AMNT,
+		                      HLTH_INSR_BST_MNTH_RUNTN_AMNT,
+		                      HLTH_INSR_USR_BRDN_APMRT,
+		                      HLTH_INSR_HMLF_BRDN_APMRT,
+		                      HLTH_RCPTN_USR_BRDN_APMRT,
+		                      HLTH_RCPTN_HMLF_BRDN_APMRT,
+		                      HLTH_INSR_END_DT,
+		                      KYBDR,
+		                      INPT_DT,
+		                      INPT_ADDR,
+		                      ISMT,
+		                      REVN_DT,
+		                      REVN_ADDR)
+		     VALUES (#dpobCd#,
+		             #hlthInsrStdYr#,
+		             to_char(#hlthInsrBgnnDt#,'yyyymmdd'),
+		             #hlthInsrMinmMnthRuntnAmnt#,
+		             #hlthInsrBstMnthRuntnAmnt#,
+		             #hlthInsrUsrBrdnApmrt#,
+		             #hlthInsrHmlfBrdnApmrt#,
+		             #hlthRcptnUsrBrdnApmrt#,
+		             #hlthRcptnHmlfBrdnApmrt#,
+		             '99991231',
+		             #ismt#,
+		             TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),
+		             #revnAddr#,
+		             #ismt#,
+		             TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),
+		             #revnAddr#)
+			    
+	</insert>
+	
+	<update id="insr0200DAO.updateInsr0240EndDt" parameterClass="insr0200Dto">
+	    UPDATE INSR0240 
+		   SET HLTH_INSR_END_DT = TO_CHAR(TO_DATE(TO_CHAR(#hlthInsrBgnnDt#,'YYYYMMDD'),'YYYYMMDD')-1,'YYYYMMDD')
+	     WHERE DPOB_CD = #dpobCd#
+		   AND HLTH_INSR_STD_YR = #hlthInsrStdYr#
+		   AND HLTH_INSR_BGNN_DT = (SELECT MAX(HLTH_INSR_BGNN_DT) 
+									  FROM INSR0240
+									 WHERE DPOB_CD = #dpobCd#
+									   AND HLTH_INSR_STD_YR = #hlthInsrStdYr#
+									   AND HLTH_INSR_BGNN_DT &lt; to_char(#hlthInsrBgnnDt#,'yyyymmdd') )
+	</update>
+	
+	<insert id="insr0200DAO.insertInsr0250" parameterClass="insr0200Dto">
+	    INSERT INTO INSR0250 (DPOB_CD,
+		                      NAT_PENN_STD_YR,
+		                      NAT_PENN_BGNN_DT,
+		                      NAT_PENN_END_DT,
+		                      NAT_PENN_MINM_INCM_MNTH_AMNT,
+		                      NAT_PENN_BST_INCM_MNTH_AMNT,
+		                      NAT_PENN_USR_BRDN_APMRT,
+		                      NAT_PENN_HMLF_BRDN_APMRT,
+		                      KYBDR,
+		                      INPT_DT,
+		                      INPT_ADDR,
+		                      ISMT,
+		                      REVN_DT,
+		                      REVN_ADDR)
+		     VALUES (#dpobCd#,
+		             #natPennStdYr#,
+		             to_char(#natPennBgnnDt#,'yyyymmdd'),
+		             '99991231',
+		             #natPennMinmIncmMnthAmnt#,
+		             #natPennBstIncmMnthAmnt#,
+		             #natPennUsrBrdnApmrt#,
+		             #natPennHmlfBrdnApmrt#,
+		             #ismt#,
+		             TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),
+		             #revnAddr#,
+		             #ismt#,
+		             TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),
+		             #revnAddr#)
+			    
+	</insert>
+	
+	<update id="insr0200DAO.updateInsr0250EndDt" parameterClass="insr0200Dto">
+	    UPDATE INSR0250 
+		   SET NAT_PENN_END_DT = TO_CHAR(TO_DATE(TO_CHAR(#natPennBgnnDt#,'YYYYMMDD'),'YYYYMMDD')-1,'YYYYMMDD')
+	     WHERE DPOB_CD = #dpobCd#
+		   AND NAT_PENN_STD_YR = #natPennStdYr#
+		   AND NAT_PENN_BGNN_DT = (SELECT MAX(NAT_PENN_BGNN_DT) 
+									  FROM INSR0250
+									 WHERE DPOB_CD = #dpobCd#
+									   AND NAT_PENN_STD_YR = #natPennStdYr#
+									   AND NAT_PENN_BGNN_DT &lt; to_char(#natPennBgnnDt#,'yyyymmdd') )
+	</update>
+	
+	<insert id="insr0200DAO.insertInsr0260" parameterClass="insr0200Dto">
+	    INSERT INTO INSR0260 (DPOB_CD,
+		                      UMYT_INSR_STD_YR,
+		                      UMYT_INSR_BGNN_DT,
+		                      UMYT_INSR_MINM_INCM_MNTH_AMNT,
+		                      UMYT_INSR_BST_INCM_MNTH_AMNT,
+		                      UMYT_INSR_HMLF_BRDN_APMRT,
+		                      UMYT_INSR_USR_BRDN_APMRT,
+		                      UMYT_INSR_USR_SFTY_EBIS_APMRT,
+		                      UMYT_INSR_END_DT,
+		                      KYBDR,
+		                      INPT_DT,
+		                      INPT_ADDR,
+		                      ISMT,
+		                      REVN_DT,
+		                      REVN_ADDR)
+		     VALUES (#dpobCd#,
+		             #umytInsrStdYr#,
+		             to_char(#umytInsrBgnnDt#,'yyyymmdd'),
+		             #umytInsrMinmIncmMnthAmnt#,
+		             #umytInsrBstIncmMnthAmnt#,
+		             #umytInsrHmlfBrdnApmrt#,
+		             #umytInsrUsrBrdnApmrt#,
+		             #umytInsrUsrSftyEbisApmrt#,
+		             '99991231',
+		             #ismt#,
+		             TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),
+		             #revnAddr#,
+		             #ismt#,
+		             TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),
+		             #revnAddr#)
+			    
+	</insert>
+	
+	<update id="insr0200DAO.updateInsr0260EndDt" parameterClass="insr0200Dto">
+	    UPDATE INSR0260 
+		   SET UMYT_INSR_END_DT = TO_CHAR(TO_DATE(TO_CHAR(to_char(#umytInsrBgnnDt#,'yyyymmdd'),'YYYYMMDD'),'YYYYMMDD')-1,'YYYYMMDD')
+	     WHERE DPOB_CD = #dpobCd#
+		   AND UMYT_INSR_STD_YR = #umytInsrStdYr#
+		   AND UMYT_INSR_BGNN_DT = (SELECT MAX(UMYT_INSR_BGNN_DT) 
+									  FROM INSR0260
+									 WHERE DPOB_CD = #dpobCd#
+									   AND UMYT_INSR_STD_YR = #umytInsrStdYr#
+									   AND UMYT_INSR_BGNN_DT &lt; to_char(#umytInsrBgnnDt#,'yyyymmdd') )
+	</update>
+	
+	<insert id="insr0200DAO.insertInsr0270" parameterClass="insr0200Dto">
+	    INSERT INTO INSR0270 (DPOB_CD,
+		                      IDTL_ACCDT_INSUR_STD_YR,
+		                      IDTL_ACCDT_INSUR_BGNN_DT,
+		                      IDTL_ACCDT_INSUR_USR_APMRT,
+		                      IDTL_ACCDT_INSUR_END_DT,
+		                      KYBDR,
+		                      INPT_DT,
+		                      INPT_ADDR,
+		                      ISMT,
+		                      REVN_DT,
+		                      REVN_ADDR)
+		     VALUES (#dpobCd#,
+		             #idtlAccdtInsurStdYr#,
+		             to_char(#idtlAccdtInsurBgnnDt#,'yyyymmdd'),
+		             #idtlAccdtInsurUsrApmrt#,
+		             '99991231',
+		             #ismt#,
+		             TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),
+		             #revnAddr#,
+		             #ismt#,
+		             TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS'),
+		             #revnAddr#)
+	</insert>
+	
+	<update id="insr0200DAO.updateInsr0270EndDt" parameterClass="insr0200Dto">
+	    UPDATE INSR0270 
+		   SET IDTL_ACCDT_INSUR_END_DT = TO_CHAR(TO_DATE(TO_CHAR(#idtlAccdtInsurBgnnDt#,'YYYYMMDD'),'YYYYMMDD')-1,'YYYYMMDD')
+	     WHERE DPOB_CD = #dpobCd#
+		   AND IDTL_ACCDT_INSUR_STD_YR = #idtlAccdtInsurStdYr#
+		   AND IDTL_ACCDT_INSUR_BGNN_DT = (SELECT MAX(IDTL_ACCDT_INSUR_BGNN_DT) 
+									  FROM INSR0270
+									 WHERE DPOB_CD = #dpobCd#
+									   AND IDTL_ACCDT_INSUR_STD_YR = #idtlAccdtInsurStdYr#
+									   AND IDTL_ACCDT_INSUR_BGNN_DT &lt; to_char(#idtlAccdtInsurBgnnDt#,'yyyymmdd') )
+	</update>
+	
+	<update id="insr0200DAO.updateInsr0240" parameterClass="insr0200Dto">
+	    UPDATE INSR0240
+	       SET HLTH_INSR_MINM_MNTH_RUNTN_AMNT = #hlthInsrMinmMnthRuntnAmnt#
+               ,HLTH_INSR_BST_MNTH_RUNTN_AMNT = #hlthInsrBstMnthRuntnAmnt#
+               ,HLTH_INSR_USR_BRDN_APMRT = #hlthInsrUsrBrdnApmrt#
+               ,HLTH_INSR_HMLF_BRDN_APMRT = #hlthInsrHmlfBrdnApmrt#
+               ,HLTH_RCPTN_USR_BRDN_APMRT = #hlthRcptnUsrBrdnApmrt#
+               ,HLTH_RCPTN_HMLF_BRDN_APMRT = #hlthRcptnHmlfBrdnApmrt#
+               ,HLTH_INSR_END_DT = to_char(#hlthInsrEndDt#,'yyyymmdd')
+               ,ISMT = #ismt#
+               ,REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS')
+               ,REVN_ADDR = #revnAddr#
+	     WHERE DPOB_CD = #dpobCd#
+	       AND HLTH_INSR_STD_YR = #hlthInsrStdYr#
+	       AND HLTH_INSR_BGNN_DT = to_char(#hlthInsrBgnnDt#,'yyyymmdd')
+	</update>
+	
+	<update id="insr0200DAO.updateInsr0250" parameterClass="insr0200Dto">
+	    UPDATE INSR0250
+	       SET NAT_PENN_END_DT = to_char(#natPennEndDt#,'yyyymmdd')
+               ,NAT_PENN_MINM_INCM_MNTH_AMNT = #natPennMinmIncmMnthAmnt#
+               ,NAT_PENN_BST_INCM_MNTH_AMNT = #natPennBstIncmMnthAmnt#
+               ,NAT_PENN_USR_BRDN_APMRT = #natPennUsrBrdnApmrt#
+               ,NAT_PENN_HMLF_BRDN_APMRT = #natPennHmlfBrdnApmrt#
+               ,ISMT = #ismt#
+               ,REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS')
+               ,REVN_ADDR = #revnAddr#
+	     WHERE DPOB_CD = #dpobCd#
+	       AND NAT_PENN_STD_YR = #natPennStdYr#
+	       AND NAT_PENN_BGNN_DT = to_char(#natPennBgnnDt#,'yyyymmdd')
+	</update>
+	
+	<update id="insr0200DAO.updateInsr0260" parameterClass="insr0200Dto">
+	    UPDATE INSR0260
+	       SET UMYT_INSR_MINM_INCM_MNTH_AMNT = #umytInsrMinmIncmMnthAmnt#
+               ,UMYT_INSR_BST_INCM_MNTH_AMNT = #umytInsrBstIncmMnthAmnt#
+               ,UMYT_INSR_HMLF_BRDN_APMRT = #umytInsrHmlfBrdnApmrt#
+               ,UMYT_INSR_USR_BRDN_APMRT = #umytInsrUsrBrdnApmrt#
+               ,UMYT_INSR_USR_SFTY_EBIS_APMRT = #umytInsrUsrSftyEbisApmrt#
+               ,UMYT_INSR_END_DT = to_char(#umytInsrEndDt#,'yyyymmdd')
+               ,ISMT = #ismt#
+               ,REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS')
+               ,REVN_ADDR = #revnAddr#
+	     WHERE DPOB_CD = #dpobCd#
+           AND UMYT_INSR_STD_YR = #umytInsrStdYr#
+           AND UMYT_INSR_BGNN_DT = to_char(#umytInsrBgnnDt#,'yyyymmdd')
+	</update>
+	
+	<update id="insr0200DAO.updateInsr0270" parameterClass="insr0200Dto">
+	    UPDATE INSR0270
+	       SET IDTL_ACCDT_INSUR_USR_APMRT = #idtlAccdtInsurUsrApmrt#
+               ,IDTL_ACCDT_INSUR_END_DT = to_char(#idtlAccdtInsurEndDt#,'yyyymmdd')
+               ,ISMT = #ismt#
+               ,REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHH24MISS')
+               ,REVN_ADDR = #revnAddr#
+	     WHERE DPOB_CD = #dpobCd#
+	       AND IDTL_ACCDT_INSUR_STD_YR = #idtlAccdtInsurStdYr#
+	       AND IDTL_ACCDT_INSUR_BGNN_DT = to_char(#idtlAccdtInsurBgnnDt#,'yyyymmdd')
+	</update>
+	
+
+</sqlMap>

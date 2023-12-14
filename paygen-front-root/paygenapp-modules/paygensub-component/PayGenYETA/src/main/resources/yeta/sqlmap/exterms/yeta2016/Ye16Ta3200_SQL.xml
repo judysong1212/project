@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye16Ta3200">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ye16Ta3200SrhVO" type="com.app.exterms.yearendtax.server.vo.Yeta3200SrhVO"/>
+	<typeAlias  alias="ye16Ta3200Vo" type="com.app.exterms.yearendtax.server.vo.Yeta3200VO"/>
+	
+	<resultMap id="ye16Ta3200" class="com.app.exterms.yearendtax.server.vo.Yeta3200VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="edacRvyy" column="EDAC_RVYY" columnIndex="2"/>
+		<result property="settGbcd" column="SETT_GBCD" columnIndex="3"/> 
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="siteNumb" column="SITE_NUMB" columnIndex="5"/>
+		<result property="taxmEa01" column="TAXM_EA01" columnIndex="6"/>
+		<result property="taxmEb01" column="TAXM_EB01" columnIndex="7"/>
+		<result property="taxmEc01" column="TAXM_EC01" columnIndex="8"/>
+		<result property="taxmEd01" column="TAXM_ED01" columnIndex="9"/>
+		<result property="taxmEe01" column="TAXM_EE01" columnIndex="10"/>
+		<result property="taxmEe02" column="TAXM_EE02" columnIndex="11"/>
+		<result property="taxmEe10" column="TAXM_EE10" columnIndex="12"/>
+		<result property="taxmEf01" column="TAXM_EF01" columnIndex="13"/>
+		<result property="taxmEg01" column="TAXM_EG01" columnIndex="14"/>
+		<result property="taxmEh01" column="TAXM_EH01" columnIndex="15"/>
+		<result property="taxmEh02" column="TAXM_EH02" columnIndex="16"/>
+		<result property="taxmEh03" column="TAXM_EH03" columnIndex="17"/>
+		<result property="taxmEh04" column="TAXM_EH04" columnIndex="18"/>
+		<result property="taxmEh05" column="TAXM_EH05" columnIndex="19"/>
+		<result property="taxmEh06" column="TAXM_EH06" columnIndex="20"/>
+		<result property="taxmEh07" column="TAXM_EH07" columnIndex="21"/>
+		<result property="taxmEh08" column="TAXM_EH08" columnIndex="22"/>
+		<result property="taxmEh09" column="TAXM_EH09" columnIndex="23"/>
+		<result property="taxmEh10" column="TAXM_EH10" columnIndex="24"/>
+		<result property="taxmEh14" column="TAXM_EH14" columnIndex="25"/>
+		<result property="taxmEh15" column="TAXM_EH15" columnIndex="26"/>
+		<result property="taxmEh11" column="TAXM_EH11" columnIndex="27"/>
+		<result property="taxmEh12" column="TAXM_EH12" columnIndex="28"/>
+		<result property="taxmEh13" column="TAXM_EH13" columnIndex="29"/>
+		<result property="taxmEh16" column="TAXM_EH16" columnIndex="30"/>
+		<result property="taxmEi01" column="TAXM_EI01" columnIndex="31"/>
+		<result property="taxmEj01" column="TAXM_EJ01" columnIndex="32"/>
+		<result property="taxmEj10" column="TAXM_EJ10" columnIndex="33"/>
+		<result property="taxmEk01" column="TAXM_EK01" columnIndex="34"/>
+		<result property="taxmEl01" column="TAXM_EL01" columnIndex="35"/>
+		<result property="taxmEm01" column="TAXM_EM01" columnIndex="36"/>
+		<result property="taxmEm02" column="TAXM_EM02" columnIndex="37"/>
+		<result property="taxmEm03" column="TAXM_EM03" columnIndex="38"/>
+		<result property="taxmEn01" column="TAXM_EN01" columnIndex="39"/>
+		<result property="taxmEo01" column="TAXM_EO01" columnIndex="40"/>
+		<result property="taxmEp01" column="TAXM_EP01" columnIndex="41"/>
+		<result property="taxmEp02" column="TAXM_EP02" columnIndex="42"/>
+		<result property="taxmEq01" column="TAXM_EQ01" columnIndex="43"/>
+		<result property="taxmEr01" column="TAXM_ER01" columnIndex="44"/>
+		<result property="taxmEr10" column="TAXM_ER10" columnIndex="45"/>
+		<result property="taxmEs01" column="TAXM_ES01" columnIndex="46"/>
+		<result property="taxmEy02" column="TAXM_EY02" columnIndex="47"/>
+		<result property="taxmEy03" column="TAXM_EY03" columnIndex="48"/>
+		<result property="taxmEy21" column="TAXM_EY21" columnIndex="49"/>
+		<result property="taxmEy22" column="TAXM_EY22" columnIndex="50"/>
+		<result property="taxmEt01" column="TAXM_ET01" columnIndex="51"/>
+		<result property="taxmEt10" column="TAXM_ET10" columnIndex="52"/>
+		<result property="taxmEt20" column="TAXM_ET20" columnIndex="53"/>
+		<result property="kybdr" column="KYBDR" columnIndex="54"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="55"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="56"/>
+		<result property="ismt" column="ISMT" columnIndex="57"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="58"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="59"/>
+	</resultMap>
+	
+	<insert id="ye16Ta3200DAO.insertYeta3200_S">
+		<![CDATA[
+			INSERT INTO YETA3200 
+				( DPOB_CD
+				  , EDAC_RVYY
+				  , SETT_GBCD 
+				  , SYSTEMKEY
+				  , SITE_NUMB
+				  , TAXM_EA01
+				  , TAXM_EB01
+				  , TAXM_EC01
+				  , TAXM_ED01
+				  , TAXM_EE01
+				  , TAXM_EE02
+				  , TAXM_EE10
+				  , TAXM_EF01
+				  , TAXM_EG01
+				  , TAXM_EH01
+				  , TAXM_EH02
+				  , TAXM_EH03
+				  , TAXM_EH04
+				  , TAXM_EH05
+				  , TAXM_EH06
+				  , TAXM_EH07
+				  , TAXM_EH08
+				  , TAXM_EH09
+				  , TAXM_EH10
+				  , TAXM_EH14
+				  , TAXM_EH15
+				  , TAXM_EH11
+				  , TAXM_EH12
+				  , TAXM_EH13
+				  , TAXM_EH16
+				  , TAXM_EI01
+				  , TAXM_EJ01
+				  , TAXM_EJ10
+				  , TAXM_EK01
+				  , TAXM_EL01
+				  , TAXM_EM01
+				  , TAXM_EM02
+				  , TAXM_EM03
+				  , TAXM_EN01
+				  , TAXM_EO01
+				  , TAXM_EP01
+				  , TAXM_EP02
+				  , TAXM_EQ01
+				  , TAXM_ER01
+				  , TAXM_ER10
+				  , TAXM_ES01
+				  , TAXM_EY02
+				  , TAXM_EY03
+				  , TAXM_EY21
+				  , TAXM_EY22
+				  , TAXM_ET01
+				  , TAXM_ET10
+				  , TAXM_ET20
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #edacRvyy#
+				  , #settGbcd#
+				  , #systemkey#
+				  , #siteNumb#
+				  , #taxmEa01#
+				  , #taxmEb01#
+				  , #taxmEc01#
+				  , #taxmEd01#
+				  , #taxmEe01#
+				  , #taxmEe02#
+				  , #taxmEe10#
+				  , #taxmEf01#
+				  , #taxmEg01#
+				  , #taxmEh01#
+				  , #taxmEh02#
+				  , #taxmEh03#
+				  , #taxmEh04#
+				  , #taxmEh05#
+				  , #taxmEh06#
+				  , #taxmEh07#
+				  , #taxmEh08#
+				  , #taxmEh09#
+				  , #taxmEh10#
+				  , #taxmEh14#
+				  , #taxmEh15#
+				  , #taxmEh11#
+				  , #taxmEh12#
+				  , #taxmEh13#
+				  , #taxmEh16#
+				  , #taxmEi01#
+				  , #taxmEj01#
+				  , #taxmEj10#
+				  , #taxmEk01#
+				  , #taxmEl01#
+				  , #taxmEm01#
+				  , #taxmEm02#
+				  , #taxmEm03#
+				  , #taxmEn01#
+				  , #taxmEo01#
+				  , #taxmEp01#
+				  , #taxmEp02#
+				  , #taxmEq01#
+				  , #taxmEr01#
+				  , #taxmEr10#
+				  , #taxmEs01#
+				  , #taxmEy02#
+				  , #taxmEy03#
+				  , #taxmEy21#
+				  , #taxmEy22#
+				  , #taxmEt01#
+				  , #taxmEt10#
+				  , #taxmEt20#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="ye16Ta3200DAO.updateYeta3200_S">
+		<![CDATA[
+			UPDATE YETA3200
+			SET DPOB_CD=#dpobCd#
+				, EDAC_RVYY=#edacRvyy#
+				, SETT_GBCD=#settGbcd#
+				, SYSTEMKEY=#systemkey#
+				, SITE_NUMB=#siteNumb#
+				, TAXM_EA01=#taxmEa01#
+				, TAXM_EB01=#taxmEb01#
+				, TAXM_EC01=#taxmEc01#
+				, TAXM_ED01=#taxmEd01#
+				, TAXM_EE01=#taxmEe01#
+				, TAXM_EE02=#taxmEe02#
+				, TAXM_EE10=#taxmEe10#
+				, TAXM_EF01=#taxmEf01#
+				, TAXM_EG01=#taxmEg01#
+				, TAXM_EH01=#taxmEh01#
+				, TAXM_EH02=#taxmEh02#
+				, TAXM_EH03=#taxmEh03#
+				, TAXM_EH04=#taxmEh04#
+				, TAXM_EH05=#taxmEh05#
+				, TAXM_EH06=#taxmEh06#
+				, TAXM_EH07=#taxmEh07#
+				, TAXM_EH08=#taxmEh08#
+				, TAXM_EH09=#taxmEh09#
+				, TAXM_EH10=#taxmEh10#
+				, TAXM_EH14=#taxmEh14#
+				, TAXM_EH15=#taxmEh15#
+				, TAXM_EH11=#taxmEh11#
+				, TAXM_EH12=#taxmEh12#
+				, TAXM_EH13=#taxmEh13#
+				, TAXM_EH16=#taxmEh16#
+				, TAXM_EI01=#taxmEi01#
+				, TAXM_EJ01=#taxmEj01#
+				, TAXM_EJ10=#taxmEj10#
+				, TAXM_EK01=#taxmEk01#
+				, TAXM_EL01=#taxmEl01#
+				, TAXM_EM01=#taxmEm01#
+				, TAXM_EM02=#taxmEm02#
+				, TAXM_EM03=#taxmEm03#
+				, TAXM_EN01=#taxmEn01#
+				, TAXM_EO01=#taxmEo01#
+				, TAXM_EP01=#taxmEp01#
+				, TAXM_EP02=#taxmEp02#
+				, TAXM_EQ01=#taxmEq01#
+				, TAXM_ER01=#taxmEr01#
+				, TAXM_ER10=#taxmEr10#
+				, TAXM_ES01=#taxmEs01#
+				, TAXM_EY02=#taxmEy02#
+				, TAXM_EY03=#taxmEy03#
+				, TAXM_EY21=#taxmEy21#
+				, TAXM_EY22=#taxmEy22#
+				, TAXM_ET01=#taxmEt01#
+				, TAXM_ET10=#taxmEt10#
+				, TAXM_ET20=#taxmEt20#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND SITE_NUMB=#siteNumb#
+				]]>
+	</update>
+	
+	<delete id="ye16Ta3200DAO.deleteYeta3200_S">
+		<![CDATA[
+			DELETE FROM YETA3200 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND SITE_NUMB=#siteNumb#
+				]]>
+	</delete>
+	
+	<!-- yeta0100 화면 연말정산 대상자삭제 -->
+	<delete id="ye16Ta3200DAO.fnPayr06430_Yeta3200_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3200 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd# 
+				]]>
+				 <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                   </isNotEmpty> 
+	</delete>
+	
+	
+	
+	<select id="ye16Ta3200DAO.selectYeta3200_S" resultMap="ye16Ta3200">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, EDAC_RVYY
+				, SETT_GBCD
+				, SYSTEMKEY
+				, SITE_NUMB
+				, TAXM_EA01
+				, TAXM_EB01
+				, TAXM_EC01
+				, TAXM_ED01
+				, TAXM_EE01
+				, TAXM_EE02
+				, TAXM_EE10
+				, TAXM_EF01
+				, TAXM_EG01
+				, TAXM_EH01
+				, TAXM_EH02
+				, TAXM_EH03
+				, TAXM_EH04
+				, TAXM_EH05
+				, TAXM_EH06
+				, TAXM_EH07
+				, TAXM_EH08
+				, TAXM_EH09
+				, TAXM_EH10
+				, TAXM_EH14
+				, TAXM_EH15
+				, TAXM_EH11
+				, TAXM_EH12
+				, TAXM_EH13
+				, TAXM_EH16
+				, TAXM_EI01
+				, TAXM_EJ01
+				, TAXM_EJ10
+				, TAXM_EK01
+				, TAXM_EL01
+				, TAXM_EM01
+				, TAXM_EM02
+				, TAXM_EM03
+				, TAXM_EN01
+				, TAXM_EO01
+				, TAXM_EP01
+				, TAXM_EP02
+				, TAXM_EQ01
+				, TAXM_ER01
+				, TAXM_ER10
+				, TAXM_ES01
+				, TAXM_EY02
+				, TAXM_EY03
+				, TAXM_EY21
+				, TAXM_EY22
+				, TAXM_ET01
+				, TAXM_ET10
+				, TAXM_ET20
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YETA3200
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND SITE_NUMB=#siteNumb#
+				]]>
+	</select>
+	
+	<select id="ye16Ta3200DAO.selectYeta3200List_D" parameterClass="ye16Ta3200SrhVO" resultClass="egovMap">
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+					SELECT
+									AA.DPOB_CD
+									, AA.EDAC_RVYY
+									, AA.SETT_GBCD
+									, fcBass0300CDNM(AA.DPOB_CD, AA.SETT_GBCD) AS SETT_GBNM
+									, AA.SETT_GBCD AS settGbcdcommCd 
+									, fcBass0300CDNM(AA.DPOB_CD, AA.SETT_GBCD) AS settGbcdcommCdNm 
+									, AA.SYSTEMKEY
+									, AA.SITE_NUMB
+									, AA.TAXM_EA01
+									, AA.TAXM_EB01
+									, AA.TAXM_EC01
+									, AA.TAXM_ED01
+									, AA.TAXM_EE01
+									, AA.TAXM_EE02
+									, AA.TAXM_EE10
+									, AA.TAXM_EF01
+									, AA.TAXM_EG01
+									, AA.TAXM_EH01
+									, AA.TAXM_EH02
+									, AA.TAXM_EH03
+									, AA.TAXM_EH04
+									, AA.TAXM_EH05
+									, AA.TAXM_EH06
+									, AA.TAXM_EH07
+									, AA.TAXM_EH08
+									, AA.TAXM_EH09
+									, AA.TAXM_EH10
+									, AA.TAXM_EH14
+									, AA.TAXM_EH15
+									, AA.TAXM_EH11
+									, AA.TAXM_EH12
+									, AA.TAXM_EH13
+									, AA.TAXM_EH16
+									, AA.TAXM_EI01
+									, AA.TAXM_EJ01
+									, AA.TAXM_EJ10
+									, AA.TAXM_EK01
+									, AA.TAXM_EL01
+									, AA.TAXM_EM01
+									, AA.TAXM_EM02
+									, AA.TAXM_EM03
+									, AA.TAXM_EN01
+									, AA.TAXM_EO01
+									, AA.TAXM_EP01
+									, AA.TAXM_EP02
+									, AA.TAXM_EQ01
+									, AA.TAXM_ER01
+									, AA.TAXM_ER10
+									, AA.TAXM_ES01
+									, AA.TAXM_EY02
+									, AA.TAXM_EY03
+									, AA.TAXM_EY21
+									, AA.TAXM_EY22
+									, AA.TAXM_ET01
+									, AA.TAXM_ET10
+									, AA.TAXM_ET20
+									, AA.KYBDR
+									, AA.INPT_DT
+									, AA.INPT_ADDR
+									, AA.ISMT
+									, AA.REVN_DT
+									, AA.REVN_ADDR
+									, CC.HAN_NM
+									, CC.RESN_REGN_NUM
+									, BB.SITE_CTNT
+									, (AA.TAXM_EG01
+											+ AA.TAXM_EH06
+											+ AA.TAXM_EH09
+											+ AA.TAXM_EH15
+											+ AA.TAXM_EH13
+											+ AA.TAXM_EK01
+											+ AA.TAXM_EM03
+											+ AA.TAXM_ER10
+											+ AA.TAXM_EY03
+											+ AA.TAXM_EH01
+											+ AA.TAXM_EH07
+											+ AA.TAXM_EH10
+											+ AA.TAXM_EH11
+											+ AA.TAXM_EH16
+											+ AA.TAXM_EM01
+											+ AA.TAXM_EO01
+											+ AA.TAXM_ES01
+											+ AA.TAXM_EY21
+											+ AA.TAXM_EH05
+											+ AA.TAXM_EH03
+											+ AA.TAXM_EH14
+											+ AA.TAXM_EH12
+											+ AA.TAXM_EI01
+											+ AA.TAXM_EM02
+											+ AA.TAXM_EQ01
+											+ AA.TAXM_EY02
+											+ AA.TAXM_EY22)	AS TAXE_TOTL
+									, (AA.TAXM_ET01
+											+ AA.TAXM_ET10
+											+ AA.TAXM_ET20) AS TAXM_TOTL
+							FROM YETA3200 AA, YETA3110 BB, PSNL0100 CC
+					WHERE 
+						AA.DPOB_CD = BB.DPOB_CD
+						AND AA.DPOB_CD = CC.DPOB_CD
+						AND AA.SYSTEMKEY = BB.SYSTEMKEY
+						AND AA.SYSTEMKEY = CC.SYSTEMKEY
+						AND AA.SITE_NUMB = BB.SITE_NUMB
+						<isNotEmpty prepend="AND" property="dpobCd">
+							AA.DPOB_CD=#dpobCd#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="edacRvyy" >
+							AA.EDAC_RVYY=#edacRvyy#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="settGbcd" >
+							AA.SETT_GBCD=#settGbcd#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="systemkey" >
+							AA.SYSTEMKEY=#systemkey#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="siteNumb" >
+							AA.SITE_NUMB=#siteNumb#
+						</isNotEmpty> 
+					ORDER BY 
+							DPOB_CD DESC
+								, EDAC_RVYY DESC
+								, SETT_GBCD DESC
+								, SYSTEMKEY DESC
+								, SITE_NUMB DESC
+			
+			<![CDATA[					
+		) A WHERE ROWNUM <= #lastIndex#
+	)WHERE RNUM >= #firstIndex#
+	]]>
+	</select>	
+	
+	
+	<select id="ye16Ta3200DAO.selectYeta3200ListTotCnt_S" parameterClass="ye16Ta3200SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3200 AA, YETA3110 BB, PSNL0100 CC
+			WHERE
+					AA.DPOB_CD = BB.DPOB_CD
+						AND AA.DPOB_CD = CC.DPOB_CD
+						AND AA.SYSTEMKEY = BB.SYSTEMKEY
+						AND AA.SYSTEMKEY = CC.SYSTEMKEY
+						AND AA.SITE_NUMB = BB.SITE_NUMB
+						<isNotEmpty prepend="AND" property="dpobCd">
+							AA.DPOB_CD=#dpobCd#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="edacRvyy" >
+							AA.EDAC_RVYY=#edacRvyy#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="settGbcd" >
+							AA.SETT_GBCD=#settGbcd#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="systemkey" >
+							AA.SYSTEMKEY=#systemkey#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="siteNumb" >
+							AA.SITE_NUMB=#siteNumb#
+						</isNotEmpty> 
+	</select>
+
+</sqlMap>

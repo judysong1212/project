@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PdfL102d_2019">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="pdfL102dSrh_2019_VO" type="com.app.exterms.yearendtax.server.vo.PdfL102dSrh_2019_VO"/>
+	
+	<resultMap id="pdfL102d_2019" class="com.app.exterms.yearendtax.server.vo.PdfL102d_2019_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="3"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="4"/>
+		<result property="conbSeilNum" column="CONB_SEIL_NUM" columnIndex="5"/>
+		<result property="conbDd" column="CONB_DD" columnIndex="6"/>
+		<result property="conbApin" column="CONB_APIN" columnIndex="7"/>
+		<result property="conbDaysAmtSum" column="CONB_DAYS_AMT_SUM" columnIndex="8"/>
+		<result property="conbDdDdctSum" column="CONB_DD_DDCT_SUM" columnIndex="9"/>
+		<result property="kybdr" column="KYBDR" columnIndex="10"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="11"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="12"/>
+		<result property="ismt" column="ISMT" columnIndex="13"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="14"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="15"/>
+	</resultMap>
+	
+	<insert id="pdfL102d_2019_DAO.insertPdfL102d_S">
+		<![CDATA[
+			INSERT INTO PDF_L102D 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , CONB_SEIL_NUM
+				  , CONB_DD
+				  , CONB_APIN
+				  , CONB_DAYS_AMT_SUM
+				  , CONB_DD_DDCT_SUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #conbSeilNum#
+				  , #conbDd#
+				  , #conbApin#
+				  , #conbDaysAmtSum#
+				  , #conbDdDdctSum#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="pdfL102d_2019_DAO.updatePdfL102d_S">
+		<![CDATA[
+			UPDATE PDF_L102D
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, CONB_SEIL_NUM=#conbSeilNum#
+				, CONB_DD=#conbDd#
+				, CONB_APIN=#conbApin#
+				, CONB_DAYS_AMT_SUM=#conbDaysAmtSum#
+				, CONB_DD_DDCT_SUM=#conbDdDdctSum#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND CONB_SEIL_NUM=#conbSeilNum#
+								AND CONB_DD=#conbDd#
+				]]>
+	</update>
+	
+	<delete id="pdfL102d_2019_DAO.deletePdfL102d_S">
+		<![CDATA[
+			DELETE FROM PDF_L102D 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND CONB_SEIL_NUM=#conbSeilNum#
+								AND CONB_DD=#conbDd#
+				]]>
+	</delete>
+	
+	<select id="pdfL102d_2019_DAO.selectPdfL102d_S" resultMap="pdfL102d_2019">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, CONB_SEIL_NUM
+				, CONB_DD
+				, CONB_APIN
+				, CONB_DAYS_AMT_SUM
+				, CONB_DD_DDCT_SUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PDF_L102D
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND CONB_SEIL_NUM=#conbSeilNum#
+								AND CONB_DD=#conbDd#
+				]]>
+	</select>
+	
+	<select id="pdfL102d_2019_DAO.selectPdfL102dList_D" parameterClass="pdfL102dSrh_2019_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, CONB_SEIL_NUM
+								, CONB_DD
+								, CONB_APIN
+								, CONB_DAYS_AMT_SUM
+								, CONB_DD_DDCT_SUM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PDF_L102D
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, CONB_SEIL_NUM DESC
+							, CONB_DD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="pdfL102d_2019_DAO.selectPdfL102dListTotCnt_S" parameterClass="pdfL102dSrh_2019_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PDF_L102D
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

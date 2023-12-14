@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgPdfJ101m">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgPdfJ101mSrhVO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgPdfJ101mSrhVO"/>
+	
+	<resultMap id="infcPkgPdfJ101m" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgPdfJ101mVO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="lsAmtMn" column="LS_AMT_MN" columnIndex="5"/>
+		<result property="lsMmAmt" column="LS_MM_AMT" columnIndex="6"/>
+		<result property="fixCd" column="FIX_CD" columnIndex="7"/>
+		<result property="kybdr" column="KYBDR" columnIndex="8"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="9"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="10"/>
+		<result property="ismt" column="ISMT" columnIndex="11"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="12"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="13"/>
+	</resultMap>
+	
+	<insert id="infcPkgPdfJ101mDAO.insertPdfJ101m_S">
+		<![CDATA[
+			INSERT INTO PDF_J101M 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , TRADE_SEIL_NUM
+				  , LS_AMT_MN
+				  , LS_MM_AMT
+				  , FIX_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , (SELECT COUNT(*)+1 FROM PDF_J101M)
+				  , #lsAmtMn#
+				  , #lsMmAmt#
+				  , #fixCd#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgPdfJ101mDAO.updatePdfJ101m_S">
+		<![CDATA[
+			UPDATE PDF_J101M
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, TRADE_SEIL_NUM	= #tradeSeilNum#
+				, LS_AMT_MN=#lsAmtMn#
+				, LS_MM_AMT=#lsMmAmt#
+				, FIX_CD=#fixCd#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND LS_AMT_MN=#lsAmtMn#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPdfJ101mDAO.deletePdfJ101m_S">
+		<![CDATA[
+			DELETE FROM PDF_J101M 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND LS_AMT_MN=#lsAmtMn#
+				]]>
+				<!-- AND TRADE_SEIL_NUM	= #tradeSeilNum# -->
+	</delete>
+	
+	<select id="infcPkgPdfJ101mDAO.selectPdfJ101m_S" resultMap="infcPkgPdfJ101m">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, TRADE_SEIL_NUM
+				, LS_AMT_MN
+				, LS_MM_AMT
+				, FIX_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PDF_J101M
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND LS_AMT_MN=#lsAmtMn#
+								AND TRADE_SEIL_NUM	= #tradeSeilNum#
+				]]>
+	</select>
+	
+	<select id="infcPkgPdfJ101mDAO.selectPdfJ101mList_D" parameterClass="infcPkgPdfJ101mSrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, TRADE_SEIL_NUM
+								, LS_AMT_MN
+								, LS_MM_AMT
+								, FIX_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PDF_J101M
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, LS_AMT_MN DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgPdfJ101mDAO.selectPdfJ101mListTotCnt_S" parameterClass="infcPkgPdfJ101mSrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PDF_J101M
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

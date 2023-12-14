@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye17TaPyyt0302_2020">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="pyyt0302_2020_Vo" type="com.app.exterms.yearendtax.server.vo.Pyyt0302_2020_VO"/>
+	<typeAlias  alias="pyyt0302Srh_2020_Vo" type="com.app.exterms.yearendtax.server.vo.Pyyt0302Srh_2020_VO"/>
+	
+	<resultMap id="pyyt0302_2020" class="com.app.exterms.yearendtax.server.vo.Pyyt0302_2020_VO">
+		<result property="pyytItemCd" column="PYYT_ITEM_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="dpobCd" column="DPOB_CD" columnIndex="3"/>
+		<result property="pyytYrMnth" column="PYYT_YR_MNTH" columnIndex="4"/>
+		<result property="pyytPymtDducCd" column="PYYT_PYMT_DDUC_CD" columnIndex="5"/>
+		<result property="pyytPymtDducSum" column="PYYT_PYMT_DDUC_SUM" columnIndex="6"/>
+		<result property="pyytPyddTxtnAmnt" column="PYYT_PYDD_TXTN_AMNT" columnIndex="7"/>
+		<result property="pyytPyddFreeDtySum" column="PYYT_PYDD_FREE_DTY_SUM" columnIndex="8"/>
+		<result property="pyytYrtxDotnCd" column="PYYT_YRTX_DOTN_CD" columnIndex="9"/>
+		<result property="pyytYtfeDtyReduCd" column="PYYT_YTFE_DTY_REDU_CD" columnIndex="10"/>
+		<result property="kybdr" column="KYBDR" columnIndex="11"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="12"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="13"/>
+		<result property="ismt" column="ISMT" columnIndex="14"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="15"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="16"/>
+	</resultMap>
+	
+	<!-- 
+					  , (CASE WHEN NVL(TO_CHAR(#pyytPymtDducCd#), 'TT') = 'TT'
+				  		THEN (SELECT TO_CHAR(AA.PYMT_DDUC_DIV_CD)
+								  FROM (SELECT DPOB_CD, PAY_DDUC_CD, PYMT_DDUC_DIV_CD FROM PAYR0470
+								        UNION ALL
+								        SELECT DPOB_CD, PAY_EXTPY_CD, PYMT_DDUC_DIV_CD FROM PAYR0480) AA
+								 WHERE AA.DPOB_CD = #dpobCd# AND AA.PAY_DDUC_CD = #pyytItemCd#
+				  		      )
+				  	  ELSE TO_CHAR(#pyytItemCd#)      
+				  	  END
+				     )
+	
+	 -->
+	
+	<insert id="ye17TaPyyt0302_2020_DAO.insertPyyt0302_S">
+		<![CDATA[
+			INSERT INTO PYYT0302 
+				( PYYT_ITEM_CD
+				  , SYSTEMKEY
+				  , DPOB_CD
+				  , PYYT_YR_MNTH
+				  , PAY_CD
+				  , PYYT_PYMT_DDUC_CD
+				  , PYYT_PYMT_DDUC_SUM
+				  , PYYT_PYDD_TXTN_AMNT
+				  , PYYT_PYDD_FREE_DTY_SUM
+				  , PYYT_YRTX_DOTN_CD
+				  , PYYT_YTFE_DTY_REDU_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #pyytItemCd#
+				  , #systemkey#
+				  , #dpobCd#
+				  , #pyytYrMnth#
+				  , #payCd#
+				  , ( SELECT AA.PYMT_DDUC_DIV_CD
+					  	FROM ( SELECT DPOB_CD, PAY_DDUC_CD, PYMT_DDUC_DIV_CD 
+					  				FROM PAYR0470
+						        UNION ALL
+							    SELECT DPOB_CD, PAY_EXTPY_CD, PYMT_DDUC_DIV_CD 
+							   FROM PAYR0480) AA
+						WHERE AA.DPOB_CD = #dpobCd# 
+							AND AA.PAY_DDUC_CD = #pyytItemCd#
+				  	 )
+				  , #pyytPymtDducSum#
+				  , #pyytPyddTxtnAmnt#
+				  , NVL((#pyytPymtDducSum# - #pyytPyddTxtnAmnt#), 0)
+				  , NVL( ( SELECT YRTX_DOTN_CD 
+				  			FROM PAYR0485 
+				  		   WHERE DPOB_CD=#dpobCd# 
+				  		   	AND PAY_ITEM_CD=#pyytItemCd#
+				  		   	AND EMYMT_DIV_CD=#emymtDivCd#
+				  		   ), '')
+				  , NVL( ( SELECT YRTX_FREE_DTY_REDU_CD 
+				  			FROM PAYR0485 
+				  		   WHERE DPOB_CD=#dpobCd# 
+				  		   	AND PAY_ITEM_CD=#pyytItemCd#
+				  		   	AND EMYMT_DIV_CD=#emymtDivCd#
+				  		   ), '') 
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="ye17TaPyyt0302_2020_DAO.updatePyyt0302_S">
+		<![CDATA[
+		UPDATE PYYT0302
+			SET PYYT_ITEM_CD=#pyytItemCd#
+				, SYSTEMKEY=#systemkey#
+				, DPOB_CD=#dpobCd#
+				, PYYT_YR_MNTH=#pyytYrMnth#
+				, PYYT_PYMT_DDUC_CD=#pyytPymtDducCd#
+				, PYYT_PYMT_DDUC_SUM=#pyytPymtDducSum#
+				, PYYT_PYDD_TXTN_AMNT=#pyytPyddTxtnAmnt#
+				, PYYT_PYDD_FREE_DTY_SUM=#pyytPyddFreeDtySum#
+				, PYYT_YRTX_DOTN_CD=#pyytYrtxDotnCd#
+				, PYYT_YTFE_DTY_REDU_CD=#pyytYtfeDtyReduCd#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+			WHERE PYYT_ITEM_CD=#pyytItemCd#
+				AND SYSTEMKEY=#systemkey#
+				AND DPOB_CD=#dpobCd#
+				AND PYYT_YR_MNTH=#pyytYrMnth#
+				AND PAY_CD=#payCd#
+				]]>
+	</update>
+	
+	<delete id="ye17TaPyyt0302_2020_DAO.deletePyyt0302_S">
+		<![CDATA[
+			DELETE FROM PYYT0302 
+						WHERE PYYT_ITEM_CD=#pyytItemCd#
+								AND SYSTEMKEY=#systemkey#
+								AND DPOB_CD=#dpobCd#
+								AND PYYT_YR_MNTH=#pyytYrMnth#
+								AND PAY_CD=#payCd#
+				]]>
+	</delete>
+	
+	<delete id="ye17TaPyyt0302_2020_DAO.deletePyyt0302">
+		<![CDATA[
+			DELETE FROM PYYT0302 
+						WHERE SYSTEMKEY=#systemkey#
+								AND DPOB_CD=#dpobCd#
+								AND PYYT_YR_MNTH=#pyytYrMnth#
+				]]>
+	</delete>
+	
+	<select id="ye17TaPyyt0302_2020_DAO.selectPyyt0302_S" resultMap="pyyt0302_2020">
+		<![CDATA[
+			SELECT
+				PYYT_ITEM_CD
+				, SYSTEMKEY
+				, DPOB_CD
+				, PYYT_YR_MNTH
+				, PYYT_PYMT_DDUC_CD
+				, PYYT_PYMT_DDUC_SUM
+				, PYYT_PYDD_TXTN_AMNT
+				, PYYT_PYDD_FREE_DTY_SUM
+				, PYYT_YRTX_DOTN_CD
+				, PYYT_YTFE_DTY_REDU_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PYYT0302
+						WHERE PYYT_ITEM_CD=#pyytItemCd#
+								AND SYSTEMKEY=#systemkey#
+								AND DPOB_CD=#dpobCd#
+								AND PYYT_YR_MNTH=#pyytYrMnth#
+				]]>
+	</select>
+	
+	<select id="ye17TaPyyt0302_2020_DAO.selectPyyt0302List_D" parameterClass="pyyt0302Srh_2020_Vo" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+						SELECT
+										AA.PYYT_ITEM_CD
+										, ( CASE WHEN #pyytPymtDducCd# = 'B0080030'
+												THEN ( SELECT PAY_DDUC_NM AS PYYT_ITEM_NM
+											                FROM PAYR0470
+											               WHERE DPOB_CD=#dpobCd# 
+															AND PYMT_DDUC_DIV_CD IN (#pyytPymtDducCd#, 'B0080040')
+															AND PAY_DDUC_CD = AA.PYYT_ITEM_CD
+												      )
+											ELSE ( SELECT PAY_EXTPY_NM AS PYYT_ITEM_NM
+											              FROM PAYR0480
+											             WHERE DPOB_CD=#dpobCd# 
+															AND PYMT_DDUC_DIV_CD IN (#pyytPymtDducCd#, 'B0080010')
+															AND PAY_EXTPY_CD = AA.PYYT_ITEM_CD
+											      )
+											END      
+										   )AS PYYT_ITEM_NM	
+										, AA.SYSTEMKEY
+										, AA.DPOB_CD
+										, AA.PYYT_YR_MNTH
+										, AA.PYYT_PYMT_DDUC_CD
+										, AA.PYYT_PYMT_DDUC_SUM
+										, AA.PYYT_PYDD_TXTN_AMNT
+										, AA.PYYT_PYDD_FREE_DTY_SUM
+										, AA.PYYT_YRTX_DOTN_CD
+                                		, ( '[' || fcBass0300ITEMNM(AA.DPOB_CD, AA.PYYT_YRTX_DOTN_CD, '1') || '] ' || fcBass0300CDNM (AA.DPOB_CD, AA.PYYT_YRTX_DOTN_CD) ) AS PYYT_YRTX_DOTN_NM
+										, AA.PYYT_YTFE_DTY_REDU_CD
+                                		, ( '[' || fcBass0300ITEMNM(AA.DPOB_CD, AA.PYYT_YTFE_DTY_REDU_CD, '1') || '] ' || fcBass0300ITEMNM(AA.DPOB_CD, AA.PYYT_YTFE_DTY_REDU_CD, '2') ) AS PYYT_YTFE_DTY_REDU_NM
+										, AA.KYBDR
+										, AA.INPT_DT
+										, AA.INPT_ADDR
+										, AA.ISMT
+										, AA.REVN_DT
+										, AA.REVN_ADDR
+										, AA.PAY_CD
+								FROM PYYT0302 AA
+						WHERE 1=1
+						<isNotEmpty prepend="AND" property="pyytItemCd">
+							AA.PYYT_ITEM_CD=#pyytItemCd#
+			     		</isNotEmpty>
+			     		<isNotEmpty prepend="AND" property="systemkey">
+							AA.SYSTEMKEY=#systemkey#
+			     		</isNotEmpty>
+			     		<isNotEmpty prepend="AND" property="dpobCd">
+							AA.DPOB_CD=#dpobCd#
+			     		</isNotEmpty>
+			     		<isNotEmpty prepend="AND" property="payCd">
+							AA.PAY_CD=#payCd#
+			     		</isNotEmpty>			     		
+			     		<isNotEmpty prepend="AND" property="pyytYrMnth">
+							AA.PYYT_YR_MNTH=#pyytYrMnth#
+			     		</isNotEmpty>
+			     		<isEqual prepend="AND" property="pyytPymtDducCd" compareValue="B0080030">
+							AA.PYYT_PYMT_DDUC_CD IN (#pyytPymtDducCd#, 'B0080040')
+						</isEqual>
+						<isNotEqual prepend="AND" property="pyytPymtDducCd" compareValue="B0080030">
+							AA.PYYT_PYMT_DDUC_CD IN (#pyytPymtDducCd#, 'B0080010')
+						</isNotEqual>
+
+							ORDER BY 
+								AA.PYYT_ITEM_CD ASC
+									, AA.SYSTEMKEY DESC
+									, AA.DPOB_CD DESC
+									, AA.PYYT_YR_MNTH DESC
+				
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>	
+	<select id="ye17TaPyyt0302_2020_DAO.selectPyyt0302ListTotCnt_S" parameterClass="pyyt0302Srh_2020_Vo" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PYYT0302
+			WHERE 1=1
+					<isNotEmpty prepend="AND" property="pyytItemCd">
+						PYYT_ITEM_CD=#pyytItemCd#
+		     		</isNotEmpty>
+		     		<isNotEmpty prepend="AND" property="systemkey">
+						SYSTEMKEY=#systemkey#
+		     		</isNotEmpty>
+		     		<isNotEmpty prepend="AND" property="payCd">
+						PAY_CD=#payCd#
+		     		</isNotEmpty>		     		
+		     		<isNotEmpty prepend="AND" property="dpobCd">
+						DPOB_CD=#dpobCd#
+		     		</isNotEmpty>
+		     		<isNotEmpty prepend="AND" property="pyytYrMnth">
+						PYYT_YR_MNTH=#pyytYrMnth#
+		     		</isNotEmpty>
+			     	<isEqual prepend="AND" property="pyytPymtDducCd" compareValue="B0080030">
+						PYYT_PYMT_DDUC_CD IN (#pyytPymtDducCd#, 'B0080040')
+					</isEqual>
+					<isNotEqual prepend="AND" property="pyytPymtDducCd" compareValue="B0080030">
+						PYYT_PYMT_DDUC_CD IN (#pyytPymtDducCd#, 'B0080010')
+					</isNotEqual>
+	</select>
+	
+	
+	<select id="ye17TaPyyt0302_2020_DAO.selectPsnl0100" parameterClass="pyyt0302_2020_Vo" resultClass="egovMap">
+		<![CDATA[
+			SELECT AA.DPOB_CD
+				, NVL(AA.SYSTEMKEY,'X')AS SYSTEMKEY
+		       	, AA.HAN_NM
+		       	, AA.ENG_NM
+		       	, AA.CHIN_CHAR_NM
+		       	, AA.RESN_REGN_NUM
+		       	, AA.SX_DIV_CD
+		       	, AA.YOOBH_MNTH_DAY
+		       	, AA.SCLC_DIV_CD
+		       	, AA.NATN_CD
+		       	, fcBass0300CDNM(AA.DPOB_CD, AA.NATN_CD) AS NATN_NM
+		       	, fcBass0300ITEMNM(AA.DPOB_CD, AA.NATN_CD, '12') AS NATN_ITEM
+		       	, AA.DEPT_CD
+		       	, AA.BUSIN_CD
+		       	, AA.CURR_AFFN_DEPT_CD
+		       	, AA.REPBTY_BUSIN_DIV_CD
+		       	, AA.TYP_OCCU_CD
+		       	, AA.ODTY_CD
+		       	, AA.FRST_EMYMT_DT
+		       	, AA.EMYMT_DIV_CD
+		       	, AA.EMYMT_BGNN_DT
+		       	, AA.EMYMT_END_DT
+		       	, AA.PYSP_CD
+		       	, AA.HDOFC_CODTN_CD
+		       	, AA.RETRY_DT
+		       	, AA.RETRY_REAS_CTNT
+		       	, AA.FRGNR_DIV_CD
+		       	, AA.PSPT_NUM
+		       	, AA.STY_BGNN_DT
+		       	, AA.STY_END_DT
+		       	, AA.END_SCHL
+		       	, AA.END_DEGR_DIV_CD
+		       	, AA.PMTN_SCDU_DT
+		       	, AA.PYSP_PRMTN_SCDU_DT
+		       	, AA.REYMN_SCDU_DT
+		       	, AA.LOG_SVC_YR_NUM_CD
+		       	, AA.LOG_SVC_MNTH_ICM_CD
+		       	, AA.CURR_PYSP_APPMT_DT
+		       	, AA.CURR_DEPT_APPMT_DT
+		       	, AA.PERN_NOTE_CTNT
+		       	, AA.PYSP_GRDE_CD
+		       	, AA.DTIL_OCCU_CLS_DIV_CD
+		       	, AA.DTIL_OCCU_INTTN_CD
+		       	, AA.REPBTY_BUSIN_NM
+		       	, BB.PAYR_MANG_DEPT_CD
+			  FROM PSNL0100 AA, PAYR0500 BB
+			  
+			WHERE AA.DPOB_CD=#dpobCd#
+			]]>
+			<isEqual prepend="AND" property="juminCk" compareValue="0">
+				AA.RESN_REGN_NUM=#resnRegnNum#
+			</isEqual>
+			<isEqual property="juminCk" compareValue="1">
+				AND AA.YOOBH_MNTH_DAY=#yoobhMnthDay#
+				AND AA.HAN_NM=#hanNm#
+			</isEqual>
+				AND AA.DPOB_CD = BB.DPOB_CD
+				AND AA.SYSTEMKEY = BB.SYSTEMKEY
+	</select>
+	
+
+</sqlMap>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass0160">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass0160SerarchVO" type="com.app.exterms.resm.server.vo.Bass0160SrhVO"/>
+	
+	<resultMap id="bass0160" class="com.app.exterms.resm.server.vo.Bass0160VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="2"/>
+		<result property="payMangeDeptWhlePernChrg" column="PAY_MANGE_DEPT_WHLE_PERN_CHRG" columnIndex="3"/>
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="4"/>
+		<result property="payExpnsRepbtyDivCd" column="PAY_EXPNS_REPBTY_DIV_CD" columnIndex="5"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="6"/>
+		<result property="kybdr" column="KYBDR" columnIndex="7"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="8"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="9"/>
+		<result property="ismt" column="ISMT" columnIndex="10"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="11"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="12"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="13"/>
+	</resultMap>
+	
+	<insert id="bass0160DAO.insertBass0160_S">
+		<![CDATA[
+			INSERT INTO BASS0160 
+				( DPOB_CD
+				  , EMYMT_DIV_CD
+				  , PAY_MANGE_DEPT_WHLE_PERN_CHRG
+				  , PAYR_MANG_DEPT_CD
+				  , PAY_EXPNS_REPBTY_DIV_CD
+				  , BUSIN_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , DEPT_CD )
+			VALUES ( #dpobCd#
+				  , #emymtDivCd#
+				  , #payMangeDeptWhlePernChrg#
+				  , #payrMangDeptCd#
+				  , #payExpnsRepbtyDivCd#
+				  , #businCd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr#
+				  , #deptCd# )
+		]]>
+	</insert>
+	
+	<update id="bass0160DAO.updateBass0160_S">
+		<![CDATA[
+			UPDATE BASS0160
+			SET DPOB_CD=#dpobCd#
+				, EMYMT_DIV_CD=#emymtDivCd#
+				, PAY_MANGE_DEPT_WHLE_PERN_CHRG=#payMangeDeptWhlePernChrg#
+				, PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				, PAY_EXPNS_REPBTY_DIV_CD=#payExpnsRepbtyDivCd#
+				, BUSIN_CD=#businCd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+				, DEPT_CD=#deptCd#
+						WHERE DPOB_CD=#dpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND PAY_MANGE_DEPT_WHLE_PERN_CHRG=#payMangeDeptWhlePernChrg#
+				]]>
+	</update>
+	
+	<delete id="bass0160DAO.deleteBass0160_S">
+		<![CDATA[
+			DELETE FROM BASS0160 
+						WHERE DPOB_CD=#dpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND PAY_MANGE_DEPT_WHLE_PERN_CHRG=#payMangeDeptWhlePernChrg#
+				]]>
+	</delete>
+	
+	<select id="bass0160DAO.selectBass0160_S" resultMap="bass0160">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, EMYMT_DIV_CD
+				, PAY_MANGE_DEPT_WHLE_PERN_CHRG
+				, PAYR_MANG_DEPT_CD
+				, PAY_EXPNS_REPBTY_DIV_CD
+				, BUSIN_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, DEPT_CD
+			FROM BASS0160
+						WHERE DPOB_CD=#dpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND PAY_MANGE_DEPT_WHLE_PERN_CHRG=#payMangeDeptWhlePernChrg#
+				]]>
+	</select>
+	
+	<select id="bass0160DAO.selectBass0160List_D" parameterClass="bass0160SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, EMYMT_DIV_CD
+								, PAY_MANGE_DEPT_WHLE_PERN_CHRG
+								, PAYR_MANG_DEPT_CD
+								, PAY_EXPNS_REPBTY_DIV_CD
+								, BUSIN_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+								, DEPT_CD
+						FROM BASS0160
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					EMYMT_DIV_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, EMYMT_DIV_CD DESC
+							, PAY_MANGE_DEPT_WHLE_PERN_CHRG DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass0160DAO.selectBass0160ListTotCnt_S" parameterClass="bass0160SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0160
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				EMYMT_DIV_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

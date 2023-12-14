@@ -1,0 +1,651 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Payr0600">
+
+    <typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+    <typeAlias alias="payr0600SrhVO" type="com.app.exterms.payroll.server.vo.Payr0600SrhVO"/>
+    <typeAlias alias="payr0600DTO" type="com.app.exterms.payroll.client.dto.Payr0600DTO"/>
+
+    <resultMap id="payr0600" class="com.app.exterms.payroll.server.vo.Payr0600VO">
+        <result property="dpobCd" column="DPOB_CD" columnIndex="1"/> <!--사업장코드-->
+        <result property="dilWrkrIncmBlggYr" column="DIL_WRKR_INCM_BLGG_YR" columnIndex="2"/> <!--일용근로소득귀속년도-->
+        <result property="dilWrkrIncmBlggQatrDivCd" column="DIL_WRKR_INCM_BLGG_QATR_DIV_CD" columnIndex="3"/> <!--일용근로소득귀속분기구분코드-->
+        <result property="dilWrkrIncmSeilNum" column="DIL_WRKR_INCM_SEIL_NUM" columnIndex="4"/> <!--일용근로소득일련번호-->
+        <result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="5"/> <!--급여관리부서코드-->
+        <result property="deptCd" column="DEPT_CD" columnIndex="6"/> <!--부서코드-->
+        <result property="businCd" column="BUSIN_CD" columnIndex="7"/> <!--사업코드-->
+        <result property="dilWrkrSumtNumPeplNum" column="DIL_WRKR_SUMT_NUM_PEPL_NUM" columnIndex="8"/> <!--일용근로자소득제출인원수-->
+        <result property="dilWrkrIncmSumtDataNum" column="DIL_WRKR_INCM_SUMT_DATA_NUM" columnIndex="9"/> <!--일용근로자소득제출자료건수-->
+        <result property="dilWrkrTotPymtAggrSum" column="DIL_WRKR_TOT_PYMT_AGGR_SUM" columnIndex="10"/> <!--일용근로자총지급액합계금액-->
+        <result property="dilWrkrFreeDtyTxAggrSum" column="DIL_WRKR_FREE_DTY_TX_AGGR_SUM" columnIndex="11"/> <!--일용근로자비과세소득합계금액-->
+        <result property="whdgTxTxAmntTxAggrSum" column="WHDG_TX_TX_AMNT_TX_AGGR_SUM" columnIndex="12"/> <!--원천징수세액소득세합계금액-->
+        <result property="whdgTxIncmTxAggrSum" column="WHDG_TX_INCM_TX_AGGR_SUM" columnIndex="13"/> <!--원천징수세액지방소득세합계금액-->
+        <result property="dilWrkrIncmSumtDt" column="DIL_WRKR_INCM_SUMT_DT" columnIndex="14"/> <!--일용근로자소득제출일자-->
+        <result property="degtrNm" column="DEGTR_NM" columnIndex="15"/> <!--대표자성명-->
+        <result property="corpNmFmnm" column="CORP_NM_FMNM" columnIndex="16"/> <!--법인명_상호-->
+        <result property="busoprRgstnNum" column="BUSOPR_RGSTN_NUM" columnIndex="17"/> <!--사업자등록번호-->
+        <result property="busoprResnRegnNum" column="BUSOPR_RESN_REGN_NUM" columnIndex="18"/> <!--사업자주민등록번호-->
+        <result property="corpNum" column="CORP_NUM" columnIndex="19"/> <!--법인번호-->
+        <result property="incmRegrstDebrZpcd" column="INCM_REGRST_DEBR_ZPCD" columnIndex="20"/> <!--소득신고의무자우편번호-->
+        <result property="incmRegrstDebrFndtnAddr" column="INCM_REGRST_DEBR_FNDTN_ADDR" columnIndex="21"/> <!--소득신고의무자기본주소-->
+        <result property="incmRegrstDebrDtlPatrAddr" column="INCM_REGRST_DEBR_DTL_PATR_ADDR" columnIndex="22"/> <!--소득신고의무자상세주소-->
+        <result property="juriTxOffcCd" column="JURI_TX_OFFC_CD" columnIndex="23"/> <!--관할세무서코드-->
+        <result property="pentrCd" column="PENTR_CD" columnIndex="24"/> <!--제출자구분코드-->
+        <result property="txDeptyNum" column="TX_DEPTY_NUM" columnIndex="25"/> <!--세무대리인번호-->
+        <result property="hmtxId" column="HMTX_ID" columnIndex="26"/> <!--홈텍스ID-->
+        <result property="txPgmCd" column="TX_PGM_CD" columnIndex="27"/> <!--세무프로그램코드-->
+        <result property="pernChrgDeptNm" column="PERN_CHRG_DEPT_NM" columnIndex="28"/> <!--담당자부서명-->
+        <result property="pernChrgNm" column="PERN_CHRG_NM" columnIndex="29"/> <!--담당자성명-->
+        <result property="pernChrgPhnNum" column="PERN_CHRG_PHN_NUM" columnIndex="30"/> <!--담당자전화번호-->
+        <result property="ectnMailAddr" column="ECTN_MAIL_ADDR" columnIndex="31"/> <!--전자우편주소-->
+        <result property="dilWrkrIncmSumtDdlneDt" column="DIL_WRKR_INCM_SUMT_DDLNE_DT" columnIndex="32"/> <!--일용근로자소득제출마감일자-->
+        <result property="dilWrkrIncmSumtDdlneYn" column="DIL_WRKR_INCM_SUMT_DDLNE_YN" columnIndex="33"/> <!--일용근로자소득제출마감여부-->
+        <result property="kybdr" column="KYBDR" columnIndex="34"/> <!--입력자-->
+        <result property="inptDt" column="INPT_DT" columnIndex="35"/> <!--입력일자-->
+        <result property="inptAddr" column="INPT_ADDR" columnIndex="36"/> <!--입력주소-->
+        <result property="ismt" column="ISMT" columnIndex="37"/> <!--수정자-->
+        <result property="revnDt" column="REVN_DT" columnIndex="38"/> <!--수정일자-->
+        <result property="revnAddr" column="REVN_ADDR" columnIndex="39"/> <!--수정주소-->
+        <result property="secResnNum" column="SEC_RESN_NUM" columnIndex="40"/> <!-- add:: 주민등록번호원본 -->
+        <result property="systemkey" column="SYSTEMKEY" columnIndex="41"/> <!-- add:SYSTEMKEY -->
+        <result property="deptNm" column="DEPT_NM" columnIndex="42"/> <!--add:부서명 -->
+        <result property="businNm" column="BUSIN_NM" columnIndex="43"/> <!-- add:사업명 -->
+    </resultMap>
+
+    <insert id="payr0600DAO.insertPayr0600_S">
+        /* payr0600DAO.insertPayr0600_S */
+        INSERT INTO PAYR0600
+			      ( DPOB_CD
+                  , DIL_WRKR_INCM_BLGG_YR
+                  , DIL_WRKR_INCM_BLGG_QATR_DIV_CD
+                  , DIL_WRKR_INCM_SEIL_NUM
+                  , PAYR_MANG_DEPT_CD
+                  , DEPT_CD
+                  , BUSIN_CD
+                  , DIL_WRKR_SUMT_NUM_PEPL_NUM
+                  , DIL_WRKR_INCM_SUMT_DATA_NUM
+                  , DIL_WRKR_TOT_PYMT_AGGR_SUM
+                  , DIL_WRKR_FREE_DTY_TX_AGGR_SUM
+                  , WHDG_TX_TX_AMNT_TX_AGGR_SUM
+                  , WHDG_TX_INCM_TX_AGGR_SUM
+                  , DIL_WRKR_INCM_SUMT_DT
+                  , DEGTR_NM
+                  , CORP_NM_FMNM
+                  , BUSOPR_RGSTN_NUM
+                  , BUSOPR_RESN_REGN_NUM
+                  , CORP_NUM
+                  , INCM_REGRST_DEBR_ZPCD
+                  , INCM_REGRST_DEBR_FNDTN_ADDR
+                  , INCM_REGRST_DEBR_DTL_PATR_ADDR
+                  , JURI_TX_OFFC_CD
+                  , PENTR_CD
+                  , TX_DEPTY_NUM
+                  , HMTX_ID
+                  , TX_PGM_CD
+                  , PERN_CHRG_DEPT_NM
+                  , PERN_CHRG_NM
+                  , PERN_CHRG_PHN_NUM
+                  , ECTN_MAIL_ADDR
+                  , DIL_WRKR_INCM_SUMT_DDLNE_DT
+                  , DIL_WRKR_INCM_SUMT_DDLNE_YN
+                  , KYBDR
+                  , INPT_DT
+                  , INPT_ADDR
+                  , ISMT
+                  , REVN_DT
+                  , REVN_ADDR )
+           VALUES ( #dpobCd#
+                  , #dilWrkrIncmBlggYr#
+                  , #dilWrkrIncmBlggQatrDivCd#
+                  , (SELECT MAX(NVL(DIL_WRKR_INCM_SEIL_NUM, 0)) + 1 FROM PAYR0600)
+                  , #payrMangDeptCd#
+                  , #deptCd#
+                  , #businCd#
+                  , #dilWrkrSumtNumPeplNum#
+                  , #dilWrkrIncmSumtDataNum#
+                  , #dilWrkrTotPymtAggrSum#
+                  , #dilWrkrFreeDtyTxAggrSum#
+                  , #whdgTxTxAmntTxAggrSum#
+                  , #whdgTxIncmTxAggrSum#
+                  , #dilWrkrIncmSumtDt#
+                  , #degtrNm#
+                  , #corpNmFmnm#
+                  , #busoprRgstnNum#
+                  , #busoprResnRegnNum#
+                  , #corpNum#
+                  , #incmRegrstDebrZpcd#
+                  , #incmRegrstDebrFndtnAddr#
+                  , #incmRegrstDebrDtlPatrAddr#
+                  , #juriTxOffcCd#
+                  , #pentrCd#
+                  , #txDeptyNum#
+                  , #hmtxId#
+                  , #txPgmCd#
+                  , #pernChrgDeptNm#
+                  , #pernChrgNm#
+                  , #pernChrgPhnNum#
+                  , #ectnMailAddr#
+                  , #dilWrkrIncmSumtDdlneDt#
+                  , #dilWrkrIncmSumtDdlneYn#
+                  , #kybdr#
+                  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+                  , #inptAddr#
+                  , #ismt#
+                  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+                  , #revnAddr#)
+    </insert>
+
+    <update id="payr0600DAO.updatePayr0600_S">
+        /* payr0600DAO.updatePayr0600_S */
+        UPDATE PAYR0600
+		   SET DIL_WRKR_INCM_BLGG_YR=#dilWrkrIncmBlggYr#
+			 , DIL_WRKR_BLGG_QATR_DIV_CD=#dilWrkrBlggQatrDivCd#
+			 , PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+			 , DPOB_CD=#dpobCd#
+			 , DIL_WRKR_INCM_SUMT_DATA_NUM=#dilWrkrIncmSumtDataNum#
+			 , DIL_WRKR_INCM_SUMT_DT=#dilWrkrIncmSumtDt#
+			 , DEGTR_NM=#degtrNm#
+			 , CORP_NM_FMNM=#corpNmFmnm#
+			 , BUSOPR_RGSTN_NUM=#busoprRgstnNum#
+			 , RESN_REGN_NUM=#resnRegnNum#
+			 , CORP_NUM=#corpNum#
+			 , INCM_REGRST_DEBR_ZPCD=#incmRegrstDebrZpcd#
+			 , INCM_REGRST_DEBR_FNDTN_ADDR=#incmRegrstDebrFndtnAddr#
+			 , INCM_REGRST_DEBR_DTL_PATR_ADDR=#incmRegrstDebrDtlPatrAddr#
+			 , JURI_TX_OFFC_CD=#juriTxOffcCd#
+			 , PENTR_CD=#pentrCd#
+			 , TX_DEPTY_NUM=#txDeptyNum#
+			 , HMTX_ID=#hmtxId#
+			 , TX_PGM_CD=#txPgmCd#
+			 , PERN_CHRG_DEPT_NM=#pernChrgDeptNm#
+			 , PERN_CHRG_NM=#pernChrgNm#
+			 , PERN_CHRG_PHN_NUM=#pernChrgPhnNum#
+			 , DIL_WRKR_INCM_SUMT_DDLNE_DT=#dilWrkrIncmSumtDdlneDt#
+			 , DIL_WRKR_INCM_SUMT_DDLNE_YN=#dilWrkrIncmSumtDdlneYn#
+			 , ISMT=#ismt#
+			 , REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+			 , REVN_ADDR=#revnAddr#
+		 WHERE DIL_WRKR_INCM_BLGG_YR=#dilWrkrIncmBlggYr#
+		   AND DIL_WRKR_BLGG_QATR_DIV_CD=#dilWrkrBlggQatrDivCd#
+		   AND PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+    </update>
+
+    <delete id="payr0600DAO.deletePayr0600_S">
+        /* payr0600DAO.deletePayr0600_S */
+		DELETE FROM PAYR0600
+		 WHERE DIL_WRKR_INCM_BLGG_YR=#dilWrkrIncmBlggYr#
+		   AND DIL_WRKR_BLGG_QATR_DIV_CD=#dilWrkrBlggQatrDivCd#
+		   AND PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+    </delete>
+
+    <select id="payr0600DAO.selectPayr0600_S" resultMap="payr0600">
+        /* payr0600DAO.selectPayr0600_S */
+	    SELECT DPOB_CD
+             , DIL_WRKR_INCM_BLGG_YR
+             , DIL_WRKR_INCM_BLGG_QATR_DIV_CD
+             , DIL_WRKR_INCM_SEIL_NUM
+             , PAYR_MANG_DEPT_CD
+             , DEPT_CD
+             , BUSIN_CD
+             , DIL_WRKR_SUMT_NUM_PEPL_NUM
+             , DIL_WRKR_INCM_SUMT_DATA_NUM
+             , DIL_WRKR_TOT_PYMT_AGGR_SUM
+             , DIL_WRKR_FREE_DTY_TX_AGGR_SUM
+             , WHDG_TX_TX_AMNT_TX_AGGR_SUM
+             , WHDG_TX_INCM_TX_AGGR_SUM
+             , DIL_WRKR_INCM_SUMT_DT
+             , DEGTR_NM
+             , CORP_NM_FMNM
+             , BUSOPR_RGSTN_NUM
+             , BUSOPR_RESN_REGN_NUM
+             , CORP_NUM
+             , INCM_REGRST_DEBR_ZPCD
+             , INCM_REGRST_DEBR_FNDTN_ADDR
+             , INCM_REGRST_DEBR_DTL_PATR_ADDR
+             , JURI_TX_OFFC_CD
+             , PENTR_CD
+             , TX_DEPTY_NUM
+             , HMTX_ID
+             , TX_PGM_CD
+             , PERN_CHRG_DEPT_NM
+             , PERN_CHRG_NM
+             , PERN_CHRG_PHN_NUM
+             , ECTN_MAIL_ADDR
+             , DIL_WRKR_INCM_SUMT_DDLNE_DT
+             , DIL_WRKR_INCM_SUMT_DDLNE_YN
+             , KYBDR
+             , INPT_DT
+             , INPT_ADDR
+             , ISMT
+             , REVN_DT
+             , REVN_ADDR
+		  FROM PAYR0600
+		 WHERE DIL_WRKR_INCM_BLGG_YR=#dilWrkrIncmBlggYr#
+		   AND DIL_WRKR_BLGG_QATR_DIV_CD=#dilWrkrBlggQatrDivCd#
+		   AND PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+    </select>
+
+    <select id="payr0600DAO.selectPayr0600List_D" parameterClass="payr0600SrhVO" resultClass="egovMap">
+        /* payr0600DAO.selectPayr0600List_D */
+        SELECT *
+          FROM (
+                SELECT A.*
+                     , ROWNUM RNUM
+                  FROM (
+                        SELECT DPOB_CD
+                             , DIL_WRKR_INCM_BLGG_YR
+                             , DIL_WRKR_INCM_BLGG_QATR_DIV_CD
+                             , DIL_WRKR_INCM_SEIL_NUM
+                             , PAYR_MANG_DEPT_CD
+                             , DEPT_CD
+                             , BUSIN_CD
+                             , DIL_WRKR_SUMT_NUM_PEPL_NUM
+                             , DIL_WRKR_INCM_SUMT_DATA_NUM
+                             , DIL_WRKR_TOT_PYMT_AGGR_SUM
+                             , DIL_WRKR_FREE_DTY_TX_AGGR_SUM
+                             , WHDG_TX_TX_AMNT_TX_AGGR_SUM
+                             , WHDG_TX_INCM_TX_AGGR_SUM
+                             , DIL_WRKR_INCM_SUMT_DT
+                             , DEGTR_NM
+                             , CORP_NM_FMNM
+                             , BUSOPR_RGSTN_NUM
+                             , BUSOPR_RESN_REGN_NUM
+                             , CORP_NUM
+                             , INCM_REGRST_DEBR_ZPCD
+                             , INCM_REGRST_DEBR_FNDTN_ADDR
+                             , INCM_REGRST_DEBR_DTL_PATR_ADDR
+                             , JURI_TX_OFFC_CD
+                             , PENTR_CD
+                             , TX_DEPTY_NUM
+                             , HMTX_ID
+                             , TX_PGM_CD
+                             , PERN_CHRG_DEPT_NM
+                             , PERN_CHRG_NM
+                             , PERN_CHRG_PHN_NUM
+                             , ECTN_MAIL_ADDR
+                             , DIL_WRKR_INCM_SUMT_DDLNE_DT
+                             , DIL_WRKR_INCM_SUMT_DDLNE_YN
+                             , KYBDR
+                             , INPT_DT
+                             , INPT_ADDR
+                             , ISMT
+                             , REVN_DT
+                             , REVN_ADDR
+                          FROM PAYR0600
+                          <isEqual prepend="WHERE" property="searchCondition" compareValue="0">
+                           DIL_WRKR_INCM_BLGG_YR = #searchKeyword#
+                          </isEqual>
+                          <isEqual prepend="WHERE" property="searchCondition" compareValue="1">
+                           DIL_WRKR_BLGG_QATR_DIV_CD LIKE '%' || #searchKeyword# || '%'
+                          </isEqual>
+                      ORDER BY DIL_WRKR_INCM_BLGG_YR DESC
+                             , DIL_WRKR_BLGG_QATR_DIV_CD DESC
+                             , PAYR_MANG_DEPT_CD DESC
+                        ) A
+                WHERE ROWNUM &lt;= #lastIndex#
+                )
+        WHERE RNUM &gt; #firstIndex#
+    </select>
+
+    <select id="payr0600DAO.selectPayr0600ListTotCnt_S" parameterClass="payr0600SrhVO" resultClass="int">
+        /* payr0600DAO.selectPayr0600ListTotCnt_S */
+        SELECT COUNT(*) totcnt
+          FROM PAYR0600
+        <isEqual prepend="WHERE" property="searchCondition" compareValue="0">
+         DIL_WRKR_INCM_BLGG_YR = #searchKeyword#
+        </isEqual>
+        <isEqual prepend="WHERE" property="searchCondition" compareValue="1">
+         DIL_WRKR_BLGG_QATR_DIV_CD LIKE '%' || #searchKeyword# || '%'
+        </isEqual>
+    </select>
+
+    <select id="payr0600DAO.selectPayr0600DtlWrkrIncmBlggYrList_D" parameterClass="payr0600SrhVO" resultClass="egovMap">
+        /* payr0600DAO.selectPayr0600DtlWrkrIncmBlggYrList_D */
+        SELECT *
+          FROM (
+                SELECT A.*
+                     , ROWNUM RNUM
+                  FROM (
+                        SELECT DPOB_CD
+                             , DIL_WRKR_INCM_BLGG_YR
+                             , DIL_WRKR_INCM_BLGG_YR AS DIL_WRKR_INCM_BLGG_YR_DISP
+                          FROM PAYR0600
+                        <isNotEmpty prepend="WHERE" property="dpobCd">
+                         DPOB_CD=#dpobCd#
+                        </isNotEmpty>
+                      ORDER BY DIL_WRKR_INCM_BLGG_YR DESC
+                        ) A
+                 WHERE ROWNUM &lt;= #lastIndex#
+                )
+         WHERE RNUM &gt; #firstIndex#
+    </select>
+    <select id="payr0600DAO.selectPayr0600DtlWrkrIncmBlggYrListTotCnt_S" parameterClass="payr0600SrhVO" resultClass="int">
+        /* payr0600DAO.selectPayr0600DtlWrkrIncmBlggYrListTotCnt_S */
+        SELECT COUNT(*) totcnt
+          FROM PAYR0600
+        <isNotEmpty prepend="WHERE" property="dpobCd">
+         DPOB_CD=#dpobCd#
+        </isNotEmpty>
+    </select>
+
+    <delete id="payr0600DAO.deletePayr0600ForInsert" parameterClass="payr0600DTO">
+        /* payr0650DAO.deletePayr0600ForInsert */
+        DELETE FROM PAYR0600
+              WHERE ( DPOB_CD
+                    , DIL_WRKR_INCM_BLGG_YR
+                    , DIl_WRKR_INCM_BLGG_QATR_DIV_CD
+                    , DEPT_CD
+                    , BUSIN_CD)
+                 IN (
+                     SELECT *
+                       FROM (
+                             SELECT P304.DPOB_CD
+                                  , SUBSTR(P304.PYMT_YR_MNTH, 1, 4)     AS DIL_WRKR_INCM_BLGG_YR
+                                  , CASE WHEN SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '01'
+                                           OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '02'
+                                           OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '03'
+                                         THEN '1'
+                                         WHEN SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '04'
+                                           OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '05'
+                                           OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '06'
+                                         THEN '2'
+                                         WHEN SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '07'
+                                           OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '08'
+                                           OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '09'
+                                         THEN '3'
+                                         WHEN SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '10'
+                                           OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '11'
+                                           OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '12'
+                                         THEN '4'
+                                         ELSE NULL END  AS DIL_WRKR_INCM_BLGG_QATR_DIV_CD
+                                  , P304.DEPT_CD
+                                  , P304.BUSIN_CD
+                               FROM BASS0100 B100
+                                  , DLGN0100 D100
+                                  , PAYR0301 P301
+                                  , PAYR0304 P304
+                                  , PAYR0305 P305
+                                  , PSNL0111 P111
+                                  , PSNL0100 P100
+                                  , BASS0150 B150
+                              WHERE B150.PAYR_MANG_DEPT_CD          = P304.PAYR_MANG_DEPT_CD
+                                AND B100.DPOB_CD                    = P304.DPOB_CD
+                                AND B100.DPOB_CD                    = P305.DPOB_CD
+                                AND B100.DPOB_CD                    = P301.DPOB_CD
+                                AND B100.DPOB_CD                    = P111.DPOB_CD
+                                AND B100.DPOB_CD                    = D100.DPOB_CD
+                                AND B100.DPOB_CD                    = P100.DPOB_CD
+                                AND B150.DPOB_CD                    = B100.DPOB_CD
+                                AND P111.SYSTEMKEY                  = P304.SYSTEMKEY
+                                AND P111.SYSTEMKEY                  = D100.SYSTEMKEY
+                                AND P111.SYSTEMKEY                  = P301.SYSTEMKEY
+                                AND P111.SYSTEMKEY                  = P305.SYSTEMKEY
+                                AND P111.SYSTEMKEY                  = P100.SYSTEMKEY
+                                <isNotEmpty property="systemkey">
+                                AND P111.SYSTEMKEY                  = #systemkey#
+                                </isNotEmpty>
+                                AND P304.PYMT_YR_MNTH               = D100.DILNLAZ_YR_MNTH
+                                AND P304.PYMT_YR_MNTH               = P301.PYMT_YR_MNTH
+                                AND P304.PYMT_YR_MNTH               = P305.PYMT_YR_MNTH
+                                AND P304.DPOB_CD                    = #dpobCd#
+                                AND SUBSTR(P304.PYMT_YR_MNTH, 1, 4) = #dilWrkrIncmBlggYr#
+                                AND P304.DEPT_CD                    = #deptCd#
+                                AND P304.BUSIN_CD                   = #businCd#
+                                AND (CASE WHEN SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '01'
+                                       OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '02'
+                                       OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '03'
+                                     THEN '1'
+                                     WHEN SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '04'
+                                       OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '05'
+                                       OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '06'
+                                     THEN '2'
+                                     WHEN SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '07'
+                                       OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '08'
+                                       OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '09'
+                                     THEN '3'
+                                     WHEN SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '10'
+                                       OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '11'
+                                       OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '12'
+                                     THEN '4'
+                                     ELSE NULL END)
+                                     <iterate prepend="IN" property="dilWrkrIncmBlggQatrDivCdArr" open="(" close=")" conjunction=",">
+                                         #dilWrkrIncmBlggQatrDivCdArr[]#
+                                     </iterate>
+                             ) A
+                        GROUP BY BUSIN_CD
+                               , DEPT_CD
+                               , DIL_WRKR_INCM_BLGG_QATR_DIV_CD
+                               , DIL_WRKR_INCM_BLGG_YR
+                               , DPOB_CD
+                    )
+    </delete>
+
+    <insert id="payr0600DAO.insertPayr0600MultipleRow" parameterClass="payr0600DTO">
+        /* payr0650DAO.insertPayr0600MultipleRow */
+        INSERT INTO PAYR0600
+        WITH C AS (
+                   SELECT DPOB_CD
+                        , DIL_WRKR_INCM_BLGG_YR
+                        , DIL_WRKR_INCM_BLGG_QATR_DIV_CD
+                        , (
+                           SELECT NVL(MAX(DIL_WRKR_INCM_SEIL_NUM), 0)
+                             FROM PAYR0600
+                          ) + ROW_NUMBER() OVER (
+                                                 PARTITION BY DPOB_CD
+                                                     ORDER BY DIL_WRKR_INCM_BLGG_QATR_DIV_CD
+                                                            , DIL_WRKR_INCM_BLGG_YR
+                                                 )            AS DIL_WRKR_INCM_SEIL_NUM
+                        , MAX(PAYR_MANG_DEPT_CD)              AS PAYR_MANG_DEPT_CD
+                        , DEPT_CD                             AS DEPT_CD
+                        , BUSIN_CD                            AS BUSIN_CD
+                        , COUNT(DISTINCT (SYSTEMKEY))         AS DIL_WRKR_SUMT_NUM_PERL_NUM
+                        , COUNT(0)                            AS DIL_WRKR_INCM_SUMT_DATA_NUM
+                        , SUM(DIL_WRKR_INCM_TOT_PYMT_SUM)     AS DIL_WRKR_INCM_TOT_PYMT_SUM
+                        , SUM(DIL_WRKR_FREE_DTY_INCM_SUM)     AS DIL_WRKR_FREE_DTY_INCM_SUM
+                        , SUM(DIL_WRKR_INCM_INCM_TX_SUM)      AS DIL_WRKR_INCM_INCM_TX_SUM
+                        , SUM(DIL_WRKR_RGON_INCM_TX_SUM)      AS DIL_WRKR_RGON_INCM_TX_SUM
+                        , MAX(DIL_WRKR_INCM_DATA_ARRGT_DT)    AS DIL_WRKR_INCM_DATA_ARRGT_DT
+                        , MAX(DEGTR_NM)                       AS DEGTR_NM
+                        , MAX(CORP_NM_FMNM)                   AS CORP_NM_FMNM
+                        , MAX(BUSOPR_RGSTN_NUM)               AS BUSOPR_RGSTN_NUM
+                        , MAX(DEGTR_RESN_REGN_NUM)            AS DEGTR_RESN_REGN_NUM
+                        , MAX(CORP_RGSTN_NUM)                 AS CORP_RGSTN_NUM
+                        , MAX(INCM_REGRST_DEBR_ZPCD)          AS INCM_REGRST_DEBR_ZPCD
+                        , MAX(INCM_REGRST_DEBR_FNDTN_ADDR)    AS INCM_REGRST_DEBR_FNDTN_ADDR
+                        , MAX(INCM_REGRST_DEBR_DTL_PATR_ADDR) AS INCM_REGRST_DEBR_DTL_PATR_ADDR
+                        , MAX(JURI_TX_OFFC_CD)                AS JURI_TX_OFFC_CD
+                        , MAX(PENTR_CD)                       AS PENTR_CD
+                        , MAX(TX_DEPTY_NUM)                   AS TX_DEPTY_NUM
+                        , MAX(HMTX_ID)                        AS HMTX_ID
+                        , MAX(TX_PGM_CD)                      AS TX_PGM_CD
+                        , MAX(PERN_CHRG_DEPT_NM)              AS PERN_CHRG_DEPT_NM
+                        , MAX(PERN_CHRG_NM)                   AS PERN_CHRG_NM
+                        , MAX(PERN_CHRG_PHN_NUM)              AS PERN_CHRG_PHN_NUM
+                        , MAX(ECTN_MAIL_ADDR)                 AS ECTN_MAIL_ADDR
+                        , MAX(DIL_WRKR_INCM_SUMT_DDLNE_DT)    AS DIL_WRKR_INCM_SUMT_DDLNE_DT
+                        , MAX(DIL_WRKR_INCM_SUMT_DDLNE_YN)    AS DIL_WRKR_INCM_SUMT_DDLNE_YN
+                        , MAX(KYBDR)                          AS KYBDR
+                        , MAX(INPT_DT)                        AS INPT_DT
+                        , MAX(INPT_ADDR)                      AS INPT_ADDR
+                        , MAX(ISMT)                           AS ISMT
+                        , MAX(REVN_DT)                        AS REVN_DT
+                        , MAX(REVN_ADDR)                      AS REVN_ADDR
+                     FROM (
+                           SELECT P304.DPOB_CD                    AS DPOB_CD
+                                , SUBSTR(P304.PYMT_YR_MNTH, 1, 4) AS DIL_WRKR_INCM_BLGG_YR
+                                , CASE WHEN SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '01'
+                                         OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '02'
+                                         OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '03'
+                                       THEN '1'
+                                       WHEN SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '04'
+                                         OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '05'
+                                         OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '06'
+                                       THEN '2'
+                                       WHEN SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '07'
+                                         OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '08'
+                                         OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '09'
+                                       THEN '3'
+                                       WHEN SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '10'
+                                         OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '11'
+                                         OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '12'
+                                       THEN '4'
+                                       ELSE NULL END              AS DIL_WRKR_INCM_BLGG_QATR_DIV_CD
+                                , P304.PAYR_MANG_DEPT_CD          AS PAYR_MANG_DEPT_CD
+                                , P304.DEPT_CD                    AS DEPT_CD
+                                , P304.BUSIN_CD                   AS BUSIN_CD
+                                , P304.SYSTEMKEY                  AS SYSTEMKEY
+                                , P301.PYMT_TOT_AMNT              AS DIL_WRKR_INCM_TOT_PYMT_SUM
+                                , P301.FREE_DTY_TOT_AMNT          AS DIL_WRKR_FREE_DTY_INCM_SUM
+                                , P305.TURTY_INCM_TX_QNTY         AS DIL_WRKR_INCM_INCM_TX_SUM
+                                , P305.LOC_INCM_TX_AMT            AS DIL_WRKR_RGON_INCM_TX_SUM
+                                , TO_CHAR(SYSDATE, 'YYYYMMDD')    AS DIL_WRKR_INCM_DATA_ARRGT_DT
+                                , B100.DEGTR_NM                   AS DEGTR_NM
+                                , B100.DPOB_NM                    AS CORP_NM_FMNM
+                                , B100.BUSOPR_RGSTN_NUM           AS BUSOPR_RGSTN_NUM
+                                , B100.DEGTR_RESN_REGN_NUM        AS DEGTR_RESN_REGN_NUM
+                                , B100.CORP_RGSTN_NUM             AS CORP_RGSTN_NUM
+                                , B100.DPOB_ZPCD                  AS INCM_REGRST_DEBR_ZPCD
+                                , B100.DPOB_FNDTN_ADDR            AS INCM_REGRST_DEBR_FNDTN_ADDR
+                                , B100.DPOB_DTL_PATR_ADDR         AS INCM_REGRST_DEBR_DTL_PATR_ADDR
+                                , B150.TX_OFFC_CD                 AS JURI_TX_OFFC_CD
+                                , NULL                            AS PENTR_CD
+                                , NULL                            AS TX_DEPTY_NUM
+                                , B150.HMTX_ID                    AS HMTX_ID
+                                , NULL                            AS TX_PGM_CD
+                                , NULL                            AS PERN_CHRG_DEPT_NM
+                                , NULL                            AS PERN_CHRG_NM
+                                , NULL                            AS PERN_CHRG_PHN_NUM
+                                , NULL                            AS ECTN_MAIL_ADDR
+                                , TO_CHAR(SYSDATE, 'YYYYMMDD')    AS DIL_WRKR_INCM_SUMT_DDLNE_DT
+                                , 'Y'                             AS DIL_WRKR_INCM_SUMT_DDLNE_YN
+                                , #kybdr#                         AS KYBDR
+                                , TO_CHAR(SYSDATE, 'YYYYMMDD')    AS INPT_DT
+                                , #inptAddr#                      AS INPT_ADDR
+                                , #ismt#                          AS ISMT
+                                , TO_CHAR(SYSDATE, 'YYYYMMDD')    AS REVN_DT
+                                , #revnAddr#                      AS REVN_ADDR
+                             FROM BASS0100 B100
+                                , DLGN0100 D100
+                                , PAYR0301 P301
+                                , PAYR0304 P304
+                                , PAYR0305 P305
+                                , PSNL0111 P111
+                                , PSNL0100 P100
+                                , BASS0150 B150
+                            WHERE B100.DPOB_CD                    = P304.DPOB_CD
+                              AND B100.DPOB_CD                    = P305.DPOB_CD
+                              AND B100.DPOB_CD                    = P301.DPOB_CD
+                              AND B100.DPOB_CD                    = P111.DPOB_CD
+                              AND B100.DPOB_CD                    = D100.DPOB_CD
+                              AND B100.DPOB_CD                    = P100.DPOB_CD
+                              AND B150.DPOB_CD                    = B100.DPOB_CD
+                              AND P111.SYSTEMKEY                  = P304.SYSTEMKEY
+                              AND P111.SYSTEMKEY                  = D100.SYSTEMKEY
+                              AND P111.SYSTEMKEY                  = P301.SYSTEMKEY
+                              AND P111.SYSTEMKEY                  = P305.SYSTEMKEY
+                              AND P111.SYSTEMKEY                  = P100.SYSTEMKEY
+                              <isNotEmpty property="systemkey">
+                              AND P111.SYSTEMKEY                  = #systemkey#
+                              </isNotEmpty>
+                              AND P304.PYMT_YR_MNTH               = D100.DILNLAZ_YR_MNTH
+                              AND P304.PYMT_YR_MNTH               = P301.PYMT_YR_MNTH
+                              AND P304.PYMT_YR_MNTH               = P305.PYMT_YR_MNTH
+                              AND P304.DPOB_CD                    = #dpobCd#
+                              AND P304.DEPT_CD                    = #deptCd#
+                              AND P304.BUSIN_CD                   = #businCd#
+                              AND B150.PAYR_MANG_DEPT_CD          = P304.PAYR_MANG_DEPT_CD
+                              AND SUBSTR(P304.PYMT_YR_MNTH, 1, 4) = #dilWrkrIncmBlggYr#
+                              AND (CASE WHEN SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '01'
+                                          OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '02'
+                                          OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '03'
+                                        THEN '1'
+                                        WHEN SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '04'
+                                          OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '05'
+                                          OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '06'
+                                        THEN '2'
+                                        WHEN SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '07'
+                                          OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '08'
+                                          OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '09'
+                                        THEN '3'
+                                        WHEN SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '10'
+                                          OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '11'
+                                          OR SUBSTR(P304.PYMT_YR_MNTH, 5, 6) = '12'
+                                        THEN '4'
+                                        ELSE NULL END)
+                                        <iterate prepend="IN" property="dilWrkrIncmBlggQatrDivCdArr" open="(" close=")" conjunction=",">
+                                            #dilWrkrIncmBlggQatrDivCdArr[]#
+                                        </iterate>
+                           )
+                     GROUP BY BUSIN_CD
+                            , DEPT_CD
+                            , DIL_WRKR_INCM_BLGG_QATR_DIV_CD
+                            , DIL_WRKR_INCM_BLGG_YR
+                            , DPOB_CD
+        ) select * from C
+
+    </insert>
+
+    <update id="payr0600DAO.updatePayr0600" parameterClass="payr0600DTO">
+        /* payr0600DAO.updatePayr0600 */
+        UPDATE PAYR0600 P600
+           SET ( DIL_WRKR_SUMT_NUM_PEPL_NUM      /* 일용근로자소득제출인원수 */
+               , DIL_WRKR_INCM_SUMT_DATA_NUM     /* 일용근로자소득제출자료건수 */
+               , DIL_WRKR_TOT_PYMT_AGGR_SUM      /* 일용근로자총지급액합계금액 */
+               , DIL_WRKR_FREE_DTY_TX_AGGR_SUM   /* 일용근로자비과세소득합계금액 */
+               , WHDG_TX_TX_AMNT_TX_AGGR_SUM     /* 원천징수세액소득세합계금액 */
+               , WHDG_TX_INCM_TX_AGGR_SUM        /* 원천징수세액지방소득세합계금액 */
+               , ISMT                            /* 수정자 */
+               , REVN_DT                         /* 수정일자 */
+               , REVN_ADDR                       /* 수정주소 */
+               ) = ( SELECT COUNT(DISTINCT (SYSTEMKEY))        AS DIL_WRKR_SUMT_NUM_PEPL_NUM    /* 일용근로자소득제출인원수 */
+                          , COUNT(0)                           AS DIL_WRKR_INCM_SUMT_DATA_NUM   /* 일용근로자소득제출자료건수 */
+                          , SUM(DIL_WRKR_INCM_TOT_PYMT_SUM)    AS DIL_WRKR_TOT_PYMT_AGGR_SUM    /* 일용근로자총지급액합계금액 */
+                          , SUM(DIL_WRKR_FREE_DTY_INCM_SUM)    AS DIL_WRKR_FREE_DTY_TX_AGGR_SUM /* 일용근로자비과세소득합계금액 */
+                          , SUM(DIL_WRKR_INCM_INCM_TX_SUM)     AS WHDG_TX_TX_AMNT_TX_AGGR_SUM   /* 일용근로자비과세소득합계금액 */
+                          , SUM(DIL_WRKR_RGON_INCM_TX_SUM)     AS WHDG_TX_INCM_TX_AGGR_SUM      /* 원천징수세액지방소득세합계금액 */
+                          , #ismt#                             AS ISMT
+                          , TO_CHAR(SYSDATE, 'YYYYMMDD')       AS REVN_DT
+                          , #revnAddr#                         AS REVN_ADDR
+                       FROM PAYR0650 P650
+                      WHERE P650.DPOB_CD                        = P600.DPOB_CD
+                        AND P650.DIL_WRKR_INCM_BLGG_YR          = P600.DIL_WRKR_INCM_BLGG_YR
+                        AND P650.DIL_WRKR_INCM_BLGG_QATR_DIV_CD = P600.DIL_WRKR_INCM_BLGG_QATR_DIV_CD
+                        AND P650.DIL_WRKR_INCM_SEIL_NUM         = P600.DIL_WRKR_INCM_SEIL_NUM
+                   GROUP BY P650.DIL_WRKR_INCM_SEIL_NUM
+                          , P650.DIL_WRKR_INCM_BLGG_QATR_DIV_CD
+                          , P650.DIL_WRKR_INCM_BLGG_YR
+                          , P650.DPOB_CD
+               )
+         WHERE P600.DPOB_CD                        = #dpobCd#
+           AND P600.DIL_WRKR_INCM_BLGG_YR          = #dilWrkrIncmBlggYr#
+           AND P600.DIL_WRKR_INCM_BLGG_QATR_DIV_CD = #dilWrkrIncmBlggQatrDivCd#
+           AND P600.DIL_WRKR_INCM_SEIL_NUM         = #dilWrkrIncmSeilNum#
+    </update>
+
+    <update id="payr0600DAO.updatePayr0600PentrInfo" parameterClass="payr0600DTO">
+        /* payr0600DAO.selectPayr0600PentrInfo */
+        UPDATE PAYR0600
+           SET DEGTR_NM                        = #degtrNm#
+             , CORP_NM_FMNM                    = #corpNmFmnm#
+             , BUSOPR_RGSTN_NUM                = #busoprRgstnNum#
+             , BUSOPR_RESN_REGN_NUM            = #busoprResnRegnNum#
+             , CORP_NUM                        = #corpNum#
+             , INCM_REGRST_DEBR_ZPCD           = #incmRegrstDebrZpcd#
+             , INCM_REGRST_DEBR_FNDTN_ADDR     = #incmRegrstDebrFndtnAddr#
+             , INCM_REGRST_DEBR_DTL_PATR_ADDR  = #incmRegrstDebrDtlPatrAddr#
+             , PERN_CHRG_DEPT_NM               = #pernChrgDeptNm#
+             , PERN_CHRG_PHN_NUM               = #pernChrgPhnNum#
+             , PERN_CHRG_NM                    = #pernChrgNm#
+             , ECTN_MAIL_ADDR                  = #ectnMailAddr#
+         WHERE DIL_WRKR_INCM_BLGG_YR           = #dilWrkrIncmBlggYr#
+           AND DEPT_CD                         = #deptCd#
+           AND BUSIN_CD                        = #businCd#
+           AND DIL_WRKR_INCM_BLGG_QATR_DIV_CD
+           <iterate prepend="IN" property="dilWrkrIncmBlggQatrDivCdArr" open="(" close=")" conjunction=",">
+           #dilWrkrIncmBlggQatrDivCdArr[]#
+           </iterate>
+    </update>
+
+
+</sqlMap>

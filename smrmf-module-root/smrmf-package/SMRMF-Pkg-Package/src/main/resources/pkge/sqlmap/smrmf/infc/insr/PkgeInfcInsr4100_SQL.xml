@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcInsr4100">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgInsr4100SerarchVO" type="com.app.smrmf.infc.insurance.server.vo.InfcPkgInsr4100SrhVO"/>
+	
+	<resultMap id="infcPkgInsr4100" class="com.app.smrmf.infc.insurance.server.vo.InfcPkgInsr4100VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+	<!-- 	<result property="natPennSeilNum" column="NAT_PENN_SEIL_NUM" columnIndex="3"/> -->
+		<result property="emymtSeilNum" column="EMYMT_SEIL_NUM" columnIndex="3"/>
+		<result property="natPennAqtnDt" column="NAT_PENN_AQTN_DT" columnIndex="4"/>
+		<result property="natPennLssDt" column="NAT_PENN_LSS_DT" columnIndex="5"/>
+		<result property="kybdr" column="KYBDR" columnIndex="6"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="7"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="8"/>
+		<result property="ismt" column="ISMT" columnIndex="9"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="10"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="11"/>
+	</resultMap>
+	
+	<insert id="infcPkgInsr4100DAO.insertInsr4100_NOT_EXISTS">
+		<![CDATA[
+			INSERT INTO INSR4100 (DPOB_CD, SYSTEMKEY, EMYMT_SEIL_NUM)
+			   SELECT AA.DPOB_CD, AA.SYSTEMKEY, AA.EMYMT_SEIL_NUM
+			     FROM PSNL0110 AA
+			    WHERE     AA.EMYMT_SEIL_NUM =
+			                 (SELECT MAX (BB.EMYMT_SEIL_NUM)
+			                    FROM PSNL0110 BB
+			                   WHERE     AA.DPOB_CD = BB.DPOB_CD
+			                         AND AA.SYSTEMKEY = BB.SYSTEMKEY
+			                         AND EMYMT_TYP_CD = 'A0420010')
+			          AND NOT EXISTS
+			                     (SELECT 1
+			                        FROM INSR4100 NN
+			                       WHERE     NN.DPOB_CD = AA.DPOB_CD
+			                             AND NN.SYSTEMKEY = AA.SYSTEMKEY
+			                             AND NN.EMYMT_SEIL_NUM = AA.EMYMT_SEIL_NUM)
+		]]>
+	</insert>
+	
+	<insert id="infcPkgInsr4100DAO.insertInsr4100_S">
+		<![CDATA[
+			INSERT INTO INSR4100 
+				( DPOB_CD
+				  , SYSTEMKEY 
+				  , EMYMT_SEIL_NUM
+				  , NAT_PENN_AQTN_DT
+				  , NAT_PENN_LSS_DT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey# 
+				  , #emymtSeilNum#
+				  , #natPennAqtnDt#
+				  , #natPennLssDt#
+				  , #kybdr#
+				  ,TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  ,TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgInsr4100DAO.updateInsr4100_S">
+		<![CDATA[
+			UPDATE INSR4100
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey# 
+				, EMYMT_SEIL_NUM=#emymtSeilNum#
+				, NAT_PENN_AQTN_DT=#natPennAqtnDt#
+				, NAT_PENN_LSS_DT=#natPennLssDt# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+				]]>
+	</update>
+	
+	<update id="infcPkgInsr4100DAO.updateXlsInsr4100_S">
+		<![CDATA[
+			UPDATE INSR4100 AA
+			SET   AA.NAT_PENN_AQTN_DT=#natPennAqtnDt#  
+				, AA.ISMT=#ismt#
+				, AA.REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, AA.REVN_ADDR=#revnAddr#
+						WHERE   AA.DPOB_CD=#dpobCd#
+								AND AA.SYSTEMKEY= (SELECT SYSTEMKEY 
+								                    FROM PSNL0100
+								                    WHERE  DPOB_CD=#dpobCd#
+			                                          AND  RESN_REGN_NUM = Replace(#resnRegnNum#,'-','')  
+								               )
+								AND AA.EMYMT_SEIL_NUM = (SELECT MAX(EMYMT_SEIL_NUM) 
+			                                FROM PSNL0110 TP01, PSNL0100 TP02
+			                                WHERE  TP01.DPOB_CD = TP02.DPOB_CD
+			                                AND  TP01.SYSTEMKEY = TP02.SYSTEMKEY
+			                                AND  TP02.RESN_REGN_NUM = Replace(#resnRegnNum#,'-','')
+			                                AND  TP01.DPOB_CD  = AA.DPOB_CD
+			                                AND  TP01.SYSTEMKEY = AA.SYSTEMKEY
+			                                AND  TP01.EMYMT_TYP_CD = 'A0420010')
+				]]>
+	</update>
+	
+	<delete id="infcPkgInsr4100DAO.deleteInsr4100_S">
+		<![CDATA[
+			DELETE FROM INSR4100 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+				]]>
+	</delete>
+	
+	<select id="infcPkgInsr4100DAO.selectInsr4100_S" resultMap="infcPkgInsr4100">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY 
+				, EMYMT_SEIL_NUM
+				, NAT_PENN_AQTN_DT
+				, NAT_PENN_LSS_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM INSR4100
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+				]]>
+	</select>
+	
+	<select id="infcPkgInsr4100DAO.selectInsr4100List_D" parameterClass="infcPkgInsr4100SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY 
+								, EMYMT_SEIL_NUM
+								, NAT_PENN_AQTN_DT
+								, NAT_PENN_LSS_DT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM INSR4100
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, EMYMT_SEIL_NUM  DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgInsr4100DAO.selectInsr4100ListTotCnt_S" parameterClass="infcPkgInsr4100SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM INSR4100
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	 
+	
+ 
+</sqlMap>

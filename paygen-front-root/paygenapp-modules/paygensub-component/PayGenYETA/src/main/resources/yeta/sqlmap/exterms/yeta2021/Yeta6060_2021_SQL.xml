@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Yeta6060_2021">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="Yeta2060_2021_Vo" type="com.app.exterms.yearendtax.server.vo.Yeta3060_2021_VO"/>
+	<typeAlias  alias="Yeta2060Srh_2021_VO" type="com.app.exterms.yearendtax.server.vo.Yeta3060Srh_2021_VO"/>
+	<typeAlias  alias="Yeta2060_2021_DTO" type="com.app.exterms.yearendtax.client.dto.yeta2021.Yeta6060DTO"/>
+	
+	<resultMap id="resultMapYeta6060_2021" class="com.app.exterms.yearendtax.server.vo.Yeta2060_2021_VO">
+		<result property="dpobCd" 				column="DPOB_CD" 					columnIndex="1"/>
+		<result property="utDpobCd" 			column="UT_DPOB_CD" 				columnIndex="2"/>
+		<result property="utDpobNm" 			column="UT_DPOB_NM" 				columnIndex="3"/>
+		<result property="hhrkUntDpobCd" 		column="HHRK_UNT_DPOB_CD" 			columnIndex="4"/>
+		<result property="degtrResnRegnNum" 	column="DEGTR_RESN_REGN_NUM" 		columnIndex="5"/>
+		<result property="degtrNm" 				column="DEGTR_NM" 					columnIndex="6"/>
+		<result property="frgnrDivCd" 			column="FRGNR_DIV_CD" 				columnIndex="7"/>
+		<result property="busoprRgstnNum" 		column="BUSOPR_RGSTN_NUM" 			columnIndex="8"/>
+		<result property="corpRgstnNum" 		column="CORP_RGSTN_NUM" 			columnIndex="9"/>
+		<result property="corpDivCd" 			column="CORP_DIV_CD" 				columnIndex="10"/>
+		<result property="untDpobZpcd" 			column="UNT_DPOB_ZPCD" 				columnIndex="11"/>
+		<result property="untDpobFndtnAddr" 	column="UNT_DPOB_FNDTN_ADDR" 		columnIndex="12"/>
+		<result property="untDpobDtlPatrAddr" 	column="UNT_DPOB_DTL_PATR_ADDR" 	columnIndex="13"/>
+		<result property="untDpobPhnNum" 		column="UNT_DPOB_PHN_NUM" 			columnIndex="14"/>
+		<result property="untDpobFaxNum" 		column="UNT_DPOB_FAX_NUM" 			columnIndex="15"/>
+		<result property="untDpobEctnMailAddr" 	column="UNT_DPOB_ECTN_MAIL_ADDR" 	columnIndex="16"/>
+		<result property="untDpobBncdsNm" 		column="UNT_DPOB_BNCDS_NM" 			columnIndex="17"/>
+		<result property="untDpobItemNm" 		column="UNT_DPOB_ITEM_NM" 			columnIndex="18"/>
+		<result property="untDpobMnPrdt" 		column="UNT_DPOB_MN_PRDT" 			columnIndex="19"/>
+		<result property="untDpobEsbmDt" 		column="UNT_DPOB_ESBM_DT" 			columnIndex="20"/>
+		<result property="untDpobIngnDt" 		column="UNT_DPOB_INGN_DT" 			columnIndex="21"/>
+		<result property="untDpobEobDt" 		column="UNT_DPOB_EOB_DT" 			columnIndex="22"/>
+		<result property="untDpobSealWrdNm" 	column="UNT_DPOB_SEAL_WRD_NM" 		columnIndex="23"/>
+		<result property="untDpobSealRfta" 		column="UNT_DPOB_SEAL_RFTA" 		columnIndex="24"/>
+		<result property="untDpobSealFlnm" 		column="UNT_DPOB_SEAL_FLNM" 		columnIndex="25"/>
+		<result property="untDpobFndtnUseYn" 	column="UNT_DPOB_FNDTN_USE_YN" 		columnIndex="26"/>
+		<result property="kybdr" 				column="KYBDR" 						columnIndex="27"/>
+		<result property="inptDt" 				column="INPT_DT" 					columnIndex="28"/>
+		<result property="inptAddr" 			column="INPT_ADDR" 					columnIndex="29"/>
+		<result property="ismt" 				column="ISMT" 						columnIndex="30"/>
+		<result property="revnDt" 				column="REVN_DT" 					columnIndex="31"/>
+		<result property="revnAddr" 			column="REVN_ADDR" 					columnIndex="32"/>
+		<result property="mtstBusinDivCd" 		column="MTST_BUSIN_DIV_CD" 			columnIndex="33"/>
+		<result property="upDpobCmpNo" 				column="UP_DPOB_CMP_NO" 			columnIndex="34"/>
+		<result property="upDpobUtynC171" 			column="UP_DPOB_UTYN_C171" 			columnIndex="35"/>
+		<result property="mtstDpobSeilNumC172" 	column="MTST_DPOB_SEIL_NUM_C172" 			columnIndex="36"/>
+		<result property="mnbhDivCd" 					column="MNBH_DIV_CD" 			columnIndex="37"/>
+		<result property="whdgTxCtypDivCd" 			column="WHDG_TX_CTYP_DIV_CD" 			columnIndex="38"/>
+	</resultMap>
+	
+	<select id="Yeta6060_2021_DAO.getParentDpobCd" resultClass="egovMap">
+	    SELECT 
+	    	DPOB_CD AS COMM_CD
+	    	, UT_DPOB_NM AS COMM_CD_NM
+		 FROM 
+		 	BASS0120
+		 WHERE 
+		 	HHRK_UNT_DPOB_CD IS NULL
+		 ORDER BY 
+		 	UT_DPOB_NM ASC
+	</select>
+	
+	<!-- 시스템 사업장 코드를 가져옴 -->
+	<select id="Yeta6060_2021_DAO.getSysDpobCd" resultClass="egovMap">
+	    SELECT 
+	    	SYS_DPOB_CD AS COMM_CD
+	    	, SYS_DPOB_NM AS COMM_CD_NM
+		 FROM 
+		 	SYSM0050
+		 ORDER BY 
+		 	SYS_DPOB_NM ASC
+	</select>
+	
+	<!-- 사용 시스템 구 분코드 가져옴 -->
+	<select id="Yeta6060_2021_DAO.getUseSysDivCd" resultClass="egovMap">
+	    SELECT 
+	    	USE_SYS_DIV_CD AS COMM_CD
+	    	, USE_SYS_DIV_CD AS COMM_CD_NM
+		 FROM 
+		 	SYSM0050
+		 ORDER BY 
+		 	USE_SYS_DIV_CD ASC
+	</select>
+	
+	
+	<select id="Yeta6060_2021_DAO.selectYeta6060RetryCllnDebrDivCdList" resultClass="egovMap">
+	    SELECT 
+	    	DPOB_CD AS COMM_CD
+	    	, UT_DPOB_NM AS COMM_CD_NM
+	    	, RETRY_CLLN_DEBR_DIV_CD
+		FROM 
+		  	BASS0120
+		 WHERE 
+		 	HHRK_UNT_DPOB_CD IS NULL
+		 ORDER BY 
+		 	UT_DPOB_NM ASC
+	</select>
+	
+	<select id="Yeta2060_2021_DAO.selectYeta6060sysDivCdList" resultClass="egovMap">
+	    SELECT 
+	    	SYS_DIV_CD
+	    	, SYS_DIV_CD AS SYS_DIV_NM
+		FROM 
+			BASS0120
+		WHERE 
+		 	SYS_DIV_CD IS NOT NULL
+		GROUP BY 
+			SYS_DIV_CD
+	</select>
+	
+	<update id="Yeta6060_2021_DAO.saveYeta6060" parameterClass="Yeta2060_2021_DTO">
+			MERGE INTO BASS0120
+			     USING DUAL ON (DPOB_CD = #dpobCd# AND UT_DPOB_CD = #utDpobCd#)
+			WHEN MATCHED
+			THEN
+			   UPDATE 
+			      SET UT_DPOB_NM=#utDpobNm#
+					, DEGTR_RESN_REGN_NUM= #degtrResnRegnNum#
+					, DEGTR_NM=#degtrNm#
+					, BUSOPR_RGSTN_NUM= replace(#busoprRgstnNum#,'-','')
+					, CORP_RGSTN_NUM= replace(#corpRgstnNum#,'-','')
+					, CORP_DIV_CD=#corpDivCd#
+					, UNT_DPOB_ZPCD= replace(#untDpobZpcd#,'-','')
+					, UNT_DPOB_FNDTN_ADDR=#untDpobFndtnAddr#
+					, UNT_DPOB_DTL_PATR_ADDR=#untDpobDtlPatrAddr#
+					, UNT_DPOB_PHN_NUM=#untDpobPhnNum#
+					, UNT_DPOB_FAX_NUM=#untDpobFaxNum#
+					, UNT_DPOB_SEAL_WRD_NM=#untDpobSealWrdNm#
+					, UNT_DPOB_SEAL_RFTA=#untDpobSealRfta#
+		<isNotNull property="untDpobSealFlnm"><isNotEmpty property="untDpobSealFlnm">, UNT_DPOB_SEAL_FLNM=#untDpobSealFlnm#</isNotEmpty></isNotNull>					
+					, UNT_DPOB_FNDTN_USE_YN=#untDpobFndtnUseYn#
+<!-- 					, SYS_DIV_CD = #sysDivCd# -->
+					, ISMT=#ismt#
+					, REVN_DT=TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')
+					, REVN_ADDR=#revnAddr#
+					, MTST_BUSIN_DIV_CD=#mtstBusinDivCd#
+					, UNT_DPOB_ECTN_MAIL_ADDR=#untDpobEctnMailAddr#
+					, UNT_DPOB_BNCDS_NM=#untDpobBncdsNm#
+					, UNT_DPOB_ITEM_NM=#untDpobItemNm#
+					, UNT_DPOB_MN_PRDT=#untDpobMnPrdt#
+					, UP_DPOB_CMP_NO=#upDpobCmpNo#
+					, UP_DPOB_UTYN_C171=#upDpobUtynC171#
+					, MTST_DPOB_SEIL_NUM_C172=#mtstDpobSeilNumC172#
+					, MNBH_DIV_CD=#mnbhDivCd#
+					, WHDG_TX_CTYP_DIV_CD=#whdgTxCtypDivCd#
+<!-- 					, SYS_DPOB_CD=#sysDpobCd# -->
+			WHEN NOT MATCHED
+			THEN
+			   INSERT 
+					( DPOB_CD					
+					,UT_DPOB_CD				
+					,UT_DPOB_NM				
+					,HHRK_UNT_DPOB_CD		
+					,DEGTR_RESN_REGN_NUM	
+					,DEGTR_NM				
+					,FRGNR_DIV_CD			
+					,BUSOPR_RGSTN_NUM		
+					,CORP_RGSTN_NUM			
+					,CORP_DIV_CD			
+					,UNT_DPOB_ZPCD			
+					,UNT_DPOB_FNDTN_ADDR	
+					,UNT_DPOB_DTL_PATR_ADDR	
+					,UNT_DPOB_PHN_NUM		
+					,UNT_DPOB_FAX_NUM		
+					,UNT_DPOB_ECTN_MAIL_ADDR
+					,UNT_DPOB_BNCDS_NM		
+					,UNT_DPOB_ITEM_NM		
+					,UNT_DPOB_MN_PRDT		
+					,UNT_DPOB_ESBM_DT		
+					,UNT_DPOB_INGN_DT		
+					,UNT_DPOB_EOB_DT		
+					,UNT_DPOB_SEAL_WRD_NM	
+					,UNT_DPOB_SEAL_RFTA		
+					,UNT_DPOB_SEAL_FLNM		
+					,UNT_DPOB_FNDTN_USE_YN	
+					,KYBDR					
+					,INPT_DT				
+					,INPT_ADDR				
+					,ISMT					
+					,REVN_DT				
+					,REVN_ADDR
+					,MTST_BUSIN_DIV_CD
+					,UP_DPOB_CMP_NO
+					,UP_DPOB_UTYN_C171
+					,MTST_DPOB_SEIL_NUM_C172
+					,MNBH_DIV_CD
+					,WHDG_TX_CTYP_DIV_CD)
+			VALUES 
+				(  #dpobCd#
+					,#utDpobCd#
+					,#utDpobNm#
+					,#utDpobCd#
+					,replace(#degtrResnRegnNum#,'-','')
+					,#degtrNm#
+					,#frgnrDivCd#
+					,#busoprRgstnNum#
+					,#corpRgstnNum#
+					,#corpDivCd#
+					,#untDpobZpcd#
+					,#untDpobFndtnAddr#
+					,#untDpobDtlPatrAddr#
+					,#untDpobPhnNum#
+					,#untDpobFaxNum#
+					,#untDpobEctnMailAddr#
+					,#untDpobBncdsNm#
+					,#untDpobItemNm#
+					,#untDpobMnPrdt#
+					,#untDpobEsbmDt#
+					,#untDpobIngnDt#
+					,#untDpobEobDt#
+					,#untDpobSealWrdNm#
+					,#untDpobSealRfta#
+					,#untDpobSealFlnm#
+					,#untDpobFndtnUseYn#
+					,#kybdr#
+				  	,TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					,#inptAddr#
+					,#ismt#
+				  	,TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					,#revnAddr#
+					,#mtstBusinDivCd#
+					,(SELECT DECODE (COUNT (UT_DPOB_CD),0, '00000',LPAD (TO_NUMBER (SUBSTR (MAX (NVL (UP_DPOB_CMP_NO, '00000')), -4))+ 1, 5,'0')) FROM BASS0120)
+					,#upDpobUtynC171#
+					,<isEqual property="mtstBusinDivCd" compareValue="C0030010">
+								'0000'
+					 </isEqual>
+					,#mnbhDivCd#
+					,#whdgTxCtypDivCd#)
+	</update>
+	
+	<update id="Yeta6060_2021_DAO.updateYeta6060_S">
+		<![CDATA[
+			UPDATE BASS0120
+			SET 	
+				UT_DPOB_CD				= #utDpobCd#
+				,UT_DPOB_NM				= #utDpobNm#
+				,HHRK_UNT_DPOB_CD		= #hhrkUntDpobCd#
+				,DEGTR_RESN_REGN_NUM	= #degtrResnRegnNum#
+				,DEGTR_NM				= #degtrNm#
+				,FRGNR_DIV_CD			= #frgnrDivCd#
+				,BUSOPR_RGSTN_NUM		= #busoprRgstnNum#
+				,CORP_RGSTN_NUM			= #corpRgstnNum#
+				,CORP_DIV_CD			= #corpDivCd#
+				,UNT_DPOB_ZPCD			= #untDpobZpcd#
+				,UNT_DPOB_FNDTN_ADDR	= #untDpobFndtnAddr#
+				,UNT_DPOB_DTL_PATR_ADDR	= #untDpobDtlPatrAddr#
+				,UNT_DPOB_PHN_NUM		= #untDpobPhnNum#
+				,UNT_DPOB_FAX_NUM		= #untDpobFaxNum#
+				,UNT_DPOB_ECTN_MAIL_ADDR= #untDpobEctnMailAddr#
+				,UNT_DPOB_BNCDS_NM		= #untDpobBncdsNm#
+				,UNT_DPOB_ITEM_NM		= #untDpobItemNm#
+				,UNT_DPOB_MN_PRDT		= #untDpobMnPrdt#
+				,UNT_DPOB_ESBM_DT		= #untDpobEsbmDt#
+				,UNT_DPOB_INGN_DT		= #untDpobIngnDt#
+				,UNT_DPOB_EOB_DT		= #untDpobEobDt#
+				,UNT_DPOB_SEAL_WRD_NM	= #untDpobSealWrdNm#
+				,UNT_DPOB_SEAL_RFTA		= #untDpobSealRfta#
+				,UNT_DPOB_SEAL_FLNM		= #untDpobSealFlnm#
+				,UNT_DPOB_FNDTN_USE_YN	= #untDpobFndtnUseYn#
+				,ISMT					= #ismt#
+				,REVN_DT				= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				,REVN_ADDR				= #revnAddr#
+				,MTST_BUSIN_DIV_CD		= #mtstBusinDivCd#
+				,UP_DPOB_CMP_NO=#upDpobCmpNo#
+				,UP_DPOB_UTYN_C171=#upDpobUtynC171#
+				,MTST_DPOB_SEIL_NUM_C172=#mtstDpobSeilNumC172#
+				,MNBH_DIV_CD=#mnbhDivCd#
+				,WHDG_TX_CTYP_DIV_CD=#whdgTxCtypDivCd#
+		  WHERE DPOB_CD=#dpobCd#
+			]]>
+	</update>
+	
+	<delete id="Yeta6060_2021_DAO.deleteYeta6060_S" parameterClass="Yeta2060_2021_DTO">
+		<![CDATA[
+			DELETE FROM BASS0120 WHERE DPOB_CD=#dpobCd# AND UT_DPOB_CD=#whdgTxRegrstDeptCd#
+			]]>
+	</delete>
+	
+	<select id="Yeta6060_2021_DAO.selectYeta6060_S" resultMap="resultMapYeta6060_2021">
+		<![CDATA[
+			SELECT
+				DPOB_CD					
+				,UT_DPOB_CD				
+				,UT_DPOB_NM				
+				,HHRK_UNT_DPOB_CD		
+				,DEGTR_RESN_REGN_NUM	
+				,DEGTR_NM				
+				,FRGNR_DIV_CD			
+				,BUSOPR_RGSTN_NUM		
+				,CORP_RGSTN_NUM			
+				,CORP_DIV_CD			
+				,UNT_DPOB_ZPCD			
+				,UNT_DPOB_FNDTN_ADDR	
+				,UNT_DPOB_DTL_PATR_ADDR	
+				,UNT_DPOB_PHN_NUM		
+				,UNT_DPOB_FAX_NUM		
+				,UNT_DPOB_ECTN_MAIL_ADDR
+				,UNT_DPOB_BNCDS_NM		
+				,UNT_DPOB_ITEM_NM		
+				,UNT_DPOB_MN_PRDT		
+				,UNT_DPOB_ESBM_DT		
+				,UNT_DPOB_INGN_DT		
+				,UNT_DPOB_EOB_DT		
+				,UNT_DPOB_SEAL_WRD_NM	
+				,UNT_DPOB_SEAL_RFTA		
+				,UNT_DPOB_SEAL_FLNM		
+				,UNT_DPOB_FNDTN_USE_YN	
+				,KYBDR					
+				,INPT_DT				
+				,INPT_ADDR				
+				,ISMT					
+				,REVN_DT				
+				,REVN_ADDR
+				,MTST_BUSIN_DIV_CD
+				,UP_DPOB_CMP_NO
+				,UP_DPOB_UTYN_C171
+				,MTST_DPOB_SEIL_NUM_C172
+				,MNBH_DIV_CD
+				,WHDG_TX_CTYP_DIV_CD
+			FROM BASS0120
+			]]>
+	</select>
+	
+	<select id="Yeta6060_2021_DAO.selectYeta6060List_D" parameterClass="Yeta2060Srh_2021_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+						DPOB_CD						/* 사업장코드				*/
+						,UT_DPOB_CD					/* 단위사업장코드           */
+						,UT_DPOB_NM					/* 단위사업장명             */
+						,HHRK_UNT_DPOB_CD			/* 상위단위사업장코드       */
+						,DEGTR_RESN_REGN_NUM		/* 대표자주민번호           */
+						,DEGTR_NM					/* 대표자명                 */
+						,FRGNR_DIV_CD				/* 내외국인구분코드         */
+						,BUSOPR_RGSTN_NUM			/* 사업자등록번호           */
+						,CORP_RGSTN_NUM				/* 법인등록번호             */
+						,CORP_DIV_CD				/* 법인구분코드             */
+						,UNT_DPOB_ZPCD				/* 단위사업장우편번호       */
+						,UNT_DPOB_FNDTN_ADDR		/* 단위사업장기본주소       */
+						,UNT_DPOB_DTL_PATR_ADDR		/* 단위사업장상세주소       */
+						,UNT_DPOB_PHN_NUM			/* 단위사업장전화번호       */
+						,UNT_DPOB_FAX_NUM			/* 단위사업장팩스번호       */
+						,UNT_DPOB_ECTN_MAIL_ADDR	/* 단위사업장전자우편주소   */
+						,UNT_DPOB_BNCDS_NM			/* 단위사업장업종_업태      */
+						,UNT_DPOB_ITEM_NM			/* 단위사업장업종_종목명    */
+						,UNT_DPOB_MN_PRDT			/* 단위사업장업종_주생산품  */
+						,UNT_DPOB_ESBM_DT			/* 단위사업장설립일자       */
+						,UNT_DPOB_INGN_DT			/* 단위사업장개업일자       */
+						,UNT_DPOB_EOB_DT			/* 단위사업장폐업일자       */
+						,UNT_DPOB_SEAL_WRD_NM		/* 단위사업장직인문구명     */
+						,UNT_DPOB_SEAL_RFTA			/* 단위사업장직인경로       */
+						,UNT_DPOB_SEAL_FLNM			/* 단위사업장직인파일명     */
+						,UNT_DPOB_FNDTN_USE_YN		/* 단위사업장기본사용여부   */
+						,KYBDR						/* 입력자                   */
+						,INPT_DT					/* 입력일자                 */
+						,INPT_ADDR					/* 입력주소                 */
+						,ISMT						/* 수정자                   */
+						,REVN_DT					/* 수정일자                 */
+						,REVN_ADDR					/* 수정주소                 */
+						,MTST_BUSIN_DIV_CD			/* 주종사업장구분코드       */
+						,fcBass0300CDNM(#dpobCd#, MTST_BUSIN_DIV_CD ) as MTST_BUSIN_DIV_NM
+						,UP_DPOB_CMP_NO					/* 단위사업장승인번호 */
+						,UP_DPOB_UTYN_C171				/* C171_사업자단위과세자여부 */
+						,MTST_DPOB_SEIL_NUM_C172	/* C172_종사업장일련번호 */
+						,MNBH_DIV_CD						/* 본지점구분코드 */
+						,WHDG_TX_CTYP_DIV_CD		/* 원천세징수유형구분코드 */
+					FROM BASS0120
+				WHERE 1=1
+				<isNotNull property="utDpobNm">
+				    <isNotEmpty property="utDpobNm">
+				        AND UT_DPOB_NM like '%'|| #utDpobNm# || '%'
+				    </isNotEmpty>
+				</isNotNull>
+				<isNotNull property="degtrNm">
+				    <isNotEmpty property="degtrNm">
+				        AND DEGTR_NM like '%'|| #degtrNm# || '%'
+				    </isNotEmpty>
+				</isNotNull>
+				ORDER BY DPOB_CD ASC
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	
+<select id="Yeta6060_2021_DAO.selectYeta6060ListTotCnt_S" parameterClass="Yeta2060Srh_2021_VO" resultClass="int">
+			SELECT 
+				COUNT(*) totcnt
+			FROM BASS0120
+			WHERE 1=1
+			<isNotNull property="utDpobNm">
+			    <isNotEmpty property="utDpobNm">
+			        AND UT_DPOB_NM like '%'|| #utDpobNm# || '%'
+			    </isNotEmpty>
+			</isNotNull>
+			<isNotNull property="degtrNm">
+			    <isNotEmpty property="degtrNm">
+			        AND DEGTR_NM like '%'|| #degtrNm# || '%'
+			    </isNotEmpty>
+			</isNotNull>
+</select>
+<select id="Yeta6060_2021_DAO.selectYetaM606001List_D" parameterClass="Yeta2060Srh_2021_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+						DPOB_CD						/* 사업장코드				*/
+						,UT_DPOB_CD					/* 단위사업장코드           */
+						,UT_DPOB_NM					/* 단위사업장명             */
+						,HHRK_UNT_DPOB_CD			/* 상위단위사업장코드       */
+						,DEGTR_RESN_REGN_NUM		/* 대표자주민번호           */
+						,DEGTR_NM					/* 대표자명                 */
+						,FRGNR_DIV_CD				/* 내외국인구분코드         */
+						,BUSOPR_RGSTN_NUM			/* 사업자등록번호           */
+						,CORP_RGSTN_NUM				/* 법인등록번호             */
+						,CORP_DIV_CD				/* 법인구분코드             */
+						,UNT_DPOB_ZPCD				/* 단위사업장우편번호       */
+						,UNT_DPOB_FNDTN_ADDR		/* 단위사업장기본주소       */
+						,UNT_DPOB_DTL_PATR_ADDR		/* 단위사업장상세주소       */
+						,UNT_DPOB_PHN_NUM			/* 단위사업장전화번호       */
+						,UNT_DPOB_FAX_NUM			/* 단위사업장팩스번호       */
+						,UNT_DPOB_ECTN_MAIL_ADDR	/* 단위사업장전자우편주소   */
+						,UNT_DPOB_BNCDS_NM			/* 단위사업장업종_업태      */
+						,UNT_DPOB_ITEM_NM			/* 단위사업장업종_종목명    */
+						,UNT_DPOB_MN_PRDT			/* 단위사업장업종_주생산품  */
+						,UNT_DPOB_ESBM_DT			/* 단위사업장설립일자       */
+						,UNT_DPOB_INGN_DT			/* 단위사업장개업일자       */
+						,UNT_DPOB_EOB_DT			/* 단위사업장폐업일자       */
+						,UNT_DPOB_SEAL_WRD_NM		/* 단위사업장직인문구명     */
+						,UNT_DPOB_SEAL_RFTA			/* 단위사업장직인경로       */
+						,UNT_DPOB_SEAL_FLNM			/* 단위사업장직인파일명     */
+						,UNT_DPOB_FNDTN_USE_YN		/* 단위사업장기본사용여부   */
+						,KYBDR						/* 입력자                   */
+						,INPT_DT					/* 입력일자                 */
+						,INPT_ADDR					/* 입력주소                 */
+						,ISMT						/* 수정자                   */
+						,REVN_DT					/* 수정일자                 */
+						,REVN_ADDR					/* 수정주소                 */
+						,MTST_BUSIN_DIV_CD			/* 주종사업장구분코드       */
+						,fcBass0300CDNM(#dpobCd#, MTST_BUSIN_DIV_CD ) as MTST_BUSIN_DIV_NM
+						,UP_DPOB_CMP_NO					/* 단위사업장승인번호 */
+						,UP_DPOB_UTYN_C171				/* C171_사업자단위과세자여부 */
+						,MTST_DPOB_SEIL_NUM_C172	/* C172_종사업장일련번호 */
+						,MNBH_DIV_CD						/* 본지점구분코드 */
+						,WHDG_TX_CTYP_DIV_CD		/* 원천세징수유형구분코드 */
+						,BEF_BUSOPR_RGSTN_NUM
+					FROM BASS0120
+				WHERE 1=1
+				<isNotNull property="mtstBusinDivCd">
+				    <isNotEmpty property="mtstBusinDivCd">
+				        AND MTST_BUSIN_DIV_CD = #mtstBusinDivCd#
+				    </isNotEmpty>
+				</isNotNull>
+				        AND WHDG_TX_CTYP_DIV_CD	IN ('C0040030', 'C0040020')
+				        AND MNBH_DIV_CD = 'C0050010'
+				ORDER BY DPOB_CD ASC
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</select>
+
+<select id="Yeta6060_2021_DAO.selectYetaM606001ListTotCnt_S" parameterClass="Yeta2060Srh_2021_VO" resultClass="int">
+			SELECT 
+				COUNT(*) totcnt
+			FROM BASS0120
+			WHERE 1=1
+			<isNotNull property="mtstBusinDivCd">
+				    <isNotEmpty property="mtstBusinDivCd">
+				        AND MTST_BUSIN_DIV_CD = #mtstBusinDivCd#
+				    </isNotEmpty>
+			</isNotNull>
+			AND WHDG_TX_CTYP_DIV_CD	IN ('C0040030', 'C0040020')
+			AND MNBH_DIV_CD = 'C0050010'
+</select>
+
+<select id="Yeta6060_2021_DAO.selectYetaS606001List_D" parameterClass="Yeta2060Srh_2021_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+						DPOB_CD						/* 사업장코드				*/
+						,UT_DPOB_CD					/* 단위사업장코드           */
+						,UT_DPOB_NM					/* 단위사업장명             */
+						,HHRK_UNT_DPOB_CD			/* 상위단위사업장코드       */
+						,DEGTR_RESN_REGN_NUM		/* 대표자주민번호           */
+						,DEGTR_NM					/* 대표자명                 */
+						,FRGNR_DIV_CD				/* 내외국인구분코드         */
+						,BUSOPR_RGSTN_NUM			/* 사업자등록번호           */
+						,CORP_RGSTN_NUM				/* 법인등록번호             */
+						,CORP_DIV_CD				/* 법인구분코드             */
+						,UNT_DPOB_ZPCD				/* 단위사업장우편번호       */
+						,UNT_DPOB_FNDTN_ADDR		/* 단위사업장기본주소       */
+						,UNT_DPOB_DTL_PATR_ADDR		/* 단위사업장상세주소       */
+						,UNT_DPOB_PHN_NUM			/* 단위사업장전화번호       */
+						,UNT_DPOB_FAX_NUM			/* 단위사업장팩스번호       */
+						,UNT_DPOB_ECTN_MAIL_ADDR	/* 단위사업장전자우편주소   */
+						,UNT_DPOB_BNCDS_NM			/* 단위사업장업종_업태      */
+						,UNT_DPOB_ITEM_NM			/* 단위사업장업종_종목명    */
+						,UNT_DPOB_MN_PRDT			/* 단위사업장업종_주생산품  */
+						,UNT_DPOB_ESBM_DT			/* 단위사업장설립일자       */
+						,UNT_DPOB_INGN_DT			/* 단위사업장개업일자       */
+						,UNT_DPOB_EOB_DT			/* 단위사업장폐업일자       */
+						,UNT_DPOB_SEAL_WRD_NM		/* 단위사업장직인문구명     */
+						,UNT_DPOB_SEAL_RFTA			/* 단위사업장직인경로       */
+						,UNT_DPOB_SEAL_FLNM			/* 단위사업장직인파일명     */
+						,UNT_DPOB_FNDTN_USE_YN		/* 단위사업장기본사용여부   */
+						,KYBDR						/* 입력자                   */
+						,INPT_DT					/* 입력일자                 */
+						,INPT_ADDR					/* 입력주소                 */
+						,ISMT						/* 수정자                   */
+						,REVN_DT					/* 수정일자                 */
+						,REVN_ADDR					/* 수정주소                 */
+						,MTST_BUSIN_DIV_CD			/* 주종사업장구분코드       */
+						,fcBass0300CDNM(#dpobCd#, MTST_BUSIN_DIV_CD ) as MTST_BUSIN_DIV_NM
+						,UP_DPOB_CMP_NO					/* 단위사업장승인번호 */
+						,UP_DPOB_UTYN_C171				/* C171_사업자단위과세자여부 */
+						,MTST_DPOB_SEIL_NUM_C172	/* C172_종사업장일련번호 */
+						,MNBH_DIV_CD						/* 본지점구분코드 */
+						,WHDG_TX_CTYP_DIV_CD		/* 원천세징수유형구분코드 */
+						,BEF_BUSOPR_RGSTN_NUM
+					FROM BASS0120
+				WHERE 1=1
+					AND HHRK_UNT_DPOB_CD = #utDpobCd#
+					AND MTST_BUSIN_DIV_CD IN ('C0030010','C0030020')					    
+					AND WHDG_TX_CTYP_DIV_CD	IN ('C0040030', 'C0040020')
+					AND MNBH_DIV_CD IN ('C0050020' , 'C0050010')
+				ORDER BY MTST_DPOB_SEIL_NUM_C172 ASC				
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</select>
+
+<select id="Yeta6060_2021_DAO.selectYetaS606001ListTotCnt_S" parameterClass="Yeta2060Srh_2021_VO" resultClass="int">
+			SELECT 
+				COUNT(*) totcnt
+			FROM BASS0120
+			WHERE 1=1
+					AND HHRK_UNT_DPOB_CD = #utDpobCd#
+					AND MTST_BUSIN_DIV_CD IN ('C0030010','C0030020')
+					AND WHDG_TX_CTYP_DIV_CD	IN ('C0040030', 'C0040020')
+					AND MNBH_DIV_CD IN ('C0050020' , 'C0050010')
+</select>
+
+<update id="Yeta6060_2021_DAO.deleteYeta606001_S" parameterClass="Yeta2060_2021_Vo">
+		<![CDATA[
+			UPDATE BASS0120 SET
+				BUSOPR_RGSTN_NUM = #busoprRgstnNum#,
+				HHRK_UNT_DPOB_CD = #hhrkUntDpobCd#,
+				MTST_DPOB_SEIL_NUM_C172 = #mtstDpobSeilNumC172#,
+				BEF_BUSOPR_RGSTN_NUM = #befBusoprRgstnNum#,
+				ISMT = #ismt#,
+				REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+				REVN_ADDR = #revnAddr#
+			WHERE
+				DPOB_CD = #dpobCd#
+				AND UT_DPOB_CD = #utDpobCd#
+			]]>
+</update>
+
+<update id="Yeta6060_2021_DAO.insertYetaS606001_S">
+		<![CDATA[
+			UPDATE BASS0120 SET
+				HHRK_UNT_DPOB_CD = #hhrkUntDpobCd#,
+				BUSOPR_RGSTN_NUM = #busoprRgstnNum#,
+				BEF_BUSOPR_RGSTN_NUM = #befBusoprRgstnNum#,
+				MTST_DPOB_SEIL_NUM_C172 = (SELECT LPAD (TO_NUMBER (SUBSTR (MAX (MTST_DPOB_SEIL_NUM_C172), -4)) + 1,
+							                        4,
+							                        '0')
+							              FROM BASS0120 WHERE BUSOPR_RGSTN_NUM = #busoprRgstnNum#),
+				MNBH_DIV_CD = 'C0050020',
+				MTST_BUSIN_DIV_CD = #mtstBusinDivCd#,
+				ISMT = #ismt#,
+				REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+				REVN_ADDR = #revnAddr#
+			WHERE
+				DPOB_CD = #dpobCd#
+				AND UT_DPOB_CD = #utDpobCd#
+		]]>
+	</update>
+	
+<update id="Yeta6060_2021_DAO.updateNumYetaS606001_S">
+		<![CDATA[
+			UPDATE BASS0120 SET
+				MTST_DPOB_SEIL_NUM_C172 = #mtstDpobSeilNumC172#,
+				ISMT = #ismt#,
+				REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+				REVN_ADDR = #revnAddr#
+			WHERE
+				DPOB_CD = #dpobCd#
+				AND UT_DPOB_CD = #utDpobCd#
+		]]>
+</update>
+
+</sqlMap>

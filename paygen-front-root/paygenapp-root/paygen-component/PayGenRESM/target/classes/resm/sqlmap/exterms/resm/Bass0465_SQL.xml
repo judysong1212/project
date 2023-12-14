@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass0465">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass0465SerarchVO" type="com.app.exterms.resm.server.vo.Bass0465SrhVO"/>
+	
+	<resultMap id="bass0465" class="com.app.exterms.resm.server.vo.Bass0465VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="hhrkDeptGrpCd" column="HHRK_DEPT_GRP_CD" columnIndex="2"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="3"/>
+		<result property="kybdr" column="KYBDR" columnIndex="4"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="5"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="6"/>
+		<result property="ismt" column="ISMT" columnIndex="7"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="8"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="9"/>
+	</resultMap>
+	
+	<insert id="bass0465DAO.insertBass0465_S">
+		<![CDATA[
+			INSERT INTO BASS0465 
+				( DPOB_CD
+				  , HHRK_DEPT_GRP_CD
+				  , DEPT_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #hhrkDeptGrpCd#
+				  , #deptCd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass0465DAO.updateBass0465_S">
+		<![CDATA[
+			UPDATE BASS0465
+			SET DPOB_CD=#dpobCd#
+				, HHRK_DEPT_GRP_CD=#hhrkDeptGrpCd#
+				, DEPT_CD=#deptCd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND HHRK_DEPT_GRP_CD=#hhrkDeptGrpCd#
+								AND DEPT_CD=#deptCd#
+				]]>
+	</update>
+	
+	<delete id="bass0465DAO.deleteBass0465_S">
+		<![CDATA[
+			DELETE FROM BASS0465 
+						WHERE DPOB_CD=#dpobCd#
+								AND HHRK_DEPT_GRP_CD=#hhrkDeptGrpCd#
+								AND DEPT_CD=#deptCd#
+				]]>
+	</delete>
+	
+	<select id="bass0465DAO.selectBass0465_S" resultMap="bass0465">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, HHRK_DEPT_GRP_CD
+				, DEPT_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS0465
+						WHERE DPOB_CD=#dpobCd#
+								AND HHRK_DEPT_GRP_CD=#hhrkDeptGrpCd#
+								AND DEPT_CD=#deptCd#
+				]]>
+	</select>
+	
+	<select id="bass0465DAO.selectBass0465List_D" parameterClass="bass0465SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, HHRK_DEPT_GRP_CD
+								, DEPT_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS0465
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					HHRK_DEPT_GRP_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, HHRK_DEPT_GRP_CD DESC
+							, DEPT_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass0465DAO.selectBass0465ListTotCnt_S" parameterClass="bass0465SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0465
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				HHRK_DEPT_GRP_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

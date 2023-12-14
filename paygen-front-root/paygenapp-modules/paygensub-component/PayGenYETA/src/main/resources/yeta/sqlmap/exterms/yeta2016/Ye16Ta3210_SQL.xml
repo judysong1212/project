@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye16Ta3210">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ye16Ta3210SerarchVO" type="com.app.exterms.yearendtax.server.vo.Yeta3210SrhVO"/>
+	
+	<resultMap id="ye16Ta3210" class="com.app.exterms.yearendtax.server.vo.Yeta3210VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="edacRvyy" column="EDAC_RVYY" columnIndex="2"/>
+		<result property="settGbcd" column="SETT_GBCD" columnIndex="3"/>
+		<result property="elctYymm" column="ELCT_YYMM" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="elctDate" column="ELCT_DATE" columnIndex="6"/>
+		<result property="suprTxam" column="SUPR_TXAM" columnIndex="7"/>
+		<result property="buamTxam" column="BUAM_TXAM" columnIndex="8"/>
+		<result property="inbsAmnt" column="INBS_AMNT" columnIndex="9"/>
+		<result property="stckInam" column="STCK_INAM" columnIndex="10"/>
+		<result property="spbmTxam" column="SPBM_TXAM" columnIndex="11"/>
+		<result property="ecinTxam" column="ECIN_TXAM" columnIndex="12"/>
+		<result property="taxmEcin" column="TAXM_ECIN" columnIndex="13"/>
+		<result property="taxmEarn" column="TAXM_EARN" columnIndex="14"/>
+		<result property="taxmEtam" column="TAXM_ETAM" columnIndex="15"/>
+		<result property="txetTxam" column="TXET_TXAM" columnIndex="16"/>
+		<result property="addrBhtx" column="ADDR_BHTX" columnIndex="17"/>
+		<result property="spciHlth" column="SPCI_HLTH" columnIndex="18"/>
+		<result property="spciEmpf" column="SPCI_EMPF" columnIndex="19"/>
+		<result property="natnPsnf" column="NATN_PSNF" columnIndex="20"/>
+		<result property="earnTaxn" column="EARN_TAXN" columnIndex="21"/>
+		<result property="ihtxTaxn" column="IHTX_TAXN" columnIndex="22"/>
+		<result property="etccTxam" column="ETCC_TXAM" columnIndex="23"/>
+		<result property="etccEtam" column="ETCC_ETAM" columnIndex="24"/>
+		<result property="kybdr" column="KYBDR" columnIndex="25"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="26"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="27"/>
+		<result property="ismt" column="ISMT" columnIndex="28"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="29"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="30"/>
+	</resultMap>
+	
+	<insert id="ye16Ta3210DAO.insertYeta3210_S">
+		<![CDATA[
+			INSERT INTO YETA3210 
+				( DPOB_CD
+				  , EDAC_RVYY
+				  , SETT_GBCD
+				  , ELCT_YYMM
+				  , SYSTEMKEY
+				  , ELCT_DATE
+				  , SUPR_TXAM
+				  , BUAM_TXAM
+				  , INBS_AMNT
+				  , STCK_INAM
+				  , SPBM_TXAM
+				  , ECIN_TXAM
+				  , TAXM_ECIN
+				  , TAXM_EARN
+				  , TAXM_ETAM
+				  , TXET_TXAM
+				  , ADDR_BHTX
+				  , SPCI_HLTH
+				  , SPCI_EMPF
+				  , NATN_PSNF
+				  , EARN_TAXN
+				  , IHTX_TAXN
+				  , ETCC_TXAM
+				  , ETCC_ETAM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #edacRvyy#
+				  , #settGbcd#
+				  , #elctYymm#
+				  , #systemkey#
+				  , #elctDate#
+				  , #suprTxam#
+				  , #buamTxam#
+				  , #inbsAmnt#
+				  , #stckInam#
+				  , #spbmTxam#
+				  , #ecinTxam#
+				  , #taxmEcin#
+				  , #taxmEarn#
+				  , #taxmEtam#
+				  , #txetTxam#
+				  , #addrBhtx#
+				  , #spciHlth#
+				  , #spciEmpf#
+				  , #natnPsnf#
+				  , #earnTaxn#
+				  , #ihtxTaxn#
+				  , #etccTxam#
+				  , #etccEtam#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="ye16Ta3210DAO.updateYeta3210_S">
+		<![CDATA[
+			UPDATE YETA3210
+			SET DPOB_CD=#dpobCd#
+				, EDAC_RVYY=#edacRvyy#
+				, SETT_GBCD=#settGbcd#
+				, ELCT_YYMM=#elctYymm#
+				, SYSTEMKEY=#systemkey#
+				, ELCT_DATE=#elctDate#
+				, SUPR_TXAM=#suprTxam#
+				, BUAM_TXAM=#buamTxam#
+				, INBS_AMNT=#inbsAmnt#
+				, STCK_INAM=#stckInam#
+				, SPBM_TXAM=#spbmTxam#
+				, ECIN_TXAM=#ecinTxam#
+				, TAXM_ECIN=#taxmEcin#
+				, TAXM_EARN=#taxmEarn#
+				, TAXM_ETAM=#taxmEtam#
+				, TXET_TXAM=#txetTxam#
+				, ADDR_BHTX=#addrBhtx#
+				, SPCI_HLTH=#spciHlth#
+				, SPCI_EMPF=#spciEmpf#
+				, NATN_PSNF=#natnPsnf#
+				, EARN_TAXN=#earnTaxn#
+				, IHTX_TAXN=#ihtxTaxn#
+				, ETCC_TXAM=#etccTxam#
+				, ETCC_ETAM=#etccEtam#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND ELCT_YYMM=#elctYymm#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	
+	<delete id="ye16Ta3210DAO.deleteYeta3210_S">
+		<![CDATA[
+			DELETE FROM YETA3210 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND ELCT_YYMM=#elctYymm#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<!-- yeta0100 연말정산대상자 관리 -->
+	<delete id="ye16Ta3210DAO.fnPayr06420_PAYR417_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3210 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#  
+				]]>
+				 <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                   </isNotEmpty> 
+	</delete>
+	
+	
+	
+	<select id="ye16Ta3210DAO.selectYeta3210_S" resultMap="ye16Ta3210">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, EDAC_RVYY
+				, SETT_GBCD
+				, ELCT_YYMM
+				, SYSTEMKEY
+				, ELCT_DATE
+				, SUPR_TXAM
+				, BUAM_TXAM
+				, INBS_AMNT
+				, STCK_INAM
+				, SPBM_TXAM
+				, ECIN_TXAM
+				, TAXM_ECIN
+				, TAXM_EARN
+				, TAXM_ETAM
+				, TXET_TXAM
+				, ADDR_BHTX
+				, SPCI_HLTH
+				, SPCI_EMPF
+				, NATN_PSNF
+				, EARN_TAXN
+				, IHTX_TAXN
+				, ETCC_TXAM
+				, ETCC_ETAM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YETA3210
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND ELCT_YYMM=#elctYymm#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+	<select id="ye16Ta3210DAO.selectYeta3210List_D" parameterClass="ye16Ta3210SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, EDAC_RVYY
+								, SETT_GBCD
+								, fcBass0300CDNM(DPOB_CD, SETT_GBCD) AS SETT_GBNM
+								, SETT_GBCD AS settGbcdcommCd 
+								, fcBass0300CDNM(DPOB_CD, SETT_GBCD) AS settGbcdcommCdNm 
+								, ELCT_YYMM
+								, SYSTEMKEY
+								, ELCT_DATE
+								, SUPR_TXAM
+								, BUAM_TXAM
+								, INBS_AMNT
+								, STCK_INAM
+								, SPBM_TXAM
+								, ECIN_TXAM
+								, TAXM_ECIN
+								, TAXM_EARN
+								, TAXM_ETAM
+								, TXET_TXAM
+								, ADDR_BHTX
+								, SPCI_HLTH
+								, SPCI_EMPF
+								, NATN_PSNF
+								, EARN_TAXN
+								, IHTX_TAXN
+								, ETCC_TXAM
+								, ETCC_ETAM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YETA3210
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, EDAC_RVYY DESC
+							, SETT_GBCD DESC
+							, ELCT_YYMM DESC
+							, SYSTEMKEY DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="ye16Ta3210DAO.selectYeta3210ListTotCnt_S" parameterClass="ye16Ta3210SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3210
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

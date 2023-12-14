@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0121">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	
+	<typeAlias alias="psnl0121Dto" type="com.app.exterms.personal.client.dto.Psnl0121DTO"/>
+    <typeAlias  alias="psnl0121SerarchVO" type="com.app.exterms.personal.server.vo.Psnl0121DefaultVO"/>
+    <typeAlias  alias="psnl0121Vo" type="com.app.exterms.personal.server.vo.Psnl0121VO"/>
+	
+	<resultMap id="psnl0121" class="com.app.exterms.personal.server.vo.Psnl0121VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="accldSeilNum" column="ACCLD_SEIL_NUM" columnIndex="3"/>
+		<result property="accldYr" column="ACCLD_YR" columnIndex="4"/>
+		<result property="accldPrttDt" column="ACCLD_PRTT_DT" columnIndex="5"/>
+		<result property="accldKndCd" column="ACCLD_KND_CD" columnIndex="6"/>
+		<result property="accldDivCd" column="ACCLD_DIV_CD" columnIndex="7"/>
+		<result property="accldNm" column="ACCLD_NM" columnIndex="8"/>
+		<result property="accldCfmntNum" column="ACCLD_CFMNT_NUM" columnIndex="9"/>
+		<result property="efmnIstutNm" column="EFMN_ISTUT_NM" columnIndex="10"/>
+		<result property="accldMnantCtnt" column="ACCLD_MNANT_CTNT" columnIndex="11"/>
+		<result property="accldNoteCtnt" column="ACCLD_NOTE_CTNT" columnIndex="12"/>
+		<result property="kybdr" column="KYBDR" columnIndex="13"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="14"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="15"/>
+		<result property="ismt" column="ISMT" columnIndex="16"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="17"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="18"/>
+	</resultMap>
+	
+	
+	<!-- <insert id="psnl0121DAO.insertPsnl0121" parameterClass="psnl0121Dto"> -->
+	<insert id="psnl0121DAO.insertPsnl0121" parameterClass="psnl0121Vo">
+		<![CDATA[
+			INSERT INTO PSNL0121 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , ACCLD_SEIL_NUM
+				  , ACCLD_YR
+				  , ACCLD_PRTT_DT
+				  , ACCLD_KND_CD
+				  , ACCLD_DIV_CD
+				  , ACCLD_NM
+				  , ACCLD_CFMNT_NUM
+				  , EFMN_ISTUT_NM
+				  , ACCLD_MNANT_CTNT
+				  , ACCLD_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , (select NVL(MAX(ACCLD_SEIL_NUM)+1,1) from PSNL0121 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#) 
+				  , SUBSTR(#accldPrttDt#, 0, 4)
+				  , #accldPrttDt#
+				  , #accldKndCd#
+				  , #accldDivCd#
+				  , #accldNm#
+				  , #accldCfmntNum#
+				  , #efmnIstutNm#
+				  , #accldMnantCtnt#
+				  , #accldNoteCtnt#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	
+	<!-- <update id="psnl0121DAO.updatePsnl0121" parameterClass="psnl0121Dto"> -->
+	<update id="psnl0121DAO.updatePsnl0121" parameterClass="psnl0121Vo">
+			UPDATE PSNL0121
+			SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				<isNotNull property="accldPrttDt"><isNotEmpty property="accldPrttDt">, ACCLD_YR=SUBSTR(#accldPrttDt#,0,4)</isNotEmpty></isNotNull>
+				<isNotNull property="accldPrttDt"><isNotEmpty property="accldPrttDt">, ACCLD_PRTT_DT= #accldPrttDt#</isNotEmpty></isNotNull>
+				<isNotNull property="accldKndCd"><isNotEmpty property="accldKndCd">, ACCLD_KND_CD=#accldKndCd#</isNotEmpty></isNotNull>
+				<isNotNull property="accldDivCd"><isNotEmpty property="accldDivCd">, ACCLD_DIV_CD=#accldDivCd#</isNotEmpty></isNotNull>
+				<isNotNull property="accldNm"><isNotEmpty property="accldNm">, ACCLD_NM=#accldNm#</isNotEmpty></isNotNull>
+				<isNotNull property="accldCfmntNum"><isNotEmpty property="accldCfmntNum">, ACCLD_CFMNT_NUM=#accldCfmntNum#</isNotEmpty></isNotNull>
+				<isNotNull property="efmnIstutNm"><isNotEmpty property="efmnIstutNm">, EFMN_ISTUT_NM=#efmnIstutNm#</isNotEmpty></isNotNull>
+				<isNotNull property="accldMnantCtnt"><isNotEmpty property="accldMnantCtnt">, ACCLD_MNANT_CTNT=#accldMnantCtnt#</isNotEmpty></isNotNull>
+				<isNotNull property="accldNoteCtnt"><isNotEmpty property="accldNoteCtnt">, ACCLD_NOTE_CTNT=#accldNoteCtnt#</isNotEmpty></isNotNull>
+				<isNotNull property="ismt"><isNotEmpty property="ismt">, ISMT=#ismt#</isNotEmpty></isNotNull>
+				<isNotNull property="revnAddr"><isNotEmpty property="revnAddr">, REVN_ADDR=#revnAddr#</isNotEmpty></isNotNull>
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				AND ACCLD_SEIL_NUM=#accldSeilNum#
+	</update>
+	
+	
+	<!-- <delete id="psnl0121DAO.deletePsnl0121" parameterClass="psnl0121Dto"> -->
+	<delete id="psnl0121DAO.deletePsnl0121" parameterClass="psnl0121Vo">
+		<![CDATA[
+			DELETE FROM PSNL0121 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND ACCLD_SEIL_NUM=#accldSeilNum#
+				]]>
+	</delete>
+	
+	<select id="psnl0121DAO.selectPsnl0121" resultClass="egovMap" parameterClass="hashMap">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, ACCLD_SEIL_NUM
+				, ACCLD_YR
+				, TO_DATE(ACCLD_PRTT_DT, 'YYYYMMDD') ACCLD_PRTT_DT
+				, ACCLD_KND_CD
+				, ACCLD_DIV_CD
+				, ACCLD_NM
+				, ACCLD_CFMNT_NUM
+				, EFMN_ISTUT_NM
+				, ACCLD_MNANT_CTNT
+				, ACCLD_NOTE_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PSNL0121
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								
+				]]>
+		<isNotNull property="accldSeilNum">
+		    <isNotEmpty property="accldSeilNum">
+		        AND ACCLD_SEIL_NUM=#accldSeilNum#
+		    </isNotEmpty>
+		</isNotNull>
+	</select>
+	
+</sqlMap>

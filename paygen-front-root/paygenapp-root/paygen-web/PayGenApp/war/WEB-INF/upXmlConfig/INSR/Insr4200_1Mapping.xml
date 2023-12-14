@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<workbook>
+		<worksheet name="Sheet1">
+			<section startRow="0" endRow="1"/>
+			<loop startRow="2" endRow="2" items="insr3200List" var="insr3200Vo" varType="com.app.exterms.insurance.server.vo.Insr3200ExcelVO">
+				<section startRow="2" endRow="2">
+				    <mapping row="2" col="0">insr3200Vo.nofctYrMnth</mapping>    <!-- 고지년월 -->
+				    <mapping row="2" col="1">insr3200Vo.nofctDspty</mapping> <!-- 고지차수 -->
+					<mapping row="2" col="2">insr3200Vo.hanNm</mapping> <!-- 한글성명 -->
+					<mapping row="2" col="3">insr3200Vo.resnRegnNum</mapping> <!-- 주민등록번호 -->
+					<mapping row="2" col="4">insr3200Vo.nofctPrmm</mapping> <!-- 고지보험료 -->
+					<mapping row="2" col="5">insr3200Vo.yrtxPrmm</mapping> <!-- 연말정산보험료 -->
+					<mapping row="2" col="6">insr3200Vo.lgtmRcptnNofctPrmm</mapping> <!-- 요양고지보험료 -->
+					<mapping row="2" col="7">insr3200Vo.lgtmRcptnYrtxPrmm</mapping> <!-- 요양연말정산보험료 -->
+					<mapping row="2" col="8">insr3200Vo.hlthInsrRefdItrt</mapping> <!-- 건강환급금이자 -->
+					<mapping row="2" col="9">insr3200Vo.lgtmRcptnRefdItrt</mapping> <!-- 요양환급금이자 -->
+				</section>
+				<loopbreakcondition>
+					<rowcheck offset="2">
+						<cellcheck offset="3"/>
+					</rowcheck>
+				</loopbreakcondition>
+			</loop>
+		</worksheet>
+	</workbook>

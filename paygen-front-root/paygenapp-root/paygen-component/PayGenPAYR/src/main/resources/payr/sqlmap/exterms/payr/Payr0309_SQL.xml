@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Payr0309">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="payr0309SerarchVO" type="com.app.exterms.payroll.server.vo.Payr0309SrhVO"/>
+	
+	<resultMap id="payr0309" class="com.app.exterms.payroll.server.vo.Payr0309VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="pymtYrMnth" column="PYMT_YR_MNTH" columnIndex="3"/>
+		<result property="payCd" column="PAY_CD" columnIndex="4"/>
+		<result property="payrSeilNum" column="PAYR_SEIL_NUM" columnIndex="5"/>
+		<result property="hlthInsurFlucDt" column="HLTH_INSUR_FLUC_DT" columnIndex="6"/>
+		<result property="hlthInsrPayTotAmnt" column="HLTH_INSR_PAY_TOT_AMNT" columnIndex="7"/>
+		<result property="hlthInsrMnthRuntnAmnt" column="HLTH_INSR_MNTH_RUNTN_AMNT" columnIndex="8"/>
+		<result property="hlthInsrGrde" column="HLTH_INSR_GRDE" columnIndex="9"/>
+		<result property="hlthInsrCertNum" column="HLTH_INSR_CERT_NUM" columnIndex="10"/>
+		<result property="natPennInsurFlucDt" column="NAT_PENN_INSUR_FLUC_DT" columnIndex="11"/>
+		<result property="natPennStdIncmMnthAmnt" column="NAT_PENN_STD_INCM_MNTH_AMNT" columnIndex="12"/>
+		<result property="natPennGrde" column="NAT_PENN_GRDE" columnIndex="13"/>
+		<result property="hlthInsrApptnYn" column="HLTH_INSR_APPTN_YN" columnIndex="14"/>
+		<result property="natPennApptnYn" column="NAT_PENN_APPTN_YN" columnIndex="15"/>
+		<result property="umytInsrApptnYn" column="UMYT_INSR_APPTN_YN" columnIndex="16"/>
+		<result property="idtlAccdtInsurApptnYn" column="IDTL_ACCDT_INSUR_APPTN_YN" columnIndex="17"/>
+		<result property="kybdr" column="KYBDR" columnIndex="18"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="19"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="20"/>
+		<result property="ismt" column="ISMT" columnIndex="21"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="22"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="23"/>
+		<result property="umytInsrFlucDt" column="UMYT_INSR_FLUC_DT" columnIndex="24"/>
+		<result property="umytInsrPayTotAmnt" column="UMYT_INSR_PAY_TOT_AMNT" columnIndex="25"/>
+		<result property="umytInsrPayMnthAmnt" column="UMYT_INSR_PAY_MNTH_AMNT" columnIndex="26"/>
+		<result property="idtlAccdtFlucDt" column="IDTL_ACCDT_FLUC_DT" columnIndex="27"/>
+		<result property="idtlAccdtPayTotAmnt" column="IDTL_ACCDT_PAY_TOT_AMNT" columnIndex="28"/>
+		<result property="idtlAccdtPayMnthAmnt" column="IDTL_ACCDT_PAY_MNTH_AMNT" columnIndex="29"/>
+	</resultMap>
+	
+	<insert id="payr0309DAO.insertPayr0309_S">
+		<![CDATA[
+			INSERT INTO PAYR0309 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , PYMT_YR_MNTH
+				  , PAY_CD
+				  , PAYR_SEIL_NUM
+				  , HLTH_INSUR_FLUC_DT
+				  , HLTH_INSR_PAY_TOT_AMNT
+				  , HLTH_INSR_MNTH_RUNTN_AMNT
+				  , HLTH_INSR_GRDE
+				  , HLTH_INSR_CERT_NUM
+				  , NAT_PENN_INSUR_FLUC_DT
+				  , NAT_PENN_STD_INCM_MNTH_AMNT
+				  , NAT_PENN_GRDE
+				  , HLTH_INSR_APPTN_YN
+				  , NAT_PENN_APPTN_YN
+				  , UMYT_INSR_APPTN_YN
+				  , IDTL_ACCDT_INSUR_APPTN_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , UMYT_INSR_FLUC_DT
+				  , UMYT_INSR_PAY_TOT_AMNT
+				  , UMYT_INSR_PAY_MNTH_AMNT
+				  , IDTL_ACCDT_FLUC_DT
+				  , IDTL_ACCDT_PAY_TOT_AMNT
+				  , IDTL_ACCDT_PAY_MNTH_AMNT )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #pymtYrMnth#
+				  , #payCd#
+				  , #payrSeilNum#
+				  , #hlthInsurFlucDt#
+				  , #hlthInsrPayTotAmnt#
+				  , #hlthInsrMnthRuntnAmnt#
+				  , #hlthInsrGrde#
+				  , #hlthInsrCertNum#
+				  , #natPennInsurFlucDt#
+				  , #natPennStdIncmMnthAmnt#
+				  , #natPennGrde#
+				  , #hlthInsrApptnYn#
+				  , #natPennApptnYn#
+				  , #umytInsrApptnYn#
+				  , #idtlAccdtInsurApptnYn#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr#
+				  , #umytInsrFlucDt#
+				  , #umytInsrPayTotAmnt#
+				  , #umytInsrPayMnthAmnt#
+				  , #idtlAccdtFlucDt#
+				  , #idtlAccdtPayTotAmnt#
+				  , #idtlAccdtPayMnthAmnt# )
+		]]>
+	</insert>
+	
+	<update id="payr0309DAO.updatePayr0309_S">
+		<![CDATA[
+			UPDATE PAYR0309
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, PYMT_YR_MNTH=#pymtYrMnth#
+				, PAY_CD=#payCd#
+				, PAYR_SEIL_NUM=#payrSeilNum#
+				, HLTH_INSUR_FLUC_DT=#hlthInsurFlucDt#
+				, HLTH_INSR_PAY_TOT_AMNT=#hlthInsrPayTotAmnt#
+				, HLTH_INSR_MNTH_RUNTN_AMNT=#hlthInsrMnthRuntnAmnt#
+				, HLTH_INSR_GRDE=#hlthInsrGrde#
+				, HLTH_INSR_CERT_NUM=#hlthInsrCertNum#
+				, NAT_PENN_INSUR_FLUC_DT=#natPennInsurFlucDt#
+				, NAT_PENN_STD_INCM_MNTH_AMNT=#natPennStdIncmMnthAmnt#
+				, NAT_PENN_GRDE=#natPennGrde#
+				, HLTH_INSR_APPTN_YN=#hlthInsrApptnYn#
+				, NAT_PENN_APPTN_YN=#natPennApptnYn#
+				, UMYT_INSR_APPTN_YN=#umytInsrApptnYn#
+				, IDTL_ACCDT_INSUR_APPTN_YN=#idtlAccdtInsurApptnYn#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+				, UMYT_INSR_FLUC_DT=#umytInsrFlucDt#
+				, UMYT_INSR_PAY_TOT_AMNT=#umytInsrPayTotAmnt#
+				, UMYT_INSR_PAY_MNTH_AMNT=#umytInsrPayMnthAmnt#
+				, IDTL_ACCDT_FLUC_DT=#idtlAccdtFlucDt#
+				, IDTL_ACCDT_PAY_TOT_AMNT=#idtlAccdtPayTotAmnt#
+				, IDTL_ACCDT_PAY_MNTH_AMNT=#idtlAccdtPayMnthAmnt#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+				]]>
+	</update>
+	
+	<delete id="payr0309DAO.deletePayr0309_S">
+		<![CDATA[
+			DELETE FROM PAYR0309 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+				]]>
+	</delete>
+	
+		<delete id="payr0309DAO.deletePayCalculationPayr0309_S">
+		<![CDATA[
+			DELETE FROM PAYR0309 
+						WHERE DPOB_CD=#dpobCd# 
+						  AND PYMT_YR_MNTH=#pymtYrMnth#
+									]]>						
+						<isNotEmpty prepend="AND" property="systemkey" >
+					 	  SYSTEMKEY=#systemkey#
+				        </isNotEmpty>  	 
+	</delete>	 
+	
+	<select id="payr0309DAO.selectPayr0309_S" resultMap="payr0309">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, PYMT_YR_MNTH
+				, PAY_CD
+				, PAYR_SEIL_NUM
+				, HLTH_INSUR_FLUC_DT
+				, HLTH_INSR_PAY_TOT_AMNT
+				, HLTH_INSR_MNTH_RUNTN_AMNT
+				, HLTH_INSR_GRDE
+				, HLTH_INSR_CERT_NUM
+				, NAT_PENN_INSUR_FLUC_DT
+				, NAT_PENN_STD_INCM_MNTH_AMNT
+				, NAT_PENN_GRDE
+				, HLTH_INSR_APPTN_YN
+				, NAT_PENN_APPTN_YN
+				, UMYT_INSR_APPTN_YN
+				, IDTL_ACCDT_INSUR_APPTN_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, UMYT_INSR_FLUC_DT
+				, UMYT_INSR_PAY_TOT_AMNT
+				, UMYT_INSR_PAY_MNTH_AMNT
+				, IDTL_ACCDT_FLUC_DT
+				, IDTL_ACCDT_PAY_TOT_AMNT
+				, IDTL_ACCDT_PAY_MNTH_AMNT
+			FROM PAYR0309
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+				]]>
+	</select>
+	
+	<select id="payr0309DAO.selectPayr0309List_D" parameterClass="payr0309SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, PYMT_YR_MNTH
+								, PAY_CD
+								, PAYR_SEIL_NUM
+								, HLTH_INSUR_FLUC_DT
+								, HLTH_INSR_PAY_TOT_AMNT
+								, HLTH_INSR_MNTH_RUNTN_AMNT
+								, HLTH_INSR_GRDE
+								, HLTH_INSR_CERT_NUM
+								, NAT_PENN_INSUR_FLUC_DT
+								, NAT_PENN_STD_INCM_MNTH_AMNT
+								, NAT_PENN_GRDE
+								, HLTH_INSR_APPTN_YN
+								, NAT_PENN_APPTN_YN
+								, UMYT_INSR_APPTN_YN
+								, IDTL_ACCDT_INSUR_APPTN_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+								, UMYT_INSR_FLUC_DT
+								, UMYT_INSR_PAY_TOT_AMNT
+								, UMYT_INSR_PAY_MNTH_AMNT
+								, IDTL_ACCDT_FLUC_DT
+								, IDTL_ACCDT_PAY_TOT_AMNT
+								, IDTL_ACCDT_PAY_MNTH_AMNT
+						FROM PAYR0309
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, PYMT_YR_MNTH DESC
+							, PAY_CD DESC
+							, PAYR_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="payr0309DAO.selectPayr0309ListTotCnt_S" parameterClass="payr0309SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0309
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

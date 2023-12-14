@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PGRM_ComPsnl0115">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="prgmComPsnl0115SrhVO" type="com.app.exterms.prgm.server.vo.PrgmComPsnl0115SrhVO"/>
+	
+	<resultMap id="prgmPsnl0115" class="com.app.exterms.prgm.server.vo.PrgmComPsnl0115VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="famySeilNum" column="FAMY_SEIL_NUM" columnIndex="3"/>
+		<result property="famyRelaDivCd" column="FAMY_RELA_DIV_CD" columnIndex="4"/>
+		<result property="famyNm" column="FAMY_NM" columnIndex="5"/>
+		<result property="famyResnRegnNum" column="FAMY_RESN_REGN_NUM" columnIndex="6"/>
+		<result property="yoobhMnthDay" column="YOOBH_MNTH_DAY" columnIndex="7"/>
+		<result property="sclcDivCd" column="SCLC_DIV_CD" columnIndex="8"/>
+		<result property="acadAbtyDivCd" column="ACAD_ABTY_DIV_CD" columnIndex="9"/>
+		<result property="schlNm" column="SCHL_NM" columnIndex="10"/>
+		<result property="crrCd" column="CRR_CD" columnIndex="11"/>
+		<result property="wkOfcNm" column="WK_OFC_NM" columnIndex="12"/>
+		<result property="inbyNm" column="INBY_NM" columnIndex="13"/>
+		<result property="frgnrYn" column="FRGNR_YN" columnIndex="14"/>
+		<result property="dabtyDivCd" column="DABTY_DIV_CD" columnIndex="15"/>
+		<result property="dabtyGrdeCd" column="DABTY_GRDE_CD" columnIndex="16"/>
+		<result property="famyPartNoteCtnt" column="FAMY_PART_NOTE_CTNT" columnIndex="17"/>
+		<result property="natnCd" column="NATN_CD" columnIndex="18"/>
+		<result property="famyChbttYn" column="FAMY_CHBTT_YN" columnIndex="19"/>
+		<result property="famyAllwYn" column="FAMY_ALLW_YN" columnIndex="20"/>
+		<result property="schlExpnAdmclYn" column="SCHL_EXPN_ADMCL_YN" columnIndex="21"/>
+		<result property="yrtxYn" column="YRTX_YN" columnIndex="22"/>
+		<result property="kybdr" column="KYBDR" columnIndex="23"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="24"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="25"/>
+		<result property="ismt" column="ISMT" columnIndex="26"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="27"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="28"/>
+	</resultMap>
+	<!-- 
+	<insert id="psnl0115DAO.insertPsnl0115_S">
+		<![CDATA[
+			INSERT INTO PSNL0115 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , FAMY_SEIL_NUM
+				  , FAMY_RELA_DIV_CD
+				  , FAMY_NM
+				  , FAMY_RESN_REGN_NUM
+				  , YOOBH_MNTH_DAY
+				  , SCLC_DIV_CD
+				  , ACAD_ABTY_DIV_CD
+				  , SCHL_NM
+				  , CRR_CD
+				  , WK_OFC_NM
+				  , INBY_NM
+				  , FRGNR_YN
+				  , DABTY_DIV_CD
+				  , DABTY_GRDE_CD
+				  , FAMY_PART_NOTE_CTNT
+				  , NATN_CD
+				  , FAMY_CHBTT_YN
+				  , FAMY_ALLW_YN
+				  , SCHL_EXPN_ADMCL_YN
+				  , YRTX_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #famySeilNum#
+				  , #famyRelaDivCd#
+				  , #famyNm#
+				  , #famyResnRegnNum#
+				  , #yoobhMnthDay#
+				  , #sclcDivCd#
+				  , #acadAbtyDivCd#
+				  , #schlNm#
+				  , #crrCd#
+				  , #wkOfcNm#
+				  , #inbyNm#
+				  , #frgnrYn#
+				  , #dabtyDivCd#
+				  , #dabtyGrdeCd#
+				  , #famyPartNoteCtnt#
+				  , #natnCd#
+				  , #famyChbttYn#
+				  , #famyAllwYn#
+				  , #schlExpnAdmclYn#
+				  , #yrtxYn#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="psnl0115DAO.updatePsnl0115_S">
+		<![CDATA[
+			UPDATE PSNL0115
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, FAMY_SEIL_NUM=#famySeilNum#
+				, FAMY_RELA_DIV_CD=#famyRelaDivCd#
+				, FAMY_NM=#famyNm#
+				, FAMY_RESN_REGN_NUM=#famyResnRegnNum#
+				, YOOBH_MNTH_DAY=#yoobhMnthDay#
+				, SCLC_DIV_CD=#sclcDivCd#
+				, ACAD_ABTY_DIV_CD=#acadAbtyDivCd#
+				, SCHL_NM=#schlNm#
+				, CRR_CD=#crrCd#
+				, WK_OFC_NM=#wkOfcNm#
+				, INBY_NM=#inbyNm#
+				, FRGNR_YN=#frgnrYn#
+				, DABTY_DIV_CD=#dabtyDivCd#
+				, DABTY_GRDE_CD=#dabtyGrdeCd#
+				, FAMY_PART_NOTE_CTNT=#famyPartNoteCtnt#
+				, NATN_CD=#natnCd#
+				, FAMY_CHBTT_YN=#famyChbttYn#
+				, FAMY_ALLW_YN=#famyAllwYn#
+				, SCHL_EXPN_ADMCL_YN=#schlExpnAdmclYn#
+				, YRTX_YN=#yrtxYn#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAMY_SEIL_NUM=#famySeilNum#
+				]]>
+	</update>
+	
+	<delete id="psnl0115DAO.deletePsnl0115_S">
+		<![CDATA[
+			DELETE FROM PSNL0115 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAMY_SEIL_NUM=#famySeilNum#
+				]]>
+	</delete>
+	
+	<select id="psnl0115DAO.selectPsnl0115_S" resultMap="psnl0115">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, FAMY_SEIL_NUM
+				, FAMY_RELA_DIV_CD
+				, FAMY_NM
+				, FAMY_RESN_REGN_NUM
+				, YOOBH_MNTH_DAY
+				, SCLC_DIV_CD
+				, ACAD_ABTY_DIV_CD
+				, SCHL_NM
+				, CRR_CD
+				, WK_OFC_NM
+				, INBY_NM
+				, FRGNR_YN
+				, DABTY_DIV_CD
+				, DABTY_GRDE_CD
+				, FAMY_PART_NOTE_CTNT
+				, NATN_CD
+				, FAMY_CHBTT_YN
+				, FAMY_ALLW_YN
+				, SCHL_EXPN_ADMCL_YN
+				, YRTX_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PSNL0115
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAMY_SEIL_NUM=#famySeilNum#
+				]]>
+	</select>
+	 -->
+	<select id="prgmComPsnl0115DAO.selectPsnl0115List_D" parameterClass="prgmComPsnl0115SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								  DPOB_CD
+								, SYSTEMKEY
+								, FAMY_SEIL_NUM
+								, FAMY_RELA_DIV_CD
+								, fcBass0300CDNM(DPOB_CD,FAMY_RELA_DIV_CD) AS FAMY_RELA_DIV_NM 
+								, FAMY_NM
+								, FAMY_RESN_REGN_NUM
+								, YOOBH_MNTH_DAY
+								, SCLC_DIV_CD
+								, fcBass0300CDNM(DPOB_CD,SCLC_DIV_CD) AS SCLC_DIV_NM  
+								, ACAD_ABTY_DIV_CD
+								, fcBass0300CDNM(DPOB_CD,ACAD_ABTY_DIV_CD) AS ACAD_ABTY_DIV_NM 
+								, SCHL_NM
+								, CRR_CD
+								, fcBass0300CDNM(DPOB_CD,CRR_CD) AS CRR_NM 
+								, WK_OFC_NM
+								, INBY_NM
+								, FRGNR_YN
+								, DABTY_DIV_CD
+								, fcBass0300CDNM(DPOB_CD,DABTY_DIV_CD) AS DABTY_DIV_NM 
+								, DABTY_GRDE_CD
+								, fcBass0300CDNM(DPOB_CD,DABTY_GRDE_CD) AS DABTY_GRDE_NM 
+								, FAMY_PART_NOTE_CTNT
+								, NATN_CD
+								, fcBass0300CDNM(DPOB_CD,NATN_CD) AS NATN_NM 
+								, FAMY_CHBTT_YN
+								, FAMY_ALLW_YN
+								, SCHL_EXPN_ADMCL_YN
+								, YRTX_YN 
+								, FAMY_SUPPT_YN
+								, FAMY_SUPPT_RELA_DIV_CD
+						FROM PSNL0115
+						
+				WHERE 1=1
+		  	 <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>   
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 		
+						
+				UNION ALL
+				
+				SELECT DPOB_CD
+								, SYSTEMKEY
+								, 0 AS FAMY_SEIL_NUM
+								, 'A0190001'
+								, fcBass0300CDNM(DPOB_CD, 'A0190001') AS FAMY_RELA_DIV_NM 
+								, HAN_NM AS FAMY_NM
+								, RESN_REGN_NUM AS FAMY_RESN_REGN_NUM
+								, ''
+								, ''
+								, ''  
+								, ''
+								, ''
+								, ''
+								, ''
+								, ''
+								, ''
+								, ''
+								, 'N'
+								, ''
+								, ''
+								, ''
+								, ''
+								, ''
+								, NATN_CD
+								, fcBass0300CDNM(DPOB_CD,NATN_CD) AS NATN_NM 
+								, ''
+								, ''
+								, ''
+								, 'Y' 
+								, 'N'
+								, 'Y0180001'
+								
+						FROM PSNL0100		
+						
+				WHERE 1=1
+		  	 <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>   
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, FAMY_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="prgmComPsnl0115DAO.selectPsnl0115ListTotCnt_S" parameterClass="prgmComPsnl0115SrhVO" resultClass="int">
+	
+	 SELECT COUNT(*)
+	  FROM ( SELECT DPOB_CD
+					, SYSTEMKEY
+				FROM PSNL0115
+							
+				WHERE 1=1
+			  	 <isNotEmpty prepend="AND" property="dpobCd" >
+				 	DPOB_CD=#dpobCd#
+			       </isNotEmpty>   
+			       <isNotEmpty prepend="AND" property="systemkey" >
+				 	SYSTEMKEY=#systemkey#
+			       </isNotEmpty> 		
+							
+			UNION ALL
+					
+				SELECT DPOB_CD
+						, SYSTEMKEY
+									
+					FROM PSNL0100		
+							
+				WHERE 1=1
+			  	 <isNotEmpty prepend="AND" property="dpobCd" >
+				 	DPOB_CD=#dpobCd#
+			       </isNotEmpty>   
+			       <isNotEmpty prepend="AND" property="systemkey" >
+				 	SYSTEMKEY=#systemkey#
+			       </isNotEmpty> 
+			)       
+	</select>
+
+</sqlMap>

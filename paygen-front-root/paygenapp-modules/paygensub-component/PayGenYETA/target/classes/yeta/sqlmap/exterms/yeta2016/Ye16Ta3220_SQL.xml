@@ -1,0 +1,707 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye16Ta3220">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ye16Ta3220SrhVO" type="com.app.exterms.yearendtax.server.vo.Yeta3220SrhVO"/>
+	
+	<resultMap id="ye16Ta3220" class="com.app.exterms.yearendtax.server.vo.Yeta3220VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="edacRvyy" column="EDAC_RVYY" columnIndex="2"/>
+		<result property="settGbcd" column="SETT_GBCD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="rsnoNumb" column="RSNO_NUMB" columnIndex="5"/>
+		<result property="relhCode" column="RELH_CODE" columnIndex="6"/>
+		<result property="kornName" column="KORN_NAME" columnIndex="7"/>
+		<result property="frnrCode" column="FRNR_CODE" columnIndex="8"/>
+		<result property="baseDdyn" column="BASE_DDYN" columnIndex="9"/>
+		<result property="psclDdyn" column="PSCL_DDYN" columnIndex="10"/>
+		<result property="brddCtyn" column="BRDD_CTYN" columnIndex="11"/>
+		<result property="faddCtyn" column="FADD_CTYN" columnIndex="12"/>
+		<result property="rpctDdyn" column="RPCT_DDYN" columnIndex="13"/>
+		<result property="bithDdyn" column="BITH_DDYN" columnIndex="14"/>
+		<result property="pantOnyn" column="PANT_ONYN" columnIndex="15"/>
+		<result property="insuPayr" column="INSU_PAYR" columnIndex="16"/>
+		<result property="insuRtyr" column="INSU_RTYR" columnIndex="17"/>
+		<result property="psclIurr" column="PSCL_IURR" columnIndex="18"/>
+		<result property="mediCost" column="MEDI_COST" columnIndex="19"/>
+		<result property="educCost" column="EDUC_COST" columnIndex="20"/>
+		<result property="cdteCard" column="CDTE_CARD" columnIndex="21"/>
+		<result property="cashRece" column="CASH_RECE" columnIndex="22"/>
+		<result property="jiblCard" column="JIBL_CARD" columnIndex="23"/>
+		<result property="grpyAmnt" column="GRPY_AMNT" columnIndex="24"/>
+		<result property="mgntStvd" column="MGNT_STVD" columnIndex="25"/>
+		<result property="ctrbAmnt" column="CTRB_AMNT" columnIndex="26"/>
+		<result property="insuFetc" column="INSU_FETC" columnIndex="27"/>
+		<result property="insuRtet" column="INSU_RTET" columnIndex="28"/>
+		<result property="psclIurt" column="PSCL_IURT" columnIndex="29"/>
+		<result property="mediExps" column="MEDI_EXPS" columnIndex="30"/>
+		<result property="educOtec" column="EDUC_OTEC" columnIndex="31"/>
+		<result property="cdteCdec" column="CDTE_CDEC" columnIndex="32"/>
+		<result property="jiblCdec" column="JIBL_CDEC" columnIndex="33"/>
+		<result property="grpyAtec" column="GRPY_ATEC" columnIndex="34"/>
+		<result property="mgntSdec" column="MGNT_SDEC" columnIndex="35"/>
+		<result property="ctrbAmec" column="CTRB_AMEC" columnIndex="36"/>
+		<result property="kybdr" column="KYBDR" columnIndex="37"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="38"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="39"/>
+		<result property="ismt" column="ISMT" columnIndex="40"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="41"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="42"/>
+		<result property="famySupptRelaDivCd" column="FAMY_SUPPT_RELA_DIV_CD" columnIndex="43"/>
+		<result property="insuGopy" column="INSU_GOPY" columnIndex="44"/>
+		<result property="insuGoec" column="INSU_GOEC" columnIndex="45"/>
+	</resultMap>
+	
+	
+	
+	<!-- yeta1100 대상자관리 화면- 삭제  -->
+	<delete id="ye16Ta3220DAO.fnYeta1100_YETA3220_2016_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3220 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd# 
+				]]>
+				 <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                   </isNotEmpty> 
+	</delete>	
+	
+	
+	
+	
+	<insert id="ye16Ta3220DAO.insertYeta3220_S">
+		<![CDATA[
+			INSERT INTO YETA3220 
+				( DPOB_CD
+				  , EDAC_RVYY
+				  , SETT_GBCD
+				  , SYSTEMKEY
+				  , RSNO_NUMB
+				  , RELH_CODE
+				  , KORN_NAME
+				  , FRNR_CODE
+				  , BASE_DDYN
+				  , PSCL_DDYN
+				  , BRDD_CTYN
+				  , FADD_CTYN
+				  , RPCT_DDYN
+				  , BITH_DDYN
+				  , PANT_ONYN
+				  , INSU_PAYR
+				  , INSU_RTYR
+				  , PSCL_IURR
+				  , MEDI_COST
+				  , EDUC_COST
+				  , CDTE_CARD
+				  , CASH_RECE
+				  , JIBL_CARD
+				  , GRPY_AMNT
+				  , MGNT_STVD
+				  , CTRB_AMNT
+				  , INSU_FETC
+				  , INSU_RTET
+				  , PSCL_IURT
+				  , MEDI_EXPS
+				  , EDUC_OTEC
+				  , CDTE_CDEC
+				  , JIBL_CDEC
+				  , GRPY_ATEC
+				  , MGNT_SDEC
+				  , CTRB_AMEC
+				  , FAMY_SUPPT_RELA_DIV_CD
+				 , INSU_GOPY
+				 ,INSU_GOEC
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #edacRvyy#
+				  , #settGbcd#
+				  , #systemkey#
+				  , #rsnoNumb#
+				  , #relhCode#
+				  , #kornName#
+				  , #frnrCode#
+				  , #baseDdyn#
+				  , (fcBass0300ITEMNM(#dpobCd#, #psclDdyn#, '11'))
+				  ,  #brddCtyn# 
+				  , #faddCtyn#
+				  , #rpctDdyn#
+				  , #bithDdyn#
+				  , #pantOnyn#
+				  , #insuPayr#
+				  , #insuRtyr#
+				  , #psclIurr#
+				  , #mediCost#
+				  , #educCost#
+				  , #cdteCard#
+				  , #cashRece#
+				  , #jiblCard#
+				  , #grpyAmnt#
+				  , #mgntStvd#
+				  , #ctrbAmnt#
+				  , #insuFetc#
+				  , #insuRtet#
+				  , #psclIurt#
+				  , #mediExps#
+				  , #educOtec#
+				  , #cdteCdec#
+				  , #jiblCdec#
+				  , #grpyAtec#
+				  , #mgntSdec#
+				  , #ctrbAmec#
+				  , #famySupptRelaDivCd#
+				  , #insuGopy#
+				  , #insuGoec#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<!-- 소득공제_국세청자료 수정 -->
+	<update id="ye16Ta3220DAO.updateYeta3220_01">
+		<![CDATA[
+			UPDATE YETA3220
+			SET INSU_PAYR=#insuPayr#
+				, INSU_RTYR=#insuRtyr#
+				, PSCL_IURR=#psclIurr#
+				, MEDI_COST=#mediCost#
+				, EDUC_COST=#educCost#
+				, CDTE_CARD=#cdteCard#
+				, CASH_RECE=#cashRece#
+				, JIBL_CARD=#jiblCard#
+				, GRPY_AMNT=#grpyAmnt#
+				, MGNT_STVD=#mgntStvd#
+				, CTRB_AMNT=#ctrbAmnt#
+				, INSU_GOPY=#insuGopy#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+			WHERE DPOB_CD=#dpobCd#
+					AND EDAC_RVYY=#edacRvyy#
+					AND SETT_GBCD=#settGbcd#
+					AND SYSTEMKEY=#systemkey#
+					AND RSNO_NUMB=#rsnoNumb# 
+				]]>
+	</update>
+	
+	
+	<!-- 소득공제_기타자료 수정 -->
+	<update id="ye16Ta3220DAO.updateYeta3220_02">
+		<![CDATA[
+			UPDATE YETA3220
+			SET   INSU_FETC=#insuFetc#
+				, INSU_RTET=#insuRtet#
+				, PSCL_IURT=#psclIurt#
+				, MEDI_EXPS=#mediExps#
+				, EDUC_OTEC=#educOtec#
+				, CDTE_CDEC=#cdteCdec#
+				, JIBL_CDEC=#jiblCdec#
+				, GRPY_ATEC=#grpyAtec#
+				, MGNT_SDEC=#mgntSdec#
+				, CTRB_AMEC=#ctrbAmec#
+				, INSU_GOEC=#insuGoec#
+			WHERE DPOB_CD=#dpobCd#
+					AND EDAC_RVYY=#edacRvyy#
+					AND SETT_GBCD=#settGbcd#
+					AND SYSTEMKEY=#systemkey#
+					AND RSNO_NUMB=#rsnoNumb#  
+				]]>
+	</update>
+	 
+	<update id="ye16Ta3220DAO.updateYeta3220_S">
+		<![CDATA[
+			UPDATE YETA3220
+			SET  RSNO_NUMB=#rsnoNumb#
+				, RELH_CODE=#relhCode#
+				, KORN_NAME=#kornName#
+				, FRNR_CODE=#frnrCode#
+				, BASE_DDYN=#baseDdyn#
+				, PSCL_DDYN=(fcBass0300ITEMNM(#dpobCd#, #psclDdyn#, '11'))
+				, BRDD_CTYN=#brddCtyn#
+				, FADD_CTYN=#faddCtyn#
+				, RPCT_DDYN=#rpctDdyn#
+				, BITH_DDYN=#bithDdyn#
+				, PANT_ONYN=#pantOnyn#
+				, INSU_PAYR=#insuPayr#
+				, INSU_RTYR=#insuRtyr#
+				, PSCL_IURR=#psclIurr#
+				, MEDI_COST=#mediCost#
+				, EDUC_COST=#educCost#
+				, CDTE_CARD=#cdteCard#
+				, CASH_RECE=#cashRece#
+				, JIBL_CARD=#jiblCard#
+				, GRPY_AMNT=#grpyAmnt#
+				, MGNT_STVD=#mgntStvd#
+				, CTRB_AMNT=#ctrbAmnt#
+				, INSU_FETC=#insuFetc#
+				, INSU_RTET=#insuRtet#
+				, PSCL_IURT=#psclIurt#
+				, MEDI_EXPS=#mediExps#
+				, EDUC_OTEC=#educOtec#
+				, CDTE_CDEC=#cdteCdec#
+				, JIBL_CDEC=#jiblCdec#
+				, GRPY_ATEC=#grpyAtec#
+				, MGNT_SDEC=#mgntSdec#
+				, CTRB_AMEC=#ctrbAmec# 
+				, INSU_GOPY=#insuGopy#
+	        	, INSU_GOEC=#insuGoec#
+	        	,FAMY_SUPPT_RELA_DIV_CD = #famySupptRelaDivCd#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND RSNO_NUMB=#beforeJumin#
+				]]>
+	</update>
+	
+	<!-- 인적공제명세 수정 -->
+	<update id="ye16Ta3220DAO.updateYeta0300ToYeta3220_01_S">
+		<![CDATA[
+			UPDATE YETA3220
+			SET  RSNO_NUMB=#rsnoNumb#
+				, RELH_CODE=#relhCode#
+				, KORN_NAME=#kornName#
+				, FRNR_CODE=#frnrCode#
+				, BASE_DDYN=#baseDdyn#
+				, PSCL_DDYN=(fcBass0300ITEMNM(#dpobCd#, #psclDdyn#, '11'))
+				, BRDD_CTYN=#brddCtyn#
+				, FADD_CTYN=#faddCtyn#
+				, RPCT_DDYN=#rpctDdyn#
+				, BITH_DDYN=#bithDdyn#
+				, PANT_ONYN=#pantOnyn# 
+				, FAMY_SUPPT_RELA_DIV_CD=#famySupptRelaDivCd#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND RSNO_NUMB=#beforeJumin#
+				]]>
+	</update>
+	
+	
+	<delete id="ye16Ta3220DAO.deleteYeta3220_S">
+		<![CDATA[
+			DELETE FROM YETA3220 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND RSNO_NUMB=#rsnoNumb#
+				]]>
+	</delete>
+	   
+	<!-- yeta0100 대상자관리 화면- 삭제  -->
+	<delete id="ye16Ta3220DAO.fnPayr06430_PAYR410_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3220 
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd# 
+				]]>
+				 <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                   </isNotEmpty> 
+	</delete>
+	
+	
+	<select id="ye16Ta3220DAO.selectYeta3220_S" resultMap="ye16Ta3220">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, EDAC_RVYY
+				, SETT_GBCD
+				, SYSTEMKEY
+				, RSNO_NUMB
+				, RELH_CODE
+				, KORN_NAME
+				, FRNR_CODE
+				, BASE_DDYN
+				, PSCL_DDYN
+				, BRDD_CTYN
+				, FADD_CTYN
+				, RPCT_DDYN
+				, BITH_DDYN
+				, PANT_ONYN
+				, INSU_PAYR
+				, INSU_RTYR
+				, PSCL_IURR
+				, MEDI_COST
+				, EDUC_COST
+				, CDTE_CARD
+				, CASH_RECE
+				, JIBL_CARD
+				, GRPY_AMNT
+				, MGNT_STVD
+				, CTRB_AMNT
+				, INSU_FETC
+				, INSU_RTET
+				, PSCL_IURT
+				, MEDI_EXPS
+				, EDUC_OTEC
+				, CDTE_CDEC
+				, JIBL_CDEC
+				, GRPY_ATEC
+				, MGNT_SDEC
+				, CTRB_AMEC
+				,FAMY_SUPPT_RELA_DIV_CD 
+				, INSU_GOPY
+				 ,INSU_GOEC
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YETA3220
+						WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#
+								AND RSNO_NUMB=#rsnoNumb#
+				]]>
+	</select>
+	
+	<!-- 대상자정보에 따른 인적공제 리스트 쿼리 -->
+	<select id="ye16Ta3220DAO.selectYeta0300To3220List" parameterClass="ye16Ta3220SrhVO" resultClass="egovMap">
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+					SELECT
+									DPOB_CD
+									, EDAC_RVYY
+									, SETT_GBCD
+									, SYSTEMKEY
+									, RSNO_NUMB
+									, RSNO_NUMB AS RSNO_NUMB2
+									, RELH_CODE
+									, RELH_CODE AS relhCodecommCd
+									, fcBass0300CDNM(DPOB_CD, RELH_CODE) AS relhCodecommCdNm 
+									, KORN_NAME
+									, FRNR_CODE
+									, BASE_DDYN
+									, PSCL_DDYN
+									, (SELECT C.COMM_CD 
+											FROM BASS0300 C
+											WHERE C.DPOB_CD = DPOB_CD
+													AND C.RPSTTV_CD = 'Y008'
+													AND	C.MANGE_ITEM11 = PSCL_DDYN)AS psclDdyncommCd
+									, fcBass0300CDNM(DPOB_CD, (SELECT C.COMM_CD 
+																FROM BASS0300 C
+																WHERE C.DPOB_CD = DPOB_CD
+																	AND C.RPSTTV_CD = 'Y008'
+																	AND	C.MANGE_ITEM11 = PSCL_DDYN)) AS psclDdyncommCdNm  
+									, BRDD_CTYN
+									, FADD_CTYN
+									, RPCT_DDYN
+									, BITH_DDYN
+									, PANT_ONYN
+									, INSU_PAYR
+									, INSU_RTYR
+									, PSCL_IURR
+									, MEDI_COST
+									, EDUC_COST
+									, CDTE_CARD
+									, CASH_RECE
+									, JIBL_CARD
+									, GRPY_AMNT
+									, MGNT_STVD
+									, CTRB_AMNT
+									, INSU_FETC
+									, INSU_RTET
+									, PSCL_IURT
+									, MEDI_EXPS
+									, EDUC_OTEC
+									, CDTE_CDEC
+									, JIBL_CDEC
+									, GRPY_ATEC
+									, MGNT_SDEC
+									, CTRB_AMEC
+									, KYBDR
+									, INPT_DT
+									, INPT_ADDR
+									, ISMT
+									, REVN_DT
+									, REVN_ADDR
+									, '국세청' AS KU_NM
+									, '기타' AS KI_NM
+									, '0' AS TEMP
+									, FAMY_SUPPT_RELA_DIV_CD
+									, FAMY_SUPPT_RELA_DIV_CD AS famySupptRelaDivCdcommCd
+									, fcBass0300CDNM(DPOB_CD, FAMY_SUPPT_RELA_DIV_CD) AS famySupptRelaDivCdcommCdNm 
+				, INSU_GOPY
+				 ,INSU_GOEC
+							FROM YETA3220
+					WHERE 
+					<isNotEmpty property="dpobCd" >
+						DPOB_CD=#dpobCd#
+			 		</isNotEmpty>
+					<isNotEmpty prepend="AND" property="systemkey" >
+						SYSTEMKEY=#systemkey#
+					</isNotEmpty> 
+					<isNotEmpty prepend="AND" property="edacRvyy" >
+						EDAC_RVYY = #edacRvyy#
+					</isNotEmpty> 
+					<isNotEmpty prepend="AND" property="settGbcd" >
+						SETT_GBCD=#settGbcd#
+					</isNotEmpty> 
+						ORDER BY 
+							DPOB_CD DESC
+								, RELH_CODE
+			
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+	]]>
+	</select>
+	
+	<!-- 대상자정보 선택에 따른 인적공제 수 구하는 쿼리 -->
+	<select id="ye16Ta3220DAO.selectYeta0300To3220ListTotCnt_S" parameterClass="ye16Ta3220SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3220
+			WHERE 
+				<isNotEmpty property="dpobCd" >
+					DPOB_CD=#dpobCd#
+			 	</isNotEmpty>
+				<isNotEmpty prepend="AND" property="systemkey" >
+					SYSTEMKEY=#systemkey#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="edacRvyy" >
+					EDAC_RVYY = #edacRvyy#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="settGbcd" >
+					SETT_GBCD=#settGbcd#
+				</isNotEmpty>
+	</select>
+	
+	
+	<!-- 대상자정보 선택에 따른 인적공제 합계 수 구하는 쿼리-->
+	<select id="ye16Ta3220DAO.selectYeta0300To3220SumListTotCnt_S" parameterClass="ye16Ta3220SrhVO" resultClass="int">
+			SELECT COUNT (*) totcnt 
+			FROM ( 	SELECT	'국' AS HEADER
+									, MAX(SYSTEMKEY) AS SYSTEMKEY
+									, SUM(INSU_PAYR) AS INSU_PAYR
+									, SUM(INSU_RTYR) AS INSU_RTYR
+									, SUM(PSCL_IURR) AS PSCL_IURR
+									, SUM(MEDI_COST) AS MEDI_COST
+									, SUM(EDUC_COST) AS EDUC_COST
+									, SUM(CDTE_CARD) AS CDTE_CARD
+									, SUM(CASH_RECE) AS CASH_RECE
+									, SUM(JIBL_CARD) AS JIBL_CARD
+									, SUM(GRPY_AMNT) AS GRPY_AMNT
+									, SUM(MGNT_STVD) AS MGNT_STVD
+									, SUM(CTRB_AMNT) AS CTRB_AMNT
+									,SUM(INSU_GOPY) AS INSU_GOPY
+									, '합계' AS SUM_NAME
+						FROM YETA3220
+					WHERE 
+						<isNotEmpty property="dpobCd" >
+							DPOB_CD=#dpobCd#
+				 		</isNotEmpty>
+						<isNotEmpty prepend="AND" property="systemkey" >
+							SYSTEMKEY=#systemkey#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="edacRvyy" >
+							EDAC_RVYY = #edacRvyy#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="settGbcd" >
+							SETT_GBCD=#settGbcd#
+						</isNotEmpty> 
+					
+					UNION ALL
+					SELECT 			
+							'기' AS HEADER	
+									, MAX(SYSTEMKEY) AS SYSTEMKEY
+									, SUM(INSU_FETC) AS INSU_FETC
+									, SUM(INSU_RTET) AS INSU_RTET
+									, SUM(PSCL_IURT) AS PSCL_IURT
+									, SUM(MEDI_EXPS) AS MEDI_EXPS
+									, SUM(EDUC_OTEC)  AS EDUC_OTEC
+									, SUM(CDTE_CDEC) AS CDTE_CDEC
+									, SUM(0)
+									, SUM(JIBL_CDEC) AS JIBL_CDEC
+									, SUM(GRPY_ATEC) AS GRPY_ATEC
+									, SUM(MGNT_SDEC) AS MGNT_SDEC
+									, SUM(CTRB_AMEC) AS CTRB_AMEC
+										,SUM(INSU_GOEC) AS INSU_GOEC
+									, '합계' AS SUM_NAME
+					FROM YETA3220
+					WHERE 
+						<isNotEmpty property="dpobCd" >
+							DPOB_CD=#dpobCd#
+				 		</isNotEmpty>
+						<isNotEmpty prepend="AND" property="systemkey" >
+							SYSTEMKEY=#systemkey#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="edacRvyy" >
+							EDAC_RVYY = #edacRvyy#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="settGbcd" >
+							SETT_GBCD=#settGbcd#
+						</isNotEmpty> 
+			)
+	</select>
+	 
+	
+	<!-- 대상자정보에 따른 소득공제 합계 리스트 쿼리 -->
+	<select id="ye16Ta3220DAO.selectYeta0300To3220SumList" parameterClass="ye16Ta3220SrhVO" resultClass="egovMap">
+		SELECT	'국' AS HEADER
+									, MAX(SYSTEMKEY) AS SYSTEMKEY
+									, SUM(INSU_PAYR) AS INSU_PAYR
+									, SUM(INSU_RTYR) AS INSU_RTYR
+									, SUM(PSCL_IURR) AS PSCL_IURR
+									, SUM(MEDI_COST) AS MEDI_COST
+									, SUM(EDUC_COST) AS EDUC_COST
+									, SUM(CDTE_CARD) AS CDTE_CARD
+									, SUM(CASH_RECE) AS CASH_RECE
+									, SUM(JIBL_CARD) AS JIBL_CARD
+									, SUM(GRPY_AMNT) AS GRPY_AMNT
+									, SUM(MGNT_STVD) AS MGNT_STVD
+									, SUM(CTRB_AMNT) AS CTRB_AMNT
+									,SUM(INSU_GOPY)  AS INSU_GOPY
+									, '합계' AS SUM_NAME
+						FROM YETA3220
+					WHERE 
+						<isNotEmpty property="dpobCd" >
+							DPOB_CD = #dpobCd#
+				 		</isNotEmpty>
+						<isNotEmpty prepend="AND" property="systemkey" >
+							SYSTEMKEY = #systemkey#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="edacRvyy" >
+							EDAC_RVYY = #edacRvyy#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="settGbcd" >
+							SETT_GBCD = #settGbcd#
+						</isNotEmpty> 
+					
+					UNION ALL
+					SELECT 			
+							'기' AS HEADER	
+									, MAX(SYSTEMKEY) AS SYSTEMKEY
+									, SUM(INSU_FETC) AS INSU_PAYR
+									, SUM(INSU_RTET) AS INSU_RTYR
+									, SUM(PSCL_IURT) AS PSCL_IURR
+									, SUM(MEDI_EXPS) AS MEDI_COST
+									, SUM(EDUC_OTEC) AS EDUC_COST
+									, SUM(CDTE_CDEC) AS CDTE_CARD
+									, SUM(0) AS CASH_RECE
+									, SUM(JIBL_CDEC) AS JIBL_CARD
+									, SUM(GRPY_ATEC) AS GRPY_AMNT
+									, SUM(MGNT_SDEC) AS MGNT_STVD
+									, SUM(CTRB_AMEC) AS CTRB_AMNT
+							    	  , SUM(INSU_GOEC) AS INSU_GOPY
+									, '합계' AS SUM_NAME
+					FROM YETA3220
+					WHERE 
+					<isNotEmpty property="dpobCd" >
+						DPOB_CD = #dpobCd#
+			 		</isNotEmpty>
+					<isNotEmpty prepend="AND" property="systemkey" >
+						SYSTEMKEY = #systemkey#
+					</isNotEmpty> 
+					<isNotEmpty prepend="AND" property="edacRvyy" >
+						EDAC_RVYY = #edacRvyy#
+					</isNotEmpty> 
+					<isNotEmpty prepend="AND" property="settGbcd" >
+						SETT_GBCD = #settGbcd#
+					</isNotEmpty> 	
+	</select>
+	
+	
+	<select id="ye16Ta3220DAO.selectYeta3220List_D" parameterClass="ye16Ta3220SrhVO" resultClass="egovMap">
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+					SELECT
+									DPOB_CD
+									, EDAC_RVYY
+									, SETT_GBCD
+									, SYSTEMKEY
+									, RSNO_NUMB
+									, RELH_CODE
+									, KORN_NAME
+									, FRNR_CODE
+									, BASE_DDYN
+									, PSCL_DDYN
+									, BRDD_CTYN
+									, FADD_CTYN
+									, RPCT_DDYN
+									, BITH_DDYN
+									, PANT_ONYN
+									, INSU_PAYR
+									, INSU_RTYR
+									, PSCL_IURR
+									, MEDI_COST
+									, EDUC_COST
+									, CDTE_CARD
+									, CASH_RECE
+									, JIBL_CARD
+									, GRPY_AMNT
+									, MGNT_STVD
+									, CTRB_AMNT
+									, INSU_FETC
+									, INSU_RTET
+									, PSCL_IURT
+									, MEDI_EXPS
+									, EDUC_OTEC
+									, CDTE_CDEC
+									, JIBL_CDEC
+									, GRPY_ATEC
+									, MGNT_SDEC
+									, CTRB_AMEC
+									, INSU_GOPY
+				                  ,INSU_GOEC
+								,FAMY_SUPPT_RELA_DIV_CD	
+									, KYBDR
+									, INPT_DT
+									, INPT_ADDR
+									, ISMT
+									, REVN_DT
+									, REVN_ADDR
+							FROM YETA3220
+					WHERE 1=1
+					<isEqual prepend="AND" property="searchCondition" compareValue="0">
+						DPOB_CD = #searchKeyword#
+					</isEqual>
+					<isEqual prepend="AND" property="searchCondition" compareValue="1">
+						EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+					</isEqual>
+						ORDER BY 
+							DPOB_CD DESC
+								, EDAC_RVYY DESC
+								, SETT_GBCD DESC
+								, SYSTEMKEY DESC
+								, RSNO_NUMB DESC
+			
+			<![CDATA[					
+		) A WHERE ROWNUM <= #lastIndex#
+	)WHERE RNUM >= #firstIndex#
+	]]>
+		</select>	
+		<select id="ye16Ta3220DAO.selectYeta3220ListTotCnt_S" parameterClass="ye16Ta3220SrhVO" resultClass="int">
+				SELECT COUNT(*) totcnt
+				FROM YETA3220
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					EDAC_RVYY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass0210">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass0210SerarchVO" type="com.app.exterms.basis.server.vo.Bass0210SrhVO"/>
+	
+	<resultMap id="bass0210" class="com.app.exterms.basis.server.vo.Bass0210VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="pubcHodyDt" column="PUBC_HODY_DT" columnIndex="2"/>
+		<result property="dotwCd" column="DOTW_CD" columnIndex="3"/>
+		<result property="pubcHodyCtnt" column="PUBC_HODY_CTNT" columnIndex="4"/>
+		<result property="pubcHodyYn" column="PUBC_HODY_YN" columnIndex="5"/>
+		<result property="paidPubcHodyYn" column="PAID_PUBC_HODY_YN" columnIndex="6"/>
+		<result property="kybdr" column="KYBDR" columnIndex="7"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="8"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="9"/>
+		<result property="ismt" column="ISMT" columnIndex="10"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="11"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="12"/> 
+	</resultMap>
+	
+	<resultMap id="bass0210Chk" class="com.app.exterms.basis.server.vo.Bass0210VO">
+		<result property="offdayKubn" column="OFFDAY_KUBN" columnIndex="1"/>
+	</resultMap>
+	
+	<insert id="bass0210DAO.insertBass0210_S">
+		<![CDATA[
+			INSERT INTO BASS0200 
+				( DPOB_CD
+				  , PUBC_HODY_DT
+				  , DOTW_CD
+				  , PUBC_HODY_CTNT
+				  , PUBC_HODY_YN
+				  , PAID_PUBC_HODY_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  )
+			VALUES ( #dpobCd#
+					, #pubcHodyDt#
+					, #dotwCd#
+					, #pubcHodyCtnt#
+					, #pubcHodyYn#
+					, #paidPubcHodyYn#
+					, #kybdr#
+					, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					, #inptAddr#
+					, #ismt#
+					, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+					, #revnAddr#
+					 )
+		]]>
+	</insert>
+	
+	<update id="bass0210DAO.updateBass0210_S">
+		<![CDATA[
+			UPDATE BASS0200
+			SET 
+				  PUBC_HODY_DT=#pubcHodyDt# 
+				, DOTW_CD=#dotwCd#
+				, PUBC_HODY_CTNT=#pubcHodyCtnt#
+				, PUBC_HODY_YN=#pubcHodyYn#
+				, PAID_PUBC_HODY_YN=#paidPubcHodyYn# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+			WHERE DPOB_CD=#dpobCd#
+			AND PUBC_HODY_DT=#pubcHodyDt#
+		]]>
+	</update>
+	
+	<delete id="bass0210DAO.deleteBass0210_S">
+		<![CDATA[
+			DELETE 
+			FROM BASS0200 
+			WHERE 	DPOB_CD=#dpobCd#
+			AND 		PUBC_HODY_DT=#pubcHodyDt#
+				]]>
+	</delete>
+	
+	<select id="bass0210DAO.selectBass0210_S" resultMap="bass0210">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, PUBC_HODY_DT 
+				, DOTW_CD
+				, PUBC_HODY_CTNT
+				, PUBC_HODY_YN
+				, PAID_PUBC_HODY_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM 	BASS0200
+			WHERE 	DPOB_CD=#dpobCd#
+			AND 		PUBC_HODY_DT=#pubcHodyDt#
+				]]>
+	</select>
+	
+	<select id="bass0210DAO.selectBass0210List_D" parameterClass="bass0210SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, PUBC_HODY_DT 
+								, DOTW_CD
+								, DOTW_CD AS dotwCdcommCd
+								, fcBass0300CDNM(DPOB_CD,DOTW_CD) AS dotwCdcommCdNm
+								, PUBC_HODY_CTNT
+								, PUBC_HODY_YN
+								, PAID_PUBC_HODY_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS0200
+				WHERE 1=1
+				   <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="pubcHodyCtnt" >
+			 	   PUBC_HODY_CTNT   LIKE '%' || #pubcHodyCtnt# || '%'
+		       </isNotEmpty>
+					ORDER BY 
+						DPOB_CD ASC
+						, PUBC_HODY_DT DESC
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>	 
+	</select>	
+	<select id="bass0210DAO.selectBass0210ListTotCnt_S" parameterClass="bass0210SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0200
+			WHERE 1=1
+			   <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>
+		        <isNotEmpty prepend="AND" property="pubcHodyCtnt" >
+			 	PUBC_HODY_CTNT   LIKE '%' || #pubcHodyCtnt# || '%'
+		       </isNotEmpty>
+	</select>
+	
+	<select id="bass0210DAO.selectCoCalendar_S" resultMap="bass0210Chk">
+			SELECT OFFDAY_KUBN
+			FROM  CO_CALENDAR
+			WHERE 1=1
+			   <isNotEmpty prepend="AND" property="pubcHodyDt" >
+			 	CALENDAR_DATE=#pubcHodyDt#
+		       </isNotEmpty>
+	</select>
+	
+</sqlMap>

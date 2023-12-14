@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.paygen.comp</groupId>
+    <artifactId>paygen-component</artifactId>
+    <version>2.2.0</version>
+  </parent>
+  <groupId>com.paygen.payr</groupId>
+  <artifactId>paygen-payr</artifactId>
+  <packaging>jar</packaging> 
+  <name>PayGenPYAR</name>
+  <url>http://maven.apache.org</url> 
+	  
+	<dependencies>
+	         <!--   -->
+        <dependency>
+            <groupId>org.springmodules</groupId>
+            <artifactId>spring-modules-validation</artifactId>
+            <version>0.9</version>
+           <scope>system</scope>
+            <systemPath>${project.basedir}/war/WEB-INF/lib/spring-modules-validation-0.9.jar</systemPath>
+        </dependency>
+        <!-- 
+         <dependency>
+            <groupId>gwt-calendar</groupId>
+            <artifactId>gwt-calendar-1.0.1</artifactId>
+            <version>1.0.1</version>
+           <scope>system</scope>
+            <systemPath>${basedir}/war/WEB-INF/lib/gwt-calendar.jar</systemPath>
+        </dependency>
+         
+        <dependency>
+            <groupId>com.api</groupId>
+            <artifactId>PassNiApi</artifactId>
+            <version>2.7</version>
+        </dependency>
+          -->
+      <!--     <dependency>
+            <groupId>com.app.exterms</groupId>
+            <artifactId>ExTerms_Ex</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ExTerms_Ex.jar</systemPath>
+        </dependency> -->
+       
+	    <dependency>
+            <groupId>net.zschech</groupId>
+            <artifactId>gwt-java-math</artifactId>
+            <version>1.0.9</version> 
+        </dependency>
+        
+      <!-- 프로젝트 코어 등 추가 jar -->
+       <dependency> 
+      	 <groupId>com.paygen.prgm</groupId>
+  		 <artifactId>paygen-prgm</artifactId>
+         <version>${smrmf.version}</version>  
+	   </dependency>
+		<!--  <dependency> 
+      	 <groupId>com.paygen.commons</groupId>
+  		 <artifactId>paygen-commons</artifactId> 
+         <version>${smrmf.version}</version> 
+		</dependency>
+		 
+       <dependency> 
+      	 <groupId>com.paygen.infc</groupId>
+  		 <artifactId>paygen-infc</artifactId> 
+         <version>${smrmf.version}</version> 
+		</dependency> -->
+		<!-- 
+		 <dependency> 
+      	 <groupId>com.paygen.proc</groupId>
+  		 <artifactId>paygen-proc</artifactId> 
+         <version>${smrmf.version}</version> 
+		</dependency>
+		 -->
+  </dependencies>
+		
+		<build>
+		<!-- <defaultGoal>install</defaultGoal>
+		<directory>${basedir}/target</directory>
+		<finalName>PayGenPYAR-${version}</finalName> paygen-payr --> 
+		 <resources>
+		    <resource>
+		      <directory>src/main/resources</directory>
+		         <!-- <excludes>
+			            	<exclude>rebel.xml</exclude> 
+			    </excludes> -->
+		    </resource>
+		    <resource>
+		      <directory>src/main/java</directory>
+		      <includes> 
+		        <include>**/client/**/*.*</include>
+		        <include>**/shared/**/*.*</include>
+		        <include>**/*.gwt.xml</include>
+		      </includes>
+	    </resource>
+	  </resources>
+	 
+	</build>
+	 
+</project>

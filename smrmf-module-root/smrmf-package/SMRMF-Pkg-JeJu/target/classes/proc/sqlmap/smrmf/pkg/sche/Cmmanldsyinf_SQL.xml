@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Cmmanldsyinf">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="cmmanldsyinfSerarchVO" type="com.app.smrmf.pkg.sche.sysm.service.vo.CmmanldsyinfSrhVO"/>
+	
+	<resultMap id="cmmanldsyinf" class="com.app.smrmf.pkg.sche.sysm.service.vo.CmmanldsyinfVO">
+		<result property="logDate" column="LOG_DATE" columnIndex="1"/>
+		<result property="logSeq" column="LOG_SEQ" columnIndex="2"/>
+		<result property="userGb" column="USER_GB" columnIndex="3"/>
+		<result property="dn" column="DN" columnIndex="4"/>
+		<result property="code" column="CODE" columnIndex="5"/>
+		<result property="type" column="TYPE" columnIndex="6"/>
+	</resultMap>
+	
+	<insert id="cmmanldsyinfDAO.insertCmmanldsyinf_S">
+		<![CDATA[
+			INSERT INTO CMMANLDSYINF 
+				( LOG_DATE
+				  , LOG_SEQ
+				  , USER_GB
+				  , DN
+				  , CODE
+				  , TYPE )
+			VALUES ( #logDate#
+				  , #logSeq#
+				  , #userGb#
+				  , #dn#
+				  , #code#
+				  , #type# )
+		]]>
+	</insert>
+	
+	<update id="cmmanldsyinfDAO.updateCmmanldsyinf_S">
+		<![CDATA[
+			UPDATE CMMANLDSYINF
+			SET LOG_DATE=#logDate#
+				, LOG_SEQ=#logSeq#
+				, USER_GB=#userGb#
+				, DN=#dn#
+				, CODE=#code#
+				, TYPE=#type#
+			]]>
+	</update>
+	
+	<delete id="cmmanldsyinfDAO.deleteCmmanldsyinf_S">
+		<![CDATA[
+			DELETE FROM CMMANLDSYINF 
+			]]>
+	</delete>
+	
+	<select id="cmmanldsyinfDAO.selectCmmanldsyinf_S" resultMap="cmmanldsyinf">
+		<![CDATA[
+			SELECT
+				LOG_DATE
+				, LOG_SEQ
+				, USER_GB
+				, DN
+				, CODE
+				, TYPE
+			FROM CMMANLDSYINF
+			]]>
+	</select>
+	
+	<select id="cmmanldsyinfDAO.selectCmmanldsyinfList_D" parameterClass="cmmanldsyinfSerarchVO" resultClass="egovMap"> 
+				SELECT
+								LOG_DATE
+								, LOG_SEQ
+								, USER_GB
+								, DN
+								, CODE
+								, TYPE
+						FROM CMMANLDSYINF
+				WHERE USER_GB = #userGb# 
+				  <isNotEmpty property="logDate"> 
+			      <isNotEmpty property="logSeq"  > 
+					 AND  (LOG_DATE || LPAD(LOG_SEQ,4,'0')) > (#logDate# || LPAD(#logSeq#,4,'0'))   
+			     	</isNotEmpty> 
+			     </isNotEmpty> 	
+					ORDER BY LOG_DATE, LOG_SEQ 
+	</select>	
+	<select id="cmmanldsyinfDAO.selectCmmanldsyinfListTotCnt_S" parameterClass="cmmanldsyinfSerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM CMMANLDSYINF
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				LOG_DATE = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				LOG_SEQ LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

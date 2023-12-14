@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass0355">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass0355SerarchVO" type="com.app.exterms.resm.server.vo.Bass0355SrhVO"/>
+	
+	<resultMap id="bass0355" class="com.app.exterms.resm.server.vo.Bass0355VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="2"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="3"/>
+		<result property="dtilOccuClsAccDivCd" column="DTIL_OCCU_CLS_ACC_DIV_CD" columnIndex="4"/>
+		<result property="dtilOccuClsApptnUcstDys" column="DTIL_OCCU_CLS_APPTN_UCST_DYS" columnIndex="5"/>
+		<result property="fxtmUseYn" column="FXTM_USE_YN" columnIndex="6"/>
+		<result property="dtilOcclsApptnUcstSum" column="DTIL_OCCLS_APPTN_UCST_SUM" columnIndex="7"/>
+		<result property="rotaDutyApptnYn" column="ROTA_DUTY_APPTN_YN" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap>
+	
+	<insert id="bass0355DAO.insertBass0355_S">
+		<![CDATA[
+			INSERT INTO BASS0355 
+				( DPOB_CD
+				  , TYP_OCCU_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , DTIL_OCCU_CLS_ACC_DIV_CD
+				  , DTIL_OCCU_CLS_APPTN_UCST_DYS
+				  , FXTM_USE_YN
+				  , DTIL_OCCLS_APPTN_UCST_SUM
+				  , ROTA_DUTY_APPTN_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #typOccuCd#
+				  , #dtilOccuInttnCd#
+				  , #dtilOccuClsAccDivCd#
+				  , #dtilOccuClsApptnUcstDys#
+				  , #fxtmUseYn#
+				  , #dtilOcclsApptnUcstSum#
+				  , #rotaDutyApptnYn#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass0355DAO.updateBass0355_S">
+		<![CDATA[
+			UPDATE BASS0355
+			SET DPOB_CD=#dpobCd#
+				, TYP_OCCU_CD=#typOccuCd#
+				, DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				, DTIL_OCCU_CLS_ACC_DIV_CD=#dtilOccuClsAccDivCd#
+				, DTIL_OCCU_CLS_APPTN_UCST_DYS=#dtilOccuClsApptnUcstDys#
+				, FXTM_USE_YN=#fxtmUseYn#
+				, DTIL_OCCLS_APPTN_UCST_SUM=#dtilOcclsApptnUcstSum#
+				, ROTA_DUTY_APPTN_YN=#rotaDutyApptnYn#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND TYP_OCCU_CD=#typOccuCd#
+								AND DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				]]>
+	</update>
+	
+	<delete id="bass0355DAO.deleteBass0355_S">
+		<![CDATA[
+			DELETE FROM BASS0355 
+						WHERE DPOB_CD=#dpobCd#
+								AND TYP_OCCU_CD=#typOccuCd#
+								AND DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				]]>
+	</delete>
+	
+	<select id="bass0355DAO.selectBass0355_S" resultMap="bass0355">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, TYP_OCCU_CD
+				, DTIL_OCCU_INTTN_CD
+				, DTIL_OCCU_CLS_ACC_DIV_CD
+				, DTIL_OCCU_CLS_APPTN_UCST_DYS
+				, FXTM_USE_YN
+				, DTIL_OCCLS_APPTN_UCST_SUM
+				, ROTA_DUTY_APPTN_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS0355
+						WHERE DPOB_CD=#dpobCd#
+								AND TYP_OCCU_CD=#typOccuCd#
+								AND DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				]]>
+	</select>
+	
+	<select id="bass0355DAO.selectBass0355List_D" parameterClass="bass0355SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, TYP_OCCU_CD
+								, DTIL_OCCU_INTTN_CD
+								, DTIL_OCCU_CLS_ACC_DIV_CD
+								, DTIL_OCCU_CLS_APPTN_UCST_DYS
+								, FXTM_USE_YN
+								, DTIL_OCCLS_APPTN_UCST_SUM
+								, ROTA_DUTY_APPTN_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS0355
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					TYP_OCCU_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, TYP_OCCU_CD DESC
+							, DTIL_OCCU_INTTN_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass0355DAO.selectBass0355ListTotCnt_S" parameterClass="bass0355SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0355
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				TYP_OCCU_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

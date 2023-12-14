@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PayGenLogin">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="loginVO" type="com.app.smrmf.sysm.server.vo.system.LoginVO"/>
+	
+	<resultMap id="payGenLogin" class="com.app.smrmf.sysm.server.vo.system.LoginVO">
+		<result property="sysDivCd" column="SYS_DIV_CD" columnIndex="1"/>
+		<result property="usrId" column="USR_ID" columnIndex="2"/>
+		<result property="usrNm" column="USR_NM" columnIndex="3"/>
+		<result property="usrDivCd" column="USR_DIV_CD" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="6"/>
+		<result property="email" column="EMAIL" columnIndex="7"/>
+		<result property="pwd" column="PWD" columnIndex="8"/>
+	<!-- 	<result property="ssoUsrId" column="SSO_USR_ID" columnIndex="9"/>  -->
+		<result property="useYn" column="USE_YN" columnIndex="10"/>
+		<result property="kybdr" column="KYBDR" columnIndex="11"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="12"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="13"/>
+		<result property="ismt" column="ISMT" columnIndex="14"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="15"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="16"/>
+	</resultMap> 
+	
+	<!-- 아이디 찾기를 위한 resultMap -->
+	<resultMap id="usrId" class="com.app.smrmf.sysm.server.vo.system.LoginVO">
+		<result property="usrId" column="usrId" columnIndex="1"/>
+	</resultMap>
+	
+	<!-- 비밀번호 처리를 위한 resultMap -->
+	<resultMap id="pwd" class="com.app.smrmf.sysm.server.vo.system.LoginVO">
+		<result property="pwd" column="pwd" columnIndex="1"/>
+	</resultMap>
+	  
+	
+	<!-- 일반 로그인 -->
+	<select id="payGenLoginDAO.actionLogin" resultMap="payGenLogin">
+		<!-- 일반회원 -->
+		<isEqual property="usrDivCd" compareValue="G">
+			<![CDATA[
+			SELECT
+				SYS_DIV_CD
+				, USR_ID
+				, USR_NM
+				, USR_DIV_CD
+				, SYSTEMKEY
+				, DEPT_CD
+				, EMAIL
+				, PWD
+				, USE_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM SYSM0100
+			 WHERE USR_ID = #usrId#
+			   AND PWD = #pwd#
+			   AND USE_YN = 'Y'
+			]]>
+		</isEqual> 
+	</select>
+	  
+	<!-- 아이디 찾기 -->
+	<select id="payGenLoginDAO.searchId" resultMap="usrId">
+		<!-- 일반회원 -->
+		<isEqual property="usrDivCd" compareValue="G">
+			<![CDATA[
+			SELECT USR_ID AS USR_ID 
+			  FROM SYSM0100
+			 WHERE  USR_NM = #usrNm#
+			   AND EMAIL = #email#
+			   AND USE_YN = 'Y'
+			]]>
+		</isEqual> 
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="payGenLoginDAO.searchPassword" resultMap="pwd">
+		<!-- 일반회원 -->
+		<isEqual property="usrDivCd" compareValue="G">
+			<![CDATA[
+			SELECT PWD AS PWD
+			  FROM SYSM0100
+			 WHERE USR_ID = #usrId#
+			   AND USR_NM = #usrNm#
+			   AND EMAIL = #email#
+			   AND USE_YN = 'Y'
+			]]>
+		</isEqual> 
+	</select>
+	
+	<!-- 변경된 비밀번호를 저장 -->
+	<update id="payGenLoginDAO.updatePassword">
+		<!-- 일반회원 -->
+		<isEqual property="usrDivCd" compareValue="G">
+			<![CDATA[ 
+		 UPDATE SYSM0100
+			SET   PWD=#pwd# 
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+			 WHERE USR_ID = #usrId#	
+			]]>
+		</isEqual> 
+	</update> 
+	 
+</sqlMap>

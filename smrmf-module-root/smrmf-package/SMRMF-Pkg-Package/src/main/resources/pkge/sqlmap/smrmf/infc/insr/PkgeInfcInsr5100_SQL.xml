@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcInsr5100">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgInsr5100SerarchVO" type="com.app.smrmf.infc.insurance.server.vo.InfcPkgInsr5100SrhVO"/>
+	
+	<resultMap id="infcPkgInsr5100" class="com.app.smrmf.infc.insurance.server.vo.InfcPkgInsr5100VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+	<!-- <result property="umytInsrSeilNum" column="UMYT_INSR_SEIL_NUM" columnIndex="3"/>  -->
+		<result property="emymtSeilNum" column="EMYMT_SEIL_NUM" columnIndex="3"/>
+		<result property="socInsrDducEthdCd" column="SOC_INSR_DDUC_ETHD_CD" columnIndex="4"/>
+		<result property="umytInsrAqtnDt" column="UMYT_INSR_AQTN_DT" columnIndex="5"/>
+		<result property="umytInsrLssDt" column="UMYT_INSR_LSS_DT" columnIndex="6"/>
+		<result property="umytInsrEepnYn" column="UMYT_INSR_EEPN_YN" columnIndex="7"/>
+		<result property="umytInsrEepnReasCtnt" column="UMYT_INSR_EEPN_REAS_CTNT" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap>
+	
+	<insert id="infcPkgInsr5100DAO.insertInsr5100_NOT_EXISTS">
+		<![CDATA[
+		INSERT INTO INSR5100 (DPOB_CD, SYSTEMKEY, EMYMT_SEIL_NUM)
+		   SELECT AA.DPOB_CD, AA.SYSTEMKEY, AA.EMYMT_SEIL_NUM
+		     FROM PSNL0110 AA
+		    WHERE     AA.EMYMT_SEIL_NUM =
+		                 (SELECT MAX (BB.EMYMT_SEIL_NUM)
+		                    FROM PSNL0110 BB
+		                   WHERE     AA.DPOB_CD = BB.DPOB_CD
+		                         AND AA.SYSTEMKEY = BB.SYSTEMKEY
+		                         AND EMYMT_TYP_CD = 'A0420010')
+		          AND NOT EXISTS
+		                     (SELECT 1
+		                        FROM INSR5100 NN
+		                       WHERE     NN.DPOB_CD = AA.DPOB_CD
+		                             AND NN.SYSTEMKEY = AA.SYSTEMKEY
+		                             AND NN.EMYMT_SEIL_NUM = AA.EMYMT_SEIL_NUM)
+		]]>
+	</insert>	
+	
+	
+	<insert id="infcPkgInsr5100DAO.insertInsr5100_S">
+		<![CDATA[
+			INSERT INTO INSR5100 
+				( DPOB_CD
+				  , SYSTEMKEY 
+				  , EMYMT_SEIL_NUM
+				  , SOC_INSR_DDUC_ETHD_CD
+				  , UMYT_INSR_AQTN_DT
+				  , UMYT_INSR_LSS_DT
+				  , UMYT_INSR_EEPN_YN
+				  , UMYT_INSR_EEPN_REAS_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey# 
+				  , #emymtSeilNum#
+				  , #socInsrDducEthdCd#
+				  , #umytInsrAqtnDt#
+				  , #umytInsrLssDt#
+				  , #umytInsrEepnYn#
+				  , #umytInsrEepnReasCtnt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgInsr5100DAO.updateInsr5100_S">
+		<![CDATA[
+			UPDATE INSR5100
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey# 
+				, EMYMT_SEIL_NUM=#emymtSeilNum#
+				, SOC_INSR_DDUC_ETHD_CD=#socInsrDducEthdCd#
+				, UMYT_INSR_AQTN_DT=#umytInsrAqtnDt#
+				, UMYT_INSR_LSS_DT=#umytInsrLssDt#
+				, UMYT_INSR_EEPN_YN=#umytInsrEepnYn#
+				, UMYT_INSR_EEPN_REAS_CTNT=#umytInsrEepnReasCtnt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+				]]>
+	</update>
+	
+	<delete id="infcPkgInsr5100DAO.deleteInsr5100_S">
+		<![CDATA[
+			DELETE FROM INSR5100 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+				]]>
+	</delete>
+	
+	<select id="infcPkgInsr5100DAO.selectInsr5100_S" resultMap="infcPkgInsr5100">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY 
+				, EMYMT_SEIL_NUM
+				, SOC_INSR_DDUC_ETHD_CD
+				, UMYT_INSR_AQTN_DT
+				, UMYT_INSR_LSS_DT
+				, UMYT_INSR_EEPN_YN
+				, UMYT_INSR_EEPN_REAS_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM INSR5100
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EMYMT_SEIL_NUM=#emymtSeilNum#
+				]]>
+	</select>
+	
+	<select id="infcPkgInsr5100DAO.selectInsr5100List_D" parameterClass="infcPkgInsr5100SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY 
+								, EMYMT_SEIL_NUM
+								, SOC_INSR_DDUC_ETHD_CD
+								, UMYT_INSR_AQTN_DT
+								, UMYT_INSR_LSS_DT
+								, UMYT_INSR_EEPN_YN
+								, UMYT_INSR_EEPN_REAS_CTNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM INSR5100
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, EMYMT_SEIL_NUM  DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgInsr5100DAO.selectInsr5100ListTotCnt_S" parameterClass="infcPkgInsr5100SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM INSR5100
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+	  
+
+</sqlMap>

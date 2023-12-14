@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Remt2400">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="remt2400SerarchVO" type="com.app.exterms.retirement.server.vo.Remt2400SrhVO"/>
+	
+	<resultMap id="remt2400" class="com.app.exterms.retirement.server.vo.Remt2400VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="calcSevePayPsnBlggYr" column="CALC_SEVE_PAY_PSN_BLGG_YR" columnIndex="2"/>
+		<result property="calcSevePayPsnDivCd" column="CALC_SEVE_PAY_PSN_DIV_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="5"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="6"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="7"/>
+		<result property="aimenrEcteYn" column="AIMENR_ECTE_YN" columnIndex="8"/>
+		<result property="frgnrDivCd" column="FRGNR_DIV_CD" columnIndex="9"/>
+		<result property="ridnSeptYn" column="RIDN_SEPT_YN" columnIndex="10"/>
+		<result property="ridnCd" column="RIDN_CD" columnIndex="11"/>
+		<result property="ridnNm" column="RIDN_NM" columnIndex="12"/>
+		<result property="blggYrBgnnDt" column="BLGG_YR_BGNN_DT" columnIndex="13"/>
+		<result property="blggYrEndDt" column="BLGG_YR_END_DT" columnIndex="14"/>
+		<result property="retryReasCd" column="RETRY_REAS_CD" columnIndex="15"/>
+		<result property="busoprRgstnNum" column="BUSOPR_RGSTN_NUM" columnIndex="16"/>
+		<result property="paeWorkNm" column="PAE_WORK_NM" columnIndex="17"/>
+		<result property="retryPayQnty" column="RETRY_PAY_QNTY" columnIndex="18"/>
+		<result property="freeDtyRetryPayQnty" column="FREE_DTY_RETRY_PAY_QNTY" columnIndex="19"/>
+		<result property="txtnTgtRetryPayQnty" column="TXTN_TGT_RETRY_PAY_QNTY" columnIndex="20"/>
+		<result property="icncDt" column="ICNC_DT" columnIndex="21"/>
+		<result property="rkfcdDt" column="RKFCD_DT" columnIndex="22"/>
+		<result property="rsgtnDt" column="RSGTN_DT" columnIndex="23"/>
+		<result property="pymtDt" column="PYMT_DT" columnIndex="24"/>
+		<result property="logSvcMnthIcm" column="LOG_SVC_MNTH_ICM" columnIndex="25"/>
+		<result property="eepnMnthIcm" column="EEPN_MNTH_ICM" columnIndex="26"/>
+		<result property="addMnthIcm" column="ADD_MNTH_ICM" columnIndex="27"/>
+		<result property="dupMnthIcm" column="DUP_MNTH_ICM" columnIndex="28"/>
+		<result property="logSvcYrNum" column="LOG_SVC_YR_NUM" columnIndex="29"/>
+		<result property="logPpnl12befIcncDt" column="LOG_PPNL_12BEF_ICNC_DT" columnIndex="30"/>
+		<result property="logPpnl12befRkfcdDt" column="LOG_PPNL_12BEF_RKFCD_DT" columnIndex="31"/>
+		<result property="logPpnl12befRsgtnDt" column="LOG_PPNL_12BEF_RSGTN_DT" columnIndex="32"/>
+		<result property="logPpnl12befPymtDt" column="LOG_PPNL_12BEF_PYMT_DT" columnIndex="33"/>
+		<result property="logPpnl12befLogMnthIcm" column="LOG_PPNL_12BEF_LOG_MNTH_ICM" columnIndex="34"/>
+		<result property="logPpnl12befEepnMnthIcm" column="LOG_PPNL_12BEF_EEPN_MNTH_ICM" columnIndex="35"/>
+		<result property="logPpnl12befAddMnthIcm" column="LOG_PPNL_12BEF_ADD_MNTH_ICM" columnIndex="36"/>
+		<result property="logPpnl12befDupMnthIcm" column="LOG_PPNL_12BEF_DUP_MNTH_ICM" columnIndex="37"/>
+		<result property="logPpnl12befLogYrNum" column="LOG_PPNL_12BEF_LOG_YR_NUM" columnIndex="38"/>
+		<result property="logPpnl13afrIcncDt" column="LOG_PPNL_13AFR_ICNC_DT" columnIndex="39"/>
+		<result property="logPpnl13afrRkfcdDt" column="LOG_PPNL_13AFR_RKFCD_DT" columnIndex="40"/>
+		<result property="logPpnl13afrRsgtnDt" column="LOG_PPNL_13AFR_RSGTN_DT" columnIndex="41"/>
+		<result property="logPpnl13afrPymtDt" column="LOG_PPNL_13AFR_PYMT_DT" columnIndex="42"/>
+		<result property="logPpnl13afrLogMnthIcm" column="LOG_PPNL_13AFR_LOG_MNTH_ICM" columnIndex="43"/>
+		<result property="logPpnl13afrEepnMnthIcm" column="LOG_PPNL_13AFR_EEPN_MNTH_ICM" columnIndex="44"/>
+		<result property="logPpnl13afrAddMnthIcm" column="LOG_PPNL_13AFR_ADD_MNTH_ICM" columnIndex="45"/>
+		<result property="logPpnl13afrDupMnthIcm" column="LOG_PPNL_13AFR_DUP_MNTH_ICM" columnIndex="46"/>
+		<result property="logPpnl13afrLogSvc" column="LOG_PPNL_13AFR_LOG_SVC" columnIndex="47"/>
+		<result property="retryIncmPymtSum" column="RETRY_INCM_PYMT_SUM" columnIndex="48"/>
+		<result property="retryIncmFxrtDducSum" column="RETRY_INCM_FXRT_DDUC_SUM" columnIndex="49"/>
+		<result property="logYrDducSum" column="LOG_YR_DDUC_SUM" columnIndex="50"/>
+		<result property="retryTxtnStdClutSum" column="RETRY_TXTN_STD_CLUT_SUM" columnIndex="51"/>
+		<result property="tat12befTxtnStdPpnlSum" column="TAT_12BEF_TXTN_STD_PPNL_SUM" columnIndex="52"/>
+		<result property="tat12befYravgTxstdSum" column="TAT_12BEF_YRAVG_TXSTD_SUM" columnIndex="53"/>
+		<result property="tat12befCvsnTxtnStdSum" column="TAT_12BEF_CVSN_TXTN_STD_SUM" columnIndex="54"/>
+		<result property="tat12befCvsnCalcAmnt" column="TAT_12BEF_CVSN_CALC_AMNT" columnIndex="55"/>
+		<result property="tat12befYrAvgCalcAmnt" column="TAT_12BEF_YR_AVG_CALC_AMNT" columnIndex="56"/>
+		<result property="tat12befCalcTxAmnt" column="TAT_12BEF_CALC_TX_AMNT" columnIndex="57"/>
+		<result property="tat12befAlpayTxAmnt" column="TAT_12BEF_ALPAY_TX_AMNT" columnIndex="58"/>
+		<result property="tat12befRegTgtTxAmnt" column="TAT_12BEF_REG_TGT_TX_AMNT" columnIndex="59"/>
+		<result property="tat13afrTxstdPpnlSum" column="TAT_13AFR_TXSTD_PPNL_SUM" columnIndex="60"/>
+		<result property="tat13afrYrAvgStdSum" column="TAT_13AFR_YR_AVG_STD_SUM" columnIndex="61"/>
+		<result property="tat13afrCvsnTxtnStdSum" column="TAT_13AFR_CVSN_TXTN_STD_SUM" columnIndex="62"/>
+		<result property="tat13afrCvsnCalcTxAmnt" column="TAT_13AFR_CVSN_CALC_TX_AMNT" columnIndex="63"/>
+		<result property="tat13afrYrAvgCalcAmnt" column="TAT_13AFR_YR_AVG_CALC_AMNT" columnIndex="64"/>
+		<result property="tat13afrAlpayTxAmnt" column="TAT_13AFR_ALPAY_TX_AMNT" columnIndex="65"/>
+		<result property="tat13afrRegrstTgtSum" column="TAT_13AFR_REGRST_TGT_SUM" columnIndex="66"/>
+		<result property="tatAggrTxtnStdPpnlSum" column="TAT_AGGR_TXTN_STD_PPNL_SUM" columnIndex="67"/>
+		<result property="tatAggrYrAvgTxtnStdSum" column="TAT_AGGR_YR_AVG_TXTN_STD_SUM" columnIndex="68"/>
+		<result property="tatAggrCvsnTxtnStdSum" column="TAT_AGGR_CVSN_TXTN_STD_SUM" columnIndex="69"/>
+		<result property="tatAggrCvsnCalcTxAmnt" column="TAT_AGGR_CVSN_CALC_TX_AMNT" columnIndex="70"/>
+		<result property="tatAggrYrAvgCalcTxAmnt" column="TAT_AGGR_YR_AVG_CALC_TX_AMNT" columnIndex="71"/>
+		<result property="tatAggrCalcTxAmnt" column="TAT_AGGR_CALC_TX_AMNT" columnIndex="72"/>
+		<result property="tatAggrAlpayTxAmnt" column="TAT_AGGR_ALPAY_TX_AMNT" columnIndex="73"/>
+		<result property="tatAggrRegrstTgtTxAmnt" column="TAT_AGGR_REGRST_TGT_TX_AMNT" columnIndex="74"/>
+		<result property="pymtRegTgtIncmTxQnty" column="PYMT_REG_TGT_INCM_TX_QNTY" columnIndex="75"/>
+		<result property="pymtRegTgtRgonIncmQnty" column="PYMT_REG_TGT_RGON_INCM_QNTY" columnIndex="76"/>
+		<result property="pymtRegTgtFarvilSpclQnty" column="PYMT_REG_TGT_FARVIL_SPCL_QNTY" columnIndex="77"/>
+		<result property="pymtRegrstTgtAggrSum" column="PYMT_REGRST_TGT_AGGR_SUM" columnIndex="78"/>
+		<result property="kybdr" column="KYBDR" columnIndex="79"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="80"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="81"/>
+		<result property="ismt" column="ISMT" columnIndex="82"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="83"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="84"/>
+	</resultMap>
+	
+	<insert id="remt2400DAO.insertRemt2400_S">
+		<![CDATA[
+			INSERT INTO REMT2400 
+				( DPOB_CD
+				  , CALC_SEVE_PAY_PSN_BLGG_YR
+				  , CALC_SEVE_PAY_PSN_DIV_CD
+				  , SYSTEMKEY
+				  , DEPT_CD
+				  , HAN_NM
+				  , RESN_REGN_NUM
+				  , AIMENR_ECTE_YN
+				  , FRGNR_DIV_CD
+				  , RIDN_SEPT_YN
+				  , RIDN_CD
+				  , RIDN_NM
+				  , BLGG_YR_BGNN_DT
+				  , BLGG_YR_END_DT
+				  , RETRY_REAS_CD
+				  , BUSOPR_RGSTN_NUM
+				  , PAE_WORK_NM
+				  , RETRY_PAY_QNTY
+				  , FREE_DTY_RETRY_PAY_QNTY
+				  , TXTN_TGT_RETRY_PAY_QNTY
+				  , ICNC_DT
+				  , RKFCD_DT
+				  , RSGTN_DT
+				  , PYMT_DT
+				  , LOG_SVC_MNTH_ICM
+				  , EEPN_MNTH_ICM
+				  , ADD_MNTH_ICM
+				  , DUP_MNTH_ICM
+				  , LOG_SVC_YR_NUM
+				  , LOG_PPNL_12BEF_ICNC_DT
+				  , LOG_PPNL_12BEF_RKFCD_DT
+				  , LOG_PPNL_12BEF_RSGTN_DT
+				  , LOG_PPNL_12BEF_PYMT_DT
+				  , LOG_PPNL_12BEF_LOG_MNTH_ICM
+				  , LOG_PPNL_12BEF_EEPN_MNTH_ICM
+				  , LOG_PPNL_12BEF_ADD_MNTH_ICM
+				  , LOG_PPNL_12BEF_DUP_MNTH_ICM
+				  , LOG_PPNL_12BEF_LOG_YR_NUM
+				  , LOG_PPNL_13AFR_ICNC_DT
+				  , LOG_PPNL_13AFR_RKFCD_DT
+				  , LOG_PPNL_13AFR_RSGTN_DT
+				  , LOG_PPNL_13AFR_PYMT_DT
+				  , LOG_PPNL_13AFR_LOG_MNTH_ICM
+				  , LOG_PPNL_13AFR_EEPN_MNTH_ICM
+				  , LOG_PPNL_13AFR_ADD_MNTH_ICM
+				  , LOG_PPNL_13AFR_DUP_MNTH_ICM
+				  , LOG_PPNL_13AFR_LOG_SVC
+				  , RETRY_INCM_PYMT_SUM
+				  , RETRY_INCM_FXRT_DDUC_SUM
+				  , LOG_YR_DDUC_SUM
+				  , RETRY_TXTN_STD_CLUT_SUM
+				  , TAT_12BEF_TXTN_STD_PPNL_SUM
+				  , TAT_12BEF_YRAVG_TXSTD_SUM
+				  , TAT_12BEF_CVSN_TXTN_STD_SUM
+				  , TAT_12BEF_CVSN_CALC_AMNT
+				  , TAT_12BEF_YR_AVG_CALC_AMNT
+				  , TAT_12BEF_CALC_TX_AMNT
+				  , TAT_12BEF_ALPAY_TX_AMNT
+				  , TAT_12BEF_REG_TGT_TX_AMNT
+				  , TAT_13AFR_TXSTD_PPNL_SUM
+				  , TAT_13AFR_YR_AVG_STD_SUM
+				  , TAT_13AFR_CVSN_TXTN_STD_SUM
+				  , TAT_13AFR_CVSN_CALC_TX_AMNT
+				  , TAT_13AFR_YR_AVG_CALC_AMNT
+				  , TAT_13AFR_ALPAY_TX_AMNT
+				  , TAT_13AFR_REGRST_TGT_SUM
+				  , TAT_AGGR_TXTN_STD_PPNL_SUM
+				  , TAT_AGGR_YR_AVG_TXTN_STD_SUM
+				  , TAT_AGGR_CVSN_TXTN_STD_SUM
+				  , TAT_AGGR_CVSN_CALC_TX_AMNT
+				  , TAT_AGGR_YR_AVG_CALC_TX_AMNT
+				  , TAT_AGGR_CALC_TX_AMNT
+				  , TAT_AGGR_ALPAY_TX_AMNT
+				  , TAT_AGGR_REGRST_TGT_TX_AMNT
+				  , PYMT_REG_TGT_INCM_TX_QNTY
+				  , PYMT_REG_TGT_RGON_INCM_QNTY
+				  , PYMT_REG_TGT_FARVIL_SPCL_QNTY
+				  , PYMT_REGRST_TGT_AGGR_SUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #calcSevePayPsnBlggYr#
+				  , #calcSevePayPsnDivCd#
+				  , #systemkey#
+				  , #deptCd#
+				  , #hanNm#
+				  , #resnRegnNum#
+				  , #aimenrEcteYn#
+				  , #frgnrDivCd#
+				  , #ridnSeptYn#
+				  , #ridnCd#
+				  , #ridnNm#
+				  , #blggYrBgnnDt#
+				  , #blggYrEndDt#
+				  , #retryReasCd#
+				  , #busoprRgstnNum#
+				  , #paeWorkNm#
+				  , #retryPayQnty#
+				  , #freeDtyRetryPayQnty#
+				  , #txtnTgtRetryPayQnty#
+				  , #icncDt#
+				  , #rkfcdDt#
+				  , #rsgtnDt#
+				  , #pymtDt#
+				  , #logSvcMnthIcm#
+				  , #eepnMnthIcm#
+				  , #addMnthIcm#
+				  , #dupMnthIcm#
+				  , #logSvcYrNum#
+				  , #logPpnl12befIcncDt#
+				  , #logPpnl12befRkfcdDt#
+				  , #logPpnl12befRsgtnDt#
+				  , #logPpnl12befPymtDt#
+				  , #logPpnl12befLogMnthIcm#
+				  , #logPpnl12befEepnMnthIcm#
+				  , #logPpnl12befAddMnthIcm#
+				  , #logPpnl12befDupMnthIcm#
+				  , #logPpnl12befLogYrNum#
+				  , #logPpnl13afrIcncDt#
+				  , #logPpnl13afrRkfcdDt#
+				  , #logPpnl13afrRsgtnDt#
+				  , #logPpnl13afrPymtDt#
+				  , #logPpnl13afrLogMnthIcm#
+				  , #logPpnl13afrEepnMnthIcm#
+				  , #logPpnl13afrAddMnthIcm#
+				  , #logPpnl13afrDupMnthIcm#
+				  , #logPpnl13afrLogSvc#
+				  , #retryIncmPymtSum#
+				  , #retryIncmFxrtDducSum#
+				  , #logYrDducSum#
+				  , #retryTxtnStdClutSum#
+				  , #tat12befTxtnStdPpnlSum#
+				  , #tat12befYravgTxstdSum#
+				  , #tat12befCvsnTxtnStdSum#
+				  , #tat12befCvsnCalcAmnt#
+				  , #tat12befYrAvgCalcAmnt#
+				  , #tat12befCalcTxAmnt#
+				  , #tat12befAlpayTxAmnt#
+				  , #tat12befRegTgtTxAmnt#
+				  , #tat13afrTxstdPpnlSum#
+				  , #tat13afrYrAvgStdSum#
+				  , #tat13afrCvsnTxtnStdSum#
+				  , #tat13afrCvsnCalcTxAmnt#
+				  , #tat13afrYrAvgCalcAmnt#
+				  , #tat13afrAlpayTxAmnt#
+				  , #tat13afrRegrstTgtSum#
+				  , #tatAggrTxtnStdPpnlSum#
+				  , #tatAggrYrAvgTxtnStdSum#
+				  , #tatAggrCvsnTxtnStdSum#
+				  , #tatAggrCvsnCalcTxAmnt#
+				  , #tatAggrYrAvgCalcTxAmnt#
+				  , #tatAggrCalcTxAmnt#
+				  , #tatAggrAlpayTxAmnt#
+				  , #tatAggrRegrstTgtTxAmnt#
+				  , #pymtRegTgtIncmTxQnty#
+				  , #pymtRegTgtRgonIncmQnty#
+				  , #pymtRegTgtFarvilSpclQnty#
+				  , #pymtRegrstTgtAggrSum#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="remt2400DAO.updateRemt2400_S">
+		<![CDATA[
+			UPDATE REMT2400
+			SET DPOB_CD=#dpobCd#
+				, CALC_SEVE_PAY_PSN_BLGG_YR=#calcSevePayPsnBlggYr#
+				, CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+				, SYSTEMKEY=#systemkey#
+				, DEPT_CD=#deptCd#
+				, HAN_NM=#hanNm#
+				, RESN_REGN_NUM=#resnRegnNum#
+				, AIMENR_ECTE_YN=#aimenrEcteYn#
+				, FRGNR_DIV_CD=#frgnrDivCd#
+				, RIDN_SEPT_YN=#ridnSeptYn#
+				, RIDN_CD=#ridnCd#
+				, RIDN_NM=#ridnNm#
+				, BLGG_YR_BGNN_DT=#blggYrBgnnDt#
+				, BLGG_YR_END_DT=#blggYrEndDt#
+				, RETRY_REAS_CD=#retryReasCd#
+				, BUSOPR_RGSTN_NUM=#busoprRgstnNum#
+				, PAE_WORK_NM=#paeWorkNm#
+				, RETRY_PAY_QNTY=#retryPayQnty#
+				, FREE_DTY_RETRY_PAY_QNTY=#freeDtyRetryPayQnty#
+				, TXTN_TGT_RETRY_PAY_QNTY=#txtnTgtRetryPayQnty#
+				, ICNC_DT=#icncDt#
+				, RKFCD_DT=#rkfcdDt#
+				, RSGTN_DT=#rsgtnDt#
+				, PYMT_DT=#pymtDt#
+				, LOG_SVC_MNTH_ICM=#logSvcMnthIcm#
+				, EEPN_MNTH_ICM=#eepnMnthIcm#
+				, ADD_MNTH_ICM=#addMnthIcm#
+				, DUP_MNTH_ICM=#dupMnthIcm#
+				, LOG_SVC_YR_NUM=#logSvcYrNum#
+				, LOG_PPNL_12BEF_ICNC_DT=#logPpnl12befIcncDt#
+				, LOG_PPNL_12BEF_RKFCD_DT=#logPpnl12befRkfcdDt#
+				, LOG_PPNL_12BEF_RSGTN_DT=#logPpnl12befRsgtnDt#
+				, LOG_PPNL_12BEF_PYMT_DT=#logPpnl12befPymtDt#
+				, LOG_PPNL_12BEF_LOG_MNTH_ICM=#logPpnl12befLogMnthIcm#
+				, LOG_PPNL_12BEF_EEPN_MNTH_ICM=#logPpnl12befEepnMnthIcm#
+				, LOG_PPNL_12BEF_ADD_MNTH_ICM=#logPpnl12befAddMnthIcm#
+				, LOG_PPNL_12BEF_DUP_MNTH_ICM=#logPpnl12befDupMnthIcm#
+				, LOG_PPNL_12BEF_LOG_YR_NUM=#logPpnl12befLogYrNum#
+				, LOG_PPNL_13AFR_ICNC_DT=#logPpnl13afrIcncDt#
+				, LOG_PPNL_13AFR_RKFCD_DT=#logPpnl13afrRkfcdDt#
+				, LOG_PPNL_13AFR_RSGTN_DT=#logPpnl13afrRsgtnDt#
+				, LOG_PPNL_13AFR_PYMT_DT=#logPpnl13afrPymtDt#
+				, LOG_PPNL_13AFR_LOG_MNTH_ICM=#logPpnl13afrLogMnthIcm#
+				, LOG_PPNL_13AFR_EEPN_MNTH_ICM=#logPpnl13afrEepnMnthIcm#
+				, LOG_PPNL_13AFR_ADD_MNTH_ICM=#logPpnl13afrAddMnthIcm#
+				, LOG_PPNL_13AFR_DUP_MNTH_ICM=#logPpnl13afrDupMnthIcm#
+				, LOG_PPNL_13AFR_LOG_SVC=#logPpnl13afrLogSvc#
+				, RETRY_INCM_PYMT_SUM=#retryIncmPymtSum#
+				, RETRY_INCM_FXRT_DDUC_SUM=#retryIncmFxrtDducSum#
+				, LOG_YR_DDUC_SUM=#logYrDducSum#
+				, RETRY_TXTN_STD_CLUT_SUM=#retryTxtnStdClutSum#
+				, TAT_12BEF_TXTN_STD_PPNL_SUM=#tat12befTxtnStdPpnlSum#
+				, TAT_12BEF_YRAVG_TXSTD_SUM=#tat12befYravgTxstdSum#
+				, TAT_12BEF_CVSN_TXTN_STD_SUM=#tat12befCvsnTxtnStdSum#
+				, TAT_12BEF_CVSN_CALC_AMNT=#tat12befCvsnCalcAmnt#
+				, TAT_12BEF_YR_AVG_CALC_AMNT=#tat12befYrAvgCalcAmnt#
+				, TAT_12BEF_CALC_TX_AMNT=#tat12befCalcTxAmnt#
+				, TAT_12BEF_ALPAY_TX_AMNT=#tat12befAlpayTxAmnt#
+				, TAT_12BEF_REG_TGT_TX_AMNT=#tat12befRegTgtTxAmnt#
+				, TAT_13AFR_TXSTD_PPNL_SUM=#tat13afrTxstdPpnlSum#
+				, TAT_13AFR_YR_AVG_STD_SUM=#tat13afrYrAvgStdSum#
+				, TAT_13AFR_CVSN_TXTN_STD_SUM=#tat13afrCvsnTxtnStdSum#
+				, TAT_13AFR_CVSN_CALC_TX_AMNT=#tat13afrCvsnCalcTxAmnt#
+				, TAT_13AFR_YR_AVG_CALC_AMNT=#tat13afrYrAvgCalcAmnt#
+				, TAT_13AFR_ALPAY_TX_AMNT=#tat13afrAlpayTxAmnt#
+				, TAT_13AFR_REGRST_TGT_SUM=#tat13afrRegrstTgtSum#
+				, TAT_AGGR_TXTN_STD_PPNL_SUM=#tatAggrTxtnStdPpnlSum#
+				, TAT_AGGR_YR_AVG_TXTN_STD_SUM=#tatAggrYrAvgTxtnStdSum#
+				, TAT_AGGR_CVSN_TXTN_STD_SUM=#tatAggrCvsnTxtnStdSum#
+				, TAT_AGGR_CVSN_CALC_TX_AMNT=#tatAggrCvsnCalcTxAmnt#
+				, TAT_AGGR_YR_AVG_CALC_TX_AMNT=#tatAggrYrAvgCalcTxAmnt#
+				, TAT_AGGR_CALC_TX_AMNT=#tatAggrCalcTxAmnt#
+				, TAT_AGGR_ALPAY_TX_AMNT=#tatAggrAlpayTxAmnt#
+				, TAT_AGGR_REGRST_TGT_TX_AMNT=#tatAggrRegrstTgtTxAmnt#
+				, PYMT_REG_TGT_INCM_TX_QNTY=#pymtRegTgtIncmTxQnty#
+				, PYMT_REG_TGT_RGON_INCM_QNTY=#pymtRegTgtRgonIncmQnty#
+				, PYMT_REG_TGT_FARVIL_SPCL_QNTY=#pymtRegTgtFarvilSpclQnty#
+				, PYMT_REGRST_TGT_AGGR_SUM=#pymtRegrstTgtAggrSum#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND CALC_SEVE_PAY_PSN_BLGG_YR=#calcSevePayPsnBlggYr#
+								AND CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	
+	<delete id="remt2400DAO.deleteRemt2400_S">
+		<![CDATA[
+			DELETE FROM REMT2400 
+						WHERE DPOB_CD=#dpobCd#
+								AND CALC_SEVE_PAY_PSN_BLGG_YR=#calcSevePayPsnBlggYr#
+								AND CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<select id="remt2400DAO.selectRemt2400_S" resultMap="remt2400">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, CALC_SEVE_PAY_PSN_BLGG_YR
+				, CALC_SEVE_PAY_PSN_DIV_CD
+				, SYSTEMKEY
+				, DEPT_CD
+				, HAN_NM
+				, RESN_REGN_NUM
+				, AIMENR_ECTE_YN
+				, FRGNR_DIV_CD
+				, RIDN_SEPT_YN
+				, RIDN_CD
+				, RIDN_NM
+				, BLGG_YR_BGNN_DT
+				, BLGG_YR_END_DT
+				, RETRY_REAS_CD
+				, BUSOPR_RGSTN_NUM
+				, PAE_WORK_NM
+				, RETRY_PAY_QNTY
+				, FREE_DTY_RETRY_PAY_QNTY
+				, TXTN_TGT_RETRY_PAY_QNTY
+				, ICNC_DT
+				, RKFCD_DT
+				, RSGTN_DT
+				, PYMT_DT
+				, LOG_SVC_MNTH_ICM
+				, EEPN_MNTH_ICM
+				, ADD_MNTH_ICM
+				, DUP_MNTH_ICM
+				, LOG_SVC_YR_NUM
+				, LOG_PPNL_12BEF_ICNC_DT
+				, LOG_PPNL_12BEF_RKFCD_DT
+				, LOG_PPNL_12BEF_RSGTN_DT
+				, LOG_PPNL_12BEF_PYMT_DT
+				, LOG_PPNL_12BEF_LOG_MNTH_ICM
+				, LOG_PPNL_12BEF_EEPN_MNTH_ICM
+				, LOG_PPNL_12BEF_ADD_MNTH_ICM
+				, LOG_PPNL_12BEF_DUP_MNTH_ICM
+				, LOG_PPNL_12BEF_LOG_YR_NUM
+				, LOG_PPNL_13AFR_ICNC_DT
+				, LOG_PPNL_13AFR_RKFCD_DT
+				, LOG_PPNL_13AFR_RSGTN_DT
+				, LOG_PPNL_13AFR_PYMT_DT
+				, LOG_PPNL_13AFR_LOG_MNTH_ICM
+				, LOG_PPNL_13AFR_EEPN_MNTH_ICM
+				, LOG_PPNL_13AFR_ADD_MNTH_ICM
+				, LOG_PPNL_13AFR_DUP_MNTH_ICM
+				, LOG_PPNL_13AFR_LOG_SVC
+				, RETRY_INCM_PYMT_SUM
+				, RETRY_INCM_FXRT_DDUC_SUM
+				, LOG_YR_DDUC_SUM
+				, RETRY_TXTN_STD_CLUT_SUM
+				, TAT_12BEF_TXTN_STD_PPNL_SUM
+				, TAT_12BEF_YRAVG_TXSTD_SUM
+				, TAT_12BEF_CVSN_TXTN_STD_SUM
+				, TAT_12BEF_CVSN_CALC_AMNT
+				, TAT_12BEF_YR_AVG_CALC_AMNT
+				, TAT_12BEF_CALC_TX_AMNT
+				, TAT_12BEF_ALPAY_TX_AMNT
+				, TAT_12BEF_REG_TGT_TX_AMNT
+				, TAT_13AFR_TXSTD_PPNL_SUM
+				, TAT_13AFR_YR_AVG_STD_SUM
+				, TAT_13AFR_CVSN_TXTN_STD_SUM
+				, TAT_13AFR_CVSN_CALC_TX_AMNT
+				, TAT_13AFR_YR_AVG_CALC_AMNT
+				, TAT_13AFR_ALPAY_TX_AMNT
+				, TAT_13AFR_REGRST_TGT_SUM
+				, TAT_AGGR_TXTN_STD_PPNL_SUM
+				, TAT_AGGR_YR_AVG_TXTN_STD_SUM
+				, TAT_AGGR_CVSN_TXTN_STD_SUM
+				, TAT_AGGR_CVSN_CALC_TX_AMNT
+				, TAT_AGGR_YR_AVG_CALC_TX_AMNT
+				, TAT_AGGR_CALC_TX_AMNT
+				, TAT_AGGR_ALPAY_TX_AMNT
+				, TAT_AGGR_REGRST_TGT_TX_AMNT
+				, PYMT_REG_TGT_INCM_TX_QNTY
+				, PYMT_REG_TGT_RGON_INCM_QNTY
+				, PYMT_REG_TGT_FARVIL_SPCL_QNTY
+				, PYMT_REGRST_TGT_AGGR_SUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM REMT2400
+						WHERE DPOB_CD=#dpobCd#
+								AND CALC_SEVE_PAY_PSN_BLGG_YR=#calcSevePayPsnBlggYr#
+								AND CALC_SEVE_PAY_PSN_DIV_CD=#calcSevePayPsnDivCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+	<select id="remt2400DAO.selectRemt2400List_D" parameterClass="remt2400SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, CALC_SEVE_PAY_PSN_BLGG_YR
+								, CALC_SEVE_PAY_PSN_DIV_CD
+								, SYSTEMKEY
+								, DEPT_CD
+								, HAN_NM
+								, RESN_REGN_NUM
+								, AIMENR_ECTE_YN
+								, FRGNR_DIV_CD
+								, RIDN_SEPT_YN
+								, RIDN_CD
+								, RIDN_NM
+								, BLGG_YR_BGNN_DT
+								, BLGG_YR_END_DT
+								, RETRY_REAS_CD
+								, BUSOPR_RGSTN_NUM
+								, PAE_WORK_NM
+								, RETRY_PAY_QNTY
+								, FREE_DTY_RETRY_PAY_QNTY
+								, TXTN_TGT_RETRY_PAY_QNTY
+								, ICNC_DT
+								, RKFCD_DT
+								, RSGTN_DT
+								, PYMT_DT
+								, LOG_SVC_MNTH_ICM
+								, EEPN_MNTH_ICM
+								, ADD_MNTH_ICM
+								, DUP_MNTH_ICM
+								, LOG_SVC_YR_NUM
+								, LOG_PPNL_12BEF_ICNC_DT
+								, LOG_PPNL_12BEF_RKFCD_DT
+								, LOG_PPNL_12BEF_RSGTN_DT
+								, LOG_PPNL_12BEF_PYMT_DT
+								, LOG_PPNL_12BEF_LOG_MNTH_ICM
+								, LOG_PPNL_12BEF_EEPN_MNTH_ICM
+								, LOG_PPNL_12BEF_ADD_MNTH_ICM
+								, LOG_PPNL_12BEF_DUP_MNTH_ICM
+								, LOG_PPNL_12BEF_LOG_YR_NUM
+								, LOG_PPNL_13AFR_ICNC_DT
+								, LOG_PPNL_13AFR_RKFCD_DT
+								, LOG_PPNL_13AFR_RSGTN_DT
+								, LOG_PPNL_13AFR_PYMT_DT
+								, LOG_PPNL_13AFR_LOG_MNTH_ICM
+								, LOG_PPNL_13AFR_EEPN_MNTH_ICM
+								, LOG_PPNL_13AFR_ADD_MNTH_ICM
+								, LOG_PPNL_13AFR_DUP_MNTH_ICM
+								, LOG_PPNL_13AFR_LOG_SVC
+								, RETRY_INCM_PYMT_SUM
+								, RETRY_INCM_FXRT_DDUC_SUM
+								, LOG_YR_DDUC_SUM
+								, RETRY_TXTN_STD_CLUT_SUM
+								, TAT_12BEF_TXTN_STD_PPNL_SUM
+								, TAT_12BEF_YRAVG_TXSTD_SUM
+								, TAT_12BEF_CVSN_TXTN_STD_SUM
+								, TAT_12BEF_CVSN_CALC_AMNT
+								, TAT_12BEF_YR_AVG_CALC_AMNT
+								, TAT_12BEF_CALC_TX_AMNT
+								, TAT_12BEF_ALPAY_TX_AMNT
+								, TAT_12BEF_REG_TGT_TX_AMNT
+								, TAT_13AFR_TXSTD_PPNL_SUM
+								, TAT_13AFR_YR_AVG_STD_SUM
+								, TAT_13AFR_CVSN_TXTN_STD_SUM
+								, TAT_13AFR_CVSN_CALC_TX_AMNT
+								, TAT_13AFR_YR_AVG_CALC_AMNT
+								, TAT_13AFR_ALPAY_TX_AMNT
+								, TAT_13AFR_REGRST_TGT_SUM
+								, TAT_AGGR_TXTN_STD_PPNL_SUM
+								, TAT_AGGR_YR_AVG_TXTN_STD_SUM
+								, TAT_AGGR_CVSN_TXTN_STD_SUM
+								, TAT_AGGR_CVSN_CALC_TX_AMNT
+								, TAT_AGGR_YR_AVG_CALC_TX_AMNT
+								, TAT_AGGR_CALC_TX_AMNT
+								, TAT_AGGR_ALPAY_TX_AMNT
+								, TAT_AGGR_REGRST_TGT_TX_AMNT
+								, PYMT_REG_TGT_INCM_TX_QNTY
+								, PYMT_REG_TGT_RGON_INCM_QNTY
+								, PYMT_REG_TGT_FARVIL_SPCL_QNTY
+								, PYMT_REGRST_TGT_AGGR_SUM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM REMT2400
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					CALC_SEVE_PAY_PSN_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, CALC_SEVE_PAY_PSN_BLGG_YR DESC
+							, CALC_SEVE_PAY_PSN_DIV_CD DESC
+							, SYSTEMKEY DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="remt2400DAO.selectRemt2400ListTotCnt_S" parameterClass="remt2400SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM REMT2400
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				CALC_SEVE_PAY_PSN_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

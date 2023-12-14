@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0130">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="psnl0130SrhVO" type="com.app.exterms.personal.server.vo.Psnl0130SrhVO"/>
+	
+	<resultMap id="psnl0130" class="com.app.exterms.personal.server.vo.Psnl0130VO">
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="1"/>
+		<result property="dpobCd" column="DPOB_CD" columnIndex="2"/>
+		<result property="payCd" column="PAY_CD" columnIndex="3"/>
+		<result property="bnkCd" column="BNK_CD" columnIndex="4"/>
+		<result property="bnkAccuNum" column="BNK_ACCU_NUM" columnIndex="5"/>
+		<result property="acntHodrNm" column="ACNT_HODR_NM" columnIndex="6"/>
+		<result property="rpsttvAccuYn" column="RPSTTV_ACCU_YN" columnIndex="7"/>
+		<result property="accuNoteCtnt" column="ACCU_NOTE_CTNT" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap>
+	
+	<insert id="psnl0130DAO.insertPsnl0130_S">
+		<![CDATA[
+			INSERT INTO PSNL0130 
+				( SYSTEMKEY
+				  , DPOB_CD
+				  , PAY_CD
+				  , BNK_CD
+				  , BNK_ACCU_NUM
+				  , ACNT_HODR_NM
+				  , RPSTTV_ACCU_YN
+				  , ACCU_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #systemkey#
+				  , #dpobCd#
+				  , #payCd#
+				  , #bnkCd#
+				  , #bnkAccuNum#
+				  , #acntHodrNm#
+				  , #rpsttvAccuYn#
+				  , #accuNoteCtnt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="psnl0130DAO.updatePsnl0130_S">
+		<![CDATA[
+			UPDATE PSNL0130
+			SET SYSTEMKEY=#systemkey#
+				, DPOB_CD=#dpobCd#
+				, PAY_CD=#payCd#
+				, BNK_CD=#bnkCd#
+				, BNK_ACCU_NUM=#bnkAccuNum#
+				, ACNT_HODR_NM=#acntHodrNm#
+				, RPSTTV_ACCU_YN=#rpsttvAccuYn#
+				, ACCU_NOTE_CTNT=#accuNoteCtnt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE SYSTEMKEY=#systemkey#
+								AND DPOB_CD=#dpobCd#
+								AND PAY_CD=#payCd#
+				]]>
+	</update>
+	
+	<delete id="psnl0130DAO.deletePsnl0130_S">
+		<![CDATA[
+			DELETE FROM PSNL0130 
+						WHERE SYSTEMKEY=#systemkey#
+								AND DPOB_CD=#dpobCd#
+								AND PAY_CD=#payCd#
+				]]>
+	</delete>
+	
+	<select id="psnl0130DAO.selectPsnl0130_S" resultMap="psnl0130">
+		<![CDATA[
+			SELECT
+				SYSTEMKEY
+				, DPOB_CD
+				, PAY_CD
+				, BNK_CD
+				, BNK_ACCU_NUM
+				, ACNT_HODR_NM
+				, RPSTTV_ACCU_YN
+				, ACCU_NOTE_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PSNL0130
+						WHERE SYSTEMKEY=#systemkey#
+								AND DPOB_CD=#dpobCd#
+								AND PAY_CD=#payCd#
+				]]>
+	</select>
+	
+	<select id="psnl0130DAO.selectPsnl0130List_D" parameterClass="psnl0130SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								 SYSTEMKEY
+								, DPOB_CD
+								, PAY_CD
+							    , PAY_CD AS payCdcommCd 
+								, fcBass0300CDNM(DPOB_CD,PAY_CD) AS payCdcommCdNm 
+								, BNK_CD
+								, BNK_CD AS bnkCdcommCd 
+								, fcBass0300CDNM(DPOB_CD,BNK_CD) AS bnkCdcommCdNm 
+								, BNK_ACCU_NUM
+								, ACNT_HODR_NM
+								, RPSTTV_ACCU_YN
+								, ACCU_NOTE_CTNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PSNL0130
+				WHERE 1=1
+				  <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>
+		            <isNotEmpty prepend="AND" property="systemkey" >
+			 	SYSTEMKEY=#systemkey#
+		       </isNotEmpty>
+					ORDER BY 
+						SYSTEMKEY DESC
+							, DPOB_CD DESC
+							, PAY_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="psnl0130DAO.selectPsnl0130ListTotCnt_S" parameterClass="psnl0130SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PSNL0130
+			WHERE 1=1
+			  <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>
+		            <isNotEmpty prepend="AND" property="systemkey" >
+			 	SYSTEMKEY=#systemkey#
+		       </isNotEmpty>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye161030_2023">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ye161030Srh_2023_Vo" type="com.app.exterms.yearendtax.server.vo.Ye161030Srh_2023_VO"/>
+	
+	 
+	<!-- 
+	#############################################################################
+	######################## 2023년도 연말정산 로직 시작 ############################
+	#############################################################################
+	 -->
+	 
+	<insert id="ye161030_2023_DAO.insertYeta8300ToYe161030_S">
+		<![CDATA[
+			INSERT INTO YE161030 
+				( DPOB_CD				
+					, YRTX_BLGG_YR		
+					, CLUT_SEPT_CD		
+					, SYSTEMKEY			
+					, TXPR_DSCM_NO_CNTN	
+					, SUPT_FMLY_RLT_CL_CD	
+					, NNF_CL_CD			
+					, TXPR_NM				
+					, BSC_DDC_CL_CD		
+					, WMN_DDC_CL_CD		
+					, SNPRNT_FMLY_DDC_CL_CD
+					, SCC_DDC_CL_CD		
+					, DSBR_DDC_CL_CD		
+					, CHBT_ATPR_DDC_CL_CD
+					, SCHOOL_YN
+					, EDU_DDC_DVCD
+				  	, KYBDR
+				  	, INPT_DT
+				  	, INPT_ADDR
+				  	, ISMT
+				  	, REVN_DT
+				  	, REVN_ADDR
+				  	, FAMY_RELA_DIV_CD )
+			VALUES ( #dpobCd#			
+						, #yrtxBlggYr#		
+						, #clutSeptCd#	
+						, #systemkey#			
+						, #txprDscmNoCntn#
+						, #suptFmlyRltClCd#
+						, #nnfClCd#
+						, #txprNm#				
+						, #bscDdcClCd#		
+						, #wmnDdcClCd#		
+						, #snprntFmlyDdcClCd#
+						, #sccDdcClCd#		
+						, NVL( ( SELECT MANGE_ITEM11
+						     FROM BASS0300
+						     WHERE DPOB_CD = #dpobCd#
+						     	AND COMM_CD = #dsbrDdcClCd#
+						   ), '0')
+						, NVL( ( SELECT MANGE_ITEM11
+						     FROM BASS0300
+						     WHERE DPOB_CD = #dpobCd#
+						     	AND COMM_CD = #chbtAtprDdcClCd#
+						     	AND RPSTTV_CD = 'Y021'
+						   ), 'N')
+						, #schoolYn#
+						, #eduDdcDvcd#
+					  	, #kybdr#
+					  	, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')	
+					  	, #inptAddr#
+					  	, #ismt#
+					  	, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')	
+					  	, #revnAddr#
+					  	, #famyRelaDivCd# )
+		]]>
+	</insert>
+	
+	<update id="ye161030_2023_DAO.updateYeta8300ToYe161030_S">
+		<![CDATA[
+			UPDATE YE161030
+				SET SUPT_FMLY_RLT_CL_CD			= #suptFmlyRltClCd#
+						, NNF_CL_CD				= #nnfClCd#	
+						, TXPR_NM 				= #txprNm#				
+						, BSC_DDC_CL_CD 		= #bscDdcClCd#
+						, WMN_DDC_CL_CD 		= #wmnDdcClCd#	
+						, SNPRNT_FMLY_DDC_CL_CD = #snprntFmlyDdcClCd#
+						, SCC_DDC_CL_CD 		= #sccDdcClCd#	
+						, DSBR_DDC_CL_CD		= NVL( ( SELECT MANGE_ITEM11
+														   FROM BASS0300
+														  WHERE DPOB_CD = #dpobCd#
+														  	AND COMM_CD = #dsbrDdcClCd#
+														   ), '0')	
+						, CHBT_ATPR_DDC_CL_CD 	=  NVL( ( SELECT MANGE_ITEM11
+												     FROM BASS0300
+												     WHERE DPOB_CD = #dpobCd#
+												     	AND COMM_CD = #chbtAtprDdcClCd#
+												     	AND RPSTTV_CD = 'Y021'
+												   ), 'N')
+						, SCHOOL_YN				= #schoolYn#
+						, EDU_DDC_DVCD			= #eduDdcDvcd#
+						, ISMT					= #ismt#
+						, REVN_DT				= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')	
+						, REVN_ADDR				= #revnAddr#
+						
+				WHERE DPOB_CD=#dpobCd#
+					AND YRTX_BLGG_YR=#yrtxBlggYr#
+					AND CLUT_SEPT_CD=#clutSeptCd#
+					AND SYSTEMKEY=#systemkey#
+					AND TXPR_DSCM_NO_CNTN=#txprDscmNoCntn#
+				]]>
+	</update>
+	
+	<delete id="ye161030_2023_DAO.deleteYeta8300ToYe161030_S">
+		<![CDATA[
+			DELETE FROM YE161030 
+				WHERE DPOB_CD=#dpobCd#
+					AND YRTX_BLGG_YR=#yrtxBlggYr#
+					AND CLUT_SEPT_CD=#clutSeptCd#
+					AND SYSTEMKEY=#systemkey#
+					AND TXPR_DSCM_NO_CNTN=#txprDscmNoCntn#
+				]]>
+	</delete>
+	
+	<select id="ye161030_2023_DAO.seleteYeta8300ToYe161030_D" parameterClass="ye161030Srh_2023_Vo" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM 
+			  FROM ( SELECT AA.DPOB_CD				
+							, AA.YRTX_BLGG_YR		
+							, AA.CLUT_SEPT_CD		
+							, AA.SYSTEMKEY			
+							, AA.TXPR_DSCM_NO_CNTN	
+							, AA.SUPT_FMLY_RLT_CL_CD	
+							, AA.SUPT_FMLY_RLT_CL_CD AS suptFmlyRltClCdcommCd 
+							, fcBass0300CDNM(AA.DPOB_CD, AA.SUPT_FMLY_RLT_CL_CD) AS suptFmlyRltClCdcommCdNm 
+							, AA.NNF_CL_CD	
+							, AA.TXPR_NM				
+							, AA.BSC_DDC_CL_CD		
+							, AA.WMN_DDC_CL_CD		
+							, AA.SNPRNT_FMLY_DDC_CL_CD
+							, AA.SCC_DDC_CL_CD		
+							, AA.DSBR_DDC_CL_CD	
+							, ( SELECT COMM_CD
+								  FROM BASS0300
+								WHERE DPOB_CD = AA.DPOB_CD
+									AND MANGE_ITEM11 = AA.DSBR_DDC_CL_CD
+									AND RPSTTV_CD = 'Y008'
+								) AS dsbrDdcClCdcommCd 
+							, ( SELECT COMM_CD_NM
+								  FROM BASS0300
+								WHERE DPOB_CD = AA.DPOB_CD
+									AND MANGE_ITEM11 = AA.DSBR_DDC_CL_CD
+									AND RPSTTV_CD = 'Y008'
+								) AS dsbrDdcClCdcommCdNm 	
+							, AA.CHBT_ATPR_DDC_CL_CD
+							, ( SELECT COMM_CD
+								  FROM BASS0300
+								WHERE DPOB_CD = AA.DPOB_CD
+									AND MANGE_ITEM11 = AA.CHBT_ATPR_DDC_CL_CD
+									AND RPSTTV_CD = 'Y021'
+								)  AS chbtAtprDdcClCdcommCd 
+							, ( SELECT COMM_CD_NM
+								  FROM BASS0300
+								WHERE DPOB_CD = AA.DPOB_CD
+									AND MANGE_ITEM11 = AA.CHBT_ATPR_DDC_CL_CD
+									AND RPSTTV_CD = 'Y021'
+								) AS chbtAtprDdcClCdcommCdNm
+								, AA.SCHOOL_YN
+							, AA.EDU_DDC_DVCD				
+							, AA.KYBDR				
+							, AA.INPT_DT				
+							, AA.INPT_ADDR			
+							, AA.ISMT				
+							, AA.REVN_DT				
+							, AA.REVN_ADDR
+							, NVL(AA.FAMY_RELA_DIV_CD, BB.FAMY_RELA_DIV_CD)AS FAMY_RELA_DIV_CD
+							, NVL(AA.FAMY_RELA_DIV_CD, BB.FAMY_RELA_DIV_CD)AS famyRelaDivCdcommCd 
+							, fcBass0300CDNM(AA.DPOB_CD, NVL(AA.FAMY_RELA_DIV_CD, BB.FAMY_RELA_DIV_CD)) AS famyRelaDivCdcommCdNm 
+							
+						FROM YE161030 AA, PSNL0115 BB
+						
+					WHERE AA.DPOB_CD 			= #dpobCd#				
+						AND AA.YRTX_BLGG_YR 	= #yrtxBlggYr#	
+						AND AA.CLUT_SEPT_CD		= #clutSeptCd#		
+						AND AA.SYSTEMKEY	  	= #systemkey#
+						
+						AND AA.DPOB_CD 			= BB.DPOB_CD(+)
+						AND AA.SYSTEMKEY 		= BB.SYSTEMKEY(+)
+						AND AA.TXPR_DSCM_NO_CNTN= BB.FAMY_RESN_REGN_NUM(+)
+							
+					ORDER BY AA.DPOB_CD				
+							, AA.YRTX_BLGG_YR		
+							, AA.CLUT_SEPT_CD		
+							, AA.SYSTEMKEY
+							, AA.TXPR_NM
+							, AA.FAMY_RELA_DIV_CD
+							, AA.TXPR_DSCM_NO_CNTN
+				
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>
+		
+	<select id="ye161030_2023_DAO.seleteYeta8300ToYe161030ListCnt_S" parameterClass="ye161030Srh_2023_Vo" resultClass="int">
+		SELECT COUNT(*) totcnt
+			FROM YE161030 AA, PSNL0115 BB
+		WHERE AA.DPOB_CD 			= #dpobCd#				
+			AND AA.YRTX_BLGG_YR 	= #yrtxBlggYr#	
+			AND AA.CLUT_SEPT_CD		= #clutSeptCd#		
+			AND AA.SYSTEMKEY	  	= #systemkey#
+								
+			AND AA.DPOB_CD 			= BB.DPOB_CD(+)
+			AND AA.SYSTEMKEY 		= BB.SYSTEMKEY(+)
+			AND AA.TXPR_DSCM_NO_CNTN= BB.FAMY_RESN_REGN_NUM(+)
+									
+		ORDER BY AA.DPOB_CD				
+				, AA.YRTX_BLGG_YR		
+				, AA.CLUT_SEPT_CD		
+				, AA.SYSTEMKEY
+				, AA.TXPR_DSCM_NO_CNTN
+	</select>
+	
+	
+	<!-- 
+	#############################################################################
+	######################## 2023년도 연말정산 로직 종료 ############################
+	#############################################################################
+	 -->
+	 
+	
+	<!-- +++++++++++++++++++++++++ 2023년도 귀속 로직  시작 ++++++++++++++++++++++++++++++ -->
+		
+	<delete id="ye161030_2023_DAO.deleteYetaP810001_Ye161030VO_2023_Delete_S">
+		<![CDATA[
+			DELETE FROM YE161030 
+				WHERE DPOB_CD=#dpobCd#
+					AND YRTX_BLGG_YR=#yrtxBlggYr#
+					AND CLUT_SEPT_CD=#clutSeptCd#
+					AND SYSTEMKEY=#systemkey# 
+				]]>
+	</delete>	 
+	
+	<!-- +++++++++++++++++++++++++ 2023년도 귀속 로직  종료 ++++++++++++++++++++++++++++++ -->
+	
+	
+	 
+
+</sqlMap>

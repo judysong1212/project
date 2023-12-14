@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgYe161055">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYe161055SrhVO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgYe161055SrhVO"/>
+	
+	<resultMap id="infcPkgYe161055" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgYe161055VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="piclEmplDivCd" column="PICL_EMPL_DIV_CD" columnIndex="5"/>
+		<result property="natPennPrmmSum" column="NAT_PENN_PRMM_SUM" columnIndex="6"/>
+		<result property="natPennAraPrmmSum" column="NAT_PENN_ARA_PRMM_SUM" columnIndex="7"/>
+		<result property="natPennDducSum" column="NAT_PENN_DDUC_SUM" columnIndex="8"/>
+		<result property="puoferAnty" column="PUOFER_ANTY" columnIndex="9"/>
+		<result property="puoferAntyDducSum" column="PUOFER_ANTY_DDUC_SUM" columnIndex="10"/>
+		<result property="mltymAnty" column="MLTYM_ANTY" columnIndex="11"/>
+		<result property="mltymAntyDducSum" column="MLTYM_ANTY_DDUC_SUM" columnIndex="12"/>
+		<result property="prtafirSchlFalymmAnty" column="PRTAFIR_SCHL_FALYMM_ANTY" columnIndex="13"/>
+		<result property="prtafirSchlDducSum" column="PRTAFIR_SCHL_DDUC_SUM" columnIndex="14"/>
+		<result property="spildtnPstoficAnty" column="SPILDTN_PSTOFIC_ANTY" columnIndex="15"/>
+		<result property="spildtnPstoficDducSum" column="SPILDTN_PSTOFIC_DDUC_SUM" columnIndex="16"/>
+		<result property="kybdr" column="KYBDR" columnIndex="17"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="18"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="19"/>
+		<result property="ismt" column="ISMT" columnIndex="20"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="21"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="22"/>
+	</resultMap>
+	
+	
+	<insert id="infcPkgYe161055DAO.fnYeta2100_Ye161055_PAYR_2017_Y0130001_Insert_S">
+		<![CDATA[
+			INSERT INTO YE161055 
+				(   DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , PICL_EMPL_DIV_CD
+				  , NAT_PENN_PRMM_SUM
+				  , NAT_PENN_ARA_PRMM_SUM
+				  , NAT_PENN_DDUC_SUM
+				  , PUOFER_ANTY
+				  , PUOFER_ANTY_DDUC_SUM
+				  , MLTYM_ANTY
+				  , MLTYM_ANTY_DDUC_SUM
+				  , PRTAFIR_SCHL_FALYMM_ANTY
+				  , PRTAFIR_SCHL_DDUC_SUM
+				  , SPILDTN_PSTOFIC_ANTY
+				  , SPILDTN_PSTOFIC_DDUC_SUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , 'Y0130001'    /* 주근무지 */
+				  ,  (SELECT SUM(YE160401.NATN_PSNF) AS NATN_PSNF      
+                               FROM YE160401                          
+                               WHERE YE160401.YRTX_BLGG_YR = #yrtxBlggYr#    
+                              AND YE160401.CLUT_SEPT_CD = #clutSeptCd#      
+                              AND YE160401.SYSTEMKEY =  #systemkey#
+                              AND YE160401.DPOB_CD =  #dpobCd#)  
+				  ,0
+				  ,  (SELECT SUM(YE160401.NATN_PSNF) AS NATN_PSNF      
+                               FROM YE160401                          
+                               WHERE YE160401.YRTX_BLGG_YR = #yrtxBlggYr#    
+                              AND YE160401.CLUT_SEPT_CD = #clutSeptCd#      
+                              AND YE160401.SYSTEMKEY =  #systemkey#
+                              AND YE160401.DPOB_CD =  #dpobCd#)  
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<!--  C_연금보험료_공적연금상세  -->
+		<insert id="infcPkgYe161055DAO.incTaxDeducDec_nts_Yeta2017_Ye161055_Insert_S">
+		<![CDATA[
+			INSERT INTO YE161055 
+				(   DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , PICL_EMPL_DIV_CD
+				  , NAT_PENN_PRMM_SUM
+				  , NAT_PENN_ARA_PRMM_SUM
+				  , NAT_PENN_DDUC_SUM
+				  , PUOFER_ANTY
+				  , PUOFER_ANTY_DDUC_SUM
+				  , MLTYM_ANTY
+				  , MLTYM_ANTY_DDUC_SUM
+				  , PRTAFIR_SCHL_FALYMM_ANTY
+				  , PRTAFIR_SCHL_DDUC_SUM
+				  , SPILDTN_PSTOFIC_ANTY
+				  , SPILDTN_PSTOFIC_DDUC_SUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			  ( 
+			  SELECT 
+					DPOB_CD
+					, YRTX_BLGG_YR
+					, CLUT_SEPT_CD
+					, SYSTEMKEY
+					, 'Y0130001'    /* 주근무지 */ 
+					,  NP_HTHR_MCUR_WKAR_INFEE_AMT
+					,  NP_HTHR_AREA_INFEE_AMT
+					,  (NP_HTHR_MCUR_WKAR_DDC_AMT + NP_HTHR_AREA_DDC_AMT)
+					   , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+					FROM  YE161050                   
+                             WHERE YRTX_BLGG_YR = #yrtxBlggYr#    
+                              AND CLUT_SEPT_CD = #clutSeptCd#      
+                              AND SYSTEMKEY =  #systemkey#
+                              AND DPOB_CD =  #dpobCd#   
+				 )
+		]]>
+	</insert> 
+	
+	             
+	<insert id="infcPkgYe161055DAO.fnYeta2100_Ye161055_PAYR_2017_Y0130002_Insert_S">
+		<![CDATA[
+			INSERT INTO YE161055 
+				(   DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , PICL_EMPL_DIV_CD
+				  , NAT_PENN_PRMM_SUM
+				  , NAT_PENN_ARA_PRMM_SUM
+				  , NAT_PENN_DDUC_SUM
+				  , PUOFER_ANTY
+				  , PUOFER_ANTY_DDUC_SUM
+				  , MLTYM_ANTY
+				  , MLTYM_ANTY_DDUC_SUM
+				  , PRTAFIR_SCHL_FALYMM_ANTY
+				  , PRTAFIR_SCHL_DDUC_SUM
+				  , SPILDTN_PSTOFIC_ANTY
+				  , SPILDTN_PSTOFIC_DDUC_SUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , 'Y0130002'    /* 종근무지 */
+				  , 0 
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , 0
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	
+	<!-- 공적연금상세  금액    -->
+	<update id="infcPkgYe161055DAO.fnYeta2300_YE161055_2017_Update_S">
+		<![CDATA[
+			  UPDATE YE161055 AA  
+			  SET NAT_PENN_PRMM_SUM=NVL((SELECT SUM(NVL(NAT_AMT_SUM,0) - NVL(PMT,0) )
+			 								FROM	 PDF_P102Y BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY  
+											AND BB.PDF_DAT_APP_YN = 'Y'
+			  							),NAT_PENN_PRMM_SUM)  
+			  	, NAT_PENN_ARA_PRMM_SUM=NVL((SELECT SUM(NVL(PMT,0))
+			 								FROM	 PDF_P102Y BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY  
+											AND BB.PDF_DAT_APP_YN = 'Y'
+			  							),NAT_PENN_ARA_PRMM_SUM)  						
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE AA.DPOB_CD=#dpobCd#
+								AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+								AND AA.CLUT_SEPT_CD=#clutSeptCd#
+								AND AA.SYSTEMKEY=#systemkey#
+								AND AA.PICL_EMPL_DIV_CD='Y0130001'    /* 주근무지 */  
+            ]]>
+	</update>
+	 	
+	
+	
+	
+	
+		<!-- 본인,가족사항 업데이트/국민연금 주사업장  금액    -->
+	<update id="infcPkgYe161055DAO.PdfYeta2017_P102M_YE161055_Update_S">
+		<![CDATA[
+			  UPDATE YE161055 AA  
+			  SET NAT_PENN_PRMM_SUM=NVL((SELECT SUM(NVL(NAT_AMT_SUM,0) - NVL(PMT,0) )
+			 								FROM	 PDF_P102Y BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY  
+											AND BB.PDF_DAT_APP_YN = 'Y'
+			  							),0)  
+			  	, NAT_PENN_ARA_PRMM_SUM=NVL((SELECT SUM(NVL(PMT,0))
+			 								FROM	 PDF_P102Y BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY  
+											AND BB.PDF_DAT_APP_YN = 'Y'
+			  							),0)  						
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE AA.DPOB_CD=#dpobCd#
+								AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+								AND AA.CLUT_SEPT_CD=#clutSeptCd#
+								AND AA.SYSTEMKEY=#systemkey#
+								AND AA.PICL_EMPL_DIV_CD='Y0130001'    /* 주근무지 */  
+            ]]>
+	</update>
+	 
+	
+ 	<!-- 본인,가족사항 업데이트/국민연금 종사업장  금액    -->
+	  <delete id="infcPkgYe161055DAO.delete_YETA2300_2017_Ye161055_S">
+		<![CDATA[
+			DELETE FROM YE161055 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND PICL_EMPL_DIV_CD='Y0130002'  
+				]]>
+	    </delete>	
+
+			<insert id="infcPkgYe161055DAO.insert_YETA2300_2017_Ye161055_S">
+		<![CDATA[
+			INSERT INTO YE161055 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , PICL_EMPL_DIV_CD
+				  
+				  , NAT_PENN_PRMM_SUM			/* 국민연금보험료금액 */
+				  , NAT_PENN_ARA_PRMM_SUM		/* 국민연금지역보험료금액 */
+				  , NAT_PENN_DDUC_SUM			/* 국민염금보험료공제금액 */
+				  , PUOFER_ANTY					/* 공무원연금금액 */
+				  , PUOFER_ANTY_DDUC_SUM		/* 공무원연금공제금액 */
+				  , MLTYM_ANTY					/* 군인연금금액 */
+				  , MLTYM_ANTY_DDUC_SUM			/* 군인연금공제금액 */
+				  , PRTAFIR_SCHL_FALYMM_ANTY	/* 사립학교교직원연금금액 */
+				  , PRTAFIR_SCHL_DDUC_SUM		/* 사립학교교직원연금공제금액 */
+				  , SPILDTN_PSTOFIC_ANTY		/* 별정우체국연금금액 */
+				  , SPILDTN_PSTOFIC_DDUC_SUM	/* 별정우체국연금공제금액 */
+				 
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+				  
+			SELECT DPOB_CD
+						, YRTX_BLGG_YR
+						, CLUT_SEPT_CD
+						, SYSTEMKEY 
+						, ('Y0130002') AS PICL_EMPL_DIV_CD
+						
+						, SUM(NVL(NAT_PENN_PRMM_SUM,0))
+						, SUM(NVL(NAT_PENN_ARA_PRMM_SUM,0))
+						, SUM(NVL(NAT_PENN_DDUC_SUM ,0))
+						, SUM(NVL(PUOFER_ANTY,0))
+						, SUM(NVL(PUOFER_ANTY_DDUC_SUM,0))
+						, SUM(NVL(MLTYM_ANTY,0)) 
+						, SUM(NVL(MLTYM_ANTY_DDUC_SUM,0)) 
+						, SUM(NVL(PRTAFIR_SCHL_FALYMM_ANTY ,0))
+						, SUM(NVL(PRTAFIR_SCHL_DDUC_SUM ,0))
+						, SUM(NVL(SPILDTN_PSTOFIC_ANTY ,0)) 
+						, SUM(NVL(SPILDTN_PSTOFIC_DDUC_SUM ,0))
+						
+						, #kybdr#
+				  		, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  		, #inptAddr#
+				  		, #ismt#
+				  		, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  		, #revnAddr# 
+				  		
+					FROM YE160406
+				WHERE DPOB_CD=#dpobCd#
+					AND YRTX_BLGG_YR=#yrtxBlggYr#
+					AND CLUT_SEPT_CD=#clutSeptCd#
+					AND SYSTEMKEY=#systemkey# 
+					
+				GROUP BY DPOB_CD
+						, YRTX_BLGG_YR
+						, CLUT_SEPT_CD
+						, SYSTEMKEY 
+	 
+		]]>
+	</insert>
+ 
+	
+	
+	<!-- ######################### 2017년도 귀속 로직  종료 ######################### -->
+	
+	<insert id="infcPkgYe161055DAO.insertYe161055_S">
+		<![CDATA[
+			INSERT INTO YE161055 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , PICL_EMPL_DIV_CD
+				  , NAT_PENN_PRMM_SUM
+				  , NAT_PENN_ARA_PRMM_SUM
+				  , NAT_PENN_DDUC_SUM
+				  , PUOFER_ANTY
+				  , PUOFER_ANTY_DDUC_SUM
+				  , MLTYM_ANTY
+				  , MLTYM_ANTY_DDUC_SUM
+				  , PRTAFIR_SCHL_FALYMM_ANTY
+				  , PRTAFIR_SCHL_DDUC_SUM
+				  , SPILDTN_PSTOFIC_ANTY
+				  , SPILDTN_PSTOFIC_DDUC_SUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #piclEmplDivCd#
+				  , #natPennPrmmSum#
+				  , #natPennAraPrmmSum#
+				  , #natPennDducSum#
+				  , #puoferAnty#
+				  , #puoferAntyDducSum#
+				  , #mltymAnty#
+				  , #mltymAntyDducSum#
+				  , #prtafirSchlFalymmAnty#
+				  , #prtafirSchlDducSum#
+				  , #spildtnPstoficAnty#
+				  , #spildtnPstoficDducSum#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgYe161055DAO.updateYe161055_S">
+		<![CDATA[
+			UPDATE YE161055
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, PICL_EMPL_DIV_CD=#piclEmplDivCd#
+				, NAT_PENN_PRMM_SUM=#natPennPrmmSum#
+				, NAT_PENN_ARA_PRMM_SUM=#natPennAraPrmmSum#
+				, NAT_PENN_DDUC_SUM=#natPennDducSum#
+				, PUOFER_ANTY=#puoferAnty#
+				, PUOFER_ANTY_DDUC_SUM=#puoferAntyDducSum#
+				, MLTYM_ANTY=#mltymAnty#
+				, MLTYM_ANTY_DDUC_SUM=#mltymAntyDducSum#
+				, PRTAFIR_SCHL_FALYMM_ANTY=#prtafirSchlFalymmAnty#
+				, PRTAFIR_SCHL_DDUC_SUM=#prtafirSchlDducSum#
+				, SPILDTN_PSTOFIC_ANTY=#spildtnPstoficAnty#
+				, SPILDTN_PSTOFIC_DDUC_SUM=#spildtnPstoficDducSum#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND PICL_EMPL_DIV_CD=#piclEmplDivCd#
+				]]>
+	</update>
+	
+	<delete id="infcPkgYe161055DAO.deleteYe161055_S">
+		<![CDATA[
+			DELETE FROM YE161055 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND PICL_EMPL_DIV_CD=#piclEmplDivCd#
+				]]>
+	</delete>
+	
+	<select id="infcPkgYe161055DAO.selectYe161055_S" resultMap="infcPkgYe161055">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, PICL_EMPL_DIV_CD
+				, NAT_PENN_PRMM_SUM
+				, NAT_PENN_ARA_PRMM_SUM
+				, NAT_PENN_DDUC_SUM
+				, PUOFER_ANTY
+				, PUOFER_ANTY_DDUC_SUM
+				, MLTYM_ANTY
+				, MLTYM_ANTY_DDUC_SUM
+				, PRTAFIR_SCHL_FALYMM_ANTY
+				, PRTAFIR_SCHL_DDUC_SUM
+				, SPILDTN_PSTOFIC_ANTY
+				, SPILDTN_PSTOFIC_DDUC_SUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE161055
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND PICL_EMPL_DIV_CD=#piclEmplDivCd#
+				]]>
+	</select>
+	
+	<select id="infcPkgYe161055DAO.selectYe161055List_D" parameterClass="infcPkgYe161055SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, PICL_EMPL_DIV_CD
+								, NAT_PENN_PRMM_SUM
+								, NAT_PENN_ARA_PRMM_SUM
+								, NAT_PENN_DDUC_SUM
+								, PUOFER_ANTY
+								, PUOFER_ANTY_DDUC_SUM
+								, MLTYM_ANTY
+								, MLTYM_ANTY_DDUC_SUM
+								, PRTAFIR_SCHL_FALYMM_ANTY
+								, PRTAFIR_SCHL_DDUC_SUM
+								, SPILDTN_PSTOFIC_ANTY
+								, SPILDTN_PSTOFIC_DDUC_SUM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE161055
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, PICL_EMPL_DIV_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgYe161055DAO.selectYe161055ListTotCnt_S" parameterClass="infcPkgYe161055SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE161055
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

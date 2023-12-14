@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeinfcPkgOther0400">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgBass0400SrhVo" type="com.app.smrmf.infc.basis.server.vo.InfcPkgBass0400SrhVO"/>
+	<typeAlias  alias="infcPkgBass0400Vo" type="com.app.smrmf.infc.basis.server.vo.InfcPkgBass0400VO"/>
+	
+	<select id="infcPkgOther0400DAO.selectBass0400PiOrgCode" parameterClass="infcPkgBass0400SrhVo" resultClass="egovMap">
+	    	<![CDATA[
+				SELECT DEPT_CD,
+			       DEPT_NM AS DEPT_NM_HAN,
+			       DEPT_MIN_NM AS DEPT_NM_RTCHNT,
+			       DEPT_NM_ENG,
+			       RPRSNTATV_DEPT_CD AS TPLVL_DEPT_CD,
+			       NEXT_DEPT_CD AS HHRK_DEPT_CD,
+			       RPRSNTATV_DEPT_CD AS PAYR_MANG_DEPT_CD,
+			       DECODE (USE_YN, '0', 'Y', 'N') AS DEPT_USE_YN,
+			       DECODE (USE_YN, '0', 'Y', 'N') AS DEPT_DSPY_YN,
+			       DEPT_CD AS MANGE_DEPT_CD,
+			       RANK AS DEPT_RANK
+			  FROM PI_ORG_CODE
+			 WHERE RPRSNTATV_DEPT_CD = #rprsntatvDeptCd# 
+			 ]]>
+	</select> 
+	 
+	<insert id="infcPkgOther0400DAO.insertBass0400" parameterClass="infcPkgBass0400Vo">
+	     
+			   INSERT 
+						( DPOB_CD,
+	                      DEPT_CD,
+	                      DEPT_NM_HAN,
+	                      DEPT_NM_RTCHNT,
+	                      DEPT_NM_ENG,
+	                      TPLVL_DEPT_CD,
+	                      HHRK_DEPT_CD,
+	                      PAYR_MANG_DEPT_CD,
+	                      DEPT_USE_YN,
+	                      NAT_PENN_SYM,
+	                      HLTH_INSR_SYM,
+	                      UMYT_INSR_SYM,
+	                      IDTL_ACCDT_INSUR_SYM,
+	                      DEPT_NOTE_CTNT,
+	                      DEPT_DSPY_YN,
+	                      MANGE_DEPT_CD,
+	                      KYBDR,
+	                      INPT_DT,
+	                      INPT_ADDR,
+	                      ISMT,
+	                      REVN_DT,
+	                      REVN_ADDR)
+				VALUES ( #dpobCd#,
+			             #deptCd#,
+			             #deptNmHan#,
+			             #deptNmRtchnt#,
+			             #deptNmEng#,
+			             #tplvlDeptCd#,
+			             #hhrkDeptCd#,
+			             #payrMangDeptCd#,
+			             #deptUseYn#,
+			             #natPennSym#,
+			             #hlthInsrSym#,
+			             #umytInsrSym#,
+			             #idtlAccdtInsurSym#,
+			             #deptNoteCtnt#,
+			             #deptDspyYn#,
+			             #mangeDeptCd#,
+			             #ismt#,
+			             to_char(sysdate, 'yyyymmddhh24miss'),
+			             #revnAddr#,
+			             #ismt#,
+			             to_char(sysdate, 'yyyymmddhh24miss'),
+			             #revnAddr#)
+	</insert>
+	
+	<delete id="infcPkgOther0400DAO.deleteBass0400"  parameterClass="infcPkgBass0400Vo">
+		<![CDATA[
+			DELETE FROM BASS0400 
+			WHERE DPOB_CD = #dpobCd#  
+			]]>
+	</delete>
+	
+	
+</sqlMap>

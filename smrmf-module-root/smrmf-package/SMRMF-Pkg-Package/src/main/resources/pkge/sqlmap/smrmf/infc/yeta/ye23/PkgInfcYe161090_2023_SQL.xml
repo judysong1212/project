@@ -1,0 +1,1045 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgYe161090_2023">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYe161090Srh_2023_VO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2023.InfcPkgYe161090Srh_2023_VO"/>
+	
+	<resultMap id="infcPkgYe161090_2023" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2023.InfcPkgYe161090_2023_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="famResnoEncCntn" column="FAM_RESNO_ENC_CNTN" columnIndex="5"/>
+		<result property="scxpsStd" column="SCXPS_STD" columnIndex="6"/>
+		<result property="scxpsUseAmt" column="SCXPS_USE_AMT" columnIndex="7"/>
+		<result property="scxpsStdDdcTrgtIndvAmt" column="SCXPS_STD_DDC_TRGT_INDV_AMT" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap>
+	
+<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직  시작 ++++++++++++++++++++++++++++++ -->
+
+<!--   교육비   -->
+<delete id="infcPkgYe161090_2023_DAO.PdfYeta8200_C101Y_YE161090_Delete_S">
+		<![CDATA[
+			DELETE FROM YE161090 AA
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey# 
+					            AND CD_VVAL_KRN_CD = 'Y0140000'  /* 국세청 */  
+					            AND SCXPS_STD_CL_DIV_CD IN ('Y0200010','Y0200020')
+								AND EXISTS (SELECT * FROM  PDF_C101Y BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.RESID = AA.FAM_RESNO_ENC_CNTN  )
+								
+				]]>
+				<isNotEmpty prepend="AND" property="famResnoEncCntn" >
+                        FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+                </isNotEmpty> 
+				
+				 
+				
+	</delete>
+	
+<!-- 교육비 -->
+<insert id="infcPkgYe161090_2023_DAO.PdfYeta8200_C101Y_YE161090_Insert_S">
+		<![CDATA[
+			INSERT INTO YE161090 (DPOB_CD,
+			                      YRTX_BLGG_YR,
+			                      CLUT_SEPT_CD,
+			                      SYSTEMKEY,
+			                      FAM_RESNO_ENC_CNTN,
+			                      CD_VVAL_KRN_CD,
+			                      SCXPS_STD,
+			                      SCXPS_USE_AMT,
+			                      SCXPS_STD_DDC_TRGT_INDV_AMT,
+			                      SCXPS_STD_CL_DIV_CD,
+			                      KYBDR,
+			                      INPT_DT,
+			                      INPT_ADDR,
+			                      ISMT,
+			                      REVN_DT,
+			                      REVN_ADDR)
+			   (SELECT AC02.DPOB_CD,
+			           AC02.YRTX_BLGG_YR,
+			           AC02.CLUT_SEPT_CD,
+			           AC02.SYSTEMKEY,
+			           AC02.TXPR_DSCM_NO_CNTN,
+			           'Y0140000'                                                /* 국세청 */
+			                     ,
+			           AC03.EDU_TP,
+			           AC03.EDI_SUM,
+			           0,
+			           AC03.EDU_CL,
+			           #kybdr#,
+			           TO_CHAR (SYSDATE, 'YYYYMMDDHHMISS'),
+			           #inptAddr#,
+			           #ismt#,
+			           TO_CHAR (SYSDATE, 'YYYYMMDDHHMISS'),
+			           #revnAddr#
+			      FROM YE161030 AC02,
+			           (  SELECT DPOB_CD,
+			                     YRTX_BLGG_YR,
+			                     CLUT_SEPT_CD,
+			                     SYSTEMKEY,
+			                     RESID,
+			                     EDU_TP,
+			                     EDU_CL,
+			                     SUM (NVL (EDI_SUM, 0)) AS EDI_SUM
+			                FROM (SELECT AA.DPOB_CD,
+			                             AA.YRTX_BLGG_YR,
+			                             AA.CLUT_SEPT_CD,
+			                             AA.SYSTEMKEY,
+			                             AA.RESID,
+			                             (CASE
+			                                 WHEN AA.DAT_CD = 'G0004'
+			                                 THEN
+			                                    (CASE
+			                                        WHEN AA.EDU_TP = 'H' THEN 'Y0030040'
+			                                        WHEN AA.EDU_TP = 'J' THEN 'Y0030040'
+			                                        WHEN AA.EDU_TP = 'K' THEN 'Y0030040'
+			                                        ELSE 'Y0030005'
+			                                     END)
+			                                 WHEN AA.DAT_CD = 'G0006'
+			                                 THEN
+			                                    (CASE
+			                                        WHEN AA.EDU_TP = 'H' THEN 'Y0030040'
+			                                        WHEN AA.EDU_TP = 'J' THEN 'Y0030040'
+			                                        WHEN AA.EDU_TP = 'K' THEN 'Y0030040'
+			                                        ELSE 'Y0030005'
+			                                     END)
+			                                 WHEN DAT_CD = 'G0007'
+			                                 THEN
+			                                    (CASE
+			                                        WHEN AA.EDU_TP = 'H' THEN 'Y0030040'
+			                                        WHEN AA.EDU_TP = 'J' THEN 'Y0030040'
+			                                        WHEN AA.EDU_TP = 'K' THEN 'Y0030040'
+			                                        ELSE 'Y0030005'
+			                                     END)
+			                                 WHEN DAT_CD = 'G0008'
+			                                 THEN
+			                                    (CASE
+			                                        WHEN AA.EDU_TP = 'H' THEN 'Y0030040'
+			                                        WHEN AA.EDU_TP = 'J' THEN 'Y0030040'
+			                                        WHEN AA.EDU_TP = 'K' THEN 'Y0030040'
+			                                        ELSE 'Y0030005'
+			                                     END)
+			                                 ELSE
+			                                    '99999999'
+			                              END)
+			                                EDU_TP,
+			                             (CASE
+			                                 WHEN AA.EDU_CL = 'B' THEN 'Y0200020'
+			                                 ELSE 'Y0200010'
+			                              END)
+			                                AS EDU_CL,
+			                             AA.EDI_SUM
+			                        FROM PDF_C101Y AA
+			                       WHERE     AA.DPOB_CD = #dpobCd#
+			                             AND AA.YRTX_BLGG_YR = #yrtxBlggYr#
+			                             AND AA.CLUT_SEPT_CD = #clutSeptCd#
+			                             AND AA.SYSTEMKEY = #systemkey#
+			                             AND AA.PDF_DAT_APP_YN = 'Y'
+			                             AND EXISTS
+			                                    (SELECT *
+			                                       FROM YE161030 AC01
+			                                      WHERE     AC01.DPOB_CD = #dpobCd#
+			                                            AND AC01.YRTX_BLGG_YR =
+			                                                   #yrtxBlggYr#
+			                                            AND AC01.CLUT_SEPT_CD =
+			                                                   #clutSeptCd#
+			                                            AND AC01.SYSTEMKEY =
+			                                                   #systemkey#
+			                                            AND AC01.FAMY_RELA_DIV_CD =
+			                                                   'A0190001'
+			                                            AND AC01.DPOB_CD = AA.DPOB_CD
+			                                            AND AC01.YRTX_BLGG_YR =
+			                                                   AA.YRTX_BLGG_YR
+			                                            AND AC01.CLUT_SEPT_CD =
+			                                                   AA.CLUT_SEPT_CD
+			                                            AND AC01.SYSTEMKEY = AA.SYSTEMKEY
+			                                            AND AC01.TXPR_DSCM_NO_CNTN =
+			                                                   AA.RESID)
+			                      UNION ALL
+			                      SELECT AA.DPOB_CD,
+			                             AA.YRTX_BLGG_YR,
+			                             AA.CLUT_SEPT_CD,
+			                             AA.SYSTEMKEY,
+			                             AA.RESID,
+			                             (CASE
+			                                 WHEN AA.DAT_CD = 'G0004'
+			                                 THEN
+			                                    (CASE
+			                                        WHEN AA.EDU_TP = '1'
+			                                        THEN
+			                                           'Y0030010'
+			                                        WHEN AA.EDU_TP = '2'
+			                                        THEN
+			                                           'Y0030020'
+			                                        WHEN AA.EDU_TP = '3'
+			                                        THEN
+			                                           'Y0030020'
+			                                        WHEN AA.EDU_TP = '4'
+			                                        THEN
+			                                           'Y0030020'
+			                                        WHEN AA.EDU_TP = '8'
+			                                        THEN
+			                                           'Y0030010'
+			                                        WHEN AA.EDU_TP = 'F'
+			                                        THEN
+			                                           (CASE
+			                                               WHEN (CASE
+			                                                        WHEN (SUBSTR (AA.RESID,
+			                                                                      7,
+			                                                                      1)) IN ('3',
+			                                                                              '4')
+			                                                        THEN
+			                                                              '20'
+			                                                           || SUBSTR (AA.RESID,
+			                                                                      1,
+			                                                                      6)
+			                                                        ELSE
+			                                                              '19'
+			                                                           || SUBSTR (AA.RESID,
+			                                                                      1,
+			                                                                      6)
+			                                                     END) >= '20130101'
+			                                               THEN
+			                                                  'Y0030010'
+			                                               ELSE
+			                                                  'Y0030020'
+			                                            END)
+			                                        WHEN AA.EDU_TP = 'G'
+			                                        THEN
+			                                           (CASE
+			                                               WHEN (CASE
+			                                                        WHEN (SUBSTR (AA.RESID,
+			                                                                      7,
+			                                                                      1)) IN ('3',
+			                                                                              '4')
+			                                                        THEN
+			                                                              '20'
+			                                                           || SUBSTR (AA.RESID,
+			                                                                      1,
+			                                                                      6)
+			                                                        ELSE
+			                                                              '19'
+			                                                           || SUBSTR (AA.RESID,
+			                                                                      1,
+			                                                                      6)
+			                                                     END) >= '20130101'
+			                                               THEN
+			                                                  'Y0030010'
+			                                               ELSE
+			                                                  'Y0030020'
+			                                            END)
+			                                        WHEN AA.EDU_TP = 'H'
+			                                        THEN
+			                                           'Y0030040'
+			                                        WHEN AA.EDU_TP = 'J'
+			                                        THEN
+			                                           'Y0030040'
+			                                        WHEN AA.EDU_TP = 'K'
+			                                        THEN
+			                                           'Y0030040'
+			                                        WHEN AA.EDU_TP = 'L'
+			                                        THEN
+			                                           'Y0030020'
+			                                        ELSE
+			                                           '99999999'
+			                                     END)
+			                                 WHEN AA.DAT_CD = 'G0006'
+			                                 THEN
+			                                    (CASE
+			                                        WHEN AA.EDU_TP = '5' THEN 'Y0030030'
+			                                        WHEN AA.EDU_TP = '6' THEN 'Y0030030'
+			                                        WHEN AA.EDU_TP = '7' THEN 'Y0030030'
+			                                        WHEN AA.EDU_TP = 'C' THEN 'Y0030030'
+			                                        WHEN AA.EDU_TP = 'D' THEN 'Y0030030'
+			                                        WHEN AA.EDU_TP = 'E' THEN 'Y0030030'
+			                                        WHEN AA.EDU_TP = 'H' THEN 'Y0030040'
+			                                        WHEN AA.EDU_TP = 'J' THEN 'Y0030040'
+			                                        WHEN AA.EDU_TP = 'K' THEN 'Y0030040'
+			                                        ELSE '99999999'
+			                                     END)
+			                                 WHEN DAT_CD = 'G0007'
+			                                 THEN
+			                                    (CASE
+			                                        WHEN AA.EDU_TP = '1'
+			                                        THEN
+			                                           'Y0030010'
+			                                        WHEN AA.EDU_TP = '2'
+			                                        THEN
+			                                           'Y0030020'
+			                                        WHEN AA.EDU_TP = '3'
+			                                        THEN
+			                                           'Y0030020'
+			                                        WHEN AA.EDU_TP = '4'
+			                                        THEN
+			                                           'Y0030020'
+			                                        WHEN AA.EDU_TP = '8'
+			                                        THEN
+			                                           'Y0030010'
+			                                        WHEN AA.EDU_TP = 'F'
+			                                        THEN
+			                                           (CASE
+			                                               WHEN (CASE
+			                                                        WHEN (SUBSTR (AA.RESID,
+			                                                                      7,
+			                                                                      1)) IN ('3',
+			                                                                              '4')
+			                                                        THEN
+			                                                              '20'
+			                                                           || SUBSTR (AA.RESID,
+			                                                                      1,
+			                                                                      6)
+			                                                        ELSE
+			                                                              '19'
+			                                                           || SUBSTR (AA.RESID,
+			                                                                      1,
+			                                                                      6)
+			                                                     END) >= '20130101'
+			                                               THEN
+			                                                  'Y0030010'
+			                                               ELSE
+			                                                  'Y0030020'
+			                                            END)
+			                                        WHEN AA.EDU_TP = 'G'
+			                                        THEN
+			                                           (CASE
+			                                               WHEN (CASE
+			                                                        WHEN (SUBSTR (AA.RESID,
+			                                                                      7,
+			                                                                      1)) IN ('3',
+			                                                                              '4')
+			                                                        THEN
+			                                                              '20'
+			                                                           || SUBSTR (AA.RESID,
+			                                                                      1,
+			                                                                      6)
+			                                                        ELSE
+			                                                              '19'
+			                                                           || SUBSTR (AA.RESID,
+			                                                                      1,
+			                                                                      6)
+			                                                     END) >= '20130101'
+			                                               THEN
+			                                                  'Y0030010'
+			                                               ELSE
+			                                                  'Y0030020'
+			                                            END)
+			                                        WHEN AA.EDU_TP = '5'
+			                                        THEN
+			                                           'Y0030030'
+			                                        WHEN AA.EDU_TP = '6'
+			                                        THEN
+			                                           'Y0030030'
+			                                        WHEN AA.EDU_TP = '7'
+			                                        THEN
+			                                           'Y0030030'
+			                                        WHEN AA.EDU_TP = 'C'
+			                                        THEN
+			                                           'Y0030030'
+			                                        WHEN AA.EDU_TP = 'D'
+			                                        THEN
+			                                           'Y0030030'
+			                                        WHEN AA.EDU_TP = 'E'
+			                                        THEN
+			                                           'Y0030030'
+			                                        WHEN AA.EDU_TP = 'H'
+			                                        THEN
+			                                           'Y0030040'
+			                                        WHEN AA.EDU_TP = 'J'
+			                                        THEN
+			                                           'Y0030040'
+			                                        WHEN AA.EDU_TP = 'K'
+			                                        THEN
+			                                           'Y0030040'
+			                                        ELSE
+			                                           '99999999'
+			                                     END)
+			                                 WHEN DAT_CD = 'G0008'
+			                                 THEN
+			                                    (CASE
+			                                        WHEN AA.EDU_TP = '1'
+			                                        THEN
+			                                           'Y0030010'
+			                                        WHEN AA.EDU_TP = '2'
+			                                        THEN
+			                                           'Y0030020'
+			                                        WHEN AA.EDU_TP = '3'
+			                                        THEN
+			                                           'Y0030020'
+			                                        WHEN AA.EDU_TP = '4'
+			                                        THEN
+			                                           'Y0030020'
+			                                        WHEN AA.EDU_TP = '8'
+			                                        THEN
+			                                           'Y0030010'
+			                                        WHEN AA.EDU_TP = 'F'
+			                                        THEN
+			                                           (CASE
+			                                               WHEN (CASE
+			                                                        WHEN (SUBSTR (AA.RESID,
+			                                                                      7,
+			                                                                      1)) IN ('3',
+			                                                                              '4')
+			                                                        THEN
+			                                                              '20'
+			                                                           || SUBSTR (AA.RESID,
+			                                                                      1,
+			                                                                      6)
+			                                                        ELSE
+			                                                              '19'
+			                                                           || SUBSTR (AA.RESID,
+			                                                                      1,
+			                                                                      6)
+			                                                     END) >= '20130101'
+			                                               THEN
+			                                                  'Y0030010'
+			                                               ELSE
+			                                                  'Y0030020'
+			                                            END)
+			                                        WHEN AA.EDU_TP = 'G'
+			                                        THEN
+			                                           (CASE
+			                                               WHEN (CASE
+			                                                        WHEN (SUBSTR (AA.RESID,
+			                                                                      7,
+			                                                                      1)) IN ('3',
+			                                                                              '4')
+			                                                        THEN
+			                                                              '20'
+			                                                           || SUBSTR (AA.RESID,
+			                                                                      1,
+			                                                                      6)
+			                                                        ELSE
+			                                                              '19'
+			                                                           || SUBSTR (AA.RESID,
+			                                                                      1,
+			                                                                      6)
+			                                                     END) >= '20130101'
+			                                               THEN
+			                                                  'Y0030010'
+			                                               ELSE
+			                                                  'Y0030020'
+			                                            END)
+			                                        WHEN AA.EDU_TP = 'H'
+			                                        THEN
+			                                           'Y0030040'
+			                                        WHEN AA.EDU_TP = 'J'
+			                                        THEN
+			                                           'Y0030040'
+			                                        WHEN AA.EDU_TP = 'K'
+			                                        THEN
+			                                           'Y0030040'
+			                                        ELSE
+			                                           '99999999'
+			                                     END)
+			                                 ELSE
+			                                    '99999999'
+			                              END)
+			                                EDU_TP,
+			                             (CASE
+			                                 WHEN AA.EDU_CL = 'B' THEN 'Y0200020'
+			                                 ELSE 'Y0200010'
+			                              END)
+			                                AS EDU_CL,
+			                             AA.EDI_SUM
+			                        FROM PDF_C101Y AA
+			                       WHERE     AA.DPOB_CD = #dpobCd#
+			                             AND AA.YRTX_BLGG_YR = #yrtxBlggYr#
+			                             AND AA.CLUT_SEPT_CD = #clutSeptCd#
+			                             AND AA.SYSTEMKEY = #systemkey#
+			                             AND AA.PDF_DAT_APP_YN = 'Y'
+			                             AND NOT EXISTS
+			                                        (SELECT *
+			                                           FROM YE161030 AC01
+			                                          WHERE     AC01.DPOB_CD = #dpobCd#
+			                                                AND AC01.YRTX_BLGG_YR =
+			                                                       #yrtxBlggYr#
+			                                                AND AC01.CLUT_SEPT_CD =
+			                                                       #clutSeptCd#
+			                                                AND AC01.SYSTEMKEY =
+			                                                       #systemkey#
+			                                                AND AC01.FAMY_RELA_DIV_CD =
+			                                                       'A0190001'
+			                                                AND AC01.DPOB_CD = AA.DPOB_CD
+			                                                AND AC01.YRTX_BLGG_YR =
+			                                                       AA.YRTX_BLGG_YR
+			                                                AND AC01.CLUT_SEPT_CD =
+			                                                       AA.CLUT_SEPT_CD
+			                                                AND AC01.SYSTEMKEY =
+			                                                       AA.SYSTEMKEY
+			                                                AND AC01.TXPR_DSCM_NO_CNTN =
+			                                                       AA.RESID))
+			            GROUP BY DPOB_CD,
+			                     YRTX_BLGG_YR,
+			                     CLUT_SEPT_CD,
+			                     SYSTEMKEY,
+			                     RESID,
+			                     EDU_TP,
+			                     EDU_CL) AC03
+			     WHERE     AC02.DPOB_CD = #dpobCd#
+			           AND AC02.YRTX_BLGG_YR = #yrtxBlggYr#
+			           AND AC02.CLUT_SEPT_CD = #clutSeptCd#
+			           AND AC02.SYSTEMKEY = #systemkey#
+			           AND AC02.DPOB_CD = AC03.DPOB_CD
+			           AND AC02.YRTX_BLGG_YR = AC03.YRTX_BLGG_YR
+			           AND AC02.CLUT_SEPT_CD = AC03.CLUT_SEPT_CD
+			           AND AC02.SYSTEMKEY = AC03.SYSTEMKEY
+			           AND AC02.TXPR_DSCM_NO_CNTN = AC03.RESID)
+		]]>
+	</insert>
+
+  <!--   직업훈련비   -->
+<delete id="infcPkgYe161090_2023_DAO.PdfYeta8200_C202Y_YE161090_Delete_S">
+		<![CDATA[
+			DELETE FROM YE161090 AA
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey# 
+					            AND CD_VVAL_KRN_CD = 'Y0140000'  /* 국세청 */  
+					            AND SCXPS_STD_CL_DIV_CD = 'Y0200030'
+								AND EXISTS (SELECT * FROM  PDF_C202Y BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.RESID = AA.FAM_RESNO_ENC_CNTN  )
+								
+				]]>
+				<isNotEmpty prepend="AND" property="famResnoEncCntn" >
+                        FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+                </isNotEmpty> 
+				
+				 
+				
+	</delete>
+	
+<!-- 직업훈련비 -->
+<insert id="infcPkgYe161090_2023_DAO.PdfYeta8200_C202Y_YE161090_Insert_S">
+		<![CDATA[
+			INSERT INTO YE161090 
+				(   DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , FAM_RESNO_ENC_CNTN
+				  , CD_VVAL_KRN_CD
+				  , SCXPS_STD
+				  , SCXPS_USE_AMT
+				  , SCXPS_STD_DDC_TRGT_INDV_AMT
+				  , SCXPS_STD_CL_DIV_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			  (SELECT 
+				     AC02.DPOB_CD
+				   , AC02.YRTX_BLGG_YR
+				   , AC02.CLUT_SEPT_CD
+				   , AC02.SYSTEMKEY
+				   , AC02.TXPR_DSCM_NO_CNTN
+				   ,'Y0140000'  /* 국세청 */ 
+				   , 'Y0030005'
+				   , AC03.JOB_EDI_SUM
+				   , 0
+				   , 'Y0200030'
+				   , #kybdr#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #inptAddr#
+				   , #ismt#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #revnAddr#   
+		FROM YE161030  AC02, (  
+		                               SELECT
+		                                                DPOB_CD
+													 ,  YRTX_BLGG_YR
+											 		 ,  CLUT_SEPT_CD
+													 ,  SYSTEMKEY
+													 ,  RESID 
+													 , SUM(NVL(JOB_EDI_SUM,0)) AS JOB_EDI_SUM						
+		                               FROM
+											( 
+											SELECT    AA.DPOB_CD
+													 ,  AA.YRTX_BLGG_YR
+											 		 ,  AA.CLUT_SEPT_CD
+													 ,  AA.SYSTEMKEY
+													 ,  AA.RESID 
+													 ,  AA.JOB_EDI_SUM													 
+										              FROM  PDF_C202Y  AA   
+										               WHERE AA.DPOB_CD=#dpobCd#
+														 AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+														 AND AA.CLUT_SEPT_CD=#clutSeptCd#
+														 AND AA.SYSTEMKEY=#systemkey#
+														 AND AA.DAT_CD ='G0005'
+														 	AND AA.PDF_DAT_APP_YN = 'Y'
+														 AND EXISTS
+														 			(SELECT * FROM YE161030 AC01
+										              			   WHERE  AC01.DPOB_CD=#dpobCd#
+														            AND AC01.YRTX_BLGG_YR=#yrtxBlggYr#
+														            AND AC01.CLUT_SEPT_CD=#clutSeptCd#
+														            AND AC01.SYSTEMKEY=#systemkey#
+														            AND AC01.FAMY_RELA_DIV_CD =  'A0190001'  
+																    AND AC01.DPOB_CD = AA.DPOB_CD
+													                AND AC01.YRTX_BLGG_YR = AA.YRTX_BLGG_YR 
+													                AND AC01.CLUT_SEPT_CD = AA.CLUT_SEPT_CD 
+													                AND AC01.SYSTEMKEY = AA.SYSTEMKEY
+													                AND AC01.TXPR_DSCM_NO_CNTN = AA.RESID )
+														)               
+										               GROUP BY   DPOB_CD
+																 ,  YRTX_BLGG_YR
+														 		 ,  CLUT_SEPT_CD
+																 ,  SYSTEMKEY
+																 ,  RESID 
+					) AC03
+					 WHERE AC02.DPOB_CD=#dpobCd#
+					   AND AC02.YRTX_BLGG_YR=#yrtxBlggYr#
+					   AND AC02.CLUT_SEPT_CD=#clutSeptCd#
+					   AND AC02.SYSTEMKEY=#systemkey#
+					   AND AC02.DPOB_CD = AC03.DPOB_CD
+		               AND AC02.YRTX_BLGG_YR = AC03.YRTX_BLGG_YR 
+		               AND AC02.CLUT_SEPT_CD = AC03.CLUT_SEPT_CD 
+		               AND AC02.SYSTEMKEY = AC03.SYSTEMKEY
+		               AND AC02.TXPR_DSCM_NO_CNTN = AC03.RESID 
+				      )
+		]]>
+	</insert>
+	
+
+ <!--   교복구입비   -->
+<delete id="infcPkgYe161090_2023_DAO.PdfYeta8200_C301Y_YE161090_Delete_S">
+		<![CDATA[
+			DELETE FROM YE161090 AA
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey# 
+					            AND CD_VVAL_KRN_CD = 'Y0140000'  /* 국세청 */  
+					            AND SCXPS_STD_CL_DIV_CD = 'Y0200040'
+								AND EXISTS (SELECT * FROM  PDF_C301Y BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.RESID = AA.FAM_RESNO_ENC_CNTN 
+										 )
+								
+				]]>
+				<isNotEmpty prepend="AND" property="famResnoEncCntn" >
+                        FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+                </isNotEmpty> 
+				
+				 
+				
+	</delete>
+	
+<!-- 교복구입비 -->
+<insert id="infcPkgYe161090_2023_DAO.PdfYeta8200_C301Y_YE161090_Insert_S">
+		<![CDATA[
+			INSERT INTO YE161090 
+				(   DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , FAM_RESNO_ENC_CNTN
+				  , CD_VVAL_KRN_CD
+				  , SCXPS_STD
+				  , SCXPS_USE_AMT
+				  , SCXPS_STD_DDC_TRGT_INDV_AMT
+				  , SCXPS_STD_CL_DIV_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			  (SELECT 
+				     AC02.DPOB_CD
+				   , AC02.YRTX_BLGG_YR
+				   , AC02.CLUT_SEPT_CD
+				   , AC02.SYSTEMKEY
+				   , AC02.TXPR_DSCM_NO_CNTN
+				   ,'Y0140000'  /* 국세청 */ 
+				   ,  'Y0030020'
+				   , AC03.SCH_UNI_SUM
+				   , 0
+				   , 'Y0200040'
+				   , #kybdr#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #inptAddr#
+				   , #ismt#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #revnAddr#   
+		FROM YE161030  AC02, (  
+		                               SELECT
+		                                                DPOB_CD
+													 ,  YRTX_BLGG_YR
+											 		 ,  CLUT_SEPT_CD
+													 ,  SYSTEMKEY
+													 ,  RESID 
+													 , SUM(NVL(SCH_UNI_SUM,0)) AS SCH_UNI_SUM						
+		                               FROM
+											( 
+											SELECT      AA.DPOB_CD
+													 ,  AA.YRTX_BLGG_YR
+											 		 ,  AA.CLUT_SEPT_CD
+													 ,  AA.SYSTEMKEY
+													 ,  AA.RESID 
+													 ,  AA.SCH_UNI_SUM													 
+										              FROM   PDF_C301Y  AA   
+										               WHERE AA.DPOB_CD=#dpobCd#
+														 AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+														 AND AA.CLUT_SEPT_CD=#clutSeptCd#
+														 AND AA.SYSTEMKEY=#systemkey#
+														 AND AA.DAT_CD ='G0024'
+														 	AND AA.PDF_DAT_APP_YN = 'Y'
+														 AND EXISTS
+														 			(SELECT * FROM YE161030 AC01
+										              			   WHERE  AC01.DPOB_CD=#dpobCd#
+														            AND AC01.YRTX_BLGG_YR=#yrtxBlggYr#
+														            AND AC01.CLUT_SEPT_CD=#clutSeptCd#
+														            AND AC01.SYSTEMKEY=#systemkey# 
+														            
+																    AND AC01.DPOB_CD = AA.DPOB_CD
+													                AND AC01.YRTX_BLGG_YR = AA.YRTX_BLGG_YR 
+													                AND AC01.CLUT_SEPT_CD = AA.CLUT_SEPT_CD 
+													                AND AC01.SYSTEMKEY = AA.SYSTEMKEY
+													                AND AC01.TXPR_DSCM_NO_CNTN = AA.RESID )
+														)               
+										               GROUP BY   DPOB_CD
+																 ,  YRTX_BLGG_YR
+														 		 ,  CLUT_SEPT_CD
+																 ,  SYSTEMKEY
+																 ,  RESID 
+					) AC03
+					 WHERE AC02.DPOB_CD=#dpobCd#
+					   AND AC02.YRTX_BLGG_YR=#yrtxBlggYr#
+					   AND AC02.CLUT_SEPT_CD=#clutSeptCd#
+					   AND AC02.SYSTEMKEY=#systemkey#
+					   AND AC02.DPOB_CD = AC03.DPOB_CD
+		               AND AC02.YRTX_BLGG_YR = AC03.YRTX_BLGG_YR 
+		               AND AC02.CLUT_SEPT_CD = AC03.CLUT_SEPT_CD 
+		               AND AC02.SYSTEMKEY = AC03.SYSTEMKEY
+		               AND AC02.TXPR_DSCM_NO_CNTN = AC03.RESID 
+				      )
+		]]>
+	</insert> 
+
+
+ <!--   학자금대출   -->
+<delete id="infcPkgYe161090_2023_DAO.PdfYeta8200_C401Y_YE161090_Delete_S">
+		<![CDATA[
+			DELETE FROM YE161090  AA
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey# 
+					            AND CD_VVAL_KRN_CD = 'Y0140000'  /* 국세청 */  
+					            AND SCXPS_STD_CL_DIV_CD = 'Y0200050'
+								AND EXISTS (SELECT * FROM  PDF_C401Y BB
+			 							   WHERE BB.DPOB_CD=AA.DPOB_CD
+											AND BB.YRTX_BLGG_YR=AA.YRTX_BLGG_YR
+											AND BB.CLUT_SEPT_CD=AA.CLUT_SEPT_CD
+											AND BB.SYSTEMKEY=AA.SYSTEMKEY
+											AND BB.RESID = AA.FAM_RESNO_ENC_CNTN 
+										)
+								
+				]]>
+				<isNotEmpty prepend="AND" property="famResnoEncCntn" >
+                        FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+                </isNotEmpty> 
+				 
+	</delete>
+	
+<!-- 학자금대출 -->
+<insert id="infcPkgYe161090_2023_DAO.PdfYeta8200_C401Y_YE161090_Insert_S">
+		<![CDATA[
+			INSERT INTO YE161090 
+				(   DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , FAM_RESNO_ENC_CNTN
+				  , CD_VVAL_KRN_CD
+				  , SCXPS_STD
+				  , SCXPS_USE_AMT
+				  , SCXPS_STD_DDC_TRGT_INDV_AMT
+				  , SCXPS_STD_CL_DIV_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			  (SELECT 
+				     AC02.DPOB_CD
+				   , AC02.YRTX_BLGG_YR
+				   , AC02.CLUT_SEPT_CD
+				   , AC02.SYSTEMKEY
+				   , AC02.TXPR_DSCM_NO_CNTN
+				   ,'Y0140000'  /* 국세청 */ 
+				   , AC03.SCH_UNI_CD
+				   , AC03.SCH_INTT_UNI_SUM
+				   , 0
+				   , 'Y0200050'
+				   , #kybdr#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #inptAddr#
+				   , #ismt#
+				   , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				   , #revnAddr#   
+		FROM YE161030  AC02, (  
+		                               SELECT
+		                                                DPOB_CD
+													 ,  YRTX_BLGG_YR
+											 		 ,  CLUT_SEPT_CD
+													 ,  SYSTEMKEY
+													 ,  RESID 
+													 , SCH_UNI_CD
+													 , SUM(NVL(SCH_INTT_UNI_SUM,0)) AS SCH_INTT_UNI_SUM						
+		                               FROM
+											(
+												SELECT      AA.DPOB_CD
+													 ,  AA.YRTX_BLGG_YR
+											 		 ,  AA.CLUT_SEPT_CD
+													 ,  AA.SYSTEMKEY
+													 ,  AA.RESID 
+													 ,  ('Y0030005') AS SCH_UNI_CD
+													 ,  AA.SCH_INTT_UNI_SUM													 
+										              FROM   PDF_C401Y  AA   
+										               WHERE AA.DPOB_CD=#dpobCd#
+														 AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+														 AND AA.CLUT_SEPT_CD=#clutSeptCd#
+														 AND AA.SYSTEMKEY=#systemkey#
+														 AND AA.DAT_CD ='G0033'
+														 	AND AA.PDF_DAT_APP_YN = 'Y'
+														 AND EXISTS
+														 			(SELECT * FROM YE161030 AC01
+										              			   WHERE  AC01.DPOB_CD=#dpobCd#
+														            AND AC01.YRTX_BLGG_YR=#yrtxBlggYr#
+														            AND AC01.CLUT_SEPT_CD=#clutSeptCd#
+														            AND AC01.SYSTEMKEY=#systemkey# 
+														            AND AC01.FAMY_RELA_DIV_CD =  'A0190001'  
+																    AND AC01.DPOB_CD = AA.DPOB_CD
+													                AND AC01.YRTX_BLGG_YR = AA.YRTX_BLGG_YR 
+													                AND AC01.CLUT_SEPT_CD = AA.CLUT_SEPT_CD 
+													                AND AC01.SYSTEMKEY = AA.SYSTEMKEY
+													                AND AC01.TXPR_DSCM_NO_CNTN = AA.RESID )
+										    UNION ALL 
+											SELECT      AA.DPOB_CD
+													 ,  AA.YRTX_BLGG_YR
+											 		 ,  AA.CLUT_SEPT_CD
+													 ,  AA.SYSTEMKEY
+													 ,  AA.RESID 
+													 ,  ('Y0030030') AS SCH_UNI_CD
+													 ,  AA.SCH_INTT_UNI_SUM													 
+										              FROM   PDF_C401Y  AA   
+										               WHERE AA.DPOB_CD=#dpobCd#
+														 AND AA.YRTX_BLGG_YR=#yrtxBlggYr#
+														 AND AA.CLUT_SEPT_CD=#clutSeptCd#
+														 AND AA.SYSTEMKEY=#systemkey#
+														 AND AA.DAT_CD ='G0033'
+														 	AND AA.PDF_DAT_APP_YN = 'Y'
+														 AND EXISTS
+														 			(SELECT * FROM YE161030 AC01
+										              			   WHERE  AC01.DPOB_CD=#dpobCd#
+														            AND AC01.YRTX_BLGG_YR=#yrtxBlggYr#
+														            AND AC01.CLUT_SEPT_CD=#clutSeptCd#
+														            AND AC01.SYSTEMKEY=#systemkey# 
+														            AND AC01.FAMY_RELA_DIV_CD <>  'A0190001'  
+																    AND AC01.DPOB_CD = AA.DPOB_CD
+													                AND AC01.YRTX_BLGG_YR = AA.YRTX_BLGG_YR 
+													                AND AC01.CLUT_SEPT_CD = AA.CLUT_SEPT_CD 
+													                AND AC01.SYSTEMKEY = AA.SYSTEMKEY
+													                AND AC01.TXPR_DSCM_NO_CNTN = AA.RESID )
+														)               
+										               GROUP BY   DPOB_CD
+																 ,  YRTX_BLGG_YR
+														 		 ,  CLUT_SEPT_CD
+																 ,  SYSTEMKEY
+																 ,  RESID 
+																 , SCH_UNI_CD
+					) AC03
+					 WHERE AC02.DPOB_CD=#dpobCd#
+					   AND AC02.YRTX_BLGG_YR=#yrtxBlggYr#
+					   AND AC02.CLUT_SEPT_CD=#clutSeptCd#
+					   AND AC02.SYSTEMKEY=#systemkey#
+					   AND AC02.DPOB_CD = AC03.DPOB_CD
+		               AND AC02.YRTX_BLGG_YR = AC03.YRTX_BLGG_YR 
+		               AND AC02.CLUT_SEPT_CD = AC03.CLUT_SEPT_CD 
+		               AND AC02.SYSTEMKEY = AC03.SYSTEMKEY
+		               AND AC02.TXPR_DSCM_NO_CNTN = AC03.RESID 
+				      )
+		]]>
+	</insert>
+
+	
+<!-- +++++++++++++++++++++++++ 2017년도 귀속 로직  종료 ++++++++++++++++++++++++++++++ -->
+	
+	
+	
+	
+	
+	
+	<insert id="infcPkgYe161090_2023_DAO.insertYe161090_S">
+		<![CDATA[
+			INSERT INTO YE161090 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , FAM_RESNO_ENC_CNTN
+				  , SCXPS_STD
+				  , SCXPS_USE_AMT
+				  , SCXPS_STD_DDC_TRGT_INDV_AMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #famResnoEncCntn#
+				  , #scxpsStd#
+				  , #scxpsUseAmt#
+				  , #scxpsStdDdcTrgtIndvAmt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgYe161090_2023_DAO.updateYe161090_S">
+		<![CDATA[
+			UPDATE YE161090
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+				, SCXPS_STD=#scxpsStd#
+				, SCXPS_USE_AMT=#scxpsUseAmt#
+				, SCXPS_STD_DDC_TRGT_INDV_AMT=#scxpsStdDdcTrgtIndvAmt#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+				]]>
+	</update>
+	
+	<delete id="infcPkgYe161090_2023_DAO.deleteYe161090_S">
+		<![CDATA[
+			DELETE FROM YE161090 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+				]]>
+	</delete>
+	
+	<select id="infcPkgYe161090_2023_DAO.selectYe161090_S" resultMap="infcPkgYe161090_2023">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, FAM_RESNO_ENC_CNTN
+				, SCXPS_STD
+				, SCXPS_USE_AMT
+				, SCXPS_STD_DDC_TRGT_INDV_AMT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE161090
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FAM_RESNO_ENC_CNTN=#famResnoEncCntn#
+				]]>
+	</select>
+	
+	<select id="infcPkgYe161090_2023_DAO.selectYe161090List_D" parameterClass="infcPkgYe161090Srh_2023_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, FAM_RESNO_ENC_CNTN
+								, SCXPS_STD
+								, SCXPS_USE_AMT
+								, SCXPS_STD_DDC_TRGT_INDV_AMT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE161090
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, FAM_RESNO_ENC_CNTN DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgYe161090_2023_DAO.selectYe161090ListTotCnt_S" parameterClass="infcPkgYe161090Srh_2023_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE161090
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

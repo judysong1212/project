@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bugt0250">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bugt0250SerarchVO" type="com.app.exterms.budget.server.vo.Bugt0250SrhVO"/>
+	
+	<resultMap id="bugt0250" class="com.app.exterms.budget.server.vo.Bugt0250VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="accYr" column="ACC_YR" columnIndex="2"/>
+		<result property="deptBusinSttmtAccSeilNum" column="DEPT_BUSIN_STTMT_ACC_SEIL_NUM" columnIndex="3"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="4"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="5"/>
+		<result property="accUntCd" column="ACC_UNT_CD" columnIndex="6"/>
+		<result property="accUntTxItemCd" column="ACC_UNT_TX_ITEM_CD" columnIndex="7"/>
+		<result property="smpCtnt" column="SMP_CTNT" columnIndex="8"/>
+		<result property="calcBssCtnt" column="CALC_BSS_CTNT" columnIndex="9"/>
+		<result property="deptBusinExpnsSum" column="DEPT_BUSIN_EXPNS_SUM" columnIndex="10"/>
+		<result property="kybdr" column="KYBDR" columnIndex="11"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="12"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="13"/>
+		<result property="ismt" column="ISMT" columnIndex="14"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="15"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="16"/>
+	</resultMap>
+	
+	<insert id="bugt0250DAO.insertBugt0250_S">
+		<![CDATA[
+			INSERT INTO BUGT0250 
+				( DPOB_CD
+				  , ACC_YR
+				  , DEPT_BUSIN_STTMT_ACC_SEIL_NUM
+				  , DEPT_CD
+				  , BUSIN_CD
+				  , ACC_UNT_CD
+				  , ACC_UNT_TX_ITEM_CD
+				  , SMP_CTNT
+				  , CALC_BSS_CTNT
+				  , DEPT_BUSIN_EXPNS_SUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #accYr#
+				  , #deptBusinSttmtAccSeilNum#
+				  , #deptCd#
+				  , #businCd#
+				  , #accUntCd#
+				  , #accUntTxItemCd#
+				  , #smpCtnt#
+				  , #calcBssCtnt#
+				  , #deptBusinExpnsSum#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bugt0250DAO.updateBugt0250_S">
+		<![CDATA[
+			UPDATE BUGT0250
+			SET DPOB_CD=#dpobCd#
+				, ACC_YR=#accYr#
+				, DEPT_BUSIN_STTMT_ACC_SEIL_NUM=#deptBusinSttmtAccSeilNum#
+				, DEPT_CD=#deptCd#
+				, BUSIN_CD=#businCd#
+				, ACC_UNT_CD=#accUntCd#
+				, ACC_UNT_TX_ITEM_CD=#accUntTxItemCd#
+				, SMP_CTNT=#smpCtnt#
+				, CALC_BSS_CTNT=#calcBssCtnt#
+				, DEPT_BUSIN_EXPNS_SUM=#deptBusinExpnsSum#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND ACC_YR=#accYr#
+								AND DEPT_BUSIN_STTMT_ACC_SEIL_NUM=#deptBusinSttmtAccSeilNum#
+				]]>
+	</update>
+	
+	<delete id="bugt0250DAO.deleteBugt0250_S">
+		<![CDATA[
+			DELETE FROM BUGT0250 
+						WHERE DPOB_CD=#dpobCd#
+								AND ACC_YR=#accYr#
+								AND DEPT_BUSIN_STTMT_ACC_SEIL_NUM=#deptBusinSttmtAccSeilNum#
+				]]>
+	</delete>
+	
+	<select id="bugt0250DAO.selectBugt0250_S" resultMap="bugt0250">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, ACC_YR
+				, DEPT_BUSIN_STTMT_ACC_SEIL_NUM
+				, DEPT_CD
+				, BUSIN_CD
+				, ACC_UNT_CD
+				, ACC_UNT_TX_ITEM_CD
+				, SMP_CTNT
+				, CALC_BSS_CTNT
+				, DEPT_BUSIN_EXPNS_SUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BUGT0250
+						WHERE DPOB_CD=#dpobCd#
+								AND ACC_YR=#accYr#
+								AND DEPT_BUSIN_STTMT_ACC_SEIL_NUM=#deptBusinSttmtAccSeilNum#
+				]]>
+	</select>
+	
+	<select id="bugt0250DAO.selectBugt0250List_D" parameterClass="bugt0250SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, ACC_YR
+								, DEPT_BUSIN_STTMT_ACC_SEIL_NUM
+								, DEPT_CD
+								, BUSIN_CD
+								, ACC_UNT_CD
+								, ACC_UNT_TX_ITEM_CD
+								, SMP_CTNT
+								, CALC_BSS_CTNT
+								, DEPT_BUSIN_EXPNS_SUM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BUGT0250
+				WHERE 1=1
+			<!-- 	<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					ACC_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual> -->
+					ORDER BY 
+						DPOB_CD DESC
+							, ACC_YR DESC
+							, DEPT_BUSIN_STTMT_ACC_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bugt0250DAO.selectBugt0250ListTotCnt_S" parameterClass="bugt0250SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BUGT0250
+			WHERE 1=1
+			<!-- <isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				ACC_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual> -->
+	</select>
+
+</sqlMap>

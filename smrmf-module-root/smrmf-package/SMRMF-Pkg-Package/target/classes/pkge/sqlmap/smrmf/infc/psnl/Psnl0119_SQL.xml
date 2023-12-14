@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0119">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="infcPsnl0119Dto" type="com.app.exterms.personal.client.dto.InfcPsnl0119DTO"/>
+	<typeAlias  alias="infcPsnl0119SerarchVO" type="com.app.exterms.personal.server.vo.InfcPsnl0119DefaultVO"/>
+	
+	<resultMap id="infcPsnl0119" class="com.app.exterms.personal.server.vo.InfcPsnl0119VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="carrRsptSeilNum" column="CARR_RSPT_SEIL_NUM" columnIndex="3"/>
+		<result property="carrBgnnDt" column="CARR_BGNN_DT" columnIndex="4"/>
+		<result property="carrEndDt" column="CARR_END_DT" columnIndex="5"/>
+		<result property="paeWorkNm" column="PAE_WORK_NM" columnIndex="6"/>
+		<result property="carrDivCd" column="CARR_DIV_CD" columnIndex="7"/>
+		<result property="dutyDeptNm" column="DUTY_DEPT_NM" columnIndex="8"/>
+		<result property="repbtyBusinNm" column="REPBTY_BUSIN_NM" columnIndex="9"/>
+		<result property="odtyNm" column="ODTY_NM" columnIndex="10"/>
+		<result property="amntDlywagSum" column="AMNT_DLYWAG_SUM" columnIndex="11"/>
+		<result property="carrNoteCtnt" column="CARR_NOTE_CTNT" columnIndex="12"/>
+		<result property="dutyYrNum" column="DUTY_YR_NUM" columnIndex="13"/>
+		<result property="dutyMnthIcm" column="DUTY_MNTH_ICM" columnIndex="14"/>
+		<result property="cvsnRto" column="CVSN_RTO" columnIndex="15"/>
+		<result property="ajmtMnthNum" column="AJMT_MNTH_NUM" columnIndex="16"/>
+		<result property="rcgtnMnthNum" column="RCGTN_MNTH_NUM" columnIndex="17"/>
+		<result property="kybdr" column="KYBDR" columnIndex="18"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="19"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="20"/>
+		<result property="ismt" column="ISMT" columnIndex="21"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="22"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="23"/>
+	</resultMap>
+
+	<insert id="infcPsnl0119DAO.insertPsnl0119" parameterClass="infcPsnl0119Dto">
+		<![CDATA[
+			INSERT INTO PSNL0119 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , CARR_RSPT_SEIL_NUM
+				  , CARR_BGNN_DT
+				  , CARR_END_DT
+				  , PAE_WORK_NM
+				  , CARR_DIV_CD
+				  , DUTY_DEPT_NM
+				  , REPBTY_BUSIN_NM
+				  , ODTY_NM
+				  , AMNT_DLYWAG_SUM
+				  , CARR_NOTE_CTNT
+				  , DUTY_YR_NUM
+				  , DUTY_MNTH_ICM
+				  , CVSN_RTO
+				  , AJMT_MNTH_NUM
+				  , RCGTN_MNTH_NUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , (select NVL(MAX(CARR_RSPT_SEIL_NUM)+1,1) from PSNL0119 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#) 
+				  , TO_CHAR(#carrBgnnDt#, 'yyyymmdd')
+				  , TO_CHAR(#carrEndDt#, 'yyyymmdd')
+				  , #paeWorkNm#
+				  , #carrDivCd#
+				  , #dutyDeptNm#
+				  , #repbtyBusinNm#
+				  , #odtyNm#
+				  , #amntDlywagSum#
+				  , #carrNoteCtnt#
+				  , #dutyYrNum#
+				  , #dutyMnthIcm#
+				  , #cvsnRto#
+				  , #ajmtMnthNum#
+				  , #rcgtnMnthNum#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPsnl0119DAO.updatePsnl0119" parameterClass="infcPsnl0119Dto">
+		
+			UPDATE PSNL0119
+			SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				<isNotNull property="carrBgnnDt"><isNotEmpty property="carrBgnnDt">, CARR_BGNN_DT=TO_CHAR(#carrBgnnDt#, 'yyyymmdd')</isNotEmpty></isNotNull>
+				<isNotNull property="carrEndDt"><isNotEmpty property="carrEndDt">, CARR_END_DT=TO_CHAR(#carrEndDt#, 'yyyymmdd')</isNotEmpty></isNotNull>
+				<isNotNull property="paeWorkNm"><isNotEmpty property="paeWorkNm">, PAE_WORK_NM=#paeWorkNm#</isNotEmpty></isNotNull>
+				<isNotNull property="carrDivCd"><isNotEmpty property="carrDivCd">, CARR_DIV_CD=#carrDivCd#</isNotEmpty></isNotNull>
+				<isNotNull property="dutyDeptNm"><isNotEmpty property="dutyDeptNm">, DUTY_DEPT_NM=#dutyDeptNm#</isNotEmpty></isNotNull>
+				<isNotNull property="repbtyBusinNm"><isNotEmpty property="repbtyBusinNm">, REPBTY_BUSIN_NM=#repbtyBusinNm#</isNotEmpty></isNotNull>
+				<isNotNull property="odtyNm"><isNotEmpty property="odtyNm">, ODTY_NM=#odtyNm#</isNotEmpty></isNotNull>
+				<isNotNull property="amntDlywagSum"><isNotEmpty property="amntDlywagSum">, AMNT_DLYWAG_SUM=#amntDlywagSum#</isNotEmpty></isNotNull>
+				<isNotNull property="carrNoteCtnt"><isNotEmpty property="carrNoteCtnt">, CARR_NOTE_CTNT=#carrNoteCtnt#</isNotEmpty></isNotNull>
+				<isNotNull property="dutyYrNum"><isNotEmpty property="dutyYrNum">, DUTY_YR_NUM=#dutyYrNum#</isNotEmpty></isNotNull>
+				<isNotNull property="dutyMnthIcm"><isNotEmpty property="dutyMnthIcm">, DUTY_MNTH_ICM=#dutyMnthIcm#</isNotEmpty></isNotNull>
+				<isNotNull property="cvsnRto"><isNotEmpty property="cvsnRto">, CVSN_RTO=#cvsnRto#</isNotEmpty></isNotNull>
+				<isNotNull property="ajmtMnthNum"><isNotEmpty property="ajmtMnthNum">, AJMT_MNTH_NUM=#ajmtMnthNum#</isNotEmpty></isNotNull>
+				<isNotNull property="rcgtnMnthNum"><isNotEmpty property="rcgtnMnthNum">, RCGTN_MNTH_NUM=#rcgtnMnthNum#</isNotEmpty></isNotNull>
+				<isNotNull property="ismt"><isNotEmpty property="ismt">, ISMT=#ismt#</isNotEmpty></isNotNull>
+				<isNotNull property="revnAddr"><isNotEmpty property="revnAddr">, REVN_ADDR=#revnAddr#</isNotEmpty></isNotNull>
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				AND CARR_RSPT_SEIL_NUM=#carrRsptSeilNum#
+		
+	</update>
+	
+	<delete id="infcPsnl0119DAO.deletePsnl0119" parameterClass="infcPsnl0119Dto">
+		<![CDATA[
+			DELETE FROM PSNL0119 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND CARR_RSPT_SEIL_NUM=#carrRsptSeilNum#
+				]]>
+	</delete>
+	
+	<select id="infcPsnl0119DAO.selectPsnl0119" resultClass="egovMap" parameterClass="hashMap">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, CARR_RSPT_SEIL_NUM
+				, TO_DATE( CARR_BGNN_DT ,'YYYYMMDD') CARR_BGNN_DT
+				, TO_DATE( CARR_END_DT ,'YYYYMMDD') CARR_END_DT
+				, PAE_WORK_NM
+				, CARR_DIV_CD
+				, DUTY_DEPT_NM
+				, REPBTY_BUSIN_NM
+				, ODTY_NM
+				, AMNT_DLYWAG_SUM
+				, CARR_NOTE_CTNT
+				, DUTY_YR_NUM
+				, DUTY_MNTH_ICM
+				, CVSN_RTO
+				, AJMT_MNTH_NUM
+				, RCGTN_MNTH_NUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PSNL0119
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+					
+				]]>
+		<isNotNull property="carrRsptSeilNum">
+		    <isNotEmpty property="carrRsptSeilNum">
+		        			AND CARR_RSPT_SEIL_NUM=#carrRsptSeilNum#
+		    </isNotEmpty>
+		</isNotNull>
+	</select>
+
+</sqlMap>

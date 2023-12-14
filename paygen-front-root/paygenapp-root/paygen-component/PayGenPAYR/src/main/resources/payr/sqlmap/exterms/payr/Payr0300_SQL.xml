@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Payr0300">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="payr0300SrhVO" type="com.app.exterms.payroll.server.vo.Payr0300SrhVO"/>
+	
+	<resultMap id="payr0300" class="com.app.exterms.payroll.server.vo.Payr0300VO">
+	    <result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="pymtYrMnth" column="PYMT_YR_MNTH" columnIndex="2"/>
+		<result property="payCd" column="PAY_CD" columnIndex="3"/>
+		<result property="payrSeilNum" column="PAYR_SEIL_NUM" columnIndex="4"/>
+		<result property="payPymtDt" column="PAY_PYMT_DT" columnIndex="5"/>
+		<result property="payMstrNoteCtnt" column="PAY_MSTR_NOTE_CTNT" columnIndex="6"/>
+		<result property="kybdr" column="KYBDR" columnIndex="7"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="8"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="9"/>
+		<result property="ismt" column="ISMT" columnIndex="10"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="11"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="12"/>
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="13"/> 
+	</resultMap>
+	
+	<insert id="payr0300DAO.insertPayr0300_S">
+		<![CDATA[
+		INSERT INTO PAYR0300 
+				( DPOB_CD
+				  , PYMT_YR_MNTH
+				  , PAY_CD
+				  , PAYR_SEIL_NUM
+				  , PAY_PYMT_DT
+				  , PAY_MSTR_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , PAYR_MANG_DEPT_CD )
+			VALUES ( #dpobCd#
+				  , REPLACE(#pymtYrMnth#,'.','') 
+				  , #payCd#
+				  , #payrSeilNum#
+				  , #payPymtDt#
+				  , #payMstrNoteCtnt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #payrMangDeptCd# )
+		]]>
+	</insert>
+	
+	<update id="payr0300DAO.updatePayr0300_S">
+		<![CDATA[
+			UPDATE PAYR0300
+			SET DPOB_CD=#dpobCd#
+				, PYMT_YR_MNTH=REPLACE(#pymtYrMnth#,'.','') 
+				, PAY_CD=#payCd#
+				, PAYR_SEIL_NUM=#payrSeilNum#
+				, PAY_PYMT_DT=#payPymtDt#
+				, PAY_MSTR_NOTE_CTNT=#payMstrNoteCtnt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+				, PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=#pymtYrMnth#
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+				]]>
+	</update>
+	
+	<delete id="payr0300DAO.deletePayr0300_S">
+		<![CDATA[
+				DELETE FROM PAYR0300 
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=REPLACE(#pymtYrMnth#,'.','') 
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+				]]>
+	</delete>
+	
+		<delete id="payr0300DAO.deletePayCalculationPayr0300_S">
+		<![CDATA[
+				DELETE FROM PAYR0300 
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=REPLACE(#pymtYrMnth#,'.','') 
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+				]]>
+	</delete>
+	
+	
+	<select id="payr0300DAO.selectPayr0300_S" resultMap="payr0300">
+		<![CDATA[
+				SELECT
+				DPOB_CD
+				, PYMT_YR_MNTH
+				, PAY_CD
+				, PAYR_SEIL_NUM
+				, PAY_PYMT_DT
+				, PAY_MSTR_NOTE_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, PAYR_MANG_DEPT_CD
+			FROM PAYR0300
+						WHERE DPOB_CD=#dpobCd#
+								AND PYMT_YR_MNTH=REPLACE(#pymtYrMnth#,'.','') 
+								AND PAY_CD=#payCd#
+								AND PAYR_SEIL_NUM=#payrSeilNum#
+				]]>
+	</select>
+	
+	<select id="payr0300DAO.selectPayr0300List_D" parameterClass="payr0300SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+				
+				                DPOB_CD
+								, PYMT_YR_MNTH
+								, PAY_CD
+								, PAYR_SEIL_NUM
+								, PAY_PYMT_DT
+								, PAY_MSTR_NOTE_CTNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+								, PAYR_MANG_DEPT_CD 
+						FROM PAYR0300
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					PAYR_MANG_DEPT_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					PYMT_YR_MNTH LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						PAYR_MANG_DEPT_CD DESC
+							, PYMT_YR_MNTH DESC
+							, PAY_CD DESC
+							, PAYR_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="payr0300DAO.selectPayr0300ListTotCnt_S" parameterClass="payr0300SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0300
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				PAYR_MANG_DEPT_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				PYMT_YR_MNTH LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+	
+	<select id="payr0300DAO.selectPayr0300PayYrList_D" parameterClass="payr0300SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DISTINCT DPOB_CD
+								,SUBSTR(PYMT_YR_MNTH,1,4) AS PAY_YR 
+								, SUBSTR(PYMT_YR_MNTH,1,4) AS PAY_YR_DISP
+						FROM PAYR0300
+				WHERE 1=1
+				    <isNotEmpty prepend="AND" property="dpobCd" >
+			 	    DPOB_CD=#dpobCd#
+		           </isNotEmpty>
+					ORDER BY   SUBSTR(PYMT_YR_MNTH,1,4) DESC 
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="payr0300DAO.selectPayr0300PayYrListTotCnt_S" parameterClass="payr0300SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			 FROM
+			 (
+			SELECT
+								 DISTINCT  DPOB_CD
+								,SUBSTR(PYMT_YR_MNTH,1,4) AS PAY_YR 
+								, SUBSTR(PYMT_YR_MNTH,1,4) AS PAY_YR_DISP
+						FROM PAYR0300
+				WHERE 1=1
+				    <isNotEmpty prepend="AND" property="dpobCd" >
+			 	    DPOB_CD=#dpobCd#
+		           </isNotEmpty>
+			) 
+	</select>
+	
+	
+	
+
+</sqlMap>

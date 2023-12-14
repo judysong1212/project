@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PdfJ301m_2021">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="pdfJ301mSrh_2021_VO" type="com.app.exterms.yearendtax.server.vo.PdfJ301mSrh_2021_VO"/>
+	
+	<resultMap id="pdfJ301m_2021" class="com.app.exterms.yearendtax.server.vo.PdfJ301m_2021_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="homeSeilSum" column="HOME_SEIL_SUM" columnIndex="5"/>
+		<result property="homeAmtMn" column="HOME_AMT_MN" columnIndex="6"/>
+		<result property="homeMmAmt" column="HOME_MM_AMT" columnIndex="7"/>
+		<result property="fixCd" column="FIX_CD" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="13"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="14"/>
+	</resultMap>
+	
+	<insert id="pdfJ301m_2021_DAO.insertPdfJ301m_S">
+		<![CDATA[
+			INSERT INTO PDF_J301M 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , HOME_SEIL_SUM
+				  , HOME_AMT_MN
+				  , HOME_MM_AMT
+				  , FIX_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_ADDR
+				  , REVN_DT )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #homeSeilSum#
+				  , #homeAmtMn#
+				  , #homeMmAmt#
+				  , #fixCd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnAddr#
+				  , #revnDt# )
+		]]>
+	</insert>
+	
+	<update id="pdfJ301m_2021_DAO.updatePdfJ301m_S">
+		<![CDATA[
+			UPDATE PDF_J301M
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, HOME_SEIL_SUM=#homeSeilSum#
+				, HOME_AMT_MN=#homeAmtMn#
+				, HOME_MM_AMT=#homeMmAmt#
+				, FIX_CD=#fixCd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_ADDR=#revnAddr#
+				, REVN_DT=#revnDt#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND HOME_SEIL_SUM=#homeSeilSum#
+								AND HOME_AMT_MN=#homeAmtMn#
+				]]>
+	</update>
+	
+	<delete id="pdfJ301m_2021_DAO.deletePdfJ301m_S">
+		<![CDATA[
+			DELETE FROM PDF_J301M 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND HOME_SEIL_SUM=#homeSeilSum#
+								AND HOME_AMT_MN=#homeAmtMn#
+				]]>
+	</delete>
+	
+	<select id="pdfJ301m_2021_DAO.selectPdfJ301m_S" resultMap="pdfJ301m_2021">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, HOME_SEIL_SUM
+				, HOME_AMT_MN
+				, HOME_MM_AMT
+				, FIX_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_ADDR
+				, REVN_DT
+			FROM PDF_J301M
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND HOME_SEIL_SUM=#homeSeilSum#
+								AND HOME_AMT_MN=#homeAmtMn#
+				]]>
+	</select>
+	
+	<select id="pdfJ301m_2021_DAO.selectPdfJ301mList_D" parameterClass="pdfJ301mSrh_2021_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, HOME_SEIL_SUM
+								, HOME_AMT_MN
+								, HOME_MM_AMT
+								, FIX_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_ADDR
+								, REVN_DT
+						FROM PDF_J301M
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, HOME_SEIL_SUM DESC
+							, HOME_AMT_MN DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="pdfJ301m_2021_DAO.selectPdfJ301mListTotCnt_S" parameterClass="pdfJ301mSrh_2021_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PDF_J301M
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

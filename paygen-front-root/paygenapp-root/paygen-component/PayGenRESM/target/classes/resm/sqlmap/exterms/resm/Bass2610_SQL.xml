@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass2610">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass2610SerarchVO" type="com.app.exterms.resm.server.vo.Bass2610SrhVO"/>
+	
+	<resultMap id="bass2610" class="com.app.exterms.resm.server.vo.Bass2610VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="stpInttnSeptVal" column="STP_INTTN_SEPT_VAL" columnIndex="2"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="3"/>
+		<result property="wkdyNorDutyTmNum" column="WKDY_NOR_DUTY_TM_NUM" columnIndex="4"/>
+		<result property="wkdyMnDutyTmNum" column="WKDY_MN_DUTY_TM_NUM" columnIndex="5"/>
+		<result property="wkdyMnthStdTmNum" column="WKDY_MNTH_STD_TM_NUM" columnIndex="6"/>
+		<result property="wkdyExtnnBudTmNum" column="WKDY_EXTNN_BUD_TM_NUM" columnIndex="7"/>
+		<result property="pubcHodyNorDutyTmNum" column="PUBC_HODY_NOR_DUTY_TM_NUM" columnIndex="8"/>
+		<result property="pubcHodyDayStdTmNum" column="PUBC_HODY_DAY_STD_TM_NUM" columnIndex="9"/>
+		<result property="pubcHodyMnthBudNumDys" column="PUBC_HODY_MNTH_BUD_NUM_DYS" columnIndex="10"/>
+		<result property="pubcHodyMnthBudTmNum" column="PUBC_HODY_MNTH_BUD_TM_NUM" columnIndex="11"/>
+		<result property="servcDutyTmStpSeilNum" column="SERVC_DUTY_TM_STP_SEIL_NUM" columnIndex="12"/>
+		<result property="workBusinNum" column="WORK_BUSIN_NUM" columnIndex="13"/>
+		<result property="workUntBusinNum" column="WORK_UNT_BUSIN_NUM" columnIndex="14"/>
+		<result property="mangeUntBusinNum" column="MANGE_UNT_BUSIN_NUM" columnIndex="15"/>
+		<result property="kybdr" column="KYBDR" columnIndex="16"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="17"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="18"/>
+		<result property="ismt" column="ISMT" columnIndex="19"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="20"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="21"/>
+	</resultMap>
+	
+	<insert id="bass2610DAO.insertBass2610_S">
+		<![CDATA[
+			INSERT INTO BASS2610 
+				( DPOB_CD
+				  , STP_INTTN_SEPT_VAL
+				  , EMYMT_DIV_CD
+				  , WKDY_NOR_DUTY_TM_NUM
+				  , WKDY_MN_DUTY_TM_NUM
+				  , WKDY_MNTH_STD_TM_NUM
+				  , WKDY_EXTNN_BUD_TM_NUM
+				  , PUBC_HODY_NOR_DUTY_TM_NUM
+				  , PUBC_HODY_DAY_STD_TM_NUM
+				  , PUBC_HODY_MNTH_BUD_NUM_DYS
+				  , PUBC_HODY_MNTH_BUD_TM_NUM
+				  , SERVC_DUTY_TM_STP_SEIL_NUM
+				  , WORK_BUSIN_NUM
+				  , WORK_UNT_BUSIN_NUM
+				  , MANGE_UNT_BUSIN_NUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #stpInttnSeptVal#
+				  , #emymtDivCd#
+				  , #wkdyNorDutyTmNum#
+				  , #wkdyMnDutyTmNum#
+				  , #wkdyMnthStdTmNum#
+				  , #wkdyExtnnBudTmNum#
+				  , #pubcHodyNorDutyTmNum#
+				  , #pubcHodyDayStdTmNum#
+				  , #pubcHodyMnthBudNumDys#
+				  , #pubcHodyMnthBudTmNum#
+				  , #servcDutyTmStpSeilNum#
+				  , #workBusinNum#
+				  , #workUntBusinNum#
+				  , #mangeUntBusinNum#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass2610DAO.updateBass2610_S">
+		<![CDATA[
+			UPDATE BASS2610
+			SET DPOB_CD=#dpobCd#
+				, STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				, EMYMT_DIV_CD=#emymtDivCd#
+				, WKDY_NOR_DUTY_TM_NUM=#wkdyNorDutyTmNum#
+				, WKDY_MN_DUTY_TM_NUM=#wkdyMnDutyTmNum#
+				, WKDY_MNTH_STD_TM_NUM=#wkdyMnthStdTmNum#
+				, WKDY_EXTNN_BUD_TM_NUM=#wkdyExtnnBudTmNum#
+				, PUBC_HODY_NOR_DUTY_TM_NUM=#pubcHodyNorDutyTmNum#
+				, PUBC_HODY_DAY_STD_TM_NUM=#pubcHodyDayStdTmNum#
+				, PUBC_HODY_MNTH_BUD_NUM_DYS=#pubcHodyMnthBudNumDys#
+				, PUBC_HODY_MNTH_BUD_TM_NUM=#pubcHodyMnthBudTmNum#
+				, SERVC_DUTY_TM_STP_SEIL_NUM=#servcDutyTmStpSeilNum#
+				, WORK_BUSIN_NUM=#workBusinNum#
+				, WORK_UNT_BUSIN_NUM=#workUntBusinNum#
+				, MANGE_UNT_BUSIN_NUM=#mangeUntBusinNum#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				]]>
+	</update>
+	
+	<delete id="bass2610DAO.deleteBass2610_S">
+		<![CDATA[
+			DELETE FROM BASS2610 
+						WHERE DPOB_CD=#dpobCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				]]>
+	</delete>
+	
+	<select id="bass2610DAO.selectBass2610_S" resultMap="bass2610">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, STP_INTTN_SEPT_VAL
+				, EMYMT_DIV_CD
+				, WKDY_NOR_DUTY_TM_NUM
+				, WKDY_MN_DUTY_TM_NUM
+				, WKDY_MNTH_STD_TM_NUM
+				, WKDY_EXTNN_BUD_TM_NUM
+				, PUBC_HODY_NOR_DUTY_TM_NUM
+				, PUBC_HODY_DAY_STD_TM_NUM
+				, PUBC_HODY_MNTH_BUD_NUM_DYS
+				, PUBC_HODY_MNTH_BUD_TM_NUM
+				, SERVC_DUTY_TM_STP_SEIL_NUM
+				, WORK_BUSIN_NUM
+				, WORK_UNT_BUSIN_NUM
+				, MANGE_UNT_BUSIN_NUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS2610
+						WHERE DPOB_CD=#dpobCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				]]>
+	</select>
+	
+	<select id="bass2610DAO.selectBass2610List_D" parameterClass="bass2610SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, STP_INTTN_SEPT_VAL
+								, EMYMT_DIV_CD
+								, WKDY_NOR_DUTY_TM_NUM
+								, WKDY_MN_DUTY_TM_NUM
+								, WKDY_MNTH_STD_TM_NUM
+								, WKDY_EXTNN_BUD_TM_NUM
+								, PUBC_HODY_NOR_DUTY_TM_NUM
+								, PUBC_HODY_DAY_STD_TM_NUM
+								, PUBC_HODY_MNTH_BUD_NUM_DYS
+								, PUBC_HODY_MNTH_BUD_TM_NUM
+								, SERVC_DUTY_TM_STP_SEIL_NUM
+								, WORK_BUSIN_NUM
+								, WORK_UNT_BUSIN_NUM
+								, MANGE_UNT_BUSIN_NUM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS2610
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					STP_INTTN_SEPT_VAL LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, STP_INTTN_SEPT_VAL DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass2610DAO.selectBass2610ListTotCnt_S" parameterClass="bass2610SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS2610
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				STP_INTTN_SEPT_VAL LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

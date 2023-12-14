@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass0100">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="Bass0100SrhVO" type="com.app.exterms.basis.server.vo.Bass0100SrhVO"/>
+	<typeAlias  alias="Bass0100DTO" type="com.app.exterms.basis.client.dto.Bass0100DTO"/>
+	
+	<resultMap id="bass0100" class="com.app.exterms.basis.server.vo.Bass0100VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="dpobNm" column="DPOB_NM" columnIndex="2"/>
+		<result property="degtrResnRegnNum" column="DEGTR_RESN_REGN_NUM" columnIndex="3"/>
+		<result property="tplvlDpobCd" column="TPLVL_DPOB_CD" columnIndex="4"/>
+		<result property="degtrNm" column="DEGTR_NM" columnIndex="5"/>
+		<result property="busoprRgstnNum" column="BUSOPR_RGSTN_NUM" columnIndex="6"/>
+		<result property="corpRgstnNum" column="CORP_RGSTN_NUM" columnIndex="7"/>
+		<result property="corpDivCd" column="CORP_DIV_CD" columnIndex="8"/>
+		<result property="dpobZpcd" column="DPOB_ZPCD" columnIndex="9"/>
+		<result property="dpobFndtnAddr" column="DPOB_FNDTN_ADDR" columnIndex="10"/>
+		<result property="dpobDtlPatrAddr" column="DPOB_DTL_PATR_ADDR" columnIndex="11"/>
+		<result property="dpobPhnNum" column="DPOB_PHN_NUM" columnIndex="12"/>
+		<result property="dpobFaxNum" column="DPOB_FAX_NUM" columnIndex="13"/>
+		<result property="dpobSealWrdNm" column="DPOB_SEAL_WRD_NM" columnIndex="14"/>
+		<result property="dpobSealRftaNm" column="DPOB_SEAL_RFTA_NM" columnIndex="15"/>
+		<result property="dpobSealFlNm" column="DPOB_SEAL_FL_NM" columnIndex="16"/>
+		<result property="dpobFndtnUseYn" column="DPOB_FNDTN_USE_YN" columnIndex="17"/>
+		<result property="hlthInsrSym" column="HLTH_INSR_SYM" columnIndex="18"/>
+		<result property="natPennSym" column="NAT_PENN_SYM" columnIndex="19"/>
+		<result property="umytInsrSym" column="UMYT_INSR_SYM" columnIndex="20"/>
+		<result property="sysDivCd" column="SYS_DIV_CD" columnIndex="21"/>
+		<result property="kybdr" column="KYBDR" columnIndex="22"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="23"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="24"/>
+		<result property="ismt" column="ISMT" columnIndex="25"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="26"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="27"/>
+		<result property="retryCllnDebrDivCd" column="RETRY_CLLN_DEBR_DIV_CD" columnIndex="28"/>
+		<result property="insurPrvaffAgcyIstutNum" column="INSUR_PRVAFF_AGCY_ISTUT_NUM" columnIndex="29"/>
+		<result property="insurPrvaffAgcyIstutNm" column="INSUR_PRVAFF_AGCY_ISTUT_NM" columnIndex="30"/>
+		<result property="hlthInsrOfceSym" column="HLTH_INSR_OFCE_SYM" columnIndex="31"/>
+		<result property="idtlAccdtInsurSym" column="IDTL_ACCDT_INSUR_SYM" columnIndex="32"/>
+	</resultMap>
+	
+	<select id="bass0100DAO.getParentDpobCd" resultClass="egovMap">
+	    SELECT 
+	    	DPOB_CD AS COMM_CD
+	    	, DPOB_NM AS COMM_CD_NM
+		 FROM 
+		 	BASS0100
+		 WHERE 
+		 	TPLVL_DPOB_CD IS NULL
+		 ORDER BY 
+		 	DPOB_NM ASC
+	</select>
+	
+	<!-- 시스템 사업장 코드를 가져옴 -->
+	<select id="bass0100DAO.getSysDpobCd" resultClass="egovMap">
+	    SELECT 
+	    	SYS_DPOB_CD AS COMM_CD
+	    	, SYS_DPOB_NM AS COMM_CD_NM
+		 FROM 
+		 	SYSM0050
+		 ORDER BY 
+		 	SYS_DPOB_NM ASC
+	</select>
+	
+	<!-- 사용 시스템 구 분코드 가져옴 -->
+	<select id="bass0100DAO.getUseSysDivCd" resultClass="egovMap">
+	    SELECT 
+	    	USE_SYS_DIV_CD AS COMM_CD
+	    	, USE_SYS_DIV_CD AS COMM_CD_NM
+		 FROM 
+		 	SYSM0050
+		 ORDER BY 
+		 	USE_SYS_DIV_CD ASC
+	</select>
+	
+	
+	<select id="bass0100DAO.selectBass0100RetryCllnDebrDivCdList" resultClass="egovMap">
+	    SELECT 
+	    	DPOB_CD AS COMM_CD
+	    	, DPOB_NM AS COMM_CD_NM
+	    	, RETRY_CLLN_DEBR_DIV_CD
+		FROM 
+		  	BASS0100
+		 WHERE 
+		 	TPLVL_DPOB_CD IS NULL
+		 ORDER BY 
+		 	DPOB_NM ASC
+	</select>
+	
+	<select id="bass0100DAO.selectBass0100sysDivCdList" resultClass="egovMap">
+	    SELECT 
+	    	SYS_DIV_CD
+	    	, SYS_DIV_CD AS SYS_DIV_NM
+		FROM 
+			BASS0100
+		WHERE 
+		 	SYS_DIV_CD IS NOT NULL
+		GROUP BY 
+			SYS_DIV_CD
+	</select>
+	
+	<update id="bass0100DAO.saveBass0100" parameterClass="Bass0100DTO">
+			MERGE INTO BASS0100
+			     USING DUAL ON (DPOB_CD = #dpobCd#)
+			WHEN MATCHED
+			THEN
+			   UPDATE 
+			      SET DPOB_NM=#dpobNm#
+					, DEGTR_RESN_REGN_NUM= replace(#degtrResnRegnNum#,'-','')
+					, DEGTR_NM=#degtrNm#
+					, BUSOPR_RGSTN_NUM= replace(#busoprRgstnNum#,'-','')
+					, CORP_RGSTN_NUM= replace(#corpRgstnNum#,'-','')
+					, CORP_DIV_CD=#corpDivCd#
+					, DPOB_ZPCD= replace(#dpobZpcd#,'-','')
+					, DPOB_FNDTN_ADDR=#dpobFndtnAddr#
+					, DPOB_DTL_PATR_ADDR=#dpobDtlPatrAddr#
+					, DPOB_PHN_NUM=#dpobPhnNum#
+					, DPOB_FAX_NUM=#dpobFaxNum#
+					, DPOB_SEAL_WRD_NM=#dpobSealWrdNm#
+					, DPOB_SEAL_RFTA_NM=#dpobSealRftaNm#
+		<isNotNull property="dpobSealFlNm"><isNotEmpty property="dpobSealFlNm">, DPOB_SEAL_FL_NM=#dpobSealFlNm#</isNotEmpty></isNotNull>					
+					, DPOB_FNDTN_USE_YN=#dpobFndtnUseYn#
+					, HLTH_INSR_SYM=#hlthInsrSym#
+					, NAT_PENN_SYM=#natPennSym#
+					, UMYT_INSR_SYM=#umytInsrSym#
+					, SYS_DIV_CD = #sysDivCd#
+					, ISMT=#ismt#
+					, REVN_DT=TO_CHAR(SYSDATE, 'YYYYMMDDHHMISS')
+					, REVN_ADDR=#revnAddr#
+					, TPLVL_DPOB_CD=#tplvlDpobCd#	
+					, RETRY_CLLN_DEBR_DIV_CD=#retryCllnDebrDivCd#
+					, HLTH_INSR_OFCE_SYM=#hlthInsrOfceSym#
+					, INSUR_PRVAFF_AGCY_ISTUT_NUM=#insurPrvaffAgcyIstutNum#
+					, IDTL_ACCDT_INSUR_SYM=#idtlAccdtInsurSym# 		
+					, MTST_BUSIN_DIV_CD=#mtstBusinDivCd#
+					, SYS_DPOB_CD=#sysDpobCd#
+			WHEN NOT MATCHED
+			THEN
+			   INSERT 
+					( DPOB_CD
+					  , DPOB_NM
+					  , DEGTR_RESN_REGN_NUM
+					  , TPLVL_DPOB_CD
+					  , DEGTR_NM
+					  , BUSOPR_RGSTN_NUM
+					  , CORP_RGSTN_NUM
+					  , CORP_DIV_CD
+					  , DPOB_ZPCD
+					  , DPOB_FNDTN_ADDR
+					  , DPOB_DTL_PATR_ADDR
+					  , DPOB_PHN_NUM
+					  , DPOB_FAX_NUM
+					  , DPOB_SEAL_WRD_NM
+					  , DPOB_SEAL_RFTA_NM
+					  , DPOB_SEAL_FL_NM
+					  , DPOB_FNDTN_USE_YN
+					  , HLTH_INSR_SYM
+					  , NAT_PENN_SYM
+					  , UMYT_INSR_SYM
+					  , SYS_DIV_CD
+					  , KYBDR
+					  , INPT_DT
+					  , INPT_ADDR
+					  , ISMT
+					  , REVN_DT
+					  , REVN_ADDR
+					  , RETRY_CLLN_DEBR_DIV_CD
+					  , INSUR_PRVAFF_AGCY_ISTUT_NUM
+					  , INSUR_PRVAFF_AGCY_ISTUT_NM
+					  , HLTH_INSR_OFCE_SYM
+					  , IDTL_ACCDT_INSUR_SYM 
+					  , MTST_BUSIN_DIV_CD
+					  , SYS_DPOB_CD)
+			VALUES 
+				( #dpobCd#
+					  , #dpobNm#
+					  , replace(#degtrResnRegnNum#,'-','')
+					  , #tplvlDpobCd#
+					  , #degtrNm#
+					  , replace(#busoprRgstnNum#,'-','')
+					  , replace(#corpRgstnNum#,'-','')
+					  , #corpDivCd#
+					  , replace(#dpobZpcd#,'-','')
+					  , #dpobFndtnAddr#
+					  , #dpobDtlPatrAddr#
+					  , #dpobPhnNum#
+					  , #dpobFaxNum#
+					  , #dpobSealWrdNm#
+					  , #dpobSealRftaNm#
+					  , #dpobSealFlNm#
+					  , #dpobFndtnUseYn#
+					  , #hlthInsrSym#
+					  , #natPennSym#
+					  , #umytInsrSym#
+					  , #sysDivCd#
+					  , #ismt#
+					  , TO_CHAR(SYSDATE, 'YYYYMMDD')
+					  , #inptAddr#
+					  , #ismt#
+					  , TO_CHAR(SYSDATE, 'YYYYMMDD')
+					  , #revnAddr#
+					  , #retryCllnDebrDivCd#
+					  , #insurPrvaffAgcyIstutNum#
+					  , #insurPrvaffAgcyIstutNm#
+					  , #hlthInsrOfceSym#
+					  , #idtlAccdtInsurSym# 
+					  , #mtstBusinDivCd#
+					  , #sysDpobCd#)
+	</update>
+	
+	
+	<insert id="bass0100DAO.insertBass0100_S">
+		<![CDATA[
+			INSERT INTO BASS0100 
+				( DPOB_CD
+				  , DPOB_NM
+				  , DEGTR_RESN_REGN_NUM
+				  , DEGTR_NM
+				  , BUSOPR_RGSTN_NUM
+				  , CORP_RGSTN_NUM
+				  , CORP_DIV_CD
+				  , DPOB_ZPCD
+				  , DPOB_FNDTN_ADDR
+				  , DPOB_DTL_PATR_ADDR
+				  , DPOB_PHN_NUM
+				  , DPOB_FAX_NUM
+				  , DPOB_SEAL_WRD_NM
+				  , DPOB_SEAL_RFTA_NM
+				  , DPOB_SEAL_FL_NM
+				  , DPOB_FNDTN_USE_YN
+				  , HLTH_INSR_SYM
+				  , NAT_PENN_SYM
+				  , UMYT_INSR_SYM
+				  , SYS_DIV_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , SYS_DPOB_CD )
+			VALUES ( #dpobCd#
+				  , #dpobNm#
+				  , #degtrResnRegnNum#
+				  , #degtrNm#
+				  , #busoprRgstnNum#
+				  , #corpRgstnNum#
+				  , #corpDivCd#
+				  , #dpobZpcd#
+				  , #dpobFndtnAddr#
+				  , #dpobDtlPatrAddr#
+				  , #dpobPhnNum#
+				  , #dpobFaxNum#
+				  , #dpobSealWrdNm#
+				  , #dpobSealRftaNm#
+				  , #dpobSealFlNm#
+				  , #dpobFndtnUseYn#
+				  , #hlthInsrSym#
+				  , #natPennSym#
+				  , #umytInsrSym#
+				  , #sysDivCd#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #sysDpobCd# )
+		]]>
+	</insert>
+	
+	<update id="bass0100DAO.updateBass0100_S">
+		<![CDATA[
+			UPDATE BASS0100
+			SET DPOB_NM=#dpobNm#
+				, DEGTR_RESN_REGN_NUM=#degtrResnRegnNum#
+				, DEGTR_NM=#degtrNm#
+				, BUSOPR_RGSTN_NUM=#busoprRgstnNum#
+				, CORP_RGSTN_NUM=#corpRgstnNum#
+				, CORP_DIV_CD=#corpDivCd#
+				, DPOB_ZPCD=#dpobZpcd#
+				, DPOB_FNDTN_ADDR=#dpobFndtnAddr#
+				, DPOB_DTL_PATR_ADDR=#dpobDtlPatrAddr#
+				, DPOB_PHN_NUM=#dpobPhnNum#
+				, DPOB_FAX_NUM=#dpobFaxNum#
+				, DPOB_SEAL_WRD_NM=#dpobSealWrdNm#
+				, DPOB_SEAL_RFTA_NM=#dpobSealRftaNm#
+				, DPOB_SEAL_FL_NM=#dpobSealFlNm#
+				, DPOB_FNDTN_USE_YN=#dpobFndtnUseYn#
+				, HLTH_INSR_SYM=#hlthInsrSym#
+				, NAT_PENN_SYM=#natPennSym#
+				, UMYT_INSR_SYM=#umytInsrSym#
+				, SYS_DIV_CD = #sysDivCd# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+				, SYS_DPOB_CD=#sysDpobCd#
+		  WHERE DPOB_CD=#dpobCd#
+			]]>
+	</update>
+	
+	<delete id="bass0100DAO.deleteBass0100_S" parameterClass="Bass0100DTO">
+		<![CDATA[
+			DELETE FROM BASS0100 WHERE DPOB_CD=#dpobCd#
+			]]>
+	</delete>
+	
+	<select id="bass0100DAO.selectBass0100_S" resultMap="bass0100">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, DPOB_NM
+				, DEGTR_RESN_REGN_NUM
+				, DEGTR_NM
+				, BUSOPR_RGSTN_NUM
+				, CORP_RGSTN_NUM
+				, CORP_DIV_CD
+				, DPOB_ZPCD
+				, DPOB_FNDTN_ADDR
+				, DPOB_DTL_PATR_ADDR
+				, DPOB_PHN_NUM
+				, DPOB_FAX_NUM
+				, DPOB_SEAL_WRD_NM
+				, DPOB_SEAL_RFTA_NM
+				, DPOB_SEAL_FL_NM
+				, DPOB_FNDTN_USE_YN
+				, HLTH_INSR_SYM
+				, NAT_PENN_SYM
+				, UMYT_INSR_SYM
+				, SYS_DIV_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, RETRY_CLLN_DEBR_DIV_CD
+				, INSUR_PRVAFF_AGCY_ISTUT_NUM
+				, INSUR_PRVAFF_AGCY_ISTUT_NM
+				, HLTH_INSR_OFCE_SYM
+				, IDTL_ACCDT_INSUR_SYM
+				, SYS_DPOB_CD
+			FROM BASS0100
+			]]>
+	</select>
+	
+	<select id="bass0100DAO.selectBass0100List_D" parameterClass="Bass0100SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, DPOB_NM
+						        , REGEXP_REPLACE(DEGTR_RESN_REGN_NUM,'(^.{6})','\1-') as DEGTR_RESN_REGN_NUM
+						        , DEGTR_NM
+						        , DECODE(LENGTH(BUSOPR_RGSTN_NUM),10,
+						            SUBSTR(BUSOPR_RGSTN_NUM,1,3)||'-'||
+						            SUBSTR(BUSOPR_RGSTN_NUM,4,2)||'-'||
+						            SUBSTR(BUSOPR_RGSTN_NUM,6,5)
+						        , BUSOPR_RGSTN_NUM) as BUSOPR_RGSTN_NUM
+						        , REGEXP_REPLACE(CORP_RGSTN_NUM,'(^.{6})','\1-') as CORP_RGSTN_NUM
+						        , CORP_DIV_CD
+						        , DPOB_ZPCD 
+						        , DPOB_FNDTN_ADDR
+								, DPOB_DTL_PATR_ADDR
+								, DPOB_PHN_NUM
+								, DPOB_FAX_NUM
+								, DPOB_SEAL_WRD_NM
+								, DPOB_SEAL_RFTA_NM
+								, DPOB_SEAL_FL_NM
+								, DPOB_FNDTN_USE_YN
+								, HLTH_INSR_SYM
+								, NAT_PENN_SYM
+								, UMYT_INSR_SYM
+								, SYS_DIV_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+								, TPLVL_DPOB_CD
+								, RETRY_CLLN_DEBR_DIV_CD
+								, INSUR_PRVAFF_AGCY_ISTUT_NUM
+								, INSUR_PRVAFF_AGCY_ISTUT_NM
+								, HLTH_INSR_OFCE_SYM
+								, IDTL_ACCDT_INSUR_SYM
+								, MTST_BUSIN_DIV_CD
+								, MTST_BUSIN_DIV_CD AS mtstBusinDivCdcommCd 
+								, fcBass0300CDNM(DPOB_CD, MTST_BUSIN_DIV_CD) AS mtstBusinDivCdcommCdNm  
+								, SYS_DPOB_CD
+						FROM BASS0100
+				WHERE 1=1
+				<isNotNull property="dpobNm">
+				    <isNotEmpty property="dpobNm">
+				        AND DPOB_NM like '%'|| #dpobNm# || '%'
+				    </isNotEmpty>
+				</isNotNull>
+				<isNotNull property="degtrNm">
+				    <isNotEmpty property="degtrNm">
+				        AND DEGTR_NM like '%'|| #degtrNm# || '%'
+				    </isNotEmpty>
+				</isNotNull>
+				<isNotNull property="mtstBusinDivCd">
+			    	<isNotEmpty property="mtstBusinDivCd">
+			        	AND MTST_BUSIN_DIV_CD = #mtstBusinDivCd# 
+			   		</isNotEmpty>
+				</isNotNull>
+				ORDER BY DPOB_CD ASC
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<!-- REGEXP_REPLACE(,'(^.{3})','\1-') as DPOB_ZPCD -->
+	<select id="bass0100DAO.selectBass0100ListTotCnt_S" parameterClass="Bass0100SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0100
+			WHERE 1=1
+			<isNotNull property="dpobNm">
+			    <isNotEmpty property="dpobNm">
+			        AND DPOB_NM like '%'|| #dpobNm# || '%'
+			    </isNotEmpty>
+			</isNotNull>
+			<isNotNull property="degtrNm">
+			    <isNotEmpty property="degtrNm">
+			        AND DEGTR_NM like '%'|| #degtrNm# || '%'
+			    </isNotEmpty>
+			</isNotNull>
+			<isNotNull property="mtstBusinDivCd">
+			    <isNotEmpty property="mtstBusinDivCd">
+			        AND MTST_BUSIN_DIV_CD = #mtstBusinDivCd# 
+			    </isNotEmpty>
+			</isNotNull>
+			
+	</select>
+
+</sqlMap>

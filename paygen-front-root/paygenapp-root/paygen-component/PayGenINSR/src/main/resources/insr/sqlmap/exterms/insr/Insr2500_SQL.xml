@@ -1,0 +1,954 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Insr2500">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="insr2500SerarchVO" type="com.app.exterms.insurance.server.vo.Insr2500SrhVO"/>
+	<typeAlias  alias="insr2200SerarchVO" type="com.app.exterms.insurance.server.vo.Insr2200SrhVO"/>
+	
+	<resultMap id="insr2500" class="com.app.exterms.insurance.server.vo.Insr2500VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="retryYrMnth" column="RETRY_YR_MNTH" columnIndex="3"/>
+		<result property="socInsrLssEmymtNum" column="SOC_INSR_LSS_EMYMT_NUM" columnIndex="4"/>
+		<result property="soctyInsurCmptnDt" column="SOCTY_INSUR_CMPTN_DT" columnIndex="5"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="6"/>
+		<result property="nm" column="NM" columnIndex="7"/>
+		<result property="icncDt" column="ICNC_DT" columnIndex="8"/>
+		<result property="umytInsrAqtnDt" column="UMYT_INSR_AQTN_DT" columnIndex="9"/>
+		<result property="retryDt" column="RETRY_DT" columnIndex="10"/>
+		<result property="umytInsrChgjbReasCd" column="UMYT_INSR_CHGJB_REAS_CD" columnIndex="11"/>
+		<result property="umytInsrSpecResnCtnt" column="UMYT_INSR_SPEC_RESN_CTNT" columnIndex="12"/>
+		<result property="usalyTisedUntPridNumDys" column="USALY_TISED_UNT_PRID_NUM_DYS" columnIndex="13"/>
+		<result property="avgAmntCalcTotNumDys" column="AVG_AMNT_CALC_TOT_NUM_DYS" columnIndex="14"/>
+		<result property="avgAmntFndtnSum" column="AVG_AMNT_FNDTN_SUM" columnIndex="15"/>
+		<result property="avgAmntEtcExtpySum" column="AVG_AMNT_ETC_EXTPY_SUM" columnIndex="16"/>
+		<result property="avgAmntAllwBnusSum" column="AVG_AMNT_ALLW_BNUS_SUM" columnIndex="17"/>
+		<result property="avgAmntAnnlExtpySum" column="AVG_AMNT_ANNL_EXTPY_SUM" columnIndex="18"/>
+		<result property="avgAmntEtcSum" column="AVG_AMNT_ETC_SUM" columnIndex="19"/>
+		<result property="avgAmntQnty" column="AVG_AMNT_QNTY" columnIndex="20"/>
+		<result property="usalyAmntWag" column="USALY_AMNT_WAG" columnIndex="21"/>
+		<result property="stdAmntWag" column="STD_AMNT_WAG" columnIndex="22"/>
+		<result property="dayFxdWorkTmNum" column="DAY_FXD_WORK_TM_NUM" columnIndex="23"/>
+		<result property="sevePayReipSum" column="SEVE_PAY_REIP_SUM" columnIndex="24"/>
+		<result property="sevePayRstEtcSum" column="SEVE_PAY_RST_ETC_SUM" columnIndex="25"/>
+		<result property="kybdr" column="KYBDR" columnIndex="26"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="27"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="28"/>
+		<result property="ismt" column="ISMT" columnIndex="29"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="30"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="31"/>
+	</resultMap>
+	
+	<insert id="insr2500DAO.insertInsr2500_S">
+		<![CDATA[
+			INSERT INTO INSR2500 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , RETRY_YR_MNTH
+				  , SOC_INSR_LSS_EMYMT_NUM
+				  , SOCTY_INSUR_CMPTN_DT
+				  , DEPT_CD
+				  , NM
+				  , ICNC_DT
+				  , UMYT_INSR_AQTN_DT
+				  , RETRY_DT
+				  , UMYT_INSR_CHGJB_REAS_CD
+				  , UMYT_INSR_SPEC_RESN_CTNT
+				  , USALY_TISED_UNT_PRID_NUM_DYS
+				  , AVG_AMNT_CALC_TOT_NUM_DYS
+				  , AVG_AMNT_FNDTN_SUM
+				  , AVG_AMNT_ETC_EXTPY_SUM
+				  , AVG_AMNT_ALLW_BNUS_SUM
+				  , AVG_AMNT_ANNL_EXTPY_SUM
+				  , AVG_AMNT_ETC_SUM
+				  , AVG_AMNT_QNTY
+				  , USALY_AMNT_WAG
+				  , STD_AMNT_WAG
+				  , DAY_FXD_WORK_TM_NUM
+				  , SEVE_PAY_REIP_SUM
+				  , SEVE_PAY_RST_ETC_SUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #retryYrMnth#
+				  , #socInsrLssEmymtNum#
+				  , #soctyInsurCmptnDt#
+				  , #deptCd#
+				  , #nm#
+				  , #icncDt#
+				  , #umytInsrAqtnDt#
+				  , #retryDt#
+				  , #umytInsrChgjbReasCd#
+				  , #umytInsrSpecResnCtnt#
+				  , #usalyTisedUntPridNumDys#
+				  , #avgAmntCalcTotNumDys#
+				  , #avgAmntFndtnSum#
+				  , #avgAmntEtcExtpySum#
+				  , #avgAmntAllwBnusSum#
+				  , #avgAmntAnnlExtpySum#
+				  , #avgAmntEtcSum#
+				  , #avgAmntQnty#
+				  , #usalyAmntWag#
+				  , #stdAmntWag#
+				  , #dayFxdWorkTmNum#
+				  , #sevePayReipSum#
+				  , #sevePayRstEtcSum#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #ismt#
+				  , #inptAddr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="insr2500DAO.updateInsr2500_S">
+	    <!--  , RETRY_YR_MNTH = TO_CHAR(SYSDATE,'YYYYMM') -->
+		<![CDATA[
+			UPDATE INSR2500
+			SET SOCTY_INSUR_CMPTN_DT=#soctyInsurCmptnDt#
+			   
+				, DEPT_CD=#deptCd#
+				, NM=#nm#
+				, ICNC_DT=#icncDt#
+				, UMYT_INSR_AQTN_DT=#umytInsrAqtnDt#
+				, RETRY_DT=#retryDt#
+				, UMYT_INSR_CHGJB_REAS_CD=#umytInsrChgjbReasCd#
+				, UMYT_INSR_SPEC_RESN_CTNT=#umytInsrSpecResnCtnt#
+				, USALY_TISED_UNT_PRID_NUM_DYS=#usalyTisedUntPridNumDys#
+				, AVG_AMNT_CALC_TOT_NUM_DYS=#avgAmntCalcTotNumDys#
+				, AVG_AMNT_FNDTN_SUM=#avgAmntFndtnSum#
+				, AVG_AMNT_ETC_EXTPY_SUM=#avgAmntEtcExtpySum#
+				, AVG_AMNT_ALLW_BNUS_SUM=#avgAmntAllwBnusSum#
+				, AVG_AMNT_ANNL_EXTPY_SUM=#avgAmntAnnlExtpySum#
+				, AVG_AMNT_ETC_SUM=#avgAmntEtcSum#
+				, AVG_AMNT_QNTY=#avgAmntQnty#
+				, USALY_AMNT_WAG=#usalyAmntWag#
+				, STD_AMNT_WAG=#stdAmntWag#
+				, DAY_FXD_WORK_TM_NUM=#dayFxdWorkTmNum#
+				, SEVE_PAY_REIP_SUM=#sevePayReipSum#
+				, SEVE_PAY_RST_ETC_SUM=#sevePayRstEtcSum#
+				, ISMT=#ismt#
+				, REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND RETRY_YR_MNTH=#retryYrMnth#
+								AND SOC_INSR_LSS_EMYMT_NUM=#socInsrLssEmymtNum#
+				]]>
+	</update>
+	
+	<delete id="insr2500DAO.deleteInsr2500_S">
+		<![CDATA[
+			DELETE FROM INSR2500 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND RETRY_YR_MNTH=#retryYrMnth#
+								AND SOC_INSR_LSS_EMYMT_NUM=#socInsrLssEmymtNum#
+				]]>
+	</delete>
+	
+	<select id="insr2500DAO.selectInsr2500_S" resultMap="insr2500">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, RETRY_YR_MNTH
+				, SOC_INSR_LSS_EMYMT_NUM
+				, SOCTY_INSUR_CMPTN_DT
+				, DEPT_CD
+				, NM
+				, ICNC_DT
+				, UMYT_INSR_AQTN_DT
+				, RETRY_DT
+				, UMYT_INSR_CHGJB_REAS_CD
+				, UMYT_INSR_SPEC_RESN_CTNT
+				, USALY_TISED_UNT_PRID_NUM_DYS
+				, AVG_AMNT_CALC_TOT_NUM_DYS
+				, AVG_AMNT_FNDTN_SUM
+				, AVG_AMNT_ETC_EXTPY_SUM
+				, AVG_AMNT_ALLW_BNUS_SUM
+				, AVG_AMNT_ANNL_EXTPY_SUM
+				, AVG_AMNT_ETC_SUM
+				, AVG_AMNT_QNTY
+				, USALY_AMNT_WAG
+				, STD_AMNT_WAG
+				, DAY_FXD_WORK_TM_NUM
+				, SEVE_PAY_REIP_SUM
+				, SEVE_PAY_RST_ETC_SUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM INSR2500
+						WHERE DPOB_CD=#dpobCd#
+						AND SYSTEMKEY=#systemkey#
+						AND SOC_INSR_LSS_EMYMT_NUM=#socInsrLssEmymtNum#
+				]]>
+	</select>
+	
+	<select id="insr2500DAO.selectInsr2500List_D" parameterClass="insr2500SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, RETRY_YR_MNTH
+								, SOC_INSR_LSS_EMYMT_NUM
+								, SOCTY_INSUR_CMPTN_DT
+								, DEPT_CD
+								, NM
+								, ICNC_DT
+								, UMYT_INSR_AQTN_DT
+								, RETRY_DT
+								, UMYT_INSR_CHGJB_REAS_CD
+								, UMYT_INSR_SPEC_RESN_CTNT
+								, USALY_TISED_UNT_PRID_NUM_DYS
+								, AVG_AMNT_CALC_TOT_NUM_DYS
+								, AVG_AMNT_FNDTN_SUM
+								, AVG_AMNT_ETC_EXTPY_SUM
+								, AVG_AMNT_ALLW_BNUS_SUM
+								, AVG_AMNT_ANNL_EXTPY_SUM
+								, AVG_AMNT_ETC_SUM
+								, AVG_AMNT_QNTY
+								, USALY_AMNT_WAG
+								, STD_AMNT_WAG
+								, DAY_FXD_WORK_TM_NUM
+								, SEVE_PAY_REIP_SUM
+								, SEVE_PAY_RST_ETC_SUM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM INSR2500
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, RETRY_YR_MNTH DESC
+							, SOC_INSR_LSS_EMYMT_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="insr2500DAO.selectInsr2500ListTotCnt_S" parameterClass="insr2500SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM INSR2500
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+	<!-- <select id="insr2500DAO.selectInsr2500Excel_S" resultMap="EgovMap">
+	                                                                    
+     SELECT    
+	     max(A.DPOB_CD) AS DPOB_CD,
+	     max(A.SYSTEMKEY) AS SYSTEMKEY,
+	     max(A.RETRY_YR_MNTH) AS RETRY_YR_MNTH,
+	     max(A.SOC_INSR_LSS_EMYMT_NUM) AS SOC_INSR_LSS_EMYMT_NUM,
+	                                                                                     
+	     max(decode(B.SEVE_PAY_DTL_PATR_NUM,'1',B.PAY_PYMT_BGNN_DT)) AS PAY_PYMT_BGNN_DT_1,         
+	     max(decode(B.SEVE_PAY_DTL_PATR_NUM,'1',B.PAY_PYMT_END_DT)) AS PAY_PYMT_END_DT_1,           
+	     max(decode(B.SEVE_PAY_DTL_PATR_NUM,'1',B.PYMT_NUM_DYS)) AS PYMT_NUM_DYS_1,                 
+	     max(decode(B.SEVE_PAY_DTL_PATR_NUM,'1',B.AMNT_BSPY_SUM)) AS AMNT_BSPY_SUM_1,               
+	                                                                            
+	     max(decode(B.SEVE_PAY_DTL_PATR_NUM,'2',B.PAY_PYMT_BGNN_DT)) AS PAY_PYMT_BGNN_DT_2,         
+	     max(decode(B.SEVE_PAY_DTL_PATR_NUM,'2',B.PAY_PYMT_END_DT)) AS PAY_PYMT_END_DT_2,           
+	     max(decode(B.SEVE_PAY_DTL_PATR_NUM,'2',B.PYMT_NUM_DYS)) AS PYMT_NUM_DYS_2,                 
+	     max(decode(B.SEVE_PAY_DTL_PATR_NUM,'2',B.AMNT_BSPY_SUM)) AS AMNT_BSPY_SUM_2,               
+	                                                                            
+	     max(decode(B.SEVE_PAY_DTL_PATR_NUM,'3',B.PAY_PYMT_BGNN_DT)) AS PAY_PYMT_BGNN_DT_3,         
+	     max(decode(B.SEVE_PAY_DTL_PATR_NUM,'3',B.PAY_PYMT_END_DT)) AS PAY_PYMT_END_DT_3,           
+	     max(decode(B.SEVE_PAY_DTL_PATR_NUM,'3',B.PYMT_NUM_DYS)) AS PYMT_NUM_DYS_3,                 
+	     max(decode(B.SEVE_PAY_DTL_PATR_NUM,'3',B.AMNT_BSPY_SUM)) AS AMNT_BSPY_SUM_3,               
+	                                                                            
+	     max(decode(B.SEVE_PAY_DTL_PATR_NUM,'4',B.PAY_PYMT_BGNN_DT)) AS PAY_PYMT_BGNN_DT_4,         
+	     max(decode(B.SEVE_PAY_DTL_PATR_NUM,'4',B.PAY_PYMT_END_DT)) AS PAY_PYMT_END_DT_4,           
+	     max(decode(B.SEVE_PAY_DTL_PATR_NUM,'4',B.PYMT_NUM_DYS)) AS PYMT_NUM_DYS_4,                 
+	     max(decode(B.SEVE_PAY_DTL_PATR_NUM,'4',B.AMNT_BSPY_SUM)) AS AMNT_BSPY_SUM_4,           
+	
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'1',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_1,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'1',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_1,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'1',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_1,        
+	                                                                            
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'2',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_2,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'2',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_2,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'2',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_2,        
+	                                                                            
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'3',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_3,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'3',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_3,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'3',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_3,        
+	                                                                            
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'4',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_4,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'4',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_4,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'4',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_4,        
+	                                                                            
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'5',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_5,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'5',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_5,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'5',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_5,        
+	                                                                            
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'6',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_6,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'6',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_6,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'6',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_6,        
+	                                                                            
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'7',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_7,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'7',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_7,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'7',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_7,        
+	                                                                            
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'8',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_8,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'8',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_8,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'8',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_8,   
+	     
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'9',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_9,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'9',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_9,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'9',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_9,
+	     
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'10',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_10,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'10',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_10,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'10',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_10,
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'11',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_11,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'11',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_11,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'11',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_11,
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'12',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_12,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'12',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_12,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'12',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_12,
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'13',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_13,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'13',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_13,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'13',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_13,
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'14',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_14,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'14',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_14,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'14',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_14,
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'15',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_15,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'15',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_15,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'15',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_15,
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'16',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_16,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'16',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_16,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'16',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_16,
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'17',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_17,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'17',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_17,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'17',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_17,
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'18',C.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_18,      
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'18',C.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_18,        
+	     MAX(DECODE(C.CMPTTN_TGT_PRID_SEIL_NUM,'18',C.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_18,            
+	                                                        
+	     MAX(DECODE(D.STD_EXTNN_SEIL_NUM,'1',D.STD_EXTNN_BGNN_DT)) AS STD_EXTNN_BGNN_DT_1,              
+	     MAX(DECODE(D.STD_EXTNN_SEIL_NUM,'1',D.STD_EXTNN_END_DT)) AS STD_EXTNN_END_DT_1,                
+	     MAX(DECODE(D.STD_EXTNN_SEIL_NUM,'1',D.STD_EXTNN_REAS_CD)) AS STD_EXTNN_REAS_CD_1,              
+	                                                                            
+	     MAX(DECODE(D.STD_EXTNN_SEIL_NUM,'2',D.STD_EXTNN_BGNN_DT)) AS STD_EXTNN_BGNN_DT_2,              
+	     MAX(DECODE(D.STD_EXTNN_SEIL_NUM,'2',D.STD_EXTNN_END_DT)) AS STD_EXTNN_END_DT_2,                
+	     MAX(DECODE(D.STD_EXTNN_SEIL_NUM,'2',D.STD_EXTNN_REAS_CD)) AS STD_EXTNN_REAS_CD_2,              
+	                                                                            
+	     MAX(DECODE(D.STD_EXTNN_SEIL_NUM,'3',D.STD_EXTNN_BGNN_DT)) AS STD_EXTNN_BGNN_DT_3,              
+	     MAX(DECODE(D.STD_EXTNN_SEIL_NUM,'3',D.STD_EXTNN_END_DT)) AS STD_EXTNN_END_DT_3,                
+	     MAX(DECODE(D.STD_EXTNN_SEIL_NUM,'3',D.STD_EXTNN_REAS_CD)) AS STD_EXTNN_REAS_CD_3           
+     FROM () A,                                           
+          INSR2510 B,                                           
+          INSR2520 C,                                           
+          INSR2530 D                                        
+                                                        
+     WHERE A.DPOB_CD = B.DPOB_CD                                    
+       AND A.SYSTEMKEY = B.SYSTEMKEY                                
+       AND A.RETRY_YR_MNTH = B.RETRY_YR_MNTH                            
+       AND A.SOC_INSR_LSS_EMYMT_NUM = B.SOC_INSR_LSS_EMYMT_NUM                      
+       AND A.DPOB_CD = C.DPOB_CD                                    
+       AND A.SYSTEMKEY = C.SYSTEMKEY                                
+       AND A.RETRY_YR_MNTH = C.RETRY_YR_MNTH                            
+       AND A.SOC_INSR_LSS_EMYMT_NUM = C.SOC_INSR_LSS_EMYMT_NUM                      
+       AND A.DPOB_CD = D.DPOB_CD                                    
+       AND A.SYSTEMKEY = D.SYSTEMKEY                                
+       AND A.RETRY_YR_MNTH = D.RETRY_YR_MNTH                            
+       AND A.SOC_INSR_LSS_EMYMT_NUM = D.SOC_INSR_LSS_EMYMT_NUM                      
+                                                        
+                                  
+       AND DPOB_CD=#dpobCd#
+	   AND SYSTEMKEY=#systemkey#
+	   AND RETRY_YR_MNTH=#retryYrMnth#
+	   AND SOC_INSR_LSS_EMYMT_NUM=#socInsrLssEmymtNum#               
+
+	</select> -->
+	                        
+	<select id="insr2500DAO.selectInsr2500ExcelList_D" parameterClass="insr2200SerarchVO" resultClass="egovMap">
+	    SELECT ROWNUM, ZZ.*
+			FROM (
+				SELECT WW.*, XX.*
+				
+				FROM
+				(
+					SELECT 
+						VV.*		
+					    ,SUBSTR(VV.PAY_MANGE_DEPT_PHN_NUM, 1, INSTR(VV.PAY_MANGE_DEPT_PHN_NUM, '-', 1, 1) - 1)AS PAY_MANGE_DEPT_PHN_NUM_FIRST
+				        ,SUBSTR(VV.PAY_MANGE_DEPT_PHN_NUM, INSTR(VV.PAY_MANGE_DEPT_PHN_NUM, '-', 1, 1) + 1, INSTR(VV.PAY_MANGE_DEPT_PHN_NUM, '-', 1, 2) - INSTR(VV.PAY_MANGE_DEPT_PHN_NUM, '-', 1, 1) - 1)AS PAY_MANGE_DEPT_PHN_NUM_MIDDLE
+				        ,SUBSTR(VV.PAY_MANGE_DEPT_PHN_NUM, INSTR(VV.PAY_MANGE_DEPT_PHN_NUM, '-', 1, 2) + 1)AS PAY_MANGE_DEPT_PHN_NUM_LAST					 
+				
+					FROM (
+				<isEqual property="emymtDivCd" compareValue="A0020010">				   
+							SELECT  NVL(C.HLTH_INSR_SYM,D.HLTH_INSR_SYM) AS HLTH_INSR_SYM  
+							        ,NVL(C.NAT_PENN_SYM,D.NAT_PENN_SYM) AS NAT_PENN_SYM 
+							        ,NVL(C.UMYT_INSR_SYM,D.UMYT_INSR_SYM) AS UMYT_INSR_SYM 
+							        ,NVL(C.IDTL_ACCDT_INSUR_SYM,D.IDTL_ACCDT_INSUR_SYM) AS IDTL_ACCDT_INSUR_SYM 
+							        ,NVL(C.PAY_MANGE_DEPT_PHN_NUM,D.DPOB_PHN_NUM) AS PAY_MANGE_DEPT_PHN_NUM 
+							        ,NVL(C.PAY_MANGE_DEPT_FAX_NUM,D.DPOB_FAX_NUM) AS PAY_MANGE_DEPT_FAX_NUM
+							        ,NVL(C.PAY_MANGE_DEPT_ZPCD,D.DPOB_ZPCD) AS PAY_MANGE_DEPT_ZPCD 
+							        ,NVL(C.PAY_MANGE_DEPT_F_NDTN_ADDR,D.DPOB_FNDTN_ADDR) AS PAY_MANGE_DEPT_F_NDTN_ADDR    
+							        ,NVL(C.PAY_MANGE_DEPT_DTL_PATR_ADDR,D.DPOB_DTL_PATR_ADDR) AS PAY_MANGE_DEPT_DTL_PATR_ADDR 
+							        ,NVL(C.HLTH_INSR_OFCE_SYM,D.HLTH_INSR_OFCE_SYM) AS HLTH_INSR_OFCE_SYM 
+							        ,D.INSUR_PRVAFF_AGCY_ISTUT_NUM 
+							        ,D.INSUR_PRVAFF_AGCY_ISTUT_NM          
+							        ,NVL(C.PAY_MANGE_DEPT_NM,D.DPOB_NM) AS PAY_MANGE_DEPT_NM      
+							FROM BASS0150 C ,BASS0100 D
+							WHERE C.DPOB_CD = D.DPOB_CD
+							
+							AND C.DPOB_CD = #dpobCd#
+							AND C.PAYR_MANG_DEPT_CD = #payrMangDeptCd#
+
+				</isEqual>                                  
+				<isEqual property="emymtDivCd" compareValue="A0020020">											
+						SELECT NVL (C.HLTH_INSR_SYM, D.HLTH_INSR_SYM) AS HLTH_INSR_SYM
+							,NVL (C.NAT_PENN_SYM, D.NAT_PENN_SYM) AS NAT_PENN_SYM
+							,NVL (C.UMYT_INSR_SYM, D.UMYT_INSR_SYM) AS UMYT_INSR_SYM
+							,NVL (C.IDTL_ACCDT_INSUR_SYM, D.IDTL_ACCDT_INSUR_SYM) AS IDTL_ACCDT_INSUR_SYM
+							,NVL (C.BUSIN_REPBTY_EMP_NUM, D.DPOB_PHN_NUM) AS PAY_MANGE_DEPT_PHN_NUM							
+							,D.DPOB_FAX_NUM AS PAY_MANGE_DEPT_FAX_NUM
+							,D.DPOB_ZPCD AS PAY_MANGE_DEPT_ZPCD
+							,D.DPOB_FNDTN_ADDR AS PAY_MANGE_DEPT_F_NDTN_ADDR
+							,D.DPOB_DTL_PATR_ADDR AS PAY_MANGE_DEPT_DTL_PATR_ADDR
+							,NVL (C.HLTH_INSR_OFCE_SYM, D.HLTH_INSR_OFCE_SYM) AS HLTH_INSR_OFCE_SYM
+							,D.INSUR_PRVAFF_AGCY_ISTUT_NUM
+							,D.INSUR_PRVAFF_AGCY_ISTUT_NM
+							,NVL (C.BUSIN_NM, D.DPOB_NM) AS PAY_MANGE_DEPT_NM
+						FROM BASS0500 C ,BASS0100 D
+						WHERE C.DPOB_CD = D.DPOB_CD
+						AND C.DPOB_CD = #dpobCd#
+						AND C.DEPT_CD = #deptCd#
+						AND C.BUSIN_APPTN_YR = SUBSTR (#businCd#, 1, 4)
+						AND C.BUSIN_CD = #businCd#
+					
+				</isEqual>
+
+					) VV
+				) WW,
+				
+				(
+						SELECT	 MAX(AA.DPOB_CD) AS DPOB_CD,
+							     max(AA.SYSTEMKEY) AS SYSTEMKEY,
+							     max(AA.RETRY_YR_MNTH) AS RETRY_YR_MNTH,
+							     max(AA.SOC_INSR_LSS_EMYMT_NUM) AS SOC_INSR_LSS_EMYMT_NUM,
+							     
+								 MAX(AA.NM) AS NM,
+								 MAX(AA.ICNC_DT) AS ICNC_DT,
+								 MAX(AA.UMYT_INSR_AQTN_DT) AS UMYT_INSR_AQTN_DT,
+								 MAX(AA.RETRY_DT) AS RETRY_DT,
+								 
+								 fcBass0300ITEMNM(MAX(AA.DPOB_CD), MAX(AA.UMYT_INSR_CHGJB_REAS_CD),'11') AS UMYT_INSR_CHGJB_REAS_CD,
+								
+								 MAX(AA.UMYT_INSR_SPEC_RESN_CTNT) AS UMYT_INSR_SPEC_RESN_CTNT,
+								 MAX(AA.USALY_TISED_UNT_PRID_NUM_DYS) AS USALY_TISED_UNT_PRID_NUM_DYS,
+								 MAX(AA.AVG_AMNT_CALC_TOT_NUM_DYS) AS AVG_AMNT_CALC_TOT_NUM_DYS,
+								 MAX(AA.AVG_AMNT_FNDTN_SUM) AS AVG_AMNT_FNDTN_SUM,
+								 MAX(AA.AVG_AMNT_ETC_EXTPY_SUM) AS AVG_AMNT_ETC_EXTPY_SUM,
+								 MAX(AA.AVG_AMNT_ALLW_BNUS_SUM) AS AVG_AMNT_ALLW_BNUS_SUM,
+								 MAX(AA.AVG_AMNT_ANNL_EXTPY_SUM) AS AVG_AMNT_ANNL_EXTPY_SUM,
+								 MAX(AA.AVG_AMNT_ETC_SUM) AS AVG_AMNT_ETC_SUM,
+								 MAX(AA.AVG_AMNT_QNTY) AS AVG_AMNT_QNTY,
+								 MAX(AA.USALY_AMNT_WAG) AS USALY_AMNT_WAG,
+								 MAX(AA.STD_AMNT_WAG) AS STD_AMNT_WAG,
+								 MAX(AA.DAY_FXD_WORK_TM_NUM) AS DAY_FXD_WORK_TM_NUM,
+								 MAX(AA.SEVE_PAY_REIP_SUM) AS SEVE_PAY_REIP_SUM,
+								 MAX(AA.SEVE_PAY_RST_ETC_SUM) AS SEVE_PAY_RST_ETC_SUM,
+							     
+							     MAX(BB.RESN_REGN_NUM) AS RESN_REGN_NUM,
+							                                                                                     
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'1',FF.PAY_PYMT_BGNN_DT)) AS PAY_PYMT_BGNN_DT_1,         
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'1',FF.PAY_PYMT_END_DT)) AS PAY_PYMT_END_DT_1,           
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'1',FF.PYMT_NUM_DYS)) AS PYMT_NUM_DYS_1,                 
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'1',FF.AMNT_BSPY_SUM)) AS AMNT_BSPY_SUM_1,          
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'1',FF.AMNT_ETC_EXTPY_SUM)) AS AMNT_ETC_EXTPY_SUM_1,  
+							     
+							          
+							                                                                            
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'2',FF.PAY_PYMT_BGNN_DT)) AS PAY_PYMT_BGNN_DT_2,         
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'2',FF.PAY_PYMT_END_DT)) AS PAY_PYMT_END_DT_2,           
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'2',FF.PYMT_NUM_DYS)) AS PYMT_NUM_DYS_2,                 
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'2',FF.AMNT_BSPY_SUM)) AS AMNT_BSPY_SUM_2,   
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'2',FF.AMNT_ETC_EXTPY_SUM)) AS AMNT_ETC_EXTPY_SUM_2,            
+							                                                                            
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'3',FF.PAY_PYMT_BGNN_DT)) AS PAY_PYMT_BGNN_DT_3,         
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'3',FF.PAY_PYMT_END_DT)) AS PAY_PYMT_END_DT_3,           
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'3',FF.PYMT_NUM_DYS)) AS PYMT_NUM_DYS_3,                 
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'3',FF.AMNT_BSPY_SUM)) AS AMNT_BSPY_SUM_3,      
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'3',FF.AMNT_ETC_EXTPY_SUM)) AS AMNT_ETC_EXTPY_SUM_3,         
+							                                                                            
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'4',FF.PAY_PYMT_BGNN_DT)) AS PAY_PYMT_BGNN_DT_4,         
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'4',FF.PAY_PYMT_END_DT)) AS PAY_PYMT_END_DT_4,           
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'4',FF.PYMT_NUM_DYS)) AS PYMT_NUM_DYS_4,                 
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'4',FF.AMNT_BSPY_SUM)) AS AMNT_BSPY_SUM_4, 
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'4',FF.AMNT_ETC_EXTPY_SUM)) AS AMNT_ETC_EXTPY_SUM_4,          
+							
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'1',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_1,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'1',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_1,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'1',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_1,        
+							                                                                            
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'2',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_2,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'2',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_2,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'2',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_2,        
+							                                                                            
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'3',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_3,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'3',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_3,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'3',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_3,        
+							                                                                            
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'4',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_4,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'4',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_4,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'4',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_4,        
+							                                                                            
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'5',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_5,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'5',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_5,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'5',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_5,        
+							                                                                            
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'6',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_6,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'6',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_6,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'6',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_6,        
+							                                                                            
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'7',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_7,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'7',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_7,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'7',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_7,        
+							                                                                            
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'8',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_8,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'8',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_8,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'8',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_8,   
+							     
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'9',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_9,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'9',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_9,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'9',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_9,
+							     
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'10',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_10,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'10',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_10,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'10',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_10,
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'11',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_11,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'11',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_11,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'11',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_11,
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'12',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_12,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'12',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_12,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'12',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_12,
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'13',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_13,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'13',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_13,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'13',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_13,
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'14',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_14,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'14',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_14,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'14',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_14,
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'15',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_15,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'15',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_15,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'15',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_15,
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'16',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_16,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'16',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_16,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'16',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_16,
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'17',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_17,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'17',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_17,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'17',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_17,
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'18',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_18,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'18',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_18,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'18',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_18,            
+							                                                        
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'1',HH.STD_EXTNN_BGNN_DT)) AS STD_EXTNN_BGNN_DT_1,              
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'1',HH.STD_EXTNN_END_DT)) AS STD_EXTNN_END_DT_1,           
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'1', fcBass0300ITEMNM(AA.DPOB_CD, HH.STD_EXTNN_REAS_CD,'11'))) AS STD_EXTNN_REAS_CD_1,                                                                      
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'2',HH.STD_EXTNN_BGNN_DT)) AS STD_EXTNN_BGNN_DT_2,              
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'2',HH.STD_EXTNN_END_DT)) AS STD_EXTNN_END_DT_2,                
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'2', fcBass0300ITEMNM(AA.DPOB_CD, HH.STD_EXTNN_REAS_CD,'11'))) AS STD_EXTNN_REAS_CD_2,              						                                                                            
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'3',HH.STD_EXTNN_BGNN_DT)) AS STD_EXTNN_BGNN_DT_3,              
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'3',HH.STD_EXTNN_END_DT)) AS STD_EXTNN_END_DT_3,                
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'3', fcBass0300ITEMNM(AA.DPOB_CD, HH.STD_EXTNN_REAS_CD,'11'))) AS STD_EXTNN_REAS_CD_3 
+									
+						FROM INSR2500 AA, 
+						     PSNL0100 BB, 
+						     PAYR0500 CC, 
+						     INSR2100 DD,
+						     INSR2510 FF,                                           
+					         INSR2520 GG,                                           
+					         INSR2530 HH,
+					         INSR2200 II 
+					         
+						       
+				WHERE AA.DPOB_CD = DD.DPOB_CD 				
+                  AND AA.SYSTEMKEY = DD.SYSTEMKEY
+                  AND AA.SOC_INSR_LSS_EMYMT_NUM = DD.SOC_INSR_LSS_EMYMT_NUM      
+                  
+                  AND AA.DPOB_CD = II.DPOB_CD 				
+                  AND AA.SYSTEMKEY = II.SYSTEMKEY
+                  AND AA.SOC_INSR_LSS_EMYMT_NUM = II.SOC_INSR_LSS_EMYMT_NUM       
+                        
+                  AND DD.SOCTY_INSUR_CMPTN_DT = II.SOCTY_INSUR_CMPTN_DT      
+                        
+                  AND AA.DPOB_CD = BB.DPOB_CD 
+                  AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+                  AND AA.DPOB_CD = CC.DPOB_CD 
+                  AND AA.SYSTEMKEY = CC.SYSTEMKEY 
+                  
+                  AND AA.DPOB_CD = FF.DPOB_CD                                    
+			      AND AA.SYSTEMKEY = FF.SYSTEMKEY                                
+			      AND AA.RETRY_YR_MNTH = FF.RETRY_YR_MNTH                            
+			      AND AA.SOC_INSR_LSS_EMYMT_NUM = FF.SOC_INSR_LSS_EMYMT_NUM                      
+			      AND AA.DPOB_CD = GG.DPOB_CD                                    
+			      AND AA.SYSTEMKEY = GG.SYSTEMKEY                                
+			      AND AA.RETRY_YR_MNTH = GG.RETRY_YR_MNTH                            
+			      AND AA.SOC_INSR_LSS_EMYMT_NUM = GG.SOC_INSR_LSS_EMYMT_NUM                      
+			      AND AA.DPOB_CD = HH.DPOB_CD                                    
+			      AND AA.SYSTEMKEY = HH.SYSTEMKEY                                
+			      AND AA.RETRY_YR_MNTH = HH.RETRY_YR_MNTH                            
+			      AND AA.SOC_INSR_LSS_EMYMT_NUM = HH.SOC_INSR_LSS_EMYMT_NUM   
+                  
+                  AND SUBSTR(II.SOCNSR_ISS_REG_VAL01,3,1) = 'Y'
+                  
+                <isNotEmpty prepend="AND" property="dpobCd" >
+			 		AA.DPOB_CD=#dpobCd#
+		        </isNotEmpty>   
+                <isNotEmpty prepend="AND" property="soctyInsurCmptnDt01" >
+			 	   <!--  DD.SOCTY_INSUR_CMPTN_DT BETWEEN #soctyInsurCmptnDt01# AND NVL(#soctyInsurCmptnDt02#,TO_CHAR(SYSDATE,'YYYYMMDD')) -->
+			 	    II.SOCNSR_ISS_REG_VAL18 BETWEEN #soctyInsurCmptnDt01# AND NVL(#soctyInsurCmptnDt02#,TO_CHAR(SYSDATE,'YYYYMMDD'))
+		        </isNotEmpty>    
+                    AND EXISTS  (
+                         SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' ))  ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          )
+                  
+				 <isNotEmpty prepend="AND" property="businCd" >
+			 	BB.BUSIN_CD=#businCd#
+		       </isNotEmpty> 
+		       <isNotEmpty property="typOccuCd" prepend="AND">
+				<![CDATA[
+				 BB.TYP_OCCU_CD
+				]]>
+				<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+				 #typOccuCdArr[]#
+				</iterate>
+				</isNotEmpty>  
+			    <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					
+		
+		       
+		       <isNotEmpty prepend="AND" property="systemkey" >
+		        <![CDATA[
+				 AA.SYSTEMKEY
+				]]>
+			 		<iterate prepend="IN" property="systemKeyArr" open="(" close=")" conjunction=",">
+							 #systemKeyArr[]#
+					</iterate>			
+		       </isNotEmpty> 
+		       
+		       
+		       <isNotEmpty prepend="AND" property="hanNm" >
+			 	BB.HAN_NM LIKE '%' || #hanNm# || '%'
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="payrMangeDeptCd" >
+			    CC.PAYR_MANG_DEPT_CD=#payrMangeDeptCd#
+		       </isNotEmpty> 
+		        <isNotEmpty property="hdofcCodtnCd" prepend="AND">
+				<![CDATA[
+				 BB.HDOFC_CODTN_CD
+				]]>
+				<iterate prepend="IN" property="hdofcCodtnCdArr" open="(" close=")" conjunction=",">
+				 #hdofcCodtnCdArr[]#
+				</iterate>
+				</isNotEmpty> 
+		          <isNotEmpty prepend="AND" property="emymtDivCd" >
+			 	BB.EMYMT_DIV_CD=#emymtDivCd#
+		       </isNotEmpty>  
+		          <isNotEmpty prepend="AND" property="businApptnYr" >
+			 	 SUBSTR(BB.EMYMT_BGNN_DT,1,4) =#businApptnYr#
+		       </isNotEmpty>  
+		       
+				GROUP BY AA.DPOB_CD, AA.SYSTEMKEY, AA.SOC_INSR_LSS_EMYMT_NUM
+				
+			) XX ,PSNL0100 YY
+ 		WHERE XX.DPOB_CD = YY.DPOB_CD
+   		  AND XX.SYSTEMKEY = YY.SYSTEMKEY
+		   ORDER BY 
+		            XX.DPOB_CD ASC
+		              ,(SELECT LPAD(DEPT_RANK,5,'0')  
+		                       FROM BASS0400 DD
+		                       WHERE DD.DEPT_CD = YY.CURR_AFFN_DEPT_CD
+		                         AND DD.DPOB_CD = YY.DPOB_CD) ASC 
+		            , YY.RESN_REGN_NUM ASC  
+		            , YY.DTIL_OCCU_CLS_DIV_CD ASC 
+            
+	) ZZ
+		        	
+	</select>	
+	
+	<!-- 단건 -->
+	<select id="insr2500DAO.selectInsrP230006Excel_D" parameterClass="insr2200SerarchVO" resultClass="egovMap">
+     SELECT ROWNUM, ZZ.*
+		FROM (
+	    SELECT WW.*, XX.*
+				
+				FROM
+				(
+				
+					SELECT 
+						VV.*		
+					    ,SUBSTR(VV.PAY_MANGE_DEPT_PHN_NUM, 1, INSTR(VV.PAY_MANGE_DEPT_PHN_NUM, '-', 1, 1) - 1)AS PAY_MANGE_DEPT_PHN_NUM_FIRST
+				        ,SUBSTR(VV.PAY_MANGE_DEPT_PHN_NUM, INSTR(VV.PAY_MANGE_DEPT_PHN_NUM, '-', 1, 1) + 1, INSTR(VV.PAY_MANGE_DEPT_PHN_NUM, '-', 1, 2) - INSTR(VV.PAY_MANGE_DEPT_PHN_NUM, '-', 1, 1) - 1)AS PAY_MANGE_DEPT_PHN_NUM_MIDDLE
+				        ,SUBSTR(VV.PAY_MANGE_DEPT_PHN_NUM, INSTR(VV.PAY_MANGE_DEPT_PHN_NUM, '-', 1, 2) + 1)AS PAY_MANGE_DEPT_PHN_NUM_LAST					 
+
+					FROM (
+				
+				<isEqual property="emymtDivCd" compareValue="A0020010">
+							<!-- 사업장정보 조회 공무직-->
+						   
+							SELECT  NVL(C.HLTH_INSR_SYM,D.HLTH_INSR_SYM) AS HLTH_INSR_SYM  <!-- 건강보험 번호 -->
+							        ,NVL(C.NAT_PENN_SYM,D.NAT_PENN_SYM) AS NAT_PENN_SYM <!-- 국민연금 번호 -->
+							        ,NVL(C.UMYT_INSR_SYM,D.UMYT_INSR_SYM) AS UMYT_INSR_SYM <!-- 고용보험 번호 -->
+							        ,NVL(C.IDTL_ACCDT_INSUR_SYM,D.IDTL_ACCDT_INSUR_SYM) AS IDTL_ACCDT_INSUR_SYM <!-- 산재보험 번호 -->
+							        ,NVL(C.PAY_MANGE_DEPT_PHN_NUM,D.DPOB_PHN_NUM) AS PAY_MANGE_DEPT_PHN_NUM <!-- 전화번호 -->
+							        ,NVL(C.PAY_MANGE_DEPT_FAX_NUM,D.DPOB_FAX_NUM) AS PAY_MANGE_DEPT_FAX_NUM <!-- 팩스번호 -->
+							        ,NVL(C.PAY_MANGE_DEPT_ZPCD,D.DPOB_ZPCD) AS PAY_MANGE_DEPT_ZPCD <!-- 우편번호  -->    
+							        ,NVL(C.PAY_MANGE_DEPT_F_NDTN_ADDR,D.DPOB_FNDTN_ADDR) AS PAY_MANGE_DEPT_F_NDTN_ADDR <!-- 주소 -->      
+							        ,NVL(C.PAY_MANGE_DEPT_DTL_PATR_ADDR,D.DPOB_DTL_PATR_ADDR) AS PAY_MANGE_DEPT_DTL_PATR_ADDR <!-- 상세 주소    -->
+							        ,NVL(C.HLTH_INSR_OFCE_SYM,D.HLTH_INSR_OFCE_SYM) AS HLTH_INSR_OFCE_SYM <!-- 건강보험영업소 기호 -->
+							        ,D.INSUR_PRVAFF_AGCY_ISTUT_NUM <!-- 보험사대행기관번호 -->
+							        ,D.INSUR_PRVAFF_AGCY_ISTUT_NM  <!-- 보험사무대행기관명 -->         
+							        ,NVL(C.PAY_MANGE_DEPT_NM,D.DPOB_NM) AS PAY_MANGE_DEPT_NM <!-- 명칭 -->     
+							FROM BASS0150 C ,BASS0100 D
+							WHERE C.DPOB_CD = D.DPOB_CD
+							
+							AND C.DPOB_CD = #dpobCd#
+							AND C.PAYR_MANG_DEPT_CD = #payrMangDeptCd#
+
+				</isEqual>
+				<isEqual property="emymtDivCd" compareValue="A0020020">
+							<!-- 사업장정보 조회 기간제-->
+					
+						SELECT NVL (C.HLTH_INSR_SYM, D.HLTH_INSR_SYM) AS HLTH_INSR_SYM
+							,NVL (C.NAT_PENN_SYM, D.NAT_PENN_SYM) AS NAT_PENN_SYM
+							,NVL (C.UMYT_INSR_SYM, D.UMYT_INSR_SYM) AS UMYT_INSR_SYM
+							,NVL (C.IDTL_ACCDT_INSUR_SYM, D.IDTL_ACCDT_INSUR_SYM) AS IDTL_ACCDT_INSUR_SYM
+							,NVL (C.BUSIN_REPBTY_EMP_NUM, D.DPOB_PHN_NUM) AS PAY_MANGE_DEPT_PHN_NUM
+							,D.DPOB_FAX_NUM AS PAY_MANGE_DEPT_FAX_NUM
+							,D.DPOB_ZPCD AS PAY_MANGE_DEPT_ZPCD
+							,D.DPOB_FNDTN_ADDR AS PAY_MANGE_DEPT_F_NDTN_ADDR
+							,D.DPOB_DTL_PATR_ADDR AS PAY_MANGE_DEPT_DTL_PATR_ADDR
+							,NVL (C.HLTH_INSR_OFCE_SYM, D.HLTH_INSR_OFCE_SYM) AS HLTH_INSR_OFCE_SYM
+							,D.INSUR_PRVAFF_AGCY_ISTUT_NUM
+							,D.INSUR_PRVAFF_AGCY_ISTUT_NM
+							,NVL (C.BUSIN_NM, D.DPOB_NM) AS PAY_MANGE_DEPT_NM
+						FROM BASS0500 C ,BASS0100 D
+						WHERE C.DPOB_CD = D.DPOB_CD
+						AND C.DPOB_CD = #dpobCd#
+						AND C.DEPT_CD = #deptCd#
+						AND C.BUSIN_APPTN_YR = SUBSTR (#businCd#, 1, 4)
+						AND C.BUSIN_CD = #businCd#
+					
+				</isEqual>
+					) VV 
+				) WW,
+				
+				(
+						SELECT	 MAX(AA.DPOB_CD) AS DPOB_CD,
+							     max(AA.SYSTEMKEY) AS SYSTEMKEY,
+							     max(AA.RETRY_YR_MNTH) AS RETRY_YR_MNTH,
+							     max(AA.SOC_INSR_LSS_EMYMT_NUM) AS SOC_INSR_LSS_EMYMT_NUM,
+							     
+								 MAX(AA.NM) AS NM,
+								 MAX(AA.ICNC_DT) AS ICNC_DT,
+								 MAX(AA.UMYT_INSR_AQTN_DT) AS UMYT_INSR_AQTN_DT,
+								 MAX(AA.RETRY_DT) AS RETRY_DT,
+								 
+								 fcBass0300ITEMNM(MAX(AA.DPOB_CD), MAX(AA.UMYT_INSR_CHGJB_REAS_CD),'11') AS UMYT_INSR_CHGJB_REAS_CD,
+								
+								 MAX(AA.UMYT_INSR_SPEC_RESN_CTNT) AS UMYT_INSR_SPEC_RESN_CTNT,
+								 MAX(AA.USALY_TISED_UNT_PRID_NUM_DYS) AS USALY_TISED_UNT_PRID_NUM_DYS,
+								 MAX(AA.AVG_AMNT_CALC_TOT_NUM_DYS) AS AVG_AMNT_CALC_TOT_NUM_DYS,
+								 MAX(AA.AVG_AMNT_FNDTN_SUM) AS AVG_AMNT_FNDTN_SUM,
+								 MAX(AA.AVG_AMNT_ETC_EXTPY_SUM) AS AVG_AMNT_ETC_EXTPY_SUM,
+								 MAX(AA.AVG_AMNT_ALLW_BNUS_SUM) AS AVG_AMNT_ALLW_BNUS_SUM,
+								 MAX(AA.AVG_AMNT_ANNL_EXTPY_SUM) AS AVG_AMNT_ANNL_EXTPY_SUM,
+								 MAX(AA.AVG_AMNT_ETC_SUM) AS AVG_AMNT_ETC_SUM,
+								 MAX(AA.AVG_AMNT_QNTY) AS AVG_AMNT_QNTY,
+								 MAX(AA.USALY_AMNT_WAG) AS USALY_AMNT_WAG,
+								 MAX(AA.STD_AMNT_WAG) AS STD_AMNT_WAG,
+								 MAX(AA.DAY_FXD_WORK_TM_NUM) AS DAY_FXD_WORK_TM_NUM,
+								 MAX(AA.SEVE_PAY_REIP_SUM) AS SEVE_PAY_REIP_SUM,
+								 MAX(AA.SEVE_PAY_RST_ETC_SUM) AS SEVE_PAY_RST_ETC_SUM,
+							     
+							     MAX(BB.RESN_REGN_NUM) AS RESN_REGN_NUM,
+							                                                                                     
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'1',FF.PAY_PYMT_BGNN_DT)) AS PAY_PYMT_BGNN_DT_1,         
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'1',FF.PAY_PYMT_END_DT)) AS PAY_PYMT_END_DT_1,           
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'1',FF.PYMT_NUM_DYS)) AS PYMT_NUM_DYS_1,                 
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'1',FF.AMNT_BSPY_SUM)) AS AMNT_BSPY_SUM_1,               
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'1',FF.AMNT_ETC_EXTPY_SUM)) AS AMNT_ETC_EXTPY_SUM_1,
+							                         
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'2',FF.PAY_PYMT_BGNN_DT)) AS PAY_PYMT_BGNN_DT_2,         
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'2',FF.PAY_PYMT_END_DT)) AS PAY_PYMT_END_DT_2,           
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'2',FF.PYMT_NUM_DYS)) AS PYMT_NUM_DYS_2,                 
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'2',FF.AMNT_BSPY_SUM)) AS AMNT_BSPY_SUM_2,   
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'2',FF.AMNT_ETC_EXTPY_SUM)) AS AMNT_ETC_EXTPY_SUM_2,            
+							                                                                            
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'3',FF.PAY_PYMT_BGNN_DT)) AS PAY_PYMT_BGNN_DT_3,         
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'3',FF.PAY_PYMT_END_DT)) AS PAY_PYMT_END_DT_3,           
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'3',FF.PYMT_NUM_DYS)) AS PYMT_NUM_DYS_3,                 
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'3',FF.AMNT_BSPY_SUM)) AS AMNT_BSPY_SUM_3,      
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'3',FF.AMNT_ETC_EXTPY_SUM)) AS AMNT_ETC_EXTPY_SUM_3,                 
+							                                                                            
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'4',FF.PAY_PYMT_BGNN_DT)) AS PAY_PYMT_BGNN_DT_4,         
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'4',FF.PAY_PYMT_END_DT)) AS PAY_PYMT_END_DT_4,           
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'4',FF.PYMT_NUM_DYS)) AS PYMT_NUM_DYS_4,                 
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'4',FF.AMNT_BSPY_SUM)) AS AMNT_BSPY_SUM_4,
+							     max(decode(FF.SEVE_PAY_DTL_PATR_NUM,'4',FF.AMNT_ETC_EXTPY_SUM)) AS AMNT_ETC_EXTPY_SUM_4,                   
+							
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'1',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_1,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'1',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_1,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'1',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_1,        
+							                                                                            
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'2',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_2,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'2',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_2,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'2',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_2,        
+							                                                                            
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'3',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_3,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'3',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_3,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'3',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_3,        
+							                                                                            
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'4',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_4,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'4',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_4,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'4',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_4,        
+							                                                                            
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'5',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_5,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'5',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_5,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'5',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_5,        
+							                                                                            
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'6',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_6,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'6',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_6,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'6',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_6,        
+							                                                                            
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'7',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_7,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'7',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_7,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'7',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_7,        
+							                                                                            
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'8',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_8,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'8',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_8,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'8',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_8,   
+							     
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'9',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_9,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'9',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_9,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'9',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_9,
+							     
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'10',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_10,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'10',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_10,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'10',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_10,
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'11',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_11,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'11',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_11,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'11',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_11,
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'12',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_12,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'12',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_12,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'12',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_12,
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'13',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_13,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'13',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_13,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'13',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_13,
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'14',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_14,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'14',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_14,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'14',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_14,
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'15',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_15,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'15',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_15,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'15',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_15,
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'16',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_16,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'16',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_16,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'16',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_16,
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'17',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_17,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'17',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_17,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'17',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_17,
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'18',GG.CMPTTN_TGT_BGNN_DT)) AS CMPTTN_TGT_BGNN_DT_18,      
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'18',GG.CMPTTN_TGT_END_DT)) AS CMPTTN_TGT_END_DT_18,        
+							     MAX(DECODE(GG.CMPTTN_TGT_PRID_SEIL_NUM,'18',GG.AMNT_PYMT_NUM_DYS)) AS AMNT_PYMT_NUM_DYS_18,            
+							                                                        
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'1',HH.STD_EXTNN_BGNN_DT)) AS STD_EXTNN_BGNN_DT_1,              
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'1',HH.STD_EXTNN_END_DT)) AS STD_EXTNN_END_DT_1,           
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'1', fcBass0300ITEMNM(AA.DPOB_CD, HH.STD_EXTNN_REAS_CD,'11'))) AS STD_EXTNN_REAS_CD_1,                                                                      
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'2',HH.STD_EXTNN_BGNN_DT)) AS STD_EXTNN_BGNN_DT_2,              
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'2',HH.STD_EXTNN_END_DT)) AS STD_EXTNN_END_DT_2,                
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'2', fcBass0300ITEMNM(AA.DPOB_CD, HH.STD_EXTNN_REAS_CD,'11'))) AS STD_EXTNN_REAS_CD_2,              						                                                                            
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'3',HH.STD_EXTNN_BGNN_DT)) AS STD_EXTNN_BGNN_DT_3,              
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'3',HH.STD_EXTNN_END_DT)) AS STD_EXTNN_END_DT_3,                
+							     MAX(DECODE(HH.STD_EXTNN_SEIL_NUM,'3', fcBass0300ITEMNM(AA.DPOB_CD, HH.STD_EXTNN_REAS_CD,'11'))) AS STD_EXTNN_REAS_CD_3 
+									
+						FROM INSR2500 AA, 	
+						     PSNL0100 BB,					    
+						     INSR2100 DD,
+						     INSR2510 FF,                                           
+					         INSR2520 GG,                                           
+					         INSR2530 HH 
+						       
+				WHERE AA.DPOB_CD = DD.DPOB_CD 				
+                  AND AA.SYSTEMKEY = DD.SYSTEMKEY
+                  AND AA.SOC_INSR_LSS_EMYMT_NUM = DD.SOC_INSR_LSS_EMYMT_NUM   
+                  AND AA.DPOB_CD = BB.DPOB_CD 
+                  AND AA.SYSTEMKEY = BB.SYSTEMKEY                       
+                  AND AA.DPOB_CD = FF.DPOB_CD                                    
+			      AND AA.SYSTEMKEY = FF.SYSTEMKEY                                
+			      AND AA.RETRY_YR_MNTH = FF.RETRY_YR_MNTH                            
+			      AND AA.SOC_INSR_LSS_EMYMT_NUM = FF.SOC_INSR_LSS_EMYMT_NUM                      
+			      AND AA.DPOB_CD = GG.DPOB_CD                                    
+			      AND AA.SYSTEMKEY = GG.SYSTEMKEY                                
+			      AND AA.RETRY_YR_MNTH = GG.RETRY_YR_MNTH                            
+			      AND AA.SOC_INSR_LSS_EMYMT_NUM = GG.SOC_INSR_LSS_EMYMT_NUM                      
+			      AND AA.DPOB_CD = HH.DPOB_CD                                    
+			      AND AA.SYSTEMKEY = HH.SYSTEMKEY                                
+			      AND AA.RETRY_YR_MNTH = HH.RETRY_YR_MNTH                            
+			      AND AA.SOC_INSR_LSS_EMYMT_NUM = HH.SOC_INSR_LSS_EMYMT_NUM   
+			      AND DD.UMYT_INSR_REGRST_YN = 'Y'
+                  
+                  AND AA.DPOB_CD=#dpobCd#
+				  AND AA.SYSTEMKEY=#systemkey#
+				  AND AA.SOC_INSR_LSS_EMYMT_NUM=#socInsrLssEmymtNum#
+                  
+			) XX 
+		) ZZ
+	</select>
+	    
+
+</sqlMap>

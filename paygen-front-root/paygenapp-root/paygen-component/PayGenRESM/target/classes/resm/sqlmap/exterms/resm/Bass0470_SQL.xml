@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass0470">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass0470SerarchVO" type="com.app.exterms.resm.server.vo.Bass0470SrhVO"/>
+	
+	<resultMap id="bass0470" class="com.app.exterms.resm.server.vo.Bass0470VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="2"/>
+		<result property="deptGrpCd" column="DEPT_GRP_CD" columnIndex="3"/>
+		<result property="deptGrpNm" column="DEPT_GRP_NM" columnIndex="4"/>
+		<result property="deptGrpUseYn" column="DEPT_GRP_USE_YN" columnIndex="5"/>
+		<result property="deptGrpEplnCtnt" column="DEPT_GRP_EPLN_CTNT" columnIndex="6"/>
+		<result property="kybdr" column="KYBDR" columnIndex="7"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="8"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="9"/>
+		<result property="ismt" column="ISMT" columnIndex="10"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="11"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="12"/>
+	</resultMap>
+	
+	<insert id="bass0470DAO.insertBass0470_S">
+		<![CDATA[
+			INSERT INTO BASS0470 
+				( DPOB_CD
+				  , DEPT_CD
+				  , DEPT_GRP_CD
+				  , DEPT_GRP_NM
+				  , DEPT_GRP_USE_YN
+				  , DEPT_GRP_EPLN_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #deptCd#
+				  , #deptGrpCd#
+				  , #deptGrpNm#
+				  , #deptGrpUseYn#
+				  , #deptGrpEplnCtnt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass0470DAO.updateBass0470_S">
+		<![CDATA[
+			UPDATE BASS0470
+			SET DPOB_CD=#dpobCd#
+				, DEPT_CD=#deptCd#
+				, DEPT_GRP_CD=#deptGrpCd#
+				, DEPT_GRP_NM=#deptGrpNm#
+				, DEPT_GRP_USE_YN=#deptGrpUseYn#
+				, DEPT_GRP_EPLN_CTNT=#deptGrpEplnCtnt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND DEPT_CD=#deptCd#
+								AND DEPT_GRP_CD=#deptGrpCd#
+				]]>
+	</update>
+	
+	<delete id="bass0470DAO.deleteBass0470_S">
+		<![CDATA[
+			DELETE FROM BASS0470 
+						WHERE DPOB_CD=#dpobCd#
+								AND DEPT_CD=#deptCd#
+								AND DEPT_GRP_CD=#deptGrpCd#
+				]]>
+	</delete>
+	
+	<select id="bass0470DAO.selectBass0470_S" resultMap="bass0470">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, DEPT_CD
+				, DEPT_GRP_CD
+				, DEPT_GRP_NM
+				, DEPT_GRP_USE_YN
+				, DEPT_GRP_EPLN_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS0470
+						WHERE DPOB_CD=#dpobCd#
+								AND DEPT_CD=#deptCd#
+								AND DEPT_GRP_CD=#deptGrpCd#
+				]]>
+	</select>
+	
+	<select id="bass0470DAO.selectBass0470List_D" parameterClass="bass0470SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, DEPT_CD
+								, DEPT_GRP_CD
+								, DEPT_GRP_NM
+								, DEPT_GRP_USE_YN
+								, DEPT_GRP_EPLN_CTNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS0470
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					DEPT_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, DEPT_CD DESC
+							, DEPT_GRP_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass0470DAO.selectBass0470ListTotCnt_S" parameterClass="bass0470SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0470
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				DEPT_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

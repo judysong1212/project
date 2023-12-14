@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0112">
+	
+    <typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="psnl0112SerarchVO" type="com.app.exterms.personal.server.vo.Psnl0112DefaultVO"/>
+	<typeAlias  alias="psnl0112Dto" type="com.app.exterms.personal.client.dto.Psnl0112DTO"/>
+	<typeAlias  alias="psnl0112VO" type="com.app.exterms.personal.server.vo.Psnl0112VO"/>
+	
+	
+	<resultMap id="psnl0112" class="com.app.exterms.personal.server.vo.Psnl0112VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="enrlntDt" column="ENRLNT_DT" columnIndex="3"/>
+		<result property="dsageDt" column="DSAGE_DT" columnIndex="4"/>
+		<result property="servcRcgtnPridCd" column="SERVC_RCGTN_PRID_CD" columnIndex="5"/>
+		<result property="srvssCd" column="SRVSS_CD" columnIndex="6"/>
+		<result property="baggrpCd" column="BAGGRP_CD" columnIndex="7"/>
+		<result property="abotsCd" column="ABOTS_CD" columnIndex="8"/>
+		<result property="clsCd" column="CLS_CD" columnIndex="9"/>
+		<result property="mitySilnum" column="MITY_SILNUM" columnIndex="10"/>
+		<result property="mos" column="MOS" columnIndex="11"/>
+		<result property="dsageDivCd" column="DSAGE_DIV_CD" columnIndex="12"/>
+		<result property="exmtnReasCd" column="EXMTN_REAS_CD" columnIndex="13"/>
+		<result property="exmtnReasCtnt" column="EXMTN_REAS_CTNT" columnIndex="14"/>
+		<result property="kybdr" column="KYBDR" columnIndex="15"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="16"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="17"/>
+		<result property="ismt" column="ISMT" columnIndex="18"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="19"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="20"/>
+	</resultMap>
+	
+	<update id="psnl0112DAO.savePsnl0112" parameterClass="psnl0112Dto">
+	    MERGE INTO PSNL0112
+			     USING DUAL
+			        ON (DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#)
+			WHEN MATCHED
+			THEN
+			   UPDATE SET REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						, ISMT=#ismt#
+						, REVN_ADDR=#revnAddr#
+<isNotNull property="enrlntDt"><isNotEmpty property="enrlntDt">	, ENRLNT_DT=#enrlntDt# </isNotEmpty></isNotNull>
+<isNotNull property="dsageDt"><isNotEmpty property="dsageDt">	, DSAGE_DT=#dsageDt# </isNotEmpty></isNotNull>
+<isNotNull property="servcRcgtnPridCd"><isNotEmpty property="servcRcgtnPridCd">	, SERVC_RCGTN_PRID_CD=#servcRcgtnPridCd# </isNotEmpty></isNotNull>
+<isNotNull property="srvssCd"><isNotEmpty property="srvssCd">	, SRVSS_CD=#srvssCd# </isNotEmpty></isNotNull>
+<isNotNull property="baggrpCd"><isNotEmpty property="baggrpCd">	, BAGGRP_CD=#baggrpCd# </isNotEmpty></isNotNull>
+<isNotNull property="abotsCd"><isNotEmpty property="abotsCd">	, ABOTS_CD=#abotsCd# </isNotEmpty></isNotNull>
+<isNotNull property="clsCd"><isNotEmpty property="clsCd">	, CLS_CD=#clsCd# </isNotEmpty></isNotNull>
+<isNotNull property="mitySilnum"><isNotEmpty property="mitySilnum">	, MITY_SILNUM=#mitySilnum# </isNotEmpty></isNotNull>
+<isNotNull property="mos"><isNotEmpty property="mos">	, MOS=#mos# </isNotEmpty></isNotNull>
+<isNotNull property="dsageDivCd"><isNotEmpty property="dsageDivCd">	, DSAGE_DIV_CD=#dsageDivCd# </isNotEmpty></isNotNull>
+<isNotNull property="exmtnReasCd"><isNotEmpty property="exmtnReasCd">	, EXMTN_REAS_CD=#exmtnReasCd# </isNotEmpty></isNotNull>
+<isNotNull property="exmtnReasCtnt"><isNotEmpty property="exmtnReasCtnt">	, EXMTN_REAS_CTNT=#exmtnReasCtnt# </isNotEmpty></isNotNull>
+			WHEN NOT MATCHED
+			THEN
+			   INSERT 
+						( DPOB_CD
+						  , SYSTEMKEY
+						  , ENRLNT_DT
+						  , DSAGE_DT
+						  , SERVC_RCGTN_PRID_CD
+						  , SRVSS_CD
+						  , BAGGRP_CD
+						  , ABOTS_CD
+						  , CLS_CD
+						  , MITY_SILNUM
+						  , MOS
+						  , DSAGE_DIV_CD
+						  , EXMTN_REAS_CD
+						  , EXMTN_REAS_CTNT
+						  , KYBDR
+						  , INPT_DT
+						  , INPT_ADDR
+						  , ISMT
+						  , REVN_DT
+						  , REVN_ADDR )
+					VALUES ( #dpobCd#
+						  , #systemkey#
+						  , #enrlntDt#
+						  , #dsageDt#
+						  , #servcRcgtnPridCd#
+						  , #srvssCd#
+						  , #baggrpCd#
+						  , #abotsCd#
+						  , #clsCd#
+						  , #mitySilnum#
+						  , #mos#
+						  , #dsageDivCd#
+						  , #exmtnReasCd#
+						  , #exmtnReasCtnt#
+						  , #ismt#
+						  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						  , #revnAddr#
+						  , #ismt#
+						  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						  , #revnAddr# )
+	</update>
+	
+	<insert id="psnl0112DAO.insertPsnl0112" parameterClass="psnl0112Dto">
+		<![CDATA[
+			INSERT INTO PSNL0112 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , ENRLNT_DT
+				  , DSAGE_DT
+				  , SERVC_RCGTN_PRID_CD
+				  , SRVSS_CD
+				  , BAGGRP_CD
+				  , ABOTS_CD
+				  , CLS_CD
+				  , MITY_SILNUM
+				  , MOS
+				  , DSAGE_DIV_CD
+				  , EXMTN_REAS_CD
+				  , EXMTN_REAS_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #enrlntDt#
+				  , #dsageDt#
+				  , #servcRcgtnPridCd#
+				  , #srvssCd#
+				  , #baggrpCd#
+				  , #abotsCd#
+				  , #clsCd#
+				  , #mitySilnum#
+				  , #mos#
+				  , #dsageDivCd#
+				  , #exmtnReasCd#
+				  , #exmtnReasCtnt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	
+	
+	<update id="psnl0112DAO.updatePsnl0112" parameterClass="psnl0112Dto">
+		<![CDATA[
+			UPDATE PSNL0112
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, ENRLNT_DT=#enrlntDt#
+				, DSAGE_DT=#dsageDt#
+				, SERVC_RCGTN_PRID_CD=#servcRcgtnPridCd#
+				, SRVSS_CD=#srvssCd#
+				, BAGGRP_CD=#baggrpCd#
+				, ABOTS_CD=#abotsCd#
+				, CLS_CD=#clsCd#
+				, MITY_SILNUM=#mitySilnum#
+				, MOS=#mos#
+				, DSAGE_DIV_CD=#dsageDivCd#
+				, EXMTN_REAS_CD=#exmtnReasCd#
+				, EXMTN_REAS_CTNT=#exmtnReasCtnt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+			]]>
+	</update>
+	
+
+	
+	<delete id="psnl0112DAO.deletePsnl0112" parameterClass="psnl0112Dto">
+		<![CDATA[
+			DELETE FROM PSNL0112 
+			]]>
+	</delete>
+	
+	<delete id="psnl0112DAO.deletePsnl0112_H" parameterClass="hashMap">
+		<![CDATA[
+			DELETE FROM PSNL0112 
+						WHERE DPOB_CD=#dpobCd#
+											AND SYSTEMKEY=#systemkey#
+			]]>
+	</delete>
+	
+	<select id="psnl0112DAO.selectPsnl0112" parameterClass="psnl0112Dto" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, ENRLNT_DT
+				, DSAGE_DT
+				, SERVC_RCGTN_PRID_CD
+				, SRVSS_CD
+				, BAGGRP_CD
+				, ABOTS_CD
+				, CLS_CD
+				, MITY_SILNUM
+				, MOS
+				, DSAGE_DIV_CD
+				, EXMTN_REAS_CD
+				, EXMTN_REAS_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PSNL0112
+		   WHERE DPOB_CD = #dpobCd#
+		     AND SYSTEMKEY = #systemkey#
+			]]>
+	</select>
+	
+	<update id="psnl0112DAO.updatePsnl0320ToPsnl0112" parameterClass="psnl0112VO">
+		<![CDATA[
+	 
+      UPDATE PSNL0112 SET MITY_CARR_LOG_SVC_YR_NUM_CD = #mityCarrLogSvcYrNumCd#
+                          , MITY_CARR_LOG_SVC_MNTH_NUM_CD = #mityCarrLogSvcMnthNumCd#
+                          , MITY_CARR_LOG_SVC_DYS = #mityCarrLogSvcDys#
+                          , MITY_CARR_TOT_LOG_SVC_DYS = #mityCarrTotLogSvcDys#
+                          , ISMT=#ismt#
+						  , REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				          , REVN_ADDR=#revnAddr#
+       WHERE DPOB_CD = #dpobCd#
+         AND SYSTEMKEY = #systemkey#
+	]]>
+	</update>
+	
+	
+	
+</sqlMap>

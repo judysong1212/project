@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye162040_2023">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ye162040Srh_2023_VO" type="com.app.exterms.yearendtax.server.vo.Ye162040Srh_2023_VO"/>
+	
+	<resultMap id="ye162040_2023" class="com.app.exterms.yearendtax.server.vo.Ye162040_2023_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="ltrmCniSsAccno" column="LTRM_CNI_SS_ACCNO" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="ltrmCniSsfnnCl" column="LTRM_CNI_SSFNN_CL" columnIndex="6"/>
+		<result property="ltrmCniSsfnnOrgnCd" column="LTRM_CNI_SSFNN_ORGN_CD" columnIndex="7"/>
+		<result property="ltrmCniSsFnnCmp" column="LTRM_CNI_SS_FNN_CMP" columnIndex="8"/>
+		<result property="ltrmCniSsPymAmt" column="LTRM_CNI_SS_PYM_AMT" columnIndex="9"/>
+		<result property="ltrmCniSsIncDdcAmt" column="LTRM_CNI_SS_INC_DDC_AMT" columnIndex="10"/>
+		<result property="kybdr" column="KYBDR" columnIndex="11"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="12"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="13"/>
+		<result property="ismt" column="ISMT" columnIndex="14"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="15"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="16"/>
+	</resultMap>
+	
+<!-- +++++++++++++++++++++++++ 2023년도 귀속 로직  시작 ++++++++++++++++++++++++++++++ -->
+	<delete id="ye162040_2023_DAO.deleteYetaP810001_Ye162040VO_2023_Delete_S">
+		<![CDATA[
+			DELETE FROM YE162040 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd# 
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+<!-- +++++++++++++++++++++++++ 2023년도 귀속 로직  종료 ++++++++++++++++++++++++++++++ -->
+	
+	<insert id="ye162040_2023_DAO.insertYe162040_S">
+		<![CDATA[
+			INSERT INTO YE162040 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , LTRM_CNI_SS_ACCNO
+				  , SYSTEMKEY
+				  , LTRM_CNI_SSFNN_CL
+				  , TAX_VVAL_KRN_CD
+				  , LTRM_CNI_SSFNN_ORGN_CD
+				  , LTRM_CNI_SS_FNN_CMP
+				  , LTRM_CNI_SS_PYM_AMT
+				  , LTRM_CNI_SS_INC_DDC_AMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #ltrmCniSsAccno#
+				  , #systemkey#
+				  , #ltrmCniSsfnnCl#
+				  , #taxVvalKrnCd#
+				  , ( SELECT MANGE_ITEM11
+						  FROM BASS0300
+						WHERE DPOB_CD 		= #dpobCd#
+							AND RPSTTV_CD 	= 'Y005'
+							AND COMM_CD		= #ltrmCniSsfnnOrgnCd#)
+				  , #ltrmCniSsFnnCmp#
+				  , #ltrmCniSsPymAmt#
+				  , #ltrmCniSsIncDdcAmt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="ye162040_2023_DAO.updateYe162040_S">
+		<![CDATA[
+			UPDATE YE162040
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, LTRM_CNI_SS_ACCNO=#ltrmCniSsAccno#
+				, SYSTEMKEY=#systemkey#
+				, TAX_VVAL_KRN_CD = #taxVvalKrnCd#
+				, LTRM_CNI_SSFNN_CL=#ltrmCniSsfnnCl#
+				, LTRM_CNI_SSFNN_ORGN_CD=#ltrmCniSsfnnOrgnCd#
+				, LTRM_CNI_SS_FNN_CMP=#ltrmCniSsFnnCmp#
+				, LTRM_CNI_SS_PYM_AMT=#ltrmCniSsPymAmt#
+				, LTRM_CNI_SS_INC_DDC_AMT=#ltrmCniSsIncDdcAmt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND LTRM_CNI_SS_ACCNO=#ltrmCniSsAccno#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	
+	<delete id="ye162040_2023_DAO.deleteYe162040_S">
+		<![CDATA[
+			DELETE FROM YE162040 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND LTRM_CNI_SS_ACCNO=#ltrmCniSsAccno#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<select id="ye162040_2023_DAO.selectYe162040_S" resultMap="ye162040_2023">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, LTRM_CNI_SS_ACCNO
+				, SYSTEMKEY
+				, LTRM_CNI_SSFNN_CL
+				, LTRM_CNI_SSFNN_ORGN_CD
+				, LTRM_CNI_SS_FNN_CMP
+				, LTRM_CNI_SS_PYM_AMT
+				, LTRM_CNI_SS_INC_DDC_AMT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE162040
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND LTRM_CNI_SS_ACCNO=#ltrmCniSsAccno#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+	<select id="ye162040_2023_DAO.selectYe162040List_D" parameterClass="ye162040Srh_2023_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, LTRM_CNI_SS_ACCNO
+								, SYSTEMKEY
+								, LTRM_CNI_SSFNN_CL
+								, LTRM_CNI_SSFNN_ORGN_CD
+								, LTRM_CNI_SS_FNN_CMP
+								, LTRM_CNI_SS_PYM_AMT
+								, LTRM_CNI_SS_INC_DDC_AMT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE162040
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, LTRM_CNI_SS_ACCNO DESC
+							, SYSTEMKEY DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="ye162040_2023_DAO.selectYe162040ListTotCnt_S" parameterClass="ye162040Srh_2023_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE162040
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

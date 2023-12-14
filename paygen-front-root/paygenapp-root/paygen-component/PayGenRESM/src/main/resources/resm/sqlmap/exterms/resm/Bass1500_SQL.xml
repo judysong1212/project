@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass1500">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass1500SerarchVO" type="com.app.exterms.resm.server.vo.Bass1500SrhVO"/>
+	
+	<resultMap id="bass1500" class="com.app.exterms.resm.server.vo.Bass1500VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="stpInttnSeptVal" column="STP_INTTN_SEPT_VAL" columnIndex="2"/>
+		<result property="pymtDducItemCd" column="PYMT_DDUC_ITEM_CD" columnIndex="3"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="4"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="5"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="6"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="7"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap>
+	
+	<insert id="bass1500DAO.insertBass1500_S">
+		<![CDATA[
+			INSERT INTO BASS1500 
+				( DPOB_CD
+				  , STP_INTTN_SEPT_VAL
+				  , PYMT_DDUC_ITEM_CD
+				  , EMYMT_DIV_CD
+				  , BUSIN_CD
+				  , DEPT_CD
+				  , TYP_OCCU_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #stpInttnSeptVal#
+				  , #pymtDducItemCd#
+				  , #emymtDivCd#
+				  , #businCd#
+				  , #deptCd#
+				  , #typOccuCd#
+				  , #dtilOccuInttnCd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass1500DAO.updateBass1500_S">
+		<![CDATA[
+			UPDATE BASS1500
+			SET DPOB_CD=#dpobCd#
+				, STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				, PYMT_DDUC_ITEM_CD=#pymtDducItemCd#
+				, EMYMT_DIV_CD=#emymtDivCd#
+				, BUSIN_CD=#businCd#
+				, DEPT_CD=#deptCd#
+				, TYP_OCCU_CD=#typOccuCd#
+				, DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+								AND PYMT_DDUC_ITEM_CD=#pymtDducItemCd#
+				]]>
+	</update>
+	
+	<delete id="bass1500DAO.deleteBass1500_S">
+		<![CDATA[
+			DELETE FROM BASS1500 
+						WHERE DPOB_CD=#dpobCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+								AND PYMT_DDUC_ITEM_CD=#pymtDducItemCd#
+				]]>
+	</delete>
+	
+	<select id="bass1500DAO.selectBass1500_S" resultMap="bass1500">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, STP_INTTN_SEPT_VAL
+				, PYMT_DDUC_ITEM_CD
+				, EMYMT_DIV_CD
+				, BUSIN_CD
+				, DEPT_CD
+				, TYP_OCCU_CD
+				, DTIL_OCCU_INTTN_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS1500
+						WHERE DPOB_CD=#dpobCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+								AND PYMT_DDUC_ITEM_CD=#pymtDducItemCd#
+				]]>
+	</select>
+	
+	<select id="bass1500DAO.selectBass1500List_D" parameterClass="bass1500SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, STP_INTTN_SEPT_VAL
+								, PYMT_DDUC_ITEM_CD
+								, EMYMT_DIV_CD
+								, BUSIN_CD
+								, DEPT_CD
+								, TYP_OCCU_CD
+								, DTIL_OCCU_INTTN_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS1500
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					STP_INTTN_SEPT_VAL LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, STP_INTTN_SEPT_VAL DESC
+							, PYMT_DDUC_ITEM_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass1500DAO.selectBass1500ListTotCnt_S" parameterClass="bass1500SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS1500
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				STP_INTTN_SEPT_VAL LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

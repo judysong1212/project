@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Payr5010">
+	
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="Payr5010Tobass0300SrhVO" type="com.app.exterms.payroll.server.vo.Bass0300SrhVO"/>
+	
+	<resultMap id="bass0300" class="com.app.exterms.payroll.server.vo.Bass0300VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="commCd" column="COMM_CD" columnIndex="2"/>
+		<result property="rpsttvCd" column="RPSTTV_CD" columnIndex="3"/>
+		<result property="dtlCd" column="DTL_CD" columnIndex="4"/>
+		<result property="commCdNm" column="COMM_CD_NM" columnIndex="5"/>
+		<result property="abbrNm" column="ABBR_NM" columnIndex="6"/>
+		<result property="engNm" column="ENG_NM" columnIndex="7"/>
+		<result property="mangeItem01" column="MANGE_ITEM01" columnIndex="8"/>
+		<result property="mangeItem02" column="MANGE_ITEM02" columnIndex="9"/>
+		<result property="mangeItem03" column="MANGE_ITEM03" columnIndex="10"/>
+		<result property="mangeItem04" column="MANGE_ITEM04" columnIndex="11"/>
+		<result property="mangeItem05" column="MANGE_ITEM05" columnIndex="12"/>
+		<result property="mangeItem06" column="MANGE_ITEM06" columnIndex="13"/>
+		<result property="mangeItem07" column="MANGE_ITEM07" columnIndex="14"/>
+		<result property="mangeItem08" column="MANGE_ITEM08" columnIndex="15"/>
+		<result property="mangeItem09" column="MANGE_ITEM09" columnIndex="16"/>
+		<result property="mangeItem10" column="MANGE_ITEM10" columnIndex="17"/>
+		<result property="mangeItem11" column="MANGE_ITEM11" columnIndex="18"/>
+		<result property="mangeItem12" column="MANGE_ITEM12" columnIndex="19"/>
+		<result property="mangeItem13" column="MANGE_ITEM13" columnIndex="20"/>
+		<result property="mangeItem14" column="MANGE_ITEM14" columnIndex="21"/>
+		<result property="mangeItem15" column="MANGE_ITEM15" columnIndex="22"/>
+		<result property="mangeItem16" column="MANGE_ITEM16" columnIndex="23"/>
+		<result property="mangeItem17" column="MANGE_ITEM17" columnIndex="24"/>
+		<result property="mangeItem18" column="MANGE_ITEM18" columnIndex="25"/>
+		<result property="mangeItem19" column="MANGE_ITEM19" columnIndex="26"/>
+		<result property="mangeItem20" column="MANGE_ITEM20" columnIndex="27"/>
+		<result property="cdTreeLvl" column="CD_TREE_LVL" columnIndex="28"/>
+		<result property="ord" column="ORD" columnIndex="29"/>
+		<result property="opnYn" column="OPN_YN" columnIndex="30"/>
+		<result property="useYn" column="USE_YN" columnIndex="31"/>
+		<result property="note" column="NOTE" columnIndex="32"/>
+		<result property="kybdr" column="KYBDR" columnIndex="33"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="34"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="35"/>
+		<result property="ismt" column="ISMT" columnIndex="36"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="37"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="38"/>
+	</resultMap>
+	
+	<insert id="payr5010DAO.insertBass0300_S">
+		<![CDATA[
+			INSERT INTO BASS0300 
+				( DPOB_CD
+				  , COMM_CD
+				  , RPSTTV_CD
+				  , DTL_CD
+				  , COMM_CD_NM
+				  , ABBR_NM
+				  , ENG_NM
+				  , MANGE_ITEM01
+				  , MANGE_ITEM02
+				  , MANGE_ITEM03
+				  , MANGE_ITEM04
+				  , MANGE_ITEM05
+				  , MANGE_ITEM06
+				  , MANGE_ITEM07
+				  , MANGE_ITEM08
+				  , MANGE_ITEM09
+				  , MANGE_ITEM10
+				  , MANGE_ITEM11
+				  , MANGE_ITEM12
+				  , MANGE_ITEM13
+				  , MANGE_ITEM14
+				  , MANGE_ITEM15
+				  , MANGE_ITEM16
+				  , MANGE_ITEM17
+				  , MANGE_ITEM18
+				  , MANGE_ITEM19
+				  , MANGE_ITEM20
+				  , CD_TREE_LVL
+				  , ORD
+				  , OPN_YN
+				  , USE_YN
+				  , NOTE
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #commCd#
+				  , #rpsttvCd#
+				  , #dtlCd#
+				  , #commCdNm#
+				  , #abbrNm#
+				  , #engNm#
+				  , #mangeItem01#
+				  , #mangeItem02#
+				  , #mangeItem03#
+				  , #mangeItem04#
+				  , #mangeItem05#
+				  , #mangeItem06#
+				  , #mangeItem07#
+				  , #mangeItem08#
+				  , #mangeItem09#
+				  , #mangeItem10#
+				  , #mangeItem11#
+				  , #mangeItem12#
+				  , #mangeItem13#
+				  , #mangeItem14#
+				  , #mangeItem15#
+				  , #mangeItem16#
+				  , #mangeItem17#
+				  , #mangeItem18#
+				  , #mangeItem19#
+				  , #mangeItem20#
+				  , #cdTreeLvl#
+				  , #ord#
+				  , #opnYn#
+				  , #useYn#
+				  , #note#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="payr5010DAO.updateBass0300_S">
+		<![CDATA[
+			UPDATE BASS0300
+			SET DPOB_CD=#dpobCd#
+				, COMM_CD=#commCd#
+				, RPSTTV_CD=#rpsttvCd#
+				, DTL_CD=#dtlCd#
+				, COMM_CD_NM=#commCdNm#
+				, ABBR_NM=#abbrNm#
+				, ENG_NM=#engNm#
+				, MANGE_ITEM01=#mangeItem01#
+				, MANGE_ITEM02=#mangeItem02#
+				, MANGE_ITEM03=#mangeItem03#
+				, MANGE_ITEM04=#mangeItem04#
+				, MANGE_ITEM05=#mangeItem05#
+				, MANGE_ITEM06=#mangeItem06#
+				, MANGE_ITEM07=#mangeItem07#
+				, MANGE_ITEM08=#mangeItem08#
+				, MANGE_ITEM09=#mangeItem09#
+				, MANGE_ITEM10=#mangeItem10#
+				, MANGE_ITEM11=#mangeItem11#
+				, MANGE_ITEM12=#mangeItem12#
+				, MANGE_ITEM13=#mangeItem13#
+				, MANGE_ITEM14=#mangeItem14#
+				, MANGE_ITEM15=#mangeItem15#
+				, MANGE_ITEM16=#mangeItem16#
+				, MANGE_ITEM17=#mangeItem17#
+				, MANGE_ITEM18=#mangeItem18#
+				, MANGE_ITEM19=#mangeItem19#
+				, MANGE_ITEM20=#mangeItem20#
+				, CD_TREE_LVL=#cdTreeLvl#
+				, ORD=#ord#
+				, OPN_YN=#opnYn#
+				, USE_YN=#useYn#
+				, NOTE=#note# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND COMM_CD=#commCd#
+				]]>
+	</update>
+	
+	<delete id="payr5010DAO.deleteBass0300_S">
+		<![CDATA[
+			DELETE FROM BASS0300 
+						WHERE DPOB_CD=#dpobCd#
+								AND COMM_CD=#commCd#
+				]]>
+	</delete>
+	<!--
+	<select id="payr5010DAO.selectBass0300_S" resultMap="bass0300">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, COMM_CD
+				, RPSTTV_CD
+				, DTL_CD
+				, COMM_CD_NM
+				, ABBR_NM
+				, ENG_NM
+				, MANGE_ITEM01
+				, MANGE_ITEM02
+				, MANGE_ITEM03
+				, MANGE_ITEM04
+				, MANGE_ITEM05
+				, MANGE_ITEM06
+				, MANGE_ITEM07
+				, MANGE_ITEM08
+				, MANGE_ITEM09
+				, MANGE_ITEM10
+				, MANGE_ITEM11
+				, MANGE_ITEM12
+				, MANGE_ITEM13
+				, MANGE_ITEM14
+				, MANGE_ITEM15
+				, MANGE_ITEM16
+				, MANGE_ITEM17
+				, MANGE_ITEM18
+				, MANGE_ITEM19
+				, MANGE_ITEM20
+				, CD_TREE_LVL
+				, ORD
+				, OPN_YN
+				, USE_YN
+				, NOTE
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS0300
+						WHERE DPOB_CD=#dpobCd#
+								AND COMM_CD=#commCd#
+				]]>
+	</select>
+	  -->
+	<select id="payr5010DAO.selectBass0300List_D" parameterClass="Payr5010Tobass0300SrhVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+						SELECT
+										DPOB_CD
+										, COMM_CD
+										, RPSTTV_CD
+										, DTL_CD
+										, COMM_CD_NM
+										, ABBR_NM
+										, ENG_NM
+										, MANGE_ITEM01
+										, MANGE_ITEM02
+										, MANGE_ITEM03
+										, MANGE_ITEM04
+										, MANGE_ITEM05
+										, MANGE_ITEM06
+										, MANGE_ITEM07
+										, MANGE_ITEM08
+										, MANGE_ITEM09
+										, MANGE_ITEM10
+										, MANGE_ITEM11
+										, MANGE_ITEM12
+										, MANGE_ITEM13
+										, MANGE_ITEM14
+										, MANGE_ITEM15
+										, MANGE_ITEM16
+										, MANGE_ITEM17
+										, MANGE_ITEM18
+										, MANGE_ITEM19
+										, MANGE_ITEM20
+										, CD_TREE_LVL
+										, ORD
+										, OPN_YN
+										, USE_YN
+										, NOTE
+										, KYBDR
+										, INPT_DT
+										, INPT_ADDR
+										, ISMT
+										, REVN_DT
+										, REVN_ADDR
+								FROM BASS0300
+						WHERE RPSTTV_CD = #rpsttvCd#
+				    
+					<isNotEmpty prepend="AND" property="commCdNm" >
+					 	COMM_CD_NM LIKE '%' || #commCdNm# || '%'
+				    </isNotEmpty> 
+							ORDER BY 
+								DPOB_CD DESC
+									, COMM_CD DESC
+				
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>	
+	</select>	
+	
+	<select id="payr5010DAO.selectBass0300ListTotCnt_S" parameterClass="Payr5010Tobass0300SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0300 A
+			WHERE A.RPSTTV_CD = #rpsttvCd#
+	 
+			<isNotEmpty prepend="AND" property="commCdNm" >
+			 	A.COMM_CD_NM LIKE '%' || #commCdNm# || '%'
+		    </isNotEmpty> 
+	</select>
+	
+	
+	<!-- 코드 관리 쿼리 시작 
+	<select id="payr5010DAO.selectBass0300WorkList" parameterClass="bass0300DTOMng" resultClass="egovMap">
+		SELECT 
+		   DPOB_CD, COMM_CD, RPSTTV_CD, 
+		   DTL_CD, COMM_CD_NM, ABBR_NM, 
+		   ENG_NM, MANGE_ITEM01, MANGE_ITEM02, 
+		   MANGE_ITEM03, MANGE_ITEM04, MANGE_ITEM05, 
+		   MANGE_ITEM06, MANGE_ITEM07, MANGE_ITEM08, 
+		   MANGE_ITEM09, MANGE_ITEM10, MANGE_ITEM11, 
+		   MANGE_ITEM12, MANGE_ITEM13, MANGE_ITEM14, 
+		   MANGE_ITEM15, MANGE_ITEM16, MANGE_ITEM17, 
+		   MANGE_ITEM18, MANGE_ITEM19, MANGE_ITEM20, 
+		   CD_TREE_LVL, ORD, OPN_YN, 
+		   USE_YN, NOTE, KYBDR, 
+		   INPT_DT, INPT_ADDR, ISMT, 
+		   REVN_DT, REVN_ADDR
+		FROM BASS0300
+		WHERE RPSTTV_CD like 'EXTM%'
+		ORDER BY ORD, COMM_CD_NM
+	</select>
+	<select id="payr5010DAO.selectBass0300CodeList" parameterClass="bass0300DTOMng" resultClass="egovMap">
+		SELECT 
+		   DPOB_CD, COMM_CD, RPSTTV_CD, 
+		   DTL_CD, COMM_CD_NM, ABBR_NM, 
+		   ENG_NM, MANGE_ITEM01, MANGE_ITEM02, 
+		   MANGE_ITEM03, MANGE_ITEM04, MANGE_ITEM05, 
+		   MANGE_ITEM06, MANGE_ITEM07, MANGE_ITEM08, 
+		   MANGE_ITEM09, MANGE_ITEM10, MANGE_ITEM11, 
+		   MANGE_ITEM12, MANGE_ITEM13, MANGE_ITEM14, 
+		   MANGE_ITEM15, MANGE_ITEM16, MANGE_ITEM17, 
+		   MANGE_ITEM18, MANGE_ITEM19, MANGE_ITEM20, 
+		   CD_TREE_LVL, ORD, OPN_YN, 
+		   USE_YN, NOTE, KYBDR, 
+		   INPT_DT, INPT_ADDR, ISMT, 
+		   REVN_DT, REVN_ADDR
+		FROM BASS0300
+		WHERE RPSTTV_CD = #rpsttvCd#
+		ORDER BY ORD, DTL_CD
+	</select>
+	<select id="payr5010DAO.selectBass0300DtlCodeList" parameterClass="bass0300DTOMng" resultClass="egovMap">
+		SELECT 
+		   DPOB_CD, COMM_CD, RPSTTV_CD, 
+		   DTL_CD, COMM_CD_NM, ABBR_NM, 
+		   ENG_NM, MANGE_ITEM01, MANGE_ITEM02, 
+		   MANGE_ITEM03, MANGE_ITEM04, MANGE_ITEM05, 
+		   MANGE_ITEM06, MANGE_ITEM07, MANGE_ITEM08, 
+		   MANGE_ITEM09, MANGE_ITEM10, MANGE_ITEM11, 
+		   MANGE_ITEM12, MANGE_ITEM13, MANGE_ITEM14, 
+		   MANGE_ITEM15, MANGE_ITEM16, MANGE_ITEM17, 
+		   MANGE_ITEM18, MANGE_ITEM19, MANGE_ITEM20, 
+		   CD_TREE_LVL, ORD, OPN_YN, 
+		   USE_YN, NOTE, KYBDR, 
+		   INPT_DT, INPT_ADDR, ISMT, 
+		   REVN_DT, REVN_ADDR
+		FROM BASS0300
+		WHERE RPSTTV_CD = #rpsttvCd#
+		ORDER BY ORD, COMM_CD_NM
+	</select>
+	
+	<update id="payr5010DAO.updateBass0300" parameterClass="bass0300DTOMng">
+	    UPDATE BASS0300
+		   SET RPSTTV_CD = #rpsttvCd#,
+		       DTL_CD = #dtlCd#,
+		       COMM_CD_NM = #commCdNm#,
+		       ABBR_NM = #abbrNm#,
+		       ENG_NM = #engNm#,
+		       MANGE_ITEM01 = #mangeItem01#,
+		       MANGE_ITEM02 = #mangeItem02#,
+		       MANGE_ITEM03 = #mangeItem03#,
+		       MANGE_ITEM04 = #mangeItem04#,
+		       MANGE_ITEM05 = #mangeItem05#,
+		       MANGE_ITEM06 = #mangeItem06#,
+		       MANGE_ITEM07 = #mangeItem07#,
+		       MANGE_ITEM08 = #mangeItem08#,
+		       MANGE_ITEM09 = #mangeItem09#,
+		       MANGE_ITEM10 = #mangeItem10#,
+		       MANGE_ITEM11 = #mangeItem11#,
+		       MANGE_ITEM12 = #mangeItem12#,
+		       MANGE_ITEM13 = #mangeItem13#,
+		       MANGE_ITEM14 = #mangeItem14#,
+		       MANGE_ITEM15 = #mangeItem15#,
+		       MANGE_ITEM16 = #mangeItem16#,
+		       MANGE_ITEM17 = #mangeItem17#,
+		       MANGE_ITEM18 = #mangeItem18#,
+		       MANGE_ITEM19 = #mangeItem19#,
+		       MANGE_ITEM20 = #mangeItem20#,
+		       CD_TREE_LVL = #cdTreeLvl#,
+		       ORD = #ord#,
+		       OPN_YN = #opnYn#,
+		       USE_YN = #useYn#,
+		       NOTE = #note#,
+		       ISMT = #ismt#,
+		       REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+		       REVN_ADDR = #revnAddr#
+		 WHERE DPOB_CD = #dpobCd#
+		   AND COMM_CD = #commCd#
+	</update>
+	<delete id="payr5010DAO.deleteBass0300" parameterClass="bass0300DTOMng">
+	    DELETE FROM BASS0300 WHERE DPOB_CD = #dpobCd# AND COMM_CD = #commCd#
+	</delete>
+	<delete id="payr5010DAO.deleteBass0300DtlCode" parameterClass="bass0300DTOMng">
+	    DELETE FROM BASS0300 WHERE DPOB_CD = #dpobCd# AND RPSTTV_CD = #dtlCd#
+	</delete>
+	 -->
+	
+</sqlMap>

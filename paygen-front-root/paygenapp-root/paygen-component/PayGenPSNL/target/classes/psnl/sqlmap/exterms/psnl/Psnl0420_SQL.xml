@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0420">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="psnl0420Dto" type="com.app.exterms.personal.client.dto.Psnl0420DTO"/>
+	
+	<update id="psnl0420DAO.updateIssueOk" parameterClass="psnl0420Dto">
+	 UPDATE PSNL0550
+	   SET ISS_CODTN_DIV_CD = 'A0390002',
+	       ISS_APPBN_DT = TO_CHAR (SYSDATE, 'YYYYMMDD'),
+	       ISS_CODTN_EMP_NUM = #issCodtnEmpNum#,
+	       ISMT = #ismt#,
+	       REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+	       REVN_ADDR = #revnAddr#
+	 WHERE DPOB_CD = #dpobCd# 
+	   AND PRF_ISS_NUM = #prfIssNum#
+	</update>
+	
+	<select id="psnl0420DAO.selectPsnl0420" parameterClass="psnl0420Dto" resultClass="egovMap">
+	    
+	    SELECT A.DPOB_CD,
+		       A.SYSTEMKEY,
+		       A.HAN_NM,
+		       FCBASS0400CDNM (A.DPOB_CD, A.CURR_AFFN_DEPT_CD, '2') AS DEPT_CD,
+		       FCBASS0300CDNM (A.DPOB_CD, A.HDOFC_CODTN_CD) AS HDOFC_CODTN_CD,
+		       TO_CHAR(TO_DATE(B.ISS_APPY_DT,'YYYYMMDD'),'YYYY.MM.DD') AS ISS_APPY_DT,
+		       B.ISS_PRPSE_CTNT,
+		       B.ISS_NUM_CPIS,
+		       FCBASS0300CDNM (B.DPOB_CD, B.CERTC_DIV_CD) AS CERTC_DIV_CD,
+		       FCBASS0300CDNM (B.DPOB_CD, B.ISS_CODTN_DIV_CD) AS ISS_CODTN_DIV_CD,
+		       B.PRF_ISS_NUM,
+		       TO_CHAR(TO_DATE(B.CERTC_ISS_DT,'YYYYMMDD'),'YYYY.MM.DD') AS CERTC_ISS_DT,
+		       DECODE(B.ISS_CODTN_DIV_CD,'A0390001','Y','N') AS CONFIRM_YN
+		  FROM PSNL0100 A, PSNL0550 B
+		 WHERE A.DPOB_CD = B.DPOB_CD 
+		   AND A.SYSTEMKEY = B.SYSTEMKEY
+		   
+	    <isNotNull property="hanNm">
+		     <isNotEmpty property="hanNm">
+		         AND A.HAN_NM = #hanNm#  
+		     </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="resnRegnNum">
+		     <isNotEmpty property="resnRegnNum">
+		         AND A.RESN_REGN_NUM = REPLACE(#resnRegnNum#,'-','')  
+		     </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="searchIssAppyDtS">
+		     <isNotEmpty property="searchIssAppyDtS">
+		 		AND B.ISS_APPY_DT &gt;= #searchIssAppyDtS#
+		 	 </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="searchIssAppyDtE">
+		     <isNotEmpty property="searchIssAppyDtE">
+		 		AND B.ISS_APPY_DT &lt;= #searchIssAppyDtE#
+		 	 </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="certcDivCd">
+		     <isNotEmpty property="certcDivCd">
+		         AND B.CERTC_DIV_CD = #certcDivCd#  
+		     </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="issCodtnDivCd">
+		     <isNotEmpty property="issCodtnDivCd">
+		         AND B.ISS_CODTN_DIV_CD = #issCodtnDivCd#  
+		     </isNotEmpty>
+		 </isNotNull>
+		 
+		 
+		 ORDER BY A.CURR_AFFN_DEPT_CD, A.HDOFC_CODTN_CD, A.HAN_NM
+	</select>
+	
+	
+</sqlMap>

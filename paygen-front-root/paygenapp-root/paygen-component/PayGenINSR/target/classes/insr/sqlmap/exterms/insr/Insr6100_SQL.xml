@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Insr6100">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="insr6100SerarchVO" type="com.app.exterms.insurance.server.vo.Insr6100SrhVO"/>
+	
+	<resultMap id="insr6100" class="com.app.exterms.insurance.server.vo.Insr6100VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<!-- <result property="idtlAccdtInsurSeilNum" column="IDTL_ACCDT_INSUR_SEIL_NUM" columnIndex="3"/> -->
+		<result property="emymtSeilNum" column="EMYMT_SEIL_NUM" columnIndex="3"/>
+		<result property="idtlAccdtInsurAqtnDt" column="IDTL_ACCDT_INSUR_AQTN_DT" columnIndex="4"/>
+		<result property="idtlAccdtInsurLssDt" column="IDTL_ACCDT_INSUR_LSS_DT" columnIndex="5"/>
+		<result property="kybdr" column="KYBDR" columnIndex="6"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="7"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="8"/>
+		<result property="ismt" column="ISMT" columnIndex="9"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="10"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="11"/>
+	</resultMap>
+	
+	<insert id="insr6100DAO.insertInsr6100_S">
+		<![CDATA[
+			INSERT INTO INSR6100 
+				( DPOB_CD
+				  , SYSTEMKEY 
+				  , EMYMT_SEIL_NUM
+				  , IDTL_ACCDT_INSUR_AQTN_DT
+				  , IDTL_ACCDT_INSUR_LSS_DT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey# 
+				  , #emymtSeilNum#
+				  , #idtlAccdtInsurAqtnDt#
+				  , #idtlAccdtInsurLssDt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="insr6100DAO.updateInsr6100_S">
+		<![CDATA[
+			UPDATE INSR6100
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey# 
+				, EMYMT_SEIL_NUM=#emymtSeilNum#
+				, IDTL_ACCDT_INSUR_AQTN_DT=#idtlAccdtInsurAqtnDt#
+				, IDTL_ACCDT_INSUR_LSS_DT=#idtlAccdtInsurLssDt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND  EMYMT_SEIL_NUM=#emymtSeilNum#
+				]]>
+	</update>
+	
+	<delete id="insr6100DAO.deleteInsr6100_S">
+		<![CDATA[
+			DELETE FROM INSR6100 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND  EMYMT_SEIL_NUM=#emymtSeilNum#
+				]]>
+	</delete>
+	
+	<select id="insr6100DAO.selectInsr6100_S" resultMap="insr6100">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY 
+				, EMYMT_SEIL_NUM
+				, IDTL_ACCDT_INSUR_AQTN_DT
+				, IDTL_ACCDT_INSUR_LSS_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM INSR6100
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND  EMYMT_SEIL_NUM=#emymtSeilNum#
+				]]>
+	</select>
+	
+	<select id="insr6100DAO.selectInsr6100List_D" parameterClass="insr6100SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY 
+								, EMYMT_SEIL_NUM
+								, IDTL_ACCDT_INSUR_AQTN_DT
+								, IDTL_ACCDT_INSUR_LSS_DT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM INSR6100
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							,  EMYMT_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="insr6100DAO.selectInsr6100ListTotCnt_S" parameterClass="insr6100SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM INSR6100
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0310">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="psnl0310Vo" type="com.app.exterms.personal.server.vo.Psnl0310VO"/>
+	<typeAlias  alias="psnl0310SerarchVO" type="com.app.exterms.personal.server.vo.Psnl0310SrhVO"/>
+	
+	<resultMap id="psnl0310" class="com.app.exterms.personal.server.vo.Psnl0310VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="appmtSeilNum" column="APPMT_SEIL_NUM" columnIndex="3"/>
+		<result property="appmtDivCd" column="APPMT_DIV_CD" columnIndex="4"/>
+		<result property="appmtDt" column="APPMT_DT" columnIndex="5"/>
+		<result property="bfrDeptCd" column="BFR_DEPT_CD" columnIndex="6"/>
+		<result property="bfrBusinCd" column="BFR_BUSIN_CD" columnIndex="7"/>
+		<result property="bfrTypOccuDivCd" column="BFR_TYP_OCCU_DIV_CD" columnIndex="8"/>
+		<result property="bfrOdtyDivCd" column="BFR_ODTY_DIV_CD" columnIndex="9"/>
+		<result property="bfrPyspCd" column="BFR_PYSP_CD" columnIndex="10"/>
+		<result property="bfrPyspGrdeCd" column="BFR_PYSP_GRDE_CD" columnIndex="11"/>
+		<result property="bfrLogSvcYrNumCd" column="BFR_LOG_SVC_YR_NUM_CD" columnIndex="12"/>
+		<result property="aftDeptCd" column="AFT_DEPT_CD" columnIndex="13"/>
+		<result property="aftBusinCd" column="AFT_BUSIN_CD" columnIndex="14"/>
+		<result property="aftTypOccuDivCd" column="AFT_TYP_OCCU_DIV_CD" columnIndex="15"/>
+		<result property="aftOdtyDivCd" column="AFT_ODTY_DIV_CD" columnIndex="16"/>
+		<result property="aftPyspCd" column="AFT_PYSP_CD" columnIndex="17"/>
+		<result property="aftPyspGrdeCd" column="AFT_PYSP_GRDE_CD" columnIndex="18"/>
+		<result property="aftLogSvcYrNumCd" column="AFT_LOG_SVC_YR_NUM_CD" columnIndex="19"/>
+		<result property="appmtFixYn" column="APPMT_FIX_YN" columnIndex="20"/>
+		<result property="confrtnPrtcDt" column="CONFRTN_PRTC_DT" columnIndex="21"/>
+		<result property="confrtnPrcsYn" column="CONFRTN_PRCS_YN" columnIndex="22"/>
+		<result property="kybdr" column="KYBDR" columnIndex="23"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="24"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="25"/>
+		<result property="ismt" column="ISMT" columnIndex="26"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="27"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="28"/>
+		<result property="befTypOccuInttnCd" column="BEF_TYP_OCCU_INTTN_CD" columnIndex="29"/>
+		<result property="aftTypOccuInttnCd" column="AFT_TYP_OCCU_INTTN_CD" columnIndex="30"/>
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="31"/>
+		<result property="bfrDtilOccuInttnCd" column="BFR_DTIL_OCCU_INTTN_CD" columnIndex="32"/>
+		<result property="bfrLogSvcMnthCd" column="BFR_LOG_SVC_MNTH_CD" columnIndex="33"/>
+		<result property="aftDtilOccuInttnCd" column="AFT_DTIL_OCCU_INTTN_CD" columnIndex="34"/>
+		<result property="aftLogSvcMnthCd" column="AFT_LOG_SVC_MNTH_CD" columnIndex="35"/>
+	</resultMap>
+	
+	
+	<!-- 발령여부 -->
+	<update id="psnl0310DAO.updatePsnl0310_APPMT_FIX_YN" parameterClass="psnl0310Vo">
+	    UPDATE PSNL0310
+		   SET APPMT_FIX_YN = 'Y',
+		       ISMT = #ismt#,
+		       REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+		       REVN_ADDR = #revnAddr#
+		 WHERE APPMT_SEIL_NUM = #appmtSeilNum#
+		   AND DPOB_CD = #dpobCd#
+		   AND SYSTEMKEY = #systemkey#
+	</update>
+	
+	
+	
+	<!-- 발령확정 -->
+	<insert id="psnl0310DAO.inserPsnl0310" parameterClass="psnl0310Vo">
+	    INSERT INTO PSNL0310 ( DPOB_CD
+								, SYSTEMKEY
+								, APPMT_SEIL_NUM
+								, APPMT_DIV_CD
+								, APPMT_DT
+								, BFR_DEPT_CD
+								, BFR_BUSIN_CD
+								, BFR_DTIL_OCCU_INTTN_CD	
+								, BFR_ODTY_DIV_CD
+								, BFR_PYSP_CD
+								, BFR_PYSP_GRDE_CD
+								, BFR_LOG_SVC_YR_NUM_CD
+								, AFT_DEPT_CD
+								, AFT_BUSIN_CD
+								, AFT_DTIL_OCCU_INTTN_CD
+								, AFT_LOG_SVC_MNTH_CD
+								, AFT_ODTY_DIV_CD
+								, AFT_PYSP_CD
+								, AFT_PYSP_GRDE_CD
+								, AFT_LOG_SVC_YR_NUM_CD
+								, APPMT_FIX_YN
+								, CONFRTN_PRTC_DT
+								, CONFRTN_PRCS_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR)
+			SELECT DPOB_CD
+		          , SYSTEMKEY
+		          , #appmtSeilNum#
+		          , #appmtDivCd#
+		          , #appmtDt#
+		          , CURR_AFFN_DEPT_CD
+		          , TYP_OCCU_CD
+		          , DTIL_OCCU_INTTN_CD
+		          , ODTY_CD
+		          , PYSP_CD
+		          , PYSP_GRDE_CD
+		          , LOG_SVC_YR_NUM_CD
+		          , #aftDeptCd#
+		          , #aftBusinCd#
+		          , #aftDtilOccuInttnCd#
+		          , LOG_SVC_MNTH_ICM_CD
+		          , #aftOdtyDivCd#
+		          , ''
+		          , PYSP_GRDE_CD
+		          , #aftLogSvcYrNumCd#
+		          , 'N'
+		          , ''
+		          , ''
+		          , #ismt#
+		          , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+		          , #revnAddr#
+		          , #ismt#
+		          , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+		          , #revnAddr#
+			FROM PSNL0100
+		WHERE SYSTEMKEY = #systemkey#
+	</insert>
+	
+	
+	
+	
+	<insert id="psnl0310DAO.insertPsnl0310_S">
+		<![CDATA[
+			INSERT INTO PSNL0310 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , APPMT_SEIL_NUM
+				  , APPMT_DIV_CD
+				  , APPMT_DT
+				  , BFR_DEPT_CD
+				  , BFR_BUSIN_CD
+				  , BFR_TYP_OCCU_DIV_CD
+				  , BFR_ODTY_DIV_CD
+				  , BFR_PYSP_CD
+				  , BFR_PYSP_GRDE_CD
+				  , BFR_LOG_SVC_YR_NUM_CD
+				  , AFT_DEPT_CD
+				  , AFT_BUSIN_CD
+				  , AFT_TYP_OCCU_DIV_CD
+				  , AFT_ODTY_DIV_CD
+				  , AFT_PYSP_CD
+				  , AFT_PYSP_GRDE_CD
+				  , AFT_LOG_SVC_YR_NUM_CD
+				  , APPMT_FIX_YN
+				  , CONFRTN_PRTC_DT
+				  , CONFRTN_PRCS_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR 
+				  , BFR_DTIL_OCCU_INTTN_CD
+				  , BFR_LOG_SVC_MNTH_CD
+				  , AFT_DTIL_OCCU_INTTN_CD
+				  , AFT_LOG_SVC_MNTH_CD)
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #appmtSeilNum#
+				  , #appmtDivCd#
+				  , #appmtDt#
+				  , #bfrDeptCd#
+				  , #bfrBusinCd#
+				  , #bfrTypOccuDivCd#
+				  , #bfrOdtyDivCd#
+				  , #bfrPyspCd#
+				  , #bfrPyspGrdeCd#
+				  , #bfrLogSvcYrNumCd#
+				  , #aftDeptCd#
+				  , #aftBusinCd#
+				  , #aftTypOccuDivCd#
+				  , #aftOdtyDivCd#
+				  , #aftPyspCd#
+				  , #aftPyspGrdeCd#
+				  , #aftLogSvcYrNumCd#
+				  , #appmtFixYn#
+				  , #confrtnPrtcDt#
+				  , #confrtnPrcsYn#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# 
+				  , #bfrDtilOccuInttnCd# 
+				  , #bfrLogSvcMnthCd# 
+				  , #aftDtilOccuInttnCd# 
+				  , #aftLogSvcMnthCd# 
+				  )
+		]]>
+	</insert>
+	
+	<update id="psnl0310DAO.updatePsnl0310_S">
+		<![CDATA[
+			UPDATE PSNL0310
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, APPMT_SEIL_NUM=#appmtSeilNum#
+				, APPMT_DIV_CD=#appmtDivCd#
+				, APPMT_DT=#appmtDt#
+				, BFR_DEPT_CD=#bfrDeptCd#
+				, BFR_BUSIN_CD=#bfrBusinCd#
+				, BFR_ODTY_DIV_CD=#bfrOdtyDivCd#
+				, BFR_PYSP_CD=#bfrPyspCd#
+				, BFR_PYSP_GRDE_CD=#bfrPyspGrdeCd#
+				, BFR_LOG_SVC_YR_NUM_CD=#bfrLogSvcYrNumCd#
+				, AFT_DEPT_CD=#aftDeptCd#
+				, AFT_BUSIN_CD=#aftBusinCd#
+				, AFT_TYP_OCCU_DIV_CD=#aftTypOccuDivCd#
+				, AFT_ODTY_DIV_CD=#aftOdtyDivCd#
+				, AFT_PYSP_CD=#aftPyspCd#
+				, AFT_PYSP_GRDE_CD=#aftPyspGrdeCd#
+				, AFT_LOG_SVC_YR_NUM_CD=#aftLogSvcYrNumCd#
+				, APPMT_FIX_YN=#appmtFixYn#
+				, CONFRTN_PRTC_DT=#confrtnPrtcDt#
+				, CONFRTN_PRCS_YN=#confrtnPrcsYn#
+				, DTIL_OCCU_CLS_DIV_CD=#dtilOccuClsDivCd#
+				, BFR_DTIL_OCCU_INTTN_CD=#bfrDtilOccuInttnCd#
+				, BFR_LOG_SVC_MNTH_CD= #bfrLogSvcMnthCd#
+				, AFT_DTIL_OCCU_INTTN_CD=#aftDtilOccuInttnCd#
+				, AFT_LOG_SVC_MNTH_CD=#aftLogSvcMnthCd#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND APPMT_SEIL_NUM=#appmtSeilNum#
+				]]>
+	</update>
+	
+	<delete id="psnl0310DAO.deletePsnl0310_S">
+		<![CDATA[
+			DELETE FROM PSNL0310 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND APPMT_SEIL_NUM=#appmtSeilNum#
+				]]>
+	</delete>
+	
+	<select id="psnl0310DAO.selectPsnl0310_S" resultMap="psnl0310">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, APPMT_SEIL_NUM
+				, APPMT_DIV_CD
+				, APPMT_DT
+				, BFR_DEPT_CD
+				, BFR_BUSIN_CD
+				, BFR_ODTY_DIV_CD
+				, BFR_PYSP_CD
+				, BFR_PYSP_GRDE_CD
+				, BFR_LOG_SVC_YR_NUM_CD
+				, AFT_DEPT_CD
+				, AFT_BUSIN_CD
+				, AFT_ODTY_DIV_CD
+				, AFT_PYSP_CD
+				, AFT_PYSP_GRDE_CD
+				, AFT_LOG_SVC_YR_NUM_CD
+				, APPMT_FIX_YN
+				, CONFRTN_PRTC_DT
+				, CONFRTN_PRCS_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, BFR_DTIL_OCCU_INTTN_CD
+				, BFR_LOG_SVC_MNTH_CD
+				, AFT_DTIL_OCCU_INTTN_CD
+				, AFT_LOG_SVC_MNTH_CD
+			FROM PSNL0310
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND APPMT_SEIL_NUM=#appmtSeilNum#
+				]]>
+	</select>
+	
+	<select id="psnl0310DAO.selectPsnl0310List_D" parameterClass="psnl0310SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, APPMT_SEIL_NUM
+								, APPMT_DIV_CD
+								, APPMT_DT
+								, BFR_DEPT_CD
+								, BFR_BUSIN_CD
+								, BFR_ODTY_DIV_CD
+								, BFR_PYSP_CD
+								, BFR_PYSP_GRDE_CD
+								, BFR_LOG_SVC_YR_NUM_CD
+								, AFT_DEPT_CD
+								, AFT_BUSIN_CD
+								, AFT_ODTY_DIV_CD
+								, AFT_PYSP_CD
+								, AFT_PYSP_GRDE_CD
+								, AFT_LOG_SVC_YR_NUM_CD
+								, APPMT_FIX_YN
+								, CONFRTN_PRTC_DT
+								, CONFRTN_PRCS_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+								, BFR_DTIL_OCCU_INTTN_CD
+								, BFR_LOG_SVC_MNTH_CD
+								, AFT_DTIL_OCCU_INTTN_CD
+								, AFT_LOG_SVC_MNTH_CD
+						FROM PSNL0310
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, APPMT_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="psnl0310DAO.selectPsnl0310ListTotCnt_S" parameterClass="psnl0310SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PSNL0310
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

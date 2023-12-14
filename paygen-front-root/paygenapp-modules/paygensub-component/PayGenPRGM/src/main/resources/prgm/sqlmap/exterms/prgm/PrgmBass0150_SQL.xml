@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PGRM_Bass0150">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="prgmBass0150SrhVO" type="com.app.exterms.prgm.server.vo.PrgmComBass0150SrhVO"/>
+	
+	<resultMap id="prgmBass0150" class="com.app.exterms.prgm.server.vo.PrgmComBass0150VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="2"/>
+		<result property="payMangeDeptNm" column="PAY_MANGE_DEPT_NM" columnIndex="3"/>
+		<result property="degtrResnRegnNum" column="DEGTR_RESN_REGN_NUM" columnIndex="4"/>
+		<result property="degtrNm" column="DEGTR_NM" columnIndex="5"/>
+		<result property="busoprRgstnNum" column="BUSOPR_RGSTN_NUM" columnIndex="6"/>
+		<result property="corpRgstnNum" column="CORP_RGSTN_NUM" columnIndex="7"/>
+		<result property="corpDivCd" column="CORP_DIV_CD" columnIndex="8"/>
+		<result property="payMangeDeptZpcd" column="PAY_MANGE_DEPT_ZPCD" columnIndex="9"/>
+		<result property="payMangeDeptFNdtnAddr" column="PAY_MANGE_DEPT_F_NDTN_ADDR" columnIndex="10"/>
+		<result property="payMangeDeptDtlPatrAddr" column="PAY_MANGE_DEPT_DTL_PATR_ADDR" columnIndex="11"/>
+		<result property="payMangeDeptPhnNum" column="PAY_MANGE_DEPT_PHN_NUM" columnIndex="12"/>
+		<result property="payMangeDeptFaxNum" column="PAY_MANGE_DEPT_FAX_NUM" columnIndex="13"/>
+		<result property="payMangeDeptSealWrdNm" column="PAY_MANGE_DEPT_SEAL_WRD_NM" columnIndex="14"/>
+		<result property="payMangeDeptSealRftaNm" column="PAY_MANGE_DEPT_SEAL_RFTA_NM" columnIndex="15"/>
+		<result property="payMangeDeptSealFlNm" column="PAY_MANGE_DEPT_SEAL_FL_NM" columnIndex="16"/>
+		<result property="payMangeDeptFNdtnUseYn" column="PAY_MANGE_DEPT_F_NDTN_USE_YN" columnIndex="17"/>
+		<result property="payMangeDeptWhlePernChrg" column="PAY_MANGE_DEPT_WHLE_PERN_CHRG" columnIndex="18"/>
+		<result property="payMangeDeptDivTskOffr" column="PAY_MANGE_DEPT_DIV_TSK_OFFR" columnIndex="19"/>
+		<result property="accCd" column="ACC_CD" columnIndex="20"/>
+		<result property="hlthInsrSym" column="HLTH_INSR_SYM" columnIndex="21"/>
+		<result property="natPennSym" column="NAT_PENN_SYM" columnIndex="22"/>
+		<result property="umytInsrSym" column="UMYT_INSR_SYM" columnIndex="23"/>
+		<result property="cllnDebrNm" column="CLLN_DEBR_NM" columnIndex="24"/>
+		<result property="hmtxId" column="HMTX_ID" columnIndex="25"/>
+		<result property="txOffcCd" column="TX_OFFC_CD" columnIndex="26"/>
+		<result property="bnkCd" column="BNK_CD" columnIndex="27"/>
+		<result property="groTnsrCd" column="GRO_TNSR_CD" columnIndex="28"/>
+		<result property="kybdr" column="KYBDR" columnIndex="29"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="30"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="31"/>
+		<result property="ismt" column="ISMT" columnIndex="32"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="33"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="34"/>
+	</resultMap>
+	 
+	
+	<select id="prgmBass0150DAO.selectBass0150List_D" parameterClass="prgmBass0150SrhVO" resultClass="egovMap">
+ 
+				SELECT
+								  DPOB_CD
+								, PAYR_MANG_DEPT_CD
+								, PAY_MANGE_DEPT_NM AS  PAYR_MANG_DEPT_NM
+						FROM BASS0150
+				WHERE 1=1
+		         AND PAY_MANGE_DEPT_F_NDTN_USE_YN = 'Y'	
+		         	<isNotEmpty  prepend="AND"  property="payrMangDeptCd">
+					 PAYR_MANG_DEPT_CD  = #payrMangDeptCd# 
+					</isNotEmpty> 
+					ORDER BY 
+					 DPOB_CD DESC
+				   , PAYR_MANG_DEPT_CD ASC
+		 
+	</select>	
+	
+<!--  
+	<select id="prgmBass0150DAO.selectBass0150List_D" parameterClass="prgmBass0150SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, PAYR_MANG_DEPT_CD
+								, PAY_MANGE_DEPT_NM
+								, DEGTR_RESN_REGN_NUM
+								, DEGTR_NM
+								, BUSOPR_RGSTN_NUM
+								, CORP_RGSTN_NUM
+								, CORP_DIV_CD
+								, PAY_MANGE_DEPT_ZPCD
+								, PAY_MANGE_DEPT_F_NDTN_ADDR
+								, PAY_MANGE_DEPT_DTL_PATR_ADDR
+								, PAY_MANGE_DEPT_PHN_NUM
+								, PAY_MANGE_DEPT_FAX_NUM
+								, PAY_MANGE_DEPT_SEAL_WRD_NM
+								, PAY_MANGE_DEPT_SEAL_RFTA_NM
+								, PAY_MANGE_DEPT_SEAL_FL_NM
+								, PAY_MANGE_DEPT_F_NDTN_USE_YN
+								, PAY_MANGE_DEPT_WHLE_PERN_CHRG
+								, PAY_MANGE_DEPT_DIV_TSK_OFFR
+								, ACC_CD
+								, HLTH_INSR_SYM
+								, NAT_PENN_SYM
+								, UMYT_INSR_SYM
+								, CLLN_DEBR_NM
+								, HMTX_ID
+								, TX_OFFC_CD
+								, BNK_CD
+								, GRO_TNSR_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS0150
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					PAYR_MANG_DEPT_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, PAYR_MANG_DEPT_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	-->
+	<select id="prgmBass0150DAO.selectBass0150ListTotCnt_S" parameterClass="prgmBass0150SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0150
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				PAYR_MANG_DEPT_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="InfcPkgYe161005">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgYe161005SrhVO" type="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgYe161005SrhVO"/>
+	
+	<resultMap id="infcPkgYe161005" class="com.app.smrmf.infc.yearendtax.server.vo.yeta2017.InfcPkgYe161005VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="whdgTxRegrstDeptCd" column="WHDG_TX_REGRST_DEPT_CD" columnIndex="2"/>
+		<result property="hhrkWhdgRegrstDeptCd" column="HHRK_WHDG_REGRST_DEPT_CD" columnIndex="3"/>
+		<result property="txOffcCd" column="TX_OFFC_CD" columnIndex="4"/>
+		<result property="pentrSeptCd" column="PENTR_SEPT_CD" columnIndex="5"/>
+		<result property="txDeptyMangeNum" column="TX_DEPTY_MANGE_NUM" columnIndex="6"/>
+		<result property="hmtxId" column="HMTX_ID" columnIndex="7"/>
+		<result property="txPgmCd" column="TX_PGM_CD" columnIndex="8"/>
+		<result property="busoprRgstnum" column="BUSOPR_RGSTNUM" columnIndex="9"/>
+		<result property="corpFmnmNm" column="CORP_FMNM_NM" columnIndex="10"/>
+		<result property="pernChrgDeptNm" column="PERN_CHRG_DEPT_NM" columnIndex="11"/>
+		<result property="pernChrgNm" column="PERN_CHRG_NM" columnIndex="12"/>
+		<result property="pernChrgPhnNum" column="PERN_CHRG_PHN_NUM" columnIndex="13"/>
+		<result property="useHanCd" column="USE_HAN_CD" columnIndex="14"/>
+		<result property="sumtTgtPridCd" column="SUMT_TGT_PRID_CD" columnIndex="15"/>
+		<result property="corpNum" column="CORP_NUM" columnIndex="16"/>
+		<result property="incmPost" column="INCM_POST" columnIndex="17"/>
+		<result property="incmAddr" column="INCM_ADDR" columnIndex="18"/>
+		<result property="incmAdtl" column="INCM_ADTL" columnIndex="19"/>
+		<result property="kybdr" column="KYBDR" columnIndex="20"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="21"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="22"/>
+		<result property="ismt" column="ISMT" columnIndex="23"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="24"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="25"/>
+	</resultMap>
+	
+	<insert id="infcPkgYe161005DAO.insertYe161005_S">
+		<![CDATA[
+			INSERT INTO YE161005 
+				( DPOB_CD
+				  , WHDG_TX_REGRST_DEPT_CD
+				  , HHRK_WHDG_REGRST_DEPT_CD
+				  , TX_OFFC_CD
+				  , PENTR_SEPT_CD
+				  , TX_DEPTY_MANGE_NUM
+				  , HMTX_ID
+				  , TX_PGM_CD
+				  , BUSOPR_RGSTNUM
+				  , CORP_FMNM_NM
+				  , PERN_CHRG_DEPT_NM
+				  , PERN_CHRG_NM
+				  , PERN_CHRG_PHN_NUM
+				  , USE_HAN_CD
+				  , SUMT_TGT_PRID_CD
+				  , CORP_NUM
+				  , INCM_POST
+				  , INCM_ADDR
+				  , INCM_ADTL
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #whdgTxRegrstDeptCd#
+				  , #hhrkWhdgRegrstDeptCd#
+				  , #txOffcCd#
+				  , #pentrSeptCd#
+				  , #txDeptyMangeNum#
+				  , #hmtxId#
+				  , #txPgmCd#
+				  , #busoprRgstnum#
+				  , #corpFmnmNm#
+				  , #pernChrgDeptNm#
+				  , #pernChrgNm#
+				  , #pernChrgPhnNum#
+				  , #useHanCd#
+				  , #sumtTgtPridCd#
+				  , #corpNum#
+				  , #incmPost#
+				  , #incmAddr#
+				  , #incmAdtl#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgYe161005DAO.updateYe161005_S">
+		<![CDATA[
+			UPDATE YE161005
+			SET DPOB_CD=#dpobCd#
+				, WHDG_TX_REGRST_DEPT_CD=#whdgTxRegrstDeptCd#
+				, HHRK_WHDG_REGRST_DEPT_CD=#hhrkWhdgRegrstDeptCd#
+				, TX_OFFC_CD=#txOffcCd#
+				, PENTR_SEPT_CD=#pentrSeptCd#
+				, TX_DEPTY_MANGE_NUM=#txDeptyMangeNum#
+				, HMTX_ID=#hmtxId#
+				, TX_PGM_CD=#txPgmCd#
+				, BUSOPR_RGSTNUM=#busoprRgstnum#
+				, CORP_FMNM_NM=#corpFmnmNm#
+				, PERN_CHRG_DEPT_NM=#pernChrgDeptNm#
+				, PERN_CHRG_NM=#pernChrgNm#
+				, PERN_CHRG_PHN_NUM=#pernChrgPhnNum#
+				, USE_HAN_CD=#useHanCd#
+				, SUMT_TGT_PRID_CD=#sumtTgtPridCd#
+				, CORP_NUM=#corpNum#
+				, INCM_POST=#incmPost#
+				, INCM_ADDR=#incmAddr#
+				, INCM_ADTL=#incmAdtl#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND WHDG_TX_REGRST_DEPT_CD=#whdgTxRegrstDeptCd#
+				]]>
+	</update>
+	
+	<delete id="infcPkgYe161005DAO.deleteYe161005_S">
+		<![CDATA[
+			DELETE FROM YE161005 
+						WHERE DPOB_CD=#dpobCd#
+								AND WHDG_TX_REGRST_DEPT_CD=#whdgTxRegrstDeptCd#
+				]]>
+	</delete>
+	
+	<select id="infcPkgYe161005DAO.selectYe161005_S" resultMap="infcPkgYe161005">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, WHDG_TX_REGRST_DEPT_CD
+				, HHRK_WHDG_REGRST_DEPT_CD
+				, TX_OFFC_CD
+				, PENTR_SEPT_CD
+				, TX_DEPTY_MANGE_NUM
+				, HMTX_ID
+				, TX_PGM_CD
+				, BUSOPR_RGSTNUM
+				, CORP_FMNM_NM
+				, PERN_CHRG_DEPT_NM
+				, PERN_CHRG_NM
+				, PERN_CHRG_PHN_NUM
+				, USE_HAN_CD
+				, SUMT_TGT_PRID_CD
+				, CORP_NUM
+				, INCM_POST
+				, INCM_ADDR
+				, INCM_ADTL
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE161005
+						WHERE DPOB_CD=#dpobCd#
+								AND WHDG_TX_REGRST_DEPT_CD=#whdgTxRegrstDeptCd#
+				]]>
+	</select>
+	
+	<select id="infcPkgYe161005DAO.selectYe161005List_D" parameterClass="infcPkgYe161005SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, WHDG_TX_REGRST_DEPT_CD
+								, HHRK_WHDG_REGRST_DEPT_CD
+								, TX_OFFC_CD
+								, PENTR_SEPT_CD
+								, TX_DEPTY_MANGE_NUM
+								, HMTX_ID
+								, TX_PGM_CD
+								, BUSOPR_RGSTNUM
+								, CORP_FMNM_NM
+								, PERN_CHRG_DEPT_NM
+								, PERN_CHRG_NM
+								, PERN_CHRG_PHN_NUM
+								, USE_HAN_CD
+								, SUMT_TGT_PRID_CD
+								, CORP_NUM
+								, INCM_POST
+								, INCM_ADDR
+								, INCM_ADTL
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE161005
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					WHDG_TX_REGRST_DEPT_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, WHDG_TX_REGRST_DEPT_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgYe161005DAO.selectYe161005ListTotCnt_S" parameterClass="infcPkgYe161005SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE161005
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				WHDG_TX_REGRST_DEPT_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

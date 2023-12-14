@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PdfJ203m">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="pdfJ203mSrhVO" type="com.app.exterms.yearendtax.server.vo.PdfJ203mSrhVO"/>
+	
+	<resultMap id="pdfJ203m" class="com.app.exterms.yearendtax.server.vo.PdfJ203mVO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="loanSeilNum" column="LOAN_SEIL_NUM" columnIndex="5"/>
+		<result property="loanAmtMn" column="LOAN_AMT_MN" columnIndex="6"/>
+		<result property="loanMmAmt" column="LOAN_MM_AMT" columnIndex="7"/>
+		<result property="fixCd" column="FIX_CD" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap>
+	
+	<insert id="pdfJ203mDAO.insertPdfJ203m_S">
+		<![CDATA[
+			INSERT INTO PDF_J203M 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , LOAN_SEIL_NUM
+				  , LOAN_AMT_MN
+				  , LOAN_MM_AMT
+				  , FIX_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #loanSeilNum#
+				  , #loanAmtMn#
+				  , #loanMmAmt#
+				  , #fixCd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="pdfJ203mDAO.updatePdfJ203m_S">
+		<![CDATA[
+			UPDATE PDF_J203M
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, LOAN_SEIL_NUM=#loanSeilNum#
+				, LOAN_AMT_MN=#loanAmtMn#
+				, LOAN_MM_AMT=#loanMmAmt#
+				, FIX_CD=#fixCd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND LOAN_SEIL_NUM=#loanSeilNum#
+								AND LOAN_AMT_MN=#loanAmtMn#
+				]]>
+	</update>
+	
+	<delete id="pdfJ203mDAO.deletePdfJ203m_S">
+		<![CDATA[
+			DELETE FROM PDF_J203M 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND LOAN_SEIL_NUM=#loanSeilNum#
+								AND LOAN_AMT_MN=#loanAmtMn#
+				]]>
+	</delete>
+	
+	<select id="pdfJ203mDAO.selectPdfJ203m_S" resultMap="pdfJ203m">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, LOAN_SEIL_NUM
+				, LOAN_AMT_MN
+				, LOAN_MM_AMT
+				, FIX_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PDF_J203M
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND LOAN_SEIL_NUM=#loanSeilNum#
+								AND LOAN_AMT_MN=#loanAmtMn#
+				]]>
+	</select>
+	
+	<select id="pdfJ203mDAO.selectPdfJ203mList_D" parameterClass="pdfJ203mSrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, LOAN_SEIL_NUM
+								, LOAN_AMT_MN
+								, LOAN_MM_AMT
+								, FIX_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PDF_J203M
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, LOAN_SEIL_NUM DESC
+							, LOAN_AMT_MN DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="pdfJ203mDAO.selectPdfJ203mListTotCnt_S" parameterClass="pdfJ203mSrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PDF_J203M
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

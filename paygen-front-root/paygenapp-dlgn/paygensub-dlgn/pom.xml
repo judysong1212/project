@@ -1,0 +1,155 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.paygen</groupId>
+    <artifactId>paygenapp-dlgn</artifactId>
+    <version>2.2.0</version>  
+  </parent>
+  <groupId>com.paygen.dlgn</groupId>
+  <artifactId>paygensub-dlgn</artifactId>
+  <packaging>pom</packaging> 
+  <name>${project.artifactId}</name>
+  <description>pagen-ComponentDLGN</description>
+  
+    <modules> 
+      <module>PayGenDLGN</module>    
+      <module>PayGen${dlgnname}DLGN</module>
+	</modules>    
+   
+    <dependencies>
+				<dependency>
+						<groupId>com.app.smrmf.pkg</groupId>
+  						<artifactId>smrmf-pkg-${environment}</artifactId>
+					  	<version>${paygen.version}</version> 
+	          </dependency>  
+			</dependencies>
+	 <build> 
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					 <version>3.0</version> 
+					<configuration>
+						<source>1.6</source>
+                        <target>1.6</target>
+                        <encoding>UTF-8</encoding>  
+					    <logLevel>INFO</logLevel>
+					    <fork>true</fork>
+					    <extraJvmArgs>-Xmx3072m -Xss2048k</extraJvmArgs>
+				        <minmemory>2048m</minmemory>
+					    <maxmemory>3072m</maxmemory> 
+					    <executions>
+							<execution>
+							      <!--<phase>compile</phase> -->  
+								  <goals> 
+									<goal>compile</goal> 
+									<goal>test</goal>
+								<!--	<goal>i18n</goal>
+									 <goal>generateAsync</goal> -->
+								</goals>  
+							</execution>
+						</executions>
+					</configuration>
+				</plugin>  
+						<!-- Make this jar executable -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					  <configuration>
+				 	<!-- DO NOT include log4j.properties file in your Jar 
+					  <excludes>
+						<exclude>**/log4j.properties</exclude>
+					  </excludes> -->
+					     <excludes>
+			            	<exclude>**/client/**/*.txt</exclude>  
+			            	<exclude>rebel.xml</exclude>  
+			            	<exclude>rebel-remote.xml</exclude>
+			            </excludes>
+					    <!-- but be sure to exclude the source from the final jar file
+				      <includes>
+				        <include>**/*.java</include>
+				        <include>**/*.gwt.xml</include>
+				      </includes>  -->  
+				      <failOnMissingWebXml>false</failOnMissingWebXml> 
+				   <!--   <archive>
+		               <manifest>
+		                 <addClasspath>true</addClasspath>
+		                <classpathPrefix>lib/</classpathPrefix>  
+		              
+		               --><!-- 
+		              <classpathLayoutType>repository</classpathLayoutType>
+		              NOTE: Deprecated in version 2.4. Use 'classpathLayoutType' instead. 
+		              <classpathMavenRepositoryLayout>true</classpathMavenRepositoryLayout>
+		              -->
+		         <!--    </manifest>
+		            </archive> -->
+					</configuration>
+				</plugin> 	
+			  <plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>hibernate3-maven-plugin</artifactId>
+					<version>2.1</version>
+					<configuration>
+						<components>
+							<component>
+								<name>hbm2ddl</name>
+								<implementation>annotationconfiguration</implementation>
+							</component>
+						</components>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>hsqldb</groupId>
+							<artifactId>hsqldb</artifactId>
+							<version>1.8.0.7</version>
+						</dependency>
+					</dependencies>
+				</plugin> 
+				<!-- EMMA   -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>emma-maven-plugin</artifactId>
+					<version>1.0-alpha-1</version>
+				</plugin>
+				<!-- PMD manven plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-pmd-plugin</artifactId>
+					<version>2.4</version>
+				</plugin> 
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<!-- EMMA 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>false</skipTests>
+					<forkMode>once</forkMode>
+					<reportFormat>xml</reportFormat>
+					<excludes>
+						<exclude>**/Abstract*.java</exclude>
+						<exclude>**/*Suite.java</exclude>
+					</excludes>
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+				</configuration>
+			</plugin>  -->
+			<!-- <plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>emma-maven-plugin</artifactId>
+				<version>1.0-alpha-1</version>
+				<inherited>true</inherited>
+			</plugin> -->
+			<!--  JavaDoc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.5</version>
+			</plugin> 
+		</plugins> 
+	</build> 
+</project>

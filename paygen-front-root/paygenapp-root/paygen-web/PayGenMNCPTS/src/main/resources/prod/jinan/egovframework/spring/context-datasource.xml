@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+						http://www.springframework.org/schema/jdbc  http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd">
+	
+    <bean id="egov.propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:/egovframework/egovProps/globals.properties</value> 
+            </list>
+        </property>
+    </bean>
+    
+	<!-- DataSource dataSource-${Globals.DbType}-->
+	<alias name="dataSource-oracle" alias="dataSource" />
+    <alias name="dataSource-order" alias="dataSource2" />
+    <alias name="dataSource-sgpis" alias="dataSource3" />
+	<!-- MySQL
+	<bean id="dataSource-mysql" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${Globals.DriverClassName}"/>
+		<property name="url" value="${Globals.Url}" />
+		<property name="username" value="${Globals.UserName}"/>
+		<property name="password" value="${Globals.Password}"/>
+	</bean>
+ -->
+	<!-- Oracle -->
+	<bean id="dataSource-oracle" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${Globals.DriverClassName}"/>
+		<property name="url" value="${Globals.Url}" />
+		<property name="username" value="${Globals.UserName}"/>
+		<property name="password" value="${Globals.Password}"/>  
+	</bean>
+
+	<bean id="dataSource-order" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@109.8.2.46:1526:COMM" />
+		<property name="username" value="ssoview"/>
+		<property name="password" value="ssolink"/>  
+	</bean>  
+	
+	 <!-- 세올부서연계 추가  -->
+	<bean id="dataSource-sgpis" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@109.8.2.46:1524:SGPIS" />
+		<property name="username" value="pisdba"/>
+		<property name="password" value="pisdba"/>  
+	</bean>   
+   
+</beans>

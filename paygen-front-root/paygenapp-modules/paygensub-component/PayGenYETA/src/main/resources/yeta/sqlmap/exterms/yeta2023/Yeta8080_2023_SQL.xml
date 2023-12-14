@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Yeta8080_2023">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="yeta2080Srh_2023_VO" type="com.app.exterms.yearendtax.server.vo.Yeta2080Srh_2023_VO"/>
+	
+	<resultMap id="yeta8080_2023" class="com.app.exterms.yearendtax.server.vo.Yeta2080_2023_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="2"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="3"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="4"/>
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="5"/>
+		<result property="kybdr" column="KYBDR" columnIndex="6"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="7"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="8"/>
+		<result property="ismt" column="ISMT" columnIndex="9"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="10"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="11"/>
+	</resultMap>
+	
+	<select id="Yeta8080_2023_DAO.selectYeta8080List_D" parameterClass="yeta2080Srh_2023_VO" resultClass="egovMap">
+	<![CDATA[	
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+			SELECT DISTINCT BA0400.DEPT_CD AS DEPT_CD                 
+			                , BA0400.DPOB_CD                
+			                , BA0400.DEPT_NM_HAN            
+			                , BA0400.DEPT_NM_RTCHNT        
+			                , BA0400.DEPT_NM_ENG            
+			                , BA0400.TPLVL_DEPT_CD        
+			                , BA0400.HHRK_DEPT_CD        
+			                , BA0400.PAYR_MANG_DEPT_CD    
+			                , BA0400.DEPT_USE_YN            
+			                , BA0400.NAT_PENN_SYM        
+			                , BA0400.HLTH_INSR_SYM        
+			                , BA0400.UMYT_INSR_SYM        
+			                , BA0400.IDTL_ACCDT_INSUR_SYM
+			                , BA0400.DEPT_NOTE_CTNT        
+			                , BA0400.DEPT_DSPY_YN        
+			                , BA0400.MANGE_DEPT_CD        
+			                , BA0400.KYBDR                
+			                , BA0400.INPT_DT                
+			                , BA0400.INPT_ADDR            
+			                , BA0400.ISMT                
+			                , BA0400.REVN_DT                
+			                , BA0400.REVN_ADDR            
+			                , BA0400.DEPT_RANK            
+			                , BA0400.DEPT_CRE_DT            
+			                , BA0400.DEPT_END_DT            
+			                , BA0400.BEF_DEPT_CD            
+			                , BA0400.BEF_DEPT_CD02
+			                
+			    FROM BASS0400 BA0400, BASS0360 BA0360
+			WHERE BA0400.DPOB_CD = BA0360.DPOB_CD
+			    AND BA0400.DEPT_CD = BA0360.DEPT_CD
+			    AND BA0400.DEPT_USE_YN = 'Y' 
+			
+		]]>		    
+			    <isNotNull property="deptNmHan">
+				    <isNotEmpty property="deptNmHan">
+					        AND BA0400.DEPT_NM_HAN LIKE  '%' || #deptNmHan# || '%'
+				    </isNotEmpty>
+				</isNotNull>    
+			    
+			
+			ORDER BY BA0400.DPOB_CD DESC
+			 	 	, ( SELECT LPAD(DEPT_RANK,5,'0')
+			  				FROM BASS0400 DD
+			            WHERE DD.DEPT_CD = BA0400.DEPT_CD
+			    	 		AND DD.DPOB_CD = BA0400.DPOB_CD) ASC
+	
+			<![CDATA[					
+		) A WHERE ROWNUM <= #lastIndex#
+	)WHERE RNUM >= #firstIndex#
+	]]>
+	</select>
+
+	<select id="Yeta8080_2023_DAO.selectYeta8080ListTotCnt_S" parameterClass="yeta2080Srh_2023_VO" resultClass="int">
+		SELECT COUNT(*) totcnt
+			FROM (
+					SELECT DISTINCT BA0400.DEPT_CD                  
+					                
+						FROM BASS0400 BA0400, BASS0360 BA0360
+					WHERE BA0400.DPOB_CD = BA0360.DPOB_CD
+						AND BA0400.DEPT_CD = BA0360.DEPT_CD
+						AND BA0400.DEPT_USE_YN = 'Y' 
+
+								    
+					<isNotNull property="deptNmHan">
+						<isNotEmpty property="deptNmHan">
+						AND BA0400.DEPT_NM_HAN LIKE  '%' || #deptNmHan# || '%'
+						</isNotEmpty>
+					</isNotNull>			
+				)
+	</select>
+	
+	
+  
+		
+</sqlMap>

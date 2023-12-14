@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+ 
+<sqlMap namespace="Psnl0131"> 
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	
+	<typeAlias alias="psnl0131Dto" type="com.app.exterms.personal.client.dto.Psnl0131DTO"/>
+	<typeAlias alias="psnl0131SrhVo" type="com.app.exterms.personal.server.vo.Psnl0131SrhVO"/>
+	<typeAlias alias="psnl0131Vo" type="com.app.exterms.personal.server.vo.Psnl0131VO" />
+	
+	
+	<!-- 관련근거 탭 조회, 삭제처리 되지 않은 데이터만  -->
+	<select id="psnl0131DAO.selectPsnl0131" resultClass="egovMap" parameterClass="psnl0131SrhVo"> 
+	<![CDATA[
+		SELECT T.*, ROWNUM RNUM 
+			FROM ( SELECT DPOB_CD            
+							, SYSTEMKEY        
+							, REFE_SEIL_NUM    
+							, (TO_DATE(REFE_INDT, 'YYYYMMDD'))AS REFE_INDT        
+							, REFE_PRCH_NM  
+							, (REFE_PRCH_NM || DECODE(REFE_PRCH_TEL, '', '', ' (' || REFE_PRCH_TEL || ')') )AS REFE_PRCH_NM_TITL  
+							, REFE_PRCH_TEL    
+							, REFE_DIV_CD        
+							, REFE_TITL        
+							, REFE_CTNT        
+							, REFE_DEL_FG        
+							, KYBDR            
+							, INPT_DT            
+							, INPT_ADDR  
+							, ISMT		
+							, REVN_DT		
+							, REVN_ADDR	
+					  FROM PSNL0131
+					WHERE DPOB_CD = #dpobCd#
+					    AND SYSTEMKEY = #systemkey#
+					    AND NVL(REFE_DEL_FG, 'TT') <> 'D'
+	]]>	
+					<isNotNull property="refeSeilNum">
+						<isNotEqual property="refeSeilNum" compareValue="0">
+							AND REFE_SEIL_NUM = #refeSeilNum#
+						</isNotEqual>	
+					</isNotNull>
+					ORDER BY REFE_SEIL_NUM 
+				)T
+	 
+	</select>
+	
+	<select id="psnl0131DAO.selectPsnl0131TotCnt" parameterClass="psnl0131SrhVo" resultClass="int">
+	<![CDATA[
+		SELECT COUNT(SYSTEMKEY) 
+ 		  FROM PSNL0131
+		WHERE DPOB_CD = #dpobCd#
+			AND SYSTEMKEY = #systemkey#
+			AND NVL(REFE_DEL_FG, 'TT') <> 'D'
+	]]>	 
+	</select>
+	
+	
+	
+	<insert id="psnl0131DAO.insertPsnl0131" parameterClass="psnl0131Vo">
+		<![CDATA[
+			INSERT INTO PSNL0131 
+					( DPOB_CD            
+							, SYSTEMKEY        
+							, REFE_SEIL_NUM    
+							, REFE_INDT        
+							, REFE_PRCH_NM  
+							, REFE_PRCH_TEL    
+							, REFE_DIV_CD        
+							, REFE_TITL        
+							, REFE_CTNT        
+							, REFE_DEL_FG        
+							, KYBDR            
+							, INPT_DT            
+							, INPT_ADDR
+							, ISMT		
+							, REVN_DT		
+							, REVN_ADDR	  )
+				VALUES ( #dpobCd#            
+							, #systemkey#        
+							, ( SELECT LPAD(NVL(MAX(REFE_SEIL_NUM), 0) + 1 , 4 , '0')
+							      FROM PSNL0131 
+							    WHERE DPOB_CD = #dpobCd# 
+							    	AND SYSTEMKEY = #systemkey#   
+							   )  
+							, #refeIndt#        
+							, #refePrchNm#  
+							, #refePrchTel#    
+							, #refeDivCd#        
+							, #refeTitl#        
+							, #refeCtnt#        
+							, #refeDelFg#        
+							, #kybdr#            
+							, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')          
+							, #inptAddr#
+							, #ismt#		
+							, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')	
+							, #revnAddr#	
+					    )
+				]]>	    
+			<selectKey keyProperty="refeSeilNumL" resultClass="java.lang.Long">
+			<![CDATA[
+				 SELECT MAX(REFE_SEIL_NUM) 
+				   FROM PSNL0131
+				 WHERE DPOB_CD = #dpobCd#
+				 	AND SYSTEMKEY = #systemkey#
+					AND NVL(REFE_DEL_FG, 'TT') <> 'D'
+			]]>		
+			</selectKey>
+	</insert>
+	
+	<!-- 관련근거 수정 삭제처리 -->
+	<update id="psnl0131DAO.updatePsnl0131">
+		<![CDATA[
+			UPDATE PSNL0131
+			  SET  ISMT = #ismt#			
+				, REVN_DT = TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')  			
+				, REVN_ADDR	=  #revnAddr#	
+		]]>
+				, REFE_INDT=#refeIndt#
+				, REFE_PRCH_NM=#refePrchNm#
+				, REFE_PRCH_TEL=#refePrchTel#
+				, REFE_DIV_CD=#refeDivCd#
+				, REFE_TITL=#refeTitl#
+				, REFE_CTNT=#refeCtnt#
+		<isNotNull property="refeDelFg">
+			<isNotEmpty property="refeDelFg">
+				, REFE_DEL_FG=#refeDelFg#
+			</isNotEmpty>
+		</isNotNull>
+		<![CDATA[
+			WHERE DPOB_CD=#dpobCd#
+				AND SYSTEMKEY=#systemkey#
+				AND REFE_SEIL_NUM=#refeSeilNum#
+				AND NVL(REFE_DEL_FG, 'TT') <> 'D'
+		]]>
+	</update>
+	
+
+</sqlMap>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye16Ta3160">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ye16Ta3160SerhVo" type="com.app.exterms.yearendtax.server.vo.Yeta3160SrhVO"/>
+	
+	<resultMap id="ye16Ta3160" class="com.app.exterms.yearendtax.server.vo.Yeta3160VO">
+		<result property="edacRvyy" column="EDAC_RVYY" columnIndex="1"/>
+		<result property="settGbcd" column="SETT_GBCD" columnIndex="2"/>
+		<result property="leasSqno" column="LEAS_SQNO" columnIndex="3"/>
+		<result property="dpobCd" column="DPOB_CD" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="leasName" column="LEAS_NAME" columnIndex="6"/>
+		<result property="leasRsno" column="LEAS_RSNO" columnIndex="7"/>
+		<result property="leasTyhu" column="LEAS_TYHU" columnIndex="8"/>
+		<result property="leasArea" column="LEAS_AREA" columnIndex="9"/>
+		<result property="leasAddr" column="LEAS_ADDR" columnIndex="10"/>
+		<result property="leasStdt" column="LEAS_STDT" columnIndex="11"/>
+		<result property="leasEddt" column="LEAS_EDDT" columnIndex="12"/>
+		<result property="leasDpst" column="LEAS_DPST" columnIndex="13"/>
+	</resultMap>
+
+
+	<!-- yeta0100 화면 연말정산 대상자 관리  -->
+	<delete id="ye16Ta3160DAO.fnYeta1100_YETA3160_2016_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3160 
+						WHERE EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd# 
+								AND DPOB_CD=#dpobCd# 
+				]]>
+				  <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                   </isNotEmpty> 
+		    		  			    
+	</delete>
+
+
+
+	
+	<insert id="ye16Ta3160DAO.insertYeta3160_S">
+		<![CDATA[
+			INSERT INTO YETA3160 
+				( EDAC_RVYY
+				  , SETT_GBCD
+				  , LEAS_SQNO
+				  , DPOB_CD
+				  , SYSTEMKEY
+				  , LEAS_NAME
+				  , LEAS_RSNO
+				  , LEAS_TYHU
+				  , LEAS_AREA
+				  , LEAS_ADDR
+				  , LEAS_STDT
+				  , LEAS_EDDT
+				  , LEAS_DPST )
+			VALUES ( #edacRvyy#
+				  , #settGbcd#
+				  , (SELECT NVL(MAX(LEAS_SQNO)+1,1) 
+					  FROM YETA3160 
+					  WHERE DPOB_CD=#dpobCd#
+								AND EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND SYSTEMKEY=#systemkey#) 
+				  , #dpobCd#
+				  , #systemkey#
+				  , #leasName#
+				  , #leasRsno#
+				  , (fcBass0300ITEMNM(#dpobCd#, #leasTyhu#, '11'))
+				  , #leasArea#
+				  , #leasAddr#
+				  , #leasStdt#
+				  , #leasEddt#
+				  , #leasDpst# )
+		]]>
+	</insert>
+	
+	<update id="ye16Ta3160DAO.updateYeta3160_S">
+		<![CDATA[
+			UPDATE YETA3160
+			SET EDAC_RVYY=#edacRvyy#
+				, SETT_GBCD=#settGbcd#
+				, LEAS_SQNO=#leasSqno#
+				, DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, LEAS_NAME=#leasName#
+				, LEAS_RSNO=#leasRsno#
+				, LEAS_TYHU=(fcBass0300ITEMNM(#dpobCd#, #leasTyhu#, '11'))
+				, LEAS_AREA=#leasArea#
+				, LEAS_ADDR=#leasAddr#
+				, LEAS_STDT=#leasStdt#
+				, LEAS_EDDT=#leasEddt#
+				, LEAS_DPST=#leasDpst#
+						WHERE EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND LEAS_SQNO=#leasSqno#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	
+	<delete id="ye16Ta3160DAO.deleteYeta3160_S">
+		<![CDATA[
+			DELETE FROM YETA3160 
+						WHERE EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND LEAS_SQNO=#leasSqno#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<!-- yeta0100 화면 연말정산 대상자 관리  -->
+		<delete id="ye16Ta3160DAO.fnPayr06430_PAYR451_CREATE_Delete_S">
+		<![CDATA[
+			DELETE FROM YETA3160 
+						WHERE EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd# 
+								AND DPOB_CD=#dpobCd# 
+				]]>
+				  <isNotEmpty prepend="AND" property="systemkey" >
+                      SYSTEMKEY=#systemkey#
+                   </isNotEmpty> 
+		    		  			    
+	</delete>
+	
+	
+	<select id="ye16Ta3160DAO.selectYeta3160_S" resultMap="ye16Ta3160">
+		<![CDATA[
+			SELECT
+				EDAC_RVYY
+				, SETT_GBCD
+				, LEAS_SQNO
+				, DPOB_CD
+				, SYSTEMKEY
+				, LEAS_NAME
+				, LEAS_RSNO
+				, LEAS_TYHU
+				, LEAS_AREA
+				, LEAS_ADDR
+				, LEAS_STDT
+				, LEAS_EDDT
+				, LEAS_DPST
+			FROM YETA3160
+						WHERE EDAC_RVYY=#edacRvyy#
+								AND SETT_GBCD=#settGbcd#
+								AND LEAS_SQNO=#leasSqno#
+								AND DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+	<select id="ye16Ta3160DAO.selectYeta3160List_D" parameterClass="ye16Ta3160SerhVo" resultClass="egovMap">
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+					SELECT
+									EDAC_RVYY
+									, SETT_GBCD
+									, SETT_GBCD AS settGbcdcommCd 
+									, fcBass0300CDNM(DPOB_CD, SETT_GBCD) AS settGbcdcommCdNm 
+									, LEAS_SQNO
+									, DPOB_CD
+									, SYSTEMKEY
+									, LEAS_NAME
+									, LEAS_RSNO
+									, LEAS_TYHU
+									, (SELECT C.COMM_CD 
+											FROM BASS0300 C
+											WHERE C.DPOB_CD = DPOB_CD
+													AND C.RPSTTV_CD = 'Y007'
+													AND	C.MANGE_ITEM11 = LEAS_TYHU)AS leasTyhucommCd
+										, fcBass0300CDNM(DPOB_CD, (SELECT C.COMM_CD 
+																	FROM BASS0300 C
+																	WHERE C.DPOB_CD = DPOB_CD
+																		AND C.RPSTTV_CD = 'Y007'
+																		AND	C.MANGE_ITEM11 = LEAS_TYHU)) AS leasTyhucommCdNm 
+									, LEAS_AREA
+									, LEAS_ADDR
+									, LEAS_STDT
+									, LEAS_EDDT
+									, LEAS_DPST
+							FROM YETA3160
+					WHERE 
+						<isNotEmpty property="dpobCd">
+							DPOB_CD=#dpobCd#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="edacRvyy" >
+							EDAC_RVYY=#edacRvyy#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="settGbcd" >
+							SETT_GBCD=#settGbcd#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="systemkey" >
+							SYSTEMKEY=#systemkey#
+						</isNotEmpty>  
+						ORDER BY 
+							EDAC_RVYY DESC
+								, SETT_GBCD DESC
+								, LEAS_SQNO DESC
+								, DPOB_CD DESC
+								, SYSTEMKEY DESC
+			
+			<![CDATA[					
+		) A WHERE ROWNUM <= #lastIndex#
+	)WHERE RNUM >= #firstIndex#
+	]]>
+	</select>	
+	<select id="ye16Ta3160DAO.selectYeta3160ListTotCnt_S" parameterClass="ye16Ta3160SerhVo" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YETA3160
+			WHERE 
+				<isNotEmpty property="dpobCd">
+					DPOB_CD=#dpobCd#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="edacRvyy" >
+					EDAC_RVYY=#edacRvyy#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="settGbcd" >
+					SETT_GBCD=#settGbcd#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="systemkey" >
+					SYSTEMKEY=#systemkey#
+				</isNotEmpty>  
+	</select>
+
+</sqlMap>

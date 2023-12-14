@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0125">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPsnl0125SerarchVO" type="com.app.exterms.personal.server.vo.InfcPsnl0125DefaultVO"/>
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+	
+	<resultMap id="infcPsnl0125" class="com.app.exterms.personal.server.vo.InfcPsnl0125VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="picRfta" column="PIC_RFTA" columnIndex="3"/>
+		<result property="picFlnm" column="PIC_FLNM" columnIndex="4"/>
+		<result property="kybdr" column="KYBDR" columnIndex="5"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="6"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="7"/>
+		<result property="ismt" column="ISMT" columnIndex="8"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="9"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="10"/>
+	</resultMap>
+	
+	<insert id="infcPsnl0125DAO.insertPsnl0125" parameterClass="hashMap">
+	    INSERT INTO PSNL0125 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , PIC_RFTA
+				  , PIC_FLNM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #picRfta#
+				  , #picFlnm#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+	</insert>
+	
+	<update id="infcPsnl0125DAO.updatePsnl0125" parameterClass="hashMap">
+		<![CDATA[
+			MERGE INTO PSNL0125
+			     USING DUAL
+			        ON (DPOB_CD = #dpobCd# AND SYSTEMKEY = #systemkey#)
+			WHEN MATCHED
+			THEN
+			   UPDATE SET PIC_RFTA=#picRfta#
+						, PIC_FLNM=#picFlnm#
+						, ISMT=#ismt#
+						, REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						, REVN_ADDR=#revnAddr#
+			WHEN NOT MATCHED
+			THEN
+			   INSERT 
+						( DPOB_CD
+						  , SYSTEMKEY
+						  , PIC_RFTA
+						  , PIC_FLNM
+						  , KYBDR
+						  , INPT_DT
+						  , INPT_ADDR
+						  , ISMT
+						  , REVN_DT
+						  , REVN_ADDR )
+				VALUES ( #dpobCd#
+						  , #systemkey#
+						  , #picRfta#
+						  , #picFlnm#
+						  , #ismt#
+						  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						  , #revnAddr#
+						  , #ismt#
+						  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						  , #revnAddr# )
+			]]>
+	</update>
+	
+	<delete id="infcPsnl0125DAO.deletePsnl0125" parameterClass="hashMap">
+		<![CDATA[
+			DELETE FROM PSNL0125 WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	
+	<insert id="infcPsnl0125DAO.insertPsnl0125_S">
+		<![CDATA[
+			INSERT INTO PSNL0125 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , PIC_RFTA
+				  , PIC_FLNM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #picRfta#
+				  , #picFlnm#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="infcPsnl0125DAO.updatePsnl0125_S">
+		<![CDATA[
+			UPDATE PSNL0125
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, PIC_RFTA=#picRfta#
+				, PIC_FLNM=#picFlnm#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</update>
+	
+	<delete id="infcPsnl0125DAO.deletePsnl0125_S">
+		<![CDATA[
+			DELETE FROM PSNL0125 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</delete>
+	
+	<select id="infcPsnl0125DAO.selectPsnl0125_S" resultMap="infcPsnl0125">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, PIC_RFTA
+				, PIC_FLNM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PSNL0125
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+	<select id="infcPsnl0125DAO.selectPsnl0125List_D" parameterClass="infcPsnl0125SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, PIC_RFTA
+								, PIC_FLNM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PSNL0125
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="infcPsnl0125DAO.selectPsnl0125ListTotCnt_S" parameterClass="infcPsnl0125SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PSNL0125
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass2510">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass2510SerarchVO" type="com.app.exterms.resm.server.vo.Bass2510SrhVO"/>
+	
+	<resultMap id="bass2510" class="com.app.exterms.resm.server.vo.Bass2510VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="dutyDivCd" column="DUTY_DIV_CD" columnIndex="2"/>
+		<result property="stpInttnSeptVal" column="STP_INTTN_SEPT_VAL" columnIndex="3"/>
+		<result property="rotaDutyDivCd" column="ROTA_DUTY_DIV_CD" columnIndex="4"/>
+		<result property="rotaDutyBgnnTm" column="ROTA_DUTY_BGNN_TM" columnIndex="5"/>
+		<result property="rotaDutyEndTm" column="ROTA_DUTY_END_TM" columnIndex="6"/>
+		<result property="rotaDutyTmNum" column="ROTA_DUTY_TM_NUM" columnIndex="7"/>
+		<result property="rotaDutyEepnTmNum" column="ROTA_DUTY_EEPN_TM_NUM" columnIndex="8"/>
+		<result property="extnnDutyBgnnTm" column="EXTNN_DUTY_BGNN_TM" columnIndex="9"/>
+		<result property="extnnDutyEndTm" column="EXTNN_DUTY_END_TM" columnIndex="10"/>
+		<result property="rotaExtnnEepnTmNum" column="ROTA_EXTNN_EEPN_TM_NUM" columnIndex="11"/>
+		<result property="ngtDutyBgnnTm" column="NGT_DUTY_BGNN_TM" columnIndex="12"/>
+		<result property="ngtDutyEndTm" column="NGT_DUTY_END_TM" columnIndex="13"/>
+		<result property="rotaNgtEepnTmNum" column="ROTA_NGT_EEPN_TM_NUM" columnIndex="14"/>
+		<result property="kybdr" column="KYBDR" columnIndex="15"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="16"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="17"/>
+		<result property="ismt" column="ISMT" columnIndex="18"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="19"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="20"/>
+	</resultMap>
+	
+	<insert id="bass2510DAO.insertBass2510_S">
+		<![CDATA[
+			INSERT INTO BASS2510 
+				( DPOB_CD
+				  , DUTY_DIV_CD
+				  , STP_INTTN_SEPT_VAL
+				  , ROTA_DUTY_DIV_CD
+				  , ROTA_DUTY_BGNN_TM
+				  , ROTA_DUTY_END_TM
+				  , ROTA_DUTY_TM_NUM
+				  , ROTA_DUTY_EEPN_TM_NUM
+				  , EXTNN_DUTY_BGNN_TM
+				  , EXTNN_DUTY_END_TM
+				  , ROTA_EXTNN_EEPN_TM_NUM
+				  , NGT_DUTY_BGNN_TM
+				  , NGT_DUTY_END_TM
+				  , ROTA_NGT_EEPN_TM_NUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #dutyDivCd#
+				  , #stpInttnSeptVal#
+				  , #rotaDutyDivCd#
+				  , #rotaDutyBgnnTm#
+				  , #rotaDutyEndTm#
+				  , #rotaDutyTmNum#
+				  , #rotaDutyEepnTmNum#
+				  , #extnnDutyBgnnTm#
+				  , #extnnDutyEndTm#
+				  , #rotaExtnnEepnTmNum#
+				  , #ngtDutyBgnnTm#
+				  , #ngtDutyEndTm#
+				  , #rotaNgtEepnTmNum#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass2510DAO.updateBass2510_S">
+		<![CDATA[
+			UPDATE BASS2510
+			SET DPOB_CD=#dpobCd#
+				, DUTY_DIV_CD=#dutyDivCd#
+				, STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+				, ROTA_DUTY_DIV_CD=#rotaDutyDivCd#
+				, ROTA_DUTY_BGNN_TM=#rotaDutyBgnnTm#
+				, ROTA_DUTY_END_TM=#rotaDutyEndTm#
+				, ROTA_DUTY_TM_NUM=#rotaDutyTmNum#
+				, ROTA_DUTY_EEPN_TM_NUM=#rotaDutyEepnTmNum#
+				, EXTNN_DUTY_BGNN_TM=#extnnDutyBgnnTm#
+				, EXTNN_DUTY_END_TM=#extnnDutyEndTm#
+				, ROTA_EXTNN_EEPN_TM_NUM=#rotaExtnnEepnTmNum#
+				, NGT_DUTY_BGNN_TM=#ngtDutyBgnnTm#
+				, NGT_DUTY_END_TM=#ngtDutyEndTm#
+				, ROTA_NGT_EEPN_TM_NUM=#rotaNgtEepnTmNum#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND DUTY_DIV_CD=#dutyDivCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+								AND ROTA_DUTY_DIV_CD=#rotaDutyDivCd#
+				]]>
+	</update>
+	
+	<delete id="bass2510DAO.deleteBass2510_S">
+		<![CDATA[
+			DELETE FROM BASS2510 
+						WHERE DPOB_CD=#dpobCd#
+								AND DUTY_DIV_CD=#dutyDivCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+								AND ROTA_DUTY_DIV_CD=#rotaDutyDivCd#
+				]]>
+	</delete>
+	
+	<select id="bass2510DAO.selectBass2510_S" resultMap="bass2510">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, DUTY_DIV_CD
+				, STP_INTTN_SEPT_VAL
+				, ROTA_DUTY_DIV_CD
+				, ROTA_DUTY_BGNN_TM
+				, ROTA_DUTY_END_TM
+				, ROTA_DUTY_TM_NUM
+				, ROTA_DUTY_EEPN_TM_NUM
+				, EXTNN_DUTY_BGNN_TM
+				, EXTNN_DUTY_END_TM
+				, ROTA_EXTNN_EEPN_TM_NUM
+				, NGT_DUTY_BGNN_TM
+				, NGT_DUTY_END_TM
+				, ROTA_NGT_EEPN_TM_NUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS2510
+						WHERE DPOB_CD=#dpobCd#
+								AND DUTY_DIV_CD=#dutyDivCd#
+								AND STP_INTTN_SEPT_VAL=#stpInttnSeptVal#
+								AND ROTA_DUTY_DIV_CD=#rotaDutyDivCd#
+				]]>
+	</select>
+	
+	<select id="bass2510DAO.selectBass2510List_D" parameterClass="bass2510SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, DUTY_DIV_CD
+								, STP_INTTN_SEPT_VAL
+								, ROTA_DUTY_DIV_CD
+								, ROTA_DUTY_BGNN_TM
+								, ROTA_DUTY_END_TM
+								, ROTA_DUTY_TM_NUM
+								, ROTA_DUTY_EEPN_TM_NUM
+								, EXTNN_DUTY_BGNN_TM
+								, EXTNN_DUTY_END_TM
+								, ROTA_EXTNN_EEPN_TM_NUM
+								, NGT_DUTY_BGNN_TM
+								, NGT_DUTY_END_TM
+								, ROTA_NGT_EEPN_TM_NUM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS2510
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					DUTY_DIV_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, DUTY_DIV_CD DESC
+							, STP_INTTN_SEPT_VAL DESC
+							, ROTA_DUTY_DIV_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass2510DAO.selectBass2510ListTotCnt_S" parameterClass="bass2510SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS2510
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				DUTY_DIV_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0124">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="psnl0124SerarchVO" type="com.app.exterms.personal.server.vo.Psnl0124DefaultVO"/>
+	
+	<resultMap id="psnl0124" class="com.app.exterms.personal.server.vo.Psnl0124VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="frgnLangSeilNum" column="FRGN_LANG_SEIL_NUM" columnIndex="3"/>
+		<result property="frgnLangDivCd" column="FRGN_LANG_DIV_CD" columnIndex="4"/>
+		<result property="radgCd" column="RADG_CD" columnIndex="5"/>
+		<result property="cmptnWrtnCd" column="CMPTN_WRTN_CD" columnIndex="6"/>
+		<result property="cvtnCd" column="CVTN_CD" columnIndex="7"/>
+		<result property="aqtnDt" column="AQTN_DT" columnIndex="8"/>
+		<result property="frgnLangCertt" column="FRGN_LANG_CERTT" columnIndex="9"/>
+		<result property="frgnLangIpmnAgny" column="FRGN_LANG_IPMN_AGNY" columnIndex="10"/>
+		<result property="frgnLangScre" column="FRGN_LANG_SCRE" columnIndex="11"/>
+		<result property="frgnLangGrdeNm" column="FRGN_LANG_GRDE_NM" columnIndex="12"/>
+		<result property="kybdr" column="KYBDR" columnIndex="13"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="14"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="15"/>
+		<result property="ismt" column="ISMT" columnIndex="16"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="17"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="18"/>
+	</resultMap>
+	
+	<insert id="psnl0124DAO.insertPsnl0124_S">
+		<![CDATA[
+			INSERT INTO PSNL0124 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , FRGN_LANG_SEIL_NUM
+				  , FRGN_LANG_DIV_CD
+				  , RADG_CD
+				  , CMPTN_WRTN_CD
+				  , CVTN_CD
+				  , AQTN_DT
+				  , FRGN_LANG_CERTT
+				  , FRGN_LANG_IPMN_AGNY
+				  , FRGN_LANG_SCRE
+				  , FRGN_LANG_GRDE_NM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #frgnLangSeilNum#
+				  , #frgnLangDivCd#
+				  , #radgCd#
+				  , #cmptnWrtnCd#
+				  , #cvtnCd#
+				  , #aqtnDt#
+				  , #frgnLangCertt#
+				  , #frgnLangIpmnAgny#
+				  , #frgnLangScre#
+				  , #frgnLangGrdeNm#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="psnl0124DAO.updatePsnl0124_S">
+		<![CDATA[
+			UPDATE PSNL0124
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, FRGN_LANG_SEIL_NUM=#frgnLangSeilNum#
+				, FRGN_LANG_DIV_CD=#frgnLangDivCd#
+				, RADG_CD=#radgCd#
+				, CMPTN_WRTN_CD=#cmptnWrtnCd#
+				, CVTN_CD=#cvtnCd#
+				, AQTN_DT=#aqtnDt#
+				, FRGN_LANG_CERTT=#frgnLangCertt#
+				, FRGN_LANG_IPMN_AGNY=#frgnLangIpmnAgny#
+				, FRGN_LANG_SCRE=#frgnLangScre#
+				, FRGN_LANG_GRDE_NM=#frgnLangGrdeNm#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FRGN_LANG_SEIL_NUM=#frgnLangSeilNum#
+				]]>
+	</update>
+	
+	<delete id="psnl0124DAO.deletePsnl0124_S">
+		<![CDATA[
+			DELETE FROM PSNL0124 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FRGN_LANG_SEIL_NUM=#frgnLangSeilNum#
+				]]>
+	</delete>
+	
+	<select id="psnl0124DAO.selectPsnl0124_S" resultMap="psnl0124">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, FRGN_LANG_SEIL_NUM
+				, FRGN_LANG_DIV_CD
+				, RADG_CD
+				, CMPTN_WRTN_CD
+				, CVTN_CD
+				, AQTN_DT
+				, FRGN_LANG_CERTT
+				, FRGN_LANG_IPMN_AGNY
+				, FRGN_LANG_SCRE
+				, FRGN_LANG_GRDE_NM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM PSNL0124
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND FRGN_LANG_SEIL_NUM=#frgnLangSeilNum#
+				]]>
+	</select>
+	
+	<select id="psnl0124DAO.selectPsnl0124List_D" parameterClass="psnl0124SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, FRGN_LANG_SEIL_NUM
+								, FRGN_LANG_DIV_CD
+								, RADG_CD
+								, CMPTN_WRTN_CD
+								, CVTN_CD
+								, AQTN_DT
+								, FRGN_LANG_CERTT
+								, FRGN_LANG_IPMN_AGNY
+								, FRGN_LANG_SCRE
+								, FRGN_LANG_GRDE_NM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM PSNL0124
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, FRGN_LANG_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="psnl0124DAO.selectPsnl0124ListTotCnt_S" parameterClass="psnl0124SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PSNL0124
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

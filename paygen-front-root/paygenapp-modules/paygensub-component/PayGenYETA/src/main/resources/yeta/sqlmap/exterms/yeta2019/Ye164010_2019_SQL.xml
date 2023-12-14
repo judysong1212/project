@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye164010_2019">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ye164010Srh_2019_Vo" type="com.app.exterms.yearendtax.server.vo.Ye164010Srh_2019_VO"/>
+	
+	<resultMap id="ye164010_2019" class="com.app.exterms.yearendtax.server.vo.Ye164010_2019_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="resnoEncCntn" column="RESNO_ENC_CNTN" columnIndex="5"/>
+		<result property="yn" column="YN" columnIndex="6"/>
+		<result property="bsnoEncCntn" column="BSNO_ENC_CNTN" columnIndex="7"/>
+		<result property="plymNm" column="PLYM_NM" columnIndex="8"/>
+		<result property="mdxpsPrfClCd" column="MDXPS_PRF_CL_CD" columnIndex="9"/>
+		<result property="scnt" column="SCNT" columnIndex="10"/>
+		<result property="useAmt" column="USE_AMT" columnIndex="11"/>
+		<result property="yn2" column="YN2" columnIndex="12"/>
+		<result property="yn3" column="YN3" columnIndex="13"/>
+		<result property="yn4" column="YN4" columnIndex="14"/>
+		<result property="kybdr" column="KYBDR" columnIndex="15"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="16"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="17"/>
+		<result property="ismt" column="ISMT" columnIndex="18"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="19"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="20"/>
+	</resultMap>
+	
+	
+	<!-- 
+	#############################################################################
+	######################## 2019년도 연말정산 로직 시작 ############################
+	#############################################################################
+	 -->
+	 
+	<insert id="ye164010_2019_DAO.insertYetaP43002ToYe164010_S">
+		<![CDATA[
+			INSERT INTO YE164010 
+				( DPOB_CD			
+					, YRTX_BLGG_YR	
+					, CLUT_SEPT_CD	
+					, SYSTEMKEY		
+					, MDXPS_VVAL_KRN_CD
+					, MDXPS_SEIL_NUM
+					, RESNO_ENC_CNTN	
+					, YN				
+					, BSNO_ENC_CNTN	
+					, PLYM_NM			
+					, MDXPS_PRF_CL_CD	
+					, SCNT			
+					, USE_AMT			
+					, YN2	
+					, YN3
+					, YN4			
+					, KYBDR			
+					, INPT_DT			
+					, INPT_ADDR		
+					, ISMT			
+					, REVN_DT			
+					, REVN_ADDR	)
+			VALUES ( #dpobCd#			
+					, #yrtxBlggYr#	
+					, #clutSeptCd#	
+					, #systemkey#	
+					, #mdxpsVvalKrnCd#
+					, ( SELECT NVL( MAX(MDXPS_SEIL_NUM)+1 ,1)  
+                       	  FROM YE164010  
+                         WHERE DPOB_CD=#dpobCd# 
+		         			AND YRTX_BLGG_YR=#yrtxBlggYr# 
+		                    AND CLUT_SEPT_CD=#clutSeptCd# 
+                            AND SYSTEMKEY=#systemkey# ) 	
+					, #resnoEncCntn#	
+					, #yn#				
+					, #bsnoEncCntn#	
+					, #plymNm#			
+					, #mdxpsPrfClCd#
+					, #scnt#			
+					, #useAmt#			
+					, #yn2#	
+					, #yn3#	
+					, #yn4#				
+					, #kybdr#			
+					, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')			
+					, #inptAddr#		
+					, #ismt#			
+					, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')			
+					, #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="ye164010_2019_DAO.updateYetaP43002ToYe164010_S">
+		<![CDATA[
+		UPDATE YE164010
+			SET YN 						= #yn#				
+				, BSNO_ENC_CNTN 		= #bsnoEncCntn#	
+				, PLYM_NM 				= #plymNm#			
+				, MDXPS_PRF_CL_CD 		= #mdxpsPrfClCd#
+				, SCNT 					= #scnt#			
+				, USE_AMT 				= #useAmt#			
+				, YN2 					= #yn2#
+				, YN3 					= #yn3#	
+				, YN4 					= #yn4#			
+				, ISMT					= #ismt#					
+				, REVN_DT				= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')		
+				, REVN_ADDR				= #revnAddr#
+				
+		WHERE DPOB_CD				= #dpobCd#
+			AND YRTX_BLGG_YR		= #yrtxBlggYr#
+			AND CLUT_SEPT_CD		= #clutSeptCd#
+			AND SYSTEMKEY			= #systemkey#
+			AND MDXPS_SEIL_NUM		= #mdxpsSeilNum#
+			AND MDXPS_VVAL_KRN_CD	= #mdxpsVvalKrnCd#
+		]]>
+	</update>
+	
+	<delete id="ye164010_2019_DAO.deleteYetaP43002ToYe164010_S">
+		<![CDATA[
+			DELETE FROM YE164010 
+				WHERE DPOB_CD			=#dpobCd#
+					AND YRTX_BLGG_YR	=#yrtxBlggYr#
+					AND CLUT_SEPT_CD	=#clutSeptCd#
+					AND SYSTEMKEY		=#systemkey#
+					AND MDXPS_SEIL_NUM	=#mdxpsSeilNum#
+					AND MDXPS_VVAL_KRN_CD	= #mdxpsVvalKrnCd#
+				]]>
+	</delete>
+	
+	
+	<delete id="ye164010_2019_DAO.deleteYeta4300ToYe164010_S">
+		<![CDATA[
+			DELETE FROM YE164010 
+				WHERE DPOB_CD			=#dpobCd#
+					AND YRTX_BLGG_YR	=#yrtxBlggYr#
+					AND CLUT_SEPT_CD	=#clutSeptCd#
+					AND SYSTEMKEY		=#systemkey#
+					AND RESNO_ENC_CNTN	=#resnoEncCntn#
+				]]>
+	</delete>	
+	
+	
+	
+	<select id="ye164010_2019_DAO.seleteYetaP43002ToYe164010_D" parameterClass="ye164010Srh_2019_Vo" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM 
+				FROM ( SELECT DPOB_CD			
+								, YRTX_BLGG_YR	
+								, CLUT_SEPT_CD	
+								, SYSTEMKEY	
+								, MDXPS_SEIL_NUM	
+								, MDXPS_VVAL_KRN_CD
+								, fcBass0300CDNM(DPOB_CD, MDXPS_VVAL_KRN_CD) AS MDXPS_VVAL_KRN_NM	
+								, RESNO_ENC_CNTN	
+								, YN				
+								, BSNO_ENC_CNTN	
+								, PLYM_NM			
+								, MDXPS_PRF_CL_CD	
+								, MDXPS_PRF_CL_CD AS mdxpsPrfClCdcommCd 
+								, fcBass0300CDNM(DPOB_CD, MDXPS_PRF_CL_CD) AS mdxpsPrfClCdcommCdNm 	
+								, SCNT			
+								, USE_AMT			
+								, YN2				
+								, YN3
+								, YN4
+								, KYBDR			
+								, INPT_DT			
+								, INPT_ADDR		
+								, ISMT			
+								, REVN_DT			
+								, REVN_ADDR	
+								
+						  FROM YE164010
+						WHERE DPOB_CD=#dpobCd#
+							AND YRTX_BLGG_YR=#yrtxBlggYr#
+							AND CLUT_SEPT_CD=#clutSeptCd#
+							AND SYSTEMKEY=#systemkey#
+							
+						ORDER BY DPOB_CD DESC
+								, YRTX_BLGG_YR 
+								, CLUT_SEPT_CD 
+								, SYSTEMKEY 
+								, RESNO_ENC_CNTN 
+								, BSNO_ENC_CNTN
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>	
+	
+	<select id="ye164010_2019_DAO.seleteYetaP43002ToYe164010ListCnt_S" parameterClass="ye164010Srh_2019_Vo" resultClass="int">
+		SELECT COUNT(SYSTEMKEY) totcnt
+		  FROM YE164010
+		WHERE DPOB_CD=#dpobCd#
+			AND YRTX_BLGG_YR=#yrtxBlggYr#
+			AND CLUT_SEPT_CD=#clutSeptCd#
+			AND SYSTEMKEY=#systemkey#
+	</select>	 
+	 
+	<!-- 
+	#############################################################################
+	######################## 2019년도 연말정산 로직 종료 ############################
+	#############################################################################
+	 -->	 
+		
+
+<!-- +++++++++++++++++++++++++ 2019년도 귀속 로직  시작 ++++++++++++++++++++++++++++++ -->
+	<delete id="ye164010_2019_DAO.deleteYetaP410001_Ye164010VO_2019_Delete_S">
+		<![CDATA[
+			DELETE FROM YE164010 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey# 
+				]]>
+	</delete>
+<!-- +++++++++++++++++++++++++ 2019년도 귀속 로직  종료 ++++++++++++++++++++++++++++++ -->	
+	
+	
+	
+	
+	<insert id="ye164010_2019_DAO.insertYe164010_S">
+		<![CDATA[
+			INSERT INTO YE164010 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , RESNO_ENC_CNTN
+				  , YN
+				  , BSNO_ENC_CNTN
+				  , PLYM_NM
+				  , MDXPS_PRF_CL_CD
+				  , SCNT
+				  , USE_AMT
+				  , YN2
+				  , YN3
+				  , YN4
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #resnoEncCntn#
+				  , #yn#
+				  , #bsnoEncCntn#
+				  , #plymNm#
+				  , #mdxpsPrfClCd#
+				  , #scnt#
+				  , #useAmt#
+				  , #yn2#
+				  , #yn3#
+				  , #yn4#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="ye164010_2019_DAO.updateYe164010_S">
+		<![CDATA[
+			UPDATE YE164010
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, RESNO_ENC_CNTN=#resnoEncCntn#
+				, YN=#yn#
+				, BSNO_ENC_CNTN=#bsnoEncCntn#
+				, PLYM_NM=#plymNm#
+				, MDXPS_PRF_CL_CD=#mdxpsPrfClCd#
+				, SCNT=#scnt#
+				, USE_AMT=#useAmt#
+				, YN2=#yn2#
+				, YN3=#yn3#
+				, YN4=#yn4#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND RESNO_ENC_CNTN=#resnoEncCntn#
+				]]>
+	</update>
+	
+	<delete id="ye164010_2019_DAO.deleteYe164010_S">
+		<![CDATA[
+			DELETE FROM YE164010 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND RESNO_ENC_CNTN=#resnoEncCntn#
+				]]>
+	</delete>
+	
+	<select id="ye164010_2019_DAO.selectYe164010_S" resultMap="ye164010_2019">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, RESNO_ENC_CNTN
+				, YN
+				, BSNO_ENC_CNTN
+				, PLYM_NM
+				, MDXPS_PRF_CL_CD
+				, SCNT
+				, USE_AMT
+				, YN2
+				, YN3
+				, YN4
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE164010
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND RESNO_ENC_CNTN=#resnoEncCntn#
+				]]>
+	</select>
+	
+	<select id="ye164010_2019_DAO.selectYe164010List_D" parameterClass="ye164010Srh_2019_Vo" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, RESNO_ENC_CNTN
+								, YN
+								, BSNO_ENC_CNTN
+								, PLYM_NM
+								, MDXPS_PRF_CL_CD
+								, SCNT
+								, USE_AMT
+								, YN2
+								, YN3
+								, YN4
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE164010
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, RESNO_ENC_CNTN DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="ye164010_2019_DAO.selectYe164010ListTotCnt_S" parameterClass="ye164010Srh_2019_Vo" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE164010
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

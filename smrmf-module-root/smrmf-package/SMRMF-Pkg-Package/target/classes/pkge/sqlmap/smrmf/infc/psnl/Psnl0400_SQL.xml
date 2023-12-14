@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Psnl0400">
+	
+	<typeAlias alias="hashMap" type="java.util.HashMap"/>
+    <typeAlias alias="list" type="java.util.List"/>
+    <typeAlias alias="int" type="java.lang.Integer"/>
+    <typeAlias alias="string" type="java.lang.String"/>
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias alias="infcPsnl0400Dto" type="com.app.exterms.personal.client.dto.InfcPsnl0400DTO"/>
+	
+	<select id="infcPsnl0400DAO.selectExperienceMain" parameterClass="infcPsnl0400Dto" resultClass="egovMap">
+	    
+	    SELECT A.HAN_NM, A.RESN_REGN_NUM, A.DPOB_CD, A.SYSTEMKEY
+				,C.HUS_FNDTN_ADDR ||' '|| C.HUS_DTL_PATR_ADDR AS ADDR
+				,FCBASS0400CDNM(A.DPOB_CD, A.DEPT_CD, '2') AS DEPT_CD
+				,FCBASS0400CDNM(A.DPOB_CD, A.CURR_AFFN_DEPT_CD, '2') AS CURR_AFFN_DEPT_CD
+				,FCBASS0500CDNM(A.DPOB_CD,SUBSTR(A.EMYMT_BGNN_DT,1,4) ,A.CURR_AFFN_DEPT_CD, A.BUSIN_CD ) AS BUSIN_CD
+				,FCBASS0300CDNM(A.DPOB_CD,A.EMYMT_DIV_CD) AS EMYMT_DIV_CD
+				,FCBASS0300CDNM(A.DPOB_CD,A.TYP_OCCU_CD) AS TYP_OCCU_CD
+				,FCBASS0350CDNM (A.DPOB_CD, A.TYP_OCCU_CD, A.DTIL_OCCU_CLS_DIV_CD, '1') AS DTIL_OCCU_CLS_DIV_CD
+				,A.RETRY_REAS_CTNT
+		FROM 
+			PSNL0100 A, PSNL0111 C
+		WHERE A.DPOB_CD = C.DPOB_CD(+)
+		AND A.SYSTEMKEY = C.SYSTEMKEY(+)
+	    <isNotNull property="hanNm">
+		     <isNotEmpty property="hanNm">
+		         AND A.HAN_NM = #hanNm#  
+		     </isNotEmpty>
+		 </isNotNull>
+		 <isNotNull property="resnRegnNum">
+		     <isNotEmpty property="resnRegnNum">
+		         AND A.RESN_REGN_NUM = REPLACE(#resnRegnNum#,'-','')  
+		     </isNotEmpty>
+		 </isNotNull>
+		 ORDER BY EMYMT_BGNN_DT DESC
+	</select>
+	
+	<select id="infcPsnl0400DAO.selectExperience" parameterClass="infcPsnl0400Dto" resultClass="egovMap">
+	    
+	    SELECT B.DPOB_CD, B.SYSTEMKEY, B.EMYMT_SEIL_NUM
+				,DECODE(LENGTH(B.EMYMT_BGNN_DT),8,TO_CHAR(TO_DATE(B.EMYMT_BGNN_DT,'yyyymmdd'),'YYYY.MM.DD'),B.EMYMT_BGNN_DT) AS EMYMT_BGNN_DT
+				,DECODE(LENGTH(B.EMYMT_END_DT),8,TO_CHAR(TO_DATE(B.EMYMT_END_DT,'yyyymmdd'),'YYYY.MM.DD'),B.EMYMT_END_DT) AS EMYMT_END_DT
+				,FCBASS0300CDNM(B.DPOB_CD,B.EMYMT_DIV_CD) AS CHILD_EMYMT_DIV_CD
+				,FCBASS0400CDNM(B.DPOB_CD, B.DEPT_CD, '2') AS CHILD_DEPT_CD
+				,FCBASS0500CDNM(B.DPOB_CD,SUBSTR(B.EMYMT_BGNN_DT,1,4) ,B.DEPT_CD, B.BUSIN_CD ) AS CHILD_BUSIN_CD
+				,FCBASS0300CDNM(B.DPOB_CD,B.TYP_OCCU_CD) AS CHILD_TYP_OCCU_CD
+				,FCBASS0350CDNM (B.DPOB_CD, B.TYP_OCCU_CD, B.DTIL_OCCU_CLS_DIV_CD, '1') AS CHILD_DTIL_OCCU_CLS_DIV_CD
+		FROM 
+			PSNL0110 B
+		WHERE B.DPOB_CD = #dpobCd#
+		  AND B.SYSTEMKEY = #systemkey#
+		ORDER BY B.EMYMT_BGNN_DT DESC
+	</select>
+	
+	<select id="infcPsnl0400DAO.getIssueNumber" parameterClass="infcPsnl0400Dto" resultClass="string">
+	    SELECT TO_CHAR(SYSDATE,'yyyy') || SUBSTR(#certcDivCd#,-2)|| LPAD(NVL(MAX(SUBSTR(PRF_ISS_NUM,LENGTH(PRF_ISS_NUM)-3,4)),0)+1 ,4,'0')
+		  FROM PSNL0550
+		 WHERE SUBSTR(PRF_ISS_NUM,1,4) = TO_CHAR(SYSDATE,'yyyy')
+		   AND CERTC_DIV_CD = #certcDivCd#
+	</select>
+	
+	<insert id="infcPsnl0400DAO.insertIssueData" parameterClass="infcPsnl0400Dto">
+	    
+	    INSERT INTO PSNL0550 (DPOB_CD,
+                      PRF_ISS_NUM,
+                      CERTC_DIV_CD,
+                      SYSTEMKEY,
+                      CERTC_ISS_DT,
+                      ISS_NUM_CPIS,
+                      ISS_PRPSE_CTNT,
+                      ISS_ISTUT_NM,
+                      RETRY_REAS_CTNT,
+                      ISS_APPY_DT,
+                      ISS_APPBN_DT,
+                      ISS_CODTN_DIV_CD,
+                      ISS_CODTN_EMP_NUM,
+                      ISS_YN,
+                      CERTC_ISS_DEL_YN,
+                      KYBDR,
+                      INPT_DT,
+                      INPT_ADDR,
+                      ISMT,
+                      REVN_DT,
+                      REVN_ADDR)
+	     VALUES (#dpobCd#,
+	             #prfIssNum#,
+	             #certcDivCd#,
+	             #systemkey#,
+	             #certcIssDt#,
+	             #issNumCpis#,
+	             #issPrpseCtnt#,
+	             #issIstutNm#,
+	             #retryReasCtnt#,
+	             #issAppyDt#,
+	             #issAppbnDt#,
+	             #issCodtnDivCd#,
+	             #issCodtnEmpNum#,
+	             #issYn#,
+	             #certcIssDelYn#,
+	             #ismt#,
+	             TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+	             #revnAddr#,
+	             #ismt#,
+	             TO_CHAR(SYSDATE,'YYYYMMDDHHMISS'),
+	             #revnAddr#)
+	    
+	</insert>
+</sqlMap>

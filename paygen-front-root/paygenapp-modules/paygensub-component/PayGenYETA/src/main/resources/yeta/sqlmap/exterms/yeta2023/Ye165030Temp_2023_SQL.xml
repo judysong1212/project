@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ye165030Temp_2023">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ye165030TempSrh_2023_VO" type="com.app.exterms.yearendtax.server.vo.Ye165030TempSrh_2023_VO"/>
+	
+	<resultMap id="ye165030Temp_2023" class="com.app.exterms.yearendtax.server.vo.Ye165030Temp_2023_VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="yrtxBlggYr" column="YRTX_BLGG_YR" columnIndex="2"/>
+		<result property="clutSeptCd" column="CLUT_SEPT_CD" columnIndex="3"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="4"/>
+		<result property="conbSeilNum" column="CONB_SEIL_NUM" columnIndex="5"/>
+		<result property="conbCddl" column="CONB_CDDL" columnIndex="6"/>
+		<result property="attrYr" column="ATTR_YR" columnIndex="7"/>
+		<result property="useAmt" column="USE_AMT" columnIndex="8"/>
+		<result property="pyrDdcAmt" column="PYR_DDC_AMT" columnIndex="9"/>
+		<result property="ddcTrgtAmt" column="DDC_TRGT_AMT" columnIndex="10"/>
+		<result property="thcYrDdcAmtNdXps" column="THC_YR_DDC_AMT_ND_XPS" columnIndex="11"/>
+		<result property="thcYrDdcAmt" column="THC_YR_DDC_AMT" columnIndex="12"/>
+		<result property="thcYrNducExtnAmt" column="THC_YR_NDUC_EXTN_AMT" columnIndex="13"/>
+		<result property="thcYrNducCrfwAmt" column="THC_YR_NDUC_CRFW_AMT" columnIndex="14"/>
+		<result property="kybdr" column="KYBDR" columnIndex="15"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="16"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="17"/>
+		<result property="ismt" column="ISMT" columnIndex="18"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="19"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="20"/>
+	</resultMap>
+	
+	
+	<!-- +++++++++++++++++++++++++ 2023년도 귀속 로직  시작 ++++++++++++++++++++++++++++++ -->
+	<delete id="ye165030Temp_2023_DAO.deleteYetaP810001_Ye165030TempVO_2023_Delete_S">
+		<![CDATA[
+			DELETE FROM YE165030_TEMP 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey# 
+				]]>
+	</delete>
+<!-- +++++++++++++++++++++++++ 2023년도 귀속 로직  종료 ++++++++++++++++++++++++++++++ -->
+
+	<insert id="ye165030Temp_2023_DAO.insertYe165030Temp_S">
+		<![CDATA[
+			INSERT INTO YE165030_TEMP 
+				( DPOB_CD
+				  , YRTX_BLGG_YR
+				  , CLUT_SEPT_CD
+				  , SYSTEMKEY
+				  , CONB_SEIL_NUM
+				  , CONB_CDDL
+				  , ATTR_YR
+				  , USE_AMT
+				  , PYR_DDC_AMT
+				  , DDC_TRGT_AMT
+				  , THC_YR_DDC_AMT_ND_XPS
+				  , THC_YR_DDC_AMT
+				  , THC_YR_NDUC_EXTN_AMT
+				  , THC_YR_NDUC_CRFW_AMT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #yrtxBlggYr#
+				  , #clutSeptCd#
+				  , #systemkey#
+				  , #conbSeilNum#
+				  , #conbCddl#
+				  , #attrYr#
+				  , #useAmt#
+				  , #pyrDdcAmt#
+				  , #ddcTrgtAmt#
+				  , #thcYrDdcAmtNdXps#
+				  , #thcYrDdcAmt#
+				  , #thcYrNducExtnAmt#
+				  , #thcYrNducCrfwAmt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="ye165030Temp_2023_DAO.updateYe165030Temp_S">
+		<![CDATA[
+			UPDATE YE165030_TEMP
+			SET DPOB_CD=#dpobCd#
+				, YRTX_BLGG_YR=#yrtxBlggYr#
+				, CLUT_SEPT_CD=#clutSeptCd#
+				, SYSTEMKEY=#systemkey#
+				, CONB_SEIL_NUM=#conbSeilNum#
+				, CONB_CDDL=#conbCddl#
+				, ATTR_YR=#attrYr#
+				, USE_AMT=#useAmt#
+				, PYR_DDC_AMT=#pyrDdcAmt#
+				, DDC_TRGT_AMT=#ddcTrgtAmt#
+				, THC_YR_DDC_AMT_ND_XPS=#thcYrDdcAmtNdXps#
+				, THC_YR_DDC_AMT=#thcYrDdcAmt#
+				, THC_YR_NDUC_EXTN_AMT=#thcYrNducExtnAmt#
+				, THC_YR_NDUC_CRFW_AMT=#thcYrNducCrfwAmt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND CONB_SEIL_NUM=#conbSeilNum#
+				]]>
+	</update>
+	
+	<delete id="ye165030Temp_2023_DAO.deleteYe165030Temp_S">
+		<![CDATA[
+			DELETE FROM YE165030_TEMP 
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND CONB_SEIL_NUM=#conbSeilNum#
+				]]>
+	</delete>
+	
+	<select id="ye165030Temp_2023_DAO.selectYe165030Temp_S" resultMap="ye165030Temp_2023">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, YRTX_BLGG_YR
+				, CLUT_SEPT_CD
+				, SYSTEMKEY
+				, CONB_SEIL_NUM
+				, CONB_CDDL
+				, ATTR_YR
+				, USE_AMT
+				, PYR_DDC_AMT
+				, DDC_TRGT_AMT
+				, THC_YR_DDC_AMT_ND_XPS
+				, THC_YR_DDC_AMT
+				, THC_YR_NDUC_EXTN_AMT
+				, THC_YR_NDUC_CRFW_AMT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM YE165030_TEMP
+						WHERE DPOB_CD=#dpobCd#
+								AND YRTX_BLGG_YR=#yrtxBlggYr#
+								AND CLUT_SEPT_CD=#clutSeptCd#
+								AND SYSTEMKEY=#systemkey#
+								AND CONB_SEIL_NUM=#conbSeilNum#
+				]]>
+	</select>
+	
+	<select id="ye165030Temp_2023_DAO.selectYe165030TempList_D" parameterClass="ye165030TempSrh_2023_VO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, YRTX_BLGG_YR
+								, CLUT_SEPT_CD
+								, SYSTEMKEY
+								, CONB_SEIL_NUM
+								, CONB_CDDL
+								, ATTR_YR
+								, USE_AMT
+								, PYR_DDC_AMT
+								, DDC_TRGT_AMT
+								, THC_YR_DDC_AMT_ND_XPS
+								, THC_YR_DDC_AMT
+								, THC_YR_NDUC_EXTN_AMT
+								, THC_YR_NDUC_CRFW_AMT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM YE165030_TEMP
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, YRTX_BLGG_YR DESC
+							, CLUT_SEPT_CD DESC
+							, SYSTEMKEY DESC
+							, CONB_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="ye165030Temp_2023_DAO.selectYe165030TempListTotCnt_S" parameterClass="ye165030TempSrh_2023_VO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM YE165030_TEMP
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YRTX_BLGG_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

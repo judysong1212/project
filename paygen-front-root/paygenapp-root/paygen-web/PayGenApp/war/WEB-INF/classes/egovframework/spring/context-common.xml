@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	
+	 
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>classpath:/egovframework/message/message-common</value>
+				<value>classpath:/egovframework/rte/fdl/idgnr/messages/idgnr</value>
+				<value>classpath:/egovframework/rte/fdl/property/messages/properties</value>
+				<value>classpath:/egovframework/egovProps/globals</value>
+			</list>
+		</property>
+		<property name="cacheSeconds">
+			<value>60</value>
+		</property>
+	</bean>
+	
+    <bean id="egovMessageSource" class="egovframework.com.cmm.EgovMessageSource">
+        <property name="reloadableResourceBundleMessageSource">
+            <ref bean="messageSource" />
+        </property>
+    </bean>
+
+	<!-- 실행환경에서 빈 이름 참조(AbstractServiceImpl) -->
+	<bean id="leaveaTrace" class="egovframework.rte.fdl.cmmn.trace.LeaveaTrace">
+		<property name="traceHandlerServices">
+			<list>
+				<ref bean="traceHandlerService" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="traceHandlerService" class="egovframework.rte.fdl.cmmn.trace.manager.DefaultTraceHandleManager">
+		<property name="reqExpMatcher">
+			<ref bean="antPathMater" />
+		</property>
+		<property name="patterns">
+			<list>
+				<value>*</value>
+			</list>
+		</property>
+		<property name="handlers">
+			<list>
+				<ref bean="defaultTraceHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="antPathMater" class="org.springframework.util.AntPathMatcher" />
+
+	<bean id="defaultTraceHandler" class="egovframework.rte.fdl.cmmn.trace.handler.DefaultTraceHandler" />
+     
+    <!-- MULTIPART RESOLVERS -->
+    <!-- regular spring resolver -->
+    <bean id="spring.RegularCommonsMultipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="100000000" />
+        <property name="maxInMemorySize" value="100000000" />
+    </bean>
+
+    <!-- custom multi file resolver
+    <bean id="local.MultiCommonsMultipartResolver" class="egovframework.com.cmm.web.EgovMultipartResolver">
+        <property name="maxUploadSize" value="100000000" />
+        <property name="maxInMemorySize" value="100000000" />
+    </bean> -->
+
+    <!-- choose one from above and alias it to the name Spring expects -->
+    <!-- alias name="local.MultiCommonsMultipartResolver" alias="multipartResolver" /-->
+    <alias name="spring.RegularCommonsMultipartResolver" alias="multipartResolver" /> 
+  
+  
+	<!-- enable autowire 
+ 	<context:annotation-config /> -->
+	<!-- enable transaction demarcation with annotations -->
+  
+   <context:component-scan base-package="com.app.exterms,com.app.smrmf,com.msf,
+                                            com.msfgwt,org.aspectj,com.google,com.app.smrmf.core.msfmainapp,
+                                            org.app.exterms,com.app.smrmf.infc,com.msf.exterms,
+                                            org.gwtrpcspring,org.msf.exterms">  
+                                    <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+									<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>   
+    </context:component-scan> 
+   
+     <context:component-scan base-package="egovframework,
+                                          com.any.smrmf,
+                                          com.crypto,
+                                          com.link,
+                                          com.ext,
+                                          com.smrmf,
+                                          com.app.exterms,
+                                          org.msf.exterms,
+                                          com.corp,
+                                          com.smrmf.exterms,
+                                          com.sso,
+                                          org.app.exterms,
+                                          com.web.smrmf,com.webjs.smrmf,com.app.smrmf,com.msf.exterms,com.msf.utils">   
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/> 
+    </context:component-scan>
+    <!-- 
+   <ehcache-spring:annotation-driven /> 
+   
+   <ehcache-spring:config cache-manager="cacheManager">  
+   		<ehcache-spring:evict-expired-elements interval="600" />
+   </ehcache-spring:config>  
+   <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">  
+   		<property name="configLocation" value="/WEB-INF/cache/ehcache.xml" />
+   </bean>    
+   --> 
+   
+   <cache:annotation-driven cache-manager="cacheManager" mode="proxy" order="1"/>   
+   <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager">    
+    	<property name="cacheManager" ref="ehcache"/> 
+   </bean> 
+    <!-- Ehcache library setup classpath:ehcache.xml -->
+    <bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">     
+   	 	<property name="configLocation" value="/WEB-INF/cache/ehcache.xml"/> 
+    </bean> 
+    
+     <bean class="com.any.smrmf.utils.BeanFinder"/> 
+     
+     <!-- imsi Cache -->  
+     <bean id="cacheDictionary" class="java.util.HashMap"/> 
+     
+     
+   <bean id="hostNameShellCommander" class="com.any.smrmf.utils.ShellCommander">
+      <property name="command" value="hostname"/>
+   </bean>
+   
+   
+  <!-- Crypto -->
+
+   <bean id="cipherAES" class="com.crypto.template.CipherTemplate">
+      <property name="algorithm" value="AES"/>
+      <property name="secretKey" value="lf0hr1aercdl8vlzitunhm200"/>
+   </bean>
+
+   <bean id="digesterMD5" class="com.crypto.template.DigesterTemplate">
+      <property name="algorithm" value="MD5"/>
+   </bean>
+
+  <!-- File -->
+
+  <!--  <bean id="uploadTempDir" class="org.springframework.core.io.FileSystemResource">
+      <constructor-arg value="${multipartResolver.uploadTempDir}"/>
+   </bean>
+ 
+   <bean id="storage" class="java.io.File">
+      <constructor-arg value="${file.storage.location}"/>
+   </bean>
+-->
+  <!-- Form Template -->
+
+   <bean id="calendar" class="com.web.smrmf.sysm.web.form.CalendarOptionTemplate">
+      <property name="startYear" value="1999"/>
+      <property name="endYear" value="2050"/>
+   </bean>
+
+   <bean id="options" class="com.store.web.front.form.EnumOptionTemplate"/>
+
+   <bean id="codeOrder" class="com.web.smrmf.sysm.web.form.IntegerRangeOptionTemplate">
+      <property name="from" value="1"/>
+      <property name="to" value="10"/>
+   </bean>
+
+   <bean id="charRange" class="com.web.smrmf.sysm.web.form.CharRangeOptionTemplate">
+      <property name="from" value="A"/>
+      <property name="to" value="F"/>
+   </bean>
+
+   <bean id="mapOptions" class="com.web.smrmf.sysm.web.form.ObjectOptionTemplate">
+        <property name="options">
+           <map>
+               <entry>
+                   <key><value>I</value></key>
+                   <value>IPhone</value>
+               </entry>
+               <entry>
+                   <key><value>G</value></key>
+                   <value>Galaxy</value>
+               </entry>
+               <entry>
+                   <key><value>O</value></key>
+                   <value>Optimus</value>
+               </entry>
+               <entry>
+                   <key><value>V</value></key>
+                   <value>Vega</value>
+               </entry>
+               <entry>
+                   <key><value>D</value></key>
+                   <value>Desire</value>
+               </entry>
+            </map>
+        </property>
+   </bean>
+ 
+  <!-- Control 
+
+   <bean id="remoteControlUri" class="java.lang.String">
+      <constructor-arg value="${control.uri}"/>
+   </bean>
+
+   <bean id="remoteControlPort" class="java.lang.Integer">
+      <constructor-arg value="${remote.port}"/>
+   </bean>
+   -->
+     
+</beans>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bass0505">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bass0505SerarchVO" type="com.app.exterms.resm.server.vo.Bass0505SrhVO"/>
+	
+	<resultMap id="bass0505" class="com.app.exterms.resm.server.vo.Bass0505VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="2"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="3"/>
+		<result property="fxtmAccDivCd" column="FXTM_ACC_DIV_CD" columnIndex="4"/>
+		<result property="fxtmApptnUcstNumDys" column="FXTM_APPTN_UCST_NUM_DYS" columnIndex="5"/>
+		<result property="fxtmPdyUcstSum" column="FXTM_PDY_UCST_SUM" columnIndex="6"/>
+		<result property="rotaDutyApptnYn" column="ROTA_DUTY_APPTN_YN" columnIndex="7"/>
+		<result property="kybdr" column="KYBDR" columnIndex="8"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="9"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="10"/>
+		<result property="ismt" column="ISMT" columnIndex="11"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="12"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="13"/>
+	</resultMap>
+	
+	<insert id="bass0505DAO.insertBass0505_S">
+		<![CDATA[
+			INSERT INTO BASS0505 
+				( DPOB_CD
+				  , BUSIN_CD
+				  , DEPT_CD
+				  , FXTM_ACC_DIV_CD
+				  , FXTM_APPTN_UCST_NUM_DYS
+				  , FXTM_PDY_UCST_SUM
+				  , ROTA_DUTY_APPTN_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #businCd#
+				  , #deptCd#
+				  , #fxtmAccDivCd#
+				  , #fxtmApptnUcstNumDys#
+				  , #fxtmPdyUcstSum#
+				  , #rotaDutyApptnYn#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bass0505DAO.updateBass0505_S">
+		<![CDATA[
+			UPDATE BASS0505
+			SET DPOB_CD=#dpobCd#
+				, BUSIN_CD=#businCd#
+				, DEPT_CD=#deptCd#
+				, FXTM_ACC_DIV_CD=#fxtmAccDivCd#
+				, FXTM_APPTN_UCST_NUM_DYS=#fxtmApptnUcstNumDys#
+				, FXTM_PDY_UCST_SUM=#fxtmPdyUcstSum#
+				, ROTA_DUTY_APPTN_YN=#rotaDutyApptnYn#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND BUSIN_CD=#businCd#
+				]]>
+	</update>
+	
+	<delete id="bass0505DAO.deleteBass0505_S">
+		<![CDATA[
+			DELETE FROM BASS0505 
+						WHERE DPOB_CD=#dpobCd#
+								AND BUSIN_CD=#businCd#
+				]]>
+	</delete>
+	
+	<select id="bass0505DAO.selectBass0505_S" resultMap="bass0505">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, BUSIN_CD
+				, DEPT_CD
+				, FXTM_ACC_DIV_CD
+				, FXTM_APPTN_UCST_NUM_DYS
+				, FXTM_PDY_UCST_SUM
+				, ROTA_DUTY_APPTN_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS0505
+						WHERE DPOB_CD=#dpobCd#
+								AND BUSIN_CD=#businCd#
+				]]>
+	</select>
+	
+	<select id="bass0505DAO.selectBass0505List_D" parameterClass="bass0505SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, BUSIN_CD
+								, DEPT_CD
+								, FXTM_ACC_DIV_CD
+								, FXTM_APPTN_UCST_NUM_DYS
+								, FXTM_PDY_UCST_SUM
+								, ROTA_DUTY_APPTN_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS0505
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					BUSIN_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, BUSIN_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bass0505DAO.selectBass0505ListTotCnt_S" parameterClass="bass0505SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0505
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				BUSIN_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

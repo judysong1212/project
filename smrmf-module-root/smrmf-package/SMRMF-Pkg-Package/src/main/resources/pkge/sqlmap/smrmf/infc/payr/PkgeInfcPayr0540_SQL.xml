@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PkgeInfcPayr0540">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="infcPkgPayr0540SrhVO" type="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0540SrhVO"/>
+	 
+	<resultMap id="infcPkgPayr0540" class="com.app.smrmf.infc.payroll.server.vo.InfcPkgPayr0540VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="exptnPrcsSeilNum" column="EXPTN_PRCS_SEIL_NUM" columnIndex="3"/>
+		<result property="payItemCd" column="PAY_ITEM_CD" columnIndex="4"/>
+		<result property="exptnDivCd" column="EXPTN_DIV_CD" columnIndex="5"/>
+		<result property="pymtDducDivCd" column="PYMT_DDUC_DIV_CD" columnIndex="6"/>
+		<result property="exmtnYn" column="EXMTN_YN" columnIndex="7"/>
+		<result property="exptnPrcsPymtSum" column="EXPTN_PRCS_PYMT_SUM" columnIndex="8"/>
+		<result property="exptnPrcsPymtRto" column="EXPTN_PRCS_PYMT_RTO" columnIndex="9"/>
+		<result property="exptnPrcsBgnnDt" column="EXPTN_PRCS_BGNN_DT" columnIndex="10"/>
+		<result property="exptnPrcsEndDt" column="EXPTN_PRCS_END_DT" columnIndex="11"/> 
+		<result property="exptnPrcsNoteCtnt" column="EXPTN_PRCS_NOTE_CTNT" columnIndex="12"/>
+		<result property="kybdr" column="KYBDR" columnIndex="13"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="14"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="15"/>
+		<result property="ismt" column="ISMT" columnIndex="16"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="17"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="18"/> 
+	</resultMap>
+	
+	<select id="infcPkgPayr0540DAO.getMaxSeilNum" parameterClass="java.util.HashMap" resultClass="java.lang.String">
+	    SELECT 
+	           NVL(MAX(EXPTN_PRCS_SEIL_NUM),0)+1 
+	      FROM PAYR0540 
+	     WHERE DPOB_CD = #dpobCd# 
+	       AND SYSTEMKEY = #systemkey#
+	</select>
+	
+	<insert id="infcPkgPayr0540DAO.insertPayr0540_S">
+		<![CDATA[
+			INSERT INTO PAYR0540 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , EXPTN_PRCS_SEIL_NUM
+				  , EXPTN_DIV_CD
+				  , PYMT_DDUC_DIV_CD
+				  , EXMTN_YN
+				  , EXPTN_PRCS_PYMT_SUM
+				  , EXPTN_PRCS_PYMT_RTO
+				  , EXPTN_PRCS_BGNN_DT
+				  , EXPTN_PRCS_END_DT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , PAY_ITEM_CD
+				  , EXPTN_PRCS_NOTE_CTNT )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , (
+				    SELECT 
+				           NVL(MAX(EXPTN_PRCS_SEIL_NUM),0)+1 
+				      FROM PAYR0540 
+				     WHERE DPOB_CD = #dpobCd# 
+				       AND SYSTEMKEY = #systemkey#
+				  )
+				  , #exptnDivCd#
+				  , #pymtDducDivCd#
+				  , #exmtnYn#
+				  , #exptnPrcsPymtSum#
+				  , #exptnPrcsPymtRto#
+				  , #exptnPrcsBgnnDt#
+				  , #exptnPrcsEndDt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , (
+				   SELECT  MANGE_ITEM02 
+					FROM BASS0300 
+				   WHERE DPOB_CD = #dpobCd#
+				     AND COMM_CD = #exptnDivCd#
+				  )
+				  , #exptnPrcsNoteCtnt# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgPayr0540DAO.updatePayr0540_S">
+		<![CDATA[
+			UPDATE PAYR0540
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, EXPTN_PRCS_SEIL_NUM=#exptnPrcsSeilNum#
+				, EXPTN_DIV_CD=#exptnDivCd#
+				, PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+				, EXMTN_YN=#exmtnYn#
+				, EXPTN_PRCS_PYMT_SUM=#exptnPrcsPymtSum#
+				, EXPTN_PRCS_PYMT_RTO=#exptnPrcsPymtRto#
+				, EXPTN_PRCS_BGNN_DT=#exptnPrcsBgnnDt#
+				, EXPTN_PRCS_END_DT=#exptnPrcsEndDt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+				, PAY_ITEM_CD=#payItemCd#
+				, EXPTN_PRCS_NOTE_CTNT=#exptnPrcsNoteCtnt#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EXPTN_PRCS_SEIL_NUM=#exptnPrcsSeilNum#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPayr0540DAO.deletePayr0540_S">
+		<![CDATA[
+			DELETE FROM PAYR0540 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EXPTN_PRCS_SEIL_NUM=#exptnPrcsSeilNum#
+				]]>
+	</delete>
+	
+	<select id="infcPkgPayr0540DAO.selectPayr0540_S" resultMap="infcPkgPayr0540">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, EXPTN_PRCS_SEIL_NUM
+				, EXPTN_DIV_CD
+				, PYMT_DDUC_DIV_CD
+				, EXMTN_YN
+				, EXPTN_PRCS_PYMT_SUM
+				, EXPTN_PRCS_PYMT_RTO
+				, EXPTN_PRCS_BGNN_DT
+				, EXPTN_PRCS_END_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, PAY_ITEM_CD
+				, EXPTN_PRCS_NOTE_CTNT
+			FROM PAYR0540
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EXPTN_PRCS_SEIL_NUM=#exptnPrcsSeilNum#
+				]]>
+	</select>
+	<!-- Insr410001 - 신규등록자인지여부판단  -->
+	<select id="infcPkgPayr0540DAO.selectInsr410001ToPayr0540_S" parameterClass="infcPkgPayr0540SrhVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, EXPTN_PRCS_SEIL_NUM
+				, EXPTN_DIV_CD
+				, PYMT_DDUC_DIV_CD
+				, EXMTN_YN
+				, EXPTN_PRCS_PYMT_SUM
+				, EXPTN_PRCS_PYMT_RTO
+				, EXPTN_PRCS_BGNN_DT
+				, EXPTN_PRCS_END_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, PAY_ITEM_CD
+				, EXPTN_PRCS_NOTE_CTNT
+			FROM PAYR0540
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey# 
+				]]>
+	</select>
+	
+	<select id="infcPkgPayr0540DAO.selectPayr0540List_D" parameterClass="infcPkgPayr0540SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								SYSTEMKEY
+								, DPOB_CD
+								, EXPTN_PRCS_SEIL_NUM
+								, EXPTN_DIV_CD
+								, EXPTN_DIV_CD AS exptnDivCdcommCd
+								, fcBass0300CDNM(DPOB_CD,EXPTN_DIV_CD) AS exptnDivCdcommCdNm
+								, PYMT_DDUC_DIV_CD
+								, PYMT_DDUC_DIV_CD  AS pymtDducDivCdcommCd
+								, fcBass0300CDNM(DPOB_CD,PYMT_DDUC_DIV_CD) AS pymtDducDivCdcommCdNm 
+								, EXMTN_YN
+								, EXPTN_PRCS_PYMT_SUM
+								, EXPTN_PRCS_PYMT_RTO
+								, EXPTN_PRCS_BGNN_DT
+								, EXPTN_PRCS_END_DT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+								, PAY_ITEM_CD
+								, EXPTN_PRCS_NOTE_CTNT
+						FROM PAYR0540
+				WHERE 1=1
+				<isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>   
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+			 	PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="jobYrMnth" >
+			 	   #jobYrMnth# BETWEEN SUBSTR(EXPTN_PRCS_BGNN_DT,1, 6) AND SUBSTR(EXPTN_PRCS_END_DT, 1, 6)
+		       </isNotEmpty> 
+					ORDER BY 
+					DPOB_CD  ASC
+						, SYSTEMKEY DESC
+							, EXPTN_PRCS_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="infcPkgPayr0540DAO.selectPayr0540ListTotCnt_S" parameterClass="infcPkgPayr0540SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0540
+			WHERE 1=1
+				<isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>   
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	SYSTEMKEY=#systemkey#
+		       </isNotEmpty>
+		       <isNotEmpty prepend="AND" property="pymtDducDivCd" >
+			 	PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+		       </isNotEmpty> 
+		        <isNotEmpty prepend="AND" property="pymtDt" >
+			 	   #pymtDt# BETWEEN EXPTN_PRCS_BGNN_DT AND EXPTN_PRCS_END_DT
+		       </isNotEmpty>  
+	</select>
+	 
+	<insert id="infcPkgPayr0540DAO.insertPayr0540ToPayr4100_S">
+		<![CDATA[
+			INSERT INTO PAYR0540 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , EXPTN_PRCS_SEIL_NUM
+				  , EXPTN_DIV_CD
+				  , PYMT_DDUC_DIV_CD
+				  , EXMTN_YN
+				  , EXPTN_PRCS_PYMT_SUM
+				  , EXPTN_PRCS_PYMT_RTO
+				  , EXPTN_PRCS_BGNN_DT
+				  , EXPTN_PRCS_END_DT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , PAY_ITEM_CD
+				  , EXPTN_PRCS_NOTE_CTNT )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , (
+				      SELECT 
+				           NVL(MAX(EXPTN_PRCS_SEIL_NUM),0)+1 
+				      FROM PAYR0540 
+				     WHERE DPOB_CD = #dpobCd# 
+				       AND SYSTEMKEY = #systemkey#
+				  )
+				  , #exptnDivCd#
+				  , #pymtDducDivCd#
+				  , #exmtnYn#
+				  , #exptnPrcsPymtSum#
+				  , #exptnPrcsPymtRto#
+				  , #exptnPrcsBgnnDt#
+				  , #exptnPrcsEndDt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr#
+				  , #payItemCd#
+				  , #exptnPrcsNoteCtnt# )
+		]]>
+	</insert>
+	
+	<update id="infcPkgPayr0540DAO.updatePayr0540ToPayr4100_S">
+		<![CDATA[
+			UPDATE PAYR0540
+			SET   EXPTN_DIV_CD=#exptnDivCd#
+				, PYMT_DDUC_DIV_CD=#pymtDducDivCd#
+				, EXMTN_YN=#exmtnYn#
+				, EXPTN_PRCS_PYMT_SUM=#exptnPrcsPymtSum#
+				, EXPTN_PRCS_PYMT_RTO=#exptnPrcsPymtRto#
+				, EXPTN_PRCS_BGNN_DT=#exptnPrcsBgnnDt#
+				, EXPTN_PRCS_END_DT=#exptnPrcsEndDt#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+				, PAY_ITEM_CD=#payItemCd#
+				, EXPTN_PRCS_NOTE_CTNT=#exptnPrcsNoteCtnt#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EXPTN_PRCS_SEIL_NUM=#exptnPrcsSeilNum#
+				]]>
+	</update>
+	
+	<delete id="infcPkgPayr0540DAO.deletePayr0540ToPayr4100_S">
+		<![CDATA[
+			DELETE FROM PAYR0540 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EXPTN_PRCS_SEIL_NUM=#exptnPrcsSeilNum#
+				]]>
+	</delete>
+	
+	<!-- Insr410001 화면 - 예외대상자전체삭제  -->
+	 <delete id="infcPkgPayr0540DAO.deleteInsr410001ToPayr0540_S">
+		<![CDATA[
+			DELETE FROM PAYR0540 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey# 
+				]]>
+	</delete>
+	
+	
+	<select id="infcPkgPayr0540DAO.selectPayr0540ToPayr4100_S" resultMap="infcPkgPayr0540">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, EXPTN_PRCS_SEIL_NUM
+				, EXPTN_DIV_CD
+				, PYMT_DDUC_DIV_CD
+				, EXMTN_YN
+				, EXPTN_PRCS_PYMT_SUM
+				, EXPTN_PRCS_PYMT_RTO
+				, EXPTN_PRCS_BGNN_DT
+				, EXPTN_PRCS_END_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, PAY_ITEM_CD
+				, EXPTN_PRCS_NOTE_CTNT
+			FROM PAYR0540
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND EXPTN_PRCS_SEIL_NUM=#exptnPrcsSeilNum#
+				]]>
+	</select>
+	
+	<!-- 예외대상자 처리  -->
+	<select id="infcPkgPayr0540DAO.selectInsrLP410001Payr0540List_D" parameterClass="infcPkgPayr0540SrhVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+			 SELECT
+			   NN.*
+			 FROM 
+			 (SELECT DISTINCT 
+                         AA.DPOB_CD
+                        ,AA.SYSTEMKEY 
+                        ,BB.EMYMT_DIV_CD
+                        ,fcBass0300CDNM(BB.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM
+                        ,BB.HAN_NM
+                        ,BB.RESN_REGN_NUM
+                        ,BB.CURR_AFFN_DEPT_CD AS DEPT_CD
+                        ,fcBass0400CDNM(BB.DPOB_CD,BB.CURR_AFFN_DEPT_CD,'2') AS DEPT_NM 
+                        ,BB.TYP_OCCU_CD 
+                        , fcBass0320CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD)  AS TYP_OCCU_NM
+                        ,NVL(BB.PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+                        ,BB.DTIL_OCCU_INTTN_CD 
+		                , fcBassEx0350CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD,BB.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM
+                        ,BB.BUSIN_CD
+                        ,fcBass0500CDNM(BB.DPOB_CD,SUBSTR(BB.BUSIN_CD,1,4),BB.DEPT_CD,BB.BUSIN_CD) AS BUSIN_NM   
+                        ,CC.PAYR_MANG_DEPT_CD
+                        ,fcBass0400CDNM(CC.DPOB_CD,CC.PAYR_MANG_DEPT_CD,'2') AS PAYR_MANG_DEPT_NM
+                FROM PAYR0540 AA, PSNL0100 BB,PAYR0500 CC  
+                WHERE AA.DPOB_CD=BB.DPOB_CD  
+                  AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+                  AND AA.DPOB_CD=CC.DPOB_CD   
+                  AND AA.SYSTEMKEY = CC.SYSTEMKEY  
+                   <isNotEmpty prepend="AND" property="dpobCd" >
+			 	     AA.DPOB_CD=#dpobCd#
+		           </isNotEmpty> 
+		                AND EXISTS  (
+                          SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+				 
+                                          ) 
+				       <isNotEmpty prepend="AND" property="businCd" >
+					 	BB.BUSIN_CD=#businCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	CC.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	BB.EMYMT_DIV_CD=#emymtDivCd#
+					 	</isNotEmpty>
+				     
+ 					<isNotEmpty property="typOccuCd" prepend="AND">
+					<![CDATA[
+					 BB.TYP_OCCU_CD
+					]]>
+					<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					 #typOccuCdArr[]#
+					</iterate>
+					</isNotEmpty>  
+				    <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>    
+					 <!--  <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+					<![CDATA[
+					 BB.DTIL_OCCU_CLS_DIV_CD
+					]]>
+					<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+					 #dtilOccuClsDivCdArr[]#
+					</iterate>
+					</isNotEmpty>   -->
+					 <isNotEmpty property="hdofcCodtnCd" prepend="AND">
+				<![CDATA[
+				 BB.HDOFC_CODTN_CD
+				]]>
+				<iterate prepend="IN" property="hdofcCodtnCdArr" open="(" close=")" conjunction=",">
+				 #hdofcCodtnCdArr[]#
+				</iterate>
+				</isNotEmpty> 
+				          <isNotEmpty prepend="AND" property="systemkey" >
+					 	BB.SYSTEMKEY=#systemkey#
+				       </isNotEmpty>  
+				       <isNotEmpty prepend="AND" property="hanNm" >
+					 	BB.HAN_NM LIKE '%' || #hanNm# || '%'
+				       </isNotEmpty>  
+		      ) NN
+					ORDER BY   NN.PAYR_MANG_DEPT_CD DESC 
+							 ,(SELECT LPAD(DEPT_RANK,5,'0')  
+                                   FROM BASS0400 DD
+                                   WHERE DD.DEPT_CD =  NN.DEPT_CD  
+                                     AND DD.DPOB_CD =  NN.DPOB_CD) ASC 
+						    , NN.RESN_REGN_NUM ASC
+							, NN.SYSTEMKEY DESC  
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>	
+    <!-- 예외대상자 처리 -->
+	<select id="infcPkgPayr0540DAO.selectInsrLP410001Payr0540ListTotCnt_S" parameterClass="infcPkgPayr0540SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM  
+			(
+			  SELECT DISTINCT 
+                         AA.DPOB_CD
+                        ,AA.SYSTEMKEY 
+                        ,BB.EMYMT_DIV_CD
+                        ,fcBass0300CDNM(BB.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM
+                        ,BB.HAN_NM
+                        ,BB.RESN_REGN_NUM
+                        ,BB.CURR_AFFN_DEPT_CD AS DEPT_CD
+                        ,fcBass0400CDNM(BB.DPOB_CD,BB.CURR_AFFN_DEPT_CD,'2') AS DEPT_NM 
+                        ,BB.TYP_OCCU_CD 
+                        , fcBass0320CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD)  AS TYP_OCCU_NM
+                        ,NVL(BB.PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+                        ,BB.BUSIN_CD
+                        ,fcBass0500CDNM(BB.DPOB_CD,SUBSTR(BB.BUSIN_CD,1,4),BB.DEPT_CD,BB.BUSIN_CD) AS BUSIN_NM   
+                        ,CC.PAYR_MANG_DEPT_CD
+                        ,fcBass0400CDNM(CC.DPOB_CD,CC.PAYR_MANG_DEPT_CD,'2') AS PAYR_MANG_DEPT_NM
+                FROM PAYR0540 AA, PSNL0100 BB,PAYR0500 CC  
+                WHERE AA.DPOB_CD=BB.DPOB_CD  
+                  AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+                  AND AA.DPOB_CD=CC.DPOB_CD   
+                  AND AA.SYSTEMKEY = CC.SYSTEMKEY  
+                   <isNotEmpty prepend="AND" property="dpobCd" >
+			 	     AA.DPOB_CD=#dpobCd#
+		           </isNotEmpty> 
+		                AND EXISTS  (
+                        SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM 
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C
+                                            WHERE     C.DPOB_CD = BB.DPOB_CD
+						                        AND C.DEPT_CD = BB.CURR_AFFN_DEPT_CD
+						                        AND NVL(C.TYP_OCCU_CD,'TT')  = NVL(BB.TYP_OCCU_CD,'TT') 
+                                                AND NVL(C.DTIL_OCCU_INTTN_CD,'TT')  = NVL(BB.DTIL_OCCU_INTTN_CD,'TT')
+                                               <isNotEmpty property="deptCd" prepend="AND">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]#
+												</iterate>
+												</isNotEmpty> 
+                                          ) 
+				       <isNotEmpty prepend="AND" property="businCd" >
+					 	BB.BUSIN_CD=#businCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	CC.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	BB.EMYMT_DIV_CD=#emymtDivCd#
+					 	</isNotEmpty>
+				     
+ 					<isNotEmpty property="typOccuCd" prepend="AND">
+					<![CDATA[
+					 BB.TYP_OCCU_CD
+					]]>
+					<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					 #typOccuCdArr[]#
+					</iterate>
+					</isNotEmpty>  
+				   <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 BB.DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>    
+					<!--   <isNotEmpty property="dtilOccuClsDivCd" prepend="AND">
+					<![CDATA[
+					 BB.DTIL_OCCU_CLS_DIV_CD
+					]]>
+					<iterate prepend="IN" property="dtilOccuClsDivCdArr" open="(" close=")" conjunction=",">
+					 #dtilOccuClsDivCdArr[]#
+					</iterate>
+					</isNotEmpty>   -->
+					 <isNotEmpty property="hdofcCodtnCd" prepend="AND">
+				<![CDATA[
+				 BB.HDOFC_CODTN_CD
+				]]>
+				<iterate prepend="IN" property="hdofcCodtnCdArr" open="(" close=")" conjunction=",">
+				 #hdofcCodtnCdArr[]#
+				</iterate>
+				</isNotEmpty> 
+				          <isNotEmpty prepend="AND" property="systemkey" >
+					 	BB.SYSTEMKEY=#systemkey#
+				       </isNotEmpty>  
+				       <isNotEmpty prepend="AND" property="hanNm" >
+					 	BB.HAN_NM LIKE '%' || #hanNm# || '%'
+				       </isNotEmpty>  
+			)
+	</select>
+	 
+	<!-- 예외 처리 내역  -->
+	<select id="infcPkgPayr0540DAO.selectInsrRP410001Payr0540List_D" parameterClass="infcPkgPayr0540SrhVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+			 SELECT
+                  AA.DPOB_CD
+                , AA.SYSTEMKEY
+                , AA.EXPTN_PRCS_SEIL_NUM
+                , AA.EXPTN_DIV_CD 
+                , AA.EXPTN_DIV_CD AS exptnDivCdcommCd
+                , fcBass0300CDNM(AA.DPOB_CD,AA.EXPTN_DIV_CD) AS exptnDivCdcommCdNm
+                , AA.PYMT_DDUC_DIV_CD
+                , fcBass0300CDNM(AA.DPOB_CD,AA.PYMT_DDUC_DIV_CD) AS PYMT_DDUC_DIV_NM
+                , AA.EXMTN_YN
+                , AA.EXPTN_PRCS_PYMT_SUM
+                , AA.EXPTN_PRCS_PYMT_RTO
+                , AA.EXPTN_PRCS_BGNN_DT
+                , AA.EXPTN_PRCS_END_DT 
+                , AA.PAY_ITEM_CD
+                , AA.EXPTN_PRCS_NOTE_CTNT 
+                        ,BB.EMYMT_DIV_CD
+                        ,fcBass0300CDNM(BB.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM
+                        ,BB.HAN_NM
+                        ,BB.RESN_REGN_NUM
+                        ,BB.DEPT_CD AS DEPT_CD
+                        ,fcBass0400CDNM(BB.DPOB_CD,BB.DEPT_CD,'2') AS DEPT_NM 
+                        ,BB.TYP_OCCU_CD 
+                        , fcBass0320CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD)   AS TYP_OCCU_NM
+                        ,NVL(BB.PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+                        , BB.DTIL_OCCU_INTTN_CD 
+		               , fcBassEx0350CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD,BB.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM 
+                        ,BB.BUSIN_CD
+                        ,fcBass0500CDNM(BB.DPOB_CD,SUBSTR(BB.BUSIN_CD,1,4),BB.DEPT_CD,BB.BUSIN_CD) AS BUSIN_NM   
+                        ,CC.PAYR_MANG_DEPT_CD
+                        ,fcBass0400CDNM(CC.DPOB_CD,CC.PAYR_MANG_DEPT_CD,'2') AS PAYR_MANG_DEPT_NM
+            FROM PAYR0540 AA, PSNL0100 BB,PAYR0500 CC  
+                WHERE AA.DPOB_CD=BB.DPOB_CD  
+                  AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+                  AND AA.DPOB_CD=CC.DPOB_CD   
+                  AND AA.SYSTEMKEY = CC.SYSTEMKEY  
+                   <isNotEmpty prepend="AND" property="dpobCd" >
+			 	AA.DPOB_CD=#dpobCd#
+		       </isNotEmpty>   
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	AA.SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+					ORDER BY  AA.SYSTEMKEY DESC 
+							, AA.EXPTN_PRCS_SEIL_NUM ASC 
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	 </select>	
+	 <!-- 예외 처리 내역 -->
+	 <select id="infcPkgPayr0540DAO.selectInsrRP410001Payr0540ListTotCnt_S" parameterClass="infcPkgPayr0540SrhVO" resultClass="int">
+				SELECT COUNT(*) totcnt
+				FROM  
+				(
+				SELECT
+	                  AA.DPOB_CD
+	                , AA.SYSTEMKEY
+	                , AA.EXPTN_PRCS_SEIL_NUM
+	                , AA.EXPTN_DIV_CD 
+	                , AA.EXPTN_DIV_CD AS exptnDivCdcommCd
+	                , fcBass0300CDNM(AA.DPOB_CD,AA.EXPTN_DIV_CD) AS exptnDivCdcommCdNm
+	                , AA.PYMT_DDUC_DIV_CD
+	                , fcBass0300CDNM(AA.DPOB_CD,AA.PYMT_DDUC_DIV_CD) AS PYMT_DDUC_DIV_NM
+	                , AA.EXMTN_YN
+	                , AA.EXPTN_PRCS_PYMT_SUM
+	                , AA.EXPTN_PRCS_PYMT_RTO
+	                , AA.EXPTN_PRCS_BGNN_DT
+	                , AA.EXPTN_PRCS_END_DT 
+	                , AA.PAY_ITEM_CD
+	                , AA.EXPTN_PRCS_NOTE_CTNT 
+	                        ,BB.EMYMT_DIV_CD
+	                        ,fcBass0300CDNM(BB.DPOB_CD,BB.EMYMT_DIV_CD) AS EMYMT_DIV_NM
+	                        ,BB.HAN_NM
+	                        ,BB.RESN_REGN_NUM
+	                        ,BB.DEPT_CD AS DEPT_CD
+	                        ,fcBass0400CDNM(BB.DPOB_CD,BB.DEPT_CD,'2') AS DEPT_NM 
+	                        ,BB.TYP_OCCU_CD 
+	                        , fcBass0320CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD)  AS TYP_OCCU_NM
+	                        ,NVL(BB.PYSP_GRDE_CD,'A0060000') AS PYSP_GRDE_CD
+	                          , BB.DTIL_OCCU_INTTN_CD 
+		               , fcBassEx0350CDNM(BB.DPOB_CD,BB.TYP_OCCU_CD,BB.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM 
+	                        ,BB.BUSIN_CD
+	                        ,fcBass0500CDNM(BB.DPOB_CD,SUBSTR(BB.BUSIN_CD,1,4),BB.DEPT_CD,BB.BUSIN_CD) AS BUSIN_NM   
+	                        ,CC.PAYR_MANG_DEPT_CD
+	                        ,fcBass0400CDNM(CC.DPOB_CD,CC.PAYR_MANG_DEPT_CD,'2') AS PAYR_MANG_DEPT_NM
+	            FROM PAYR0540 AA, PSNL0100 BB,PAYR0500 CC  
+	                WHERE AA.DPOB_CD=BB.DPOB_CD  
+	                  AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+	                  AND AA.DPOB_CD=CC.DPOB_CD   
+	                  AND AA.SYSTEMKEY = CC.SYSTEMKEY  
+	                  AND NVL(BB.TYP_OCCU_CD,'TT')  NOT IN ('A0410205','A0410188')
+	                   <isNotEmpty prepend="AND" property="dpobCd" >
+				 	AA.DPOB_CD=#dpobCd#
+			       </isNotEmpty>   
+			       <isNotEmpty prepend="AND" property="systemkey" >
+				 	AA.SYSTEMKEY=#systemkey#
+			       </isNotEmpty> 
+				)
+	 </select> 
+</sqlMap>

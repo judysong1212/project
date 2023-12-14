@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Insr2510">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="insr2510SerarchVO" type="com.app.exterms.insurance.server.vo.Insr2510SrhVO"/>
+	
+	<resultMap id="insr2510" class="com.app.exterms.insurance.server.vo.Insr2510VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="socInsrLssEmymtNum" column="SOC_INSR_LSS_EMYMT_NUM" columnIndex="3"/>
+		<result property="retryYrMnth" column="RETRY_YR_MNTH" columnIndex="4"/>
+		<result property="sevePayDtlPatrNum" column="SEVE_PAY_DTL_PATR_NUM" columnIndex="5"/>
+		<result property="payPymtBgnnDt" column="PAY_PYMT_BGNN_DT" columnIndex="6"/>
+		<result property="payPymtEndDt" column="PAY_PYMT_END_DT" columnIndex="7"/>
+		<result property="pymtNumDys" column="PYMT_NUM_DYS" columnIndex="8"/>
+		<result property="amntBspySum" column="AMNT_BSPY_SUM" columnIndex="9"/>
+		<result property="amntEtcExtpySum" column="AMNT_ETC_EXTPY_SUM" columnIndex="10"/>
+		<result property="amntAllwBnusSum" column="AMNT_ALLW_BNUS_SUM" columnIndex="11"/>
+		<result property="amntAnnlExtpySum" column="AMNT_ANNL_EXTPY_SUM" columnIndex="12"/>
+		<result property="amntEtcSum" column="AMNT_ETC_SUM" columnIndex="13"/>
+		<result property="kybdr" column="KYBDR" columnIndex="14"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="15"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="16"/>
+		<result property="ismt" column="ISMT" columnIndex="17"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="18"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="19"/>
+	</resultMap>
+	
+	<insert id="insr2510DAO.insertInsr2510_S">
+<!-- 	    <selectKey keyProperty="sevePayDtlPatrNum" resultType="int" order="BEFORE">
+			 SELECT NVL(MAX(SEVE_PAY_DTL_PATR_NUM),0) + 1 sevePayDtlPatrNum FROM INSR2510
+		</selectKey> -->
+		<![CDATA[
+			INSERT INTO INSR2510 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , SOC_INSR_LSS_EMYMT_NUM
+				  , RETRY_YR_MNTH
+				  , SEVE_PAY_DTL_PATR_NUM
+				  , PAY_PYMT_BGNN_DT
+				  , PAY_PYMT_END_DT
+				  , PYMT_NUM_DYS
+				  , AMNT_BSPY_SUM
+				  , AMNT_ETC_EXTPY_SUM
+				  , AMNT_ALLW_BNUS_SUM
+				  , AMNT_ANNL_EXTPY_SUM
+				  , AMNT_ETC_SUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #socInsrLssEmymtNum#
+				  , #retryYrMnth#
+				  , #sevePayDtlPatrNum#
+				  , #payPymtBgnnDt#
+				  , #payPymtEndDt#
+				  , #pymtNumDys#
+				  , #amntBspySum#
+				  , #amntEtcExtpySum#
+				  , #amntAllwBnusSum#
+				  , #amntAnnlExtpySum#
+				  , #amntEtcSum#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #ismt#
+				  , #inptAddr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="insr2510DAO.updateInsr2510_S">
+		<![CDATA[
+			UPDATE INSR2510
+			SET 
+				PAY_PYMT_BGNN_DT=#payPymtBgnnDt#
+				, PAY_PYMT_END_DT=#payPymtEndDt#
+				, PYMT_NUM_DYS=#pymtNumDys#
+				, AMNT_BSPY_SUM=#amntBspySum#
+				, AMNT_ETC_EXTPY_SUM=#amntEtcExtpySum#
+				, AMNT_ALLW_BNUS_SUM=#amntAllwBnusSum#
+				, AMNT_ANNL_EXTPY_SUM=#amntAnnlExtpySum#
+				, AMNT_ETC_SUM=#amntEtcSum#
+				, ISMT=#ismt#
+				, REVN_DT= TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND SOC_INSR_LSS_EMYMT_NUM=#socInsrLssEmymtNum#
+								AND RETRY_YR_MNTH=#retryYrMnth#
+								AND SEVE_PAY_DTL_PATR_NUM=#sevePayDtlPatrNum#
+				]]>
+	</update>
+	
+	<delete id="insr2510DAO.deleteInsr2510_S">
+		<![CDATA[
+			DELETE FROM INSR2510 
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND SOC_INSR_LSS_EMYMT_NUM=#socInsrLssEmymtNum#
+								AND RETRY_YR_MNTH=#retryYrMnth#
+								AND SEVE_PAY_DTL_PATR_NUM=#sevePayDtlPatrNum#
+				]]>
+	</delete>
+	
+	<select id="insr2510DAO.selectInsr2510_S" resultMap="insr2510">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, SOC_INSR_LSS_EMYMT_NUM
+				, RETRY_YR_MNTH
+				, SEVE_PAY_DTL_PATR_NUM
+				, PAY_PYMT_BGNN_DT
+				, PAY_PYMT_END_DT
+				, PYMT_NUM_DYS
+				, AMNT_BSPY_SUM
+				, AMNT_ETC_EXTPY_SUM
+				, AMNT_ALLW_BNUS_SUM
+				, AMNT_ANNL_EXTPY_SUM
+				, AMNT_ETC_SUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM INSR2510
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND SOC_INSR_LSS_EMYMT_NUM=#socInsrLssEmymtNum#
+								AND RETRY_YR_MNTH=#retryYrMnth#
+								AND SEVE_PAY_DTL_PATR_NUM=#sevePayDtlPatrNum#
+				]]>
+	</select>
+	
+	<select id="insr2510DAO.selectInsr2510List_D" parameterClass="insr2510SerarchVO" resultMap="insr2510">
+				SELECT
+					A.DPOB_CD
+					, A.SYSTEMKEY
+					, A.SOC_INSR_LSS_EMYMT_NUM
+					, A.RETRY_YR_MNTH
+					, A.SEVE_PAY_DTL_PATR_NUM
+					, A.PAY_PYMT_BGNN_DT
+					, A.PAY_PYMT_END_DT
+					, A.PYMT_NUM_DYS
+					, A.AMNT_BSPY_SUM
+					, A.AMNT_ETC_EXTPY_SUM
+					, A.AMNT_ALLW_BNUS_SUM
+					, A.AMNT_ANNL_EXTPY_SUM
+					, A.AMNT_ETC_SUM
+					, A.KYBDR
+					, A.INPT_DT
+					, A.INPT_ADDR
+					, A.ISMT
+					, A.REVN_DT
+					, A.REVN_ADDR								
+						FROM INSR2510 A , INSR2500 B
+				WHERE A.DPOB_CD = B.DPOB_CD
+				  AND A.SYSTEMKEY = B.SYSTEMKEY
+				  AND A.RETRY_YR_MNTH = B.RETRY_YR_MNTH
+				  AND A.SOC_INSR_LSS_EMYMT_NUM = B.SOC_INSR_LSS_EMYMT_NUM
+				  AND A.DPOB_CD = #dpobCd#
+				  AND A.SYSTEMKEY = #systemkey#
+				  <!-- AND A.RETRY_YR_MNTH = #retryYrMnth# -->
+				  AND A.SOC_INSR_LSS_EMYMT_NUM = #socInsrLssEmymtNum#
+					ORDER BY 
+						A.DPOB_CD DESC
+							, A.SYSTEMKEY DESC
+							, A.SOC_INSR_LSS_EMYMT_NUM DESC
+							, A.RETRY_YR_MNTH DESC
+							, A.SEVE_PAY_DTL_PATR_NUM DESC
+	</select>	
+	<select id="insr2510DAO.selectInsr2510ListTotCnt_S" parameterClass="insr2510SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM INSR2510
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

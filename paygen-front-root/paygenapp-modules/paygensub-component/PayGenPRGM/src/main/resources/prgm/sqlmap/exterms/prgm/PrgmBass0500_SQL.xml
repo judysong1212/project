@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PGRM_Bass0500">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="prgmComSearchVO" type="com.app.exterms.prgm.server.vo.PrgmComSearchVO"/>
+	
+	<resultMap id="prgmComBass0500" class="com.app.exterms.prgm.server.vo.PrgmComBass0500VO"> 
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="2"/>
+		<result property="businApptnYr" column="BUSIN_APPTN_YR" columnIndex="3"/>
+		<result property="businCd" column="BUSIN_CD" columnIndex="4"/>
+		<result property="businNm" column="BUSIN_NM" columnIndex="5"/>
+		<result property="businEmymtTypOccuCd" column="BUSIN_EMYMT_TYP_OCCU_CD" columnIndex="6"/>
+		<result property="businRepbtyEmpNum" column="BUSIN_REPBTY_EMP_NUM" columnIndex="7"/>
+		<result property="idtlAccdtInsurApmrt" column="IDTL_ACCDT_INSUR_APMRT" columnIndex="8"/>
+		<result property="spityCtnt" column="SPITY_CTNT" columnIndex="9"/>
+		<result property="natPennSym" column="NAT_PENN_SYM" columnIndex="10"/>
+		<result property="hlthInsrSym" column="HLTH_INSR_SYM" columnIndex="11"/>
+		<result property="umytInsrSym" column="UMYT_INSR_SYM" columnIndex="12"/>
+		<result property="idtlAccdtInsurSym" column="IDTL_ACCDT_INSUR_SYM" columnIndex="13"/>
+		<result property="kybdr" column="KYBDR" columnIndex="14"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="15"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="16"/>
+		<result property="ismt" column="ISMT" columnIndex="17"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="18"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="19"/>
+		<result property="businStdt" column="BUSIN_STDT" columnIndex="20"/>
+		<result property="businEddt" column="BUSIN_EDDT" columnIndex="21"/>
+	</resultMap>
+	
+	<!-- <insert id="bass0500DAO.insertBass0500_S">
+		<![CDATA[
+			INSERT INTO BASS0500 
+				( DPOB_CD
+				  , DEPT_CD
+				  , BUSIN_APPTN_YR
+				  , BUSIN_CD
+				  , BUSIN_NM
+				  , BUSIN_EMYMT_TYP_OCCU_CD
+				  , BUSIN_REPBTY_EMP_NUM
+				  , IDTL_ACCDT_INSUR_APMRT
+				  , SPITY_CTNT
+				  , NAT_PENN_SYM
+				  , HLTH_INSR_SYM
+				  , UMYT_INSR_SYM
+				  , IDTL_ACCDT_INSUR_SYM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , BUSIN_STDT
+				  , BUSIN_EDDT )
+			VALUES ( #dpobCd#
+				  , #deptCd#
+				  , #businApptnYr#
+				  , #businCd#
+				  , #businNm#
+				  , #businEmymtTypOccuCd#
+				  , #businRepbtyEmpNum#
+				  , #idtlAccdtInsurApmrt#
+				  , #spityCtnt#
+				  , #natPennSym#
+				  , #hlthInsrSym#
+				  , #umytInsrSym#
+				  , #idtlAccdtInsurSym#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr#
+				  , #businStdt#
+				  , #businEddt# )
+		]]>
+	</insert>
+	
+	<update id="bass0500DAO.updateBass0500_S">
+		<![CDATA[
+			UPDATE BASS0500
+			SET DPOB_CD=#dpobCd#
+				, DEPT_CD=#deptCd#
+				, BUSIN_APPTN_YR=#businApptnYr#
+				, BUSIN_CD=#businCd#
+				, BUSIN_NM=#businNm#
+				, BUSIN_EMYMT_TYP_OCCU_CD=#businEmymtTypOccuCd#
+				, BUSIN_REPBTY_EMP_NUM=#businRepbtyEmpNum#
+				, IDTL_ACCDT_INSUR_APMRT=#idtlAccdtInsurApmrt#
+				, SPITY_CTNT=#spityCtnt#
+				, NAT_PENN_SYM=#natPennSym#
+				, HLTH_INSR_SYM=#hlthInsrSym#
+				, UMYT_INSR_SYM=#umytInsrSym#
+				, IDTL_ACCDT_INSUR_SYM=#idtlAccdtInsurSym#
+				, KYBDR=#kybdr#
+				, INPT_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+				, BUSIN_STDT=#businStdt#
+				, BUSIN_EDDT=#businEddt#
+						WHERE DPOB_CD=#dpobCd#
+								AND DEPT_CD=#deptCd#
+								AND BUSIN_APPTN_YR=#businApptnYr#
+								AND BUSIN_CD=#businCd#
+				]]>
+	</update>
+	
+	<delete id="bass0500DAO.deleteBass0500_S">
+		<![CDATA[
+			DELETE FROM BASS0500 
+						WHERE DPOB_CD=#dpobCd#
+								AND DEPT_CD=#deptCd#
+								AND BUSIN_APPTN_YR=#businApptnYr#
+								AND BUSIN_CD=#businCd#
+				]]>
+	</delete>
+	
+	<select id="bass0500DAO.selectBass0500_S" resultMap="bass0500">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, DEPT_CD
+				, BUSIN_APPTN_YR
+				, BUSIN_CD
+				, BUSIN_NM
+				, BUSIN_EMYMT_TYP_OCCU_CD
+				, BUSIN_REPBTY_EMP_NUM
+				, IDTL_ACCDT_INSUR_APMRT
+				, SPITY_CTNT
+				, NAT_PENN_SYM
+				, HLTH_INSR_SYM
+				, UMYT_INSR_SYM
+				, IDTL_ACCDT_INSUR_SYM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, BUSIN_STDT
+				, BUSIN_EDDT
+			FROM BASS0500
+						WHERE DPOB_CD=#dpobCd#
+								AND DEPT_CD=#deptCd#
+								AND BUSIN_APPTN_YR=#businApptnYr#
+								AND BUSIN_CD=#businCd#
+				]]>
+	</select> -->
+	
+	<select id="prgmComBass0500DAO.selectBass0500_S" resultMap="prgmComBass0500">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, BUSIN_APPTN_YR
+				, DEPT_CD
+				, BUSIN_CD
+				,  ('[' || BUSIN_APPTN_YR || ']' || BUSIN_NM)  AS BUSIN_NM
+				, BUSIN_EMYMT_TYP_OCCU_CD
+				, BUSIN_REPBTY_EMP_NUM
+				, IDTL_ACCDT_INSUR_APMRT
+				, SPITY_CTNT
+				, NAT_PENN_SYM
+				, HLTH_INSR_SYM
+				, UMYT_INSR_SYM
+				, IDTL_ACCDT_INSUR_SYM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, BUSIN_STDT
+				, BUSIN_EDDT
+			FROM BASS0500
+						WHERE DPOB_CD=#dpobCd#
+								AND BUSIN_APPTN_YR=#businApptnYr#
+								AND (DEPT_CD=#deptCd# OR HHRK_DEPT_CD_01 = #deptCd#)
+								AND BUSIN_CD=#businCd#
+				]]>
+	</select>
+	
+	
+	<select id="prgmComBass0500DAO.selectPrgmComWithBusinApptnYr_D" parameterClass="prgmComSearchVO" resultClass="egovMap">
+ 
+				SELECT
+						DISTINCT  DPOB_CD
+								, BUSIN_APPTN_YR
+							    , (BUSIN_APPTN_YR) AS BUSIN_APPTN_YR_DISP
+						FROM BASS0500
+				WHERE 1=1 
+				<isNotEmpty prepend="AND" property="deptCd" >
+					DEPT_CD=#deptCd#
+				</isNotEmpty> 
+				
+					ORDER BY 
+						DPOB_CD DESC
+							, BUSIN_APPTN_YR DESC
+						  
+	</select>
+	
+	<select id="prgmComBass0500DAO.selectBass0500List_D" parameterClass="prgmComSearchVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+						SELECT
+										DPOB_CD
+										, BUSIN_APPTN_YR
+										, DEPT_CD
+										, BUSIN_CD
+										,  ('[' || BUSIN_APPTN_YR || ']' || BUSIN_NM)  AS BUSIN_NM
+										, BUSIN_EMYMT_TYP_OCCU_CD
+										, BUSIN_REPBTY_EMP_NUM
+										, IDTL_ACCDT_INSUR_APMRT
+										, SPITY_CTNT
+										, NAT_PENN_SYM
+										, HLTH_INSR_SYM
+										, UMYT_INSR_SYM
+										, IDTL_ACCDT_INSUR_SYM
+										, KYBDR
+										, INPT_DT
+										, INPT_ADDR
+										, ISMT
+										, REVN_DT
+										, REVN_ADDR
+										, BUSIN_STDT
+						               , BUSIN_EDDT
+								FROM BASS0500
+						WHERE 1=1
+						<isNotEmpty prepend="AND" property="businApptnYr">
+							BUSIN_APPTN_YR = #businApptnYr#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="deptCd" >
+							 (DEPT_CD=#deptCd# OR HHRK_DEPT_CD_01 = #deptCd#)
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="businCd">
+							BUSIN_CD = #businCd#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="businNm">
+							BUSIN_NM LIKE '%' || #businNm# || '%'
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="dpobCd" >
+							 DPOB_CD=#dpobCd#
+						</isNotEmpty> 
+							ORDER BY 
+								DPOB_CD DESC
+									, BUSIN_APPTN_YR DESC
+									, DEPT_CD DESC
+									, BUSIN_CD DESC
+				
+		<isNotEqual  property="lastIndex" compareValue="-1">
+		 <![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+		</isNotEqual>	
+		<isEqual   property="lastIndex" compareValue="-1">
+		  <![CDATA[					
+			) A  
+		)
+		]]>
+		</isEqual>	
+	</select>	
+	
+	
+	<select id="prgmComBass0500DAO.selectMultiBass0500List_D" parameterClass="prgmComSearchVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+						SELECT
+										DPOB_CD
+										, BUSIN_APPTN_YR
+										, DEPT_CD
+										, BUSIN_CD
+										,  ('[' || BUSIN_APPTN_YR || ']' || BUSIN_NM)  AS BUSIN_NM
+										, BUSIN_EMYMT_TYP_OCCU_CD
+										, BUSIN_REPBTY_EMP_NUM
+										, IDTL_ACCDT_INSUR_APMRT
+										, SPITY_CTNT
+										, NAT_PENN_SYM
+										, HLTH_INSR_SYM
+										, UMYT_INSR_SYM
+										, IDTL_ACCDT_INSUR_SYM
+										, KYBDR
+										, INPT_DT
+										, INPT_ADDR
+										, ISMT
+										, REVN_DT
+										, REVN_ADDR
+										, BUSIN_STDT
+						               , BUSIN_EDDT
+								FROM BASS0500
+						WHERE 1=1
+						<isNotEmpty prepend="AND" property="businApptnYr">
+							BUSIN_APPTN_YR = #businApptnYr#
+						</isNotEmpty>
+						  <isNotEmpty property="deptCd" prepend="AND">
+		                   <![CDATA[
+		                   (( DEPT_CD
+		                   ]]>
+		                   <iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+		                    #deptCdArr[]# 
+		                   </iterate> ) OR  ( HHRK_DEPT_CD_01 = #deptCd#))
+		                   </isNotEmpty>  
+						<isNotEmpty prepend="AND" property="businCd">
+							BUSIN_CD = #businCd#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="businNm">
+							BUSIN_NM LIKE '%' || #businNm# || '%'
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="dpobCd" >
+							 DPOB_CD=#dpobCd#
+						</isNotEmpty> 
+							ORDER BY 
+								DPOB_CD DESC
+									, BUSIN_APPTN_YR DESC
+									, DEPT_CD DESC
+									, BUSIN_CD DESC
+				
+		<isNotEqual  property="lastIndex" compareValue="-1">
+		 <![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+		</isNotEqual>	
+		<isEqual   property="lastIndex" compareValue="-1">
+		  <![CDATA[					
+			) A  
+		)
+		]]>
+		</isEqual>	
+	</select>	
+	
+	
+	
+	<select id="prgmComBass0500DAO.selectBass0500ListTotCnt_S" parameterClass="prgmComSearchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0500
+			WHERE 1=1
+				<isNotEmpty prepend="AND" property="businApptnYr">
+					BUSIN_APPTN_YR = #businApptnYr#
+				</isNotEmpty>
+				
+				<isNotEmpty prepend="AND" property="deptCd" >
+					 (DEPT_CD=#deptCd# OR HHRK_DEPT_CD_01 = #deptCd#)
+				</isNotEmpty>
+				
+			 	<isNotEmpty prepend="AND" property="businCd">
+					BUSIN_CD = #businCd#
+				</isNotEmpty>
+				
+				<isNotEmpty prepend="AND" property="businNm">
+					BUSIN_NM LIKE '%' || #businNm# || '%'
+				</isNotEmpty>
+				
+				<isNotEmpty prepend="AND" property="dpobCd" >
+					 DPOB_CD=#dpobCd#
+				</isNotEmpty>
+	</select> 
+	
+	<select id="prgmComBass0500DAO.selectMultiBass0500ListTotCnt_S" parameterClass="prgmComSearchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0500
+			WHERE 1=1
+				<isNotEmpty prepend="AND" property="businApptnYr">
+					BUSIN_APPTN_YR = #businApptnYr#
+				</isNotEmpty>
+				
+				  <isNotEmpty property="deptCd" prepend="AND">
+		                   <![CDATA[
+		                   (( DEPT_CD
+		                   ]]>
+		                   <iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+		                    #deptCdArr[]# 
+		                   </iterate> ) OR  ( HHRK_DEPT_CD_01 = #deptCd#))
+		                   </isNotEmpty>  
+         		
+			 	<isNotEmpty prepend="AND" property="businCd">
+					BUSIN_CD = #businCd#
+				</isNotEmpty>
+				
+				<isNotEmpty prepend="AND" property="businNm">
+					BUSIN_NM LIKE '%' || #businNm# || '%'
+				</isNotEmpty>
+				
+				<isNotEmpty prepend="AND" property="dpobCd" >
+					 DPOB_CD=#dpobCd#
+				</isNotEmpty>
+	</select>
+	
+	
+		<select id="prgmComBass0500DAO.selectBass0500ToPayr5300List_D" parameterClass="prgmComSearchVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+						SELECT 
+										
+										DISTINCT  AA.DPOB_CD
+										, AA.BUSIN_APPTN_YR
+										, AA.DEPT_CD
+										, fcBass0400CDNM(AA.DPOB_CD,AA.DEPT_CD,'2') AS DEPT_NM
+										, AA.BUSIN_CD
+										,  ('[' || AA.BUSIN_APPTN_YR || ']' || AA.BUSIN_NM)  AS BUSIN_NM
+										, AA.BUSIN_EMYMT_TYP_OCCU_CD
+										, AA.BUSIN_REPBTY_EMP_NUM
+										, AA.IDTL_ACCDT_INSUR_APMRT
+										, AA.SPITY_CTNT
+										, AA.NAT_PENN_SYM
+										, AA.HLTH_INSR_SYM
+										, AA.UMYT_INSR_SYM
+										, AA.IDTL_ACCDT_INSUR_SYM 
+										, AA.BUSIN_STDT
+										, AA.BUSIN_EDDT
+										, BB.PAYR_MANG_DEPT_CD
+										, (SELECT PAY_MANGE_DEPT_NM FROM BASS0150 
+										                           WHERE BASS0150.PAYR_MANG_DEPT_CD = BB.PAYR_MANG_DEPT_CD) AS PAY_MANGE_DEPT_NM 
+								FROM BASS0500 AA, PAYR0490 BB
+						WHERE AA.DPOB_CD = BB.DPOB_CD(+)
+						  AND AA.BUSIN_APPTN_YR = BB.PAY_YR(+)
+						  AND AA.DEPT_CD = BB.DEPT_CD(+) 
+						  AND AA.BUSIN_CD = BB.BUSIN_CD(+) 
+						<isNotEmpty prepend="AND" property="businApptnYr">
+							AA.BUSIN_APPTN_YR = #businApptnYr#
+						</isNotEmpty>
+						
+						<isNotEmpty prepend="AND" property="deptCd" >
+							 (AA.DEPT_CD=#deptCd# OR AA.HHRK_DEPT_CD_01 = #deptCd#)  
+						</isNotEmpty>
+						
+						<isNotEmpty prepend="AND" property="businCd">
+							AA.BUSIN_CD = #businCd#
+						</isNotEmpty>
+						
+						<isNotEmpty prepend="AND" property="dpobCd" >
+							 AA.DPOB_CD=#dpobCd#
+						</isNotEmpty>
+						
+						<isNotEmpty prepend="AND" property="payrMangDeptCd" >
+							 BB.PAYR_MANG_DEPT_CD(+)=#payrMangDeptCd#
+						</isNotEmpty>
+						
+						<isNotEmpty prepend="AND" property="payCd" >
+							 BB.PAY_CD(+)=#payCd#
+						</isNotEmpty> 
+							ORDER BY 
+								AA.DPOB_CD DESC
+									, AA.BUSIN_APPTN_YR DESC
+									, AA.DEPT_CD DESC
+									, AA.BUSIN_CD DESC
+				
+		<isNotEqual  property="lastIndex" compareValue="-1">
+		 <![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+		</isNotEqual>	
+		
+		<isEqual   property="lastIndex" compareValue="-1">
+		  <![CDATA[					
+			) A  
+		)
+		]]>
+		</isEqual>	
+	</select>	
+	
+	
+	<select id="prgmComBass0500DAO.selectBass0500ToPayr5300ListTotCnt_S" parameterClass="prgmComSearchVO" resultClass="int">
+		SELECT COUNT(*) totcnt
+			FROM  
+			(
+			SELECT 
+								DISTINCT
+								  AA.DPOB_CD
+								, AA.BUSIN_APPTN_YR
+								, AA.DEPT_CD
+								, fcBass0400CDNM(AA.DPOB_CD,AA.DEPT_CD,'2') AS DEPT_NM 
+								, AA.BUSIN_CD
+								,  ('[' || AA.BUSIN_APPTN_YR || ']' || AA.BUSIN_NM)  AS BUSIN_NM
+								, AA.BUSIN_EMYMT_TYP_OCCU_CD
+								, AA.BUSIN_REPBTY_EMP_NUM
+								, AA.IDTL_ACCDT_INSUR_APMRT
+								, AA.SPITY_CTNT
+								, AA.NAT_PENN_SYM
+								, AA.HLTH_INSR_SYM
+								, AA.UMYT_INSR_SYM
+								, AA.IDTL_ACCDT_INSUR_SYM 
+								, AA.BUSIN_STDT
+								, AA.BUSIN_EDDT
+								, BB.PAYR_MANG_DEPT_CD
+								, (SELECT PAY_MANGE_DEPT_NM FROM BASS0150 
+								                           WHERE BASS0150.PAYR_MANG_DEPT_CD = BB.PAYR_MANG_DEPT_CD) AS PAY_MANGE_DEPT_NM 
+						FROM BASS0500 AA, PAYR0490 BB
+				WHERE AA.DPOB_CD = BB.DPOB_CD(+)
+				  AND AA.BUSIN_APPTN_YR = BB.PAY_YR(+)
+				  AND AA.DEPT_CD = BB.DEPT_CD(+) 
+				  AND AA.BUSIN_CD = BB.BUSIN_CD(+) 
+				<isNotEmpty prepend="AND" property="businApptnYr">
+					AA.BUSIN_APPTN_YR = #businApptnYr#
+				</isNotEmpty>
+				
+				<isNotEmpty prepend="AND" property="deptCd" >
+					(AA.DEPT_CD=#deptCd# OR AA.HHRK_DEPT_CD_01 = #deptCd#)  
+				</isNotEmpty>
+				
+				<isNotEmpty prepend="AND" property="businCd">
+					AA.BUSIN_CD = #businCd#
+				</isNotEmpty>
+				
+				<isNotEmpty prepend="AND" property="dpobCd" >
+					 AA.DPOB_CD=#dpobCd#
+				</isNotEmpty>
+				
+				<isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 BB.PAYR_MANG_DEPT_CD(+)=#payrMangDeptCd#
+				</isNotEmpty>
+				
+				<isNotEmpty prepend="AND" property="payCd" >
+					 BB.PAY_CD(+)=#payCd#
+				</isNotEmpty> 
+			
+			)
+	</select>
+	<!-- 	, AA.KYBDR
+								, AA.INPT_DT
+								, AA.INPT_ADDR
+								, AA.ISMT
+								, AA.REVN_DT
+								, AA.REVN_ADDR
+								
+								, BB.PAY_CD
+								, fcBass0300CDNM(AA.DPOB_CD,BB.PAY_CD) AS PAY_NM  -->
+	
+
+</sqlMap>
