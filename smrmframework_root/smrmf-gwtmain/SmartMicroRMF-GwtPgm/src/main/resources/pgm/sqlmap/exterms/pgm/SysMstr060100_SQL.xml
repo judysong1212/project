@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SysMstr060100">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="mstr060100SrhVO" type="com.app.smrmf.sysm.server.service.vo.SysMstr060100SrhVO"/>
+	
+	<resultMap id="mstr060100" class="com.app.smrmf.sysm.server.service.vo.SysMstr060100VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="famyAllwAddChdQntyOvr" column="FAMY_ALLW_ADD_CHD_QNTY_OVR" columnIndex="2"/>
+		<result property="payBondFrclrMinPhbnSum" column="PAY_BOND_FRCLR_MIN_PHBN_SUM" columnIndex="3"/>
+		<result property="payBondFrclrCalcMnthSum" column="PAY_BOND_FRCLR_CALC_MNTH_SUM" columnIndex="4"/>
+		<result property="kybdr" column="KYBDR" columnIndex="5"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="6"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="7"/>
+		<result property="ismt" column="ISMT" columnIndex="8"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="9"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="10"/>
+	</resultMap>
+	
+	<insert id="mstr060100DAO.insertSysMstr060100_S">
+		<![CDATA[
+			INSERT INTO MSTR_06_0100 
+				( DPOB_CD
+				  , FAMY_ALLW_ADD_CHD_QNTY_OVR
+				  , PAY_BOND_FRCLR_MIN_PHBN_SUM
+				  , PAY_BOND_FRCLR_CALC_MNTH_SUM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #famyAllwAddChdQntyOvr#
+				  , #payBondFrclrMinPhbnSum#
+				  , #payBondFrclrCalcMnthSum#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="mstr060100DAO.updateSysMstr060100_S">
+		<![CDATA[
+			UPDATE MSTR_06_0100
+			SET DPOB_CD=#dpobCd#
+				, FAMY_ALLW_ADD_CHD_QNTY_OVR=#famyAllwAddChdQntyOvr#
+				, PAY_BOND_FRCLR_MIN_PHBN_SUM=#payBondFrclrMinPhbnSum#
+				, PAY_BOND_FRCLR_CALC_MNTH_SUM=#payBondFrclrCalcMnthSum#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+				]]>
+	</update>
+	
+	<delete id="mstr060100DAO.deleteSysMstr060100_S">
+		<![CDATA[
+			DELETE FROM MSTR_06_0100 
+						WHERE DPOB_CD=#dpobCd#
+				]]>
+	</delete>
+	
+	<select id="mstr060100DAO.selectSysMstr060100_S" resultMap="mstr060100">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, FAMY_ALLW_ADD_CHD_QNTY_OVR
+				, PAY_BOND_FRCLR_MIN_PHBN_SUM
+				, PAY_BOND_FRCLR_CALC_MNTH_SUM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM MSTR_06_0100
+						WHERE DPOB_CD=#dpobCd#
+				]]>
+	</select>
+	
+	<select id="mstr060100DAO.selectSysMstr060100List_D" parameterClass="mstr060100SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, FAMY_ALLW_ADD_CHD_QNTY_OVR
+								, PAY_BOND_FRCLR_MIN_PHBN_SUM
+								, PAY_BOND_FRCLR_CALC_MNTH_SUM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM MSTR_06_0100
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					FAMY_ALLW_ADD_CHD_QNTY_OVR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="mstr060100DAO.selectSysMstr060100ListTotCnt_S" parameterClass="mstr060100SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM MSTR_06_0100
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				FAMY_ALLW_ADD_CHD_QNTY_OVR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

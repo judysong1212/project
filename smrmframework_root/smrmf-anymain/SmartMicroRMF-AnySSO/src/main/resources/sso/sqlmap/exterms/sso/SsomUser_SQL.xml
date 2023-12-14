@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SsomUser">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ssomUserSerarchVO" type="com.app.smrmf.sysm.server.vo.system.SsomUserSrhVO"/>
+	
+	<resultMap id="ssomUser" class="com.app.smrmf.sysm.server.vo.system.SsomUserVO">
+		<result property="nid" column="NID" columnIndex="1"/>
+		<result property="cn" column="CN" columnIndex="2"/>
+		<result property="ou" column="OU" columnIndex="3"/>
+		<result property="oucode" column="OUCODE" columnIndex="4"/>
+		<result property="parentoucode" column="PARENTOUCODE" columnIndex="5"/>
+		<result property="topoucode" column="TOPOUCODE" columnIndex="6"/>
+		<result property="uidM" column="UID_M" columnIndex="7"/>
+		<result property="displayname" column="DISPLAYNAME" columnIndex="8"/>
+		<result property="description" column="DESCRIPTION" columnIndex="9"/>
+		<result property="userfullname" column="USERFULLNAME" columnIndex="10"/>
+		<result property="givenname" column="GIVENNAME" columnIndex="11"/>
+		<result property="positioncode" column="POSITIONCODE" columnIndex="12"/>
+		<result property="position" column="POSITION" columnIndex="13"/>
+		<result property="titlecode" column="TITLECODE" columnIndex="14"/>
+		<result property="title" column="TITLE" columnIndex="15"/>
+		<result property="titleorposition" column="TITLEORPOSITION" columnIndex="16"/>
+		<result property="mail" column="MAIL" columnIndex="17"/>
+		<result property="othermail" column="OTHERMAIL" columnIndex="18"/>
+		<result property="telephonenumber" column="TELEPHONENUMBER" columnIndex="19"/>
+		<result property="fax" column="FAX" columnIndex="20"/>
+		<result property="orgfullname" column="ORGFULLNAME" columnIndex="21"/>
+		<result property="orderrank" column="ORDERRANK" columnIndex="22"/>
+		<result property="homepostaladdress1" column="HOMEPOSTALADDRESS1" columnIndex="23"/>
+		<result property="homepostaladdress2" column="HOMEPOSTALADDRESS2" columnIndex="24"/>
+		<result property="homefaxphonenumber" column="HOMEFAXPHONENUMBER" columnIndex="25"/>
+		<result property="homephone" column="HOMEPHONE" columnIndex="26"/>
+		<result property="mobile" column="MOBILE" columnIndex="27"/>
+		<result property="pager" column="PAGER" columnIndex="28"/>
+		<result property="jobtitle" column="JOBTITLE" columnIndex="29"/>
+		<result property="nickname" column="NICKNAME" columnIndex="30"/>
+		<result property="empnumber" column="EMPNUMBER" columnIndex="31"/>
+		<result property="homepageurl" column="HOMEPAGEURL" columnIndex="32"/>
+		<result property="photopath" column="PHOTOPATH" columnIndex="33"/>
+		<result property="gender" column="GENDER" columnIndex="34"/>
+		<result property="weddingdate" column="WEDDINGDATE" columnIndex="35"/>
+		<result property="birthday" column="BIRTHDAY" columnIndex="36"/>
+		<result property="carnumber" column="CARNUMBER" columnIndex="37"/>
+		<result property="status" column="STATUS" columnIndex="38"/>
+		<result property="isother" column="ISOTHER" columnIndex="39"/>
+		<result property="otherperiod" column="OTHERPERIOD" columnIndex="40"/>
+		<result property="otheroucode" column="OTHEROUCODE" columnIndex="41"/>
+		<result property="otherou" column="OTHEROU" columnIndex="42"/>
+		<result property="sidM" column="SID_M" columnIndex="43"/>
+	</resultMap>
+	
+	<insert id="ssomUserDAO.insertSsomUser_S">
+		<![CDATA[
+			INSERT INTO SSOM_USER 
+				( NID
+				  , CN
+				  , OU
+				  , OUCODE
+				  , PARENTOUCODE
+				  , TOPOUCODE
+				  , UID_M
+				  , DISPLAYNAME
+				  , DESCRIPTION
+				  , USERFULLNAME
+				  , GIVENNAME
+				  , POSITIONCODE
+				  , POSITION
+				  , TITLECODE
+				  , TITLE
+				  , TITLEORPOSITION
+				  , MAIL
+				  , OTHERMAIL
+				  , TELEPHONENUMBER
+				  , FAX
+				  , ORGFULLNAME
+				  , ORDERRANK
+				  , HOMEPOSTALADDRESS1
+				  , HOMEPOSTALADDRESS2
+				  , HOMEFAXPHONENUMBER
+				  , HOMEPHONE
+				  , MOBILE
+				  , PAGER
+				  , JOBTITLE
+				  , NICKNAME
+				  , EMPNUMBER
+				  , HOMEPAGEURL
+				  , PHOTOPATH
+				  , GENDER
+				  , WEDDINGDATE
+				  , BIRTHDAY
+				  , CARNUMBER
+				  , STATUS
+				  , ISOTHER
+				  , OTHERPERIOD
+				  , OTHEROUCODE
+				  , OTHEROU
+				  , SID_M )
+			VALUES ( #nid#
+				  , #cn#
+				  , #ou#
+				  , #oucode#
+				  , #parentoucode#
+				  , #topoucode#
+				  , #uidM#
+				  , #displayname#
+				  , #description#
+				  , #userfullname#
+				  , #givenname#
+				  , #positioncode#
+				  , #position#
+				  , #titlecode#
+				  , #title#
+				  , #titleorposition#
+				  , #mail#
+				  , #othermail#
+				  , #telephonenumber#
+				  , #fax#
+				  , #orgfullname#
+				  , #orderrank#
+				  , #homepostaladdress1#
+				  , #homepostaladdress2#
+				  , #homefaxphonenumber#
+				  , #homephone#
+				  , #mobile#
+				  , #pager#
+				  , #jobtitle#
+				  , #nickname#
+				  , #empnumber#
+				  , #homepageurl#
+				  , #photopath#
+				  , #gender#
+				  , #weddingdate#
+				  , #birthday#
+				  , #carnumber#
+				  , #status#
+				  , #isother#
+				  , #otherperiod#
+				  , #otheroucode#
+				  , #otherou#
+				  , #sidM# )
+		]]>
+	</insert>
+	
+	<update id="ssomUserDAO.updateSsomUser_S"> 
+			UPDATE SSOM_USER
+			SET UID_M=#uidM#
+			 <isNotNull property="nid"><isNotEmpty property="nid">, NID=#nid#			       </isNotEmpty></isNotNull> 
+				<isNotNull property="cn"><isNotEmpty property="cn">, CN=#cn#                                 </isNotEmpty></isNotNull>
+				<isNotNull property="ou"><isNotEmpty property="ou">, OU=#ou#                                 </isNotEmpty></isNotNull>
+				<isNotNull property="oucode"><isNotEmpty property="oucode">, OUCODE=#oucode#                         </isNotEmpty></isNotNull>
+				<isNotNull property="parentoucode"><isNotEmpty property="parentoucode">, PARENTOUCODE=#parentoucode#             </isNotEmpty></isNotNull>
+				<isNotNull property="topoucode"><isNotEmpty property="topoucode">, TOPOUCODE=#topoucode#                   </isNotEmpty></isNotNull>
+				<isNotNull property="displayname"><isNotEmpty property="displayname">, DISPLAYNAME=#displayname#               </isNotEmpty></isNotNull>
+				<isNotNull property="description"><isNotEmpty property="description">, DESCRIPTION=#description#               </isNotEmpty></isNotNull>
+				<isNotNull property="userfullname"><isNotEmpty property="userfullname">, USERFULLNAME=#userfullname#             </isNotEmpty></isNotNull>
+				<isNotNull property="givenname"><isNotEmpty property="givenname">, GIVENNAME=#givenname#                   </isNotEmpty></isNotNull>
+				<isNotNull property="positioncode"><isNotEmpty property="positioncode">, POSITIONCODE=#positioncode#             </isNotEmpty></isNotNull>
+				<isNotNull property="position"><isNotEmpty property="position">, POSITION=#position#                     </isNotEmpty></isNotNull>
+				<isNotNull property="titlecode"><isNotEmpty property="titlecode">, TITLECODE=#titlecode#                   </isNotEmpty></isNotNull>
+				<isNotNull property="title"><isNotEmpty property="title">, TITLE=#title#                           </isNotEmpty></isNotNull>
+				<isNotNull property="titleorposition"><isNotEmpty property="titleorposition">, TITLEORPOSITION=#titleorposition#       </isNotEmpty></isNotNull>
+				<isNotNull property="mail"><isNotEmpty property="mail">, MAIL=#mail#                             </isNotEmpty></isNotNull>
+				<isNotNull property="othermail"><isNotEmpty property="othermail">, OTHERMAIL=#othermail#                   </isNotEmpty></isNotNull>
+				<isNotNull property="telephonenumber"><isNotEmpty property="telephonenumber">, TELEPHONENUMBER=#telephonenumber#       </isNotEmpty></isNotNull>
+				<isNotNull property="fax"><isNotEmpty property="fax">, FAX=#fax#                               </isNotEmpty></isNotNull>
+				<isNotNull property="orgfullname"><isNotEmpty property="orgfullname">, ORGFULLNAME=#orgfullname#               </isNotEmpty></isNotNull>
+				<isNotNull property="orderrank"><isNotEmpty property="orderrank">, ORDERRANK=#orderrank#                   </isNotEmpty></isNotNull>
+				<isNotNull property="homepostaladdress1"><isNotEmpty property="homepostaladdress1">, HOMEPOSTALADDRESS1=#homepostaladdress1# </isNotEmpty></isNotNull>
+				<isNotNull property="homepostaladdress2"><isNotEmpty property="homepostaladdress2">, HOMEPOSTALADDRESS2=#homepostaladdress2# </isNotEmpty></isNotNull>
+				<isNotNull property="homefaxphonenumber"><isNotEmpty property="homefaxphonenumber">, HOMEFAXPHONENUMBER=#homefaxphonenumber# </isNotEmpty></isNotNull>
+				<isNotNull property="homephone"><isNotEmpty property="homephone">, HOMEPHONE=#homephone#                   </isNotEmpty></isNotNull>
+				<isNotNull property="mobile"><isNotEmpty property="mobile">, MOBILE=#mobile#                         </isNotEmpty></isNotNull>
+				<isNotNull property="pager"><isNotEmpty property="pager">, PAGER=#pager#                           </isNotEmpty></isNotNull>
+				<isNotNull property="jobtitle"><isNotEmpty property="jobtitle">, JOBTITLE=#jobtitle#                     </isNotEmpty></isNotNull>
+				<isNotNull property="nickname"><isNotEmpty property="nickname">, NICKNAME=#nickname#                     </isNotEmpty></isNotNull>
+				<isNotNull property="empnumber"><isNotEmpty property="empnumber">, EMPNUMBER=#empnumber#                   </isNotEmpty></isNotNull>
+				<isNotNull property="homepageurl"><isNotEmpty property="homepageurl">, HOMEPAGEURL=#homepageurl#               </isNotEmpty></isNotNull>
+				<isNotNull property="photopath"><isNotEmpty property="photopath">, PHOTOPATH=#photopath#                   </isNotEmpty></isNotNull>
+				<isNotNull property="gender"><isNotEmpty property="gender">, GENDER=#gender#                         </isNotEmpty></isNotNull>
+				<isNotNull property="weddingdate"><isNotEmpty property="weddingdate">, WEDDINGDATE=#weddingdate#               </isNotEmpty></isNotNull>
+				<isNotNull property="birthday"><isNotEmpty property="birthday">, BIRTHDAY=#birthday#                     </isNotEmpty></isNotNull>
+				<isNotNull property="carnumber"><isNotEmpty property="carnumber">, CARNUMBER=#carnumber#                   </isNotEmpty></isNotNull>
+				<isNotNull property="status"><isNotEmpty property="status">, STATUS=#status#                         </isNotEmpty></isNotNull>
+				<isNotNull property="isother"><isNotEmpty property="isother">, ISOTHER=#isother#                       </isNotEmpty></isNotNull>
+				<isNotNull property="otherperiod"><isNotEmpty property="otherperiod">, OTHERPERIOD=#otherperiod#               </isNotEmpty></isNotNull>
+				<isNotNull property="otheroucode"><isNotEmpty property="otheroucode">, OTHEROUCODE=#otheroucode#               </isNotEmpty></isNotNull>
+				<isNotNull property="otherou"><isNotEmpty property="otherou">, OTHEROU=#otherou#                       </isNotEmpty></isNotNull>
+				<isNotNull property="sidM"><isNotEmpty property="sidM">, SID_M=#sidM#                            </isNotEmpty></isNotNull>    
+		     WHERE UID_M=#uidM# 
+	</update>
+	
+	<delete id="ssomUserDAO.deleteSsomUser_S">
+		<![CDATA[
+			DELETE FROM SSOM_USER 
+						WHERE NID=#nid#
+				]]>
+	</delete>
+	
+	<select id="ssomUserDAO.selectSsomUser_S" resultMap="ssomUser">
+		<![CDATA[
+			SELECT
+				NID
+				, CN
+				, OU
+				, OUCODE
+				, PARENTOUCODE
+				, TOPOUCODE
+				, UID_M
+				, DISPLAYNAME
+				, DESCRIPTION
+				, USERFULLNAME
+				, GIVENNAME
+				, POSITIONCODE
+				, POSITION
+				, TITLECODE
+				, TITLE
+				, TITLEORPOSITION
+				, MAIL
+				, OTHERMAIL
+				, TELEPHONENUMBER
+				, FAX
+				, ORGFULLNAME
+				, ORDERRANK
+				, HOMEPOSTALADDRESS1
+				, HOMEPOSTALADDRESS2
+				, HOMEFAXPHONENUMBER
+				, HOMEPHONE
+				, MOBILE
+				, PAGER
+				, JOBTITLE
+				, NICKNAME
+				, EMPNUMBER
+				, HOMEPAGEURL
+				, PHOTOPATH
+				, GENDER
+				, WEDDINGDATE
+				, BIRTHDAY
+				, CARNUMBER
+				, STATUS
+				, ISOTHER
+				, OTHERPERIOD
+				, OTHEROUCODE
+				, OTHEROU
+				, SID_M
+			FROM SSOM_USER
+		  WHERE  SID_M=#userId#
+			AND STATUS = 'C' 
+				]]>
+	</select>
+	
+	<select id="ssomUserDAO.selectSsomUserList_D" parameterClass="ssomUserSerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								NID
+								, CN
+								, OU
+								, OUCODE
+								, PARENTOUCODE
+								, TOPOUCODE
+								, UID_M
+								, DISPLAYNAME
+								, DESCRIPTION
+								, USERFULLNAME
+								, GIVENNAME
+								, POSITIONCODE
+								, POSITION
+								, TITLECODE
+								, TITLE
+								, TITLEORPOSITION
+								, MAIL
+								, OTHERMAIL
+								, TELEPHONENUMBER
+								, FAX
+								, ORGFULLNAME
+								, ORDERRANK
+								, HOMEPOSTALADDRESS1
+								, HOMEPOSTALADDRESS2
+								, HOMEFAXPHONENUMBER
+								, HOMEPHONE
+								, MOBILE
+								, PAGER
+								, JOBTITLE
+								, NICKNAME
+								, EMPNUMBER
+								, HOMEPAGEURL
+								, PHOTOPATH
+								, GENDER
+								, WEDDINGDATE
+								, BIRTHDAY
+								, CARNUMBER
+								, STATUS
+								, ISOTHER
+								, OTHERPERIOD
+								, OTHEROUCODE
+								, OTHEROU
+								, SID_M
+						FROM SSOM_USER
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					NID = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					CN LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						NID DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="ssomUserDAO.selectSsomUserListTotCnt_S" parameterClass="ssomUserSerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SSOM_USER
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				NID = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				CN LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

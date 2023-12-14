@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Cmmn0310">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="msfCmmn0310SearchVO" type="com.app.smrmf.sysm.server.service.vo.Cmmn0310SrhVO"/>
+	
+	<resultMap id="msfCmmn0310" class="com.app.smrmf.sysm.server.service.vo.Cmmn0310VO">
+		<result property="zpcd" column="ZPCD" columnIndex="1"/>
+		<result property="zpcdSeilNum" column="ZPCD_SEIL_NUM" columnIndex="2"/>
+		<result property="ctapv" column="CTAPV" columnIndex="3"/>
+		<result property="ctatgu" column="CTATGU" columnIndex="4"/>
+		<result property="tatd" column="TATD" columnIndex="5"/>
+		<result property="li" column="LI" columnIndex="6"/>
+		<result property="bok" column="BOK" columnIndex="7"/>
+		<result property="sanHusnum" column="SAN_HUSNUM" columnIndex="8"/>
+		<result property="bgnnMn" column="BGNN_MN" columnIndex="9"/>
+		<result property="bgnnHusnumSb" column="BGNN_HUSNUM_SB" columnIndex="10"/>
+		<result property="endHusnumMn" column="END_HUSNUM_MN" columnIndex="11"/>
+		<result property="endHusnumSb" column="END_HUSNUM_SB" columnIndex="12"/>
+		<result property="buildNm" column="BUILD_NM" columnIndex="13"/>
+		<result property="buildBgnnDong" column="BUILD_BGNN_DONG" columnIndex="14"/>
+		<result property="buildEndDong" column="BUILD_END_DONG" columnIndex="15"/>
+		<result property="whleAddr" column="WHLE_ADDR" columnIndex="16"/>
+		<result property="note" column="NOTE" columnIndex="17"/>
+		<result property="kybdr" column="KYBDR" columnIndex="18"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="19"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="20"/>
+		<result property="ismt" column="ISMT" columnIndex="21"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="22"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="23"/>
+	</resultMap>
+	
+	<insert id="msfCmmn0310DAO.insertCmmn0310_S">
+		<![CDATA[
+			INSERT INTO CMMN0310 
+				( ZPCD
+				  , ZPCD_SEIL_NUM
+				  , CTAPV
+				  , CTATGU
+				  , TATD
+				  , LI
+				  , BOK
+				  , SAN_HUSNUM
+				  , BGNN_MN
+				  , BGNN_HUSNUM_SB
+				  , END_HUSNUM_MN
+				  , END_HUSNUM_SB
+				  , BUILD_NM
+				  , BUILD_BGNN_DONG
+				  , BUILD_END_DONG
+				  , WHLE_ADDR
+				  , NOTE
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #zpcd#
+				  , #zpcdSeilNum#
+				  , #ctapv#
+				  , #ctatgu#
+				  , #tatd#
+				  , #li#
+				  , #bok#
+				  , #sanHusnum#
+				  , #bgnnMn#
+				  , #bgnnHusnumSb#
+				  , #endHusnumMn#
+				  , #endHusnumSb#
+				  , #buildNm#
+				  , #buildBgnnDong#
+				  , #buildEndDong#
+				  , #whleAddr#
+				  , #note#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="msfCmmn0310DAO.updateCmmn0310_S">
+		<![CDATA[
+			UPDATE CMMN0310
+			SET ZPCD=#zpcd#
+				, ZPCD_SEIL_NUM=#zpcdSeilNum#
+				, CTAPV=#ctapv#
+				, CTATGU=#ctatgu#
+				, TATD=#tatd#
+				, LI=#li#
+				, BOK=#bok#
+				, SAN_HUSNUM=#sanHusnum#
+				, BGNN_MN=#bgnnMn#
+				, BGNN_HUSNUM_SB=#bgnnHusnumSb#
+				, END_HUSNUM_MN=#endHusnumMn#
+				, END_HUSNUM_SB=#endHusnumSb#
+				, BUILD_NM=#buildNm#
+				, BUILD_BGNN_DONG=#buildBgnnDong#
+				, BUILD_END_DONG=#buildEndDong#
+				, WHLE_ADDR=#whleAddr#
+				, NOTE=#note#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				, REVN_ADDR=#revnAddr#
+						WHERE ZPCD=#zpcd#
+								AND ZPCD_SEIL_NUM=#zpcdSeilNum#
+				]]>
+	</update>
+	
+	<delete id="msfCmmn0310DAO.deleteCmmn0310_S">
+		<![CDATA[
+			DELETE FROM CMMN0310 
+						WHERE ZPCD=#zpcd#
+								AND ZPCD_SEIL_NUM=#zpcdSeilNum#
+				]]>
+	</delete>
+	
+	<select id="msfCmmn0310DAO.selectCmmn0310_S" resultMap="msfCmmn0310">
+		<![CDATA[
+			SELECT
+				ZPCD
+				, ZPCD_SEIL_NUM
+				, CTAPV
+				, CTATGU
+				, TATD
+				, LI
+				, BOK
+				, SAN_HUSNUM
+				, BGNN_MN
+				, BGNN_HUSNUM_SB
+				, END_HUSNUM_MN
+				, END_HUSNUM_SB
+				, BUILD_NM
+				, BUILD_BGNN_DONG
+				, BUILD_END_DONG
+				, WHLE_ADDR
+				, NOTE
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM CMMN0310
+						WHERE ZPCD=#zpcd#
+								AND ZPCD_SEIL_NUM=#zpcdSeilNum#
+				]]>
+	</select>
+	
+	<select id="msfCmmn0310DAO.selectCmmn0310List_D" parameterClass="msfCmmn0310SearchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								ZPCD
+								, ZPCD_SEIL_NUM
+								, CTAPV
+								, CTATGU
+								, TATD
+								, LI
+								, BOK
+								, SAN_HUSNUM
+								, BGNN_MN
+								, BGNN_HUSNUM_SB
+								, END_HUSNUM_MN
+								, END_HUSNUM_SB
+								, BUILD_NM
+								, BUILD_BGNN_DONG
+								, BUILD_END_DONG
+								, WHLE_ADDR
+								, NOTE
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM CMMN0310
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					ZPCD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					ZPCD_SEIL_NUM LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						ZPCD DESC
+							, ZPCD_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="msfCmmn0310DAO.selectCmmn0310ListTotCnt_S" parameterClass="msfCmmn0310SearchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM CMMN0310
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				ZPCD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				ZPCD_SEIL_NUM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

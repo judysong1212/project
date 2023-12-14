@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+ 
+	<sqlMap namespace="Sysm0051">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysm0051SrhVO" type="com.app.smrmf.sysm.server.vo.SysIfSysm0051SrhVO"/>
+	
+	<resultMap id="sysm0051" class="com.app.smrmf.sysm.server.vo.SysIfSysm0051VO">
+		<result property="sysDpobCd" column="SYS_DPOB_CD" columnIndex="1"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="2"/>
+		<result property="txtnFrmDivCd" column="TXTN_FRM_DIV_CD" columnIndex="3"/>
+		<result property="txtnFrmBgnnDt" column="TXTN_FRM_BGNN_DT" columnIndex="4"/>
+		<result property="txtnFrmEndDt" column="TXTN_FRM_END_DT" columnIndex="5"/>
+		<result property="txtnFrmCtnt" column="TXTN_FRM_CTNT" columnIndex="6"/>
+		<result property="kybdr" column="KYBDR" columnIndex="7"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="8"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="9"/>
+		<result property="ismt" column="ISMT" columnIndex="10"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="11"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="12"/>
+	</resultMap>
+	
+	<insert id="sysm0051DAO.insertSysm0051_S">
+		<![CDATA[
+			INSERT INTO SYSM0051 
+				( SYS_DPOB_CD
+				  , EMYMT_DIV_CD
+				  , TXTN_FRM_DIV_CD
+				  , TXTN_FRM_BGNN_DT
+				  , TXTN_FRM_END_DT
+				  , TXTN_FRM_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #sysDpobCd#
+				  , #emymtDivCd#
+				  , #txtnFrmDivCd#
+				  , #txtnFrmBgnnDt#
+				  , #txtnFrmEndDt#
+				  , #txtnFrmCtnt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="sysm0051DAO.updateSysm0051_S">
+		<![CDATA[
+			UPDATE SYSM0051
+			SET SYS_DPOB_CD=#sysDpobCd#
+				, EMYMT_DIV_CD=#emymtDivCd#
+				, TXTN_FRM_DIV_CD=#txtnFrmDivCd#
+				, TXTN_FRM_BGNN_DT=#txtnFrmBgnnDt#
+				, TXTN_FRM_END_DT=#txtnFrmEndDt#
+				, TXTN_FRM_CTNT=#txtnFrmCtnt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE SYS_DPOB_CD=#sysDpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND TXTN_FRM_DIV_CD=#txtnFrmDivCd#
+								AND TXTN_FRM_BGNN_DT=#txtnFrmBgnnDt#
+				]]>
+	</update>
+	
+	<delete id="sysm0051DAO.deleteSysm0051_S">
+		<![CDATA[
+			DELETE FROM SYSM0051 
+						WHERE SYS_DPOB_CD=#sysDpobCd#
+		]]>				
+						<isNotNull property="emymtDivCd">
+							<isNotEmpty property="emymtDivCd" prepend="AND">
+								EMYMT_DIV_CD=#emymtDivCd#
+							</isNotEmpty>
+			 			</isNotNull>
+			 			<isNotNull property="txtnFrmDivCd">
+							<isNotEmpty property="txtnFrmDivCd" prepend="AND">
+								TXTN_FRM_DIV_CD=#txtnFrmDivCd#
+							</isNotEmpty>
+			 			</isNotNull>	
+			 			<isNotNull property="txtnFrmBgnnDt">
+							<isNotEmpty property="txtnFrmBgnnDt" prepend="AND">			 										
+								TXTN_FRM_BGNN_DT=#txtnFrmBgnnDt#
+							</isNotEmpty>
+			 			</isNotNull>								
+				
+	</delete>
+	
+	<select id="sysm0051DAO.selectSysm0051_S" resultMap="sysm0051">
+		<![CDATA[
+			SELECT
+				SYS_DPOB_CD
+				, EMYMT_DIV_CD
+				, (SELECT COMM_CD_NM FROM BASS0300 WHERE COMM_CD = EMYMT_DIV_CD) AS EMYMT_DIV_NM
+				, TXTN_FRM_DIV_CD
+				, TXTN_FRM_DIV_CD AS txtnFrmDivCdCommCd
+				, (SELECT COMM_CD_NM FROM BASS0300 WHERE COMM_CD = TXTN_FRM_DIV_CD) AS txtnFrmDivCdCommCdNm
+				, TXTN_FRM_BGNN_DT
+				, TXTN_FRM_END_DT
+				, TXTN_FRM_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM SYSM0051
+						WHERE SYS_DPOB_CD=#sysDpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND TXTN_FRM_DIV_CD=#txtnFrmDivCd#
+								AND TXTN_FRM_BGNN_DT=#txtnFrmBgnnDt#
+				]]>
+	</select>
+	
+	<select id="sysm0051DAO.selectSysm0051List_D" parameterClass="sysm0051SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								SYS_DPOB_CD
+								, EMYMT_DIV_CD
+								, (SELECT COMM_CD_NM FROM BASS0300 WHERE COMM_CD = EMYMT_DIV_CD) AS EMYMT_DIV_NM
+								, TXTN_FRM_DIV_CD
+								, TXTN_FRM_DIV_CD AS txtnFrmDivCdCommCd
+								, (SELECT COMM_CD_NM FROM BASS0300 WHERE COMM_CD = TXTN_FRM_DIV_CD) AS txtnFrmDivCdCommCdNm
+								, TXTN_FRM_BGNN_DT
+								, TXTN_FRM_END_DT
+								, TXTN_FRM_CTNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM SYSM0051
+				WHERE 1=1
+				<isNotNull property="sysDpobCd">
+					<isNotEmpty property="sysDpobCd" prepend="AND">
+						SYS_DPOB_CD = #sysDpobCd#
+			     	</isNotEmpty>
+			 	</isNotNull>
+					ORDER BY 
+						SYS_DPOB_CD DESC
+							, EMYMT_DIV_CD DESC
+							, TXTN_FRM_DIV_CD DESC
+							, TXTN_FRM_BGNN_DT DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="sysm0051DAO.selectSysm0051ListTotCnt_S" parameterClass="sysm0051SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSM0051
+			WHERE 1=1
+			<isNotNull property="sysDpobCd">
+				<isNotEmpty property="sysDpobCd" prepend="AND">
+					SYS_DPOB_CD = #sysDpobCd#
+			     </isNotEmpty>
+			 </isNotNull>
+	</select>
+	
+	
+	<select id="sysm0051DAO.selectPayr0304ListTotCnt_S" parameterClass="sysm0051SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PAYR0304
+			WHERE 1=1
+			<isNotNull property="emymtDivCd">
+				<isNotEmpty property="emymtDivCd" prepend="AND">
+					EMYMT_DIV_CD= #emymtDivCd#
+			     </isNotEmpty>
+			 </isNotNull>
+	</select>
+
+</sqlMap> 

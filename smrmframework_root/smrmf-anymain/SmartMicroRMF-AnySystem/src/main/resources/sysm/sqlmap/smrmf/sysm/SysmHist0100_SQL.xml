@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SysmHist0100">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysmHist0100SrhVo" type="com.app.smrmf.sysm.server.vo.SysIfHist0100SrhVO"/>
+	<typeAlias  alias="sysmHist0100Vo" type="com.app.smrmf.sysm.server.vo.SysIfHist0100VO"/>
+
+	<select id="sysmHist0100DAO.getHour" resultClass="egovMap">
+	    SELECT LPAD((0), 2, 0)AS COMM_CD
+	    FROM DUAL
+	    UNION ALL
+	    SELECT LPAD((LEVEL), 2, 0)AS COMM_CD
+	    FROM DUAL   
+		CONNECT BY LEVEL <![CDATA[ <=  ]]> 23
+	</select>
+	
+	<select id="sysmHist0100DAO.getMinute" resultClass="egovMap">
+	    SELECT LPAD((0), 2, 0)AS COMM_CD
+	    FROM DUAL
+	    UNION ALL
+	    SELECT LPAD((LEVEL), 2, 0)AS COMM_CD
+	    FROM DUAL   
+		CONNECT BY LEVEL <![CDATA[ <=  ]]>59
+	</select>
+	 
+	
+	<select id="sysmHist0100DAO.selectHist0100ListTotCnt_S" parameterClass="sysmHist0100SrhVo" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM HIST0100
+			WHERE 1=1
+			<isNotNull property="dpobCd">
+			     <isNotEmpty property="dpobCd" prepend="AND">
+					DPOB_CD = #dpobCd#
+			     </isNotEmpty>
+			 </isNotNull>
+			 
+			<isNotNull property="usrConnectDivCd">
+			     <isNotEmpty property="usrConnectDivCd" prepend="AND">
+					USR_CONNECT_DIV_CD = #usrConnectDivCd#
+			     </isNotEmpty>
+			 </isNotNull>
+			 
+			 <isNotNull property="systemkey">
+			     <isNotEmpty property="systemkey" prepend="AND">
+			        USR_ID = (SELECT  USR_ID FROM SYSM0100 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY= #systemkey#)
+			     </isNotEmpty>
+			 </isNotNull>
+			 
+			 <isNotNull property="usrConnectBgnnDtntm">
+			     <isNotEmpty property="usrConnectBgnnDtntm" prepend="AND">
+			         SUBSTR(USR_CONNECT_BGNN_DTNTM, 1, 8) <![CDATA[  >= ]]> SUBSTR(#usrConnectBgnnDtntm#, 1, 8)
+			     </isNotEmpty>
+			</isNotNull>
+				 
+			 <isNotNull property="usrConnectEndDtntm">
+			     <isNotEmpty property="usrConnectEndDtntm" prepend="AND">
+			        SUBSTR(USR_CONNECT_END_DTNTM, 1, 8) <![CDATA[ <= ]]> SUBSTR(#usrConnectEndDtntm#, 1, 8)
+			     </isNotEmpty>
+			 </isNotNull>
+			 
+			 <isNotEmpty property="deptCd" prepend="AND">
+				<![CDATA[
+					DEPT_CD
+				]]>
+				<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+					#deptCdArr[]#
+				</iterate>
+			</isNotEmpty>  
+			 
+	</select> 
+	
+	<select id="sysmHist0100DAO.selectHist0100List_D" parameterClass="sysmHist0100SrhVo" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM 
+				FROM (
+					  SELECT DPOB_CD				
+						, USR_CONNECT_YR				
+						, USR_ID				
+						, USR_CONNECT_SEIL_NUM						
+						, USR_CONNECT_DIV_CD					
+						, DEPT_CD	
+						, fcBass0400CDNM(DPOB_CD, DEPT_CD,'2') AS DEPT_NM						
+						, USR_DIV_CD					
+						, USR_NM						
+						, SUBSTR(USR_CONNECT_BGNN_DTNTM,1,14) AS USR_CONNECT_BGNN_DTNTM		
+						, SUBSTR(USR_CONNECT_END_DTNTM,1,14) AS USR_CONNECT_END_DTNTM				
+						, SESSIONKEY					
+						, KYBDR					
+						, INPT_DT					
+						, INPT_ADDR				
+						, ISMT						
+						, REVN_DT		
+						, REVN_ADDR			
+					  FROM HIST0100   
+					  WHERE  1=1
+				   	<isNotNull property="dpobCd">
+					     <isNotEmpty property="dpobCd" prepend="AND">
+							DPOB_CD = #dpobCd#
+					     </isNotEmpty>
+					 </isNotNull>
+
+					<isNotNull property="usrConnectDivCd">
+						<isNotEmpty property="usrConnectDivCd" prepend="AND">
+							USR_CONNECT_DIV_CD = #usrConnectDivCd#
+						</isNotEmpty>
+					</isNotNull>
+					 
+					 <isNotNull property="systemkey">
+					     <isNotEmpty property="systemkey" prepend="AND">
+					        USR_ID = (SELECT  USR_ID FROM SYSM0100 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY= #systemkey#)
+					     </isNotEmpty>
+					 </isNotNull>
+					 
+					 <isNotNull property="usrConnectBgnnDtntm">
+					     <isNotEmpty property="usrConnectBgnnDtntm" prepend="AND">
+					        SUBSTR(USR_CONNECT_BGNN_DTNTM, 1, 8) <![CDATA[  >= ]]> SUBSTR(#usrConnectBgnnDtntm#, 1, 8)
+					     </isNotEmpty>
+					 </isNotNull>
+					 
+					 <isNotNull property="usrConnectEndDtntm">
+					     <isNotEmpty property="usrConnectEndDtntm" prepend="AND">
+					        SUBSTR(USR_CONNECT_END_DTNTM, 1, 8) <![CDATA[ <= ]]> SUBSTR(#usrConnectEndDtntm#, 1, 8)
+					     </isNotEmpty>
+					 </isNotNull>
+					 
+					 <isNotEmpty property="deptCd" prepend="AND">
+						<![CDATA[
+							DEPT_CD
+						]]>
+						<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+							#deptCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>
+
+	<delete id="sysmHist0100DAO.deleteHist0100_S">
+		<![CDATA[
+			DELETE FROM HIST0100 
+			WHERE  1=1
+		]]>
+		<isNotNull property="dpobCd">
+			<isNotEmpty property="dpobCd" prepend="AND">
+				DPOB_CD = #dpobCd#
+			</isNotEmpty>
+		</isNotNull>
+		<isNotNull property="usrConnectYr">
+			<isNotEmpty property="usrConnectYr" prepend="AND">
+				USR_CONNECT_YR = #usrConnectYr#
+			</isNotEmpty>
+		</isNotNull>
+		<isNotNull property="usrId">
+			<isNotEmpty property="usrId" prepend="AND">
+				USR_ID = #usrId#
+			</isNotEmpty>
+		</isNotNull>
+		<isNotNull property="usrConnectSeilNum">
+			<isNotEmpty property="usrConnectSeilNum" prepend="AND">
+				USR_CONNECT_SEIL_NUM = #usrConnectSeilNum#
+			</isNotEmpty>
+		</isNotNull>
+				
+	</delete>
+
+</sqlMap>

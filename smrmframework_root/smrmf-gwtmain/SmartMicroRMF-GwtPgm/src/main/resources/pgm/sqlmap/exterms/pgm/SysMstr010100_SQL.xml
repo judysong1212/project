@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SysMstr010100">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysMstr010100SerarchVO" type="com.app.smrmf.sysm.server.service.vo.SysIfMstr010100SrhVO"/>
+	
+	<resultMap id="sysMstr010100" class="com.app.smrmf.sysm.server.service.vo.SysIfMstr010100VO">
+		<result property="sysDpobCd" column="SYS_DPOB_CD" columnIndex="1"/>
+		<result property="sysVarNm" column="SYS_VAR_NM" columnIndex="2"/>
+		<result property="sysVarDivCd" column="SYS_VAR_DIV_CD" columnIndex="3"/>
+		<result property="sysVarVal" column="SYS_VAR_VAL" columnIndex="4"/>
+		<result property="sysVarCtnt" column="SYS_VAR_CTNT" columnIndex="5"/>
+		<result property="kybdr" column="KYBDR" columnIndex="6"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="7"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="8"/>
+		<result property="ismt" column="ISMT" columnIndex="9"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="10"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="11"/>
+	</resultMap>
+	
+	<insert id="mstr010100DAO.insertMstr010100_S">
+		<![CDATA[
+			INSERT INTO MSTR_01_0100 
+				( SYS_DPOB_CD
+				  , SYS_VAR_NM
+				  , SYS_VAR_DIV_CD
+				  , SYS_VAR_VAL
+				  , SYS_VAR_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #sysDpobCd#
+				  , #sysVarNm#
+				  , #sysVarDivCd#
+				  , #sysVarVal#
+				  , #sysVarCtnt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="mstr010100DAO.updateMstr010100_S">
+		<![CDATA[
+			UPDATE MSTR_01_0100
+			SET SYS_DPOB_CD=#sysDpobCd#
+				, SYS_VAR_NM=#sysVarNm#
+				, SYS_VAR_DIV_CD=#sysVarDivCd#
+				, SYS_VAR_VAL=#sysVarVal#
+				, SYS_VAR_CTNT=#sysVarCtnt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE SYS_DPOB_CD=#sysDpobCd#
+								AND SYS_VAR_NM=#sysVarNm#
+				]]>
+	</update>
+	
+	<delete id="mstr010100DAO.deleteMstr010100_S">
+		<![CDATA[
+			DELETE FROM MSTR_01_0100 
+						WHERE SYS_DPOB_CD=#sysDpobCd#
+								AND SYS_VAR_NM=#sysVarNm#
+				]]>
+	</delete>
+	
+	<select id="mstr010100DAO.selectMstr010100_S" resultMap="sysMstr010100">
+		<![CDATA[
+			SELECT
+				SYS_DPOB_CD
+				, SYS_VAR_NM
+				, SYS_VAR_DIV_CD
+				, SYS_VAR_VAL
+				, SYS_VAR_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM MSTR_01_0100
+						WHERE SYS_DPOB_CD=#sysDpobCd#
+								AND SYS_VAR_NM=#sysVarNm#
+				]]>
+	</select>
+	
+	<select id="mstr010100DAO.selectMstr010100List_D" parameterClass="sysMstr010100SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+							  	  SYS_DPOB_CD
+								, SYS_VAR_NM
+								, SYS_VAR_DIV_CD
+								, SYS_VAR_VAL
+								, SYS_VAR_CTNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM MSTR_01_0100
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					SYS_DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYS_VAR_NM LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						SYS_DPOB_CD DESC
+							, SYS_VAR_NM DESC
+		
+		<![CDATA[					
+	) A 
+) 
+]]>
+	</select>	
+	<select id="mstr010100DAO.selectMstr010100ListTotCnt_S" parameterClass="sysMstr010100SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM MSTR_01_0100
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				SYS_DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYS_VAR_NM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select> 
+ 
+</sqlMap>

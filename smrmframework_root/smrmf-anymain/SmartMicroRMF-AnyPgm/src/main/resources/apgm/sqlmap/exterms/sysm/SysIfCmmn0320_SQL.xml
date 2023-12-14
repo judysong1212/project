@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MSFCmmn0320">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="msfCmmn0320SearchVO" type="com.app.smrmf.sysm.server.service.vo.Cmmn0320SrhVO"/>
+	
+	<resultMap id="msfCmmn0320" class="com.app.smrmf.sysm.server.service.vo.Cmmn0320VO"> 
+		<result property="cutdogCd" column="CUTDOG_CD" columnIndex="1"/>
+		<result property="roadNmCtapv" column="ROAD_NM_CTAPV" columnIndex="2"/>
+		<result property="roadNmCtatgu" column="ROAD_NM_CTATGU" columnIndex="3"/>
+		<result property="roadNmTat" column="ROAD_NM_TAT" columnIndex="4"/>
+		<result property="roadNmLi" column="ROAD_NM_LI" columnIndex="5"/>
+		<result property="roadNmSan" column="ROAD_NM_SAN" columnIndex="6"/>
+		<result property="roadNmLtnumBobn" column="ROAD_NM_LTNUM_BOBN" columnIndex="7"/>
+		<result property="roadNmLtnumBubn" column="ROAD_NM_LTNUM_BUBN" columnIndex="8"/>
+		<result property="roadNmCd" column="ROAD_NM_CD" columnIndex="9"/>
+		<result property="roadNm" column="ROAD_NM" columnIndex="10"/>
+		<result property="roadNmUngr" column="ROAD_NM_UNGR" columnIndex="11"/>
+		<result property="buildNumBobn" column="BUILD_NUM_BOBN" columnIndex="12"/>
+		<result property="buildNumBubn" column="BUILD_NUM_BUBN" columnIndex="13"/>
+		<result property="buildNm" column="BUILD_NM" columnIndex="14"/>
+		<result property="dtlPatrBuildNm" column="DTL_PATR_BUILD_NM" columnIndex="15"/>
+		<result property="buildMangeNum" column="BUILD_MANGE_NUM" columnIndex="16"/>
+		<result property="tatdSeilNum" column="TATD_SEIL_NUM" columnIndex="17"/>
+		<result property="adsttDongCd" column="ADSTT_DONG_CD" columnIndex="18"/>
+		<result property="adsttDongNm" column="ADSTT_DONG_NM" columnIndex="19"/>
+		<result property="zpcd" column="ZPCD" columnIndex="20"/>
+		<result property="zpcdSeilNum" column="ZPCD_SEIL_NUM" columnIndex="21"/>
+		<result property="lotDsttnNm" column="LOT_DSTTN_NM" columnIndex="22"/>
+		<result property="mvReasCd" column="MV_REAS_CD" columnIndex="23"/>
+		<result property="chngDt" column="CHNG_DT" columnIndex="24"/>
+		<result property="chngBfrRoadNmAddr" column="CHNG_BFR_ROAD_NM_ADDR" columnIndex="25"/>
+		<result property="ctatguBuildNm" column="CTATGU_BUILD_NM" columnIndex="26"/>
+		<result property="jonHus" column="JON_HUS" columnIndex="27"/>
+		<result property="baseArNum" column="BASE_AR_NUM" columnIndex="28"/>
+		<result property="dtlAddrYn" column="DTL_ADDR_YN" columnIndex="29"/>
+		<result property="postCtnt01" column="POST_CTNT01" columnIndex="30"/>
+		<result property="postCtnt02" column="POST_CTNT02" columnIndex="31"/>
+		<result property="kybdr" column="KYBDR" columnIndex="32"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="33"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="34"/>
+		<result property="ismt" column="ISMT" columnIndex="35"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="36"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="37"/>
+	</resultMap>
+	
+	<insert id="msfCmmn0320DAO.insertCmmn0320_S">
+		<![CDATA[
+			INSERT INTO CMMN0320 
+				( ZPCD
+				  , ZPCD_SEIL_NUM
+				  , BUILD_MANGE_NUM
+				  , CUTDOG_CD
+				  , ROAD_NM_CTAPV
+				  , ROAD_NM_CTATGU
+				  , ROAD_NM_TAT
+				  , ROAD_NM_LI
+				  , ROAD_NM_SAN
+				  , ROAD_NM_LTNUM_BOBN
+				  , ROAD_NM_LTNUM_BUBN
+				  , ROAD_NM_CD
+				  , ROAD_NM
+				  , ROAD_NM_UNGR
+				  , BUILD_NUM_BOBN
+				  , BUILD_NUM_BUBN
+				  , BUILD_NM
+				  , DTL_PATR_BUILD_NM
+				  , TATD_SEIL_NUM
+				  , ADSTT_DONG_CD
+				  , ADSTT_DONG_NM
+				  , LOT_DSTTN_NM
+				  , MV_REAS_CD
+				  , CHNG_DT
+				  , CHNG_BFR_ROAD_NM_ADDR
+				  , CTATGU_BUILD_NM
+				  , JON_HUS
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #zpcd#
+				  , #zpcdSeilNum#
+				  , #buildMangeNum#
+				  , #cutdogCd#
+				  , #roadNmCtapv#
+				  , #roadNmCtatgu#
+				  , #roadNmTat#
+				  , #roadNmLi#
+				  , #roadNmSan#
+				  , #roadNmLtnumBobn#
+				  , #roadNmLtnumBubn#
+				  , #roadNmCd#
+				  , #roadNm#
+				  , #roadNmUngr#
+				  , #buildNumBobn#
+				  , #buildNumBubn#
+				  , #buildNm#
+				  , #dtlPatrBuildNm#
+				  , #tatdSeilNum#
+				  , #adsttDongCd#
+				  , #adsttDongNm#
+				  , #lotDsttnNm#
+				  , #mvReasCd#
+				  , #chngDt#
+				  , #chngBfrRoadNmAddr#
+				  , #ctatguBuildNm#
+				  , #jonHus#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="msfCmmn0320DAO.updateCmmn0320_S">
+		<![CDATA[
+			UPDATE CMMN0320
+			SET ZPCD=#zpcd#
+				, ZPCD_SEIL_NUM=#zpcdSeilNum#
+				, BUILD_MANGE_NUM=#buildMangeNum#
+				, CUTDOG_CD=#cutdogCd#
+				, ROAD_NM_CTAPV=#roadNmCtapv#
+				, ROAD_NM_CTATGU=#roadNmCtatgu#
+				, ROAD_NM_TAT=#roadNmTat#
+				, ROAD_NM_LI=#roadNmLi#
+				, ROAD_NM_SAN=#roadNmSan#
+				, ROAD_NM_LTNUM_BOBN=#roadNmLtnumBobn#
+				, ROAD_NM_LTNUM_BUBN=#roadNmLtnumBubn#
+				, ROAD_NM_CD=#roadNmCd#
+				, ROAD_NM=#roadNm#
+				, ROAD_NM_UNGR=#roadNmUngr#
+				, BUILD_NUM_BOBN=#buildNumBobn#
+				, BUILD_NUM_BUBN=#buildNumBubn#
+				, BUILD_NM=#buildNm#
+				, DTL_PATR_BUILD_NM=#dtlPatrBuildNm#
+				, TATD_SEIL_NUM=#tatdSeilNum#
+				, ADSTT_DONG_CD=#adsttDongCd#
+				, ADSTT_DONG_NM=#adsttDongNm#
+				, LOT_DSTTN_NM=#lotDsttnNm#
+				, MV_REAS_CD=#mvReasCd#
+				, CHNG_DT=#chngDt#
+				, CHNG_BFR_ROAD_NM_ADDR=#chngBfrRoadNmAddr#
+				, CTATGU_BUILD_NM=#ctatguBuildNm#
+				, JON_HUS=#jonHus#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				, REVN_ADDR=#revnAddr#
+						WHERE ZPCD=#zpcd#
+								AND ZPCD_SEIL_NUM=#zpcdSeilNum#
+				]]>
+	</update>
+	
+	<delete id="msfCmmn0320DAO.deleteCmmn0320_S">
+		<![CDATA[
+			DELETE FROM CMMN0320 
+						WHERE ZPCD=#zpcd#
+								AND ZPCD_SEIL_NUM=#zpcdSeilNum#
+				]]>
+	</delete>
+	
+	<select id="msfCmmn0320DAO.selectCmmn0320_S" resultMap="msfCmmn0320">
+		<![CDATA[
+			SELECT
+				ZPCD
+				, ZPCD_SEIL_NUM
+				, BUILD_MANGE_NUM
+				, CUTDOG_CD
+				, ROAD_NM_CTAPV
+				, ROAD_NM_CTATGU
+				, ROAD_NM_TAT
+				, ROAD_NM_LI
+				, ROAD_NM_SAN
+				, ROAD_NM_LTNUM_BOBN
+				, ROAD_NM_LTNUM_BUBN
+				, ROAD_NM_CD
+				, ROAD_NM
+				, ROAD_NM_UNGR
+				, BUILD_NUM_BOBN
+				, BUILD_NUM_BUBN
+				, BUILD_NM
+				, DTL_PATR_BUILD_NM
+				, TATD_SEIL_NUM
+				, ADSTT_DONG_CD
+				, ADSTT_DONG_NM
+				, LOT_DSTTN_NM
+				, MV_REAS_CD
+				, CHNG_DT
+				, CHNG_BFR_ROAD_NM_ADDR
+				, CTATGU_BUILD_NM
+				, JON_HUS
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM CMMN0320
+						WHERE ZPCD=#zpcd#
+								AND ZPCD_SEIL_NUM=#zpcdSeilNum#
+				]]>
+	</select>
+	
+
+	<select id="msfCmmn0320DAO.selectCmmn0320List_D" parameterClass="msfCmmn0320SearchVO" resultClass="egovMap">
+   <![CDATA[
+  SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+		  SELECT
+                          ZPCD AS OLD_ZPCD
+                                , BASE_AR_NUM AS ZPCD
+                                ,  ( FN_DTN_ADDR_VIEW ||  
+                                     '<br>'  
+                                 || ORG_ADDR ) AS FN_DTN_ADDR_VIEW
+                                ,  FN_DTN_ADDR
+                                ,  DTL_PATR_ADDR
+                                , ZPCD_SEIL_NUM
+                                , BUILD_MANGE_NUM
+                                , CUTDOG_CD
+                                , ROAD_NM_CTAPV
+                                , ROAD_NM_CTATGU
+                                , ROAD_NM_TAT
+                                , ROAD_NM_LI
+                                , ROAD_NM_SAN
+                                , ROAD_NM_LTNUM_BOBN
+                                , ROAD_NM_LTNUM_BUBN
+                                , ROAD_NM_CD
+                                , ROAD_NM
+                                , ROAD_NM_UNGR
+                                , BUILD_NUM_BOBN
+                                , BUILD_NUM_BUBN
+                                , BUILD_NM
+                                , DTL_PATR_BUILD_NM
+                                , TATD_SEIL_NUM
+                                , ADSTT_DONG_CD
+                                , ADSTT_DONG_NM
+                                , LOT_DSTTN_NM
+                                , MV_REAS_CD
+                                , CHNG_DT
+                                , CHNG_BFR_ROAD_NM_ADDR
+                                , CTATGU_BUILD_NM
+                                , JON_HUS
+                                 , BASE_AR_NUM
+                                  , DTL_ADDR_YN 
+                       FROM 
+                               ( SELECT
+                                  ZPCD AS OLD_ZPCD
+                                , BASE_AR_NUM AS ZPCD
+                                , ((ROAD_NM_CTAPV || ' ' || ROAD_NM_CTATGU) || ' ' ||
+                                  ( CASE WHEN ROAD_NM_LI IS NOT NULL THEN (ROAD_NM_TAT || ' ') ELSE '' END) ||
+                                  (ROAD_NM || ' '  ||
+                                  (CASE WHEN ROAD_NM_UNGR = '1'
+                                  THEN '지하 '  ELSE '' END)
+                                  || BUILD_NUM_BOBN ||
+                                  (CASE WHEN (TRIM(NVL(BUILD_NUM_BUBN,'TT')) <> 'TT') AND (TRIM(NVL(BUILD_NUM_BUBN,'TT')) <> '0')
+                                  THEN '-' || BUILD_NUM_BUBN ELSE '' END)
+                                   )  ||
+                                  
+                                   ( CASE WHEN ROAD_NM_LI IS NULL THEN ' (' || ROAD_NM_TAT
+                                     || (
+                                       CASE WHEN JON_HUS = '1' THEN ',' || CTATGU_BUILD_NM || ')' ELSE ')' END
+                                       )
+                                     ELSE '' END))  AS FN_DTN_ADDR_VIEW  
+                                , (ROAD_NM_CTAPV || ' ' || ROAD_NM_CTATGU) || ' ' ||
+                                  ( CASE WHEN ROAD_NM_LI IS NOT NULL THEN (ROAD_NM_TAT || ' ') ELSE '' END) ||
+                                  (ROAD_NM || ' '  ||
+                                  (CASE WHEN ROAD_NM_UNGR = '1'
+                                  THEN '지하 '  ELSE '' END)
+                                  || BUILD_NUM_BOBN ||
+                                  (CASE WHEN (TRIM(NVL(BUILD_NUM_BUBN,'TT')) <> 'TT') AND (TRIM(NVL(BUILD_NUM_BUBN,'TT')) <> '0')
+                                  THEN '-' || BUILD_NUM_BUBN ELSE '' END)
+                                   )  AS FN_DTN_ADDR
+                                , (
+                                   ( CASE WHEN ROAD_NM_LI IS NULL THEN ' (' || ROAD_NM_TAT
+                                     || (
+                                       CASE WHEN JON_HUS = '1' THEN ',' || CTATGU_BUILD_NM || ')' ELSE ')' END
+                                       )
+                                     ELSE '' END)
+                                  ) AS DTL_PATR_ADDR
+                                  , (
+                                   ROAD_NM_CTAPV || ' ' ||
+                                   ROAD_NM_CTATGU|| ' ' ||
+                                    ROAD_NM_TAT|| ' ' ||
+                                  ROAD_NM_LI || ' ' ||
+                                  DECODE(ROAD_NM_SAN,0,'','산') ||
+                                  ROAD_NM_LTNUM_BOBN || '-' ||
+                                 ROAD_NM_LTNUM_BUBN
+                                  ) AS ORG_ADDR 
+                                , ZPCD_SEIL_NUM
+                                , BUILD_MANGE_NUM
+                                , CUTDOG_CD
+                                , ROAD_NM_CTAPV
+                                , ROAD_NM_CTATGU
+                                , ROAD_NM_TAT
+                                , ROAD_NM_LI
+                                , ROAD_NM_SAN
+                                , ROAD_NM_LTNUM_BOBN
+                                , ROAD_NM_LTNUM_BUBN
+                                , ROAD_NM_CD
+                                , ROAD_NM
+                                , ROAD_NM_UNGR
+                                , BUILD_NUM_BOBN
+                                , BUILD_NUM_BUBN
+                                , BUILD_NM
+                                , DTL_PATR_BUILD_NM
+                                , TATD_SEIL_NUM
+                                , ADSTT_DONG_CD
+                                , ADSTT_DONG_NM
+                                , LOT_DSTTN_NM
+                                , MV_REAS_CD
+                                , CHNG_DT
+                                , CHNG_BFR_ROAD_NM_ADDR
+                                , CTATGU_BUILD_NM
+                                , JON_HUS
+                                 , BASE_AR_NUM
+                                  , DTL_ADDR_YN 
+                        FROM CMMN0320
+                        )     ]]>     
+				WHERE 1=1  
+				  <isNotEmpty  property="searchWord" >
+				     <isNotEmpty prepend="AND" property="searchWord" >
+				 	    ( (FN_DTN_ADDR_VIEW  LIKE '%' || #searchWord# || '%') 
+				 	     OR ( ORG_ADDR  LIKE '%' || #searchWord# || '%') )
+			        </isNotEmpty>  
+			      </isNotEmpty> 
+			      <isEmpty  property="searchWord" >
+				      <isNotEmpty prepend="AND" property="roadNmCtapv" >
+					 	ROAD_NM_CTAPV=#roadNmCtapv#
+				      </isNotEmpty> 
+				      <isNotEmpty prepend="AND" property="roadNmCtatgu" >
+					 	ROAD_NM_CTATGU=#roadNmCtatgu#
+				      </isNotEmpty> 
+				      <isNotEmpty prepend="AND" property="roadNmTat" >
+					 	 ((TRIM(ROAD_NM_TAT)  LIKE '%' || TRIM(#roadNmTat#) || '%') OR (TRIM(ADSTT_DONG_NM)  LIKE '%' || TRIM(#roadNmTat#) || '%'))
+				      </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="roadNmLi" >
+					 	 TRIM(ROAD_NM_LI)  LIKE '%' || TRIM(#roadNmLi#) || '%'
+				      </isNotEmpty>  
+				       <isNotEqual   property="roadNmLtnumBobn" compareValue="0">
+						  <isNotEmpty prepend="AND" property="roadNmLtnumBobn" >
+					 	   (TO_CHAR(ROAD_NM_LTNUM_BOBN) || '-' || TO_CHAR(ROAD_NM_LTNUM_BUBN)) LIKE '%' || #roadNmLtnumBobn# || '%' 
+				          </isNotEmpty> 
+					   </isNotEqual> 
+				      <isNotEmpty prepend="AND" property="roadNm" >
+					 	TRIM(ROAD_NM) LIKE '%' || TRIM(#roadNm#) || '%'
+				      </isNotEmpty> 
+				      <isNotEmpty prepend="AND" property="buildNumBobn" >
+					 	(BUILD_NUM_BOBN || '-' || BUILD_NUM_BUBN) LIKE '%' || #buildNumBobn# || '%' 
+				      </isNotEmpty> 
+				      <isNotEmpty prepend="AND" property="buildNm" >
+					 	 ((TRIM(BUILD_NM) LIKE '%' || TRIM(#buildNm#)  || '%') OR (TRIM(CTATGU_BUILD_NM) LIKE '%' || TRIM(#buildNm#)  || '%'))
+				      </isNotEmpty> 
+			      </isEmpty>  
+				AND ZPCD IS NOT NULL		
+				 ORDER BY 
+				 ZPCD ASC
+				 , ZPCD_SEIL_NUM ASC 
+		 
+	            
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<!--   , POST_CTNT01
+           , POST_CTNT02 -->
+	<select id="msfCmmn0320DAO.selectCmmn0320ListTotCnt_S" parameterClass="msfCmmn0320SearchVO" resultClass="int">
+		
+	    	SELECT COUNT(*) totcnt
+			FROM 
+             (
+             <![CDATA[	
+               SELECT
+                          ZPCD AS OLD_ZPCD
+                                , BASE_AR_NUM AS ZPCD
+                                ,  ( FN_DTN_ADDR_VIEW ||  
+                                     '<br>'  
+                                 || ORG_ADDR ) AS FN_DTN_ADDR_VIEW
+                                ,  FN_DTN_ADDR
+                                ,  DTL_PATR_ADDR
+                                , ZPCD_SEIL_NUM
+                                , BUILD_MANGE_NUM
+                                , CUTDOG_CD
+                                , ROAD_NM_CTAPV
+                                , ROAD_NM_CTATGU
+                                , ROAD_NM_TAT
+                                , ROAD_NM_LI
+                                , ROAD_NM_SAN
+                                , ROAD_NM_LTNUM_BOBN
+                                , ROAD_NM_LTNUM_BUBN
+                                , ROAD_NM_CD
+                                , ROAD_NM
+                                , ROAD_NM_UNGR
+                                , BUILD_NUM_BOBN
+                                , BUILD_NUM_BUBN
+                                , BUILD_NM
+                                , DTL_PATR_BUILD_NM
+                                , TATD_SEIL_NUM
+                                , ADSTT_DONG_CD
+                                , ADSTT_DONG_NM
+                                , LOT_DSTTN_NM
+                                , MV_REAS_CD
+                                , CHNG_DT
+                                , CHNG_BFR_ROAD_NM_ADDR
+                                , CTATGU_BUILD_NM
+                                , JON_HUS
+                                 , BASE_AR_NUM
+                                  , DTL_ADDR_YN 
+                       FROM 
+                               ( SELECT
+                                  ZPCD AS OLD_ZPCD
+                                , BASE_AR_NUM AS ZPCD
+                                , ((ROAD_NM_CTAPV || ' ' || ROAD_NM_CTATGU) || ' ' ||
+                                  ( CASE WHEN ROAD_NM_LI IS NOT NULL THEN (ROAD_NM_TAT || ' ') ELSE '' END) ||
+                                  (ROAD_NM || ' '  ||
+                                  (CASE WHEN ROAD_NM_UNGR = '1'
+                                  THEN '지하 '  ELSE '' END)
+                                  || BUILD_NUM_BOBN ||
+                                  (CASE WHEN (TRIM(NVL(BUILD_NUM_BUBN,'TT')) <> 'TT') AND (TRIM(NVL(BUILD_NUM_BUBN,'TT')) <> '0')
+                                  THEN '-' || BUILD_NUM_BUBN ELSE '' END)
+                                   )  ||
+                                  
+                                   ( CASE WHEN ROAD_NM_LI IS NULL THEN ' (' || ROAD_NM_TAT
+                                     || (
+                                       CASE WHEN JON_HUS = '1' THEN ',' || CTATGU_BUILD_NM || ')' ELSE ')' END
+                                       )
+                                     ELSE '' END))  AS FN_DTN_ADDR_VIEW  
+                                , (ROAD_NM_CTAPV || ' ' || ROAD_NM_CTATGU) || ' ' ||
+                                  ( CASE WHEN ROAD_NM_LI IS NOT NULL THEN (ROAD_NM_TAT || ' ') ELSE '' END) ||
+                                  (ROAD_NM || ' '  ||
+                                  (CASE WHEN ROAD_NM_UNGR = '1'
+                                  THEN '지하 '  ELSE '' END)
+                                  || BUILD_NUM_BOBN ||
+                                  (CASE WHEN (TRIM(NVL(BUILD_NUM_BUBN,'TT')) <> 'TT') AND (TRIM(NVL(BUILD_NUM_BUBN,'TT')) <> '0')
+                                  THEN '-' || BUILD_NUM_BUBN ELSE '' END)
+                                   )  AS FN_DTN_ADDR
+                                , (
+                                   ( CASE WHEN ROAD_NM_LI IS NULL THEN ' (' || ROAD_NM_TAT
+                                     || (
+                                       CASE WHEN JON_HUS = '1' THEN ',' || CTATGU_BUILD_NM || ')' ELSE ')' END
+                                       )
+                                     ELSE '' END)
+                                  ) AS DTL_PATR_ADDR
+                                  , (
+                                   ROAD_NM_CTAPV || ' ' ||
+                                   ROAD_NM_CTATGU|| ' ' ||
+                                    ROAD_NM_TAT|| ' ' ||
+                                  ROAD_NM_LI || ' ' ||
+                                  DECODE(ROAD_NM_SAN,0,'','산') ||
+                                  ROAD_NM_LTNUM_BOBN || '-' ||
+                                 ROAD_NM_LTNUM_BUBN
+                                  ) AS ORG_ADDR 
+                                , ZPCD_SEIL_NUM
+                                , BUILD_MANGE_NUM
+                                , CUTDOG_CD
+                                , ROAD_NM_CTAPV
+                                , ROAD_NM_CTATGU
+                                , ROAD_NM_TAT
+                                , ROAD_NM_LI
+                                , ROAD_NM_SAN
+                                , ROAD_NM_LTNUM_BOBN
+                                , ROAD_NM_LTNUM_BUBN
+                                , ROAD_NM_CD
+                                , ROAD_NM
+                                , ROAD_NM_UNGR
+                                , BUILD_NUM_BOBN
+                                , BUILD_NUM_BUBN
+                                , BUILD_NM
+                                , DTL_PATR_BUILD_NM
+                                , TATD_SEIL_NUM
+                                , ADSTT_DONG_CD
+                                , ADSTT_DONG_NM
+                                , LOT_DSTTN_NM
+                                , MV_REAS_CD
+                                , CHNG_DT
+                                , CHNG_BFR_ROAD_NM_ADDR
+                                , CTATGU_BUILD_NM
+                                , JON_HUS
+                                , BASE_AR_NUM
+                                , DTL_ADDR_YN 
+                        FROM CMMN0320
+                        )    
+            ]]>   
+			WHERE 1=1 
+			 <isNotEmpty  property="searchWord" >
+				     <isNotEmpty prepend="AND" property="searchWord" >
+				 	    ( (TEMP_LTNUM01  LIKE '%' || TRIM(#searchWord#) || '%') 
+				 	     OR ( TEMP_LTNUM02  LIKE '%' || TRIM(#searchWord#) || '%') )
+			         </isNotEmpty>  
+			  </isNotEmpty> 
+			 <isEmpty  property="searchWord" >
+				      <isNotEmpty prepend="AND" property="roadNmCtapv" >
+					 	ROAD_NM_CTAPV=#roadNmCtapv#
+				      </isNotEmpty> 
+				      <isNotEmpty prepend="AND" property="roadNmCtatgu" >
+					 	ROAD_NM_CTATGU=#roadNmCtatgu#
+				      </isNotEmpty> 
+				      <isNotEmpty prepend="AND" property="roadNmTat" >
+					 	 ((TRIM(ROAD_NM_TAT)  LIKE '%' || TRIM(#roadNmTat#) || '%') OR (TRIM(ADSTT_DONG_NM)  LIKE '%' || TRIM(#roadNmTat#) || '%'))
+				      </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="roadNmLi" >
+					 	 TRIM(ROAD_NM_LI)  LIKE '%' || TRIM(#roadNmLi#) || '%'
+				      </isNotEmpty>  
+				       <isNotEqual   property="roadNmLtnumBobn" compareValue="0">
+						  <isNotEmpty prepend="AND" property="roadNmLtnumBobn" >
+					 	   (TO_CHAR(ROAD_NM_LTNUM_BOBN) || '-' || TO_CHAR(ROAD_NM_LTNUM_BUBN)) LIKE '%' || #roadNmLtnumBobn# || '%' 
+				          </isNotEmpty> 
+					   </isNotEqual> 
+				      <isNotEmpty prepend="AND" property="roadNm" >
+					 	TRIM(ROAD_NM) LIKE '%' || TRIM(#roadNm#) || '%'
+				      </isNotEmpty> 
+				      <isNotEmpty prepend="AND" property="buildNumBobn" >
+					 	(BUILD_NUM_BOBN || '-' || BUILD_NUM_BUBN) LIKE '%' || #buildNumBobn# || '%' 
+				      </isNotEmpty> 
+				      <isNotEmpty prepend="AND" property="buildNm" >
+					 	 ((TRIM(BUILD_NM) LIKE '%' || TRIM(#buildNm#)  || '%') OR (TRIM(CTATGU_BUILD_NM) LIKE '%' || TRIM(#buildNm#)  || '%'))
+				      </isNotEmpty> 
+			      </isEmpty>  
+				AND ZPCD IS NOT NULL
+				 ) 
+	</select>
+	
+		<select id="msfCmmn0320DAO.selectCmmn0320RoadNmCtapvList_D" parameterClass="msfCmmn0320SearchVO" resultClass="egovMap">
+                    SELECT
+							       COMM_CD_NM   AS  ROAD_NM_CTAPV
+								, (COMM_CD_NM) AS ROAD_NM_CTAPV_DISP
+								 
+						FROM BASS0300
+				WHERE  OPN_YN = 'Y'
+				 AND USE_YN = 'Y' 
+				 AND RPSTTV_CD = 'D003'
+				<isNotEmpty prepend="AND" property="dpobCd" >
+					 DPOB_CD=#dpobCd#
+				</isNotEmpty>
+					ORDER BY 
+						DPOB_CD ASC , ORD ASC  , COMM_CD ASC 
+			 
+	</select>
+	
+	 <select id="msfCmmn0320DAO.selectCmmn0320RoadNmCtatguList_D" parameterClass="msfCmmn0320SearchVO" resultClass="egovMap">
+ 
+				SELECT
+						 DISTINCT	 
+								  ROAD_NM_CTAPV 
+								, ROAD_NM_CTATGU
+								, (ROAD_NM_CTATGU) AS ROAD_NM_CTATGU_DISP 
+						FROM CMMN0320
+				WHERE 1=1 
+			 <isNotEmpty prepend="AND" property="roadNmCtapv" >
+			 	 ROAD_NM_CTAPV  LIKE  #roadNmCtapv#  || '%'
+		      </isNotEmpty> 
+					ORDER BY 
+						ROAD_NM_CTATGU ASC 
+	</select>
+	
+
+</sqlMap>

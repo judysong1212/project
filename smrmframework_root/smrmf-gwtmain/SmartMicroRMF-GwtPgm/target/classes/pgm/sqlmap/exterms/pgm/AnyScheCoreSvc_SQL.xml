@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MSFScheCoreSvc">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/> 
+	 
+    <resultMap id="smrmfCoreVo" class="com.app.smrmf.sche.quartz.service.impl.SmrmfScheVO">
+	    <result property="dpobCd" column="DPOB_CD" />
+		<result property="healthCheck" column="HEALTH_CHECK"  /> 
+	</resultMap> 
+	
+    <!-- 시스템 헬스체크 잠재적으로 로드걸리는 시간  -->
+	<select id="scheCoreSvcDao.sysScheHealthCheck_S" resultMap="smrmfCoreVo">
+	    SELECT ('') AS DPOB_CD,  SYSDATE AS HEALTH_CHECK FROM DUAL
+	</select>
+	  
+</sqlMap>

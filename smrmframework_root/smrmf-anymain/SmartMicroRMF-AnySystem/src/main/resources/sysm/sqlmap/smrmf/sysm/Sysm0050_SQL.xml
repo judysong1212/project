@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sysm0050">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysm0050SrhVO" type="com.app.smrmf.sysm.server.vo.SysIfSysm0050SrhVO"/>
+	<typeAlias  alias="sysm0050Vo" type="com.app.smrmf.sysm.server.vo.SysIfSysm0050VO"/>
+	
+	<resultMap id="sysm0050" class="com.app.smrmf.sysm.server.vo.SysIfSysm0050VO">
+			<result property="sysDpobCd" column="SYS_DPOB_CD" columnIndex="1"/>
+		<result property="sysDpobNm" column="SYS_DPOB_NM" columnIndex="2"/>
+		<result property="sysDpobKey" column="SYS_DPOB_KEY" columnIndex="3"/>
+		<result property="useSysDivCd" column="USE_SYS_DIV_CD" columnIndex="4"/>
+		<result property="sysDpobUseYn" column="SYS_DPOB_USE_YN" columnIndex="5"/>
+		<result property="sysDpobBgnDt" column="SYS_DPOB_BGN_DT" columnIndex="6"/>
+		<result property="sysDpobEdDt" column="SYS_DPOB_ED_DT" columnIndex="7"/>
+		<result property="sysDpobCtnt" column="SYS_DPOB_CTNT" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap>
+	
+	<insert id="sysm0050DAO.insertSysm0050_S">
+		<![CDATA[
+				INSERT INTO SYSM0050 
+				( SYS_DPOB_CD
+				  , SYS_DPOB_NM
+				  , SYS_DPOB_KEY
+				  , USE_SYS_DIV_CD
+				  , SYS_DPOB_USE_YN
+				  , SYS_DPOB_BGN_DT
+				  , SYS_DPOB_ED_DT
+				  , SYS_DPOB_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #sysDpobCd#
+				  , #sysDpobNm#
+				  , #sysDpobKey#
+				  , #useSysDivCd#
+				  , #sysDpobUseYn#
+				  , #sysDpobBgnDt#
+				  , #sysDpobEdDt#
+				  , #sysDpobCtnt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="sysm0050DAO.updateSysm0050_S">
+		<![CDATA[
+			UPDATE SYSM0050
+			SET SYS_DPOB_CD=#sysDpobCd#
+				, SYS_DPOB_NM=#sysDpobNm#
+				, SYS_DPOB_KEY=#sysDpobKey#
+				, USE_SYS_DIV_CD=#useSysDivCd#
+				, SYS_DPOB_USE_YN=#sysDpobUseYn#
+				, SYS_DPOB_BGN_DT=#sysDpobBgnDt#
+				, SYS_DPOB_ED_DT=#sysDpobEdDt#
+				, SYS_DPOB_CTNT=#sysDpobCtnt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE SYS_DPOB_CD=#sysDpobCd#
+				]]>
+	</update>
+	
+	<delete id="sysm0050DAO.deleteSysm0050_S">
+		<![CDATA[
+				DELETE FROM SYSM0050 
+						WHERE SYS_DPOB_CD=#sysDpobCd#
+		]]>
+	</delete>
+	
+	<select id="sysm0050DAO.selectSysm0050_S" resultMap="sysm0050">
+		<![CDATA[
+			SELECT
+				SYS_DPOB_CD
+				, SYS_DPOB_NM
+				, SYS_DPOB_KEY
+				, USE_SYS_DIV_CD
+				, SYS_DPOB_USE_YN
+				, SYS_DPOB_BGN_DT
+				, SYS_DPOB_ED_DT
+				, SYS_DPOB_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM SYSM0050
+						WHERE SYS_DPOB_CD=#sysDpobCd#
+				]]>
+	</select>
+	
+	<select id="sysm0050DAO.selectSysm0050List_D" parameterClass="sysm0050SrhVO" resultClass="egovMap">
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+					SELECT
+							    SYS_DPOB_CD
+								, SYS_DPOB_NM
+								, SYS_DPOB_KEY
+								, USE_SYS_DIV_CD
+								, SYS_DPOB_USE_YN
+								, SYS_DPOB_BGN_DT
+								, SYS_DPOB_ED_DT
+								, SYS_DPOB_CTNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+							FROM SYSM0050
+					WHERE 1=1
+					<isNotNull property="sysDpobNm">
+						<isNotEmpty property="sysDpobNm" prepend="AND">
+							SYS_DPOB_NM = #sysDpobNm#
+				     	</isNotEmpty>
+				 	</isNotNull>
+				 	<isNotNull property="sysDpobUseYn">
+						<isNotEmpty property="sysDpobUseYn" prepend="AND">
+							SYS_DPOB_USE_YN = #sysDpobUseYn#
+				     	</isNotEmpty>
+				 	</isNotNull>
+						ORDER BY 
+							SYS_DPOB_CD ASC
+							, SYS_DPOB_NM ASC
+			
+			<![CDATA[					
+		) A WHERE ROWNUM <= #lastIndex#
+	)WHERE RNUM >= #firstIndex#
+	]]>
+	</select>	
+	<select id="sysm0050DAO.selectSysm0050ListTotCnt_S" parameterClass="sysm0050SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSM0050
+			WHERE 1=1
+				<isNotNull property="sysDpobNm">
+					<isNotEmpty property="sysDpobNm" prepend="AND">
+						SYS_DPOB_NM = #sysDpobNm#
+				   	</isNotEmpty>
+				</isNotNull>
+				<isNotNull property="sysDpobCd">
+					<isNotEmpty property="sysDpobCd" prepend="AND">
+						SYS_DPOB_CD = #sysDpobCd#
+				   	</isNotEmpty>
+				</isNotNull>
+			 	<isNotNull property="sysDpobUseYn">
+					<isNotEmpty property="sysDpobUseYn" prepend="AND">
+						SYS_DPOB_USE_YN = #sysDpobUseYn#
+			     	</isNotEmpty>
+			 	</isNotNull>
+	</select>
+	
+	<!-- 상위사업장 코드 -->
+	<select id="sysm0050DAO.getHhrkSysDpobCd" resultClass="egovMap">
+	    SELECT 
+	    	SYS_DPOB_CD AS COMM_CD
+	    	, SYS_DPOB_NM AS COMM_CD_NM
+		 FROM 
+		 	SYSM0050
+		 WHERE 
+		 	HHRK_SYS_DPOB_CD IS NULL
+		 ORDER BY 
+		 	SYS_DPOB_NM ASC
+	</select>
+	
+	<select id="sysm0050DAO.selectBass0100sysDivCdList" resultClass="egovMap">
+	    SELECT 
+	    	SYS_DIV_CD AS COMM_CD
+	    	, SYS_DIV_CD AS COMM_CD_NM
+		FROM 
+			BASS0100
+		WHERE 
+		 	SYS_DIV_CD IS NOT NULL
+		GROUP BY 
+			SYS_DIV_CD
+	</select>
+	
+	
+	<!-- BASS0100 사업장 확인 -->
+	<select id="sysm0050DAO.selectBass0100ListTotCnt_S" parameterClass="sysm0050SrhVO" resultClass="int">
+		SELECT COUNT(*) totcnt
+		FROM BASS0100
+		WHERE 1=1
+			<isNotNull property="sysDpobCd">
+				<isNotEmpty property="sysDpobCd" prepend="AND">
+					DPOB_CD = #sysDpobCd#
+			     </isNotEmpty>
+			 </isNotNull>
+	</select>
+
+</sqlMap> 

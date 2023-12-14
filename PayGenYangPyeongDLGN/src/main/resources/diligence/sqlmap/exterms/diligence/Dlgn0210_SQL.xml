@@ -1,0 +1,1380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Dlgn0210">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="dlgn0210VO" type="com.app.exterms.diligence.server.vo.Dlgn0210VO"/>
+	<typeAlias  alias="dlgn0210SerarchVO" type="com.app.exterms.diligence.server.vo.Dlgn0210SrhVO"/>
+	<typeAlias  alias="dlgn0210ExlVO" type="com.app.exterms.diligence.server.vo.Dlgn0210ExlVO"/>
+	<typeAlias  alias="dlgn0110ExlVO" type="com.app.exterms.diligence.server.vo.Dlgn0110ExlVO"/>
+	<typeAlias  alias="dlgn0210Dto" type="com.app.exterms.diligence.client.dto.Dlgn0210DTO"/>
+	<typeAlias  alias="dlgn0110Dto" type="com.app.exterms.diligence.client.dto.Dlgn0110DTO"/>
+	
+	<resultMap id="dlgn0210" class="com.app.exterms.diligence.server.vo.Dlgn0210VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/>
+		<result property="dilnlazExceDutyYrMnth" column="DILNLAZ_EXCE_DUTY_YR_MNTH" columnIndex="3"/>
+		<result property="payCd" column="PAY_CD" columnIndex="4"/>
+		<result property="dilnlazApptnDt" column="DILNLAZ_APPTN_DT" columnIndex="5"/>
+		<result property="dilnlazDutyYn" column="DILNLAZ_DUTY_YN" columnIndex="6"/>
+		<result property="dilnlazDutyTm" column="DILNLAZ_DUTY_TM" columnIndex="7"/>
+		<result property="dilnlazNtotYn" column="DILNLAZ_NTOT_YN" columnIndex="8"/>
+		<result property="dilnlazNtotTm" column="DILNLAZ_NTOT_TM" columnIndex="9"/>
+		<result property="dilnlazTmRstDutyYn" column="DILNLAZ_TM_RST_DUTY_YN" columnIndex="10"/>
+		<result property="dilnlazTmRstDutyTm" column="DILNLAZ_TM_RST_DUTY_TM" columnIndex="11"/>
+		<result property="kybdr" column="KYBDR" columnIndex="12"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="13"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="14"/>
+		<result property="ismt" column="ISMT" columnIndex="15"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="16"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="17"/>
+		<result property="dilnlazHodyDutyYn" column="DILNLAZ_HODY_DUTY_YN" columnIndex="18"/>
+		<result property="dilnlazHodyDutyTm" column="DILNLAZ_HODY_DUTY_TM" columnIndex="19"/>
+	</resultMap>
+	
+	<insert id="dlgn0210DAO.insertDlgn0210_S">
+		<![CDATA[
+			INSERT INTO DLGN0210 
+				( DPOB_CD
+				  , SYSTEMKEY
+				  , DILNLAZ_EXCE_DUTY_YR_MNTH
+				  , PAY_CD
+				  , DILNLAZ_APPTN_DT
+				  , DILNLAZ_DUTY_YN
+				  , DILNLAZ_DUTY_TM
+				  , DILNLAZ_NTOT_YN
+				  , DILNLAZ_NTOT_TM
+				  , DILNLAZ_TM_RST_DUTY_YN
+				  , DILNLAZ_TM_RST_DUTY_TM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , DILNLAZ_HODY_DUTY_YN
+				  , DILNLAZ_HODY_DUTY_TM )
+			VALUES ( #dpobCd#
+				  , #systemkey#
+				  , #dilnlazExceDutyYrMnth#
+				  , #payCd#
+				  , #dilnlazApptnDt#
+				  , #dilnlazDutyYn#
+				  , #dilnlazDutyTm#
+				  , #dilnlazNtotYn#
+				  , #dilnlazNtotTm#
+				  , #dilnlazTmRstDutyYn#
+				  , #dilnlazTmRstDutyTm#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr#
+				  , #dilnlazHodyDutyYn#
+				  , #dilnlazHodyDutyTm# )
+		]]>
+	</insert>
+	
+	<update id="dlgn0210DAO.updateDlgn0210_S">
+		<![CDATA[
+			UPDATE DLGN0210
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+				, PAY_CD=#payCd#
+				, DILNLAZ_APPTN_DT=#dilnlazApptnDt#
+				, DILNLAZ_DUTY_YN=#dilnlazDutyYn#
+				, DILNLAZ_DUTY_TM=#dilnlazDutyTm#
+				, DILNLAZ_NTOT_YN=#dilnlazNtotYn#
+				, DILNLAZ_NTOT_TM=#dilnlazNtotTm#
+				, DILNLAZ_TM_RST_DUTY_YN=#dilnlazTmRstDutyYn#
+				, DILNLAZ_TM_RST_DUTY_TM=#dilnlazTmRstDutyTm#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+				, DILNLAZ_HODY_DUTY_YN=#dilnlazHodyDutyYn#
+				, DILNLAZ_HODY_DUTY_TM=#dilnlazHodyDutyTm#
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+								AND PAY_CD=#payCd#
+								AND DILNLAZ_APPTN_DT=#dilnlazApptnDt#
+				]]>
+	</update>
+	
+	<delete id="dlgn0210DAO.deleteDlgn0210_S">
+		<![CDATA[
+			DELETE FROM DLGN0210 
+				WHERE DPOB_CD=#dpobCd#
+					AND SYSTEMKEY=#systemkey#
+					AND DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+					AND PAY_CD=#payCd# 
+					AND TYP_OCCU_BUSIN_VAL = #typOccuBusinVal#	
+				]]>
+			<isNotEmpty prepend="AND" property="dilnlazApptnDt" >
+			          DILNLAZ_APPTN_DT=#dilnlazApptnDt#
+			 </isNotEmpty>
+	</delete>
+	
+	<select id="dlgn0210DAO.selectDlgn0210_S" resultMap="dlgn0210">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, SYSTEMKEY
+				, DILNLAZ_EXCE_DUTY_YR_MNTH
+				, PAY_CD
+				, DILNLAZ_APPTN_DT
+				, DILNLAZ_DUTY_YN
+				, DILNLAZ_DUTY_TM
+				, DILNLAZ_NTOT_YN
+				, DILNLAZ_NTOT_TM
+				, DILNLAZ_TM_RST_DUTY_YN
+				, DILNLAZ_TM_RST_DUTY_TM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, DILNLAZ_HODY_DUTY_YN
+				, DILNLAZ_HODY_DUTY_TM
+			FROM DLGN0210
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+								AND DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+								AND PAY_CD=#payCd# 
+								AND ROWNUM = 1
+				]]>
+	</select>
+	<!-- 
+								AND DILNLAZ_APPTN_DT=#dilnlazApptnDt#  -->
+	<select id="dlgn0210DAO.selectDlgn0210List_D" parameterClass="dlgn0210SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, SYSTEMKEY
+								, DILNLAZ_EXCE_DUTY_YR_MNTH
+								, PAY_CD
+								, DILNLAZ_APPTN_DT
+								, DILNLAZ_DUTY_YN
+								, DILNLAZ_DUTY_TM
+								, DILNLAZ_NTOT_YN
+								, DILNLAZ_NTOT_TM
+								, DILNLAZ_TM_RST_DUTY_YN
+								, DILNLAZ_TM_RST_DUTY_TM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+								, DILNLAZ_HODY_DUTY_YN
+								, DILNLAZ_HODY_DUTY_TM
+						FROM DLGN0210
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, SYSTEMKEY DESC
+							, DILNLAZ_EXCE_DUTY_YR_MNTH DESC
+							, PAY_CD DESC
+							, DILNLAZ_APPTN_DT DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="dlgn0210DAO.selectDlgn0210ListTotCnt_S" parameterClass="dlgn0210SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM DLGN0210
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYSTEMKEY LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+	<update id="dlgn0210DAO.updateXlsDlgn0200ToDlgn0210" parameterClass="dlgn0210ExlVO">
+		UPDATE DLGN0210 SET
+		<isNotEmpty property="dilnlazDutyStTm" >
+		   	<isNotEmpty property="dilnlazDutyEdTm" >
+		   	<![CDATA[
+              DILNLAZ_TM_RST_DUTY_TM = (
+	              							(
+		              							SELECT CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR = (SELECT DISTINCT SUBSTR (#dilnlazYrMnth#, 0, 4) FROM DLGN0210)
+																							                               AND YYYYMM = #dilnlazYrMnth#
+																							                               AND SUBSTR (CALENDAR_DATE, -2) = SUBSTR(#dilnlazApptnDt#, -2)) = '0'  
+											                THEN
+											                	TO_NUMBER(
+												                     (SELECT CASE WHEN ( (  (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) - 1080)) <= 240
+												                                  THEN ( (  (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) - 1080))
+												                                  ELSE TO_NUMBER ('240')
+												                                  END AS DILNLAZ_TM_RST_DUTY_TM
+												                      FROM DLGN0210
+												                      WHERE SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100 WHERE RESN_REGN_NUM = #resnRegnNum#)
+																		                                                AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+																		                                                AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)
+																)
+											               ELSE TO_NUMBER('0')
+											               END AS DILNLAZ_TM_RST_DUTY_TM FROM DLGN0210 WHERE SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100
+											                                                											   WHERE RESN_REGN_NUM = #resnRegnNum#)
+																		                               AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+																		                               AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#
+											) +
+											(
+													select  
+										            		CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR = (SELECT DISTINCT SUBSTR (#dilnlazYrMnth#, 0, 4) FROM DLGN0210) AND YYYYMM = #dilnlazYrMnth#
+                               									 AND SUBSTR (CALENDAR_DATE, -2) = SUBSTR(#dilnlazApptnDt#, -2)) = '0'
+                                               				THEN
+											            		case 
+											                      when to_number(SUBSTR (#dilnlazDutyStTm#, 0, 2)  || SUBSTR (#dilnlazDutyStTm#, 4, 2)) < 900
+											                      then TO_NUMBER(540 - (SUBSTR (#dilnlazDutyStTm#, 0, 2)  * 60 + SUBSTR (#dilnlazDutyStTm#, 4, 2)))
+											                      ELSE TO_NUMBER('0')
+											                    END
+											                ELSE TO_NUMBER('0')
+											                END     
+										            from  dual	
+											)
+										), 
+        	 DILNLAZ_NTOT_TM = (SELECT CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR = (SELECT DISTINCT SUBSTR (#dilnlazYrMnth#, 0, 4) FROM DLGN0210)
+																			                                AND YYYYMM =  #dilnlazYrMnth#
+																			                                AND SUBSTR (CALENDAR_DATE, -2) = SUBSTR(#dilnlazApptnDt#, -2)) = '0'
+                         							THEN        
+							                              (SELECT CASE WHEN (  (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) - 1080) > 240
+							                                           THEN (  (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) - 1080)- 240
+							                                           ELSE TO_NUMBER ('')
+							                                           END AS DILNLAZ_NTOT_TM
+							                                FROM DLGN0210
+							                                WHERE SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100 WHERE RESN_REGN_NUM = #resnRegnNum#)
+																		                                      AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+																		                                      AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)
+							                        ELSE TO_NUMBER('')
+							                     	END AS DILNLAZ_NTOT_TM FROM DLGN0210 WHERE SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100 WHERE RESN_REGN_NUM = #resnRegnNum#)
+																											                              AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+																											                              AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 
+    		 DILNLAZ_HODY_DUTY_TM = (SELECT CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR = (SELECT DISTINCT SUBSTR (#dilnlazYrMnth#, 0, 4) FROM DLGN0210)
+															                                AND YYYYMM = #dilnlazYrMnth#
+															                                AND SUBSTR (CALENDAR_DATE, -2) = SUBSTR(#dilnlazApptnDt#, -2)) = '1'
+                           						 THEN CASE WHEN (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) >= 720
+		                                         		   THEN CASE WHEN (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60  + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) >= 1080
+                                                		 	         THEN '480'
+                                                                     ELSE TO_CHAR((SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) - 600)
+                                                                     END
+                                                           ELSE TO_CHAR( SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2))
+                                                           END
+                                                 ELSE TO_NUMBER('')
+                                                 END AS DILNLAZ_HODY_DUTY_TM FROM DLGN0210 WHERE SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100 WHERE RESN_REGN_NUM = #resnRegnNum#)
+																												                              AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+																												                              AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 
+   			DILNLAZ_HODY_NTOT_TM = (
+   										(
+   												SELECT CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR = (SELECT DISTINCT SUBSTR (#dilnlazYrMnth#, 0, 4) FROM DLGN0210) AND YYYYMM = #dilnlazYrMnth#
+                                																						   AND SUBSTR (CALENDAR_DATE, -2) = SUBSTR(#dilnlazApptnDt#, -2)) = '1'
+                                                THEN CASE WHEN (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60+ SUBSTR (#dilnlazDutyEdTm#, 4, 2)) > 1080
+                                                          THEN TO_NUMBER((SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) - 1080)
+                                                          ELSE TO_NUMBER('0')
+                                                          END
+                                                ELSE TO_NUMBER('0')
+                                                END AS DILNLAZ_HODY_NTOT_TM FROM DLGN0210 WHERE SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100 WHERE RESN_REGN_NUM = #resnRegnNum#)
+																										                              AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+																										                              AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#
+										) +
+										(
+									            select  
+									            		CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR = (SELECT DISTINCT SUBSTR (#dilnlazYrMnth#, 0, 4) FROM DLGN0210) AND YYYYMM = #dilnlazYrMnth#
+                              									 AND SUBSTR (CALENDAR_DATE, -2) = SUBSTR(#dilnlazApptnDt#, -2)) = '1'
+                                               				THEN
+											            		case 
+											                      when to_number(SUBSTR (#dilnlazDutyStTm#, 0, 2)  || SUBSTR (#dilnlazDutyStTm#, 4, 2)) < 900
+											                      then TO_NUMBER(540 - (SUBSTR (#dilnlazDutyStTm#, 0, 2)  * 60 + SUBSTR (#dilnlazDutyStTm#, 4, 2)))
+											                      ELSE TO_NUMBER('0')
+											                    END
+											                ELSE TO_NUMBER('0')
+										                END     
+									            from  dual											
+										)
+									),
+		     DILNLAZ_DUTY_ST_TM = #dilnlazDutyStTm#,
+		     DILNLAZ_DUTY_ED_TM = #dilnlazDutyEdTm#
+                ]]>
+           </isNotEmpty>
+         </isNotEmpty>
+          <isEmpty property="dilnlazDutyStTm" >
+		   	<isEmpty property="dilnlazDutyEdTm" >
+		   		<isEmpty property="dilnlazNtotTm" >
+			   	  <isNotEmpty property="dilnlazTmRstDutyTm" >
+	           	   <![CDATA[
+	           	   DILNLAZ_TM_RST_DUTY_TM = (SELECT ((SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)) * 60 + SUBSTR(#dilnlazTmRstDutyTm#, 4, 2)) AS DILNLAZ_TM_RST_DUTY_TM 
+	                                  				FROM DLGN0210 WHERE SYSTEMKEY =(SELECT SYSTEMKEY FROM PSNL0100 WHERE RESN_REGN_NUM = #resnRegnNum#)
+	                                   							  AND DILNLAZ_EXCE_DUTY_YR_MNTH =#dilnlazYrMnth#
+	                                   							  AND DILNLAZ_APPTN_DT =  #dilnlazApptnDt#),
+	               DILNLAZ_DUTY_ED_TM = (SELECT TRUNC(( SELECT  1080 + SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazTmRstDutyTm#, 4, 2) 
+						                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+						                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+						                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)/60) ||':'||
+						       			CASE WHEN  MOD(( SELECT  1080 + SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazTmRstDutyTm#, 4, 2) 
+						                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+						                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+						                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60) = '0' THEN '00' ELSE                    
+						                         TO_CHAR(MOD(( SELECT  1080 + SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazTmRstDutyTm#, 4, 2) 
+						                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+						                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+						                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60))
+						                       END
+						                  FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+						                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+						                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#),
+					DILNLAZ_DUTY_ST_TM = '09:00',
+					DILNLAZ_HODY_DUTY_TM = '',
+					DILNLAZ_HODY_NTOT_TM = ''
+	               
+	          	   ]]>
+	          	  </isNotEmpty>
+	          	</isEmpty>
+	          	<isNotEmpty property="dilnlazNtotTm" >
+	          	  <isNotEmpty property="dilnlazTmRstDutyTm" >
+	          	   <![CDATA[
+	          	   DILNLAZ_TM_RST_DUTY_TM = (SELECT ((SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)) * 60 + SUBSTR(#dilnlazTmRstDutyTm#, 4, 2)) AS DILNLAZ_TM_RST_DUTY_TM 
+	                                  				FROM DLGN0210 WHERE SYSTEMKEY =(SELECT SYSTEMKEY FROM PSNL0100 WHERE RESN_REGN_NUM = #resnRegnNum#)
+	                                   							  AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+	                                   							  AND DILNLAZ_APPTN_DT =  #dilnlazApptnDt#),
+	               DILNLAZ_NTOT_TM = (SELECT ((SUBSTR (#dilnlazNtotTm#, 0, 2)) * 60 + SUBSTR(#dilnlazNtotTm#, 4, 2)) AS DILNLAZ_NTOT_TM 
+	                                           FROM DLGN0210 WHERE SYSTEMKEY =(SELECT SYSTEMKEY FROM PSNL0100 WHERE RESN_REGN_NUM = #resnRegnNum#)
+	                                           AND DILNLAZ_EXCE_DUTY_YR_MNTH =#dilnlazYrMnth#
+	                                           AND DILNLAZ_APPTN_DT =  #dilnlazApptnDt#),
+	              DILNLAZ_DUTY_ED_TM = (SELECT CASE WHEN (SUBSTR (#dilnlazTmRstDutyTm#, 4, 2)+ SUBSTR (#dilnlazNtotTm#, 4, 2)) >= 60 
+										             THEN  
+										                 (SELECT (TRUNC(( SELECT  1080 + SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)*60+ SUBSTR (#dilnlazNtotTm#, 0, 2)*60    
+										                                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+										                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+										                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)/60) + 1)||':'|| 
+										                      CASE WHEN  (TO_NUMBER(( SELECT  SUBSTR (#dilnlazTmRstDutyTm#, 4, 2) + SUBSTR (#dilnlazNtotTm#, 4, 2)  
+										                                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+										                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+										                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#) - 60 )) = '0'  THEN '00'
+										                           ELSE TO_CHAR(( SELECT  SUBSTR (#dilnlazTmRstDutyTm#, 4, 2) + SUBSTR (#dilnlazNtotTm#, 4, 2)  
+										                                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+										                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+										                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#) - 60 )
+										                           END FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+										                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+										                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)  
+										                                    
+										             ELSE (SELECT TRUNC(( SELECT  1080 + SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazTmRstDutyTm#, 4, 2) + SUBSTR (#dilnlazNtotTm#, 0, 2)*60 + SUBSTR (#dilnlazNtotTm#, 4, 2)  
+										                                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+										                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+										                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)/60) ||':'||
+										                        CASE WHEN  (MOD(( SELECT  1080 + SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazTmRstDutyTm#, 4, 2) + SUBSTR (#dilnlazNtotTm#, 0, 2)*60 + SUBSTR (#dilnlazNtotTm#, 4, 2)  
+										                                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+										                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+										                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60)) = '0' THEN '00'
+										                             ELSE TO_CHAR(MOD(( SELECT  1080 + SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazTmRstDutyTm#, 4, 2) + SUBSTR (#dilnlazNtotTm#, 0, 2)*60 + SUBSTR (#dilnlazNtotTm#, 4, 2)  
+										                                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+										                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+										                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60))
+										                             END FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+										                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+										                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)  
+										             END AS DILNLAZ_DUTY_ED_TM                        
+										                    
+										                 FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+										                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+										                                            AND DILNLAZ_APPTN_DT =#dilnlazApptnDt#),
+					DILNLAZ_DUTY_ST_TM = '09:00',
+					DILNLAZ_HODY_DUTY_TM = '',
+					DILNLAZ_HODY_NTOT_TM = ''
+	               ]]>
+	              </isNotEmpty>
+	            </isNotEmpty>
+	            <isEmpty property="dilnlazHodyNtotTm" >
+	              <isNotEmpty property="dilnlazHodyDutyTm" >
+	               <![CDATA[
+	               	DILNLAZ_HODY_DUTY_TM = (SELECT ((SUBSTR (#dilnlazHodyDutyTm#, 0, 2) * 60 + SUBSTR(#dilnlazHodyDutyTm#, 4, 2))) AS DILNLAZ_HODY_DUTY_TM 
+	                                           FROM DLGN0210 WHERE SYSTEMKEY =(SELECT SYSTEMKEY FROM PSNL0100 WHERE RESN_REGN_NUM = #resnRegnNum#)
+	                                           AND DILNLAZ_EXCE_DUTY_YR_MNTH =#dilnlazYrMnth#
+	                                           AND DILNLAZ_APPTN_DT =  #dilnlazApptnDt#),
+	                DILNLAZ_DUTY_ED_TM = (SELECT CASE 
+	                                                 WHEN (SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2) ) > 180
+	                							     THEN TRUNC(( SELECT 600 + SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2) 
+								                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+								                          AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+								                          AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)/60) ||':'||
+						      					   MOD(( SELECT SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2)  
+						                                        FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+						                            			AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+						                            			AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60) 
+						                            ELSE TRUNC(( SELECT 540 + SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2) 
+						                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+						                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+						                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)/60) ||':'||
+						                         CASE WHEN MOD(( SELECT SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2)  
+						                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+						                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+						                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60)  = '0' THEN '00' ELSE
+						                           TO_CHAR(MOD(( SELECT SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2)  
+						                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+						                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+						                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60)) 
+						                          END
+						                        END AS DILNLAZ_DUTY_ED_TM  
+					                            
+					                            FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+					                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+					                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#),
+					 DILNLAZ_DUTY_ST_TM = '09:00',
+					 DILNLAZ_TM_RST_DUTY_TM = '',
+					 DILNLAZ_NTOT_TM = ''
+	               ]]>
+	              </isNotEmpty>
+	             </isEmpty>
+				<isNotEmpty property="dilnlazHodyNtotTm" >
+	              <isNotEmpty property="dilnlazHodyDutyTm" >
+	              <![CDATA[
+	               	DILNLAZ_HODY_DUTY_TM = (SELECT ((SUBSTR (#dilnlazHodyDutyTm#, 0, 2) * 60 + SUBSTR(#dilnlazHodyDutyTm#, 4, 2))) AS DILNLAZ_HODY_DUTY_TM 
+	                                           FROM DLGN0210 WHERE SYSTEMKEY =(SELECT SYSTEMKEY FROM PSNL0100 WHERE RESN_REGN_NUM = #resnRegnNum#)
+	                                           AND DILNLAZ_EXCE_DUTY_YR_MNTH =#dilnlazYrMnth#
+	                                           AND DILNLAZ_APPTN_DT =  #dilnlazApptnDt#),
+					DILNLAZ_HODY_NTOT_TM = (SELECT ( (SUBSTR (#dilnlazHodyNtotTm#, 0, 2) * 60 + SUBSTR (#dilnlazHodyNtotTm#, 4, 2))) AS DILNLAZ_HODY_NTOT_TM
+                                               FROM DLGN0210 WHERE SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100 WHERE RESN_REGN_NUM = #resnRegnNum#)
+                                               AND DILNLAZ_EXCE_DUTY_YR_MNTH =#dilnlazYrMnth#
+                                               AND DILNLAZ_APPTN_DT =  #dilnlazApptnDt#),
+                                               
+               	   DILNLAZ_DUTY_ED_TM = (SELECT CASE WHEN (SUBSTR (#dilnlazHodyDutyTm#, 4, 2)+ SUBSTR (#dilnlazHodyNtotTm#, 4, 2)) >= 60 
+										             THEN  
+										                 (SELECT (TRUNC(( SELECT 600 + SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60+ SUBSTR (#dilnlazHodyNtotTm#, 0, 2)*60    
+										                                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+										                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+										                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)/60) + 1)||':'|| 
+										                     TO_NUMBER(( SELECT  SUBSTR (#dilnlazHodyDutyTm#, 4, 2) + SUBSTR (#dilnlazHodyNtotTm#, 4, 2)  
+										                                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+										                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+										                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#) - 60 )
+										                                            
+										                                            FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+										                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+										                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)  
+										                                    
+										             ELSE (SELECT TRUNC(( SELECT 600 + SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2) + SUBSTR (#dilnlazHodyNtotTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyNtotTm#, 4, 2)  
+										                                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+										                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+										                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)/60) ||':'||
+										                                            
+										                                           
+										                       CASE WHEN (MOD (( SELECT  SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2) + SUBSTR (#dilnlazHodyNtotTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyNtotTm#, 4, 2)  
+										                                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+										                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+										                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60)) = '0'
+										                            THEN (MOD (( SELECT  SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2) + SUBSTR (#dilnlazHodyNtotTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyNtotTm#, 4, 2)  
+										                                          FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+										                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+										                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60))||'0'
+										                            ELSE (SELECT   TO_CHAR(SUBSTR (#dilnlazHodyDutyTm#, 0, 2) * 60+ SUBSTR (#dilnlazHodyDutyTm#, 4, 2) + SUBSTR (#dilnlazHodyNtotTm#, 0, 2) * 60 + SUBSTR (#dilnlazHodyNtotTm#, 4, 2)) FROM DLGN0210
+											                                         WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100 WHERE RESN_REGN_NUM = #resnRegnNum#)
+																	                                               AND DILNLAZ_EXCE_DUTY_YR_MNTH =#dilnlazYrMnth#
+																	                                               AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)              
+										                            END                               
+										                                            FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+										                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+										                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)  
+										             END AS DILNLAZ_DUTY_ED_TM                        
+										                    
+										                 FROM DLGN0210  WHERE     SYSTEMKEY = (SELECT SYSTEMKEY FROM PSNL0100  WHERE RESN_REGN_NUM = #resnRegnNum#)
+										                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+										                                            AND DILNLAZ_APPTN_DT =#dilnlazApptnDt#),
+						DILNLAZ_DUTY_ST_TM = '09:00',
+					    DILNLAZ_TM_RST_DUTY_TM = '',
+					    DILNLAZ_NTOT_TM = ''	                                           
+	              ]]>
+	              </isNotEmpty>
+	            </isNotEmpty>	             
+           </isEmpty>
+           </isEmpty>
+           WHERE SYSTEMKEY = (SELECT SYSTEMKEY 
+                                    FROM PSNL0100 
+                                    WHERE RESN_REGN_NUM = #resnRegnNum#)
+           AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+           AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#
+	</update> 
+
+	<!-- 시간외근무관리 엑셀 업로드시 DLGN0210 시간을 수정  (hh:mm) -->
+	<update id="dlgn0210DAO.updateXlsDlgn0200ToDlgn0210Input" parameterClass="dlgn0210ExlVO">
+		UPDATE DLGN0210 
+			SET DILNLAZ_TM_RST_DUTY_TM 	= NVL( (SUBSTR (#dilnlazTmRstDutyTm#, 0, 2) * 60 + SUBSTR(#dilnlazTmRstDutyTm#, 4, 2))	, '0') 
+        	 	, DILNLAZ_NTOT_TM 		= NVL( (SUBSTR (#dilnlazNtotTm#, 0, 2) * 60 + SUBSTR(#dilnlazNtotTm#, 4, 2))			, '0')
+    		 	, DILNLAZ_HODY_DUTY_TM 	= NVL( (SUBSTR (#dilnlazHodyDutyTm#, 0, 2) * 60 + SUBSTR(#dilnlazHodyDutyTm#, 4, 2))	, '0')
+   				, DILNLAZ_HODY_NTOT_TM 	= NVL( (SUBSTR (#dilnlazHodyNtotTm#, 0, 2) * 60 + SUBSTR(#dilnlazHodyNtotTm#, 4, 2))	, '0')
+		     	, DILNLAZ_DUTY_ST_TM 	= NVL( #dilnlazDutyStTm# , '')
+		     	, DILNLAZ_DUTY_ED_TM 	= NVL( #dilnlazDutyEdTm# , '')
+		WHERE SYSTEMKEY = ( SELECT SYSTEMKEY 
+                        	FROM PSNL0100 
+                   		   WHERE RESN_REGN_NUM = #resnRegnNum#)
+			AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+			AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#
+	</update> 
+	
+	
+	<!-- 시간외근무관리 엑셀 업로드시 DLGN0210 시간을 수정 (mm) -->
+	<update id="dlgn0210DAO.updateXlsDlgn0200ToDlgn0210Input02" parameterClass="dlgn0210ExlVO">
+		UPDATE DLGN0210 
+			SET DILNLAZ_TM_RST_DUTY_TM 	= NVL(#dilnlazTmRstDutyTm#	, '0')
+				, DILNLAZ_NTOT_TM 		= NVL(#dilnlazNtotTm#		, '0') 
+    		 	, DILNLAZ_HODY_DUTY_TM 	= NVL(#dilnlazHodyDutyTm#	, '0') 
+   				, DILNLAZ_HODY_NTOT_TM 	= NVL(#dilnlazHodyNtotTm#	, '0')
+		     	, DILNLAZ_DUTY_ST_TM 	= NVL(#dilnlazDutyStTm#		, '')
+		     	, DILNLAZ_DUTY_ED_TM 	= NVL(#dilnlazDutyEdTm#		, '')
+		WHERE SYSTEMKEY = ( SELECT SYSTEMKEY 
+              					FROM PSNL0100 
+                			WHERE RESN_REGN_NUM = #resnRegnNum#)
+			AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+           	AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#
+	</update> 
+	
+	
+	<!-- 시간외근무관리 엑셀 업로드시 DLGN0210 근무여부를 수정 -->
+	<update id="dlgn0210DAO.updateXlsDlgn0200ToDlgn0210Yn" parameterClass="dlgn0210ExlVO">
+		UPDATE DLGN0210 
+			SET DILNLAZ_TM_RST_DUTY_YN 	= NVL ( ( CASE WHEN DILNLAZ_TM_RST_DUTY_TM IS NULL OR DILNLAZ_TM_RST_DUTY_TM ='0' THEN 'N' ELSE 'Y' END ) 	, 'N')
+	            , DILNLAZ_NTOT_YN 		= NVL ( ( CASE WHEN DILNLAZ_NTOT_TM IS NULL OR DILNLAZ_NTOT_TM ='0' THEN 'N' ELSE 'Y' END )					, 'N')
+	            , DILNLAZ_HODY_DUTY_YN 	= NVL ( ( CASE WHEN DILNLAZ_HODY_DUTY_TM IS NULL OR DILNLAZ_HODY_DUTY_TM = '0' THEN 'N' ELSE 'Y' END )		, 'N')
+		WHERE SYSTEMKEY = ( SELECT SYSTEMKEY 
+	                  			FROM PSNL0100 
+	                    	WHERE RESN_REGN_NUM = #resnRegnNum#) 
+			AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+	</update>
+	
+	<!-- 시간외근무관리 수정 시 DLGN0210 근무 여부 수정 -->
+	<update id="dlgn0210DAO.updateDlgn0210Grid_Yn" parameterClass="dlgn0210VO">
+		UPDATE DLGN0210 
+	        SET DILNLAZ_TM_RST_DUTY_YN 	= NVL ( ( CASE WHEN DILNLAZ_TM_RST_DUTY_TM IS NULL OR DILNLAZ_TM_RST_DUTY_TM ='0' THEN 'N' ELSE 'Y' END) 					, 'N')
+	            , DILNLAZ_NTOT_YN 		= NVL ( ( CASE WHEN DILNLAZ_NTOT_TM IS NULL OR DILNLAZ_NTOT_TM = '0' THEN 'N' ELSE 'Y' END) 								, 'N')
+	            , DILNLAZ_HODY_DUTY_YN 	= NVL ( ( CASE WHEN NVL(DILNLAZ_HODY_DUTY_TM, '0') = '0' AND NVL(DILNLAZ_HODY_NTOT_TM, '0') = '0'THEN 'N' ELSE 'Y' END )	, 'N')
+		WHERE SYSTEMKEY = #systemkey#
+			AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+			AND PAY_CD = #payCd#
+			AND TYP_OCCU_BUSIN_VAL = #typOccuBusinVal#
+	</update>
+	
+	
+	<!-- *********************************************************이전로직 : 시간:분 단위로 보여주는 쿼리 -->
+ <select id="dlgn0210DAO.selectDlgn0200List" parameterClass="dlgn0210SerarchVO" resultClass="egovMap">
+	<![CDATA[
+		SELECT A.DPOB_CD
+                , A.SYSTEMKEY
+                , A.DILNLAZ_EXCE_DUTY_YR_MNTH
+                , A.PAY_CD
+                , TO_CHAR (TO_DATE (A.DILNLAZ_APPTN_DT, 'YYYYMMDD'), 'YYYY.MM.DD') AS DILNLAZ_APPTN_DT
+                , A.DILNLAZ_DUTY_YN
+                , CASE WHEN(A.DILNLAZ_DUTY_TM = '0' OR A.DILNLAZ_DUTY_TM IS NULL) THEN '' ELSE (CASE WHEN TRUNC(A.DILNLAZ_DUTY_TM / 60) > 0 AND TRUNC(A.DILNLAZ_DUTY_TM
+                        / 60) < 10 THEN TO_CHAR('0'||TRUNC(A.DILNLAZ_DUTY_TM / 60)) ELSE TO_CHAR(TRUNC(A.DILNLAZ_DUTY_TM
+                         / 60)) END) ||':'|| (CASE WHEN MOD(A.DILNLAZ_DUTY_TM, 60 )>= 0 AND MOD(A.DILNLAZ_DUTY_TM, 60) <10
+                        THEN TO_CHAR('0'||MOD(A.DILNLAZ_DUTY_TM , 60)) ELSE TO_CHAR(MOD(A.DILNLAZ_DUTY_TM , 60)) END) END AS DILNLAZ_DUTY_TM    
+                , A.DILNLAZ_NTOT_YN
+                , CASE WHEN ( A.DILNLAZ_NTOT_TM = '0' OR A.DILNLAZ_NTOT_TM IS NULL ) THEN '' ELSE  (CASE WHEN TRUNC(A.DILNLAZ_NTOT_TM / 60) >= 0 AND TRUNC(A.DILNLAZ_NTOT_TM
+                        / 60) < 10 THEN TO_CHAR('0'||TRUNC(A.DILNLAZ_NTOT_TM / 60)) ELSE TO_CHAR(TRUNC(A.DILNLAZ_NTOT_TM
+                         / 60)) END) ||':'|| (CASE WHEN MOD(A.DILNLAZ_NTOT_TM, 60 )>= 0 AND MOD(A.DILNLAZ_NTOT_TM, 60) <10
+                        THEN TO_CHAR('0'||MOD(A.DILNLAZ_NTOT_TM , 60)) ELSE TO_CHAR(MOD(A.DILNLAZ_NTOT_TM , 60)) END)END AS DILNLAZ_NTOT_TM
+                , A.DILNLAZ_TM_RST_DUTY_YN
+                , CASE WHEN (SELECT(CASE WHEN
+	                		( A.DILNLAZ_TM_RST_DUTY_TM = '0' OR A.DILNLAZ_TM_RST_DUTY_TM IS NULL ) THEN '' ELSE  (CASE WHEN TRUNC(A.DILNLAZ_TM_RST_DUTY_TM / 60) > 0 AND TRUNC(A.DILNLAZ_TM_RST_DUTY_TM
+	                        / 60) < 10 THEN TO_CHAR('0'||TRUNC(A.DILNLAZ_TM_RST_DUTY_TM / 60)) ELSE TO_CHAR(TRUNC(A.DILNLAZ_TM_RST_DUTY_TM
+	                         / 60)) END) ||':'|| (CASE WHEN MOD(A.DILNLAZ_TM_RST_DUTY_TM, 60 )>= 0 AND MOD(A.DILNLAZ_TM_RST_DUTY_TM, 60) <10
+	                        THEN TO_CHAR('0'||MOD(A.DILNLAZ_TM_RST_DUTY_TM , 60)) ELSE TO_CHAR(MOD(A.DILNLAZ_TM_RST_DUTY_TM , 60)) END) 
+	                        END)
+				                        FROM DLGN0210 A 
+			                    WHERE DPOB_CD=#dpobCd# AND SYSTEMKEY=#systemkey# AND DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+			                    AND DILNLAZ_TM_RST_DUTY_TM  LIKE '%'||'-'||'%' )IS NOT NULL 
+                       THEN ''
+                       ELSE 
+                           (CASE WHEN
+	                		( A.DILNLAZ_TM_RST_DUTY_TM = '0' OR A.DILNLAZ_TM_RST_DUTY_TM IS NULL ) THEN '' ELSE  (CASE WHEN TRUNC(A.DILNLAZ_TM_RST_DUTY_TM / 60) > 0 AND TRUNC(A.DILNLAZ_TM_RST_DUTY_TM
+	                        / 60) < 10 THEN TO_CHAR('0'||TRUNC(A.DILNLAZ_TM_RST_DUTY_TM / 60)) ELSE TO_CHAR(TRUNC(A.DILNLAZ_TM_RST_DUTY_TM
+	                         / 60)) END) ||':'|| (CASE WHEN MOD(A.DILNLAZ_TM_RST_DUTY_TM, 60 )>= 0 AND MOD(A.DILNLAZ_TM_RST_DUTY_TM, 60) <10
+	                        THEN TO_CHAR('0'||MOD(A.DILNLAZ_TM_RST_DUTY_TM , 60)) ELSE TO_CHAR(MOD(A.DILNLAZ_TM_RST_DUTY_TM , 60)) END) END )
+	                   END AS DILNLAZ_TM_RST_DUTY_TM
+                , A.KYBDR
+                , A.INPT_DT
+                , A.INPT_ADDR
+                , A.ISMT
+                , A.REVN_DT
+                , A.REVN_ADDR
+                , A.DILNLAZ_HODY_DUTY_YN
+                , CASE WHEN ( A.DILNLAZ_HODY_DUTY_TM = '0' OR A.DILNLAZ_HODY_DUTY_TM IS NULL ) THEN '' ELSE  (CASE WHEN TRUNC(A.DILNLAZ_HODY_DUTY_TM / 60) > 0 AND TRUNC(A.DILNLAZ_HODY_DUTY_TM
+                        / 60) < 10 THEN TO_CHAR('0'||TRUNC(A.DILNLAZ_HODY_DUTY_TM / 60)) ELSE TO_CHAR(TRUNC(A.DILNLAZ_HODY_DUTY_TM
+                         / 60)) END) ||':'|| (CASE WHEN MOD(A.DILNLAZ_HODY_DUTY_TM, 60 )>= 0 AND MOD(A.DILNLAZ_HODY_DUTY_TM, 60) <10
+                        THEN TO_CHAR('0'||MOD(A.DILNLAZ_HODY_DUTY_TM , 60)) ELSE TO_CHAR(MOD(A.DILNLAZ_HODY_DUTY_TM , 60)) END) END AS DILNLAZ_HODY_DUTY_TM
+                                              
+                , CASE WHEN ( A.DILNLAZ_HODY_NTOT_TM = '0' OR A.DILNLAZ_HODY_NTOT_TM IS NULL ) THEN '' ELSE  (CASE WHEN TRUNC(A.DILNLAZ_HODY_NTOT_TM / 60) > 0 AND TRUNC(A.DILNLAZ_HODY_NTOT_TM
+                        / 60) < 10 THEN TO_CHAR('0'||TRUNC(A.DILNLAZ_HODY_NTOT_TM / 60)) ELSE TO_CHAR(TRUNC(A.DILNLAZ_HODY_NTOT_TM
+                         / 60)) END) ||':'|| (CASE WHEN MOD(A.DILNLAZ_HODY_NTOT_TM, 60 )>= 0 AND MOD(A.DILNLAZ_HODY_NTOT_TM, 60) <10
+                        THEN TO_CHAR('0'||MOD(A.DILNLAZ_HODY_NTOT_TM , 60)) ELSE TO_CHAR(MOD(A.DILNLAZ_HODY_NTOT_TM , 60)) END) END AS DILNLAZ_HODY_NTOT_TM 
+                , CASE WHEN SUBSTR(DILNLAZ_DUTY_ED_TM, 0, 2) * 60 >= 1080 AND DILNLAZ_TM_RST_DUTY_TM > 0 THEN
+       				   CASE WHEN DILNLAZ_TM_RST_DUTY_TM IS NOT NULL THEN 
+				            CASE WHEN SUBSTR(DILNLAZ_DUTY_ED_TM, 0, 2) >= 22
+				                 THEN '22:00' 
+				                 ELSE  A.DILNLAZ_DUTY_ED_TM
+				                 END 
+				        ELSE '' END 
+				  ELSE '' END AS DILNLAZ_DUTY_ED_TM_RST
+                , CASE WHEN SUBSTR(DILNLAZ_DUTY_ED_TM, 0, 2) * 60 >= 1320 AND DILNLAZ_NTOT_TM > 0 THEN 
+				       CASE WHEN DILNLAZ_NTOT_TM IS NOT NULL THEN A.DILNLAZ_DUTY_ED_TM ELSE '' END 
+				  ELSE '' END AS DILNLAZ_DUTY_ED_TM_DUTY
+				, CASE WHEN SUBSTR(DILNLAZ_DUTY_ED_TM, 0, 2) > 0 THEN
+				       CASE WHEN DILNLAZ_HODY_DUTY_TM IS NOT NULL AND DILNLAZ_HODY_DUTY_TM != '0' THEN 
+				            CASE WHEN SUBSTR(DILNLAZ_DUTY_ED_TM, 0, 2) >= 18
+				                 THEN '18:00' 
+				                 ELSE  A.DILNLAZ_DUTY_ED_TM
+				                 END 
+				       ELSE '' END 
+				   ELSE '' END AS DILNLAZ_DUTY_ED_TM_HODY_DUTY  
+				, CASE WHEN SUBSTR(DILNLAZ_DUTY_ED_TM, 0, 2) > 0 THEN
+				       CASE WHEN DILNLAZ_HODY_NTOT_TM IS NULL OR DILNLAZ_HODY_NTOT_TM = '0' THEN '' ELSE A.DILNLAZ_DUTY_ED_TM END 
+				  ELSE '' END AS DILNLAZ_DUTY_ED_TM_HODY_NTOT
+				, A.DILNLAZ_DUTY_ST_TM
+         		, A.DILNLAZ_DUTY_ED_TM
+         		, A.TYP_OCCU_BUSIN_VAL
+         		, DECODE(C.PUBC_HODY_YN, 'Y', 2, B.OFFDAY_KUBN ) AS OFFDAY_KUBN
+                 FROM DLGN0210 A, CO_CALENDAR B,
+			        (SELECT DPOB_CD, (PUBC_HODY_DT) AS YEAR_MNTH_DAY, PUBC_HODY_YN
+			            FROM BASS0200) C
+		WHERE A.DPOB_CD=#dpobCd#
+   			AND A.SYSTEMKEY=#systemkey#
+            AND A.PAY_CD = #payCd#
+            AND A.TYP_OCCU_BUSIN_VAL = #typOccuBusinVal#
+            AND A.DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+		    AND A.DILNLAZ_APPTN_DT = B.CALENDAR_DATE(+)
+		    AND A.DPOB_CD = C.DPOB_CD(+)
+		    AND A.DILNLAZ_APPTN_DT = C.YEAR_MNTH_DAY(+)
+		    
+		 ORDER BY A.DILNLAZ_APPTN_DT
+     ]]>
+	</select>
+	<!-- *********************************************************시간단위 -->
+	<select id="dlgn0210DAO.selectDlgn0200List_1" parameterClass="dlgn0210SerarchVO" resultClass="egovMap">
+		<![CDATA[
+			SELECT
+				A.DPOB_CD
+				, A.SYSTEMKEY
+				, A.DILNLAZ_EXCE_DUTY_YR_MNTH
+				, A.PAY_CD
+				, TO_CHAR (TO_DATE (A.DILNLAZ_APPTN_DT, 'YYYYMMDD'), 'YYYY.MM.DD') AS DILNLAZ_APPTN_DT
+				, A.DILNLAZ_DUTY_YN
+				, A.DILNLAZ_DUTY_TM
+				, A.DILNLAZ_NTOT_YN
+				, A.DILNLAZ_NTOT_TM
+				, A.DILNLAZ_TM_RST_DUTY_YN
+				, A.DILNLAZ_TM_RST_DUTY_TM
+				, A.KYBDR
+				, A.INPT_DT
+				, A.INPT_ADDR
+				, A.ISMT
+				, A.REVN_DT
+				, A.REVN_ADDR
+				, A.DILNLAZ_HODY_DUTY_YN
+				, A.DILNLAZ_HODY_DUTY_TM
+				, A.DILNLAZ_HODY_NTOT_TM
+				, A.DILNLAZ_DUTY_ST_TM
+				, A.DILNLAZ_DUTY_ED_TM
+				, CASE WHEN SUBSTR(DILNLAZ_DUTY_ED_TM, 4, 2) > 0 AND DILNLAZ_TM_RST_DUTY_TM != '0' THEN
+       				   CASE WHEN DILNLAZ_TM_RST_DUTY_TM IS NOT NULL THEN 
+				            CASE WHEN SUBSTR(DILNLAZ_DUTY_ED_TM, 0, 2) >= 22
+				                 THEN '22:00' 
+				                 ELSE  A.DILNLAZ_DUTY_ED_TM
+				                 END 
+				        ELSE '' END 
+				  ELSE '' END AS DILNLAZ_DUTY_ED_TM_RST
+                , CASE WHEN SUBSTR(DILNLAZ_DUTY_ED_TM, 0, 2) > 18 AND DILNLAZ_NTOT_TM != '0' THEN
+				       CASE WHEN DILNLAZ_NTOT_TM IS NOT NULL THEN A.DILNLAZ_DUTY_ED_TM ELSE '' END 
+				  ELSE '' END AS DILNLAZ_DUTY_ED_TM_DUTY
+				, CASE WHEN SUBSTR(DILNLAZ_DUTY_ED_TM, 0, 2) > 0 AND DILNLAZ_HODY_DUTY_TM != '0' THEN
+				       CASE WHEN DILNLAZ_HODY_DUTY_TM IS NOT NULL THEN 
+				            CASE WHEN SUBSTR(DILNLAZ_DUTY_ED_TM, 0, 2) >= 18
+				                 THEN '18:00' 
+				                 ELSE  A.DILNLAZ_DUTY_ED_TM
+				                 END 
+				       ELSE '' END 
+				   ELSE '' END AS DILNLAZ_DUTY_ED_TM_HODY_DUTY  
+				, CASE WHEN SUBSTR(DILNLAZ_DUTY_ED_TM, 0, 2) > 0 AND DILNLAZ_HODY_NTOT_TM != '0' THEN
+				       CASE WHEN DILNLAZ_HODY_NTOT_TM IS NULL OR DILNLAZ_HODY_NTOT_TM = '0' THEN '' ELSE A.DILNLAZ_DUTY_ED_TM END 
+				  ELSE '' END AS DILNLAZ_DUTY_ED_TM_HODY_NTOT
+				, DECODE (C.PUBC_HODY_YN, 'Y', 2, B.OFFDAY_KUBN) AS OFFDAY_KUBN
+				, A.TYP_OCCU_BUSIN_VAL
+			
+			FROM DLGN0210 A, CO_CALENDAR B, (SELECT DPOB_CD, (PUBC_HODY_DT) AS YEAR_MNTH_DAY, PUBC_HODY_YN FROM BASS0200) C
+		
+		WHERE A.DPOB_CD=#dpobCd#
+			AND A.SYSTEMKEY=#systemkey#
+			AND A.TYP_OCCU_BUSIN_VAL = #typOccuBusinVal#
+			AND A.DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+			AND A.PAY_CD=#payCd# 
+			AND A.DILNLAZ_APPTN_DT = B.CALENDAR_DATE(+)
+  			AND A.DILNLAZ_APPTN_DT = C.YEAR_MNTH_DAY(+)
+        	AND A.DPOB_CD = C.DPOB_CD(+)
+        	
+ 		ORDER BY A.DILNLAZ_APPTN_DT ASC
+				]]>
+	</select>	
+	<select id="dlgn0210DAO.selectDlgn0200ListTotCnt" parameterClass="dlgn0210SerarchVO" resultClass="int">
+		SELECT COUNT(*) totcnt
+            FROM DLGN0210 A, CO_CALENDAR B,
+			        (SELECT DPOB_CD, (PUBC_HODY_DT) AS YEAR_MNTH_DAY, PUBC_HODY_YN
+			            FROM BASS0200) C
+		WHERE A.DPOB_CD=#dpobCd#
+     		AND A.SYSTEMKEY=#systemkey#
+            AND A.PAY_CD = #payCd#
+            AND A.TYP_OCCU_BUSIN_VAL = #typOccuBusinVal# 
+            AND A.DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+		    AND A.DILNLAZ_APPTN_DT = B.CALENDAR_DATE(+)
+		    AND A.DPOB_CD = C.DPOB_CD(+)
+		    AND A.DILNLAZ_APPTN_DT = C.YEAR_MNTH_DAY(+)
+		ORDER BY A.DILNLAZ_APPTN_DT
+	</select>
+
+	<update id="dlgn0210DAO.updateXlsDlgn0100ToDlgn0210" parameterClass="dlgn0110ExlVO">
+	<![CDATA[
+		UPDATE DLGN0210 
+            SET 
+                DILNLAZ_DUTY_ST_TM = #dilnlazStTm#,
+                DILNLAZ_DUTY_ED_TM = #dilnlazEdTm#,
+                
+                DILNLAZ_TM_RST_DUTY_TM = (SELECT CASE WHEN(CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR =(SELECT DISTINCT SUBSTR(#dilnlazYrMnth#, 0, 4) FROM DLGN0210) AND YYYYMM = #dilnlazYrMnth# AND SUBSTR(CALENDAR_DATE, -2) = '01') = '0' 
+							                          THEN CASE WHEN ( (  (SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2)) - 1080)) <= 240
+							                                    THEN 
+								                                    CASE WHEN  ( (  (  SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2))  - 1080)) = '0'
+							                                             THEN ''
+							                                             ELSE ( TO_CHAR(  (  SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2)) - 1080))
+							                                             END
+							                                    ELSE TO_CHAR('240')
+							                                    END
+							                     ELSE TO_CHAR('')
+							                     END) < 0
+							THEN ''
+							ELSE TO_CHAR (CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR = (SELECT DISTINCT SUBSTR(#dilnlazYrMnth#, 0, 4) FROM DLGN0210) AND YYYYMM = #dilnlazYrMnth# AND SUBSTR(CALENDAR_DATE, -2) = '01') = '0' 
+							                          THEN CASE WHEN ( (  (SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2)) - 1080)) <= 240
+							                                    THEN 
+								                                    CASE WHEN  ( (  (  SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2))  - 1080)) = '0'
+							                                             THEN ''
+							                                             ELSE ( TO_CHAR(  (  SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2)) - 1080))
+							                                             END
+							                                    ELSE TO_CHAR('240')
+							                                    END
+							                     ELSE TO_CHAR('')
+							                     END)
+						    END
+			                     AS DILNLAZ_TM_RST_DUTY_TM
+			                FROM DLGN0210 A              
+			                WHERE A.SYSTEMKEY = (SELECT SYSTEMKEY 
+			                                     FROM PSNL0100 
+			                                    WHERE RESN_REGN_NUM =#resnRegnNum#) 
+			                AND A.DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+			                AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#),
+							                
+              	DILNLAZ_NTOT_TM = (SELECT CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR =(SELECT DISTINCT SUBSTR(#dilnlazYrMnth#, 0, 4) FROM DLGN0210) AND YYYYMM = #dilnlazYrMnth# AND SUBSTR(CALENDAR_DATE, -2) = '01') = '0'
+					                          THEN CASE WHEN ( (  (SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2)) - 1080)) > 240
+					                                    THEN ( (  (SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2)) - 1080)) - 240
+					                                    ELSE TO_NUMBER('')
+					                                    END
+					                     ELSE TO_NUMBER('')
+					                     END AS DILNLAZ_NTOT_TM
+					                FROM DLGN0210              
+					                WHERE SYSTEMKEY = (SELECT SYSTEMKEY 
+					                                     FROM PSNL0100 
+					                                    WHERE RESN_REGN_NUM =#resnRegnNum#) 
+					                AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+					                AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#),
+               DILNLAZ_HODY_DUTY_TM = (SELECT CASE WHEN(CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR =(SELECT DISTINCT SUBSTR(#dilnlazYrMnth#, 0, 4) FROM DLGN0210) AND YYYYMM = #dilnlazYrMnth# AND SUBSTR(CALENDAR_DATE, -2) = '01') = '1' 
+						                          THEN CASE WHEN ( (  (SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2)))) <= 1080
+						                                    THEN 
+						                                    	CASE WHEN ( ( (  SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2)))) > 720 
+									                                 THEN ( ( (  SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2)))) - 600
+									                                 ELSE ( ( (  SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2)))) - 540
+									                          		 END
+						                                    ELSE TO_NUMBER('1080')
+						                                    END
+						                     ELSE TO_NUMBER('')
+						                     END)< 0 
+						     THEN ''
+						     ELSE TO_CHAR(CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR =(SELECT DISTINCT SUBSTR(#dilnlazYrMnth#, 0, 4) FROM DLGN0210) AND YYYYMM = #dilnlazYrMnth# AND SUBSTR(CALENDAR_DATE, -2) = '01') = '1' 
+						                          THEN CASE WHEN ( (  (SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2)))) <= 1080
+						                                    THEN 
+						                                    	CASE WHEN ( ( (  SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2)))) > 720 
+									                                 THEN ( ( (  SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2)))) - 600
+									                                 ELSE ( ( (  SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2)))) - 540
+									                          		 END
+						                                    ELSE TO_NUMBER('1080')
+						                                    END
+						                     ELSE TO_NUMBER('')
+						                     END)
+						      END              
+				                     AS DILNLAZ_TM_RST_DUTY_TM
+				                FROM DLGN0210              
+				                WHERE SYSTEMKEY = (SELECT SYSTEMKEY 
+				                                     FROM PSNL0100 
+				                                    WHERE RESN_REGN_NUM =#resnRegnNum#) 
+				                AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+				                AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#),
+               DILNLAZ_HODY_NTOT_TM = (SELECT CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR =(SELECT DISTINCT SUBSTR(#dilnlazYrMnth#, 0, 4) FROM DLGN0210) AND YYYYMM = #dilnlazYrMnth# AND SUBSTR(CALENDAR_DATE, -2) = '01') = '1' 
+						                          THEN CASE WHEN ( (  (SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2))))> 1080
+						                                    THEN 
+						                                    	CASE WHEN ( ( (  SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2)))) > 720 
+									                                 THEN ( ( (  SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2)))) - 600
+									                                 ELSE ( ( (  SUBSTR (#dilnlazEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazEdTm#, 4, 2)))) - 540
+									                          		 END
+						                                    ELSE TO_NUMBER('')
+						                                    END
+						                     ELSE TO_NUMBER('')
+						                     END AS DILNLAZ_TM_RST_DUTY_TM
+						                FROM DLGN0210              
+						                WHERE SYSTEMKEY = (SELECT SYSTEMKEY 
+						                                     FROM PSNL0100 
+						                                    WHERE RESN_REGN_NUM =#resnRegnNum#) 
+						                AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+						                AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)
+                WHERE SYSTEMKEY = (SELECT SYSTEMKEY 
+                                     FROM PSNL0100 
+                                    WHERE RESN_REGN_NUM =#resnRegnNum#) 
+                AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+                AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#
+    ]]>                   
+	</update>
+
+	<!-- *********************************************************이전로직 : 시간:분 단위로 보여주는 쿼리 -->
+	<update id="dlgn0210DAO.updateDlgn0210Grid_02" parameterClass="dlgn0210VO">
+ 		 UPDATE DLGN0210 SET
+ 		<isEmpty property="dilnlazNtotTm" >
+	  	  <isNotEmpty property="dilnlazTmRstDutyTm" >
+	  	  <isEmpty property="dilnlazHodyNtotTm" >
+	  	  <isEmpty property="dilnlazHodyDutyTm" >
+        	   <![CDATA[
+        	   DILNLAZ_TM_RST_DUTY_TM = (SELECT ((SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)) * 60 + SUBSTR(#dilnlazTmRstDutyTm#, 4, 2)) AS DILNLAZ_TM_RST_DUTY_TM 
+                               				FROM DLGN0210 WHERE SYSTEMKEY =#systemkey#
+                                							  AND DILNLAZ_EXCE_DUTY_YR_MNTH =#dilnlazExceDutyYrMnth#
+                                							  AND DILNLAZ_APPTN_DT =  #dilnlazApptnDt#),
+		      DILNLAZ_NTOT_TM = (SELECT CASE WHEN ((SUBSTR (#dilnlazNtotTm#, 0, 2)) * 60 + SUBSTR(#dilnlazNtotTm#, 4, 2)) = ''
+		      							     THEN ''
+		      							     ELSE TO_CHAR((SUBSTR (#dilnlazNtotTm#, 0, 2)) * 60 + SUBSTR(#dilnlazNtotTm#, 4, 2))
+		      								 END AS DILNLAZ_NTOT_TM 
+                                        FROM DLGN0210 WHERE SYSTEMKEY =#systemkey#
+                                        AND DILNLAZ_EXCE_DUTY_YR_MNTH =#dilnlazExceDutyYrMnth#
+                                        AND DILNLAZ_APPTN_DT =  #dilnlazApptnDt#),                                							  
+              DILNLAZ_DUTY_ED_TM = (SELECT TRUNC(( SELECT  1080 + SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazTmRstDutyTm#, 4, 2) 
+		                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+		                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+		                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)/60) ||':'||
+						      	  CASE WHEN (MOD(( SELECT  1080 + SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazTmRstDutyTm#, 4, 2) 
+						                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60)) < 10
+			                  	   THEN '0'||(MOD(( SELECT  1080 + SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazTmRstDutyTm#, 4, 2) 
+						                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60))
+						                            
+			                  	   ELSE TO_CHAR(MOD(( SELECT  1080 + SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazTmRstDutyTm#, 4, 2) 
+						                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60))
+						           END
+			                            FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+			                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+			                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#),
+		     DILNLAZ_DUTY_ST_TM = (SELECT CASE
+                                         WHEN #dilnlazDutyStTm# IS NULL
+                                         THEN
+                                            '09:00'
+                                         ELSE
+                                            #dilnlazDutyStTm#
+                                         END
+                                 FROM DLGN0210
+                                WHERE     SYSTEMKEY = #systemkey#
+                                      AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+                                      AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#) 
+       	   ]]>
+       	   </isEmpty>
+       	   </isEmpty>
+       	  </isNotEmpty>
+       	</isEmpty>
+       	
+       	<isNotEmpty property="dilnlazNtotTm" >
+       	  <isNotEmpty property="dilnlazTmRstDutyTm" >
+       	  <isEmpty property="dilnlazHodyNtotTm" >
+	  	  <isEmpty property="dilnlazHodyDutyTm" >
+       	   <![CDATA[
+       	   DILNLAZ_TM_RST_DUTY_TM = (SELECT ((SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)) * 60 + SUBSTR(#dilnlazTmRstDutyTm#, 4, 2)) AS DILNLAZ_TM_RST_DUTY_TM 
+                               				FROM DLGN0210 WHERE SYSTEMKEY =#systemkey#
+                                							  AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+                                							  AND DILNLAZ_APPTN_DT =  #dilnlazApptnDt#),
+            DILNLAZ_NTOT_TM = (SELECT ((SUBSTR (#dilnlazNtotTm#, 0, 2)) * 60 + SUBSTR(#dilnlazNtotTm#, 4, 2)) AS DILNLAZ_NTOT_TM 
+                                        FROM DLGN0210 WHERE SYSTEMKEY =#systemkey#
+                                        AND DILNLAZ_EXCE_DUTY_YR_MNTH =#dilnlazExceDutyYrMnth#
+                                        AND DILNLAZ_APPTN_DT =  #dilnlazApptnDt#),
+           DILNLAZ_DUTY_ED_TM = (SELECT CASE WHEN (SUBSTR (#dilnlazTmRstDutyTm#, 4, 2)+ SUBSTR (#dilnlazNtotTm#, 4, 2)) >= 60 
+						             THEN  
+						                 (SELECT (TRUNC(( SELECT  1080 + SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)*60+ SUBSTR (#dilnlazNtotTm#, 0, 2)*60    
+						                                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)/60) + 1)||':'|| 
+						                     TO_NUMBER(( SELECT  SUBSTR (#dilnlazTmRstDutyTm#, 4, 2) + SUBSTR (#dilnlazNtotTm#, 4, 2)  
+						                                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#) - 60 )
+						                                            
+						                                            FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)  
+						                                    
+						             ELSE (SELECT TRUNC(( SELECT  1080 + SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazTmRstDutyTm#, 4, 2) + SUBSTR (#dilnlazNtotTm#, 0, 2)*60 + SUBSTR (#dilnlazNtotTm#, 4, 2)  
+						                                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)/60) ||':'||
+						                                            
+						                                           
+						                     CASE WHEN (MOD(( SELECT  1080 + SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazTmRstDutyTm#, 4, 2) + SUBSTR (#dilnlazNtotTm#, 0, 2)*60 + SUBSTR (#dilnlazNtotTm#, 4, 2)  
+						                                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60)) < 10
+						                          THEN '0'||(MOD(( SELECT  1080 + SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazTmRstDutyTm#, 4, 2) + SUBSTR (#dilnlazNtotTm#, 0, 2)*60 + SUBSTR (#dilnlazNtotTm#, 4, 2)  
+						                                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60))
+						                                            
+						                          ELSE TO_CHAR(MOD(( SELECT  1080 + SUBSTR (#dilnlazTmRstDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazTmRstDutyTm#, 4, 2) + SUBSTR (#dilnlazNtotTm#, 0, 2)*60 + SUBSTR (#dilnlazNtotTm#, 4, 2)  
+						                                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60))
+						                          END
+						                                            
+						                                            FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)  
+						             END AS DILNLAZ_DUTY_ED_TM                        
+						                    
+						                 FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                                            AND DILNLAZ_APPTN_DT =#dilnlazApptnDt#),
+			DILNLAZ_DUTY_ST_TM = (SELECT CASE
+                                         WHEN #dilnlazDutyStTm# IS NULL
+                                         THEN
+                                            '09:00'
+                                         ELSE
+                                            #dilnlazDutyStTm#
+                                         END
+                                 FROM DLGN0210
+                                WHERE     SYSTEMKEY = #systemkey#
+                                      AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+                                      AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)						                                            
+						                                            
+            ]]>
+            </isEmpty>
+            </isEmpty>
+           </isNotEmpty>
+         </isNotEmpty>
+         
+         <isEmpty property="dilnlazNtotTm" >
+       	 <isEmpty property="dilnlazTmRstDutyTm" >
+           <isNotEmpty property="dilnlazHodyDutyTm" >
+         <isEmpty property="dilnlazHodyNtotTm" >
+            <![CDATA[
+            	DILNLAZ_HODY_DUTY_TM = (SELECT CASE WHEN ((SUBSTR (#dilnlazHodyDutyTm#, 0, 2) * 60 + SUBSTR(#dilnlazHodyDutyTm#, 4, 2))) = '0'
+            	 								    THEN ''
+            	 								    ELSE TO_CHAR((SUBSTR (#dilnlazHodyDutyTm#, 0, 2) * 60 + SUBSTR(#dilnlazHodyDutyTm#, 4, 2)))
+            	 								    END AS DILNLAZ_HODY_DUTY_TM 
+                                        FROM DLGN0210 WHERE SYSTEMKEY =#systemkey#
+                                        AND DILNLAZ_EXCE_DUTY_YR_MNTH =#dilnlazExceDutyYrMnth#
+                                        AND DILNLAZ_APPTN_DT =  #dilnlazApptnDt#),
+				DILNLAZ_HODY_NTOT_TM = (SELECT CASE WHEN ((SUBSTR (#dilnlazHodyNtotTm#, 0, 2) * 60 + SUBSTR (#dilnlazHodyNtotTm#, 4, 2))) = ''
+												    THEN ''
+												    ELSE TO_CHAR((SUBSTR (#dilnlazHodyNtotTm#, 0, 2) * 60 + SUBSTR (#dilnlazHodyNtotTm#, 4, 2)))
+												    END AS DILNLAZ_HODY_NTOT_TM
+                                           FROM DLGN0210 WHERE SYSTEMKEY = #systemkey#
+                                           AND DILNLAZ_EXCE_DUTY_YR_MNTH =#dilnlazExceDutyYrMnth#
+                                           AND DILNLAZ_APPTN_DT =  #dilnlazApptnDt#),                                        
+             DILNLAZ_DUTY_ED_TM = (SELECT CASE WHEN #dilnlazHodyDutyTm# = '00:00' THEN '' ELSE
+             							CASE 
+                                              WHEN (SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2) ) > 180
+             							     THEN TRUNC(( SELECT 600 + SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2) 
+				                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+				                          AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+				                          AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)/60) ||':'||
+		      							  CASE WHEN (MOD(( SELECT SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2)  
+		                                        FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+		                            			AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+		                            			AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60)) = '0' THEN '00' ELSE 
+		      							  TO_CHAR(CASE WHEN (MOD(( SELECT SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2)  
+		                                        FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+		                            			AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+		                            			AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60)) < 0
+		                            		   THEN TO_NUMBER('')
+		                            		   ELSE (MOD(( SELECT SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2)  
+		                                        FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+		                            			AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+		                            			AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60))
+		                            		   END)
+		                            		END	 
+		                            ELSE TRUNC(( SELECT 540 + SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2) 
+		                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+		                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+		                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)/60) ||':'||
+		      							
+		      						CASE WHEN	(MOD(( SELECT SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2)  
+						                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60)) < 10
+		                            THEN '0'||(MOD(( SELECT SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2)  
+						                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60))
+		                            ELSE 
+		                            	TO_CHAR(MOD(( SELECT SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2)  
+						                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60))
+		                            END
+		                        END
+		                        END AS DILNLAZ_DUTY_ED_TM  
+	                            FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+	                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+	                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#),
+			DILNLAZ_DUTY_ST_TM = (SELECT CASE WHEN #dilnlazHodyDutyTm# = '00:00' THEN ''
+											  WHEN #dilnlazDutyStTm# IS NULL THEN '09:00'
+											  ELSE #dilnlazDutyStTm# END
+                                 FROM DLGN0210
+                                WHERE     SYSTEMKEY = #systemkey#
+                                      AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+                                      AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)	                            
+	                                  
+            ]]>
+          </isEmpty>
+           </isNotEmpty>
+          	</isEmpty>
+          	</isEmpty>
+        
+        <isEmpty property="dilnlazNtotTm" >
+       	 <isEmpty property="dilnlazTmRstDutyTm" >  
+		<isNotEmpty property="dilnlazHodyNtotTm" >
+           <isNotEmpty property="dilnlazHodyDutyTm" >
+           <![CDATA[
+            	DILNLAZ_HODY_DUTY_TM = (SELECT CASE WHEN ((SUBSTR (#dilnlazHodyDutyTm#, 0, 2) * 60 + SUBSTR(#dilnlazHodyDutyTm#, 4, 2))) = '0'
+            					                   THEN ''
+            					                   ELSE TO_CHAR((SUBSTR (#dilnlazHodyDutyTm#, 0, 2) * 60 + SUBSTR(#dilnlazHodyDutyTm#, 4, 2)))
+            					                   END AS DILNLAZ_HODY_DUTY_TM 
+                                        FROM DLGN0210 WHERE SYSTEMKEY =#systemkey#
+                                        AND DILNLAZ_EXCE_DUTY_YR_MNTH =#dilnlazExceDutyYrMnth#
+                                        AND DILNLAZ_APPTN_DT =  #dilnlazApptnDt#),
+				DILNLAZ_HODY_NTOT_TM = (SELECT CASE WHEN ((SUBSTR (#dilnlazHodyNtotTm#, 0, 2) * 60 + SUBSTR (#dilnlazHodyNtotTm#, 4, 2))) = '0'
+												    THEN ''
+												    ELSE TO_CHAR((SUBSTR (#dilnlazHodyNtotTm#, 0, 2) * 60 + SUBSTR (#dilnlazHodyNtotTm#, 4, 2)))
+												    END AS DILNLAZ_HODY_NTOT_TM
+                                           FROM DLGN0210 WHERE SYSTEMKEY = #systemkey#
+                                           AND DILNLAZ_EXCE_DUTY_YR_MNTH =#dilnlazExceDutyYrMnth#
+                                           AND DILNLAZ_APPTN_DT =  #dilnlazApptnDt#),
+                                           
+           	   DILNLAZ_DUTY_ED_TM = (SELECT CASE WHEN (SUBSTR (#dilnlazHodyDutyTm#, 4, 2)+ SUBSTR (#dilnlazHodyNtotTm#, 4, 2)) >= 60 
+						             THEN  
+						                 (SELECT (TRUNC(( SELECT 600 + SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60+ SUBSTR (#dilnlazHodyNtotTm#, 0, 2)*60    
+						                                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)/60) + 1)||':'|| 
+						                     TO_NUMBER(( SELECT  SUBSTR (#dilnlazHodyDutyTm#, 4, 2) + SUBSTR (#dilnlazHodyNtotTm#, 4, 2)  
+						                                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#) - 60 )
+						                                            
+						                                            FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)  
+						                                    
+						             ELSE  (SELECT TRUNC(( SELECT 600 + SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2) + SUBSTR (#dilnlazHodyNtotTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyNtotTm#, 4, 2)  
+						                                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)/60) ||':'||
+						                                            
+						                                           
+						                       CASE WHEN (MOD (( SELECT  SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2) + SUBSTR (#dilnlazHodyNtotTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyNtotTm#, 4, 2)  
+						                                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60)) = '0'
+						                            THEN (MOD (( SELECT  SUBSTR (#dilnlazHodyDutyTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyDutyTm#, 4, 2) + SUBSTR (#dilnlazHodyNtotTm#, 0, 2)*60 + SUBSTR (#dilnlazHodyNtotTm#, 4, 2)  
+						                                          FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60))||'0'
+						                            ELSE TO_CHAR(MOD ((SELECT   TO_CHAR(SUBSTR (#dilnlazHodyDutyTm#, 0, 2) * 60+ SUBSTR (#dilnlazHodyDutyTm#, 4, 2) + SUBSTR (#dilnlazHodyNtotTm#, 0, 2) * 60 + SUBSTR (#dilnlazHodyNtotTm#, 4, 2)) FROM DLGN0210
+							                                         WHERE     SYSTEMKEY = #systemkey#
+													                                               AND DILNLAZ_EXCE_DUTY_YR_MNTH =#dilnlazExceDutyYrMnth#
+													                                               AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 60))               
+						                            END                               
+						                                            FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                                            AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#) 
+						             END AS 	                        
+						                    
+						                 FROM DLGN0210  WHERE     SYSTEMKEY = #systemkey#
+						                                            AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+						                                            AND DILNLAZ_APPTN_DT =#dilnlazApptnDt#),
+			DILNLAZ_DUTY_ST_TM = (SELECT CASE
+                                         WHEN #dilnlazDutyStTm# IS NULL
+                                         THEN
+                                            '09:00'
+                                         ELSE
+                                            #dilnlazDutyStTm#
+                                         END
+                                 FROM DLGN0210
+                                WHERE     SYSTEMKEY = #systemkey#
+                                      AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+                                      AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)						                                            
+           ]]>
+           </isNotEmpty>
+         </isNotEmpty>
+         </isEmpty>
+         </isEmpty>
+         
+          <isEmpty property="dilnlazNtotTm" >
+       	 <isEmpty property="dilnlazTmRstDutyTm" >  
+		<isEmpty property="dilnlazHodyNtotTm" >
+           <isEmpty property="dilnlazHodyDutyTm" >
+           <![CDATA[
+     		DILNLAZ_TM_RST_DUTY_TM = (
+	     									(
+	     										SELECT CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR = (SELECT DISTINCT SUBSTR (#dilnlazExceDutyYrMnth#, 0, 4) FROM DLGN0210)
+																						                               AND YYYYMM = #dilnlazExceDutyYrMnth#
+																						                               AND SUBSTR (CALENDAR_DATE, -2) = SUBSTR(#dilnlazApptnDt#, -2)) = '0'  
+										                THEN
+										                     CASE WHEN 
+												                     (SELECT CASE WHEN ( (  (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) - 1080)) <= 240
+												                                  THEN ( (  (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) - 1080))
+												                                  ELSE TO_NUMBER ('240')
+												                                  END AS DILNLAZ_TM_RST_DUTY_TM
+												                      FROM DLGN0210
+												                      WHERE SYSTEMKEY = #systemkey#
+																		                                                AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+																		                                                AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#) < 0
+																  THEN TO_NUMBER('0')
+																  ELSE
+																  	  TO_NUMBER(
+																	  	  (SELECT CASE WHEN ( (  (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) - 1080)) <= 240
+													                                  THEN ( (  (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) - 1080))
+													                                  ELSE TO_NUMBER ('240')
+													                                  END AS DILNLAZ_TM_RST_DUTY_TM
+													                      FROM DLGN0210
+													                      WHERE SYSTEMKEY = #systemkey#
+																		  AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+																		  AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)
+																	  )
+																  END		                                                
+										               ELSE TO_NUMBER('0')
+										               END AS DILNLAZ_TM_RST_DUTY_TM FROM DLGN0210 WHERE SYSTEMKEY = #systemkey#
+																	                               AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+																	                               AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#
+													  )
+												  +
+													(
+												            select  
+												            		CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR = (SELECT DISTINCT SUBSTR (#dilnlazExceDutyYrMnth#, 0, 4) FROM DLGN0210) AND YYYYMM = #dilnlazExceDutyYrMnth#
+	                                									 AND SUBSTR (CALENDAR_DATE, -2) = SUBSTR(#dilnlazApptnDt#, -2)) = '0'
+	                                                				THEN
+													            		case 
+													                      when to_number(SUBSTR (#dilnlazDutyStTm#, 0, 2)  || SUBSTR (#dilnlazDutyStTm#, 4, 2)) < 900
+													                      then TO_NUMBER(540 - (SUBSTR (#dilnlazDutyStTm#, 0, 2)  * 60 + SUBSTR (#dilnlazDutyStTm#, 4, 2)))
+													                      ELSE TO_NUMBER('0')
+													                    END
+													                ELSE TO_NUMBER('0')
+													                END     
+												            from  dual	
+													) 		                               
+												
+												
+												), 
+        	 DILNLAZ_NTOT_TM = (SELECT CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR = (SELECT DISTINCT SUBSTR (#dilnlazExceDutyYrMnth#, 0, 4) FROM DLGN0210)
+																			                                AND YYYYMM =  #dilnlazExceDutyYrMnth#
+																			                                AND SUBSTR (CALENDAR_DATE, -2) = SUBSTR(#dilnlazApptnDt#, -2)) = '0'
+                         							THEN   
+                         								CASE WHEN     
+							                              (SELECT CASE WHEN (  (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) - 1080) > 240
+							                                           THEN (  (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) - 1080)- 240
+							                                           ELSE TO_NUMBER ('')
+							                                           END AS DILNLAZ_NTOT_TM
+							                                FROM DLGN0210
+							                                WHERE SYSTEMKEY = #systemkey#
+																		                                      AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+																		                                      AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#) < 0
+															THEN TO_NUMBER('')
+															ELSE
+																(SELECT CASE WHEN (  (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) - 1080) > 240
+							                                           THEN (  (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) - 1080)- 240
+							                                           ELSE TO_NUMBER ('')
+							                                           END AS DILNLAZ_NTOT_TM
+								                                FROM DLGN0210
+								                                WHERE SYSTEMKEY = #systemkey#
+																			                                      AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+																			                                      AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#)	
+															END				                                      		                                      
+							                        ELSE TO_NUMBER('')
+							                     	END AS DILNLAZ_NTOT_TM FROM DLGN0210 WHERE SYSTEMKEY = #systemkey#
+																											                              AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+																											                              AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 
+    		 DILNLAZ_HODY_DUTY_TM = (SELECT CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR = (SELECT DISTINCT SUBSTR (#dilnlazExceDutyYrMnth#, 0, 4) FROM DLGN0210)
+															                                AND YYYYMM = #dilnlazExceDutyYrMnth#
+															                                AND SUBSTR (CALENDAR_DATE, -2) = SUBSTR(#dilnlazApptnDt#, -2)) = '1'
+                           						 THEN CASE WHEN (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) >= 720
+		                                         		   THEN CASE WHEN (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60  + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) >= 1080
+                                                		 	         THEN '480'
+                                                                     ELSE TO_CHAR((SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) - 600)
+                                                                     END
+                                                           ELSE TO_CHAR( SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2))
+                                                           END
+                                                 ELSE TO_NUMBER('')
+                                                 END AS DILNLAZ_HODY_DUTY_TM FROM DLGN0210 WHERE SYSTEMKEY = #systemkey#
+																												                              AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+																												                              AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#), 
+   			DILNLAZ_HODY_NTOT_TM = (
+   										(
+   										       SELECT CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR = (SELECT DISTINCT SUBSTR (#dilnlazExceDutyYrMnth#, 0, 4) FROM DLGN0210) AND YYYYMM = #dilnlazExceDutyYrMnth#
+                                																						   AND SUBSTR (CALENDAR_DATE, -2) = SUBSTR(#dilnlazApptnDt#, -2)) = '1'
+                                                THEN CASE WHEN (  SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60+ SUBSTR (#dilnlazDutyEdTm#, 4, 2)) > 1080
+                                                          THEN TO_NUMBER((SUBSTR (#dilnlazDutyEdTm#, 0, 2) * 60 + SUBSTR (#dilnlazDutyEdTm#, 4, 2)) - 1080)
+                                                          ELSE TO_NUMBER('0')
+                                                          END
+                                                ELSE TO_NUMBER('0')
+                                                END AS DILNLAZ_HODY_NTOT_TM FROM DLGN0210 WHERE SYSTEMKEY = #systemkey#
+																										                              AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+																										                               AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#
+												AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#
+										)
+										+(
+											            select  
+											            		CASE WHEN (SELECT OFFDAY_KUBN FROM CO_CALENDAR WHERE YEAR = (SELECT DISTINCT SUBSTR (#dilnlazExceDutyYrMnth#, 0, 4) FROM DLGN0210) AND YYYYMM = #dilnlazExceDutyYrMnth#
+                                									 AND SUBSTR (CALENDAR_DATE, -2) = SUBSTR(#dilnlazApptnDt#, -2)) = '1'
+                                                				THEN
+												            		case 
+												                      when to_number(SUBSTR (#dilnlazDutyStTm#, 0, 2)  || SUBSTR (#dilnlazDutyStTm#, 4, 2)) < 900
+												                      then TO_NUMBER(540 - (SUBSTR (#dilnlazDutyStTm#, 0, 2)  * 60 + SUBSTR (#dilnlazDutyStTm#, 4, 2)))
+												                      ELSE TO_NUMBER('0')
+												                    END
+												                ELSE TO_NUMBER('0')
+												                END     
+											            from  dual	
+										) 
+									),
+		     DILNLAZ_DUTY_ST_TM = #dilnlazDutyStTm#,
+		     DILNLAZ_DUTY_ED_TM = #dilnlazDutyEdTm#
+		      ]]>
+        </isEmpty>
+        </isEmpty>
+        </isEmpty>
+		</isEmpty>
+		
+		WHERE SYSTEMKEY = #systemkey#
+       AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+       AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#        
+	</update>
+	
+	<!-- ******************************************************** 시간외 입력시 근무시간에 대해서만 update 처리 -->
+	<update id="dlgn0210DAO.updateDlgn0210GridTm_02" parameterClass="dlgn0210VO">
+ 		 UPDATE DLGN0210 
+ 		 	SET DILNLAZ_TM_RST_DUTY_TM 	= NVL( ( SUBSTR(#dilnlazTmRstDutyTm#, 0, 2) * 60 + SUBSTR(#dilnlazTmRstDutyTm#, 4, 2) ) , '0')
+				, DILNLAZ_NTOT_TM 		= NVL( ( SUBSTR(#dilnlazNtotTm#, 0, 2) * 60 + SUBSTR(#dilnlazNtotTm#, 4, 2) )      		, '0')
+	  			, DILNLAZ_HODY_DUTY_TM 	= NVL( ( SUBSTR(#dilnlazHodyDutyTm#, 0, 2) * 60 + SUBSTR(#dilnlazHodyDutyTm#, 4, 2) )	, '0')     
+	  			, DILNLAZ_HODY_NTOT_TM 	= NVL( ( SUBSTR(#dilnlazHodyNtotTm#, 0, 2) * 60 + SUBSTR (#dilnlazHodyNtotTm#, 4, 2))	, '0')
+		 WHERE DPOB_CD = #dpobCd#
+			AND SYSTEMKEY = #systemkey#
+       		AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazExceDutyYrMnth#
+       		AND DILNLAZ_APPTN_DT = #dilnlazApptnDt#      
+       		AND PAY_CD = #payCd#      
+       		AND TYP_OCCU_BUSIN_VAL = #typOccuBusinVal#
+	</update>	
+	
+	
+	
+	
+	
+	<!-- ********************************************************* 시간단위 기준일 전 -->
+	 <update id="dlgn0210DAO.updateDlgn0210Grid_02Pre" parameterClass="dlgn0210VO">
+		<![CDATA[
+		UPDATE DLGN0210
+			SET DPOB_CD=#dpobCd#
+				, SYSTEMKEY=#systemkey#
+				, DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+				, PAY_CD=#payCd#
+				, DILNLAZ_APPTN_DT=#dilnlazApptnDt#
+				, DILNLAZ_DUTY_YN=#dilnlazDutyYn#
+				, DILNLAZ_DUTY_TM=#dilnlazDutyTm#
+				, DILNLAZ_NTOT_YN=#dilnlazNtotYn#
+				, DILNLAZ_NTOT_TM=#dilnlazNtotTm#
+				, DILNLAZ_TM_RST_DUTY_YN=#dilnlazTmRstDutyYn#
+				, DILNLAZ_TM_RST_DUTY_TM=#dilnlazTmRstDutyTm#
+				, ISMT=#ismt#
+				, REVN_ADDR=#revnAddr#
+				, DILNLAZ_HODY_DUTY_YN=#dilnlazHodyDutyYn#
+				, DILNLAZ_HODY_DUTY_TM=#dilnlazHodyDutyTm#
+				, DILNLAZ_HODY_NTOT_TM=#dilnlazHodyNtotTm#
+				, DILNLAZ_DUTY_ST_TM=#dilnlazDutyStTm#
+				, DILNLAZ_DUTY_ED_TM=#dilnlazDutyEdTm#
+				
+		WHERE DPOB_CD=#dpobCd#
+			AND SYSTEMKEY=#systemkey#
+			AND DILNLAZ_EXCE_DUTY_YR_MNTH=#dilnlazExceDutyYrMnth#
+			AND PAY_CD=#payCd#
+			AND DILNLAZ_APPTN_DT=#dilnlazApptnDt#
+			AND TYP_OCCU_BUSIN_VAL = #typOccuBusinVal# 
+				]]>
+	</update> 
+	
+	 <update id="dlgn0210DAO.updateDlgn0100Todlgn0210Tm" parameterClass="dlgn0110Dto">
+	 	<![CDATA[
+	 		UPDATE DLGN0210
+				   SET DILNLAZ_DUTY_ED_TM = (SELECT CASE WHEN  #dilnlazDutyTm# = '0:00'
+				                                    THEN '00:00'
+				                                    ELSE 
+				                                        CASE WHEN (SUBSTR(#dilnlazDutyTm#, 0, 1)*60 + SUBSTR(#dilnlazDutyTm#, 3, 2)) > 180 
+				                                             THEN TRUNC ((SUBSTR(#dilnlazDutyTm#, 0, 1)*60 + SUBSTR(#dilnlazDutyTm#, 3, 2)) / 60 )+10 
+				                                                  ||':'|| 
+				                                                  TO_CHAR(SUBSTR(#dilnlazDutyTm#, 3, 2))             
+				                                             ELSE 
+				                                                  TRUNC((SUBSTR(#dilnlazDutyTm#, 0, 1)*60 + SUBSTR(#dilnlazDutyTm#, 3, 2)) / 60 )+9 
+				                                                  ||':'|| 
+				                                                   TO_CHAR(SUBSTR(#dilnlazDutyTm#, 3, 2))
+				                                             END
+				                                    END
+				                                FROM DLGN0210
+				                                WHERE     DPOB_CD = #dpobCd#
+				                               AND SYSTEMKEY = #systemkey#
+				                               AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+				                               AND PAY_CD = #payCd#
+				                               AND DILNLAZ_APPTN_DT =
+				                                      REPLACE (REPLACE (#dilnlazApptnDt#, '-', ''), '.', '')),
+				       DILNLAZ_TM_RST_DUTY_TM = '',
+				       DILNLAZ_NTOT_TM = '',
+				       DILNLAZ_HODY_DUTY_TM = '',
+				       DILNLAZ_HODY_NTOT_TM = '',
+				       ]]>
+				       <isEqual property="dilnlazDutyTm" compareValue="0:00">
+							DILNLAZ_DUTY_ST_TM = '00:00',
+					   </isEqual>
+				       <![CDATA[
+				       ISMT = #ismt#,
+				       REVN_DT = TO_CHAR (SYSDATE, 'YYYYMMDDHHMISS'),
+				       REVN_ADDR = #revnAddr#
+				 WHERE     DPOB_CD = #dpobCd#
+				       AND SYSTEMKEY = #systemkey#
+				       AND DILNLAZ_EXCE_DUTY_YR_MNTH = #dilnlazYrMnth#
+				       AND PAY_CD = #payCd#
+				       AND TYP_OCCU_BUSIN_VAL = #typOccuBusinVal#
+				       AND DILNLAZ_APPTN_DT =
+				              REPLACE (REPLACE (#dilnlazApptnDt#, '-', ''), '.', '')
+	 	]]>
+	 </update>
+	
+</sqlMap>

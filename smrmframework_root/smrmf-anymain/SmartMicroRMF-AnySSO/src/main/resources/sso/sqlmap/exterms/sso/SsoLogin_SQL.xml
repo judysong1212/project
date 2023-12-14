@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SsoLogin">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/> 
+	 
+	<resultMap id="ssoIfncLogin" class="com.app.smrmf.sysm.server.vo.system.SsoxUserVO">
+	    <result property="dpobCd" column="DPOB_CD" />
+	    <result property="sysDivCd" column="SYS_DIV_CD" />
+	    <result property="userId" column="USER_ID"  />
+	    <result property="pwd" column="PWD" />  
+	</resultMap>  
+	   
+	<!-- 일반 로그인 actionSSOLogin-->
+	 <select id="ssoLoginDAO.actionSSOLogin" resultMap="ssoIfncLogin"> 
+			<![CDATA[
+		SELECT
+			      BB.DPOB_CD
+				, AA.SYS_DIV_CD
+				, AA.USR_ID AS USER_ID 
+				, AA.PWD  
+			FROM SYSM0100 AA, BASS0100 BB  
+						WHERE AA.SYS_DIV_CD = BB.SYS_DIV_CD 
+						  AND AA.USR_ID=#ssoUsrId#
+						  AND AA.USE_YN = 'Y'
+		]]> 
+	</select>	
+	
+	 
+	 	<!-- 올레 일반 로그인 actionOLSSOLogin-->
+	 <select id="ssoLoginDAO.actionOLSSOLogin" resultMap="ssoIfncLogin"> 
+			<![CDATA[
+		SELECT
+			      BB.DPOB_CD
+				, AA.SYS_DIV_CD
+				, AA.USR_ID AS USER_ID 
+				, AA.PWD  
+			FROM SYSM0100 AA, BASS0100 BB  
+						WHERE AA.SYS_DIV_CD = BB.SYS_DIV_CD 
+						  AND AA.USR_ID=#ssoUsrId#
+						  AND AA.USE_YN = 'Y'
+		]]> 
+	</select>	
+	 
+	 <!-- 세올 인사랑 로그인 actionSeolSSOLogin-->
+	 <resultMap id="seolSsoIfncLogin" class="com.app.smrmf.sysm.server.vo.system.SsoxUserVO">
+	     <result property="userId" column="USER_ID"  />
+		<result property="userName" column="USER_NAME"  />
+		<result property="userSn" column="USER_SN"  />
+		<result property="userStat" column="USER_STAT"  />
+		<result property="userStatName" column="USER_STAT_NAME" /> 
+		<result property="deptId" column="DEPT_ID"/>
+		<result property="deptName" column="DEPT_NAME" />
+		<result property="deptFullname" column="DEPT_FULLNAME" />
+		<result property="classId" column="CLASS_ID"/>
+		<result property="className" column="CLASS_NAME" /> 
+		<result property="email" column="EMAIL" />
+		<result property="tel" column="TEL" />
+		<result property="mobile" column="MOBILE" /> 
+		<result property="useYn" column="USE_YN" />
+	</resultMap>  
+	   
+	<!-- 세올 인사랑 로그인 actionSeolSSOLogin-->
+	 <select id="ssoLoginDAO.actionSeolSSOLogin" resultMap="seolSsoIfncLogin"> 
+			<![CDATA[
+		SELECT  CC.USER_ID
+				, CC.USER_NAME
+				, CC.USER_SN
+				, CC.USER_STAT
+				, CC.USER_STAT_NAME
+				, CC.REGULARITY
+				, CC.ORG_ID
+				, CC.ORG_NAME
+				, CC.DEPT_ID
+				, CC.DEPT_NAME
+				, CC.DEPT_FULLNAME
+				, CC.CLASS_ID
+				, CC.CLASS_NAME
+				, CC.POSITION_ID
+				, CC.POSITION_NAME
+				, CC.GRADE_ID
+				, CC.GRADE_NAME
+				, CC.EMAIL
+				, CC.TEL
+				, CC.MOBILE
+				, CC.JOIN_DAY
+				, CC.RETIRE_DAY
+				, CC.ADD_INFO1
+				, CC.ADD_INFO2
+				, CC.ADD_INFO3
+				, CC.ADD_INFO4
+				, CC.ADD_INFO5
+				, CC.ADD_INFO6
+				, CC.ADD_INFO7
+				, CC.BASE_SYS
+				, CC.REG_DAY
+				, CC.UPDATE_DAY
+				, CC.USE_YN
+				, CC.RDUTY_NAME
+			FROM  SSOX_USER CC
+		   WHERE  CC.USER_ID=#ssoUsrId# 
+		]]> 
+	</select>	 
+	   
+	 <!-- 
+	<resultMap id="ssoIfncLogin" class="com.app.smrmf.core.msfmainapp.server.vo.system.SsoxUserVO">
+	    <result property="dpobCd" column="DPOB_CD" />
+	    <result property="sysDivCd" column="SYS_DIV_CD" />
+	    <result property="userId" column="USER_ID"  />
+		<result property="userName" column="USER_NAME"  />
+		<result property="userSn" column="USER_SN"  />
+		<result property="userStat" column="USER_STAT"  />
+		<result property="userStatName" column="USER_STAT_NAME" />
+		<result property="regularity" column="REGULARITY"/>
+		<result property="orgId" column="ORG_ID"/>
+		<result property="orgName" column="ORG_NAME"/>
+		<result property="deptId" column="DEPT_ID"/>
+		<result property="deptName" column="DEPT_NAME" />
+		<result property="deptFullname" column="DEPT_FULLNAME" />
+		<result property="classId" column="CLASS_ID"/>
+		<result property="className" column="CLASS_NAME" />
+		<result property="positionId" column="POSITION_ID" />
+		<result property="positionName" column="POSITION_NAME" />
+		<result property="gradeId" column="GRADE_ID" />
+		<result property="gradeName" column="GRADE_NAME" />
+		<result property="email" column="EMAIL" />
+		<result property="tel" column="TEL" />
+		<result property="mobile" column="MOBILE" />
+		<result property="joinDay" column="JOIN_DAY"  />
+		<result property="retireDay" column="RETIRE_DAY"  />
+		<result property="addInfo1" column="ADD_INFO1" />
+		<result property="addInfo2" column="ADD_INFO2" />
+		<result property="addInfo3" column="ADD_INFO3"  />
+		<result property="addInfo4" column="ADD_INFO4" />
+		<result property="addInfo5" column="ADD_INFO5"  />
+		<result property="addInfo6" column="ADD_INFO6" />
+		<result property="addInfo7" column="ADD_INFO7" />
+		<result property="baseSys" column="BASE_SYS" />
+		<result property="regDay" column="REG_DAY" />
+		<result property="updateDay" column="UPDATE_DAY" />
+		<result property="useYn" column="USE_YN" />
+		<result property="rdutyName" column="RDUTY_NAME" />
+	    <result property="pwd" column="PWD" /> 
+	</resultMap> -->
+	   
+	<!-- 일반 로그인 actionSSOLogin-->
+	<!--<select id="ssoLoginDAO.actionSSOLogin" resultMap="ssoIfncLogin"> 
+			<![CDATA[
+		SELECT
+			      BB.DPOB_CD
+				, AA.SYS_DIV_CD
+				, AA.USR_ID
+				, AA.USR_NM
+				, AA.USR_DIV_CD
+				, AA.SYSTEMKEY
+				, AA.DEPT_CD 
+				, AA.TYP_OCCU_CD
+				, ('') AS TYP_OCCU_NM
+				, AA.PYSP_GRDE_CD
+				, fcBass0300CDNM(BB.DPOB_CD,PYSP_GRDE_CD) AS PYSP_GRDE_NM 
+				, AA.USR_TEL
+				, AA.EMAIL
+				, AA.PWD 
+				, AA.USE_YN
+				, AA.KYBDR
+				, AA.INPT_DT
+				, AA.INPT_ADDR
+				, AA.ISMT
+				, AA.REVN_DT
+				, AA.REVN_ADDR
+				, CC.USER_ID
+				, CC.USER_NAME
+				, CC.USER_SN
+				, CC.USER_STAT
+				, CC.USER_STAT_NAME
+				, CC.REGULARITY
+				, CC.ORG_ID
+				, CC.ORG_NAME
+				, CC.DEPT_ID
+				, CC.DEPT_NAME
+				, CC.DEPT_FULLNAME
+				, CC.CLASS_ID
+				, CC.CLASS_NAME
+				, CC.POSITION_ID
+				, CC.POSITION_NAME
+				, CC.GRADE_ID
+				, CC.GRADE_NAME
+				, CC.EMAIL
+				, CC.TEL
+				, CC.MOBILE
+				, CC.JOIN_DAY
+				, CC.RETIRE_DAY
+				, CC.ADD_INFO1
+				, CC.ADD_INFO2
+				, CC.ADD_INFO3
+				, CC.ADD_INFO4
+				, CC.ADD_INFO5
+				, CC.ADD_INFO6
+				, CC.ADD_INFO7
+				, CC.BASE_SYS
+				, CC.REG_DAY
+				, CC.UPDATE_DAY
+				, CC.USE_YN
+				, CC.RDUTY_NAME
+			FROM SYSM0100 AA, BASS0100 BB , SSOX_USER CC
+						WHERE AA.SYS_DIV_CD = BB.SYS_DIV_CD
+						  AND AA.USR_ID = CC.USER_ID
+						  AND CC.USER_ID=#ssoUsrId#
+						  AND AA.USE_YN = 'Y'
+		]]> 
+	</select>	
+	  --> 
+	 
+</sqlMap>

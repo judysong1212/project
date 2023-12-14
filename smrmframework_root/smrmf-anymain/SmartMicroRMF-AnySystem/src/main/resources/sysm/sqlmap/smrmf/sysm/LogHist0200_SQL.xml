@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MsfHist0200">
+    
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="msfHist0200SrhVo" type="com.app.smrmf.sysm.server.vo.SysIfHist0200SrhVO"/>
+	<typeAlias  alias="msfHist0200Vo" type="com.app.smrmf.sysm.server.vo.SysIfHist0200VO"/>
+	
+	<select id="msfHist0200DAO.getHour" resultClass="egovMap">
+	    SELECT LPAD((0), 2, 0)AS COMM_CD
+	    FROM DUAL
+	    UNION ALL
+	    SELECT LPAD((LEVEL), 2, 0)AS COMM_CD
+	    FROM DUAL   
+		CONNECT BY LEVEL <![CDATA[ <=  ]]> 23
+	</select>
+	
+	<select id="msfHist0200DAO.getMinute" resultClass="egovMap">
+	    SELECT LPAD((0), 2, 0)AS COMM_CD
+	    FROM DUAL
+	    UNION ALL
+	    SELECT LPAD((LEVEL), 2, 0)AS COMM_CD
+	    FROM DUAL   
+		CONNECT BY LEVEL <![CDATA[ <=  ]]>59
+	</select>
+	 
+		<insert id="LogHistoryServiceDAO.insertHist0200"  parameterClass="msfHist0200Vo" >
+	      <selectKey keyProperty="keyId" resultClass="String">
+             SELECT DBMS_RANDOM.STRING('X', 3) AS KEY_ID FROM DUAL
+         </selectKey>
+		INSERT INTO HIST0200 
+					( DPOB_CD		
+						, USR_JOB_YR		
+						, USR_ID		
+						, USR_JOB_SEIL_NUM			
+						, USR_CONNECT_DIV_CD			
+						, DEPT_CD	
+						, USR_DIV_CD				
+						, USR_NM	
+						, SYSTEMKEY			
+						, USR_JOB_DTNTM		
+						, USR_JOB_SEPT_DIV_CD		
+						, USR_JOB_ETHD_NM				
+						, USR_JOB_BGNN_TM				
+						, USR_JOB_END_TM			
+						, KYBDR		
+						, INPT_DT			
+						, INPT_ADDR			
+						, ISMT			
+						, REVN_DT			
+						, REVN_ADDR	)
+				VALUES 				
+					( #dpobCd#		
+						, #usrJobYr#		
+						, #usrId#		
+						, ( SELECT NVL(MAX(USR_JOB_SEIL_NUM),0) + 1 
+							 FROM HIST0200 
+							WHERE DPOB_CD = #dpobCd# 
+							    AND USR_JOB_YR = #usrJobYr#	
+								AND USR_ID = #usrId#
+								AND USR_JOB_BGNN_TM = (TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3') || #keyId#)) 				
+						, #usrConnectDivCd#			
+						, #deptCd#	
+						, #usrDivCd#				
+						, #usrNm#	
+						, ( SELECT NVL(SYSTEMKEY, '') 
+							 FROM SYSM0100
+							WHERE USR_ID = #usrId#	 	
+						  )			
+						, (#usrJobDtntm# || #keyId#)		
+						, #usrJobSeptDivCd#		
+						, #usrJobEthdNm# 			
+						, (TO_CHAR(SYSTIMESTAMP,'YYYYMMDDHH24MISSFF3') || #keyId#)			
+						, (#usrJobEndTm# || #keyId#)			
+						, #kybdr#			
+						, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')		
+						, #inptAddr#						
+						, #ismt#					
+						, TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')						
+						, #revnAddr#)
+	</insert>
+	
+	<update id="LogHistoryServiceDAO.updateHist0200">
+		<![CDATA[
+		UPDATE HIST0200
+			SET DPOB_CD=#dpobCd#	
+				, USR_JOB_YR=#usrJobYr#			
+				, USR_ID=#usrId#		
+				, USR_JOB_SEIL_NUM=#usrJobSeilNum#			
+				, USR_CONNECT_DIV_CD=#usrConnectDivCd#			
+				, DEPT_CD=#deptCd#		
+				, USR_DIV_CD=#usrDivCd#				
+				, USR_NM=#usrNm#	
+				, SYSTEMKEY=#systemkey#				
+				, USR_JOB_DTNTM= #usrJobDtntm#			
+				, USR_JOB_SEPT_DIV_CD=#usrJobSeptDivCd#				
+				, USR_JOB_ETHD_NM=#usrJobEthdNm#					
+				, USR_JOB_BGNN_TM=#usrJobBgnnTm#				
+				, USR_JOB_END_TM=#usrJobEndTm#				
+				, ISMT=#ismt#					
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMISS')							
+				, REVN_ADDR=#revnAddr#
+		WHERE  DPOB_CD = #dpobCd#
+			AND USR_JOB_YR = #usrJobYr#
+			AND USR_ID = #usrId#
+			AND	USR_JOB_SEIL_NUM = #usrJobSeilNum#
+		]]>
+	</update>
+	
+	<delete id="LogHistoryServiceDAO.deleteHist0200">
+		<![CDATA[
+			DELETE FROM HIST0200 
+			WHERE DPOB_CD = #dpobCd#
+				AND USR_JOB_YR = #usrJobYr#
+				AND USR_ID = #usrId#
+				AND USR_JOB_SEIL_NUM = #usrJobSeilNum#
+				AND USR_JOB_BGNN_TM = #usrJobBgnnTm#
+		]]>		
+	</delete>
+	
+	<select id="LogHistoryServiceDAO.selectHist0200ListTotCnt" parameterClass="msfHist0200SrhVo" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM HIST0200
+			WHERE 1=1
+			<isNotNull property="dpobCd">
+			     <isNotEmpty property="dpobCd" prepend="AND">
+					DPOB_CD = #dpobCd#
+			     </isNotEmpty>
+			 </isNotNull>
+			 
+			<isNotNull property="usrConnectDivCd">
+				<isNotEmpty property="usrConnectDivCd" prepend="AND">
+					USR_CONNECT_DIV_CD = #usrConnectDivCd#
+				</isNotEmpty>
+			</isNotNull>
+				 
+			 <isNotNull property="systemkey">
+			     <isNotEmpty property="systemkey" prepend="AND">
+			        USR_ID = (SELECT  USR_ID FROM SYSM0200 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY= #systemkey#)
+			     </isNotEmpty>
+			 </isNotNull>
+			 
+			 <isNotNull property="usrJobBgnnTm">
+			     <isNotEmpty property="usrJobBgnnTm" prepend="AND">
+			         SUBSTR(USR_JOB_BGNN_TM, 1, 10) <![CDATA[ >=	]]> #usrJobBgnnTm#
+			     </isNotEmpty>
+			</isNotNull>
+				 
+			 <isNotNull property="usrJobEndTm">
+			     <isNotEmpty property="usrJobEndTm" prepend="AND">
+			        SUBSTR(USR_JOB_END_TM, 1, 10) <![CDATA[ <= ]]>#usrJobEndTm#
+			     </isNotEmpty>
+			 </isNotNull>
+			 
+			 <isNotEmpty property="deptCd" prepend="AND">
+				<![CDATA[
+					DEPT_CD
+				]]>
+				<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+					#deptCdArr[]#
+				</iterate>
+			</isNotEmpty>  
+	</select> 
+	
+	<select id="LogHistoryServiceDAO.selectHist0200List" parameterClass="msfHist0200SrhVo" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM 
+				FROM (
+					  SELECT DPOB_CD		
+						, USR_JOB_YR		
+						, USR_ID		
+						, USR_JOB_SEIL_NUM			
+						, USR_CONNECT_DIV_CD			
+						, DEPT_CD	
+						, fcBass0400CDNM(DPOB_CD, DEPT_CD,'2') AS DEPT_NM	
+						, USR_DIV_CD				
+						, USR_NM	
+						, SYSTEMKEY			
+						, USR_JOB_DTNTM		
+						, USR_JOB_SEPT_DIV_CD		
+						, USR_JOB_ETHD_NM				
+						, USR_JOB_BGNN_TM				
+						, USR_JOB_END_TM			
+						, KYBDR		
+						, INPT_DT			
+						, INPT_ADDR			
+						, ISMT			
+						, REVN_DT			
+						, REVN_ADDR					
+					  FROM HIST0200   
+					  WHERE  1=1
+				   	<isNotNull property="dpobCd">
+					     <isNotEmpty property="dpobCd" prepend="AND">
+							DPOB_CD = #dpobCd#
+					     </isNotEmpty>
+					 </isNotNull>
+				   	
+				   	<isNotNull property="usrConnectDivCd">
+						<isNotEmpty property="usrConnectDivCd" prepend="AND">
+							USR_CONNECT_DIV_CD = #usrConnectDivCd#
+						</isNotEmpty>
+					</isNotNull>
+					 
+					 <isNotNull property="systemkey">
+					     <isNotEmpty property="systemkey" prepend="AND">
+					        USR_ID = (SELECT  USR_ID FROM SYSM0200 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY= #systemkey#)
+					     </isNotEmpty>
+					 </isNotNull>
+					 
+					 <isNotNull property="usrJobEndTm">
+					     <isNotEmpty property="usrJobEndTm" prepend="AND">
+					        SUBSTR(USR_JOB_BGNN_TM, 1, 10) <![CDATA[ >= ]]> #usrJobEndTm#
+					     </isNotEmpty>
+					 </isNotNull>
+					 
+					 <isNotNull property="usrJobEndTm">
+					     <isNotEmpty property="usrJobEndTm" prepend="AND">
+					        SUBSTR(USR_JOB_END_TM, 1, 10) <![CDATA[ <=  ]]>#usrJobEndTm#
+					     </isNotEmpty>
+					 </isNotNull>
+					 
+					 <isNotEmpty property="deptCd" prepend="AND">
+						<![CDATA[
+							DEPT_CD
+						]]>
+						<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+							#deptCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>
+
+</sqlMap>

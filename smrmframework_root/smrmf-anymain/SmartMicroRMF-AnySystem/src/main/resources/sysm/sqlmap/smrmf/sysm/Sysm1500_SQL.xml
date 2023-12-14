@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sysm1500">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysm1500SerarchVO" type="com.app.smrmf.sysm.server.vo.SysIfSysm1500SrhVO"/>
+	
+	<resultMap id="sysm1500" class="com.app.smrmf.sysm.server.vo.SysIfSysm1500VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="2"/>
+		<result property="pymtDducItemCd" column="PYMT_DDUC_ITEM_CD" columnIndex="3"/>
+		<result property="kybdr" column="KYBDR" columnIndex="4"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="5"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="6"/>
+		<result property="ismt" column="ISMT" columnIndex="7"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="8"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="9"/>
+	</resultMap>
+	
+	<insert id="sysm1500DAO.insertSysm1500_S">
+		<![CDATA[
+			INSERT INTO SYSM1500 
+				( DPOB_CD
+				  , EMYMT_DIV_CD
+				  , PYMT_DDUC_ITEM_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #emymtDivCd#
+				  , #pymtDducItemCd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="sysm1500DAO.updateSysm1500_S">
+		<![CDATA[
+			UPDATE SYSM1500
+			SET DPOB_CD=#dpobCd#
+				, EMYMT_DIV_CD=#emymtDivCd#
+				, PYMT_DDUC_ITEM_CD=#pymtDducItemCd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND PYMT_DDUC_ITEM_CD=#pymtDducItemCd#
+				]]>
+	</update>
+	
+	<delete id="sysm1500DAO.deleteSysm1500_S">
+		<![CDATA[
+			DELETE FROM SYSM1500 
+						WHERE DPOB_CD=#dpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND PYMT_DDUC_ITEM_CD=#pymtDducItemCd#
+				]]>
+	</delete>
+	
+	<select id="sysm1500DAO.selectSysm1500_S" resultMap="sysm1500">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, EMYMT_DIV_CD
+				, PYMT_DDUC_ITEM_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM SYSM1500
+						WHERE DPOB_CD=#dpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND PYMT_DDUC_ITEM_CD=#pymtDducItemCd#
+				]]>
+	</select>
+	
+	<select id="sysm1500DAO.selectSysm1500List_D" parameterClass="sysm1500SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, EMYMT_DIV_CD
+								, PYMT_DDUC_ITEM_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM SYSM1500
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					EMYMT_DIV_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, EMYMT_DIV_CD DESC
+							, PYMT_DDUC_ITEM_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="sysm1500DAO.selectSysm1500ListTotCnt_S" parameterClass="sysm1500SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSM1500
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				EMYMT_DIV_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

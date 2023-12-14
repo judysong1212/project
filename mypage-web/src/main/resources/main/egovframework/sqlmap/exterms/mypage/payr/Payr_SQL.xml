@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PayrPage">
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>	
+	<typeAlias  alias="psnlPage" type="com.web.exterms.mypage.payr.service.PayrollPageVO"/>
+	
+	<resultMap id="psnlPageMap" class="com.web.exterms.mypage.payr.service.PayrollPageVO">
+		<result property="deptNm" column="DEPT_NM" columnIndex="1"/>
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="2"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="3"/>
+	</resultMap>
+	<resultMap id="psnlPageMap2" class="com.web.exterms.mypage.payr.service.PayrollPageVO">
+		<result property="pernPymtSum" column="PERN_PYMT_SUM" columnIndex="1"/>
+	</resultMap>
+	
+<!-- 육아휴직 -->
+	<select id="payrDAO.getChildHday" parameterClass="psnlPage" resultClass="java.lang.String">
+		SELECT SUM (CASE
+		            WHEN SYSDATE > TO_DATE (DECODE(TURTY_RNTMNT_DT,NULL,LEVF_ABNC_END_DT), 'YYYYMMDD') THEN 1
+		            ELSE 0
+		          	END)
+		FROM PSNL0123
+		WHERE SYSTEMKEY = #systemkey#
+		   	AND LEVF_ABNC_DIV_CD = 'B0140006'
+    </select>
+<!-- 급여상세내역 -->
+	<!-- 급여구분 -->
+	<select id="payrDAO.getPayDetailDivisionList" parameterClass="psnlPage" resultClass="egovMap">
+		SELECT  (SELECT B.PAY_EXTPY_NM FROM PAYR0480 B WHERE B.DPOB_CD = #dpobCd# AND B.PAY_EXTPY_CD = A.PAY_ITEM_CD) AS PAY_ITEM_NM 
+		FROM (
+			SELECT 
+				C.PAY_ITEM_CD
+				, SUM(C.PYMT_DDUC_SUM) AS PYMT_DDUC_SUM  
+			FROM PAYR0302 C, PAYR0304 D
+			WHERE C.SYSTEMKEY = #systemkey#
+				AND C.PYMT_YR_MNTH = #searchYear#||#searchMonth#
+				AND C.PYMT_DDUC_DIV_CD IN ('B0080010','B0080020')
+				AND C.PAY_CD = #payCd#
+				AND C.SYSTEMKEY = #systemkey#
+				AND SUBSTR(C.PYMT_YR_MNTH,1,4) = #searchYear#
+				AND C.DPOB_CD = D.DPOB_CD
+				AND C.PYMT_YR_MNTH = D.PYMT_YR_MNTH
+				AND C.SYSTEMKEY = D.SYSTEMKEY
+				AND C.PAY_CD = D.PAY_CD
+				AND C.PAYR_SEIL_NUM = D.PAYR_SEIL_NUM
+			GROUP BY 
+				C.PAY_ITEM_CD
+		) A
+		ORDER BY A.PAY_ITEM_CD ASC
+	</select> 
+	<!-- 인적사항 -->
+	<select id="payrDAO.getPayDetailMemberInfo" parameterClass="psnlPage" resultMap="psnlPageMap">
+		SELECT DISTINCT 
+			 FCBASS0400CDNM(#dpobCd#, DEPT_CD, '1') AS DEPT_NM
+			, SUBSTR(RESN_REGN_NUM,0,6)||'-'||SUBSTR(RESN_REGN_NUM,7) AS RESN_REGN_NUM
+			, HAN_NM
+		FROM PAYR0304 
+		WHERE SYSTEMKEY = #systemkey#
+		AND PYMT_YR_MNTH = #searchYear#||#searchMonth#
+		AND PAY_CD = #searchDivision#
+	</select>
+	<!-- 실수령액 -->
+	<select id="payrDAO.getPayDetailPay" parameterClass="psnlPage" resultMap="psnlPageMap2">
+	    SELECT 
+	    	SUM(A.PERN_PYMT_SUM) as PERN_PYMT_SUM
+	    FROM PAYR0301 A, PAYR0304 C
+		WHERE  A.SYSTEMKEY = #systemkey#
+			AND A.PYMT_YR_MNTH = #searchYear#||#searchMonth#
+			AND A.PAY_CD = #searchDivision#
+			AND SUBSTR(A.PYMT_YR_MNTH,1,4) = #searchYear#
+			AND A.DPOB_CD = C.DPOB_CD
+			AND A.PYMT_YR_MNTH = C.PYMT_YR_MNTH
+			AND A.SYSTEMKEY = C.SYSTEMKEY
+			AND A.PAY_CD = C.PAY_CD
+			AND A.PAYR_SEIL_NUM = C.PAYR_SEIL_NUM
+			AND A.PAY_DDLNE_YN = 'Y'
+	</select>
+	<!-- 보수계 -->
+	<select id="payrDAO.getPayDetailExtpyList" parameterClass="psnlPage" resultClass="egovMap">
+		SELECT  (SELECT B.PAY_EXTPY_NM FROM PAYR0480 B WHERE B.DPOB_CD = #dpobCd# AND B.PAY_EXTPY_CD = A.PAY_ITEM_CD) AS PAY_ITEM_NM 
+				, A.PYMT_DDUC_SUM 
+		FROM 
+			(
+			SELECT 
+				C.PAY_ITEM_CD
+				, SUM(C.PYMT_DDUC_SUM) AS PYMT_DDUC_SUM  
+			FROM PAYR0302 C, PAYR0304 D
+			WHERE C.SYSTEMKEY = #systemkey#
+				AND C.PYMT_YR_MNTH = #searchYear#||#searchMonth#
+				AND C.PYMT_DDUC_DIV_CD IN ('B0080010','B0080020')
+				AND C.PAY_CD = #searchDivision#
+				AND C.SYSTEMKEY = #systemkey#
+				AND SUBSTR(C.PYMT_YR_MNTH,1,4) = #searchYear#
+				AND C.DPOB_CD = D.DPOB_CD
+				AND C.PYMT_YR_MNTH = D.PYMT_YR_MNTH
+				AND C.SYSTEMKEY = D.SYSTEMKEY
+				AND C.PAY_CD = D.PAY_CD
+				AND C.PAYR_SEIL_NUM = D.PAYR_SEIL_NUM
+			GROUP BY 
+				C.PAY_ITEM_CD
+		) A
+		ORDER BY A.PAY_ITEM_CD ASC
+	</select>
+	<!-- 보수계 급여구분 콤보박스 -->
+	<select id="payrDAO.getPayDetailExtpyList2" parameterClass="psnlPage" resultClass="egovMap">
+	SELECT 
+	    FCBASS0300CDNM(A.DPOB_CD, A.PAY_CD) AS PAY_CD_NM
+	    , A.PAY_CD 
+	FROM (
+	    SELECT
+	    C.PAY_CD
+	    , C.DPOB_CD
+	    FROM PAYR0302 C, PAYR0304 D
+	    WHERE     C.SYSTEMKEY = #systemkey#
+	                   AND C.PYMT_YR_MNTH = #searchYear#||#searchMonth#
+	                   AND C.SYSTEMKEY =  #systemkey#
+	                   AND SUBSTR (C.PYMT_YR_MNTH, 1, 4) = #searchYear#
+	                   AND C.DPOB_CD = D.DPOB_CD
+	                   AND C.PYMT_YR_MNTH = D.PYMT_YR_MNTH
+	                   AND C.SYSTEMKEY = D.SYSTEMKEY
+	                   AND C.PAY_CD = D.PAY_CD
+	                   AND C.PAYR_SEIL_NUM = D.PAYR_SEIL_NUM
+	    GROUP BY C.PAY_CD, C.DPOB_CD
+	    ORDER BY C.PAY_CD ASC
+	    )A
+	</select>
+	<!-- 공제계 -->
+	<select id="payrDAO.getPayDetailDducList" parameterClass="psnlPage" resultClass="egovMap">
+		SELECT  (SELECT B.PAY_DDUC_NM FROM PAYR0470 B WHERE B.DPOB_CD = #dpobCd# AND B.PAY_DDUC_CD = A.PAY_ITEM_CD) AS PAY_ITEM_NM
+				, A.PYMT_DDUC_SUM 
+		FROM (
+			SELECT 
+				C.PAY_ITEM_CD
+				, SUM(C.PYMT_DDUC_SUM) AS PYMT_DDUC_SUM  
+			FROM PAYR0302 C, PAYR0304 D
+			WHERE C.SYSTEMKEY = #systemkey#
+				AND C.PYMT_YR_MNTH = #searchYear#||#searchMonth#
+				AND C.PYMT_DDUC_DIV_CD IN ('B0080030','B0080040')
+				AND C.PAY_CD = #searchDivision#
+				AND C.SYSTEMKEY = #systemkey#
+				AND SUBSTR(C.PYMT_YR_MNTH,1,4) = #searchYear#
+				AND C.DPOB_CD = D.DPOB_CD
+				AND C.PYMT_YR_MNTH = D.PYMT_YR_MNTH
+				AND C.SYSTEMKEY = D.SYSTEMKEY
+				AND C.PAY_CD = D.PAY_CD
+				AND C.PAYR_SEIL_NUM = D.PAYR_SEIL_NUM
+			GROUP BY C.PAY_ITEM_CD
+		) A
+		ORDER BY 
+			PAY_ITEM_CD ASC
+	</select>
+<!-- 급여지급내역 -->
+	<select id="payrDAO.getPayList" parameterClass="psnlPage" resultClass="egovMap">
+		SELECT
+			substr(A.PYMT_YR_MNTH,5,2) as PYMT_YR_MNTH,
+			FCBASS0300CDNM(A.DPOB_CD, A.PAY_CD) AS PAY_NM,
+		    NVL((SELECT SUM(PYMT_DDUC_SUM) FROM PAYR0302 B WHERE B.PYMT_YR_MNTH = A.PYMT_YR_MNTH AND B.SYSTEMKEY = A.SYSTEMKEY AND B.PAY_ITEM_CD = 'B0010100' AND B.PAY_CD = A.PAY_CD AND B.DPOB_CD = A.DPOB_CD AND B.PAYR_SEIL_NUM = A.PAYR_SEIL_NUM), 0) AS STD_PAY,
+		    A.EXTPY_TOT_AMNT,
+		    A.DDUC_TOT_AMNT,
+		    A.TX_TOT_AMNT,
+		    A.TXTN_TOT_AMNT,
+		    A.FREE_DTY_TOT_AMNT,
+		    NVL((SELECT SUM(PYMT_DDUC_SUM) FROM PAYR0302 B WHERE B.PYMT_YR_MNTH = A.PYMT_YR_MNTH AND B.SYSTEMKEY = A.SYSTEMKEY AND B.PAY_ITEM_CD IN ('D0010100', 'D0010200', 'D0010300', 'D0010400', 'D0010500') AND B.PAY_CD = A.PAY_CD AND B.DPOB_CD = A.DPOB_CD AND B.PAYR_SEIL_NUM = A.PAYR_SEIL_NUM), 0) AS DDCU_H_PAY,
+		    NVL((SELECT SUM(PYMT_DDUC_SUM) FROM PAYR0302 B WHERE B.PYMT_YR_MNTH = A.PYMT_YR_MNTH AND B.SYSTEMKEY = A.SYSTEMKEY AND B.PAY_ITEM_CD IN ('D0150100', 'D0150200', 'D0150300') AND B.PAY_CD = A.PAY_CD AND B.DPOB_CD = A.DPOB_CD AND B.PAYR_SEIL_NUM = A.PAYR_SEIL_NUM), 0) AS DDCU_P_PAY,
+		    NVL((SELECT SUM(PYMT_DDUC_SUM) FROM PAYR0302 B WHERE B.PYMT_YR_MNTH = A.PYMT_YR_MNTH AND B.SYSTEMKEY = A.SYSTEMKEY AND B.PAY_ITEM_CD IN ('D0160100', 'D0160200', 'D0160300') AND B.PAY_CD = A.PAY_CD AND B.DPOB_CD = A.DPOB_CD AND B.PAYR_SEIL_NUM = A.PAYR_SEIL_NUM), 0) AS DDCU_E_PAY,
+		    A.PYMT_TOT_AMNT,
+		    A.PERN_PYMT_SUM
+		FROM PAYR0301 A, PAYR0304 C
+		WHERE A.SYSTEMKEY = #systemkey#
+			AND SUBSTR(A.PYMT_YR_MNTH,1,4) = #pymtYr#
+			AND A.DPOB_CD = C.DPOB_CD
+			AND A.PYMT_YR_MNTH = C.PYMT_YR_MNTH
+			AND A.SYSTEMKEY = C.SYSTEMKEY
+			AND A.PAY_CD = C.PAY_CD
+			AND A.PAYR_SEIL_NUM = C.PAYR_SEIL_NUM
+			AND A.PAY_DDLNE_YN = 'Y'
+		UNION ALL
+		SELECT
+		   '합계',
+		   '',
+		    SUM((SELECT SUM(PYMT_DDUC_SUM) FROM PAYR0302 B WHERE B.PYMT_YR_MNTH = A.PYMT_YR_MNTH AND B.SYSTEMKEY = A.SYSTEMKEY AND B.PAY_ITEM_CD = 'B0010100' AND B.PAY_CD = A.PAY_CD AND B.DPOB_CD = A.DPOB_CD AND B.PAYR_SEIL_NUM = A.PAYR_SEIL_NUM)),
+		    SUM(A.EXTPY_TOT_AMNT),
+		    SUM(A.DDUC_TOT_AMNT),
+		    SUM(A.TX_TOT_AMNT),
+		    SUM(A.TXTN_TOT_AMNT),
+		    SUM(A.FREE_DTY_TOT_AMNT),
+		    SUM((SELECT SUM(PYMT_DDUC_SUM) FROM PAYR0302 B WHERE B.PYMT_YR_MNTH = A.PYMT_YR_MNTH AND B.SYSTEMKEY = A.SYSTEMKEY AND B.PAY_ITEM_CD IN ('D0010100', 'D0010200', 'D0010300', 'D0010400', 'D0010500') AND B.PAY_CD = A.PAY_CD AND B.DPOB_CD = A.DPOB_CD AND B.PAYR_SEIL_NUM = A.PAYR_SEIL_NUM)),
+		    SUM((SELECT SUM(PYMT_DDUC_SUM) FROM PAYR0302 B WHERE B.PYMT_YR_MNTH = A.PYMT_YR_MNTH AND B.SYSTEMKEY = A.SYSTEMKEY AND B.PAY_ITEM_CD IN ('D0150100', 'D0150200', 'D0150300') AND B.PAY_CD = A.PAY_CD AND B.DPOB_CD = A.DPOB_CD AND B.PAYR_SEIL_NUM = A.PAYR_SEIL_NUM)),
+		    SUM((SELECT SUM(PYMT_DDUC_SUM) FROM PAYR0302 B WHERE B.PYMT_YR_MNTH = A.PYMT_YR_MNTH AND B.SYSTEMKEY = A.SYSTEMKEY AND B.PAY_ITEM_CD IN ('D0160100', 'D0160200', 'D0160300') AND B.PAY_CD = A.PAY_CD AND B.DPOB_CD = A.DPOB_CD AND B.PAYR_SEIL_NUM = A.PAYR_SEIL_NUM)),
+		    SUM(A.PYMT_TOT_AMNT),
+		    SUM(A.PERN_PYMT_SUM)
+		FROM PAYR0301 A, PAYR0304 C
+		WHERE A.SYSTEMKEY = #systemkey#
+			AND SUBSTR(A.PYMT_YR_MNTH,1,4) = #pymtYr#
+			AND A.DPOB_CD = C.DPOB_CD
+			AND A.PYMT_YR_MNTH = C.PYMT_YR_MNTH
+			AND A.SYSTEMKEY = C.SYSTEMKEY
+			AND A.PAY_CD = C.PAY_CD
+			AND A.PAYR_SEIL_NUM = C.PAYR_SEIL_NUM
+			AND A.PAY_DDLNE_YN = 'Y'
+		ORDER BY 
+			PYMT_YR_MNTH ASC
+	</select> 
+	
+	<!-- 단가표 
+	<select id="payrDAO.getCost" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
+		SELECT D.PYSP_LOG_SVC_YR_NUM_CD
+	    		, D.USALY_AMNT_HRWG_QNTY 
+				, ( SELECT COUNT(A.PYSP_LOG_SVC_YR_NUM_CD)
+						FROM PAYR0440 A, PAYR0400 B 
+			     	WHERE A.TYP_OCCU_GRDE_MPPG_SEIL_NUM = B.TYP_OCCU_GRDE_MPPG_SEIL_NUM                      
+			      		AND A.UCST_DGM_USE_YN = 'Y'                               
+			            AND A.TYP_OCCU_GRDE_MPPG_SEIL_NUM = ( SELECT B.TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+			                                                     	FROM PAYR0400 B, PAYR0304 C
+			                                                      WHERE B.DPOB_CD = C.DPOB_CD
+			                                               			AND B.DTIL_OCCU_INTTN_CD = C.DTIL_OCCU_INTTN_CD
+			                                               			AND B.DPOB_CD = #DPOB_CD#
+			                                               			AND SUBSTR(C.PYMT_YR_MNTH, '0', '4') = #PYMT_YR#
+			                                               			AND	C.SYSTEMKEY = #SYSTEMKEY#
+			                                                      GROUP BY B.TYP_OCCU_GRDE_MPPG_SEIL_NUM )                                     
+			    		AND A.DPOB_CD = B.DPOB_CD    
+			      		AND A.PAY_YR =#PYMT_YR#
+			      		AND A.PYSP_LOG_SVC_YR_NUM_CD = 'A0070000') AS PAYR_ITEM_SEIL_COUNT                                     
+	   			, FCBASS0300CDNM(A.DPOB_CD, A.PYSP_LOG_SVC_YR_NUM_CD) AS PYSP_LOG_SVC_YR_NUM
+              	, (SELECT MAX(OCCU_CLSS_PAY_CMPTTN_STD) FROM PAYR0440) AS OCCU_CLSS_PAY_CMPTTN_STD
+              	, A.TYP_OCCU_GRDE_MPPG_SEIL_NUM  
+              	, A.UCST_SUM
+              	, A.PAYR_ITEM_CD
+              	, (SELECT D.PAY_EXTPY_NM FROM PAYR0480 D WHERE A.PAYR_ITEM_CD=D.PAY_EXTPY_CD) AS PAY_EXTPY_NM
+            	, A.PAY_YR 
+           		, A.PAYR_ITEM_SEIL_NUM 
+           		, A.OCCU_CLSS_PAY_CMPTTN_STD 
+           		, A.PAYR_MANG_DEPT_CD
+            	, A.UCST_SUM
+            	, FCBASS0300CDNM(B.DPOB_CD, B.TYP_OCCU_CD) AS TYP_OCCU_NM
+           		, FCBASS0350CDNM(B.DPOB_CD, B.TYP_OCCU_CD, B.DTIL_OCCU_CLS_DIV_CD, '1')  AS DTIL_OCCU_CLS_DIV_NM
+        FROM 
+            PAYR0440 A, PAYR0400 B, PAYR0445 D
+        WHERE 
+            A.TYP_OCCU_GRDE_MPPG_SEIL_NUM = B.TYP_OCCU_GRDE_MPPG_SEIL_NUM                      
+            AND A.UCST_DGM_USE_YN = 'Y'                               
+            AND A.TYP_OCCU_GRDE_MPPG_SEIL_NUM = ( SELECT B.TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+			                                                     	FROM PAYR0400 B, PAYR0304 C
+			                                                      WHERE B.DPOB_CD = C.DPOB_CD
+			                                               			AND B.DTIL_OCCU_INTTN_CD = C.DTIL_OCCU_INTTN_CD
+			                                               			AND B.DPOB_CD = #DPOB_CD#
+			                                               			AND SUBSTR(C.PYMT_YR_MNTH, '0', '4') = #PYMT_YR#
+			                                               			AND	C.SYSTEMKEY = #SYSTEMKEY#
+			                                                      GROUP BY B.TYP_OCCU_GRDE_MPPG_SEIL_NUM )                                     
+            AND A.DPOB_CD = B.DPOB_CD    
+            AND A.PAY_YR = #PYMT_YR#
+            AND D.DPOB_CD = A.DPOB_CD
+ 			AND D.PAY_YR = #PYMT_YR#
+ 			AND D.TYP_OCCU_GRDE_MPPG_SEIL_NUM = ( SELECT B.TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+			                                                     	FROM PAYR0400 B, PAYR0304 C
+			                                                      WHERE B.DPOB_CD = C.DPOB_CD
+			                                               			AND B.DTIL_OCCU_INTTN_CD = C.DTIL_OCCU_INTTN_CD
+			                                               			AND B.DPOB_CD = #DPOB_CD#
+			                                               			AND SUBSTR(C.PYMT_YR_MNTH, '0', '4') = #PYMT_YR#
+			                                               			AND	C.SYSTEMKEY = #SYSTEMKEY#
+			                                                      GROUP BY B.TYP_OCCU_GRDE_MPPG_SEIL_NUM )
+    
+ 			AND D.OCCU_CLSS_PAY_CMPTTN_STD = (SELECT MAX(OCCU_CLSS_PAY_CMPTTN_STD) 
+ 			  								  FROM PAYR0445 
+ 			  								  WHERE PAY_YR = #PYMT_YR#)
+ 			AND D.PYSP_LOG_SVC_YR_NUM_CD = A.PYSP_LOG_SVC_YR_NUM_CD
+         ORDER BY 
+         	A.PYSP_LOG_SVC_YR_NUM_CD, A.PAYR_ITEM_SEIL_NUM, D.PYSP_LOG_SVC_YR_NUM_CD
+	</select> 	
+-->	
+	
+	
+	<!-- 단가표 -->
+	<select id="payrDAO.getCost" parameterClass="psnlPage" resultClass="egovMap">
+		SELECT D.PYSP_LOG_SVC_YR_NUM_CD
+	    		, D.USALY_AMNT_HRWG_QNTY 
+				, ( SELECT COUNT(A.PYSP_LOG_SVC_YR_NUM_CD)
+						FROM PAYR0440 A, PAYR0400 B 
+			     	WHERE A.TYP_OCCU_GRDE_MPPG_SEIL_NUM = B.TYP_OCCU_GRDE_MPPG_SEIL_NUM                      
+			      		AND A.UCST_DGM_USE_YN = 'Y'                               
+			            AND A.TYP_OCCU_GRDE_MPPG_SEIL_NUM = ( SELECT B.TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+			                                                     	FROM PAYR0400 B, PAYR0304 C
+			                                                      WHERE B.DPOB_CD = C.DPOB_CD
+			                                               			AND B.DTIL_OCCU_INTTN_CD = C.DTIL_OCCU_INTTN_CD
+			                                               			AND B.DPOB_CD = #dpobCd#
+			                                               			AND SUBSTR(C.PYMT_YR_MNTH, '0', '4') = #pymtYr#
+			                                               			AND	C.SYSTEMKEY = #systemkey#
+			                                                      GROUP BY B.TYP_OCCU_GRDE_MPPG_SEIL_NUM )                                     
+			    		AND A.DPOB_CD = B.DPOB_CD    
+			      		AND A.PAY_YR =#pymtYr#
+			      		AND A.PYSP_LOG_SVC_YR_NUM_CD = 'A0070000') AS PAYR_ITEM_SEIL_COUNT                                     
+	   			, FCBASS0300CDNM(A.DPOB_CD, A.PYSP_LOG_SVC_YR_NUM_CD) AS PYSP_LOG_SVC_YR_NUM
+              	, (SELECT MAX(OCCU_CLSS_PAY_CMPTTN_STD) FROM PAYR0440) AS OCCU_CLSS_PAY_CMPTTN_STD
+              	, A.TYP_OCCU_GRDE_MPPG_SEIL_NUM  
+              	, A.UCST_SUM
+              	, A.PAYR_ITEM_CD
+              	, (SELECT D.PAY_EXTPY_NM FROM PAYR0480 D WHERE A.PAYR_ITEM_CD=D.PAY_EXTPY_CD) AS PAY_EXTPY_NM
+            	, A.PAY_YR 
+           		, A.PAYR_ITEM_SEIL_NUM 
+           		, A.PAYR_MANG_DEPT_CD
+            	, FCBASS0320CDNM(B.DPOB_CD, B.TYP_OCCU_CD) AS TYP_OCCU_NM
+           		, FCBASSEX0350CDNM(B.DPOB_CD, B.TYP_OCCU_CD, B.DTIL_OCCU_INTTN_CD, '1')  AS DTIL_OCCU_CLS_DIV_NM
+        FROM 
+            PAYR0440 A, PAYR0400 B, PAYR0445 D
+        WHERE 1=1
+        	AND A.DPOB_CD = #dpobCd#
+        	AND A.PAY_YR = #pymtYr#
+            AND A.UCST_DGM_USE_YN = 'Y'                               
+            AND A.TYP_OCCU_GRDE_MPPG_SEIL_NUM = ( SELECT B.TYP_OCCU_GRDE_MPPG_SEIL_NUM 
+			                                                     	FROM PAYR0400 B, PAYR0304 C
+			                                                      WHERE B.DPOB_CD = C.DPOB_CD
+			                                               			AND B.DTIL_OCCU_INTTN_CD = C.DTIL_OCCU_INTTN_CD
+			                                               			AND B.DPOB_CD = #dpobCd#
+			                                               			AND SUBSTR(C.PYMT_YR_MNTH, '0', '4') = #pymtYr#
+			                                               			AND	C.SYSTEMKEY = #systemkey#
+			                                                      GROUP BY B.TYP_OCCU_GRDE_MPPG_SEIL_NUM )                                     
+            AND A.DPOB_CD = B.DPOB_CD    
+            AND A.DPOB_CD = D.DPOB_CD
+ 			AND A.PAY_YR = D.PAY_YR
+ 			AND A.TYP_OCCU_GRDE_MPPG_SEIL_NUM = D.TYP_OCCU_GRDE_MPPG_SEIL_NUM
+ 			AND A.TYP_OCCU_GRDE_MPPG_SEIL_NUM = B.TYP_OCCU_GRDE_MPPG_SEIL_NUM   
+ 			AND A.PYSP_LOG_SVC_YR_NUM_CD = D.PYSP_LOG_SVC_YR_NUM_CD
+ 			AND D.OCCU_CLSS_PAY_CMPTTN_STD = (SELECT MAX(OCCU_CLSS_PAY_CMPTTN_STD) 
+ 			  								  FROM PAYR0445 
+ 			  								  WHERE PAY_YR = #pymtYr#)
+ 			
+         ORDER BY 
+         	A.PYSP_LOG_SVC_YR_NUM_CD, A.PAYR_ITEM_SEIL_NUM, D.PYSP_LOG_SVC_YR_NUM_CD
+	</select> 
+</sqlMap>

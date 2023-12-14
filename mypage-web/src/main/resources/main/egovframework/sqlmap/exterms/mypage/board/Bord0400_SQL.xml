@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bord0400">	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bord0400SerarchVO" type="com.web.exterms.mypage.board.service.BoardPageDefaultVO"/>
+	<typeAlias  alias="bord0400vo" type="com.web.exterms.mypage.board.service.Bord0400VO"/>
+	<resultMap id="bord0400" class="com.web.exterms.mypage.board.service.Bord0400VO">
+		<result property="sysDivCd" column="SYS_DIV_CD"/>
+		<result property="bullBordMsgeAttcFlNum" column="BULL_BORD_MSGE_ATTC_FL_NUM" />
+		<result property="bullBordMsgeSeilNum" column="BULL_BORD_MSGE_SEIL_NUM" />
+		<result property="bullBordUid" column="BULL_BORD_UID" />
+		<result property="bullBordGrpId" column="BULL_BORD_GRP_ID" />
+		<result property="flNm" column="FL_NM" />
+		<result property="flRfta" column="FL_RFTA" />
+	</resultMap>
+
+	<insert id="bord0400DAO.insertBoardPage_D">
+		<![CDATA[
+			INSERT INTO BORD0400 
+				( SYS_DIV_CD
+				  , BULL_BORD_MSGE_SEIL_NUM
+				  , BULL_BORD_MSGE_ATTC_FL_NUM
+				  , BULL_BORD_UID
+				  , BULL_BORD_GRP_ID
+				  , FL_NM
+				  , FL_SZ
+				  , CTNT_TYP
+				  , DWLD_NUM
+				  , IMG_SZ_ETT
+				  , IMG_SZ_HEIT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , FL_RFTA )
+			VALUES ( #sysDivCd#
+			      , #bullBordMsgeSeilNum#
+				  , (SELECT NVL(MAX(BULL_BORD_MSGE_SEIL_NUM),0) 
+			           FROM BORD0300
+			           WHERE SYS_DIV_CD=#sysDivCd#
+								AND BULL_BORD_UID=#bullBordUid#
+								AND BULL_BORD_GRP_ID=#bullBordGrpId#
+			          	)
+				  , #bullBordUid#
+				  , #bullBordGrpId#
+				  , #flNm#
+				  , #flSz#
+				  , #ctntTyp#
+				  , #dwldNum#
+				  , #imgSzEtt#
+				  , #imgSzHeit#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr#
+				  , #flRfta# )
+		]]>
+	</insert>
+	
+	<update id="bord0400DAO.updateBord0400_S">
+		<![CDATA[
+			UPDATE BORD0400
+			SET SYS_DIV_CD=#sysDivCd#
+				, BULL_BORD_UID=#bullBordUid#
+				, BULL_BORD_GRP_ID=#bullBordGrpId#
+				, FL_NM=#flNm#
+				, FL_SZ=#flSz#
+				, CTNT_TYP=#ctntTyp#
+				, DWLD_NUM=#dwldNum#
+				, IMG_SZ_ETT=#imgSzEtt#
+				, IMG_SZ_HEIT=#imgSzHeit#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+				, FL_RFTA=#flRfta#
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND BULL_BORD_MSGE_SEIL_NUM=#bullBordMsgeSeilNum#
+								AND BULL_BORD_UID=#bullBordUid#
+								AND BULL_BORD_GRP_ID=#bullBordGrpId#
+				]]>
+	</update>
+	
+	
+	<delete id="bord0400DAO.deleteAllBord0400_S">
+		<![CDATA[
+			DELETE FROM BORD0400 
+						WHERE SYS_DIV_CD=#sysDivCd# 
+								AND BULL_BORD_MSGE_SEIL_NUM=#bullBordMsgeSeilNum#
+								AND BULL_BORD_UID=#bullBordUid#
+								AND BULL_BORD_GRP_ID=#bullBordGrpId#
+				]]>
+	</delete>
+	
+	<delete id="bord0400DAO.deleteBord0400_S">
+		<![CDATA[
+			DELETE FROM BORD0400 
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND BULL_BORD_MSGE_SEIL_NUM=#bullBordMsgeSeilNum#
+								AND BULL_BORD_UID=#bullBordUid#
+								AND BULL_BORD_GRP_ID=#bullBordGrpId#
+				]]>
+	</delete>
+	
+	<select id="bord0400DAO.selectBord0400_S" resultMap="bord0400" remapResults="true">
+		<![CDATA[
+			  SELECT AA.SYS_DIV_CD,
+                       AA.BULL_BORD_MSGE_SEIL_NUM,
+                       AA.BULL_BORD_UID,
+                       AA.BULL_BORD_GRP_ID,
+                       AA.TPLVL_WRTN_INFO,
+                       AA.WRTN_ASWR_STGE,
+                       AA.WRTN_RGSTN_ORD,
+                       AA.ASWR_WRTN_NUM,
+                       AA.PPG_PERN_NM,
+                       AA.USR_ID,
+                       AA.BULL_BORD_MSGE_TTL,
+                       AA.BULL_BORD_MSGE_CTNT,
+                       AA.WRTN_SECR_NUM,
+                       AA.PPG_PERN_EMAIL,
+                       AA.INQY_NUM,
+                       AA.HTML_USE_YN,
+                       AA.BULL_BORD_MSGE_DEL_YN,
+                       AA.NOTI_BGNN_DT,
+                       AA.NOTI_END_DT,
+                       BB.FL_RFTA,
+                       BB.FL_NM,
+                       BB.BULL_BORD_MSGE_ATTC_FL_NUM,  
+                       AA.KYBDR,
+                       AA.INPT_DT,
+                       AA.INPT_ADDR,
+                       AA.ISMT,
+                       AA.REVN_DT,
+                       AA.REVN_ADDR  
+                   FROM BORD0300 AA,BORD0400 BB
+                   WHERE  AA.SYS_DIV_CD=BB.SYS_DIV_CD(+)
+                   AND AA.BULL_BORD_MSGE_SEIL_NUM=BB.BULL_BORD_MSGE_SEIL_NUM(+)
+                   AND AA.BULL_BORD_UID=BB.BULL_BORD_UID(+)
+                   AND AA.BULL_BORD_GRP_ID=BB.BULL_BORD_GRP_ID(+)
+                   				AND	AA.SYS_DIV_CD=#sysDivCd#
+								AND AA.BULL_BORD_MSGE_SEIL_NUM=#bullBordMsgeSeilNum#
+								AND AA.BULL_BORD_UID=#bullBordUid#
+								AND AA.BULL_BORD_GRP_ID=#bullBordGrpId#
+				]]>
+	</select>
+	
+	<select id="bord0400DAO.selectCheckBord0400_D" parameterClass="bord0400vo" resultClass="egovMap">
+		SELECT
+								SYS_DIV_CD
+								, BULL_BORD_MSGE_ATTC_FL_NUM
+								, BULL_BORD_MSGE_SEIL_NUM
+								, BULL_BORD_UID
+								, BULL_BORD_GRP_ID
+								, FL_NM
+								, FL_SZ
+								, CTNT_TYP
+								, DWLD_NUM
+								, IMG_SZ_ETT
+								, IMG_SZ_HEIT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+								, FL_RFTA
+						FROM BORD0400
+				WHERE 1=1
+					AND BULL_BORD_MSGE_SEIL_NUM = #bullBordMsgeSeilNum#
+					ORDER BY 
+						SYS_DIV_CD DESC
+							, BULL_BORD_MSGE_ATTC_FL_NUM DESC
+							, BULL_BORD_MSGE_SEIL_NUM DESC
+							, BULL_BORD_UID DESC
+							, BULL_BORD_GRP_ID DESC
+	</select>	
+	
+	<select id="bord0400DAO.selectBord0400List_D" parameterClass="bord0400SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								SYS_DIV_CD
+								, BULL_BORD_MSGE_ATTC_FL_NUM
+								, BULL_BORD_MSGE_SEIL_NUM
+								, BULL_BORD_UID
+								, BULL_BORD_GRP_ID
+								, FL_NM
+								, FL_SZ
+								, CTNT_TYP
+								, DWLD_NUM
+								, IMG_SZ_ETT
+								, IMG_SZ_HEIT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+								, FL_RFTA
+						FROM BORD0400
+				WHERE 1=1
+					AND BULL_BORD_MSGE_SEIL_NUM = #bullBordMsgeSeilNum#
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					SYS_DIV_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					BULL_BORD_MSGE_ATTC_FL_NUM LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						SYS_DIV_CD DESC
+							, BULL_BORD_MSGE_ATTC_FL_NUM DESC
+							, BULL_BORD_MSGE_SEIL_NUM DESC
+							, BULL_BORD_UID DESC
+							, BULL_BORD_GRP_ID DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bord0400DAO.selectBord0400ListTotCnt_S" parameterClass="bord0400SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BORD0400
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				SYS_DIV_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				BULL_BORD_MSGE_ATTC_FL_NUM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

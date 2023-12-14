@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sysm2100">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysm2100SerarchVO" type="com.app.smrmf.sysm.server.vo.SysIfSysm2100SrhVO"/>
+	
+	<resultMap id="sysm2100" class="com.app.smrmf.sysm.server.vo.SysIfSysm2100VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="pernStpSeilNum" column="PERN_STP_SEIL_NUM" columnIndex="2"/>
+		<result property="pyspRdwMnthNumDysCd" column="PYSP_RDW_MNTH_NUM_DYS_CD" columnIndex="3"/>
+		<result property="logSvcMnthFndtnDysCd" column="LOG_SVC_MNTH_FNDTN_DYS_CD" columnIndex="4"/>
+		<result property="kybdr" column="KYBDR" columnIndex="5"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="6"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="7"/>
+		<result property="ismt" column="ISMT" columnIndex="8"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="9"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="10"/>
+	</resultMap>
+	
+	<insert id="sysm2100DAO.insertSysm2100_S">
+		<![CDATA[
+			INSERT INTO SYSM2100 
+				( DPOB_CD
+				  , PERN_STP_SEIL_NUM
+				  , PYSP_RDW_MNTH_NUM_DYS_CD
+				  , LOG_SVC_MNTH_FNDTN_DYS_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #pernStpSeilNum#
+				  , #pyspRdwMnthNumDysCd#
+				  , #logSvcMnthFndtnDysCd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="sysm2100DAO.updateSysm2100_S">
+		<![CDATA[
+			UPDATE SYSM2100
+			SET DPOB_CD=#dpobCd#
+				, PERN_STP_SEIL_NUM=#pernStpSeilNum#
+				, PYSP_RDW_MNTH_NUM_DYS_CD=#pyspRdwMnthNumDysCd#
+				, LOG_SVC_MNTH_FNDTN_DYS_CD=#logSvcMnthFndtnDysCd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND PERN_STP_SEIL_NUM=#pernStpSeilNum#
+				]]>
+	</update>
+	
+	<delete id="sysm2100DAO.deleteSysm2100_S">
+		<![CDATA[
+			DELETE FROM SYSM2100 
+						WHERE DPOB_CD=#dpobCd#
+								AND PERN_STP_SEIL_NUM=#pernStpSeilNum#
+				]]>
+	</delete>
+	
+	<select id="sysm2100DAO.selectSysm2100_S" resultMap="sysm2100">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, PERN_STP_SEIL_NUM
+				, PYSP_RDW_MNTH_NUM_DYS_CD
+				, LOG_SVC_MNTH_FNDTN_DYS_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM SYSM2100
+						WHERE DPOB_CD=#dpobCd#
+								AND PERN_STP_SEIL_NUM=#pernStpSeilNum#
+				]]>
+	</select>
+	
+	<select id="sysm2100DAO.selectSysm2100List_D" parameterClass="sysm2100SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, PERN_STP_SEIL_NUM
+								, PYSP_RDW_MNTH_NUM_DYS_CD
+								, LOG_SVC_MNTH_FNDTN_DYS_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM SYSM2100
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					PERN_STP_SEIL_NUM LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, PERN_STP_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="sysm2100DAO.selectSysm2100ListTotCnt_S" parameterClass="sysm2100SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSM2100
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				PERN_STP_SEIL_NUM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

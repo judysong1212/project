@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bord0200">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bord0200SrhVO" type="com.app.smrmf.sysm.server.service.vo.Bord0200SrhVO"/>
+	
+	<resultMap id="bord0200" class="com.app.smrmf.sysm.server.service.vo.Bord0200VO">
+		<result property="sysDivCd" column="SYS_DIV_CD" columnIndex="1"/>
+		<result property="bullBordUid" column="BULL_BORD_UID" columnIndex="2"/>
+		<result property="bullBordGrpId" column="BULL_BORD_GRP_ID" columnIndex="3"/>
+		<result property="ttl" column="TTL" columnIndex="4"/>
+		<result property="bullBordTtlTxt" column="BULL_BORD_TTL_TXT" columnIndex="5"/>
+		<result property="bullBordEpln" column="BULL_BORD_EPLN" columnIndex="6"/>
+		<result property="notMateNum" column="NOT_MATE_NUM" columnIndex="7"/>
+		<result property="pageTagSz" column="PAGE_TAG_SZ" columnIndex="8"/>
+		<result property="sknTyp" column="SKN_TYP" columnIndex="9"/>
+		<result property="nlsncWrtnStp" column="NLSNC_WRTN_STP" columnIndex="10"/>
+		<result property="bullBordRnge" column="BULL_BORD_RNGE" columnIndex="11"/>
+		<result property="bullBordSz" column="BULL_BORD_SZ" columnIndex="12"/>
+		<result property="notMateTtlEpsnMensCd" column="NOT_MATE_TTL_EPSN_MENS_CD" columnIndex="13"/>
+		<result property="aswrWrtnUseYn" column="ASWR_WRTN_USE_YN" columnIndex="14"/>
+		<result property="comtUseYn" column="COMT_USE_YN" columnIndex="15"/>
+		<result property="flAttcUseYn" column="FL_ATTC_USE_YN" columnIndex="16"/>
+		<result property="bullBordNtfnFuncUseYn" column="BULL_BORD_NTFN_FUNC_USE_YN" columnIndex="17"/>
+		<result property="adminEmailSndUseYn" column="ADMIN_EMAIL_SND_USE_YN" columnIndex="18"/>
+		<result property="delDivFlag" column="DEL_DIV_FLAG" columnIndex="19"/>
+		<result property="lstShape" column="LST_SHAPE" columnIndex="20"/>
+		<result property="lnkUrl" column="LNK_URL" columnIndex="21"/>
+		<result property="attcFlSz" column="ATTC_FL_SZ" columnIndex="22"/>
+		<result property="kybdr" column="KYBDR" columnIndex="23"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="24"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="25"/>
+		<result property="ismt" column="ISMT" columnIndex="26"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="27"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="28"/>
+	</resultMap>
+	
+	<insert id="bord0200DAO.insertBord0200_S">
+		<![CDATA[
+			INSERT INTO BORD0200 
+				( SYS_DIV_CD
+				  , BULL_BORD_UID
+				  , BULL_BORD_GRP_ID
+				  , TTL
+				  , BULL_BORD_TTL_TXT
+				  , BULL_BORD_EPLN
+				  , NOT_MATE_NUM
+				  , PAGE_TAG_SZ
+				  , SKN_TYP
+				  , NLSNC_WRTN_STP
+				  , BULL_BORD_RNGE
+				  , BULL_BORD_SZ
+				  , NOT_MATE_TTL_EPSN_MENS_CD
+				  , ASWR_WRTN_USE_YN
+				  , COMT_USE_YN
+				  , FL_ATTC_USE_YN
+				  , BULL_BORD_NTFN_FUNC_USE_YN
+				  , ADMIN_EMAIL_SND_USE_YN
+				  , DEL_DIV_FLAG
+				  , LST_SHAPE
+				  , LNK_URL
+				  , ATTC_FL_SZ
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #sysDivCd#
+				  , #bullBordUid#
+				  , #bullBordGrpId#
+				  , #ttl#
+				  , #bullBordTtlTxt#
+				  , #bullBordEpln#
+				  , #notMateNum#
+				  , #pageTagSz#
+				  , #sknTyp#
+				  , #nlsncWrtnStp#
+				  , #bullBordRnge#
+				  , #bullBordSz#
+				  , #notMateTtlEpsnMensCd#
+				  , #aswrWrtnUseYn#
+				  , #comtUseYn#
+				  , #flAttcUseYn#
+				  , #bullBordNtfnFuncUseYn#
+				  , #adminEmailSndUseYn#
+				  , #delDivFlag#
+				  , #lstShape#
+				  , #lnkUrl#
+				  , #attcFlSz#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bord0200DAO.updateBord0200_S">
+		<![CDATA[
+			UPDATE BORD0200
+			SET SYS_DIV_CD=#sysDivCd#
+				, BULL_BORD_UID=#bullBordUid#
+				, BULL_BORD_GRP_ID=#bullBordGrpId#
+				, TTL=#ttl#
+				, BULL_BORD_TTL_TXT=#bullBordTtlTxt#
+				, BULL_BORD_EPLN=#bullBordEpln#
+				, NOT_MATE_NUM=#notMateNum#
+				, PAGE_TAG_SZ=#pageTagSz#
+				, SKN_TYP=#sknTyp#
+				, NLSNC_WRTN_STP=#nlsncWrtnStp#
+				, BULL_BORD_RNGE=#bullBordRnge#
+				, BULL_BORD_SZ=#bullBordSz#
+				, NOT_MATE_TTL_EPSN_MENS_CD=#notMateTtlEpsnMensCd#
+				, ASWR_WRTN_USE_YN=#aswrWrtnUseYn#
+				, COMT_USE_YN=#comtUseYn#
+				, FL_ATTC_USE_YN=#flAttcUseYn#
+				, BULL_BORD_NTFN_FUNC_USE_YN=#bullBordNtfnFuncUseYn#
+				, ADMIN_EMAIL_SND_USE_YN=#adminEmailSndUseYn#
+				, DEL_DIV_FLAG=#delDivFlag#
+				, LST_SHAPE=#lstShape#
+				, LNK_URL=#lnkUrl#
+				, ATTC_FL_SZ=#attcFlSz#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				, REVN_ADDR=#revnAddr#
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND BULL_BORD_UID=#bullBordUid#
+								AND BULL_BORD_GRP_ID=#bullBordGrpId#
+				]]>
+	</update>
+	
+	<delete id="bord0200DAO.deleteBord0200_S">
+		<![CDATA[
+			DELETE FROM BORD0200 
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND BULL_BORD_UID=#bullBordUid#
+								AND BULL_BORD_GRP_ID=#bullBordGrpId#
+				]]>
+	</delete>
+	
+	<select id="bord0200DAO.selectBord0200_S" resultMap="bord0200">
+		<![CDATA[
+			SELECT
+				SYS_DIV_CD
+				, BULL_BORD_UID
+				, BULL_BORD_GRP_ID
+				, TTL
+				, BULL_BORD_TTL_TXT
+				, BULL_BORD_EPLN
+				, NOT_MATE_NUM
+				, PAGE_TAG_SZ
+				, SKN_TYP
+				, NLSNC_WRTN_STP
+				, BULL_BORD_RNGE
+				, BULL_BORD_SZ
+				, NOT_MATE_TTL_EPSN_MENS_CD
+				, ASWR_WRTN_USE_YN
+				, COMT_USE_YN
+				, FL_ATTC_USE_YN
+				, BULL_BORD_NTFN_FUNC_USE_YN
+				, ADMIN_EMAIL_SND_USE_YN
+				, DEL_DIV_FLAG
+				, LST_SHAPE
+				, LNK_URL
+				, ATTC_FL_SZ
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BORD0200
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND BULL_BORD_UID=#bullBordUid#
+								AND BULL_BORD_GRP_ID=#bullBordGrpId#
+				]]>
+	</select>
+	
+	<select id="bord0200DAO.selectBord0200List_D" parameterClass="bord0200SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								SYS_DIV_CD
+								, BULL_BORD_UID
+								, BULL_BORD_GRP_ID
+								, TTL
+								, BULL_BORD_TTL_TXT
+								, BULL_BORD_EPLN
+								, NOT_MATE_NUM
+								, PAGE_TAG_SZ
+								, SKN_TYP
+								, NLSNC_WRTN_STP
+								, BULL_BORD_RNGE
+								, BULL_BORD_SZ
+								, NOT_MATE_TTL_EPSN_MENS_CD
+								, ASWR_WRTN_USE_YN
+								, COMT_USE_YN
+								, FL_ATTC_USE_YN
+								, BULL_BORD_NTFN_FUNC_USE_YN
+								, ADMIN_EMAIL_SND_USE_YN
+								, DEL_DIV_FLAG
+								, LST_SHAPE
+								, LNK_URL
+								, ATTC_FL_SZ
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BORD0200
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					SYS_DIV_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					BULL_BORD_UID LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						SYS_DIV_CD DESC
+							, BULL_BORD_UID DESC
+							, BULL_BORD_GRP_ID DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bord0200DAO.selectBord0200ListTotCnt_S" parameterClass="bord0200SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BORD0200
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				SYS_DIV_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				BULL_BORD_UID LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

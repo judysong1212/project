@@ -1,0 +1,29 @@
+/*
+ * Micro Smart Framework - Framework GWT (Google) + Ext GWT (Sencha) for RIA Applications
+ * Copyright(c) 2014, atres
+ * 
+ * http://visionit.kr
+ *
+ */
+package com.app.smrmf.core.msfmainapp.client.form;
+
+import com.extjs.gxt.ui.client.widget.Info;
+import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.user.client.Element;
+import com.google.gwt.user.client.ui.RootPanel;
+
+public class InfoPage extends LayoutContainer implements EntryPoint {
+
+  public void onModuleLoad() {
+    RootPanel.get().add(this);
+  }
+
+  @Override
+  protected void onRender(Element parent, int pos) {
+    super.onRender(parent, pos);
+
+    Info.display("Test Message", "You name is {0}", "darrell");
+  }
+
+}

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+   <parent>
+    <groupId>com.app.smrmf.gwt</groupId>
+    <artifactId>smrmf-gwt</artifactId>
+    <version>2.2.0</version>
+  </parent>
+  <groupId>smrmf.gwtsystem</groupId>
+  <artifactId>smrmf-gwtsystem</artifactId>
+  <packaging>jar</packaging> 
+  <name>SmartMicroRMF-GwtSystem</name>
+  <url>http://maven.apache.org</url>
+  
+	<dependencies> 
+	 
+	   <dependency>
+		    <groupId>com.google.gwt</groupId>
+		    <artifactId>gwt-dev</artifactId>
+		    <version>${gwtVersion}</version>
+		    <scope>provided</scope>
+		</dependency>  
+      <dependency> 
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjlib</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		
+		 <dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>5.12.1</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+		<!-- Freemarker -->
+		<dependency>
+			<groupId>freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		
+		   <dependency>
+        <groupId>smrmf.anycrypt</groupId>
+        <artifactId>smrmf-anycrypt</artifactId>
+      	<version>${smrmf.version}</version>
+      </dependency> 
+      
+       <dependency>
+       <groupId>smrmf.anypgm</groupId>
+       <artifactId>smrmf-anypgm</artifactId>
+      	<version>${smrmf.version}</version>
+      </dependency>  
+     
+     <dependency>
+       <groupId>smrmf.anyext</groupId>
+       <artifactId>smrmf-anyext</artifactId>
+      	<version>${smrmf.version}</version>
+      </dependency> 
+      
+      <dependency>
+       <groupId>smrmf.anysystem</groupId>
+       <artifactId>smrmf-anysystem</artifactId>
+      	<version>${smrmf.version}</version>
+      </dependency>  
+		 
+  </dependencies>
+		
+		<build>
+		<defaultGoal>install</defaultGoal>
+		<directory>${basedir}/target</directory>
+		<finalName>smrmf-gwtsystem-${project.version}</finalName>
+		<!--  <resources>
+		    <resource>
+		      <directory>src/main/resources</directory>
+		    </resource>
+		    <resource>
+		      <directory>src/main/java</directory>
+		      <includes> 
+		        <include>**/client/**/*.*</include>
+		        <include>**/shared/**/*.*</include>
+		        <include>**/*.gwt.xml</include>
+		      </includes>
+	    </resource> 
+	  </resources> -->
+	  <resources>
+			<resource>
+				<directory>src/main/java</directory>				
+				<!-- 
+				<includes>
+					<include>**/*</include>
+				</includes>
+				 -->
+				<excludes>
+					<exclude>com/msfgwt/validate/jsr303/**/*.java</exclude>
+					<exclude>com/msfgwt/validate/jsr303/**/*.class</exclude>
+					<exclude>com/msfgwt/validate/jsr303/**/*.*</exclude>
+					<exclude>javax/validation/**/*.*</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/java</directory>
+				<!-- <includes>
+					<include>**/*</include>
+				</includes> -->
+				<excludes>
+					<exclude>**/*</exclude> 
+				</excludes>
+			</testResource>
+		</testResources>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>${maven-eclipse-plugin.version}</version>
+				<configuration>
+					<wtpversion>2.0</wtpversion>
+					<additionalBuildcommands>
+						<buildcommand>org.eclipse.jdt.core.javabuilder</buildcommand>
+						<buildcommand>org.eclipse.wst.jsdt.core.javascriptValidator</buildcommand>
+						<buildcommand>org.eclipse.wst.common.project.facet.core.builder</buildcommand>
+						<buildcommand>org.eclipse.wst.validation.validationbuilder</buildcommand>
+						<buildcommand>org.maven.ide.eclipse.maven2Builder</buildcommand>
+					</additionalBuildcommands>
+
+					<additionalProjectnatures>
+						<projectnature>org.eclipse.jem.workbench.JavaEMFNature</projectnature>
+						<projectnature>org.eclipse.wst.common.modulecore.ModuleCoreNature</projectnature>
+						<projectnature>org.eclipse.jdt.core.javanature</projectnature>
+						<projectnature>org.maven.ide.eclipse.maven2Nature</projectnature>
+						<projectnature>org.eclipse.wst.common.project.facet.core.nature</projectnature>
+						<projectnature>org.eclipse.wst.jsdt.core.jsNature</projectnature>
+					</additionalProjectnatures>
+					<additionalConfig>
+						<file>
+							<name>.settings/org.eclipse.wst.validation.prefs</name>
+							<content>
+								DELEGATES_PREFERENCE=delegateValidatorList
+								USER_BUILD_PREFERENCE=enabledBuildValidatorListorg.jboss.tools.seam.internal.core.validation.SeamProjectPropertyValidator;org.eclipse.wst.common.componentcore.internal.ModuleCoreValidator;org.eclipse.jst.j2ee.internal.classpathdep.ClasspathDependencyValidator;org.eclipse.wst.wsi.ui.internal.WSIMessageValidator;
+								USER_MANUAL_PREFERENCE=enabledManualValidatorListorg.jboss.tools.seam.internal.core.validation.SeamProjectPropertyValidator;org.eclipse.wst.common.componentcore.internal.ModuleCoreValidator;org.eclipse.jst.j2ee.internal.classpathdep.ClasspathDependencyValidator;org.eclipse.wst.wsi.ui.internal.WSIMessageValidator;
+								USER_PREFERENCE=overrideGlobalPreferencestruedisableAllValidationtrueversion1.2.102.v200905201610
+								eclipse.preferences.version=1
+								override=true
+								suspend=true
+								vf.version=3
+						    </content>
+						</file>
+						<file>
+							<name>.settings/org.maven.ide.eclipse.prefs</name>
+							<content>
+								activeProfiles=
+								eclipse.preferences.version=1
+								fullBuildGoals=process-test-resources
+								includeModules=false
+								resolveWorkspaceProjects=true
+								resourceFilterGoals=process-resources resources:testResources
+								skipCompilerPlugin=true
+								version=1
+						    </content>
+						</file>
+					</additionalConfig>
+				</configuration>
+			</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.0</version> 
+					<inherited>true</inherited>
+					<configuration>
+						<source>1.6</source>
+                        <target>1.6</target>
+                        <encoding>UTF-8</encoding>
+                        <extraJvmArgs>-Xmx3072m -Xss2048k</extraJvmArgs>
+				        <minmemory>2048m</minmemory>
+					    <maxmemory>3072m</maxmemory>  
+	                   <executions>
+							<execution>
+							      <!--<phase>compile</phase> -->  
+								  <goals> 
+									<goal>compile</goal> 
+									<goal>test</goal> 
+								</goals>  
+							</execution>
+						</executions>
+                         <excludes>
+				          	<exclude>com/msfgwt/reflection/emul/**/*.*</exclude>
+				            <exclude>com/msfgwt/validate/emul/**/*.*</exclude>
+				          	<exclude>com/msfgwt/validate/jsr303/**/*.*</exclude>
+				          	<exclude>javax/validation/**/*.*</exclude>
+				          </excludes>
+					</configuration> 
+				</plugin>  
+						<!-- Make this jar executable -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					 <inherited>true</inherited>
+			        <executions>
+			          <execution>
+			            <id>default-jar</id>
+			            <phase>package</phase>
+			            <goals>
+			              <goal>jar</goal>
+			            </goals>
+			            <configuration>
+					          <includes>
+					            <include>**/*.*</include>
+					          </includes>
+					          
+					          <excludes>
+					          	<exclude>com/msfgwt/validate/jsr303/**/*.*</exclude>
+					          	<exclude>javax/validation/**/*.*</exclude>
+					          </excludes>
+					        </configuration>
+			          </execution>
+			        </executions>
+					  <!-- <configuration>
+					DO NOT include log4j.properties file in your Jar 
+					  <excludes>
+						<exclude>**/log4j.properties</exclude>
+					  </excludes> -->
+					    <!-- but be sure to exclude the source from the final jar file
+				      <includes>
+				        <include>**/*.java</include>
+				        <include>**/*.gwt.xml</include>
+				      </includes> 
+					</configuration> -->
+				</plugin> 
+				<!-- EMMA   -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>emma-maven-plugin</artifactId>
+					<version>1.0-alpha-1</version>
+				</plugin>
+				<!-- PMD manven plugin -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-pmd-plugin</artifactId>
+					<version>2.4</version>
+				</plugin> 
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<!-- EMMA-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				 <version>2.17</version>
+				<configuration>
+					<skipTests>false</skipTests>
+					<forkMode>once</forkMode>
+					<reportFormat>xml</reportFormat>
+					<excludes>
+						<exclude>**/Abstract*.java</exclude>
+						<exclude>**/*Suite.java</exclude>
+					</excludes>
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+				</configuration>
+			</plugin> 
+			 
+			<!--  JavaDoc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.5</version>
+			</plugin> 
+		</plugins> 
+	</build> 
+</project>

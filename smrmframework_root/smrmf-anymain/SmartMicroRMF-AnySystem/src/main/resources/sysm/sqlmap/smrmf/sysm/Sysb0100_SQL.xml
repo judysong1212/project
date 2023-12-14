@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sysb0100">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysIfSysb0100SrhVO" type="com.app.smrmf.sysm.server.vo.SysIfSysb0100SrhVO"/>
+	
+	<resultMap id="sysIfSysb0100" class="com.app.smrmf.sysm.server.vo.SysIfSysb0100VO">
+		<result property="usrId" column="USR_ID" columnIndex="1"/>
+		<result property="usrInfoChngDtntm" column="USR_INFO_CHNG_DTNTM" columnIndex="2"/>
+		<result property="sysDivCd" column="SYS_DIV_CD" columnIndex="3"/>
+		<result property="authId" column="AUTH_ID" columnIndex="4"/>
+		<result property="usrRgstnSeptFlag" column="USR_RGSTN_SEPT_FLAG" columnIndex="5"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="6"/>
+		<result property="usrNm" column="USR_NM" columnIndex="7"/>
+		<result property="usrDivCd" column="USR_DIV_CD" columnIndex="8"/>
+		<result property="email" column="EMAIL" columnIndex="9"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="10"/>
+		<result property="phnNum" column="PHN_NUM" columnIndex="11"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="12"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="13"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="14"/>
+		<result property="authApptnBgnnDt" column="AUTH_APPTN_BGNN_DT" columnIndex="15"/>
+		<result property="authApptnEndDt" column="AUTH_APPTN_END_DT" columnIndex="16"/>
+		<result property="usrEaueDt" column="USR_EAUE_DT" columnIndex="17"/>
+		<result property="usrUseYn" column="USR_USE_YN" columnIndex="18"/>
+		<result property="usrAuthEepnYn" column="USR_AUTH_EEPN_YN" columnIndex="19"/>
+		<result property="pyspInsnYn" column="PYSP_INSN_YN" columnIndex="20"/>
+		<result property="notPyspInsnYn" column="NOT_PYSP_INSN_YN" columnIndex="21"/>
+		<result property="shttmInsnYn" column="SHTTM_INSN_YN" columnIndex="22"/>
+		<result property="servcInptPrcsYn" column="SERVC_INPT_PRCS_YN" columnIndex="23"/>
+		<result property="yrtxInptPrcsYn" column="YRTX_INPT_PRCS_YN" columnIndex="24"/>
+		<result property="kybdr" column="KYBDR" columnIndex="25"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="26"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="27"/>
+		<result property="ismt" column="ISMT" columnIndex="28"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="29"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="30"/>
+	</resultMap>
+	
+	<insert id="sysb0100DAO.insertSysb0100_S">
+		<![CDATA[
+			INSERT INTO SYSB0100 
+				( USR_ID
+				  , USR_INFO_CHNG_DTNTM
+				  , SYS_DIV_CD
+				  , AUTH_ID
+				  , USR_RGSTN_SEPT_FLAG
+				  , DEPT_CD
+				  , USR_NM
+				  , USR_DIV_CD
+				  , EMAIL
+				  , SYSTEMKEY
+				  , PHN_NUM
+				  , TYP_OCCU_CD
+				  , PYSP_GRDE_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , AUTH_APPTN_BGNN_DT
+				  , AUTH_APPTN_END_DT
+				  , USR_EAUE_DT
+				  , USR_USE_YN
+				  , USR_AUTH_EEPN_YN
+				  , PYSP_INSN_YN
+				  , NOT_PYSP_INSN_YN
+				  , SHTTM_INSN_YN
+				  , SERVC_INPT_PRCS_YN
+				  , YRTX_INPT_PRCS_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #usrId#
+				  , #usrInfoChngDtntm#
+				  , #sysDivCd#
+				  , #authId#
+				  , #usrRgstnSeptFlag#
+				  , #deptCd#
+				  , #usrNm#
+				  , #usrDivCd#
+				  , #email#
+				  , #systemkey#
+				  , #phnNum#
+				  , #typOccuCd#
+				  , #pyspGrdeCd#
+				  , #dtilOccuInttnCd#
+				  , #authApptnBgnnDt#
+				  , #authApptnEndDt#
+				  , #usrEaueDt#
+				  , #usrUseYn#
+				  , #usrAuthEepnYn#
+				  , #pyspInsnYn#
+				  , #notPyspInsnYn#
+				  , #shttmInsnYn#
+				  , #servcInptPrcsYn#
+				  , #yrtxInptPrcsYn#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="sysb0100DAO.updateSysb0100_S">
+		<![CDATA[
+			UPDATE SYSB0100
+			SET USR_ID=#usrId#
+				, USR_INFO_CHNG_DTNTM=#usrInfoChngDtntm#
+				, SYS_DIV_CD=#sysDivCd#
+				, AUTH_ID=#authId#
+				, USR_RGSTN_SEPT_FLAG=#usrRgstnSeptFlag#
+				, DEPT_CD=#deptCd#
+				, USR_NM=#usrNm#
+				, USR_DIV_CD=#usrDivCd#
+				, EMAIL=#email#
+				, SYSTEMKEY=#systemkey#
+				, PHN_NUM=#phnNum#
+				, TYP_OCCU_CD=#typOccuCd#
+				, PYSP_GRDE_CD=#pyspGrdeCd#
+				, DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				, AUTH_APPTN_BGNN_DT=#authApptnBgnnDt#
+				, AUTH_APPTN_END_DT=#authApptnEndDt#
+				, USR_EAUE_DT=#usrEaueDt#
+				, USR_USE_YN=#usrUseYn#
+				, USR_AUTH_EEPN_YN=#usrAuthEepnYn#
+				, PYSP_INSN_YN=#pyspInsnYn#
+				, NOT_PYSP_INSN_YN=#notPyspInsnYn#
+				, SHTTM_INSN_YN=#shttmInsnYn#
+				, SERVC_INPT_PRCS_YN=#servcInptPrcsYn#
+				, YRTX_INPT_PRCS_YN=#yrtxInptPrcsYn#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE USR_ID=#usrId#
+								AND USR_INFO_CHNG_DTNTM=#usrInfoChngDtntm#
+				]]>
+	</update>
+	
+	<delete id="sysb0100DAO.deleteSysb0100_S">
+		<![CDATA[
+			DELETE FROM SYSB0100 
+						WHERE USR_ID=#usrId#
+								AND USR_INFO_CHNG_DTNTM=#usrInfoChngDtntm#
+				]]>
+	</delete>
+	
+	<select id="sysb0100DAO.selectSysb0100_S" resultMap="sysIfSysb0100">
+		<![CDATA[
+			SELECT
+				USR_ID
+				, USR_INFO_CHNG_DTNTM
+				, SYS_DIV_CD
+				, AUTH_ID
+				, USR_RGSTN_SEPT_FLAG
+				, DEPT_CD
+				, USR_NM
+				, USR_DIV_CD
+				, EMAIL
+				, SYSTEMKEY
+				, PHN_NUM
+				, TYP_OCCU_CD
+				, PYSP_GRDE_CD
+				, DTIL_OCCU_INTTN_CD
+				, AUTH_APPTN_BGNN_DT
+				, AUTH_APPTN_END_DT
+				, USR_EAUE_DT
+				, USR_USE_YN
+				, USR_AUTH_EEPN_YN
+				, PYSP_INSN_YN
+				, NOT_PYSP_INSN_YN
+				, SHTTM_INSN_YN
+				, SERVC_INPT_PRCS_YN
+				, YRTX_INPT_PRCS_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM SYSB0100
+						WHERE USR_ID=#usrId#
+								AND USR_INFO_CHNG_DTNTM=#usrInfoChngDtntm#
+				]]>
+	</select>
+	
+	<select id="sysb0100DAO.selectSysb0100List_D" parameterClass="sysIfSysb0100SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								USR_ID
+								, USR_INFO_CHNG_DTNTM
+								, SYS_DIV_CD
+								, AUTH_ID
+								, USR_RGSTN_SEPT_FLAG
+								, DEPT_CD
+								, USR_NM
+								, USR_DIV_CD
+								, EMAIL
+								, SYSTEMKEY
+								, PHN_NUM
+								, TYP_OCCU_CD
+								, PYSP_GRDE_CD
+								, DTIL_OCCU_INTTN_CD
+								, AUTH_APPTN_BGNN_DT
+								, AUTH_APPTN_END_DT
+								, USR_EAUE_DT
+								, USR_USE_YN
+								, USR_AUTH_EEPN_YN
+								, PYSP_INSN_YN
+								, NOT_PYSP_INSN_YN
+								, SHTTM_INSN_YN
+								, SERVC_INPT_PRCS_YN
+								, YRTX_INPT_PRCS_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM SYSB0100
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					USR_ID = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					USR_INFO_CHNG_DTNTM LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						USR_ID DESC
+							, USR_INFO_CHNG_DTNTM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="sysb0100DAO.selectSysb0100ListTotCnt_S" parameterClass="sysIfSysb0100SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSB0100
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				USR_ID = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				USR_INFO_CHNG_DTNTM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

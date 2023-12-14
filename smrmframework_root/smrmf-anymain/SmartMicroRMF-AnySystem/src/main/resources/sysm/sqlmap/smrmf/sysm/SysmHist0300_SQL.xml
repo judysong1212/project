@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SysmHist0300">
+    
+    <typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysmHist0300SrhVo" type="com.app.smrmf.sysm.server.vo.SysIfHist0300SrhVO"/>
+	<typeAlias  alias="sysmHist0300Vo" type="com.app.smrmf.sysm.server.vo.SysIfHist0300VO"/>
+	
+	<resultMap id="hist0300" class="EgovMap">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="errOccrrncYr" column="ERR_OCCRRNC_YR" columnIndex="2"/>
+		<result property="usrId" column="USR_ID" columnIndex="3"/>
+		<result property="errSeilNum" column="ERR_SEIL_NUM" columnIndex="4"/>
+		<result property="usrConnectDivCd" column="USR_CONNECT_DIV_CD" columnIndex="5"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="6"/>
+		<result property="usrDivCd" column="USR_DIV_CD" columnIndex="7"/>
+		<result property="usrNm" column="USR_NM" columnIndex="8"/>
+		<result property="errOccrrncDtntm" column="ERR_OCCRRNC_DTNTM" columnIndex="9"/>
+		<result property="errEthdNm" column="ERR_ETHD_NM" columnIndex="10"/>
+		<result property="errNm" column="ERR_NM"  columnIndex="11"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="12"/> 
+		<result property="kybdr" column="KYBDR" columnIndex="13"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="14"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="15"/>
+		<result property="ismt" column="ISMT" columnIndex="16"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="17"/>
+		<result property="deptNm" column="DEPT_NM" columnIndex="18"/>
+		<result property="windowNm" column="WINDOW_NM" columnIndex="19"/>
+		<result property="windowId" column="WINDOW_ID" columnIndex="20"/>
+		<result property="errCtnt" column="ERR_CTNT"  jdbcType="CLOB" javaType="java.lang.String" columnIndex="21"/>
+	</resultMap>
+	
+	 
+	<select id="sysmHist0300DAO.getHour" resultClass="egovMap">
+	    SELECT LPAD((0), 2, 0)AS COMM_CD
+	    FROM DUAL
+	    UNION ALL
+	    SELECT LPAD((LEVEL), 2, 0)AS COMM_CD
+	    FROM DUAL   
+		CONNECT BY LEVEL <![CDATA[ <=  ]]> 23
+	</select>
+	
+	<select id="sysmHist0300DAO.getMinute" resultClass="egovMap">
+	    SELECT LPAD((0), 2, 0)AS COMM_CD
+	    FROM DUAL
+	    UNION ALL
+	    SELECT LPAD((LEVEL), 2, 0)AS COMM_CD
+	    FROM DUAL   
+		CONNECT BY LEVEL <![CDATA[ <=  ]]>59
+	</select>
+	
+	<select id="sysmHist0300DAO.selectHist0300ListTotCnt_S" parameterClass="sysmHist0300SrhVo" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM HIST0300
+			WHERE 1=1
+				   	<isNotNull property="dpobCd">
+					     <isNotEmpty property="dpobCd" prepend="AND">
+							DPOB_CD = #dpobCd#
+					     </isNotEmpty>
+					 </isNotNull>
+					 
+				   	<isNotNull property="usrConnectDivCd">
+						<isNotEmpty property="usrConnectDivCd" prepend="AND">
+							USR_CONNECT_DIV_CD = #usrConnectDivCd#
+						</isNotEmpty>
+					</isNotNull>				   	
+					 
+					 <isNotNull property="systemkey">
+					     <isNotEmpty property="systemkey" prepend="AND">
+					        USR_ID = (SELECT  USR_ID FROM SYSM0300 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY= #systemkey#)
+					     </isNotEmpty>
+					 </isNotNull>
+					 
+					 <isNotEmpty property="deptCd" prepend="AND">
+						<![CDATA[
+							DEPT_CD
+						]]>
+						<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+							#deptCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+					 
+					 <isNotNull property="errOccrrncDtntmS">
+					     <isNotEmpty property="errOccrrncDtntmS" prepend="AND">
+					        SUBSTR(ERR_OCCRRNC_DTNTM, 1, 8) <![CDATA[ >= ]]> SUBSTR(#errOccrrncDtntmS#, 1, 8)
+					     </isNotEmpty>
+					 </isNotNull>
+					 
+					 <isNotNull property="errOccrrncDtntmE">
+					     <isNotEmpty property="errOccrrncDtntmE" prepend="AND">
+					        SUBSTR(ERR_OCCRRNC_DTNTM, 1, 8) <![CDATA[ <= ]]> SUBSTR(#errOccrrncDtntmE#, 1, 8)
+					     </isNotEmpty>
+					 </isNotNull>
+	</select> 
+	
+	
+	<select id="sysmHist0300DAO.selectHist0300List_D" parameterClass="sysmHist0300SrhVo" resultMap="hist0300">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM 
+				FROM (
+					  SELECT DPOB_CD
+							, ERR_OCCRRNC_YR				
+							, USR_ID			
+							, ERR_SEIL_NUM			
+							, USR_CONNECT_DIV_CD	
+							, DEPT_CD		
+							, USR_DIV_CD		
+							, USR_NM			
+							, SUBSTR(ERR_OCCRRNC_DTNTM,1,14) AS ERR_OCCRRNC_DTNTM	
+							, ERR_ETHD_NM	
+							, ERR_NM				
+							, KYBDR	
+							, INPT_DT	
+							, INPT_ADDR			
+							, ISMT	
+							, REVN_DT	
+							, REVN_ADDR	
+						    , fcBass0400CDNM(DPOB_CD, DEPT_CD,'2') AS DEPT_NM	
+						    , WINDOW_NM		
+							, WINDOW_ID	
+							, ERR_CTNT		
+					  FROM HIST0300   
+					  WHERE  1=1
+				   	<isNotNull property="dpobCd">
+					     <isNotEmpty property="dpobCd" prepend="AND">
+							DPOB_CD = #dpobCd#
+					     </isNotEmpty>
+					 </isNotNull>
+					 
+				   	<isNotNull property="usrConnectDivCd">
+						<isNotEmpty property="usrConnectDivCd" prepend="AND">
+							USR_CONNECT_DIV_CD = #usrConnectDivCd#
+						</isNotEmpty>
+					</isNotNull>				   	
+					 
+					 <isNotNull property="systemkey">
+					     <isNotEmpty property="systemkey" prepend="AND">
+					        USR_ID = (SELECT  USR_ID FROM SYSM0300 WHERE DPOB_CD = #dpobCd# AND SYSTEMKEY= #systemkey#)
+					     </isNotEmpty>
+					 </isNotNull>
+					 
+					  <isNotNull property="usrId">
+					     <isNotEmpty property="usrId" prepend="AND">
+					        USR_ID = #usrId#
+					     </isNotEmpty>
+					 </isNotNull>
+					 
+					  <isNotNull property="windowId">
+					     <isNotEmpty property="windowId" prepend="AND">
+					        WINDOW_ID = #windowId#
+					     </isNotEmpty>
+					 </isNotNull>
+					 
+					 <isNotNull property="errOccrrncDtntmS">
+					     <isNotEmpty property="errOccrrncDtntmS" prepend="AND">
+					        SUBSTR(ERR_OCCRRNC_DTNTM, 1, 8) <![CDATA[ >= ]]> SUBSTR(#errOccrrncDtntmS#, 1, 8)
+					     </isNotEmpty>
+					 </isNotNull>
+					 
+					 <isNotNull property="errOccrrncDtntmE">
+					     <isNotEmpty property="errOccrrncDtntmE" prepend="AND">
+					        SUBSTR(ERR_OCCRRNC_DTNTM, 1, 8) <![CDATA[ <= ]]> SUBSTR(#errOccrrncDtntmE#, 1, 8)
+					     </isNotEmpty>
+					 </isNotNull>
+					 
+					 <isNotEmpty property="deptCd" prepend="AND">
+						<![CDATA[
+							DEPT_CD
+						]]>
+						<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+							#deptCdArr[]#
+						</iterate>
+					</isNotEmpty>  
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>
+
+	<delete id="sysmHist0300DAO.deleteHist0300_S">
+		<![CDATA[
+			DELETE FROM HIST0300 
+			WHERE  1=1
+		]]>
+		<isNotNull property="dpobCd">
+			<isNotEmpty property="dpobCd" prepend="AND">
+				DPOB_CD = #dpobCd#
+			</isNotEmpty>
+		</isNotNull>
+		<isNotNull property="errOccrrncYr">
+			<isNotEmpty property="errOccrrncYr" prepend="AND">
+				ERR_OCCRRNC_YR = #errOccrrncYr#
+			</isNotEmpty>
+		</isNotNull>
+		<isNotNull property="usrId">
+			<isNotEmpty property="usrId" prepend="AND">
+				USR_ID = #usrId#
+			</isNotEmpty>
+		</isNotNull>
+		<isNotNull property="errSeilNum">
+			<isNotEmpty property="errSeilNum" prepend="AND">
+				ERR_SEIL_NUM = #errSeilNum#
+			</isNotEmpty>
+		</isNotNull>
+				
+	</delete>
+
+</sqlMap>

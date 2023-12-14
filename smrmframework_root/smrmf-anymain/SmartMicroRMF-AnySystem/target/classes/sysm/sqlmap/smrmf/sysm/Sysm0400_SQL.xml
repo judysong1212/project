@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sysm0400">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysm0400SerarchVO" type="com.app.smrmf.sysm.server.vo.SysIfSysm0400SrhVO"/>
+	
+	<resultMap id="sysm0400" class="com.app.smrmf.sysm.server.vo.SysIfSysm0400VO">
+		<result property="sysDivCd" column="SYS_DIV_CD" columnIndex="1"/>
+		<result property="authGrpSeilNum" column="AUTH_GRP_SEIL_NUM" columnIndex="2"/>
+		<result property="mnuCd" column="MNU_CD" columnIndex="3"/>
+		<result property="mnuAuthGrPScnInqyYn" column="MNU_AUTH_GR_P_SCN_INQY_YN" columnIndex="4"/>
+		<result property="mnuAuthGrPScnInptYn" column="MNU_AUTH_GR_P_SCN_INPT_YN" columnIndex="5"/>
+		<result property="mnuAuthGrPScnRevnYn" column="MNU_AUTH_GR_P_SCN_REVN_YN" columnIndex="6"/>
+		<result property="mnuAuthGrPScnDelYn" column="MNU_AUTH_GR_P_SCN_DEL_YN" columnIndex="7"/>
+		<result property="mnuAuthGrPScnPrtYn" column="MNU_AUTH_GR_P_SCN_PRT_YN" columnIndex="8"/>
+		<result property="kybdr" column="KYBDR" columnIndex="9"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="10"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="11"/>
+		<result property="ismt" column="ISMT" columnIndex="12"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="13"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="14"/>
+	</resultMap>
+	
+	<insert id="sysm0400DAO.insertSysm0400_S">
+		<![CDATA[
+			INSERT INTO SYSM0400 
+				( SYS_DIV_CD
+				  , AUTH_GRP_SEIL_NUM
+				  , MNU_CD
+				  , MNU_AUTH_GR_P_SCN_INQY_YN
+				  , MNU_AUTH_GR_P_SCN_INPT_YN
+				  , MNU_AUTH_GR_P_SCN_REVN_YN
+				  , MNU_AUTH_GR_P_SCN_DEL_YN
+				  , MNU_AUTH_GR_P_SCN_PRT_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #sysDivCd#
+				  , #authGrpSeilNum#
+				  , #mnuCd#
+				  , #mnuAuthGrPScnInqyYn#
+				  , #mnuAuthGrPScnInptYn#
+				  , #mnuAuthGrPScnRevnYn#
+				  , #mnuAuthGrPScnDelYn#
+				  , #mnuAuthGrPScnPrtYn#
+				  , #kybdr#
+				  , SYSDATE
+				  , #inptAddr#
+				  , #ismt#
+				  , SYSDATE
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="sysm0400DAO.updateSysm0400_S">
+		<![CDATA[
+			UPDATE SYSM0400
+			SET SYS_DIV_CD=#sysDivCd#
+				, AUTH_GRP_SEIL_NUM=#authGrpSeilNum#
+				, MNU_CD=#mnuCd#
+				, MNU_AUTH_GR_P_SCN_INQY_YN=#mnuAuthGrPScnInqyYn#
+				, MNU_AUTH_GR_P_SCN_INPT_YN=#mnuAuthGrPScnInptYn#
+				, MNU_AUTH_GR_P_SCN_REVN_YN=#mnuAuthGrPScnRevnYn#
+				, MNU_AUTH_GR_P_SCN_DEL_YN=#mnuAuthGrPScnDelYn#
+				, MNU_AUTH_GR_P_SCN_PRT_YN=#mnuAuthGrPScnPrtYn#
+				, ISMT=#ismt#
+				, REVN_DT=SYSDATE
+				, REVN_ADDR=#revnAddr#
+		   WHERE SYS_DIV_CD=#sysDivCd#
+			 AND AUTH_GRP_SEIL_NUM=#authGrpSeilNum#
+		     AND  MNU_CD=#mnuCd#
+			]]>
+	</update>
+	
+	<delete id="sysm0400DAO.deleteSysm0400_S">
+		<![CDATA[
+			DELETE FROM SYSM0400 
+			WHERE SYS_DIV_CD=#sysDivCd#
+			 AND AUTH_GRP_SEIL_NUM=#authGrpSeilNum#
+		     AND  MNU_CD=#mnuCd#
+			]]>
+	</delete>
+	
+	<select id="sysm0400DAO.selectSysm0400_S" resultMap="sysm0400">
+		<![CDATA[
+			SELECT
+				SYS_DIV_CD
+				, AUTH_GRP_SEIL_NUM
+				, MNU_CD
+				, MNU_AUTH_GR_P_SCN_INQY_YN
+				, MNU_AUTH_GR_P_SCN_INPT_YN
+				, MNU_AUTH_GR_P_SCN_REVN_YN
+				, MNU_AUTH_GR_P_SCN_DEL_YN
+				, MNU_AUTH_GR_P_SCN_PRT_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM SYSM0400
+			WHERE SYS_DIV_CD=#sysDivCd#
+			 AND AUTH_GRP_SEIL_NUM=#authGrpSeilNum#
+		     AND  MNU_CD=#mnuCd#
+			]]>
+	</select>
+	
+	<select id="sysm0400DAO.selectSysm0400List_D" parameterClass="sysm0400SerarchVO" resultClass="egovMap"> 
+	     SELECT A.*                                                                         
+                  FROM (  
+                         SELECT
+                              DISTINCT   AA.SYS_DIV_CD
+                                , BB.AUTH_GRP_SEIL_NUM
+                                , AA.MNU_CD  , AA.HHRK_MNU_CD, 
+                                  AA.MNU_NM,  
+                                  AA.MNU_AUTH_FRM_CD, AA.MNU_TIP_NM, AA.MNU_SCN_FRM_PKG_NM, 
+                                  AA.MNU_PRNT_ORD 
+                                , (SELECT COUNT(*) FROM SYSM0400 TT
+                                     WHERE TT.MNU_CD = BB.MNU_CD 
+                                       AND TT.AUTH_GRP_SEIL_NUM = BB.AUTH_GRP_SEIL_NUM ) AS MNU_CNT
+                                , (SELECT MNU_AUTH_GR_P_SCN_INQY_YN FROM SYSM0400 TT
+                                     WHERE TT.MNU_CD = BB.MNU_CD 
+                                       AND TT.AUTH_GRP_SEIL_NUM = BB.AUTH_GRP_SEIL_NUM ) AS MNU_AUTH_GR_P_SCN_INQY_YN
+                                 , (SELECT MNU_AUTH_GR_P_SCN_INPT_YN FROM SYSM0400 TT
+                                     WHERE TT.MNU_CD = BB.MNU_CD 
+                                       AND TT.AUTH_GRP_SEIL_NUM = BB.AUTH_GRP_SEIL_NUM ) AS MNU_AUTH_GR_P_SCN_INPT_YN
+                                 , (SELECT MNU_AUTH_GR_P_SCN_REVN_YN FROM SYSM0400 TT
+                                     WHERE TT.MNU_CD = BB.MNU_CD 
+                                       AND TT.AUTH_GRP_SEIL_NUM = BB.AUTH_GRP_SEIL_NUM ) AS MNU_AUTH_GR_P_SCN_REVN_YN       
+                                 , (SELECT MNU_AUTH_GR_P_SCN_DEL_YN FROM SYSM0400 TT
+                                     WHERE TT.MNU_CD = BB.MNU_CD 
+                                       AND TT.AUTH_GRP_SEIL_NUM = BB.AUTH_GRP_SEIL_NUM ) AS MNU_AUTH_GR_P_SCN_DEL_YN
+                                  , (SELECT MNU_AUTH_GR_P_SCN_PRT_YN FROM SYSM0400 TT
+                                     WHERE TT.MNU_CD = BB.MNU_CD 
+                                       AND TT.AUTH_GRP_SEIL_NUM = BB.AUTH_GRP_SEIL_NUM ) AS MNU_AUTH_GR_P_SCN_PRT_YN 
+                                , AA.KYBDR
+                                , AA.INPT_DT
+                                , AA.INPT_ADDR
+                                , AA.ISMT
+                                , AA.REVN_DT
+                                , AA.REVN_ADDR
+                       FROM SYSM0200 AA, SYSM0400 BB
+                      WHERE    AA.MNU_PRNT_YN = 'Y'
+                         AND   AA.USE_YN = 'Y' 
+                        AND AA.MNU_CD = BB.MNU_CD(+)
+                        AND BB.AUTH_GRP_SEIL_NUM(+) = #authGrpSeilNum#
+                        AND NOT EXISTS (SELECT SYS_DIV_CD, MNU_CD 
+                                          FROM SYSM0200 CC
+			                    		 WHERE AA.MNU_CD = CC.MNU_CD AND AA.SYS_DIV_CD = CC.SYS_DIV_CD
+			                               AND CC.MNU_AUTH_FRM_CD = 'ADMIN'
+			                    		)  
+                       
+                ) A                                                                                                            
+                         CONNECT BY PRIOR A.MNU_CD = A.HHRK_MNU_CD                                                                        
+                         START WITH A.MNU_CD = #sysDivCd#                                                                 
+                         ORDER BY A.MNU_PRNT_ORD   
+	</select>	
+	<select id="sysm0400DAO.selectSysm0400ListTotCnt_S" parameterClass="sysm0400SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSM0400
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				SYS_DIV_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				AUTH_GRP_SEIL_NUM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

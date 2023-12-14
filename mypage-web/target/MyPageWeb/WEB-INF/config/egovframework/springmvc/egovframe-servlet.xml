@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- - DispatcherServlet application context for Application's web tier. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task-3.2.xsd">
+
+	<task:executor id="executor" pool-size="5-10" queue-capacity="255" />
+	<task:scheduler id="scheduler" pool-size="3" />
+	<task:annotation-driven executor="executor" scheduler="scheduler" />
+
+	<!-- - The controllers are autodetected DAOs labeled with the @Controller 
+		annotation. -->
+	<context:component-scan base-package="egovframework,com.any.smrmf,com.app.smrmf,com.web.exterms,com.crypt,com.link,com.crypto"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**/*.do" />
+			<bean class="com.web.exterms.mypage.interceptor.LoginCheckInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+
+	<mvc:annotation-driven
+		content-negotiation-manager="contentNegotiationManager">
+		<mvc:message-converters register-defaults="false">
+			<bean id="jacksonMessageConverter" p:supportedMediaTypes="application/json"
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+
+	<bean id="contentNegotiationManager"
+		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<property name="favorPathExtension" value="false" />
+		<property name="favorParameter" value="false" />
+		<property name="ignoreAcceptHeader" value="false" />
+		<property name="mediaTypes">
+			<value>
+				atom=application/atom+xml
+				html=text/html
+				json=application/json
+			</value>
+		</property>
+	</bean>
+
+
+	<!-- - The form-based controllers within this application provide @RequestMapping 
+		- annotations at the type level for path mapping URLs and @RequestMapping 
+		- at the method level for request type mappings (e.g., GET and POST). - In 
+		contrast, ClinicController - which is not form-based - provides - @RequestMapping 
+		only at the method level for path mapping URLs. - - DefaultAnnotationHandlerMapping 
+		is driven by these annotations and is - enabled by default with Java 5+. -->
+
+	<!-- - This bean processes annotated handler methods, applying Application-specific 
+		PropertyEditors - for request parameter binding. It overrides the default 
+		AnnotationMethodHandlerAdapter. -->
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="webBindingInitializer">
+			<bean class="egovframework.com.cmm.web.EgovBindingInitializer" />
+		</property>
+		<property name="customArgumentResolvers">
+			<list>
+				<!-- <bean class="egovframework.rte.ptl.mvc.bind.AnnotationCommandMapArgumentResolver" 
+					/> -->
+				<bean class="egovframework.rte.ptl.mvc.bind.CommandMapArgumentResolver" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="handlerMapping"
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+
+
+	<bean id="urlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/**/*.do">viewController</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+
+	<bean id="viewController"
+		class="org.springframework.web.servlet.mvc.UrlFilenameViewController" />
+
+
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
+		p:order="1" />
+
+	<!-- - This bean resolves specific types of exceptions to corresponding 
+		logical - view names for error views. The default behaviour of DispatcherServlet 
+		- is to propagate all exceptions to the servlet container: this will happen 
+		- here with all other types of exceptions. -->
+	<bean id="exceptionResolver"
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView" value="egovframework/com/cmm/error/egovError" />
+		<property name="exceptionMappings">
+			<props>
+				<prop key="org.springframework.dao.DataAccessException">egovframework/com/cmm/error/dataAccessFailure</prop>
+				<prop key="org.springframework.transaction.TransactionException">egovframework/com/cmm/error/dataAccessFailure</prop>
+				<prop key="egovframework.rte.fdl.cmmn.exception.EgovBizException">egovframework/com/cmm/error/egovBizException</prop>
+				<prop key="org.springframework.web.HttpSessionRequiredException">egovframework/com/uat/uia/EgovLoginUsr</prop>
+			</props>
+		</property>
+	</bean>
+	<bean class="org.msf.utils.UTF8StringBeanPostProcessor"></bean>
+	<bean
+		class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"></bean>
+	<!-- - This bean configures the 'prefix' and 'suffix' properties of - InternalResourceViewResolver, 
+		which resolves logical view names - returned by Controllers. For example, 
+		a logical view name of "vets" - will be mapped to "/WEB-INF/jsp/vets.jsp". -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+		p:order="1" p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"
+		p:viewClass="org.springframework.web.servlet.view.JstlView" />
+
+
+	<!-- - Message source for this context, loaded from localized "messages_xx" 
+		files. - Could also reside in the root application context, as it is generic, 
+		- but is currently just used within Application's web tier. <bean id="messageSource" 
+		class="org.springframework.context.support.ResourceBundleMessageSource" p:basename="messages"/> -->
+
+
+	<!-- For Pagination Tag -->
+	<bean id="imageRenderer" class="egovframework.com.cmm.ImagePaginationRenderer" />
+
+	<bean id="paginationManager"
+		class="egovframework.rte.ptl.mvc.tags.ui.pagination.DefaultPaginationManager">
+		<property name="rendererType">
+			<map>
+				<entry key="image" value-ref="imageRenderer" />
+			</map>
+		</property>
+	</bean>
+	<!-- /For Pagination Tag -->
+	<!-- MULTIPART RESOLVERS -->
+	<!-- regular spring resolver -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="maxUploadSize" value="10485760" />
+		<property name="maxInMemorySize" value="10485760" />
+	</bean>
+
+	<bean id="annotationHandlerAdaptor"
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="synchronizeOnSession" value="true" />
+	</bean>
+	
+	 <bean class="com.any.smrmf.utils.BeanFinder"/>
+
+</beans>

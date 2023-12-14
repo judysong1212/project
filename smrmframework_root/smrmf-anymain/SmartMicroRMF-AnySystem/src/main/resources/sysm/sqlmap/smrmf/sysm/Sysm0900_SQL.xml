@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sysm0900">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysm0900SrhVo" type="com.app.smrmf.sysm.server.vo.SysIfSysm0900SrhVO"/>
+	
+	
+	<!-- 인사마스터 조회 -->
+	<select id="sysm0900DAO.selectSysm0900ToPsnl0100List" parameterClass="sysm0900SrhVo" resultClass="egovMap">
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+					SELECT
+									DPOB_CD
+									, SYSTEMKEY
+									, HAN_NM
+									, CURR_AFFN_DEPT_CD AS DEPT_CD
+									, fcBass0400CDNM(DPOB_CD, CURR_AFFN_DEPT_CD, '2') AS DEPT_NM
+									, RESN_REGN_NUM
+									, RESN_REGN_NUM AS SEC_REGN_NUM
+							FROM PSNL0100
+					WHERE 1=1
+						AND DPOB_CD = #dpobCd#
+					  <isNotNull property="emymtDivCd">
+					 	<isNotEmpty property="emymtDivCd" >
+						 	 AND EMYMT_DIV_CD=#emymtDivCd# 
+					 	</isNotEmpty>
+					 </isNotNull> 
+						ORDER BY 
+							DPOB_CD DESC
+							, (SELECT LPAD(DEPT_RANK,5,'0')  
+	                                   FROM BASS0400 DD
+	                                   WHERE DD.DEPT_CD = CURR_AFFN_DEPT_CD
+	                                     AND DD.DPOB_CD = DPOB_CD) ASC
+	                        , RESN_REGN_NUM ASC
+						    , SYSTEMKEY DESC
+				 
+		<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>					    
+						    
+	</select>	
+	
+	<select id="sysm0900DAO.selectXlsSysm0900ToPsnl0100List" parameterClass="sysm0900SrhVo" resultClass="egovMap">
+					SELECT
+									DPOB_CD
+									, SYSTEMKEY
+									, HAN_NM
+									, CURR_AFFN_DEPT_CD AS DEPT_CD
+									, fcBass0400CDNM(DPOB_CD, CURR_AFFN_DEPT_CD, '2') AS DEPT_NM
+									, RESN_REGN_NUM
+									, RESN_REGN_NUM AS SEC_REGN_NUM
+							FROM PSNL0100
+					WHERE 1=1
+						AND DPOB_CD = #dpobCd#
+					  <isNotNull property="emymtDivCd">
+					 	<isNotEmpty property="emymtDivCd" >
+						 	 AND EMYMT_DIV_CD=#emymtDivCd# 
+					 	</isNotEmpty>
+					 </isNotNull> 
+						ORDER BY 
+							DPOB_CD DESC
+							, (SELECT LPAD(DEPT_RANK,5,'0')  
+	                                   FROM BASS0400 DD
+	                                   WHERE DD.DEPT_CD = CURR_AFFN_DEPT_CD
+	                                     AND DD.DPOB_CD = DPOB_CD) ASC
+	                        , RESN_REGN_NUM ASC
+						    , SYSTEMKEY DESC
+						    
+	</select>	
+	
+	
+	
+	<select id="sysm0900DAO.selectSysm0900ToPsnl0100ListTotCnt_S" parameterClass="sysm0900SrhVo" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PSNL0100
+			WHERE 1=1
+				AND DPOB_CD = #dpobCd#
+			  <isNotNull property="emymtDivCd">
+			 	<isNotEmpty property="emymtDivCd" >
+				 	 AND EMYMT_DIV_CD=#emymtDivCd# 
+			 	</isNotEmpty>
+			 </isNotNull> 
+	</select>
+	
+	<!-- 인사 가족  조회 -->
+	<select id="sysm0900DAO.selectSysm0900ToPsnl0115List" parameterClass="sysm0900SrhVo" resultClass="egovMap">
+	SELECT * FROM (
+		SELECT A.*, ROWNUM RNUM FROM (
+	
+					SELECT AA.DPOB_CD
+					        , AA.SYSTEMKEY
+					        , AA.HAN_NM
+					        , AA.RESN_REGN_NUM
+					        , AA.RESN_REGN_NUM AS SEC_REGN_NUM
+					        , AA.CURR_AFFN_DEPT_CD AS DEPT_CD
+					        , fcBass0400CDNM(AA.DPOB_CD, AA.CURR_AFFN_DEPT_CD, '2') AS DEPT_NM
+					        , BB.FAMY_SEIL_NUM
+					        , BB.FAMY_RELA_DIV_CD
+					        , fcBass0300CDNM(AA.DPOB_CD, BB.FAMY_RELA_DIV_CD) AS FAMY_RELA_DIV_NM
+					        , BB.FAMY_NM         
+					        , BB.FAMY_RESN_REGN_NUM 
+					        , BB.FAMY_RESN_REGN_NUM AS SEC_FAMY_RESN_REGN_NUM  
+					FROM PSNL0100 AA, PSNL0115 BB
+					WHERE 1=1
+					    AND AA.DPOB_CD = #dpobCd#
+					    AND AA.DPOB_CD = BB.DPOB_CD
+					    AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+						<isNotNull property="emymtDivCd">
+			 				<isNotEmpty property="emymtDivCd" >
+				 				 AND AA.EMYMT_DIV_CD=#emymtDivCd# 
+			 				</isNotEmpty>
+			 			</isNotNull> 
+					ORDER BY 
+					    AA.DPOB_CD DESC
+					    , (SELECT LPAD(DEPT_RANK,5,'0')  
+					        FROM BASS0400 DD
+					       WHERE DD.DEPT_CD = AA.CURR_AFFN_DEPT_CD
+					          AND DD.DPOB_CD = AA.DPOB_CD) ASC
+					    , AA.RESN_REGN_NUM ASC
+					    , AA.SYSTEMKEY DESC    
+					    , BB.FAMY_SEIL_NUM
+			<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>						    
+	</select>	
+	
+	<select id="sysm0900DAO.selectXlsSysm0900ToPsnl0115List" parameterClass="sysm0900SrhVo" resultClass="egovMap">
+					SELECT AA.DPOB_CD
+					        , AA.SYSTEMKEY
+					        , AA.HAN_NM
+					        , AA.RESN_REGN_NUM
+					        , AA.RESN_REGN_NUM AS SEC_REGN_NUM
+					        , AA.CURR_AFFN_DEPT_CD AS DEPT_CD
+					        , fcBass0400CDNM(AA.DPOB_CD, AA.CURR_AFFN_DEPT_CD, '2') AS DEPT_NM
+					        , BB.FAMY_SEIL_NUM
+					        , BB.FAMY_RELA_DIV_CD
+					        , fcBass0300CDNM(AA.DPOB_CD, BB.FAMY_RELA_DIV_CD) AS FAMY_RELA_DIV_NM
+					        , BB.FAMY_NM         
+					        , BB.FAMY_RESN_REGN_NUM 
+					        , BB.FAMY_RESN_REGN_NUM AS SEC_FAMY_RESN_REGN_NUM  
+					FROM PSNL0100 AA, PSNL0115 BB
+					WHERE 1=1
+					    AND AA.DPOB_CD = #dpobCd#
+					    AND AA.DPOB_CD = BB.DPOB_CD
+					    AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+						<isNotNull property="emymtDivCd">
+			 				<isNotEmpty property="emymtDivCd" >
+				 				 AND AA.EMYMT_DIV_CD=#emymtDivCd# 
+			 				</isNotEmpty>
+			 			</isNotNull> 
+					ORDER BY 
+					    AA.DPOB_CD DESC
+					    , (SELECT LPAD(DEPT_RANK,5,'0')  
+					        FROM BASS0400 DD
+					       WHERE DD.DEPT_CD = AA.CURR_AFFN_DEPT_CD
+					          AND DD.DPOB_CD = AA.DPOB_CD) ASC
+					    , AA.RESN_REGN_NUM ASC
+					    , AA.SYSTEMKEY DESC    
+					    , BB.FAMY_SEIL_NUM
+	</select>	
+	
+	<select id="sysm0900DAO.selectSysm0900ToPsnl0115ListTotCnt_S" parameterClass="sysm0900SrhVo" resultClass="int">
+		SELECT COUNT(*) totcnt
+			FROM PSNL0100 AA, PSNL0115 BB
+		WHERE 1=1
+		    AND AA.DPOB_CD = #dpobCd#
+		    AND AA.DPOB_CD = BB.DPOB_CD
+		   	AND AA.SYSTEMKEY = BB.SYSTEMKEY 
+			<isNotNull property="emymtDivCd">
+				<isNotEmpty property="emymtDivCd" >
+					 AND AA.EMYMT_DIV_CD=#emymtDivCd# 
+				</isNotEmpty>
+			</isNotNull> 
+	</select>
+	
+	
+
+</sqlMap>

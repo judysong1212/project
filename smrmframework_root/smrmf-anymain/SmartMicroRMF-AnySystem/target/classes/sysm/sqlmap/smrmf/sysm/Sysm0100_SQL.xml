@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sysm0100">
+	 
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysm0100SerarchVO" type="com.app.smrmf.sysm.server.vo.SysIfSysm0100SrhVO"/>
+	<typeAlias  alias="sysIfSysm0100VO" type="com.app.smrmf.sysm.server.vo.SysIfSysm0100VO"/>
+	
+	<resultMap id="sysm0100" class="com.app.smrmf.sysm.server.vo.SysIfSysm0100VO">
+		<result property="sysDivCd" column="SYS_DIV_CD" columnIndex="1"/>
+		<result property="usrId" column="USR_ID" columnIndex="2"/>
+		<result property="usrNm" column="USR_NM" columnIndex="3"/>
+		<result property="usrDivCd" column="USR_DIV_CD" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="6"/> 
+		<result property="usrTel" column="USR_TEL" columnIndex="7"/>
+		<result property="email" column="EMAIL" columnIndex="8"/>
+		<result property="pwd" column="PWD" columnIndex="9"/>
+		<result property="useYn" column="USE_YN" columnIndex="10"/>
+		<result property="kybdr" column="KYBDR" columnIndex="11"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="12"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="13"/>
+		<result property="ismt" column="ISMT" columnIndex="14"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="15"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="16"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="17"/> 
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="18"/>
+		<result property="tmpPwd" column="TMP_PWD" columnIndex="19"/> 
+		<result property="payrMangDeptYn" column="PAYR_MANG_DEPT_YN"  columnIndex="20"/>
+		<result property="usrAuthEepnYn" column="USR_AUTH_EEPN_YN"  columnIndex="21"/> 
+		<result property="pyspInsnYn" column="PYSP_INSN_YN"  columnIndex="22"/> 
+		<result property="notPyspInsnYn" column="NOT_PYSP_INSN_YN"  columnIndex="23"/> 
+		<result property="servcInptPrcsYn" column="SERVC_INPT_PRCS_YN"  columnIndex="24"/> 
+		<result property="yrtxInptPrcsYn" column="YRTX_INPT_PRCS_YN"  columnIndex="25"/> 
+		<result property="shttmInsnYn" column="SHTTM_INSN_YN"  columnIndex="26"/> 
+		<result property="usrAuthDivCd" column="USR_AUTH_DIV_CD"  columnIndex="27"/>  
+		<result property="lockat" column="LOCKAT"  columnIndex="28"/>
+		<result property="pwddate" column="PWD_DATE"  columnIndex="29"/>
+		<!-- <result property="logincnt" column="LOGIN_CNT" columnIndex="30"/>  -->
+		
+	</resultMap>
+	<!-- 회원가입 계정 저장 쿼리 -->
+	<insert id="sysm0100DAO.insertSysm0100_S">
+		<![CDATA[
+			INSERT INTO SYSM0100 
+				(  SYS_DIV_CD
+				  , USR_ID
+				  , USR_NM
+				  , USR_DIV_CD
+				  , SYSTEMKEY
+				  , DEPT_CD
+				  , TYP_OCCU_CD 
+				  , PYSP_GRDE_CD
+				  , USR_TEL
+				  , EMAIL
+				  , PWD
+				  , USE_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR  
+					, USR_AUTH_EEPN_YN	
+					, PYSP_INSN_YN		
+					, NOT_PYSP_INSN_YN	
+					, SERVC_INPT_PRCS_YN	
+					, YRTX_INPT_PRCS_YN	
+					, SHTTM_INSN_YN		
+					, USR_AUTH_DIV_CD		
+					 )
+			VALUES ( #sysDivCd#
+				  , #usrId#
+				  , #usrNm#
+				  , #usrDivCd#
+				  ,  (DECODE( NVL(#systemkey#, 'TT'),'TT',DECODE(#usrDivCd#,'D0010070',
+                         (SELECT SYSTEMKEY
+                            FROM PSNL0100 AA
+                           WHERE     TRIM (AA.HAN_NM) = TRIM (#usrNm#)
+                                 AND AA.CURR_AFFN_DEPT_CD = #deptCd#),  #systemkey#),#systemkey# ))  
+				  , #deptCd#
+				  , #typOccuCd# 
+				  , #pyspGrdeCd#
+				  , #usrTel#
+				  , #email#
+				  , #pwd#
+				  , #useYn#
+				  , #kybdr#
+				  ,  SYSDATE 
+				  , #inptAddr#
+				  , #ismt#
+				  , SYSDATE
+				  , #revnAddr#  
+						, #usrAuthEepnYn#	
+						, #pyspInsnYn#		
+						, #notPyspInsnYn#	
+						, #servcInptPrcsYn#	
+						, #yrtxInptPrcsYn#	
+						, #shttmInsnYn#		
+						, #usrAuthDivCd#
+						)
+		]]>
+	</insert>
+	
+	<insert id="sysm0100DAO.insertConfSysm0100_S">
+		<![CDATA[
+			INSERT INTO SYSM0100 
+				(  SYS_DIV_CD
+				  , USR_ID
+				  , USR_NM
+				  , USR_DIV_CD
+				  , SYSTEMKEY
+				  , DEPT_CD
+				  , TYP_OCCU_CD 
+				  , PYSP_GRDE_CD
+				  , USR_TEL
+				  , EMAIL
+				  , PWD
+				  , USE_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR  
+					, USR_AUTH_EEPN_YN	
+					, PYSP_INSN_YN		
+					, NOT_PYSP_INSN_YN	
+					, SERVC_INPT_PRCS_YN	
+					, YRTX_INPT_PRCS_YN	
+					, SHTTM_INSN_YN		
+					, USR_AUTH_DIV_CD		
+					 )
+			VALUES ( #sysDivCd#
+				  , #usrId#
+				  , #usrNm#
+				  , #usrDivCd#
+				  ,  (DECODE( NVL(#systemkey#, 'TT'),'TT',DECODE(#usrDivCd#,'D0010070',
+                         (SELECT SYSTEMKEY
+                            FROM PSNL0100 AA
+                           WHERE     TRIM (AA.HAN_NM) = TRIM (#usrNm#)
+                                 AND AA.CURR_AFFN_DEPT_CD = #deptCd#),  #systemkey#),#systemkey# )) 
+				  , #deptCd#
+				  , #typOccuCd# 
+				  , #pyspGrdeCd#
+				  , #usrTel#
+				  , #email#
+				  , #pwd#
+				  , #useYn#
+				  , #kybdr#
+				  , SYSDATE 
+				  , #inptAddr#
+				  , #ismt#
+				  , SYSDATE
+				  , #revnAddr#  
+						, #usrAuthEepnYn#	
+						, #pyspInsnYn#		
+						, #notPyspInsnYn#	
+						, #servcInptPrcsYn#	
+						, #yrtxInptPrcsYn#	
+						, #shttmInsnYn#		
+						, #usrAuthDivCd#
+						)
+		]]>
+	</insert> 
+
+	
+	<insert id="sysm0100DAO.insertSysmUsr0100_S">
+		<![CDATA[
+			INSERT INTO SYSM0100 
+				(  SYS_DIV_CD			
+					, USR_ID				
+					, USR_NM				
+					, USR_DIV_CD			
+					, SYSTEMKEY			
+					, DEPT_CD				
+					, USR_TEL				
+					, EMAIL				
+					, PWD					
+					, USE_YN				
+					, KYBDR				
+					, INPT_DT				
+					, INPT_ADDR			
+					, ISMT				
+					, REVN_DT				
+					, REVN_ADDR			
+					, TYP_OCCU_CD			
+					, PYSP_GRDE_CD		 
+					, USR_AUTH_EEPN_YN	
+					, PYSP_INSN_YN		
+					, NOT_PYSP_INSN_YN	
+					, SERVC_INPT_PRCS_YN	
+					, YRTX_INPT_PRCS_YN	
+					, SHTTM_INSN_YN		
+					, USR_AUTH_DIV_CD		
+				)
+			VALUES (  #sysDivCd#			
+						, #usrId#				
+						, #usrNm#				
+						, #usrDivCd#			
+						, #systemkey#			
+						, #deptCd#				
+						, #usrTel#				
+						, #email#				
+						, #pwd#					
+						, #useYn#				
+						, #kybdr#				
+						, SYSDATE		
+						, #inptAddr#			
+						, #ismt#				
+						, SYSDATE		
+						, #revnAddr#			
+						, #typOccuCd#			
+						, #pyspGrdeCd#		 
+						, #usrAuthEepnYn#	
+						, #pyspInsnYn#		
+						, #notPyspInsnYn#	
+						, #servcInptPrcsYn#	
+						, #yrtxInptPrcsYn#	
+						, #shttmInsnYn#		
+						, #usrAuthDivCd#
+					)
+		]]>
+	</insert>
+	
+	<!-- LOCKAT, LOGINCNT 추가  2023.06.21-->
+	<update id="sysm0100DAO.updateSysm0100_S">
+		<![CDATA[
+			UPDATE SYSM0100
+			SET SYS_DIV_CD=#sysDivCd#
+				, USR_ID=#usrId#
+				, USR_NM=#usrNm#
+				, USR_DIV_CD=#usrDivCd#
+				, SYSTEMKEY=   NVL( (  SELECT SYSTEMKEY FROM PSNL0100 AA 
+							       WHERE  TRIM(AA.HAN_NM) = TRIM(SYSM0100.USR_NM)
+							       AND    AA.CURR_AFFN_DEPT_CD = SYSM0100.DEPT_CD
+							      ), SYSM0100.SYSTEMKEY) 
+				, DEPT_CD=#deptCd#
+				, TYP_OCCU_CD=#typOccuCd# 
+				, PYSP_GRDE_CD=#pyspGrdeCd#
+				, USR_TEL=#usrTel#
+				, EMAIL=#email#
+				, LOCKAT = #lockat#
+				, LOGIN_CNT = #logincnt#
+				, USE_YN=#useYn#
+				, ISMT=#ismt#
+				, REVN_DT=SYSDATE
+				, REVN_ADDR=#revnAddr# 
+					, USR_AUTH_EEPN_YN = #usrAuthEepnYn#
+					, PYSP_INSN_YN = #pyspInsnYn#
+					, NOT_PYSP_INSN_YN = #notPyspInsnYn#	
+					, SERVC_INPT_PRCS_YN = #servcInptPrcsYn#	
+					, YRTX_INPT_PRCS_YN	= #yrtxInptPrcsYn#
+					, SHTTM_INSN_YN	= #shttmInsnYn#
+					, USR_AUTH_DIV_CD = #usrAuthDivCd#
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND USR_ID=#usrId#
+				]]>
+	</update>
+	
+	<!-- 계정잠금 수정 추가 -->
+		<update id="sysm0100DAO.updateSysmUsr0100_S">
+		<![CDATA[
+			UPDATE SYSM0100
+			SET  SYS_DIV_CD	= #sysDivCd#		
+					, USR_ID = 	#usrId#			
+					, USR_NM = 	#usrNm#					
+					, USR_DIV_CD = 	#usrDivCd#		
+					, SYSTEMKEY	= #systemkey#	
+					, DEPT_CD = #deptCd#			
+					, USR_TEL = #usrTel#			
+					, EMAIL	= #email#			
+					, USE_YN = #useYn#			
+					, ISMT = #ismt#	
+					, LOCKAT = #lockat#	
+					, REVN_DT = SYSDATE		
+					, REVN_ADDR	= #revnAddr#
+					, TYP_OCCU_CD = #typOccuCd#	
+					, PYSP_GRDE_CD = #pyspGrdeCd# 
+					, USR_AUTH_EEPN_YN = #usrAuthEepnYn#
+					, PYSP_INSN_YN = #pyspInsnYn#
+					, NOT_PYSP_INSN_YN = #notPyspInsnYn#	
+					, SERVC_INPT_PRCS_YN = #servcInptPrcsYn#	
+					, YRTX_INPT_PRCS_YN	= #yrtxInptPrcsYn#
+					, SHTTM_INSN_YN	= #shttmInsnYn#
+					, USR_AUTH_DIV_CD = #usrAuthDivCd#
+			 WHERE SYS_DIV_CD=#sysDivCd#
+				AND USR_ID=#usrId#
+				]]>
+	</update>
+	
+	
+	<delete id="sysm0100DAO.deleteSysm0100_S">
+		<![CDATA[
+			DELETE FROM SYSM0100 
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND USR_ID=#usrId#
+				]]>
+	</delete>
+	
+	<select id="sysm0100DAO.selectSysm0100_S" resultMap="sysm0100">
+		<![CDATA[
+			SELECT
+				SYS_DIV_CD
+				, USR_ID
+				, USR_NM
+				, USR_DIV_CD
+				, SYSTEMKEY
+				, DEPT_CD
+				, TYP_OCCU_CD 
+				, PYSP_GRDE_CD
+				, USR_TEL
+				, EMAIL
+				, PWD
+				, (PWD) AS TMP_PWD
+				, USE_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR 
+					, USR_AUTH_EEPN_YN	 
+					, PYSP_INSN_YN			
+					, NOT_PYSP_INSN_YN	   
+					, SERVC_INPT_PRCS_YN	
+					, YRTX_INPT_PRCS_YN		
+					, SHTTM_INSN_YN			
+					, USR_AUTH_DIV_CD		
+			FROM SYSM0100
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND USR_ID=#usrId#
+				]]>
+	</select>
+	
+	<!-- 사용자 정보 조회 -->
+	<select id="sysm0100DAO.selectSysm0100List_D" parameterClass="sysm0100SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+				                 (#dpobCd#) AS deptCddpobCd
+								, SYS_DIV_CD
+								, USR_ID
+								, USR_NM
+								, USR_DIV_CD
+								, USR_DIV_CD AS usrDivCdcommCd
+								, fcBass0300CDNM(#dpobCd#,USR_DIV_CD) AS usrDivCdcommCdNm
+								, SYSTEMKEY
+								, DEPT_CD
+								, DEPT_CD AS deptCddeptCd
+								, fcBass0400CDNM(#dpobCd#,DEPT_CD,'2') AS deptCddeptNmRtchnt
+								,  TYP_OCCU_CD  AS typOccuCdtypOccuCd
+								 , fcBass0320CDNM(#dpobCd#,TYP_OCCU_CD)  AS typOccuCdtypOccuNm
+								, PYSP_GRDE_CD
+								, fcBass0300CDNM(#dpobCd#,PYSP_GRDE_CD) AS PYSP_GRDE_NM 
+								, USR_TEL
+								, EMAIL
+								, PWD
+								, (PWD) AS TMP_PWD
+								, USE_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, LOCKAT 								<!-- 계정잠금여부 추가 -->
+								, REVN_DT
+								, REVN_ADDR 
+								, TYP_OCCU_CD			 
+											, DTIL_OCCU_INTTN_CD	 
+											, USR_AUTH_EEPN_YN	 
+											, PYSP_INSN_YN			
+											, NOT_PYSP_INSN_YN	   
+											, SERVC_INPT_PRCS_YN	
+											, YRTX_INPT_PRCS_YN		
+											, SHTTM_INSN_YN			
+											, USR_AUTH_DIV_CD		
+						FROM SYSM0100
+				WHERE 1=1
+				<isNotEmpty prepend="AND" property="usrNm">
+					USR_NM LIKE '%' || #usrNm# || '%' 
+				</isNotEmpty> 
+				<isEqual  property="searchKeyword" compareValue="Y">
+					<isNotEmpty  property="usrDivCd">
+						AND USR_DIV_CD  = #usrDivCd# 
+					</isNotEmpty>
+				</isEqual>
+				<isEqual   property="searchKeyword" compareValue="N">
+					<isNotEmpty   property="usrDivCd">
+					     AND NOT EXISTS (SELECT SYS_DIV_CD, USR_ID ,USR_DIV_CD
+                                          FROM SYSM0100 CC
+			                    		 WHERE SYSM0100.SYS_DIV_CD = CC.SYS_DIV_CD
+			                               AND CC.USR_DIV_CD IN ( #usrDivCd# ) 
+			                    		)  
+						
+					</isNotEmpty>
+				</isEqual>
+				<isNotEmpty prepend="AND" property="deptCd">
+					DEPT_CD =  #deptCd# 
+				</isNotEmpty>
+					ORDER BY 
+					SYS_DIV_CD ASC 
+					 ,(SELECT LPAD(DEPT_RANK,5,'0')  
+                                   FROM BASS0400 DD
+                                   WHERE DD.DEPT_CD =  SYSM0100.DEPT_CD  
+                                     AND DD.DPOB_CD = #dpobCd#) ASC 
+				   ,USR_ID ASC  
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>	
+	</select>	
+	<select id="sysm0100DAO.selectSysm0100ListTotCnt_S" parameterClass="sysm0100SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSM0100
+			WHERE 1=1
+		 <isNotEmpty prepend="AND" property="usrNm">
+					USR_NM LIKE '%' || #usrNm# || '%' 
+		 </isNotEmpty> 
+		 <isEqual   property="searchKeyword" compareValue="Y">
+				<isNotEmpty  property="usrDivCd">
+					AND USR_DIV_CD  = #usrDivCd# 
+				</isNotEmpty>
+		 </isEqual>
+		 <isEqual   property="searchKeyword" compareValue="N">
+				<isNotEmpty  property="usrDivCd">
+				    AND NOT EXISTS (SELECT SYS_DIV_CD, USR_ID ,USR_DIV_CD
+                                          FROM SYSM0100 CC
+			                    		 WHERE SYSM0100.SYS_DIV_CD = CC.SYS_DIV_CD
+			                               AND CC.USR_DIV_CD IN ( #usrDivCd# ) 
+			                    		)  
+				</isNotEmpty>
+		 </isEqual>
+		<isNotEmpty prepend="AND" property="deptCd">
+					DEPT_CD =  #deptCd# 
+		</isNotEmpty>
+				
+	</select>
+	
+	<!-- 사용안함  -->
+	<select id="sysm0100DAO.selectSSoUserList_D"  resultClass="egovMap">
+ SELECT   AA.SYS_DIV_CD
+                , AA.USR_ID 
+                , CC.USER_ID
+                , CC.USER_NAME
+                , CC.USER_SN
+                , CC.USER_STAT
+                , CC.USER_STAT_NAME
+                , CC.REGULARITY
+                , CC.ORG_ID
+                , CC.ORG_NAME
+                , (CC.DEPT_ID || '00') AS DEPT_ID
+                , CC.DEPT_NAME
+                , CC.DEPT_FULLNAME
+                , CC.CLASS_ID
+                , CC.CLASS_NAME
+                , CC.POSITION_ID
+                , CC.POSITION_NAME
+                , CC.GRADE_ID
+                , CC.GRADE_NAME
+                , CC.EMAIL
+                , CC.TEL
+                , CC.MOBILE
+                , CC.JOIN_DAY
+                , CC.RETIRE_DAY
+                , CC.ADD_INFO1
+                , CC.ADD_INFO2
+                , CC.ADD_INFO3
+                , CC.ADD_INFO4
+                , CC.ADD_INFO5
+                , CC.ADD_INFO6
+                , CC.ADD_INFO7
+                , CC.BASE_SYS
+                , CC.REG_DAY
+                , CC.UPDATE_DAY
+                , CC.USE_YN
+                , CC.RDUTY_NAME
+            FROM SSOX_USER CC ,SYSM0100 AA 
+                        WHERE AA.USR_ID(+) = CC.USER_ID   
+			              AND CC.ORG_ID = SUBSTR(#dpobCd#,4,9)
+	</select>	
+	<!--   AND CC.USER_STAT -->
+	
+	<update id="sysm0100DAO.updateUserSysm0100_S">
+		<![CDATA[
+			UPDATE SYSM0100
+			SET   SYSTEMKEY=#systemkey#
+				, DEPT_CD=#deptCd#  
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND USR_ID=#usrId#
+				]]>
+	</update>
+	
+	
+	<!-- 개인별 맵핑 작업을 위한 권한 처리  -->
+		<select id="sysm0100DAO.selectSysm0700ToSysm0100List_D" parameterClass="sysm0100SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+				                 (#dpobCd#) AS DPOB_CD
+								, SYS_DIV_CD
+								, USR_ID
+								, USR_NM
+								, USR_DIV_CD
+								, fcBass0300CDNM(#dpobCd#,USR_DIV_CD) AS USR_DIV_NM
+								, USR_DIV_CD AS usrDivCdcommCd
+								, fcBass0300CDNM(#dpobCd#,USR_DIV_CD) AS usrDivCdcommCdNm
+								, SYSTEMKEY
+								, DEPT_CD
+								, DEPT_CD AS deptCddeptCd
+								, fcBass0400CDNM(#dpobCd#,DEPT_CD,'2') AS  DEPT_NM
+								, fcBass0400CDNM(#dpobCd#,DEPT_CD,'2') AS deptCddeptNmRtchnt
+								,  TYP_OCCU_CD  AS typOccuCdtypOccuCd
+								 , fcBass0320CDNM(#dpobCd#,TYP_OCCU_CD)  AS typOccuCdtypOccuNm
+								, PYSP_GRDE_CD
+								, fcBass0300CDNM(#dpobCd#,PYSP_GRDE_CD) AS PYSP_GRDE_NM 
+								, USR_TEL
+								, EMAIL
+								, PWD
+								, (PWD) AS TMP_PWD
+								, USE_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR 
+											, USR_AUTH_EEPN_YN	 
+											, PYSP_INSN_YN			
+											, NOT_PYSP_INSN_YN	   
+											, SERVC_INPT_PRCS_YN	
+											, YRTX_INPT_PRCS_YN		
+											, SHTTM_INSN_YN			
+											, USR_AUTH_DIV_CD		
+						FROM SYSM0100
+				WHERE USR_DIV_CD NOT IN ('D0010070','D0010080','D0010020','D0010040')
+				<isNotEmpty prepend="AND" property="usrNm">
+					USR_NM LIKE '%' || #usrNm# || '%' 
+				</isNotEmpty>  
+					ORDER BY 
+					SYS_DIV_CD ASC 
+					 ,(SELECT LPAD(DEPT_RANK,5,'0')  
+                                   FROM BASS0400 DD
+                                   WHERE DD.DEPT_CD =  SYSM0100.DEPT_CD  
+                                     AND DD.DPOB_CD = #dpobCd#) ASC 
+                    ,USR_DIV_CD ASC                 
+				   ,USR_ID ASC   
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+ 
+	</select>	
+	<!-- 개인별 맵핑 작업을 위한 권한 처리  -->
+	<select id="sysm0100DAO.selectSysm0700ToSysm0100ListTotCnt_S" parameterClass="sysm0100SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSM0100
+			WHERE USR_DIV_CD NOT IN ('D0010070','D0010080','D0010020','D0010040')
+		 <isNotEmpty prepend="AND" property="usrNm">
+					USR_NM LIKE '%' || #usrNm# || '%' 
+		 </isNotEmpty>  
+				
+	</select>
+
+	
+	
+  <select id="sysm0100DAO.selectPopupSysm0100List_D" parameterClass="sysm0100SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+				                 (#dpobCd#) AS deptCddpobCd
+								, SYS_DIV_CD
+								, USR_ID
+								, USR_NM
+								, USR_DIV_CD
+								, USR_DIV_CD AS usrDivCdcommCd
+								, fcBass0300CDNM(#dpobCd#,USR_DIV_CD) AS usrDivCdcommCdNm
+								, SYSTEMKEY
+								, DEPT_CD
+								, DEPT_CD AS deptCddeptCd
+								, fcBass0400CDNM(#dpobCd#,DEPT_CD,'2') AS deptCddeptNmRtchnt
+								,  TYP_OCCU_CD   AS typOccuCdtypOccuCd
+								 , fcBass0320CDNM(#dpobCd#,TYP_OCCU_CD) AS typOccuCdtypOccuNm
+								, PYSP_GRDE_CD
+								, fcBass0300CDNM(#dpobCd#,PYSP_GRDE_CD) AS PYSP_GRDE_NM 
+								, USR_TEL
+								, EMAIL
+								, PWD
+								, USE_YN
+							, USR_AUTH_EEPN_YN
+							    , PYSP_INSN_YN
+							    , NOT_PYSP_INSN_YN
+							    , SERVC_INPT_PRCS_YN
+							    , YRTX_INPT_PRCS_YN
+							    , SHTTM_INSN_YN
+							    , USR_AUTH_DIV_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM SYSM0100
+				WHERE 1=1
+				<isNotEmpty prepend="AND" property="usrNm">
+					USR_NM LIKE '%' || #usrNm# || '%' 
+				</isNotEmpty> 
+				<isEqual  property="searchKeyword" compareValue="Y">
+					<isNotEmpty  property="usrDivCd">
+						AND USR_DIV_CD  = #usrDivCd# 
+					</isNotEmpty>
+				</isEqual>
+				<isEqual   property="searchKeyword" compareValue="N">
+					<isNotEmpty   property="usrDivCd">
+					     AND NOT EXISTS (SELECT SYS_DIV_CD, USR_ID ,USR_DIV_CD
+                                          FROM SYSM0100 CC
+			                    		 WHERE SYSM0100.SYS_DIV_CD = CC.SYS_DIV_CD
+			                               AND CC.USR_DIV_CD IN ( #usrDivCd# ) 
+			                    		)  
+						
+					</isNotEmpty>
+				</isEqual>
+				<isNotEmpty prepend="AND" property="deptCd">
+					DEPT_CD =  #deptCd# 
+				</isNotEmpty>
+					ORDER BY 
+					SYS_DIV_CD ASC 
+				   ,USR_ID ASC  
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>	
+	</select>	
+	<select id="sysm0100DAO.selectPopupSysm0100ListTotCnt_S" parameterClass="sysm0100SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSM0100
+			WHERE 1=1
+		 <isNotEmpty prepend="AND" property="usrNm">
+					USR_NM LIKE '%' || #usrNm# || '%' 
+		 </isNotEmpty> 
+		 <isEqual   property="searchKeyword" compareValue="Y">
+				<isNotEmpty  property="usrDivCd">
+					AND USR_DIV_CD  = #usrDivCd# 
+				</isNotEmpty>
+		 </isEqual>
+		 <isEqual   property="searchKeyword" compareValue="N">
+				<isNotEmpty  property="usrDivCd">
+				    AND NOT EXISTS (SELECT SYS_DIV_CD, USR_ID ,USR_DIV_CD
+                                          FROM SYSM0100 CC
+			                    		 WHERE SYSM0100.SYS_DIV_CD = CC.SYS_DIV_CD
+			                               AND CC.USR_DIV_CD IN ( #usrDivCd# ) 
+			                    		)  
+				</isNotEmpty>
+		 </isEqual>
+		<isNotEmpty prepend="AND" property="deptCd">
+					DEPT_CD =  #deptCd# 
+		</isNotEmpty>
+				
+	</select>
+	
+	
+	<select id="sysm0100DAO.selectSysm0100ExlList_D" parameterClass="sysm0100SerarchVO" resultClass="egovMap">
+		SELECT
+							                 (#dpobCd#) AS deptCddpobCd
+											, SYS_DIV_CD
+											, USR_ID
+											, USR_NM
+											, USR_DIV_CD
+											, USR_DIV_CD AS usrDivCdcommCd
+											, fcBass0300CDNM(#dpobCd#,USR_DIV_CD) AS usrDivCdcommCdNm
+											, SYSTEMKEY
+											, DEPT_CD
+											, DEPT_CD AS deptCddeptCd
+											, fcBass0400CDNM(#dpobCd#,DEPT_CD,'2') AS deptCddeptNmRtchnt
+											, TYP_OCCU_CD  AS typOccuCdtypOccuCd
+											, fcBass0320CDNM(#dpobCd#,TYP_OCCU_CD)  AS typOccuCdtypOccuNm
+											, PYSP_GRDE_CD
+											, fcBass0300CDNM(#dpobCd#,PYSP_GRDE_CD) AS PYSP_GRDE_NM 
+											, USR_TEL
+											, EMAIL
+											, PWD
+											, (PWD) AS TMP_PWD
+											, USE_YN
+											, KYBDR
+											, INPT_DT
+											, INPT_ADDR
+											, ISMT
+											, REVN_DT
+											, REVN_ADDR
+											, TYP_OCCU_CD			 
+											, DTIL_OCCU_INTTN_CD	
+											, USR_AUTH_EEPN_YN	 
+											, PYSP_INSN_YN			
+											, NOT_PYSP_INSN_YN	   
+											, SERVC_INPT_PRCS_YN	
+											, YRTX_INPT_PRCS_YN		
+											, SHTTM_INSN_YN			
+											, USR_AUTH_DIV_CD		
+									FROM SYSM0100
+							WHERE 1=1
+							<isNotEmpty prepend="AND" property="usrNm">
+								USR_NM LIKE '%' || #usrNm# || '%' 
+							</isNotEmpty> 
+							<isEqual  property="searchKeyword" compareValue="Y">
+								<isNotEmpty  property="usrDivCd">
+									AND USR_DIV_CD  = #usrDivCd# 
+								</isNotEmpty>
+							</isEqual>
+							<isEqual   property="searchKeyword" compareValue="N">
+								<isNotEmpty   property="usrDivCd">
+								     AND NOT EXISTS (SELECT SYS_DIV_CD, USR_ID ,USR_DIV_CD
+			                                          FROM SYSM0100 CC
+						                    		 WHERE SYSM0100.SYS_DIV_CD = CC.SYS_DIV_CD
+						                               AND CC.USR_DIV_CD IN ( #usrDivCd# ) 
+						                    		)  
+									
+								</isNotEmpty>
+							</isEqual>
+							<isNotEmpty prepend="AND" property="deptCd">
+								DEPT_CD =  #deptCd# 
+							</isNotEmpty>
+								ORDER BY 
+								SYS_DIV_CD ASC 
+								 ,(SELECT LPAD(DEPT_RANK,5,'0')  
+			                                   FROM BASS0400 DD
+			                                   WHERE DD.DEPT_CD =  SYSM0100.DEPT_CD  
+			                                     AND DD.DPOB_CD = #dpobCd#) ASC 
+							   ,USR_ID ASC  
+	</select>	
+	
+	
+	<!-- 비밀번호 초기화를 위한 조회 쿼리 -->
+	<select id="sysm0100DAO.getUsrInfo" parameterClass="sysIfSysm0100VO" resultClass="egovMap">
+	SELECT A.SYS_DIV_CD
+			, A.USR_ID
+			, A.USR_NM
+			, A.USR_DIV_CD
+			, A.USR_DIV_CD
+			, A.SYSTEMKEY
+			, A.DEPT_CD
+			, B.HAN_NM
+			, B.RESN_REGN_NUM
+			, NVL(B.YOOBH_MNTH_DAY, '000000') AS YOOBH_MNTH_DAY
+  		FROM SYSM0100 A, PSNL0100 B
+ 	WHERE A.SYSTEMKEY = B.SYSTEMKEY(+)
+    	AND A.USR_ID = #usrId#
+	</select>
+	
+</sqlMap>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sysm1300">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysm1300SerarchVO" type="com.app.smrmf.sysm.server.vo.SysIfSysm1300SrhVO"/>
+	
+	<resultMap id="sysm1300" class="com.app.smrmf.sysm.server.vo.SysIfSysm1300VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="2"/>
+		<result property="dutyDivCd" column="DUTY_DIV_CD" columnIndex="3"/>
+		<result property="servcDutyDotwSeilNum" column="SERVC_DUTY_DOTW_SEIL_NUM" columnIndex="4"/>
+		<result property="monDutyYn" column="MON_DUTY_YN" columnIndex="5"/>
+		<result property="tueDutyYn" column="TUE_DUTY_YN" columnIndex="6"/>
+		<result property="wedDutyYn" column="WED_DUTY_YN" columnIndex="7"/>
+		<result property="thurDutyYn" column="THUR_DUTY_YN" columnIndex="8"/>
+		<result property="friDutyYn" column="FRI_DUTY_YN" columnIndex="9"/>
+		<result property="satDutyYn" column="SAT_DUTY_YN" columnIndex="10"/>
+		<result property="sunDutyYn" column="SUN_DUTY_YN" columnIndex="11"/>
+		<result property="norPubcHodyCalcYn" column="NOR_PUBC_HODY_CALC_YN" columnIndex="12"/>
+		<result property="kybdr" column="KYBDR" columnIndex="13"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="14"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="15"/>
+		<result property="ismt" column="ISMT" columnIndex="16"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="17"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="18"/>
+	</resultMap>
+	
+	<insert id="sysm1300DAO.insertSysm1300_S">
+		<![CDATA[
+			INSERT INTO SYSM1300 
+				( DPOB_CD
+				  , EMYMT_DIV_CD
+				  , DUTY_DIV_CD
+				  , SERVC_DUTY_DOTW_SEIL_NUM
+				  , MON_DUTY_YN
+				  , TUE_DUTY_YN
+				  , WED_DUTY_YN
+				  , THUR_DUTY_YN
+				  , FRI_DUTY_YN
+				  , SAT_DUTY_YN
+				  , SUN_DUTY_YN
+				  , NOR_PUBC_HODY_CALC_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #emymtDivCd#
+				  , #dutyDivCd#
+				  , #servcDutyDotwSeilNum#
+				  , #monDutyYn#
+				  , #tueDutyYn#
+				  , #wedDutyYn#
+				  , #thurDutyYn#
+				  , #friDutyYn#
+				  , #satDutyYn#
+				  , #sunDutyYn#
+				  , #norPubcHodyCalcYn#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="sysm1300DAO.updateSysm1300_S">
+		<![CDATA[
+			UPDATE SYSM1300
+			SET DPOB_CD=#dpobCd#
+				, EMYMT_DIV_CD=#emymtDivCd#
+				, DUTY_DIV_CD=#dutyDivCd#
+				, SERVC_DUTY_DOTW_SEIL_NUM=#servcDutyDotwSeilNum#
+				, MON_DUTY_YN=#monDutyYn#
+				, TUE_DUTY_YN=#tueDutyYn#
+				, WED_DUTY_YN=#wedDutyYn#
+				, THUR_DUTY_YN=#thurDutyYn#
+				, FRI_DUTY_YN=#friDutyYn#
+				, SAT_DUTY_YN=#satDutyYn#
+				, SUN_DUTY_YN=#sunDutyYn#
+				, NOR_PUBC_HODY_CALC_YN=#norPubcHodyCalcYn#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND DUTY_DIV_CD=#dutyDivCd#
+								AND SERVC_DUTY_DOTW_SEIL_NUM=#servcDutyDotwSeilNum#
+				]]>
+	</update>
+	
+	<delete id="sysm1300DAO.deleteSysm1300_S">
+		<![CDATA[
+			DELETE FROM SYSM1300 
+						WHERE DPOB_CD=#dpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND DUTY_DIV_CD=#dutyDivCd#
+								AND SERVC_DUTY_DOTW_SEIL_NUM=#servcDutyDotwSeilNum#
+				]]>
+	</delete>
+	
+	<select id="sysm1300DAO.selectSysm1300_S" resultMap="sysm1300">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, EMYMT_DIV_CD
+				, DUTY_DIV_CD
+				, SERVC_DUTY_DOTW_SEIL_NUM
+				, MON_DUTY_YN
+				, TUE_DUTY_YN
+				, WED_DUTY_YN
+				, THUR_DUTY_YN
+				, FRI_DUTY_YN
+				, SAT_DUTY_YN
+				, SUN_DUTY_YN
+				, NOR_PUBC_HODY_CALC_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM SYSM1300
+						WHERE DPOB_CD=#dpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND DUTY_DIV_CD=#dutyDivCd#
+								AND SERVC_DUTY_DOTW_SEIL_NUM=#servcDutyDotwSeilNum#
+				]]>
+	</select>
+	
+	<select id="sysm1300DAO.selectSysm1300List_D" parameterClass="sysm1300SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, EMYMT_DIV_CD
+								, DUTY_DIV_CD
+								, SERVC_DUTY_DOTW_SEIL_NUM
+								, MON_DUTY_YN
+								, TUE_DUTY_YN
+								, WED_DUTY_YN
+								, THUR_DUTY_YN
+								, FRI_DUTY_YN
+								, SAT_DUTY_YN
+								, SUN_DUTY_YN
+								, NOR_PUBC_HODY_CALC_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM SYSM1300
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					EMYMT_DIV_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, EMYMT_DIV_CD DESC
+							, DUTY_DIV_CD DESC
+							, SERVC_DUTY_DOTW_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="sysm1300DAO.selectSysm1300ListTotCnt_S" parameterClass="sysm1300SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSM1300
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				EMYMT_DIV_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

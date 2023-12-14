@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bord0300">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bord0300SrhVO" type="com.app.smrmf.sysm.server.service.vo.Bord0300SrhVO"/>
+	
+	<resultMap id="bord0300" class="com.app.smrmf.sysm.server.service.vo.Bord0300VO">
+		<result property="sysDivCd" column="SYS_DIV_CD" columnIndex="1"/>
+		<result property="bullBordMsgeSeilNum" column="BULL_BORD_MSGE_SEIL_NUM" columnIndex="2"/>
+		<result property="bullBordUid" column="BULL_BORD_UID" columnIndex="3"/>
+		<result property="bullBordGrpId" column="BULL_BORD_GRP_ID" columnIndex="4"/>
+		<result property="tplvlWrtnInfo" column="TPLVL_WRTN_INFO" columnIndex="5"/>
+		<result property="wrtnAswrStge" column="WRTN_ASWR_STGE" columnIndex="6"/>
+		<result property="wrtnRgstnOrd" column="WRTN_RGSTN_ORD" columnIndex="7"/>
+		<result property="aswrWrtnNum" column="ASWR_WRTN_NUM" columnIndex="8"/>
+		<result property="ppgPernNm" column="PPG_PERN_NM" columnIndex="9"/>
+		<result property="usrId" column="USR_ID" columnIndex="10"/>
+		<result property="bullBordMsgeTtl" column="BULL_BORD_MSGE_TTL" columnIndex="11"/>
+		<result property="bullBordMsgeCtnt" column="BULL_BORD_MSGE_CTNT" columnIndex="12"/>
+		<result property="wrtnSecrNum" column="WRTN_SECR_NUM" columnIndex="13"/>
+		<result property="ppgPernEmail" column="PPG_PERN_EMAIL" columnIndex="14"/>
+		<result property="inqyNum" column="INQY_NUM" columnIndex="15"/>
+		<result property="htmlUseYn" column="HTML_USE_YN" columnIndex="16"/>
+		<result property="bullBordMsgeDelYn" column="BULL_BORD_MSGE_DEL_YN" columnIndex="17"/>
+		<result property="notiBgnnDt" column="NOTI_BGNN_DT" columnIndex="18"/>
+		<result property="notiEndDt" column="NOTI_END_DT" columnIndex="19"/>
+		<result property="kybdr" column="KYBDR" columnIndex="20"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="21"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="22"/>
+		<result property="ismt" column="ISMT" columnIndex="23"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="24"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="25"/>
+	</resultMap>
+	
+	<insert id="bord0300DAO.insertBord0300_S">
+		<![CDATA[
+			INSERT INTO BORD0300 
+				( SYS_DIV_CD
+				  , BULL_BORD_MSGE_SEIL_NUM
+				  , BULL_BORD_UID
+				  , BULL_BORD_GRP_ID
+				  , TPLVL_WRTN_INFO
+				  , WRTN_ASWR_STGE
+				  , WRTN_RGSTN_ORD
+				  , ASWR_WRTN_NUM
+				  , PPG_PERN_NM
+				  , USR_ID
+				  , BULL_BORD_MSGE_TTL
+				  , BULL_BORD_MSGE_CTNT
+				  , WRTN_SECR_NUM
+				  , PPG_PERN_EMAIL
+				  , INQY_NUM
+				  , HTML_USE_YN
+				  , BULL_BORD_MSGE_DEL_YN
+				  , NOTI_BGNN_DT
+				  , NOTI_END_DT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #sysDivCd#
+				   ,(SELECT NVL(MAX(BULL_BORD_MSGE_SEIL_NUM),0) + 1 
+			           FROM BORD0300
+			          WHERE SYS_DIV_CD=#sysDivCd# 
+						AND BULL_BORD_UID=#bullBordUid#
+						AND BULL_BORD_GRP_ID=#bullBordGrpId# 
+			       )   
+				  , #bullBordUid#
+				  , #bullBordGrpId#
+				  , #tplvlWrtnInfo#
+				  , #wrtnAswrStge#
+				  , #wrtnRgstnOrd#
+				  , #aswrWrtnNum#
+				  , #ppgPernNm#
+				  , #usrId#
+				  , #bullBordMsgeTtl#
+				  , #bullBordMsgeCtnt:CLOB#
+				  , #wrtnSecrNum#
+				  , #ppgPernEmail#
+				  , #inqyNum#
+				  , #htmlUseYn#
+				  , #bullBordMsgeDelYn#
+				  , #notiBgnnDt#
+				  , #notiEndDt#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDD')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDD')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bord0300DAO.updateBord0300_S">
+		<![CDATA[
+			UPDATE BORD0300
+			SET SYS_DIV_CD=#sysDivCd#
+				, BULL_BORD_MSGE_SEIL_NUM=#bullBordMsgeSeilNum#
+				, BULL_BORD_UID=#bullBordUid#
+				, BULL_BORD_GRP_ID=#bullBordGrpId#
+				, TPLVL_WRTN_INFO=#tplvlWrtnInfo#
+				, WRTN_ASWR_STGE=#wrtnAswrStge#
+				, WRTN_RGSTN_ORD=#wrtnRgstnOrd#
+				, ASWR_WRTN_NUM=#aswrWrtnNum#
+				, PPG_PERN_NM=#ppgPernNm#
+				, USR_ID=#usrId#
+				, BULL_BORD_MSGE_TTL=#bullBordMsgeTtl#
+				, BULL_BORD_MSGE_CTNT=#bullBordMsgeCtnt:CLOB#
+				, WRTN_SECR_NUM=#wrtnSecrNum#
+				, PPG_PERN_EMAIL=#ppgPernEmail#
+				, INQY_NUM=#inqyNum#
+				, HTML_USE_YN=#htmlUseYn#
+				, BULL_BORD_MSGE_DEL_YN=#bullBordMsgeDelYn#
+				, NOTI_BGNN_DT=#notiBgnnDt#
+				, NOTI_END_DT=#notiEndDt# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDD')
+				, REVN_ADDR=#revnAddr#
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND BULL_BORD_MSGE_SEIL_NUM=#bullBordMsgeSeilNum#
+								AND BULL_BORD_UID=#bullBordUid#
+								AND BULL_BORD_GRP_ID=#bullBordGrpId# 
+				]]>
+	</update>
+	 
+	
+	<delete id="bord0300DAO.deleteBord0300_S">
+		<![CDATA[
+			DELETE FROM BORD0300 
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND BULL_BORD_MSGE_SEIL_NUM=#bullBordMsgeSeilNum#
+								AND BULL_BORD_UID=#bullBordUid#
+								AND BULL_BORD_GRP_ID=#bullBordGrpId#
+				]]>
+	</delete>
+	
+	<select id="bord0300DAO.selectBord0300_S" resultMap="bord0300">
+		<![CDATA[
+			SELECT
+				SYS_DIV_CD
+				, BULL_BORD_MSGE_SEIL_NUM
+				, BULL_BORD_UID
+				, BULL_BORD_GRP_ID
+				, TPLVL_WRTN_INFO
+				, WRTN_ASWR_STGE
+				, WRTN_RGSTN_ORD
+				, ASWR_WRTN_NUM
+				, PPG_PERN_NM
+				, USR_ID
+				, BULL_BORD_MSGE_TTL
+				, BULL_BORD_MSGE_CTNT
+				, WRTN_SECR_NUM
+				, PPG_PERN_EMAIL
+				, INQY_NUM
+				, HTML_USE_YN
+				, BULL_BORD_MSGE_DEL_YN
+				, NOTI_BGNN_DT
+				, NOTI_END_DT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BORD0300 
+			WHERE SYS_DIV_CD=#sysDivCd#
+					AND BULL_BORD_MSGE_SEIL_NUM= (
+					                              SELECT  MAX(BULL_BORD_MSGE_SEIL_NUM) 
+					                               FROM BORD0300 
+			                                      WHERE SYS_DIV_CD=#sysDivCd# 
+													AND BULL_BORD_UID=#bullBordUid#
+													AND BULL_BORD_GRP_ID=#bullBordGrpId#
+												 ) 
+					AND BULL_BORD_UID=#bullBordUid#
+					AND BULL_BORD_GRP_ID=#bullBordGrpId#
+				]]>
+	</select>
+	
+	<select id="bord0300DAO.selectBord0300List_D" parameterClass="bord0300SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								SYS_DIV_CD
+								, BULL_BORD_MSGE_SEIL_NUM
+								, BULL_BORD_UID
+								, BULL_BORD_GRP_ID
+								, TPLVL_WRTN_INFO
+								, WRTN_ASWR_STGE
+								, WRTN_RGSTN_ORD
+								, ASWR_WRTN_NUM
+								, PPG_PERN_NM
+								, USR_ID
+								, BULL_BORD_MSGE_TTL
+								, BULL_BORD_MSGE_CTNT
+								, WRTN_SECR_NUM
+								, PPG_PERN_EMAIL
+								, INQY_NUM
+								, HTML_USE_YN
+								, BULL_BORD_MSGE_DEL_YN
+								, NOTI_BGNN_DT
+								, NOTI_END_DT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BORD0300
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					SYS_DIV_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					BULL_BORD_MSGE_SEIL_NUM LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						SYS_DIV_CD DESC
+							, BULL_BORD_MSGE_SEIL_NUM DESC
+							, BULL_BORD_UID DESC
+							, BULL_BORD_GRP_ID DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bord0300DAO.selectBord0300ListTotCnt_S" parameterClass="bord0300SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BORD0300
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				SYS_DIV_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				BULL_BORD_MSGE_SEIL_NUM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+	<resultMap id="bordResultMap" class="EgovMap"> 
+	    <result property="sysDivCd" column="SYS_DIV_CD"  />
+		<result property="bullBordMsgeSeilNum" column="BULL_BORD_MSGE_SEIL_NUM"  />
+		<result property="bullBordUid" column="BULL_BORD_UID"  />
+		<result property="bullBordGrpId" column="BULL_BORD_GRP_ID"  />
+		<result property="tplvlWrtnInfo" column="TPLVL_WRTN_INFO"  />
+		<result property="wrtnAswrStge" column="WRTN_ASWR_STGE"  />
+		<result property="wrtnRgstnOrd" column="WRTN_RGSTN_ORD"  />
+		<result property="aswrWrtnNum" column="ASWR_WRTN_NUM"  />
+		<result property="ppgPernNm" column="PPG_PERN_NM"  />
+		<result property="usrId" column="USR_ID"  />
+		<result property="bullBordMsgeTtl" column="BULL_BORD_MSGE_TTL"  />
+		 <result property="bullBordMsgeCtnt" column="BULL_BORD_MSGE_CTNT" jdbcType="CLOB" javaType="java.lang.String"/>
+		<result property="wrtnSecrNum" column="WRTN_SECR_NUM"  />
+		<result property="ppgPernEmail" column="PPG_PERN_EMAIL"  />
+		<result property="inqyNum" column="INQY_NUM"  />
+		<result property="htmlUseYn" column="HTML_USE_YN"  />
+		<result property="bullBordMsgeDelYn" column="BULL_BORD_MSGE_DEL_YN"  />
+		<result property="notiBgnnDt" column="NOTI_BGNN_DT"  />
+		<result property="notiEndDt" column="NOTI_END_DT"  />
+		<result property="kybdr" column="KYBDR"  />
+		<result property="inptDt" column="INPT_DT"  />
+		<result property="inptAddr" column="INPT_ADDR"  />
+		<result property="ismt" column="ISMT"  />
+		<result property="revnDt" column="REVN_DT"  />
+		<result property="revnAddr" column="REVN_ADDR"  /> 
+         <result property="attachFileCount" column="ATTACH_FILE_COUNT"  />
+        <result property="recentlyFlag" column="RECENTLY_FLAG"  />
+        <result property="flRfta" column="FL_RFTA"/>
+        <result property="flNm" column="FL_NM"/>
+   </resultMap>
+	
+	
+	<!-- 메인화면공지사항처리  -->
+	<select id="bord0300DAO.selectBord0300ViewList_D" parameterClass="bord0300SrhVO"  resultMap="bordResultMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				 SELECT AA.SYS_DIV_CD,
+                       AA.BULL_BORD_MSGE_SEIL_NUM,
+                       AA.BULL_BORD_UID,
+                       AA.BULL_BORD_GRP_ID,
+                       AA.TPLVL_WRTN_INFO,
+                       AA.WRTN_ASWR_STGE,
+                       AA.WRTN_RGSTN_ORD,
+                       AA.ASWR_WRTN_NUM,
+                       AA.PPG_PERN_NM,
+                       AA.USR_ID,
+                       AA.BULL_BORD_MSGE_TTL,
+                       AA.BULL_BORD_MSGE_CTNT,
+                       AA.WRTN_SECR_NUM,
+                       AA.PPG_PERN_EMAIL,
+                       AA.INQY_NUM,
+                       AA.HTML_USE_YN,
+                       AA.BULL_BORD_MSGE_DEL_YN,
+                       AA.NOTI_BGNN_DT,
+                       AA.NOTI_END_DT, 
+                       AA.ATTACH_FILE_COUNT,
+                       AA.RECENTLY_FLAG  ,
+                         BB.FL_RFTA,
+                        BB.FL_NM, 
+                       AA.KYBDR,
+                       AA.INPT_DT,
+                       AA.INPT_ADDR,
+                       AA.ISMT,
+                       AA.REVN_DT,
+                       AA.REVN_ADDR 
+                  FROM TB_BOARD_VIEW AA,BORD0400 BB
+                WHERE   AA.SYS_DIV_CD=BB.SYS_DIV_CD(+)
+                  AND AA.BULL_BORD_MSGE_SEIL_NUM=BB.BULL_BORD_MSGE_SEIL_NUM(+)
+                  AND AA.BULL_BORD_UID=BB.BULL_BORD_UID(+)
+                  AND AA.BULL_BORD_GRP_ID=BB.BULL_BORD_GRP_ID(+)
+                   <isNotEmpty prepend="AND" property="sysDivCd" >
+					 	AA.SYS_DIV_CD=#sysDivCd#
+				  </isNotEmpty> 
+				 <isNotEmpty prepend="AND" property="bullBordUid" >
+					    AA.BULL_BORD_UID=#bullBordUid#
+				 </isNotEmpty> 
+				  <isNotEmpty prepend="AND" property="bullBordGrpId" >
+					 	AA.BULL_BORD_GRP_ID=#bullBordGrpId#
+				  </isNotEmpty> 
+					ORDER BY 
+						AA.SYS_DIV_CD ASC
+							, AA.BULL_BORD_MSGE_SEIL_NUM DESC
+							, AA.BULL_BORD_UID DESC
+							, AA.BULL_BORD_GRP_ID DESC 
+								
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="bord0300DAO.selectBord0300ViewListTotCnt_S" parameterClass="bord0300SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt  
+               FROM TB_BOARD_VIEW AA,BORD0400 BB
+                WHERE   AA.SYS_DIV_CD=BB.SYS_DIV_CD(+)
+                  AND AA.BULL_BORD_MSGE_SEIL_NUM=BB.BULL_BORD_MSGE_SEIL_NUM(+)
+                  AND AA.BULL_BORD_UID=BB.BULL_BORD_UID(+)
+                  AND AA.BULL_BORD_GRP_ID=BB.BULL_BORD_GRP_ID(+)
+                   <isNotEmpty prepend="AND" property="sysDivCd" >
+					 	AA.SYS_DIV_CD=#sysDivCd#
+				  </isNotEmpty> 
+				 <isNotEmpty prepend="AND" property="bullBordUid" >
+					    AA.BULL_BORD_UID=#bullBordUid#
+				 </isNotEmpty> 
+				  <isNotEmpty prepend="AND" property="bullBordGrpId" >
+					 	AA.BULL_BORD_GRP_ID=#bullBordGrpId#
+				  </isNotEmpty> 
+	</select>
+	
+	<!--   <isNotEmpty prepend="AND" property="sysDivCd" >
+					 	SYS_DIV_CD=#sysDivCd#
+				  </isNotEmpty> 
+				 <isNotEmpty prepend="AND" property="bullBordUid" >
+					    BULL_BORD_UID=#bullBordUid#
+				 </isNotEmpty> 
+				  <isNotEmpty prepend="AND" property="bullBordGrpId" >
+					 	BULL_BORD_GRP_ID=#bullBordGrpId#
+				  </isNotEmpty>  -->
+
+</sqlMap>

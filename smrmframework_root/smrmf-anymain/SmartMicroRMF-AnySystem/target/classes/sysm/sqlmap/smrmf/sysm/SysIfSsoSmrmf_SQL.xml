@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SysIfSsoSmrmf">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/> 
+	<typeAlias  alias="ssoxUserSrhVO" type="com.app.smrmf.sysm.server.vo.system.SsoxUserSrhVO"/>
+	 
+ 	
+	<select id="sysIfSsoSmrmfDAO.selectSsoxIfUserList_D" parameterClass="ssoxUserSrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								USER_ID
+								, USER_NAME
+								, USER_ID AS USR_ID
+								, USER_NAME AS USR_NM
+								, USER_SN
+								, USER_STAT
+								, USER_STAT_NAME
+								, REGULARITY
+								, ORG_ID
+								, ORG_NAME
+								, (DEPT_ID || '00') AS DEPT_CD 
+								, (DEPT_ID || '00') AS deptCddeptCd
+								, DEPT_NAME AS deptCddeptNmRtchnt
+								, DEPT_ID
+								, DEPT_NAME
+								, DEPT_FULLNAME
+								, CLASS_ID
+								, CLASS_NAME
+								, POSITION_ID
+								, POSITION_NAME
+								, GRADE_ID
+								, GRADE_NAME
+								, EMAIL
+								, TEL
+								, MOBILE
+								, JOIN_DAY
+								, RETIRE_DAY
+								, ADD_INFO1
+								, ADD_INFO2
+								, ADD_INFO3
+								, ADD_INFO4
+								, ADD_INFO5
+								, ADD_INFO6
+								, ADD_INFO7
+								, BASE_SYS
+								, REG_DAY
+								, UPDATE_DAY
+								, USE_YN
+								, RDUTY_NAME
+						FROM SSOX_USER
+				WHERE 1=1
+				<isNotEmpty prepend="AND" property="userName">
+					USER_NAME LIKE '%' || #userName# || '%' 
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="deptId">
+					DEPT_ID = #deptId#  
+				</isNotEmpty>
+					ORDER BY USER_NAME ASC
+	
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="sysIfSsoSmrmfDAO.selectSsoxIfUserListTotCnt_S" parameterClass="ssoxUserSrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SSOX_USER
+			WHERE 1=1
+				<isNotEmpty prepend="AND" property="userName">
+					USER_NAME LIKE '%' || #userName# || '%' 
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="deptId">
+					DEPT_ID = #deptId#  
+				</isNotEmpty>
+	</select> 
+	
+	
+	 	
+	<select id="ssomUserDAO.selectSsomIfUserList_D" parameterClass="ssoxUserSrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM ( 
+	SELECT
+				NID
+				, CN
+				, (OUCODE || '00') AS DEPT_CD 
+				, (OUCODE || '00') AS deptCddeptCd
+				, OU AS deptCddeptNmRtchnt
+				, OUCODE AS DEPT_ID
+				, OU AS DEPT_NAME 
+				, PARENTOUCODE
+				, TOPOUCODE
+				, UID_M
+				, DISPLAYNAME AS USER_NAME
+				, DISPLAYNAME AS USR_NM
+				, DESCRIPTION
+				, USERFULLNAME
+				, GIVENNAME
+				, POSITIONCODE AS CLASS_ID
+				, POSITION AS CLASS_NAME
+				, TITLECODE
+				, TITLE
+				, TITLEORPOSITION
+				, MAIL
+				, OTHERMAIL
+				, TELEPHONENUMBER
+				, FAX
+				, ORGFULLNAME
+				, ORDERRANK
+				, HOMEPOSTALADDRESS1
+				, HOMEPOSTALADDRESS2
+				, HOMEFAXPHONENUMBER
+				, HOMEPHONE
+				, MOBILE
+				, PAGER
+				, JOBTITLE
+				, NICKNAME
+				, EMPNUMBER
+				, HOMEPAGEURL
+				, PHOTOPATH
+				, GENDER
+				, WEDDINGDATE
+				, BIRTHDAY
+				, CARNUMBER
+				, STATUS AS USER_STAT
+				, ISOTHER
+				, OTHERPERIOD
+				, OTHEROUCODE
+				, OTHEROU
+				, SID_M AS USR_ID
+				, SID_M AS USER_ID
+			FROM SSOM_USER
+		  WHERE  STATUS = 'C'  
+				<isNotEmpty prepend="AND" property="userName">
+					DISPLAYNAME LIKE '%' || #userName# || '%' 
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="deptId">
+					OUCODE = #deptId#  
+				</isNotEmpty>
+					ORDER BY DISPLAYNAME ASC
+	
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="ssomUserDAO.selectSsomIfUserListTotCnt_S" parameterClass="ssoxUserSrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SSOM_USER
+		     WHERE  STATUS = 'C'  
+				<isNotEmpty prepend="AND" property="userName">
+					DISPLAYNAME LIKE '%' || #userName# || '%' 
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="deptId">
+					OUCODE = #deptId#  
+				</isNotEmpty>
+	</select> 
+	 
+	 
+</sqlMap>

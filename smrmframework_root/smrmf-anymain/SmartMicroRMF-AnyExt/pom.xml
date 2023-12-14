@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+   <parent>
+    <groupId>com.app.smrmf.any</groupId>
+    <artifactId>smrmf-any</artifactId>
+    <version>2.2.0</version>
+  </parent>
+  <groupId>smrmf.anyext</groupId>
+  <artifactId>smrmf-anyext</artifactId>
+  <packaging>jar</packaging> 
+  <name>SmartMicroRMF-AnyExt</name>
+  <url>http://maven.apache.org</url> 
+	 
+	<dependencies>    
+         
+      <dependency>
+        <groupId>smrmf.anyutils</groupId>
+        <artifactId>smrmf-anyutils</artifactId>
+      	<version>${smrmf.version}</version>
+      </dependency> 
+      
+      
+     <dependency>
+        <groupId>smrmf.anycrypt</groupId>
+        <artifactId>smrmf-anycrypt</artifactId>
+      	<version>${smrmf.version}</version>
+      </dependency>  
+       
+  </dependencies>
+		
+		<build>
+		<defaultGoal>install</defaultGoal>
+		<directory>${basedir}/target</directory>
+		<finalName>smrmf-anyext-${project.version}</finalName>
+		 <resources>
+		    <resource>
+		      <directory>src/main/resources</directory>
+		    </resource>
+		    <resource>
+		      <directory>src/main/java</directory>
+		      <includes> 
+		        <include>**/client/**/*.*</include>
+		        <include>**/shared/**/*.*</include>
+		        <include>**/*.gwt.xml</include> 
+		      </includes>
+	    </resource> 
+	  </resources>
+		<pluginManagement>
+			<plugins> 
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId> 
+				  <version>3.0</version> 
+					<configuration>
+						<source>1.6</source>
+                        <target>1.6</target>
+                        <encoding>UTF-8</encoding>
+                         <extraJvmArgs>-Xmx3072m -Xss2048k</extraJvmArgs>
+				        <minmemory>2048m</minmemory>
+					    <maxmemory>3072m</maxmemory>  
+                   <executions>
+						<execution>
+						      <!--<phase>compile</phase> -->  
+							  <goals> 
+								<goal>compile</goal> 
+								<goal>test</goal> 
+							</goals>  
+						</execution>
+					</executions>
+					</configuration>
+				</plugin>   
+						<!-- Make this jar executable -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+				  <configuration> 
+				  <!--   <includes>
+			            <include>**/*.*</include>
+			            <include>com/msf/calendar/*.*</include>
+			          </includes>
+					DO NOT include log4j.properties file in your Jar
+					   <excludes>
+						<exclude>java/**/*.*</exclude>
+					  </excludes>    --> 
+					  <!--  but be sure to exclude the source from the final jar file
+				      <includes>
+				        <include>**/*.java</include>
+				        <include>**/*.gwt.xml</include>
+				      </includes>-->
+					</configuration>   
+				</plugin>  
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<!-- EMMA 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>false</skipTests>
+					<forkMode>once</forkMode>
+					<reportFormat>xml</reportFormat>
+					<excludes>
+						<exclude>**/Abstract*.java</exclude>
+						<exclude>**/*Suite.java</exclude>
+					</excludes>
+					<includes>
+						<include>**/*Test.java</include>
+					</includes>
+				</configuration>
+			</plugin>-->
+			<!-- <plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>emma-maven-plugin</artifactId>
+				<version>1.0-alpha-1</version>
+				<inherited>true</inherited>
+			</plugin> -->
+			<!--  JavaDoc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.5</version>
+			</plugin> 
+		</plugins> 
+	</build> 
+	 
+</project>

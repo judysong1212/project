@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sysm0130">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysm0130SerarchVO" type=com.app.smrmf.sysm.server.vo.SysIfSysm0130SrhVO"/>
+	
+	<resultMap id="sysm0130" class="com.app.smrmf.sysm.server.vo.SysIfSysm0130VO">com.app.smrmf.sysm.server.vo.SysIf
+		<result property="usrId" column="USR_ID" columnIndex="1"/>
+		<result property="usrChgSeilNum" column="USR_CHG_SEIL_NUM" columnIndex="2"/>
+		<result property="usrBfPwd" column="USR_BF_PWD" columnIndex="3"/>
+		<result property="usrChgPwd" column="USR_CHG_PWD" columnIndex="4"/>
+		<result property="usrPwdChgDttm" column="USR_PWD_CHG_DTTM" columnIndex="5"/>
+		<result property="kybdr" column="KYBDR" columnIndex="6"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="7"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="8"/>
+		<result property="ismt" column="ISMT" columnIndex="9"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="10"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="11"/>
+	</resultMap>
+	
+	<insert id="sysm0130DAO.insertSysm0130_S">
+		<![CDATA[
+			INSERT INTO SYSM0130 
+				( USR_ID
+				  , USR_CHG_SEIL_NUM
+				  , USR_BF_PWD
+				  , USR_CHG_PWD
+				  , USR_PWD_CHG_DTTM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #usrId#
+				  , #usrChgSeilNum#
+				  , #usrBfPwd#
+				  , #usrChgPwd#
+				  , #usrPwdChgDttm#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="sysm0130DAO.updateSysm0130_S">
+		<![CDATA[
+			UPDATE SYSM0130
+			SET USR_ID=#usrId#
+				, USR_CHG_SEIL_NUM=#usrChgSeilNum#
+				, USR_BF_PWD=#usrBfPwd#
+				, USR_CHG_PWD=#usrChgPwd#
+				, USR_PWD_CHG_DTTM=#usrPwdChgDttm#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE USR_ID=#usrId#
+								AND USR_CHG_SEIL_NUM=#usrChgSeilNum#
+				]]>
+	</update>
+	
+	<delete id="sysm0130DAO.deleteSysm0130_S">
+		<![CDATA[
+			DELETE FROM SYSM0130 
+						WHERE USR_ID=#usrId#
+								AND USR_CHG_SEIL_NUM=#usrChgSeilNum#
+				]]>
+	</delete>
+	
+	<select id="sysm0130DAO.selectSysm0130_S" resultMap="sysm0130">
+		<![CDATA[
+			SELECT
+				USR_ID
+				, USR_CHG_SEIL_NUM
+				, USR_BF_PWD
+				, USR_CHG_PWD
+				, USR_PWD_CHG_DTTM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM SYSM0130
+						WHERE USR_ID=#usrId#
+								AND USR_CHG_SEIL_NUM=#usrChgSeilNum#
+				]]>
+	</select>
+	
+	<select id="sysm0130DAO.selectSysm0130List_D" parameterClass="sysm0130SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								USR_ID
+								, USR_CHG_SEIL_NUM
+								, USR_BF_PWD
+								, USR_CHG_PWD
+								, USR_PWD_CHG_DTTM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM SYSM0130
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					USR_ID = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					USR_CHG_SEIL_NUM LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						USR_ID DESC
+							, USR_CHG_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="sysm0130DAO.selectSysm0130ListTotCnt_S" parameterClass="sysm0130SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSM0130
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				USR_ID = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				USR_CHG_SEIL_NUM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

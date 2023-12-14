@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Bord0100">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="bord0100SrhVO" type="com.app.smrmf.sysm.server.service.vo.Bord0100SrhVO"/>
+	
+	<resultMap id="bord0100" class="com.app.smrmf.sysm.server.service.vo.Bord0100VO">
+		<result property="sysDivCd" column="SYS_DIV_CD" columnIndex="1"/>
+		<result property="bullBordGrpId" column="BULL_BORD_GRP_ID" columnIndex="2"/>
+		<result property="bullBordHhrkGrpId" column="BULL_BORD_HHRK_GRP_ID" columnIndex="3"/>
+		<result property="dpth" column="DPTH" columnIndex="4"/>
+		<result property="bullBordGrpNm" column="BULL_BORD_GRP_NM" columnIndex="5"/>
+		<result property="kybdr" column="KYBDR" columnIndex="6"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="7"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="8"/>
+		<result property="ismt" column="ISMT" columnIndex="9"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="10"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="11"/>
+	</resultMap>
+	
+	<insert id="bord0100DAO.insertBord0100_S">
+		<![CDATA[
+			INSERT INTO BORD0100 
+				( SYS_DIV_CD
+				  , BULL_BORD_GRP_ID
+				  , BULL_BORD_HHRK_GRP_ID
+				  , DPTH
+				  , BULL_BORD_GRP_NM
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #sysDivCd#
+				  , #bullBordGrpId#
+				  , #bullBordHhrkGrpId#
+				  , #dpth#
+				  , #bullBordGrpNm#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="bord0100DAO.updateBord0100_S">
+		<![CDATA[
+			UPDATE BORD0100
+			SET SYS_DIV_CD=#sysDivCd#
+				, BULL_BORD_GRP_ID=#bullBordGrpId#
+				, BULL_BORD_HHRK_GRP_ID=#bullBordHhrkGrpId#
+				, DPTH=#dpth#
+				, BULL_BORD_GRP_NM=#bullBordGrpNm#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				, REVN_ADDR=#revnAddr#
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND BULL_BORD_GRP_ID=#bullBordGrpId#
+				]]>
+	</update>
+	
+	<delete id="bord0100DAO.deleteBord0100_S">
+		<![CDATA[
+			DELETE FROM BORD0100 
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND BULL_BORD_GRP_ID=#bullBordGrpId#
+				]]>
+	</delete>
+	
+	<select id="bord0100DAO.selectBord0100_S" resultMap="bord0100">
+		<![CDATA[
+			SELECT
+				SYS_DIV_CD
+				, BULL_BORD_GRP_ID
+				, BULL_BORD_HHRK_GRP_ID
+				, DPTH
+				, BULL_BORD_GRP_NM
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BORD0100
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND BULL_BORD_GRP_ID=#bullBordGrpId#
+				]]>
+	</select>
+	
+	<select id="bord0100DAO.selectBord0100List_D" parameterClass="bord0100SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								SYS_DIV_CD
+								, BULL_BORD_GRP_ID
+								, BULL_BORD_HHRK_GRP_ID
+								, DPTH
+								, BULL_BORD_GRP_NM
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BORD0100
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					SYS_DIV_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					BULL_BORD_GRP_ID LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						SYS_DIV_CD DESC
+							, BULL_BORD_GRP_ID DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="bord0100DAO.selectBord0100ListTotCnt_S" parameterClass="bord0100SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BORD0100
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				SYS_DIV_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				BULL_BORD_GRP_ID LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

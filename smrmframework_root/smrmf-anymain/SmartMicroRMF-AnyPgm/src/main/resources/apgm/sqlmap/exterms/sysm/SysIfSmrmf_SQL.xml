@@ -1,0 +1,1479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MSFCoreSmrmf">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="msfPkgSearchVO" type="com.app.smrmf.sysm.server.service.vo.SysComSearchVO"/> 
+	<typeAlias  alias="ssoxUserSrhVO" type="com.app.smrmf.sysm.server.vo.system.SsoxUserSrhVO"/>
+	
+	<!--  
+	<resultMap id="sysIfBass0300" class="com.app.smrmf.sysm.server.service.vo.SysIfBass0300VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="commCd" column="COMM_CD" columnIndex="2"/>
+		<result property="rpsttvCd" column="RPSTTV_CD" columnIndex="3"/>
+		<result property="dtlCd" column="DTL_CD" columnIndex="4"/>
+`		<result property="commCdNm" column="COMM_CD_NM" columnIndex="5"/>
+		<result property="abbrNm" column="ABBR_NM" columnIndex="6"/>
+		<result property="engNm" column="ENG_NM" columnIndex="7"/>
+		<result property="mangeItem01" column="MANGE_ITEM01" columnIndex="8"/>
+		<result property="mangeItem02" column="MANGE_ITEM02" columnIndex="9"/>
+		<result property="mangeItem03" column="MANGE_ITEM03" columnIndex="10"/>
+		<result property="mangeItem04" column="MANGE_ITEM04" columnIndex="11"/>
+		<result property="mangeItem05" column="MANGE_ITEM05" columnIndex="12"/>
+		<result property="mangeItem06" column="MANGE_ITEM06" columnIndex="13"/>
+		<result property="mangeItem07" column="MANGE_ITEM07" columnIndex="14"/>
+		<result property="mangeItem08" column="MANGE_ITEM08" columnIndex="15"/>
+		<result property="mangeItem09" column="MANGE_ITEM09" columnIndex="16"/>
+		<result property="mangeItem10" column="MANGE_ITEM10" columnIndex="17"/>
+		<result property="mangeItem11" column="MANGE_ITEM11" columnIndex="18"/>
+		<result property="mangeItem12" column="MANGE_ITEM12" columnIndex="19"/>
+		<result property="mangeItem13" column="MANGE_ITEM13" columnIndex="20"/>
+		<result property="mangeItem14" column="MANGE_ITEM14" columnIndex="21"/>
+		<result property="mangeItem15" column="MANGE_ITEM15" columnIndex="22"/>
+		<result property="mangeItem16" column="MANGE_ITEM16" columnIndex="23"/>
+		<result property="mangeItem17" column="MANGE_ITEM17" columnIndex="24"/>
+		<result property="mangeItem18" column="MANGE_ITEM18" columnIndex="25"/>
+		<result property="mangeItem19" column="MANGE_ITEM19" columnIndex="26"/>
+		<result property="mangeItem20" column="MANGE_ITEM20" columnIndex="27"/>
+		<result property="cdTreeLvl" column="CD_TREE_LVL" columnIndex="28"/>
+		<result property="ord" column="ORD" columnIndex="29"/>
+		<result property="opnYn" column="OPN_YN" columnIndex="30"/>
+		<result property="useYn" column="USE_YN" columnIndex="31"/>
+		<result property="note" column="NOTE" columnIndex="32"/>
+		<result property="kybdr" column="KYBDR" columnIndex="33"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="34"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="35"/>
+		<result property="ismt" column="ISMT" columnIndex="36"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="37"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="38"/>
+	</resultMap>
+	-->
+	
+	<select id="msfPkgSmrmfDAO.selectBass0300List_D" parameterClass="msfPkgSearchVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+						SELECT
+										DPOB_CD
+										, COMM_CD
+										, RPSTTV_CD
+										, DTL_CD
+										, COMM_CD_NM
+										, ABBR_NM
+										, ENG_NM
+										, MANGE_ITEM01
+										, MANGE_ITEM02
+										, MANGE_ITEM03
+										, MANGE_ITEM04
+										, MANGE_ITEM05
+										, MANGE_ITEM06
+										, MANGE_ITEM07
+										, MANGE_ITEM08
+										, MANGE_ITEM09
+										, MANGE_ITEM10
+										, MANGE_ITEM11
+										, MANGE_ITEM12
+										, MANGE_ITEM13
+										, MANGE_ITEM14
+										, MANGE_ITEM15
+										, MANGE_ITEM16
+										, MANGE_ITEM17
+										, MANGE_ITEM18
+										, MANGE_ITEM19
+										, MANGE_ITEM20
+										, CD_TREE_LVL
+										, ORD
+										, OPN_YN
+										, USE_YN
+										, NOTE
+										, KYBDR
+										, INPT_DT
+										, INPT_ADDR
+										, ISMT
+										, REVN_DT
+										, REVN_ADDR
+								FROM BASS0300
+						WHERE  OPN_YN = 'Y'
+						 AND USE_YN = 'Y'
+						<isNotEmpty prepend="AND" property="rpsttvCd">
+							RPSTTV_CD = #rpsttvCd#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="commCdNm">
+							COMM_CD_NM LIKE '%' || #commCdNm# || '%'
+						</isNotEmpty> 
+				<!--  <isNotNull prepend="AND" property="arrRpsttvCd">
+						    <![CDATA[
+								RPSTTV_CD
+							]]>
+							<iterate prepend="IN" property="arrRpsttvCd" open="(" close=")" conjunction=",">
+							 #arrRpsttvCd[]#
+							</iterate> 
+						</isNotNull> -->
+						<isNotEmpty prepend="AND" property="mangeItem01" >
+							 MANGE_ITEM01=#mangeItem01#
+						</isNotEmpty>	
+						<isNotEmpty prepend="AND" property="mangeItem02" >
+							 MANGE_ITEM02=#mangeItem02#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="mangeItem03" >
+							 MANGE_ITEM03=#mangeItem03#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="mangeItem04" >
+							  MANGE_ITEM04=#mangeItem04#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="mangeItem05" >
+							 MANGE_ITEM05=#mangeItem05#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="mangeItem06" >
+							 MANGE_ITEM06=#mangeItem06#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="mangeItem07" >
+							 MANGE_ITEM07=#mangeItem07#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="mangeItem08" >
+							 MANGE_ITEM08=#mangeItem08#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="mangeItem09" >
+							  MANGE_ITEM09=#mangeItem09#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="mangeItem10" >
+							 MANGE_ITEM10=#mangeItem10#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="mangeItem11" >
+							 MANGE_ITEM11=#mangeItem11#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="mangeItem12" >
+							 MANGE_ITEM12=#mangeItem12#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="mangeItem13" >
+							 MANGE_ITEM13=#mangeItem13#
+						</isNotEmpty> 
+						<isNotEmpty prepend="AND" property="mangeItem14" >
+							  MANGE_ITEM14=#mangeItem14#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="mangeItem15" >
+							 MANGE_ITEM15=#mangeItem15#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="mangeItem16" >
+							 MANGE_ITEM16=#mangeItem16#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="mangeItem17" >
+							 MANGE_ITEM17=#mangeItem17#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="mangeItem18" >
+							  MANGE_ITEM18=#mangeItem18#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="mangeItem19" >
+							  MANGE_ITEM19=#mangeItem19#
+						</isNotEmpty>
+						<isNotEmpty prepend="AND" property="mangeItem20" >
+							 MANGE_ITEM20=#mangeItem20#
+						</isNotEmpty>  
+						<isNotEmpty prepend="AND" property="dpobCd" >
+							 DPOB_CD=#dpobCd#
+						</isNotEmpty>
+							ORDER BY 
+								DPOB_CD ASC , ORD ASC  , COMM_CD ASC
+		
+		<isNotEqual  property="lastIndex" compareValue="-1">
+		 <![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+		</isNotEqual>	
+		<isEqual   property="lastIndex" compareValue="-1">
+		  <![CDATA[					
+			) A  
+		)
+		]]>
+		</isEqual>						
+	</select>	
+	
+	<select id="msfPkgSmrmfDAO.selectBass0300ListTotCnt_S" parameterClass="msfPkgSearchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0300
+			WHERE OPN_YN = 'Y'
+			  AND USE_YN = 'Y'
+			   <isNotEmpty prepend="AND" property="rpsttvCd">
+					RPSTTV_CD = #rpsttvCd#
+				</isNotEmpty>
+			    <isNotEmpty prepend="AND" property="commCdNm">
+					COMM_CD_NM LIKE '%' || #commCdNm# || '%'
+				</isNotEmpty> 
+			<!-- 	<isNotNull prepend="AND" property="arrRpsttvCd">
+				    <![CDATA[
+						RPSTTV_CD
+					]]>
+					<iterate prepend="IN" property="arrRpsttvCd" open="(" close=")" conjunction=",">
+					 #arrRpsttvCd[]#
+					</iterate> 
+				</isNotNull> -->
+				<isNotEmpty prepend="AND" property="mangeItem01" >
+					 MANGE_ITEM01=#mangeItem01#
+				</isNotEmpty>	
+				<isNotEmpty prepend="AND" property="mangeItem02" >
+					 MANGE_ITEM02=#mangeItem02#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem03" >
+					 MANGE_ITEM03=#mangeItem03#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="mangeItem04" >
+					  MANGE_ITEM04=#mangeItem04#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="mangeItem05" >
+					 MANGE_ITEM05=#mangeItem05#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="mangeItem06" >
+					 MANGE_ITEM06=#mangeItem06#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem07" >
+					 MANGE_ITEM07=#mangeItem07#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem08" >
+					 MANGE_ITEM08=#mangeItem08#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="mangeItem09" >
+					  MANGE_ITEM09=#mangeItem09#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem10" >
+					 MANGE_ITEM10=#mangeItem10#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem11" >
+					 MANGE_ITEM11=#mangeItem11#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="mangeItem12" >
+					 MANGE_ITEM12=#mangeItem12#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem13" >
+					 MANGE_ITEM13=#mangeItem13#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="mangeItem14" >
+					  MANGE_ITEM14=#mangeItem14#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem15" >
+					 MANGE_ITEM15=#mangeItem15#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem16" >
+					 MANGE_ITEM16=#mangeItem16#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem17" >
+					 MANGE_ITEM17=#mangeItem17#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem18" >
+					  MANGE_ITEM18=#mangeItem18#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem19" >
+					  MANGE_ITEM19=#mangeItem19#
+				</isNotEmpty>
+				<isNotEmpty prepend="AND" property="mangeItem20" >
+					 MANGE_ITEM20=#mangeItem20#
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="dpobCd" >
+					 DPOB_CD=#dpobCd#
+				</isNotEmpty>
+	</select>
+	
+	
+	<!-- 직종+호봉등급 콤보박스처리  -->
+		<select id="msfPkgSmrmfDAO.selectBass0350ComboTypOccuCdList_D" parameterClass="msfPkgSearchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT         DISTINCT   DPOB_CD
+								,  TYP_OCCU_CD  
+								 ,  fcBass0320CDNM(DPOB_CD,TYP_OCCU_CD) AS TYP_OCCU_NM
+								, PYSP_GRDE_CD
+								, fcBass0300CDNM(#dpobCd#,PYSP_GRDE_CD) AS PYSP_GRDE_NM  
+						FROM BASS0350
+				WHERE  DPOB_CD=#dpobCd#
+			     <isEmpty property="ymdGb" prepend="AND">			  
+                          DTIL_OCCU_CLS_USE_YN = 'Y'
+                  </isEmpty>     
+					  <isEqual property="ymdGb" compareValue="Y"> 
+					   <isNotEmpty prepend="AND" property="strDate" >
+                             #strDate# BETWEEN SUBSTR((NVL(DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                               AND SUBSTR((NVL(DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                       </isNotEmpty>	 
+					  </isEqual>
+                     <isEqual   property="ymdGb" compareValue="YM">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN SUBSTR((NVL(DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                               AND SUBSTR((NVL(DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                       </isNotEmpty>
+					  </isEqual>
+					 <isEqual   property="ymdGb" compareValue="YMD">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN (NVL(DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                               AND (NVL(DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+                       </isNotEmpty>
+					 </isEqual>   
+                     <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+						((TYP_OCCU_CD = #typOccuCd#) OR (CHNG_TYP_OCCU_CD
+						]]>
+					   <iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					     #typOccuCdArr[]# 
+					  </iterate>
+					  )
+					 </isNotEmpty> 
+				<isNotEmpty prepend="AND" property="pyspGrdeCd">
+					NVL(PYSP_GRDE_CD,'A0060000') = #pyspGrdeCd#
+				</isNotEmpty>  
+					ORDER BY 
+					   DPOB_CD ASC 
+						, TYP_OCCU_CD ASC 
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>	
+	</select>	
+	<select id="msfPkgSmrmfDAO.selectBass0350ComboTypOccuCdListTotCnt_S" parameterClass="msfPkgSearchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0350
+			WHERE  DPOB_CD=#dpobCd#
+			       <isEmpty property="ymdGb" prepend="AND">			  
+                          DTIL_OCCU_CLS_USE_YN = 'Y'
+                  </isEmpty>     
+					  <isEqual property="ymdGb" compareValue="Y"> 
+					   <isNotEmpty prepend="AND" property="strDate" >
+                             #strDate# BETWEEN SUBSTR((NVL(DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                               AND SUBSTR((NVL(DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                       </isNotEmpty>	 
+					  </isEqual>
+                     <isEqual   property="ymdGb" compareValue="YM">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN SUBSTR((NVL(DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                               AND SUBSTR((NVL(DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                       </isNotEmpty>
+					  </isEqual>
+					 <isEqual   property="ymdGb" compareValue="YMD">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN (NVL(DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                               AND (NVL(DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+                       </isNotEmpty>
+					 </isEqual>   
+                     <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+						((TYP_OCCU_CD = #typOccuCd#) OR (CHNG_TYP_OCCU_CD
+						]]>
+					   <iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					     #typOccuCdArr[]#
+					  </iterate>
+					  )
+					 </isNotEmpty> 
+		    <isNotEmpty prepend="AND" property="pyspGrdeCd">
+					NVL(PYSP_GRDE_CD,'A0060000') = #pyspGrdeCd#
+			</isNotEmpty>  
+	</select>
+	
+	
+	<!-- 급여부서코드 처리릉 위해 추가  -->
+		<select id="msfPkgSmrmfDAO.selectPayrWithBass0400List_D" parameterClass="msfPkgSearchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+	                    SELECT  AA.*  FROM   
+				             (   SELECT DISTINCT 
+								   BB.DPOB_CD,
+								   (SELECT B.DPOB_NM FROM BASS0100 B WHERE B.DPOB_CD = BB.DPOB_CD ) AS DPOB_NM,
+								   BB.DEPT_CD,
+								   BB.DEPT_NM_HAN,
+								   BB.DEPT_NM_RTCHNT,
+								   BB.DEPT_NM_ENG,
+								   BB.TPLVL_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = BB.DPOB_CD AND B.DEPT_CD = BB.TPLVL_DEPT_CD  ) AS TPLVL_DEPT_CD_NM,
+								   BB.HHRK_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = BB.DPOB_CD AND B.DEPT_CD = BB.HHRK_DEPT_CD  ) AS HHRK_DEPT_CD_NM,
+								   BB.PAYR_MANG_DEPT_CD,
+								   BB.DEPT_USE_YN,
+								   BB.NAT_PENN_SYM,
+								   BB.HLTH_INSR_SYM,
+								   BB.UMYT_INSR_SYM,
+								   BB.IDTL_ACCDT_INSUR_SYM,
+								   BB.DEPT_NOTE_CTNT,
+								   BB.DEPT_DSPY_YN,
+								   BB.DEPT_RANK,
+								   BB.MANGE_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = BB.DPOB_CD AND B.DEPT_CD = BB.MANGE_DEPT_CD  ) AS MANGE_DEPT_CD_NM ,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = BB.DPOB_CD AND B.DEPT_CD = BB.MANGE_DEPT_CD  ) AS MANGE_DEPT_NM ,
+								   ( SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = BB.DPOB_CD AND B.DEPT_CD = BB.MANGE_DEPT_CD  ) AS MANGE_DEPT_NM_RTCHNT ,
+								    BB.DEPT_CRE_DT,
+								   BB.DEPT_END_DT 
+								FROM BASS0400 BB, PSNL0100 CC 
+								WHERE  1=1
+                                  <isNotEmpty prepend="AND" property="deptDspyYn" >
+                                      BB.DEPT_USE_YN   =   #deptDspyYn#   
+                                  </isNotEmpty>    
+								   <isNotEmpty prepend="AND" property="deptDspyYn" >
+								      BB.DEPT_DSPY_YN  =  #deptDspyYn#   
+								   </isNotEmpty>  
+							       AND CC.HDOFC_CODTN_CD = 'A0030010'  
+								   <isNotEmpty prepend="AND" property="emymtDivCd" >
+								      CC.EMYMT_DIV_CD   = #emymtDivCd#
+								   </isNotEmpty> 
+								  AND BB.DEPT_CD = CC.CURR_AFFN_DEPT_CD
+								  AND BB.DPOB_CD = CC.DPOB_CD  
+								UNION ALL
+								SELECT 
+								    C.DPOB_CD,
+								   (SELECT B.DPOB_NM FROM BASS0100 B WHERE B.DPOB_CD =  C.DPOB_CD ) AS DPOB_NM,
+								    C.DEPT_CD,
+								    C.DEPT_NM_HAN,
+								    C.DEPT_NM_RTCHNT,
+								    C.DEPT_NM_ENG,
+								    C.TPLVL_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD =  C.DPOB_CD AND B.DEPT_CD =  C.TPLVL_DEPT_CD  ) AS TPLVL_DEPT_CD_NM,
+								    C.HHRK_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD =  C.DPOB_CD AND B.DEPT_CD =  C.HHRK_DEPT_CD  ) AS HHRK_DEPT_CD_NM,
+								    C.PAYR_MANG_DEPT_CD,
+								    C.DEPT_USE_YN,
+								    C.NAT_PENN_SYM,
+								    C.HLTH_INSR_SYM,
+								    C.UMYT_INSR_SYM,
+								    C.IDTL_ACCDT_INSUR_SYM,
+								    C.DEPT_NOTE_CTNT,
+								    C.DEPT_DSPY_YN,
+								    C.DEPT_RANK,
+								    C.MANGE_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD =  C.DPOB_CD AND B.DEPT_CD =  C.MANGE_DEPT_CD  ) AS MANGE_DEPT_CD_NM ,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD =  C.DPOB_CD AND B.DEPT_CD =  C.MANGE_DEPT_CD  ) AS MANGE_DEPT_NM ,
+								   ( SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = C.DPOB_CD AND B.DEPT_CD =  C.MANGE_DEPT_CD  ) AS MANGE_DEPT_NM_RTCHNT, 
+								    C.DEPT_CRE_DT,
+								   C.DEPT_END_DT
+								FROM BASS0400 C
+								WHERE 1=1
+                                  <isNotEmpty prepend="AND" property="deptDspyYn" >
+                                      C.DEPT_USE_YN   =   #deptDspyYn#   
+                                  </isNotEmpty>
+								 AND (C.DPOB_CD,C.DEPT_CD) IN (SELECT 
+								                                    DPOB_CD, PAYR_MANG_DEPT_CD AS DEPT_CD
+								                                 FROM  BASS0150 
+								                                WHERE PAY_MANGE_DEPT_F_NDTN_USE_YN = 'Y') 
+								   <isNotEmpty prepend="AND" property="deptDspyYn" >
+								      C.DEPT_DSPY_YN  =  #deptDspyYn#   
+								   </isNotEmpty>
+							 ) AA 
+				             WHERE 1=1
+				            <isNotEmpty prepend="AND" property="dpobCd" >
+								 AA.DPOB_CD=#dpobCd#
+							</isNotEmpty>
+							  <isNotEmpty prepend="AND" property="payrMangDeptCd">
+					 		   AA.PAYR_MANG_DEPT_CD  = #payrMangDeptCd#
+							</isNotEmpty>
+                            <isNotEmpty prepend="AND" property="mangeDeptCd">
+					 		   AA.MANGE_DEPT_CD = #mangeDeptCd#
+							</isNotEmpty>
+							 <isEqual property="ymdGb" compareValue="Y"> 
+					   <isNotEmpty prepend="AND" property="strDate" >
+                             #strDate# BETWEEN SUBSTR((NVL(AA.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                               AND SUBSTR((NVL(AA.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                       </isNotEmpty>	 
+					  </isEqual>
+                     <isEqual   property="ymdGb" compareValue="YM">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN SUBSTR((NVL(AA.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                               AND SUBSTR((NVL(AA.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                       </isNotEmpty>
+					  </isEqual>
+					 <isEqual   property="ymdGb" compareValue="YMD">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN (NVL(AA.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                               AND (NVL(AA.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+                       </isNotEmpty>
+					 </isEqual>   
+							<isNotEmpty prepend="AND" property="deptCd">
+								AA.DEPT_CD = #deptCd#
+							</isNotEmpty>
+							
+							
+							<isNotEmpty prepend="AND" property="deptNm">
+								AA.DEPT_NM_HAN LIKE '%' || #deptNm# || '%'
+							</isNotEmpty>
+				             ORDER BY LPAD(AA.DEPT_RANK,5,'0')  ASC   
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>	 
+	</select>	
+	<select id="msfPkgSmrmfDAO.selectPayrWithBass0400ListTotCnt_S" parameterClass="msfPkgSearchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			    FROM (
+			       SELECT  AA.*  FROM   
+				             (   SELECT DISTINCT 
+								   BB.DPOB_CD,
+								   (SELECT B.DPOB_NM FROM BASS0100 B WHERE B.DPOB_CD = BB.DPOB_CD ) AS DPOB_NM,
+								   BB.DEPT_CD,
+								   BB.DEPT_NM_HAN,
+								   BB.DEPT_NM_RTCHNT,
+								   BB.DEPT_NM_ENG,
+								   BB.TPLVL_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = BB.DPOB_CD AND B.DEPT_CD = BB.TPLVL_DEPT_CD  ) AS TPLVL_DEPT_CD_NM,
+								   BB.HHRK_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = BB.DPOB_CD AND B.DEPT_CD = BB.HHRK_DEPT_CD  ) AS HHRK_DEPT_CD_NM,
+								   BB.PAYR_MANG_DEPT_CD,
+								   BB.DEPT_USE_YN,
+								   BB.NAT_PENN_SYM,
+								   BB.HLTH_INSR_SYM,
+								   BB.UMYT_INSR_SYM,
+								   BB.IDTL_ACCDT_INSUR_SYM,
+								   BB.DEPT_NOTE_CTNT,
+								   BB.DEPT_DSPY_YN,
+								   BB.DEPT_RANK,
+								   BB.MANGE_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = BB.DPOB_CD AND B.DEPT_CD = BB.MANGE_DEPT_CD  ) AS MANGE_DEPT_CD_NM ,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = BB.DPOB_CD AND B.DEPT_CD = BB.MANGE_DEPT_CD  ) AS MANGE_DEPT_NM ,
+								   ( SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = BB.DPOB_CD AND B.DEPT_CD = BB.MANGE_DEPT_CD  ) AS MANGE_DEPT_NM_RTCHNT ,
+								    BB.DEPT_CRE_DT,
+								   BB.DEPT_END_DT 
+								FROM BASS0400 BB, PSNL0100 CC 
+								WHERE  1=1
+                                  <isNotEmpty prepend="AND" property="deptDspyYn" >
+                                      BB.DEPT_USE_YN   =   #deptDspyYn#   
+                                  </isNotEmpty>
+								   <isNotEmpty prepend="AND" property="deptDspyYn" >
+								      BB.DEPT_DSPY_YN  =  #deptDspyYn#   
+								   </isNotEmpty>  
+								   AND CC.HDOFC_CODTN_CD = 'A0030010' 
+								    <isNotEmpty prepend="AND" property="emymtDivCd" >
+								      CC.EMYMT_DIV_CD   = #emymtDivCd#
+								   </isNotEmpty> 
+								  AND BB.DEPT_CD = CC.CURR_AFFN_DEPT_CD
+								  AND BB.DPOB_CD = CC.DPOB_CD  
+								UNION ALL
+								SELECT 
+								    C.DPOB_CD,
+								   (SELECT B.DPOB_NM FROM BASS0100 B WHERE B.DPOB_CD =  C.DPOB_CD ) AS DPOB_NM,
+								    C.DEPT_CD,
+								    C.DEPT_NM_HAN,
+								    C.DEPT_NM_RTCHNT,
+								    C.DEPT_NM_ENG,
+								    C.TPLVL_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD =  C.DPOB_CD AND B.DEPT_CD =  C.TPLVL_DEPT_CD  ) AS TPLVL_DEPT_CD_NM,
+								    C.HHRK_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD =  C.DPOB_CD AND B.DEPT_CD =  C.HHRK_DEPT_CD  ) AS HHRK_DEPT_CD_NM,
+								    C.PAYR_MANG_DEPT_CD,
+								    C.DEPT_USE_YN,
+								    C.NAT_PENN_SYM,
+								    C.HLTH_INSR_SYM,
+								    C.UMYT_INSR_SYM,
+								    C.IDTL_ACCDT_INSUR_SYM,
+								    C.DEPT_NOTE_CTNT,
+								    C.DEPT_DSPY_YN,
+								    C.DEPT_RANK,
+								    C.MANGE_DEPT_CD,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD =  C.DPOB_CD AND B.DEPT_CD =  C.MANGE_DEPT_CD  ) AS MANGE_DEPT_CD_NM ,
+								   (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD =  C.DPOB_CD AND B.DEPT_CD =  C.MANGE_DEPT_CD  ) AS MANGE_DEPT_NM ,
+								   ( SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = C.DPOB_CD AND B.DEPT_CD =  C.MANGE_DEPT_CD  ) AS MANGE_DEPT_NM_RTCHNT ,
+								   C.DEPT_CRE_DT,
+								   C.DEPT_END_DT
+								FROM BASS0400 C
+								WHERE  1=1
+                                  <isNotEmpty prepend="AND" property="deptDspyYn" >
+                                      C.DEPT_USE_YN   =   #deptDspyYn#   
+                                  </isNotEmpty>
+								  AND (C.DPOB_CD,C.DEPT_CD) IN (SELECT 
+								                                    DPOB_CD, PAYR_MANG_DEPT_CD AS DEPT_CD
+								                                FROM  BASS0150 
+								                                WHERE PAY_MANGE_DEPT_F_NDTN_USE_YN = 'Y') 
+								   <isNotEmpty prepend="AND" property="deptDspyYn" >
+								      C.DEPT_DSPY_YN  =  #deptDspyYn#   
+								   </isNotEmpty>
+							 ) AA 
+				             WHERE 1=1
+				            <isNotEmpty prepend="AND" property="dpobCd" >
+								 AA.DPOB_CD=#dpobCd#
+							</isNotEmpty>
+                            <isNotEmpty prepend="AND" property="payrMangDeptCd">
+					 		   AA.PAYR_MANG_DEPT_CD  = #payrMangDeptCd#
+							</isNotEmpty>
+							<isNotEmpty prepend="AND" property="mangeDeptCd">
+					 		   AA.MANGE_DEPT_CD = #mangeDeptCd#
+							</isNotEmpty>
+							 <isEqual property="ymdGb" compareValue="Y"> 
+							   <isNotEmpty prepend="AND" property="strDate" >
+		                             #strDate# BETWEEN SUBSTR((NVL(AA.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+		                                               AND SUBSTR((NVL(AA.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+		                       </isNotEmpty>	 
+							  </isEqual>
+		                     <isEqual   property="ymdGb" compareValue="YM">
+							   <isNotEmpty prepend="AND" property="strDate" >
+		                                #strDate# BETWEEN SUBSTR((NVL(AA.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+		                                               AND SUBSTR((NVL(AA.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+		                       </isNotEmpty>
+							  </isEqual>
+							 <isEqual   property="ymdGb" compareValue="YMD">
+							   <isNotEmpty prepend="AND" property="strDate" >
+		                                #strDate# BETWEEN (NVL(AA.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+		                                               AND (NVL(AA.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+		                       </isNotEmpty>
+							 </isEqual>   
+							<isNotEmpty prepend="AND" property="deptCd">
+								AA.DEPT_CD = #deptCd#
+							</isNotEmpty>
+							<isNotEmpty prepend="AND" property="deptNm">
+								AA.DEPT_NM_HAN LIKE '%' || #deptNm# || '%'
+							</isNotEmpty>
+			    ) 
+	</select>
+	
+<!-- 소속부서코드  -->	 
+	<select id="msfPkgSmrmfDAO.selectBass0400List_D" parameterClass="msfPkgSearchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+	                    SELECT  C.*  FROM   
+				             ( SELECT C.* FROM 
+				                            ( 
+				                            SELECT   AA.DPOB_CD,
+				                               (SELECT B.DPOB_NM FROM BASS0100 B WHERE B.DPOB_CD = AA.DPOB_CD ) AS DPOB_NM,
+				                               AA.DEPT_CD,
+				                               AA.DEPT_NM_HAN,
+				                               AA.DEPT_NM_RTCHNT,
+				                               AA.DEPT_NM_ENG,
+				                               AA.TPLVL_DEPT_CD,
+				                               (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = AA.DPOB_CD AND B.DEPT_CD = AA.TPLVL_DEPT_CD  ) AS TPLVL_DEPT_CD_NM,
+				                               AA.HHRK_DEPT_CD,
+				                               (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = AA.DPOB_CD AND B.DEPT_CD = AA.HHRK_DEPT_CD  ) AS HHRK_DEPT_CD_NM,
+				                               AA.PAYR_MANG_DEPT_CD,
+				                               AA.DEPT_USE_YN,
+				                               AA.NAT_PENN_SYM,
+				                               AA.HLTH_INSR_SYM,
+				                               AA.UMYT_INSR_SYM,
+				                               AA.IDTL_ACCDT_INSUR_SYM,
+				                               AA.DEPT_NOTE_CTNT,
+				                               AA.DEPT_DSPY_YN,
+				                               AA.DEPT_RANK,
+				                               AA.MANGE_DEPT_CD,
+				                               (SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = AA.DPOB_CD AND B.DEPT_CD = AA.MANGE_DEPT_CD  ) AS MANGE_DEPT_CD_NM ,
+				                              ( SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = AA.DPOB_CD AND B.DEPT_CD = AA.MANGE_DEPT_CD  ) AS MANGE_DEPT_NM ,
+				                               ( SELECT B.DEPT_NM_RTCHNT FROM BASS0400 B WHERE B.DPOB_CD = AA.DPOB_CD AND B.DEPT_CD = AA.MANGE_DEPT_CD  ) AS MANGE_DEPT_NM_RTCHNT ,
+				                                  AA.DEPT_CRE_DT,
+								                AA.DEPT_END_DT
+				                                FROM BASS0400 AA 
+				                                WHERE  1=1
+				                                  <isNotEmpty prepend="AND" property="deptDspyYn" >
+				                                      AA.DEPT_USE_YN   =   #deptDspyYn#   
+				                                  </isNotEmpty>
+				                                  <isNotEmpty prepend="AND" property="deptDspyYn" >
+													   AA.DEPT_DSPY_YN  =  #deptDspyYn#   
+												</isNotEmpty>  
+				                     ) C
+				             START WITH C.HHRK_DEPT_CD = '000000000'
+				             CONNECT BY PRIOR C.DEPT_CD = C.HHRK_DEPT_CD 
+				             ) C
+				             WHERE 1=1
+				            <isNotEmpty prepend="AND" property="dpobCd" >
+								 C.DPOB_CD=#dpobCd#
+							</isNotEmpty>
+                            <isNotEmpty prepend="AND" property="mangeDeptCd">
+					 		   C.MANGE_DEPT_CD = #mangeDeptCd#
+							</isNotEmpty> 
+							
+							 <isEqual property="ymdGb" compareValue="Y"> 
+								   <isNotEmpty prepend="AND" property="strDate" >
+			                             #strDate# BETWEEN SUBSTR((NVL(C.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+			                                               AND SUBSTR((NVL(C.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+			                       </isNotEmpty>	 
+								  </isEqual>
+			                     <isEqual   property="ymdGb" compareValue="YM">
+								   <isNotEmpty prepend="AND" property="strDate" >
+			                                #strDate# BETWEEN SUBSTR((NVL(C.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+			                                               AND SUBSTR((NVL(C.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+			                       </isNotEmpty>
+								  </isEqual>
+								 <isEqual   property="ymdGb" compareValue="YMD">
+								   <isNotEmpty prepend="AND" property="strDate" >
+			                                #strDate# BETWEEN (NVL(C.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+			                                               AND (NVL(C.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+			                       </isNotEmpty>
+								 </isEqual>   
+						<!--  
+                            <isNotEmpty prepend="AND" property="deptCd">
+			              	   C.DEPT_CD = #deptCd#
+			                </isNotEmpty> 
+			                
+			             -->
+							<isNotEmpty prepend="AND" property="deptNm">
+								 C.DEPT_NM_HAN LIKE '%' || #deptNm# || '%'
+							</isNotEmpty> 
+							ORDER BY C.DPOB_CD ASC
+								,( SELECT LPAD(DEPT_RANK,5,'0')
+								  	FROM BASS0400 DD
+								   WHERE DD.DPOB_CD = C.DPOB_CD
+									AND DD.DEPT_CD = C.DEPT_CD
+									AND DD.DEPT_USE_YN = 'Y'
+									AND DD.DEPT_DSPY_YN = 'Y'
+								  ) ASC  
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>	 
+	</select>
+	 
+ 	
+	<select id="msfPkgSsoSmrmfDAO.selectSsoxIfUserList_D" parameterClass="ssoxUserSrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								USER_ID
+								, USER_NAME
+								, USER_ID AS USR_ID
+								, USER_NAME AS USR_NM
+								, USER_SN
+								, USER_STAT
+								, USER_STAT_NAME
+								, REGULARITY
+								, ORG_ID
+								, ORG_NAME
+								, (DEPT_ID || '00') AS DEPT_CD 
+								, (DEPT_ID || '00') AS deptCddeptCd
+								, DEPT_NAME AS deptCddeptNmRtchnt
+								, DEPT_ID
+								, DEPT_NAME
+								, DEPT_FULLNAME
+								, CLASS_ID
+								, CLASS_NAME
+								, POSITION_ID
+								, POSITION_NAME
+								, GRADE_ID
+								, GRADE_NAME
+								, EMAIL
+								, TEL
+								, MOBILE
+								, JOIN_DAY
+								, RETIRE_DAY
+								, ADD_INFO1
+								, ADD_INFO2
+								, ADD_INFO3
+								, ADD_INFO4
+								, ADD_INFO5
+								, ADD_INFO6
+								, ADD_INFO7
+								, BASE_SYS
+								, REG_DAY
+								, UPDATE_DAY
+								, USE_YN
+								, RDUTY_NAME
+						FROM SSOX_USER
+				WHERE 1=1
+				<isNotEmpty prepend="AND" property="userName">
+					USER_NAME LIKE '%' || #userName# || '%' 
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="deptId">
+					DEPT_ID = #deptId#  
+				</isNotEmpty>
+					ORDER BY USER_NAME ASC
+	
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+	</select>	
+	<select id="msfPkgSsoSmrmfDAO.selectSsoxIfUserListTotCnt_S" parameterClass="ssoxUserSrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SSOX_USER
+			WHERE 1=1
+				<isNotEmpty prepend="AND" property="userName">
+					USER_NAME LIKE '%' || #userName# || '%' 
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="deptId">
+					DEPT_ID = #deptId#  
+				</isNotEmpty>
+	</select>
+	
+	
+	<select id="msfPkgSmrmfDAO.selectPsnl0100ListTotCnt_S" parameterClass="msfPkgSearchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM PSNL0100
+			WHERE 1=1 
+			  <isNotEmpty prepend="AND" property="dpobCd" >
+			 	DPOB_CD=#dpobCd#
+		       </isNotEmpty>  
+		         <isNotEmpty prepend="AND" property="emymtDivCd" >
+			 	EMYMT_DIV_CD=#emymtDivCd#
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="deptCd" >
+			 	CURR_AFFN_DEPT_CD=#deptCd#
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="businCd" >
+			 	BUSIN_CD=#businCd#
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="typOccuCd" >
+			 	TYP_OCCU_CD=#typOccuCd#
+		       </isNotEmpty> 
+		      <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+			 	DTIL_OCCU_INTTN_CD =#dtilOccuInttnCd#
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="systemkey" >
+			 	SYSTEMKEY=#systemkey#
+		       </isNotEmpty> 
+		       <isNotEmpty prepend="AND" property="hanNm" >
+			 	HAN_NM LIKE '%' || #hanNm# || '%'
+		       </isNotEmpty> 
+	</select>
+	
+	<select id="msfPkgSmrmfDAO.selectPsnl0100List_D" parameterClass="msfPkgSearchVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+				SELECT DPOB_CD,
+				       SYSTEMKEY,
+				       HAN_NM,
+				       ENG_NM,
+				       CHIN_CHAR_NM,
+				       SUBSTR(RESN_REGN_NUM,0,6)||'-'||SUBSTR(RESN_REGN_NUM,7) AS RESN_REGN_NUM,
+				       SX_DIV_CD,
+				       YOOBH_MNTH_DAY,
+				       SCLC_DIV_CD,
+				       NATN_CD,
+				       DEPT_CD,
+				       fcBass0400CDNM(#dpobCd#,DEPT_CD,'2') AS DEPT_NM,
+				       BUSIN_CD,
+				       CURR_AFFN_DEPT_CD,
+				       fcBass0400CDNM(#dpobCd#,CURR_AFFN_DEPT_CD,'2') AS CURR_AFFN_DEPT_NM,
+				       REPBTY_BUSIN_DIV_CD,
+				       TYP_OCCU_CD,
+				       fcBass0320CDNM(#dpobCd#,TYP_OCCU_CD) AS TYP_OCCU_NM,
+				       ODTY_CD,
+				       fcBass0300CDNM(#dpobCd#,ODTY_CD) AS ODTY_NM,
+				       FRST_EMYMT_DT,
+				       EMYMT_DIV_CD,
+				       fcBass0300CDNM(#dpobCd#,EMYMT_DIV_CD) AS EMYMT_DIV_NM,
+				       EMYMT_DIV_CD AS emymtDivCdcommCd ,
+				       fcBass0300CDNM(#dpobCd#,EMYMT_DIV_CD) AS emymtDivCdcommCdNm,
+				       EMYMT_BGNN_DT,
+				       EMYMT_END_DT,
+				       PYSP_CD,
+				       fcBass0300CDNM(DPOB_CD,PYSP_CD) AS PYSP_NM,
+				       HDOFC_CODTN_CD,
+				       fcBass0300CDNM(DPOB_CD,HDOFC_CODTN_CD) AS HDOFC_CODTN_NM,
+				       RETRY_DT,
+				       RETRY_REAS_CTNT,
+				       FRGNR_DIV_CD,
+				       fcBass0300CDNM(DPOB_CD,FRGNR_DIV_CD) AS FRGNR_DIV_NM,
+				       PSPT_NUM,
+				       STY_BGNN_DT,
+				       STY_END_DT,
+				       END_SCHL,
+				       END_DEGR_DIV_CD,
+				       fcBass0300CDNM(DPOB_CD,END_DEGR_DIV_CD) AS END_DEGR_DIV_NM,
+				       PMTN_SCDU_DT,
+				       PYSP_PRMTN_SCDU_DT,
+				       REYMN_SCDU_DT,
+				       LOG_SVC_YR_NUM_CD,
+				       fcBass0300CDNM(#dpobCd#,LOG_SVC_YR_NUM_CD) AS LOG_SVC_YR_NUM_NM,
+				       LOG_SVC_MNTH_ICM_CD,
+				       (SELECT  COMM_CD_NM FROM BASS0300 C WHERE  C.COMM_CD = LOG_SVC_YR_NUM_CD)
+		                         ||' '||(SELECT  COMM_CD_NM FROM BASS0300 C WHERE  C.COMM_CD = LOG_SVC_MNTH_ICM_CD) AS LOG_SVC_MNTH_ICM_NM,
+				       CURR_PYSP_APPMT_DT,
+				       CURR_DEPT_APPMT_DT,
+				       PERN_NOTE_CTNT,
+				       KYBDR,
+				       INPT_DT,
+				       INPT_ADDR,
+				       ISMT,
+				       REVN_DT,
+				       REVN_ADDR,
+				       (SELECT MAX (B.CURR_PAE_WORK_NM)
+				          FROM PSNL0110 B
+				         WHERE B.DPOB_CD = A.DPOB_CD AND B.SYSTEMKEY = A.SYSTEMKEY)
+				          AS CURR_PAE_WORK_NM,
+				       (SELECT MAX (C.PIC_FLNM )
+				          FROM PSNL0125 C
+				         WHERE C.DPOB_CD = A.DPOB_CD AND C.SYSTEMKEY = A.SYSTEMKEY)
+				          AS PIC_FLNM,
+				       PYSP_GRDE_CD,
+				       fcBass0300CDNM(#dpobCd#,PYSP_GRDE_CD) AS PYSP_GRDE_NM,
+				       DTIL_OCCU_CLS_DIV_CD,
+				        A.DTIL_OCCU_INTTN_CD ,
+				         fcBassEx0350CDNM(A.DPOB_CD,A.TYP_OCCU_CD,A.DTIL_OCCU_INTTN_CD,'1' ) AS DTIL_OCCU_CLS_DIV_NM ,
+				       '('||(SELECT BUSIN_APPTN_YR FROM BASS0500 WHERE A.DPOB_CD = DPOB_CD AND A.CURR_AFFN_DEPT_CD = DEPT_CD AND A.BUSIN_CD = BUSIN_CD AND SUBSTR(A.EMYMT_BGNN_DT,1,4) = BUSIN_APPTN_YR)||')'||
+		               (SELECT BUSIN_NM FROM BASS0500 WHERE A.DPOB_CD = DPOB_CD AND A.CURR_AFFN_DEPT_CD = DEPT_CD AND A.BUSIN_CD = BUSIN_CD AND SUBSTR(A.EMYMT_BGNN_DT,1,4) = BUSIN_APPTN_YR) AS BUSIN_NM         
+				  FROM PSNL0100 A
+				 WHERE 1=1
+				   <isNotEmpty prepend="AND" property="dpobCd" >
+					 	DPOB_CD=#dpobCd#
+				       </isNotEmpty>  
+				         <isNotEmpty prepend="AND" property="emymtDivCd" >
+					 	EMYMT_DIV_CD=#emymtDivCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="deptCd" >
+					 	CURR_AFFN_DEPT_CD=#deptCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="businCd" >
+					 	BUSIN_CD=#businCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="typOccuCd" >
+					 	TYP_OCCU_CD=#typOccuCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="dtilOccuInttnCd" >
+					 	DTIL_OCCU_INTTN_CD =#dtilOccuInttnCd#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="systemkey" >
+					 	SYSTEMKEY=#systemkey#
+				       </isNotEmpty> 
+				       <isNotEmpty prepend="AND" property="hanNm" >
+					 	HAN_NM LIKE '%' || #hanNm# || '%'
+				       </isNotEmpty> 
+							ORDER BY 
+								DPOB_CD ASC
+								,RESN_REGN_NUM ASC 
+									, SYSTEMKEY ASC
+				
+				<![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+	</select>	
+	
+	
+	<!-- 직종 콤보박스처리  -->
+	<select id="msfPkgSmrmfDAO.selectBass0320ComboTypOccuCdList_D" parameterClass="msfPkgSearchVO" resultClass="egovMap">
+		SELECT * FROM (
+			SELECT A.*, ROWNUM RNUM FROM (
+									SELECT DISTINCT   AA.DPOB_CD
+								                , AA.TYP_OCCU_CD
+								                , AA.TYP_OCCU_NM
+								                , AA.TYP_OCCU_USE_YN
+								                , AA.TYP_OCCU_CTNT
+								                , AA.TYP_OCCU_ORD
+								                , AA.TYP_OCCU_JBFML_DIV_CD
+								                , AA.PYSP_GRDE_CD  
+								        FROM BASS0320 AA, 
+								                ( 
+								 SELECT  C.DPOB_CD,
+		                                 C.DTIL_OCCU_INTTN_CD,
+		                                 C.TYP_OCCU_CD,
+		                                 C.DEPT_CD FROM  
+		                                             ( SELECT * 
+                                               			  FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C 
+		                                                 <isNotEmpty property="deptCd" prepend="WHERE">
+														<![CDATA[
+														 C.DEPT_CD
+														]]>
+														<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+														 #deptCdArr[]# 
+														</iterate>
+														</isNotEmpty>   
+								                ) BB 
+								WHERE AA.DPOB_CD = BB.DPOB_CD
+								  AND AA.TYP_OCCU_CD = BB.TYP_OCCU_CD   
+		                <isEmpty property="ymdGb" prepend="AND">			  
+                     		     AA.TYP_OCCU_USE_YN = 'Y' 
+                        </isEmpty>  
+						  <isEqual property="ymdGb" compareValue="Y"> 
+					   <isNotEmpty prepend="AND" property="strDate" >
+                             #strDate# BETWEEN SUBSTR((NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                               AND SUBSTR((NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                       </isNotEmpty>	 
+					  </isEqual>
+                     <isEqual   property="ymdGb" compareValue="YM">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN SUBSTR((NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                               AND SUBSTR((NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                       </isNotEmpty>
+					  </isEqual>
+					 <isEqual   property="ymdGb" compareValue="YMD">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN (NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                               AND (NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+                       </isNotEmpty>
+					 </isEqual>   
+                       <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+						((AA.TYP_OCCU_CD = #typOccuCd#) OR (AA.CHNG_TYP_OCCU_CD
+						]]>
+					   <iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					     #typOccuCdArr[]#
+					  </iterate>
+					  )
+					 </isNotEmpty>      
+						<isNotEmpty prepend="AND" property="dpobCd" >
+							 AA.DPOB_CD=#dpobCd#
+						</isNotEmpty>  
+		<isNotEqual  property="lastIndex" compareValue="-1">
+		 <![CDATA[					
+			) A WHERE ROWNUM <= #lastIndex#
+		)WHERE RNUM >= #firstIndex#
+		]]>
+		</isNotEqual>	
+		<isEqual   property="lastIndex" compareValue="-1">
+		  <![CDATA[					
+			) A  
+		)
+		]]>
+		</isEqual>	
+	</select>
+	
+	
+	
+	<select id="msfPkgSmrmfDAO.selectBass0320ComboTypOccuCdListTotCnt_S" parameterClass="msfPkgSearchVO" resultClass="int">
+		SELECT COUNT(*) totcnt
+		FROM (
+				SELECT DISTINCT   AA.DPOB_CD
+						                , AA.TYP_OCCU_CD
+						                , AA.TYP_OCCU_NM
+						                , AA.TYP_OCCU_USE_YN
+						                , AA.TYP_OCCU_CTNT
+						                , AA.TYP_OCCU_ORD
+						                , AA.TYP_OCCU_JBFML_DIV_CD
+						                , AA.PYSP_GRDE_CD  
+						        FROM BASS0320 AA, 
+						                ( 
+						                SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM  
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' ))) C 
+                                                 <isNotEmpty property="deptCd" prepend="WHERE">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]# 
+												</iterate>
+												</isNotEmpty>   
+						                ) BB 
+						WHERE AA.DPOB_CD = BB.DPOB_CD
+						  AND AA.TYP_OCCU_CD = BB.TYP_OCCU_CD   
+			   <isEmpty property="ymdGb" prepend="AND">			  
+                          AA.TYP_OCCU_USE_YN = 'Y' 
+              </isEmpty>     
+					  <isEqual property="ymdGb" compareValue="Y"> 
+					   <isNotEmpty prepend="AND" property="strDate" >
+                             #strDate# BETWEEN SUBSTR((NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                               AND SUBSTR((NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                       </isNotEmpty>	 
+					  </isEqual>
+                     <isEqual   property="ymdGb" compareValue="YM">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN SUBSTR((NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                               AND SUBSTR((NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                       </isNotEmpty>
+					  </isEqual>
+					 <isEqual   property="ymdGb" compareValue="YMD">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN (NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                               AND (NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+                       </isNotEmpty>
+					 </isEqual>   
+                     <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+						((AA.TYP_OCCU_CD = #typOccuCd#) OR (AA.CHNG_TYP_OCCU_CD
+						]]>
+					   <iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					     #typOccuCdArr[]#
+					  </iterate>
+					  )
+					 </isNotEmpty>    
+				<isNotEmpty prepend="AND" property="dpobCd" >
+					 AA.DPOB_CD=#dpobCd#
+				</isNotEmpty>  
+		)
+	</select>
+	
+	
+	
+	<!--  부서 변경시 구간에 따른 데이타를 가죠오는 쿼리  -->
+	<select id="msfPkgSmrmfDAO.setFuncBeforComboBass0400List_D" parameterClass="msfPkgSearchVO" resultClass="egovMap"> 
+				     SELECT C.DEPT_CD 
+                          FROM BASS0400 C
+                        WHERE  C.DEPT_DSPY_YN = 'Y'  
+                     <isNotEmpty prepend="AND" property="dpobCd" >
+                      C.DPOB_CD=#dpobCd#
+                     </isNotEmpty> 
+                     <isEqual property="ymdGb" compareValue="Y"> 
+					   <isNotEmpty prepend="AND" property="strDate" >
+                             #strDate# BETWEEN SUBSTR((NVL(C.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                               AND SUBSTR((NVL(C.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                       </isNotEmpty>	 
+					  </isEqual>
+                     <isEqual   property="ymdGb" compareValue="YM">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN SUBSTR((NVL(C.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                               AND SUBSTR((NVL(C.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                       </isNotEmpty>
+					  </isEqual>
+					 <isEqual   property="ymdGb" compareValue="YMD">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN (NVL(C.DEPT_CRE_DT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                               AND (NVL(C.DEPT_END_DT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+                       </isNotEmpty>
+					 </isEqual>   
+                     <isNotEmpty property="deptCd" prepend="AND">
+						<![CDATA[
+						 C.DEPT_CD
+						]]>
+						<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+						 #deptCdArr[]# 
+						</iterate>
+					 </isNotEmpty>   
+                        ORDER BY LPAD(DEPT_RANK,5,'0') ASC
+	 
+</select>
+	
+<!--  직종 리스트 구하는 로직  -->	
+<select id="msfPkgSmrmfDAO.setFuncBeforComboBass0320List_D" parameterClass="msfPkgSearchVO" resultClass="egovMap">
+                   SELECT 
+                       TYP_OCCU_CD 
+                   FROM  BASS0320 
+                    WHERE DPOB_CD=#dpobCd# 
+                     <isEqual property="ymdGb" compareValue="Y"> 
+					   <isNotEmpty prepend="AND" property="strDate" >
+                             #strDate# BETWEEN SUBSTR((NVL(TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                               AND SUBSTR((NVL(TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                       </isNotEmpty>	 
+					  </isEqual>
+                     <isEqual   property="ymdGb" compareValue="YM">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN SUBSTR((NVL(TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                               AND SUBSTR((NVL(TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                       </isNotEmpty>
+					  </isEqual>
+					 <isEqual   property="ymdGb" compareValue="YMD">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN (NVL(TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                               AND (NVL(TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+                       </isNotEmpty>
+					 </isEqual>   
+                     <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+						 CHNG_TYP_OCCU_CD
+						]]>
+					   <iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					     #typOccuCdArr[]#
+					  </iterate>
+					 </isNotEmpty>   
+                        ORDER BY TYP_OCCU_ORD ASC
+	 
+</select>		
+
+	
+<!--  직종 / 직종세  리스트 구하는 로직  -->	
+<select id="msfPkgSmrmfDAO.setFuncBeforComboBass0350List_D" parameterClass="msfPkgSearchVO" resultClass="egovMap">
+                   SELECT 
+                         TYP_OCCU_CD 
+                        ,DTIL_OCCU_INTTN_CD
+                   FROM  BASS0350 
+                   WHERE  DPOB_CD=#dpobCd# 
+                     <isEqual property="ymdGb" compareValue="Y"> 
+					   <isNotEmpty prepend="AND" property="strDate" >
+                             #strDate# BETWEEN SUBSTR((NVL(DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                               AND SUBSTR((NVL(DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                       </isNotEmpty>	 
+					  </isEqual>
+                     <isEqual   property="ymdGb" compareValue="YM">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN SUBSTR((NVL(DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                               AND SUBSTR((NVL(DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                       </isNotEmpty>
+					  </isEqual>
+					 <isEqual   property="ymdGb" compareValue="YMD">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN (NVL(DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                               AND (NVL(DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+                       </isNotEmpty>
+					 </isEqual>   
+                     <isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+						 CHNG_TYP_OCCU_CD
+						]]>
+					   <iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					     #typOccuCdArr[]#
+					  </iterate>
+					 </isNotEmpty>  
+					  <isNotEmpty property="dtilOccuInttnCd" prepend="AND">
+						<![CDATA[
+							 CHNG_DTIL_OCCU_INTTN_CD
+						]]>
+						<iterate prepend="IN" property="dtilOccuInttnCdArr" open="(" close=")" conjunction=",">
+							 #dtilOccuInttnCdArr[]#
+						</iterate>
+					</isNotEmpty>   
+                        ORDER BY DTIL_OCCU_CLS_ORD ASC
+                       , TYP_OCCU_CD  ASC 
+                       , DTIL_OCCU_INTTN_CD ASC
+       
+</select> 
+
+
+ <select id="msfPkgSmrmfDAO.selectBass0320TypOccuCdList_D" parameterClass="msfPkgSearchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT            AA.DPOB_CD
+								, AA.TYP_OCCU_CD
+							    , AA.TYP_OCCU_NM 
+						FROM BASS0320 AA,
+						(
+						  SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM  
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C 
+                                                 <isNotEmpty property="deptCd" prepend="WHERE">
+													<![CDATA[
+													 C.DEPT_CD
+													]]>
+													<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+													 #deptCdArr[]# 
+													</iterate>
+												</isNotEmpty>   
+						) BB
+				WHERE AA.DPOB_CD = BB.DPOB_CD  
+				  AND AA.TYP_OCCU_CD = BB.TYP_OCCU_CD 
+			  	<isEmpty property="ymdGb" prepend="AND">			  
+                          AA.TYP_OCCU_USE_YN = 'Y' 
+              	</isEmpty>     
+					<isEqual property="ymdGb" compareValue="Y"> 
+						<isNotEmpty prepend="AND" property="strDate" >
+                             #strDate# BETWEEN SUBSTR((NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                               AND SUBSTR((NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                  		</isNotEmpty>	 
+					</isEqual>
+                 	<isEqual   property="ymdGb" compareValue="YM">
+						<isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN SUBSTR((NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                               AND SUBSTR((NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                       	</isNotEmpty>
+					</isEqual>
+					<isEqual   property="ymdGb" compareValue="YMD">
+						<isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN (NVL(AA.TYP_OCCU_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                               AND (NVL(AA.TYP_OCCU_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+               			</isNotEmpty>
+					</isEqual>   
+                 	<isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+						((AA.TYP_OCCU_CD = #typOccuCd#) OR (AA.CHNG_TYP_OCCU_CD
+						]]>
+					   	<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+					     #typOccuCdArr[]#
+					  	</iterate>
+					  )
+					</isNotEmpty>    
+					<isNotEmpty prepend="AND" property="dpobCd" >
+					   AA.DPOB_CD=#dpobCd#
+					</isNotEmpty>
+			   GROUP BY  AA.DPOB_CD,   AA.TYP_OCCU_CD, AA.TYP_OCCU_NM 
+	<isNotEqual  property="lastIndex" compareValue="-1">
+	 <![CDATA[					
+		) A WHERE ROWNUM <= #lastIndex#
+	) WHERE RNUM >= #firstIndex#
+	]]>
+	</isNotEqual>	
+	<isEqual   property="lastIndex" compareValue="-1">
+	  <![CDATA[					
+		) A  
+	)
+	]]>
+	</isEqual>	
+</select>	
+
+	<select id="msfPkgSmrmfDAO.selectSysIfBass0350ListTotCnt_S" parameterClass="msfPkgSearchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM (
+				SELECT        DISTINCT      AA.DPOB_CD
+									  , AA.TYP_OCCU_CD
+									  , fcBass0320CDNM(AA.DPOB_CD,AA.TYP_OCCU_CD) AS TYP_OCCU_NM
+									  , AA.DTIL_OCCU_INTTN_CD 
+									  , AA.DTIL_OCCU_CLS_DIV_CD 
+									  , AA.DTIL_OCCU_CLS_NM
+									  , AA.DTIL_OCCU_JBFML_DIV_CD
+									  , AA.DTIL_OCCU_CLS_USE_YN
+									  , AA.CHNG_TGT_YN
+									  , AA.DTIL_OCCU_CLS_CTNT
+									  , AA.DTIL_OCCU_CLS_ORD
+									  , AA.BGG_LOG_SVC_YR_NUM_CD 
+									  , AA.PYSP_GRDE_CD
+									  , fcBass0300CDNM(AA.DPOB_CD,AA.PYSP_GRDE_CD) AS PYSP_GRDE_NM  
+							FROM BASS0350 AA , 
+			                ( 
+			                 SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM  
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C 
+                                                 <isNotEmpty property="deptCd" prepend="WHERE">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]# 
+												</iterate>
+												</isNotEmpty>   
+						
+			                ) BB 
+		    	WHERE AA.DPOB_CD = BB.DPOB_CD
+			      AND AA.TYP_OCCU_CD = BB.TYP_OCCU_CD 
+			      AND AA.DTIL_OCCU_INTTN_CD = BB.DTIL_OCCU_INTTN_CD 
+				   <isEmpty property="ymdGb" prepend="AND">			  
+                          DTIL_OCCU_CLS_USE_YN = 'Y'
+                  </isEmpty>     
+					<isEqual property="ymdGb" compareValue="Y"> 
+						<isNotEmpty prepend="AND" property="strDate" >
+                             #strDate# BETWEEN SUBSTR((NVL(AA.DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                               AND SUBSTR((NVL(AA.DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                       	</isNotEmpty>	 
+					</isEqual>
+               		<isEqual   property="ymdGb" compareValue="YM">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN SUBSTR((NVL(AA.DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                               AND SUBSTR((NVL(AA.DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                       </isNotEmpty>
+					</isEqual>
+					<isEqual   property="ymdGb" compareValue="YMD">
+					   <isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN (NVL(AA.DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                               AND (NVL(AA.DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+                       </isNotEmpty>
+					</isEqual>  
+				 	<isNotEmpty property="typOccuCd" prepend="AND">
+						<![CDATA[
+						 AA.TYP_OCCU_CD
+						]]>
+						<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+						 #typOccuCdArr[]#
+						</iterate>
+					</isNotEmpty> 
+			    	<isNotEmpty prepend="AND" property="dpobCd" >
+				 	AA.DPOB_CD=#dpobCd#
+			    	</isNotEmpty>
+			)
+	</select>
+	
+	<select id="msfPkgSmrmfDAO.selectSysIfBass0350List_D" parameterClass="msfPkgSearchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+	    SELECT A01.* FROM 
+				(SELECT    DISTINCT  AA.DPOB_CD
+								  , AA.TYP_OCCU_CD
+								  , fcBass0320CDNM(AA.DPOB_CD,AA.TYP_OCCU_CD) AS TYP_OCCU_NM
+								  , AA.DTIL_OCCU_INTTN_CD 
+								  , AA.DTIL_OCCU_CLS_DIV_CD 
+								  , AA.DTIL_OCCU_CLS_NM
+								  , AA.DTIL_OCCU_JBFML_DIV_CD
+								  , AA.DTIL_OCCU_CLS_USE_YN
+								  , AA.CHNG_TGT_YN
+								  , AA.DTIL_OCCU_CLS_CTNT
+								  , AA.DTIL_OCCU_CLS_ORD
+								  , AA.BGG_LOG_SVC_YR_NUM_CD 
+								  , AA.PYSP_GRDE_CD
+								  , fcBass0300CDNM(AA.DPOB_CD,AA.PYSP_GRDE_CD) AS PYSP_GRDE_NM  
+						FROM BASS0350 AA , 
+		                ( 
+		                SELECT  C.DPOB_CD,
+                                 C.DTIL_OCCU_INTTN_CD,
+                                 C.TYP_OCCU_CD,
+                                 C.DEPT_CD FROM  
+                                             ( SELECT * 
+                                                 FROM TABLE(PKG_DTIL_AUTH.FN_DTIL_AUTH_TB(#dpobCd#,#payrMangDeptYn#,#payrMangDeptCd#,#deptCd#,#usrId#,#deptCdAuth#,'' )) ) C 
+                                                 <isNotEmpty property="deptCd" prepend="WHERE">
+												<![CDATA[
+												 C.DEPT_CD
+												]]>
+												<iterate prepend="IN" property="deptCdArr" open="(" close=")" conjunction=",">
+												 #deptCdArr[]# 
+												</iterate>
+												</isNotEmpty>   
+						
+		                ) BB 
+	    	WHERE AA.DPOB_CD = BB.DPOB_CD
+		      AND AA.TYP_OCCU_CD = BB.TYP_OCCU_CD 
+		      AND AA.DTIL_OCCU_INTTN_CD = BB.DTIL_OCCU_INTTN_CD 
+					<isEmpty property="ymdGb" prepend="AND">			  
+                          DTIL_OCCU_CLS_USE_YN = 'Y'
+                  	</isEmpty>     
+			    	<isEqual property="ymdGb" compareValue="Y"> 
+					   <isNotEmpty prepend="AND" property="strDate" >
+                             #strDate# BETWEEN SUBSTR((NVL(AA.DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                               AND SUBSTR((NVL(AA.DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                       </isNotEmpty>	 
+				  	</isEqual>
+                	<isEqual   property="ymdGb" compareValue="YM">
+						<isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN SUBSTR((NVL(AA.DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                               AND SUBSTR((NVL(AA.DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                       </isNotEmpty>
+					</isEqual>
+					<isEqual   property="ymdGb" compareValue="YMD">
+						<isNotEmpty prepend="AND" property="strDate" >
+                                #strDate# BETWEEN (NVL(AA.DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                               AND (NVL(AA.DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+                       	</isNotEmpty>
+					</isEqual>   
+			 <isNotEmpty property="typOccuCd" prepend="AND">
+				<![CDATA[
+				 AA.TYP_OCCU_CD
+				]]>
+				<iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+				 #typOccuCdArr[]#
+				</iterate>
+			</isNotEmpty>    
+		    <isNotEmpty prepend="AND" property="dpobCd" >
+			 	AA.DPOB_CD=#dpobCd#
+		    </isNotEmpty> 
+			) A01
+					ORDER BY 
+					   A01.DPOB_CD ASC
+					  , A01.DTIL_OCCU_CLS_ORD ASC
+						, A01.TYP_OCCU_CD ASC
+								, A01.DTIL_OCCU_INTTN_CD ASC
+	<isNotEqual  property="lastIndex" compareValue="-1">
+	 <![CDATA[					
+		) A WHERE ROWNUM <= #lastIndex#
+	)WHERE RNUM >= #firstIndex#
+	]]>
+	</isNotEqual>	
+	<isEqual   property="lastIndex" compareValue="-1">
+	  <![CDATA[					
+		) A  
+	)
+	]]>
+	</isEqual>	
+	</select>	
+ 
+	
+	<resultMap id="userPsnl0100" class="com.app.smrmf.sysm.server.service.vo.SysIfPsnl0100VO"> 
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="2"/> 
+		<result property="resnRegnNum" column="RESN_REGN_NUM" columnIndex="3"/>
+	 	<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="4"/>
+	</resultMap>
+	
+	<select id="msfPkgSmrmfDAO.selectPsnlUser0100_S" resultMap="userPsnl0100">
+		<![CDATA[
+			SELECT
+				  DPOB_CD
+				, SYSTEMKEY 
+				, RESN_REGN_NUM 
+				, DECODE(EMYMT_DIV_CD,'A0020010','D0010070','D0010080') AS EMYMT_DIV_CD
+			FROM PSNL0100
+						WHERE DPOB_CD=#dpobCd#
+								AND SYSTEMKEY=#systemkey#
+				]]>
+	</select>
+	
+</sqlMap>

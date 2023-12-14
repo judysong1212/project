@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sysm0600">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysm0600SerarchVO" type="com.app.smrmf.sysm.server.vo.SysIfSysm0600SrhVO"/>
+	
+	<resultMap id="sysm0600" class="com.app.smrmf.sysm.server.vo.SysIfSysm0600VO">com.app.smrmf.sysm.server.vo.SysIf
+		<result property="sysDivCd" column="SYS_DIV_CD" columnIndex="1"/>
+		<result property="usrDivCd" column="USR_DIV_CD" columnIndex="2"/>
+		<result property="usrId" column="USR_ID" columnIndex="3"/>
+		<result property="usrAuthUseYn" column="USR_AUTH_USE_YN" columnIndex="4"/>
+		<result property="kybdr" column="KYBDR" columnIndex="5"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="6"/>
+		<result property="ismt" column="ISMT" columnIndex="7"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="8"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="9"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="10"/>
+	</resultMap>
+	
+	<insert id="sysm0600DAO.insertSysm0600_S">
+		<![CDATA[
+			INSERT INTO SYSM0600 
+				( SYS_DIV_CD
+				  , USR_DIV_CD
+				  , USR_ID
+				  , USR_AUTH_USE_YN
+				  , KYBDR
+				  , INPT_DT
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , INPT_ADDR )
+			VALUES ( #sysDivCd#
+				  , #usrDivCd#
+				  , #usrId#
+				  , #usrAuthUseYn#
+				  , #kybdr#
+				  , #inptDt#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr#
+				  , #inptAddr# )
+		]]>
+	</insert>
+	
+	<update id="sysm0600DAO.updateSysm0600_S">
+		<![CDATA[
+			UPDATE SYSM0600
+			SET SYS_DIV_CD=#sysDivCd#
+				, USR_DIV_CD=#usrDivCd#
+				, USR_ID=#usrId#
+				, USR_AUTH_USE_YN=#usrAuthUseYn#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+				, INPT_ADDR=#inptAddr#
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND USR_DIV_CD=#usrDivCd#
+								AND USR_ID=#usrId#
+				]]>
+	</update>
+	
+	<delete id="sysm0600DAO.deleteSysm0600_S">
+		<![CDATA[
+			DELETE FROM SYSM0600 
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND USR_DIV_CD=#usrDivCd#
+								AND USR_ID=#usrId#
+				]]>
+	</delete>
+	
+	<select id="sysm0600DAO.selectSysm0600_S" resultMap="sysm0600">
+		<![CDATA[
+			SELECT
+				SYS_DIV_CD
+				, USR_DIV_CD
+				, USR_ID
+				, USR_AUTH_USE_YN
+				, KYBDR
+				, INPT_DT
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, INPT_ADDR
+			FROM SYSM0600
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND USR_DIV_CD=#usrDivCd#
+								AND USR_ID=#usrId#
+				]]>
+	</select>
+	
+	<select id="sysm0600DAO.selectSysm0600List_D" parameterClass="sysm0600SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								SYS_DIV_CD
+								, USR_DIV_CD
+								, USR_ID
+								, USR_AUTH_USE_YN
+								, KYBDR
+								, INPT_DT
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+								, INPT_ADDR
+						FROM SYSM0600
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					SYS_DIV_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					USR_DIV_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						SYS_DIV_CD DESC
+							, USR_DIV_CD DESC
+							, USR_ID DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="sysm0600DAO.selectSysm0600ListTotCnt_S" parameterClass="sysm0600SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSM0600
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				SYS_DIV_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				USR_DIV_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

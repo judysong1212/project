@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SysIfBass0350">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysIfBass0350SerarchVO" type="com.app.smrmf.sysm.server.service.vo.SysIfBass0350SrhVO"/>
+	
+	<resultMap id="sysIfBass0350" class="com.app.smrmf.sysm.server.service.vo.SysIfBass0350VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="2"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="3"/>
+		<result property="dtilOccuClsDivCd" column="DTIL_OCCU_CLS_DIV_CD" columnIndex="4"/>
+		<result property="pyspGrdeCd" column="PYSP_GRDE_CD" columnIndex="5"/>
+		<result property="dtilOccuClsNm" column="DTIL_OCCU_CLS_NM" columnIndex="6"/>
+		<result property="dtilOccuJbfmlDivCd" column="DTIL_OCCU_JBFML_DIV_CD" columnIndex="7"/>
+		<result property="dtilOccuClsUseYn" column="DTIL_OCCU_CLS_USE_YN" columnIndex="8"/>
+		<result property="chngTgtYn" column="CHNG_TGT_YN" columnIndex="9"/>
+		<result property="dtilOccuClsCtnt" column="DTIL_OCCU_CLS_CTNT" columnIndex="10"/>
+		<result property="dtilOccuClsOrd" column="DTIL_OCCU_CLS_ORD" columnIndex="11"/>
+		<result property="bggLogSvcYrNumCd" column="BGG_LOG_SVC_YR_NUM_CD" columnIndex="12"/>
+		<result property="kybdr" column="KYBDR" columnIndex="13"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="14"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="15"/>
+		<result property="ismt" column="ISMT" columnIndex="16"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="17"/>
+		<result property="dtilOcclsApptnUcstCd" column="DTIL_OCCLS_APPTN_UCST_CD" columnIndex="18"/>
+		<result property="dtilOcclsApptnUcstSum" column="DTIL_OCCLS_APPTN_UCST_SUM" columnIndex="19"/>
+		<result property="chngTypOccuCd" column="CHNG_TYP_OCCU_CD" columnIndex="20"/>
+		<result property="chngDtilOccuInttnCd" column="CHNG_DTIL_OCCU_INTTN_CD" columnIndex="21"/>
+		<result property="dtilOccuInttnStdt" column="DTIL_OCCU_INTTN_STDT" columnIndex="22"/>
+		<result property="dtilOccuInttnEddt" column="DTIL_OCCU_INTTN_EDDT" columnIndex="23"/> 
+	</resultMap>
+	
+	<insert id="sysIfBass0350DAO.insertBass0350_S">
+		<![CDATA[
+			INSERT INTO BASS0350 
+				( DPOB_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , TYP_OCCU_CD
+				  , DTIL_OCCU_CLS_DIV_CD
+				  , PYSP_GRDE_CD
+				  , DTIL_OCCU_CLS_NM
+				  , DTIL_OCCU_JBFML_DIV_CD
+				  , DTIL_OCCU_CLS_USE_YN
+				  , CHNG_TGT_YN
+				  , DTIL_OCCU_CLS_CTNT
+				  , DTIL_OCCU_CLS_ORD
+				  , BGG_LOG_SVC_YR_NUM_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #dtilOccuInttnCd#
+				  , #typOccuCd#
+				  , #dtilOccuClsDivCd#
+				  , #pyspGrdeCd#
+				  , #dtilOccuClsNm#
+				  , #dtilOccuJbfmlDivCd#
+				  , #dtilOccuClsUseYn#
+				  , #chngTgtYn#
+				  , #dtilOccuClsCtnt#
+				  , #dtilOccuClsOrd#
+				  , #bggLogSvcYrNumCd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="sysIfBass0350DAO.updateBass0350_S">
+		<![CDATA[
+			UPDATE BASS0350
+			SET DPOB_CD=#dpobCd#
+				, DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				, TYP_OCCU_CD=#typOccuCd#
+				, DTIL_OCCU_CLS_DIV_CD=#dtilOccuClsDivCd#
+				, PYSP_GRDE_CD=#pyspGrdeCd#
+				, DTIL_OCCU_CLS_NM=#dtilOccuClsNm#
+				, DTIL_OCCU_JBFML_DIV_CD=#dtilOccuJbfmlDivCd#
+				, DTIL_OCCU_CLS_USE_YN=#dtilOccuClsUseYn#
+				, CHNG_TGT_YN=#chngTgtYn#
+				, DTIL_OCCU_CLS_CTNT=#dtilOccuClsCtnt#
+				, DTIL_OCCU_CLS_ORD=#dtilOccuClsOrd#
+				, BGG_LOG_SVC_YR_NUM_CD=#bggLogSvcYrNumCd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				]]>
+	</update>
+	
+	<delete id="sysIfBass0350DAO.deleteBass0350_S">
+		<![CDATA[
+			DELETE FROM BASS0350 
+						WHERE DPOB_CD=#dpobCd#
+								AND DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				]]>
+	</delete>
+	
+	<select id="sysIfBass0350DAO.selectBass0350_S" resultMap="sysIfBass0350">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, DTIL_OCCU_INTTN_CD
+				, TYP_OCCU_CD
+				, DTIL_OCCU_CLS_DIV_CD
+				, PYSP_GRDE_CD
+				, DTIL_OCCU_CLS_NM
+				, DTIL_OCCU_JBFML_DIV_CD
+				, DTIL_OCCU_CLS_USE_YN
+				, CHNG_TGT_YN
+				, DTIL_OCCU_CLS_CTNT
+				, DTIL_OCCU_CLS_ORD
+				, BGG_LOG_SVC_YR_NUM_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				,DTIL_OCCLS_APPTN_UCST_CD
+				, DTIL_OCCLS_APPTN_UCST_SUM
+				, CHNG_TYP_OCCU_CD
+				, CHNG_DTIL_OCCU_INTTN_CD
+				, DTIL_OCCU_INTTN_STDT
+				, DTIL_OCCU_INTTN_EDDT
+			FROM BASS0350
+						WHERE DPOB_CD=#dpobCd#
+								AND DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				]]>
+	</select>
+	
+	<select id="sysIfBass0350DAO.selectBass0350List_D" parameterClass="sysIfBass0350SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, DTIL_OCCU_INTTN_CD
+								, TYP_OCCU_CD
+								, DTIL_OCCU_CLS_DIV_CD
+								, PYSP_GRDE_CD
+								, DTIL_OCCU_CLS_NM
+								, DTIL_OCCU_JBFML_DIV_CD
+								, DTIL_OCCU_CLS_USE_YN
+								, CHNG_TGT_YN
+								, DTIL_OCCU_CLS_CTNT
+								, DTIL_OCCU_CLS_ORD
+								, BGG_LOG_SVC_YR_NUM_CD
+									,DTIL_OCCLS_APPTN_UCST_CD
+								, DTIL_OCCLS_APPTN_UCST_SUM
+								, CHNG_TYP_OCCU_CD
+								, CHNG_DTIL_OCCU_INTTN_CD
+								, DTIL_OCCU_INTTN_STDT
+								, DTIL_OCCU_INTTN_EDDT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS0350
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					DTIL_OCCU_INTTN_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, DTIL_OCCU_INTTN_CD DESC
+							, DTIL_OCCU_CLS_USE_YN DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="sysIfBass0350DAO.selectBass0350ListTotCnt_S" parameterClass="sysIfBass0350SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0350
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				DTIL_OCCU_INTTN_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+	
+	<select id="sysIfBass0350DAO.selectSysmUsr0400ToBass0350List_D" parameterClass="sysIfBass0350SerarchVO" resultClass="egovMap">
+		SELECT
+			C.DPOB_CD
+			, C.TYP_OCCU_CD
+			,C.DTIL_OCCU_INTTN_CD,
+			fcBass0320CDNM(C.DPOB_CD, C.TYP_OCCU_CD) AS TYP_OCCU_NM,
+			C.DTIL_OCCU_CLS_NM,
+			C.DTIL_OCCU_CLS_USE_YN  
+		FROM BASS0350 C
+		WHERE C.DPOB_CD=#dpobCd# 
+			<isNotNull property="dtilOccuClsNm">
+			    <isNotEmpty property="dtilOccuClsNm">
+			        AND C.DTIL_OCCU_CLS_NM LIKE '%' || #dtilOccuClsNm# || '%'
+			    </isNotEmpty>
+			</isNotNull> 
+			  <isEqual property="ymdGb" compareValue="Y"> 
+			   <isNotEmpty prepend="AND" property="strDate" >
+                           #strDate# BETWEEN SUBSTR((NVL(C.DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                             AND SUBSTR((NVL(C.DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                     </isNotEmpty>	 
+			  </isEqual>
+                   <isEqual   property="ymdGb" compareValue="YM">
+			   <isNotEmpty prepend="AND" property="strDate" >
+                              #strDate# BETWEEN SUBSTR((NVL(C.DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                             AND SUBSTR((NVL(C.DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                     </isNotEmpty>
+			  </isEqual>
+			 <isEqual   property="ymdGb" compareValue="YMD">
+			   <isNotEmpty prepend="AND" property="strDate" >
+                              #strDate# BETWEEN (NVL(C.DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                             AND (NVL(C.DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+                     </isNotEmpty>
+			 </isEqual>   
+                   <isNotEmpty property="typOccuCd" prepend="AND">
+				<![CDATA[
+				 CHNG_TYP_OCCU_CD
+				]]>
+			   <iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+			     #typOccuCdArr[]# 
+			  </iterate>
+			 </isNotEmpty> 			  
+			AND NOT EXISTS (SELECT 1 FROM BASS0360 D 
+			                 WHERE D.DPOB_CD=#dpobCd#  
+				<isNotEmpty property="deptCd">
+					AND D.DEPT_CD = #deptCd#
+				</isNotEmpty> 
+		    AND  C.DPOB_CD =  D.DPOB_CD 
+			AND C.TYP_OCCU_CD = D.TYP_OCCU_CD
+			AND C.DTIL_OCCU_INTTN_CD = D.DTIL_OCCU_INTTN_CD)
+	</select>	
+	
+	<select id="sysIfBass0350DAO.selectSysmUsr0400ToBass0350ListTotCnt_S" parameterClass="sysIfBass0350SerarchVO" resultClass="int">
+		SELECT COUNT(*) totcnt
+			FROM BASS0350 C
+			WHERE  C.DPOB_CD=#dpobCd# 		 
+			    <isNotEmpty property="dtilOccuClsNm">
+			        AND C.DTIL_OCCU_CLS_NM LIKE '%' || #dtilOccuClsNm# || '%'
+			    </isNotEmpty> 
+			      <isEqual property="ymdGb" compareValue="Y"> 
+			   <isNotEmpty prepend="AND" property="strDate" >
+                           #strDate# BETWEEN SUBSTR((NVL(C.DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4) 
+                                             AND SUBSTR((NVL(C.DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,4)    
+                     </isNotEmpty>	 
+			  </isEqual>
+                   <isEqual   property="ymdGb" compareValue="YM">
+			   <isNotEmpty prepend="AND" property="strDate" >
+                              #strDate# BETWEEN SUBSTR((NVL(C.DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6) 
+                                             AND SUBSTR((NVL(C.DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD'))),1,6)    
+                     </isNotEmpty>
+			  </isEqual>
+			 <isEqual   property="ymdGb" compareValue="YMD">
+			   <isNotEmpty prepend="AND" property="strDate" >
+                              #strDate# BETWEEN (NVL(C.DTIL_OCCU_INTTN_STDT,TO_CHAR(SYSDATE,'YYYYMMDD'))) 
+                                             AND (NVL(C.DTIL_OCCU_INTTN_EDDT,TO_CHAR(SYSDATE,'YYYYMMDD')))      
+                     </isNotEmpty>
+			 </isEqual>   
+                   <isNotEmpty property="typOccuCd" prepend="AND">
+				<![CDATA[
+				 CHNG_TYP_OCCU_CD
+				]]>
+			   <iterate prepend="IN" property="typOccuCdArr" open="(" close=")" conjunction=",">
+			     #typOccuCdArr[]# 
+			  </iterate>
+			 </isNotEmpty> 	
+			AND NOT EXISTS (SELECT 1 FROM BASS0360 D 
+			                 WHERE  D.DPOB_CD=#dpobCd#  
+				<isNotEmpty property="deptCd">
+					AND D.DEPT_CD = #deptCd#
+				</isNotEmpty> 
+		   AND  C.DPOB_CD =  D.DPOB_CD 	
+			AND C.TYP_OCCU_CD = D.TYP_OCCU_CD
+			AND C.DTIL_OCCU_INTTN_CD = D.DTIL_OCCU_INTTN_CD)
+	</select>
+	 
+
+</sqlMap>

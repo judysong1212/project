@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CoCalendar">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="msfCoCalendarSrhVO" type="com.app.smrmf.sysm.server.service.vo.SysCoCalendarSrhVO"/>
+	
+	<resultMap id="msfCoCalendar" class="com.app.smrmf.sysm.server.service.vo.SysCoCalendarVO">
+		<result property="calendarDate" column="CALENDAR_DATE" columnIndex="1"/>
+		<result property="year" column="YEAR" columnIndex="2"/>
+		<result property="month" column="MONTH" columnIndex="3"/>
+		<result property="yyyymm" column="YYYYMM" columnIndex="4"/>
+		<result property="yymm" column="YYMM" columnIndex="5"/>
+		<result property="day" column="DAY" columnIndex="6"/>
+		<result property="halfYear" column="HALF_YEAR" columnIndex="7"/>
+		<result property="quarterYear" column="QUARTER_YEAR" columnIndex="8"/>
+		<result property="dayOfWeek" column="DAY_OF_WEEK" columnIndex="9"/>
+		<result property="offdayKubn" column="OFFDAY_KUBN" columnIndex="10"/>
+		<result property="rgstryUser" column="RGSTRY_USER" columnIndex="11"/>
+		<result property="rgstryDt" column="RGSTRY_DT" columnIndex="12"/>
+		<result property="updateUser" column="UPDATE_USER" columnIndex="13"/>
+		<result property="updateDt" column="UPDATE_DT" columnIndex="14"/>
+	</resultMap>
+	 
+	
+	<select id="SysCoCalendarDAO.selectCoCalendarList_D" parameterClass="msfCoCalendarSrhVO" resultClass="egovMap">
+ 
+				SELECT    DISTINCT YEAR
+								, (YEAR) AS YEAR_DISP 
+						FROM CO_CALENDAR
+				WHERE 1=1 
+					ORDER BY YEAR DESC
+	 
+	</select>	
+	
+	<select id="SysCoCalendarDAO.selectCoCalendarMonthList_D" parameterClass="msfCoCalendarSrhVO" resultClass="egovMap">
+ 
+				SELECT    DISTINCT (DECODE(LENGTH(MONTH),1,('0'||MONTH),MONTH)) AS MONTH
+								 , (DECODE(LENGTH(MONTH),1,('0'||MONTH),MONTH)) AS MONTH_DISP 
+						FROM CO_CALENDAR
+				WHERE 1=1 
+					ORDER BY MONTH ASC
+	 
+	</select>	
+	
+<!-- <select id="SysCoCalendarDAO.selectCoCalendarList_D" parameterClass="msfCoCalendarSrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								CALENDAR_DATE
+								, YEAR
+								, MONTH
+								, YYYYMM
+								, YYMM
+								, DAY
+								, HALF_YEAR
+								, QUARTER_YEAR
+								, DAY_OF_WEEK
+								, OFFDAY_KUBN
+								, RGSTRY_USER
+								, RGSTRY_DT
+								, UPDATE_USER
+								, UPDATE_DT
+						FROM CO_CALENDAR
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					CALENDAR_DATE = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					YEAR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+	
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	 -->	
+	<select id="SysCoCalendarDAO.selectCoCalendarListTotCnt_S" parameterClass="msfCoCalendarSrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM CO_CALENDAR
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				CALENDAR_DATE = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				YEAR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

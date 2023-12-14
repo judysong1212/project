@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sysb0500">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysIfSysb0500SerarchVO" type="com.app.smrmf.sysm.server.vo.SysIfSysb0500SrhVO"/>
+	
+	<resultMap id="sysIfSysb0500" class="com.app.smrmf.sysm.server.vo.SysIfSysb0500VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="usrRdgDtntm" column="USR_RDG_DTNTM" columnIndex="2"/>
+		<result property="usrRdgSeilNum" column="USR_RDG_SEIL_NUM" columnIndex="3"/>
+		<result property="usrRdgDivCd" column="USR_RDG_DIV_CD" columnIndex="4"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="5"/>
+		<result property="usrId" column="USR_ID" columnIndex="6"/>
+		<result property="usrConnId" column="USR_CONN_ID" columnIndex="7"/>
+		<result property="usrRdgEthdNm" column="USR_RDG_ETHD_NM" columnIndex="8"/>
+		<result property="usrRdgJobDivCd" column="USR_RDG_JOB_DIV_CD" columnIndex="9"/>
+		<result property="usrSpfcRcptSmkeyVal" column="USR_SPFC_RCPT_SMKEY_VAL" columnIndex="10"/>
+		<result property="usrRdgNoteCtnt" column="USR_RDG_NOTE_CTNT" columnIndex="11"/>
+		<result property="kybdr" column="KYBDR" columnIndex="12"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="13"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="14"/>
+		<result property="ismt" column="ISMT" columnIndex="15"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="16"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="17"/>
+	</resultMap>
+	
+	<insert id="sysb0500DAO.insertSysb0500_S">
+		<![CDATA[
+			INSERT INTO SYSB0500 
+				( DPOB_CD
+				  , USR_RDG_DTNTM
+				  , USR_RDG_SEIL_NUM
+				  , USR_RDG_DIV_CD
+				  , DEPT_CD
+				  , USR_ID
+				  , USR_CONN_ID
+				  , USR_RDG_ETHD_NM
+				  , USR_RDG_JOB_DIV_CD
+				  , USR_SPFC_RCPT_SMKEY_VAL
+				  , USR_RDG_NOTE_CTNT
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #usrRdgDtntm#
+				  , #usrRdgSeilNum#
+				  , #usrRdgDivCd#
+				  , #deptCd#
+				  , #usrId#
+				  , #usrConnId#
+				  , #usrRdgEthdNm#
+				  , #usrRdgJobDivCd#
+				  , #usrSpfcRcptSmkeyVal#
+				  , #usrRdgNoteCtnt#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="sysb0500DAO.updateSysb0500_S">
+		<![CDATA[
+			UPDATE SYSB0500
+			SET DPOB_CD=#dpobCd#
+				, USR_RDG_DTNTM=#usrRdgDtntm#
+				, USR_RDG_SEIL_NUM=#usrRdgSeilNum#
+				, USR_RDG_DIV_CD=#usrRdgDivCd#
+				, DEPT_CD=#deptCd#
+				, USR_ID=#usrId#
+				, USR_CONN_ID=#usrConnId#
+				, USR_RDG_ETHD_NM=#usrRdgEthdNm#
+				, USR_RDG_JOB_DIV_CD=#usrRdgJobDivCd#
+				, USR_SPFC_RCPT_SMKEY_VAL=#usrSpfcRcptSmkeyVal#
+				, USR_RDG_NOTE_CTNT=#usrRdgNoteCtnt#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND USR_RDG_DTNTM=#usrRdgDtntm#
+								AND USR_RDG_SEIL_NUM=#usrRdgSeilNum#
+				]]>
+	</update>
+	
+	<delete id="sysb0500DAO.deleteSysb0500_S">
+		<![CDATA[
+			DELETE FROM SYSB0500 
+						WHERE DPOB_CD=#dpobCd#
+								AND USR_RDG_DTNTM=#usrRdgDtntm#
+								AND USR_RDG_SEIL_NUM=#usrRdgSeilNum#
+				]]>
+	</delete>
+	
+	<select id="sysb0500DAO.selectSysb0500_S" resultMap="sysIfSysb0500">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, USR_RDG_DTNTM
+				, USR_RDG_SEIL_NUM
+				, USR_RDG_DIV_CD
+				, DEPT_CD
+				, USR_ID
+				, USR_CONN_ID
+				, USR_RDG_ETHD_NM
+				, USR_RDG_JOB_DIV_CD
+				, USR_SPFC_RCPT_SMKEY_VAL
+				, USR_RDG_NOTE_CTNT
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM SYSB0500
+						WHERE DPOB_CD=#dpobCd#
+								AND USR_RDG_DTNTM=#usrRdgDtntm#
+								AND USR_RDG_SEIL_NUM=#usrRdgSeilNum#
+				]]>
+	</select>
+	
+	<select id="sysb0500DAO.selectSysb0500List_D" parameterClass="sysIfSysb0500SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, USR_RDG_DTNTM
+								, USR_RDG_SEIL_NUM
+								, USR_RDG_DIV_CD
+								, DEPT_CD
+								, USR_ID
+								, USR_CONN_ID
+								, USR_RDG_ETHD_NM
+								, USR_RDG_JOB_DIV_CD
+								, USR_SPFC_RCPT_SMKEY_VAL
+								, USR_RDG_NOTE_CTNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM SYSB0500
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					USR_RDG_DTNTM LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, USR_RDG_DTNTM DESC
+							, USR_RDG_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="sysb0500DAO.selectSysb0500ListTotCnt_S" parameterClass="sysIfSysb0500SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSB0500
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				USR_RDG_DTNTM LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

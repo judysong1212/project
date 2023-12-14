@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sysm0300">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysm0300SerarchVO" type="com.app.smrmf.sysm.server.vo.SysIfSysm0300SrhVO"/>
+	
+	<resultMap id="sysm0300" class="com.app.smrmf.sysm.server.vo.SysIfSysm0300VO">
+		<result property="sysDivCd" column="SYS_DIV_CD" columnIndex="1"/>
+		<result property="authGrpSeilNum" column="AUTH_GRP_SEIL_NUM" columnIndex="2"/>
+		<result property="businDivCd" column="BUSIN_DIV_CD" columnIndex="3"/>
+		<result property="authGrpNm" column="AUTH_GRP_NM" columnIndex="4"/>
+		<result property="grde" column="GRDE" columnIndex="5"/>
+		<result property="authGrpUseYn" column="AUTH_GRP_USE_YN" columnIndex="6"/>
+		<result property="grpEpln" column="GRP_EPLN" columnIndex="7"/>
+		<result property="kybdr" column="KYBDR" columnIndex="8"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="9"/>
+		<result property="ismt" column="ISMT" columnIndex="10"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="11"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="12"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="13"/>
+	</resultMap>
+	
+	<insert id="sysm0300DAO.insertSysm0300_S">
+		<![CDATA[
+			INSERT INTO SYSM0300 
+				( SYS_DIV_CD
+				  , AUTH_GRP_SEIL_NUM
+				  , BUSIN_DIV_CD
+				  , AUTH_GRP_NM
+				  , GRDE
+				  , AUTH_GRP_USE_YN
+				  , GRP_EPLN
+				  , KYBDR
+				  , INPT_DT
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , INPT_ADDR )
+			VALUES ( #sysDivCd#
+				  , (SELECT NVL(MAX(AUTH_GRP_SEIL_NUM),0) + 1 FROM SYSM0300 
+				     WHERE SYS_DIV_CD = #sysDivCd#)
+				  , #businDivCd#
+				  , #authGrpNm#
+				  , #grde#
+				  , #authGrpUseYn#
+				  , #grpEpln#
+				  , #kybdr#
+				  , SYSDATE
+				  , #ismt#
+				  , SYSDATE
+				  , #revnAddr#
+				  , #inptAddr# )
+		]]>
+	</insert>
+	
+	<update id="sysm0300DAO.updateSysm0300_S">
+		<![CDATA[
+			UPDATE SYSM0300
+			SET SYS_DIV_CD=#sysDivCd#
+				, AUTH_GRP_SEIL_NUM=#authGrpSeilNum#
+				, BUSIN_DIV_CD=#businDivCd#
+				, AUTH_GRP_NM=#authGrpNm#
+				, GRDE=#grde#
+				, AUTH_GRP_USE_YN=#authGrpUseYn#
+				, GRP_EPLN=#grpEpln#
+				, ISMT=#ismt#
+				, REVN_DT=SYSDATE
+				, REVN_ADDR=#revnAddr#
+				WHERE SYS_DIV_CD=#sysDivCd#
+			   AND AUTH_GRP_SEIL_NUM=#authGrpSeilNum#
+			]]>
+	</update>
+	
+	<delete id="sysm0300DAO.deleteSysm0300_S">
+		<![CDATA[
+			DELETE FROM SYSM0300 
+			WHERE SYS_DIV_CD=#sysDivCd#
+			  AND AUTH_GRP_SEIL_NUM=#authGrpSeilNum#
+			]]>
+	</delete>
+	
+	<select id="sysm0300DAO.selectSysm0300_S" resultMap="sysm0300">
+		<![CDATA[
+			SELECT
+			    	SYS_DIV_CD
+				, AUTH_GRP_SEIL_NUM
+				, BUSIN_DIV_CD
+				, AUTH_GRP_NM
+				, GRDE
+				, AUTH_GRP_USE_YN
+				, GRP_EPLN
+				, KYBDR
+				, INPT_DT
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, INPT_ADDR
+			FROM SYSM0300
+			WHERE SYS_DIV_CD=#sysDivCd#
+			 AND AUTH_GRP_SEIL_NUM=#authGrpSeilNum#
+			]]>
+	</select>
+	
+	<select id="sysm0300DAO.selectSysm0300List_D" parameterClass="sysm0300SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								  SYS_DIV_CD
+								, AUTH_GRP_SEIL_NUM
+								, BUSIN_DIV_CD
+								, AUTH_GRP_NM
+								, GRDE
+								, AUTH_GRP_USE_YN
+								, GRP_EPLN
+								, KYBDR
+								, INPT_DT
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+								, INPT_ADDR
+						FROM SYSM0300
+				WHERE 1=1
+			   <isNotEmpty prepend="AND" property="sysDivCd">
+					SYS_DIV_CD  = #sysDivCd# 
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="authGrpSeilNum">
+					AUTH_GRP_SEIL_NUM    = #authGrpSeilNum# 
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="authGrpNm">
+					AUTH_GRP_NM   LIKE  '%' || #authGrpNm# || '%' 
+				</isNotEmpty> 
+					ORDER BY 
+					  SYS_DIV_CD ASC 
+					  ,AUTH_GRP_SEIL_NUM ASC  
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>	
+	</select>	
+	<select id="sysm0300DAO.selectSysm0300ListTotCnt_S" parameterClass="sysm0300SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSM0300
+			WHERE 1=1
+			<isNotEmpty prepend="AND" property="sysDivCd">
+					SYS_DIV_CD  = #sysDivCd# 
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="sysDivCd">
+					AUTH_GRP_SEIL_NUM    = #authGrpSeilNum# 
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="authGrpNm">
+					AUTH_GRP_NM   LIKE  '%' || #authGrpNm# || '%' 
+				</isNotEmpty> 
+	</select>
+	
+	
+	<select id="sysm0300DAO.selectSysm0500ToSysm0300List_D" parameterClass="sysm0300SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM ( 
+				 SELECT           BB.SYS_DIV_CD
+								, BB.AUTH_GRP_SEIL_NUM
+								, BB.BUSIN_DIV_CD
+								, BB.AUTH_GRP_NM
+								, BB.GRDE
+								, BB.AUTH_GRP_USE_YN
+								, BB.GRP_EPLN   
+                                , ('') AS USR_ID  
+                                 , ('') AS USR_NM
+                                , ('N') AS USR_AUTH_USE_YN  
+                                , (0) AS USR_AUTH_USE_CNT   
+                        FROM  SYSM0300 BB  
+                       WHERE  1 = 1
+                        AND  NOT EXISTS (
+                         SELECT 1 FROM  SYSM0500 AA
+                                 WHERE  AA.AUTH_GRP_SEIL_NUM = BB.AUTH_GRP_SEIL_NUM 
+                                   AND  AA.SYS_DIV_CD = BB.SYS_DIV_CD 
+								<isNotEmpty prepend="AND" property="usrId">
+								      AA.USR_ID  = #usrId#
+							    </isNotEmpty>  
+                        ) 
+					ORDER BY  BB.AUTH_GRP_SEIL_NUM
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>	
+	</select>	
+	
+	
+	<select id="sysm0300DAO.selectSelectSysmMtr0500ToSysm0300List_D" parameterClass="sysm0300SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM ( 
+				 SELECT           BB.SYS_DIV_CD
+								, BB.AUTH_GRP_SEIL_NUM
+								, BB.BUSIN_DIV_CD
+								, BB.AUTH_GRP_NM
+								, BB.GRDE
+								, BB.AUTH_GRP_USE_YN
+								, BB.GRP_EPLN   
+                                , ('') AS USR_ID  
+                                 , ('') AS USR_NM
+                                , ('N') AS USR_AUTH_USE_YN  
+                                , (0) AS USR_AUTH_USE_CNT   
+                        FROM  SYSM0300 BB  
+                       WHERE  1 = 1
+                          <isNotEmpty prepend="AND" property="authGrpNm">
+									BB.AUTH_GRP_NM LIKE '%' || #authGrpNm# || '%'
+						 </isNotEmpty> 
+                        AND  NOT EXISTS (
+                         SELECT 1 FROM  SYSM0800 AA
+                                 WHERE  AA.AUTH_GRP_SEIL_NUM = BB.AUTH_GRP_SEIL_NUM 
+                                   AND  AA.SYS_DIV_CD = BB.SYS_DIV_CD 
+                                   AND AA.SYS_DIV_CD=#sysDivCd#  
+								<isNotEmpty prepend="AND" property="usrId">
+								      AA.USR_DIV_CD  = #usrDivCd#
+							    </isNotEmpty>   
+                        ) 
+					ORDER BY  BB.AUTH_GRP_SEIL_NUM
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>	
+	</select>	
+	
+	
+	<select id="sysm0300DAO.selectSelectSysmMtr0500ToSysm0300ListTotCnt_S" parameterClass="sysm0300SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSM0300
+			WHERE 1=1
+			<isNotEmpty prepend="AND" property="sysDivCd">
+					SYS_DIV_CD  = #sysDivCd# 
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="sysDivCd">
+					AUTH_GRP_SEIL_NUM    = #authGrpSeilNum# 
+				</isNotEmpty> 
+				<isNotEmpty prepend="AND" property="authGrpNm">
+					AUTH_GRP_NM   LIKE  '%' || #authGrpNm# || '%' 
+				</isNotEmpty> 
+	</select>
+	
+</sqlMap>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SysMstr050100">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="mstr050100SrhVO" type="com.app.smrmf.sysm.server.service.vo.SysMstr050100SrhVO"/>
+	
+	<resultMap id="mstr050100" class="com.app.smrmf.sysm.server.service.vo.SysMstr050100VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="dilnlazOptYr" column="DILNLAZ_OPT_YR" columnIndex="2"/>
+		<result property="wkdyDutyRcgtnTm" column="WKDY_DUTY_RCGTN_TM" columnIndex="3"/>
+		<result property="satDutyRcgtnTm" column="SAT_DUTY_RCGTN_TM" columnIndex="4"/>
+		<result property="satDutyRcgtnMultpe" column="SAT_DUTY_RCGTN_MULTPE" columnIndex="5"/>
+		<result property="pubcHodyDutyRcgtnTm" column="PUBC_HODY_DUTY_RCGTN_TM" columnIndex="6"/>
+		<result property="pubcHodyDutyRcgtnMultpe" column="PUBC_HODY_DUTY_RCGTN_MULTPE" columnIndex="7"/>
+		<result property="kybdr" column="KYBDR" columnIndex="8"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="9"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="10"/>
+		<result property="ismt" column="ISMT" columnIndex="11"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="12"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="13"/>
+	</resultMap>
+	
+	<insert id="mstr050100DAO.insertSysMstr050100_S">
+		<![CDATA[
+			INSERT INTO MSTR_05_0100 
+				( DPOB_CD
+				  , DILNLAZ_OPT_YR
+				  , WKDY_DUTY_RCGTN_TM
+				  , SAT_DUTY_RCGTN_TM
+				  , SAT_DUTY_RCGTN_MULTPE
+				  , PUBC_HODY_DUTY_RCGTN_TM
+				  , PUBC_HODY_DUTY_RCGTN_MULTPE
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #dilnlazOptYr#
+				  , #wkdyDutyRcgtnTm#
+				  , #satDutyRcgtnTm#
+				  , #satDutyRcgtnMultpe#
+				  , #pubcHodyDutyRcgtnTm#
+				  , #pubcHodyDutyRcgtnMultpe#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="mstr050100DAO.updateSysMstr050100_S">
+		<![CDATA[
+			UPDATE MSTR_05_0100
+			SET DPOB_CD=#dpobCd#
+				, DILNLAZ_OPT_YR=#dilnlazOptYr#
+				, WKDY_DUTY_RCGTN_TM=#wkdyDutyRcgtnTm#
+				, SAT_DUTY_RCGTN_TM=#satDutyRcgtnTm#
+				, SAT_DUTY_RCGTN_MULTPE=#satDutyRcgtnMultpe#
+				, PUBC_HODY_DUTY_RCGTN_TM=#pubcHodyDutyRcgtnTm#
+				, PUBC_HODY_DUTY_RCGTN_MULTPE=#pubcHodyDutyRcgtnMultpe#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND DILNLAZ_OPT_YR=#dilnlazOptYr#
+				]]>
+	</update>
+	
+	<delete id="mstr050100DAO.deleteSysMstr050100_S">
+		<![CDATA[
+			DELETE FROM MSTR_05_0100 
+						WHERE DPOB_CD=#dpobCd#
+								AND DILNLAZ_OPT_YR=#dilnlazOptYr#
+				]]>
+	</delete>
+	
+	<select id="mstr050100DAO.selectSysMstr050100_S" resultMap="mstr050100">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, DILNLAZ_OPT_YR
+				, WKDY_DUTY_RCGTN_TM
+				, SAT_DUTY_RCGTN_TM
+				, SAT_DUTY_RCGTN_MULTPE
+				, PUBC_HODY_DUTY_RCGTN_TM
+				, PUBC_HODY_DUTY_RCGTN_MULTPE
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM MSTR_05_0100
+						WHERE DPOB_CD=#dpobCd#
+								AND DILNLAZ_OPT_YR=#dilnlazOptYr#
+				]]>
+	</select>
+	
+	<select id="mstr050100DAO.selectSysMstr050100List_D" parameterClass="mstr050100SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, DILNLAZ_OPT_YR
+								, WKDY_DUTY_RCGTN_TM
+								, SAT_DUTY_RCGTN_TM
+								, SAT_DUTY_RCGTN_MULTPE
+								, PUBC_HODY_DUTY_RCGTN_TM
+								, PUBC_HODY_DUTY_RCGTN_MULTPE
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM MSTR_05_0100
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					DILNLAZ_OPT_YR LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, DILNLAZ_OPT_YR DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="mstr050100DAO.selectSysMstr050100ListTotCnt_S" parameterClass="mstr050100SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM MSTR_05_0100
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				DILNLAZ_OPT_YR LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

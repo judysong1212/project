@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SysMstr060300">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="mstr060300SrhVO" type="com.app.smrmf.sysm.server.service.vo.SysMstr060300SrhVO"/>
+	
+	<resultMap id="mstr060300" class="com.app.smrmf.sysm.server.service.vo.SysMstr060300VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="levfAbncDivCd" column="LEVF_ABNC_DIV_CD" columnIndex="2"/>
+		<result property="levfAbncPayPymtMnth" column="LEVF_ABNC_PAY_PYMT_MNTH" columnIndex="3"/>
+		<result property="payItemGrpCd" column="PAY_ITEM_GRP_CD" columnIndex="4"/>
+		<result property="levfAbncPayPymtRate" column="LEVF_ABNC_PAY_PYMT_RATE" columnIndex="5"/>
+		<result property="kybdr" column="KYBDR" columnIndex="6"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="7"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="8"/>
+		<result property="ismt" column="ISMT" columnIndex="9"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="10"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="11"/>
+	</resultMap>
+	
+	<insert id="mstr060300DAO.insertSysMstr060300_S">
+		<![CDATA[
+			INSERT INTO MSTR_06_0300 
+				( DPOB_CD
+				  , LEVF_ABNC_DIV_CD
+				  , LEVF_ABNC_PAY_PYMT_MNTH
+				  , PAY_ITEM_GRP_CD
+				  , LEVF_ABNC_PAY_PYMT_RATE
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #levfAbncDivCd#
+				  , #levfAbncPayPymtMnth#
+				  , #payItemGrpCd#
+				  , #levfAbncPayPymtRate#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="mstr060300DAO.updateSysMstr060300_S">
+		<![CDATA[
+			UPDATE MSTR_06_0300
+			SET DPOB_CD=#dpobCd#
+				, LEVF_ABNC_DIV_CD=#levfAbncDivCd#
+				, LEVF_ABNC_PAY_PYMT_MNTH=#levfAbncPayPymtMnth#
+				, PAY_ITEM_GRP_CD=#payItemGrpCd#
+				, LEVF_ABNC_PAY_PYMT_RATE=#levfAbncPayPymtRate#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND LEVF_ABNC_DIV_CD=#levfAbncDivCd#
+				]]>
+	</update>
+	
+	<delete id="mstr060300DAO.deleteSysMstr060300_S">
+		<![CDATA[
+			DELETE FROM MSTR_06_0300 
+						WHERE DPOB_CD=#dpobCd#
+								AND LEVF_ABNC_DIV_CD=#levfAbncDivCd#
+				]]>
+	</delete>
+	
+	<select id="mstr060300DAO.selectSysMstr060300_S" resultMap="mstr060300">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, LEVF_ABNC_DIV_CD
+				, LEVF_ABNC_PAY_PYMT_MNTH
+				, PAY_ITEM_GRP_CD
+				, LEVF_ABNC_PAY_PYMT_RATE
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM MSTR_06_0300
+						WHERE DPOB_CD=#dpobCd#
+								AND LEVF_ABNC_DIV_CD=#levfAbncDivCd#
+				]]>
+	</select>
+	
+	<select id="mstr060300DAO.selectSysMstr060300List_D" parameterClass="mstr060300SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, LEVF_ABNC_DIV_CD
+								, LEVF_ABNC_PAY_PYMT_MNTH
+								, PAY_ITEM_GRP_CD
+								, LEVF_ABNC_PAY_PYMT_RATE
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM MSTR_06_0300
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					LEVF_ABNC_DIV_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, LEVF_ABNC_DIV_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="mstr060300DAO.selectSysMstr060300ListTotCnt_S" parameterClass="mstr060300SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM MSTR_06_0300
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				LEVF_ABNC_DIV_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

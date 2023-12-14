@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SysMstr060150">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="mstr060150SrhVO" type="com.app.smrmf.sysm.server.service.vo.SysMstr060150SrhVO"/>
+	
+	<resultMap id="mstr060150" class="com.app.smrmf.sysm.server.service.vo.SysMstr060150VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="payCd" column="PAY_CD" columnIndex="2"/>
+		<result property="pymtDducItemCd" column="PYMT_DDUC_ITEM_CD" columnIndex="3"/>
+		<result property="kybdr" column="KYBDR" columnIndex="4"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="5"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="6"/>
+		<result property="ismt" column="ISMT" columnIndex="7"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="8"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="9"/>
+	</resultMap>
+	
+	<insert id="mstr060150DAO.insertSysMstr060150_S">
+		<![CDATA[
+			INSERT INTO MSTR_06_0150 
+				( DPOB_CD
+				  , PAY_CD
+				  , PYMT_DDUC_ITEM_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #payCd#
+				  , #pymtDducItemCd#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="mstr060150DAO.updateSysMstr060150_S">
+		<![CDATA[
+			UPDATE MSTR_06_0150
+			SET DPOB_CD=#dpobCd#
+				, PAY_CD=#payCd#
+				, PYMT_DDUC_ITEM_CD=#pymtDducItemCd#
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND PAY_CD=#payCd#
+								AND PYMT_DDUC_ITEM_CD=#pymtDducItemCd#
+				]]>
+	</update>
+	
+	<delete id="mstr060150DAO.deleteSysMstr060150_S">
+		<![CDATA[
+			DELETE FROM MSTR_06_0150 
+						WHERE DPOB_CD=#dpobCd#
+								AND PAY_CD=#payCd#
+								AND PYMT_DDUC_ITEM_CD=#pymtDducItemCd#
+				]]>
+	</delete>
+	
+	<select id="mstr060150DAO.selectSysMstr060150_S" resultMap="mstr060150">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, PAY_CD
+				, PYMT_DDUC_ITEM_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM MSTR_06_0150
+						WHERE DPOB_CD=#dpobCd#
+								AND PAY_CD=#payCd#
+								AND PYMT_DDUC_ITEM_CD=#pymtDducItemCd#
+				]]>
+	</select>
+	
+	<select id="mstr060150DAO.selectSysMstr060150List_D" parameterClass="mstr060150SrhVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, PAY_CD
+								, PYMT_DDUC_ITEM_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM MSTR_06_0150
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					PAY_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, PAY_CD DESC
+							, PYMT_DDUC_ITEM_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="mstr060150DAO.selectSysMstr060150ListTotCnt_S" parameterClass="mstr060150SrhVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM MSTR_06_0150
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				PAY_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

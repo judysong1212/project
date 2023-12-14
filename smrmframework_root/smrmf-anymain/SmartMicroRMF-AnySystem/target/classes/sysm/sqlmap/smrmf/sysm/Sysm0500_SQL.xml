@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sysm0500">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysm0500SerarchVO" type="com.app.smrmf.sysm.server.vo.SysIfSysm0500SrhVO"/>
+	
+	<resultMap id="sysm0500" class="com.app.smrmf.sysm.server.vo.SysIfSysm0500VO">
+	    <result property="sysDivCd" column="SYS_DIV_CD" columnIndex="1"/>
+		<result property="authGrpSeilNum" column="AUTH_GRP_SEIL_NUM" columnIndex="2"/>
+		<result property="usrId" column="USR_ID" columnIndex="3"/>
+		<result property="usrAuthUseYn" column="USR_AUTH_USE_YN" columnIndex="4"/>
+		<result property="kybdr" column="KYBDR" columnIndex="5"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="6"/>
+		<result property="ismt" column="ISMT" columnIndex="7"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="8"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="9"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="10"/>
+	</resultMap>
+	
+<insert id="sysm0500DAO.insertSysm0500_S">
+		<![CDATA[
+			INSERT INTO SYSM0500 
+				( SYS_DIV_CD
+				  , AUTH_GRP_SEIL_NUM
+				  , USR_ID
+				  , USR_AUTH_USE_YN
+				  , KYBDR
+				  , INPT_DT
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , INPT_ADDR )
+			VALUES ( #sysDivCd#
+				  , #authGrpSeilNum#
+				  , #usrId#
+				  , #usrAuthUseYn#
+				  , #kybdr#
+				  , #inptDt#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr#
+				  , #inptAddr# )
+		]]>
+	</insert>
+	
+	<update id="sysm0500DAO.updateSysm0500_S">
+		<![CDATA[
+			UPDATE SYSM0500
+			SET SYS_DIV_CD=#sysDivCd#
+				, AUTH_GRP_SEIL_NUM=#authGrpSeilNum#
+				, USR_ID=#usrId#
+				, USR_AUTH_USE_YN=#usrAuthUseYn#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+				, INPT_ADDR=#inptAddr#
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND AUTH_GRP_SEIL_NUM=#authGrpSeilNum#
+								AND USR_ID=#usrId#
+				]]>
+	</update>
+	
+	<delete id="sysm0500DAO.deleteSysm0500_S">
+		<![CDATA[
+			DELETE FROM SYSM0500 
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND AUTH_GRP_SEIL_NUM=#authGrpSeilNum#
+								AND USR_ID=#usrId#
+				]]>
+	</delete>
+	
+	<select id="sysm0500DAO.selectSysm0500_S" resultMap="sysm0500">
+		<![CDATA[
+			SELECT
+				SYS_DIV_CD
+				, AUTH_GRP_SEIL_NUM
+				, USR_ID
+				, USR_AUTH_USE_YN
+				, KYBDR
+				, INPT_DT
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, INPT_ADDR
+			FROM SYSM0500
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND AUTH_GRP_SEIL_NUM=#authGrpSeilNum#
+								AND USR_ID=#usrId#
+				]]>
+	</select>
+	
+	
+	<select id="sysm0500DAO.selectSysm0500List_D" parameterClass="sysm0500SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM ( 
+				 SELECT           BB.SYS_DIV_CD
+                                , BB.AUTH_GRP_SEIL_NUM 
+                                , BB.AUTH_GRP_NM    
+                                , AA.USR_ID  
+                                , CC.USR_NM
+                                , AA.USR_AUTH_USE_YN  
+                                , (SELECT COUNT(*) FROM SYSM0500 CC
+								   WHERE CC.AUTH_GRP_SEIL_NUM = BB.AUTH_GRP_SEIL_NUM
+								   AND CC.USR_ID = AA.USR_ID
+								  ) AS USR_AUTH_USE_CNT                                
+                                , AA.KYBDR
+                                , AA.INPT_DT
+                                , AA.ISMT
+                                , AA.REVN_DT
+                                , AA.REVN_ADDR
+                                , AA.INPT_ADDR
+                        FROM  SYSM0300 BB , SYSM0500 AA , SYSM0100 CC 
+                       WHERE  BB.AUTH_GRP_SEIL_NUM = AA.AUTH_GRP_SEIL_NUM 
+                         AND  BB.SYS_DIV_CD = AA.SYS_DIV_CD 
+                         AND  AA.SYS_DIV_CD = CC.SYS_DIV_CD
+                         AND  AA.USR_ID = CC.USR_ID  
+                         AND CC.USR_DIV_CD NOT IN ('D0010070','D0010080')
+					<isNotEmpty prepend="AND" property="usrId">
+					      AA.USR_ID = #usrId#
+				    </isNotEmpty>   
+					ORDER BY  
+					 (SELECT LPAD(DEPT_RANK,5,'0')  
+                                   FROM BASS0400 DD
+                                   WHERE DD.DEPT_CD =  CC.DEPT_CD  
+                                     AND DD.DPOB_CD = #dpobCd#) ASC 
+					,BB.AUTH_GRP_SEIL_NUM
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>	
+	</select>	
+	<select id="sysm0500DAO.selectSysm0500ListTotCnt_S" parameterClass="sysm0500SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			 FROM  SYSM0300 BB , SYSM0500 AA , SYSM0100 CC 
+               WHERE  BB.AUTH_GRP_SEIL_NUM = AA.AUTH_GRP_SEIL_NUM 
+                 AND  BB.SYS_DIV_CD = AA.SYS_DIV_CD 
+                 AND  BB.SYS_DIV_CD = CC.SYS_DIV_CD
+                 AND  BB.USR_ID = AA.USR_ID  
+                  AND CC.USR_DIV_CD NOT IN ('D0010070','D0010080')
+					<isNotEmpty prepend="AND" property="usrId">
+					      AA.USR_ID  = #usrId#
+				</isNotEmpty>  
+	</select>
+
+
+</sqlMap>

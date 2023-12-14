@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SysIfBass0360">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysIfBass0360SerarchVO" type="com.app.smrmf.sysm.server.service.vo.SysIfBass0360SrhVO"/>
+	
+	<resultMap id="sysIfBass0360" class="com.app.smrmf.sysm.server.service.vo.SysIfBass0360VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="dtilOccuInttnCd" column="DTIL_OCCU_INTTN_CD" columnIndex="2"/>
+		<result property="typOccuCd" column="TYP_OCCU_CD" columnIndex="3"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="4"/>
+		<result property="payrMangDeptCd" column="PAYR_MANG_DEPT_CD" columnIndex="5"/>
+		<result property="kybdr" column="KYBDR" columnIndex="6"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="7"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="8"/>
+		<result property="ismt" column="ISMT" columnIndex="9"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="10"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="11"/>
+	</resultMap>
+	
+	<insert id="sysIfBass0360DAO.insertBass0360_S">
+		<![CDATA[
+			INSERT INTO BASS0360 
+				( DPOB_CD
+				  , DTIL_OCCU_INTTN_CD
+				  , TYP_OCCU_CD
+				  , DEPT_CD
+				  , PAYR_MANG_DEPT_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #dtilOccuInttnCd#
+				  , #typOccuCd#
+				  , #deptCd#
+				  , #payrMangDeptCd#
+				  , #kybdr#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #inptAddr#
+				  , #ismt#
+				  , TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+<!-- 	<update id="sysIfBass0360DAO.updateBass0360_S">
+		<![CDATA[
+			UPDATE BASS0360
+			SET DPOB_CD=#dpobCd#
+				, DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+				, TYP_OCCU_CD=#typOccuCd#
+				, DEPT_CD=#deptCd#
+				, PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+								AND TYP_OCCU_CD=#typOccuCd#
+								AND DEPT_CD=#deptCd#
+				]]>
+	</update> -->
+	
+	<update id="sysIfBass0360DAO.updateBass0360_S">
+		<![CDATA[
+			UPDATE BASS0360
+			SET   PAYR_MANG_DEPT_CD=#payrMangDeptCd# 
+				, ISMT=#ismt#
+				, REVN_DT=TO_CHAR(SYSDATE,'YYYYMMDDHHMMSS')
+				, REVN_ADDR=#revnAddr#
+						WHERE   DPOB_CD=#dpobCd#
+								AND DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+								AND TYP_OCCU_CD=#typOccuCd#
+								AND DEPT_CD=#deptCd#
+				]]>
+	</update>
+	
+	<delete id="sysIfBass0360DAO.deleteBass0360_S">
+		<![CDATA[
+			DELETE FROM BASS0360 
+						WHERE DPOB_CD=#dpobCd#
+								AND DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+								AND TYP_OCCU_CD=#typOccuCd#
+								AND DEPT_CD=#deptCd#
+				]]>
+	</delete>
+	
+	<select id="sysIfBass0360DAO.selectBass0360_S" resultMap="sysIfBass0360">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, DTIL_OCCU_INTTN_CD
+				, TYP_OCCU_CD
+				, DEPT_CD
+				, PAYR_MANG_DEPT_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM BASS0360
+						WHERE DPOB_CD=#dpobCd#
+								AND DTIL_OCCU_INTTN_CD=#dtilOccuInttnCd#
+								AND TYP_OCCU_CD=#typOccuCd#
+								AND DEPT_CD=#deptCd#
+				]]>
+	</select>
+	
+	<select id="sysIfBass0360DAO.selectBass0360List_D" parameterClass="sysIfBass0360SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, DTIL_OCCU_INTTN_CD
+								, TYP_OCCU_CD
+								, DEPT_CD
+								, PAYR_MANG_DEPT_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM BASS0360
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					DTIL_OCCU_INTTN_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, DTIL_OCCU_INTTN_CD DESC
+							, TYP_OCCU_CD DESC
+							, DEPT_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="sysIfBass0360DAO.selectBass0360ListTotCnt_S" parameterClass="sysIfBass0360SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0360
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				DTIL_OCCU_INTTN_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+	
+	
+	<!-- 단위기관 맵핑 사용직종세 조회  -->
+	<select id="sysIfBass0360DAO.selectSysm0600TopToBass0360List_D" parameterClass="sysIfBass0360SerarchVO" resultClass="egovMap">
+	SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				    SELECT
+				         C.DPOB_CD, C.DEPT_CD,C.TYP_OCCU_CD,C.DTIL_OCCU_INTTN_CD,
+						fcBass0400CDNM(C.DPOB_CD,C.DEPT_CD, 2) AS DEPT_NM_RTCHNT,	 
+						fcBass0320CDNM(C.DPOB_CD, C.TYP_OCCU_CD) AS TYP_OCCU_NM,
+						fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_INTTN_CD, 1) AS DTIL_OCCU_CLS_NM,
+						D.DTIL_OCCU_JBFML_DIV_CD,
+						fcBass0300CDNM(C.DPOB_CD, D.DTIL_OCCU_JBFML_DIV_CD) AS DTIL_OCCU_JBFML_DIV_NM,
+						D.DTIL_OCCU_CLS_USE_YN ,
+						C.PAYR_MANG_DEPT_CD ,
+						 (SELECT  PAY_MANGE_DEPT_NM 
+									FROM BASS0150 SS
+									WHERE   SS.DPOB_CD = C.DPOB_CD
+									 AND    SS.PAYR_MANG_DEPT_CD = C.PAYR_MANG_DEPT_CD ) AS PAYR_MANG_DEPT_NM 
+					FROM BASS0360 C, BASS0350 D
+					WHERE C.DPOB_CD =  D.DPOB_CD 
+					 AND  C.TYP_OCCU_CD =  D.TYP_OCCU_CD 
+					 AND  C.DTIL_OCCU_INTTN_CD =D.DTIL_OCCU_INTTN_CD 
+					 AND  C.DPOB_CD=#dpobCd#  
+				     <isNotEmpty prepend="AND" property="deptCd" >
+					 	C.DEPT_CD=#deptCd#
+				     </isNotEmpty> 
+					 AND  C.PAYR_MANG_DEPT_CD=#payrMangDeptCd#  
+                  <isNotEmpty prepend="AND" property="dtilOccuClsNm" >  
+				         fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_INTTN_CD, 1) like '%' || #dtilOccuClsNm# || '%'
+				  </isNotEmpty> 	
+	<![CDATA[
+			) A WHERE ROWNUM <= #lastIndex#
+ 		)WHERE RNUM >= #firstIndex# 
+ 	]]>
+	</select>
+	<!-- 단위기관 맵핑 사용직종세 조회  -->
+	<select id="sysIfBass0360DAO.selectSysm0600TopToBass0360ListTotCnt_S" parameterClass="sysIfBass0360SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0360 C  , BASS0350 D
+					WHERE C.DPOB_CD =  D.DPOB_CD 
+					 AND  C.TYP_OCCU_CD =  D.TYP_OCCU_CD 
+					 AND C.DTIL_OCCU_INTTN_CD =D.DTIL_OCCU_INTTN_CD 
+					  AND C.DPOB_CD=#dpobCd#  
+					   <isNotEmpty prepend="AND" property="deptCd" >
+					 	C.DEPT_CD=#deptCd#
+				       </isNotEmpty> 
+                    <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	C.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				       </isNotEmpty> 
+                  <isNotEmpty prepend="AND" property="dtilOccuClsNm" >  
+				         fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_INTTN_CD, 1) like '%' || #dtilOccuClsNm# || '%'
+				  </isNotEmpty> 	
+	</select>
+	
+	
+	<!-- 단위기관 맵핑 미사용직종세 조회  -->
+	<select id="sysIfBass0360DAO.selectSysm0600BtmToBass0360List_D" parameterClass="sysIfBass0360SerarchVO" resultClass="egovMap">
+	SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				    SELECT
+						C.DPOB_CD, C.DEPT_CD,C.TYP_OCCU_CD,C.DTIL_OCCU_INTTN_CD,
+						fcBass0400CDNM(C.DPOB_CD,C.DEPT_CD, 2) AS DEPT_NM_RTCHNT,	 
+						fcBass0320CDNM(C.DPOB_CD, C.TYP_OCCU_CD) AS TYP_OCCU_NM,
+						fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_INTTN_CD, 1) AS DTIL_OCCU_CLS_NM,
+						D.DTIL_OCCU_JBFML_DIV_CD,
+						fcBass0300CDNM(C.DPOB_CD, D.DTIL_OCCU_JBFML_DIV_CD) AS DTIL_OCCU_JBFML_DIV_NM,
+						D.DTIL_OCCU_CLS_USE_YN ,
+						C.PAYR_MANG_DEPT_CD ,
+						 (SELECT  PAY_MANGE_DEPT_NM 
+									FROM BASS0150 SS
+									WHERE   SS.DPOB_CD = C.DPOB_CD
+									 AND    SS.PAYR_MANG_DEPT_CD = C.PAYR_MANG_DEPT_CD ) AS PAYR_MANG_DEPT_NM 
+					FROM BASS0360 C, BASS0350 D
+					WHERE C.DPOB_CD =  D.DPOB_CD 
+					 AND  C.TYP_OCCU_CD =  D.TYP_OCCU_CD 
+					 AND C.DTIL_OCCU_INTTN_CD =D.DTIL_OCCU_INTTN_CD 
+					 AND C.DPOB_CD=#dpobCd#  
+					    <isNotEmpty prepend="AND" property="deptCd" >
+					 	C.DEPT_CD=#deptCd#
+				       </isNotEmpty> 
+                  <isNotEmpty prepend="AND" property="dtilOccuClsNm" >  
+				         fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_INTTN_CD, 1) like '%' || #dtilOccuClsNm# || '%'
+				  </isNotEmpty> 	
+				    AND  NVL(C.PAYR_MANG_DEPT_CD,'TT') = 'TT'
+				    AND  NOT EXISTS (
+				               SELECT  E.DPOB_CD, E.DEPT_CD,E.TYP_OCCU_CD,E.DTIL_OCCU_INTTN_CD
+								FROM   SYSM0700 E
+								WHERE  E.DPOB_CD =  C.DPOB_CD 
+								  AND  E.DEPT_CD =  C.DEPT_CD  
+								  AND  E.TYP_OCCU_CD =  C.TYP_OCCU_CD  
+								  AND  E.DTIL_OCCU_INTTN_CD = C.DTIL_OCCU_INTTN_CD  
+								  )
+	<![CDATA[
+			) A WHERE ROWNUM <= #lastIndex#
+ 		)WHERE RNUM >= #firstIndex# 
+ 	]]>
+	</select>
+	<!-- 단위기관 맵핑 미사용직종세 조회  -->
+	<select id="sysIfBass0360DAO.selectSysm0600BtmToBass0360ListTotCnt_S" parameterClass="sysIfBass0360SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0360 C  , BASS0350 D
+					WHERE C.DPOB_CD =  D.DPOB_CD 
+					 AND  C.TYP_OCCU_CD =  D.TYP_OCCU_CD 
+					 AND C.DTIL_OCCU_INTTN_CD =D.DTIL_OCCU_INTTN_CD 
+					  AND C.DPOB_CD=#dpobCd# 
+					     <isNotEmpty prepend="AND" property="deptCd" >
+					 	C.DEPT_CD=#deptCd#
+				       </isNotEmpty> 
+                  <isNotEmpty prepend="AND" property="dtilOccuClsNm" >  
+				         fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_INTTN_CD, 1) like '%' || #dtilOccuClsNm# || '%'
+				  </isNotEmpty> 
+				    AND  NVL(C.PAYR_MANG_DEPT_CD,'TT') = 'TT'	
+				    AND  NOT EXISTS (
+				               SELECT  E.DPOB_CD, E.DEPT_CD,E.TYP_OCCU_CD,E.DTIL_OCCU_INTTN_CD
+								FROM   SYSM0700 E
+								WHERE  E.DPOB_CD =  C.DPOB_CD 
+								  AND  E.DEPT_CD =  C.DEPT_CD  
+								  AND  E.TYP_OCCU_CD =  C.TYP_OCCU_CD  
+								  AND  E.DTIL_OCCU_INTTN_CD = C.DTIL_OCCU_INTTN_CD  
+								  )
+	</select>
+	
+	
+	
+	<!-- 개인별 맵핑 미사용직종세 조회  -->
+	<select id="sysIfBass0360DAO.selectSysm0700ToBass0360List_D" parameterClass="sysIfBass0360SerarchVO" resultClass="egovMap">
+	SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				    SELECT
+						C.DPOB_CD, C.DEPT_CD,C.TYP_OCCU_CD,C.DTIL_OCCU_INTTN_CD,
+						fcBass0400CDNM(C.DPOB_CD,C.DEPT_CD, 2) AS DEPT_NM_RTCHNT,	 
+						fcBass0320CDNM(C.DPOB_CD, C.TYP_OCCU_CD) AS TYP_OCCU_NM,
+						fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_INTTN_CD, 1) AS DTIL_OCCU_CLS_NM,
+						D.DTIL_OCCU_JBFML_DIV_CD,
+						fcBass0300CDNM(C.DPOB_CD, D.DTIL_OCCU_JBFML_DIV_CD) AS DTIL_OCCU_JBFML_DIV_NM,
+						D.DTIL_OCCU_CLS_USE_YN ,
+						C.PAYR_MANG_DEPT_CD ,
+						 (SELECT  PAY_MANGE_DEPT_NM 
+									FROM BASS0150 SS
+									WHERE   SS.DPOB_CD = C.DPOB_CD
+									 AND    SS.PAYR_MANG_DEPT_CD = C.PAYR_MANG_DEPT_CD ) AS PAYR_MANG_DEPT_NM 
+					FROM BASS0360 C, BASS0350 D
+					WHERE C.DPOB_CD =  D.DPOB_CD
+					 AND  C.TYP_OCCU_CD =  D.TYP_OCCU_CD  
+					 AND C.DTIL_OCCU_INTTN_CD =D.DTIL_OCCU_INTTN_CD  
+					 AND C.DPOB_CD=#dpobCd#  
+				     AND C.DEPT_CD = #deptCd#
+                  <isNotEmpty prepend="AND" property="dtilOccuClsNm" >  
+				         D.DTIL_OCCU_CLS_NM like '%' || #dtilOccuClsNm# || '%'
+				  </isNotEmpty> 	 
+				    AND  NVL(C.PAYR_MANG_DEPT_CD,'TT') = 'TT' 
+				    AND  NOT EXISTS (
+				               SELECT  E.DPOB_CD, E.DEPT_CD,E.TYP_OCCU_CD,E.DTIL_OCCU_INTTN_CD
+								FROM   SYSM0700 E
+								WHERE  E.DPOB_CD =  C.DPOB_CD 
+								  AND  E.DEPT_CD =  C.DEPT_CD  
+								  AND  E.TYP_OCCU_CD =  C.TYP_OCCU_CD  
+								  AND  E.DTIL_OCCU_INTTN_CD = C.DTIL_OCCU_INTTN_CD  
+								  AND  E.USR_ID = #usrId#
+								  )
+				   
+	<![CDATA[
+			) A WHERE ROWNUM <= #lastIndex#
+ 		)WHERE RNUM >= #firstIndex# 
+ 	]]>
+	</select>
+	<!-- 개인별 맵핑 미사용직종세 조회  -->
+	<select id="sysIfBass0360DAO.selectSysm0700ToBass0360ListTotCnt_S" parameterClass="sysIfBass0360SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0360 C  , BASS0350 D
+					WHERE C.DPOB_CD =  D.DPOB_CD 
+					 AND  C.TYP_OCCU_CD =  D.TYP_OCCU_CD 
+					 AND C.DTIL_OCCU_INTTN_CD =D.DTIL_OCCU_INTTN_CD 
+					  AND C.DPOB_CD=#dpobCd# 
+					  AND C.DEPT_CD = #deptCd#
+                   <isNotEmpty prepend="AND" property="dtilOccuClsNm" >  
+				         D.DTIL_OCCU_CLS_NM like '%' || #dtilOccuClsNm# || '%'
+				  </isNotEmpty> 	
+			       
+				    AND  NVL(C.PAYR_MANG_DEPT_CD,'TT') = 'TT'	
+				    AND  NOT EXISTS (
+				               SELECT  E.DPOB_CD, E.DEPT_CD,E.TYP_OCCU_CD,E.DTIL_OCCU_INTTN_CD
+								FROM   SYSM0700 E
+								WHERE  E.DPOB_CD =  C.DPOB_CD 
+								  AND  E.DEPT_CD =  C.DEPT_CD  
+								  AND  E.TYP_OCCU_CD =  C.TYP_OCCU_CD  
+								  AND  E.DTIL_OCCU_INTTN_CD = C.DTIL_OCCU_INTTN_CD  
+								  AND  E.USR_ID = #usrId#
+								  )
+				 
+	</select>
+	
+	  <!--     AND   EXISTS (
+				               SELECT  E.DPOB_CD, E.DEPT_CD,E.TYP_OCCU_CD,E.DTIL_OCCU_INTTN_CD
+								FROM   SYSM0700 E
+								WHERE  E.DPOB_CD =  C.DPOB_CD 
+								  AND  E.DEPT_CD =  C.DEPT_CD  
+								  AND  E.TYP_OCCU_CD =  C.TYP_OCCU_CD  
+								  AND  E.DTIL_OCCU_INTTN_CD = C.DTIL_OCCU_INTTN_CD 
+								  AND  E.USR_ID = #usrId#
+				    ) -->
+
+	
+	<select id="sysIfBass0360DAO.selectSysmUsr0400ToBass0360List_D" parameterClass="sysIfBass0360SerarchVO" resultClass="egovMap">
+	SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				    SELECT
+						C.DPOB_CD, C.DEPT_CD,C.TYP_OCCU_CD,C.DTIL_OCCU_INTTN_CD,
+						fcBass0400CDNM(C.DPOB_CD,C.DEPT_CD, 2) AS DEPT_NM_RTCHNT,	 
+						fcBass0320CDNM(C.DPOB_CD, C.TYP_OCCU_CD) AS TYP_OCCU_NM,
+						fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_INTTN_CD, 1) AS DTIL_OCCU_CLS_NM,
+						D.DTIL_OCCU_JBFML_DIV_CD,
+						fcBass0320CDNM(C.DPOB_CD, D.DTIL_OCCU_JBFML_DIV_CD) AS DTIL_OCCU_JBFML_DIV_NM,
+						D.DTIL_OCCU_CLS_USE_YN 
+					FROM BASS0360 C, BASS0350 D
+					WHERE C.DPOB_CD =  D.DPOB_CD(+)
+					  AND  C.TYP_OCCU_CD =  D.TYP_OCCU_CD(+) 
+					  AND C.DTIL_OCCU_INTTN_CD =D.DTIL_OCCU_INTTN_CD(+)  
+					  AND C.DPOB_CD=#dpobCd# 
+                   <isNotEmpty prepend="AND" property="deptCd" > 
+				         C.DEPT_CD = #deptCd#
+				    </isNotEmpty> 	
+                  <isNotEmpty prepend="AND" property="dtilOccuClsNm" >  
+				         fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_INTTN_CD, 1) like '%' || #dtilOccuClsNm# || '%'
+				  </isNotEmpty> 	
+	<![CDATA[
+			) A WHERE ROWNUM <= #lastIndex#
+ 		)WHERE RNUM >= #firstIndex# 
+ 	]]>
+	</select>
+	
+	<select id="sysIfBass0360DAO.selectSysmUsr0400ToBass0360ListTotCnt_S" parameterClass="sysIfBass0360SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0360 C  , BASS0350 D
+					WHERE C.DPOB_CD =  D.DPOB_CD(+)
+					 AND  C.TYP_OCCU_CD =  D.TYP_OCCU_CD(+) 
+					 AND C.DTIL_OCCU_INTTN_CD =D.DTIL_OCCU_INTTN_CD(+)
+					  AND C.DPOB_CD=#dpobCd#  
+                     <isNotEmpty prepend="AND" property="deptCd" > 
+				         C.DEPT_CD = #deptCd#
+				    </isNotEmpty> 	
+                  <isNotEmpty prepend="AND" property="dtilOccuClsNm" >  
+				         fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_INTTN_CD, 1) like '%' || #dtilOccuClsNm# || '%'
+				  </isNotEmpty> 	
+	</select>
+	
+  
+	<!-- 단위기관 맵핑 사용직종세 조회  -->
+	<select id="sysIfBass0360DAO.selectSysmUsr0500TopToBass0360List_D" parameterClass="sysIfBass0360SerarchVO" resultClass="egovMap">
+	SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				    SELECT
+				         C.DPOB_CD, C.DEPT_CD,C.TYP_OCCU_CD,C.DTIL_OCCU_INTTN_CD,
+						fcBass0400CDNM(C.DPOB_CD,C.DEPT_CD, 2) AS DEPT_NM_RTCHNT,	 
+						fcBass0320CDNM(C.DPOB_CD, C.TYP_OCCU_CD) AS TYP_OCCU_NM,
+						fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_INTTN_CD, 1) AS DTIL_OCCU_CLS_NM,
+						D.DTIL_OCCU_JBFML_DIV_CD,
+						fcBass0300CDNM(C.DPOB_CD, D.DTIL_OCCU_JBFML_DIV_CD) AS DTIL_OCCU_JBFML_DIV_NM,
+						D.DTIL_OCCU_CLS_USE_YN ,
+						C.PAYR_MANG_DEPT_CD ,
+						 (SELECT  PAY_MANGE_DEPT_NM 
+									FROM BASS0150 SS
+									WHERE   SS.DPOB_CD = C.DPOB_CD
+									 AND    SS.PAYR_MANG_DEPT_CD = C.PAYR_MANG_DEPT_CD ) AS PAYR_MANG_DEPT_NM 
+					FROM BASS0360 C, BASS0350 D
+					WHERE C.DPOB_CD =  D.DPOB_CD 
+					 AND  C.TYP_OCCU_CD =  D.TYP_OCCU_CD 
+					 AND  C.DTIL_OCCU_INTTN_CD =D.DTIL_OCCU_INTTN_CD 
+					 AND  C.DPOB_CD=#dpobCd#  
+				     <isNotEmpty prepend="AND" property="deptCd" >
+					 	C.DEPT_CD=#deptCd#
+				     </isNotEmpty> 
+					 AND  C.PAYR_MANG_DEPT_CD=#payrMangDeptCd#  
+                  <isNotEmpty prepend="AND" property="dtilOccuClsNm" >  
+				         fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_INTTN_CD, 1) like '%' || #dtilOccuClsNm# || '%'
+				  </isNotEmpty> 	
+	<![CDATA[
+			) A WHERE ROWNUM <= #lastIndex#
+ 		)WHERE RNUM >= #firstIndex# 
+ 	]]>
+	</select>
+	<!-- 단위기관 맵핑 사용직종세 조회  -->
+	<select id="sysIfBass0360DAO.selectSysmUsr0500TopToBass0360ListTotCnt_S" parameterClass="sysIfBass0360SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0360 C  , BASS0350 D
+					WHERE C.DPOB_CD =  D.DPOB_CD 
+					 AND  C.TYP_OCCU_CD =  D.TYP_OCCU_CD 
+					 AND C.DTIL_OCCU_INTTN_CD =D.DTIL_OCCU_INTTN_CD 
+					  AND C.DPOB_CD=#dpobCd#  
+					   <isNotEmpty prepend="AND" property="deptCd" >
+					 	C.DEPT_CD=#deptCd#
+				       </isNotEmpty> 
+                    <isNotEmpty prepend="AND" property="payrMangDeptCd" >
+					 	C.PAYR_MANG_DEPT_CD=#payrMangDeptCd#
+				       </isNotEmpty> 
+                  <isNotEmpty prepend="AND" property="dtilOccuClsNm" >  
+				         fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_INTTN_CD, 1) like '%' || #dtilOccuClsNm# || '%'
+				  </isNotEmpty> 	
+	</select>
+	
+	
+	<!-- 단위기관 맵핑 미사용직종세 조회  -->
+	<select id="sysIfBass0360DAO.selectSysmUsr0500BtmToBass0360List_D" parameterClass="sysIfBass0360SerarchVO" resultClass="egovMap">
+	SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				    SELECT
+						C.DPOB_CD, C.DEPT_CD,C.TYP_OCCU_CD,C.DTIL_OCCU_INTTN_CD,
+						fcBass0400CDNM(C.DPOB_CD,C.DEPT_CD, 2) AS DEPT_NM_RTCHNT,	 
+						fcBass0320CDNM(C.DPOB_CD, C.TYP_OCCU_CD) AS TYP_OCCU_NM,
+						fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_INTTN_CD, 1) AS DTIL_OCCU_CLS_NM,
+						D.DTIL_OCCU_JBFML_DIV_CD,
+						fcBass0300CDNM(C.DPOB_CD, D.DTIL_OCCU_JBFML_DIV_CD) AS DTIL_OCCU_JBFML_DIV_NM,
+						D.DTIL_OCCU_CLS_USE_YN ,
+						C.PAYR_MANG_DEPT_CD ,
+						 (SELECT  PAY_MANGE_DEPT_NM 
+									FROM BASS0150 SS
+									WHERE   SS.DPOB_CD = C.DPOB_CD
+									 AND    SS.PAYR_MANG_DEPT_CD = C.PAYR_MANG_DEPT_CD ) AS PAYR_MANG_DEPT_NM 
+					FROM BASS0360 C, BASS0350 D
+					WHERE C.DPOB_CD =  D.DPOB_CD 
+					 AND  C.TYP_OCCU_CD =  D.TYP_OCCU_CD 
+					 AND C.DTIL_OCCU_INTTN_CD =D.DTIL_OCCU_INTTN_CD 
+					 AND C.DPOB_CD=#dpobCd#  
+					    <isNotEmpty prepend="AND" property="deptCd" >
+					 	C.DEPT_CD=#deptCd#
+				       </isNotEmpty> 
+                  <isNotEmpty prepend="AND" property="dtilOccuClsNm" >  
+				         fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_INTTN_CD, 1) like '%' || #dtilOccuClsNm# || '%'
+				  </isNotEmpty> 	
+				    AND  NVL(C.PAYR_MANG_DEPT_CD,'TT') = 'TT'
+				    AND  NOT EXISTS (
+				               SELECT  E.DPOB_CD, E.DEPT_CD,E.TYP_OCCU_CD,E.DTIL_OCCU_INTTN_CD
+								FROM   SYSM0700 E
+								WHERE  E.DPOB_CD =  C.DPOB_CD 
+								  AND  E.DEPT_CD =  C.DEPT_CD  
+								  AND  E.TYP_OCCU_CD =  C.TYP_OCCU_CD  
+								  AND  E.DTIL_OCCU_INTTN_CD = C.DTIL_OCCU_INTTN_CD  
+								  )
+	<![CDATA[
+			) A WHERE ROWNUM <= #lastIndex#
+ 		)WHERE RNUM >= #firstIndex# 
+ 	]]>
+	</select>
+	<!-- 단위기관 맵핑 미사용직종세 조회  -->
+	<select id="sysIfBass0360DAO.selectSysmUsr0500BtmToBass0360ListTotCnt_S" parameterClass="sysIfBass0360SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM BASS0360 C  , BASS0350 D
+					WHERE C.DPOB_CD =  D.DPOB_CD 
+					 AND  C.TYP_OCCU_CD =  D.TYP_OCCU_CD 
+					 AND C.DTIL_OCCU_INTTN_CD =D.DTIL_OCCU_INTTN_CD 
+					  AND C.DPOB_CD=#dpobCd# 
+					     <isNotEmpty prepend="AND" property="deptCd" >
+					 	C.DEPT_CD=#deptCd#
+				       </isNotEmpty> 
+                  <isNotEmpty prepend="AND" property="dtilOccuClsNm" >  
+				         fcBassEx0350CDNM(C.DPOB_CD, C.TYP_OCCU_CD, C.DTIL_OCCU_INTTN_CD, 1) like '%' || #dtilOccuClsNm# || '%'
+				  </isNotEmpty> 
+				    AND  NVL(C.PAYR_MANG_DEPT_CD,'TT') = 'TT'	
+				    AND  NOT EXISTS (
+				               SELECT  E.DPOB_CD, E.DEPT_CD,E.TYP_OCCU_CD,E.DTIL_OCCU_INTTN_CD
+								FROM   SYSM0700 E
+								WHERE  E.DPOB_CD =  C.DPOB_CD 
+								  AND  E.DEPT_CD =  C.DEPT_CD  
+								  AND  E.TYP_OCCU_CD =  C.TYP_OCCU_CD  
+								  AND  E.DTIL_OCCU_INTTN_CD = C.DTIL_OCCU_INTTN_CD  
+								  )
+	</select>
+	
+	
+  
+</sqlMap>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sysm0850">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysUsrSysm0850SerarchVO" type="com.app.smrmf.sysm.server.vo.SysIfSysm0850SrhVO"/>
+	
+	<resultMap id="sysUsrSysm0850" class="com.app.smrmf.sysm.server.vo.SysIfSysm0850VO">
+	    <result property="usrId" column="USR_ID" columnIndex="1"/>
+		<result property="sysDivCd" column="SYS_DIV_CD" columnIndex="2"/>
+		<result property="usrDivCd" column="USR_DIV_CD" columnIndex="3"/>
+		<result property="mnuCd" column="MNU_CD" columnIndex="4"/>
+		<result property="mnuAuthGrpScnInqyYn" column="MNU_AUTH_GRP_SCN_INQY_YN" columnIndex="5"/>
+		<result property="mnuAuthGrpScnInptYn" column="MNU_AUTH_GRP_SCN_INPT_YN" columnIndex="6"/>
+		<result property="mnuAuthGrpScnRevnYn" column="MNU_AUTH_GRP_SCN_REVN_YN" columnIndex="7"/>
+		<result property="mnuAuthGrpScnDelYn" column="MNU_AUTH_GRP_SCN_DEL_YN" columnIndex="8"/>
+		<result property="mnuAuthGrpScnPrtYn" column="MNU_AUTH_GRP_SCN_PRT_YN" columnIndex="9"/>
+		<result property="kybdr" column="KYBDR" columnIndex="10"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="11"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="12"/>
+		<result property="ismt" column="ISMT" columnIndex="13"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="14"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="15"/>
+	</resultMap>
+	
+	<insert id="sysm0850DAO.insertSysm0850_S">
+		<![CDATA[
+			INSERT INTO SYSM0850 
+				( USR_ID
+				  , SYS_DIV_CD
+				  , USR_DIV_CD
+				  , MNU_CD
+				  , MNU_AUTH_GRP_SCN_INQY_YN
+				  , MNU_AUTH_GRP_SCN_INPT_YN
+				  , MNU_AUTH_GRP_SCN_REVN_YN
+				  , MNU_AUTH_GRP_SCN_DEL_YN
+				  , MNU_AUTH_GRP_SCN_PRT_YN
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #usrId#
+				  , #sysDivCd#
+				  , #usrDivCd#
+				  , #mnuCd#
+				  , #mnuAuthGrpScnInqyYn#
+				  , #mnuAuthGrpScnInptYn#
+				  , #mnuAuthGrpScnRevnYn#
+				  , #mnuAuthGrpScnDelYn#
+				  , #mnuAuthGrpScnPrtYn#
+				  , #kybdr#
+				  , SYSDATE
+				  , #inptAddr#
+				  , #ismt#
+				  , SYSDATE
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="sysm0850DAO.updateSysm0850_S">
+		<![CDATA[
+			UPDATE SYSM0850
+			SET USR_ID=#usrId#
+				, SYS_DIV_CD=#sysDivCd#
+				, USR_DIV_CD=#usrDivCd#
+				, MNU_CD=#mnuCd#
+				, MNU_AUTH_GRP_SCN_INQY_YN=#mnuAuthGrpScnInqyYn#
+				, MNU_AUTH_GRP_SCN_INPT_YN=#mnuAuthGrpScnInptYn#
+				, MNU_AUTH_GRP_SCN_REVN_YN=#mnuAuthGrpScnRevnYn#
+				, MNU_AUTH_GRP_SCN_DEL_YN=#mnuAuthGrpScnDelYn#
+				, MNU_AUTH_GRP_SCN_PRT_YN=#mnuAuthGrpScnPrtYn#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE USR_ID=#usrId#
+								AND SYS_DIV_CD=#sysDivCd#
+								AND USR_DIV_CD=#usrDivCd#
+								AND MNU_CD=#mnuCd#
+				]]>
+	</update>
+	
+	<delete id="sysm0850DAO.deleteSysm0850_S">
+		<![CDATA[
+			DELETE FROM SYSM0850 
+						WHERE USR_ID=#usrId#
+								AND SYS_DIV_CD=#sysDivCd#
+								AND USR_DIV_CD=#usrDivCd#
+								AND MNU_CD=#mnuCd#
+				]]>
+	</delete>
+	
+	<select id="sysm0850DAO.selectSysm0850_S" resultMap="sysUsrSysm0850">
+		<![CDATA[
+			SELECT
+				USR_ID
+				, SYS_DIV_CD
+				, USR_DIV_CD
+				, MNU_CD
+				, MNU_AUTH_GRP_SCN_INQY_YN
+				, MNU_AUTH_GRP_SCN_INPT_YN
+				, MNU_AUTH_GRP_SCN_REVN_YN
+				, MNU_AUTH_GRP_SCN_DEL_YN
+				, MNU_AUTH_GRP_SCN_PRT_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM SYSM0850
+					WHERE USR_ID=#usrId#
+								AND SYS_DIV_CD=#sysDivCd#
+								AND USR_DIV_CD=#usrDivCd#
+								AND MNU_CD=#mnuCd#
+				]]>
+	</select>
+	
+	<select id="sysm0850DAO.selectSysm0850List_D" parameterClass="sysUsrSysm0850SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								USR_ID
+								, SYS_DIV_CD
+								, USR_DIV_CD
+								, MNU_CD
+								, MNU_AUTH_GRP_SCN_INQY_YN
+								, MNU_AUTH_GRP_SCN_INPT_YN
+								, MNU_AUTH_GRP_SCN_REVN_YN
+								, MNU_AUTH_GRP_SCN_DEL_YN
+								, MNU_AUTH_GRP_SCN_PRT_YN
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM SYSM0850
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					USR_DIV_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					SYS_DIV_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+							USR_ID DESC
+							, SYS_DIV_CD DESC
+							, USR_DIV_CD DESC
+							, MNU_CD DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="sysm0850DAO.selectSysm0850ListTotCnt_S" parameterClass="sysUsrSysm0850SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSM0850
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				USR_DIV_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				SYS_DIV_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

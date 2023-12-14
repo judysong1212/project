@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SsomDept">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ssomDeptSerarchVO" type="com.app.smrmf.sysm.server.vo.system.SsomDeptSrhVO"/>
+	
+	<resultMap id="ssomDept" class="com.app.smrmf.sysm.server.vo.system.SsomDeptVO">
+		<result property="oucode" column="OUCODE" columnIndex="1"/>
+		<result property="ou" column="OU" columnIndex="2"/>
+		<result property="topoucode" column="TOPOUCODE" columnIndex="3"/>
+		<result property="parentoucode" column="PARENTOUCODE" columnIndex="4"/>
+		<result property="cn" column="CN" columnIndex="5"/>
+		<result property="oudivision" column="OUDIVISION" columnIndex="6"/>
+		<result property="orgfullname" column="ORGFULLNAME" columnIndex="7"/>
+		<result property="oulevel" column="OULEVEL" columnIndex="8"/>
+		<result property="ouorder" column="OUORDER" columnIndex="9"/>
+		<result property="engou" column="ENGOU" columnIndex="10"/>
+		<result property="telephonenumber" column="TELEPHONENUMBER" columnIndex="11"/>
+		<result property="ouaddress1" column="OUADDRESS1" columnIndex="12"/>
+		<result property="ouaddress2" column="OUADDRESS2" columnIndex="13"/>
+		<result property="ouhomepage" column="OUHOMEPAGE" columnIndex="14"/>
+		<result property="oufax" column="OUFAX" columnIndex="15"/>
+		<result property="oumail" column="OUMAIL" columnIndex="16"/>
+		<result property="issidoonly" column="ISSIDOONLY" columnIndex="17"/>
+		<result property="status" column="STATUS" columnIndex="18"/>
+		<result property="sidoadduserid" column="SIDOADDUSERID" columnIndex="19"/>
+		<result property="sidoadddate" column="SIDOADDDATE" columnIndex="20"/>
+		<result property="sidoaddtime" column="SIDOADDTIME" columnIndex="21"/>
+		<result property="sidochangeuserid" column="SIDOCHANGEUSERID" columnIndex="22"/>
+		<result property="sidochangedate" column="SIDOCHANGEDATE" columnIndex="23"/>
+		<result property="sidochangetime" column="SIDOCHANGETIME" columnIndex="24"/>
+		<result property="isvirtual" column="ISVIRTUAL" columnIndex="25"/>
+		<result property="virparentoucode" column="VIRPARENTOUCODE" columnIndex="26"/>
+	</resultMap>
+	
+	<insert id="ssomDeptDAO.insertSsomDept_S">
+		<![CDATA[
+			INSERT INTO SSOM_DEPT 
+				( OUCODE
+				  , OU
+				  , TOPOUCODE
+				  , PARENTOUCODE
+				  , CN
+				  , OUDIVISION
+				  , ORGFULLNAME
+				  , OULEVEL
+				  , OUORDER
+				  , ENGOU
+				  , TELEPHONENUMBER
+				  , OUADDRESS1
+				  , OUADDRESS2
+				  , OUHOMEPAGE
+				  , OUFAX
+				  , OUMAIL
+				  , ISSIDOONLY
+				  , STATUS
+				  , SIDOADDUSERID
+				  , SIDOADDDATE
+				  , SIDOADDTIME
+				  , SIDOCHANGEUSERID
+				  , SIDOCHANGEDATE
+				  , SIDOCHANGETIME
+				  , ISVIRTUAL
+				  , VIRPARENTOUCODE )
+			VALUES ( #oucode#
+				  , #ou#
+				  , #topoucode#
+				  , #parentoucode#
+				  , #cn#
+				  , #oudivision#
+				  , #orgfullname#
+				  , #oulevel#
+				  , #ouorder#
+				  , #engou#
+				  , #telephonenumber#
+				  , #ouaddress1#
+				  , #ouaddress2#
+				  , #ouhomepage#
+				  , #oufax#
+				  , #oumail#
+				  , #issidoonly#
+				  , #status#
+				  , #sidoadduserid#
+				  , #sidoadddate#
+				  , #sidoaddtime#
+				  , #sidochangeuserid#
+				  , #sidochangedate#
+				  , #sidochangetime#
+				  , #isvirtual#
+				  , #virparentoucode# )
+		]]>
+	</insert>
+	
+	<update id="ssomDeptDAO.updateSsomDept_S">
+		<![CDATA[
+			UPDATE SSOM_DEPT
+			SET OUCODE=#oucode#
+				, OU=#ou#
+				, TOPOUCODE=#topoucode#
+				, PARENTOUCODE=#parentoucode#
+				, CN=#cn#
+				, OUDIVISION=#oudivision#
+				, ORGFULLNAME=#orgfullname#
+				, OULEVEL=#oulevel#
+				, OUORDER=#ouorder#
+				, ENGOU=#engou#
+				, TELEPHONENUMBER=#telephonenumber#
+				, OUADDRESS1=#ouaddress1#
+				, OUADDRESS2=#ouaddress2#
+				, OUHOMEPAGE=#ouhomepage#
+				, OUFAX=#oufax#
+				, OUMAIL=#oumail#
+				, ISSIDOONLY=#issidoonly#
+				, STATUS=#status#
+				, SIDOADDUSERID=#sidoadduserid#
+				, SIDOADDDATE=#sidoadddate#
+				, SIDOADDTIME=#sidoaddtime#
+				, SIDOCHANGEUSERID=#sidochangeuserid#
+				, SIDOCHANGEDATE=#sidochangedate#
+				, SIDOCHANGETIME=#sidochangetime#
+				, ISVIRTUAL=#isvirtual#
+				, VIRPARENTOUCODE=#virparentoucode#
+						WHERE OUCODE=#oucode#
+				]]>
+	</update>
+	
+	<delete id="ssomDeptDAO.deleteSsomDept_S">
+		<![CDATA[
+			DELETE FROM SSOM_DEPT 
+						WHERE OUCODE=#oucode#
+				]]>
+	</delete>
+	
+	<select id="ssomDeptDAO.selectSsomDept_S" resultMap="ssomDept">
+		<![CDATA[
+			SELECT
+				OUCODE
+				, OU
+				, TOPOUCODE
+				, PARENTOUCODE
+				, CN
+				, OUDIVISION
+				, ORGFULLNAME
+				, OULEVEL
+				, OUORDER
+				, ENGOU
+				, TELEPHONENUMBER
+				, OUADDRESS1
+				, OUADDRESS2
+				, OUHOMEPAGE
+				, OUFAX
+				, OUMAIL
+				, ISSIDOONLY
+				, STATUS
+				, SIDOADDUSERID
+				, SIDOADDDATE
+				, SIDOADDTIME
+				, SIDOCHANGEUSERID
+				, SIDOCHANGEDATE
+				, SIDOCHANGETIME
+				, ISVIRTUAL
+				, VIRPARENTOUCODE
+			FROM SSOM_DEPT
+						WHERE OUCODE=#oucode#
+				]]>
+	</select>
+	
+	<select id="ssomDeptDAO.selectSsomDeptList_D" parameterClass="ssomDeptSerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								OUCODE
+								, OU
+								, TOPOUCODE
+								, PARENTOUCODE
+								, CN
+								, OUDIVISION
+								, ORGFULLNAME
+								, OULEVEL
+								, OUORDER
+								, ENGOU
+								, TELEPHONENUMBER
+								, OUADDRESS1
+								, OUADDRESS2
+								, OUHOMEPAGE
+								, OUFAX
+								, OUMAIL
+								, ISSIDOONLY
+								, STATUS
+								, SIDOADDUSERID
+								, SIDOADDDATE
+								, SIDOADDTIME
+								, SIDOCHANGEUSERID
+								, SIDOCHANGEDATE
+								, SIDOCHANGETIME
+								, ISVIRTUAL
+								, VIRPARENTOUCODE
+						FROM SSOM_DEPT
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					OUCODE = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					OU LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						OUCODE DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="ssomDeptDAO.selectSsomDeptListTotCnt_S" parameterClass="ssomDeptSerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SSOM_DEPT
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				OUCODE = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				OU LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

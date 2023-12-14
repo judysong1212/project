@@ -1,0 +1,1042 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.app.smrmf</groupId>
+  <artifactId>smrmframework-root</artifactId>
+  <version>2.2.0</version>
+  <packaging>pom</packaging>
+  <name>${project.artifactId}</name>
+  <description>Smart Micro Resource Management Framework</description>
+  
+    <modules>
+		 <module>smrmf-anymain</module> 
+	     <module>smrmf-gwtmain</module>    
+	</modules> 
+	<properties>
+		<!-- Convenience property to set the GWT version -->
+		<gwtVersion>2.7.0</gwtVersion>
+		<springframeworkVersion>3.2.4.RELEASE</springframeworkVersion>
+		<!-- GWT needs at least java 1.6 -->
+		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+		<mybatis-spring.version>1.0.1</mybatis-spring.version> 
+		<quartz.version>1.8.6</quartz.version>
+        <mysql-connector-java.version>5.1.18</mysql-connector-java.version>
+        <geronimo-servlet_3.0_spec.version>1.0</geronimo-servlet_3.0_spec.version>  	 
+    	<org.mapstruct.version>1.0.0.Beta1</org.mapstruct.version> 
+    	<jetty.version>8.1.12.v20130726</jetty.version>
+        <jetty.jsp.version>8.1.12.v20130726</jetty.jsp.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
+		<gxt.version>2.3.1-gwt27</gxt.version> 
+		<poi.version>3.9</poi.version>
+		<smrmf.version>2.2.0</smrmf.version>
+		<commons-httpclient-version>3.1</commons-httpclient-version>
+	</properties> 
+ 
+	<repositories>
+	    <!-- nexus 레포지토리연계 -->      
+      <repository>
+            <id>paygenVer1</id>
+            <url>http://192.168.0.8:9447/nexus/content/groups/PayGen-Group/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository> 
+	  	<repository>
+			<id>smrmf_nexus</id>
+<!-- 			<url>http://211.34.164.100:8080/nexus/content/groups/public/</url> -->
+			<url>http://192.168.0.8:9447/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		 <!-- nexus 레포지토리연계    -->  
+	     <repository>
+			<id>mvn2</id>
+			<url>http://repo1.maven.org/maven2/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+ 
+		<repository>
+			<id>egovframe</id>
+			<url>http://www.egovframe.go.kr/maven/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository> 
+		
+		 <repository>
+			<id>central</id>
+			<name>bintray</name>
+			<url>http://jcenter.bintray.com</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		
+	</repositories>
+  	  <pluginRepositories>
+	    <pluginRepository>
+	        <id>paygenVer1</id>
+            <url>http://192.168.0.8:9447/nexus/content/groups/PayGen-Group/</url>
+	        <releases><enabled>true</enabled></releases>
+	        <snapshots><enabled>false</enabled></snapshots>
+	    </pluginRepository>
+	</pluginRepositories>   
+	<dependencies>
+	    
+	    <!-- GWT  distribution -->
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<version>${gwtVersion}</version>
+			<scope>runtime</scope>
+		</dependency> 	
+		<!-- <dependency>
+	       <groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet-deps</artifactId>
+			<version>${gwtVersion}</version>
+			<scope>runtime</scope>
+		</dependency>  -->
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>${gwtVersion}</version>
+			<scope>provided</scope>
+		</dependency> 
+		<dependency>
+		  <groupId>com.google.web.bindery</groupId>
+		  <artifactId>requestfactory-server</artifactId>
+		  <version>${gwtVersion}</version>
+		  <scope>runtime</scope>
+		</dependency> 
+		<!--  extjs --> 
+       <dependency>
+		  <groupId>com.extjs</groupId>
+		  <artifactId>gxt</artifactId>
+		  <version>${gxt.version}</version> 
+		    <scope>provided</scope> 
+		</dependency>
+     
+	   <!-- dto mapper -->
+	   <dependency>
+		  <groupId>org.modelmapper</groupId>
+		  <artifactId>modelmapper</artifactId>
+		  <version>0.6.5</version>
+		</dependency>
+		
+	   <dependency>
+		  <groupId>org.modelmapper.extensions</groupId>
+		  <artifactId>modelmapper-spring</artifactId>
+		  <version>0.6.5</version>
+		</dependency>
+		 <!-- gwtUpload  inc 
+        <dependency>
+       	   <groupId>com.googlecode.gwtupload</groupId> 
+			<artifactId>gwtupload</artifactId> 
+			<version>1.0.1</version> 
+        </dependency> --> 
+                <!-- https://mvnrepository.com/artifact/com.googlecode.gwtupload/jsupload
+		<dependency>
+		    <groupId>com.googlecode.gwtupload</groupId>
+		    <artifactId>jsupload</artifactId>
+		    <version>1.0.1</version>
+		</dependency>
+		   <dependency>
+		      <groupId>gwtchismes</groupId>
+		      <artifactId>gwtchismes</artifactId>
+		      <version>0.9.7</version> 
+		      <scope>system</scope>
+		      <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/gwtchismes-0.9.7.jar</systemPath>
+		    </dependency>
+		    <dependency>
+			    <groupId>org.timepedia.exporter</groupId>
+			    <artifactId>gwtexporter</artifactId>
+			    <version>2.4.0-M1</version>
+			</dependency>
+			  <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-incubator</artifactId>
+      <version>20101117-r1766</version>
+     <scope>system</scope>
+      <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/gwt-incubator-20101117-r1766.jar</systemPath>
+    </dependency> -->
+
+  	
+	<!-- gwtUpload inc  -->
+       <!--  
+		<dependencies>
+		    <dependency>
+		        <groupId>org.mapstruct</groupId>
+		        <artifactId>mapstruct</artifactId>
+		        <version>${org.mapstruct.version}</version>
+		    </dependency>
+		</dependencies> -->
+		 <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-lang3</artifactId>
+			    <version>3.0</version>
+			</dependency>
+		 
+        <!-- apache poi   -->
+     <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>${poi.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>${poi.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml-schemas</artifactId>
+        <version>${poi.version}</version>
+    </dependency>
+  
+     <dependency>
+			<groupId>net.sourceforge.jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+			<version>2.6.12</version>
+		</dependency>
+   
+         <dependency>
+            <groupId>net.zschech</groupId>
+            <artifactId>gwt-java-math</artifactId>
+            <version>1.0.9</version>
+          <!--   <scope>system</scope>
+            <systemPath>${basedir}/war/WEB-INF/lib/gwt-java-math-1.0.9.jar</systemPath> -->
+        </dependency> 
+        
+		<!-- Spring framework distribution -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${springframeworkVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${springframeworkVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${springframeworkVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${springframeworkVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${springframeworkVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${springframeworkVersion}</version>
+		</dependency>
+		 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${springframeworkVersion}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${springframeworkVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${springframeworkVersion}</version>
+		</dependency>
+		 
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-webmvc</artifactId>
+		    <version>${springframeworkVersion}</version>
+        </dependency>
+          
+            <!-- json -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <version>2.4.0</version>
+		</dependency>
+		 
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.4.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-annotations</artifactId>
+		    <version>2.4.0</version>
+		</dependency>
+ 
+		<!-- egov framework  -->
+        
+        <dependency>
+		  <groupId>egovframework.rte</groupId>
+		  <artifactId>egovframework.rte.fdl.cmmn</artifactId>
+		  <version>2.7.0</version>
+		</dependency>
+ 
+		
+        <dependency>
+		    <groupId>egovframework.rte</groupId>
+		    <artifactId>egovframework.rte.ptl.mvc</artifactId>
+		    <version>2.7.0</version>
+        </dependency>
+				
+        <dependency>
+		    <groupId>egovframework.rte</groupId>
+		    <artifactId>egovframework.rte.psl.dataaccess</artifactId>
+		    <version>2.7.0</version>
+        </dependency>
+        
+        <dependency>
+			<groupId>egovframework.rte</groupId>
+			<artifactId>egovframework.rte.fdl.idgnr</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+        
+       	<dependency>
+			<groupId>egovframework.rte</groupId>
+			<artifactId>egovframework.rte.fdl.property</artifactId>  
+			<version>2.7.0</version>
+		</dependency>
+
+		<!-- Hibernate -->
+		 <dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>1.0.1.Final</version>
+		</dependency>
+  
+	<dependency>
+        <groupId>org.quartz-scheduler</groupId>
+        <artifactId>quartz</artifactId>
+        <version>${quartz.version}</version>
+    </dependency> 
+	  <dependency>
+		<groupId>org.quartz-scheduler</groupId>
+		<artifactId>quartz-oracle</artifactId>
+		<version>1.8.6</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.quartz-scheduler</groupId>
+		<artifactId>quartz-jboss</artifactId>
+		<version>1.8.6</version>
+	</dependency> 
+		<!-- Apache commons-logging -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+<!-- 
+	    <dependency>
+			<groupId>org.gwtrpcspring</groupId>
+			<artifactId>gwtrpc-spring</artifactId>
+			<version>1.0.3</version>
+		</dependency> 
+		 -->
+		<!-- spring4gwt
+		<dependency>
+			<groupId>org.spring4gwt</groupId>
+			<artifactId>spring4gwt</artifactId>
+			<version>0.0.1</version> 
+		</dependency>  -->
+		 
+		<!-- ORACLE JDBC driver, need install yourself -->
+		 <dependency>
+			<groupId>ojdbc</groupId>
+			<artifactId>ojdbc</artifactId>
+			<version>1.6</version> 
+		</dependency> 
+
+	    <dependency>
+		  <groupId>net.sf.gwt-widget</groupId>
+		  <artifactId>gwt-sl</artifactId>
+		  <version>1.7</version>
+		</dependency> 
+		
+		<!-- Test unit -->
+		
+	    <!-- junit -->
+        <!-- <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency> --> 
+		<!-- junit -->
+		<!-- TestNg -->
+		 <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8</version>
+            <scope>test</scope>
+        </dependency> 
+        <!-- TestNg -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.1.0.Final</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+	 
+		<!-- aspectjweaver -->
+		  <dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>1.6.11</version>
+        </dependency>
+        
+		<!--  aspectjrt  -->
+        <dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjrt</artifactId>
+		    <version>1.6.9</version>
+        </dependency>
+		
+        <!-- aopalliance  -->
+        <dependency>
+		    <groupId>aopalliance</groupId>
+		    <artifactId>aopalliance</artifactId>
+		    <version>1.0</version>
+        </dependency>
+        
+		<!-- ibatis-sqlmap  -->
+        <dependency>
+		    <groupId>org.apache.ibatis</groupId>
+		    <artifactId>ibatis-sqlmap</artifactId>
+		    <version>2.3.4.726</version>
+        </dependency>
+		
+        <!-- jsr250-api - annotation  -->
+        <dependency>
+		    <groupId>javax.annotation</groupId>
+		    <artifactId>jsr250-api</artifactId>
+		    <version>1.0</version>
+        </dependency> 
+        <!-- jsp 관련 -->
+        <dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>servlet-api</artifactId> 
+		    <version>2.5</version>
+		     <scope>provided</scope>
+        </dependency>
+		
+            <dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
+		 
+	    <dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>el-api</artifactId>
+			<version>1.1</version>
+			<scope>provided</scope>
+		</dependency>
+ 
+       <dependency>
+		    <groupId>taglibs</groupId>
+		    <artifactId>standard</artifactId>
+		    <version>1.1.2</version>
+        </dependency>
+		
+        <dependency>
+		    <groupId>cglib</groupId>
+		    <artifactId>cglib</artifactId>
+		    <version>2.2</version>
+		     <scope>provided</scope>
+        </dependency>
+     
+	  <dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>jstl</artifactId>
+	    <version>1.1.2</version> 
+	  </dependency>   
+   
+	   <!-- 	SLF4J  -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.13</version>
+		</dependency>
+    
+	
+	    <dependency>
+	      <groupId>org.slf4j</groupId>
+	      <artifactId>jcl-over-slf4j</artifactId>
+	      <version>1.7.13</version> 
+	  </dependency>  
+	
+   <dependency>
+	      <groupId>org.slf4j</groupId>
+	      <artifactId>log4j-over-slf4j</artifactId>
+	      <version>1.7.13</version>
+	  </dependency>
+	  
+ 
+   <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jul-to-slf4j</artifactId>
+      <version>1.7.13</version>
+  </dependency> 
+  
+      <dependency>
+		<groupId>ch.qos.logback</groupId>
+		<artifactId>logback-access</artifactId>
+		<version>1.1.2</version>
+		 </dependency>
+     <dependency>
+           <groupId>ch.qos.logback</groupId>
+           <artifactId>logback-classic</artifactId>
+            <version>1.1.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+            <scope>runtime</scope>
+       </dependency>
+       <dependency>
+           <groupId>ch.qos.logback</groupId>
+           <artifactId>logback-core</artifactId>
+            <version>1.1.2</version>
+       </dependency>
+
+		<!--  조건부 설정을 사용하려면 아래의 디펜던시를 추가해 주어야 한다.   -->
+		 <dependency>
+			<groupId>org.codehaus.janino</groupId>
+			<artifactId>janino</artifactId>
+			<version>2.7.7</version>
+		</dependency>
+  
+  
+		<dependency>
+			<groupId>net.sf.log4jdbc</groupId>
+			<artifactId>log4jdbc4</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
+        <dependency>
+		    <groupId>commons-dbcp</groupId>
+		    <artifactId>commons-dbcp</artifactId>
+		    <version>1.2.2</version>
+        </dependency>
+	 
+        <dependency>
+		    <groupId>commons-beanutils</groupId>
+		    <artifactId>commons-beanutils</artifactId>
+		    <version>1.8.3</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+        
+		<dependency>
+	        <groupId>org.easymock</groupId>
+	        <artifactId>easymock</artifactId>
+	        <version>3.0</version>
+	     </dependency>
+		      
+	    <dependency>
+	        <groupId>commons-collections</groupId>
+	        <artifactId>commons-collections</artifactId>
+	        <version>3.2.1</version>       
+	      </dependency>	
+		
+		<dependency>
+	        <groupId>commons-digester</groupId>
+	        <artifactId>commons-digester</artifactId>
+	        <version>1.8</version>
+	    </dependency>
+	    
+		<dependency>
+	        <groupId>org.antlr</groupId>
+	        <artifactId>antlr</artifactId>
+	        <version>3.0.1</version>
+   		</dependency>
+   		 <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>${mybatis-spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${springframeworkVersion}</version>
+        </dependency>
+ 
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.fdl.security</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+        
+        <dependency>
+		   <groupId>com.googlecode.ehcache-spring-annotations</groupId>
+		   <artifactId>ehcache-spring-annotations</artifactId>
+		   <version>1.2.0</version>
+		</dependency> 
+ 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-compress</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.fdl.crypto</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.fdl.excel</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.fdl.string</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.fdl.filehandling</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-vfs</groupId>
+            <artifactId>commons-vfs</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+  
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.fdl.logging</artifactId>
+            <version>2.7.0</version>
+               <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+        </dependency>
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+    
+ 
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.2.0.Final</version>
+               <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+        </dependency>
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.itl.integration</artifactId>
+            <version>2.7.0</version>
+        </dependency>
+       <!-- 암호화 모듈  최종본확인 후 처리 개별시도별로 다른관계로 별도로구성함. 
+        <dependency>
+		  <groupId>com.softforum</groupId>
+		  <artifactId>xdbe</artifactId>
+		  <version>1.0</version>
+		</dependency> -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-email</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.castor</groupId>
+            <artifactId>castor-core</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.castor</groupId>
+            <artifactId>castor-codegen</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.castor</groupId>
+            <artifactId>castor-xml-schema</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.castor</groupId>
+            <artifactId>castor-xml</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.xmlbeans</groupId>
+            <artifactId>xmlbeans</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+        
+        <dependency>
+    	<groupId>xml-apis</groupId>
+   		 <artifactId>xml-apis</artifactId>
+    	<version>1.4.01</version>
+	</dependency>
+
+        <dependency>
+            <groupId>commons-pool</groupId>
+            <artifactId>commons-pool</artifactId>
+            <version>1.5.6</version>
+        </dependency>
+        <dependency>
+            <groupId>egovframework.rte</groupId>
+            <artifactId>egovframework.rte.fdl.xml</artifactId>
+            <version>2.7.0</version>
+               <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+        </dependency>
+        
+         <dependency>
+        	<groupId>egovframework.rte</groupId>
+        	<artifactId>egovframework.rte.itl.webservice</artifactId>
+        	<version>2.7.0</version>
+        </dependency>
+        
+         <!-- 
+        <dependency>
+            <groupId>org.springframework.webflow</groupId>
+            <artifactId>org.springframework.webflow</artifactId>
+            <version>2.0.0.RELEASE</version>
+        </dependency> 
+         -->
+      <dependency>
+          <groupId>commons-httpclient</groupId>
+          <artifactId>commons-httpclient</artifactId>
+          <version>${commons-httpclient-version}</version>
+      </dependency>
+      
+        <dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-framework</artifactId>
+			<version>4.1.5</version>
+		</dependency> 
+        
+	   <dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		
+	    <dependency>
+			<groupId>com.artofsolving</groupId>
+			<artifactId>jodconverter</artifactId>
+			<version>2.2.1</version>
+			   <exclusions>
+			<exclusion>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			</exclusion>
+			  <exclusion> 
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			  </exclusion>
+			</exclusions>
+		</dependency>
+		
+	    <dependency>
+			<groupId>egovframework.com.ems</groupId>
+			<artifactId>sndng-mail</artifactId>
+			<version>1.0</version>
+		</dependency>
+		 
+	    <!-- gwt-math BigDecimal <inherits name="com.googlecode.gwt.math.Math"/>
+	     <dependency>
+			<groupId>com.googlecode</groupId>
+			<artifactId>gwt-math-server</artifactId>
+			<version>2.1</version> 
+		</dependency> 
+	      <dependency>
+			<groupId>com.googlecode</groupId>
+			<artifactId>gwt-math</artifactId>
+			<version>2.1</version> 
+		</dependency>
+		-->
+		
+		<!-- gwt-java-math
+		<inherits name="net.zschech.gwt.math.Math" /> 
+		 <dependency>
+			<groupId>net.zschech</groupId>
+			<artifactId>gwt-java-math</artifactId>
+			<version>1.0.9</version> 
+		</dependency>  --> 
+	  
+      <dependency>
+        <groupId>maven</groupId>
+        <artifactId>maven-jboss-plugin</artifactId>
+        <version>1.5</version>
+        <type>plugin</type>
+      </dependency> 
+		
+  </dependencies> 
+	<reporting>
+		<outputDirectory>${basedir}/target/site</outputDirectory>
+		<plugins>
+			<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId> 
+					<configuration>
+						<source>1.6</source>
+                        <target>1.6</target>
+                        <encoding>UTF-8</encoding>
+                       <executions>
+						<execution>
+						      <!--<phase>compile</phase> -->  
+							  <goals> 
+								<goal>compile</goal> 
+								<goal>test</goal>
+							<!--	<goal>i18n</goal>
+								 <goal>generateAsync</goal> -->
+							</goals>  
+						</execution>
+					</executions>
+					</configuration>
+				</plugin>   
+			<plugin>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.0.1</version>
+				<reportSets>
+					<reportSet>
+						<id>sunlink</id>
+						<reports>
+							<report>javadoc</report>
+						</reports>
+						<inherited>true</inherited>
+						<configuration>
+							<links>
+								<link>http://java.sun.com/j2se/1.5.0/docs/api/</link>
+							</links>
+						</configuration>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<!-- JUnit Test Results & EMMA Coverage Reporting -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>emma-maven-plugin</artifactId>
+				<inherited>true</inherited>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>surefire-report-maven-plugin</artifactId>
+				<inherited>true</inherited>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>report-only</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<!-- PMD manven plugin -->
+			<!--
+				<plugin> <groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId> <version>2.4</version>
+				<configuration> <rulesets> <ruleset>./Ruleset.xml</ruleset>
+				</rulesets> <linkXref>true</linkXref>
+				<sourceEncoding>${encoding}</sourceEncoding>
+				<minimumTokens>100</minimumTokens>
+				<targetJdk>${compileSource}</targetJdk> </configuration>
+				<reportSets> <reportSet> <reports> <report>pmd</report> </reports>
+				</reportSet> </reportSets> </plugin>
+			-->
+			<!-- Generating JavaDoc Report -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<minmemory>128m</minmemory>
+					<maxmemory>512m</maxmemory>
+					<encoding>${encoding}</encoding>
+					<docencoding>${encoding}</docencoding>
+					<charset>${encoding}</charset>
+				</configuration>
+			</plugin>
+			<!-- Generating Java Source in HTML -->
+			<plugin>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<configuration>
+					<inputEncoding>${encoding}</inputEncoding>
+					<outputEncoding>${encoding}</outputEncoding>
+					<linkJavadoc>true</linkJavadoc>
+					<javadocDir>apidocs</javadocDir>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>   
+	  <build>
+<!-- 	  		<plugins> -->
+<!-- 		 	<plugin>  -->
+<!-- 	 				<groupId>org.zeroturnaround</groupId>  -->
+<!-- 	 				<artifactId>jrebel-maven-plugin</artifactId>  -->
+<!-- 	 				<executions>  -->
+<!-- 	 					<execution>  -->
+<!-- 	 						<id>generate-rebel-xml</id>  -->
+<!-- 	 						<phase>process-resources</phase>  -->
+<!-- 	 						<goals>  -->
+<!-- 	 							<goal>generate</goal>  -->
+<!-- 	 						</goals>  -->
+<!-- 	 					</execution>  -->
+<!-- 	 				</executions>  -->
+<!-- 	 			</plugin>   -->
+<!-- 		  </plugins>  -->
+			<pluginManagement>
+			<plugins> 
+ 				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. --> 
+ 				<plugin> 
+ 					<groupId>org.eclipse.m2e</groupId> 
+ 					<artifactId>lifecycle-mapping</artifactId> 
+ 					<version>1.0.0</version> 
+ 					<configuration> 
+ 						<lifecycleMappingMetadata> 
+ 							<pluginExecutions> 
+ 								<pluginExecution> 
+ 									<pluginExecutionFilter> 
+ 										<groupId>org.codehaus.mojo</groupId> 
+ 										<artifactId>gwt-maven-plugin</artifactId> 
+ 										<versionRange>[2.7.0,)</versionRange> 
+ 										<goals> 
+ 											<goal>i18n</goal> 
+ 											<goal>generateAsync</goal> 
+ 											<goal>resources</goal> 
+ 										</goals> 
+ 									</pluginExecutionFilter> 
+ 									<action> 
+ 										<ignore></ignore> 
+ 									</action> 
+ 								</pluginExecution> 
+ 								<pluginExecution> 
+ 									<pluginExecutionFilter> 
+ 										<groupId>org.apache.maven.plugins</groupId> 
+ 										<artifactId>maven-war-plugin</artifactId> 
+ 										<versionRange>[2.1.1,)</versionRange> 
+ 										<goals> 
+ 											<goal>exploded</goal> 
+ 										</goals> 
+ 									</pluginExecutionFilter> 
+ 									<action> 
+ 										<ignore></ignore> 
+ 									</action> 
+ 								</pluginExecution> 
+<!--  								<pluginExecution>  -->
+<!--  									<pluginExecutionFilter>  -->
+<!--  										<groupId>org.zeroturnaround</groupId>  -->
+<!--  										<artifactId>jrebel-maven-plugin</artifactId>  -->
+<!--  										<versionRange>[1.1.0,)</versionRange>  -->
+<!--  										<goals>  -->
+<!--  											<goal>generate</goal>  -->
+<!--  										</goals>  -->
+<!--  									</pluginExecutionFilter>  -->
+<!--  									<action>  -->
+<!--  										<ignore></ignore>  -->
+<!--  									</action>  -->
+<!--  								</pluginExecution>  -->
+ 							</pluginExecutions> 
+ 						</lifecycleMappingMetadata> 
+ 					</configuration> 
+ 				</plugin>  
+			</plugins>
+		</pluginManagement> 
+	  </build>
+	    <distributionManagement>
+	    <repository>
+	        <id>PayGen-Rel</id>
+	        <name>Releases</name>
+	        <url>http://192.168.0.8:9447/nexus/content/repositories/PayGen-Rel/</url>
+	    </repository>
+	 
+	    <snapshotRepository>
+	        <id>PayGen-Snap</id>
+	        <name>Snapshots</name>
+	        <url>http://192.168.0.8:9447/nexus/content/repositories/PayGen-Snap/</url>
+	    </snapshotRepository>
+	</distributionManagement> 
+</project>

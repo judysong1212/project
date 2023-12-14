@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sysm1000">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysm1000SerarchVO" type="com.app.smrmf.sysm.server.vo.SysIfSysm1000SrhVO"/>
+	
+	<resultMap id="sysm1000" class="com.app.smrmf.sysm.server.vo.SysIfSysm1000VO">
+		<result property="dpobCd" column="DPOB_CD" columnIndex="1"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="2"/>
+		<result property="servcCommSeilNum" column="SERVC_COMM_SEIL_NUM" columnIndex="3"/>
+		<result property="eryGtwkTotYn" column="ERY_GTWK_TOT_YN" columnIndex="4"/>
+		<result property="dilnlazDducPaySubtnYn" column="DILNLAZ_DDUC_PAY_SUBTN_YN" columnIndex="5"/>
+		<result property="wklyHldyExtpyPrcsYn" column="WKLY_HLDY_EXTPY_PRCS_YN" columnIndex="6"/>
+		<result property="wkdyNorTmCttgDivCd" column="WKDY_NOR_TM_CTTG_DIV_CD" columnIndex="7"/>
+		<result property="wkdyExtnnCttgDivCd" column="WKDY_EXTNN_CTTG_DIV_CD" columnIndex="8"/>
+		<result property="wkdyNgtCttgDivCd" column="WKDY_NGT_CTTG_DIV_CD" columnIndex="9"/>
+		<result property="pubcHodyNorTmCttgCd" column="PUBC_HODY_NOR_TM_CTTG_CD" columnIndex="10"/>
+		<result property="pubcHodyExtnnTmCttgCd" column="PUBC_HODY_EXTNN_TM_CTTG_CD" columnIndex="11"/>
+		<result property="pubcHodyNorMrkDivCd" column="PUBC_HODY_NOR_MRK_DIV_CD" columnIndex="12"/>
+		<result property="wkdyExtnnMrkDivCd" column="WKDY_EXTNN_MRK_DIV_CD" columnIndex="13"/>
+		<result property="wkdyNgtMrkDivCd" column="WKDY_NGT_MRK_DIV_CD" columnIndex="14"/>
+		<result property="wkdyNorDutyMrkDivCd" column="WKDY_NOR_DUTY_MRK_DIV_CD" columnIndex="15"/>
+		<result property="pubcHodyExtnnMrkCd" column="PUBC_HODY_EXTNN_MRK_CD" columnIndex="16"/>
+		<result property="pubcHodyNgtMrkDivCd" column="PUBC_HODY_NGT_MRK_DIV_CD" columnIndex="17"/>
+		<result property="kybdr" column="KYBDR" columnIndex="18"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="19"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="20"/>
+		<result property="ismt" column="ISMT" columnIndex="21"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="22"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="23"/>
+	</resultMap>
+	
+	<insert id="sysm1000DAO.insertSysm1000_S">
+		<![CDATA[
+			INSERT INTO SYSM1000 
+				( DPOB_CD
+				  , EMYMT_DIV_CD
+				  , SERVC_COMM_SEIL_NUM
+				  , ERY_GTWK_TOT_YN
+				  , DILNLAZ_DDUC_PAY_SUBTN_YN
+				  , WKLY_HLDY_EXTPY_PRCS_YN
+				  , WKDY_NOR_TM_CTTG_DIV_CD
+				  , WKDY_EXTNN_CTTG_DIV_CD
+				  , WKDY_NGT_CTTG_DIV_CD
+				  , PUBC_HODY_NOR_TM_CTTG_CD
+				  , PUBC_HODY_EXTNN_TM_CTTG_CD
+				  , PUBC_HODY_NOR_MRK_DIV_CD
+				  , WKDY_EXTNN_MRK_DIV_CD
+				  , WKDY_NGT_MRK_DIV_CD
+				  , WKDY_NOR_DUTY_MRK_DIV_CD
+				  , PUBC_HODY_EXTNN_MRK_CD
+				  , PUBC_HODY_NGT_MRK_DIV_CD
+				  , KYBDR
+				  , INPT_DT
+				  , INPT_ADDR
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR )
+			VALUES ( #dpobCd#
+				  , #emymtDivCd#
+				  , #servcCommSeilNum#
+				  , #eryGtwkTotYn#
+				  , #dilnlazDducPaySubtnYn#
+				  , #wklyHldyExtpyPrcsYn#
+				  , #wkdyNorTmCttgDivCd#
+				  , #wkdyExtnnCttgDivCd#
+				  , #wkdyNgtCttgDivCd#
+				  , #pubcHodyNorTmCttgCd#
+				  , #pubcHodyExtnnTmCttgCd#
+				  , #pubcHodyNorMrkDivCd#
+				  , #wkdyExtnnMrkDivCd#
+				  , #wkdyNgtMrkDivCd#
+				  , #wkdyNorDutyMrkDivCd#
+				  , #pubcHodyExtnnMrkCd#
+				  , #pubcHodyNgtMrkDivCd#
+				  , #kybdr#
+				  , #inptDt#
+				  , #inptAddr#
+				  , #ismt#
+				  , #revnDt#
+				  , #revnAddr# )
+		]]>
+	</insert>
+	
+	<update id="sysm1000DAO.updateSysm1000_S">
+		<![CDATA[
+			UPDATE SYSM1000
+			SET DPOB_CD=#dpobCd#
+				, EMYMT_DIV_CD=#emymtDivCd#
+				, SERVC_COMM_SEIL_NUM=#servcCommSeilNum#
+				, ERY_GTWK_TOT_YN=#eryGtwkTotYn#
+				, DILNLAZ_DDUC_PAY_SUBTN_YN=#dilnlazDducPaySubtnYn#
+				, WKLY_HLDY_EXTPY_PRCS_YN=#wklyHldyExtpyPrcsYn#
+				, WKDY_NOR_TM_CTTG_DIV_CD=#wkdyNorTmCttgDivCd#
+				, WKDY_EXTNN_CTTG_DIV_CD=#wkdyExtnnCttgDivCd#
+				, WKDY_NGT_CTTG_DIV_CD=#wkdyNgtCttgDivCd#
+				, PUBC_HODY_NOR_TM_CTTG_CD=#pubcHodyNorTmCttgCd#
+				, PUBC_HODY_EXTNN_TM_CTTG_CD=#pubcHodyExtnnTmCttgCd#
+				, PUBC_HODY_NOR_MRK_DIV_CD=#pubcHodyNorMrkDivCd#
+				, WKDY_EXTNN_MRK_DIV_CD=#wkdyExtnnMrkDivCd#
+				, WKDY_NGT_MRK_DIV_CD=#wkdyNgtMrkDivCd#
+				, WKDY_NOR_DUTY_MRK_DIV_CD=#wkdyNorDutyMrkDivCd#
+				, PUBC_HODY_EXTNN_MRK_CD=#pubcHodyExtnnMrkCd#
+				, PUBC_HODY_NGT_MRK_DIV_CD=#pubcHodyNgtMrkDivCd#
+				, KYBDR=#kybdr#
+				, INPT_DT=#inptDt#
+				, INPT_ADDR=#inptAddr#
+				, ISMT=#ismt#
+				, REVN_DT=#revnDt#
+				, REVN_ADDR=#revnAddr#
+						WHERE DPOB_CD=#dpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND SERVC_COMM_SEIL_NUM=#servcCommSeilNum#
+				]]>
+	</update>
+	
+	<delete id="sysm1000DAO.deleteSysm1000_S">
+		<![CDATA[
+			DELETE FROM SYSM1000 
+						WHERE DPOB_CD=#dpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND SERVC_COMM_SEIL_NUM=#servcCommSeilNum#
+				]]>
+	</delete>
+	
+	<select id="sysm1000DAO.selectSysm1000_S" resultMap="sysm1000">
+		<![CDATA[
+			SELECT
+				DPOB_CD
+				, EMYMT_DIV_CD
+				, SERVC_COMM_SEIL_NUM
+				, ERY_GTWK_TOT_YN
+				, DILNLAZ_DDUC_PAY_SUBTN_YN
+				, WKLY_HLDY_EXTPY_PRCS_YN
+				, WKDY_NOR_TM_CTTG_DIV_CD
+				, WKDY_EXTNN_CTTG_DIV_CD
+				, WKDY_NGT_CTTG_DIV_CD
+				, PUBC_HODY_NOR_TM_CTTG_CD
+				, PUBC_HODY_EXTNN_TM_CTTG_CD
+				, PUBC_HODY_NOR_MRK_DIV_CD
+				, WKDY_EXTNN_MRK_DIV_CD
+				, WKDY_NGT_MRK_DIV_CD
+				, WKDY_NOR_DUTY_MRK_DIV_CD
+				, PUBC_HODY_EXTNN_MRK_CD
+				, PUBC_HODY_NGT_MRK_DIV_CD
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM SYSM1000
+						WHERE DPOB_CD=#dpobCd#
+								AND EMYMT_DIV_CD=#emymtDivCd#
+								AND SERVC_COMM_SEIL_NUM=#servcCommSeilNum#
+				]]>
+	</select>
+	
+	<select id="sysm1000DAO.selectSysm1000List_D" parameterClass="sysm1000SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								DPOB_CD
+								, EMYMT_DIV_CD
+								, SERVC_COMM_SEIL_NUM
+								, ERY_GTWK_TOT_YN
+								, DILNLAZ_DDUC_PAY_SUBTN_YN
+								, WKLY_HLDY_EXTPY_PRCS_YN
+								, WKDY_NOR_TM_CTTG_DIV_CD
+								, WKDY_EXTNN_CTTG_DIV_CD
+								, WKDY_NGT_CTTG_DIV_CD
+								, PUBC_HODY_NOR_TM_CTTG_CD
+								, PUBC_HODY_EXTNN_TM_CTTG_CD
+								, PUBC_HODY_NOR_MRK_DIV_CD
+								, WKDY_EXTNN_MRK_DIV_CD
+								, WKDY_NGT_MRK_DIV_CD
+								, WKDY_NOR_DUTY_MRK_DIV_CD
+								, PUBC_HODY_EXTNN_MRK_CD
+								, PUBC_HODY_NGT_MRK_DIV_CD
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+						FROM SYSM1000
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					DPOB_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					EMYMT_DIV_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+						DPOB_CD DESC
+							, EMYMT_DIV_CD DESC
+							, SERVC_COMM_SEIL_NUM DESC
+		
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	
+	<select id="sysm1000DAO.selectSysm1000ListTotCnt_S" parameterClass="sysm1000SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSM1000
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				DPOB_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				EMYMT_DIV_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

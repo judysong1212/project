@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="coreMstr010100">
+	
+<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+<typeAlias  alias="coreMstr010100SerarchVO" type="com.app.smrmf.sysm.server.service.vo.SysIfMstr010100SrhVO"/>
+  
+  
+	<resultMap id="coreSysMstr010100" class="com.app.smrmf.sysm.server.service.vo.SysIfMstr010100VO">
+		<result property="sysDpobCd" column="SYS_DPOB_CD" columnIndex="1"/>
+		<result property="sysVarNm" column="SYS_VAR_NM" columnIndex="2"/>
+		<result property="sysVarDivCd" column="SYS_VAR_DIV_CD" columnIndex="3"/>
+		<result property="sysVarVal" column="SYS_VAR_VAL" columnIndex="4"/>
+		<result property="sysVarCtnt" column="SYS_VAR_CTNT" columnIndex="5"/>
+		<result property="kybdr" column="KYBDR" columnIndex="6"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="7"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="8"/>
+		<result property="ismt" column="ISMT" columnIndex="9"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="10"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="11"/>
+	</resultMap>
+	
+<select id="propMstr010100DAO.selectPropsMstr010100List_D" parameterClass="coreMstr010100SerarchVO" resultMap="coreSysMstr010100" >
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+							  	  SYS_DPOB_CD
+								, SYS_VAR_NM
+								, SYS_VAR_DIV_CD
+								, SYS_VAR_VAL
+								, SYS_VAR_CTNT
+								, KYBDR
+								, INPT_DT
+								, INPT_ADDR
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+				FROM MSTR_01_0100
+				WHERE 1=1 
+				ORDER BY 
+				  	  SYS_DPOB_CD DESC
+					, SYS_VAR_NM DESC
+		
+		<![CDATA[					
+	) A 
+) 
+]]>
+</select>		
+	
+<cacheModel id="extemsprops-cache" type="LRU" readOnly="true" serialize="false"> 
+</cacheModel>  
+  <!-- <flushInterval hours="24"/> <flushOnExecute  statement="propMstr010100DAO.selectPropsMstr010100List_D"/> 
+     <property name=“size" value="1000"/>  --> 
+</sqlMap>

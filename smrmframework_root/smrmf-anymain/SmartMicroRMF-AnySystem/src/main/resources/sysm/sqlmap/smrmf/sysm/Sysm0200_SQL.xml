@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Sysm0200">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="sysm0200SerarchVO" type="com.app.smrmf.sysm.server.vo.SysIfSysm0200SrhVO"/>
+	
+	<resultMap id="sysm0200" class="com.app.smrmf.sysm.server.vo.SysIfSysm0200VO">
+		<result property="sysDivCd" column="SYS_DIV_CD" columnIndex="1"/>
+		<result property="mnuCd" column="MNU_CD" columnIndex="2"/>
+		<result property="hhrkMnuCd" column="HHRK_MNU_CD" columnIndex="3"/>
+		<result property="mnuNm" column="MNU_NM" columnIndex="4"/>
+		<result property="mnuIcn" column="MNU_ICN" columnIndex="5"/>
+		<result property="mnuTmbl" column="MNU_TMBL" columnIndex="6"/>
+		<result property="mnuAuthFrmCd" column="MNU_AUTH_FRM_CD" columnIndex="7"/>
+		<result property="mnuTipNm" column="MNU_TIP_NM" columnIndex="8"/>
+		<result property="mnuScnFrmPkgNm" column="MNU_SCN_FRM_PKG_NM" columnIndex="9"/>
+		<result property="mnuPrntYn" column="MNU_PRNT_YN" columnIndex="10"/>
+		<result property="mnuPrntOrd" column="MNU_PRNT_ORD" columnIndex="11"/>
+		<result property="useYn" column="USE_YN" columnIndex="12"/>
+		<result property="mnuEpln" column="MNU_EPLN" columnIndex="13"/>
+		<result property="kybdr" column="KYBDR" columnIndex="14"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="15"/>
+		<result property="ismt" column="ISMT" columnIndex="16"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="17"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="18"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="19"/> 
+		<result property="mnuAuthGrPScnInqyYn" column="MNU_AUTH_GR_P_SCN_INQY_YN" columnIndex="20"/>
+		<result property="mnuAuthGrPScnInptYn" column="MNU_AUTH_GR_P_SCN_INPT_YN" columnIndex="21"/>
+		<result property="mnuAuthGrPScnRevnYn" column="MNU_AUTH_GR_P_SCN_REVN_YN" columnIndex="22"/>
+		<result property="mnuAuthGrPScnDelYn" column="MNU_AUTH_GR_P_SCN_DEL_YN" columnIndex="23"/>
+		<result property="mnuAuthGrPScnPrtYn" column="MNU_AUTH_GR_P_SCN_PRT_YN" columnIndex="24"/> 
+	</resultMap>
+	
+	<insert id="sysm0200DAO.insertSysm0200_S">
+		<![CDATA[
+			INSERT INTO SYSM0200 
+				( SYS_DIV_CD
+				  , MNU_CD
+				  , HHRK_MNU_CD
+				  , MNU_NM
+				  , MNU_ICN
+				  , MNU_TMBL
+				  , MNU_AUTH_FRM_CD
+				  , MNU_TIP_NM
+				  , MNU_SCN_FRM_PKG_NM
+				  , MNU_PRNT_YN
+				  , MNU_PRNT_ORD
+				  , USE_YN
+				  , MNU_EPLN
+				  , KYBDR
+				  , INPT_DT
+				  , ISMT
+				  , REVN_DT
+				  , REVN_ADDR
+				  , INPT_ADDR )
+			VALUES ( #sysDivCd#
+				  , #mnuCd#
+				  , #hhrkMnuCd#
+				  , #mnuNm#
+				  , #mnuIcn#
+				  , #mnuTmbl#
+				  , #mnuAuthFrmCd#
+				  , #mnuTipNm#
+				  , #mnuScnFrmPkgNm#
+				  , #mnuPrntYn#
+				  , #mnuPrntOrd#
+				  , #useYn#
+				  , #mnuEpln#
+				  , #kybdr#
+				  , SYSDATE
+				  , #ismt#
+				  , SYSDATE
+				  , #revnAddr#
+				  , #inptAddr# )
+		]]>
+	</insert>
+	
+	<update id="sysm0200DAO.updateSysm0200_S">
+		<![CDATA[
+			UPDATE SYSM0200
+			SET SYS_DIV_CD=#sysDivCd#
+				, MNU_CD=#mnuCd#
+				, HHRK_MNU_CD=#hhrkMnuCd#
+				, MNU_NM=#mnuNm#
+				, MNU_ICN=#mnuIcn#
+				, MNU_TMBL=#mnuTmbl#
+				, MNU_AUTH_FRM_CD=#mnuAuthFrmCd#
+				, MNU_TIP_NM=#mnuTipNm#
+				, MNU_SCN_FRM_PKG_NM=#mnuScnFrmPkgNm#
+				, MNU_PRNT_YN=#mnuPrntYn#
+				, MNU_PRNT_ORD=#mnuPrntOrd#
+				, USE_YN=#useYn#
+				, MNU_EPLN=#mnuEpln#
+				, KYBDR=#kybdr#
+				, INPT_DT=SYSDATE
+				, ISMT=#ismt#
+				, REVN_DT=SYSDATE
+				, REVN_ADDR=#revnAddr#
+				, INPT_ADDR=#inptAddr#
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND MNU_CD=#mnuCd#
+				]]>
+	</update>
+	
+	<delete id="sysm0200DAO.deleteSysm0200_S">
+		<![CDATA[
+			DELETE FROM SYSM0200 
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND MNU_CD=#mnuCd#
+				]]>
+	</delete>
+	
+	<select id="sysm0200DAO.selectSysm0200_S" resultMap="sysm0200">
+		<![CDATA[
+			SELECT
+				SYS_DIV_CD
+				, MNU_CD
+				, HHRK_MNU_CD
+				, MNU_NM
+				, MNU_ICN
+				, MNU_TMBL
+				, MNU_AUTH_FRM_CD
+				, MNU_TIP_NM
+				, MNU_SCN_FRM_PKG_NM
+				, MNU_PRNT_YN
+				, MNU_PRNT_ORD
+				, USE_YN
+				, MNU_EPLN
+				, KYBDR
+				, INPT_DT
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+				, INPT_ADDR
+			FROM SYSM0200
+						WHERE SYS_DIV_CD=#sysDivCd#
+								AND MNU_CD=#mnuCd#
+				]]>
+	</select>
+	
+	<select id="sysm0200DAO.selectSysm0200List_D" parameterClass="sysm0200SerarchVO" resultClass="egovMap">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT
+								SYS_DIV_CD
+								, MNU_CD
+								, HHRK_MNU_CD
+								, MNU_NM
+								, MNU_ICN
+								, MNU_TMBL
+								, MNU_AUTH_FRM_CD
+								, MNU_TIP_NM
+								, MNU_SCN_FRM_PKG_NM
+								, MNU_PRNT_YN
+								, MNU_PRNT_ORD
+								, USE_YN
+								, MNU_EPLN
+								, KYBDR
+								, INPT_DT
+								, ISMT
+								, REVN_DT
+								, REVN_ADDR
+								, INPT_ADDR
+						FROM SYSM0200
+				WHERE 1=1
+				<isEqual prepend="AND" property="searchCondition" compareValue="0">
+					SYS_DIV_CD = #searchKeyword#
+				</isEqual>
+				<isEqual prepend="AND" property="searchCondition" compareValue="1">
+					MNU_CD LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+					ORDER BY 
+	
+		<![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM > #firstIndex#
+]]>
+	</select>	 
+	
+	<select id="sysm0200DAO.selectMenuSysm0200List_D" parameterClass="sysm0200SerarchVO" resultMap="sysm0200">
+SELECT * FROM (
+	SELECT A.*, ROWNUM RNUM FROM (
+				SELECT   DISTINCT   AA.SYS_DIV_CD
+                                , AA.MNU_CD
+                                , AA.HHRK_MNU_CD
+                                , AA.MNU_NM
+                                , AA.MNU_ICN
+                                , AA.MNU_TMBL
+                                , AA.MNU_AUTH_FRM_CD
+                                , AA.MNU_TIP_NM
+                                , AA.MNU_SCN_FRM_PKG_NM
+                                , AA.MNU_PRNT_YN
+                                , AA.MNU_PRNT_ORD
+                                , AA.USE_YN
+                                , AA.MNU_EPLN
+                                , AA.KYBDR
+                                , AA.INPT_DT
+                                , AA.ISMT
+                                , AA.REVN_DT
+                                , AA.REVN_ADDR
+                                , AA.INPT_ADDR
+                                , BB.MNU_AUTH_GR_P_SCN_INQY_YN
+                                , BB.MNU_AUTH_GR_P_SCN_INPT_YN
+                                , BB.MNU_AUTH_GR_P_SCN_REVN_YN
+                                , BB.MNU_AUTH_GR_P_SCN_DEL_YN
+                                , BB.MNU_AUTH_GR_P_SCN_PRT_YN
+                        FROM SYSM0200 AA ,SYSM0400 BB
+                WHERE 1=1 
+                  AND  AA.SYS_DIV_CD = BB.SYS_DIV_CD
+                  AND  AA.MNU_CD = BB.MNU_CD
+             ORDER BY  AA.MNU_PRNT_ORD ASC
+                     , AA.MNU_CD ASC
+<isNotEqual  property="lastIndex" compareValue="-1">
+ <![CDATA[					
+	) A WHERE ROWNUM <= #lastIndex#
+)WHERE RNUM >= #firstIndex#
+]]>
+</isNotEqual>	
+<isEqual   property="lastIndex" compareValue="-1">
+  <![CDATA[					
+	) A  
+)
+]]>
+</isEqual>	
+ </select>
+	 
+	<select id="sysm0200DAO.selectSysm0200ListTotCnt_S" parameterClass="sysm0200SerarchVO" resultClass="int">
+			SELECT COUNT(*) totcnt
+			FROM SYSM0200
+			WHERE 1=1
+			<isEqual prepend="AND" property="searchCondition" compareValue="0">
+				SYS_DIV_CD = #searchKeyword#
+			</isEqual>
+			<isEqual prepend="AND" property="searchCondition" compareValue="1">
+				MNU_CD LIKE '%' || #searchKeyword# || '%'
+			</isEqual>
+	</select>
+
+</sqlMap>

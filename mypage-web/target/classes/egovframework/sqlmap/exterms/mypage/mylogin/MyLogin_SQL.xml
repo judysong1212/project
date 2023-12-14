@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MyLogin">
+	
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="loginVO" type="egovframework.com.cmm.LoginVO"/>
+	<typeAlias  alias="mypageVo" type="com.web.exterms.mypage.login.service.MyPageSessionVO"/>
+	
+	<resultMap id="myLogin" class="egovframework.com.cmm.LoginVO">
+		<result property="sysDivCd" column="SYS_DIV_CD" columnIndex="1"/>
+		<result property="usrId" column="USR_ID" columnIndex="2"/>
+		<result property="usrNm" column="USR_NM" columnIndex="3"/>
+		<result property="usrDivCd" column="USR_DIV_CD" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="6"/>
+		<result property="email" column="EMAIL" columnIndex="7"/>
+		<result property="pwd" column="PWD" columnIndex="8"/>
+		<result property="useYn" column="USE_YN" columnIndex="9"/>
+		<result property="kybdr" column="KYBDR" columnIndex="10"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="11"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="12"/>
+		<result property="ismt" column="ISMT" columnIndex="13"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="14"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="15"/>
+	</resultMap>
+	
+	<resultMap id="mypageVo1" class="com.web.exterms.mypage.login.service.MyPageSessionVO">
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="1"/>
+		<result property="currAffnDeptCd" column="CURR_AFFN_DEPT_CD" columnIndex="2"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="3"/>		
+		<result property="dpobCd" column="DPOB_CD" columnIndex="4"/>	
+		<result property="usrTel" column="USR_TEL" columnIndex="5"/>	
+		<result property="emailAddr" column="EMAIL_ADDR" columnIndex="6"/>	
+		<result property="currDeptNm" column="CURR_DEPT_NM" columnIndex="7"/>
+		<result property="chkUserId" column="CHK_USER_ID" columnIndex="8"/>							
+	</resultMap>	
+	
+	<resultMap id="mypageVo2" class="com.web.exterms.mypage.login.service.MyPageSessionVO">
+		<result property="sysDivCd" column="SYS_DIV_CD" columnIndex="1"/>
+		<result property="usrId" column="USR_ID" columnIndex="2"/>
+		<result property="usrNm" column="USR_NM" columnIndex="3"/>
+		<result property="usrDivCd" column="USR_DIV_CD" columnIndex="4"/>
+		<result property="systemkey" column="SYSTEMKEY" columnIndex="5"/>
+		<result property="deptCd" column="DEPT_CD" columnIndex="6"/>
+		<result property="usrTel" column="USR_TEL" columnIndex="7"/>
+		<result property="email" column="EMAIL" columnIndex="8"/>
+		<result property="pwd" column="PWD" columnIndex="9"/>
+		<result property="useYn" column="USE_YN" columnIndex="10"/>
+		<result property="kybdr" column="KYBDR" columnIndex="11"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="12"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="13"/>
+		<result property="ismt" column="ISMT" columnIndex="14"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="15"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="16"/>
+		<result property="hanNm" column="HAN_NM" columnIndex="17"/>
+		<result property="currAffnDeptCd" column="CURR_AFFN_DEPT_CD" columnIndex="18"/>
+		<result property="currAffnDeptNm" column="CURR_AFFN_DEPT_NM" columnIndex="19"/>
+		<result property="emymtDivCd" column="EMYMT_DIV_CD" columnIndex="20"/>
+		<result property="emymtDivNm" column="EMYMT_DIV_NM" columnIndex="21"/>
+		<result property="dpobCd" column="DPOB_CD" columnIndex="22"/>	
+		<result property="usrLgnAccLckYn" column="USR_LGN_ACC_LCK_YN" columnIndex="23"/>			
+	</resultMap>
+	
+	<resultMap id="mypageVo3" class="com.web.exterms.mypage.login.service.MyPageSessionVO">
+		<result property="usrId" column="USR_ID" columnIndex="1"/>
+		<result property="kybdr" column="KYBDR" columnIndex="2"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="3"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="4"/>
+		<result property="ismt" column="ISMT" columnIndex="5"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="6"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="7"/>
+		<result property="usrBfPwd" column="USR_BF_PWD" columnIndex="8"/>	
+		<result property="usrChgPwd" column="USR_CHG_PWD" columnIndex="9"/>
+		<result property="usrPwdChgDttm" column="USR_PWD_CHG_DTTM" columnIndex="10"/>	
+	</resultMap>
+	
+	<resultMap id="mypageVo4" class="com.web.exterms.mypage.login.service.MyPageSessionVO">
+		<result property="usrId" column="USR_ID" columnIndex="1"/>
+		<result property="kybdr" column="KYBDR" columnIndex="2"/>
+		<result property="inptDt" column="INPT_DT" columnIndex="3"/>
+		<result property="inptAddr" column="INPT_ADDR" columnIndex="4"/>
+		<result property="ismt" column="ISMT" columnIndex="5"/>
+		<result property="revnDt" column="REVN_DT" columnIndex="6"/>
+		<result property="revnAddr" column="REVN_ADDR" columnIndex="7"/>
+		<result property="usrErrLgnCnt" column="USR_ERR_LGN_CNT" columnIndex="8"/>	
+		<result property="usrErrLgnDttm" column="USR_ERR_LGN_DTTM" columnIndex="9"/>
+		<result property="usrLgnSesn" column="USR_LGN_SESN" columnIndex="10"/>	
+		<result property="usrLgnChkDttm" column="USR_LGN_CHK_DTTM" columnIndex="11"/>	
+		<result property="sysDivCd" column="SYS_DIV_CD" columnIndex="12"/>
+	</resultMap>	
+	
+	<!-- 회원가입시 계정정보 추가 하면서 패스워드 변경 이력에서도 insert -->
+	<insert id="myLoginDAO.insertSyms0100ToSysm0130Info">
+	    INSERT All 
+	    	INTO SYSM0100 (SYS_DIV_CD,
+		                      USR_ID,
+		                      USR_NM,
+		                      USR_DIV_CD,
+		                      SYSTEMKEY,
+		                      DEPT_CD,
+		                      USR_TEL,
+		                      EMAIL,
+		                      PWD,
+		                      USE_YN,
+		                      KYBDR,
+		                      INPT_DT,
+		                      INPT_ADDR,
+		                      ISMT,
+		                      REVN_DT,
+		                      REVN_ADDR)
+		     VALUES (NVL(#sysDivCd#,'EXTERM00'),
+		             #usrId#,
+		             #hanNm#,
+		             (SELECT DECODE(EMYMT_DIV_CD, 'A0020010',  'D0010070', 'D0010080') FROM PSNL0100 WHERE SYSTEMKEY = #systemkey#),
+		             #systemkey#,
+		             #currAffnDeptCd#,
+		             #husPhnNum#,
+		             #email#,
+		             #pwd#,
+		             'N',
+		             #usrId#,
+		             SYSDATE,
+		             #revnAddr#,
+		             #usrId#,
+		             SYSDATE,
+		             #revnAddr#)
+		    INTO SYSM0130 (USR_ID,
+		  		  USR_CHG_SEIL_NUM,
+		    	  USR_CHG_PWD,
+		    	  USR_PWD_CHG_DTTM,
+		    	  KYBDR,
+		    	  INPT_DT,
+		    	  INPT_ADDR,
+		    	  ISMT,
+		    	  REVN_DT,
+		    	  REVN_ADDR)
+		    VALUES (#usrId#,
+		    	  (SELECT TO_CHAR(SYSDATE,'yyyy') || LPAD(NVL(MAX(SUBSTR(USR_CHG_SEIL_NUM,-4)),0)+1 ,4,'0')
+                       FROM SYSM0130
+                      WHERE SUBSTR(USR_CHG_SEIL_NUM,1,4) = TO_CHAR(SYSDATE,'yyyy')),
+                  #pwd#,
+		    	  TO_CHAR(SYSDATE,'yyyymmdd'),
+		    	  #usrId#,
+		    	  SYSDATE,
+		    	  #inptAddr#,
+		    	  #usrId#,
+		    	  SYSDATE,
+		    	  #revnAddr#)
+		SELECT * FROM DUAL    
+	</insert>
+	
+ 	
+ 	<select id="myLoginDAO.getMemberInfo" resultMap="mypageVo1">
+	 	SELECT A.DPOB_CD, A.SYSTEMKEY, 
+	 	   A.HAN_NM,
+	       A.CURR_AFFN_DEPT_CD,
+	       FCBASS0400CDNM (A.DPOB_CD, A.CURR_AFFN_DEPT_CD, '1') AS CURR_DEPT_NM,
+	       NVL(B.CELL_PHNE_NUM, B.CMPY_PHN_NUM) AS USR_TEL,
+	       B.EMAIL_ADDR,
+	       DECODE('','','신규이용자','새올사용자') AS CHK_USER_ID,
+           ('') AS USR_ID
+	  FROM PSNL0100 A, PSNL0111 B
+	 WHERE A.DPOB_CD = B.DPOB_CD 
+	   AND A.SYSTEMKEY = B.SYSTEMKEY
+	   AND A.RESN_REGN_NUM = #resnRegnNum# 
+ 	</select>
+ 	<!-- C.USER_ID NVL(C.USER_ID,'') SSOX_USER C   AND A.RESN_REGN_NUM = C.USER_SN(+)  -->
+ 	
+	<select id="myLoginDAO.selectLoginInfo" resultMap="mypageVo2">
+	    SELECT A.SYS_DIV_CD,
+               A.USR_ID,
+               A.USR_NM,
+               A.USR_DIV_CD,
+               A.SYSTEMKEY,
+               A.DEPT_CD,
+               A.USR_TEL,
+               A.EMAIL,
+               A.PWD,
+               A.USE_YN,
+               A.KYBDR,
+               A.INPT_DT,
+               A.INPT_ADDR,
+               A.ISMT,
+               A.REVN_DT,
+               A.REVN_ADDR,
+               A.USR_LGN_ACC_LCK_YN,
+               B.HAN_NM,
+               B.CURR_AFFN_DEPT_CD,
+               FCBASS0400CDNM(B.DPOB_CD, B.CURR_AFFN_DEPT_CD,'2') AS CURR_AFFN_DEPT_NM,
+               B.EMYMT_DIV_CD,
+               FCBASS0300CDNM(B.DPOB_CD, B.EMYMT_DIV_CD) AS EMYMT_DIV_NM,
+               B.DPOB_CD
+          FROM SYSM0100 A, PSNL0100 B
+         WHERE A.SYSTEMKEY  = B.SYSTEMKEY 
+		   AND USR_ID = #usrId# 
+	</select>
+		
+	<!-- 		   
+	<isNotNull property="PWD">
+		       <isNotEmpty property="PWD">
+		   		AND A.PWD = #PWD#        
+		       </isNotEmpty>
+		   </isNotNull> -->
+		   
+	<!-- 패스워드 변경 이력 조회 -->	   
+	<select id="myLoginDAO.selectPasswordInfo"  resultMap="mypageVo3">
+	     SELECT A.USR_ID,
+	       		A.USR_BF_PWD,
+	       		A.USR_CHG_PWD,
+	      		A.USR_PWD_CHG_DTTM,
+	      		A.KYBDR,
+                A.INPT_DT,
+              	A.INPT_ADDR,
+               	A.ISMT,
+               	A.REVN_DT,
+               	A.REVN_ADDR    
+          FROM SYSM0130 A
+         WHERE A.USR_ID = #usrId# 
+	</select>
+	
+	<!-- 변경된 비밀번호를 저장 -->
+	<update id="myLoginDAO.updatePassword">
+		<!-- 일반회원 -->
+			<![CDATA[ 
+		 UPDATE SYSM0130
+			SET    USR_BF_PWD = #pwd#
+					, USR_CHG_PWD=#newPwd# 
+					, USR_PWD_CHG_DTTM = TO_CHAR(SYSDATE,'yyyymmdd')
+					, KYBDR=#usrId#
+					, INPT_DT= SYSDATE
+					, INPT_ADDR=#inptAddr#
+			 WHERE USR_ID = #usrId#			 			 	
+			]]>
+	</update> 
+	
+	<!-- 변경된 비밀번호를 저장 -->
+	<update id="myLoginDAO.updateSysm0100Password">
+		<!-- 일반회원 -->
+			<![CDATA[ 
+		 UPDATE SYSM0100		 
+			SET    PWD = #newPwd#
+			 WHERE USR_ID = #usrId#			 			 	
+			]]>
+	</update> 
+		 
+	 <!-- 로그인 성공시 세션기록  -->
+	<insert id="myLoginDAO.insertSessionLoginSysm0120">
+		INSERT INTO SYSM0120
+		(	USR_ID,
+			SYS_DIV_CD,
+			USR_ERR_LGN_CNT,
+			USR_ERR_LGN_DTTM,
+			KYBDR,
+			INPT_DT,
+			INPT_ADDR,
+			ISMT,
+			REVN_DT,
+			REVN_ADDR,
+			USR_LGN_SESN,
+			USR_LGN_CHK_DTTM
+		)
+		VALUES ( #usrId#,
+			#sysDivCd#,
+			NVL(#usrErrLgnCnt#,'0'),
+			NVL(#usrErrLgnDttm#,'0'),
+			#usrId#,
+			SYSDATE,
+			#inptAddr#,
+			#usrId#,
+			SYSDATE,
+			#revnAddr#,
+			#usrLgnSesn#,
+			TO_CHAR(SYSDATE,'yyyymmddhh24miss')
+		)
+	</insert>
+	
+	<!-- 로그인 실패시 테이블 데이터 존재 유무 확인 -->
+	<select id="myLoginDAO.selectErrLoginSysm0120" resultMap="mypageVo4">
+			SELECT USR_ID,
+						SYS_DIV_CD,
+						USR_ERR_LGN_CNT,
+						USR_ERR_LGN_DTTM,
+						KYBDR,
+						INPT_DT,
+						INPT_ADDR,
+						ISMT,
+						REVN_DT,
+						REVN_ADDR,
+						USR_LGN_SESN,
+						USR_LGN_CHK_DTTM
+	 		 FROM SYSM0120
+	 		 WHERE USR_ID = #usrId#
+	</select>
+	
+	<!-- 로그인 실패시 신규 데이터 입력 -->
+	<insert id="myLoginDAO.insertErrLoginSysm0120">		
+			   INSERT   INTO SYSM0120  
+			   			( USR_ID,
+			               SYS_DIV_CD,
+			               USR_ERR_LGN_CNT,
+			               USR_ERR_LGN_DTTM,
+			               KYBDR,
+			               INPT_DT,
+			               INPT_ADDR,
+			               ISMT,
+			               REVN_DT,
+			               REVN_ADDR,
+			               USR_LGN_SESN,
+			               USR_LGN_CHK_DTTM)
+			       VALUES (#usrId#,
+			               #sysDivCd#,
+			               NVL (MAX (USR_ERR_LGN_CNT), 0) + 1,
+			               TO_CHAR(SYSDATE,'yyyymmddhh24miss'),
+			               #usrId#,
+			               SYSDATE,
+			               #inptAddr#,
+			               #usrId#,
+			               SYSDATE,
+			               #revnAddr#,
+			               #usrLgnSesn#,
+			               TO_CHAR (SYSDATE, 'yyyymmddhh24miss')
+			               )
+	</insert>
+	
+	<!-- 데이타 존재시 업데이트 처리 -->
+	<update id="myLoginDAO.updateErrLoginSysm0120">
+			<![CDATA[ 
+		 UPDATE SYSM0120
+			SET    USR_ERR_LGN_CNT  = USR_ERR_LGN_CNT + 1,
+					  USR_ERR_LGN_DTTM =  (TO_CHAR (SYSDATE, 'yyyymmddhh24miss'))
+			 WHERE USR_ID = #usrId#	
+			 		AND USR_ERR_LGN_CNT = (SELECT NVL(MAX(USR_ERR_LGN_CNT),'0') FROM SYSM0120)		 			 	
+			]]>
+	</update>
+	
+	<!-- 로그인 5회 실패시 사용유무 N로 변경 -->
+	<update id="myLoginDAO.updateSysm0100UseInfo">
+		<!-- 일반회원 -->
+			<![CDATA[ 
+		 UPDATE SYSM0100		 
+			SET    USR_LGN_ACC_LCK_YN  = 'Y'
+					, ISMT = #usrId#
+					, REVN_DT = SYSDATE
+					, REVN_ADDR = #revnAddr#
+			 WHERE USR_ID = #usrId#			 			 	
+			]]>
+	</update> 
+	
+	<!-- 사용유무 업데이트 후 삭제 처리 -->
+	<delete id="myLoginDAO.deleteErrLoginSysm0120">
+		<![CDATA[
+			DELETE FROM SYSM0120 
+				WHERE USR_ID = #usrId#
+			]]>
+	</delete>
+	
+	<!-- 데이타 존재시 업데이트 처리 -->
+	<update id="myLoginDAO.updateSessionChkSysm0120">
+			<![CDATA[ 
+	 UPDATE SYSM0120
+		SET  USR_LGN_CHK_DTTM =  (TO_CHAR (SYSDATE, 'yyyymmddhh24miss'))			 	
+			]]>
+		<isNotNull property="usrLgnSesn">
+			<isNotEmpty property="usrLgnSesn">
+				,  USR_LGN_SESN = #usrLgnSesn#	
+			</isNotEmpty>
+		</isNotNull>
+		<isNotNull property="revnAddr">
+			<isNotEmpty property="revnAddr">
+				, REVN_ADDR = #revnAddr#
+			</isNotEmpty>
+		</isNotNull>
+		<isNotNull property="usrErrLgnCnt">
+			<isNotEmpty property="usrErrLgnCnt">
+				, USR_ERR_LGN_CNT=#usrErrLgnCnt#
+			</isNotEmpty>
+		</isNotNull>
+		<isNotNull property="usrErrLgnDttm">
+			<isNotEmpty property="usrErrLgnDttm">
+				, USR_ERR_LGN_DTTM = #usrErrLgnDttm#
+			</isNotEmpty>
+		</isNotNull>
+		WHERE USR_ID = #usrId#
+	</update>
+	
+	<!--  미사용 쿼리 
+	
+	<resultMap id="usrId" class="egovframework.com.cmm.LoginVO">
+		<result property="usrId" column="usrId" columnIndex="1"/>
+	</resultMap>
+	
+	<resultMap id="pwd" class="egovframework.com.cmm.LoginVO">
+		<result property="pwd" column="pwd" columnIndex="1"/>
+	</resultMap>
+	  
+	<select id="myLoginDAO.actionLogin" resultMap="myLogin">
+		<isEqual property="usrDivCd" compareValue="G">
+			<![CDATA[
+			SELECT
+				SYS_DIV_CD
+				, USR_ID
+				, USR_NM
+				, USR_DIV_CD
+				, SYSTEMKEY
+				, DEPT_CD
+				, EMAIL
+				, PWD
+				, USE_YN
+				, KYBDR
+				, INPT_DT
+				, INPT_ADDR
+				, ISMT
+				, REVN_DT
+				, REVN_ADDR
+			FROM SYSM0100
+			 WHERE USR_ID = #usrId#
+			   AND PWD = #pwd#
+			   AND USE_YN = 'Y'
+			]]>
+		</isEqual> 
+	</select>
+	  
+	<select id="myLoginDAO.searchId" resultMap="usrId">
+		<isEqual property="usrDivCd" compareValue="G">
+			<![CDATA[
+			SELECT USR_ID AS USR_ID 
+			  FROM SYSM0100
+			 WHERE  USR_NM = #usrNm#
+			   AND EMAIL = #email#
+			   AND USE_YN = 'Y'
+			]]>
+		</isEqual> 
+	</select>
+	
+	<select id="myLoginDAO.searchPassword" resultMap="pwd">
+		<isEqual property="usrDivCd" compareValue="G">
+			<![CDATA[
+			SELECT PWD AS PWD
+			  FROM SYSM0100
+			 WHERE USR_ID = #usrId#
+			   AND USR_NM = #usrNm#
+			   AND EMAIL = #email#
+			   AND USE_YN = 'Y'
+			]]>
+		</isEqual> 
+	</select>-->
+
+</sqlMap>
